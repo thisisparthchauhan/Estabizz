@@ -1,0 +1,4426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estabizz Fintech PVT LTD — India's #1 Fintech Compliance Platform</title>
+  <meta name="description"
+    content="Expert regulatory guidance for NBFC, RBI, SEBI, and IRDA licenses. Estabizz handles your fintech compliance end-to-end." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=DM+Sans:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ============================================
+       DESIGN SYSTEM — CSS VARIABLES
+    ============================================ */
+    :root {
+      --primary: #0EA5E9;
+      --primary-light: #38BDF8;
+      --primary-lightest: #BAE6FD;
+      --primary-dark: #0284C7;
+      --navy: #0F172A;
+      --navy-mid: #1E293B;
+      --text-dark: #0F172A;
+      --text-mid: #334155;
+      --text-light: #64748B;
+      --white: #FFFFFF;
+      --bg-light: #F0F9FF;
+      --bg-subtle: #F8FAFC;
+      --accent: #06B6D4;
+      --success: #10B981;
+      --border: #E2E8F0;
+      --shadow-sm: 0 1px 3px rgba(14, 165, 233, 0.08);
+      --shadow-md: 0 4px 16px rgba(14, 165, 233, 0.12);
+      --shadow-lg: 0 12px 40px rgba(14, 165, 233, 0.18);
+      --shadow-xl: 0 24px 64px rgba(14, 165, 233, 0.22);
+    }
+
+    /* ============================================
+       GLOBAL RESET & BASE
+    ============================================ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      color: var(--text-dark);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Sora', sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ============================================
+       SCROLL REVEAL ANIMATION
+    ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: 0.4s;
+    }
+
+    .reveal-delay-5 {
+      transition-delay: 0.5s;
+    }
+
+    /* ============================================
+       SECTION 1: STICKY NAVIGATION
+    ============================================ */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 72px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Logo */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-text {
+      line-height: 1.2;
+    }
+
+    .nav-logo-name {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--navy);
+    }
+
+    .nav-logo-name span {
+      color: var(--primary);
+    }
+
+    .nav-logo-tagline {
+      font-size: 10px;
+      color: var(--text-light);
+      letter-spacing: 0.3px;
+    }
+
+    /* Center Nav */
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 14px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-mid);
+      border-radius: 8px;
+      transition: color 0.3s ease, background 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 14px;
+      right: 14px;
+      height: 2px;
+      background: var(--primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-link .arrow {
+      font-size: 11px;
+      opacity: 0.6;
+      transition: transform 0.3s ease;
+    }
+
+    /* ── Mega Menu ────────────────────────────────────────────────────── */
+    .mega-wrap {
+      position: static;
+    }
+
+    .mega-wrap:hover>.nav-link .arrow,
+    .mega-wrap.active>.nav-link .arrow {
+      transform: rotate(180deg);
+    }
+
+    .mega-panel {
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12), 0 4px 20px rgba(0, 0, 0, 0.06);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+      z-index: 999;
+      pointer-events: none;
+    }
+
+    .mega-wrap:hover>.mega-panel,
+    .mega-wrap.active>.mega-panel {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .mega-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      min-height: 340px;
+    }
+
+    .mega-sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      background: #f8fafc;
+      border-right: 1px solid #e2e8f0;
+      padding: 16px 0;
+    }
+
+    .mega-sidebar-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #475569;
+      background: none;
+      border: none;
+      border-left: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .mega-sidebar-btn:hover {
+      color: var(--primary);
+      background: #f0f9ff;
+    }
+
+    .mega-sidebar-btn.active {
+      color: var(--primary);
+      background: #f0f9ff;
+      border-left-color: var(--primary);
+      font-weight: 600;
+    }
+
+    .mega-sidebar-btn .sidebar-icon {
+      font-size: 16px;
+      width: 24px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .mega-content {
+      flex: 1;
+      padding: 28px 32px;
+    }
+
+    .mega-content-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+
+    .mega-tab {
+      display: none;
+    }
+
+    .mega-tab.active {
+      display: block;
+    }
+
+    .mega-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px 32px;
+    }
+
+    .mega-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      font-size: 14px;
+      color: #334155;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .mega-link:hover {
+      background: #f0f9ff;
+      color: var(--primary);
+    }
+
+    .mega-link::before {
+      content: '›';
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .mega-footer {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mega-footer-cta {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s ease;
+    }
+
+    .mega-footer-cta:hover {
+      gap: 10px;
+    }
+
+    .mega-footer-help {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .mega-footer-help a {
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    /* Right Nav */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .nav-phone {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-mid);
+      font-weight: 500;
+    }
+
+    .nav-phone svg {
+      color: var(--primary);
+    }
+
+    .nav-login {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-mid);
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-login:hover {
+      color: var(--primary);
+    }
+
+    .nav-cta {
+      background: var(--navy);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Sora', sans-serif;
+      padding: 10px 22px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .hamburger:hover {
+      background: var(--bg-light);
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      z-index: 999;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s ease;
+    }
+
+    .mobile-menu.open {
+      max-height: 600px;
+    }
+
+    .mobile-menu-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 48px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-mid);
+      border-bottom: 1px solid var(--border);
+      transition: color 0.3s ease, background 0.3s ease;
+    }
+
+    .mobile-menu-link:hover {
+      color: var(--primary);
+      background: var(--bg-light);
+    }
+
+    .mobile-menu-cta {
+      margin: 16px 24px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .mobile-menu-cta a {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-cta .m-login {
+      border: 1px solid var(--border);
+      color: var(--navy);
+    }
+
+    .mobile-menu-cta .m-start {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    @media (max-width: 1024px) {
+      .nav-center {
+        display: none;
+      }
+
+      .nav-phone {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-login {
+        display: none;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+    }
+
+    /* ============================================
+       SECTION 2: HERO
+    ============================================ */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatCard {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @keyframes floatCardMid {
+
+      0%,
+      100% {
+        transform: translateY(-50%);
+      }
+
+      50% {
+        transform: translateY(calc(-50% - 8px));
+      }
+    }
+
+    @keyframes floatCardBottom {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0px);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(-8px);
+      }
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+      }
+    }
+
+    .hero {
+      min-height: 85vh;
+      background: linear-gradient(160deg, #EFF6FF 0%, #DBEAFE 40%, #E0F2FE 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 80px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%230EA5E9' stroke-width='0.5'%3E%3Cpath d='M0 0h40v40H0z'/%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+    }
+
+    /* Hero Text — Centered at top */
+    .hero-text {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 40px 24px 0;
+      z-index: 2;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--white);
+      border: 1px solid var(--primary-light);
+      border-radius: 100px;
+      box-shadow: var(--shadow-sm);
+      font-size: 13px;
+      color: var(--primary-dark);
+      font-weight: 500;
+      margin: 0 auto 20px;
+      animation: fadeInUp 0.5s ease both;
+    }
+
+    .hero-h1 {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.1;
+      animation: fadeInUp 0.5s ease both;
+      animation-delay: 0.1s;
+      margin-bottom: 16px;
+    }
+
+    .hero-h1 .gradient-text {
+      background: linear-gradient(135deg, #0EA5E9, #06B6D4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-mid);
+      line-height: 1.7;
+      max-width: 620px;
+      margin: 0 auto 20px;
+      animation: fadeInUp 0.5s ease both;
+      animation-delay: 0.2s;
+    }
+
+    .hero-pills {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.5s ease both;
+      animation-delay: 0.3s;
+      margin-bottom: 24px;
+    }
+
+    .hero-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .hero-pill .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-green {
+      background: var(--success);
+    }
+
+    .dot-blue {
+      background: var(--primary);
+    }
+
+    .dot-cyan {
+      background: var(--accent);
+    }
+
+    .pills-sep {
+      color: var(--border);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.5s ease both;
+      animation-delay: 0.4s;
+      margin-bottom: 12px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, #0EA5E9, #0284C7);
+      color: var(--white);
+      font-family: 'Sora', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(14, 165, 233, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(14, 165, 233, 0.45);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      background: transparent;
+      border: 2px solid var(--border);
+      color: var(--navy);
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--text-light);
+      animation: fadeInUp 0.5s ease both;
+      animation-delay: 0.45s;
+    }
+
+    /* Globe Wrapper — Xflow style: large, centered, bottom-cropped */
+    .globe-wrapper {
+      position: relative;
+      width: 700px;
+      height: 700px;
+      margin: 40px auto -200px;
+      z-index: 1;
+    }
+
+    #globe-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 60px rgba(14, 165, 233, 0.35)) drop-shadow(0 0 120px rgba(14, 165, 233, 0.15));
+    }
+
+    #globe-container canvas {
+      border-radius: 50%;
+    }
+
+    /* Floating Info Cards */
+    .float-card {
+      position: absolute;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 10px 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .float-card-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .float-card-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #0F172A;
+      display: block;
+      line-height: 1.2;
+    }
+
+    .float-card-sub {
+      font-size: 11px;
+      color: #64748B;
+      display: block;
+      line-height: 1.2;
+      margin-top: 1px;
+    }
+
+    .float-card-sub.green {
+      color: #10B981;
+      font-weight: 600;
+    }
+
+    .float-card-sub.blue {
+      color: #0EA5E9;
+      font-weight: 500;
+    }
+
+    .card-nbfc {
+      top: 200px;
+      left: -80px;
+      border-left: 3px solid #10B981;
+      animation: floatCard 3s ease infinite;
+    }
+
+    .card-countries {
+      top: 250px;
+      right: -80px;
+      border-left: 3px solid #0EA5E9;
+      animation: floatCardMid 3s ease infinite 1s;
+    }
+
+    .card-speed {
+      bottom: 220px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 3px solid #F59E0B;
+      animation: floatCardBottom 3s ease infinite 2s;
+    }
+
+    /* Testimonial Card overlapping bottom of globe */
+    .globe-testimonial {
+      position: absolute;
+      bottom: 180px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px 28px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+      z-index: 15;
+      width: 380px;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .globe-testimonial .testimonial-quote {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    .globe-testimonial .testimonial-author {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .globe-testimonial .testimonial-role {
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    .testimonial-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .testimonial-nav button {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: white;
+      font-size: 12px;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .testimonial-nav button:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* ============================================
+       SECTION 3: STATS TICKER
+    ============================================ */
+    @keyframes shimmer {
+      0% {
+        background-position: -200% center;
+      }
+
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    .stats-strip {
+      height: 72px;
+      background: linear-gradient(135deg, #0EA5E9, #0284C7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-strip::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 3s linear infinite;
+    }
+
+    .stats-strip-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 0;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 32px;
+      color: white;
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .stat-item+.stat-item::before {
+      content: '|';
+      position: absolute;
+      left: 0;
+      opacity: 0.3;
+    }
+
+    .stat-item .stat-n {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    /* ============================================
+       SECTION 4: TRUSTED BY
+    ============================================ */
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .trusted-section {
+      padding: 64px 0;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    .trusted-label {
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      font-weight: 500;
+    }
+
+    .marquee-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .marquee-wrapper::before,
+    .marquee-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      z-index: 2;
+    }
+
+    .marquee-wrapper::before {
+      left: 0;
+      background: linear-gradient(to right, white, transparent);
+    }
+
+    .marquee-wrapper::after {
+      right: 0;
+      background: linear-gradient(to left, white, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 24px;
+      animation: marquee 30s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 130px;
+      height: 44px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text-mid);
+      filter: grayscale(1);
+      opacity: 0.5;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .marquee-logo:hover {
+      filter: grayscale(0);
+      opacity: 1;
+      color: var(--primary);
+      border-color: var(--primary-light);
+    }
+
+    /* ============================================
+       SECTION 5: SOLUTIONS GRID
+    ============================================ */
+    .solutions-section {
+      padding: 96px 0;
+      background: var(--bg-subtle);
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 16px;
+      background: rgba(14, 165, 233, 0.08);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-h2 {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 18px;
+      color: var(--text-mid);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .sol-card {
+      background: var(--white);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .sol-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-light);
+    }
+
+    .sol-card-arrow {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--text-light);
+      transition: all 0.3s ease;
+      background: var(--white);
+      z-index: 2;
+    }
+
+    .sol-card:hover .sol-card-arrow {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .sol-card-illo {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--bg-light), #E0F2FE);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sol-card-body {
+      padding: 24px;
+    }
+
+    .sol-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(14, 165, 233, 0.1);
+      color: var(--primary-dark);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .sol-card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-family: 'Sora', sans-serif;
+    }
+
+    .sol-card-desc {
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .sol-services {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    .sol-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.3s ease;
+    }
+
+    .sol-card:hover .sol-link {
+      gap: 8px;
+    }
+
+    /* ============================================
+       SECTION 6: WHY ESTABIZZ
+    ============================================ */
+    .why-section {
+      padding: 96px 0;
+      background: var(--white);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 45% 55%;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .why-left {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .why-left .section-label {
+      display: inline-flex;
+    }
+
+    .why-left .section-h2 {
+      text-align: left;
+      font-size: 38px;
+    }
+
+    .why-body {
+      font-size: 16px;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      width: fit-content;
+    }
+
+    .btn-dark:hover {
+      background: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .why-micro-stats {
+      display: flex;
+      gap: 32px;
+      padding-top: 8px;
+    }
+
+    .why-micro {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .why-micro-num {
+      font-family: 'Sora', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .why-micro-label {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .why-micro-sep {
+      width: 1px;
+      background: var(--border);
+      align-self: stretch;
+    }
+
+    .why-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .why-card {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .why-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-light);
+    }
+
+    .why-card-illo {
+      height: 130px;
+      background: var(--bg-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-card-body {
+      padding: 20px;
+    }
+
+    .why-card-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .why-card-desc {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       RESPONSIVE BREAKPOINTS
+    ============================================ */
+    @media (max-width: 1024px) {
+      .hero-h1 {
+        font-size: 52px;
+      }
+
+      .solutions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .globe-wrapper {
+        width: 550px;
+        height: 550px;
+        margin-bottom: -150px;
+      }
+
+      .card-nbfc,
+      .card-countries {
+        display: none;
+      }
+
+      .globe-testimonial {
+        width: 320px;
+        bottom: 140px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .globe-wrapper {
+        width: 380px;
+        height: 380px;
+        margin-bottom: -100px;
+      }
+
+      .float-card {
+        display: none;
+      }
+
+      .globe-testimonial {
+        display: none;
+      }
+
+      .hero-h1 {
+        font-size: 40px;
+      }
+
+      .section-h2 {
+        font-size: 32px;
+      }
+
+      .solutions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-strip-inner {
+        flex-wrap: wrap;
+        gap: 0;
+        padding: 8px 0;
+        height: auto;
+        min-height: 72px;
+      }
+
+      .stat-item {
+        padding: 4px 16px;
+        font-size: 12px;
+      }
+
+      .stat-item .stat-n {
+        font-size: 16px;
+      }
+
+      .why-right {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================
+       SECTION 7: CORE SERVICES (DARK)
+    ============================================ */
+    .services-section {
+      padding: 96px 0;
+      background: var(--navy);
+    }
+
+    .services-section .section-label {
+      background: rgba(14, 165, 233, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(14, 165, 233, 0.3);
+    }
+
+    .services-section .section-h2 {
+      color: var(--white);
+    }
+
+    .services-section .section-sub {
+      color: var(--text-light);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .srv-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .srv-card:hover {
+      background: rgba(14, 165, 233, 0.08);
+      border-color: rgba(14, 165, 233, 0.4);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .srv-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(14, 165, 233, 0.15);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .srv-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .srv-desc {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .srv-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .srv-tag {
+      padding: 4px 10px;
+      background: rgba(14, 165, 233, 0.12);
+      color: var(--primary-light);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    /* ============================================
+       SECTION 8: HOW IT WORKS
+    ============================================ */
+    .process-section {
+      padding: 96px 0;
+      background: var(--bg-light);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+      margin-top: 64px;
+    }
+
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: calc(12.5% + 24px);
+      right: calc(12.5% + 24px);
+      height: 2px;
+      border-top: 2px dashed var(--primary-light);
+      z-index: 0;
+    }
+
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0EA5E9, #0284C7);
+      color: white;
+      font-family: 'Sora', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.35);
+      flex-shrink: 0;
+    }
+
+    .step-icon-wrap {
+      width: 56px;
+      height: 56px;
+      background: white;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+
+    .process-cta {
+      text-align: center;
+      margin-top: 56px;
+    }
+
+    /* ============================================
+       SECTION 9: PRESS / NEWS
+    ============================================ */
+    .press-section {
+      padding: 96px 0;
+      background: var(--white);
+    }
+
+    .press-header {
+      margin-bottom: 48px;
+    }
+
+    .press-header .section-label {
+      display: inline-flex;
+    }
+
+    .press-header .section-h2 {
+      text-align: left;
+    }
+
+    .press-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .press-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      border-left: 4px solid var(--primary);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .press-card:nth-child(2) {
+      border-left-color: #1D4ED8;
+    }
+
+    .press-card:nth-child(3) {
+      border-left-color: #334155;
+    }
+
+    .press-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .press-pub {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    .press-pub.et {
+      color: #c0392b;
+    }
+
+    .press-pub.fe {
+      color: #1D4ED8;
+    }
+
+    .press-pub.bs {
+      color: var(--navy);
+    }
+
+    .press-quote {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-mid);
+      line-height: 1.8;
+      flex: 1;
+    }
+
+    .press-quote::before {
+      content: '\201C';
+      font-size: 48px;
+      color: var(--primary-lightest);
+      line-height: 0;
+      vertical-align: -18px;
+      margin-right: 4px;
+      font-style: normal;
+    }
+
+    .press-read {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.3s ease;
+    }
+
+    .press-card:hover .press-read {
+      gap: 8px;
+    }
+
+    .press-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 40px;
+    }
+
+    .press-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.3s ease;
+    }
+
+    .press-dot.active {
+      background: var(--primary);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* ============================================
+       SECTION 10: API / DEVELOPER
+    ============================================ */
+    @keyframes pulse-glow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 24px rgba(14, 165, 233, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 48px rgba(14, 165, 233, 0.7);
+      }
+    }
+
+    .api-section {
+      padding: 96px 0;
+      background: var(--navy);
+    }
+
+    .api-grid {
+      display: grid;
+      grid-template-columns: 45% 55%;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .api-left .section-label {
+      background: rgba(14, 165, 233, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(14, 165, 233, 0.3);
+    }
+
+    .api-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin: 16px 0;
+    }
+
+    .api-body {
+      font-size: 16px;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .api-features {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .api-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .api-check {
+      width: 20px;
+      height: 20px;
+      background: rgba(14, 165, 233, 0.2);
+      border: 1px solid rgba(14, 165, 233, 0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .api-check svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .api-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary-grad {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #0EA5E9, #0284C7);
+      color: white;
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary-grad:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(14, 165, 233, 0.4);
+    }
+
+    .btn-ghost-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-ghost-white:hover {
+      background: white;
+      color: var(--navy);
+    }
+
+    /* API Right illustration */
+    .api-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .api-illo {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .api-center-logo {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #0EA5E9, #0284C7);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse-glow 3s ease infinite;
+      z-index: 2;
+      position: relative;
+    }
+
+    .api-network {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .api-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .api-feat-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 20px 18px;
+      transition: all 0.3s ease;
+    }
+
+    .api-feat-card:hover {
+      background: rgba(14, 165, 233, 0.1);
+      border-color: rgba(14, 165, 233, 0.3);
+    }
+
+    .api-feat-icon {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .api-feat-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .api-feat-desc {
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* Responsive 7-10 */
+    @media (max-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+
+      .process-steps::before {
+        display: none;
+      }
+
+      .api-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .press-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .api-feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================
+       SECTION 11: TESTIMONIALS
+    ============================================ */
+    .testimonials-section {
+      padding: 96px 0;
+      background: var(--bg-subtle);
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testi-card {
+      background: var(--white);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 32px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .testi-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+      border-color: var(--primary-light);
+    }
+
+    .testi-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .testi-company {
+      padding: 6px 12px;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .testi-stars {
+      color: #F59E0B;
+      font-size: 15px;
+      letter-spacing: 1px;
+    }
+
+    .testi-quote {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-mid);
+      line-height: 1.8;
+      flex: 1;
+      position: relative;
+      padding-left: 0;
+    }
+
+    .testi-quote::before {
+      content: '\201C';
+      font-size: 56px;
+      color: var(--primary-lightest);
+      line-height: 0;
+      vertical-align: -22px;
+      font-style: normal;
+      margin-right: 4px;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testi-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0EA5E9, #0284C7);
+      color: white;
+      font-family: 'Sora', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .testi-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .testi-role {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    /* ============================================
+       SECTION 12: CTA BANNER
+    ============================================ */
+    @keyframes gradShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .cta-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #0EA5E9, #0284C7, #06B6D4);
+      background-size: 200% 200%;
+      animation: gradShift 4s ease infinite;
+      text-align: center;
+    }
+
+    .cta-h2 {
+      font-size: 42px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 16px;
+      font-family: 'Sora', sans-serif;
+    }
+
+    .cta-sub {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 32px;
+    }
+
+    .cta-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .cta-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+    }
+
+    .cta-trust-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 36px;
+      background: white;
+      color: var(--navy);
+      font-family: 'Sora', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .btn-white:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+    }
+
+    .cta-phone {
+      margin-top: 20px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .cta-phone a {
+      color: white;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+
+    /* ============================================
+       SECTION 13: FOOTER
+    ============================================ */
+    .footer {
+      background: #0F172A;
+      border-top: 3px solid;
+      border-image: linear-gradient(90deg, #0EA5E9, #06B6D4) 1;
+    }
+
+    .footer-top {
+      padding: 64px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-top-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand {
+      /* flex column established by footer-top-grid */
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo-text {
+      font-family: 'Sora', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      max-width: 280px;
+    }
+
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-light);
+      transition: color 0.2s ease;
+    }
+
+    .footer-contact-item:hover {
+      color: var(--primary);
+    }
+
+    .footer-contact-icon {
+      font-size: 14px;
+    }
+
+    .footer-addr {
+      font-size: 12px;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .footer-social {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .footer-social:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(14, 165, 233, 0.1);
+    }
+
+    .footer-certs {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer-cert {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* Footer Live Rate */
+    .footer-rate-col {
+      grid-column: 1;
+    }
+
+    .footer-live-rate {
+      margin-top: 0;
+    }
+
+    .footer-rate-label {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+
+    .footer-rate-num {
+      font-family: 'Sora', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rate-up {
+      color: var(--success);
+      font-size: 18px;
+    }
+
+    .footer-rate-note {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    /* Footer link columns */
+    .footer-col-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-link {
+      font-size: 13px;
+      color: var(--text-light);
+      transition: color 0.2s ease;
+      line-height: 1.4;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+
+    /* Footer bottom */
+    .footer-bottom {
+      padding: 24px 0;
+    }
+
+    .footer-bottom-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .footer-cin {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-legal a {
+      font-size: 13px;
+      color: var(--text-light);
+      transition: color 0.2s ease;
+    }
+
+    .footer-legal a:hover {
+      color: var(--primary);
+    }
+
+    /* Responsive 11-13 */
+    @media (max-width: 1024px) {
+      .testi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-top-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .testi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-h2 {
+        font-size: 30px;
+      }
+
+      .footer-top-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-bottom-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+      }
+
+      .footer-legal {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-top-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+  <!-- ============================================
+       SECTION 1: STICKY NAVIGATION BAR
+  ============================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <!-- Logo -->
+      <a href="#" class="nav-logo">
+        <svg class="nav-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="18" height="18" rx="5" fill="url(#lg1)" opacity="0.9" />
+          <rect x="10" y="10" width="18" height="18" rx="5" fill="url(#lg2)" opacity="0.85" />
+          <rect x="18" y="6" width="18" height="18" rx="5" fill="url(#lg3)" opacity="0.8" />
+          <defs>
+            <linearGradient id="lg1" x1="2" y1="2" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#38BDF8" />
+              <stop offset="1" stop-color="#0EA5E9" />
+            </linearGradient>
+            <linearGradient id="lg2" x1="10" y1="10" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#0EA5E9" />
+              <stop offset="1" stop-color="#0284C7" />
+            </linearGradient>
+            <linearGradient id="lg3" x1="18" y1="6" x2="36" y2="24" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#06B6D4" />
+              <stop offset="1" stop-color="#0284C7" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="nav-logo-text">
+          <div class="nav-logo-name">Estabizz <span>Fintech</span></div>
+          <div class="nav-logo-tagline">Compliance · Licensing · Advisory</div>
+        </div>
+      </a>
+
+      <!-- Center Nav Links -->
+      <div class="nav-center">
+
+        <!-- ═══ SERVICES MEGA ═══ -->
+        <div class="mega-wrap" data-mega="services">
+          <a href="#solutions" class="nav-link">Services <span class="arrow">▾</span></a>
+          <div class="mega-panel">
+            <div class="mega-inner">
+              <div class="mega-sidebar">
+                <button class="mega-sidebar-btn active" data-tab="srv-startup"><span
+                    class="sidebar-icon">🚀</span>Startup Services</button>
+                <button class="mega-sidebar-btn" data-tab="srv-nbfc"><span class="sidebar-icon">🏦</span>NBFC
+                  Services</button>
+                <button class="mega-sidebar-btn" data-tab="srv-fintech"><span class="sidebar-icon">💳</span>Fintech
+                  Services</button>
+                <button class="mega-sidebar-btn" data-tab="srv-compliance"><span
+                    class="sidebar-icon">📋</span>Compliance & Audit</button>
+                <button class="mega-sidebar-btn" data-tab="srv-tax"><span class="sidebar-icon">📊</span>Tax &
+                  Accounting</button>
+              </div>
+              <div class="mega-content">
+                <div class="mega-tab active" id="srv-startup">
+                  <div class="mega-content-title">Startup Services</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">Private Limited Registration</a>
+                    <a href="#" class="mega-link">LLP Formation</a>
+                    <a href="#" class="mega-link">One Person Company (OPC)</a>
+                    <a href="#" class="mega-link">Section 8 Company</a>
+                    <a href="#" class="mega-link">Partnership Firm</a>
+                    <a href="#" class="mega-link">GST Registration</a>
+                    <a href="#" class="mega-link">MSME / Udyam Registration</a>
+                    <a href="#" class="mega-link">Trademark Registration</a>
+                    <a href="#" class="mega-link">Startup India Recognition</a>
+                    <a href="#" class="mega-link">Business Plan Drafting</a>
+                    <a href="#" class="mega-link">Bank Account Setup</a>
+                    <a href="#" class="mega-link">Digital Signature (DSC)</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="srv-nbfc">
+                  <div class="mega-content-title">NBFC Services</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">NBFC Registration</a>
+                    <a href="#" class="mega-link">NBFC Compliance</a>
+                    <a href="#" class="mega-link">NBFC Business Plan</a>
+                    <a href="#" class="mega-link">NBFC Loan Portfolio Audit</a>
+                    <a href="#" class="mega-link">NBFC Due Diligence</a>
+                    <a href="#" class="mega-link">NBFC for Sale</a>
+                    <a href="#" class="mega-link">NBFC Takeover</a>
+                    <a href="#" class="mega-link">NBFC Legal Support</a>
+                    <a href="#" class="mega-link">NBFC Financial Modeling</a>
+                    <a href="#" class="mega-link">NBFC Marketing</a>
+                    <a href="#" class="mega-link">NBFC Account Aggregator License</a>
+                    <a href="#" class="mega-link">Peer to Peer Lending License</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="srv-fintech">
+                  <div class="mega-content-title">Fintech Services</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">Payment Aggregator License</a>
+                    <a href="#" class="mega-link">Payment Gateway Setup</a>
+                    <a href="#" class="mega-link">Prepaid Wallet License</a>
+                    <a href="#" class="mega-link">UPI Service Provider</a>
+                    <a href="#" class="mega-link">BBPS Membership</a>
+                    <a href="#" class="mega-link">White Label ATM</a>
+                    <a href="#" class="mega-link">Money Transfer License</a>
+                    <a href="#" class="mega-link">Cross-Border Payments</a>
+                    <a href="#" class="mega-link">KYC Framework Setup</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="srv-compliance">
+                  <div class="mega-content-title">Compliance & Audit</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">Statutory Audit</a>
+                    <a href="#" class="mega-link">Internal Audit</a>
+                    <a href="#" class="mega-link">ROC Filing</a>
+                    <a href="#" class="mega-link">XBRL Returns</a>
+                    <a href="#" class="mega-link">Annual Compliance</a>
+                    <a href="#" class="mega-link">MCA Filing</a>
+                    <a href="#" class="mega-link">Corporate Governance</a>
+                    <a href="#" class="mega-link">Board Meeting Compliance</a>
+                    <a href="#" class="mega-link">Secretarial Audit</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="srv-tax">
+                  <div class="mega-content-title">Tax & Accounting</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">GST Filing & Returns</a>
+                    <a href="#" class="mega-link">Income Tax Filing</a>
+                    <a href="#" class="mega-link">TDS Compliance</a>
+                    <a href="#" class="mega-link">Transfer Pricing</a>
+                    <a href="#" class="mega-link">Bookkeeping Services</a>
+                    <a href="#" class="mega-link">Payroll Management</a>
+                  </div>
+                </div>
+                <div class="mega-footer">
+                  <a href="#solutions" class="mega-footer-cta">View All Services →</a>
+                  <span class="mega-footer-help">Need help? <a href="#contact">Talk to an expert</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ REGULATORY MEGA ═══ -->
+        <div class="mega-wrap" data-mega="regulatory">
+          <a href="#services" class="nav-link">Regulatory <span class="arrow">▾</span></a>
+          <div class="mega-panel">
+            <div class="mega-inner">
+              <div class="mega-sidebar">
+                <button class="mega-sidebar-btn active" data-tab="reg-rbi"><span class="sidebar-icon">🏛️</span>RBI
+                  Services</button>
+                <button class="mega-sidebar-btn" data-tab="reg-sebi"><span class="sidebar-icon">📈</span>SEBI
+                  Services</button>
+                <button class="mega-sidebar-btn" data-tab="reg-irda"><span class="sidebar-icon">🛡️</span>IRDA
+                  Registration</button>
+                <button class="mega-sidebar-btn" data-tab="reg-ifsca"><span class="sidebar-icon">🌐</span>IFSCA</button>
+                <button class="mega-sidebar-btn" data-tab="reg-aml"><span class="sidebar-icon">🔍</span>AML
+                  Advisory</button>
+                <button class="mega-sidebar-btn" data-tab="reg-fema"><span class="sidebar-icon">💱</span>FEMA
+                  Compliance</button>
+              </div>
+              <div class="mega-content">
+                <div class="mega-tab active" id="reg-rbi">
+                  <div class="mega-content-title">RBI Services</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">NBFC Loan Portfolio Audit</a>
+                    <a href="#" class="mega-link">Capital Adequacy Planning</a>
+                    <a href="#" class="mega-link">Lend Tech</a>
+                    <a href="#" class="mega-link">NBFC for Sale</a>
+                    <a href="#" class="mega-link">NBFC Business Plan</a>
+                    <a href="#" class="mega-link">NBFC Legal Support</a>
+                    <a href="#" class="mega-link">Compliance under FEMA</a>
+                    <a href="#" class="mega-link">Peer to Peer Lending License</a>
+                    <a href="#" class="mega-link">FEMA Registration Services</a>
+                    <a href="#" class="mega-link">Asset Liability Management</a>
+                    <a href="#" class="mega-link">TPAP License</a>
+                    <a href="#" class="mega-link">Alternative Asset Valuation</a>
+                    <a href="#" class="mega-link">NBFC Due Diligence</a>
+                    <a href="#" class="mega-link">NBFC Takeover</a>
+                    <a href="#" class="mega-link">Conversion of NBFC into Bank</a>
+                    <a href="#" class="mega-link">Full Fledged Money Changers</a>
+                    <a href="#" class="mega-link">Mortgage Guarantee Company</a>
+                    <a href="#" class="mega-link">Cyber Security Audit for NBFCs</a>
+                    <a href="#" class="mega-link">NBFC Financial Modeling</a>
+                    <a href="#" class="mega-link">NBFC Registration</a>
+                    <a href="#" class="mega-link">NBFC Debt Recovery Advisory</a>
+                    <a href="#" class="mega-link">NBFC Marketing</a>
+                    <a href="#" class="mega-link">NBFC Account Aggregator (AA)</a>
+                    <a href="#" class="mega-link">Prepaid Wallet License</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="reg-sebi">
+                  <div class="mega-content-title">SEBI Services</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">Stock Broker Registration</a>
+                    <a href="#" class="mega-link">Investment Advisor Registration</a>
+                    <a href="#" class="mega-link">AIF Registration</a>
+                    <a href="#" class="mega-link">PMS Registration</a>
+                    <a href="#" class="mega-link">Research Analyst Registration</a>
+                    <a href="#" class="mega-link">Merchant Banker Registration</a>
+                    <a href="#" class="mega-link">KRA Registration</a>
+                    <a href="#" class="mega-link">Depository Participant</a>
+                    <a href="#" class="mega-link">Credit Rating Agency</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="reg-irda">
+                  <div class="mega-content-title">IRDA Registration</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">Insurance Broker License</a>
+                    <a href="#" class="mega-link">Corporate Agent License</a>
+                    <a href="#" class="mega-link">Web Aggregator License</a>
+                    <a href="#" class="mega-link">TPA License</a>
+                    <a href="#" class="mega-link">Insurance Repository</a>
+                    <a href="#" class="mega-link">Micro Insurance</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="reg-ifsca">
+                  <div class="mega-content-title">IFSCA</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">IFSCA Fund Management</a>
+                    <a href="#" class="mega-link">IFSCA Broker Dealer</a>
+                    <a href="#" class="mega-link">IFSCA Banking Unit</a>
+                    <a href="#" class="mega-link">IFSCA Insurance Office</a>
+                    <a href="#" class="mega-link">GIFT City Setup</a>
+                    <a href="#" class="mega-link">Fintech Regulatory Sandbox</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="reg-aml">
+                  <div class="mega-content-title">AML Advisory</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">AML/CFT Policy Framework</a>
+                    <a href="#" class="mega-link">KYC Program Design</a>
+                    <a href="#" class="mega-link">Transaction Monitoring</a>
+                    <a href="#" class="mega-link">STR Filing Support</a>
+                    <a href="#" class="mega-link">AML Compliance Audit</a>
+                    <a href="#" class="mega-link">PMLA Compliance</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="reg-fema">
+                  <div class="mega-content-title">FEMA Compliance</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">FDI Compliance</a>
+                    <a href="#" class="mega-link">ODI Advisory</a>
+                    <a href="#" class="mega-link">ECB Compliance</a>
+                    <a href="#" class="mega-link">LRS Advisory</a>
+                    <a href="#" class="mega-link">FEMA Compounding</a>
+                    <a href="#" class="mega-link">Export-Import Advisory</a>
+                  </div>
+                </div>
+                <div class="mega-footer">
+                  <a href="#services" class="mega-footer-cta">View All Regulatory Services →</a>
+                  <span class="mega-footer-help">Need help? <a href="#contact">Talk to an expert</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ SOLUTIONS MEGA ═══ -->
+        <div class="mega-wrap" data-mega="solutions">
+          <a href="#solutions" class="nav-link">Solutions <span class="arrow">▾</span></a>
+          <div class="mega-panel">
+            <div class="mega-inner">
+              <div class="mega-sidebar">
+                <button class="mega-sidebar-btn active" data-tab="sol-startup"><span class="sidebar-icon">🚀</span>For
+                  Startups</button>
+                <button class="mega-sidebar-btn" data-tab="sol-nbfc"><span class="sidebar-icon">🏦</span>For
+                  NBFCs</button>
+                <button class="mega-sidebar-btn" data-tab="sol-fintech"><span class="sidebar-icon">💳</span>For
+                  Fintechs</button>
+                <button class="mega-sidebar-btn" data-tab="sol-sme"><span class="sidebar-icon">🏢</span>For
+                  SMEs</button>
+                <button class="mega-sidebar-btn" data-tab="sol-enterprise"><span class="sidebar-icon">🏗️</span>For
+                  Enterprises</button>
+              </div>
+              <div class="mega-content">
+                <div class="mega-tab active" id="sol-startup">
+                  <div class="mega-content-title">For Startups & New Businesses</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">Company Registration</a>
+                    <a href="#" class="mega-link">GST Registration</a>
+                    <a href="#" class="mega-link">Bank Account Opening</a>
+                    <a href="#" class="mega-link">Trademark Filing</a>
+                    <a href="#" class="mega-link">Startup India Scheme</a>
+                    <a href="#" class="mega-link">DPIIT Recognition</a>
+                    <a href="#" class="mega-link">Seed Funding Compliance</a>
+                    <a href="#" class="mega-link">Founder Agreement</a>
+                    <a href="#" class="mega-link">Business Plan Consulting</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="sol-nbfc">
+                  <div class="mega-content-title">For NBFCs & Lending Businesses</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">RBI License Application</a>
+                    <a href="#" class="mega-link">NBFC Compliance</a>
+                    <a href="#" class="mega-link">XBRL Returns</a>
+                    <a href="#" class="mega-link">Annual RBI Returns</a>
+                    <a href="#" class="mega-link">Fair Practices Code</a>
+                    <a href="#" class="mega-link">Loan Portfolio Audit</a>
+                    <a href="#" class="mega-link">CERSAI Registration</a>
+                    <a href="#" class="mega-link">NHB Compliance</a>
+                    <a href="#" class="mega-link">NBFC Acquisition Support</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="sol-fintech">
+                  <div class="mega-content-title">For Fintech Platforms</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">PA/PG License (RBI)</a>
+                    <a href="#" class="mega-link">SEBI Registration</a>
+                    <a href="#" class="mega-link">IRDA Licensing</a>
+                    <a href="#" class="mega-link">IFSCA Setup</a>
+                    <a href="#" class="mega-link">Digital Lending Guidelines</a>
+                    <a href="#" class="mega-link">Cyber Security Framework</a>
+                    <a href="#" class="mega-link">Data Privacy Compliance</a>
+                    <a href="#" class="mega-link">Regulatory Sandbox</a>
+                    <a href="#" class="mega-link">API Compliance</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="sol-sme">
+                  <div class="mega-content-title">For SMEs & Freelancers</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">Audit & Tax Filing</a>
+                    <a href="#" class="mega-link">ROC Annual Filing</a>
+                    <a href="#" class="mega-link">MCA Compliance</a>
+                    <a href="#" class="mega-link">Payroll Services</a>
+                    <a href="#" class="mega-link">GST Returns</a>
+                    <a href="#" class="mega-link">TDS Compliance</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="sol-enterprise">
+                  <div class="mega-content-title">For Enterprises</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">Corporate Restructuring</a>
+                    <a href="#" class="mega-link">M&A Advisory</a>
+                    <a href="#" class="mega-link">Cross-border Compliance</a>
+                    <a href="#" class="mega-link">Internal Audit Framework</a>
+                    <a href="#" class="mega-link">Board Advisory</a>
+                    <a href="#" class="mega-link">ESG Compliance</a>
+                  </div>
+                </div>
+                <div class="mega-footer">
+                  <a href="#solutions" class="mega-footer-cta">Explore All Solutions →</a>
+                  <span class="mega-footer-help">Need help? <a href="#contact">Talk to an expert</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ RESOURCES MEGA ═══ -->
+        <div class="mega-wrap" data-mega="resources">
+          <a href="#press" class="nav-link">Resources <span class="arrow">▾</span></a>
+          <div class="mega-panel">
+            <div class="mega-inner">
+              <div class="mega-sidebar">
+                <button class="mega-sidebar-btn active" data-tab="res-press"><span class="sidebar-icon">📰</span>Press &
+                  Media</button>
+                <button class="mega-sidebar-btn" data-tab="res-case"><span class="sidebar-icon">📂</span>Case
+                  Studies</button>
+                <button class="mega-sidebar-btn" data-tab="res-guides"><span class="sidebar-icon">📖</span>Guides &
+                  Articles</button>
+                <button class="mega-sidebar-btn" data-tab="res-faq"><span class="sidebar-icon">❓</span>FAQs</button>
+                <button class="mega-sidebar-btn" data-tab="res-tools"><span class="sidebar-icon">🛠️</span>Free
+                  Tools</button>
+              </div>
+              <div class="mega-content">
+                <div class="mega-tab active" id="res-press">
+                  <div class="mega-content-title">Press & Media</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">Latest News</a>
+                    <a href="#" class="mega-link">Media Coverage</a>
+                    <a href="#" class="mega-link">Press Releases</a>
+                    <a href="#" class="mega-link">Brand Assets</a>
+                    <a href="#" class="mega-link">Company Announcements</a>
+                    <a href="#" class="mega-link">Awards & Recognition</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="res-case">
+                  <div class="mega-content-title">Case Studies</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">NBFC License Success Stories</a>
+                    <a href="#" class="mega-link">Fintech Compliance Case Study</a>
+                    <a href="#" class="mega-link">Startup Registration Stories</a>
+                    <a href="#" class="mega-link">SEBI Registration Case Study</a>
+                    <a href="#" class="mega-link">Cross-border Compliance</a>
+                    <a href="#" class="mega-link">Enterprise Audit Case Study</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="res-guides">
+                  <div class="mega-content-title">Guides & Articles</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">How to Register an NBFC</a>
+                    <a href="#" class="mega-link">PA License Complete Guide</a>
+                    <a href="#" class="mega-link">SEBI Registration Process</a>
+                    <a href="#" class="mega-link">IFSCA Setup Guide</a>
+                    <a href="#" class="mega-link">GST Compliance Handbook</a>
+                    <a href="#" class="mega-link">Startup Legal Checklist</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="res-faq">
+                  <div class="mega-content-title">Frequently Asked Questions</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">NBFC FAQs</a>
+                    <a href="#" class="mega-link">Payment Aggregator FAQs</a>
+                    <a href="#" class="mega-link">SEBI FAQs</a>
+                    <a href="#" class="mega-link">Company Registration FAQs</a>
+                    <a href="#" class="mega-link">GST FAQs</a>
+                    <a href="#" class="mega-link">Compliance FAQs</a>
+                  </div>
+                </div>
+                <div class="mega-tab" id="res-tools">
+                  <div class="mega-content-title">Free Tools</div>
+                  <div class="mega-links">
+                    <a href="#" class="mega-link">NBFC Eligibility Checker</a>
+                    <a href="#" class="mega-link">GST Calculator</a>
+                    <a href="#" class="mega-link">Compliance Calendar</a>
+                    <a href="#" class="mega-link">Business Name Generator</a>
+                    <a href="#" class="mega-link">ROC Filing Tracker</a>
+                    <a href="#" class="mega-link">License Cost Estimator</a>
+                  </div>
+                </div>
+                <div class="mega-footer">
+                  <a href="#press" class="mega-footer-cta">View All Resources →</a>
+                  <span class="mega-footer-help">Need help? <a href="#contact">Talk to an expert</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ PRICING (no dropdown) ═══ -->
+        <a href="#cta" class="nav-link">Pricing</a>
+      </div>
+
+      <!-- Right Side -->
+      <div class="nav-right">
+        <a href="tel:+919825600907" class="nav-phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14h-.08z" />
+          </svg>
+          +91-9825600907
+        </a>
+        <a href="#" class="nav-login">Login</a>
+        <a href="#cta" class="nav-cta">Get Started</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#solutions" class="mobile-menu-link">Services <span>›</span></a>
+    <a href="#services" class="mobile-menu-link">Regulatory <span>›</span></a>
+    <a href="#solutions" class="mobile-menu-link">Solutions <span>›</span></a>
+    <a href="#press" class="mobile-menu-link">Resources <span>›</span></a>
+    <a href="#cta" class="mobile-menu-link">Pricing <span>›</span></a>
+    <a href="tel:+919825600907" class="mobile-menu-link">📞 +91-9825600907 <span>›</span></a>
+    <div class="mobile-menu-cta">
+      <a href="#" class="m-login">Login</a>
+      <a href="#cta" class="m-start">Get Started</a>
+    </div>
+  </div>
+
+
+
+  <!-- ============================================
+       SECTION 2: HERO
+  ============================================ -->
+  <section class="hero" id="hero">
+    <!-- Hero Text — Centered -->
+    <div class="hero-text">
+      <div class="hero-badge">🏆 India's #1 Fintech Compliance Platform</div>
+      <h1 class="hero-h1">
+        Simplify Fintech<br>
+        Compliance, <span class="gradient-text">Accelerate</span><br>
+        Your Growth
+      </h1>
+      <p class="hero-sub">Expert regulatory guidance for NBFC, RBI, SEBI, and IRDA licenses. We handle your fintech
+        compliance end-to-end so you can focus on building your business.</p>
+      <div class="hero-pills">
+        <span class="hero-pill"><span class="dot dot-green"></span>500+ Licenses Obtained</span>
+        <span class="pills-sep">·</span>
+        <span class="hero-pill"><span class="dot dot-blue"></span>1000+ Businesses Served</span>
+        <span class="pills-sep">·</span>
+        <span class="hero-pill"><span class="dot dot-cyan"></span>Pan India Services</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#cta" class="btn-primary">Get Started Free &nbsp;→</a>
+        <a href="#contact" class="btn-secondary">Book a Free Consultation</a>
+      </div>
+      <p class="hero-note">No credit card required · Free consultation · Response in 24 hours</p>
+    </div>
+
+    <!-- Globe — Xflow-style, large & centered, bottom-cropped -->
+    <div class="globe-wrapper">
+      <!-- Floating Info Cards -->
+      <div class="float-card card-nbfc">
+        <span class="float-card-icon">🏦</span>
+        <div>
+          <span class="float-card-title">NBFC License</span>
+          <span class="float-card-sub green">Approved ✓</span>
+        </div>
+      </div>
+      <div class="float-card card-countries">
+        <span class="float-card-icon">🌍</span>
+        <div>
+          <span class="float-card-title">140+ Countries</span>
+          <span class="float-card-sub blue">Regulatory Network</span>
+        </div>
+      </div>
+      <div class="float-card card-speed">
+        <span class="float-card-icon">⚡</span>
+        <div>
+          <span class="float-card-title" style="color:#F59E0B;">48hr</span>
+          <span class="float-card-sub">Avg Processing</span>
+        </div>
+      </div>
+
+      <!-- Testimonial Card -->
+      <div class="globe-testimonial" id="globeTestimonial">
+        <p class="testimonial-quote" id="testimonialQuote">"Estabizz made our NBFC licensing process seamless. Their
+          expertise saved us months of effort."</p>
+        <div class="testimonial-author" id="testimonialAuthor">Rajesh Mehta</div>
+        <div class="testimonial-role" id="testimonialRole">CEO, FinEdge Technologies</div>
+        <div class="testimonial-nav">
+          <button onclick="prevTestimonial()">‹</button>
+          <button onclick="nextTestimonial()">›</button>
+        </div>
+      </div>
+
+      <!-- Three.js Globe Canvas -->
+      <div id="globe-container"></div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 3: STATS TICKER STRIP
+  ============================================ -->
+  <div class="stats-strip">
+    <div class="stats-strip-inner">
+      <div class="stat-item"><span class="stat-n">500+</span> Licenses Obtained</div>
+      <div class="stat-item"><span class="stat-n">1000+</span> Businesses Served</div>
+      <div class="stat-item"><span class="stat-n">15+</span> Years Experience</div>
+      <div class="stat-item"><span class="stat-n">40+</span> Regulatory Experts</div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 4: TRUSTED BY STRIP
+  ============================================ -->
+  <section class="trusted-section">
+    <div class="trusted-label">Trusted by India's Fastest Growing Fintechs</div>
+    <div class="marquee-wrapper">
+      <div class="marquee-track" id="marqueeTrack">
+        <span class="marquee-logo">FinEdge</span>
+        <span class="marquee-logo">PayNXT</span>
+        <span class="marquee-logo">LoanKart</span>
+        <span class="marquee-logo">WealthDesk</span>
+        <span class="marquee-logo">CreditBee</span>
+        <span class="marquee-logo">Razorpay</span>
+        <span class="marquee-logo">Groww</span>
+        <span class="marquee-logo">Slice</span>
+        <span class="marquee-logo">Jupiter</span>
+        <span class="marquee-logo">Fi Money</span>
+        <span class="marquee-logo">FinEdge</span>
+        <span class="marquee-logo">PayNXT</span>
+        <span class="marquee-logo">LoanKart</span>
+        <span class="marquee-logo">WealthDesk</span>
+        <span class="marquee-logo">CreditBee</span>
+        <span class="marquee-logo">Razorpay</span>
+        <span class="marquee-logo">Groww</span>
+        <span class="marquee-logo">Slice</span>
+        <span class="marquee-logo">Jupiter</span>
+        <span class="marquee-logo">Fi Money</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 5: SOLUTIONS GRID
+  ============================================ -->
+  <section class="solutions-section" id="solutions">
+    <div class="container">
+      <div class="section-header">
+        <div><span class="section-label">Our Solutions</span></div>
+        <h2 class="section-h2 reveal">Powering seamless compliance for every business</h2>
+        <p class="section-sub reveal reveal-delay-1">Whether you're a startup, NBFC, or enterprise — we have the right
+          compliance solution for you.</p>
+      </div>
+      <div class="solutions-grid">
+
+        <!-- Card 1: Startups -->
+        <div class="sol-card reveal">
+          <div class="sol-card-arrow">↗</div>
+          <div class="sol-card-illo">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+              <rect x="20" y="50" width="40" height="40" rx="6" fill="#BAE6FD" opacity="0.7" />
+              <rect x="35" y="35" width="40" height="40" rx="6" fill="#38BDF8" opacity="0.7" />
+              <rect x="50" y="20" width="40" height="40" rx="6" fill="#0EA5E9" opacity="0.8" />
+              <rect x="55" y="25" width="30" height="4" rx="2" fill="white" opacity="0.8" />
+              <rect x="55" y="33" width="20" height="3" rx="1.5" fill="white" opacity="0.5" />
+              <rect x="55" y="40" width="25" height="3" rx="1.5" fill="white" opacity="0.3" />
+            </svg>
+          </div>
+          <div class="sol-card-body">
+            <span class="sol-badge">140+ Business Types</span>
+            <h3 class="sol-card-title">For Startups &amp; New Businesses</h3>
+            <p class="sol-card-desc">Register your company, get GST, open bank accounts, and stay compliant from day
+              one.</p>
+            <p class="sol-services">Private Ltd · LLP · OPC · Section 8</p>
+            <a href="#" class="sol-link">Explore →</a>
+          </div>
+        </div>
+
+        <!-- Card 2: NBFCs -->
+        <div class="sol-card reveal reveal-delay-1">
+          <div class="sol-card-arrow">↗</div>
+          <div class="sol-card-illo">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+              <circle cx="60" cy="60" r="22" stroke="#38BDF8" stroke-width="4" fill="none" />
+              <circle cx="60" cy="60" r="12" fill="#0EA5E9" opacity="0.8" />
+              <circle cx="32" cy="45" r="14" stroke="#06B6D4" stroke-width="3" fill="none" />
+              <circle cx="88" cy="45" r="14" stroke="#0284C7" stroke-width="3" fill="none" />
+              <path d="M44 50 L48 55" stroke="#38BDF8" stroke-width="2" />
+              <path d="M72 50 L76 55" stroke="#38BDF8" stroke-width="2" />
+              <circle cx="32" cy="45" r="7" fill="#06B6D4" opacity="0.6" />
+              <circle cx="88" cy="45" r="7" fill="#0284C7" opacity="0.6" />
+            </svg>
+          </div>
+          <div class="sol-card-body">
+            <span class="sol-badge">Save 60% time</span>
+            <h3 class="sol-card-title">For NBFCs &amp; Lending Businesses</h3>
+            <p class="sol-card-desc">Get your NBFC license, manage RBI compliance, handle annual returns and audits.</p>
+            <p class="sol-services">RBI License · NBFC Compliance · XBRL Returns</p>
+            <a href="#" class="sol-link">Explore →</a>
+          </div>
+        </div>
+
+        <!-- Card 3: Fintechs -->
+        <div class="sol-card reveal reveal-delay-2">
+          <div class="sol-card-arrow">↗</div>
+          <div class="sol-card-illo">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+              <rect x="25" y="35" width="70" height="50" rx="6" stroke="#38BDF8" stroke-width="2" fill="none" />
+              <line x1="25" y1="55" x2="95" y2="55" stroke="#BAE6FD" stroke-width="1.5" />
+              <line x1="55" y1="35" x2="55" y2="85" stroke="#BAE6FD" stroke-width="1.5" />
+              <circle cx="40" cy="45" r="5" fill="#0EA5E9" />
+              <circle cx="70" cy="45" r="5" fill="#06B6D4" />
+              <circle cx="40" cy="70" r="5" fill="#0284C7" />
+              <circle cx="70" cy="70" r="5" fill="#38BDF8" />
+              <line x1="40" y1="45" x2="70" y2="45" stroke="#0EA5E9" stroke-width="1.5" stroke-dasharray="3 2" />
+              <line x1="40" y1="45" x2="40" y2="70" stroke="#0EA5E9" stroke-width="1.5" stroke-dasharray="3 2" />
+              <line x1="70" y1="45" x2="70" y2="70" stroke="#0EA5E9" stroke-width="1.5" stroke-dasharray="3 2" />
+              <line x1="40" y1="70" x2="70" y2="70" stroke="#0EA5E9" stroke-width="1.5" stroke-dasharray="3 2" />
+            </svg>
+          </div>
+          <div class="sol-card-body">
+            <span class="sol-badge">7000+ businesses</span>
+            <h3 class="sol-card-title">For Fintech Platforms</h3>
+            <p class="sol-card-desc">Payment aggregator licenses, SEBI registrations, and full regulatory stack for
+              digital finance.</p>
+            <p class="sol-services">PA License · SEBI Reg · IRDA · IFSCA</p>
+            <a href="#" class="sol-link">Explore →</a>
+          </div>
+        </div>
+
+        <!-- Card 4: SMEs -->
+        <div class="sol-card reveal reveal-delay-3">
+          <div class="sol-card-arrow">↗</div>
+          <div class="sol-card-illo">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+              <rect x="22" y="40" width="76" height="48" rx="8" fill="#E0F2FE" stroke="#38BDF8" stroke-width="2" />
+              <rect x="30" y="48" width="60" height="34" rx="4" fill="#0EA5E9" opacity="0.15" />
+              <rect x="35" y="54" width="50" height="4" rx="2" fill="#0284C7" opacity="0.6" />
+              <rect x="35" y="62" width="35" height="3" rx="1.5" fill="#38BDF8" opacity="0.5" />
+              <rect x="35" y="69" width="42" height="3" rx="1.5" fill="#38BDF8" opacity="0.4" />
+              <rect x="35" y="76" width="28" height="3" rx="1.5" fill="#38BDF8" opacity="0.3" />
+              <circle cx="60" cy="38" r="5" fill="#0EA5E9" />
+              <line x1="60" y1="33" x2="60" y2="30" stroke="#0EA5E9" stroke-width="2" />
+            </svg>
+          </div>
+          <div class="sol-card-body">
+            <span class="sol-badge">Settlement in 24hrs</span>
+            <h3 class="sol-card-title">For SMEs &amp; Freelancers</h3>
+            <p class="sol-card-desc">Audit, tax filing, secretarial services, and compliance management for growing
+              businesses.</p>
+            <p class="sol-services">Audit · ROC · MCA Filing · Tax</p>
+            <a href="#" class="sol-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 6: WHY ESTABIZZ
+  ============================================ -->
+  <section class="why-section" id="why">
+    <div class="container">
+      <div class="why-grid">
+        <!-- Left text -->
+        <div class="why-left reveal">
+          <span class="section-label">Why Choose Us</span>
+          <h2 class="section-h2" style="text-align:left;font-size:38px;">Estabizz is the platform of choice for fintech
+            compliance in India</h2>
+          <p class="why-body">Startups, NBFCs, and enterprises across India use Estabizz to navigate complex regulatory
+            requirements efficiently and confidently. Here's why.</p>
+          <a href="#cta" class="btn-dark">Sign Up Free →</a>
+          <div class="why-micro-stats">
+            <div class="why-micro">
+              <span class="why-micro-num">500+</span>
+              <span class="why-micro-label">Licenses</span>
+            </div>
+            <div class="why-micro-sep"></div>
+            <div class="why-micro">
+              <span class="why-micro-num">15+</span>
+              <span class="why-micro-label">Years</span>
+            </div>
+            <div class="why-micro-sep"></div>
+            <div class="why-micro">
+              <span class="why-micro-num">40+</span>
+              <span class="why-micro-label">Experts</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 2x2 feature cards -->
+        <div class="why-right">
+          <!-- Card A -->
+          <div class="why-card reveal reveal-delay-1">
+            <div class="why-card-illo">
+              <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+                <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="52" fill="#0EA5E9"
+                  opacity="0.18" font-family="Sora,sans-serif" font-weight="800">%</text>
+                <circle cx="45" cy="45" r="28" stroke="#38BDF8" stroke-width="2" fill="none" opacity="0.4" />
+                <circle cx="45" cy="45" r="18" stroke="#0EA5E9" stroke-width="2" fill="none" opacity="0.5" />
+                <circle cx="45" cy="45" r="8" fill="#0EA5E9" opacity="0.6" />
+              </svg>
+            </div>
+            <div class="why-card-body">
+              <h3 class="why-card-title">Transparent Pricing. No hidden charges.</h3>
+              <p class="why-card-desc">Know the exact fee before you begin. Our pricing is linked to actual regulatory
+                costs with zero surprises.</p>
+            </div>
+          </div>
+          <!-- Card B -->
+          <div class="why-card reveal reveal-delay-2">
+            <div class="why-card-illo">
+              <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+                <rect x="30" y="20" width="30" height="50" rx="5" fill="#E0F2FE" />
+                <rect x="30" y="20" width="30" height="15" rx="5" fill="#0EA5E9" opacity="0.7" />
+                <ellipse cx="45" cy="45" rx="8" ry="14" stroke="#38BDF8" stroke-width="2" fill="none" />
+                <line x1="45" y1="31" x2="45" y2="59" stroke="#0284C7" stroke-width="2" />
+                <path d="M38 38 L52 52" stroke="#06B6D4" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div class="why-card-body">
+              <h3 class="why-card-title">Licenses in weeks, not months.</h3>
+              <p class="why-card-desc">Track your application in real-time. Our expert team fast-tracks approvals
+                through established regulatory channels.</p>
+            </div>
+          </div>
+          <!-- Card C -->
+          <div class="why-card reveal reveal-delay-3">
+            <div class="why-card-illo">
+              <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+                <path d="M45 18 L68 29 L68 48 C68 60 57 70 45 74 C33 70 22 60 22 48 L22 29 Z" fill="#E0F2FE"
+                  stroke="#38BDF8" stroke-width="2" />
+                <rect x="36" y="38" width="18" height="14" rx="3" fill="#0EA5E9" opacity="0.7" />
+                <circle cx="45" cy="34" r="6" fill="#0284C7" opacity="0.8" />
+                <line x1="40" y1="45" x2="50" y2="45" stroke="white" stroke-width="2" stroke-linecap="round" />
+                <line x1="45" y1="40" x2="45" y2="50" stroke="white" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div class="why-card-body">
+              <h3 class="why-card-title">Expert team of CAs, CSs &amp; Lawyers.</h3>
+              <p class="why-card-desc">Every case is handled by qualified professionals with deep RBI, SEBI, IRDA, and
+                MCA domain knowledge.</p>
+            </div>
+          </div>
+          <!-- Card D -->
+          <div class="why-card reveal reveal-delay-4">
+            <div class="why-card-illo">
+              <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+                <circle cx="45" cy="45" r="26" stroke="#BAE6FD" stroke-width="3" fill="none" />
+                <circle cx="45" cy="45" r="18" stroke="#38BDF8" stroke-width="2" fill="none" />
+                <line x1="45" y1="27" x2="45" y2="45" stroke="#0EA5E9" stroke-width="3" stroke-linecap="round" />
+                <line x1="45" y1="45" x2="57" y2="45" stroke="#0284C7" stroke-width="3" stroke-linecap="round" />
+                <circle cx="45" cy="45" r="3" fill="#0EA5E9" />
+                <circle cx="45" cy="21" r="3" fill="#38BDF8" opacity="0.6" />
+                <circle cx="69" cy="45" r="3" fill="#38BDF8" opacity="0.6" />
+                <circle cx="45" cy="69" r="3" fill="#38BDF8" opacity="0.6" />
+                <circle cx="21" cy="45" r="3" fill="#38BDF8" opacity="0.6" />
+              </svg>
+            </div>
+            <div class="why-card-body">
+              <h3 class="why-card-title">End-to-end support, always.</h3>
+              <p class="why-card-desc">From document preparation to approval follow-ups — we handle every step and keep
+                you informed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- SECTIONS 7-10 STYLES (appended inline) -->
+
+
+  <!-- ============================================
+       SECTION 7: CORE SERVICES (DARK)
+  ============================================ -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <div><span class="section-label">Core Services</span></div>
+        <h2 class="section-h2 reveal">Everything you need for fintech compliance</h2>
+        <p class="section-sub reveal reveal-delay-1">From registration to ongoing compliance — our complete suite of
+          regulatory services.</p>
+      </div>
+      <div class="services-grid">
+
+        <!-- NBFC Registration -->
+        <div class="srv-card reveal">
+          <div class="srv-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect x="2" y="10" width="24" height="16" rx="3" stroke="#38BDF8" stroke-width="1.8" fill="none" />
+              <path d="M6 10V8a8 8 0 0116 0v2" stroke="#38BDF8" stroke-width="1.8" fill="none" />
+              <rect x="11" y="16" width="6" height="5" rx="1" fill="#38BDF8" opacity="0.6" />
+            </svg>
+          </div>
+          <h3 class="srv-title">NBFC Registration</h3>
+          <p class="srv-desc">Complete NBFC license from RBI — Business plan, application, due diligence, and approval
+            support.</p>
+          <div class="srv-tags">
+            <span class="srv-tag">RBI</span><span class="srv-tag">NBFC</span><span class="srv-tag">License</span>
+          </div>
+        </div>
+
+        <!-- Payment Aggregator -->
+        <div class="srv-card reveal reveal-delay-1">
+          <div class="srv-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect x="2" y="6" width="24" height="16" rx="4" stroke="#38BDF8" stroke-width="1.8" fill="none" />
+              <rect x="2" y="10" width="24" height="4" fill="#38BDF8" opacity="0.3" />
+              <rect x="6" y="16" width="6" height="2" rx="1" fill="#38BDF8" opacity="0.7" />
+              <rect x="15" y="16" width="8" height="2" rx="1" fill="#38BDF8" opacity="0.4" />
+            </svg>
+          </div>
+          <h3 class="srv-title">Payment Aggregator License</h3>
+          <p class="srv-desc">Get your PA license from RBI. We handle the complex application, net worth compliance, and
+            KYC framework.</p>
+          <div class="srv-tags">
+            <span class="srv-tag">RBI</span><span class="srv-tag">Payment</span><span class="srv-tag">Fintech</span>
+          </div>
+        </div>
+
+        <!-- SEBI Registration -->
+        <div class="srv-card reveal reveal-delay-2">
+          <div class="srv-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <polyline points="4,20 10,12 16,16 24,6" stroke="#38BDF8" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="24" cy="6" r="2.5" fill="#38BDF8" opacity="0.8" />
+              <rect x="4" y="22" width="20" height="2" rx="1" fill="#38BDF8" opacity="0.3" />
+            </svg>
+          </div>
+          <h3 class="srv-title">SEBI Registration</h3>
+          <p class="srv-desc">Stock broker, investment advisor, AIF, PMS — complete SEBI registration and ongoing
+            compliance management.</p>
+          <div class="srv-tags">
+            <span class="srv-tag">SEBI</span><span class="srv-tag">Capital Market</span>
+          </div>
+        </div>
+
+        <!-- IRDA Licensing -->
+        <div class="srv-card reveal reveal-delay-3">
+          <div class="srv-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M14 3 L25 8 L25 16 C25 21 19.5 25.5 14 27 C8.5 25.5 3 21 3 16 L3 8 Z" stroke="#38BDF8"
+                stroke-width="1.8" fill="none" />
+              <path d="M9 14 L12 17 L19 10" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+          <h3 class="srv-title">IRDA Licensing</h3>
+          <p class="srv-desc">Insurance broker, corporate agency, web aggregator, and TPA licenses with complete IRDA
+            compliance support.</p>
+          <div class="srv-tags">
+            <span class="srv-tag">IRDA</span><span class="srv-tag">Insurance</span>
+          </div>
+        </div>
+
+        <!-- Company Formation -->
+        <div class="srv-card reveal reveal-delay-4">
+          <div class="srv-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect x="4" y="8" width="20" height="16" rx="3" stroke="#38BDF8" stroke-width="1.8" fill="none" />
+              <path d="M9 8V6a5 5 0 0110 0v2" stroke="#38BDF8" stroke-width="1.8" fill="none" />
+              <line x1="8" y1="14" x2="20" y2="14" stroke="#38BDF8" stroke-width="1.5" opacity="0.6" />
+              <line x1="8" y1="18" x2="16" y2="18" stroke="#38BDF8" stroke-width="1.5" opacity="0.4" />
+            </svg>
+          </div>
+          <h3 class="srv-title">Company Formation</h3>
+          <p class="srv-desc">Private Limited, LLP, OPC, Section 8 — complete company registration with MCA, GST, and
+            bank account.</p>
+          <div class="srv-tags">
+            <span class="srv-tag">MCA</span><span class="srv-tag">Startup</span><span class="srv-tag">ROC</span>
+          </div>
+        </div>
+
+        <!-- Audit & Compliance -->
+        <div class="srv-card reveal reveal-delay-5">
+          <div class="srv-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect x="4" y="3" width="14" height="22" rx="3" stroke="#38BDF8" stroke-width="1.8" fill="none" />
+              <line x1="8" y1="9" x2="14" y2="9" stroke="#38BDF8" stroke-width="1.5" />
+              <line x1="8" y1="13" x2="14" y2="13" stroke="#38BDF8" stroke-width="1.5" opacity="0.7" />
+              <line x1="8" y1="17" x2="12" y2="17" stroke="#38BDF8" stroke-width="1.5" opacity="0.5" />
+              <circle cx="21" cy="21" r="5" stroke="#38BDF8" stroke-width="1.5" fill="none" />
+              <line x1="24.5" y1="24.5" x2="27" y2="27" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </div>
+          <h3 class="srv-title">Audit &amp; Compliance</h3>
+          <p class="srv-desc">Statutory audit, internal audit, ROC filing, XBRL returns, and annual compliance
+            management.</p>
+          <div class="srv-tags">
+            <span class="srv-tag">Audit</span><span class="srv-tag">Tax</span><span class="srv-tag">ROC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 8: HOW IT WORKS
+  ============================================ -->
+  <section class="process-section" id="process">
+    <div class="container">
+      <div class="section-header">
+        <div><span class="section-label">How It Works</span></div>
+        <h2 class="section-h2 reveal">Get your license in 4 simple steps</h2>
+      </div>
+      <div class="process-steps">
+
+        <div class="process-step reveal">
+          <div class="step-circle">01</div>
+          <div class="step-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M4 6h20M4 6a2 2 0 00-2 2v12a2 2 0 002 2h20a2 2 0 002-2V8a2 2 0 00-2-2M8 6V4a2 2 0 014 0v2"
+                stroke="#0EA5E9" stroke-width="1.8" fill="none" stroke-linecap="round" />
+              <circle cx="14" cy="15" r="4" stroke="#0EA5E9" stroke-width="1.5" fill="none" />
+              <path d="M17 18l3 3" stroke="#0EA5E9" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </div>
+          <h3 class="step-title">Free Consultation</h3>
+          <p class="step-desc">Tell us your business goals. Our experts analyze the right license for you.</p>
+        </div>
+
+        <div class="process-step reveal reveal-delay-1">
+          <div class="step-circle">02</div>
+          <div class="step-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect x="5" y="3" width="18" height="22" rx="3" stroke="#0EA5E9" stroke-width="1.8" fill="none" />
+              <line x1="9" y1="9" x2="19" y2="9" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round" />
+              <line x1="9" y1="13" x2="19" y2="13" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round"
+                opacity="0.7" />
+              <line x1="9" y1="17" x2="15" y2="17" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round"
+                opacity="0.5" />
+            </svg>
+          </div>
+          <h3 class="step-title">Document Preparation</h3>
+          <p class="step-desc">We prepare all required documents, business plans, and applications with zero effort from
+            you.</p>
+        </div>
+
+        <div class="process-step reveal reveal-delay-2">
+          <div class="step-circle">03</div>
+          <div class="step-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M14 20V8M8 14l6-6 6 6" stroke="#0EA5E9" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" fill="none" />
+              <rect x="4" y="22" width="20" height="3" rx="1.5" fill="#0EA5E9" opacity="0.3" />
+            </svg>
+          </div>
+          <h3 class="step-title">Regulatory Submission</h3>
+          <p class="step-desc">We file your application with RBI, SEBI, IRDA, or MCA and follow up proactively.</p>
+        </div>
+
+        <div class="process-step reveal reveal-delay-3">
+          <div class="step-circle">04</div>
+          <div class="step-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <circle cx="14" cy="12" r="8" stroke="#0EA5E9" stroke-width="1.8" fill="none" />
+              <path d="M10 12l3 3 5-5" stroke="#0EA5E9" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M8 22c0-2 2.7-3.5 6-3.5s6 1.5 6 3.5" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round"
+                fill="none" />
+            </svg>
+          </div>
+          <h3 class="step-title">License Received</h3>
+          <p class="step-desc">You receive your license and we continue supporting ongoing compliance requirements.</p>
+        </div>
+      </div>
+      <div class="process-cta reveal">
+        <a href="#cta" class="btn-primary">Start Your Journey Today →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 9: PRESS / NEWS
+  ============================================ -->
+  <section class="press-section" id="press">
+    <div class="container">
+      <div class="press-header reveal">
+        <span class="section-label">In the News</span>
+        <h2 class="section-h2" style="text-align:left;">We're making the headlines</h2>
+      </div>
+      <div class="press-grid">
+
+        <div class="press-card reveal">
+          <div class="press-pub et">The Economic Times</div>
+          <p class="press-quote">Estabizz Fintech simplifies the complex landscape of financial regulatory compliance,
+            making it accessible for businesses of all sizes across India.</p>
+          <a href="#" class="press-read">Read more →</a>
+        </div>
+
+        <div class="press-card reveal reveal-delay-1">
+          <div class="press-pub fe">Financial Express</div>
+          <p class="press-quote">With Estabizz, getting an NBFC license no longer feels like navigating a maze. Their
+            expert team handled everything seamlessly for our fintech startup.</p>
+          <a href="#" class="press-read">Read more →</a>
+        </div>
+
+        <div class="press-card reveal reveal-delay-2">
+          <div class="press-pub bs">Business Standard</div>
+          <p class="press-quote">Estabizz is designed to help businesses obtain financial licenses in a compliant and
+            regulatory manner — from startups to large enterprises.</p>
+          <a href="#" class="press-read">Read more →</a>
+        </div>
+      </div>
+      <div class="press-dots">
+        <span class="press-dot active"></span>
+        <span class="press-dot"></span>
+        <span class="press-dot"></span>
+        <span class="press-dot"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 10: API / DEVELOPER
+  ============================================ -->
+  <section class="api-section" id="api">
+    <div class="container">
+      <div class="api-grid">
+        <!-- Left -->
+        <div class="api-left reveal">
+          <span class="section-label">For Developers &amp; Platforms</span>
+          <h2 class="api-title">Build compliant fintech products with Estabizz APIs</h2>
+          <p class="api-body">Effortlessly embed best-in-class compliance and regulatory intelligence into your
+            platform. Our powerful APIs provide multiple integration opportunities while abstracting the complexity of
+            Indian financial regulations.</p>
+          <div class="api-features">
+            <div class="api-feature">
+              <div class="api-check">
+                <svg viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5l2.5 2.5L8 3" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+              APIs for company registration and compliance checks
+            </div>
+            <div class="api-feature">
+              <div class="api-check">
+                <svg viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5l2.5 2.5L8 3" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+              Real-time license status tracking
+            </div>
+            <div class="api-feature">
+              <div class="api-check">
+                <svg viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5l2.5 2.5L8 3" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+              Automated document generation
+            </div>
+            <div class="api-feature">
+              <div class="api-check">
+                <svg viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5l2.5 2.5L8 3" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+              Webhook notifications for regulatory updates
+            </div>
+          </div>
+          <div class="api-btns">
+            <a href="#" class="btn-primary-grad">Know More</a>
+            <a href="#cta" class="btn-ghost-white">Sign Up Free</a>
+          </div>
+        </div>
+
+        <!-- Right illustration + feature grid -->
+        <div class="api-right reveal reveal-delay-2">
+          <div class="api-illo">
+            <!-- SVG network illustration -->
+            <svg class="api-network" viewBox="0 0 420 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Radiating lines from center (210,100) -->
+              <line x1="210" y1="100" x2="60" y2="30" stroke="#0EA5E9" stroke-width="1" opacity="0.3"
+                stroke-dasharray="4 3" />
+              <line x1="210" y1="100" x2="360" y2="30" stroke="#0EA5E9" stroke-width="1" opacity="0.3"
+                stroke-dasharray="4 3" />
+              <line x1="210" y1="100" x2="60" y2="170" stroke="#0EA5E9" stroke-width="1" opacity="0.3"
+                stroke-dasharray="4 3" />
+              <line x1="210" y1="100" x2="360" y2="170" stroke="#0EA5E9" stroke-width="1" opacity="0.3"
+                stroke-dasharray="4 3" />
+              <line x1="210" y1="100" x2="20" y2="100" stroke="#0EA5E9" stroke-width="1" opacity="0.2"
+                stroke-dasharray="4 3" />
+              <line x1="210" y1="100" x2="400" y2="100" stroke="#0EA5E9" stroke-width="1" opacity="0.2"
+                stroke-dasharray="4 3" />
+              <!-- Node dots -->
+              <circle cx="60" cy="30" r="5" fill="#38BDF8" opacity="0.5" />
+              <circle cx="360" cy="30" r="5" fill="#38BDF8" opacity="0.5" />
+              <circle cx="60" cy="170" r="5" fill="#38BDF8" opacity="0.5" />
+              <circle cx="360" cy="170" r="5" fill="#38BDF8" opacity="0.5" />
+              <circle cx="20" cy="100" r="4" fill="#06B6D4" opacity="0.4" />
+              <circle cx="400" cy="100" r="4" fill="#06B6D4" opacity="0.4" />
+              <!-- Outer ring -->
+              <circle cx="210" cy="100" r="60" stroke="#38BDF8" stroke-width="1" opacity="0.15"
+                stroke-dasharray="6 4" />
+              <circle cx="210" cy="100" r="80" stroke="#0EA5E9" stroke-width="1" opacity="0.08"
+                stroke-dasharray="8 6" />
+            </svg>
+            <div class="api-center-logo">
+              <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+                <rect x="2" y="2" width="18" height="18" rx="5" fill="white" opacity="0.9" />
+                <rect x="10" y="10" width="18" height="18" rx="5" fill="white" opacity="0.7" />
+                <rect x="18" y="6" width="18" height="18" rx="5" fill="white" opacity="0.5" />
+              </svg>
+            </div>
+          </div>
+          <div class="api-feature-grid">
+            <div class="api-feat-card">
+              <div class="api-feat-icon">&lt;/&gt;</div>
+              <div class="api-feat-title">APIs</div>
+              <div class="api-feat-desc">RESTful APIs for compliance automation</div>
+            </div>
+            <div class="api-feat-card">
+              <div class="api-feat-icon">��️</div>
+              <div class="api-feat-title">White-labeled</div>
+              <div class="api-feat-desc">Full white-label solution for your brand</div>
+            </div>
+            <div class="api-feat-card">
+              <div class="api-feat-icon">⚡</div>
+              <div class="api-feat-title">Quick Integration</div>
+              <div class="api-feat-desc">Go live in hours, not weeks</div>
+            </div>
+            <div class="api-feat-card">
+              <div class="api-feat-icon">💰</div>
+              <div class="api-feat-title">Monetization</div>
+              <div class="api-feat-desc">Revenue-share partnerships available</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 11: TESTIMONIALS
+  ============================================ -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <div><span class="section-label">Client Testimonials</span></div>
+        <h2 class="section-h2 reveal">What our clients say</h2>
+        <p class="section-sub reveal reveal-delay-1">Join 1000+ businesses that trust Estabizz for their compliance
+          needs</p>
+      </div>
+      <div class="testi-grid">
+
+        <div class="testi-card reveal">
+          <div class="testi-top">
+            <span class="testi-company">DripCapital</span>
+            <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          </div>
+          <p class="testi-quote">Estabizz has been instrumental in getting our NBFC license approved. Their team was
+            professional, responsive, and handled every regulatory hurdle with ease. Highly recommended.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">RM</div>
+            <div>
+              <div class="testi-name">Rajesh Mehta</div>
+              <div class="testi-role">CEO, DripCapital India</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal reveal-delay-1">
+          <div class="testi-top">
+            <span class="testi-company">FinEdge</span>
+            <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          </div>
+          <p class="testi-quote">We approached Estabizz for our Payment Aggregator license and they made the entire
+            process simple and transparent. Got our RBI license in under 60 days!</p>
+          <div class="testi-author">
+            <div class="testi-avatar">PS</div>
+            <div>
+              <div class="testi-name">Priya Sharma</div>
+              <div class="testi-role">Founder, FinEdge Technologies</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal reveal-delay-2">
+          <div class="testi-top">
+            <span class="testi-company">WeWork India</span>
+            <span class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          </div>
+          <p class="testi-quote">Estabizz has improved our compliance operations significantly. Their team's knowledge
+            of SEBI and RBI regulations is unmatched. A truly reliable compliance partner.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">AP</div>
+            <div>
+              <div class="testi-name">Ankit Patel</div>
+              <div class="testi-role">CFO, WeWork India</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 12: CTA BANNER
+  ============================================ -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <h2 class="cta-h2 reveal">Ready to get your fintech license?</h2>
+      <p class="cta-sub reveal reveal-delay-1">Join 1000+ businesses. Get a free consultation with our regulatory
+        experts today.</p>
+      <div class="cta-trust reveal reveal-delay-2">
+        <span class="cta-trust-item"><span class="cta-trust-check">&#10003;</span> Free Consultation</span>
+        <span class="cta-trust-item"><span class="cta-trust-check">&#10003;</span> No Hidden Fees</span>
+        <span class="cta-trust-item"><span class="cta-trust-check">&#10003;</span> Expert Guidance</span>
+      </div>
+      <a href="tel:+919825600907" class="btn-white reveal reveal-delay-3">Get Started Free &rarr;</a>
+      <p class="cta-phone reveal reveal-delay-4">Or call us directly: <a href="tel:+919825600907">+91-9825600907</a></p>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 13: FOOTER
+  ============================================ -->
+  <footer class="footer" id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-top-grid">
+
+          <!-- Brand column -->
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+                <rect x="2" y="2" width="18" height="18" rx="5" fill="url(#flg1)" opacity="0.9" />
+                <rect x="10" y="10" width="18" height="18" rx="5" fill="url(#flg2)" opacity="0.85" />
+                <rect x="18" y="6" width="18" height="18" rx="5" fill="url(#flg3)" opacity="0.8" />
+                <defs>
+                  <linearGradient id="flg1" x1="2" y1="2" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#38BDF8" />
+                    <stop offset="1" stop-color="#0EA5E9" />
+                  </linearGradient>
+                  <linearGradient id="flg2" x1="10" y1="10" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#0EA5E9" />
+                    <stop offset="1" stop-color="#0284C7" />
+                  </linearGradient>
+                  <linearGradient id="flg3" x1="18" y1="6" x2="36" y2="24" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#06B6D4" />
+                    <stop offset="1" stop-color="#0284C7" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <span class="footer-logo-text">Estabizz Fintech</span>
+            </div>
+            <p class="footer-tagline">India's most trusted fintech compliance and regulatory licensing partner.</p>
+            <div class="footer-contact">
+              <a href="tel:+919825600907" class="footer-contact-item">
+                <span class="footer-contact-icon">&#128222;</span> +91-9825600907
+              </a>
+              <a href="mailto:info@estabizz.com" class="footer-contact-item">
+                <span class="footer-contact-icon">&#9993;</span> info@estabizz.com
+              </a>
+            </div>
+            <p class="footer-addr">No. 123, 2nd Floor, SG Highway,<br>Ahmedabad, Gujarat &mdash; 380015</p>
+            <div class="footer-socials">
+              <a href="#" class="footer-social" aria-label="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+              </a>
+              <a href="#" class="footer-social" aria-label="Twitter">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                </svg>
+              </a>
+              <a href="#" class="footer-social" aria-label="Facebook">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                </svg>
+              </a>
+            </div>
+            <div class="footer-certs">
+              <div class="footer-cert">ISO<br>27001</div>
+              <div class="footer-cert">AICPA<br>SOC</div>
+            </div>
+            <!-- Live Rate Display (inside brand column) -->
+            <div class="footer-live-rate" style="margin-top:24px;">
+              <p class="footer-rate-label">Estabizz Live Rate &mdash; Feb 24, 2026 at 10:24 IST</p>
+              <div class="footer-rate-num">INR 84.50 <span class="rate-up">&#8599;</span></div>
+              <p class="footer-rate-note">Estabizz uses Mid-Market Rate (MMR) for all international transactions</p>
+            </div>
+          </div>
+
+          <!-- Products -->
+          <div>
+            <div class="footer-col-title">Products</div>
+            <div class="footer-links">
+              <a href="#" class="footer-link">Estabizz Compliance Suite</a>
+              <a href="#" class="footer-link">Regulatory Dashboard</a>
+              <a href="#" class="footer-link">Document Management</a>
+              <a href="#" class="footer-link">License Tracker</a>
+              <a href="#" class="footer-link">FX AI Analyst</a>
+            </div>
+          </div>
+
+          <!-- Solutions -->
+          <div>
+            <div class="footer-col-title">Solutions</div>
+            <div class="footer-links">
+              <a href="#" class="footer-link">For Exporters</a>
+              <a href="#" class="footer-link">For NBFCs</a>
+              <a href="#" class="footer-link">For Fintech Platforms</a>
+              <a href="#" class="footer-link">For Freelancers</a>
+              <a href="#" class="footer-link">For Payment Aggregators</a>
+            </div>
+          </div>
+
+          <!-- Regulatory -->
+          <div>
+            <div class="footer-col-title">Regulatory</div>
+            <div class="footer-links">
+              <a href="#" class="footer-link">RBI Compliance</a>
+              <a href="#" class="footer-link">SEBI Registration</a>
+              <a href="#" class="footer-link">IRDA Licensing</a>
+              <a href="#" class="footer-link">IFSCA Services</a>
+              <a href="#" class="footer-link">FEMA Advisory</a>
+            </div>
+          </div>
+
+          <!-- Resources -->
+          <div>
+            <div class="footer-col-title">Resources</div>
+            <div class="footer-links">
+              <a href="#" class="footer-link">Blog</a>
+              <a href="#" class="footer-link">Guides &amp; eBooks</a>
+              <a href="#" class="footer-link">Case Studies</a>
+              <a href="#" class="footer-link">FAQs</a>
+              <a href="#" class="footer-link">Regulatory Updates</a>
+            </div>
+          </div>
+
+          <!-- Tools + More -->
+          <div>
+            <div class="footer-col-title">Tools + More</div>
+            <div class="footer-links">
+              <a href="#" class="footer-link">SWIFT/BIC Finder</a>
+              <a href="#" class="footer-link">IBAN Finder</a>
+              <a href="#" class="footer-link">Currency Converter</a>
+              <a href="#" class="footer-link">FIRA Calculator</a>
+              <a href="#" class="footer-link">Pricing</a>
+              <a href="#" class="footer-link">Careers</a>
+              <a href="#" class="footer-link">Team Estabizz</a>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <div class="container">
+            <div class="footer-bottom-inner">
+              <span class="footer-copy">&copy; 2024 Estabizz Fintech PVT LTD. All rights reserved.</span>
+              <span class="footer-cin">CIN: U72900KA2021FTC149049</span>
+              <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Refund Policy</a>
+              </div>
+            </div>
+          </div>
+        </div>
+  </footer>
+  <script>
+    // ============================================
+    // JS: Sticky Navbar
+    // ============================================
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // ============================================
+    // JS: Mobile Hamburger Menu
+    // ============================================
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+
+    // ============================================
+    // JS: Mega Menu Interactions
+    // ============================================
+    (function initMegaMenu() {
+      // Sidebar tab switching — on hover (desktop) or click
+      document.querySelectorAll('.mega-sidebar-btn').forEach(function (btn) {
+        function activate() {
+          var panel = btn.closest('.mega-panel');
+          var tabId = btn.getAttribute('data-tab');
+          // Deactivate siblings
+          panel.querySelectorAll('.mega-sidebar-btn').forEach(function (b) { b.classList.remove('active'); });
+          panel.querySelectorAll('.mega-tab').forEach(function (t) { t.classList.remove('active'); });
+          // Activate this
+          btn.classList.add('active');
+          var tab = document.getElementById(tabId);
+          if (tab) tab.classList.add('active');
+        }
+        btn.addEventListener('mouseenter', activate);
+        btn.addEventListener('click', activate);
+      });
+
+      // Close mega menus when clicking outside
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.mega-wrap')) {
+          document.querySelectorAll('.mega-wrap.active').forEach(function (w) { w.classList.remove('active'); });
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.mega-wrap.active').forEach(function (w) { w.classList.remove('active'); });
+        }
+      });
+    })();
+
+    // ============================================
+    // JS: Testimonial Card Cycling
+    // ============================================
+    const testimonials = [
+      { quote: '"Estabizz made our NBFC licensing process seamless. Their expertise saved us months of effort."', author: 'Rajesh Mehta', role: 'CEO, FinEdge Technologies' },
+      { quote: '"The regulatory compliance team at Estabizz is outstanding. They guided us through every step."', author: 'Priya Sharma', role: 'Founder, PayBridge Solutions' },
+      { quote: '"From SEBI registration to ongoing compliance, Estabizz handles it all with remarkable efficiency."', author: 'Vikram Patel', role: 'Director, CreditFlow India' },
+    ];
+    let currentTestimonial = 0;
+    function showTestimonial(index) {
+      const q = document.getElementById('testimonialQuote');
+      const a = document.getElementById('testimonialAuthor');
+      const r = document.getElementById('testimonialRole');
+      if (!q) return;
+      q.textContent = testimonials[index].quote;
+      a.textContent = testimonials[index].author;
+      r.textContent = testimonials[index].role;
+    }
+    function nextTestimonial() { currentTestimonial = (currentTestimonial + 1) % testimonials.length; showTestimonial(currentTestimonial); }
+    function prevTestimonial() { currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length; showTestimonial(currentTestimonial); }
+    setInterval(nextTestimonial, 4000);
+
+    // ============================================
+    // JS: 3D Interactive Earth Globe (Canvas 2D)
+    // ============================================
+    (function initGlobe() {
+      var container = document.getElementById('globe-container');
+      if (!container) return;
+
+      var SIZE = container.offsetWidth || 700;
+      var canvas = document.createElement('canvas');
+      canvas.width = SIZE * (window.devicePixelRatio > 1 ? 2 : 1);
+      canvas.height = canvas.width;
+      canvas.style.width = SIZE + 'px';
+      canvas.style.height = SIZE + 'px';
+      canvas.style.cursor = 'grab';
+      container.appendChild(canvas);
+      var c = canvas.getContext('2d');
+
+      // ── State ──────────────────────────────────────────────────────────
+      var rotY = 1.8; // Start facing India (~78°E → π - 78*π/180)
+      var rotX = 0;
+      var autoRotate = true;
+      var isDragging = false;
+      var prevMouse = { x: 0, y: 0 };
+      var textureLoaded = false;
+      var earthImg = new Image();
+      var earthData = null;
+      var animFrame = null;
+
+      // ── Location Pins ──────────────────────────────────────────────────
+      var pins = [
+        { name: 'New York', lat: 40.7128, lon: -74.0060, color: '#4F8EF7' },
+        { name: 'London', lat: 51.5074, lon: -0.1278, color: '#4F8EF7' },
+        { name: 'Frankfurt', lat: 50.1109, lon: 8.6821, color: '#4F8EF7' },
+        { name: 'Dubai', lat: 25.2048, lon: 55.2708, color: '#4F8EF7' },
+        { name: 'Sydney', lat: -33.8688, lon: 151.2093, color: '#4F8EF7' },
+        { name: 'India HQ', lat: 23.0225, lon: 72.5714, color: '#FFD700' },
+        { name: 'Singapore', lat: 1.3521, lon: 103.8198, color: '#4F8EF7' }
+      ];
+
+      // ── Orbital Rings ──────────────────────────────────────────────────
+      var rings = [
+        { tilt: -0.5, phase: 0, rx: 1.38, color: 'rgba(79,142,247,0.7)' },
+        { tilt: 0.3, phase: 2.1, rx: 1.42, color: 'rgba(0,194,255,0.65)' },
+        { tilt: 1.1, phase: 4.2, rx: 1.35, color: 'rgba(79,142,247,0.55)' }
+      ];
+
+      // ── Helper: lat/lon to 3D screen point ─────────────────────────────
+      function latLonToScreen(lat, lon, r, cx, cy) {
+        var phi = lat * Math.PI / 180;
+        var theta = lon * Math.PI / 180;
+        var x0 = Math.cos(phi) * Math.sin(theta);
+        var y0 = -Math.sin(phi);
+        var z0 = Math.cos(phi) * Math.cos(theta);
+        // Apply Y rotation
+        var cosR = Math.cos(rotY), sinR = Math.sin(rotY);
+        var rx = x0 * cosR + z0 * sinR;
+        var rz = -x0 * sinR + z0 * cosR;
+        // Apply X rotation
+        var cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+        var ry = y0 * cosX - rz * sinX;
+        var rz2 = y0 * sinX + rz * cosX;
+        return { x: cx + rx * r, y: cy + ry * r, z: rz2, visible: rz2 > -0.1 };
+      }
+
+      // ── Load Texture ───────────────────────────────────────────────────
+      earthImg.crossOrigin = 'anonymous';
+      earthImg.onload = function () {
+        var tc = document.createElement('canvas');
+        tc.width = earthImg.width;
+        tc.height = earthImg.height;
+        var tctx = tc.getContext('2d');
+        tctx.drawImage(earthImg, 0, 0);
+        earthData = tctx.getImageData(0, 0, tc.width, tc.height);
+        textureLoaded = true;
+      };
+      earthImg.src = 'https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg';
+
+      // ── Draw Wireframe Loading State ───────────────────────────────────
+      function drawWireframe(r, cx, cy) {
+        c.strokeStyle = 'rgba(40,180,200,0.2)';
+        c.lineWidth = 0.5;
+        // Latitude lines
+        for (var lat = -60; lat <= 60; lat += 30) {
+          c.beginPath();
+          for (var lon = 0; lon <= 360; lon += 5) {
+            var p = latLonToScreen(lat, lon - 180, r, cx, cy);
+            if (p.z > 0) { if (lon === 0) c.moveTo(p.x, p.y); else c.lineTo(p.x, p.y); }
+          }
+          c.stroke();
+        }
+        // Longitude lines
+        for (var lon = -180; lon < 180; lon += 30) {
+          c.beginPath();
+          for (var lat = -90; lat <= 90; lat += 5) {
+            var p = latLonToScreen(lat, lon, r, cx, cy);
+            if (p.z > 0) { if (lat === -90) c.moveTo(p.x, p.y); else c.lineTo(p.x, p.y); }
+          }
+          c.stroke();
+        }
+      }
+
+      // ── Render Globe Texture via Sphere Projection ─────────────────────
+      function drawTexturedGlobe(r, cx, cy) {
+        if (!earthData) return;
+        var tw = earthData.width, th = earthData.height, td = earthData.data;
+        var step = r > 200 ? 2 : 1;
+        var imgD = c.createImageData(r * 2, r * 2);
+        var out = imgD.data;
+        var iw = r * 2;
+
+        // Light direction (normalized, from upper-left-front)
+        var lx = -0.4, ly = -0.6, lz = 0.7;
+        var lLen = Math.sqrt(lx * lx + ly * ly + lz * lz);
+        lx /= lLen; ly /= lLen; lz /= lLen;
+
+        var cosRY = Math.cos(-rotY), sinRY = Math.sin(-rotY);
+        var cosRX = Math.cos(-rotX), sinRX = Math.sin(-rotX);
+
+        for (var py = 0; py < r * 2; py += step) {
+          for (var px = 0; px < r * 2; px += step) {
+            var nx = (px - r) / r;
+            var ny = (py - r) / r;
+            var d2 = nx * nx + ny * ny;
+            if (d2 > 1) continue;
+            var nz = Math.sqrt(1 - d2);
+
+            // Apply inverse X rotation
+            var ny2 = ny * cosRX - nz * sinRX;
+            var nz2 = ny * sinRX + nz * cosRX;
+
+            // Apply inverse Y rotation
+            var rx = nx * cosRY - nz2 * sinRY;
+            var rz = nx * sinRY + nz2 * cosRY;
+
+            // To lat/lng UV
+            var lat = Math.asin(ny2);
+            var lng = Math.atan2(rz, rx);
+            var u = ((lng / (2 * Math.PI) + 0.5) + 0.5) % 1;
+            var v = 0.5 - lat / Math.PI;
+
+            // Sample texture
+            var tx = Math.floor(u * (tw - 1));
+            var ty = Math.floor(v * (th - 1));
+            var ti = (ty * tw + tx) * 4;
+
+            // Lambert lighting
+            var dot = Math.max(0, nx * lx + ny * ly + nz * lz);
+            var light = 0.12 + dot * 0.88;
+            var rim = Math.pow(1 - Math.sqrt(d2), 0.25);
+            var final_light = light * rim;
+
+            var R = Math.min(255, td[ti] * final_light);
+            var G = Math.min(255, td[ti + 1] * final_light);
+            var B = Math.min(255, td[ti + 2] * final_light);
+
+            // Fill step×step block
+            for (var dy = 0; dy < step && py + dy < r * 2; dy++) {
+              for (var dx = 0; dx < step && px + dx < r * 2; dx++) {
+                var oi = ((py + dy) * iw + (px + dx)) * 4;
+                out[oi] = R;
+                out[oi + 1] = G;
+                out[oi + 2] = B;
+                out[oi + 3] = 255;
+              }
+            }
+          }
+        }
+
+        c.putImageData(imgD, cx - r, cy - r);
+      }
+
+      // ── Draw Overlays ──────────────────────────────────────────────────
+      function drawOverlays(r, cx, cy) {
+        // 1. Atmosphere halo
+        var halo = c.createRadialGradient(cx, cy, r * 0.88, cx, cy, r * 1.2);
+        halo.addColorStop(0, 'rgba(40,180,200,0)');
+        halo.addColorStop(0.5, 'rgba(40,180,200,0.25)');
+        halo.addColorStop(1, 'transparent');
+        c.fillStyle = halo;
+        c.beginPath(); c.arc(cx, cy, r * 1.2, 0, Math.PI * 2); c.fill();
+
+        // 2. Specular highlight (top-left)
+        var spec = c.createRadialGradient(cx - r * 0.35, cy - r * 0.35, 0, cx - r * 0.35, cy - r * 0.35, r * 0.7);
+        spec.addColorStop(0, 'rgba(180,240,255,0.15)');
+        spec.addColorStop(1, 'transparent');
+        c.fillStyle = spec;
+        c.beginPath(); c.arc(cx, cy, r, 0, Math.PI * 2); c.fill();
+
+        // 3. Night shadow (right side)
+        var shadow = c.createRadialGradient(cx + r * 0.6, cy + r * 0.2, 0, cx + r * 0.5, cy, r * 1.2);
+        shadow.addColorStop(0, 'rgba(0,5,20,0.6)');
+        shadow.addColorStop(0.5, 'rgba(0,5,20,0.3)');
+        shadow.addColorStop(1, 'transparent');
+        c.fillStyle = shadow;
+        c.beginPath(); c.arc(cx, cy, r, 0, Math.PI * 2); c.fill();
+
+        // 4. Edge ring
+        c.strokeStyle = 'rgba(60,200,220,0.5)';
+        c.lineWidth = 1.5;
+        c.beginPath(); c.arc(cx, cy, r, 0, Math.PI * 2); c.stroke();
+      }
+
+      // ── Draw Orbital Rings ─────────────────────────────────────────────
+      var ringTime = 0;
+      function drawRings(r, cx, cy) {
+        ringTime += 0.008;
+        rings.forEach(function (ring) {
+          var rx = r * ring.rx;
+          var ry = rx * 0.35;
+          c.save();
+          c.translate(cx, cy);
+          c.rotate(ring.tilt);
+          c.strokeStyle = ring.color;
+          c.lineWidth = 1.2;
+          c.setLineDash([4, 6]);
+          c.beginPath();
+          c.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+          c.stroke();
+          c.setLineDash([]);
+
+          // Glowing dot
+          var angle = ringTime * 0.5 + ring.phase;
+          var dotX = Math.cos(angle) * rx;
+          var dotY = Math.sin(angle) * ry;
+          var glow = c.createRadialGradient(dotX, dotY, 0, dotX, dotY, 6);
+          glow.addColorStop(0, 'rgba(130,200,255,0.9)');
+          glow.addColorStop(1, 'transparent');
+          c.fillStyle = glow;
+          c.beginPath(); c.arc(dotX, dotY, 6, 0, Math.PI * 2); c.fill();
+          c.fillStyle = '#fff';
+          c.beginPath(); c.arc(dotX, dotY, 2, 0, Math.PI * 2); c.fill();
+
+          c.restore();
+        });
+      }
+
+      // ── Draw Location Pins ─────────────────────────────────────────────
+      var pulsePhase = 0;
+      var hoveredPin = -1;
+      function drawPins(r, cx, cy) {
+        pulsePhase += 0.04;
+        pins.forEach(function (pin, i) {
+          var p = latLonToScreen(pin.lat, pin.lon, r * 0.98, cx, cy);
+          if (!p.visible) return;
+
+          var alpha = Math.max(0, Math.min(1, (p.z + 0.1) * 2));
+
+          // Pulse ring
+          var pulseR = 4 + Math.sin(pulsePhase + i * 0.8) * 3;
+          c.globalAlpha = alpha * 0.4;
+          c.strokeStyle = pin.color;
+          c.lineWidth = 1;
+          c.beginPath(); c.arc(p.x, p.y, pulseR + 4, 0, Math.PI * 2); c.stroke();
+
+          // Glow
+          c.globalAlpha = alpha * 0.3;
+          var glow = c.createRadialGradient(p.x, p.y, 0, p.x, p.y, 8);
+          glow.addColorStop(0, pin.color);
+          glow.addColorStop(1, 'transparent');
+          c.fillStyle = glow;
+          c.beginPath(); c.arc(p.x, p.y, 8, 0, Math.PI * 2); c.fill();
+
+          // Pin dot
+          c.globalAlpha = alpha;
+          c.fillStyle = pin.color;
+          c.beginPath();
+          c.arc(p.x, p.y, pin.name === 'India HQ' ? 5 : 3.5, 0, Math.PI * 2);
+          c.fill();
+
+          // White center
+          c.fillStyle = '#fff';
+          c.beginPath(); c.arc(p.x, p.y, 1.5, 0, Math.PI * 2); c.fill();
+
+          // Tooltip on hover
+          if (i === hoveredPin) {
+            c.globalAlpha = alpha;
+            c.font = '600 11px Inter, sans-serif';
+            var tw = c.measureText(pin.name).width;
+            var tx = p.x - tw / 2 - 6;
+            var ty = p.y - 20;
+            // Background
+            c.fillStyle = 'rgba(15,23,42,0.85)';
+            c.beginPath();
+            c.roundRect(tx, ty - 10, tw + 12, 18, 4);
+            c.fill();
+            // Text
+            c.fillStyle = '#fff';
+            c.fillText(pin.name, p.x - tw / 2, ty + 2);
+          }
+
+          c.globalAlpha = 1;
+        });
+      }
+
+      // ── Main Render Loop ───────────────────────────────────────────────
+      function render() {
+        animFrame = requestAnimationFrame(render);
+
+        var w = canvas.width, h = canvas.height;
+        var cx = w / 2, cy = h / 2;
+        var r = Math.min(w, h) * 0.42;
+
+        c.clearRect(0, 0, w, h);
+
+        if (autoRotate) rotY += 0.0015;
+
+        if (textureLoaded) {
+          drawTexturedGlobe(r, cx, cy);
+        } else {
+          // Loading wireframe
+          c.fillStyle = 'rgba(13,42,62,0.5)';
+          c.beginPath(); c.arc(cx, cy, r, 0, Math.PI * 2); c.fill();
+          drawWireframe(r, cx, cy);
+        }
+
+        drawOverlays(r, cx, cy);
+        drawRings(r, cx, cy);
+        drawPins(r, cx, cy);
+      }
+      render();
+
+      // ── Mouse Drag ─────────────────────────────────────────────────────
+      canvas.addEventListener('mousedown', function (e) {
+        isDragging = true; autoRotate = false;
+        canvas.style.cursor = 'grabbing';
+        prevMouse = { x: e.offsetX, y: e.offsetY };
+      });
+      canvas.addEventListener('mousemove', function (e) {
+        // Pin hover detection
+        var w = canvas.width, cx = w / 2, cy = w / 2;
+        var r = w * 0.42;
+        var dpr = canvas.width / parseInt(canvas.style.width);
+        var mx = e.offsetX * dpr, my = e.offsetY * dpr;
+        hoveredPin = -1;
+        pins.forEach(function (pin, i) {
+          var p = latLonToScreen(pin.lat, pin.lon, r * 0.98, cx, cy);
+          if (p.visible && Math.hypot(p.x - mx, p.y - my) < 12) hoveredPin = i;
+        });
+        canvas.style.cursor = hoveredPin >= 0 ? 'pointer' : (isDragging ? 'grabbing' : 'grab');
+
+        if (!isDragging) return;
+        var dx = e.offsetX - prevMouse.x;
+        var dy = e.offsetY - prevMouse.y;
+        rotY += dx * 0.005;
+        rotX += dy * 0.005;
+        rotX = Math.max(-1.2, Math.min(1.2, rotX));
+        prevMouse = { x: e.offsetX, y: e.offsetY };
+      });
+      canvas.addEventListener('mouseup', function () {
+        isDragging = false; canvas.style.cursor = 'grab';
+        setTimeout(function () { autoRotate = true; }, 2000);
+      });
+      canvas.addEventListener('mouseleave', function () {
+        isDragging = false; hoveredPin = -1; canvas.style.cursor = 'grab';
+        setTimeout(function () { autoRotate = true; }, 2000);
+      });
+
+      // ── Touch ──────────────────────────────────────────────────────────
+      canvas.addEventListener('touchstart', function (e) {
+        isDragging = true; autoRotate = false;
+        prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        e.preventDefault();
+      }, { passive: false });
+      canvas.addEventListener('touchmove', function (e) {
+        if (!isDragging) return;
+        var dx = e.touches[0].clientX - prevMouse.x;
+        var dy = e.touches[0].clientY - prevMouse.y;
+        rotY += dx * 0.005;
+        rotX += dy * 0.005;
+        rotX = Math.max(-1.2, Math.min(1.2, rotX));
+        prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        e.preventDefault();
+      }, { passive: false });
+      canvas.addEventListener('touchend', function () {
+        isDragging = false;
+        setTimeout(function () { autoRotate = true; }, 2000);
+      });
+
+      // ── Resize ─────────────────────────────────────────────────────────
+      window.addEventListener('resize', function () {
+        var w = container.offsetWidth;
+        var dpr = window.devicePixelRatio > 1 ? 2 : 1;
+        canvas.width = w * dpr;
+        canvas.height = w * dpr;
+        canvas.style.width = w + 'px';
+        canvas.style.height = w + 'px';
+      });
+    })();
+
+    // ============================================
+    // JS: Scroll Reveal (IntersectionObserver)
+    // ============================================
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Hero elements instantly visible on load
+    setTimeout(() => {
+      document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+    }, 400);
+
+    // ============================================
+    // JS: Smooth Scroll
+    // ============================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

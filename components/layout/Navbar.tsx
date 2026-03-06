@@ -143,14 +143,25 @@ export default function Navbar() {
                             <h3 className="text-[18px] font-bold text-[#0a1628] mb-5">{currentMenu.categories[activeCategory]?.label}</h3>
                             {currentMenu.categories[activeCategory]?.items.length > 0 ? (
                                 <div className="grid grid-cols-3 gap-x-8 gap-y-3">
-                                    {currentMenu.categories[activeCategory].items.map((item, j) => (
-                                        <Link key={j} href={linkMap[item] || "#"} className="flex items-center gap-2 text-[13.5px] text-[#475569] hover:text-[#0096D6] transition-colors py-1">
-                                            <span className="text-[#0096D6] text-[8px]">›</span> {item}
-                                        </Link>
-                                    ))}
+                                    {currentMenu.categories[activeCategory].items.map((item, j) => {
+                                        const isLive = !!linkMap[item];
+                                        return (
+                                            <Link
+                                                key={j}
+                                                href={linkMap[item] || "#"}
+                                                className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#0096D6] font-medium hover:text-[#0077B6]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}
+                                            >
+                                                <span className={`${isLive ? 'text-[#0096D6]' : 'text-[#cbd5e1]'} text-[8px]`}>›</span>
+                                                {item}
+                                                {isLive && (
+                                                    <span className="ml-1 px-1.5 py-0.5 rounded-[4px] bg-[#10b981]/10 text-[#10b981] text-[9px] font-bold tracking-wider uppercase">Live</span>
+                                                )}
+                                            </Link>
+                                        );
+                                    })}
                                 </div>
                             ) : (
-                                <p className="text-[14px] text-[#94a3b8]">Content coming soon...</p>
+                                <p className="text-[14px] text-[#94a3b8]">Upcoming content...</p>
                             )}
                             <div className="flex items-center justify-between mt-8 pt-4 border-t border-gray-100">
                                 <Link href={currentMenu.viewAll} className="text-[14px] font-bold text-[#0096D6] hover:underline">{currentMenu.viewAllLabel}</Link>
@@ -173,9 +184,17 @@ export default function Navbar() {
                                         <div key={i}>
                                             <h4 className="text-[13px] font-bold text-[#0096D6] mb-1">{cat.icon} {cat.label}</h4>
                                             <div className="space-y-1 pl-2">
-                                                {cat.items.slice(0, 4).map((item, j) => (
-                                                    <Link key={j} href="#" className="block text-[13px] text-[#64748b] hover:text-[#0096D6]">{item}</Link>
-                                                ))}
+                                                {cat.items.slice(0, 4).map((item, j) => {
+                                                    const isLive = !!linkMap[item];
+                                                    return (
+                                                        <Link key={j} href={linkMap[item] || "#"} className={`flex items-center gap-2 text-[13px] py-0.5 ${isLive ? 'text-[#0096D6] font-medium' : 'text-[#64748b] hover:text-[#0096D6]'}`}>
+                                                            {item}
+                                                            {isLive && (
+                                                                <span className="px-1.5 py-0.5 rounded-[4px] bg-[#10b981]/10 text-[#10b981] text-[8px] font-bold tracking-wider uppercase">Live</span>
+                                                            )}
+                                                        </Link>
+                                                    );
+                                                })}
                                             </div>
                                         </div>
                                     ))}

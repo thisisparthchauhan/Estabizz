@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
-        "build": "next build",
+        "dev": "npx tailwindcss -i ./app/globals.css -o ./public/tailwind.css --watch & next dev",
+        "build": "npx tailwindcss -i ./app/globals.css -o ./public/tailwind.css && next build",
         "start": "next start"
     },
     "dependencies": {

@@ -27,7 +27,12 @@ const services = [
         id: "ifsca",
         title: "IFSCA & GIFT City Services",
         desc: "Regulatory structuring and operational compliance support for entities operating within India's International Financial Services Centre ecosystem.",
-        tags: ["Broker Dealer", "FME", "Global Banking Unit", "SEZ"],
+        tags: [
+            { name: "Broker Dealer", href: null },
+            { name: "Factoring", href: "/regulatory/ifsca-factoring-license-gift-city" },
+            { name: "PSP License", href: "/regulatory/psp-license-ifsca" },
+            { name: "Finance Co.", href: "/regulatory/finance-company-gift-ifsc" }
+        ],
         icon: "🌐"
     },
     {
@@ -101,32 +106,42 @@ export default function RegulatoryServices() {
                                 opacity: isVisible ? 1 : 0,
                                 transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
                                 transitionDelay: `${0.08 * index}s`
-               }}
-             >
-                    <div className="w-[48px] h-[48px] rounded-[14px] bg-[rgba(0,150,220,0.12)] border border-[rgba(0,150,220,0.2)] flex items-center justify-center text-[22px] mb-5 shrink-0">
-                        {service.icon}
-                    </div>
+                            }}
+                        >
+                            <div className="w-[48px] h-[48px] rounded-[14px] bg-[rgba(0,150,220,0.12)] border border-[rgba(0,150,220,0.2)] flex items-center justify-center text-[22px] mb-5 shrink-0">
+                                {service.icon}
+                            </div>
 
-                    <h3 className="text-[17px] font-bold text-white mb-3">
-                        {service.title}
-                    </h3>
+                            <h3 className="text-[17px] font-bold text-white mb-3">
+                                {service.title}
+                            </h3>
 
-                    <p className="text-[13px] text-[#94a3b8] leading-[1.7] mb-6 flex-grow">
-                        {service.desc}
-                    </p>
+                            <p className="text-[13px] text-[#94a3b8] leading-[1.7] mb-6 flex-grow">
+                                {service.desc}
+                            </p>
 
-                    <div className="flex flex-wrap gap-2 mt-auto">
-                        {service.tags.map((tag, i) => (
-                            <span key={i} className="px-3 py-1 bg-[rgba(0,150,220,0.1)] border border-[rgba(0,150,220,0.2)] text-[#60c8f0] rounded-full text-[11px] font-semibold whitespace-nowrap">
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
+                            <div className="flex flex-wrap gap-2 mt-auto">
+                                {service.tags.map((tag, i) => {
+                                    const isObject = typeof tag === 'object' && tag !== null;
+                                    const name = isObject ? (tag as any).name : tag;
+                                    const href = isObject ? (tag as any).href : null;
+
+                                    return href ? (
+                                        <a key={i} href={href} className="px-3 py-1 bg-[rgba(0,150,220,0.1)] border border-[rgba(0,150,220,0.2)] text-[#60c8f0] rounded-full text-[11px] font-semibold whitespace-nowrap hover:bg-[#0096D6] hover:text-white transition-colors cursor-pointer">
+                                            {name}
+                                        </a>
+                                    ) : (
+                                        <span key={i} className="px-3 py-1 bg-[rgba(0,150,220,0.1)] border border-[rgba(0,150,220,0.2)] text-[#60c8f0] rounded-full text-[11px] font-semibold whitespace-nowrap">
+                                            {name}
+                                        </span>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    ))}
                 </div>
-          ))}
-            </div>
 
-        </div>
-    </section >
-  );
+            </div>
+        </section >
+    );
 }

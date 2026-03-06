@@ -16,6 +16,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
+            <head>
+                <link rel="stylesheet" href="/tailwind.css" />
+            </head>
             <body className="antialiased selection:bg-[#0096D6] selection:text-white relative bg-transparent">
                 <LiveBackground />
                 <ReadingProgress />

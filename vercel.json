@@ -1,5 +1,4 @@
 {
-  "version": 2,
-  "name": "estabizz-site",
-  "cleanUrls": true
+  "buildCommand": "npx tailwindcss -i ./app/globals.css -o ./public/tailwind.css && next build",
+  "framework": "nextjs"
 }

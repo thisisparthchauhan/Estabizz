@@ -90,7 +90,7 @@ export default function RegulatoryArticleClient() {
           <nav className="text-sm font-medium text-gray-500 mb-8 flex items-center space-x-2">
             <a href="/" className="hover:text-[#0096D6] transition-colors">Home</a>
             <span>&gt;</span>
-            <a href="/regulatory" className="hover:text-[#0096D6] transition-colors">IFSCA</a>
+            <a href="/" className="hover:text-[#0096D6] transition-colors">IFSCA</a>
             <span>&gt;</span>
             <span className="text-[#0096D6]">Factoring License</span>
           </nav>

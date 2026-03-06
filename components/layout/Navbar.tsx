@@ -8,6 +8,7 @@ interface MegaMenu { categories: MenuCategory[]; viewAll: string; viewAllLabel: 
 const linkMap: Record<string, string> = {
     "Finance Company GIFT IFSC": "/regulatory/finance-company-gift-ifsc",
     "IFSCA Factoring License": "/regulatory/ifsca-factoring-license-gift-city",
+    "PSP License IFSCA": "/regulatory/psp-license-ifsca",
 };
 
 const menus: Record<string, MegaMenu> = {
@@ -19,7 +20,7 @@ const menus: Record<string, MegaMenu> = {
             { label: "Compliance & Audit", icon: "📋", items: ["RBI Compliance", "SEBI Compliance", "IRDAI Compliance", "IFSCA Compliance", "Annual Compliance", "Statutory Audit"] },
             { label: "Tax & Accounting", icon: "📊", items: ["Income Tax Filing", "GST Return Filing", "TDS Return Filing", "Tax Planning", "Bookkeeping Services", "Financial Statements"] },
         ],
-        viewAll: "/services", viewAllLabel: "View All Services →"
+        viewAll: "/#", viewAllLabel: "View All Services →"
     },
     Regulatory: {
         categories: [
@@ -29,7 +30,7 @@ const menus: Record<string, MegaMenu> = {
             { label: "IRDAI Licenses", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA License", "Micro Insurance"] },
             { label: "Other Regulators", icon: "⚖️", items: ["PFRDA Registration", "NHB Registration", "CERSAI Registration", "DGFT IE Code", "FSSAI License", "Drug License"] },
         ],
-        viewAll: "/regulatory", viewAllLabel: "View All Regulatory →"
+        viewAll: "/#", viewAllLabel: "View All Regulatory →"
     },
     Solutions: {
         categories: [
@@ -39,7 +40,7 @@ const menus: Record<string, MegaMenu> = {
             { label: "For SMEs", icon: "🏢", items: ["MSME Registration", "GST Compliance", "ISO Certification", "Trade License", "Import Export Code", "Labour Compliance"] },
             { label: "For Enterprises", icon: "🏗️", items: ["Corporate Restructuring", "M&A Advisory", "FEMA Compliance", "Transfer Pricing", "ESG Compliance", "Board Advisory"] },
         ],
-        viewAll: "/solutions", viewAllLabel: "Explore All Solutions →"
+        viewAll: "/#", viewAllLabel: "Explore All Solutions →"
     },
     Resources: {
         categories: [
@@ -49,7 +50,7 @@ const menus: Record<string, MegaMenu> = {
             { label: "FAQs", icon: "❓", items: [] },
             { label: "Free Tools", icon: "🔧", items: [] },
         ],
-        viewAll: "/resources", viewAllLabel: "View All Resources →"
+        viewAll: "/#", viewAllLabel: "View All Resources →"
     },
 };
 

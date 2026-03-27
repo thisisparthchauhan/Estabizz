@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🏛️", label: "RBI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "RBI Services", href: "/rbi" }, { label: "Nbfc Takeover" }]}
-            title="( Optimised with Power Word + Number + Sentiment) NBFC Takeover in India: 2026 Ultimate Guide to RBI Approval, Process & Critical Compliance Risks 🔗 Permalink ("
+            title="NBFC Takeover in India: 2026 Ultimate Guide to RBI Approval, Process & Critical Compliance Risks 🔗 Permalink"
             readTime="15 min read"
             focusKeyword="NBFC Takeover in India"
             sections={sections}

@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🏛️", label: "RBI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "RBI Services", href: "/rbi" }, { label: "Nbfc Legal Support" }]}
-            title="( Optimised with Power Word + Number + Sentiment) NBFC Legal Support Services in India: 2026 Complete & Powerful Compliance Guide 🔗 Permalink ("
+            title="NBFC Legal Support Services in India: 2026 Complete & Powerful Compliance Guide 🔗 Permalink"
             readTime="15 min read"
             focusKeyword="NBFC Legal Support Services in India"
             sections={sections}

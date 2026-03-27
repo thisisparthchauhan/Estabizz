@@ -50,6 +50,8 @@ const linkMap: Record<string, string> = {
     "SEBI Compliance": "/sebi/aif-compliance-test-report",
     "IRDAI Compliance": "/irdai/irda-insurance-broker-license",
     "IFSCA Compliance": "/regulatory/psp-license-ifsca",
+    "Aircraft Leasing IFSC": "/ifsca/aircraft-leasing",
+    "IFSCA Aircraft Leasing": "/ifsca/aircraft-leasing",
     // Enterprise / Solutions
     "FEMA Compliance": "/fema/compliance-under-fema",
     "Transfer Pricing": "/services/transfer-pricing",
@@ -78,7 +80,7 @@ const menus: Record<string, MegaMenu> = {
         categories: [
             { label: "RBI Licenses", icon: "🏛️", items: ["NBFC License", "NBFC Account Aggregator", "Payment Aggregator", "AD Category II", "Credit Information Company", "NBFC Business Plan"] },
             { label: "SEBI Licenses", icon: "📈", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "Research Analyst", "AIF Registration"] },
-            { label: "IFSCA Licenses", icon: "🌐", items: ["Finance Company GIFT IFSC", "IFSCA Factoring License", "PSP License IFSCA", "Fund Management Entity"] },
+            { label: "IFSCA Licenses", icon: "🌐", items: ["Finance Company GIFT IFSC", "IFSCA Factoring License", "PSP License IFSCA", "Fund Management Entity", "IFSCA Aircraft Leasing"] },
             { label: "IRDAI Licenses", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA License", "Micro Insurance"] },
             { label: "FEMA & Other", icon: "⚖️", items: ["FEMA Compliance", "DGFT IE Code", "Transfer Pricing", "GST Registration", "PFRDA Registration"] },
         ],

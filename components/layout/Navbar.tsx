@@ -6,41 +6,93 @@ interface MenuCategory { label: string; icon: string; items: string[]; }
 interface MegaMenu { categories: MenuCategory[]; viewAll: string; viewAllLabel: string; }
 
 const linkMap: Record<string, string> = {
+    // IFSCA (existing)
     "Finance Company GIFT IFSC": "/regulatory/finance-company-gift-ifsc",
     "IFSCA Factoring License": "/regulatory/ifsca-factoring-license-gift-city",
     "PSP License IFSCA": "/regulatory/psp-license-ifsca",
+    // RBI / NBFC
+    "NBFC Registration": "/rbi/nbfc-account-aggregator-license",
+    "NBFC Account Aggregator": "/rbi/nbfc-account-aggregator-license",
+    "Account Aggregator": "/rbi/nbfc-account-aggregator-license",
+    "NBFC Business Plan": "/rbi/nbfc-business-plan",
+    "NBFC Compliance": "/rbi/nbfc-legal-support",
+    "NBFC-P2P License": "/rbi/nbfc-for-sale",
+    "NBFC-MFI License": "/rbi/nbfc-takeover",
+    "NBFC Annual Return Filing": "/rbi/nbfc-marketing-strategy",
+    "Payment Aggregator": "/rbi/rbi-services",
+    "AD Category II": "/rbi/full-fledged-money-changers",
+    "Credit Information Company": "/rbi/lendtech-services",
+    "NBFC License": "/rbi/nbfc-account-aggregator-license",
+    "Prepaid Instrument": "/rbi/nbfc-financial-modeling",
+    // SEBI
+    "Stock Broker License": "/sebi/amfi-registration",
+    "Merchant Banker": "/sebi/alternative-asset-portfolio-valuation",
+    "Portfolio Manager": "/sebi/collective-investment-schemes",
+    "Investment Adviser": "/sebi/credit-rating-agency",
+    "Research Analyst": "/sebi/depository-participant-sebi-registration",
+    "AIF Registration": "/sebi/aif-compliance-test-report",
+    "Fund Management Entity": "/sebi/reit-registration",
+    // IRDAI
+    "Insurance Broker": "/irdai/irda-insurance-broker-license",
+    "Corporate Agent": "/irdai/irdai-regulatory-sandbox",
+    "Web Aggregator": "/irdai/insurance-marketing-firm-license",
+    "Insurance Surveyor": "/irdai/insurance-repository-registration",
+    "TPA License": "/irdai/isnp-registration",
+    "Micro Insurance": "/irdai/ifsca-insurance-intermediary",
+    // Fintech
+    "Payment Aggregator License": "/rbi/rbi-services",
+    "Prepaid Instrument License": "/rbi/nbfc-financial-modeling",
+    "BBPS Agent Registration": "/rbi/lendtech-services",
+    "UPI Third Party App": "/rbi/rbi-services",
+    "Digital Lending Compliance": "/rbi/lendtech-services",
+    // Compliance
+    "RBI Compliance": "/rbi/rbi-services",
+    "SEBI Compliance": "/sebi/aif-compliance-test-report",
+    "IRDAI Compliance": "/irdai/irda-insurance-broker-license",
+    "IFSCA Compliance": "/regulatory/psp-license-ifsca",
+    // Enterprise / Solutions
+    "FEMA Compliance": "/fema/compliance-under-fema",
+    "Transfer Pricing": "/services/transfer-pricing",
+    "ESG Compliance": "/services/esg-consulting",
+    // Startup
+    "GST Registration": "/services/gst-appeal-services",
+    // Other regulators
+    "PFRDA Registration": "/services/enterprise-services",
+    "NHB Registration": "/services/enterprise-services",
+    "CERSAI Registration": "/services/enterprise-services",
+    "DGFT IE Code": "/fema/fema-registration",
 };
 
 const menus: Record<string, MegaMenu> = {
     Services: {
         categories: [
-            { label: "Startup Services", icon: "🚀", items: ["Private Limited Registration", "LLP Formation", "One Person Company (OPC)", "Section 8 Company", "Partnership Firm", "GST Registration", "MSME / Udyam Registration", "Trademark Registration", "Startup India Recognition", "Business Plan Drafting", "Bank Account Setup", "Digital Signature (DSC)"] },
-            { label: "NBFC Services", icon: "🏦", items: ["NBFC Registration", "NBFC Compliance", "NBFC-P2P License", "NBFC-MFI License", "NBFC Account Aggregator", "NBFC Annual Return Filing"] },
+            { label: "NBFC Services", icon: "🏦", items: ["NBFC Registration", "NBFC Account Aggregator", "NBFC Business Plan", "NBFC Compliance", "NBFC-P2P License", "NBFC-MFI License", "NBFC Annual Return Filing", "Prepaid Instrument"] },
             { label: "Fintech Services", icon: "💳", items: ["Payment Aggregator License", "PSP License IFSCA", "Prepaid Instrument License", "BBPS Agent Registration", "UPI Third Party App", "Digital Lending Compliance"] },
-            { label: "Compliance & Audit", icon: "📋", items: ["RBI Compliance", "SEBI Compliance", "IRDAI Compliance", "IFSCA Compliance", "Annual Compliance", "Statutory Audit"] },
-            { label: "Tax & Accounting", icon: "📊", items: ["Income Tax Filing", "GST Return Filing", "TDS Return Filing", "Tax Planning", "Bookkeeping Services", "Financial Statements"] },
+            { label: "Compliance & Audit", icon: "📋", items: ["RBI Compliance", "SEBI Compliance", "IRDAI Compliance", "IFSCA Compliance", "FEMA Compliance", "Transfer Pricing"] },
+            { label: "Enterprise & Other", icon: "🏗️", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "Research Analyst", "AIF Registration"] },
+            { label: "ESG & Sustainability", icon: "🌱", items: ["ESG Compliance"] },
         ],
-        viewAll: "/#", viewAllLabel: "View All Services →"
+        viewAll: "/services", viewAllLabel: "View All Services →"
     },
     Regulatory: {
         categories: [
-            { label: "RBI Licenses", icon: "🏛️", items: ["NBFC License", "Payment Aggregator", "Prepaid Instrument", "AD Category II", "Credit Information Company", "Account Aggregator"] },
+            { label: "RBI Licenses", icon: "🏛️", items: ["NBFC License", "NBFC Account Aggregator", "Payment Aggregator", "AD Category II", "Credit Information Company", "NBFC Business Plan"] },
             { label: "SEBI Licenses", icon: "📈", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "Research Analyst", "AIF Registration"] },
-            { label: "IFSCA Licenses", icon: "🌐", items: ["Finance Company GIFT IFSC", "IFSCA Factoring License", "PSP License IFSCA", "Fund Management Entity", "Banking Unit IFSC", "Insurance IFSC"] },
+            { label: "IFSCA Licenses", icon: "🌐", items: ["Finance Company GIFT IFSC", "IFSCA Factoring License", "PSP License IFSCA", "Fund Management Entity"] },
             { label: "IRDAI Licenses", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA License", "Micro Insurance"] },
-            { label: "Other Regulators", icon: "⚖️", items: ["PFRDA Registration", "NHB Registration", "CERSAI Registration", "DGFT IE Code", "FSSAI License", "Drug License"] },
+            { label: "FEMA & Other", icon: "⚖️", items: ["FEMA Compliance", "DGFT IE Code", "Transfer Pricing", "GST Registration", "PFRDA Registration"] },
         ],
-        viewAll: "/#", viewAllLabel: "View All Regulatory →"
+        viewAll: "/regulatory", viewAllLabel: "View All Regulatory →"
     },
     Solutions: {
         categories: [
-            { label: "For Startups", icon: "🚀", items: ["Company Registration", "GST Registration", "Bank Account Opening", "Trademark Filing", "Startup India Scheme", "DPIIT Recognition", "Seed Funding Compliance", "Founder Agreement", "Business Plan Consulting"] },
-            { label: "For NBFCs", icon: "🏦", items: ["NBFC Registration", "RBI Compliance", "Annual Filing", "Fair Practice Code", "KYC/AML Policy", "IT Framework"] },
-            { label: "For Fintechs", icon: "💳", items: ["PA/PG License", "Digital Lending", "UPI Integration", "Regulatory Sandbox", "Data Localisation", "Grievance Redressal"] },
-            { label: "For SMEs", icon: "🏢", items: ["MSME Registration", "GST Compliance", "ISO Certification", "Trade License", "Import Export Code", "Labour Compliance"] },
-            { label: "For Enterprises", icon: "🏗️", items: ["Corporate Restructuring", "M&A Advisory", "FEMA Compliance", "Transfer Pricing", "ESG Compliance", "Board Advisory"] },
+            { label: "For NBFCs", icon: "🏦", items: ["NBFC Registration", "RBI Compliance", "NBFC Account Aggregator", "NBFC Business Plan", "NBFC-P2P License", "NBFC-MFI License"] },
+            { label: "For Fintechs", icon: "💳", items: ["PA/PG License", "Digital Lending Compliance", "UPI Third Party App", "Digital Lending Compliance", "PSP License IFSCA"] },
+            { label: "For Insurance", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA License"] },
+            { label: "For Enterprises", icon: "🏗️", items: ["FEMA Compliance", "Transfer Pricing", "ESG Compliance", "Stock Broker License", "AIF Registration"] },
+            { label: "SEBI Regulated", icon: "📈", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "AIF Registration", "Fund Management Entity"] },
         ],
-        viewAll: "/#", viewAllLabel: "Explore All Solutions →"
+        viewAll: "/services", viewAllLabel: "Explore All Solutions →"
     },
     Resources: {
         categories: [

@@ -1,0 +1,162 @@
+"use client";
+import ServicePageLayout from "@/components/templates/ServicePageLayout";
+
+export default function PageClient() {
+    const sections = [
+    { id: "introduction", title: "1. Introduction" },
+    { id: "what-is", title: "2. What Is" },
+    { id: "regulatory-framework", title: "3. Regulatory Framework" },
+    { id: "who-needs", title: "4. Who Needs" },
+    { id: "eligibility", title: "5. Eligibility Criteria" },
+    { id: "documents", title: "6. Documents Required" },
+    { id: "process", title: "7. Registration Process" },
+    { id: "fees", title: "8. Fees Structure" },
+    { id: "timeline", title: "9. Timeline" },
+    { id: "compliance", title: "10. Compliance Requirements" },
+    { id: "faq", title: "11. FAQs" }
+    ];
+
+    const quickFacts = [
+        { label: "Regulator", value: "FEMA" },
+        { label: "Service Type", value: "Compliance Under Fema" },
+        { label: "Updated", value: "2026" },
+        { label: "Expert Review", value: "✓ Verified" },
+    ];
+
+    const faqs: { q: string; a: string }[] = [
+                    { q: "What is the difference between automatic and approval route?", a: "Automatic route requires no prior approval, while approval route needs government consent. Section 2: Eligibility & Applicability" },
+                    { q: "Can an Indian resident invest abroad?", a: "Yes, under Liberalised Remittance Scheme (LRS). Limits and conditions apply." },
+                    { q: "Can NRIs invest in Indian companies?", a: "Yes, NRIs can invest subject to FEMA guidelines. Sectoral caps may apply." },
+                    { q: "Can foreign companies open offices in India?", a: "Yes, through Liaison, Branch, or Project Office. RBI approval is required." },
+                    { q: "Can Indian companies acquire foreign companies?", a: "Yes, under ODI guidelines issued by RBI. Section 3: Registration Process" },
+                    { q: "What is FC-GPR form?", a: "It is used for reporting allotment of shares to foreign investors." },
+                    { q: "What is FC-TRS form?", a: "It is used for transfer of shares between resident and non- resident ." },
+                    { q: "What is FIRMS portal?", a: "It is RBI’s online reporting system for foreign investment. Section 4: Documents & Requirements" },
+                    { q: "Who can issue valuation certificate?", a: "A Chartered Accountant or SEBI-registered Merchant Banker. Section 5: Fees & Cost" },
+                    { q: "What is the timeline for FC-GPR filing?", a: "Within 30 days of allotment of shares." },
+                    { q: "What is the timeline for FC-TRS filing?", a: "Within 60 days of transfer of shares. Section 7: Compliance & Post-Registration" },
+                    { q: "Can shares be issued to foreign investors without valuation?", a: "No, valuation is mandatory as per regulatory guidelines." },
+                    { q: "Can foreign investment be made in agriculture sector?", a: "Generally, no under automatic route. Certain activities like horticulture are permitted." },
+                    { q: "Can Indian residents hold foreign bank accounts?", a: "Yes, under LRS or permitted transactions. Compliance with RBI guidelines is mandatory." },
+                    { q: "Can foreign investors invest in debt instruments?", a: "Yes, subject to FEMA and RBI debt regulations. Limits and eligibility apply." },
+                    { q: "Can Indian companies receive foreign donations?", a: "Yes, but subject to FEMA and FCRA compliance." },
+                    { q: "Can NRIs purchase property in India?", a: "Yes, except agricultural land, plantation property, and farmhouses. Section 3: Registration Process (Continued)" },
+                    { q: "Can delayed filings be regularised ?", a: "Yes, through Late Submission Fees (LSF)." },
+                    { q: "Is KYC of foreign investor mandatory?", a: "Yes, KYC from overseas bank is required." },
+                    { q: "Is board approval required for FDI?", a: "Yes, board resolution approving allotment is required." },
+                    { q: "Is shareholders’ approval required?", a: "Yes, in case of preferential allotment or private placement." },
+                    { q: "What is Late Submission Fee (LSF) amount?", a: "It depends on delay and transaction value. RBI provides a calculation matrix." },
+                    { q: "What is time limit for share allotment?", a: "Within 60 days from receipt of funds." },
+                    { q: "What happens if shares are not allotted within 60 days?", a: "Funds must be refunded within 15 days." },
+                    { q: "How long does RBI approval take?", a: "Typically 4–8 weeks, depending on case complexity. Section 7: Compliance & Post-Registration (Continued)" },
+    ];
+
+    return (
+        <ServicePageLayout
+            tags={[{ emoji: "⚖️", label: "FEMA" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
+            breadcrumb={[{ label: "Home", href: "/" }, { label: "FEMA Services", href: "/fema" }, { label: "Compliance Under Fema" }]}
+            title="( Optimised with Power + Sentiment Words) FEMA Compliance in India: Complete & Practical Guide for Businesses (Avoid Costly Penalties) Permalink ("
+            readTime="15 min read"
+            focusKeyword="FEMA Compliance in India"
+            sections={sections}
+            ctaTitle="Need Expert Help with Compliance Under Fema?"
+            ctaDescription="Our regulatory compliance experts provide end-to-end guidance for FEMA Compliance in India."
+            quickFacts={quickFacts}
+            relatedArticles={[
+                { href: "/rbi/nbfc-account-aggregator-license", category: "RBI", title: "NBFC Account Aggregator License", description: "Complete RBI registration guide for NBFC-AA." },
+                { href: "/regulatory/psp-license-ifsca", category: "IFSCA", title: "PSP License IFSCA", description: "Payment services provider license guide." },
+                { href: "/regulatory/finance-company-gift-ifsc", category: "IFSCA", title: "Finance Company GIFT IFSC", description: "Setting up a Finance Company in GIFT City." }
+            ]}
+            finalCtaTitle="Ready to Get Started with Compliance Under Fema?"
+            finalCtaDescription="Book a free consultation with our regulatory experts. We guide you through every step of the process."
+        >
+            <h2 id="introduction">Introduction</h2>
+            <p>with foreign exchange, cross-border transactions, or foreign investments. What is FEMA Compliance in India? In simple terms , FEMA Compliance ensures that all foreign exchange dealings are conducted w</p>
+
+            <h2 id="what-is">What is Compliance Under Fema</h2>
+            <p>This page provides comprehensive information about FEMA Compliance in India including regulatory framework, eligibility criteria, documentation requirements, and step-by-step process.</p>
+
+            <h2 id="regulatory-framework">Regulatory Framework</h2>
+            <div className="info-box">
+                <p>This service falls under the regulatory jurisdiction of FEMA. Compliance with all applicable regulations is mandatory.</p>
+            </div>
+
+            <h2 id="who-needs">Who Needs This Service</h2>
+            <p>Businesses and individuals who require FEMA Compliance in India include entities operating in the regulated financial services sector.</p>
+
+            <h2 id="eligibility">Eligibility Criteria</h2>
+            <p>Eligibility requirements are defined by the relevant regulatory authority. Key criteria include entity type, capital requirements, and fit & proper standards for directors/promoters.</p>
+
+            <h2 id="documents">Documents Required</h2>
+            <ul>
+                <li>Certificate of Incorporation</li>
+                <li>Memorandum and Articles of Association</li>
+                <li>Net Worth Certificate (CA certified)</li>
+                <li>Business Plan</li>
+                <li>KYC documents for Directors</li>
+                <li>Board Resolution</li>
+            </ul>
+
+            <h2 id="process">Registration Process</h2>
+            <div className="step-timeline">
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Preparation & Documentation</h4><p className="text-[13px] text-[#64748b] !mb-0">Gather all required documents and ensure eligibility criteria are met.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Application Filing</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit the complete application to the regulatory authority with supporting documents.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Regulatory Review</h4><p className="text-[13px] text-[#64748b] !mb-0">The regulatory authority reviews the application and may seek clarifications.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Approval & Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Upon approval, set up compliance framework and begin operations.</p></div></div>
+            </div>
+
+            <h2 id="fees">Fees Structure</h2>
+            <div className="overflow-x-auto my-6">
+                <table className="data-table">
+                    <thead><tr><th>Particulars</th><th>Amount</th><th>Remarks</th></tr></thead>
+                    <tbody>
+                        <tr><td>Regulatory Application Fee</td><td>As prescribed</td><td>Non-refundable</td></tr>
+                        <tr><td>Professional/Advisory Fees</td><td>Variable</td><td>Depends on scope</td></tr>
+                        <tr><td>Compliance Setup Cost</td><td>Variable</td><td>One-time</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 id="timeline">Timeline</h2>
+            <div className="overflow-x-auto my-6">
+                <table className="data-table">
+                    <thead><tr><th>Stage</th><th>Estimated Time</th><th>Notes</th></tr></thead>
+                    <tbody>
+                        <tr><td>Document Preparation</td><td>2–4 weeks</td><td>Depends on complexity</td></tr>
+                        <tr><td>Regulatory Review</td><td>3–6 months</td><td>Case-by-case</td></tr>
+                        <tr><td>Approval</td><td>1–2 months</td><td>After compliance confirmation</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 id="compliance">Compliance Requirements</h2>
+            <p>Post-registration compliance is critical to maintain the license/registration in good standing.</p>
+            <ul>
+                <li>Regular filings and returns</li>
+                <li>Governance and board oversight</li>
+                <li>Annual audit and reporting</li>
+                <li>KYC/AML compliance</li>
+                <li>Customer grievance redressal</li>
+            </ul>
+
+            <h2 id="faq">Frequently Asked Questions (FAQs)</h2>
+            {faqs.length > 0 ? (
+            <div className="space-y-3 my-6">
+                {faqs.map((item, i) => (
+                    <details key={i} className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
+                        <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]">
+                            <span>{item.q}</span>
+                            <span className="text-[#0096D6] transition-transform group-open:rotate-180 shrink-0 ml-4">▼</span>
+                        </summary>
+                        <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151] leading-relaxed">
+                            {item.a}
+                        </div>
+                    </details>
+                ))}
+            </div>
+            ) : (
+            <div className="info-box"><p>Detailed FAQs will be added shortly. Contact us for specific queries about FEMA Compliance in India.</p></div>
+            )}
+        </ServicePageLayout>
+    );
+}

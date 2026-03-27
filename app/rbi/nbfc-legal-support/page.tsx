@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import PageClient from './PageClient';
 
 export const metadata: Metadata = {
-    title: "NBFC Legal Support Services in India – Comprehensive Regulatory Assistance",
-    description: "Expert NBFC legal support services in India. Get complete assistance for NBFC registration, compliance, RBI guidelines, legal documentation, and regulatory advisory from experienced fintech lawyers.",
-    keywords: "NBFC Legal Support",
+    title: "( Optimised with Power Word + Number + Sentiment) NBFC Legal Support Services in India: 2026 Complete & Powerful Compliance Guide 🔗 Permalink (",
+    description: "Complete guide and compliance information.",
+    keywords: "NBFC Legal Support Services in India",
     alternates: { canonical: "/rbi/nbfc-legal-support" }
 };
 

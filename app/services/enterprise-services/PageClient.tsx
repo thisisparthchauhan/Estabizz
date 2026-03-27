@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🏢", label: "Services" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Enterprise Services" }]}
-            title="(Power + Sentiment Optimised) Enterprise Services in India: Complete & Powerful Business Compliance Guide (~70 characters – within Rank Math recommended limit) Permalink ("
+            title="Enterprise Services in India: Complete Business Compliance Guide"
             readTime="15 min read"
             focusKeyword="Enterprise Services in India"
             sections={sections}

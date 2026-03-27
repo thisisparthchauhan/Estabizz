@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🏛️", label: "RBI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "RBI Services", href: "/rbi" }, { label: "Nbfc For Sale" }]}
-            title="NBFC for Sale in India: 2026 Ultimate Guide to Buy NBFC Safely & Legally 🔗 Permalink"
+            title="NBFC for Sale in India: Ultimate Guide to Buy NBFC Safely & Legally"
             readTime="15 min read"
             focusKeyword="NBFC for Sale in India"
             sections={sections}

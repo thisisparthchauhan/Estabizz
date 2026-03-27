@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🏛️", label: "RBI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "RBI Services", href: "/rbi" }, { label: "Nbfc Business Plan" }]}
-            title="NBFC Business Plan Powerful Steps for Successful RBI Approval in India Permalink ("
+            title="NBFC Business Plan: Steps for Successful RBI Approval in India"
             readTime="15 min read"
             focusKeyword="NBFC Business Plan"
             sections={sections}

@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🛡️", label: "IRDAI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Pap License" }]}
-            title="TPA License India: Complete 2026 Powerful Guide to IRDAI Registration, Eligibility & Compliance 🔗 Permalink"
+            title="TPA License India: Complete Guide to IRDAI Registration, Eligibility & Compliance"
             readTime="15 min read"
             focusKeyword="TPA License India"
             sections={sections}

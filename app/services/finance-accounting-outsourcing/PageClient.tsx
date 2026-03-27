@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "📊", label: "Services" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Finance Accounting Outsourcing" }]}
-            title="( Optimised ) Finance and Accounting Outsourcing Services: 7 Powerful Benefits Every Business Must Know Permalink ("
+            title="Finance and Accounting Outsourcing Services: Key Benefits Every Business Must Know"
             readTime="15 min read"
             focusKeyword="Finance and Accounting Outsourcing Services"
             sections={sections}

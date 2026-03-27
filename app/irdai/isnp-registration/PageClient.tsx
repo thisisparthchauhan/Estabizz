@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🛡️", label: "IRDAI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "IRDAI Services", href: "/irdai" }, { label: "Isnp Registration" }]}
-            title="ISNP Certification in India – Complete Guide, Eligibility, Process & Compliance Insights (2026)"
+            title="ISNP Certification in India: Complete Guide, Eligibility, Process & Compliance Insights"
             readTime="15 min read"
             focusKeyword="ISNP Certification in India"
             sections={sections}

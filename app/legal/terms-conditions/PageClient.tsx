@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "📜", label: "Legal" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Legal", href: "/legal" }, { label: "Terms Conditions" }]}
-            title="( Optimised ) Terms and Conditions for Website: 10 Powerful Legal Clauses Every Business Must Know 🔗 Permalink ("
+            title="Terms and Conditions for Website: Essential Legal Clauses Every Business Must Know"
             readTime="15 min read"
             focusKeyword="Terms and Conditions for Website"
             sections={sections}

@@ -29,7 +29,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "⚖️", label: "FEMA" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "FEMA Services", href: "/fema" }, { label: "Fema Registration" }]}
-            title="FEMA Registration in India: 2026 Powerful Guide to Avoid Costly Compliance Mistakes Permalink ("
+            title="FEMA Registration in India: Guide to Compliance Requirements"
             readTime="15 min read"
             focusKeyword="FEMA Registration in India"
             sections={sections}

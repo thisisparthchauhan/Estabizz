@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "📈", label: "SEBI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "SEBI Services", href: "/sebi" }, { label: "Underwriter Registration" }]}
-            title="SEBI Underwriter Registration in India: Complete Guide, Eligibility, Process & Compliance (2026)"
+            title="SEBI Underwriter Registration in India: Complete Guide, Eligibility, Process & Compliance"
             readTime="15 min read"
             focusKeyword="Regulatory Compliance"
             sections={sections}

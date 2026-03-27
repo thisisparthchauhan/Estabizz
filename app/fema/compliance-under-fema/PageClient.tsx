@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "⚖️", label: "FEMA" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "FEMA Services", href: "/fema" }, { label: "Compliance Under Fema" }]}
-            title="( Optimised with Power + Sentiment Words) FEMA Compliance in India: Complete & Practical Guide for Businesses (Avoid Costly Penalties) Permalink ("
+            title="FEMA Compliance in India: Complete & Practical Guide for Businesses"
             readTime="15 min read"
             focusKeyword="FEMA Compliance in India"
             sections={sections}

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import PageClient from './PageClient';
 
 export const metadata: Metadata = {
-    title: "( Optimised with Power + Sentiment + Number): Alternative Asset Portfolio Valuation – 15 Powerful & Essential Insights for Accurate Compliance Permalink (",
+    title: "Alternative Asset Portfolio Valuation: Essential Insights for Accurate Compliance",
     description: "Complete guide and compliance information.",
     keywords: "Alternative Asset Portfolio Valuation",
     alternates: { canonical: "/sebi/alternative-asset-portfolio-valuation" }

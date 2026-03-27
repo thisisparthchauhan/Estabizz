@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🌱", label: "ESG" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Sustainable Finance" }]}
-            title="Sustainable Finance in India: 2026 Ultimate Guide to ESG Compliance & Growth Opportunities 🔗 Permalink"
+            title="Sustainable Finance in India: Ultimate Guide to ESG Compliance & Growth Opportunities"
             readTime="15 min read"
             focusKeyword="Sustainable Finance in India"
             sections={sections}

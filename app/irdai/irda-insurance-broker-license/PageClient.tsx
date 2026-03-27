@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🛡️", label: "IRDAI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "IRDAI Services", href: "/irdai" }, { label: "Irda Insurance Broker License" }]}
-            title="IRDAI Insurance Broker License – Complete Guide with Powerful Compliance Insights (2026)"
+            title="IRDAI Insurance Broker License: Complete Guide with Compliance Insights"
             readTime="15 min read"
             focusKeyword="IRDAI Insurance Broker License"
             sections={sections}

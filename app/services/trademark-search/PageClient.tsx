@@ -29,7 +29,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "™️", label: "IP" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Trademark Search" }]}
-            title="(With Power Word + Number + Sentiment) Trademark Search India: 150 Powerful Tips to Avoid Costly Trademark Mistakes 🔗 Permalink ("
+            title="Trademark Search India: Essential Tips to Avoid Costly Trademark Mistakes"
             readTime="15 min read"
             focusKeyword="Trademark Search India"
             sections={sections}

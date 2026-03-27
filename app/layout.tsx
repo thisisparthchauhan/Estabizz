@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LiveBackground from "@/components/ui/LiveBackground";
 import ReadingProgress from "@/components/ui/ReadingProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import ChatWidget from "@/components/ui/ChatWidget";
 import "@/app/globals.css"; // Assuming the user will have this
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default function RootLayout({
                     {children}
                 </div>
                 <ScrollToTop />
+                <ChatWidget />
             </body>
         </html>
     );

@@ -37,6 +37,8 @@ const services = [
     "Other / Not Listed",
 ];
 
+type Recommendation = { service: string; reason: string };
+
 export default function ContactClient() {
     const [form, setForm] = useState({
         name: "",
@@ -48,9 +50,39 @@ export default function ContactClient() {
     });
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [aiLoading, setAiLoading] = useState(false);
+    const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+    const [aiError, setAiError] = useState("");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleRecommend = async () => {
+        if (!form.message || form.message.trim().length < 10) {
+            setAiError("Please describe your requirement in the message box first (at least 10 characters).");
+            return;
+        }
+        setAiError("");
+        setAiLoading(true);
+        setRecommendations([]);
+        try {
+            const res = await fetch("/api/recommend-services", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: form.message }),
+            });
+            const data = await res.json();
+            if (data.recommendations?.length > 0) {
+                setRecommendations(data.recommendations);
+            } else {
+                setAiError("No specific match found. Please select a service manually.");
+            }
+        } catch {
+            setAiError("Unable to get recommendations. Please select manually.");
+        } finally {
+            setAiLoading(false);
+        }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -184,6 +216,45 @@ export default function ContactClient() {
                                             placeholder="Describe your requirements or questions..."
                                             className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all resize-none"
                                         />
+                                        {/* AI Recommendation Button */}
+                                        <button
+                                            type="button"
+                                            onClick={handleRecommend}
+                                            disabled={aiLoading}
+                                            className="mt-2 flex items-center gap-2 px-4 py-2 bg-purple-50 border border-purple-200 text-purple-700 font-semibold rounded-lg text-xs hover:bg-purple-100 transition-all disabled:opacity-60"
+                                        >
+                                            {aiLoading ? (
+                                                <>
+                                                    <svg className="animate-spin w-3.5 h-3.5" fill="none" viewBox="0 0 24 24">
+                                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                                                    </svg>
+                                                    Analysing...
+                                                </>
+                                            ) : (
+                                                <>✨ AI — Suggest Best Service for Me</>
+                                            )}
+                                        </button>
+                                        {aiError && <p className="mt-1 text-xs text-red-500">{aiError}</p>}
+                                        {/* AI Recommendation Results */}
+                                        {recommendations.length > 0 && (
+                                            <div className="mt-3 p-4 bg-purple-50 border border-purple-100 rounded-xl">
+                                                <p className="text-xs font-bold text-purple-700 mb-2 uppercase tracking-wide">AI Recommendations</p>
+                                                <div className="space-y-2">
+                                                    {recommendations.map((rec, i) => (
+                                                        <button
+                                                            key={i}
+                                                            type="button"
+                                                            onClick={() => setForm(f => ({ ...f, service: rec.service }))}
+                                                            className={`w-full text-left px-3 py-2.5 rounded-lg border transition-all text-sm ${form.service === rec.service ? "bg-[#0096D6] border-[#0096D6] text-white" : "bg-white border-purple-200 text-[#0a1628] hover:border-[#0096D6]"}`}
+                                                        >
+                                                            <span className="font-semibold">{rec.service}</span>
+                                                            <span className={`block text-xs mt-0.5 ${form.service === rec.service ? "text-blue-100" : "text-gray-500"}`}>{rec.reason}</span>
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                     <button
                                         type="submit"

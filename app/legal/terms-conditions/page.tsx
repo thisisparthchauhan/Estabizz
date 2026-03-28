@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import PageClient from './PageClient';
 
 export const metadata: Metadata = {
-    title: "( Optimised ) Terms and Conditions for Website: 10 Powerful Legal Clauses Every Business Must Know 🔗 Permalink (",
+    title: "Terms and Conditions for Website: Essential Legal Clauses Every Business Must Know",
     description: "Complete guide and compliance information.",
     keywords: "Terms and Conditions for Website",
     alternates: { canonical: "/legal/terms-conditions" }

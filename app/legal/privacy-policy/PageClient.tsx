@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🔒", label: "Legal" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Legal", href: "/legal" }, { label: "Privacy Policy" }]}
-            title="Privacy Policy for Businesses: 10 Powerful Legal Rules You Must Follow in India 🔗 Permalink ("
+            title="Privacy Policy for Businesses: Legal Rules You Must Follow in India"
             readTime="15 min read"
             focusKeyword="Privacy Policy for Businesses"
             sections={sections}

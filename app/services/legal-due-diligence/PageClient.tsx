@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "⚖️", label: "Legal" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Legal Due Diligence" }]}
-            title="Legal Due Diligence Services in India Critical Checks for Smart & Secure Business Deals Permalink: legal-due-diligence-services-india"
+            title="Legal Due Diligence Services in India: Critical Checks for Smart & Secure Business Deals"
             readTime="15 min read"
             focusKeyword="Legal Due Diligence Services in India"
             sections={sections}

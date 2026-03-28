@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🏛️", label: "RBI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "RBI Services", href: "/rbi" }, { label: "Nbfc Marketing Strategy" }]}
-            title="( Optimised with Power Word + Number + Positive Sentiment) NBFC Marketing Strategy in India: 15 Powerful & Proven Ways to Grow Faster (2026 Guide) 🔗 Permalink ("
+            title="NBFC Marketing Strategy in India: 15 Proven Ways to Grow Faster"
             readTime="15 min read"
             focusKeyword="NBFC Marketing Strategy in India"
             sections={sections}

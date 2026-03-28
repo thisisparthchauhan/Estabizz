@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "💰", label: "Legal" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Legal", href: "/legal" }, { label: "Refund Policy" }]}
-            title="Refund Policy for Professional Services: Clear & Powerful Rules You Must Know Permalink ("
+            title="Refund Policy for Professional Services: Rules You Must Know"
             readTime="15 min read"
             focusKeyword="Refund Policy for Professional Services"
             sections={sections}

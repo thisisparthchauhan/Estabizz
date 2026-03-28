@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🌱", label: "ESG" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Sustainable Supply Chain" }]}
-            title="Sustainable Supply Chain Management: 7 Powerful Benefits & Essential Compliance Guide in India 🔗 Permalink ("
+            title="Sustainable Supply Chain Management: Key Benefits & Essential Compliance Guide in India"
             readTime="15 min read"
             focusKeyword="Sustainable Supply Chain Management"
             sections={sections}

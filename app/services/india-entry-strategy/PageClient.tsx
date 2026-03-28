@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🇮🇳", label: "Services" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "India Entry Strategy" }]}
-            title="India Entry Strategy: 10 Powerful Steps for Smooth & Successful Business Setup in India Permalink ("
+            title="India Entry Strategy: Steps for Smooth & Successful Business Setup in India"
             readTime="15 min read"
             focusKeyword="India Entry Strategy"
             sections={sections}

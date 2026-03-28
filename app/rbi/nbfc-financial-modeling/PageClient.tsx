@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🏛️", label: "RBI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "RBI Services", href: "/rbi" }, { label: "Nbfc Financial Modeling" }]}
-            title="( Optimised with Power Word + Number + Sentiment) NBFC Financial Modelling: 10 Powerful Insights for Smart & Compliant Growth  Permalink ("
+            title="NBFC Financial Modelling: Insights for Smart & Compliant Growth"
             readTime="15 min read"
             focusKeyword="NBFC Financial Modelling"
             sections={sections}

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import PageClient from './PageClient';
 
 export const metadata: Metadata = {
-    title: "Sustainable Supply Chain Management: 7 Powerful Benefits & Essential Compliance Guide in India 🔗 Permalink (",
+    title: "Sustainable Supply Chain Management: Key Benefits & Essential Compliance Guide in India",
     description: "Complete guide and compliance information.",
     keywords: "Sustainable Supply Chain Management",
     alternates: { canonical: "/services/sustainable-supply-chain" }

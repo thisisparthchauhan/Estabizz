@@ -29,7 +29,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🏛️", label: "RBI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "RBI Services", href: "/rbi" }, { label: "Lendtech Services" }]}
-            title="LendTech Services India: 7 Powerful Compliance Secrets for Digital Lending Success Permalink ("
+            title="LendTech Services India: Compliance Guide for Digital Lending Success"
             readTime="15 min read"
             focusKeyword="LendTech Services India"
             sections={sections}

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import PageClient from './PageClient';
 
 export const metadata: Metadata = {
-    title: "( Optimised with Power Word + Number + Sentiment) GST Appeal Services India – Complete 2026 Guide to Avoid Costly Tax Errors Permalink (",
+    title: "GST Appeal Services India: Complete Guide to Avoid Costly Tax Errors",
     description: "Complete guide and compliance information.",
     keywords: "GST Appeal Services India",
     alternates: { canonical: "/services/gst-appeal-services" }

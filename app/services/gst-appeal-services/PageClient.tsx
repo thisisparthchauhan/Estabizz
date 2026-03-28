@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "📋", label: "GST" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Gst Appeal Services" }]}
-            title="( Optimised with Power Word + Number + Sentiment) GST Appeal Services India – Complete 2026 Guide to Avoid Costly Tax Errors Permalink ("
+            title="GST Appeal Services India: Complete Guide to Avoid Costly Tax Errors"
             readTime="15 min read"
             focusKeyword="GST Appeal Services India"
             sections={sections}

@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "📈", label: "SEBI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "SEBI Services", href: "/sebi" }, { label: "Alternative Asset Portfolio Valuation" }]}
-            title="( Optimised with Power + Sentiment + Number): Alternative Asset Portfolio Valuation – 15 Powerful & Essential Insights for Accurate Compliance Permalink ("
+            title="Alternative Asset Portfolio Valuation: Essential Insights for Accurate Compliance"
             readTime="15 min read"
             focusKeyword="Alternative Asset Portfolio Valuation"
             sections={sections}

@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🔒", label: "Compliance" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Data Storage Policy" }]}
-            title="Data Storage Policy in India: Complete Legal Guide with Key Compliance Rules & Benefits (2026)"
+            title="Data Storage Policy in India: Complete Legal Guide with Key Compliance Rules & Benefits"
             readTime="15 min read"
             focusKeyword="Regulatory Compliance"
             sections={sections}

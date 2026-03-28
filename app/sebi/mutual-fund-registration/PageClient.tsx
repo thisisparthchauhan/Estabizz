@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "📈", label: "SEBI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "SEBI Services", href: "/sebi" }, { label: "Mutual Fund Registration" }]}
-            title="SEBI Mutual Fund Registration India – Complete Guide with Eligibility, Process & Compliance (2026)"
+            title="SEBI Mutual Fund Registration India: Complete Guide with Eligibility, Process & Compliance"
             readTime="15 min read"
             focusKeyword="Regulatory Compliance"
             sections={sections}

@@ -40,15 +40,14 @@ export default function FinalCTA() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-                        <button className="relative overflow-hidden group w-full sm:w-auto bg-gradient-to-r from-[#10b981] to-[#059669] text-white font-bold text-[16px] rounded-[14px] px-10 py-5 shadow-[0_10px_30px_rgba(16,185,129,0.3)] hover:-translate-y-1 transition-all duration-300">
-                            {/* Hover Shine Effect */}
+                        <a href="/contact" className="relative overflow-hidden group w-full sm:w-auto bg-gradient-to-r from-[#10b981] to-[#059669] text-white font-bold text-[16px] rounded-[14px] px-10 py-5 shadow-[0_10px_30px_rgba(16,185,129,0.3)] hover:-translate-y-1 transition-all duration-300 text-center">
                             <span className="absolute top-0 -left-full w-1/2 h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-30 skew-x-[-20deg] group-hover:animate-[shine_1s_ease-out] z-0" />
                             <span className="relative z-10 flex items-center justify-center gap-2">
                                 Start Your Application Today <span className="group-hover:translate-x-1.5 transition-transform">→</span>
                             </span>
-                        </button>
+                        </a>
 
-                        <a href="tel:+919876543210" className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white/20 text-white font-bold text-[16px] rounded-[14px] px-8 py-[18px] hover:bg-white/10 hover:border-white/40 transition-all duration-300">
+                        <a href="tel:+919825600907" className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white/20 text-white font-bold text-[16px] rounded-[14px] px-8 py-[18px] hover:bg-white/10 hover:border-white/40 transition-all duration-300">
                             <span className="text-[20px]">📞</span> Talk to an Expert
                         </a>
                     </div>

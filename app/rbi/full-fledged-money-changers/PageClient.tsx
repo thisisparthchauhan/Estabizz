@@ -55,7 +55,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🏛️", label: "RBI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "RBI Services", href: "/rbi" }, { label: "Full Fledged Money Changers" }]}
-            title="Full Fledged Money Changer License: Complete Guide to FFMC Registration in India (2026)"
+            title="Full Fledged Money Changer License: Complete Guide to FFMC Registration in India"
             readTime="15 min read"
             focusKeyword="Full Fledged Money Changer License"
             sections={sections}

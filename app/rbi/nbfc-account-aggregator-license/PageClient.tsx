@@ -28,7 +28,7 @@ export default function PageClient() {
         <ServicePageLayout
             tags={[{ emoji: "🏛️", label: "RBI" }, { emoji: "🔗", label: "Account Aggregator" }, { emoji: "📋", label: "Complete Guide" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "RBI Services", href: "/rbi" }, { label: "NBFC Account Aggregator License" }]}
-            title="NBFC Account Aggregator License: Complete RBI Registration Guide with Eligibility, Process & Compliance (2026)"
+            title="NBFC Account Aggregator License: Complete RBI Registration Guide with Eligibility, Process & Compliance"
             readTime="15 min read"
             focusKeyword="NBFC Account Aggregator License"
             sections={sections}

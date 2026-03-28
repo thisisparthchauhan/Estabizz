@@ -8,7 +8,8 @@ const solutions = [
         title: "For Startups & New Businesses",
         subtitle: "Build Right. From Day One.",
         body: "Incorporate your company, obtain GST registration, open banking channels, and establish a fully compliant foundation. We ensure your business begins its journey legally strong and future-ready.",
-        tags: ["Private Limited", "LLP", "OPC", "Section 8"]
+        tags: ["Private Limited", "LLP", "OPC", "Section 8"],
+        href: "/services"
     },
     {
         num: "02",
@@ -16,7 +17,8 @@ const solutions = [
         title: "For NBFCs & Lending Businesses",
         subtitle: "Regulated Lending. Managed with Precision.",
         body: "Secure your NBFC licence, get your post-registration done, implement RBI-compliant frameworks, and manage returns, audits, and regulatory reporting seamlessly. We safeguard your lending operations with structured compliance oversight.",
-        tags: ["RBI Licensing", "NBFC Compliance", "DNBS Reporting", "Regulatory Audits"]
+        tags: ["RBI Licensing", "NBFC Compliance", "DNBS Reporting", "Regulatory Audits"],
+        href: "/rbi"
     },
     {
         num: "03",
@@ -24,7 +26,8 @@ const solutions = [
         title: "For Fintech Platforms",
         subtitle: "Compliance Architecture for Digital Finance.",
         body: "From payment aggregator, PSP Registration or FME registrations, we design and manage your complete regulatory ecosystem. Operate with confidence in a fully governed fintech environment.",
-        tags: ["PA Licence", "PSP Registration", "FME Approval", "IFSCA Support"]
+        tags: ["PA Licence", "PSP Registration", "FME Approval", "IFSCA Support"],
+        href: "/ifsca"
     },
     {
         num: "04",
@@ -32,7 +35,8 @@ const solutions = [
         title: "For SMEs & Growing Enterprises",
         subtitle: "Structured Compliance. Sustainable Growth.",
         body: "Comprehensive audit, taxation, ROC filings, and secretarial compliance—delivered with discipline and accountability. We streamline governance so you can scale without uncertainty.",
-        tags: ["Audit", "ROC Filings", "Tax Advisory", "Compliance Management"]
+        tags: ["Audit", "ROC Filings", "Tax Advisory", "Compliance Management"],
+        href: "/services/enterprise-services"
     }
 ];
 
@@ -122,7 +126,7 @@ export default function SolutionsSection() {
                                         ))}
                                     </div>
 
-                                    <a href="#" className="inline-flex items-center gap-2 text-[#0096D6] font-bold text-[14.5px] group/link">
+                                    <a href={sol.href} className="inline-flex items-center gap-2 text-[#0096D6] font-bold text-[14.5px] group/link">
                                         Explore Solution <span className="group-hover/link:translate-x-1.5 transition-transform duration-300">→</span>
                                     </a>
                                 </div>

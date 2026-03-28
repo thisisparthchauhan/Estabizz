@@ -144,7 +144,7 @@ export default function RegulatoryArticleClient() {
           </nav>
         </aside>
 
-        <main className="flex-1 w-full max-w-[760px] bg-white border border-[rgba(0,150,220,0.08)] rounded-2xl p-8 lg:p-12 shadow-[0_8px_30px_rgba(0,100,200,0.04)] article-content overflow-hidden">
+        <main className="flex-1 w-full max-w-[760px] bg-white border border-[rgba(0,150,220,0.08)] rounded-2xl p-8 lg:p-12 shadow-[0_8px_30px_rgba(0,100,200,0.04)] article-content overflow-x-auto">
           <style dangerouslySetInnerHTML={{
             __html: `
             .article-content h2 { font-size: 24px; font-weight: 800; color: #0a1628; padding: 24px 0 8px; margin-top: 48px; position: relative; scroll-margin-top: 80px; padding-left: 16px; transition: all 0.7s ease; opacity: 0; transform: translateY(24px); }
@@ -415,33 +415,32 @@ export default function RegulatoryArticleClient() {
           </p>
           <p>Below is a simplified flow representation of the approval journey.</p>
 
-          <div className="my-10 bg-[rgba(0,150,220,0.02)] rounded-2xl p-6 md:p-10 border border-[rgba(0,150,220,0.1)] relative">
-            <div className="absolute top-4 left-4 text-[12px] font-bold text-[#64748b] bg-white px-3 py-1 rounded-full border border-gray-100 shadow-sm hidden md:block">
+          <div className="my-10 bg-[rgba(0,150,220,0.02)] rounded-2xl p-6 md:p-10 border border-[rgba(0,150,220,0.1)] relative overflow-x-auto">
+            <div className="text-[12px] font-bold text-[#64748b] bg-white px-3 py-1 rounded-full border border-gray-100 shadow-sm hidden md:inline-block mb-4">
               Stages 1–2: Finance Company prerequisite
             </div>
-            <div className="absolute bottom-4 left-4 text-[12px] font-bold text-[#0096D6] bg-blue-50 px-3 py-1 rounded-full border border-blue-100 shadow-sm hidden md:block">
-              Stages 3–6: Factoring registration pathway
-            </div>
 
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 mt-8 md:mt-2">
-              <div className="w-full md:w-auto relative group">
-                <div className="bg-gradient-to-br from-[#0a1628] to-[#1a2b45] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(10,22,40,0.3)] whitespace-nowrap px-6 border-l-4 border-l-[#0096D6]">
+            <div className="flex flex-col md:flex-row items-center md:items-center gap-3 md:gap-2 min-w-0">
+              <div className="w-full md:flex-1 md:min-w-0 relative group">
+                <div className="bg-gradient-to-br from-[#0a1628] to-[#1a2b45] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(10,22,40,0.3)] px-4 border-l-4 border-l-[#0096D6]">
                   Company Formation
                 </div>
-                <div className="hidden md:block absolute -right-8 top-1/2 -translate-y-1/2 text-[#0096D6] z-10 font-bold">→</div>
                 <div className="md:hidden flex justify-center py-2 text-[#0096D6] font-bold">↓</div>
               </div>
 
-              <div className="w-full md:w-auto relative group">
-                <div className="bg-gradient-to-br from-[#0a1628] to-[#1a2b45] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(10,22,40,0.3)] whitespace-nowrap px-6 border-l-4 border-l-[#0096D6]">
+              <div className="hidden md:block text-[#0096D6] font-bold shrink-0">→</div>
+
+              <div className="w-full md:flex-1 md:min-w-0 relative group">
+                <div className="bg-gradient-to-br from-[#0a1628] to-[#1a2b45] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(10,22,40,0.3)] px-4 border-l-4 border-l-[#0096D6]">
                   Finance Co Registration
                 </div>
-                <div className="hidden md:block absolute -right-8 top-1/2 -translate-y-1/2 text-[#0096D6] z-10 font-bold">→</div>
                 <div className="md:hidden flex justify-center py-2 text-[#0096D6] font-bold">↓</div>
               </div>
 
-              <div className="w-full md:w-auto relative group">
-                <div className="bg-gradient-to-br from-[#0077B6] to-[#0096D6] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(0,150,220,0.4)] whitespace-nowrap px-6 border-t-4 border-t-blue-300">
+              <div className="hidden md:block text-[#0096D6] font-bold shrink-0">→</div>
+
+              <div className="w-full md:flex-1 md:min-w-0 relative group">
+                <div className="bg-gradient-to-br from-[#0077B6] to-[#0096D6] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(0,150,220,0.4)] px-4 border-t-4 border-t-blue-300 relative">
                   <span className="absolute -top-2 -right-2 flex h-4 w-4">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-4 w-4 bg-blue-500 border-2 border-white"></span>
@@ -451,36 +450,38 @@ export default function RegulatoryArticleClient() {
               </div>
             </div>
 
-            <div className="hidden md:flex justify-end pr-[15%] text-[#0096D6] text-xl py-4 font-bold">
-              ↓
-            </div>
-            <div className="md:hidden flex justify-center py-2 text-[#0096D6] font-bold">
+            <div className="flex justify-center md:justify-end md:pr-[15%] text-[#0096D6] text-xl py-4 font-bold">
               ↓
             </div>
 
-            <div className="flex flex-col md:flex-row-reverse items-center justify-between gap-4 mt-2 md:mt-0 mb-8 md:mb-2">
-              <div className="w-full md:w-auto relative group">
-                <div className="bg-[#10b981] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] whitespace-nowrap px-6 border-b-4 border-b-green-700">
+            <div className="flex flex-col md:flex-row-reverse items-center md:items-center gap-3 md:gap-2 min-w-0 mb-4">
+              <div className="w-full md:flex-1 md:min-w-0 relative group">
+                <div className="bg-[#10b981] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] px-4 border-b-4 border-b-green-700">
                   Operations Begin
                 </div>
               </div>
 
-              <div className="hidden md:block text-[#0096D6] z-10 font-bold">←</div>
+              <div className="hidden md:block text-[#0096D6] font-bold shrink-0">←</div>
               <div className="md:hidden flex justify-center py-2 text-[#0096D6] font-bold">↓</div>
 
-              <div className="w-full md:w-auto relative group">
-                <div className="bg-gradient-to-br from-[#0077B6] to-[#0096D6] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(0,150,220,0.4)] whitespace-nowrap px-6">
+              <div className="w-full md:flex-1 md:min-w-0 relative group">
+                <div className="bg-gradient-to-br from-[#0077B6] to-[#0096D6] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(0,150,220,0.4)] px-4">
                   Certificate Granted
                 </div>
-                <div className="hidden md:block absolute -right-8 top-1/2 -translate-y-1/2 text-[#0096D6] z-10 font-bold">←</div>
                 <div className="md:hidden flex justify-center py-2 text-[#0096D6] font-bold">↓</div>
               </div>
 
-              <div className="w-full md:w-auto relative group">
-                <div className="bg-gradient-to-br from-[#0077B6] to-[#0096D6] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(0,150,220,0.4)] whitespace-nowrap px-6">
+              <div className="hidden md:block text-[#0096D6] font-bold shrink-0">←</div>
+
+              <div className="w-full md:flex-1 md:min-w-0 relative group">
+                <div className="bg-gradient-to-br from-[#0077B6] to-[#0096D6] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(0,150,220,0.4)] px-4">
                   IFSCA Review
                 </div>
               </div>
+            </div>
+
+            <div className="text-[12px] font-bold text-[#0096D6] bg-blue-50 px-3 py-1 rounded-full border border-blue-100 shadow-sm hidden md:inline-block">
+              Stages 3–6: Factoring registration pathway
             </div>
           </div>
 

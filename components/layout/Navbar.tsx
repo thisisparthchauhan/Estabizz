@@ -7,9 +7,9 @@ interface MegaMenu { categories: MenuCategory[]; viewAll: string; viewAllLabel: 
 
 const linkMap: Record<string, string> = {
     // IFSCA (existing)
-    "Finance Company GIFT IFSC": "/regulatory/finance-company-gift-ifsc",
+    "Finance Company GIFT IFSC": "/ifsca/finance-company",
     "IFSCA Factoring License": "/regulatory/ifsca-factoring-license-gift-city",
-    "PSP License IFSCA": "/regulatory/psp-license-ifsca",
+    "PSP License IFSCA": "/ifsca/psp-license",
     // RBI / NBFC
     "NBFC Registration": "/rbi/nbfc-account-aggregator-license",
     "NBFC Account Aggregator": "/rbi/nbfc-account-aggregator-license",
@@ -49,9 +49,13 @@ const linkMap: Record<string, string> = {
     "RBI Compliance": "/rbi/rbi-services",
     "SEBI Compliance": "/sebi/aif-compliance-test-report",
     "IRDAI Compliance": "/irdai/irda-insurance-broker-license",
-    "IFSCA Compliance": "/regulatory/psp-license-ifsca",
+    "IFSCA Compliance": "/ifsca",
     "Aircraft Leasing IFSC": "/ifsca/aircraft-leasing",
     "IFSCA Aircraft Leasing": "/ifsca/aircraft-leasing",
+    "BATF Services IFSC": "/ifsca/batf-services",
+    "FinTech Entity IFSC": "/ifsca/fintech-entity",
+    "TechFin IFSC": "/ifsca/techfin",
+    "ITFS Platform IFSC": "/ifsca/itfs-platform",
     // Enterprise / Solutions
     "FEMA Compliance": "/fema/compliance-under-fema",
     "Transfer Pricing": "/services/transfer-pricing",
@@ -84,7 +88,7 @@ const menus: Record<string, MegaMenu> = {
         categories: [
             { label: "RBI Licenses", icon: "🏛️", items: ["NBFC License", "NBFC Account Aggregator", "Payment Aggregator", "AD Category II", "Credit Information Company", "NBFC Business Plan"] },
             { label: "SEBI Licenses", icon: "📈", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "Research Analyst", "AIF Registration", "Mutual Fund Registration", "Social Stock Exchange", "Underwriter Registration"] },
-            { label: "IFSCA Licenses", icon: "🌐", items: ["Finance Company GIFT IFSC", "IFSCA Factoring License", "PSP License IFSCA", "Fund Management Entity", "IFSCA Aircraft Leasing"] },
+            { label: "IFSCA Licenses", icon: "🌐", items: ["Finance Company GIFT IFSC", "IFSCA Factoring License", "PSP License IFSCA", "Fund Management Entity", "IFSCA Aircraft Leasing", "BATF Services IFSC", "FinTech Entity IFSC", "TechFin IFSC", "ITFS Platform IFSC"] },
             { label: "IRDAI Licenses", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA License", "Micro Insurance"] },
             { label: "FEMA & Other", icon: "⚖️", items: ["FEMA Compliance", "DGFT IE Code", "Transfer Pricing", "GST Registration", "PFRDA Registration"] },
         ],
@@ -163,7 +167,13 @@ export default function Navbar() {
                     </div>
 
                     {/* Right */}
-                    <div className="hidden xl:flex items-center gap-4">
+                    <div className="hidden xl:flex items-center gap-3">
+                        <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
+                            Login
+                        </Link>
+                        <Link href="/signup" className="text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-lg px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-sm">
+                            Get Started
+                        </Link>
                         <Link href="/contact" className="bg-[#0a1628] text-white font-bold text-[13.5px] rounded-lg px-5 py-2.5 hover:bg-[#1a2638] transition-colors">
                             Book Consultation
                         </Link>

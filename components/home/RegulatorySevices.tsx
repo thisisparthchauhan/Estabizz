@@ -5,71 +5,109 @@ const services = [
     {
         id: "rbi",
         title: "RBI Regulatory Services",
+        href: "/rbi",
         desc: "End-to-end RBI licensing and compliance management — including capital structuring, policy drafting, application filing, and post-approval reporting.",
-        tags: ["NBFC", "Payment Aggregator", "PPI", "Account Aggregator"],
-        icon: "🏦",
-        href: "/rbi"
+        tags: [
+            { name: "NBFC", href: "/rbi/nbfc-account-aggregator-license" },
+            { name: "Payment Aggregator", href: "/rbi/rbi-services" },
+            { name: "PPI", href: "/rbi/nbfc-financial-modeling" },
+            { name: "Account Aggregator", href: "/rbi/nbfc-account-aggregator-license" },
+        ],
+        icon: "🏦"
     },
     {
         id: "sebi",
         title: "SEBI Regulatory Services",
+        href: "/sebi",
         desc: "Structured SEBI registration and governance support covering documentation, eligibility assessment, net worth compliance, and monitoring.",
-        tags: ["Stock Broker", "RIA", "PMS", "AIF", "Research Analyst"],
-        icon: "📈",
-        href: "/sebi"
+        tags: [
+            { name: "Stock Broker", href: "/sebi/amfi-registration" },
+            { name: "RIA", href: "/sebi/credit-rating-agency" },
+            { name: "PMS", href: "/sebi/collective-investment-schemes" },
+            { name: "AIF", href: "/sebi/aif-compliance-test-report" },
+            { name: "Research Analyst", href: "/sebi/depository-participant-sebi-registration" },
+        ],
+        icon: "📈"
     },
     {
         id: "irdai",
         title: "IRDAI Regulatory Services",
+        href: "/irdai",
         desc: "Complete IRDAI licensing lifecycle support — from feasibility assessment and capital planning to regulatory approval and compliance.",
-        tags: ["Insurance Co.", "Broker License", "Corporate Agent", "IMF"],
-        icon: "🛡️",
-        href: "/irdai"
+        tags: [
+            { name: "Insurance Co.", href: "/irdai/irda-insurance-broker-license" },
+            { name: "Broker License", href: "/irdai/irda-insurance-broker-license" },
+            { name: "Corporate Agent", href: "/irdai/irdai-regulatory-sandbox" },
+            { name: "IMF", href: "/irdai/insurance-marketing-firm-license" },
+        ],
+        icon: "🛡️"
     },
     {
         id: "ifsca",
         title: "IFSCA & GIFT City Services",
+        href: "/ifsca",
         desc: "Regulatory structuring and operational compliance support for entities operating within India's International Financial Services Centre ecosystem.",
         tags: [
-            { name: "Aircraft Leasing", href: "/ifsca/aircraft-leasing" },
+            { name: "Broker Dealer", href: "/ifsca" },
             { name: "Factoring", href: "/regulatory/ifsca-factoring-license-gift-city" },
             { name: "PSP License", href: "/regulatory/psp-license-ifsca" },
-            { name: "Finance Co.", href: "/regulatory/finance-company-gift-ifsc" }
+            { name: "Finance Co.", href: "/ifsca/finance-company" },
         ],
-        icon: "🌐",
-        href: "/ifsca"
+        icon: "🌐"
     },
     {
-        id: "fema",
-        title: "FEMA & Foreign Exchange",
-        desc: "FEMA registration, compliance advisory and cross-border transaction support aligned with India's foreign exchange regulations.",
-        tags: ["FEMA Registration", "FEMA Compliance", "Cross-Border", "FDI"],
-        icon: "🔍",
-        href: "/fema"
+        id: "fiu",
+        title: "Financial Intelligence & Reporting",
+        href: "/services",
+        desc: "Design and implementation of regulatory reporting systems aligned with India's financial intelligence and anti-money laundering frameworks.",
+        tags: [
+            { name: "FIU-IND", href: "/services/enterprise-services" },
+            { name: "PMLA Advisory", href: "/services/legal-due-diligence" },
+            { name: "AML Policy", href: "/services/enterprise-services" },
+            { name: "CKYC", href: "/services/enterprise-services" },
+        ],
+        icon: "🔍"
     },
     {
         id: "company",
         title: "Company Formation & Governance",
+        href: "/services",
         desc: "From incorporation to structured governance — building legally compliant enterprises with strong financial and operational discipline.",
-        tags: ["Private Ltd", "LLP", "Society", "Audit", "ROC Filings"],
-        icon: "🏛️",
-        href: "/services/enterprise-services"
+        tags: [
+            { name: "Private Ltd", href: "/services/enterprise-services" },
+            { name: "LLP", href: "/services/enterprise-services" },
+            { name: "Society", href: "/services/enterprise-services" },
+            { name: "Audit", href: "/services/finance-accounting-outsourcing" },
+            { name: "ROC Filings", href: "/services/enterprise-services" },
+        ],
+        icon: "🏛️"
     },
     {
-        id: "services",
-        title: "Professional Services",
-        desc: "GST appeals, transfer pricing, legal due diligence, trademark search, ESG consulting and finance outsourcing for growing businesses.",
-        tags: ["GST Appeals", "Transfer Pricing", "Trademark", "ESG"],
-        icon: "⚙️",
-        href: "/services"
+        id: "sectoral",
+        title: "Sectoral & Operational Licenses",
+        href: "/services",
+        desc: "Industry-specific regulatory approvals enabling businesses to operate legally across manufacturing, healthcare, food, exports, and certification.",
+        tags: [
+            { name: "FSSAI", href: "/services/enterprise-services" },
+            { name: "APEDA", href: "/services/enterprise-services" },
+            { name: "AYUSH", href: "/services/enterprise-services" },
+            { name: "Drug License", href: "/services/enterprise-services" },
+            { name: "BIS", href: "/services/enterprise-services" },
+        ],
+        icon: "⚙️"
     },
     {
         id: "specialised",
         title: "Specialised Compliance Support",
+        href: "/services",
         desc: "Ongoing regulatory monitoring, returns filing, audit coordination, policy drafting, and inspection readiness for market participants.",
-        tags: ["NBFC Compliance", "Broker Compliance", "RTA", "PA Audit"],
-        icon: "📋",
-        href: "/contact"
+        tags: [
+            { name: "NBFC Compliance", href: "/rbi/nbfc-legal-support" },
+            { name: "Broker Compliance", href: "/sebi/aif-compliance-test-report" },
+            { name: "RTA", href: "/services/enterprise-services" },
+            { name: "PA Audit", href: "/rbi/rbi-services" },
+        ],
+        icon: "📋"
     }
 ];
 
@@ -110,7 +148,7 @@ export default function RegulatoryServices() {
                         <a
                             key={service.id}
                             href={service.href}
-                            className={`flex flex-col h-full bg-[rgba(255,255,255,0.04)] border border-[rgba(79,142,247,0.12)] rounded-[20px] p-6 hover:bg-[rgba(0,150,220,0.08)] hover:border-[rgba(0,150,220,0.35)] hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out cursor-pointer`}
+                            className={`flex flex-col h-full bg-[rgba(255,255,255,0.04)] border border-[rgba(79,142,247,0.12)] rounded-[20px] p-6 hover:bg-[rgba(0,150,220,0.08)] hover:border-[rgba(0,150,220,0.35)] hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out no-underline`}
                             style={{
                                 opacity: isVisible ? 1 : 0,
                                 transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
@@ -130,21 +168,15 @@ export default function RegulatoryServices() {
                             </p>
 
                             <div className="flex flex-wrap gap-2 mt-auto">
-                                {service.tags.map((tag, i) => {
-                                    const isObject = typeof tag === 'object' && tag !== null;
-                                    const name = isObject ? (tag as any).name : tag;
-                                    const href = isObject ? (tag as any).href : null;
-
-                                    return href ? (
-                                        <span key={i} onClick={(e) => { e.preventDefault(); window.location.href = href; }} className="px-3 py-1 bg-[rgba(0,150,220,0.1)] border border-[rgba(0,150,220,0.2)] text-[#60c8f0] rounded-full text-[11px] font-semibold whitespace-nowrap hover:bg-[#0096D6] hover:text-white transition-colors cursor-pointer">
-                                            {name}
-                                        </span>
-                                    ) : (
-                                        <span key={i} className="px-3 py-1 bg-[rgba(0,150,220,0.1)] border border-[rgba(0,150,220,0.2)] text-[#60c8f0] rounded-full text-[11px] font-semibold whitespace-nowrap">
-                                            {name}
-                                        </span>
-                                    );
-                                })}
+                                {service.tags.map((tag, i) => (
+                                    <span
+                                        key={i}
+                                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.location.href = tag.href; }}
+                                        className="px-3 py-1 bg-[rgba(0,150,220,0.1)] border border-[rgba(0,150,220,0.2)] text-[#60c8f0] rounded-full text-[11px] font-semibold whitespace-nowrap hover:bg-[#0096D6] hover:text-white transition-colors cursor-pointer"
+                                    >
+                                        {tag.name}
+                                    </span>
+                                ))}
                             </div>
                         </a>
                     ))}

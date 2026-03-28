@@ -29,16 +29,8 @@ export default function SignupPage() {
         e.preventDefault();
         setError("");
         setSuccess("");
-
-        if (form.password !== form.confirmPassword) {
-            setError("Passwords do not match.");
-            return;
-        }
-        if (form.password.length < 8) {
-            setError("Password must be at least 8 characters.");
-            return;
-        }
-
+        if (form.password !== form.confirmPassword) { setError("Passwords do not match."); return; }
+        if (form.password.length < 8) { setError("Password must be at least 8 characters."); return; }
         setLoading(true);
         try {
             const res = await fetch("/api/auth/signup", {
@@ -53,191 +45,145 @@ export default function SignupPage() {
                 }),
             });
             const data = await res.json();
-            if (!res.ok) {
-                setError(data.error || "Something went wrong.");
-            } else {
-                setSuccess("Account created! Redirecting to login…");
-                setTimeout(() => router.push("/login"), 1500);
-            }
-        } catch {
-            setError("Network error. Please try again.");
-        } finally {
-            setLoading(false);
-        }
+            if (!res.ok) { setError(data.error || "Something went wrong."); }
+            else { setSuccess("Account created! Redirecting…"); setTimeout(() => router.push("/login"), 1500); }
+        } catch { setError("Network error. Please try again."); }
+        finally { setLoading(false); }
     };
 
-    const EyeIcon = ({ open }: { open: boolean }) => (
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-            {open ? (
-                <>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                </>
+    const EyeBtn = ({ show, onToggle }: { show: boolean; onToggle: () => void }) => (
+        <button type="button" onClick={onToggle} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+            {show ? (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
             ) : (
-                <>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-                </>
+                </svg>
             )}
-        </svg>
+        </button>
     );
 
-    return (
-        <div className="min-h-screen bg-gradient-to-br from-[#0B1B2B] via-[#0d2640] to-[#1a3a5c] flex items-center justify-center px-4 py-12">
-            {/* Background pattern */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#2196F3]/10 rounded-full blur-3xl" />
-                <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
-            </div>
+    const inputClass = "w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2196F3] focus:ring-2 focus:ring-[#2196F3]/10 transition-all";
 
-            <div className="relative w-full max-w-lg">
-                {/* Logo/Brand */}
-                <div className="text-center mb-8">
-                    <Link href="/" className="inline-block">
-                        <div className="flex items-center justify-center gap-2 mb-2">
-                            <div className="w-10 h-10 bg-gradient-to-br from-[#2196F3] to-[#0077B6] rounded-xl flex items-center justify-center shadow-lg">
-                                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                            </div>
-                            <span className="text-2xl font-bold text-white">Estabizz</span>
+    return (
+        <div className="min-h-screen flex">
+            {/* Left panel — brand */}
+            <div
+                className="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-12"
+                style={{ background: "linear-gradient(135deg, #0B1B2B 0%, #0d2a45 50%, #1a3a5c 100%)" }}
+            >
+                <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+                <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-[#2196F3]/20 rounded-full blur-[80px]" />
+                <div className="absolute bottom-1/4 right-1/4 w-56 h-56 bg-blue-400/10 rounded-full blur-[60px]" />
+
+                <div className="relative">
+                    <Link href="/" className="flex items-center gap-3">
+                        <div className="w-9 h-9 bg-gradient-to-br from-[#2196F3] to-[#0077B6] rounded-xl flex items-center justify-center">
+                            <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
                         </div>
+                        <span className="text-white font-bold text-xl">Estabizz Fintech</span>
                     </Link>
-                    <p className="text-gray-400 text-sm">Create your free account</p>
                 </div>
 
-                {/* Card */}
-                <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl">
-                    <h1 className="text-2xl font-bold text-white mb-6 text-center">Sign Up</h1>
+                <div className="relative space-y-6">
+                    <div>
+                        <p className="text-[#2196F3] text-sm font-semibold tracking-wider uppercase mb-3">Join 1000+ businesses</p>
+                        <h2 className="text-4xl font-bold text-white leading-tight">
+                            Start Your<br />Compliance Journey
+                        </h2>
+                        <p className="text-gray-400 mt-4 text-base leading-relaxed">
+                            Get expert guidance for RBI, SEBI, IFSCA and IRDAI licenses — handled end-to-end.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                        {[
+                            { icon: "🏛️", label: "RBI Licensed" },
+                            { icon: "📈", label: "SEBI Registered" },
+                            { icon: "🌐", label: "IFSCA Compliant" },
+                            { icon: "🛡️", label: "IRDAI Approved" },
+                        ].map(({ icon, label }) => (
+                            <div key={label} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2.5">
+                                <span className="text-base">{icon}</span>
+                                <span className="text-gray-300 text-xs font-medium">{label}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
-                    {error && (
-                        <div className="mb-5 bg-red-500/10 border border-red-500/30 text-red-300 text-sm px-4 py-3 rounded-lg">
-                            {error}
-                        </div>
-                    )}
-                    {success && (
-                        <div className="mb-5 bg-green-500/10 border border-green-500/30 text-green-300 text-sm px-4 py-3 rounded-lg">
-                            {success}
-                        </div>
-                    )}
+                <p className="relative text-gray-600 text-xs">© {new Date().getFullYear()} Estabizz Fintech Pvt. Ltd.</p>
+            </div>
+
+            {/* Right panel — form */}
+            <div className="w-full lg:w-1/2 flex items-center justify-center bg-[#f8faff] px-6 py-12 overflow-y-auto">
+                <div className="w-full max-w-md">
+                    <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors mb-8 group">
+                        <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Back to Home
+                    </Link>
+
+                    <div className="mb-7">
+                        <h1 className="text-2xl font-bold text-gray-900">Create Account</h1>
+                        <p className="text-gray-500 text-sm mt-1">Start your compliance journey with us today.</p>
+                    </div>
+
+                    {error && <div className="mb-5 bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-xl">{error}</div>}
+                    {success && <div className="mb-5 bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-xl">{success}</div>}
 
                     <form onSubmit={handleSubmit} className="space-y-4">
-                        {/* Name row */}
                         <div className="grid grid-cols-2 gap-3">
                             <div>
-                                <label className="block text-sm font-medium text-gray-300 mb-1.5">
-                                    First Name <span className="text-red-400">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="firstName"
-                                    value={form.firstName}
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="John"
-                                    className="w-full bg-white/5 border border-white/15 text-white placeholder-gray-500 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#2196F3] focus:bg-white/8 transition-all"
-                                />
+                                <label className="block text-sm font-medium text-gray-700 mb-1.5">First Name</label>
+                                <input type="text" name="firstName" value={form.firstName} onChange={handleChange} required placeholder="John" className={inputClass} />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-300 mb-1.5">
-                                    Last Name <span className="text-red-400">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    value={form.lastName}
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="Doe"
-                                    className="w-full bg-white/5 border border-white/15 text-white placeholder-gray-500 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#2196F3] focus:bg-white/8 transition-all"
-                                />
+                                <label className="block text-sm font-medium text-gray-700 mb-1.5">Last Name</label>
+                                <input type="text" name="lastName" value={form.lastName} onChange={handleChange} required placeholder="Doe" className={inputClass} />
                             </div>
                         </div>
 
-                        {/* Email */}
                         <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-1.5">
-                                Email Address <span className="text-red-400">*</span>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                                Mobile Number <span className="text-gray-400 font-normal">(Optional)</span>
                             </label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={form.email}
-                                onChange={handleChange}
-                                required
-                                placeholder="john@example.com"
-                                className="w-full bg-white/5 border border-white/15 text-white placeholder-gray-500 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#2196F3] transition-all"
-                            />
-                        </div>
-
-                        {/* Mobile */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-1.5">
-                                Mobile No <span className="text-gray-500 font-normal">(Optional)</span>
-                            </label>
-                            <input
-                                type="tel"
-                                name="mobile"
-                                value={form.mobile}
-                                onChange={handleChange}
-                                placeholder="+91 9876543210"
-                                className="w-full bg-white/5 border border-white/15 text-white placeholder-gray-500 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#2196F3] transition-all"
-                            />
-                        </div>
-
-                        {/* Password */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-1.5">
-                                Password <span className="text-red-400">*</span>
-                            </label>
-                            <div className="relative">
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    name="password"
-                                    value={form.password}
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="Min. 8 characters"
-                                    className="w-full bg-white/5 border border-white/15 text-white placeholder-gray-500 rounded-lg px-4 py-3 pr-11 text-sm focus:outline-none focus:border-[#2196F3] transition-all"
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200 transition-colors"
-                                >
-                                    <EyeIcon open={showPassword} />
-                                </button>
+                            <div className="flex gap-2">
+                                <div className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-xl px-3 py-3 text-sm text-gray-600 whitespace-nowrap">
+                                    🇮🇳 +91
+                                </div>
+                                <input type="tel" name="mobile" value={form.mobile} onChange={handleChange} placeholder="9876543210" className="flex-1 border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2196F3] focus:ring-2 focus:ring-[#2196F3]/10 transition-all" />
                             </div>
                         </div>
 
-                        {/* Confirm Password */}
                         <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-1.5">
-                                Confirm Password <span className="text-red-400">*</span>
-                            </label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">Email Address</label>
+                            <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="john@example.com" className={inputClass} />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
                             <div className="relative">
-                                <input
-                                    type={showConfirm ? "text" : "password"}
-                                    name="confirmPassword"
-                                    value={form.confirmPassword}
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="Re-enter password"
-                                    className="w-full bg-white/5 border border-white/15 text-white placeholder-gray-500 rounded-lg px-4 py-3 pr-11 text-sm focus:outline-none focus:border-[#2196F3] transition-all"
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowConfirm(!showConfirm)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200 transition-colors"
-                                >
-                                    <EyeIcon open={showConfirm} />
-                                </button>
+                                <input type={showPassword ? "text" : "password"} name="password" value={form.password} onChange={handleChange} required placeholder="Min. 8 characters" className={`${inputClass} pr-11`} />
+                                <EyeBtn show={showPassword} onToggle={() => setShowPassword(!showPassword)} />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">Confirm Password</label>
+                            <div className="relative">
+                                <input type={showConfirm ? "text" : "password"} name="confirmPassword" value={form.confirmPassword} onChange={handleChange} required placeholder="Re-enter password" className={`${inputClass} pr-11`} />
+                                <EyeBtn show={showConfirm} onToggle={() => setShowConfirm(!showConfirm)} />
                             </div>
                         </div>
 
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-gradient-to-r from-[#2196F3] to-[#0077B6] hover:from-[#1976D2] hover:to-[#005f8f] text-white font-semibold py-3.5 rounded-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-lg hover:shadow-blue-500/25 mt-2"
+                            className="w-full bg-gradient-to-r from-[#2196F3] to-[#0077B6] hover:from-[#1976D2] hover:to-[#005f8f] text-white font-semibold py-3.5 rounded-xl transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-md hover:shadow-blue-300/40 mt-1"
                         >
                             {loading ? (
                                 <span className="flex items-center justify-center gap-2">
@@ -247,26 +193,22 @@ export default function SignupPage() {
                                     </svg>
                                     Creating account…
                                 </span>
-                            ) : (
-                                "Sign Up"
-                            )}
+                            ) : "Sign Up"}
                         </button>
                     </form>
 
-                    <p className="text-center text-gray-400 text-sm mt-6">
+                    <p className="text-center text-gray-500 text-sm mt-6">
                         Already have an account?{" "}
-                        <Link href="/login" className="text-[#2196F3] hover:text-blue-300 font-medium transition-colors">
-                            Login
-                        </Link>
+                        <Link href="/login" className="text-[#2196F3] font-semibold hover:underline">Log in</Link>
+                    </p>
+
+                    <p className="text-center text-gray-400 text-xs mt-4">
+                        By signing up, you agree to our{" "}
+                        <Link href="/legal/terms-conditions" className="hover:text-gray-600 underline">Terms</Link>
+                        {" & "}
+                        <Link href="/legal/privacy-policy" className="hover:text-gray-600 underline">Privacy Policy</Link>
                     </p>
                 </div>
-
-                <p className="text-center text-gray-600 text-xs mt-6">
-                    By signing up, you agree to our{" "}
-                    <Link href="/legal/terms-conditions" className="text-gray-400 hover:text-gray-300 underline">Terms</Link>
-                    {" "}and{" "}
-                    <Link href="/legal/privacy-policy" className="text-gray-400 hover:text-gray-300 underline">Privacy Policy</Link>
-                </p>
             </div>
         </div>
     );

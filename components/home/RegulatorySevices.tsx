@@ -7,61 +7,69 @@ const services = [
         title: "RBI Regulatory Services",
         desc: "End-to-end RBI licensing and compliance management — including capital structuring, policy drafting, application filing, and post-approval reporting.",
         tags: ["NBFC", "Payment Aggregator", "PPI", "Account Aggregator"],
-        icon: "🏦"
+        icon: "🏦",
+        href: "/rbi"
     },
     {
         id: "sebi",
         title: "SEBI Regulatory Services",
         desc: "Structured SEBI registration and governance support covering documentation, eligibility assessment, net worth compliance, and monitoring.",
         tags: ["Stock Broker", "RIA", "PMS", "AIF", "Research Analyst"],
-        icon: "📈"
+        icon: "📈",
+        href: "/sebi"
     },
     {
         id: "irdai",
         title: "IRDAI Regulatory Services",
         desc: "Complete IRDAI licensing lifecycle support — from feasibility assessment and capital planning to regulatory approval and compliance.",
         tags: ["Insurance Co.", "Broker License", "Corporate Agent", "IMF"],
-        icon: "🛡️"
+        icon: "🛡️",
+        href: "/irdai"
     },
     {
         id: "ifsca",
         title: "IFSCA & GIFT City Services",
         desc: "Regulatory structuring and operational compliance support for entities operating within India's International Financial Services Centre ecosystem.",
         tags: [
-            { name: "Broker Dealer", href: null },
+            { name: "Aircraft Leasing", href: "/ifsca/aircraft-leasing" },
             { name: "Factoring", href: "/regulatory/ifsca-factoring-license-gift-city" },
             { name: "PSP License", href: "/regulatory/psp-license-ifsca" },
             { name: "Finance Co.", href: "/regulatory/finance-company-gift-ifsc" }
         ],
-        icon: "🌐"
+        icon: "🌐",
+        href: "/ifsca"
     },
     {
-        id: "fiu",
-        title: "Financial Intelligence & Reporting",
-        desc: "Design and implementation of regulatory reporting systems aligned with India's financial intelligence and anti-money laundering frameworks.",
-        tags: ["FIU-IND", "PMLA Advisory", "AML Policy", "CKYC"],
-        icon: "🔍"
+        id: "fema",
+        title: "FEMA & Foreign Exchange",
+        desc: "FEMA registration, compliance advisory and cross-border transaction support aligned with India's foreign exchange regulations.",
+        tags: ["FEMA Registration", "FEMA Compliance", "Cross-Border", "FDI"],
+        icon: "🔍",
+        href: "/fema"
     },
     {
         id: "company",
         title: "Company Formation & Governance",
         desc: "From incorporation to structured governance — building legally compliant enterprises with strong financial and operational discipline.",
         tags: ["Private Ltd", "LLP", "Society", "Audit", "ROC Filings"],
-        icon: "🏛️"
+        icon: "🏛️",
+        href: "/services/enterprise-services"
     },
     {
-        id: "sectoral",
-        title: "Sectoral & Operational Licenses",
-        desc: "Industry-specific regulatory approvals enabling businesses to operate legally across manufacturing, healthcare, food, exports, and certification.",
-        tags: ["FSSAI", "APEDA", "AYUSH", "Drug License", "BIS"],
-        icon: "⚙️"
+        id: "services",
+        title: "Professional Services",
+        desc: "GST appeals, transfer pricing, legal due diligence, trademark search, ESG consulting and finance outsourcing for growing businesses.",
+        tags: ["GST Appeals", "Transfer Pricing", "Trademark", "ESG"],
+        icon: "⚙️",
+        href: "/services"
     },
     {
         id: "specialised",
         title: "Specialised Compliance Support",
         desc: "Ongoing regulatory monitoring, returns filing, audit coordination, policy drafting, and inspection readiness for market participants.",
         tags: ["NBFC Compliance", "Broker Compliance", "RTA", "PA Audit"],
-        icon: "📋"
+        icon: "📋",
+        href: "/contact"
     }
 ];
 
@@ -99,9 +107,10 @@ export default function RegulatoryServices() {
                 {/* Services Grid layout */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {services.map((service, index) => (
-                        <div
+                        <a
                             key={service.id}
-                            className={`flex flex-col h-full bg-[rgba(255,255,255,0.04)] border border-[rgba(79,142,247,0.12)] rounded-[20px] p-6 hover:bg-[rgba(0,150,220,0.08)] hover:border-[rgba(0,150,220,0.35)] hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out`}
+                            href={service.href}
+                            className={`flex flex-col h-full bg-[rgba(255,255,255,0.04)] border border-[rgba(79,142,247,0.12)] rounded-[20px] p-6 hover:bg-[rgba(0,150,220,0.08)] hover:border-[rgba(0,150,220,0.35)] hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out cursor-pointer`}
                             style={{
                                 opacity: isVisible ? 1 : 0,
                                 transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
@@ -127,9 +136,9 @@ export default function RegulatoryServices() {
                                     const href = isObject ? (tag as any).href : null;
 
                                     return href ? (
-                                        <a key={i} href={href} className="px-3 py-1 bg-[rgba(0,150,220,0.1)] border border-[rgba(0,150,220,0.2)] text-[#60c8f0] rounded-full text-[11px] font-semibold whitespace-nowrap hover:bg-[#0096D6] hover:text-white transition-colors cursor-pointer">
+                                        <span key={i} onClick={(e) => { e.preventDefault(); window.location.href = href; }} className="px-3 py-1 bg-[rgba(0,150,220,0.1)] border border-[rgba(0,150,220,0.2)] text-[#60c8f0] rounded-full text-[11px] font-semibold whitespace-nowrap hover:bg-[#0096D6] hover:text-white transition-colors cursor-pointer">
                                             {name}
-                                        </a>
+                                        </span>
                                     ) : (
                                         <span key={i} className="px-3 py-1 bg-[rgba(0,150,220,0.1)] border border-[rgba(0,150,220,0.2)] text-[#60c8f0] rounded-full text-[11px] font-semibold whitespace-nowrap">
                                             {name}
@@ -137,7 +146,7 @@ export default function RegulatoryServices() {
                                     );
                                 })}
                             </div>
-                        </div>
+                        </a>
                     ))}
                 </div>
 

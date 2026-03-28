@@ -63,6 +63,10 @@ const linkMap: Record<string, string> = {
     "NHB Registration": "/services/enterprise-services",
     "CERSAI Registration": "/services/enterprise-services",
     "DGFT IE Code": "/fema/fema-registration",
+    // Hidden pages — now accessible
+    "Mutual Fund Registration": "/sebi/mutual-fund-registration",
+    "Social Stock Exchange": "/sebi/social-stock-exchange-license",
+    "Underwriter Registration": "/sebi/underwriter-registration",
 };
 
 const menus: Record<string, MegaMenu> = {
@@ -79,7 +83,7 @@ const menus: Record<string, MegaMenu> = {
     Regulatory: {
         categories: [
             { label: "RBI Licenses", icon: "🏛️", items: ["NBFC License", "NBFC Account Aggregator", "Payment Aggregator", "AD Category II", "Credit Information Company", "NBFC Business Plan"] },
-            { label: "SEBI Licenses", icon: "📈", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "Research Analyst", "AIF Registration"] },
+            { label: "SEBI Licenses", icon: "📈", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "Research Analyst", "AIF Registration", "Mutual Fund Registration", "Social Stock Exchange", "Underwriter Registration"] },
             { label: "IFSCA Licenses", icon: "🌐", items: ["Finance Company GIFT IFSC", "IFSCA Factoring License", "PSP License IFSCA", "Fund Management Entity", "IFSCA Aircraft Leasing"] },
             { label: "IRDAI Licenses", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA License", "Micro Insurance"] },
             { label: "FEMA & Other", icon: "⚖️", items: ["FEMA Compliance", "DGFT IE Code", "Transfer Pricing", "GST Registration", "PFRDA Registration"] },
@@ -155,17 +159,13 @@ export default function Navbar() {
                                 {item} <svg className={`w-3 h-3 transition-transform ${activeMenu === item ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </div>
                         ))}
-                        <Link href="/pricing" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] px-3 py-5 transition-colors">Pricing</Link>
+                        <Link href="/contact" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] px-3 py-5 transition-colors">Contact</Link>
                     </div>
 
                     {/* Right */}
                     <div className="hidden xl:flex items-center gap-4">
-                        <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors">Login</Link>
-                        <div className="flex items-center gap-1 text-[13.5px] font-semibold text-[#334155] cursor-pointer hover:text-[#0096D6]">
-                            Country <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                        </div>
-                        <Link href="/get-started" className="bg-[#0a1628] text-white font-bold text-[13.5px] rounded-lg px-5 py-2.5 hover:bg-[#1a2638] transition-colors">
-                            Get Started
+                        <Link href="/contact" className="bg-[#0a1628] text-white font-bold text-[13.5px] rounded-lg px-5 py-2.5 hover:bg-[#1a2638] transition-colors">
+                            Book Consultation
                         </Link>
                     </div>
 

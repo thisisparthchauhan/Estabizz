@@ -103,13 +103,13 @@ export default function HeroSection() {
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 mb-4 w-full sm:w-auto opacity-0 animate-[fadeUp_0.6s_ease_0.5s_forwards]">
-                        <button className="get-started-btn relative overflow-hidden w-full sm:w-auto bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-[0_8px_25px_rgba(0,150,220,0.3)] hover:shadow-[0_8px_30px_rgba(0,150,220,0.4)] hover:-translate-y-1 transition-all duration-300 group">
-                            <span className="relative z-10 flex items-center justify-center gap-2">Get Started Free <span className="group-hover:translate-x-1 transition-transform">→</span></span>
-                        </button>
+                        <a href="/services" className="get-started-btn relative overflow-hidden w-full sm:w-auto bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-[0_8px_25px_rgba(0,150,220,0.3)] hover:shadow-[0_8px_30px_rgba(0,150,220,0.4)] hover:-translate-y-1 transition-all duration-300 group text-center">
+                            <span className="relative z-10 flex items-center justify-center gap-2">Explore Our Services <span className="group-hover:translate-x-1 transition-transform">→</span></span>
+                        </a>
 
-                        <button className="w-full sm:w-auto bg-white/90 backdrop-blur-md border-2 border-[#0096D6] text-[#0096D6] font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-sm hover:bg-blue-50 transition-all duration-300">
+                        <a href="/contact" className="w-full sm:w-auto bg-white/90 backdrop-blur-md border-2 border-[#0096D6] text-[#0096D6] font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-sm hover:bg-blue-50 transition-all duration-300 text-center">
                             Book a Free Consultation
-                        </button>
+                        </a>
                     </div>
 
                     {/* Trust Line */}

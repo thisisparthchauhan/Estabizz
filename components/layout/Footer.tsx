@@ -2,11 +2,35 @@
 import React from "react";
 import Link from "next/link";
 
-const footerLinks = {
-    "Services": ["Startup Services", "NBFC Services", "Fintech Services", "Compliance & Audit", "Tax & Accounting", "Business Plan Consulting"],
-    "Regulatory": ["RBI Licenses", "SEBI Licenses", "IFSCA Licenses", "IRDAI Licenses", "PFRDA Registration", "NHB Registration"],
-    "Solutions": ["For Startups", "For NBFCs", "For Fintechs", "For SMEs", "For Enterprises"],
-    "Resources": ["Guides & Articles", "Case Studies", "FAQs", "Press & Media", "Free Tools"],
+const footerLinks: Record<string, { label: string; href: string }[]> = {
+    "Services": [
+        { label: "RBI Services", href: "/rbi" },
+        { label: "SEBI Services", href: "/sebi" },
+        { label: "IRDAI Services", href: "/irdai" },
+        { label: "IFSCA & GIFT City", href: "/ifsca" },
+        { label: "FEMA Compliance", href: "/fema" },
+        { label: "All Services", href: "/services" },
+    ],
+    "Popular Licenses": [
+        { label: "NBFC Registration", href: "/rbi/nbfc-account-aggregator-license" },
+        { label: "Aircraft Leasing IFSC", href: "/ifsca/aircraft-leasing" },
+        { label: "Insurance Broker License", href: "/irdai/irda-insurance-broker-license" },
+        { label: "AIF Registration", href: "/sebi/aif-compliance-test-report" },
+        { label: "FEMA Registration", href: "/fema/fema-registration" },
+        { label: "GST Appeal Services", href: "/services/gst-appeal-services" },
+    ],
+    "Company": [
+        { label: "About Us", href: "/contact" },
+        { label: "Contact Us", href: "/contact" },
+        { label: "Enterprise Services", href: "/services/enterprise-services" },
+        { label: "India Entry Strategy", href: "/services/india-entry-strategy" },
+        { label: "ESG Consulting", href: "/services/esg-consulting" },
+    ],
+    "Legal": [
+        { label: "Privacy Policy", href: "/legal/privacy-policy" },
+        { label: "Terms & Conditions", href: "/legal/terms-conditions" },
+        { label: "Refund Policy", href: "/legal/refund-policy" },
+    ],
 };
 
 export default function Footer() {
@@ -66,8 +90,8 @@ export default function Footer() {
                             <h4 className="text-[12px] font-bold text-white uppercase tracking-[0.08em] mb-4">{title}</h4>
                             <ul className="space-y-2.5">
                                 {links.map((link) => (
-                                    <li key={link}>
-                                        <Link href="#" className="text-[13px] text-gray-400 hover:text-[#10b981] transition-colors">{link}</Link>
+                                    <li key={link.label}>
+                                        <Link href={link.href} className="text-[13px] text-gray-400 hover:text-[#10b981] transition-colors">{link.label}</Link>
                                     </li>
                                 ))}
                             </ul>
@@ -87,10 +111,9 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] text-gray-500">
                     <p>© 2014–2025 Estabizz Fintech Pvt. Ltd. All rights reserved.</p>
                     <div className="flex flex-wrap gap-5">
-                        <Link href="/privacy" className="hover:text-gray-300 transition-colors">Privacy Policy</Link>
-                        <Link href="/terms" className="hover:text-gray-300 transition-colors">Terms of Service</Link>
-                        <Link href="/refund" className="hover:text-gray-300 transition-colors">Refund Policy</Link>
-                        <Link href="/disclaimer" className="hover:text-gray-300 transition-colors">Disclaimer</Link>
+                        <Link href="/legal/privacy-policy" className="hover:text-gray-300 transition-colors">Privacy Policy</Link>
+                        <Link href="/legal/terms-conditions" className="hover:text-gray-300 transition-colors">Terms of Service</Link>
+                        <Link href="/legal/refund-policy" className="hover:text-gray-300 transition-colors">Refund Policy</Link>
                     </div>
                 </div>
             </div>

@@ -167,7 +167,13 @@ export default function Navbar() {
                     </div>
 
                     {/* Right */}
-                    <div className="hidden xl:flex items-center gap-4">
+                    <div className="hidden xl:flex items-center gap-3">
+                        <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
+                            Login
+                        </Link>
+                        <Link href="/signup" className="text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-lg px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-sm">
+                            Get Started
+                        </Link>
                         <Link href="/contact" className="bg-[#0a1628] text-white font-bold text-[13.5px] rounded-lg px-5 py-2.5 hover:bg-[#1a2638] transition-colors">
                             Book Consultation
                         </Link>

@@ -9,26 +9,23 @@ export interface BreadcrumbItem { label: string; href?: string; }
 export interface Tag { emoji: string; label: string; }
 
 interface ServicePageLayoutProps {
-    // Hero
     tags: Tag[];
     breadcrumb: BreadcrumbItem[];
     title: string;
     readTime?: string;
     focusKeyword: string;
-    // TOC
     sections: TocSection[];
-    // Right sidebar
     ctaTitle: string;
     ctaDescription: string;
     quickFacts: QuickFact[];
-    // Related
     relatedArticles: RelatedArticle[];
-    // Final CTA
     finalCtaTitle: string;
     finalCtaDescription: string;
-    // Content
     children: React.ReactNode;
 }
+
+const PHONE = "+919876543210";
+const WHATSAPP = "919876543210";
 
 export default function ServicePageLayout({
     tags, breadcrumb, title, readTime = "12 min read", focusKeyword,
@@ -37,12 +34,14 @@ export default function ServicePageLayout({
 }: ServicePageLayoutProps) {
     const [activeSection, setActiveSection] = useState("");
     const [scrollProgress, setScrollProgress] = useState(0);
+    const [showSticky, setShowSticky] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
             const totalScroll = document.documentElement.scrollTop;
             const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             setScrollProgress(totalScroll / windowHeight);
+            setShowSticky(totalScroll > 300);
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
@@ -83,13 +82,43 @@ export default function ServicePageLayout({
 
     return (
         <div className="bg-[#f8faff] min-h-screen font-sans text-gray-800">
+
             {/* Scroll Progress Bar */}
             <div
                 className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-[#0096D6] to-[#10b981] z-50 transition-all duration-150 ease-out"
                 style={{ width: `${scrollProgress * 100}%` }}
             />
 
-            {/* Hero Header */}
+            {/* ── STICKY WHATSAPP + CALL BUTTONS ───────────────────────────── */}
+            <div className={`fixed bottom-6 left-4 z-[199] flex flex-col gap-3 transition-all duration-300 ${showSticky ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}>
+                {/* WhatsApp */}
+                <a
+                    href={`https://wa.me/${WHATSAPP}?text=Hi%2C%20I%20need%20help%20with%20${encodeURIComponent(focusKeyword)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-0 hover:gap-3 overflow-hidden bg-[#25D366] text-white rounded-full h-12 w-12 hover:w-auto hover:px-4 transition-all duration-300 shadow-lg shadow-green-400/30 hover:shadow-green-400/50"
+                    title="Chat on WhatsApp"
+                >
+                    <svg className="w-6 h-6 shrink-0 mx-auto group-hover:mx-0" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    <span className="whitespace-nowrap text-sm font-bold hidden group-hover:block">WhatsApp Us</span>
+                </a>
+
+                {/* Call */}
+                <a
+                    href={`tel:${PHONE}`}
+                    className="group flex items-center gap-0 hover:gap-3 overflow-hidden bg-gradient-to-br from-[#0096D6] to-[#0077B6] text-white rounded-full h-12 w-12 hover:w-auto hover:px-4 transition-all duration-300 shadow-lg shadow-blue-400/30 hover:shadow-blue-400/50"
+                    title="Call Us"
+                >
+                    <svg className="w-5 h-5 shrink-0 mx-auto group-hover:mx-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                    <span className="whitespace-nowrap text-sm font-bold hidden group-hover:block">Speak with Expert</span>
+                </a>
+            </div>
+
+            {/* ── HERO HEADER ──────────────────────────────────────────────── */}
             <section
                 className="relative pt-24 pb-16 px-6 lg:px-8 border-b border-blue-100 overflow-hidden"
                 style={{ background: "linear-gradient(135deg, #f0f9ff, #e0f2fe, #eff6ff)" }}
@@ -138,13 +167,46 @@ export default function ServicePageLayout({
                         <div className="flex items-center gap-1.5"><span>✅</span> Expert Reviewed</div>
                     </div>
 
-                    <div className="inline-block px-4 py-2 border border-blue-200 bg-white/60 backdrop-blur-sm rounded-full text-sm text-[#0a1628] font-semibold shadow-sm">
-                        Focus: <span className="text-[#0096D6]">{focusKeyword}</span>
+                    {/* ── HERO CTA (above the fold) ── */}
+                    <div className="flex flex-col sm:flex-row gap-3 mb-8">
+                        <Link
+                            href="/contact"
+                            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gradient-to-r from-[#0096D6] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold text-[14px] rounded-xl shadow-lg shadow-blue-300/30 hover:shadow-blue-400/40 transition-all"
+                        >
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            Book Free Consultation
+                        </Link>
+                        <a
+                            href={`tel:${PHONE}`}
+                            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white border-2 border-[#0096D6] text-[#0077B6] font-bold text-[14px] rounded-xl hover:bg-blue-50 transition-all shadow-sm"
+                        >
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            Speak with an Expert
+                        </a>
+                        <a
+                            href={`https://wa.me/${WHATSAPP}?text=Hi%2C%20I%20need%20help%20with%20${encodeURIComponent(focusKeyword)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold text-[14px] rounded-xl transition-all shadow-sm"
+                        >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            WhatsApp
+                        </a>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-4">
+                        <div className="inline-block px-4 py-2 border border-blue-200 bg-white/60 backdrop-blur-sm rounded-full text-sm text-[#0a1628] font-semibold shadow-sm">
+                            Focus: <span className="text-[#0096D6]">{focusKeyword}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-[13px] text-gray-500">
+                            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse inline-block"></span>
+                            <span>Expert available now · <strong className="text-gray-700">Response within 2 hours</strong></span>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* Main Layout */}
+            {/* ── MAIN LAYOUT ──────────────────────────────────────────────── */}
             <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col xl:flex-row gap-10 items-start">
 
                 {/* Left TOC Sidebar */}
@@ -164,6 +226,12 @@ export default function ServicePageLayout({
                             </a>
                         ))}
                     </nav>
+                    {/* Sidebar mini-CTA */}
+                    <div className="mt-5 pt-5 border-t border-gray-100">
+                        <Link href="/contact" className="block w-full text-center bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold text-[12px] py-2.5 rounded-lg hover:opacity-90 transition-opacity">
+                            📞 Book Consultation
+                        </Link>
+                    </div>
                 </aside>
 
                 {/* Mobile TOC */}
@@ -224,6 +292,31 @@ export default function ServicePageLayout({
               .badge-optional{background:#fef3c7;color:#d97706;padding:2px 10px;border-radius:999px;font-weight:700;font-size:12px}
             `}} />
                     {children}
+
+                    {/* ── MID-CONTENT CTA (inside article, after content) ── */}
+                    <div className="mt-12 rounded-2xl overflow-hidden border border-blue-100 shadow-md">
+                        <div className="bg-gradient-to-r from-[#0077B6] to-[#0096D6] px-8 py-7 flex flex-col sm:flex-row items-center justify-between gap-5">
+                            <div>
+                                <p className="text-white/70 text-[12px] font-bold uppercase tracking-wider mb-1">Expert Assistance</p>
+                                <h3 className="text-white font-bold text-[18px] leading-tight">Not sure where to start?</h3>
+                                <p className="text-white/80 text-[13px] mt-1">Our compliance experts handle everything — eligibility to approval.</p>
+                            </div>
+                            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+                                <Link href="/contact" className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-white text-[#0077B6] font-bold text-[13px] rounded-xl hover:bg-blue-50 transition-colors shadow-sm whitespace-nowrap">
+                                    📅 Book Consultation
+                                </Link>
+                                <a href={`tel:${PHONE}`} className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-white/15 hover:bg-white/25 text-white font-bold text-[13px] rounded-xl border border-white/30 transition-colors whitespace-nowrap">
+                                    📞 Call Now
+                                </a>
+                            </div>
+                        </div>
+                        <div className="bg-white px-8 py-3 flex flex-wrap items-center gap-6 text-[12px] text-gray-500 font-medium">
+                            <span className="flex items-center gap-1.5"><span className="text-green-500">✓</span> Free Initial Consultation</span>
+                            <span className="flex items-center gap-1.5"><span className="text-green-500">✓</span> 98% Approval Rate</span>
+                            <span className="flex items-center gap-1.5"><span className="text-green-500">✓</span> 1000+ Businesses Served</span>
+                            <span className="flex items-center gap-1.5"><span className="text-green-500">✓</span> End-to-End Support</span>
+                        </div>
+                    </div>
                 </main>
 
                 {/* Right Sidebar */}
@@ -234,10 +327,21 @@ export default function ServicePageLayout({
                         <h3 className="font-bold text-[18px] mb-2 leading-tight">{ctaTitle}</h3>
                         <p className="text-white/80 text-[13px] mb-5 leading-relaxed">{ctaDescription}</p>
                         <Link href="/contact" className="block w-full bg-white text-[#0077B6] font-bold text-[14px] py-3 rounded-xl hover:bg-blue-50 hover:shadow-lg transition duration-300 text-center">
-                            📞 Book Free Consultation
+                            📅 Book Free Consultation
                         </Link>
+                        <a href={`tel:${PHONE}`} className="block w-full mt-2 bg-white/10 hover:bg-white/20 text-white font-semibold text-[13px] py-2.5 rounded-xl text-center transition-colors border border-white/20">
+                            📞 Speak with Expert
+                        </a>
+                        <a
+                            href={`https://wa.me/${WHATSAPP}?text=Hi%2C%20I%20need%20help%20with%20${encodeURIComponent(focusKeyword)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block w-full mt-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-semibold text-[13px] py-2.5 rounded-xl text-center transition-colors"
+                        >
+                            💬 WhatsApp Us
+                        </a>
                         <div className="text-center text-white/70 text-[12px] mt-4 font-medium tracking-wide">
-                            ⚡ Response within 24 hours
+                            ⚡ Response within 2 hours
                         </div>
                     </div>
 
@@ -317,18 +421,35 @@ export default function ServicePageLayout({
                 </section>
             )}
 
-            {/* Final CTA */}
+            {/* ── FINAL CTA ────────────────────────────────────────────────── */}
             <section className="bg-gradient-to-br from-[#0a1628] to-[#1a2b45] py-16 text-center px-6">
                 <div className="max-w-3xl mx-auto">
+                    <div className="inline-flex items-center gap-2 bg-white/10 text-blue-200 text-[12px] font-bold px-4 py-1.5 rounded-full mb-5 uppercase tracking-wider">
+                        <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse inline-block"></span>
+                        Experts Available Now
+                    </div>
                     <h2 className="text-[28px] md:text-[32px] font-bold text-white mb-4">{finalCtaTitle}</h2>
                     <p className="text-[16px] text-blue-100 mb-8 max-w-2xl mx-auto">{finalCtaDescription}</p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#0096D6] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all">
-                            Get Started Free →
+                        <Link href="/contact" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-[#0096D6] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all">
+                            📅 Book Free Consultation
                         </Link>
-                        <a href="tel:+919876543210" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20">
-                            Talk to Expert
+                        <a href={`tel:${PHONE}`} className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20">
+                            📞 Speak with Expert
                         </a>
+                        <a
+                            href={`https://wa.me/${WHATSAPP}?text=Hi%2C%20I%20need%20compliance%20guidance`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold rounded-xl transition-all"
+                        >
+                            💬 WhatsApp
+                        </a>
+                    </div>
+                    <div className="flex flex-wrap justify-center gap-6 mt-8 text-[13px] text-blue-300">
+                        <span className="flex items-center gap-1.5"><span className="text-green-400">✓</span> Free Initial Consultation</span>
+                        <span className="flex items-center gap-1.5"><span className="text-green-400">✓</span> 98% Approval Rate</span>
+                        <span className="flex items-center gap-1.5"><span className="text-green-400">✓</span> 1000+ Businesses Served</span>
                     </div>
                 </div>
             </section>

@@ -171,7 +171,7 @@ export default function RegulatoryArticleClient() {
                 </div>
 
                 {/* Center Article Content */}
-                <main className="flex-1 w-full max-w-[760px] bg-white border border-[rgba(0,150,220,0.08)] rounded-2xl p-8 lg:p-12 shadow-[0_8px_30px_rgba(0,100,200,0.04)] article-content relative overflow-hidden">
+                <main className="flex-1 w-full max-w-[760px] bg-white border border-[rgba(0,150,220,0.08)] rounded-2xl p-8 lg:p-12 shadow-[0_8px_30px_rgba(0,100,200,0.04)] article-content relative overflow-x-auto">
                     <style dangerouslySetInnerHTML={{
                         __html: `
             .article-content h2 { font-size: 24px; font-weight: 800; color: #0a1628; padding: 24px 0 8px; margin-top: 48px; position: relative; scroll-margin-top: 80px; padding-left: 16px; transition: all 0.7s ease; opacity: 0; transform: translateY(24px); }

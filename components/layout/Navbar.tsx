@@ -6,6 +6,13 @@ interface MenuCategory { label: string; icon: string; items: string[]; }
 interface MegaMenu { categories: MenuCategory[]; viewAll: string; viewAllLabel: string; }
 
 const linkMap: Record<string, string> = {
+    // Blog / Knowledge Hub
+    "All Blogs": "/blogs",
+    "Regulatory Updates": "/blogs?category=Regulatory+Updates",
+    "Industry News": "/blogs?category=Industry+News",
+    "Guides & Tutorials": "/blogs?category=Guides+%26+Tutorials",
+    "Fintech Insights": "/blogs?category=Fintech+Insights",
+    "Compliance Tips": "/blogs?category=Compliance+Tips",
     // IFSCA (existing)
     "Finance Company GIFT IFSC": "/ifsca/finance-company",
     "IFSCA Factoring License": "/regulatory/ifsca-factoring-license-gift-city",
@@ -107,12 +114,12 @@ const menus: Record<string, MegaMenu> = {
     Resources: {
         categories: [
             { label: "Press & Media", icon: "📰", items: ["Latest News", "Media Coverage", "Press Releases", "Brand Assets", "Company Announcements", "Awards & Recognition"] },
+            { label: "Knowledge Hub", icon: "📝", items: ["All Blogs", "Regulatory Updates", "Industry News", "Guides & Tutorials", "Fintech Insights", "Compliance Tips"] },
             { label: "Case Studies", icon: "📁", items: [] },
-            { label: "Guides & Articles", icon: "📖", items: [] },
             { label: "FAQs", icon: "❓", items: [] },
             { label: "Free Tools", icon: "🔧", items: [] },
         ],
-        viewAll: "/#", viewAllLabel: "View All Resources →"
+        viewAll: "/blogs", viewAllLabel: "View All Resources →"
     },
 };
 

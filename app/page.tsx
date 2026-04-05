@@ -13,6 +13,7 @@ import CompliancePortal from "@/components/home/CompliancePortal";
 import Testimonials from "@/components/home/Testimonials";
 import FinalCTA from "@/components/home/FinalCTA";
 import StatsSection from "@/components/home/StatsSection";
+import FeaturedBlogs from "@/components/home/FeaturedBlogs";
 
 export default function Home() {
     // const [scrollProgress, setScrollProgress] = useState(0); // Removed
@@ -60,6 +61,7 @@ export default function Home() {
                 <CaseStudies />
                 <CompliancePortal />
                 <Testimonials />
+                <FeaturedBlogs />
                 <FinalCTA />
             </main>
 

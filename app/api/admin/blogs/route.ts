@@ -1,43 +1,42 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/db';
-import Blog from '@/lib/models/Blog';
+import { listBlogs, getStatusCounts } from '@/lib/models/Blog';
+import { findUserById } from '@/lib/models/User';
 import { requireAdmin } from '@/lib/auth';
 
 export async function GET(request: Request) {
     try {
         await requireAdmin();
-        await connectDB();
 
         const { searchParams } = new URL(request.url);
-        const status = searchParams.get('status');
+        const status = searchParams.get('status') || undefined;
         const page = parseInt(searchParams.get('page') || '1');
         const limit = parseInt(searchParams.get('limit') || '20');
 
-        const query: Record<string, unknown> = {};
-        if (status) query.status = status;
-
-        const skip = (page - 1) * limit;
-        const [blogs, total] = await Promise.all([
-            Blog.find(query)
-                .populate('author', 'firstName lastName email')
-                .sort({ createdAt: -1 })
-                .skip(skip)
-                .limit(limit)
-                .lean(),
-            Blog.countDocuments(query),
+        const [{ blogs, total }, statusCounts] = await Promise.all([
+            listBlogs({ status, page, limit }),
+            getStatusCounts(),
         ]);
 
-        const counts = await Blog.aggregate([
-            { $group: { _id: '$status', count: { $sum: 1 } } },
-        ]);
-
-        const statusCounts: Record<string, number> = {};
-        counts.forEach((c) => {
-            statusCounts[c._id] = c.count;
-        });
+        // Populate authors
+        const blogsWithAuthors = await Promise.all(
+            blogs.map(async (blog) => {
+                if (!blog.author) {
+                    const author = await findUserById(blog.authorId);
+                    if (author) {
+                        blog.author = {
+                            firstName: author.firstName,
+                            lastName: author.lastName,
+                            profileImage: author.profileImage,
+                            email: author.email,
+                        };
+                    }
+                }
+                return blog;
+            })
+        );
 
         return NextResponse.json({
-            blogs,
+            blogs: blogsWithAuthors,
             statusCounts,
             pagination: { page, limit, total, pages: Math.ceil(total / limit) },
         });

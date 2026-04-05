@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/db';
-import Blog from '@/lib/models/Blog';
+import { createBlog, listBlogs } from '@/lib/models/Blog';
+import { findUserById } from '@/lib/models/User';
 import { getCurrentUser, requireAuth } from '@/lib/auth';
 
 function generateSlug(title: string): string {
@@ -14,42 +14,51 @@ function generateSlug(title: string): string {
 
 export async function GET(request: Request) {
     try {
-        await connectDB();
         const { searchParams } = new URL(request.url);
         const page = parseInt(searchParams.get('page') || '1');
         const limit = parseInt(searchParams.get('limit') || '12');
-        const category = searchParams.get('category');
-        const tag = searchParams.get('tag');
+        const category = searchParams.get('category') || undefined;
+        const tag = searchParams.get('tag') || undefined;
         const myBlogs = searchParams.get('my') === 'true';
 
-        const query: Record<string, unknown> = {};
+        let authorId: string | undefined;
 
         if (myBlogs) {
             const user = await getCurrentUser();
             if (!user) {
                 return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
             }
-            query.author = user._id;
-        } else {
-            query.status = 'published';
+            authorId = user.id;
         }
 
-        if (category) query.category = category;
-        if (tag) query.tags = tag;
+        const { blogs, total } = await listBlogs({
+            status: myBlogs ? undefined : 'published',
+            category,
+            tag,
+            authorId,
+            page,
+            limit,
+        });
 
-        const skip = (page - 1) * limit;
-        const [blogs, total] = await Promise.all([
-            Blog.find(query)
-                .populate('author', 'firstName lastName profileImage')
-                .sort({ publishedAt: -1, createdAt: -1 })
-                .skip(skip)
-                .limit(limit)
-                .lean(),
-            Blog.countDocuments(query),
-        ]);
+        // Populate author info
+        const blogsWithAuthors = await Promise.all(
+            blogs.map(async (blog) => {
+                if (!blog.author) {
+                    const author = await findUserById(blog.authorId);
+                    if (author) {
+                        blog.author = {
+                            firstName: author.firstName,
+                            lastName: author.lastName,
+                            profileImage: author.profileImage,
+                        };
+                    }
+                }
+                return blog;
+            })
+        );
 
         return NextResponse.json({
-            blogs,
+            blogs: blogsWithAuthors,
             pagination: {
                 page,
                 limit,
@@ -57,7 +66,8 @@ export async function GET(request: Request) {
                 pages: Math.ceil(total / limit),
             },
         });
-    } catch {
+    } catch (error) {
+        console.error('List blogs error:', error);
         return NextResponse.json({ error: 'Failed to fetch blogs' }, { status: 500 });
     }
 }
@@ -65,7 +75,6 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
     try {
         const user = await requireAuth();
-        await connectDB();
 
         const body = await request.json();
         const { title, content, excerpt, coverImage, images, category, tags } = body;
@@ -77,15 +86,10 @@ export async function POST(request: Request) {
             );
         }
 
-        let slug = generateSlug(title);
-        const existing = await Blog.findOne({ slug });
-        if (existing) {
-            slug = `${slug}-${Date.now()}`;
-        }
-
+        const slug = `${generateSlug(title)}-${Date.now()}`;
         const isAdmin = user.role === 'admin';
 
-        const blog = await Blog.create({
+        const blog = await createBlog({
             title,
             slug,
             content,
@@ -94,9 +98,14 @@ export async function POST(request: Request) {
             images: images || [],
             category,
             tags: tags || [],
-            author: user._id,
+            authorId: user.id,
+            author: {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                profileImage: user.profileImage,
+            },
             status: isAdmin ? 'published' : 'pending',
-            publishedAt: isAdmin ? new Date() : undefined,
+            publishedAt: isAdmin ? new Date().toISOString() : undefined,
         });
 
         return NextResponse.json({ blog, slug: blog.slug }, { status: 201 });

@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/db';
-import Blog from '@/lib/models/Blog';
+import { findBlogById, updateBlog, deleteBlog } from '@/lib/models/Blog';
 import { requireAdmin } from '@/lib/auth';
 
 export async function PUT(
@@ -9,32 +8,33 @@ export async function PUT(
 ) {
     try {
         await requireAdmin();
-        await connectDB();
         const { id } = await params;
 
         const body = await request.json();
         const { status, rejectionReason } = body;
 
-        const blog = await Blog.findById(id);
+        const blog = await findBlogById(id);
         if (!blog) {
             return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
         }
 
+        const updates: Record<string, unknown> = {};
+
         if (status === 'published') {
-            blog.status = 'published';
-            blog.publishedAt = blog.publishedAt || new Date();
-            blog.rejectionReason = undefined;
+            updates.status = 'published';
+            updates.publishedAt = blog.publishedAt || new Date().toISOString();
+            updates.rejectionReason = null;
         } else if (status === 'rejected') {
-            blog.status = 'rejected';
-            blog.rejectionReason = rejectionReason || 'Does not meet publishing criteria';
+            updates.status = 'rejected';
+            updates.rejectionReason = rejectionReason || 'Does not meet publishing criteria';
         } else if (status === 'hidden') {
-            blog.status = 'hidden';
+            updates.status = 'hidden';
         } else if (status === 'pending') {
-            blog.status = 'pending';
+            updates.status = 'pending';
         }
 
-        await blog.save();
-        return NextResponse.json({ blog });
+        await updateBlog(id, updates);
+        return NextResponse.json({ blog: { ...blog, ...updates } });
     } catch (error: unknown) {
         const message = error instanceof Error ? error.message : 'Failed';
         if (message === 'Unauthorized' || message === 'Forbidden') {
@@ -50,10 +50,9 @@ export async function DELETE(
 ) {
     try {
         await requireAdmin();
-        await connectDB();
         const { id } = await params;
 
-        await Blog.findByIdAndDelete(id);
+        await deleteBlog(id);
         return NextResponse.json({ message: 'Blog deleted' });
     } catch (error: unknown) {
         const message = error instanceof Error ? error.message : 'Failed';

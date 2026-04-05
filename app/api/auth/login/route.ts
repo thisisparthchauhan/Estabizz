@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { connectDB } from '@/lib/db';
-import User from '@/lib/models/User';
+import { findUserByEmailOrMobile } from '@/lib/models/User';
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
@@ -17,15 +16,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        await connectDB();
-
-        // Find by email or mobile
-        const user = await User.findOne({
-            $or: [
-                { email: identifier.toLowerCase().trim() },
-                { mobile: identifier.trim() },
-            ],
-        });
+        const user = await findUserByEmailOrMobile(identifier.toLowerCase().trim());
 
         if (!user) {
             return NextResponse.json(
@@ -44,10 +35,8 @@ export async function POST(req: NextRequest) {
 
         const token = jwt.sign(
             {
-                id: user._id.toString(),
+                userId: user.id,
                 email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
             },
             JWT_SECRET || 'estabizz-secret-key',
             { expiresIn: '7d' }
@@ -66,7 +55,7 @@ export async function POST(req: NextRequest) {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
-            maxAge: 60 * 60 * 24 * 7, // 7 days
+            maxAge: 60 * 60 * 24 * 7,
             path: '/',
         });
 

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import { connectDB } from '@/lib/db';
-import User from '@/lib/models/User';
+import { createUser, findUserByEmail } from '@/lib/models/User';
 
 export async function POST(req: NextRequest) {
     try {
@@ -21,9 +20,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        await connectDB();
-
-        const existing = await User.findOne({ email: email.toLowerCase() });
+        const existing = await findUserByEmail(email);
         if (existing) {
             return NextResponse.json(
                 { error: 'An account with this email already exists.' },
@@ -33,12 +30,13 @@ export async function POST(req: NextRequest) {
 
         const hashed = await bcrypt.hash(password, 12);
 
-        await User.create({
+        await createUser({
             firstName: firstName.trim(),
             lastName: lastName.trim(),
             email: email.toLowerCase().trim(),
             mobile: mobile?.trim() || undefined,
             password: hashed,
+            role: 'user',
         });
 
         return NextResponse.json(

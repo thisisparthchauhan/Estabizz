@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/db';
-import Blog from '@/lib/models/Blog';
+import { findBlogBySlug, updateBlog, deleteBlog } from '@/lib/models/Blog';
+import { findUserById } from '@/lib/models/User';
 import { getCurrentUser } from '@/lib/auth';
 
 export async function GET(
@@ -8,26 +8,35 @@ export async function GET(
     { params }: { params: Promise<{ slug: string }> }
 ) {
     try {
-        await connectDB();
         const { slug } = await params;
-
-        const blog = await Blog.findOne({ slug })
-            .populate('author', 'firstName lastName profileImage')
-            .lean();
+        const blog = await findBlogBySlug(slug);
 
         if (!blog) {
             return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
         }
 
+        // Populate author
+        if (!blog.author) {
+            const author = await findUserById(blog.authorId);
+            if (author) {
+                blog.author = {
+                    firstName: author.firstName,
+                    lastName: author.lastName,
+                    profileImage: author.profileImage,
+                };
+            }
+        }
+
         const user = await getCurrentUser();
-        const isAuthor = user && blog.author._id.toString() === user._id.toString();
+        const isAuthor = user && blog.authorId === user.id;
         const isAdmin = user && user.role === 'admin';
 
         if (blog.status !== 'published' && !isAuthor && !isAdmin) {
             return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
         }
 
-        await Blog.updateOne({ slug }, { $inc: { views: 1 } });
+        // Increment views
+        await updateBlog(blog.id, { views: (blog.views || 0) + 1 });
 
         return NextResponse.json({ blog });
     } catch {
@@ -45,15 +54,14 @@ export async function PUT(
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        await connectDB();
         const { slug } = await params;
-        const blog = await Blog.findOne({ slug });
+        const blog = await findBlogBySlug(slug);
 
         if (!blog) {
             return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
         }
 
-        const isAuthor = blog.author.toString() === user._id.toString();
+        const isAuthor = blog.authorId === user.id;
         const isAdmin = user.role === 'admin';
 
         if (!isAuthor && !isAdmin) {
@@ -61,23 +69,23 @@ export async function PUT(
         }
 
         const body = await request.json();
-        const { title, content, excerpt, coverImage, images, category, tags } = body;
+        const updates: Record<string, unknown> = {};
 
-        if (title) blog.title = title;
-        if (content) blog.content = content;
-        if (excerpt) blog.excerpt = excerpt;
-        if (coverImage) blog.coverImage = coverImage;
-        if (images) blog.images = images;
-        if (category) blog.category = category;
-        if (tags) blog.tags = tags;
+        if (body.title) updates.title = body.title;
+        if (body.content) updates.content = body.content;
+        if (body.excerpt) updates.excerpt = body.excerpt;
+        if (body.coverImage) updates.coverImage = body.coverImage;
+        if (body.images) updates.images = body.images;
+        if (body.category) updates.category = body.category;
+        if (body.tags) updates.tags = body.tags;
 
         if (isAuthor && !isAdmin && blog.status === 'rejected') {
-            blog.status = 'pending';
-            blog.rejectionReason = undefined;
+            updates.status = 'pending';
+            updates.rejectionReason = null;
         }
 
-        await blog.save();
-        return NextResponse.json({ blog });
+        await updateBlog(blog.id, updates);
+        return NextResponse.json({ blog: { ...blog, ...updates } });
     } catch (error: unknown) {
         const message = error instanceof Error ? error.message : 'Failed to update blog';
         return NextResponse.json({ error: message }, { status: 500 });
@@ -94,22 +102,21 @@ export async function DELETE(
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        await connectDB();
         const { slug } = await params;
-        const blog = await Blog.findOne({ slug });
+        const blog = await findBlogBySlug(slug);
 
         if (!blog) {
             return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
         }
 
-        const isAuthor = blog.author.toString() === user._id.toString();
+        const isAuthor = blog.authorId === user.id;
         const isAdmin = user.role === 'admin';
 
         if (!isAuthor && !isAdmin) {
             return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
         }
 
-        await Blog.deleteOne({ slug });
+        await deleteBlog(blog.id);
         return NextResponse.json({ message: 'Blog deleted' });
     } catch {
         return NextResponse.json({ error: 'Failed to delete blog' }, { status: 500 });

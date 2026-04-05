@@ -1,19 +1,30 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/db';
-import Blog from '@/lib/models/Blog';
+import { getFeaturedBlogs, clearAllFeatured, updateBlog } from '@/lib/models/Blog';
+import { findUserById } from '@/lib/models/User';
 import { requireAdmin } from '@/lib/auth';
 
 export async function GET() {
     try {
-        await connectDB();
+        const featured = await getFeaturedBlogs();
 
-        const featured = await Blog.find({ featured: true, status: 'published' })
-            .populate('author', 'firstName lastName profileImage')
-            .sort({ featuredOrder: 1 })
-            .limit(4)
-            .lean();
+        // Populate authors
+        const blogsWithAuthors = await Promise.all(
+            featured.map(async (blog) => {
+                if (!blog.author) {
+                    const author = await findUserById(blog.authorId);
+                    if (author) {
+                        blog.author = {
+                            firstName: author.firstName,
+                            lastName: author.lastName,
+                            profileImage: author.profileImage,
+                        };
+                    }
+                }
+                return blog;
+            })
+        );
 
-        return NextResponse.json({ blogs: featured });
+        return NextResponse.json({ blogs: blogsWithAuthors });
     } catch {
         return NextResponse.json({ error: 'Failed to fetch featured blogs' }, { status: 500 });
     }
@@ -22,7 +33,6 @@ export async function GET() {
 export async function PUT(request: Request) {
     try {
         await requireAdmin();
-        await connectDB();
 
         const { blogIds } = await request.json();
 
@@ -33,10 +43,10 @@ export async function PUT(request: Request) {
             );
         }
 
-        await Blog.updateMany({}, { featured: false, featuredOrder: undefined });
+        await clearAllFeatured();
 
         for (let i = 0; i < blogIds.length; i++) {
-            await Blog.findByIdAndUpdate(blogIds[i], {
+            await updateBlog(blogIds[i], {
                 featured: true,
                 featuredOrder: i + 1,
             });

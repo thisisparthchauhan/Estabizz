@@ -1,6 +1,7 @@
-import mongoose, { Schema, Document, Model, Types } from 'mongoose';
+import { getFirebaseAdmin } from '../firebase';
 
-export interface IBlog extends Document {
+export interface IBlog {
+    id: string;
     title: string;
     slug: string;
     content: string;
@@ -9,52 +10,146 @@ export interface IBlog extends Document {
     images: string[];
     category: string;
     tags: string[];
-    author: Types.ObjectId;
+    authorId: string;
+    author?: {
+        firstName: string;
+        lastName: string;
+        profileImage?: string;
+        email?: string;
+    };
     status: 'draft' | 'pending' | 'published' | 'rejected' | 'hidden';
     rejectionReason?: string;
     featured: boolean;
     featuredOrder?: number;
-    likes: Types.ObjectId[];
+    likes: string[];
     likeCount: number;
     views: number;
-    publishedAt?: Date;
-    createdAt: Date;
-    updatedAt: Date;
+    publishedAt?: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
-const BlogSchema = new Schema<IBlog>(
-    {
-        title: { type: String, required: true, trim: true },
-        slug: { type: String, required: true, unique: true, lowercase: true },
-        content: { type: String, required: true },
-        excerpt: { type: String, required: true, maxlength: 300 },
-        coverImage: { type: String, required: true },
-        images: [{ type: String }],
-        category: { type: String, required: true, trim: true },
-        tags: [{ type: String, trim: true }],
-        author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-        status: {
-            type: String,
-            enum: ['draft', 'pending', 'published', 'rejected', 'hidden'],
-            default: 'pending',
-        },
-        rejectionReason: { type: String },
-        featured: { type: Boolean, default: false },
-        featuredOrder: { type: Number },
-        likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-        likeCount: { type: Number, default: 0 },
-        views: { type: Number, default: 0 },
-        publishedAt: { type: Date },
-    },
-    { timestamps: true }
-);
+function blogsCollection() {
+    return getFirebaseAdmin().collection('blogs');
+}
 
-BlogSchema.index({ status: 1, publishedAt: -1 });
-BlogSchema.index({ author: 1, status: 1 });
-BlogSchema.index({ featured: 1, featuredOrder: 1 });
-BlogSchema.index({ category: 1 });
+export async function createBlog(
+    data: Omit<IBlog, 'id' | 'createdAt' | 'updatedAt' | 'likes' | 'likeCount' | 'views' | 'featured'>
+): Promise<IBlog> {
+    const now = new Date().toISOString();
+    const blogData = {
+        ...data,
+        likes: [],
+        likeCount: 0,
+        views: 0,
+        featured: false,
+        createdAt: now,
+        updatedAt: now,
+    };
+    const docRef = await blogsCollection().add(blogData);
+    return { id: docRef.id, ...blogData };
+}
 
-const Blog: Model<IBlog> =
-    mongoose.models.Blog || mongoose.model<IBlog>('Blog', BlogSchema);
+export async function findBlogBySlug(slug: string): Promise<IBlog | null> {
+    const snapshot = await blogsCollection()
+        .where('slug', '==', slug)
+        .limit(1)
+        .get();
+    if (snapshot.empty) return null;
+    const doc = snapshot.docs[0];
+    return { id: doc.id, ...doc.data() } as IBlog;
+}
 
-export default Blog;
+export async function findBlogById(id: string): Promise<IBlog | null> {
+    const doc = await blogsCollection().doc(id).get();
+    if (!doc.exists) return null;
+    return { id: doc.id, ...doc.data() } as IBlog;
+}
+
+export async function updateBlog(id: string, data: Partial<IBlog>): Promise<void> {
+    await blogsCollection().doc(id).update({
+        ...data,
+        updatedAt: new Date().toISOString(),
+    });
+}
+
+export async function deleteBlog(id: string): Promise<void> {
+    await blogsCollection().doc(id).delete();
+}
+
+export async function listBlogs(options: {
+    status?: string;
+    category?: string;
+    tag?: string;
+    authorId?: string;
+    page?: number;
+    limit?: number;
+    orderBy?: string;
+    orderDir?: 'asc' | 'desc';
+}): Promise<{ blogs: IBlog[]; total: number }> {
+    const { status, category, authorId, page = 1, limit = 12 } = options;
+
+    let query: FirebaseFirestore.Query = blogsCollection();
+
+    if (status) query = query.where('status', '==', status);
+    if (category) query = query.where('category', '==', category);
+    if (authorId) query = query.where('authorId', '==', authorId);
+
+    query = query.orderBy('createdAt', 'desc');
+
+    // Get total count
+    const countSnapshot = await query.count().get();
+    const total = countSnapshot.data().count;
+
+    // Get paginated results
+    const offset = (page - 1) * limit;
+    const snapshot = await query.offset(offset).limit(limit).get();
+
+    const blogs = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    })) as IBlog[];
+
+    return { blogs, total };
+}
+
+export async function getFeaturedBlogs(): Promise<IBlog[]> {
+    const snapshot = await blogsCollection()
+        .where('featured', '==', true)
+        .where('status', '==', 'published')
+        .orderBy('featuredOrder', 'asc')
+        .limit(4)
+        .get();
+
+    return snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    })) as IBlog[];
+}
+
+export async function clearAllFeatured(): Promise<void> {
+    const snapshot = await blogsCollection()
+        .where('featured', '==', true)
+        .get();
+
+    const batch = getFirebaseAdmin().batch();
+    snapshot.docs.forEach((doc) => {
+        batch.update(doc.ref, { featured: false, featuredOrder: null });
+    });
+    await batch.commit();
+}
+
+export async function getStatusCounts(): Promise<Record<string, number>> {
+    const statuses = ['pending', 'published', 'rejected', 'hidden'];
+    const counts: Record<string, number> = {};
+
+    for (const status of statuses) {
+        const snapshot = await blogsCollection()
+            .where('status', '==', status)
+            .count()
+            .get();
+        counts[status] = snapshot.data().count;
+    }
+
+    return counts;
+}

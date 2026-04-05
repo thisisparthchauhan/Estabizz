@@ -1,6 +1,7 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import { getFirebaseAdmin } from '../firebase';
 
-export interface IUser extends Document {
+export interface IUser {
+    id: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -8,29 +9,60 @@ export interface IUser extends Document {
     password: string;
     role: 'user' | 'admin';
     profileImage?: string;
-    createdAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }
 
-const UserSchema = new Schema<IUser>(
-    {
-        firstName: { type: String, required: true, trim: true },
-        lastName: { type: String, required: true, trim: true },
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-            lowercase: true,
-            trim: true,
-        },
-        mobile: { type: String, trim: true },
-        password: { type: String, required: true },
-        role: { type: String, enum: ['user', 'admin'], default: 'user' },
-        profileImage: { type: String },
-    },
-    { timestamps: true }
-);
+export type UserPublic = Omit<IUser, 'password'>;
 
-const User: Model<IUser> =
-    mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
+function usersCollection() {
+    return getFirebaseAdmin().collection('users');
+}
 
-export default User;
+export async function createUser(data: Omit<IUser, 'id' | 'createdAt' | 'updatedAt'>): Promise<IUser> {
+    const now = new Date().toISOString();
+    const docRef = await usersCollection().add({
+        ...data,
+        createdAt: now,
+        updatedAt: now,
+    });
+    return { id: docRef.id, ...data, createdAt: now, updatedAt: now };
+}
+
+export async function findUserByEmail(email: string): Promise<IUser | null> {
+    const snapshot = await usersCollection()
+        .where('email', '==', email.toLowerCase())
+        .limit(1)
+        .get();
+    if (snapshot.empty) return null;
+    const doc = snapshot.docs[0];
+    return { id: doc.id, ...doc.data() } as IUser;
+}
+
+export async function findUserByEmailOrMobile(identifier: string): Promise<IUser | null> {
+    // Try email first
+    let user = await findUserByEmail(identifier);
+    if (user) return user;
+
+    // Try mobile
+    const snapshot = await usersCollection()
+        .where('mobile', '==', identifier)
+        .limit(1)
+        .get();
+    if (snapshot.empty) return null;
+    const doc = snapshot.docs[0];
+    return { id: doc.id, ...doc.data() } as IUser;
+}
+
+export async function findUserById(id: string): Promise<IUser | null> {
+    const doc = await usersCollection().doc(id).get();
+    if (!doc.exists) return null;
+    return { id: doc.id, ...doc.data() } as IUser;
+}
+
+export async function updateUser(id: string, data: Partial<IUser>): Promise<void> {
+    await usersCollection().doc(id).update({
+        ...data,
+        updatedAt: new Date().toISOString(),
+    });
+}

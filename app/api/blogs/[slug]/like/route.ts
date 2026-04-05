@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/lib/db';
-import Blog from '@/lib/models/Blog';
+import { findBlogBySlug, updateBlog } from '@/lib/models/Blog';
 import { requireAuth } from '@/lib/auth';
 
 export async function POST(
@@ -9,34 +8,32 @@ export async function POST(
 ) {
     try {
         const user = await requireAuth();
-        await connectDB();
         const { slug } = await params;
 
-        const blog = await Blog.findOne({ slug, status: 'published' });
-        if (!blog) {
+        const blog = await findBlogBySlug(slug);
+        if (!blog || blog.status !== 'published') {
             return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
         }
 
-        const userId = user._id;
-        const hasLiked = blog.likes.some(
-            (id) => id.toString() === userId.toString()
-        );
+        const userId = user.id;
+        const likes = blog.likes || [];
+        const hasLiked = likes.includes(userId);
 
+        let newLikes: string[];
         if (hasLiked) {
-            blog.likes = blog.likes.filter(
-                (id) => id.toString() !== userId.toString()
-            );
-            blog.likeCount = Math.max(0, blog.likeCount - 1);
+            newLikes = likes.filter((id) => id !== userId);
         } else {
-            blog.likes.push(userId);
-            blog.likeCount = blog.likes.length;
+            newLikes = [...likes, userId];
         }
 
-        await blog.save();
+        await updateBlog(blog.id, {
+            likes: newLikes,
+            likeCount: newLikes.length,
+        });
 
         return NextResponse.json({
             liked: !hasLiked,
-            likeCount: blog.likeCount,
+            likeCount: newLikes.length,
         });
     } catch (error: unknown) {
         const message = error instanceof Error ? error.message : 'Failed';

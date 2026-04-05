@@ -37,8 +37,7 @@ export async function createBlog(
     data: Omit<IBlog, 'id' | 'createdAt' | 'updatedAt' | 'likes' | 'likeCount' | 'views' | 'featured'>
 ): Promise<IBlog> {
     const now = new Date().toISOString();
-    const blogData = {
-        ...data,
+    const cleanData: Record<string, unknown> = {
         likes: [],
         likeCount: 0,
         views: 0,
@@ -46,8 +45,12 @@ export async function createBlog(
         createdAt: now,
         updatedAt: now,
     };
+    for (const [key, value] of Object.entries(data)) {
+        if (value !== undefined) cleanData[key] = value;
+    }
+    const blogData = cleanData as IBlog & Record<string, unknown>;
     const docRef = await blogsCollection().add(blogData);
-    return { id: docRef.id, ...blogData };
+    return { ...blogData, id: docRef.id } as IBlog;
 }
 
 export async function findBlogBySlug(slug: string): Promise<IBlog | null> {

@@ -21,11 +21,12 @@ function usersCollection() {
 
 export async function createUser(data: Omit<IUser, 'id' | 'createdAt' | 'updatedAt'>): Promise<IUser> {
     const now = new Date().toISOString();
-    const docRef = await usersCollection().add({
-        ...data,
-        createdAt: now,
-        updatedAt: now,
-    });
+    // Remove undefined values — Firestore doesn't allow them
+    const cleanData: Record<string, unknown> = { createdAt: now, updatedAt: now };
+    for (const [key, value] of Object.entries(data)) {
+        if (value !== undefined) cleanData[key] = value;
+    }
+    const docRef = await usersCollection().add(cleanData);
     return { id: docRef.id, ...data, createdAt: now, updatedAt: now };
 }
 

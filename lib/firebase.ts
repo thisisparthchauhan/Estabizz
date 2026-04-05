@@ -6,9 +6,9 @@ let db: Firestore;
 
 function getFirebaseAdmin() {
     if (!getApps().length) {
-        const projectId = process.env.FIREBASE_PROJECT_ID;
-        const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-        const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+        const projectId = process.env.FIREBASE_PROJECT_ID?.trim();
+        const clientEmail = process.env.FIREBASE_CLIENT_EMAIL?.trim();
+        const privateKey = process.env.FIREBASE_PRIVATE_KEY?.trim().replace(/\\n/g, '\n');
 
         if (!projectId || !clientEmail || !privateKey) {
             throw new Error(

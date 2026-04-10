@@ -67,7 +67,7 @@ export default function HeroSection() {
                     {/* Top Badge */}
                     <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-4 py-2 border border-blue-200 shadow-sm mb-6 rounded-full w-fit animate-[fadeDown_0.5s_ease_forwards]">
                         <span className="text-[14px]">🏆</span>
-                        <span className="text-[#0096D6] text-[13px] font-bold tracking-wide">India's #1 Fintech Compliance Platform</span>
+                        <span className="text-[#0096D6] text-[13px] font-bold tracking-wide">Trusted by 500+ Licensed Businesses Across India</span>
                     </div>
 
                     {/* H1 Headline */}

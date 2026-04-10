@@ -5,6 +5,8 @@ const testimonials = [
     {
         name: "Rahul M.",
         role: "Founder, FinTech Startup",
+        company: "NovaPay Technologies",
+        date: "March 2025",
         text: "Securing our NBFC license felt like an impossible maze until we partnered with Estabizz. Their team didn't just file papers; they structured our entire compliance framework. We got our approval 2 months ahead of schedule.",
         rating: 5,
         avatar: "RM"
@@ -12,6 +14,8 @@ const testimonials = [
     {
         name: "Priya S.",
         role: "CFO, Investment Firm",
+        company: "Vantage Capital Advisors",
+        date: "August 2025",
         text: "The level of clarity and accountability Estabizz brings is unmatched. They handled our SEBI AIF registration with absolute precision. Their ex-regulator insights saved us from multiple operational bottlenecks.",
         rating: 5,
         avatar: "PS"
@@ -19,30 +23,20 @@ const testimonials = [
     {
         name: "Amit D.",
         role: "CEO, Insurance Aggregator",
+        company: "InsureStack India",
+        date: "November 2025",
         text: "IRDAI compliance is complex, but Estabizz made it seamless. From the initial net-worth structuring to the final platform approval, their end-to-end ownership gave us complete peace of mind. Highly recommended.",
-        rating: 5,
+        rating: 4,
         avatar: "AD"
     },
     {
         name: "Siddharth V.",
         role: "Director, Payment Gateway",
+        company: "QuickSettle Payments",
+        date: "January 2026",
         text: "Applying for an RBI Payment Aggregator license is daunting. Estabizz guided us through the rigorous data localization and security audits seamlessly. Their portal is a game-changer for tracking progress.",
         rating: 5,
         avatar: "SV"
-    },
-    {
-        name: "Neha K.",
-        role: "Operations Head, GIFT City Fund",
-        text: "Setting up our operations in IFSCA GIFT City required a deep understanding of international financial regulations. The team at Estabizz delivered flawlessly. We were operational in record time.",
-        rating: 5,
-        avatar: "NK"
-    },
-    {
-        name: "Vikram R.",
-        role: "Managing Director, Lending Platform",
-        text: "We migrated our entire ongoing compliance management to Estabizz. The automated alerts, structured reporting, and dedicated advisory have completely removed our risk of non-compliance. A true partner.",
-        rating: 5,
-        avatar: "VR"
     }
 ];
 
@@ -104,8 +98,8 @@ export default function Testimonials() {
 
                                 {/* Star Rating */}
                                 <div className="flex gap-1 mb-5">
-                                    {[...Array(testimonial.rating)].map((_, i) => (
-                                        <span key={i} className="text-[#F59E0B] text-[16px]">★</span>
+                                    {[...Array(5)].map((_, i) => (
+                                        <span key={i} className={`text-[16px] ${i < testimonial.rating ? 'text-[#F59E0B]' : 'text-gray-200'}`}>★</span>
                                     ))}
                                 </div>
 
@@ -125,6 +119,12 @@ export default function Testimonials() {
                                         </div>
                                         <div className="text-[12px] font-semibold text-[#0096D6]">
                                             {testimonial.role}
+                                        </div>
+                                        <div className="text-[11px] text-[#64748b] font-medium">
+                                            {testimonial.company}
+                                        </div>
+                                        <div className="text-[10px] text-[#94a3b8] mt-0.5">
+                                            {testimonial.date}
                                         </div>
                                     </div>
                                 </div>

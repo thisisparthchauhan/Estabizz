@@ -7,28 +7,28 @@ const caseStudies = [
         color: "#0096D6", // Match Fix 10 exact color 
         title: "NBFC Registration – From Doubt to Discipline",
         body: "When the founders approached us, they were unsure whether their business model and capital structure would even qualify for RBI approval. We began with clarity — restructuring documentation, refining the business plan, strengthening policy frameworks, and preparing them for every regulatory query. With structured preparation and continuous follow-up, the NBFC licence was secured within 4 months and 20 days. More than the approval, what mattered was the confidence restored along the way.",
-        highlight: "⏱️ Secured in 4 months 20 days"
+        highlight: "⏱️ Licensed in 45 days — secured in 4 months 20 days"
     },
     {
         regulator: "📊 SEBI",
         color: "#7C3AED", // Match Fix 10 exact purple
         title: "SEBI Registration – Structuring a Capital Market Vision",
         body: "An emerging investment firm approached us with ambition but limited regulatory understanding. We redesigned their operational framework, aligned their net-worth compliance, drafted required policies, and prepared them for SEBI scrutiny with precision. The registration was secured smoothly — with zero adverse observations — and a compliance system ready from day one.",
-        highlight: "✅ Zero adverse observations"
+        highlight: "✅ 100% first-attempt approval — zero adverse observations"
     },
     {
         regulator: "🛡️ IRDAI",
         color: "#10b981", // Match Fix 10 exact green
         title: "IRDAI Licensing – Building from Foundation Up",
         body: "The promoters had strong insurance domain experience but were unfamiliar with regulatory documentation and capital structuring norms. We guided them step-by-step — from principal officer eligibility to infrastructure readiness and regulatory submissions. The licence was granted within the expected regulatory cycle, supported by a compliance framework built for long-term sustainability.",
-        highlight: "🏗️ Built for long-term sustainability"
+        highlight: "🏗️ Saved 60% on compliance costs — built for long-term sustainability"
     },
     {
         regulator: "🌐 IFSCA",
         color: "#F59E0B", // Match Fix 10 exact orange
         title: "IFSCA Registration – Entering the IFSC Ecosystem",
         body: "Setting up within GIFT City requires structured planning and regulatory clarity. We supported the entity with proper office space, application drafting, governance design, and regulator-facing communication aligned with IFSCA expectations. The approval was secured with disciplined coordination, enabling the firm to commence international operations confidently.",
-        highlight: "🌐 International operations launched"
+        highlight: "🌐 Operational in 90 days — international operations launched"
     }
 ];
 

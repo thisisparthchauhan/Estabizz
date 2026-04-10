@@ -71,10 +71,10 @@ export default function Footer() {
                         <div className="flex gap-3">
                             {[
                                 { icon: "in", label: "LinkedIn", href: "https://linkedin.com/company/estabizz" },
-                                { icon: "𝕏", label: "Twitter", href: "https://twitter.com/estabizz" },
-                                { icon: "f", label: "Facebook", href: "https://facebook.com/estabizz" },
+                                { icon: "X", label: "Twitter", href: "https://twitter.com/estabizz" },
+                                { icon: "FB", label: "Facebook", href: "https://facebook.com/estabizz" },
                                 { icon: "▶", label: "YouTube", href: "https://youtube.com/@estabizz" },
-                                { icon: "📷", label: "Instagram", href: "https://instagram.com/estabizz" },
+                                { icon: "IG", label: "Instagram", href: "https://instagram.com/estabizz" },
                             ].map((s) => (
                                 <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" title={s.label}
                                     className="w-9 h-9 rounded-full bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[13px] text-gray-400 hover:bg-[#0096D6] hover:text-white hover:border-[#0096D6] transition-all">
@@ -109,7 +109,7 @@ export default function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] text-gray-500">
-                    <p>© 2014–2025 Estabizz Fintech Pvt. Ltd. All rights reserved.</p>
+                    <p>© 2014–2026 Estabizz Fintech Pvt. Ltd. All rights reserved.</p>
                     <div className="flex flex-wrap gap-5">
                         <Link href="/legal/privacy-policy" className="hover:text-gray-300 transition-colors">Privacy Policy</Link>
                         <Link href="/legal/terms-conditions" className="hover:text-gray-300 transition-colors">Terms of Service</Link>

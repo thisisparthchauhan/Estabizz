@@ -1,15 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
+// Removed unused imports
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/home/HeroSection";
 import TrustedBy from "@/components/home/TrustedBy";
 import SolutionsSection from "@/components/home/SolutionsSection";
-import WhyChooseUs from "@/components/home/WhyChooseUs";
 import RegulatoryServices from "@/components/home/RegulatorySevices";
 import ProcessSection from "@/components/home/ProcessSection";
 import CaseStudies from "@/components/home/CaseStudies";
-import CompliancePortal from "@/components/home/CompliancePortal";
 import Testimonials from "@/components/home/Testimonials";
 import FinalCTA from "@/components/home/FinalCTA";
 import StatsSection from "@/components/home/StatsSection";
@@ -52,14 +50,12 @@ export default function Home() {
 
             <main>
                 <HeroSection />
-                <StatsSection />
                 <TrustedBy />
-                <SolutionsSection />
-                <WhyChooseUs />
+                <StatsSection />
                 <RegulatoryServices />
+                <SolutionsSection />
                 <ProcessSection />
                 <CaseStudies />
-                <CompliancePortal />
                 <Testimonials />
                 <FeaturedBlogs />
                 <FinalCTA />

@@ -71,7 +71,7 @@ export default function PageClient() {
             finalCtaDescription="Book a free consultation with our regulatory experts. We guide you through every step of the process."
         >
             <h2 id="introduction">Introduction</h2>
-            <p>ntermediaries between insurers and customers in India. From a compliance perspective, this license ensures transparency, fair advisory, and protection of policyholder interests under the supervision o</p>
+            <p>The IRDAI Insurance Broker License authorizes entities to act as intermediaries between insurers and customers in India. From a compliance perspective, this license ensures transparency, fair advisory, and protection of policyholder interests under the supervision of the Insurance Regulatory and Development Authority of India (IRDAI).</p>
 
             <h2 id="what-is">What is Irda Insurance Broker License</h2>
             <p>This page provides comprehensive information about IRDAI Insurance Broker License including regulatory framework, eligibility criteria, documentation requirements, and step-by-step process.</p>

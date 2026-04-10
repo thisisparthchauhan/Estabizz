@@ -47,14 +47,7 @@ export default function ProcessSection() {
         return () => observer.disconnect();
     }, []);
 
-    // Simple auto-advance for visual flair
-    useEffect(() => {
-        if (!isVisible) return;
-        const interval = setInterval(() => {
-            setActiveStep((prev) => (prev + 1) % steps.length);
-        }, 4000);
-        return () => clearInterval(interval);
-    }, [isVisible]);
+    // Auto-advance removed — manual hover/click only
 
     return (
         <section ref={sectionRef} className="py-24 bg-transparent relative z-10 overflow-hidden border-y border-blue-50/50">

@@ -3,470 +3,841 @@ import ServicePageLayout from "@/components/templates/ServicePageLayout";
 
 export default function PageClient() {
     const sections = [
-        { id: "introduction", title: "1. Introduction" },
-        { id: "what-is", title: "2. What is NBFC Account Aggregator License" },
-        { id: "regulatory-framework", title: "3. Regulatory Framework" },
-        { id: "who-needs", title: "4. Who Needs This License" },
-        { id: "eligibility", title: "5. Eligibility Criteria" },
-        { id: "documents", title: "6. Documents Required" },
-        { id: "process", title: "7. Registration Process" },
-        { id: "fees", title: "8. Fees Structure" },
-        { id: "timeline", title: "9. Timeline" },
-        { id: "compliance", title: "10. Compliance Requirements" },
-        { id: "faq", title: "11. FAQs" },
+        { id: "introduction", title: "Introduction" },
+        { id: "what-is-nbfc-aa", title: "What is NBFC-AA" },
+        { id: "regulatory-framework", title: "Regulatory Framework" },
+        { id: "aa-ecosystem-participants", title: "AA Ecosystem Participants" },
+        { id: "who-needs", title: "Who Needs This License" },
+        { id: "eligibility", title: "Eligibility Criteria" },
+        { id: "documents", title: "Documents Required" },
+        { id: "process", title: "Registration Process" },
+        { id: "consent-architecture", title: "Consent Architecture" },
+        { id: "technology-architecture", title: "Technology Architecture" },
+        { id: "it-governance-cybersecurity", title: "IT Governance &amp; Cybersecurity" },
+        { id: "nbfc-aa-vs-traditional-nbfc", title: "NBFC-AA vs Traditional NBFC" },
+        { id: "revenue-model", title: "Revenue Model" },
+        { id: "fees", title: "Fees &amp; Costs" },
+        { id: "timeline", title: "Timeline" },
+        { id: "post-registration-compliance", title: "Post-Registration Compliance" },
+        { id: "faqs", title: "FAQs" },
     ];
 
-    const quickFacts = [
-        { label: "Regulator", value: "RBI" },
-        { label: "Entity Type", value: "NBFC-AA" },
-        { label: "Min Net Worth", value: "Rs. 2 Crore" },
-        { label: "Governing Law", value: "RBI Act, 1934" },
-        { label: "Timeline", value: "6-9 months" },
+    const faqs: { q: string; a: string }[] = [
+        {
+            q: "What is an NBFC Account Aggregator?",
+            a: "An NBFC Account Aggregator (NBFC-AA) is a class of Non-Banking Financial Company registered with the Reserve Bank of India that facilitates the secure, consent-based sharing of financial data between Financial Information Providers (FIPs) and Financial Information Users (FIUs). It acts purely as a data conduit — not a financial intermediary.",
+        },
+        {
+            q: "Can an Account Aggregator store customer financial data?",
+            a: "No. An NBFC-AA is strictly prohibited from storing customer financial data. It operates as a transient, encrypted data pipe — data passes through the AA system only during the transmission process and is never retained or warehoused.",
+        },
+        {
+            q: "What is a Financial Information Provider (FIP)?",
+            a: "A Financial Information Provider (FIP) is an entity that holds customer financial data and is registered to share it via the AA framework. Examples include banks, NBFCs, mutual fund depositories, insurance companies, and pension fund managers.",
+        },
+        {
+            q: "What is a Financial Information User (FIU)?",
+            a: "A Financial Information User (FIU) is an entity that consumes customer financial data (with consent) through the AA ecosystem. Examples include lending platforms, wealth management applications, and fintech companies that use financial data for credit assessment or advisory services.",
+        },
+        {
+            q: "What is consent architecture in the AA framework?",
+            a: "Consent architecture refers to the technical and operational framework through which a customer explicitly authorises the sharing of their financial data. The consent must be time-bound, purpose-specific, revocable at any time, and fully auditable. A robust consent management system is central to RBI&apos;s evaluation of an AA application.",
+        },
+        {
+            q: "What is the minimum capital requirement for an NBFC-AA?",
+            a: "The minimum Net Owned Fund (NOF) required for an NBFC-AA registration is ₹2 crore. This must be maintained on a continuous basis. NOF is computed as paid-up equity capital plus free reserves minus accumulated losses and intangible assets.",
+        },
+        {
+            q: "Can an Account Aggregator lend money?",
+            a: "No. An NBFC-AA is a restricted category of NBFC that can only facilitate data sharing. It cannot undertake lending, accept deposits, or engage in any other financial intermediation activity. Its sole business is consented data facilitation.",
+        },
+        {
+            q: "What is the difference between an NBFC-AA and a traditional NBFC?",
+            a: "A traditional NBFC engages in financial intermediation — lending, leasing, investments — and earns interest income. An NBFC-AA only facilitates encrypted, consent-based data sharing between FIPs and FIUs. It cannot lend or store data, faces no direct credit risk, and is evaluated by RBI primarily on technology and consent architecture rather than capital adequacy.",
+        },
+        {
+            q: "What technology is required to operate as an NBFC-AA?",
+            a: "An NBFC-AA must have an API-based integration system, end-to-end encryption for all data in transit, a customer-facing consent dashboard, real-time authentication mechanisms, and comprehensive audit logs. RBI evaluates the architecture design itself — not just policy documents.",
+        },
+        {
+            q: "How does the revenue model of an NBFC-AA work?",
+            a: "An NBFC-AA earns revenue through service-based fees: API usage charges billed to FIUs per data request, subscription fees from financial institutions, and per-transaction data access charges. Importantly, an AA cannot monetise customer data directly — all income must be service-based.",
+        },
+        {
+            q: "What activities are prohibited for an NBFC-AA?",
+            a: "An NBFC-AA is prohibited from: storing customer financial data, using data for analytics without explicit consent, selling or monetising data, conducting lending or deposit-taking activities, performing unsolicited data requests, and undertaking any NBFC activity other than data facilitation.",
+        },
+        {
+            q: "How long does RBI approval for an NBFC-AA license take?",
+            a: "The overall timeline is approximately 4 to 9 months: 3 to 6 weeks for preparation (including technology setup), 3 to 6 months for RBI review and scrutiny of documents and IT architecture, and 1 to 2 months for final approval after compliance confirmation.",
+        },
+        {
+            q: "What is the COSMOS portal?",
+            a: "COSMOS (Company Submission Portal) is the RBI&apos;s online portal through which NBFC license applications, including NBFC-AA registrations, are submitted. Applicants must upload all required documents and the complete application package through this portal.",
+        },
+        {
+            q: "What is the consent flow in the AA ecosystem?",
+            a: "The consent flow is: (1) Customer initiates a consent request on the AA platform, (2) AA routes the consent request to the relevant FIP, (3) FIP shares the requested data only after consent is confirmed, (4) AA routes the encrypted data to the FIU, (5) Customer can revoke consent at any point, and (6) all steps are fully logged and auditable.",
+        },
+        {
+            q: "Can a fintech company become an AA or simply tie up with one?",
+            a: "A fintech company can either apply for its own NBFC-AA registration (if it meets all RBI eligibility criteria including ₹2 crore NOF and a robust technology framework) or partner with an existing licensed AA to access data-sharing services. The tie-up route is faster and avoids the licensing overhead for most fintechs.",
+        },
+        {
+            q: "What is the purpose of the FLA return for an NBFC-AA?",
+            a: "The Foreign Liabilities and Assets (FLA) return must be filed by NBFC-AAs that have received foreign direct investment or hold foreign assets. It is filed annually with the RBI through the FLAIR portal and is a statutory compliance requirement under FEMA.",
+        },
+        {
+            q: "What are the data breach obligations for an NBFC-AA?",
+            a: "In the event of a cybersecurity incident or data breach, an NBFC-AA must report the incident to both CERT-In (within the prescribed timeline under CERT-In directions) and to the RBI. The entity must also have a documented incident response framework in place as part of its IT governance policy.",
+        },
+        {
+            q: "Can an NBFC-AA carry out other NBFC activities?",
+            a: "No. An NBFC-AA is a restricted category and cannot engage in any other NBFC activity such as lending, hire-purchase, leasing, or asset finance. Its Certificate of Registration from RBI restricts it solely to account aggregation and data facilitation services.",
+        },
+        {
+            q: "What is the practical use of the AA framework in digital lending?",
+            a: "In digital lending, the AA framework enables lenders (FIUs) to access a borrower&apos;s verified financial data — bank statements, GST returns, investment portfolios — with the borrower&apos;s explicit consent, in real time. This replaces manual document submission, accelerates credit underwriting, and significantly reduces fraud risk.",
+        },
+        {
+            q: "Why should I engage a professional for the NBFC-AA license application?",
+            a: "The NBFC-AA license involves a complex blend of regulatory compliance, technology architecture evaluation, and document preparation. RBI scrutinises not only the documents but the actual IT system design. A compliance professional helps align your application with RBI&apos;s expectations, avoid common rejection reasons, and significantly improve the probability and speed of approval.",
+        },
     ];
 
     return (
         <ServicePageLayout
-            tags={[{ emoji: "🏛️", label: "RBI" }, { emoji: "🔗", label: "Account Aggregator" }, { emoji: "📋", label: "Complete Guide" }]}
-            breadcrumb={[{ label: "Home", href: "/" }, { label: "RBI Services", href: "/rbi" }, { label: "NBFC Account Aggregator License" }]}
-            title="NBFC Account Aggregator License: Complete RBI Registration Guide with Eligibility, Process & Compliance"
-            readTime="15 min read"
+            tags={[
+                { emoji: "🏦", label: "RBI" },
+                { emoji: "🏢", label: "NBFC" },
+                { emoji: "🔗", label: "Account Aggregator" },
+                { emoji: "📜", label: "AA License" },
+                { emoji: "📊", label: "Data Sharing" },
+                { emoji: "💡", label: "Fintech" },
+                { emoji: "🌐", label: "Open Banking" },
+            ]}
+            breadcrumb={[
+                { label: "Home", href: "/" },
+                { label: "RBI Services", href: "/rbi" },
+                { label: "NBFC Account Aggregator License" },
+            ]}
+            title="NBFC Account Aggregator License: Complete RBI Registration Guide"
+            readTime="18 min read"
             focusKeyword="NBFC Account Aggregator License"
             sections={sections}
-            ctaTitle="Need NBFC Account Aggregator License?"
-            ctaDescription="Expert RBI guidance for NBFC-AA registration, eligibility assessment, and compliance setup."
-            quickFacts={quickFacts}
-            relatedArticles={[
-                { href: "/rbi/nbfc-business-plan", category: "RBI Services", title: "NBFC Business Plan", description: "Complete guide to NBFC business plan preparation for RBI approval." },
-                { href: "/regulatory/psp-license-ifsca", category: "IFSCA", title: "PSP License IFSCA", description: "Payment services provider license guide for GIFT City." },
-                { href: "/rbi/lendtech-services", category: "RBI Services", title: "LendTech Services", description: "RBI guidelines for lending technology companies." }
+            ctaTitle="Get Expert Help with Your NBFC-AA License"
+            ctaDescription="The RBI scrutinises your technology architecture as closely as your documents. Our compliance experts help you build the right foundation — from consent management systems to the complete registration package — so your application stands on solid ground."
+            quickFacts={[
+                { label: "Regulator", value: "RBI" },
+                { label: "Min Net Owned Fund", value: "₹2 Crore" },
+                { label: "Application Fee", value: "NIL" },
+                { label: "Approval Timeline", value: "4–9 months" },
+                { label: "Core Principle", value: "Consent-based data only" },
+                { label: "Data Storage", value: "Prohibited" },
+                { label: "Expert Review", value: "✓ Verified" },
             ]}
-            finalCtaTitle="Ready to get your NBFC Account Aggregator License?"
-            finalCtaDescription="Book a consultation to evaluate your eligibility, prepare documentation, and navigate the RBI registration process end-to-end."
+            relatedArticles={[
+                { title: "LendTech Services", href: "/rbi/lendtech-services", category: "RBI", description: "Comprehensive guide to building RBI-compliant digital lending platforms in India." },
+                { title: "FEMA Compliance", href: "/fema/compliance-under-fema", category: "FEMA", description: "Complete guide to Foreign Exchange Management Act compliance obligations." },
+                { title: "Data Storage Policy", href: "/services/data-storage-policy", category: "Services", description: "Regulatory data localisation and storage obligations for fintech companies." },
+                { title: "Depository Participant Registration", href: "/sebi/depository-participant-sebi-registration", category: "SEBI", description: "How to become a SEBI-registered Depository Participant with NSDL or CDSL." },
+            ]}
+            finalCtaTitle="Start Your NBFC-AA Registration Journey"
+            finalCtaDescription="The Account Aggregator framework is reshaping India&apos;s financial data landscape. Whether you are building a new AA platform or integrating with the ecosystem, our team provides end-to-end support — from technology architecture review to RBI application submission."
         >
-            <h2 id="introduction">Introduction</h2>
-            <p>NBFC Account Aggregator License is a specialised registration granted by the Reserve Bank of India (RBI) to entities that provide financial data aggregation services on a consent-based framework. From a regulatory standpoint, the Account Aggregator (AA) ecosystem is one of the most transformative financial infrastructure initiatives in India, enabling seamless and secure sharing of financial data between regulated entities.</p>
-            <p>In today&apos;s data-driven financial ecosystem, the NBFC Account Aggregator framework allows individuals and businesses to share their financial information — held across banks, insurance companies, pension funds, and tax platforms — in a structured, consent-based, and digitally verifiable manner. The framework is governed entirely by the Reserve Bank of India and is built on the Data Empowerment and Protection Architecture (DEPA) model.</p>
-            <div className="info-box">
-                <h4>Key Insight</h4>
-                <p>An NBFC Account Aggregator does not access, store, or analyse customer data — it merely facilitates consent-based transfer of data from a Financial Information Provider (FIP) to a Financial Information User (FIU) in encrypted form.</p>
-            </div>
+            <section id="introduction">
+                <h2>Introduction to NBFC Account Aggregator License</h2>
+                <p>
+                    The NBFC Account Aggregator (NBFC-AA) is a specialised category of Non-Banking Financial Company
+                    registered with the Reserve Bank of India. An NBFC-AA is authorised to collect and share the
+                    financial data of customers securely, and exclusively on the basis of their explicit consent. It
+                    does not deal with money — only with the secure, structured flow of financial information.
+                </p>
+                <p>
+                    The AA framework is built on a <strong>data fiduciary model</strong>. The Account Aggregator acts
+                    only as a conduit — a regulated data pipe — between financial institutions that hold data and those
+                    that need it. It is not a data warehouse. It does not retain, analyse, or monetise customer data
+                    independently.
+                </p>
+                <div className="info-box">
+                    <strong>Critical Regulatory Principle:</strong> An NBFC-AA acts ONLY as a transient data conduit,
+                    never as a data warehouse. Data passes through the AA system in encrypted form and is never stored.
+                    This is the foundational principle of the entire framework.
+                </div>
+                <p>
+                    The growing importance of this framework cannot be overstated. The AA ecosystem is the backbone of
+                    open banking in India, enabling instant digital lending decisions, personal finance management (PFM)
+                    applications, insurance underwriting based on verified financial data, and wealth management
+                    platforms that require a holistic view of a customer&apos;s finances — all with the customer in
+                    full control of their data.
+                </p>
+            </section>
 
-            <h2 id="what-is">What is NBFC Account Aggregator License</h2>
-            <p>In simple terms, an NBFC Account Aggregator (NBFC-AA) is a non-banking financial company that acts as a consent manager for financial data. It operates as a technology-neutral intermediary between Financial Information Providers (FIPs) and Financial Information Users (FIUs).</p>
-            <p>From a compliance standpoint, the NBFC-AA does not undertake any financial activity itself — it is purely a data flow facilitator operating under strict RBI-mandated consent architecture. Legally speaking, it is governed under the Master Direction – Non-Banking Financial Company – Account Aggregator (Reserve Bank) Directions, 2016 (as amended).</p>
-            <h3>Core Functions of an NBFC-AA</h3>
-            <ul>
-                <li>Obtaining, submitting, and managing customer consent for financial data sharing</li>
-                <li>Facilitating encrypted data transfer from FIP to FIU on behalf of the customer</li>
-                <li>Providing a consent artefact management system</li>
-                <li>Ensuring data flows only in encrypted, standardised formats</li>
-                <li>Maintaining complete audit trails of all consent and data exchange activities</li>
-            </ul>
-            <h3>What NBFC-AA Cannot Do</h3>
-            <ul>
-                <li>Store, read, or process the underlying financial data</li>
-                <li>Use customer data for its own commercial purposes</li>
-                <li>Share data without explicit and revocable customer consent</li>
-                <li>Undertake lending, investment, or any other financial activity</li>
-            </ul>
+            <section id="what-is-nbfc-aa">
+                <h2>What is an NBFC Account Aggregator</h2>
+                <p>
+                    In simple terms, an NBFC-AA is a bridge between financial institutions and their customers. It
+                    securely transfers a customer&apos;s financial data from institutions that hold it to institutions
+                    that the customer wishes to share it with — based entirely on the customer&apos;s explicit,
+                    time-bound, and revocable consent.
+                </p>
+                <p>
+                    From a compliance perspective, an NBFC-AA is a restricted category of NBFC registered under the
+                    Reserve Bank of India Act. Its activities are strictly limited to data facilitation — it cannot
+                    lend, accept deposits, or engage in any other form of financial intermediation.
+                </p>
+                <p>
+                    Legally, the framework operates under the{" "}
+                    <strong>RBI Master Directions &ndash; NBFC Account Aggregator</strong>, the IT Act 2000, and the
+                    data privacy and consent frameworks including the Digital Personal Data Protection (DPDP) Act.
+                </p>
+                <div className="warning-box">
+                    <strong>What an NBFC-AA CANNOT do:</strong>
+                    <ul>
+                        <li>Store customer financial data at any point</li>
+                        <li>Use financial data for analytics or profiling without explicit, purpose-specific consent</li>
+                        <li>Sell, monetise, or transfer customer data to any third party independently</li>
+                        <li>Engage in lending, investments, or any other NBFC activity</li>
+                    </ul>
+                </div>
+            </section>
 
-            <h2 id="regulatory-framework">Regulatory Framework</h2>
-            <p>Legally speaking, the NBFC Account Aggregator framework operates under a robust multi-regulator structure. The primary regulations include:</p>
-            <ul>
-                <li>Reserve Bank of India Act, 1934 (Section 45-IA)</li>
-                <li>Master Direction – Non-Banking Financial Company – Account Aggregator (Reserve Bank) Directions, 2016</li>
-                <li>RBI&apos;s Data Localisation and Technology Risk Management Guidelines</li>
-                <li>Account Aggregator Framework (DEPA) — co-regulated by RBI, SEBI, IRDAI, and PFRDA</li>
-                <li>Information Technology Act, 2000 and related data privacy norms</li>
-            </ul>
-            <div className="overflow-x-auto my-6">
+            <section id="regulatory-framework">
+                <h2>Regulatory Framework</h2>
+                <p>
+                    The NBFC-AA framework is governed by a layered regulatory structure combining RBI directions, IT
+                    law, and evolving data privacy legislation.
+                </p>
                 <table className="data-table">
                     <thead>
                         <tr>
-                            <th>Regulator</th>
-                            <th>Role in AA Ecosystem</th>
+                            <th>Regulatory Dimension</th>
+                            <th>Governing Authority / Instrument</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>RBI</td>
-                            <td>Primary regulator — licenses and supervises NBFC-AA</td>
+                            <td>Primary Regulator</td>
+                            <td>Reserve Bank of India (RBI)</td>
                         </tr>
                         <tr>
-                            <td>SEBI</td>
-                            <td>Co-regulates FIPs and FIUs from the securities domain</td>
+                            <td>Governing Law</td>
+                            <td>RBI Act 1934 &amp; FEMA (where applicable)</td>
                         </tr>
                         <tr>
-                            <td>IRDAI</td>
-                            <td>Co-regulates insurance-related data flows within AA framework</td>
+                            <td>Master Direction</td>
+                            <td>NBFC &ndash; Account Aggregator Directions (RBI)</td>
                         </tr>
                         <tr>
-                            <td>PFRDA</td>
-                            <td>Covers pension fund data in the AA ecosystem</td>
+                            <td>Ecosystem Participants</td>
+                            <td>Financial Information Providers (FIPs), Financial Information Users (FIUs), Account Aggregators (AAs)</td>
                         </tr>
                         <tr>
-                            <td>MeitY</td>
-                            <td>Oversees technology standards and data protection aspects</td>
+                            <td>IT Framework</td>
+                            <td>RBI IT Framework for NBFCs &amp; CERT-In Directions</td>
+                        </tr>
+                        <tr>
+                            <td>Data Privacy</td>
+                            <td>IT Act 2000 &amp; Digital Personal Data Protection (DPDP) Act — consent framework</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <p>As per applicable regulatory provisions, the AA ecosystem is built on the principle of consent-first data sharing, where no data moves without the explicit, informed, and revocable consent of the customer.</p>
+            </section>
 
-            <h2 id="who-needs">Who Needs This License</h2>
-            <p>An NBFC Account Aggregator License becomes necessary for the following entities:</p>
-            <ul>
-                <li>Technology companies planning to build financial data aggregation platforms</li>
-                <li>Fintech startups looking to facilitate data-driven lending or wealth management</li>
-                <li>Banks and financial institutions setting up standalone AA subsidiaries</li>
-                <li>Entities building credit underwriting solutions based on financial data</li>
-                <li>Digital lending platforms requiring bank statement analysis via consent</li>
-                <li>Personal finance management (PFM) application developers</li>
-                <li>Open banking solution providers operating in India</li>
-            </ul>
-            <div className="warning-box">
-                <h4>⚠️ Important Regulatory Note</h4>
-                <p>Any entity aggregating or facilitating transfer of financial data between regulated financial entities in India — without an NBFC-AA license — may be in violation of RBI directions and could face regulatory action.</p>
-            </div>
+            <section id="aa-ecosystem-participants">
+                <h2>AA Ecosystem Participants</h2>
+                <p>
+                    The Account Aggregator ecosystem comprises four distinct participants, each with a defined role.
+                    Understanding this structure is essential before applying for an NBFC-AA registration.
+                </p>
+                <table className="data-table">
+                    <thead>
+                        <tr>
+                            <th>Participant</th>
+                            <th>Role</th>
+                            <th>Examples</th>
+                            <th>Position in Ecosystem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>FIP</strong> (Financial Information Provider)
+                            </td>
+                            <td>Data Provider</td>
+                            <td>Banks, NBFCs, Mutual Funds, Insurance Companies</td>
+                            <td>Holds customer financial data</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>FIU</strong> (Financial Information User)
+                            </td>
+                            <td>Data User</td>
+                            <td>Lenders, fintech lending apps, wealth management platforms</td>
+                            <td>Consumes customer financial data</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>AA</strong> (Account Aggregator)
+                            </td>
+                            <td>Data Facilitator</td>
+                            <td>Licensed NBFC-AA entities</td>
+                            <td>Routes data from FIP to FIU with consent</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Customer</strong>
+                            </td>
+                            <td>Data Owner</td>
+                            <td>Individual / Business</td>
+                            <td>Gives or revokes consent; controls all data sharing</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
 
-            <h2 id="eligibility">Eligibility Criteria</h2>
-            <p>As per the Master Direction – NBFC-AA (RBI) Directions, 2016, the following eligibility conditions must be met to obtain an NBFC Account Aggregator License:</p>
-            <div className="overflow-x-auto my-6">
+            <section id="who-needs">
+                <h2>Who Needs an NBFC-AA License</h2>
+                <p>
+                    Any entity that intends to operate as a data aggregation intermediary within India&apos;s
+                    regulated financial ecosystem needs an NBFC-AA registration from the RBI. This includes:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Fintech companies</strong> offering financial data aggregation as a core service to
+                        banks, NBFCs, or other financial institutions
+                    </li>
+                    <li>
+                        <strong>Digital lending platforms</strong> that intend to use customer financial data for
+                        credit assessment in a structured, regulated manner
+                    </li>
+                    <li>
+                        <strong>Wealth management platforms</strong> that need a holistic view of a
+                        customer&apos;s financial profile across multiple institutions
+                    </li>
+                    <li>
+                        <strong>Digital banks and neo-banks</strong> seeking to build open banking capabilities
+                        on a regulated data infrastructure
+                    </li>
+                    <li>
+                        <strong>Personal Finance Management (PFM) applications</strong> that aggregate account
+                        data across institutions to provide financial insights to users
+                    </li>
+                </ul>
+                <div className="info-box">
+                    Entities that do not wish to operate independently as an AA can instead partner with a
+                    licensed NBFC-AA. The tie-up route is commercially faster and avoids full licensing overhead
+                    for most fintechs.
+                </div>
+            </section>
+
+            <section id="eligibility">
+                <h2>Eligibility Criteria</h2>
+                <p>
+                    RBI has prescribed specific eligibility criteria for entities seeking to register as
+                    NBFC-AAs. Meeting these criteria is a prerequisite before submitting the application.
+                </p>
                 <table className="data-table">
                     <thead>
                         <tr>
                             <th>Criteria</th>
                             <th>Requirement</th>
+                            <th>Practical Note</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Entity Type</td>
-                            <td>Company registered under the Companies Act, 2013</td>
+                            <td>Company incorporated under the Companies Act</td>
+                            <td>Mandatory — LLPs and individuals are not eligible</td>
                         </tr>
                         <tr>
-                            <td>Minimum Net Owned Fund (NOF)</td>
-                            <td>Rs. 2 Crore at the time of application</td>
+                            <td>Net Owned Fund (NOF)</td>
+                            <td>Minimum ₹2 crore</td>
+                            <td>
+                                Must be maintained continuously; NOF = paid-up equity capital + free reserves &minus;
+                                accumulated losses &minus; intangible assets
+                            </td>
                         </tr>
                         <tr>
-                            <td>Principal Business</td>
-                            <td>Must be exclusively Account Aggregation — no other NBFC activities</td>
+                            <td>Promoter Fit &amp; Proper</td>
+                            <td>Clean track record</td>
+                            <td>RBI evaluates credibility, background, and financial integrity of all promoters and directors</td>
                         </tr>
                         <tr>
-                            <td>Director Fit &amp; Proper</td>
-                            <td>All directors must meet RBI&apos;s Fit &amp; Proper Criteria</td>
+                            <td>IT Infrastructure</td>
+                            <td>Secure, scalable, API-ready system</td>
+                            <td>
+                                Critical for approval — RBI evaluates the actual architecture design, not just policy
+                                documents
+                            </td>
                         </tr>
                         <tr>
-                            <td>Technology Capability</td>
-                            <td>Must demonstrate robust consent management and data security infrastructure</td>
+                            <td>Data Security Framework</td>
+                            <td>End-to-end encryption, consent management, audit logs</td>
+                            <td>RBI&apos;s primary focus area; ISO-level standards are expected</td>
                         </tr>
                         <tr>
-                            <td>Data Privacy Framework</td>
-                            <td>Must have a documented data privacy and security policy</td>
-                        </tr>
-                        <tr>
-                            <td>No FIP/FIU Activity</td>
-                            <td>NBFC-AA cannot simultaneously act as a FIP or FIU</td>
+                            <td>Business Model</td>
+                            <td>Pure data facilitation — no lending, no data storage</td>
+                            <td>An NBFC-AA cannot conduct any other NBFC activity</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <p>From a practical compliance perspective, RBI also evaluates the technical architecture, security infrastructure, and data handling protocols of the applicant entity before granting the Certificate of Registration (CoR).</p>
+            </section>
 
-            <h2 id="documents">Documents Required</h2>
-            <p>The following documents are required for obtaining the NBFC Account Aggregator License from RBI:</p>
-            <h3>Entity &amp; Incorporation Documents</h3>
-            <ul>
-                <li>Certificate of Incorporation issued by ROC</li>
-                <li>Memorandum of Association (MOA) with AA as the principal object</li>
-                <li>Articles of Association (AOA)</li>
-                <li>PAN of the company</li>
-                <li>GST Registration (if applicable)</li>
-            </ul>
-            <h3>Financial Documents</h3>
-            <ul>
-                <li>Net Worth Certificate certified by a Chartered Accountant</li>
-                <li>Audited Financial Statements (if applicable)</li>
-                <li>Bank statements confirming availability of Net Owned Funds</li>
-                <li>Source of funds declaration for capital infusion</li>
-            </ul>
-            <h3>Directors &amp; Promoters Documents</h3>
-            <ul>
-                <li>KYC documents (PAN, Aadhaar, Passport) of all directors and promoters</li>
-                <li>Detailed profiles of all directors including experience and qualifications</li>
-                <li>Declaration of Fit &amp; Proper status by each director</li>
-                <li>CIBIL/credit report of promoters (if required)</li>
-                <li>Board Resolution authorising NBFC-AA registration application</li>
-            </ul>
-            <h3>Business &amp; Technology Documents</h3>
-            <ul>
-                <li>Detailed Business Plan for Account Aggregator operations</li>
-                <li>Technology Architecture document describing consent management framework</li>
-                <li>Data Security and Privacy Policy</li>
-                <li>IT Security and Cybersecurity Framework document</li>
-                <li>Proposed operational workflows and consent journey flowchart</li>
-                <li>API integration plan with FIPs and FIUs</li>
-            </ul>
-            <h3>Policy &amp; Compliance Documents</h3>
-            <ul>
-                <li>Customer Grievance Redressal Policy</li>
-                <li>KYC/AML Compliance Policy</li>
-                <li>Data Retention and Deletion Policy</li>
-                <li>Internal Audit and Governance Framework</li>
-            </ul>
+            <section id="documents">
+                <h2>Documents Required</h2>
+                <p>
+                    A complete and well-prepared document package is critical for a successful NBFC-AA application.
+                    The following documents are required:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Certificate of Incorporation (COI)</strong> — issued by the Ministry of Corporate
+                        Affairs
+                    </li>
+                    <li>
+                        <strong>MOA &amp; AOA</strong> — the Memorandum and Articles of Association must explicitly
+                        include Account Aggregator activity in the objects clause
+                    </li>
+                    <li>
+                        <strong>Net Worth Certificate</strong> — CA-certified certificate clearly demonstrating
+                        minimum ₹2 crore Net Owned Fund
+                    </li>
+                    <li>
+                        <strong>Detailed Business Plan</strong> — comprehensive plan explaining how the AA will
+                        operate, including proposed FIP and FIU partnerships and revenue model
+                    </li>
+                    <li>
+                        <strong>IT Policy &amp; Architecture Document</strong> — system design documentation
+                        including API framework, security architecture, and data flow diagrams
+                    </li>
+                    <li>
+                        <strong>Data Privacy Policy</strong> — documenting the consent management system, customer
+                        rights framework, and data flow procedures
+                    </li>
+                    <li>
+                        <strong>Director KYC</strong> — PAN, Aadhaar, and background verification for all directors
+                        and key management personnel
+                    </li>
+                    <li>
+                        <strong>Board Resolution</strong> — authorising the company to apply for NBFC-AA registration
+                        with the RBI
+                    </li>
+                </ul>
+                <div className="warning-box">
+                    The IT Policy and Architecture Document is not a formality — RBI actively scrutinises the
+                    technical design. Weak or generic IT documentation is one of the most common reasons for
+                    application delays or rejection.
+                </div>
+            </section>
 
-            <h2 id="process">Registration Process</h2>
-            <p>The NBFC Account Aggregator registration process involves multiple stages under RBI&apos;s evaluation framework. Below is a step-by-step overview:</p>
-            <div className="step-timeline">
-                <div className="step-item">
-                    <div className="step-dot"></div>
-                    <div className="step-card">
-                        <div className="step-label">Step 1</div>
-                        <h4>Company Incorporation</h4>
-                        <p className="text-[13px] text-[#64748b] !mb-0">Incorporate a company under the Companies Act, 2013 with Account Aggregation as the principal object in the MOA. Ensure the company has no other NBFC activities.</p>
-                    </div>
-                </div>
-                <div className="step-item">
-                    <div className="step-dot"></div>
-                    <div className="step-card">
-                        <div className="step-label">Step 2</div>
-                        <h4>Arrange Minimum Net Owned Funds</h4>
-                        <p className="text-[13px] text-[#64748b] !mb-0">Infuse a minimum of Rs. 2 Crore as Net Owned Fund from legitimate and traceable sources. Obtain Net Worth Certificate from a CA.</p>
-                    </div>
-                </div>
-                <div className="step-item">
-                    <div className="step-dot"></div>
-                    <div className="step-card">
-                        <div className="step-label">Step 3</div>
-                        <h4>Prepare Business Plan &amp; Technology Framework</h4>
-                        <p className="text-[13px] text-[#64748b] !mb-0">Develop a comprehensive business plan, technology architecture document, data security framework, and all required policies for NBFC-AA operations.</p>
-                    </div>
-                </div>
-                <div className="step-item">
-                    <div className="step-dot"></div>
-                    <div className="step-card">
-                        <div className="step-label">Step 4</div>
-                        <h4>Online Application on RBI COSMOS Portal</h4>
-                        <p className="text-[13px] text-[#64748b] !mb-0">File the application for Certificate of Registration as an NBFC-AA on RBI&apos;s COSMOS portal with all supporting documents.</p>
-                    </div>
-                </div>
-                <div className="step-item">
-                    <div className="step-dot"></div>
-                    <div className="step-card">
-                        <div className="step-label">Step 5</div>
-                        <h4>Physical Document Submission to RBI</h4>
-                        <p className="text-[13px] text-[#64748b] !mb-0">Submit physical copies of all application documents to the concerned RBI Regional Office, along with a covering letter and document checklist.</p>
-                    </div>
-                </div>
-                <div className="step-item">
-                    <div className="step-dot"></div>
-                    <div className="step-card">
-                        <div className="step-label">Step 6</div>
-                        <h4>RBI Scrutiny &amp; Query Resolution</h4>
-                        <p className="text-[13px] text-[#64748b] !mb-0">RBI reviews the application, conducts due diligence on promoters, and may raise clarification queries. Respond accurately and promptly to all queries.</p>
-                    </div>
-                </div>
-                <div className="step-item">
-                    <div className="step-dot"></div>
-                    <div className="step-card">
-                        <div className="step-label">Step 7</div>
-                        <h4>In-Principle Approval</h4>
-                        <p className="text-[13px] text-[#64748b] !mb-0">Upon satisfactory review, RBI may grant In-Principle Approval for setting up NBFC-AA operations. The entity must then build and demonstrate its technology infrastructure.</p>
-                    </div>
-                </div>
-                <div className="step-item">
-                    <div className="step-dot"></div>
-                    <div className="step-card">
-                        <div className="step-label">Step 8</div>
-                        <h4>Certificate of Registration (CoR)</h4>
-                        <p className="text-[13px] text-[#64748b] !mb-0">After fulfilling all conditions of In-Principle Approval and demonstrating operational readiness, RBI issues the Certificate of Registration as NBFC-AA.</p>
-                    </div>
-                </div>
-            </div>
+            <section id="process">
+                <h2>Registration Process</h2>
+                <p>
+                    The NBFC-AA registration process involves six key steps. Each step must be completed
+                    thoroughly before proceeding to the next.
+                </p>
+                <ol className="step-timeline">
+                    <li>
+                        <strong>Step 1: Incorporate the Company</strong>
+                        <p>
+                            Incorporate a company under the Companies Act 2013. Ensure that the Memorandum of
+                            Association explicitly includes Account Aggregator activity — data facilitation and
+                            consent-based financial data sharing — in the objects clause. This is a mandatory
+                            prerequisite for the RBI application.
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Step 2: Achieve Minimum Net Owned Fund</strong>
+                        <p>
+                            Ensure the company has a minimum Net Owned Fund of ₹2 crore at the time of
+                            application. Obtain a CA-certified Net Worth Certificate confirming this. The NOF
+                            must be maintained on a continuous basis even after registration.
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Step 3: Build the IT and Data Security Framework</strong>
+                        <p>
+                            This is the most critical and time-intensive step. Develop a robust, API-based
+                            integration system with end-to-end encryption, a customer-facing consent management
+                            dashboard, real-time authentication, and comprehensive audit logging. The architecture
+                            must meet RBI&apos;s IT framework requirements and ISO-level security standards.
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Step 4: Prepare the Complete Application Package</strong>
+                        <p>
+                            Compile all required documents — including the business plan, IT architecture
+                            documentation, data privacy policy, director KYC, Net Worth Certificate, and board
+                            resolutions. Each document must be accurate, complete, and consistent with the others.
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Step 5: Submit Application via RBI COSMOS Portal</strong>
+                        <p>
+                            Submit the complete NBFC-AA registration application through the RBI&apos;s COSMOS
+                            (Company Submission) portal. All documents must be uploaded in the prescribed format.
+                            Incomplete submissions result in automatic delays.
+                        </p>
+                    </li>
+                    <li>
+                        <strong>Step 6: RBI Scrutiny and Certificate of Registration</strong>
+                        <p>
+                            RBI conducts a detailed review of the application, including scrutiny of the IT
+                            architecture and the consent management framework. The RBI may request clarifications
+                            or additional information. Upon satisfactory compliance, the Certificate of
+                            Registration as an NBFC-AA is granted.
+                        </p>
+                    </li>
+                </ol>
+            </section>
 
-            <h2 id="fees">Fees Structure</h2>
-            <div className="overflow-x-auto my-6">
+            <section id="consent-architecture">
+                <h2>Consent Architecture</h2>
+                <p>
+                    The consent architecture is the heart of the NBFC-AA framework. The entire regulatory model
+                    is built on the principle that customer financial data can only be shared with{" "}
+                    <strong>explicit, revocable, and granular consent</strong>. Without a strong consent
+                    management system, RBI approval is not achievable.
+                </p>
+                <p>The four defining characteristics of AA consent are:</p>
+                <ul>
+                    <li>
+                        <strong>Time-bound access</strong> — consent is not permanent; it is granted for a
+                        defined period and expires automatically
+                    </li>
+                    <li>
+                        <strong>Purpose-specific sharing</strong> — data can only be shared for the stated
+                        purpose at the time of consent; it cannot be repurposed
+                    </li>
+                    <li>
+                        <strong>Revocable at any time</strong> — the customer can withdraw consent at any
+                        point, immediately stopping further data sharing
+                    </li>
+                    <li>
+                        <strong>Fully auditable</strong> — every consent action (grant, use, revocation) must
+                        be logged and traceable
+                    </li>
+                </ul>
+                <div className="info-box">
+                    <strong>Consent Flow:</strong>
+                    <ol>
+                        <li>Customer initiates a consent request on the AA platform</li>
+                        <li>AA routes the consent request to the relevant FIP</li>
+                        <li>FIP shares the requested data only after consent is confirmed</li>
+                        <li>AA routes the encrypted data to the FIU</li>
+                        <li>Customer can revoke consent at any point during or after the process</li>
+                        <li>All actions are logged with complete audit trails</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="technology-architecture">
+                <h2>Technology Architecture</h2>
+                <p>
+                    The NBFC-AA is one of the most technology-intensive licenses issued by the RBI. Unlike most
+                    other NBFC categories where the primary regulatory focus is on capital adequacy and credit
+                    norms, the RBI evaluates the actual technology architecture of an AA applicant — not merely
+                    its policy documents.
+                </p>
+                <p>The following technology components are mandatory for an operational NBFC-AA:</p>
+                <ul>
+                    <li>
+                        <strong>API-based integration system</strong> — all data exchange between the AA, FIPs,
+                        and FIUs must occur through secure, standardised APIs; no manual data transfer is
+                        permissible
+                    </li>
+                    <li>
+                        <strong>End-to-end encryption</strong> — data must never exist in plaintext at any
+                        point during transmission; encryption must cover data at rest and in transit
+                    </li>
+                    <li>
+                        <strong>Consent management dashboard</strong> — a customer-facing interface through
+                        which users can view, manage, and revoke their consent in real time
+                    </li>
+                    <li>
+                        <strong>Real-time authentication system</strong> — robust multi-factor authentication
+                        for all customer interactions
+                    </li>
+                    <li>
+                        <strong>Audit logs &amp; monitoring tools</strong> — comprehensive logging of all
+                        system events, data access requests, and consent transactions
+                    </li>
+                </ul>
+                <div className="warning-box">
+                    RBI evaluates the architecture design itself — not just documentation. Applicants who
+                    submit generic IT policy documents without a credible technical implementation are likely
+                    to face delays or rejection.
+                </div>
+            </section>
+
+            <section id="it-governance-cybersecurity">
+                <h2>IT Governance &amp; Cybersecurity</h2>
+                <p>
+                    Given that an NBFC-AA handles sensitive financial data of customers across multiple
+                    institutions, RBI imposes a high standard of IT governance and cybersecurity. The following
+                    requirements are expected:
+                </p>
+                <ul>
+                    <li>
+                        <strong>ISO-level security standards</strong> — ISO 27001 certification is strongly
+                        recommended and signals credibility to RBI evaluators
+                    </li>
+                    <li>
+                        <strong>Regular VAPT</strong> — Vulnerability Assessment and Penetration Testing must
+                        be conducted periodically to identify and remediate security weaknesses
+                    </li>
+                    <li>
+                        <strong>Data encryption at all stages</strong> — encryption must apply to data both at
+                        rest (if any temporary buffering occurs) and in transit at all times
+                    </li>
+                    <li>
+                        <strong>Incident response framework</strong> — a documented, tested framework for
+                        detecting, responding to, and reporting cybersecurity incidents
+                    </li>
+                    <li>
+                        <strong>No data retention</strong> — the system must be designed for temporary
+                        encrypted transmission only; no financial data may be stored beyond the transmission
+                        lifecycle
+                    </li>
+                </ul>
+                <div className="info-box">
+                    Cybersecurity incidents must be reported to both CERT-In (within the mandated timeline
+                    under CERT-In directions) and to the RBI. An incident response framework is not merely
+                    best practice — it is a regulatory expectation.
+                </div>
+            </section>
+
+            <section id="nbfc-aa-vs-traditional-nbfc">
+                <h2>NBFC-AA vs Traditional NBFC</h2>
+                <p>
+                    The NBFC-AA is a fundamentally different entity from a traditional NBFC. Understanding
+                    these differences is important for promoters deciding which regulatory path to pursue.
+                </p>
                 <table className="data-table">
                     <thead>
                         <tr>
-                            <th>Component</th>
-                            <th>Amount / Details</th>
+                            <th>Parameter</th>
+                            <th>NBFC-AA</th>
+                            <th>Traditional NBFC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Core Activity</td>
+                            <td>Data sharing &amp; facilitation (consent-based)</td>
+                            <td>Lending, deposits, financial intermediation</td>
+                        </tr>
+                        <tr>
+                            <td>Revenue Source</td>
+                            <td>API usage charges, subscription fees</td>
+                            <td>Interest income, processing fees</td>
+                        </tr>
+                        <tr>
+                            <td>Financial Risk</td>
+                            <td>Low — no lending exposure or credit risk</td>
+                            <td>High — direct credit risk on loan book</td>
+                        </tr>
+                        <tr>
+                            <td>Data Handling</td>
+                            <td>Cannot store customer financial data</td>
+                            <td>Not applicable — deals in money, not data</td>
+                        </tr>
+                        <tr>
+                            <td>RBI Scrutiny Focus</td>
+                            <td>Technology architecture &amp; consent framework</td>
+                            <td>Capital adequacy, credit norms, NPA management</td>
+                        </tr>
+                        <tr>
+                            <td>Minimum NOF</td>
+                            <td>₹2 crore</td>
+                            <td>Varies by category (₹2 crore+ for most)</td>
+                        </tr>
+                        <tr>
+                            <td>Can it lend?</td>
+                            <td>
+                                <strong>NO</strong>
+                            </td>
+                            <td>Yes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="revenue-model">
+                <h2>Revenue Model</h2>
+                <p>
+                    The revenue model of an NBFC-AA is service-based, not data-based. An AA is strictly
+                    prohibited from monetising customer data directly. All permissible income must come from
+                    services rendered to ecosystem participants.
+                </p>
+                <table className="data-table">
+                    <thead>
+                        <tr>
+                            <th>Revenue Source</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>API Usage Charges</td>
+                            <td>Fees charged to FIUs per data request processed through the AA platform</td>
+                        </tr>
+                        <tr>
+                            <td>Subscription Model</td>
+                            <td>Annual or monthly subscription fees from financial institutions (FIPs and FIUs) for platform access</td>
+                        </tr>
+                        <tr>
+                            <td>Data Access Fees</td>
+                            <td>Per-transaction charges for each data retrieval and sharing event</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div className="warning-box">
+                    <strong>Important:</strong> An NBFC-AA cannot sell, share, or monetise customer data
+                    independently under any circumstances. All revenue must be earned through legitimate
+                    service-based charges to ecosystem participants.
+                </div>
+                <blockquote className="expert-quote">
+                    <p>
+                        &ldquo;The NBFC Account Aggregator model is a paradigm shift in financial data governance
+                        — from institution-controlled data to customer-controlled consent. The technical
+                        robustness of your consent architecture is what RBI scrutinises most closely. A strong
+                        technology foundation is not optional; it is the license.&rdquo;
+                    </p>
+                    <footer>
+                        — <strong>CS Devyani Khambhati</strong>, Compliance Expert
+                    </footer>
+                </blockquote>
+            </section>
+
+            <section id="fees">
+                <h2>Fees &amp; Costs</h2>
+                <p>
+                    The cost of obtaining an NBFC-AA registration is primarily driven by technology
+                    infrastructure investment rather than regulatory fees. The RBI does not charge an
+                    application fee.
+                </p>
+                <table className="data-table">
+                    <thead>
+                        <tr>
+                            <th>Cost Component</th>
+                            <th>Amount / Note</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>RBI Application Fee</td>
-                            <td>Nil — RBI does not charge an application fee</td>
+                            <td>NIL</td>
                         </tr>
                         <tr>
-                            <td>Minimum Net Owned Fund</td>
-                            <td>Rs. 2 Crore (to be maintained as regulatory capital)</td>
+                            <td>Professional Fees (legal &amp; compliance)</td>
+                            <td>Variable — depends on scope of engagement and complexity of application</td>
                         </tr>
                         <tr>
-                            <td>Professional Fees (Business Plan &amp; Documentation)</td>
-                            <td>Based on scope and complexity of the application</td>
+                            <td>Technology Infrastructure</td>
+                            <td>HIGH — this is the most significant cost component; API systems, encryption, consent platform, security testing</td>
                         </tr>
                         <tr>
-                            <td>Technology Infrastructure Setup</td>
-                            <td>Variable — depends on consent management platform architecture</td>
-                        </tr>
-                        <tr>
-                            <td>Legal &amp; Compliance Setup</td>
-                            <td>Depends on policy drafting, legal structuring, and advisory support</td>
-                        </tr>
-                        <tr>
-                            <td>Ongoing Annual Compliance</td>
-                            <td>RBI returns, audits, and periodic compliance filings</td>
+                            <td>CA Net Worth Certificate</td>
+                            <td>Approximately ₹10,000 &ndash; ₹25,000</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
+                <div className="info-box">
+                    Technology infrastructure is the dominant cost for any NBFC-AA applicant. Entities that
+                    underinvest in their technical foundation risk rejection at the RBI scrutiny stage —
+                    making the investment essential, not optional.
+                </div>
+            </section>
 
-            <h2 id="timeline">Timeline</h2>
-            <div className="overflow-x-auto my-6">
+            <section id="timeline">
+                <h2>Timeline</h2>
+                <p>
+                    The total timeline from commencement of preparation to receipt of the Certificate of
+                    Registration is typically 4 to 9 months, depending on the readiness of the applicant&apos;s
+                    technology infrastructure and the completeness of the application.
+                </p>
                 <table className="data-table">
                     <thead>
                         <tr>
-                            <th>Stage</th>
-                            <th>Expected Timeframe</th>
+                            <th>Phase</th>
+                            <th>Duration</th>
+                            <th>Key Activity</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Company Incorporation</td>
-                            <td>7–10 working days</td>
+                            <td>Preparation</td>
+                            <td>3 &ndash; 6 weeks</td>
+                            <td>Company incorporation, NOF structuring, IT framework development (technology setup is the critical path)</td>
                         </tr>
                         <tr>
-                            <td>Business Plan &amp; Document Preparation</td>
-                            <td>15–30 days</td>
+                            <td>RBI Review</td>
+                            <td>3 &ndash; 6 months</td>
+                            <td>Application scrutiny, IT architecture inspection, compliance framework evaluation (timeline is case-based)</td>
                         </tr>
                         <tr>
-                            <td>RBI Application Filing</td>
-                            <td>1–3 days</td>
-                        </tr>
-                        <tr>
-                            <td>RBI Application Review &amp; Queries</td>
-                            <td>2–4 months</td>
-                        </tr>
-                        <tr>
-                            <td>In-Principle Approval</td>
-                            <td>3–6 months from application</td>
-                        </tr>
-                        <tr>
-                            <td>Technology Buildout &amp; Demonstration</td>
-                            <td>3–6 months post In-Principle Approval</td>
-                        </tr>
-                        <tr>
-                            <td>Final CoR Issuance</td>
-                            <td>6–9 months (total timeline, subject to case specifics)</td>
+                            <td>Approval</td>
+                            <td>1 &ndash; 2 months</td>
+                            <td>Post-scrutiny compliance confirmation and issuance of Certificate of Registration</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div className="info-box">
-                <h4>Practical Note on Timeline</h4>
-                <p>The timeline is heavily dependent on documentation quality, promoter background, and RBI workload. Strong applications with complete documentation and a credible technology framework can progress faster through the approval stages.</p>
-            </div>
+            </section>
 
-            <h2 id="compliance">Compliance Requirements</h2>
-            <p>Post-registration, an NBFC-AA must adhere to extensive ongoing compliance requirements as mandated by RBI. From a compliance standpoint, these obligations are non-negotiable and require dedicated internal resources.</p>
-            <h3>Ongoing RBI Filings &amp; Returns</h3>
-            <ul>
-                <li>Periodic returns filing on RBI&apos;s COSMOS/XBRL platform</li>
-                <li>Annual audit report submission to RBI</li>
-                <li>Quarterly compliance certificates by the Board</li>
-                <li>Reporting of any material changes in promoters, directors, or business model</li>
-            </ul>
-            <h3>Technology &amp; Data Security Compliance</h3>
-            <ul>
-                <li>Maintaining ISO 27001 or equivalent information security certification</li>
-                <li>Regular penetration testing and vulnerability assessments</li>
-                <li>Compliance with RBI&apos;s IT Framework for NBFCs</li>
-                <li>Data localisation requirements — all customer data must be stored in India</li>
-                <li>Maintaining end-to-end encryption for all data transfers</li>
-            </ul>
-            <h3>Consent &amp; Customer Framework Compliance</h3>
-            <ul>
-                <li>Ensuring all data flows are strictly consent-based and auditable</li>
-                <li>Maintaining consent artefact records for regulatory inspection</li>
-                <li>Customer grievance redressal mechanism with defined TATs</li>
-                <li>Enabling customers to view, pause, revoke, and manage their consents at any time</li>
-            </ul>
-            <h3>Governance &amp; Board Compliance</h3>
-            <ul>
-                <li>Board-level oversight of compliance, technology, and risk management</li>
-                <li>Appointment of a dedicated Compliance Officer</li>
-                <li>Internal audit function covering technology, consent management, and operations</li>
-                <li>Annual review of all policies and frameworks</li>
-            </ul>
-            <div className="warning-box">
-                <h4>⚠️ Compliance Risk Alert</h4>
-                <p>Under applicable regulatory provisions, failure to maintain data security standards, consent framework integrity, or periodic RBI reporting obligations can lead to penalties, restrictions on operations, or cancellation of the NBFC-AA Certificate of Registration.</p>
-            </div>
+            <section id="post-registration-compliance">
+                <h2>Post-Registration Compliance</h2>
+                <p>
+                    Registration as an NBFC-AA is the beginning, not the end, of the compliance journey. RBI
+                    expects ongoing adherence to strict operational and reporting standards.
+                </p>
+                <ul>
+                    <li>
+                        <strong>Consent-based data sharing only</strong> — no unsolicited data requests; every
+                        data access event must be backed by a valid, active consent artefact
+                    </li>
+                    <li>
+                        <strong>Strict no-data-storage policy</strong> — the AA must operate only as a
+                        transient, encrypted data conduit at all times
+                    </li>
+                    <li>
+                        <strong>Strong encryption protocols</strong> — end-to-end encryption for all data in
+                        transmission must be maintained without exception
+                    </li>
+                    <li>
+                        <strong>Periodic audit and reporting to RBI</strong> — regular statutory returns and
+                        compliance reports must be filed with the Reserve Bank
+                    </li>
+                    <li>
+                        <strong>Regular IT system audits</strong> — periodic Vulnerability Assessment and
+                        Penetration Testing (VAPT) must be conducted and results documented
+                    </li>
+                    <li>
+                        <strong>Cybersecurity incident reporting</strong> — all incidents must be reported to
+                        CERT-In within the prescribed timeline and to the RBI
+                    </li>
+                    <li>
+                        <strong>Maintain audit logs</strong> — comprehensive logs of all consent transactions,
+                        data access events, and system activities must be maintained and available for
+                        regulatory inspection
+                    </li>
+                </ul>
+            </section>
 
-            <h2 id="faq">FAQs on NBFC Account Aggregator License</h2>
-            <div className="space-y-3 my-6">
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>What is an NBFC Account Aggregator License?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">An NBFC Account Aggregator License is a Certificate of Registration (CoR) issued by the Reserve Bank of India to a company that wishes to operate as an Account Aggregator — a consent-based financial data sharing intermediary under the DEPA framework.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>What is the minimum capital requirement for NBFC-AA?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">As per RBI&apos;s Master Direction on NBFC-AA, the minimum Net Owned Fund (NOF) required is Rs. 2 Crore at the time of application. This must be maintained on an ongoing basis after registration.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>Can an NBFC-AA also operate as a lender or financial services provider?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">No. Under RBI&apos;s directions, an NBFC-AA can only undertake Account Aggregation as its principal business. It cannot simultaneously act as a lender, insurer, investment adviser, or any other financial service provider. It also cannot act as a Financial Information Provider (FIP) or Financial Information User (FIU).</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>Does an NBFC-AA store customer financial data?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">No. A fundamental principle of the Account Aggregator framework is that the NBFC-AA does not store, access, or read the customer&apos;s financial data. It only facilitates encrypted transfer of data from the Financial Information Provider to the Financial Information User based on customer consent.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>What is the difference between FIP, FIU, and AA in the ecosystem?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">A Financial Information Provider (FIP) holds customer financial data (e.g., banks, insurers, MF depositories). A Financial Information User (FIU) is an entity that requests customer data for a service (e.g., lenders for credit assessment). The Account Aggregator (AA) is the consent manager that enables the data flow between FIP and FIU with customer consent — without reading the data itself.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>How long does it take to get an NBFC-AA license?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">The total timeline from application to receiving the Certificate of Registration typically ranges from 6 to 9 months, subject to documentation quality, RBI scrutiny workload, and the applicant&apos;s responsiveness to queries. The process includes an In-Principle Approval stage followed by technology demonstration before the final CoR is issued.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>Is NBFC-AA regulated only by RBI?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">RBI is the primary regulator and licensor of NBFC-AAs. However, the broader Account Aggregator ecosystem is co-regulated, as SEBI, IRDAI, and PFRDA govern the respective FIPs and FIUs within their domains. The data privacy and IT security aspects are also influenced by MeitY guidelines.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>Can a fintech startup apply for an NBFC-AA license?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">Yes, fintech startups can apply for an NBFC-AA license provided they are incorporated as a company under the Companies Act 2013, have a minimum Net Owned Fund of Rs. 2 Crore, and can demonstrate a credible technology framework and governance structure to RBI&apos;s satisfaction.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>What is the Fit &amp; Proper criteria for NBFC-AA directors?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">RBI&apos;s Fit &amp; Proper criteria requires directors to have integrity, financial soundness, and relevant competence. Directors must not have criminal convictions, must be financially sound, and must declare compliance with the Fit &amp; Proper norms. RBI conducts background verification as part of the application process.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>What happens if an NBFC-AA violates data privacy or consent norms?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">Violation of data privacy norms, consent framework requirements, or RBI directions can lead to serious regulatory consequences including monetary penalties, operational restrictions, and in severe cases, cancellation of the Certificate of Registration. Compliance with data security and consent architecture is the cornerstone of NBFC-AA operations.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>Is there a fee for RBI NBFC-AA registration application?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">No, RBI does not charge an application fee for NBFC-AA registration. The primary cost is the regulatory capital requirement of Rs. 2 Crore (minimum NOF), along with professional fees for documentation, business plan preparation, and compliance setup.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>What is the DEPA framework and how is it related to NBFC-AA?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">DEPA (Data Empowerment and Protection Architecture) is India&apos;s policy framework for enabling individuals to control and share their personal data digitally. The Account Aggregator framework is the financial services implementation of DEPA, enabling consent-based financial data sharing. NBFC-AAs are the operational entities that implement and manage this framework in the financial sector.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>Can an existing NBFC convert into an NBFC-AA?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">Since an NBFC-AA must have Account Aggregation as its sole principal business, an existing NBFC that conducts lending or other financial activities cannot simply convert to NBFC-AA without ceasing those activities. A separate entity is typically recommended for NBFC-AA operations to maintain regulatory clarity.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>What technology standards must an NBFC-AA comply with?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">NBFC-AAs must comply with the technical standards prescribed by Sahamati (the AA ecosystem industry body) and RBI&apos;s IT framework for NBFCs. This includes end-to-end encryption, secure APIs, data localisation, consent artefact management, and regular security audits. ISO 27001 certification or equivalent is generally expected.</div>
-                </details>
-                <details className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                    <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]"><span>How does customer consent work in the NBFC-AA framework?</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span></summary>
-                    <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151]">Customer consent in the NBFC-AA framework is granular, time-bound, purpose-specific, and fully revocable. A customer explicitly consents to share specific financial data (e.g., bank statements for 6 months) for a particular purpose (e.g., loan assessment) with a specific FIU. The consent artefact is cryptographically signed and maintained by the AA for audit purposes. The customer can view, pause, or revoke consent at any time.</div>
-                </details>
-            </div>
+            <section id="faqs">
+                <h2>Frequently Asked Questions</h2>
+                <div className="faq-accordion">
+                    {faqs.map((faq, i) => (
+                        <details key={i} className="faq-item">
+                            <summary>{faq.q}</summary>
+                            <p>{faq.a}</p>
+                        </details>
+                    ))}
+                </div>
+            </section>
         </ServicePageLayout>
     );
 }

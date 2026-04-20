@@ -56,6 +56,7 @@ const linkMap: Record<string, string> = {
     "FinTech Entity IFSC": "/ifsca/fintech-entity",
     "TechFin IFSC": "/ifsca/techfin",
     "ITFS Platform IFSC": "/ifsca/itfs-platform",
+    "IFSCA BATF Services": "/ifsca/batf-services",
     // Enterprise / Solutions
     "FEMA Compliance": "/fema/compliance-under-fema",
     "Transfer Pricing": "/services/transfer-pricing",
@@ -76,17 +77,18 @@ const linkMap: Record<string, string> = {
 const menus: Record<string, MegaMenu> = {
     Services: {
         categories: [
-            { label: "NBFC Services", icon: "🏦", items: ["NBFC Registration", "NBFC Account Aggregator", "NBFC Business Plan", "NBFC Compliance", "NBFC-P2P License", "NBFC-MFI License", "NBFC Annual Return Filing", "Prepaid Instrument"] },
-            { label: "Fintech Services", icon: "💳", items: ["Payment Aggregator License", "PSP License IFSCA", "Prepaid Instrument License", "BBPS Agent Registration", "UPI Third Party App", "Digital Lending Compliance"] },
-            { label: "Compliance & Audit", icon: "📋", items: ["RBI Compliance", "SEBI Compliance", "IRDAI Compliance", "IFSCA Compliance", "FEMA Compliance", "Transfer Pricing"] },
-            { label: "Enterprise & Other", icon: "🏗️", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "Research Analyst", "AIF Registration"] },
-            { label: "ESG & Sustainability", icon: "🌱", items: ["ESG Compliance"] },
+            { label: "RBI Regulatory Services", icon: "🏦", items: ["NBFC Registration", "NBFC Account Aggregator", "Payment Aggregator", "Prepaid Instrument", "NBFC Business Plan", "NBFC Compliance", "NBFC-P2P License", "NBFC-MFI License", "NBFC Annual Return Filing", "AD Category II", "Credit Information Company"] },
+            { label: "SEBI Regulatory Services", icon: "📈", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "Research Analyst", "AIF Registration", "Mutual Fund Registration", "Social Stock Exchange", "Underwriter Registration"] },
+            { label: "IRDAI Regulatory Services", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA License", "Micro Insurance"] },
+            { label: "IFSCA & GIFT City", icon: "🌐", items: ["Finance Company GIFT IFSC", "IFSCA Factoring License", "PSP License IFSCA", "Fund Management Entity", "IFSCA Aircraft Leasing", "BATF Services IFSC"] },
+            { label: "Financial Intelligence", icon: "🔍", items: ["FEMA Compliance", "DGFT IE Code", "Transfer Pricing", "GST Registration"] },
+            { label: "Company Formation", icon: "🏛️", items: ["ESG Compliance", "PFRDA Registration"] },
         ],
         viewAll: "/services", viewAllLabel: "View All Services →"
     },
     Regulatory: {
         categories: [
-            { label: "RBI Licenses", icon: "🏛️", items: ["NBFC License", "NBFC Account Aggregator", "Payment Aggregator", "AD Category II", "Credit Information Company", "NBFC Business Plan"] },
+            { label: "RBI Licenses", icon: "🏦", items: ["NBFC Registration", "NBFC Account Aggregator", "Payment Aggregator", "AD Category II", "Credit Information Company", "Prepaid Instrument", "NBFC Business Plan"] },
             { label: "SEBI Licenses", icon: "📈", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "Research Analyst", "AIF Registration", "Mutual Fund Registration", "Social Stock Exchange", "Underwriter Registration"] },
             { label: "IFSCA Licenses", icon: "🌐", items: ["Finance Company GIFT IFSC", "IFSCA Factoring License", "PSP License IFSCA", "Fund Management Entity", "IFSCA Aircraft Leasing", "BATF Services IFSC", "FinTech Entity IFSC", "TechFin IFSC", "ITFS Platform IFSC"] },
             { label: "IRDAI Licenses", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA License", "Micro Insurance"] },
@@ -96,21 +98,20 @@ const menus: Record<string, MegaMenu> = {
     },
     Solutions: {
         categories: [
-            { label: "For NBFCs", icon: "🏦", items: ["NBFC Registration", "RBI Compliance", "NBFC Account Aggregator", "NBFC Business Plan", "NBFC-P2P License", "NBFC-MFI License"] },
-            { label: "For Fintechs", icon: "💳", items: ["PA/PG License", "Digital Lending Compliance", "UPI Third Party App", "Digital Lending Compliance", "PSP License IFSCA"] },
-            { label: "For Insurance", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA License"] },
-            { label: "For Enterprises", icon: "🏗️", items: ["FEMA Compliance", "Transfer Pricing", "ESG Compliance", "Stock Broker License", "AIF Registration"] },
-            { label: "SEBI Regulated", icon: "📈", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "AIF Registration", "Fund Management Entity"] },
+            { label: "For Startups & New Businesses", icon: "🚀", items: ["GST Registration", "ESG Compliance", "PFRDA Registration", "NBFC Registration"] },
+            { label: "For NBFCs & Lending", icon: "🏦", items: ["NBFC Registration", "NBFC Compliance", "NBFC Account Aggregator", "NBFC Business Plan", "NBFC-P2P License", "NBFC-MFI License"] },
+            { label: "For Fintech Platforms", icon: "💳", items: ["Payment Aggregator License", "PSP License IFSCA", "Prepaid Instrument License", "Digital Lending Compliance", "UPI Third Party App"] },
+            { label: "For SMEs & Enterprises", icon: "🏗️", items: ["FEMA Compliance", "Transfer Pricing", "ESG Compliance", "Stock Broker License", "AIF Registration"] },
+            { label: "Specialised Compliance", icon: "📋", items: ["RBI Compliance", "SEBI Compliance", "IRDAI Compliance", "IFSCA Compliance"] },
         ],
         viewAll: "/services", viewAllLabel: "Explore All Solutions →"
     },
     Resources: {
         categories: [
-            { label: "Press & Media", icon: "📰", items: ["Latest News", "Media Coverage", "Press Releases", "Brand Assets", "Company Announcements", "Awards & Recognition"] },
-            { label: "Case Studies", icon: "📁", items: [] },
-            { label: "Guides & Articles", icon: "📖", items: [] },
+            { label: "Regulatory Updates", icon: "📰", items: ["Latest News", "Media Coverage", "Press Releases", "Company Announcements"] },
+            { label: "Case Highlights", icon: "📁", items: [] },
+            { label: "Guides & Insights", icon: "📖", items: [] },
             { label: "FAQs", icon: "❓", items: [] },
-            { label: "Free Tools", icon: "🔧", items: [] },
         ],
         viewAll: "/#", viewAllLabel: "View All Resources →"
     },

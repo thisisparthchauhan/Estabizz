@@ -31,31 +31,33 @@ export default function FinalCTA() {
             <div className="max-w-[800px] mx-auto px-6 relative z-10 text-center">
 
                 <div className={`transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-                    <h2 className="text-[36px] md:text-[48px] font-black text-white leading-[1.15] tracking-tight mb-6">
-                        Ready to Secure Your License?
+                    <h2 className="text-[36px] md:text-[48px] font-black text-white leading-[1.15] tracking-tight mb-4">
+                        Begin Your Licensing Process with Confidence
                     </h2>
 
                     <p className="text-[16px] md:text-[18px] text-[#94a3b8] leading-relaxed font-medium mb-10 max-w-2xl mx-auto">
-                        Do not let regulatory hurdles delay your launch. Partner with India's leading compliance experts and get your business operational faster.
+                        Regulatory approvals demand preparation, clarity, and disciplined execution. We guide you through every stage — from assessment to approval and beyond.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
                         <a href="/contact" className="relative overflow-hidden group w-full sm:w-auto bg-gradient-to-r from-[#10b981] to-[#059669] text-white font-bold text-[16px] rounded-[14px] px-10 py-5 shadow-[0_10px_30px_rgba(16,185,129,0.3)] hover:-translate-y-1 transition-all duration-300 text-center">
                             <span className="absolute top-0 -left-full w-1/2 h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-30 skew-x-[-20deg] group-hover:animate-[shine_1s_ease-out] z-0" />
                             <span className="relative z-10 flex items-center justify-center gap-2">
-                                Start Your Application Today <span className="group-hover:translate-x-1.5 transition-transform">→</span>
+                                Request a Structured Assessment <span className="group-hover:translate-x-1.5 transition-transform">→</span>
                             </span>
                         </a>
 
                         <a href="tel:+919825600907" className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white/20 text-white font-bold text-[16px] rounded-[14px] px-8 py-[18px] hover:bg-white/10 hover:border-white/40 transition-all duration-300">
-                            <span className="text-[20px]">📞</span> Talk to an Expert
+                            <span className="text-[20px]">📞</span> +91 98256 00907
                         </a>
                     </div>
 
-                    <div className="mt-8 text-[13px] text-[#94a3b8] font-medium flex items-center justify-center gap-4 flex-wrap">
-                        <span className="flex items-center gap-1.5"><span className="text-[#10b981]">✓</span> Free first consultation</span>
-                        <span className="flex items-center gap-1.5"><span className="text-[#10b981]">✓</span> Guaranteed confidentiality</span>
-                        <span className="flex items-center gap-1.5"><span className="text-[#10b981]">✓</span> Expert ex-regulator team</span>
+                    <div className="mt-10 text-[15px] text-white/70 font-semibold italic text-center">
+                        Regulatory strength begins with the right advisory partner.
+                    </div>
+
+                    <div className="mt-6 text-[12px] text-[#94a3b8] font-medium text-center">
+                        Trusted by regulated businesses across India and global financial centres.
                     </div>
                 </div>
 

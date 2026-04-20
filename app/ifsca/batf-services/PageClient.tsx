@@ -6,6 +6,7 @@ export default function PageClient() {
         { id: "introduction", title: "Introduction" },
         { id: "what-is-batf", title: "What are BATF Services" },
         { id: "regulatory-framework", title: "Regulatory Framework" },
+        { id: "definitions", title: "Key Definitions" },
         { id: "permitted-activities", title: "Permitted Activities" },
         { id: "eligibility", title: "Eligibility Conditions" },
         { id: "registration-process", title: "Registration Process" },
@@ -38,7 +39,7 @@ export default function PageClient() {
         },
         {
             q: "What are the fees for BATF Service Provider registration?",
-            a: "Application Fee: USD 1,000 per activity. Registration Fee: USD 5,000 per activity. Annual Fee: USD 5,000 to USD 10,000 per activity depending on employee count."
+            a: "Application Fee: USD 5,000 per activity (for entities with less than 500 employees), USD 7,500 (500–1,000 employees), USD 10,000 (more than 1,000 employees). Processing Fee: USD 5,000 per activity. Registration Fee: USD 1,000 per activity. Annual modification fee: 20% of Registration Fee. Relaxation/waiver fee: USD 1,000 per application."
         },
         {
             q: "Can BATF Service Providers serve Indian residents?",
@@ -97,9 +98,9 @@ export default function PageClient() {
                 { label: "Location", value: "GIFT IFSC, Gujarat" },
                 { label: "Regulation Year", value: "2024" },
                 { label: "Entity Type", value: "Company or LLP" },
-                { label: "Application Fee", value: "USD 1,000/activity" },
-                { label: "Registration Fee", value: "USD 5,000/activity" },
-                { label: "Annual Fee", value: "USD 5,000–10,000" },
+                { label: "Application Fee", value: "USD 5,000–10,000/activity" },
+                { label: "Processing Fee", value: "USD 5,000/activity" },
+                { label: "Registration Fee", value: "USD 1,000/activity" },
                 { label: "Entities Registered", value: "23+" },
             ]}
             relatedArticles={[
@@ -147,24 +148,27 @@ export default function PageClient() {
                             <td><strong>📊 Accounting Services</strong></td>
                             <td>
                                 <ul>
-                                    <li>Preparation of financial statements</li>
-                                    <li>Compilation of financial statements from information provided by the client</li>
                                     <li>Reviewing annual and interim financial statements or other accounting information without any attestation or assurance thereof</li>
+                                    <li>Compilation of financial statements from information provided by the client, without giving any attestation or assurances regarding the accuracy of the resulting statements</li>
+                                    <li>Preparation of financial statements</li>
+                                    <li>Compilation of income statements, balance sheets or other financial information</li>
                                     <li>Analysis of financial statements</li>
-                                    <li>Other related accounting support services including valuation support services</li>
+                                    <li>Other related accounting support services in relation to any of the above including valuation support services</li>
                                 </ul>
-                                <em>Note: Accounting Services do not include auditing services.</em>
+                                <em>Note: Accounting Services under this clause do not include auditing services.</em>
                             </td>
                         </tr>
                         <tr>
                             <td><strong>💰 Taxation Services</strong></td>
                             <td>
+                                Providing advice and guidance concerning taxes as well as preparing and filing of tax returns of all kinds.
                                 <ul>
                                     <li>Tax Consultation</li>
                                     <li>Tax Planning</li>
                                     <li>Preparing and filing of tax returns of all kinds</li>
                                     <li>Advice and guiding concerning taxes</li>
                                 </ul>
+                                <em>Explanation: Taxation Services include services in relation to all taxes, cesses, duties or levies.</em>
                             </td>
                         </tr>
                         <tr>
@@ -178,6 +182,9 @@ export default function PageClient() {
             {/* Regulatory Framework */}
             <section id="regulatory-framework">
                 <h2>Regulatory Framework</h2>
+                <div className="info-box">
+                    <strong>📌 Objective (Regulation 2):</strong> These regulations aim to put in place the regulatory framework relating to development, registration and operations of Book-keeping, Accounting, Taxation and Financial Crime Compliance Services from International Financial Services Centres.
+                </div>
                 <table className="data-table">
                     <thead>
                         <tr>
@@ -209,6 +216,53 @@ export default function PageClient() {
                         <tr>
                             <td>Chairperson</td>
                             <td>K. Rajaraman</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            {/* Definitions */}
+            <section id="definitions">
+                <h2>Key Definitions</h2>
+                <table className="data-table">
+                    <thead>
+                        <tr>
+                            <th>Term</th>
+                            <th>Definition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>BATF Service Provider</strong></td>
+                            <td>The entity registered under these regulations to undertake all or any of the following: (i) book-keeping services; (ii) accounting services; (iii) taxation services; (iv) financial crime compliance services.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Book-keeping Services</strong></td>
+                            <td>Classifying and recording transactions including payroll ledgers in terms of money or any other unit of measurement in the books of account and other related documents. <em>Note: Does not include payroll and taxation services.</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Accounting Services</strong></td>
+                            <td>Includes preparation, compilation, reviewing and analysis of financial statements and related accounting support services including valuation support. <em>Does not include auditing services.</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Taxation Services</strong></td>
+                            <td>Providing advice and guidance concerning taxes as well as preparing and filing of tax returns of all kinds. Includes services in relation to all taxes, cesses, duties or levies.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Financial Crime Compliance Services</strong></td>
+                            <td>Services rendered in relation to compliances of Anti-Money Laundering (AML) / Countering the Financing of Terrorism (CFT) measures and Financial Action Task Force (FATF) recommendations, and other related activities.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Group Entities</strong></td>
+                            <td>An arrangement involving two or more entities related through: (i) parent-subsidiary (Ind-AS 110/AS 21); (ii) joint venture (Ind-AS 28/AS 27); (iii) associate (Ind-AS 28/AS 23); (iv) common brand name; (v) investment in equity shares/capital contribution of 20% and above; or (vi) part of a network. <em>Explanation: &ldquo;Network&rdquo; refers to firms that have come together for mutual benefits by pooling resources, showcase their combined strength, uniform policies, technology and collaterals, and showcase themselves as one big unit, with one lead firm acting on behalf of member-firms.</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Specified Foreign Currency</strong></td>
+                            <td>As specified in Schedule of the IFSCA (Banking) Regulations, 2020 or any other regulation issued by the Authority.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Non-Resident</strong></td>
+                            <td>Has the same meaning as assigned under clause (g) of sub-section (1) of Section 3 of the IFSCA Act, as read with FEMA, 1999 (42 of 1999), and shall also include units in International Financial Service Centre.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -285,7 +339,7 @@ export default function PageClient() {
                         <div className="step-dot">1</div>
                         <div className="step-card">
                             <h4>Submit Application</h4>
-                            <p>Submit application to IFSCA in specified format along with non-refundable application fee (USD 1,000 per activity).</p>
+                            <p>Submit application to IFSCA in specified format along with non-refundable application fee — USD 5,000 per activity (for entities with &lt;500 employees), USD 7,500 (500–1,000 employees), or USD 10,000 (&gt;1,000 employees).</p>
                         </div>
                     </div>
                     <div className="step-item">
@@ -318,30 +372,63 @@ export default function PageClient() {
             {/* Fit and Proper */}
             <section id="fit-proper">
                 <h2>Fit and Proper Requirements (Chapter III)</h2>
-                <p>The BATF Service Provider shall ensure that the entity and its principal officer, directors/partners/designated partners, key managerial personnel and controlling shareholders are fit and proper persons at all times:</p>
+                <p>The BATF Service Provider shall ensure that the entity and its principal officer, directors/partners/designated partners, key managerial personnel and controlling shareholders are fit and proper persons at all times.</p>
+
+                <h3>Positive Criteria — A Fit and Proper Person Must Have:</h3>
+                <ul>
+                    <li>Financial integrity</li>
+                    <li>Good reputation and character</li>
+                    <li>Honesty</li>
+                </ul>
+
+                <h3>Disqualifications — A Person is NOT Fit and Proper if:</h3>
                 <table className="data-table">
                     <thead>
                         <tr>
-                            <th>Requirement</th>
-                            <th>Details</th>
+                            <th>Sr.</th>
+                            <th>Disqualification</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Fairness and Integrity</strong></td>
-                            <td>Record of financial integrity, good reputation and character, and honesty</td>
+                            <td>(i)</td>
+                            <td>Convicted by a court for any offence involving moral turpitude or any economic offence</td>
                         </tr>
                         <tr>
-                            <td><strong>No Convictions</strong></td>
-                            <td>Absence of convictions for offences involving moral turpitude or economic offences</td>
+                            <td>(ii)</td>
+                            <td>A recovery proceeding has been initiated against the person by a statutory body or financial regulatory authority and is pending</td>
                         </tr>
                         <tr>
-                            <td><strong>No Pending Proceedings</strong></td>
-                            <td>No pending recovery proceedings initiated by a statutory body</td>
+                            <td>(iii)</td>
+                            <td>An order for winding up has been passed against the person for malfeasance</td>
                         </tr>
                         <tr>
-                            <td><strong>No Regulatory Orders</strong></td>
-                            <td>No adverse orders from regulatory authorities affecting fitness</td>
+                            <td>(iv)</td>
+                            <td>Declared an undischarged insolvent</td>
+                        </tr>
+                        <tr>
+                            <td>(v)</td>
+                            <td>An order restraining, prohibiting or debarring the person from accessing, providing or dealing in financial products or financial services has been passed by any regulatory authority, and a period of three (3) years from the date of expiry of the order has not elapsed</td>
+                        </tr>
+                        <tr>
+                            <td>(vi)</td>
+                            <td>Any other order against the person has been passed by the Authority or any other regulatory authority, and a period of three (3) years from the date of the order has not elapsed</td>
+                        </tr>
+                        <tr>
+                            <td>(vii)</td>
+                            <td>Found to be of unsound mind by a court of competent jurisdiction and the finding is in force</td>
+                        </tr>
+                        <tr>
+                            <td>(viii)</td>
+                            <td>Financially not sound or has been categorised as a wilful defaulter</td>
+                        </tr>
+                        <tr>
+                            <td>(ix)</td>
+                            <td>Declared a fugitive economic offender</td>
+                        </tr>
+                        <tr>
+                            <td>(x)</td>
+                            <td>Any other disqualification as may be specified by the Authority</td>
                         </tr>
                     </tbody>
                 </table>
@@ -449,37 +536,37 @@ export default function PageClient() {
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Application Fee</strong></td>
-                            <td>USD 1,000 per activity</td>
+                            <td><strong>Application Fee (&lt;500 employees)</strong></td>
+                            <td>USD 5,000 per activity</td>
                             <td>One time (non-refundable)</td>
                         </tr>
                         <tr>
-                            <td><strong>Registration Fee</strong></td>
+                            <td><strong>Application Fee (500–1,000 employees)</strong></td>
+                            <td>USD 7,500 per activity</td>
+                            <td>One time (non-refundable)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Application Fee (&gt;1,000 employees)</strong></td>
+                            <td>USD 10,000 per activity</td>
+                            <td>One time (non-refundable)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Processing Fee</strong></td>
                             <td>USD 5,000 per activity</td>
                             <td>One time</td>
                         </tr>
                         <tr>
-                            <td><strong>Annual Fee (&lt;500 employees)</strong></td>
-                            <td>USD 5,000 per activity</td>
-                            <td>Recurring</td>
+                            <td><strong>Registration Fee</strong></td>
+                            <td>USD 1,000 per activity</td>
+                            <td>One time</td>
                         </tr>
                         <tr>
-                            <td><strong>Annual Fee (500–1,000 employees)</strong></td>
-                            <td>USD 7,500 per activity</td>
-                            <td>Recurring</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Annual Fee (&gt;1,000 employees)</strong></td>
-                            <td>USD 10,000 per activity</td>
-                            <td>Recurring</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Modification of Terms</strong></td>
+                            <td><strong>Annual Fee — Modification of Terms &amp; Conditions</strong></td>
                             <td>20% of Registration Fee</td>
                             <td>Per modification</td>
                         </tr>
                         <tr>
-                            <td><strong>Relaxation/Waiver</strong></td>
+                            <td><strong>Annual Fee — Relaxation / Waiver</strong></td>
                             <td>USD 1,000</td>
                             <td>Per application (non-refundable)</td>
                         </tr>
@@ -622,11 +709,22 @@ export default function PageClient() {
             <section id="enforcement">
                 <h2>Enforcement & Penalties</h2>
                 <div className="warning-box">
-                    <strong>⚠️ Action in Case of Default (Regulation 18):</strong> A BATF Service Provider who contravenes any provisions of these regulations, guidelines, circulars or directions shall be liable for enforcement action under the Act, including but not limited to <strong>suspension or cancellation of registration</strong>. No enforcement action shall be taken without giving reasonable opportunity to the BATF Service Provider to make its submissions.
+                    <strong>⚠️ Action in Case of Default (Regulation 18):</strong> A BATF Service Provider who contravenes any provisions of these regulations, guidelines, circulars or directions made thereunder, shall be liable for enforcement action under the Act, including but not limited to <strong>suspension or cancellation of registration</strong>. No enforcement action shall be taken without giving reasonable opportunity to the BATF Service Provider to make its submissions.
                 </div>
-                <p>
-                    The Authority may also relax strict enforcement of any requirements for reasons recorded in writing, in the interest of development of financial markets in IFSC (Regulation 15). A non-refundable fee applies for seeking such relaxation.
-                </p>
+
+                <h3>Power to Relax Strict Enforcement (Regulation 15)</h3>
+                <p>The Authority, for reasons to be recorded in writing, may in the interest of development of financial market in IFSC, relax the strict enforcement of any requirements of these regulations. For seeking relaxation:</p>
+                <ul>
+                    <li>An application giving details and grounds for relaxation shall be filed with a non-refundable fee</li>
+                    <li>IFSCA shall process such application within sixty (60) days of receipt, complete in all respects</li>
+                    <li>Reasons for acceptance or refusal shall be recorded</li>
+                </ul>
+
+                <h3>Power to Specify Norms and Issue Clarifications (Regulation 16)</h3>
+                <ul>
+                    <li>For implementation of these regulations, the Authority may specify norms, procedures, processes, additional requirements by way of circulars, guidelines or directions</li>
+                    <li>To remove difficulties in interpretation or application of provisions, the Authority may issue directions through guidance notes or circulars</li>
+                </ul>
             </section>
 
             {/* FAQs */}

@@ -99,6 +99,9 @@ export default function HeroSection() {
                         <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
                             <span className="w-2 h-2 rounded-full bg-[#0096D6]"></span> {isMounted ? <StatCount end={1000} suffix="+" /> : "1000+"} Businesses Served
                         </div>
+                        <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
+                            <span className="w-2 h-2 rounded-full bg-[#F59E0B]"></span> Pan India Services
+                        </div>
                     </div>
 
                     {/* CTA Buttons */}

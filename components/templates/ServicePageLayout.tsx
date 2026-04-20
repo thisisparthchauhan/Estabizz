@@ -197,13 +197,31 @@ export default function ServicePageLayout({
               .article-content h3{font-size:18px;font-weight:700;color:#0077B6;padding:16px 0 4px;scroll-margin-top:80px}
               .article-content h4{font-size:15px;font-weight:700;color:#0a1628;margin-bottom:8px}
               .article-content p{font-size:15px;line-height:1.85;color:#374151;margin-bottom:16px}
-              .article-content ul{padding-left:8px;margin-bottom:24px}
-              .article-content li{display:flex;align-items:flex-start;margin-bottom:8px;font-size:15px;color:#374151;line-height:1.85}
-              .article-content li::before{content:'◆';color:#0096D6;font-size:10px;margin-right:12px;margin-top:6px;flex-shrink:0}
+              .article-content ul,.article-content ol{padding-left:4px;margin-bottom:24px}
+              .article-content ul{list-style:none}
+              .article-content ol{list-style:none;counter-reset:li-counter}
+              .article-content li{position:relative;padding-left:22px;margin-bottom:10px;font-size:15px;color:#374151;line-height:1.85;display:block}
+              .article-content ul>li::before{content:'◆';color:#0096D6;font-size:10px;position:absolute;left:0;top:7px;line-height:1}
+              .article-content ol>li::before{counter-increment:li-counter;content:counter(li-counter)'.';color:#0096D6;font-size:12px;font-weight:700;position:absolute;left:0;top:3px;line-height:1}
+              .article-content li strong{color:#0a1628}
+              .article-content li a{color:#0096D6;text-decoration:underline}
+              .article-content p a,.article-content td a{color:#0096D6;text-decoration:underline}
+              .article-content p strong{color:#0a1628}
               .numbered-card{background:white;border:1px solid rgba(0,150,220,0.1);border-radius:12px;padding:16px 20px;transition:all 0.3s;margin-bottom:12px;display:flex;align-items:flex-start;gap:16px}
               .numbered-card:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,100,200,0.08);border-color:rgba(0,150,220,0.3)}
               .num-badge{width:32px;height:32px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,#0096D6,#10b981);color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px}
+              .faq-accordion{margin:24px 0}
+              .faq-item{border:1px solid #e2e8f0;border-radius:12px;margin-bottom:10px;overflow:hidden;background:white}
+              .faq-item summary{padding:16px 20px;cursor:pointer;font-weight:600;font-size:15px;color:#0a1628;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+              .faq-item summary::-webkit-details-marker{display:none}
+              .faq-item summary::after{content:'▼';color:#0096D6;font-size:11px;flex-shrink:0;transition:transform 0.2s}
+              .faq-item[open] summary::after{transform:rotate(180deg)}
+              .faq-item summary:hover{background:#f0f9ff}
+              .faq-item>div{padding:0 20px 16px 20px;font-size:14px;color:#374151;line-height:1.75;border-top:1px solid #f1f5f9}
               .faq-accordion summary::-webkit-details-marker{display:none}
+              .expert-quote{background:linear-gradient(135deg,#f0f9ff,#eff6ff);border-left:4px solid #0096D6;border-radius:0 12px 12px 0;padding:20px 24px;margin:32px 0}
+              .expert-quote blockquote{font-size:16px;font-style:italic;color:#0a1628;line-height:1.75;margin:0 0 10px 0}
+              .expert-quote cite{font-size:13px;color:#64748b;font-style:normal;font-weight:600}
               .info-box{background:rgba(0,150,220,0.04);border:1px solid rgba(0,150,220,0.15);border-left:4px solid #0096D6;border-radius:12px;padding:20px 24px;margin:24px 0}
               .warning-box{background:rgba(245,158,11,0.06);border:1px solid #fcd34d;border-left:4px solid #F59E0B;border-radius:12px;padding:20px 24px;margin:24px 0}
               .success-box{background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.2);border-left:4px solid #10b981;border-radius:12px;padding:20px 24px;margin:24px 0}

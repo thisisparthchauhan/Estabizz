@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
     title: "SEBI Services – Registration, Compliance & Licensing Guide | Estabizz Fintech",
@@ -26,7 +24,6 @@ const services = [
 export default function Page() {
     return (
         <>
-        <Navbar />
         <div className="bg-[#f8faff] min-h-screen pt-16">
             <section className="relative py-16 px-6 border-b border-blue-100 overflow-hidden"
                 style={{ background: "linear-gradient(135deg, #f0f9ff, #e0f2fe, #eff6ff)" }}>
@@ -77,7 +74,6 @@ export default function Page() {
                 </div>
             </section>
         </div>
-        <Footer />
         </>
     );
 }

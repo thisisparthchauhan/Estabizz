@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { faqGroups, FAQGroup } from "./faqData";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 /* ─── constants ─── */
 const tocItems = [
@@ -171,7 +169,6 @@ export default function FinanceCompanyArticleClient() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#f8faff] to-[#f0f9ff] text-[#374151] font-sans">
             {/* Navbar */}
-            <Navbar />
             {/* Progress bar */}
             <div className="fixed top-[64px] left-0 h-[3px] z-[200]" style={{ width: `${progress}%`, background: "linear-gradient(90deg,#0096D6,#10b981)" }} />
 
@@ -526,7 +523,6 @@ export default function FinanceCompanyArticleClient() {
             </section>
 
             {/* Footer */}
-            <Footer />
 
         </div>
     );

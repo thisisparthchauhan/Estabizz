@@ -1,6 +1,4 @@
 "use client";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/home/HeroSection";
 import TrustedBy from "@/components/home/TrustedBy";
 import SolutionsSection from "@/components/home/SolutionsSection";
@@ -47,7 +45,6 @@ export default function Home() {
             {/* Scroll Progress Bar */}
             {/* Removed */}
 
-            <Navbar />
 
             <main>
                 <HeroSection />
@@ -64,7 +61,6 @@ export default function Home() {
                 <FinalCTA />
             </main>
 
-            <Footer />
 
             {/* Scroll To Top Button */}
             {/* Removed */}

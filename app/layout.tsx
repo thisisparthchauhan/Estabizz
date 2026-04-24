@@ -3,6 +3,8 @@ import LiveBackground from "@/components/ui/LiveBackground";
 import ReadingProgress from "@/components/ui/ReadingProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import ChatWidget from "@/components/ui/ChatWidget";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import "@/app/globals.css"; // Assuming the user will have this
 
 export const metadata: Metadata = {
@@ -24,7 +26,9 @@ export default function RootLayout({
                 <LiveBackground />
                 <ReadingProgress />
                 <div className="relative z-10 w-full min-h-screen bg-transparent">
+                    <Navbar />
                     {children}
+                    <Footer />
                 </div>
                 <ScrollToTop />
                 <ChatWidget />

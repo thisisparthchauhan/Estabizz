@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
     title: "Our Regulatory Services - RBI, SEBI, IFSCA, IRDAI & FEMA Compliance | Estabizz Fintech",
@@ -104,7 +102,6 @@ const categories = [
 export default function RegulatoryPage() {
     return (
         <>
-        <Navbar />
         <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-16">
             {/* Hero */}
             <section className="relative bg-gradient-to-r from-[#0B1B2B] to-[#1a3a5c] text-white py-20 px-4">
@@ -177,7 +174,6 @@ export default function RegulatoryPage() {
                 </div>
             </section>
         </main>
-        <Footer />
         </>
     );
 }

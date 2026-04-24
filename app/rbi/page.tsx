@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
     title: "RBI Services – NBFC Registration, Account Aggregator & Compliance | Estabizz Fintech",
@@ -26,7 +24,6 @@ const services = [
 export default function Page() {
     return (
         <>
-        <Navbar />
         <div className="bg-[#f8faff] min-h-screen pt-16">
             {/* Hero */}
             <section className="relative py-16 px-6 border-b border-blue-100 overflow-hidden"
@@ -82,7 +79,6 @@ export default function Page() {
                 </div>
             </section>
         </div>
-        <Footer />
         </>
     );
 }

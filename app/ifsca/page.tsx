@@ -1,6 +1,4 @@
 import type { Metadata } from 'next';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
     title: "IFSCA Services - Finance Company, Aircraft Leasing, PSP License, FinTech, ITFS, BATF & More | Estabizz Fintech",
@@ -78,7 +76,6 @@ const services = [
 export default function IFSCAPage() {
     return (
         <>
-        <Navbar />
         <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-16">
             {/* Hero */}
             <section className="relative bg-gradient-to-r from-[#0B1B2B] to-[#1a3a5c] text-white py-20 px-4">
@@ -143,7 +140,6 @@ export default function IFSCAPage() {
                 </div>
             </section>
         </main>
-        <Footer />
         </>
     );
 }

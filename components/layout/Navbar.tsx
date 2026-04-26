@@ -169,6 +169,9 @@ export default function Navbar() {
 
                     {/* Right */}
                     <div className="hidden xl:flex items-center gap-3">
+                        <a href="https://www.estabizz.com/" target="_blank" rel="noopener noreferrer" className="text-[13.5px] font-semibold text-[#64748b] hover:text-[#0096D6] transition-colors px-3 py-2 border-r border-gray-200 pr-4">
+                            📚 Old Site
+                        </a>
                         <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
                             Login
                         </Link>
@@ -266,8 +269,11 @@ export default function Navbar() {
                                 </div>
                             </details>
                         ))}
-                        <Link href="/pricing" className="block text-[15px] font-bold text-[#0a1628] py-2">Pricing</Link>
-                        <Link href="/login" className="block text-[15px] font-bold text-[#0a1628] py-2">Login</Link>
+                        <div className="border-t border-gray-100 pt-4 mt-4">
+                            <a href="https://www.estabizz.com/" target="_blank" rel="noopener noreferrer" className="block text-[15px] font-bold text-[#64748b] hover:text-[#0096D6] py-2">📚 Visit Old Site</a>
+                            <Link href="/pricing" className="block text-[15px] font-bold text-[#0a1628] py-2">Pricing</Link>
+                            <Link href="/login" className="block text-[15px] font-bold text-[#0a1628] py-2">Login</Link>
+                        </div>
                         <Link href="/get-started" className="block w-full text-center bg-[#0a1628] text-white font-bold text-[14px] rounded-lg py-3 mt-4">Get Started</Link>
                     </div>
                 </div>

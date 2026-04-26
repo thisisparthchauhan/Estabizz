@@ -590,14 +590,14 @@ Risk Areas to Focus On:
     {
       category: 'Inspection & Enforcement',
       faqs: [
-        { q: 'Can IRDAI inspect a Corporate Agent's operations?', a: 'Yes. IRDAI has the authority to conduct on-site inspections to verify compliance.' },
+        { q: 'Can IRDAI inspect a Corporate Agent\'s operations?', a: 'Yes. IRDAI has the authority to conduct on-site inspections to verify compliance.' },
         { q: 'How often are inspections conducted?', a: 'Inspections are conducted periodically, typically once in 2-3 years, or more frequently if risks are identified.' },
         { q: 'What is covered in an inspection?', a: 'Inspections cover compliance with regulations, client record maintenance, grievance handling, training, and financial management.' },
         { q: 'What happens after an inspection?', a: 'IRDAI issues an inspection report detailing findings and provides a timeline for corrective action.' },
         { q: 'Can inspection findings be appealed?', a: 'Yes. The corporate agent can submit a reply to inspection findings with supporting evidence.' },
         { q: 'What are consequences of serious compliance violations?', a: 'Serious violations can result in penalties, suspension, or cancellation of registration.' },
         { q: 'Is there a penalty schedule?', a: 'Yes. IRDAI has a defined penalty structure for various non-compliances.' },
-        { q: 'Can penalties be appealed?', a: 'Yes. Penalties can be appealed through IRDAI's appellate process.' },
+        { q: 'Can penalties be appealed?', a: 'Yes. Penalties can be appealed through IRDAI\'s appellate process.' },
         { q: 'What is the process for suspension?', a: 'IRDAI issues a show-cause notice, allows response, and then issues a suspension order with a rectification period.' },
         { q: 'Can registration be cancelled?', a: 'Yes. Registration can be cancelled for serious violations, fraud, or non-compliance that cannot be rectified.' }
       ]
@@ -651,7 +651,7 @@ Risk Areas to Focus On:
       category: 'Problem Resolution & Grievance',
       faqs: [
         { q: 'What is the grievance redressal process?', a: 'Grievances must be acknowledged within 5 days, investigated, and resolved within 30 days, with documentation maintained.' },
-        { q: 'Where can clients lodge grievances?', a: 'Clients can lodge grievances through the Corporate Agent's office, email, phone, or through IRDAI directly.' },
+        { q: 'Where can clients lodge grievances?', a: 'Clients can lodge grievances through the Corporate Agent\'s office, email, phone, or through IRDAI directly.' },
         { q: 'What are common grievance types?', a: 'Common grievances include policy-related disputes, commission disputes, service delays, and sales practice issues.' },
         { q: 'How are grievances tracked and reported?', a: 'Corporate agents must maintain a grievance register and report statistics to IRDAI quarterly.' },
         { q: 'Can clients escalate to IRDAI if unresolved?', a: 'Yes. Unresolved grievances can be escalated to IRDAI or the IRDAI Ombudsman.' },

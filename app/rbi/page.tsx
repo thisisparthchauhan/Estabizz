@@ -20,6 +20,7 @@ const services = [
     { href: "/rbi/rbi-services", title: "RBI Services in India", desc: "Comprehensive overview of RBI regulatory services and compliance framework.", tag: "RBI", emoji: "🏛️" },
     { href: "/rbi/nbfc-financial-modeling", title: "NBFC Financial Modeling", desc: "Expert financial modeling and projections for NBFC registration and operations.", tag: "RBI", emoji: "📈" },
     { href: "/rbi/arc-registration-in-india", title: "ARC Registration in India", desc: "Complete RBI Master Direction 2024 guide for Asset Reconstruction Companies under SARFAESI Act with ₹300 Cr NOF, capital adequacy, governance and SR framework.", tag: "RBI", emoji: "🏦" },
+    { href: "/rbi/nbfc-registration-in-india", title: "NBFC Registration in India", desc: "Authoritative RBI Master Direction (Updated July 17, 2025) guide for NBFC-ICC Base Layer registration with ₹10 Cr NOF, 50-50 principal business test, COSMOS portal process and SBR compliance.", tag: "RBI", emoji: "💳" },
 ];
 
 export default function Page() {

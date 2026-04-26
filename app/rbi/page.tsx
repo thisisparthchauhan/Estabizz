@@ -22,6 +22,7 @@ const services = [
     { href: "/rbi/arc-registration-in-india", title: "ARC Registration in India", desc: "Complete RBI Master Direction 2024 guide for Asset Reconstruction Companies under SARFAESI Act with ₹300 Cr NOF, capital adequacy, governance and SR framework.", tag: "RBI", emoji: "🏦" },
     { href: "/rbi/nbfc-registration-in-india", title: "NBFC Registration in India", desc: "Authoritative RBI Master Direction (Updated July 17, 2025) guide for NBFC-ICC Base Layer registration with ₹10 Cr NOF, 50-50 principal business test, COSMOS portal process and SBR compliance.", tag: "RBI", emoji: "💳" },
     { href: "/rbi/nbfc-sro-registration", title: "NBFC SRO Registration", desc: "RBI Self-Regulatory Organisation framework for NBFC industry bodies — ₹2 Cr net worth, governance independence, member representation and recognition application process.", tag: "RBI", emoji: "🛡️" },
+    { href: "/rbi/payment-aggregator-license-in-india", title: "Payment Aggregator License", desc: "RBI PA Master Direction 2025 guide for PA-O, PA-P, PA-CB authorisation with ₹15 Cr → ₹25 Cr net worth, escrow architecture, Annexure 1 technology compliance and FIU-IND registration.", tag: "RBI", emoji: "💸" },
 ];
 
 export default function Page() {

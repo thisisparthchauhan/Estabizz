@@ -23,6 +23,7 @@ const services = [
     { href: "/rbi/nbfc-registration-in-india", title: "NBFC Registration in India", desc: "Authoritative RBI Master Direction (Updated July 17, 2025) guide for NBFC-ICC Base Layer registration with ₹10 Cr NOF, 50-50 principal business test, COSMOS portal process and SBR compliance.", tag: "RBI", emoji: "💳" },
     { href: "/rbi/nbfc-sro-registration", title: "NBFC SRO Registration", desc: "RBI Self-Regulatory Organisation framework for NBFC industry bodies — ₹2 Cr net worth, governance independence, member representation and recognition application process.", tag: "RBI", emoji: "🛡️" },
     { href: "/rbi/payment-aggregator-license-in-india", title: "Payment Aggregator License", desc: "RBI PA Master Direction 2025 guide for PA-O, PA-P, PA-CB authorisation with ₹15 Cr → ₹25 Cr net worth, escrow architecture, Annexure 1 technology compliance and FIU-IND registration.", tag: "RBI", emoji: "💸" },
+    { href: "/rbi/ppi-registration-in-india", title: "PPI Registration in India", desc: "RBI Master Directions on PPI 2021 (Updated Dec 2024) guide for digital wallets and prepaid cards — ₹5 Cr → ₹15 Cr net worth, escrow framework, Form A, System Audit Report, interoperability and customer liability.", tag: "RBI", emoji: "👛" },
 ];
 
 export default function Page() {

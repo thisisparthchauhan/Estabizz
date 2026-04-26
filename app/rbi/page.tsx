@@ -19,6 +19,7 @@ const services = [
     { href: "/rbi/nbfc-marketing-strategy", title: "NBFC Marketing Strategy", desc: "Compliant marketing strategies and digital outreach for NBFC businesses.", tag: "RBI", emoji: "📢" },
     { href: "/rbi/rbi-services", title: "RBI Services in India", desc: "Comprehensive overview of RBI regulatory services and compliance framework.", tag: "RBI", emoji: "🏛️" },
     { href: "/rbi/nbfc-financial-modeling", title: "NBFC Financial Modeling", desc: "Expert financial modeling and projections for NBFC registration and operations.", tag: "RBI", emoji: "📈" },
+    { href: "/rbi/arc-registration-in-india", title: "ARC Registration in India", desc: "Complete RBI Master Direction 2024 guide for Asset Reconstruction Companies under SARFAESI Act with ₹300 Cr NOF, capital adequacy, governance and SR framework.", tag: "RBI", emoji: "🏦" },
 ];
 
 export default function Page() {

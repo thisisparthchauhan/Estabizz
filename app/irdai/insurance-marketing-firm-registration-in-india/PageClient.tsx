@@ -639,8 +639,18 @@ It is not ideal for casual or commission-only operators.`
 
   return (
     <ServicePageLayout
-      tags={['IRDAI', 'Insurance Marketing Firm', 'IMF', 'IRDAI Regulations 2015', 'Insurance Distribution']}
-      breadcrumb={['Home', 'IRDAI Services', 'Insurance Marketing Firm Registration']}
+      tags={[
+        { emoji: '🛡️', label: 'IRDAI' },
+        { emoji: '📣', label: 'Insurance Marketing Firm' },
+        { emoji: '📣', label: 'IMF' },
+        { emoji: '📜', label: 'IRDAI Regulations 2015' },
+        { emoji: '📦', label: 'Insurance Distribution' }
+      ]}
+      breadcrumb={[
+        { label: 'Home', href: '/' },
+        { label: 'IRDAI Services', href: '/irdai' },
+        { label: 'Insurance Marketing Firm Registration' }
+      ]}
       title="Insurance Marketing Firm Registration in India"
       readTime="18 min read"
       focusKeyword="Insurance Marketing Firm Registration in India"
@@ -662,10 +672,10 @@ It is not ideal for casual or commission-only operators.`
         { label: 'Lines Available', value: 'Life, General, Health' }
       ]}
       relatedArticles={[
-        { title: 'IRDA Insurance Broker License', href: '/irdai/irda-insurance-broker-license' },
-        { title: 'Insurance Broker Registration', href: '/irdai/insurance-broker-registration-in-india' },
-        { title: 'Composite Insurance Broker Registration', href: '/irdai/composite-insurance-broker-registration-in-india' },
-        { title: 'Corporate Agent Registration', href: '/irdai/corporate-agent-registration-in-india' }
+        { title: 'IRDA Insurance Broker License', href: '/irdai/irda-insurance-broker-license', category: 'IRDAI', description: 'IRDA Insurance Broker License — complete regulatory guide.' },
+        { title: 'Insurance Broker Registration', href: '/irdai/insurance-broker-registration-in-india', category: 'IRDAI', description: 'Insurance Broker Registration — complete regulatory guide.' },
+        { title: 'Composite Insurance Broker Registration', href: '/irdai/composite-insurance-broker-registration-in-india', category: 'IRDAI', description: 'Composite Insurance Broker Registration — complete regulatory guide.' },
+        { title: 'Corporate Agent Registration', href: '/irdai/corporate-agent-registration-in-india', category: 'IRDAI', description: 'Corporate Agent Registration — complete regulatory guide.' }
       ]}
       finalCtaTitle="Need Expert Support for Insurance Marketing Firm Registration?"
       finalCtaDescription="Our compliance specialists provide end-to-end support for IRDAI registration, capital structuring, Principal Officer onboarding, ISP framework, and ongoing compliance."

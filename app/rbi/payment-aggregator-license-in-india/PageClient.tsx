@@ -564,8 +564,20 @@ For fintech founders, early compliance structuring is not an expense — it is a
 
   return (
     <ServicePageLayout
-      tags={['RBI', 'Payment Aggregator', 'PA Master Direction 2025', 'PSS Act 2007', 'PA-O', 'PA-P', 'PA-CB']}
-      breadcrumb={['Home', 'RBI Services', 'Payment Aggregator License']}
+      tags={[
+        { emoji: '🏦', label: 'RBI' },
+        { emoji: '💸', label: 'Payment Aggregator' },
+        { emoji: '📜', label: 'PA Master Direction 2025' },
+        { emoji: '⚖️', label: 'PSS Act 2007' },
+        { emoji: '🌐', label: 'PA-O' },
+        { emoji: '🏪', label: 'PA-P' },
+        { emoji: '🌍', label: 'PA-CB' }
+      ]}
+      breadcrumb={[
+        { label: 'Home', href: '/' },
+        { label: 'RBI Services', href: '/rbi' },
+        { label: 'Payment Aggregator License' }
+      ]}
       title="Payment Aggregator License in India"
       readTime="28 min read"
       focusKeyword="Payment Aggregator License in India"
@@ -587,12 +599,12 @@ For fintech founders, early compliance structuring is not an expense — it is a
         { label: 'Tech Compliance', value: 'Annexure 1 — 18 mandatory points' }
       ]}
       relatedArticles={[
-        { title: 'NBFC Registration in India', href: '/rbi/nbfc-registration-in-india' },
-        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license' },
-        { title: 'NBFC SRO Registration', href: '/rbi/nbfc-sro-registration' },
-        { title: 'ARC Registration in India', href: '/rbi/arc-registration-in-india' },
-        { title: 'LendTech Services', href: '/rbi/lendtech-services' },
-        { title: 'Full-Fledged Money Changers License', href: '/rbi/full-fledged-money-changers' }
+        { title: 'NBFC Registration in India', href: '/rbi/nbfc-registration-in-india', category: 'RBI', description: 'NBFC Registration in India — complete regulatory guide.' },
+        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license', category: 'RBI', description: 'NBFC Account Aggregator License — complete regulatory guide.' },
+        { title: 'NBFC SRO Registration', href: '/rbi/nbfc-sro-registration', category: 'RBI', description: 'NBFC SRO Registration — complete regulatory guide.' },
+        { title: 'ARC Registration in India', href: '/rbi/arc-registration-in-india', category: 'RBI', description: 'ARC Registration in India — complete regulatory guide.' },
+        { title: 'LendTech Services', href: '/rbi/lendtech-services', category: 'RBI', description: 'LendTech Services — complete regulatory guide.' },
+        { title: 'Full-Fledged Money Changers License', href: '/rbi/full-fledged-money-changers', category: 'RBI', description: 'Full-Fledged Money Changers License — complete regulatory guide.' }
       ]}
       finalCtaTitle="Need Expert Support for Payment Aggregator Authorisation?"
       finalCtaDescription="Our compliance specialists provide end-to-end PA authorisation support — pre-application net-worth audit, MoA review, Annexure 1 (18-point) tech gap assessment, all Board-approved policies, statutory auditor co-ordination, online portal submission, query handling, escrow account setup, FIU-IND registration, and ongoing compliance reporting."

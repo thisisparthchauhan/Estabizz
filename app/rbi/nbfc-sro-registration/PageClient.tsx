@@ -331,8 +331,18 @@ For industry bodies serious about long-term sector development, NBFC SRO Registr
 
   return (
     <ServicePageLayout
-      tags={['RBI', 'NBFC SRO', 'Self-Regulatory Organisation', 'Industry Body', 'Governance']}
-      breadcrumb={['Home', 'RBI Services', 'NBFC SRO Registration']}
+      tags={[
+        { emoji: '🏦', label: 'RBI' },
+        { emoji: '🛡️', label: 'NBFC SRO' },
+        { emoji: '🏛️', label: 'Self-Regulatory Organisation' },
+        { emoji: '🏢', label: 'Industry Body' },
+        { emoji: '⚖️', label: 'Governance' }
+      ]}
+      breadcrumb={[
+        { label: 'Home', href: '/' },
+        { label: 'RBI Services', href: '/rbi' },
+        { label: 'NBFC SRO Registration' }
+      ]}
       title="NBFC SRO Registration"
       readTime="15 min read"
       focusKeyword="NBFC SRO Registration"
@@ -354,11 +364,11 @@ For industry bodies serious about long-term sector development, NBFC SRO Registr
         { label: 'Inspection Power', value: 'Retained by RBI' }
       ]}
       relatedArticles={[
-        { title: 'NBFC Registration in India', href: '/rbi/nbfc-registration-in-india' },
-        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license' },
-        { title: 'NBFC Business Plan', href: '/rbi/nbfc-business-plan' },
-        { title: 'NBFC Legal Support Services', href: '/rbi/nbfc-legal-support' },
-        { title: 'ARC Registration in India', href: '/rbi/arc-registration-in-india' }
+        { title: 'NBFC Registration in India', href: '/rbi/nbfc-registration-in-india', category: 'RBI', description: 'NBFC Registration in India — complete regulatory guide.' },
+        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license', category: 'RBI', description: 'NBFC Account Aggregator License — complete regulatory guide.' },
+        { title: 'NBFC Business Plan', href: '/rbi/nbfc-business-plan', category: 'RBI', description: 'NBFC Business Plan — complete regulatory guide.' },
+        { title: 'NBFC Legal Support Services', href: '/rbi/nbfc-legal-support', category: 'RBI', description: 'NBFC Legal Support Services — complete regulatory guide.' },
+        { title: 'ARC Registration in India', href: '/rbi/arc-registration-in-india', category: 'RBI', description: 'ARC Registration in India — complete regulatory guide.' }
       ]}
       finalCtaTitle="Need Expert Support for NBFC SRO Recognition?"
       finalCtaDescription="Our compliance specialists provide end-to-end support for SRO recognition applications — governance design, ₹2 Crore net worth planning, member representation strategy, business plan, policy drafting, and ongoing post-recognition compliance."

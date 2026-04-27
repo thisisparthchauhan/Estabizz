@@ -1000,8 +1000,20 @@ AIF Registration in India is not just a licensing process — it is the creation
 
   return (
     <ServicePageLayout
-      tags={['SEBI', 'AIF', 'Alternative Investment Fund', 'AIF Regulations 2012', 'Category I', 'Category II', 'Category III']}
-      breadcrumb={['Home', 'SEBI Services', 'AIF Registration']}
+      tags={[
+        { emoji: '📊', label: 'SEBI' },
+        { emoji: '💎', label: 'AIF' },
+        { emoji: '💎', label: 'Alternative Investment Fund' },
+        { emoji: '📜', label: 'AIF Regulations 2012' },
+        { emoji: '1️⃣', label: 'Category I' },
+        { emoji: '2️⃣', label: 'Category II' },
+        { emoji: '3️⃣', label: 'Category III' }
+      ]}
+      breadcrumb={[
+        { label: 'Home', href: '/' },
+        { label: 'SEBI Services', href: '/sebi' },
+        { label: 'AIF Registration' }
+      ]}
       title="AIF Registration in India"
       readTime="30 min read"
       focusKeyword="AIF Registration in India"
@@ -1023,12 +1035,12 @@ AIF Registration in India is not just a licensing process — it is the creation
         { label: 'Approval Timeline', value: '3–6 months' }
       ]}
       relatedArticles={[
-        { title: 'AIF Compliance Test Report', href: '/sebi/aif-compliance-test-report' },
-        { title: 'Alternative Asset Portfolio Valuation', href: '/sebi/alternative-asset-portfolio-valuation' },
-        { title: 'Mutual Fund Registration', href: '/sebi/mutual-fund-registration' },
-        { title: 'AMFI Registration', href: '/sebi/amfi-registration' },
-        { title: 'REIT Registration', href: '/sebi/reit-registration' },
-        { title: 'Collective Investment Schemes', href: '/sebi/collective-investment-schemes' }
+        { title: 'AIF Compliance Test Report', href: '/sebi/aif-compliance-test-report', category: 'SEBI', description: 'AIF Compliance Test Report — complete regulatory guide.' },
+        { title: 'Alternative Asset Portfolio Valuation', href: '/sebi/alternative-asset-portfolio-valuation', category: 'SEBI', description: 'Alternative Asset Portfolio Valuation — complete regulatory guide.' },
+        { title: 'Mutual Fund Registration', href: '/sebi/mutual-fund-registration', category: 'SEBI', description: 'Mutual Fund Registration — complete regulatory guide.' },
+        { title: 'AMFI Registration', href: '/sebi/amfi-registration', category: 'SEBI', description: 'AMFI Registration — complete regulatory guide.' },
+        { title: 'REIT Registration', href: '/sebi/reit-registration', category: 'SEBI', description: 'REIT Registration — complete regulatory guide.' },
+        { title: 'Collective Investment Schemes', href: '/sebi/collective-investment-schemes', category: 'SEBI', description: 'Collective Investment Schemes — complete regulatory guide.' }
       ]}
       finalCtaTitle="Need Expert Support for AIF Registration?"
       finalCtaDescription="Our compliance specialists provide end-to-end AIF registration support — Trust/LLP structuring, PPM drafting (40-clause framework), Form A filing, SEBI query management, Investment Committee constitution, sponsor continuing interest planning, and ongoing post-registration compliance including PPM audit, Compliance Test Report, and category-specific reporting."

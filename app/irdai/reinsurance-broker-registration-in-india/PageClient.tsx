@@ -958,8 +958,19 @@ Failure to renew timely may lead to suspension of Reinsurance Broker Registratio
 
   return (
     <ServicePageLayout
-      tags={['IRDAI', 'Reinsurance Broker', 'Registration', 'IRDAI Regulations 2018', 'Treaty Reinsurance', 'Facultative']}
-      breadcrumb={['Home', 'IRDAI Services', 'Reinsurance Broker Registration']}
+      tags={[
+        { emoji: '🛡️', label: 'IRDAI' },
+        { emoji: '🔄', label: 'Reinsurance Broker' },
+        { emoji: '✅', label: 'Registration' },
+        { emoji: '📜', label: 'IRDAI Regulations 2018' },
+        { emoji: '📑', label: 'Treaty Reinsurance' },
+        { emoji: '📋', label: 'Facultative' }
+      ]}
+      breadcrumb={[
+        { label: 'Home', href: '/' },
+        { label: 'IRDAI Services', href: '/irdai' },
+        { label: 'Reinsurance Broker Registration' }
+      ]}
       title="Reinsurance Broker Registration in India"
       readTime="22 min read"
       focusKeyword="Reinsurance Broker Registration in India"
@@ -981,10 +992,10 @@ Failure to renew timely may lead to suspension of Reinsurance Broker Registratio
         { label: 'Scope', value: 'Reinsurance placement only' }
       ]}
       relatedArticles={[
-        { title: 'IRDA Insurance Broker License', href: '/irdai/irda-insurance-broker-license' },
-        { title: 'Composite Insurance Broker Registration', href: '/irdai/composite-insurance-broker-registration-in-india' },
-        { title: 'Insurance Broker Registration', href: '/irdai/insurance-broker-registration-in-india' },
-        { title: 'Corporate Agent Registration', href: '/irdai/corporate-agent-registration-in-india' }
+        { title: 'IRDA Insurance Broker License', href: '/irdai/irda-insurance-broker-license', category: 'IRDAI', description: 'IRDA Insurance Broker License — complete regulatory guide.' },
+        { title: 'Composite Insurance Broker Registration', href: '/irdai/composite-insurance-broker-registration-in-india', category: 'IRDAI', description: 'Composite Insurance Broker Registration — complete regulatory guide.' },
+        { title: 'Insurance Broker Registration', href: '/irdai/insurance-broker-registration-in-india', category: 'IRDAI', description: 'Insurance Broker Registration — complete regulatory guide.' },
+        { title: 'Corporate Agent Registration', href: '/irdai/corporate-agent-registration-in-india', category: 'IRDAI', description: 'Corporate Agent Registration — complete regulatory guide.' }
       ]}
       finalCtaTitle="Need Expert Support for Reinsurance Broker Registration?"
       finalCtaDescription="Our compliance specialists provide end-to-end support for IRDAI registration, ₹4 Crore capital planning, Principal Officer credentialing, PI insurance structuring, and ongoing reinsurance compliance."

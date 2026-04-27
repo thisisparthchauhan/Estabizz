@@ -628,8 +628,19 @@ For fintech promoters, NBFC groups, payment aggregators, and digital platforms, 
 
   return (
     <ServicePageLayout
-      tags={['RBI', 'PPI', 'Master Directions 2021 (Updated 2024)', 'PSS Act 2007', 'Digital Wallet', 'Prepaid Card']}
-      breadcrumb={['Home', 'RBI Services', 'PPI Registration']}
+      tags={[
+        { emoji: '🏦', label: 'RBI' },
+        { emoji: '👛', label: 'PPI' },
+        { emoji: '📜', label: 'Master Directions 2021 (Updated 2024)' },
+        { emoji: '⚖️', label: 'PSS Act 2007' },
+        { emoji: '👛', label: 'Digital Wallet' },
+        { emoji: '💳', label: 'Prepaid Card' }
+      ]}
+      breadcrumb={[
+        { label: 'Home', href: '/' },
+        { label: 'RBI Services', href: '/rbi' },
+        { label: 'PPI Registration' }
+      ]}
       title="PPI Registration in India"
       readTime="22 min read"
       focusKeyword="PPI Registration in India"
@@ -651,12 +662,12 @@ For fintech promoters, NBFC groups, payment aggregators, and digital platforms, 
         { label: 'Application Form', value: 'Form A (PSS Regulations)' }
       ]}
       relatedArticles={[
-        { title: 'Payment Aggregator License', href: '/rbi/payment-aggregator-license-in-india' },
-        { title: 'NBFC Registration in India', href: '/rbi/nbfc-registration-in-india' },
-        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license' },
-        { title: 'NBFC SRO Registration', href: '/rbi/nbfc-sro-registration' },
-        { title: 'ARC Registration in India', href: '/rbi/arc-registration-in-india' },
-        { title: 'LendTech Services', href: '/rbi/lendtech-services' }
+        { title: 'Payment Aggregator License', href: '/rbi/payment-aggregator-license-in-india', category: 'RBI', description: 'Payment Aggregator License — complete regulatory guide.' },
+        { title: 'NBFC Registration in India', href: '/rbi/nbfc-registration-in-india', category: 'RBI', description: 'NBFC Registration in India — complete regulatory guide.' },
+        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license', category: 'RBI', description: 'NBFC Account Aggregator License — complete regulatory guide.' },
+        { title: 'NBFC SRO Registration', href: '/rbi/nbfc-sro-registration', category: 'RBI', description: 'NBFC SRO Registration — complete regulatory guide.' },
+        { title: 'ARC Registration in India', href: '/rbi/arc-registration-in-india', category: 'RBI', description: 'ARC Registration in India — complete regulatory guide.' },
+        { title: 'LendTech Services', href: '/rbi/lendtech-services', category: 'RBI', description: 'LendTech Services — complete regulatory guide.' }
       ]}
       finalCtaTitle="Need Expert Support for PPI Authorisation?"
       finalCtaDescription="Our compliance specialists provide end-to-end PPI authorisation support — Form A preparation, net-worth audit, MoA review, escrow agreement structuring, System Audit Report co-ordination with CERT-In auditors, interoperability planning, and ongoing reporting compliance under the PPI Master Directions."

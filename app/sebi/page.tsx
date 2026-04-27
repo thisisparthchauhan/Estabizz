@@ -19,6 +19,7 @@ const services = [
     { href: "/sebi/mutual-fund-registration", title: "Mutual Fund Registration with SEBI", desc: "Step-by-step SEBI registration process for mutual funds in India.", tag: "SEBI", emoji: "📊" },
     { href: "/sebi/underwriter-registration", title: "Underwriter Registration with SEBI", desc: "SEBI registration requirements for underwriters operating in India.", tag: "SEBI", emoji: "📝" },
     { href: "/sebi/social-stock-exchange-license", title: "Social Stock Exchange License", desc: "Regulatory guide for obtaining a Social Stock Exchange license under SEBI.", tag: "SEBI", emoji: "🌍" },
+    { href: "/sebi/aif-registration-in-india", title: "AIF Registration in India", desc: "Complete SEBI AIF Regulations 2012 (Updated Nov 2025) guide for Category I/II/III Alternative Investment Funds — corpus, fees, PPM 40-clause framework, sponsor continuing interest, co-investment CIV, AI-only/LVF and compliance calendar.", tag: "SEBI", emoji: "💎" },
 ];
 
 export default function Page() {

@@ -4,17 +4,20 @@
     "private": true,
     "scripts": {
         "dev": "npx tailwindcss -i ./app/globals.css -o ./public/tailwind.css --watch & next dev",
-        "build": "npx tailwindcss -i ./app/globals.css -o ./public/tailwind.css && next build",
+        "build": "npx tailwindcss -i ./app/globals.css -o ./public/tailwind.css && next build --webpack",
         "start": "next start"
     },
+    "engines": {
+        "node": "22.x"
+    },
     "dependencies": {
-        "@anthropic-ai/sdk": "^0.80.0",
+        "@anthropic-ai/sdk": "^0.91.1",
         "@types/bcryptjs": "^2.4.6",
         "@types/jsonwebtoken": "^9.0.10",
         "bcryptjs": "^3.0.3",
         "jsonwebtoken": "^9.0.3",
         "mongoose": "^9.4.1",
-        "next": "14.2.21",
+        "next": "^16.2.4",
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
     },
@@ -22,9 +25,26 @@
         "@types/node": "^20.11.0",
         "@types/react": "^18.2.0",
         "@types/react-dom": "^18.2.0",
-        "autoprefixer": "^10.4.17",
-        "postcss": "^8.4.33",
-        "tailwindcss": "^3.4.1",
+        "autoprefixer": "^10.5.0",
+        "postcss": "^8.5.10",
+        "tailwindcss": "^3.4.19",
         "typescript": "^5.3.3"
+    },
+    "overrides": {
+        "anymatch": {
+            "picomatch": "2.3.2"
+        },
+        "micromatch": {
+            "picomatch": "2.3.2"
+        },
+        "readdirp": {
+            "picomatch": "2.3.2"
+        },
+        "fdir": {
+            "picomatch": "4.0.4"
+        },
+        "tinyglobby": {
+            "picomatch": "4.0.4"
+        }
     }
 }

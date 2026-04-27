@@ -1413,7 +1413,7 @@ export default function RegulatoryArticleClient() {
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
                     <h2 className="text-2xl font-bold text-[#0a1628] mb-8 text-center">Related Articles</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <a href="/regulatory/finance-company-gift-city" className="block group">
+                        <a href="/regulatory/finance-company-gift-ifsc" className="block group">
                             <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all h-full">
                                 <div className="text-[12px] font-bold text-[#0096D6] uppercase tracking-wider mb-2">IFSC Entity Setup</div>
                                 <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#0096D6] transition-colors mb-2">Finance Company in GIFT IFSC</h3>
@@ -1427,7 +1427,7 @@ export default function RegulatoryArticleClient() {
                                 <p className="text-[13px] text-gray-500 line-clamp-2">Guide to receivable financing and factoring in GIFT City.</p>
                             </div>
                         </a>
-                        <a href="/regulatory/fintech-entity-gift-city" className="block group">
+                        <a href="/ifsca/fintech-entity" className="block group">
                             <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all h-full">
                                 <div className="text-[12px] font-bold text-[#0096D6] uppercase tracking-wider mb-2">Fintech</div>
                                 <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#0096D6] transition-colors mb-2">Fintech Entity License in GIFT City</h3>

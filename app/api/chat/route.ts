@@ -1,7 +1,5 @@
-import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
-
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+import { getAnthropicClient } from "@/lib/anthropic";
 
 const SYSTEM_PROMPT = `You are Estabizz AI — a regulatory compliance assistant for Estabizz Fintech, India's leading fintech compliance platform.
 
@@ -29,11 +27,28 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Invalid messages" }, { status: 400 });
         }
 
-        const response = await client.messages.create({
+        const safeMessages = messages
+            .filter((message) =>
+                message &&
+                (message.role === "user" || message.role === "assistant") &&
+                typeof message.content === "string" &&
+                message.content.trim().length > 0
+            )
+            .slice(-10)
+            .map((message) => ({
+                role: message.role,
+                content: message.content.slice(0, 2000),
+            }));
+
+        if (safeMessages.length === 0 || safeMessages[safeMessages.length - 1].role !== "user") {
+            return NextResponse.json({ error: "Invalid messages" }, { status: 400 });
+        }
+
+        const response = await getAnthropicClient().messages.create({
             model: "claude-haiku-4-5-20251001",
             max_tokens: 300,
             system: SYSTEM_PROMPT,
-            messages: messages.slice(-10), // keep last 10 messages for context
+            messages: safeMessages,
         });
 
         const reply = response.content[0].type === "text" ? response.content[0].text : "";

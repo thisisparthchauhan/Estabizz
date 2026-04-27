@@ -27,13 +27,26 @@ export default function FeaturedBlogs() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("/api/admin/blogs/featured")
-            .then((r) => r.json())
-            .then((data) => {
-                if (data.blogs) setBlogs(data.blogs);
-            })
-            .catch(() => {})
-            .finally(() => setLoading(false));
+        const loadFeaturedBlogs = async () => {
+            try {
+                const response = await fetch("/api/admin/blogs/featured");
+
+                if (!response.ok) {
+                    setBlogs([]);
+                    return;
+                }
+
+                const result = await response.json();
+                setBlogs(result?.blogs || result?.data || []);
+            } catch (error) {
+                console.error("Featured blogs fetch failed:", error);
+                setBlogs([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadFeaturedBlogs();
     }, []);
 
     if (loading) {

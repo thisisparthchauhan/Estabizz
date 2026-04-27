@@ -938,7 +938,7 @@ export default function RegulatoryArticleClient() {
                 <p className="text-[13px] text-gray-500 line-clamp-2">Complete Authorisation Guide with Critical Compliance Insights.</p>
               </div>
             </a>
-            <a href="/regulatory/nbfc-license" className="block group">
+            <a href="/rbi/nbfc-registration-in-india" className="block group">
               <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all h-full">
                 <div className="text-[12px] font-bold text-[#0096D6] uppercase tracking-wider mb-2">Domestic Setup</div>
                 <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#0096D6] transition-colors mb-2">NBFC License Guide</h3>

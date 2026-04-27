@@ -1,9 +1,5 @@
-import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
-
-const client = new Anthropic({
-    apiKey: process.env.ANTHROPIC_API_KEY,
-});
+import { getAnthropicClient } from "@/lib/anthropic";
 
 const ALL_SERVICES = [
     "NBFC Registration",
@@ -50,7 +46,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const response = await client.messages.create({
+        const response = await getAnthropicClient().messages.create({
             model: "claude-haiku-4-5-20251001",
             max_tokens: 512,
             system: `You are a fintech regulatory compliance advisor at Estabizz Fintech, India.

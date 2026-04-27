@@ -11,7 +11,7 @@ const linkMap: Record<string, string> = {
     "IFSCA Factoring License": "/regulatory/ifsca-factoring-license-gift-city",
     "PSP License IFSCA": "/ifsca/psp-license",
     // RBI / NBFC
-    "NBFC Registration": "/rbi/nbfc-account-aggregator-license",
+    "NBFC Registration": "/rbi/nbfc-registration-in-india",
     "NBFC Account Aggregator": "/rbi/nbfc-account-aggregator-license",
     "Account Aggregator": "/rbi/nbfc-account-aggregator-license",
     "NBFC Business Plan": "/rbi/nbfc-business-plan",
@@ -19,29 +19,29 @@ const linkMap: Record<string, string> = {
     "NBFC-P2P License": "/rbi/nbfc-for-sale",
     "NBFC-MFI License": "/rbi/nbfc-takeover",
     "NBFC Annual Return Filing": "/rbi/nbfc-marketing-strategy",
-    "Payment Aggregator": "/rbi/rbi-services",
+    "Payment Aggregator": "/rbi/payment-aggregator-license-in-india",
     "AD Category II": "/rbi/full-fledged-money-changers",
     "Credit Information Company": "/rbi/lendtech-services",
     "NBFC License": "/rbi/nbfc-account-aggregator-license",
-    "Prepaid Instrument": "/rbi/nbfc-financial-modeling",
+    "Prepaid Instrument": "/rbi/ppi-registration-in-india",
     // SEBI
-    "Stock Broker License": "/sebi/amfi-registration",
-    "Merchant Banker": "/sebi/alternative-asset-portfolio-valuation",
-    "Portfolio Manager": "/sebi/collective-investment-schemes",
-    "Investment Adviser": "/sebi/credit-rating-agency",
-    "Research Analyst": "/sebi/depository-participant-sebi-registration",
-    "AIF Registration": "/sebi/aif-compliance-test-report",
+    "Stock Broker License": "/sebi",
+    "Merchant Banker": "/sebi",
+    "Portfolio Manager": "/sebi",
+    "Investment Adviser": "/sebi",
+    "Research Analyst": "/sebi",
+    "AIF Registration": "/sebi/aif-registration-in-india",
     "Fund Management Entity": "/sebi/reit-registration",
     // IRDAI
-    "Insurance Broker": "/irdai/irda-insurance-broker-license",
-    "Corporate Agent": "/irdai/irdai-regulatory-sandbox",
+    "Insurance Broker": "/irdai/insurance-broker-registration-in-india",
+    "Corporate Agent": "/irdai/corporate-agent-registration-in-india",
     "Web Aggregator": "/irdai/insurance-marketing-firm-license",
     "Insurance Surveyor": "/irdai/insurance-repository-registration",
     "TPA License": "/irdai/isnp-registration",
     "Micro Insurance": "/irdai/ifsca-insurance-intermediary",
     // Fintech
-    "Payment Aggregator License": "/rbi/rbi-services",
-    "Prepaid Instrument License": "/rbi/nbfc-financial-modeling",
+    "Payment Aggregator License": "/rbi/payment-aggregator-license-in-india",
+    "Prepaid Instrument License": "/rbi/ppi-registration-in-india",
     "BBPS Agent Registration": "/rbi/lendtech-services",
     "UPI Third Party App": "/rbi/rbi-services",
     "Digital Lending Compliance": "/rbi/lendtech-services",
@@ -175,7 +175,7 @@ export default function Navbar() {
                         <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
                             Login
                         </Link>
-                        <Link href="/signup" className="text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-lg px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-sm">
+                        <Link href="/get-started" className="text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-lg px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-sm">
                             Get Started
                         </Link>
                         <Link href="/contact" className="bg-[#0a1628] text-white font-bold text-[13.5px] rounded-lg px-5 py-2.5 hover:bg-[#1a2638] transition-colors">
@@ -245,21 +245,23 @@ export default function Navbar() {
                 <div className="fixed top-[64px] left-0 w-full h-[calc(100vh-64px)] bg-white z-[98] overflow-y-auto xl:hidden">
                     <div className="p-6 space-y-4">
                         {Object.entries(menus).map(([name, menu]) => (
-                            <details key={name} className="border-b border-gray-100 pb-3">
+                            <details key={name} className="rounded-xl border border-gray-100 bg-[#f8faff] px-4 py-2">
                                 <summary className="text-[15px] font-bold text-[#0a1628] cursor-pointer py-2">{name}</summary>
-                                <div className="pl-4 mt-2 space-y-3">
+                                <div className="mt-2 space-y-4 pb-2">
                                     {menu.categories.map((cat, i) => (
                                         <div key={i}>
-                                            <h4 className="text-[13px] font-bold text-[#0096D6] mb-1">{cat.icon} {cat.label}</h4>
-                                            <div className="space-y-1 pl-2">
+                                            <h4 className="text-[12px] font-black text-[#0096D6] uppercase tracking-wide mb-2">{cat.icon} {cat.label}</h4>
+                                            <div className="grid grid-cols-1 gap-1">
                                                 {cat.items.slice(0, 4).map((item, j) => {
                                                     const isLive = !!linkMap[item];
                                                     return (
-                                                        <Link key={j} href={linkMap[item] || "#"} className={`flex items-center gap-2 text-[13px] py-0.5 ${isLive ? 'text-[#0096D6] font-medium' : 'text-[#64748b] hover:text-[#0096D6]'}`}>
+                                                        <Link
+                                                            key={j}
+                                                            href={linkMap[item] || "/get-started"}
+                                                            onClick={() => setMobileOpen(false)}
+                                                            className={`block rounded-lg px-3 py-2 text-[13px] ${isLive ? 'text-[#0a1628] bg-white border border-gray-100' : 'text-[#64748b] hover:text-[#0096D6]'}`}
+                                                        >
                                                             {item}
-                                                            {isLive && (
-                                                                <span className="px-1.5 py-0.5 rounded-[4px] bg-[#10b981]/10 text-[#10b981] text-[8px] font-bold tracking-wider uppercase">Live</span>
-                                                            )}
                                                         </Link>
                                                     );
                                                 })}
@@ -271,10 +273,10 @@ export default function Navbar() {
                         ))}
                         <div className="border-t border-gray-100 pt-4 mt-4">
                             <a href="https://www.estabizz.com/" target="_blank" rel="noopener noreferrer" className="block text-[15px] font-bold text-[#64748b] hover:text-[#0096D6] py-2">📚 Visit Old Site</a>
-                            <Link href="/pricing" className="block text-[15px] font-bold text-[#0a1628] py-2">Pricing</Link>
-                            <Link href="/login" className="block text-[15px] font-bold text-[#0a1628] py-2">Login</Link>
+                            <Link href="/pricing" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] py-2">Pricing</Link>
+                            <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] py-2">Login</Link>
                         </div>
-                        <Link href="/get-started" className="block w-full text-center bg-[#0a1628] text-white font-bold text-[14px] rounded-lg py-3 mt-4">Get Started</Link>
+                        <Link href="/get-started" onClick={() => setMobileOpen(false)} className="block w-full text-center bg-[#0a1628] text-white font-bold text-[14px] rounded-lg py-3 mt-4">Get Started</Link>
                     </div>
                 </div>
             )}

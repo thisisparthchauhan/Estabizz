@@ -4,7 +4,15 @@ import jwt from 'jsonwebtoken';
 import { connectDB } from '@/lib/db';
 import User from '@/lib/models/User';
 
-const JWT_SECRET = process.env.JWT_SECRET as string;
+function getJwtSecret() {
+    const secret = process.env.JWT_SECRET;
+
+    if (!secret) {
+        throw new Error('JWT_SECRET environment variable is not defined.');
+    }
+
+    return secret;
+}
 
 export async function POST(req: NextRequest) {
     try {
@@ -49,7 +57,7 @@ export async function POST(req: NextRequest) {
                 firstName: user.firstName,
                 lastName: user.lastName,
             },
-            JWT_SECRET || 'estabizz-secret-key',
+            getJwtSecret(),
             { expiresIn: '7d' }
         );
 

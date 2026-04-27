@@ -681,8 +681,18 @@ Risk Areas to Focus On:
 
   return (
     <ServicePageLayout
-      tags={['IRDAI', 'Corporate Agent', 'Insurance Intermediary', 'Distribution License', 'Regulatory Compliance']}
-      breadcrumb={['Home', 'IRDAI Services', 'Corporate Agent Registration']}
+      tags={[
+        { emoji: '🛡️', label: 'IRDAI' },
+        { emoji: '👔', label: 'Corporate Agent' },
+        { emoji: '🔗', label: 'Insurance Intermediary' },
+        { emoji: '📜', label: 'Distribution License' },
+        { emoji: '✅', label: 'Regulatory Compliance' }
+      ]}
+      breadcrumb={[
+        { label: 'Home', href: '/' },
+        { label: 'IRDAI Services', href: '/irdai' },
+        { label: 'Corporate Agent Registration' }
+      ]}
       title="Corporate Agent Registration in India"
       readTime="22 min read"
       focusKeyword="Corporate Agent Registration in India"
@@ -702,10 +712,10 @@ Risk Areas to Focus On:
         { label: 'Lines Available', value: 'Life, General, Health, Composite' }
       ]}
       relatedArticles={[
-        { title: 'IRDA Insurance Broker License', href: '/irdai/irda-insurance-broker-license' },
-        { title: 'Composite Insurance Broker Registration', href: '/irdai/composite-insurance-broker-registration-in-india' },
-        { title: 'Insurance Marketing Firm License', href: '/irdai/insurance-marketing-firm-license' },
-        { title: 'ISNP Registration', href: '/irdai/isnp-registration' }
+        { title: 'IRDA Insurance Broker License', href: '/irdai/irda-insurance-broker-license', category: 'IRDAI', description: 'IRDA Insurance Broker License — complete regulatory guide.' },
+        { title: 'Composite Insurance Broker Registration', href: '/irdai/composite-insurance-broker-registration-in-india', category: 'IRDAI', description: 'Composite Insurance Broker Registration — complete regulatory guide.' },
+        { title: 'Insurance Marketing Firm License', href: '/irdai/insurance-marketing-firm-license', category: 'IRDAI', description: 'Insurance Marketing Firm License — complete regulatory guide.' },
+        { title: 'ISNP Registration', href: '/irdai/isnp-registration', category: 'IRDAI', description: 'ISNP Registration — complete regulatory guide.' }
       ]}
       finalCtaTitle="Need Expert Support for Corporate Agent Registration?"
       finalCtaDescription="Our compliance specialists provide end-to-end support for registration, operational setup, and ongoing compliance."

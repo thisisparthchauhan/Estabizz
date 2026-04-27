@@ -838,8 +838,19 @@ When designed with regulatory foresight, NBFC Registration in India provides ins
 
   return (
     <ServicePageLayout
-      tags={['RBI', 'NBFC', 'SBR Master Direction 2023', 'Section 45-IA', 'NBFC-ICC', 'Base Layer']}
-      breadcrumb={['Home', 'RBI Services', 'NBFC Registration']}
+      tags={[
+        { emoji: '🏦', label: 'RBI' },
+        { emoji: '💳', label: 'NBFC' },
+        { emoji: '📜', label: 'SBR Master Direction 2023' },
+        { emoji: '⚖️', label: 'Section 45-IA' },
+        { emoji: '💳', label: 'NBFC-ICC' },
+        { emoji: '🏗️', label: 'Base Layer' }
+      ]}
+      breadcrumb={[
+        { label: 'Home', href: '/' },
+        { label: 'RBI Services', href: '/rbi' },
+        { label: 'NBFC Registration' }
+      ]}
       title="NBFC Registration in India"
       readTime="25 min read"
       focusKeyword="NBFC Registration in India"
@@ -861,12 +872,12 @@ When designed with regulatory foresight, NBFC Registration in India provides ins
         { label: 'Application Portal', value: 'RBI COSMOS' }
       ]}
       relatedArticles={[
-        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license' },
-        { title: 'NBFC Business Plan', href: '/rbi/nbfc-business-plan' },
-        { title: 'NBFC Takeover', href: '/rbi/nbfc-takeover' },
-        { title: 'NBFC Legal Support Services', href: '/rbi/nbfc-legal-support' },
-        { title: 'NBFC Financial Modeling', href: '/rbi/nbfc-financial-modeling' },
-        { title: 'ARC Registration in India', href: '/rbi/arc-registration-in-india' }
+        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license', category: 'RBI', description: 'NBFC Account Aggregator License — complete regulatory guide.' },
+        { title: 'NBFC Business Plan', href: '/rbi/nbfc-business-plan', category: 'RBI', description: 'NBFC Business Plan — complete regulatory guide.' },
+        { title: 'NBFC Takeover', href: '/rbi/nbfc-takeover', category: 'RBI', description: 'NBFC Takeover — complete regulatory guide.' },
+        { title: 'NBFC Legal Support Services', href: '/rbi/nbfc-legal-support', category: 'RBI', description: 'NBFC Legal Support Services — complete regulatory guide.' },
+        { title: 'NBFC Financial Modeling', href: '/rbi/nbfc-financial-modeling', category: 'RBI', description: 'NBFC Financial Modeling — complete regulatory guide.' },
+        { title: 'ARC Registration in India', href: '/rbi/arc-registration-in-india', category: 'RBI', description: 'ARC Registration in India — complete regulatory guide.' }
       ]}
       finalCtaTitle="Need Expert Support for NBFC Registration?"
       finalCtaDescription="Our compliance specialists provide end-to-end NBFC registration support — pre-filing audit, NOF computation, COSMOS portal filing, Annex XII documentation, business plan, all Board-approved policies, query handling, and ongoing post-registration compliance."

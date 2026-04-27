@@ -611,8 +611,19 @@ When properly structured, ARC Registration in India enables participation in Ind
 
   return (
     <ServicePageLayout
-      tags={['RBI', 'ARC', 'SARFAESI Act 2002', 'Master Direction 2024', 'Asset Reconstruction', 'Securitisation']}
-      breadcrumb={['Home', 'RBI Services', 'ARC Registration']}
+      tags={[
+        { emoji: '🏦', label: 'RBI' },
+        { emoji: '🏦', label: 'ARC' },
+        { emoji: '⚖️', label: 'SARFAESI Act 2002' },
+        { emoji: '📜', label: 'Master Direction 2024' },
+        { emoji: '🔧', label: 'Asset Reconstruction' },
+        { emoji: '📦', label: 'Securitisation' }
+      ]}
+      breadcrumb={[
+        { label: 'Home', href: '/' },
+        { label: 'RBI Services', href: '/rbi' },
+        { label: 'ARC Registration' }
+      ]}
       title="ARC Registration in India"
       readTime="22 min read"
       focusKeyword="ARC Registration in India"
@@ -634,10 +645,10 @@ When properly structured, ARC Registration in India enables participation in Ind
         { label: 'Public Deposits', value: 'Prohibited' }
       ]}
       relatedArticles={[
-        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license' },
-        { title: 'NBFC Business Plan', href: '/rbi/nbfc-business-plan' },
-        { title: 'NBFC Takeover', href: '/rbi/nbfc-takeover' },
-        { title: 'NBFC Legal Support Services', href: '/rbi/nbfc-legal-support' }
+        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license', category: 'RBI', description: 'NBFC Account Aggregator License — complete regulatory guide.' },
+        { title: 'NBFC Business Plan', href: '/rbi/nbfc-business-plan', category: 'RBI', description: 'NBFC Business Plan — complete regulatory guide.' },
+        { title: 'NBFC Takeover', href: '/rbi/nbfc-takeover', category: 'RBI', description: 'NBFC Takeover — complete regulatory guide.' },
+        { title: 'NBFC Legal Support Services', href: '/rbi/nbfc-legal-support', category: 'RBI', description: 'NBFC Legal Support Services — complete regulatory guide.' }
       ]}
       finalCtaTitle="Need Expert Support for ARC Registration?"
       finalCtaDescription="Our compliance specialists provide end-to-end support for RBI registration, ₹300 Crore NOF planning, governance architecture, Asset Acquisition Policy drafting, Fair Practices Code, and ongoing SARFAESI compliance."

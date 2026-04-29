@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const services = [
     {
-        title: "Aircraft Leasing License",
-        description: "Complete guide to IFSCA Aircraft Leasing registration — operating lease, financial lease, eligibility, capital requirements, fees and compliance in GIFT IFSC.",
-        href: "/ifsca/aircraft-leasing",
+        title: "IFSCA Aircraft Leasing Registration",
+        description: "Professional support for setting up an aircraft leasing entity in GIFT IFSC, including operating lease, financial lease, hybrid lease, USD 200,000 / USD 3 million capital readiness, SWITS application, business plan, documentation and post-registration compliance.",
+        href: "/ifsca/aircraft-leasing-registration-in-ifsc",
         icon: "✈️",
         tags: ["Operating Lease", "Financial Lease", "GIFT IFSC"],
     },

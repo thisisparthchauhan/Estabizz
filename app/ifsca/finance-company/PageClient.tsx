@@ -104,7 +104,7 @@ export default function PageClient() {
                 { label: "Capital Ratio", value: "Min 8%" },
             ]}
             relatedArticles={[
-                { title: "Aircraft Leasing IFSC", href: "/ifsca/aircraft-leasing", category: "IFSCA", description: "Aircraft operating and financial lease registration in GIFT IFSC." },
+                { title: "Aircraft Leasing IFSC", href: "/ifsca/aircraft-leasing-registration-in-ifsc", category: "IFSCA", description: "Aircraft operating and financial lease registration in GIFT IFSC." },
                 { title: "BATF Services", href: "/ifsca/batf-services", category: "IFSCA", description: "Book-keeping, Accounting, Taxation & Financial Crime Compliance in GIFT IFSC." },
                 { title: "NBFC Registration", href: "/regulatory/nbfc-registration", category: "RBI", description: "NBFC registration and compliance under RBI regulations." },
                 { title: "Enterprise Services", href: "/services/enterprise-services", category: "Services", description: "Comprehensive enterprise and financial services solutions." },

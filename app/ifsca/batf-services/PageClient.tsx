@@ -104,7 +104,7 @@ export default function PageClient() {
                 { label: "Entities Registered", value: "23+" },
             ]}
             relatedArticles={[
-                { title: "Aircraft Leasing IFSC", href: "/ifsca/aircraft-leasing", category: "IFSCA", description: "Aircraft operating and financial lease registration in GIFT IFSC." },
+                { title: "Aircraft Leasing IFSC", href: "/ifsca/aircraft-leasing-registration-in-ifsc", category: "IFSCA", description: "Aircraft operating and financial lease registration in GIFT IFSC." },
                 { title: "IFSCA Insurance Intermediary", href: "/irdai/ifsca-insurance-intermediary", category: "IRDAI", description: "Insurance intermediary registration in GIFT IFSC." },
                 { title: "Finance & Accounting Outsourcing", href: "/services/finance-accounting-outsourcing", category: "Services", description: "Finance and accounting outsourcing services for businesses." },
                 { title: "ESG Consulting", href: "/services/esg-consulting", category: "Services", description: "ESG compliance and consulting guidance." },

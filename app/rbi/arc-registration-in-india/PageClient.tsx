@@ -1,693 +1,624 @@
 'use client';
+
+import Link from 'next/link';
+import type { ReactNode } from 'react';
 import ServicePageLayout from '@/components/templates/ServicePageLayout';
 
+type TableRow = ReactNode[];
+type Card = { title: string; body: ReactNode };
+type Faq = { q: string; a: string };
+
+const whatsappUrl = 'https://wa.me/919825600907';
+
+const tocSections = [
+  { id: 'quick-overview', title: 'ARC Registration in India: Quick Overview' },
+  { id: 'what-is-arc-registration', title: 'What is ARC Registration in India?' },
+  { id: 'legal-framework', title: 'Legal Framework' },
+  { id: 'asset-reconstruction-company', title: 'What is an Asset Reconstruction Company?' },
+  { id: 'who-requires-arc-registration', title: 'Who Requires ARC Registration?' },
+  { id: 'eligibility', title: 'Minimum Capital Requirement' },
+  { id: 'nof-computation', title: 'Net Owned Fund Computation' },
+  { id: 'capital-adequacy', title: 'Capital Adequacy Requirement' },
+  { id: 'permissible-activities', title: 'Permissible Activities' },
+  { id: 'key-restrictions', title: 'Key Restrictions' },
+  { id: 'documents-required', title: 'Documents Required' },
+  { id: 'registration-process', title: 'Step-by-Step ARC Registration Process' },
+  { id: 'governance', title: 'Governance Requirements' },
+  { id: 'security-receipts', title: 'Security Receipts Framework' },
+  { id: 'asset-realisation', title: 'Asset Realisation Framework' },
+  { id: 'post-registration-compliance', title: 'Post-Registration Compliance' },
+  { id: 'business-plan', title: 'Business Plan & Financial Projection Framework' },
+  { id: 'rbi-query-areas', title: 'Common RBI Query Areas' },
+  { id: 'structuring-challenges', title: 'Common Structuring Challenges' },
+  { id: 'timeline', title: 'Timeline' },
+  { id: 'inspection-action', title: 'RBI Inspection and Regulatory Action' },
+  { id: 'how-estabizz-helps', title: 'How Estabizz Helps' },
+  { id: 'why-choose-estabizz', title: 'Why Choose Estabizz' },
+  { id: 'faqs', title: 'FAQs' },
+  { id: 'expert-review', title: 'Reviewer & Disclaimer' },
+  { id: 'speak-to-expert', title: 'Speak to Our RBI Compliance Expert' }
+];
+
+const faqs: Faq[] = [
+  { q: 'What is ARC Registration in India?', a: 'ARC Registration in India is the regulatory approval granted by the Reserve Bank of India under the SARFAESI Act, 2002 to a company intending to carry on the business of securitisation and asset reconstruction.' },
+  { q: 'Who regulates Asset Reconstruction Companies in India?', a: 'Asset Reconstruction Companies are regulated by the Reserve Bank of India under the SARFAESI Act and the applicable RBI Master Direction for ARCs.' },
+  { q: 'Is ARC Registration mandatory before acquiring NPAs from banks?', a: 'Yes. No company can commence the business of securitisation or asset reconstruction without obtaining a Certificate of Registration from RBI.' },
+  { q: 'What activities are allowed after ARC Registration?', a: 'An ARC can acquire financial assets, issue Security Receipts to Qualified Buyers, undertake restructuring, enforce security interest, settle dues, convert debt into equity and implement recovery strategies as permitted.' },
+  { q: 'Can a normal NBFC acquire stressed assets without ARC Registration?', a: 'A normal NBFC cannot undertake asset reconstruction business merely on the basis of NBFC registration. ARC activity requires registration under the SARFAESI framework.' },
+  { q: 'What is the minimum Net Owned Fund for ARC Registration?', a: 'The minimum Net Owned Fund required for ARC Registration is Rs. 300 crore on an ongoing basis.' },
+  { q: 'Can an LLP apply for ARC Registration?', a: 'No. Only a company incorporated under the Companies Act can apply for ARC Registration.' },
+  { q: 'Can an individual apply for ARC Registration?', a: 'No. Individuals cannot apply directly. The applicant must be a company.' },
+  { q: 'Can an ARC accept public deposits?', a: 'No. ARCs are prohibited from accepting public deposits.' },
+  { q: 'What is a Security Receipt?', a: 'A Security Receipt represents the undivided right, title or interest of a Qualified Buyer in the financial asset acquired by the ARC.' },
+  { q: 'Can Security Receipts be issued to the public?', a: 'No. Security Receipts can be issued only to Qualified Buyers.' },
+  { q: 'What is the capital adequacy requirement for ARCs?', a: 'ARCs must maintain a minimum capital adequacy ratio of 15% of risk-weighted assets.' },
+  { q: 'Is a business plan required for ARC Registration?', a: 'Yes. RBI expects a comprehensive business plan covering acquisition strategy, recovery approach, financial projections, capital adequacy and governance framework.' },
+  { q: 'Is a Fair Practices Code mandatory for ARCs?', a: 'Yes. ARCs must frame and adopt a Board-approved Fair Practices Code.' },
+  { q: 'Is an Asset Acquisition Policy required?', a: 'Yes. A Board-approved Asset Acquisition Policy must be prepared within the prescribed regulatory framework.' },
+  { q: 'Can an ARC act as a Resolution Applicant under IBC?', a: 'Yes, subject to additional capital, governance and regulatory conditions prescribed under the RBI framework.' },
+  { q: 'How long does ARC Registration take?', a: 'The timeline varies depending on documentation quality, regulatory scrutiny, capital structure, sponsor background and query response.' },
+  { q: 'Can RBI reject the ARC Registration application?', a: 'Yes. RBI may reject the application if regulatory conditions are not satisfied.' },
+  { q: 'Is renewal of ARC Registration required?', a: 'There is no periodic renewal like a normal licence, but continuous compliance is mandatory and the Certificate of Registration remains valid unless cancelled.' },
+  { q: 'Can RBI cancel ARC Registration?', a: 'Yes. RBI may cancel registration for non-compliance, misrepresentation, failure to maintain capital or violation of regulatory conditions.' },
+  { q: 'Are ARCs subject to RBI inspection?', a: 'Yes. RBI has powers to inspect ARCs and call for information.' },
+  { q: 'Must ARCs report to Credit Information Companies?', a: 'Yes. Reporting obligations to Credit Information Companies apply.' },
+  { q: 'Is NAV declaration mandatory for Security Receipts?', a: 'Yes. NAV must be declared periodically as prescribed.' },
+  { q: 'Can ARCs directly lend money?', a: 'ARCs cannot undertake general lending like banks or NBFCs. Their activity is limited to securitisation and asset reconstruction.' },
+  { q: 'How can Estabizz help with ARC Registration?', a: 'Estabizz assists with eligibility review, capital structuring support, business plan drafting, policy documentation, sponsor and director declarations, RBI application support, query response and post-registration compliance.' }
+];
+
+function DataTable({ headers, rows }: { headers: string[]; rows: TableRow[] }) {
+  return (
+    <div className="overflow-x-auto my-6 rounded-xl border border-[rgba(0,150,220,0.12)]">
+      <table className="data-table my-0 min-w-[640px]">
+        <thead>
+          <tr>{headers.map((header) => <th key={header}>{header}</th>)}</tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={index}>
+              {row.map((cell, cellIndex) => <td key={cellIndex}>{cell}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; columns?: string }) {
+  return (
+    <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>
+      {cards.map((card) => (
+        <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)]">
+          <h3 className="!p-0 !mb-2 !text-[#0a1628]">{card.title}</h3>
+          <div className="text-[14px] leading-7 text-gray-600">{card.body}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function FormulaCard({ children }: { children: ReactNode }) {
+  return (
+    <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#f0f9ff] to-white p-5 text-center text-[15px] font-bold leading-8 text-[#0a1628] shadow-sm">
+      {children}
+    </div>
+  );
+}
+
+function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+  return (
+    <section className="mb-12">
+      <h2 id={id}>{title}</h2>
+      {children}
+    </section>
+  );
+}
+
+function BulletList({ items }: { items: ReactNode[] }) {
+  return (
+    <ul className="clean-list">
+      {items.map((item, index) => <li key={index}>{item}</li>)}
+    </ul>
+  );
+}
+
 export default function ARCRegistrationPage() {
-  const sections = [
-    {
-      id: 'introduction',
-      title: 'ARC Registration in India',
-      content: `ARC Registration in India is governed by the Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002 (SARFAESI Act) and regulated through the Master Direction – Reserve Bank of India (Asset Reconstruction Companies) Directions, 2024, updated up to April 23, 2025.
-
-Asset Reconstruction Companies (ARCs) play a structured role in India's financial system by acquiring stressed financial assets from banks and financial institutions and attempting resolution through legally recognised recovery mechanisms. ARC Registration in India is therefore not merely a licensing formality; it is a prudential entry gate into a tightly regulated resolution ecosystem.
-
-This guide explains ARC Registration in India in a practical, compliance-oriented manner aligned with the RBI Master Direction.`
-    },
-    {
-      id: 'legal-framework',
-      title: 'Legal Framework Governing ARC Registration in India',
-      content: `ARC Registration in India is required under:
-• Section 3 of the SARFAESI Act, 2002
-• Master Direction – RBI (Asset Reconstruction Companies) Directions, 2024
-• Directions issued under Sections 3, 9, 10, 12 and 12A of the Act
-
-No entity can commence the business of securitisation or asset reconstruction without obtaining a Certificate of Registration (CoR) from the Reserve Bank of India.`
-    },
-    {
-      id: 'what-is-arc',
-      title: 'What is an Asset Reconstruction Company?',
-      content: `An Asset Reconstruction Company is a specialised financial entity that:
-• Acquires non-performing or stressed financial assets from banks and financial institutions
-• Issues Security Receipts (SRs) to Qualified Buyers
-• Implements structured recovery strategies such as restructuring, settlement, enforcement, debt-to-equity conversion or management change
-• Operates securitisation schemes through trusts
-
-ARC Registration in India authorises the company to undertake both securitisation and asset reconstruction activities.`
-    },
-    {
-      id: 'who-needs',
-      title: 'Who Requires ARC Registration in India?',
-      content: `• Company acquiring NPAs from banks — Yes — Mandatory under Section 3
-• Entity issuing Security Receipts — Yes — SRs recognised as securities
-• ARC acting as Resolution Applicant under IBC — Yes — Subject to additional conditions
-• Bank restructuring own portfolio — No — Governed by banking law`
-    },
-    {
-      id: 'capital-nof',
-      title: 'Minimum Capital Requirement – Net Owned Fund (NOF)',
-      content: `As per paragraph 7 of the Master Direction:
-
-An ARC must maintain a minimum Net Owned Fund (NOF) of ₹300 crore on an ongoing basis.
-
-For ARCs existing as on October 11, 2022, a glide path was prescribed:
-• October 11, 2022 — ₹100 crore
-• March 31, 2024 — ₹200 crore
-• March 31, 2026 — ₹300 crore
-
-Failure to comply may invite supervisory action, including prohibition on incremental business.`
-    },
-    {
-      id: 'nof-computation',
-      title: 'Net Owned Fund – Computation Method',
-      content: `Owned Fund includes:
-• Paid-up equity capital
-• Compulsorily convertible preference capital
-• Free reserves (excluding revaluation reserve)
-• Credit balance in Profit and Loss Account
-
-Less:
-• Accumulated losses
-• Intangible assets
-• Short provisions
-• Excess group exposures beyond prescribed threshold
-
-Net Owned Fund Structure:
-Paid-up Equity + Convertible Preference Capital + Free Reserves − Intangible Assets − Group Exposures beyond threshold = Net Owned Fund (Minimum ₹300 Crore)`
-    },
-    {
-      id: 'capital-adequacy',
-      title: 'Capital Adequacy Requirement',
-      content: `ARC Registration in India requires maintenance of a minimum Capital Adequacy Ratio of 15% of total risk-weighted assets.
-
-Risk Weights:
-• Cash and Bank Deposits — 0%
-• Government Securities — 0%
-• Other Assets — 100%
-• Contingent Liabilities — 50%
-
-Capital for this purpose is defined as Net Owned Fund.`
-    },
-    {
-      id: 'permissible-activities',
-      title: 'Permissible Activities after ARC Registration in India',
-      content: `An ARC may undertake:
-• Acquisition of financial assets
-• Securitisation through issuance of Security Receipts
-• Change or takeover of management
-• Rescheduling of debts
-• Settlement of dues
-• Conversion of debt into equity
-• Acting as Resolution Applicant under IBC (subject to ₹1,000 crore NOF and governance conditions)`
-    },
-    {
-      id: 'restrictions',
-      title: 'Key Restrictions Applicable to ARCs',
-      content: `ARC Registration in India comes with regulatory limitations:
-• ARCs cannot accept public deposits
-• Investment in land/building is restricted, except for limited own-use and enforcement acquisitions
-• Bilateral acquisition from sponsor banks is restricted
-• SRs are privately placed and transferable only to Qualified Buyers`
-    },
-    {
-      id: 'process',
-      title: 'Step-by-Step ARC Registration Process',
-      content: `Incorporation of Company
-        ↓
-Capital Infusion (₹300 Crore NOF)
-        ↓
-Preparation of Business Plan and Policies
-        ↓
-Online Application Filing with RBI
-        ↓
-Submission to Department of Regulation
-        ↓
-Regulatory Scrutiny and Clarifications
-        ↓
-Grant of Certificate of Registration
-
-Application must be submitted to the Chief General Manager-in-Charge, Department of Regulation, RBI, Central Office, Mumbai.`
-    },
-    {
-      id: 'documents',
-      title: 'Documents Required for ARC Registration in India',
-      content: `• MOA authorising securitisation and reconstruction — Mandatory
-• Capital Proof (₹300 crore) — Mandatory
-• Detailed Business Plan — Mandatory
-• Board-Approved Asset Acquisition Policy — Mandatory
-• Fair Practices Code — Mandatory
-• Sponsor Declaration (Form I) — Mandatory
-• Director Fit & Proper Declaration (Annex II & III) — Mandatory
-• Board Resolution — Mandatory`
-    },
-    {
-      id: 'governance',
-      title: 'Governance Structure Requirements',
-      content: `ARC Registration in India demands strong governance architecture.
-
-• Independent Chairperson — Required
-• Audit Committee — Mandatory
-• Nomination & Remuneration Committee — Mandatory
-• Independent Advisory Committee (IAC) — Required for settlement and takeover cases
-• Age Limit for MD/CEO — 70 years
-• Maximum Continuous Tenure — 15 years`
-    },
-    {
-      id: 'realisation-framework',
-      title: 'Asset Realisation Framework',
-      content: `Planning Period: Maximum 6 months
-Realisation Period: 5 years
-Extended Period: Maximum 8 years from acquisition
-
-Asset Realisation Timeline:
-Acquisition Date → Planning Period (6 Months) → Realisation (Up to 5 Years) → Board Approved Extension (Max 8 Years Total)`
-    },
-    {
-      id: 'security-receipts',
-      title: 'Security Receipts Framework',
-      content: `Key provisions applicable after ARC Registration in India:
-• ARC must invest minimum 15% of transferor investment or 2.5% of total SRs issued, whichever is higher
-• Mandatory recovery rating within six months
-• NAV declaration half-yearly
-• Rating on recovery risk basis
-
-NAV Calculation: Recovery Rating % × Face Value of SR = NAV`
-    },
-    {
-      id: 'provisioning',
-      title: 'Provisioning Norms',
-      content: `• Sub-Standard — 10%
-• Doubtful — 50% plus unsecured portion
-• Loss — 100% write-off`
-    },
-    {
-      id: 'post-registration',
-      title: 'Post-Registration Compliance Obligations',
-      content: `• CIC Reporting — Fortnightly
-• NAV Disclosure — Half-yearly
-• Audited Balance Sheet Submission — Within one month of AGM
-• SARFAESI Possession Disclosure — Monthly website update
-• Capital Adequacy Monitoring — Ongoing`
-    },
-    {
-      id: 'inspection',
-      title: 'Inspection and Supervisory Powers',
-      content: `RBI may:
-• Conduct inspections
-• Seek clarifications
-• Call for additional information
-• Impose supervisory restrictions
-
-Non-compliance attracts penal consequences under the Act.`
-    },
-    {
-      id: 'common-challenges',
-      title: 'Common Structuring Challenges in ARC Registration in India',
-      content: `• Improper NOF computation
-• Weak acquisition policy drafting
-• Governance gaps
-• Inadequate sponsor due diligence documentation
-• Insufficient capital adequacy modelling
-
-ARC Registration in India is evaluated holistically — not only on capital strength but also on governance credibility.
-
-"In regulated sectors, credibility is built before capital is deployed. Regulatory approval follows institutional maturity." — CS Devyani Khambhati – Compliance Expert`
-    },
-    {
-      id: 'timeline',
-      title: 'Timeline for ARC Registration in India',
-      content: `• Preparation & Documentation — 4 to 6 weeks
-• RBI Scrutiny — 3 to 6 months
-• Clarifications — Case-specific
-• Grant of CoR — Subject to satisfaction
-
-Upon grant of Certificate of Registration, the ARC must commence business within six months, extendable to twelve months.`
-    },
-    {
-      id: 'business-plan-framework',
-      title: 'Business Plan & Financial Projection Framework',
-      content: `ARC Registration in India is not granted merely on fulfilment of the ₹300 crore Net Owned Fund requirement. The Reserve Bank of India evaluates whether the applicant has a credible, sustainable and risk-aware business model. A well-structured business plan is therefore central to ARC Registration in India.`
-    },
-    {
-      id: 'business-model',
-      title: 'Business Model Architecture for ARC Registration in India',
-      content: `An ARC's business model typically revolves around:
-• Acquisition of stressed assets from banks and financial institutions
-• Structuring securitisation schemes through trusts
-• Issuance of Security Receipts (SRs) to Qualified Buyers
-• Recovery through restructuring, settlement, enforcement or management change
-• Distribution of realisations to SR holders
-
-ARC Business Model Flow:
-Bank NPA Portfolio → Due Diligence & Valuation → Acquisition by ARC → SR Issuance to Qualified Buyers → Recovery / Resolution Strategy → Realisation & Distribution
-
-For ARC Registration in India, RBI assesses whether this cycle is supported by adequate capital, governance and operational infrastructure.`
-    },
-    {
-      id: 'business-plan-components',
-      title: 'Mandatory Components of the Business Plan',
-      content: `A structured business plan for ARC Registration in India should cover the following:
-
-Promoter Background and Strategic Intent:
-• Profile of sponsors
-• Financial strength
-• Past experience in financial services or stressed asset resolution
-• Rationale for entering asset reconstruction business
-
-RBI places significant emphasis on "fit and proper" assessment of sponsors and directors.`
-    },
-    {
-      id: 'market-opportunity',
-      title: 'Market Opportunity Assessment',
-      content: `The business plan should clearly define:
-• Target asset classes (corporate, MSME, retail secured, infrastructure)
-• Geographic focus
-• Sectoral exposure strategy
-• Competitive positioning
-
-ARC Registration in India is strengthened when the applicant demonstrates focused strategy rather than generic asset acquisition intent.`
-    },
-    {
-      id: 'acquisition-strategy',
-      title: 'Acquisition Strategy',
-      content: `As required under the Master Direction, the ARC must frame a Board-approved acquisition policy within 90 days of grant of CoR.
-
-The business plan should outline:
-• Valuation methodology
-• Discount modelling
-• Risk categorisation
-• Due diligence framework
-• Internal approval process`
-    },
-    {
-      id: 'resolution-strategy',
-      title: 'Resolution and Recovery Strategy',
-      content: `The business plan must describe:
-• Settlement framework
-• Restructuring models
-• Legal enforcement approach
-• IBC participation strategy
-• Debt-to-equity conversion parameters
-
-Realisation timelines must align with regulatory caps (planning period and maximum 8-year outer limit).`
-    },
-    {
-      id: 'projection-model',
-      title: 'Three-Year Financial Projection Model',
-      content: `RBI expects financial projections to demonstrate viability and capital adequacy sustainability.
-
-Assumptions Framework:
-• Assets Under Management (AUM): Year 1 ₹1,500 Cr | Year 2 ₹3,000 Cr | Year 3 ₹5,000 Cr
-• Average Acquisition Discount: Year 1 60% | Year 2 55% | Year 3 50%
-• Average Recovery Rate: Year 1 35% | Year 2 40% | Year 3 45%
-• Operating Cost Ratio: Year 1 8% | Year 2 7% | Year 3 6%
-
-These numbers are illustrative. Actual projections must be realistic and conservative.
-
-Revenue typically includes:
-• Management fees on SR schemes
-• Upside sharing upon recovery
-• Resolution-linked income`
-    },
-    {
-      id: 'capital-adequacy-monitoring',
-      title: 'Capital Adequacy Monitoring Projection',
-      content: `ARC Registration in India requires maintenance of minimum 15% Capital Adequacy Ratio.
-
-CAR Computation:
-Net Owned Fund (₹300 Cr+) ÷ Risk Weighted Assets = CAR (Must be ≥ 15%)
-
-The business plan must show:
-• Year-wise CAR computation
-• Impact of asset growth on capital
-• Contingency capital infusion plan`
-    },
-    {
-      id: 'cash-flow',
-      title: 'Cash Flow Planning',
-      content: `Cash flow planning must consider:
-• Capital locked in minimum SR holding (15% of transferor investment or 2.5% of total SRs, whichever higher)
-• Operational expenditure
-• Legal costs
-• Technology investment
-• Rating fees
-
-A prudent ARC demonstrates liquidity management discipline.`
-    },
-    {
-      id: 'organisational-structure',
-      title: 'Organisational Structure Plan',
-      content: `ARC Registration in India requires defined governance architecture.
-
-Proposed Organogram:
-Board of Directors → Audit Committee → Nomination & Remuneration Committee → Independent Advisory Committee → CEO / MD → Risk | Legal | Operations | Finance | Recovery Teams
-
-Independent Advisory Committee involvement is mandatory in specified settlement and management takeover cases.`
-    },
-    {
-      id: 'technology',
-      title: 'Technology and Infrastructure Plan',
-      content: `RBI expects adequate systems to support:
-• Asset tracking
-• SR accounting
-• NAV computation
-• Regulatory reporting
-• SARFAESI disclosures
-
-Monthly website disclosure of enforcement actions is mandated.`
-    },
-    {
-      id: 'risk-management',
-      title: 'Risk Management Framework',
-      content: `The business plan must articulate:
-• Credit risk management
-• Operational risk controls
-• Legal risk mitigation
-• Valuation controls
-• Conflict of interest safeguards
-
-ARC Registration in India is strengthened when risk oversight is institutionalised rather than promoter-driven.`
-    },
-    {
-      id: 'compliance-architecture',
-      title: 'Compliance Architecture After ARC Registration in India',
-      content: `The financial projection must account for recurring compliance obligations.
-
-• CIC Reporting — Fortnightly
-• NAV Disclosure — Half-yearly
-• Audited Financial Submission — Within one month of AGM
-• Capital Adequacy Monitoring — Continuous
-• Board Fit & Proper Review — Annual`
-    },
-    {
-      id: 'sensitivity',
-      title: 'Sensitivity Analysis',
-      content: `A robust ARC business plan includes:
-• Scenario of delayed recovery
-• Lower-than-expected resolution values
-• Increased litigation timeline
-• Capital erosion impact
-
-RBI evaluates resilience under stress.`
-    },
-    {
-      id: 'rbi-queries',
-      title: 'Common RBI Query Areas During ARC Registration',
-      content: `• Source and layering of capital
-• Sponsor background verification
-• Experience of management team
-• Justification for projected recovery rates
-• Governance independence
-• Conflict of interest safeguards
-
-A professionally prepared application anticipates these areas.`
-    },
-    {
-      id: 'capital-planning',
-      title: 'Strategic Capital Planning for ARC Registration in India',
-      content: `Given the ₹300 crore minimum Net Owned Fund requirement, promoters should consider:
-• Staggered capital infusion plan
-• Future rights issue strategy
-• Institutional investor participation
-• Internal accrual reinvestment
-
-Capital planning must align with asset growth.`
-    },
-    {
-      id: 'implementation-timeline',
-      title: 'Implementation Timeline Model',
-      content: `ARC Business Launch Timeline:
-• Month 1–2: Incorporation & Capital Structuring
-• Month 3–4: Policy Drafting & Application Filing
-• Month 5–8: RBI Review & Clarifications
-• Month 9: Grant of CoR
-• Month 10–12: Operational Launch
-
-Actual timelines depend on regulatory satisfaction.`
-    },
-    {
-      id: 'strategic-advisory',
-      title: 'Strategic Advisory Note',
-      content: `ARC Registration in India is not a passive investment vehicle licence. It is a governance-intensive regulatory approval requiring capital strength, disciplined management and credible recovery expertise.
-
-"Financial restructuring is as much about integrity of process as it is about recovery of value. Regulatory confidence is earned through structure, not speed." — CS Devyani Khambhati – Compliance Expert`
-    },
-    {
-      id: 'final-observations',
-      title: 'Final Observations',
-      content: `ARC Registration in India represents entry into India's formal stressed asset resolution framework under direct RBI supervision. A carefully structured business plan, realistic financial projections, disciplined capital adequacy modelling and robust governance architecture significantly improve the probability of approval.
-
-ARC Registration in India is among the most capital-intensive and compliance-driven financial licenses under RBI supervision. With a minimum ₹300 crore Net Owned Fund requirement, strict capital adequacy norms, strong governance mandates, structured securitisation rules, and close supervisory monitoring, this registration demands institutional seriousness.
-
-When properly structured, ARC Registration in India enables participation in India's stressed asset resolution framework and positions the entity as a disciplined participant in financial system recovery.`
-    }
+  const overviewCards: Card[] = [
+    { title: 'Regulator', body: 'Reserve Bank of India' },
+    { title: 'Governing Law', body: 'SARFAESI Act, 2002' },
+    { title: 'Applicable Direction', body: 'RBI Master Direction - Asset Reconstruction Companies Directions, 2024, as amended from time to time' },
+    { title: 'Registration Type', body: 'Certificate of Registration as Asset Reconstruction Company' },
+    { title: 'Minimum NOF', body: 'Rs. 300 crore on an ongoing basis' },
+    { title: 'Capital Adequacy', body: 'Minimum 15% of risk-weighted assets' },
+    { title: 'Core Activity', body: 'Securitisation and asset reconstruction' },
+    { title: 'Public Deposits', body: 'Not permitted' },
+    { title: 'Security Receipts', body: 'Issued only to Qualified Buyers' },
+    { title: 'Timeline', body: 'Indicative and subject to RBI review' }
   ];
 
-  const faqGroups = [
-    {
-      category: 'General Overview',
-      faqs: [
-        { q: "What is ARC Registration in India?", a: "ARC Registration in India is the regulatory approval granted by the Reserve Bank of India under the SARFAESI Act, 2002 to a company that intends to carry on the business of securitisation and asset reconstruction." },
-        { q: "Who regulates Asset Reconstruction Companies in India?", a: "Asset Reconstruction Companies (ARCs) are regulated by the Reserve Bank of India under the SARFAESI Act and the RBI Master Direction applicable to ARCs." },
-        { q: "Is ARC Registration in India mandatory before acquiring NPAs from banks?", a: "Yes. No company can commence the business of asset reconstruction or securitisation without obtaining a Certificate of Registration from RBI." },
-        { q: "What activities are allowed after obtaining ARC Registration in India?", a: "An ARC can acquire financial assets, issue Security Receipts to Qualified Buyers, undertake restructuring, change management, enforce security interest, and implement recovery strategies as permitted under the Act." },
-        { q: "Can a normal NBFC acquire stressed assets without ARC Registration?", a: "No. Acquisition of financial assets for asset reconstruction purposes requires registration under the SARFAESI framework." },
-        { q: "What is the main purpose of ARC Registration in India?", a: "The purpose is to create a structured and regulated mechanism for resolution of stressed financial assets in the banking system." },
-        { q: "Can an ARC act as a Resolution Applicant under IBC?", a: "Yes, subject to meeting additional capital and policy conditions prescribed under the RBI Master Direction." },
-        { q: "Is ARC Registration required for securitisation activities?", a: "Yes, if the entity intends to carry on securitisation as defined under the SARFAESI Act." },
-        { q: "What certificate is issued after ARC Registration?", a: "RBI issues a Certificate of Registration (CoR) permitting the company to carry on asset reconstruction and securitisation business." },
-        { q: "Can an ARC accept public deposits?", a: "No. ARCs are expressly prohibited from accepting public deposits." }
-      ]
-    },
-    {
-      category: 'Eligibility & Applicability',
-      faqs: [
-        { q: "Who can apply for ARC Registration in India?", a: "Only a company incorporated under the Companies Act can apply for ARC Registration." },
-        { q: "Can an LLP apply for ARC Registration?", a: "No. The law requires the applicant to be a company." },
-        { q: "Can an individual apply for ARC Registration?", a: "No. Only a company structure is permitted." },
-        { q: "What is the minimum Net Owned Fund required for ARC Registration in India?", a: "The minimum Net Owned Fund required is ₹300 crore on an ongoing basis." },
-        { q: "Is the ₹300 crore capital required at the time of application?", a: "Yes, the applicant must demonstrate compliance with the minimum Net Owned Fund requirement." },
-        { q: "Can existing ARCs operate with lower capital?", a: "Existing ARCs were given a phased timeline to reach ₹300 crore, but they must now comply with the prescribed threshold." },
-        { q: "Is foreign investment allowed in ARCs?", a: "Foreign investment is subject to applicable foreign exchange laws and RBI regulations." },
-        { q: "Are sponsors required to meet fit and proper criteria?", a: "Yes. Sponsors and directors must satisfy the fit and proper requirements prescribed by RBI." },
-        { q: "Is prior experience in banking mandatory for promoters?", a: "The regulations focus on fit and proper criteria rather than mandating specific prior experience." },
-        { q: "Can a bank sponsor an ARC?", a: "Yes, subject to compliance with applicable regulatory conditions." }
-      ]
-    },
-    {
-      category: 'Legal & Regulatory Framework',
-      faqs: [
-        { q: "Under which law is ARC Registration governed?", a: "ARC Registration is governed by the SARFAESI Act, 2002." },
-        { q: "What is the RBI Master Direction for ARCs?", a: "The Master Direction consolidates regulatory instructions applicable to ARCs, including capital adequacy, governance and operational norms." },
-        { q: "Is compliance with RBI Directions mandatory after registration?", a: "Yes, ARCs must continuously comply with the Master Direction and related circulars." },
-        { q: "What is a Security Receipt under ARC regulations?", a: "A Security Receipt represents the undivided right, title or interest of a Qualified Buyer in the financial asset acquired by the ARC." },
-        { q: "Can ARCs issue Security Receipts to the public?", a: "No. Security Receipts can be issued only to Qualified Buyers." },
-        { q: "What is the minimum investment requirement by an ARC in its own SRs?", a: "An ARC must invest a minimum prescribed percentage of the Security Receipts issued in each scheme." },
-        { q: "What is Capital Adequacy Ratio requirement for ARCs?", a: "ARCs must maintain a minimum capital adequacy ratio of 15% of risk-weighted assets." },
-        { q: "How is capital defined for capital adequacy purposes?", a: "Capital is defined as Net Owned Fund as prescribed in the Directions." },
-        { q: "Are ARCs subject to inspection by RBI?", a: "Yes, RBI has the authority to inspect ARCs and call for information." },
-        { q: "Can RBI cancel ARC Registration?", a: "Yes, RBI may cancel registration if the ARC fails to comply with regulatory conditions." }
-      ]
-    },
-    {
-      category: 'Registration / Application Process',
-      faqs: [
-        { q: "Where is the ARC application submitted?", a: "The application is submitted to the Department of Regulation, Reserve Bank of India." },
-        { q: "Is the application filed online or physically?", a: "The process involves submission in the prescribed format as directed by RBI." },
-        { q: "Is Board approval required before filing?", a: "Yes, the Board must approve the application and business plan." },
-        { q: "Is a detailed business plan required for ARC Registration?", a: "Yes, RBI requires submission of a comprehensive business plan." },
-        { q: "What does RBI examine during ARC Registration review?", a: "RBI examines capital adequacy, governance framework, sponsor background, and operational readiness." },
-        { q: "Can RBI ask for additional clarifications?", a: "Yes, RBI may seek further information or clarifications before granting registration." },
-        { q: "Is there a prescribed timeline for approval?", a: "Approval timelines depend on regulatory scrutiny and completeness of application." },
-        { q: "Can business commence before CoR is issued?", a: "No. Business can commence only after issuance of Certificate of Registration." },
-        { q: "Must business commence within a specific time after approval?", a: "Yes, ARCs must commence business within the period specified by RBI." },
-        { q: "Is modification of MOA required before applying?", a: "Yes, the Memorandum must authorise securitisation and asset reconstruction activities." }
-      ]
-    },
-    {
-      category: 'Capital, Net Worth & Infrastructure',
-      faqs: [
-        { q: "How is Net Owned Fund calculated for ARC Registration?", a: "It includes paid-up equity capital and free reserves, minus accumulated losses, intangible assets and prescribed deductions." },
-        { q: "Are revaluation reserves counted in NOF?", a: "Revaluation reserves are generally excluded from computation." },
-        { q: "Must capital be in cash form?", a: "Capital must be properly paid-up and compliant with regulatory definition." },
-        { q: "Is capital adequacy monitored continuously?", a: "Yes, ARCs must maintain the prescribed ratio at all times." },
-        { q: "Can capital be reduced after registration?", a: "Capital must not fall below the minimum threshold." },
-        { q: "Is separate infrastructure required for ARC operations?", a: "Yes, adequate office infrastructure and systems must be maintained." },
-        { q: "Are technology systems mandatory?", a: "Systems must support asset tracking, reporting and compliance." },
-        { q: "Is staff with recovery expertise required?", a: "The ARC must have competent management and operational teams." },
-        { q: "Can ARCs invest in immovable property?", a: "Only limited investment for own use is permitted." },
-        { q: "Can ARCs borrow funds?", a: "Borrowing is permitted subject to regulatory conditions." }
-      ]
-    },
-    {
-      category: 'Documentation & Declarations',
-      faqs: [
-        { q: "What documents are required for ARC Registration in India?", a: "Key documents include incorporation documents, capital proof, business plan, board resolutions, and fit and proper declarations of directors and sponsors." },
-        { q: "Is a Fair Practices Code mandatory for ARCs?", a: "Yes, ARCs are required to frame and adopt a Fair Practices Code approved by the Board." },
-        { q: "Is an Asset Acquisition Policy required?", a: "Yes, a Board-approved Asset Acquisition Policy must be framed within the prescribed period." },
-        { q: "Are directors required to submit declarations?", a: "Yes, directors must submit fit and proper declarations in the prescribed format." },
-        { q: "Is disclosure of sponsor background mandatory?", a: "Yes, full disclosure of sponsor background and shareholding structure is required." },
-        { q: "Are audited financial statements required with the application?", a: "Yes, audited financials must be submitted where applicable." },
-        { q: "Is a three-year financial projection necessary?", a: "Yes, RBI expects a credible financial projection as part of the business plan." },
-        { q: "Are conflict of interest policies required?", a: "Yes, governance policies must address conflict of interest situations." },
-        { q: "Is an organisational chart required in the application?", a: "Yes, the proposed organisational structure should be disclosed." },
-        { q: "Must the company submit a declaration regarding non-acceptance of public deposits?", a: "Yes, compliance with prohibition on public deposits must be ensured." }
-      ]
-    },
-    {
-      category: 'Timelines & Fees',
-      faqs: [
-        { q: "How long does it take to obtain ARC Registration in India?", a: "The timeline varies depending on completeness of application and regulatory review." },
-        { q: "Is there an application fee for ARC Registration?", a: "Application fees, if prescribed, must be paid as per RBI instructions." },
-        { q: "Does RBI conduct background verification during review?", a: "Yes, RBI may conduct due diligence on promoters and directors." },
-        { q: "Can the application be rejected?", a: "Yes, if regulatory conditions are not satisfied." },
-        { q: "Is there a validity period for ARC Registration?", a: "The Certificate of Registration remains valid unless cancelled." },
-        { q: "Is renewal of ARC Registration required periodically?", a: "There is no periodic renewal, but continuous compliance is mandatory." },
-        { q: "Can an ARC surrender its registration?", a: "Yes, subject to regulatory approval and settlement of obligations." },
-        { q: "Are annual fees payable after registration?", a: "Fees and charges must be complied with as prescribed by RBI." },
-        { q: "Is commencement certificate required separately?", a: "The Certificate of Registration itself authorises commencement." },
-        { q: "Does RBI issue provisional approval before final CoR?", a: "RBI may communicate in-principle approval subject to fulfilment of conditions." }
-      ]
-    },
-    {
-      category: 'Post-Registration Compliance',
-      faqs: [
-        { q: "What reports must ARCs file with RBI?", a: "ARCs must submit regulatory returns, including capital adequacy and financial statements." },
-        { q: "Is NAV declaration mandatory for Security Receipts?", a: "Yes, NAV must be declared periodically as prescribed." },
-        { q: "Is external rating required for SR schemes?", a: "Yes, recovery rating requirements apply to SR schemes." },
-        { q: "Are ARCs required to disclose enforcement actions on website?", a: "Yes, periodic disclosure of possession under SARFAESI is required." },
-        { q: "Must ARCs maintain books of accounts as per specific standards?", a: "Yes, accounting must comply with applicable regulatory and accounting standards." },
-        { q: "Is statutory audit mandatory?", a: "Yes, ARCs must undergo statutory audit." },
-        { q: "Is internal audit required?", a: "Yes, internal control mechanisms must be in place." },
-        { q: "Must ARCs report to Credit Information Companies?", a: "Yes, reporting obligations to CICs apply." },
-        { q: "Is capital adequacy reporting required?", a: "Yes, ongoing monitoring and reporting is mandatory." },
-        { q: "Are governance committees mandatory?", a: "Yes, Audit Committee and Nomination & Remuneration Committee must be constituted." }
-      ]
-    },
-    {
-      category: 'Operational Restrictions & Permissions',
-      faqs: [
-        { q: "Can ARCs directly lend money?", a: "ARCs cannot undertake general lending like banks or NBFCs." },
-        { q: "Can ARCs take over management of borrower companies?", a: "Yes, subject to compliance with legal provisions." },
-        { q: "Can ARCs convert debt into equity?", a: "Yes, conversion is permitted as part of restructuring." },
-        { q: "Can ARCs act as agents for recovery?", a: "They can undertake recovery in accordance with the Act." },
-        { q: "Are ARCs allowed to acquire assets from related parties?", a: "Acquisitions must comply with regulatory safeguards." },
-        { q: "Can ARCs issue bonds to raise capital?", a: "Capital raising must comply with applicable corporate and regulatory norms." },
-        { q: "Are ARCs allowed to invest surplus funds?", a: "Investment of surplus funds must comply with permitted categories." },
-        { q: "Can ARCs acquire retail loans?", a: "Yes, if such assets qualify as financial assets under the Act." },
-        { q: "Can ARCs participate in consortium resolution?", a: "Yes, subject to regulatory compliance." },
-        { q: "Can ARCs operate multiple securitisation schemes?", a: "Yes, each scheme must comply with regulatory norms." }
-      ]
-    },
-    {
-      category: 'Penalties, Cancellation & Regulatory Action',
-      faqs: [
-        { q: "What happens if an ARC fails to maintain ₹300 crore NOF?", a: "RBI may impose restrictions or take supervisory action." },
-        { q: "Can RBI suspend ARC operations?", a: "Yes, RBI has powers to issue directions and restrict operations." },
-        { q: "What are the grounds for cancellation of ARC Registration?", a: "Non-compliance, misrepresentation, or failure to meet regulatory conditions may lead to cancellation." },
-        { q: "Are penalties prescribed for violation of SARFAESI provisions?", a: "Yes, violations may attract penalties under the Act." },
-        { q: "Can directors be held responsible for non-compliance?", a: "Yes, accountability of management applies under law." },
-        { q: "Can an ARC continue business after cancellation?", a: "No, business must cease upon cancellation." },
-        { q: "Is RBI inspection binding on the ARC?", a: "Yes, ARCs must cooperate with inspection." },
-        { q: "Can RBI impose monetary penalties?", a: "Yes, RBI may impose penalties as per statutory powers." },
-        { q: "What if an ARC fails to comply with capital adequacy norms?", a: "RBI may restrict further business or impose corrective measures." },
-        { q: "Can regulatory action affect existing SR holders?", a: "Regulatory measures may impact operations, but investor interests are governed by scheme structure." }
-      ]
-    },
-    {
-      category: 'Practical & Scenario-Based Questions',
-      faqs: [
-        { q: "Can a company apply for ARC Registration without prior stressed asset experience?", a: "Yes, provided it satisfies capital and governance requirements." },
-        { q: "Is prior RBI approval required before change in management?", a: "Material changes in management must comply with regulatory reporting requirements." },
-        { q: "Can an ARC expand into new asset categories after registration?", a: "Expansion must remain within permitted activities." },
-        { q: "Can an ARC merge with another ARC?", a: "Such restructuring requires regulatory approval." },
-        { q: "Is ARC Registration in India suitable for small capital promoters?", a: "The minimum ₹300 crore requirement makes it capital-intensive." },
-        { q: "Can ARCs operate nationwide?", a: "Yes, ARCs can acquire assets across India." },
-        { q: "Does ARC Registration allow participation in government bad bank structures?", a: "Participation is subject to eligibility and regulatory norms." },
-        { q: "Can ARCs appoint recovery agents?", a: "Yes, subject to compliance with legal standards and fair practices." },
-        { q: "Is there any restriction on number of directors?", a: "Board composition must comply with Companies Act and RBI governance norms." },
-        { q: "What is the most common reason for delay in ARC Registration?", a: "Incomplete documentation and insufficient clarity in business plan are frequent causes of delay." }
-      ]
-    }
+  const supportCards: Card[] = [
+    { title: 'Eligibility and Structuring Review', body: 'We review the proposed structure, sponsor background, capital readiness, MOA objects and regulatory fit for ARC Registration.' },
+    { title: 'Rs. 300 Crore NOF and Capital Planning Support', body: 'We assist in preparing capital documentation, NOF computation support, financial disclosures and source of funds narrative.' },
+    { title: 'Business Plan and Financial Projection Drafting', body: 'We prepare a detailed RBI-ready business plan covering acquisition strategy, recovery model, SR structure, AUM projections, capital adequacy and governance framework.' },
+    { title: 'Policy and Governance Documentation', body: 'We assist in drafting Asset Acquisition Policy, Fair Practices Code, conflict of interest policy, risk management framework and committee governance documents.' },
+    { title: 'Sponsor and Director Documentation', body: 'We support fit and proper declarations, sponsor disclosures, director profiles and regulatory documentation.' },
+    { title: 'RBI Application and Query Support', body: 'We assist in preparing the application dossier and responding to RBI queries with structured, fact-based and professional submissions.' },
+    { title: 'Post-Registration Compliance', body: 'We support compliance calendar, NAV disclosure framework, CIC reporting support, SARFAESI disclosure tracking, audit coordination and governance review.' },
+    { title: 'Ticket-Based Execution', body: 'Estabizz follows a structured task-tracking process so clients receive organised updates throughout the engagement.' }
+  ];
+
+  const whyCards: Card[] = [
+    { title: 'RBI Regulatory Expertise', body: 'Our team works across RBI licensing and compliance matters, including regulated financial sector registrations and post-approval obligations.' },
+    { title: 'Compliance Depth, Not Just Documentation', body: 'We focus on capital, governance, policy, recovery strategy, risk controls and long-term compliance readiness.' },
+    { title: 'Business Plan Expertise', body: 'We prepare practical, regulator-facing business plans with realistic financial projections and compliance-linked assumptions.' },
+    { title: 'Multi-Regulator Experience', body: 'Estabizz experience across RBI, SEBI, IRDAI and IFSCA enables a broader regulatory perspective.' },
+    { title: '100+ Associate Professionals', body: 'Our professional network supports legal, finance, compliance, documentation and regulatory advisory requirements.' },
+    { title: 'End-to-End Support', body: 'From structuring to application filing, query support and post-registration compliance, we provide organised professional handholding.' }
   ];
 
   return (
     <ServicePageLayout
       tags={[
-        { emoji: '🏦', label: 'RBI' },
-        { emoji: '🏦', label: 'ARC' },
-        { emoji: '⚖️', label: 'SARFAESI Act 2002' },
-        { emoji: '📜', label: 'Master Direction 2024' },
-        { emoji: '🔧', label: 'Asset Reconstruction' },
-        { emoji: '📦', label: 'Securitisation' }
+        { emoji: '🏦', label: 'RBI Regulatory Advisory' },
+        { emoji: '⚖️', label: 'SARFAESI Act Compliance' },
+        { emoji: '💼', label: 'Rs. 300 Crore NOF Structuring' },
+        { emoji: '📄', label: 'Business Plan & Policy Drafting' },
+        { emoji: '🛡️', label: 'Governance Framework Support' },
+        { emoji: '✅', label: 'Post-Registration Compliance' }
       ]}
       breadcrumb={[
         { label: 'Home', href: '/' },
         { label: 'RBI Services', href: '/rbi' },
         { label: 'ARC Registration' }
       ]}
-      title="ARC Registration in India"
-      readTime="22 min read"
+      title="ARC Registration in India - Complete RBI Regulatory Framework"
+      heroDescription={
+        <p className="m-0">
+          <strong>ARC Registration in India</strong> is the regulatory approval granted by the Reserve Bank of India under the SARFAESI Act, 2002 to a company intending to carry on the business of securitisation and asset reconstruction. Asset Reconstruction Companies play an important role in India&apos;s stressed asset resolution ecosystem by acquiring financial assets from banks and financial institutions and implementing legally recognised recovery and resolution strategies.
+        </p>
+      }
+      heroActions={
+        <>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for ARC Registration</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-white text-[#0096D6] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check ARC Eligibility</Link>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm text-center">WhatsApp Estabizz Team</a>
+        </>
+      }
+      trustLine="Trusted support for RBI, SEBI, IRDAI, IFSCA and financial regulatory advisory across India and global markets."
+      readTime="28 min read"
+      displayYear="2025"
       focusKeyword="ARC Registration in India"
-      sections={sections}
-      ctaTitle="Ready to Launch Your Asset Reconstruction Company?"
-      ctaDescription="Get expert guidance on ₹300 Crore Net Owned Fund structuring, RBI Master Direction compliance, governance architecture, business plan drafting, and Certificate of Registration."
+      sections={tocSections}
+      ctaTitle="Apply for ARC Registration"
+      ctaDescription="Get structured support for RBI application, Rs. 300 crore NOF readiness, business plan, policy drafting, governance framework and post-registration compliance."
       quickFacts={[
-        { label: 'Regulator', value: 'Reserve Bank of India (RBI)' },
-        { label: 'Governing Law', value: 'SARFAESI Act, 2002' },
-        { label: 'Master Direction', value: 'RBI ARC Directions, 2024' },
-        { label: 'Eligible Entity', value: 'Company (Companies Act)' },
-        { label: 'Minimum NOF', value: '₹300 Crore' },
-        { label: 'Capital Adequacy Ratio', value: '15% of RWA' },
-        { label: 'IBC Resolution Applicant NOF', value: '₹1,000 Crore' },
-        { label: 'Minimum SR Investment', value: '15% of transferor / 2.5% of SRs' },
-        { label: 'Realisation Period', value: 'Up to 8 years from acquisition' },
-        { label: 'Approval Timeline', value: '3–6 months' },
-        { label: 'Business Commencement', value: 'Within 6 months (extendable to 12)' },
-        { label: 'Public Deposits', value: 'Prohibited' }
+        { label: 'Regulator', value: 'RBI' },
+        { label: 'Law', value: 'SARFAESI Act, 2002' },
+        { label: 'Direction', value: 'RBI ARC Directions, 2024' },
+        { label: 'Entity', value: 'Company' },
+        { label: 'Minimum NOF', value: 'Rs. 300 crore' },
+        { label: 'Capital Adequacy', value: '15% of RWA' },
+        { label: 'Public Deposits', value: 'Not permitted' },
+        { label: 'Timeline', value: 'Subject to RBI review' }
       ]}
       relatedArticles={[
-        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license', category: 'RBI', description: 'NBFC Account Aggregator License — complete regulatory guide.' },
-        { title: 'NBFC Business Plan', href: '/rbi/nbfc-business-plan', category: 'RBI', description: 'NBFC Business Plan — complete regulatory guide.' },
-        { title: 'NBFC Takeover', href: '/rbi/nbfc-takeover', category: 'RBI', description: 'NBFC Takeover — complete regulatory guide.' },
-        { title: 'NBFC Legal Support Services', href: '/rbi/nbfc-legal-support', category: 'RBI', description: 'NBFC Legal Support Services — complete regulatory guide.' }
+        { title: 'NBFC Registration in India', href: '/rbi/nbfc-registration-in-india', category: 'RBI', description: 'RBI registration guide for NBFC-ICC with NOF, principal business test and COSMOS filing.' },
+        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license', category: 'RBI', description: 'RBI licensing framework for Account Aggregators and data sharing business models.' },
+        { title: 'NBFC Legal Support Services', href: '/rbi/nbfc-legal-support', category: 'RBI', description: 'Legal and compliance support for RBI-regulated financial entities.' },
+        { title: 'NBFC Business Plan', href: '/rbi/nbfc-business-plan', category: 'RBI', description: 'Regulator-facing business plan and financial projection support for financial licences.' }
       ]}
-      finalCtaTitle="Need Expert Support for ARC Registration?"
-      finalCtaDescription="Our compliance specialists provide end-to-end support for RBI registration, ₹300 Crore NOF planning, governance architecture, Asset Acquisition Policy drafting, Fair Practices Code, and ongoing SARFAESI compliance."
+      finalCtaTitle="Start Your ARC Registration Journey with Estabizz"
+      finalCtaDescription="Build your ARC application with structured regulatory support, Rs. 300 crore NOF readiness review, RBI-focused business plan, policy documentation, governance framework and post-registration compliance assistance."
     >
-      {sections.map((section) => (
-        <section key={section.id} id={section.id} className="mb-12">
-          <h2>{section.title}</h2>
-          <div className="prose max-w-none">
-            {section.content.split('\n\n').map((paragraph, idx) => (
-              paragraph.startsWith('•') ? (
-                <ul key={idx} className="list-disc pl-6">
-                  {paragraph.split('\n').filter(l => l.trim()).map((item, i) => (
-                    <li key={i}>{item.replace('• ', '')}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p key={idx}>{paragraph}</p>
-              )
-            ))}
-          </div>
-        </section>
-      ))}
+      <Section id="quick-overview" title="ARC Registration in India: Quick Overview">
+        <CardGrid cards={overviewCards} columns="md:grid-cols-2 lg:grid-cols-2" />
+        <div className="info-box">
+          The above details are indicative and must be evaluated based on the applicant&apos;s structure, sponsor background, capital position, governance framework, business model and latest RBI directions at the time of filing.
+        </div>
+      </Section>
 
-      <section id="faq" className="mt-16">
-        <h2>Frequently Asked Questions (110+ FAQs)</h2>
-        {faqGroups.map((group, idx) => (
-          <div key={idx} className="mb-8">
-            <h3>{group.category}</h3>
-            <div className="faq-accordion">
-              {group.faqs.map((faq, i) => (
-                <details key={i} className="faq-item">
-                  <summary>{faq.q}</summary>
-                  <div>{faq.a}</div>
-                </details>
-              ))}
+      <Section id="what-is-arc-registration" title="What is ARC Registration in India?">
+        <p>ARC Registration in India is the Certificate of Registration granted by the Reserve Bank of India to a company that intends to carry on the business of securitisation and asset reconstruction. No company can commence the business of securitisation or asset reconstruction without obtaining registration from RBI under the SARFAESI Act framework.</p>
+        <p>ARC Registration in India is not a simple licence formality. It is an entry into a tightly regulated stressed asset resolution framework requiring substantial capital, strong governance, recovery expertise, policy discipline and continuous compliance.</p>
+      </Section>
+
+      <Section id="legal-framework" title="Legal Framework Governing ARC Registration in India">
+        <DataTable
+          headers={['Particular', 'Details']}
+          rows={[
+            ['Governing Law', 'Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002'],
+            ['Key Provision', 'Section 3 of the SARFAESI Act, 2002'],
+            ['Regulator', 'Reserve Bank of India'],
+            ['Applicable Direction', 'Master Direction - Reserve Bank of India Asset Reconstruction Companies Directions, 2024, as amended from time to time'],
+            ['Core Activities', 'Securitisation and asset reconstruction'],
+            ['Certificate Issued', 'Certificate of Registration from RBI'],
+            ['Public Deposit Permission', 'Not permitted'],
+            ['Supervisory Authority', 'RBI may inspect, call for information, issue directions and take action for non-compliance']
+          ]}
+        />
+        <p>The RBI Master Direction consolidates regulatory instructions for ARCs, including capital adequacy, governance, sponsor fit and proper norms, asset acquisition, Security Receipts, valuation, realisation, disclosures and post-registration compliance.</p>
+      </Section>
+
+      <Section id="asset-reconstruction-company" title="What is an Asset Reconstruction Company?">
+        <p>An Asset Reconstruction Company is a specialised financial entity that acquires stressed or non-performing financial assets from banks and financial institutions and works towards recovery, restructuring or resolution through mechanisms permitted under the SARFAESI Act and RBI directions.</p>
+        <BulletList items={[
+          'Acquires stressed financial assets from banks and financial institutions',
+          'Issues Security Receipts to Qualified Buyers',
+          'Operates securitisation schemes through trusts',
+          'Undertakes restructuring, settlement, enforcement and recovery',
+          'May convert debt into equity as permitted',
+          'May act as Resolution Applicant under IBC, subject to applicable conditions'
+        ]} />
+      </Section>
+
+      <Section id="who-requires-arc-registration" title="Who Requires ARC Registration in India?">
+        <DataTable
+          headers={['Category of Entity', 'ARC Registration Required?', 'Regulatory Position']}
+          rows={[
+            ['Company acquiring NPAs from banks for reconstruction', 'Yes', 'Mandatory under SARFAESI framework'],
+            ['Entity issuing Security Receipts', 'Yes', 'Security Receipts can be issued by registered ARC structure'],
+            ['Entity undertaking securitisation business', 'Yes', 'Requires RBI registration'],
+            ['ARC acting as Resolution Applicant under IBC', 'Yes', 'Subject to additional capital and governance conditions'],
+            ['Bank restructuring its own portfolio', 'No', 'Governed by banking law and RBI banking regulations'],
+            ['Normal NBFC acquiring stressed assets for ARC business', 'No, unless registered as ARC', 'NBFC registration alone is not sufficient for ARC activity']
+          ]}
+        />
+      </Section>
+
+      <Section id="eligibility" title="Eligibility for ARC Registration in India">
+        <DataTable
+          headers={['Requirement', 'Expected Position', 'Remarks']}
+          rows={[
+            ['Entity Type', 'Company incorporated under Companies Act', 'LLP, partnership firm and individual cannot apply'],
+            ['Minimum NOF', 'Rs. 300 crore', 'Must be maintained on an ongoing basis'],
+            ['Sponsor Fit and Proper', 'Required', 'Sponsor background and financial soundness are examined'],
+            ['Director Fit and Proper', 'Required', 'Directors must submit declarations and meet governance expectations'],
+            ['Business Plan', 'Required', 'Must explain acquisition, recovery, securitisation and compliance strategy'],
+            ['MOA Objects', 'Required', 'MOA should authorise securitisation and asset reconstruction activities'],
+            ['Governance Framework', 'Required', 'Board, committees, policies and control mechanisms must be demonstrated'],
+            ['Operational Infrastructure', 'Required', 'Asset tracking, reporting, recovery and compliance systems are expected']
+          ]}
+        />
+        <h3>Minimum Capital Requirement for ARC Registration in India</h3>
+        <p>An ARC must maintain minimum Net Owned Fund of Rs. 300 crore on an ongoing basis. The Rs. 300 crore requirement demonstrates the capital-intensive nature of the ARC business and the institutional seriousness expected by RBI.</p>
+        <DataTable
+          headers={['Requirement', 'Details']}
+          rows={[
+            ['Minimum NOF', 'Rs. 300 crore'],
+            ['Nature', 'Ongoing requirement'],
+            ['Applicability', 'Asset Reconstruction Companies'],
+            ['Existing ARC glide path', 'Rs. 100 crore as on October 11, 2022, Rs. 200 crore by March 31, 2024, Rs. 300 crore by March 31, 2026'],
+            ['Non-compliance risk', 'RBI may restrict incremental business or take supervisory action']
+          ]}
+        />
+        <div className="warning-box">Promoters should not treat ARC Registration as a low-capital financial licence. It is suitable only for applicants with strong capital backing, governance maturity and clear stressed asset resolution capability.</div>
+      </Section>
+
+      <Section id="nof-computation" title="Net Owned Fund Computation for ARC Registration">
+        <DataTable
+          headers={['Component', 'Treatment']}
+          rows={[
+            ['Paid-up equity capital', 'Add'],
+            ['Compulsorily convertible preference capital', 'Add, subject to applicable definition'],
+            ['Free reserves excluding revaluation reserve', 'Add'],
+            ['Credit balance in Profit and Loss Account', 'Add, where applicable'],
+            ['Accumulated losses', 'Deduct'],
+            ['Intangible assets', 'Deduct'],
+            ['Short provisions', 'Deduct'],
+            ['Excess group exposures beyond prescribed threshold', 'Deduct as applicable']
+          ]}
+        />
+        <FormulaCard>Paid-up Equity + Convertible Preference Capital + Free Reserves - Intangible Assets - Accumulated Losses - Short Provisions - Excess Group Exposures = Net Owned Fund</FormulaCard>
+        <p>NOF computation must be carefully supported through financial statements, CA certification and capital proof. Incorrect NOF computation may lead to regulatory queries or application delay.</p>
+      </Section>
+
+      <Section id="capital-adequacy" title="Capital Adequacy Requirement for ARCs">
+        <p>ARC Registration in India requires ongoing maintenance of a minimum Capital Adequacy Ratio of 15% of total risk-weighted assets. Capital for this purpose is linked to Net Owned Fund.</p>
+        <DataTable
+          headers={['Asset Category', 'Risk Weight']}
+          rows={[
+            ['Cash and Bank Deposits', '0%'],
+            ['Government Securities', '0%'],
+            ['Other Assets', '100%'],
+            ['Contingent Liabilities', '50%']
+          ]}
+        />
+        <FormulaCard>Capital Adequacy Ratio = Net Owned Fund / Risk Weighted Assets</FormulaCard>
+        <p>The business plan should demonstrate how the applicant will maintain capital adequacy while acquiring financial assets and investing in Security Receipts.</p>
+      </Section>
+
+      <Section id="permissible-activities" title="Permissible Activities After ARC Registration in India">
+        <BulletList items={[
+          'Acquisition of financial assets',
+          'Securitisation through issuance of Security Receipts',
+          'Change or takeover of management',
+          'Rescheduling of debts',
+          'Settlement of dues',
+          'Enforcement of security interest',
+          'Conversion of debt into equity',
+          'Acting as Resolution Applicant under IBC, subject to applicable conditions',
+          'Recovery and resolution strategies permitted under SARFAESI framework'
+        ]} />
+        <div className="info-box">Permissible activities must be carried out strictly within the SARFAESI Act, RBI Master Direction and board-approved policies.</div>
+      </Section>
+
+      <Section id="key-restrictions" title="Key Restrictions Applicable to ARCs">
+        <DataTable
+          headers={['Restriction', 'Practical Meaning']}
+          rows={[
+            ['Public deposits not allowed', 'ARCs cannot accept public deposits'],
+            ['General lending not allowed', 'ARCs cannot operate like normal banks or lending NBFCs'],
+            ['Security Receipts not for public', 'SRs can be issued only to Qualified Buyers'],
+            ['Investment in immovable property restricted', 'Permitted only in limited circumstances such as own use or enforcement-related acquisition'],
+            ['Sponsor bank transactions restricted', 'Bilateral acquisition from sponsor banks is subject to restrictions'],
+            ['Regulatory compliance mandatory', 'Non-compliance can invite RBI action'],
+            ['Surplus fund investment restricted', 'Must remain within permitted investment categories']
+          ]}
+        />
+      </Section>
+
+      <Section id="documents-required" title="Documents Required for ARC Registration in India">
+        <DataTable
+          headers={['Category', 'Documents / Information']}
+          rows={[
+            ['Corporate Documents', 'Certificate of Incorporation, MOA, AOA, PAN, registered office proof and corporate profile'],
+            ['MOA Object Clause', 'MOA must authorise securitisation and asset reconstruction activities'],
+            ['Capital Documents', 'Proof of Rs. 300 crore NOF, bank statements, capital infusion documents, CA certificate and financial statements'],
+            ['Board Documents', 'Board resolution approving ARC application, business plan and authorised signatories'],
+            ['Sponsor Documents', 'Sponsor declaration, shareholding structure, financial background, source of funds and fit and proper information'],
+            ['Director Documents', 'KYC, DIN, professional profile, fit and proper declarations, Annex II and Annex III as applicable'],
+            ['Business Plan', 'Acquisition strategy, recovery strategy, target asset class, financial projections, capital adequacy model and risk framework'],
+            ['Policy Documents', 'Asset Acquisition Policy, Fair Practices Code, conflict of interest policy, risk management policy and governance policies'],
+            ['Organisational Structure', 'Proposed board, committees, senior management, recovery team, legal team and compliance function'],
+            ['Regulatory Declarations', 'Non-acceptance of public deposits, sponsor/director declarations and other RBI-prescribed submissions']
+          ]}
+        />
+      </Section>
+
+      <Section id="registration-process" title="Step-by-Step ARC Registration Process">
+        <div className="step-timeline">
+          {[
+            ['Company Incorporation and Object Clause Review', 'Ensure the applicant is a company and its MOA authorises securitisation and asset reconstruction activities.'],
+            ['Capital Structuring and NOF Readiness', 'Infuse and document minimum Rs. 300 crore NOF and ensure capital source transparency.'],
+            ['Sponsor and Director Due Diligence', 'Review fit and proper eligibility, financial soundness, regulatory history and disclosure requirements.'],
+            ['Business Plan and Financial Projection Preparation', 'Prepare acquisition strategy, recovery model, SR scheme approach, AUM assumptions, capital adequacy projection and cash flow planning.'],
+            ['Policy and Governance Documentation', 'Prepare Asset Acquisition Policy, Fair Practices Code, conflict of interest policy, risk management framework and board committee structure.'],
+            ['RBI Application Preparation', 'Compile all documents, prescribed formats, declarations and supporting annexures.'],
+            ['Submission to RBI Department of Regulation', 'Submit the application to the Chief General Manager-in-Charge, Department of Regulation, RBI, Central Office, Mumbai, or as may be prescribed.'],
+            ['RBI Scrutiny and Clarifications', 'RBI may examine capital adequacy, governance, sponsor background, policy framework, business plan and operational readiness.'],
+            ['Grant of Certificate of Registration', 'Upon regulatory satisfaction, RBI may grant Certificate of Registration as an ARC.'],
+            ['Commencement of Business', 'After CoR, the ARC must commence business within the period specified by RBI, subject to applicable conditions.']
+          ].map(([title, body], index) => (
+            <div key={title} className="step-item">
+              <div className="step-dot" />
+              <div className="step-card">
+                <div className="step-label">Step {index + 1}</div>
+                <h3 className="!p-0 !mb-2 !text-[#0a1628]">{title}</h3>
+                <p className="!mb-0">{body}</p>
+              </div>
             </div>
+          ))}
+        </div>
+        <div className="warning-box">Each application is subject to RBI review and satisfaction. A well-prepared application improves regulatory clarity but does not guarantee approval.</div>
+      </Section>
+
+      <Section id="governance" title="Governance Requirements for Asset Reconstruction Companies">
+        <DataTable
+          headers={['Governance Requirement', 'Expected Position']}
+          rows={[
+            ['Independent Chairperson', 'Required as per applicable governance norms'],
+            ['Audit Committee', 'Mandatory'],
+            ['Nomination and Remuneration Committee', 'Mandatory'],
+            ['Independent Advisory Committee', 'Required for settlement and takeover cases'],
+            ['MD / CEO Age Limit', '70 years'],
+            ['Maximum Continuous Tenure', '15 years'],
+            ['Fit and Proper Review', 'Required for directors and sponsors'],
+            ['Conflict of Interest Controls', 'Must be addressed through policy and governance framework']
+          ]}
+        />
+        <FormulaCard>Board of Directors &rarr; Audit Committee &rarr; Nomination &amp; Remuneration Committee &rarr; Independent Advisory Committee &rarr; MD / CEO &rarr; Risk | Legal | Operations | Finance | Recovery | Compliance</FormulaCard>
+      </Section>
+
+      <Section id="security-receipts" title="Security Receipts Framework under ARC Registration in India">
+        <p>Security Receipts represent undivided right, title or interest of Qualified Buyers in the financial assets acquired by an ARC through a scheme.</p>
+        <DataTable
+          headers={['Requirement', 'Details']}
+          rows={[
+            ['Eligible Investors', 'Qualified Buyers only'],
+            ['Public Issue', 'Not permitted'],
+            ['Minimum ARC Investment', 'Minimum 15% of transferor investment or 2.5% of total SRs issued, whichever is higher'],
+            ['Recovery Rating', 'Mandatory within prescribed period'],
+            ['NAV Declaration', 'Half-yearly'],
+            ['Transferability', 'Subject to regulatory restrictions']
+          ]}
+        />
+        <FormulaCard>Recovery Rating % x Face Value of SR = NAV</FormulaCard>
+      </Section>
+
+      <Section id="asset-realisation" title="Asset Realisation Framework for ARCs">
+        <FormulaCard>Acquisition Date &rarr; Planning Period: maximum 6 months &rarr; Realisation Period: up to 5 years &rarr; Board-approved extension: maximum 8 years total from acquisition</FormulaCard>
+        <p>The ARC must prepare a resolution and recovery strategy within the permitted planning period and monitor realisation within the regulatory timelines. Any extension should be properly justified and approved as required.</p>
+        <h3>Provisioning Norms for ARCs</h3>
+        <DataTable
+          headers={['Asset Classification', 'Provision Requirement']}
+          rows={[
+            ['Sub-Standard', '10%'],
+            ['Doubtful', '50% plus unsecured portion'],
+            ['Loss', '100% write-off']
+          ]}
+        />
+        <p>Provisioning has direct impact on capital adequacy and financial strength. ARC applicants must factor provisioning sensitivity into their business plan.</p>
+      </Section>
+
+      <Section id="post-registration-compliance" title="Post-Registration Compliance After ARC Registration in India">
+        <DataTable
+          headers={['Compliance Area', 'Frequency / Requirement']}
+          rows={[
+            ['CIC Reporting', 'Fortnightly'],
+            ['NAV Disclosure', 'Half-yearly'],
+            ['Audited Balance Sheet Submission', 'Within one month of AGM'],
+            ['SARFAESI Possession Disclosure', 'Monthly website update'],
+            ['Capital Adequacy Monitoring', 'Ongoing'],
+            ['Statutory Audit', 'Annual'],
+            ['Internal Controls', 'Continuous'],
+            ['Governance Committee Meetings', 'As applicable'],
+            ['Security Receipt Rating', 'As prescribed'],
+            ['RBI Reporting', 'As prescribed by RBI']
+          ]}
+        />
+        <p>Receipt of Certificate of Registration is only the beginning. ARCs must maintain continuous compliance, proper books of account, periodic disclosures, governance controls, audit discipline and regulatory reporting.</p>
+      </Section>
+
+      <Section id="business-plan" title="Business Plan and Financial Projection Framework for ARC Registration">
+        <p>RBI evaluates whether the applicant has a credible, sustainable and risk-aware business model. The business plan should not be generic. It must explain the ARC acquisition strategy, recovery model, securitisation structure, governance framework and capital adequacy sustainability.</p>
+        <h3>Business Model Architecture</h3>
+        <FormulaCard>Bank NPA Portfolio &rarr; Due Diligence and Valuation &rarr; Acquisition by ARC &rarr; SR Issuance to Qualified Buyers &rarr; Recovery / Resolution Strategy &rarr; Realisation and Distribution</FormulaCard>
+        <h3>Mandatory Business Plan Components</h3>
+        <BulletList items={[
+          'Promoter background and strategic intent',
+          'Market opportunity assessment',
+          'Target asset class',
+          'Acquisition strategy',
+          'Valuation methodology',
+          'Resolution and recovery strategy',
+          'Legal enforcement framework',
+          'IBC participation strategy',
+          'Three-year financial projections',
+          'Capital adequacy projection',
+          'Cash flow planning',
+          'Risk management framework',
+          'Compliance architecture'
+        ]} />
+        <h3>Illustrative Assumptions</h3>
+        <DataTable
+          headers={['Parameter', 'Year 1', 'Year 2', 'Year 3']}
+          rows={[
+            ['Assets Under Management', 'Rs. 1,500 crore', 'Rs. 3,000 crore', 'Rs. 5,000 crore'],
+            ['Average Acquisition Discount', '60%', '55%', '50%'],
+            ['Average Recovery Rate', '35%', '40%', '45%'],
+            ['Operating Cost Ratio', '8%', '7%', '6%']
+          ]}
+        />
+        <div className="warning-box">These figures are illustrative only. Actual projections must be customised based on the applicant strategy, capital strength, asset class, recovery assumptions and regulatory expectations.</div>
+        <h3>Income Statement Structure</h3>
+        <DataTable
+          headers={['Particulars', 'Year 1', 'Year 2', 'Year 3']}
+          rows={[
+            ['Management Fees', 'To be projected', 'To be projected', 'To be projected'],
+            ['Recovery Upside Share', 'To be projected', 'To be projected', 'To be projected'],
+            ['Total Revenue', 'To be projected', 'To be projected', 'To be projected'],
+            ['Operating Expenses', 'To be projected', 'To be projected', 'To be projected'],
+            ['Profit Before Tax', 'To be projected', 'To be projected', 'To be projected']
+          ]}
+        />
+      </Section>
+
+      <Section id="rbi-query-areas" title="Common RBI Query Areas During ARC Registration">
+        <BulletList items={[
+          'Source and layering of capital',
+          'Sponsor background and financial strength',
+          'Management team experience',
+          'Justification for recovery assumptions',
+          'Capital adequacy sustainability',
+          'Conflict of interest safeguards',
+          'Governance independence',
+          'Asset acquisition policy quality',
+          'Operational readiness',
+          'SARFAESI disclosure framework'
+        ]} />
+      </Section>
+
+      <Section id="structuring-challenges" title="Common Structuring Challenges in ARC Registration in India">
+        <DataTable
+          headers={['Challenge', 'Practical Risk']}
+          rows={[
+            ['Improper NOF computation', 'RBI query or delay'],
+            ['Weak acquisition policy drafting', 'Governance concern'],
+            ['Inadequate sponsor due diligence', 'Fit and proper concerns'],
+            ['Unrealistic recovery assumptions', 'Business plan credibility issue'],
+            ['Insufficient capital adequacy modelling', 'Regulatory sustainability concern'],
+            ['Governance gaps', 'Application scrutiny increases'],
+            ['Poor conflict of interest controls', 'Regulatory risk'],
+            ['Lack of recovery team capability', 'Operational readiness concern'],
+            ['Weak documentation', 'Query cycles and delay']
+          ]}
+        />
+      </Section>
+
+      <Section id="timeline" title="Indicative Timeline for ARC Registration in India">
+        <DataTable
+          headers={['Stage', 'Activity', 'Estimated Duration']}
+          rows={[
+            ['Stage 1', 'Structuring, capital planning and eligibility review', '2 to 4 weeks'],
+            ['Stage 2', 'Business plan, policy drafting and document preparation', '4 to 6 weeks'],
+            ['Stage 3', 'Application submission to RBI', 'Case-specific'],
+            ['Stage 4', 'RBI scrutiny and initial review', '3 to 6 months'],
+            ['Stage 5', 'Clarifications and additional submissions', 'Case-specific'],
+            ['Stage 6', 'Grant of Certificate of Registration', 'Subject to RBI satisfaction']
+          ]}
+        />
+        <p>Upon grant of Certificate of Registration, the ARC must commence business within the period specified by RBI. The timeline is indicative and depends on regulatory scrutiny, documentation quality, capital structure, governance readiness and RBI queries.</p>
+      </Section>
+
+      <Section id="inspection-action" title="RBI Inspection and Regulatory Action">
+        <DataTable
+          headers={['Trigger', 'Possible Consequence']}
+          rows={[
+            ['Failure to maintain Rs. 300 crore NOF', 'Restrictions or supervisory action'],
+            ['Failure to maintain capital adequacy', 'Business restriction or corrective measures'],
+            ['Misrepresentation in application', 'Rejection or regulatory action'],
+            ['Non-compliance with SARFAESI provisions', 'Penalties under law'],
+            ['Governance failure', 'RBI directions or restrictions'],
+            ['Violation of public deposit prohibition', 'Serious regulatory action'],
+            ['Persistent non-compliance', 'Cancellation of registration']
+          ]}
+        />
+        <p>RBI may inspect ARCs, call for information, issue directions, restrict operations, impose monetary penalties or cancel registration where regulatory conditions are not satisfied.</p>
+      </Section>
+
+      <Section id="how-estabizz-helps" title="How Estabizz Helps with ARC Registration in India">
+        <CardGrid cards={supportCards} columns="md:grid-cols-2" />
+      </Section>
+
+      <Section id="why-choose-estabizz" title="Why Choose Estabizz for ARC Registration in India?">
+        <CardGrid cards={whyCards} columns="md:grid-cols-2" />
+      </Section>
+
+      <Section id="faqs" title="FAQs on ARC Registration in India">
+        <div className="faq-accordion">
+          {faqs.map((faq) => (
+            <details key={faq.q} className="faq-item">
+              <summary>{faq.q}</summary>
+              <div>{faq.a}</div>
+            </details>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="expert-review" title="Reviewed by Estabizz Compliance Expert">
+        <div className="success-box">
+          <h3 className="!p-0 !mb-2 !text-[#0a1628]">CS Devyani Khambhati</h3>
+          <p className="!mb-2"><strong>Designation:</strong> Compliance Expert | Estabizz Fintech Private Limited</p>
+          <p className="!mb-2"><strong>Expertise:</strong> RBI, SEBI, IRDAI, IFSCA, fintech regulatory compliance, NBFC licensing, ARC registration, financial sector documentation and post-registration compliance.</p>
+          <p className="!mb-0">This content has been prepared from a regulatory advisory perspective to help promoters, sponsors, investors and financial sector professionals understand the broad RBI framework for Asset Reconstruction Company registration in India.</p>
+        </div>
+        <div className="warning-box">
+          This content is for general informational purposes only and should not be treated as legal, regulatory, financial or investment advice. RBI requirements, application formats, capital thresholds, compliance expectations and approval processes may change from time to time. Applicants should verify the latest regulatory position and obtain professional advice before filing any application with RBI.
+        </div>
+      </Section>
+
+      <Section id="speak-to-expert" title="Start Your ARC Registration Journey with Estabizz">
+        <div className="rounded-2xl bg-gradient-to-br from-[#0a1628] to-[#1a2b45] p-6 md:p-8 text-white">
+          <p className="!text-blue-100">Build your ARC application with structured regulatory support, Rs. 300 crore NOF readiness review, RBI-focused business plan, policy documentation, governance framework and post-registration compliance assistance.</p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Link href="/contact" className="rounded-xl bg-white px-5 py-3 text-center text-sm font-bold text-[#0077B6] hover:bg-blue-50">Speak to RBI Compliance Expert</Link>
+            <Link href="/get-started" className="rounded-xl bg-[#0096D6] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#0077B6]">Apply for ARC Registration</Link>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="rounded-xl bg-[#10b981] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#059669]">WhatsApp Estabizz Team</a>
           </div>
-        ))}
-      </section>
+        </div>
+      </Section>
     </ServicePageLayout>
   );
 }

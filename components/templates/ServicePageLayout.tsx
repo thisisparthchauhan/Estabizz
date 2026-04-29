@@ -13,7 +13,11 @@ interface ServicePageLayoutProps {
     tags: Tag[];
     breadcrumb: BreadcrumbItem[];
     title: string;
+    heroDescription?: React.ReactNode;
+    heroActions?: React.ReactNode;
+    trustLine?: string;
     readTime?: string;
+    displayYear?: string;
     focusKeyword: string;
     // TOC
     sections: TocSection[];
@@ -31,7 +35,7 @@ interface ServicePageLayoutProps {
 }
 
 export default function ServicePageLayout({
-    tags, breadcrumb, title, readTime = "12 min read", focusKeyword,
+    tags, breadcrumb, title, heroDescription, heroActions, trustLine, readTime = "12 min read", displayYear = "2026", focusKeyword,
     sections, ctaTitle, ctaDescription, quickFacts,
     relatedArticles, finalCtaTitle, finalCtaDescription, children
 }: ServicePageLayoutProps) {
@@ -127,9 +131,27 @@ export default function ServicePageLayout({
                         {title}
                     </h1>
 
+                    {heroDescription && (
+                        <div className="max-w-4xl text-[17px] leading-[1.8] text-gray-600 mb-7">
+                            {heroDescription}
+                        </div>
+                    )}
+
+                    {heroActions && (
+                        <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-7">
+                            {heroActions}
+                        </div>
+                    )}
+
+                    {trustLine && (
+                        <div className="max-w-4xl text-[14px] font-semibold text-[#0a1628] bg-white/70 border border-blue-100 rounded-xl px-4 py-3 mb-7 shadow-sm">
+                            {trustLine}
+                        </div>
+                    )}
+
                     {/* Meta */}
                     <div className="flex flex-wrap items-center gap-4 text-[13px] text-gray-500 font-medium mb-8">
-                        <div className="flex items-center gap-1.5"><span>📅</span> 2026</div>
+                        <div className="flex items-center gap-1.5"><span>📅</span> {displayYear}</div>
                         <span className="text-gray-300">|</span>
                         <div className="flex items-center gap-1.5"><span>⏱️</span> {readTime}</div>
                         <span className="text-gray-300">|</span>
@@ -148,15 +170,15 @@ export default function ServicePageLayout({
             <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col xl:flex-row gap-10 items-start">
 
                 {/* Left TOC Sidebar */}
-                <aside className="hidden xl:block w-[220px] shrink-0 sticky top-[80px] bg-white border border-[rgba(0,150,220,0.1)] rounded-[16px] p-5 shadow-[0_4px_20px_rgba(0,100,200,0.03)] z-10">
+                <aside className="hidden xl:block w-[280px] shrink-0 sticky top-[80px] bg-white border border-[rgba(0,150,220,0.1)] rounded-[16px] p-5 shadow-[0_4px_20px_rgba(0,100,200,0.03)] z-10">
                     <h4 className="text-[12px] font-bold text-[#94a3b8] tracking-[0.1em] uppercase mb-4">Contents</h4>
-                    <nav className="flex flex-col space-y-1 max-h-[calc(100vh-160px)] overflow-y-auto pr-2">
+                    <nav className="flex flex-col gap-1 max-h-[calc(100vh-160px)] overflow-y-auto pr-2">
                         {sections.map((section) => (
                             <a
                                 key={section.id}
                                 href={`#${section.id}`}
                                 onClick={(e) => scrollToSection(e, section.id)}
-                                className={`text-[13px] block py-2 pl-3 rounded-r-lg border-l-[3px] transition-all duration-200 ${activeSection === section.id
+                                className={`text-[13px] block py-2.5 pl-3 pr-2 rounded-r-lg border-l-[3px] leading-snug transition-all duration-200 ${activeSection === section.id
                                     ? "border-l-[#0096D6] bg-[rgba(0,150,220,0.06)] text-[#0096D6] font-bold"
                                     : "border-l-transparent text-[#64748b] hover:text-[#0096D6] hover:bg-blue-50/50"}`}
                             >
@@ -175,10 +197,10 @@ export default function ServicePageLayout({
                                 <svg fill="none" height="24" viewBox="0 0 24 24" width="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M6 9l6 6 6-6" /></svg>
                             </span>
                         </summary>
-                        <nav className="flex flex-col space-y-2 mt-4 max-h-[300px] overflow-y-auto">
+                        <nav className="flex flex-col gap-2 mt-4 max-h-[320px] overflow-y-auto">
                             {sections.map((section) => (
                                 <a key={section.id} href={`#${section.id}`} onClick={(e) => scrollToSection(e, section.id)}
-                                    className="text-[14px] text-gray-600 hover:text-[#0096D6] border-b border-gray-50 pb-2">
+                                    className="text-[14px] text-gray-600 hover:text-[#0096D6] border-b border-gray-50 pb-2 leading-snug">
                                     {section.title}
                                 </a>
                             ))}
@@ -207,6 +229,16 @@ export default function ServicePageLayout({
               .article-content li a{color:#0096D6;text-decoration:underline}
               .article-content p a,.article-content td a{color:#0096D6;text-decoration:underline}
               .article-content p strong{color:#0a1628}
+              .article-content .clean-list{display:grid;gap:10px;margin:18px 0 28px}
+              .article-content .clean-list li{background:#f8fbff;border:1px solid rgba(0,150,220,0.1);border-radius:12px;padding:12px 14px 12px 36px;margin:0}
+              .article-content .clean-list li::before{left:15px;top:20px}
+              .article-content .numbered-list{display:grid;gap:10px;margin:18px 0 28px;counter-reset:li-counter}
+              .article-content .numbered-list li{background:#fff;border:1px solid rgba(0,150,220,0.12);border-radius:12px;padding:13px 16px 13px 44px;margin:0;box-shadow:0 3px 12px rgba(0,100,200,0.03)}
+              .article-content .numbered-list li::before{left:15px;top:14px;width:20px;height:20px;border-radius:999px;background:#e0f2fe;display:flex;align-items:center;justify-content:center}
+              .article-content .field-label{font-weight:800;color:#0a1628}
+              .article-content .process-card{background:white;border:1px solid rgba(0,150,220,0.14);border-left:4px solid #0096D6;border-radius:14px;padding:18px 20px;margin:18px 0;box-shadow:0 4px 18px rgba(0,100,200,0.04)}
+              .article-content .process-card h3{padding:0;margin:0 0 8px 0;color:#0a1628;font-size:16px}
+              .article-content .process-card p{margin:0;font-size:14px;line-height:1.75}
               .numbered-card{background:white;border:1px solid rgba(0,150,220,0.1);border-radius:12px;padding:16px 20px;transition:all 0.3s;margin-bottom:12px;display:flex;align-items:flex-start;gap:16px}
               .numbered-card:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,100,200,0.08);border-color:rgba(0,150,220,0.3)}
               .num-badge{width:32px;height:32px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,#0096D6,#10b981);color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px}

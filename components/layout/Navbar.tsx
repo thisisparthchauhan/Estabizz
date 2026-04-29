@@ -1,6 +1,7 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface MenuCategory { label: string; icon: string; items: string[]; }
 interface MegaMenu { categories: MenuCategory[]; viewAll: string; viewAllLabel: string; }
@@ -14,16 +15,23 @@ const linkMap: Record<string, string> = {
     "NBFC Registration": "/rbi/nbfc-registration-in-india",
     "NBFC Account Aggregator": "/rbi/nbfc-account-aggregator-license",
     "Account Aggregator": "/rbi/nbfc-account-aggregator-license",
+    "ARC Registration": "/rbi/arc-registration-in-india",
+    "Asset Reconstruction Company": "/rbi/arc-registration-in-india",
+    "NBFC SRO Registration": "/rbi/nbfc-sro-registration",
+    "SRO for NBFCs": "/rbi/nbfc-sro-registration",
     "NBFC Business Plan": "/rbi/nbfc-business-plan",
     "NBFC Compliance": "/rbi/nbfc-legal-support",
     "NBFC-P2P License": "/rbi/nbfc-for-sale",
     "NBFC-MFI License": "/rbi/nbfc-takeover",
     "NBFC Annual Return Filing": "/rbi/nbfc-marketing-strategy",
     "Payment Aggregator": "/rbi/payment-aggregator-license-in-india",
+    "Payment Aggregator License": "/rbi/payment-aggregator-license-in-india",
     "AD Category II": "/rbi/full-fledged-money-changers",
     "Credit Information Company": "/rbi/lendtech-services",
     "NBFC License": "/rbi/nbfc-account-aggregator-license",
     "Prepaid Instrument": "/rbi/ppi-registration-in-india",
+    "PPI Registration": "/rbi/ppi-registration-in-india",
+    "Prepaid Payment Instrument": "/rbi/ppi-registration-in-india",
     // SEBI
     "Stock Broker License": "/sebi",
     "Merchant Banker": "/sebi",
@@ -40,7 +48,6 @@ const linkMap: Record<string, string> = {
     "TPA License": "/irdai/isnp-registration",
     "Micro Insurance": "/irdai/ifsca-insurance-intermediary",
     // Fintech
-    "Payment Aggregator License": "/rbi/payment-aggregator-license-in-india",
     "Prepaid Instrument License": "/rbi/ppi-registration-in-india",
     "BBPS Agent Registration": "/rbi/lendtech-services",
     "UPI Third Party App": "/rbi/rbi-services",
@@ -73,6 +80,21 @@ const linkMap: Record<string, string> = {
     "Social Stock Exchange": "/sebi/social-stock-exchange-license",
     "Underwriter Registration": "/sebi/underwriter-registration",
 };
+
+const staticSearchLinks = [
+    { label: "Home", href: "/", group: "Site" },
+    { label: "All Services", href: "/services", group: "Site" },
+    { label: "Regulatory Services", href: "/regulatory", group: "Site" },
+    { label: "RBI Services", href: "/rbi", group: "RBI" },
+    { label: "SEBI Services", href: "/sebi", group: "SEBI" },
+    { label: "IRDAI Services", href: "/irdai", group: "IRDAI" },
+    { label: "IFSCA Services", href: "/ifsca", group: "IFSCA" },
+    { label: "FEMA Services", href: "/fema", group: "FEMA" },
+    { label: "Contact Estabizz", href: "/contact", group: "Site" },
+    { label: "Book Consultation", href: "/contact", group: "Site" },
+    { label: "Get Started", href: "/get-started", group: "Site" },
+    { label: "Login", href: "/login", group: "Site" },
+];
 
 const menus: Record<string, MegaMenu> = {
     Services: {
@@ -118,11 +140,15 @@ const menus: Record<string, MegaMenu> = {
 };
 
 export default function Navbar() {
+    const router = useRouter();
     const [scrolled, setScrolled] = useState(false);
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
     const [activeCategory, setActiveCategory] = useState(0);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchOpen, setSearchOpen] = useState(false);
+    const searchRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         const h = () => setScrolled(window.scrollY > 10);
@@ -130,8 +156,87 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", h);
     }, []);
 
+    useEffect(() => {
+        const handlePointerDown = (event: MouseEvent) => {
+            if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+                setSearchOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handlePointerDown);
+        return () => document.removeEventListener("mousedown", handlePointerDown);
+    }, []);
+
+    const searchItems = useMemo(() => {
+        const groupedItems = new Map<string, { label: string; href: string; group: string; keywords: string }>();
+
+        Object.entries(linkMap).forEach(([label, href]) => {
+            const groups = Object.entries(menus)
+                .flatMap(([menuName, menu]) =>
+                    menu.categories
+                        .filter((category) => category.items.includes(label))
+                        .map((category) => `${menuName} ${category.label}`)
+                );
+            const key = `${label}-${href}`;
+
+            groupedItems.set(key, {
+                label,
+                href,
+                group: groups[0] || "Service",
+                keywords: `${label} ${href} ${groups.join(" ")}`.toLowerCase(),
+            });
+        });
+
+        staticSearchLinks.forEach((item) => {
+            groupedItems.set(`${item.label}-${item.href}`, {
+                ...item,
+                keywords: `${item.label} ${item.href} ${item.group}`.toLowerCase(),
+            });
+        });
+
+        return Array.from(groupedItems.values()).sort((a, b) => a.label.localeCompare(b.label));
+    }, []);
+
+    const searchResults = useMemo(() => {
+        const query = searchQuery.trim().toLowerCase();
+
+        if (!query) {
+            return searchItems.slice(0, 7);
+        }
+
+        return searchItems
+            .filter((item) => item.keywords.includes(query))
+            .sort((a, b) => {
+                const aStarts = a.label.toLowerCase().startsWith(query) ? 0 : 1;
+                const bStarts = b.label.toLowerCase().startsWith(query) ? 0 : 1;
+                return aStarts - bStarts || a.label.localeCompare(b.label);
+            })
+            .slice(0, 8);
+    }, [searchItems, searchQuery]);
+
+    const closeSearch = () => {
+        setSearchOpen(false);
+        setSearchQuery("");
+    };
+
+    const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Escape") {
+            closeSearch();
+            return;
+        }
+
+        if (event.key === "Enter" && searchResults[0]) {
+            event.preventDefault();
+            const nextHref = searchResults[0].href;
+            closeSearch();
+            setMobileOpen(false);
+            router.push(nextHref);
+        }
+    };
+
     const openMenu = (menu: string) => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        setSearchOpen(false);
         setActiveMenu(menu);
         setActiveCategory(0);
     };
@@ -141,6 +246,70 @@ export default function Navbar() {
     const keepOpen = () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
 
     const currentMenu = activeMenu ? menus[activeMenu] : null;
+    const SearchBox = ({ mobile = false }: { mobile?: boolean }) => (
+        <div ref={mobile ? undefined : searchRef} className={`relative ${mobile ? "w-full" : "w-[240px]"}`}>
+            <label className="sr-only" htmlFor={mobile ? "mobile-page-search" : "desktop-page-search"}>Search pages</label>
+            <div className="relative">
+                <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" />
+                </svg>
+                <input
+                    id={mobile ? "mobile-page-search" : "desktop-page-search"}
+                    type="search"
+                    value={searchQuery}
+                    onChange={(event) => {
+                        setSearchQuery(event.target.value);
+                        setSearchOpen(true);
+                    }}
+                    onFocus={() => {
+                        setActiveMenu(null);
+                        setSearchOpen(true);
+                    }}
+                    onKeyDown={handleSearchKeyDown}
+                    placeholder="Search pages..."
+                    className={`w-full rounded-lg border border-[#dbe7f3] bg-white pl-9 pr-3 text-[13.5px] font-medium text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:border-[#0096D6] focus:ring-4 focus:ring-[#0096D6]/10 ${mobile ? "h-11" : "h-10"}`}
+                    aria-expanded={searchOpen}
+                    aria-controls={mobile ? "mobile-page-search-results" : "desktop-page-search-results"}
+                />
+            </div>
+
+            {searchOpen && (
+                <div
+                    id={mobile ? "mobile-page-search-results" : "desktop-page-search-results"}
+                    className={`${mobile ? "mt-2 w-full" : "absolute right-0 top-[46px] w-[360px]"} overflow-hidden rounded-xl border border-[#dbe7f3] bg-white shadow-[0_18px_45px_rgba(15,23,42,0.14)]`}
+                >
+                    <div className="border-b border-gray-100 px-4 py-2 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">
+                        {searchQuery.trim() ? "Search Results" : "Popular Pages"}
+                    </div>
+                    {searchResults.length > 0 ? (
+                        <div className="max-h-[330px] overflow-y-auto py-1">
+                            {searchResults.map((item) => (
+                                <Link
+                                    key={`${item.label}-${item.href}`}
+                                    href={item.href}
+                                    onClick={() => {
+                                        closeSearch();
+                                        setMobileOpen(false);
+                                    }}
+                                    className="flex items-start justify-between gap-4 px-4 py-3 transition-colors hover:bg-[#f5fbff]"
+                                >
+                                    <span>
+                                        <span className="block text-[13.5px] font-bold text-[#0a1628]">{item.label}</span>
+                                        <span className="mt-0.5 block text-[11.5px] font-medium text-[#64748b]">{item.group}</span>
+                                    </span>
+                                    <span className="mt-0.5 shrink-0 text-[12px] font-bold text-[#0096D6]">Open</span>
+                                </Link>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="px-4 py-5 text-[13px] font-medium text-[#64748b]">
+                            No page found. Try RBI, IFSCA, NBFC, payment, insurance or SEBI.
+                        </div>
+                    )}
+                </div>
+            )}
+        </div>
+    );
 
     return (
         <>
@@ -169,10 +338,11 @@ export default function Navbar() {
 
                     {/* Right */}
                     <div className="hidden xl:flex items-center gap-3">
-                        <a href="https://www.estabizz.com/" target="_blank" rel="noopener noreferrer" className="text-[13.5px] font-semibold text-[#64748b] hover:text-[#0096D6] transition-colors px-3 py-2 border-r border-gray-200 pr-4">
+                        <SearchBox />
+                        <a href="https://www.estabizz.com/" target="_blank" rel="noopener noreferrer" className="hidden text-[13.5px] font-semibold text-[#64748b] hover:text-[#0096D6] transition-colors px-3 py-2 border-r border-gray-200 pr-4">
                             📚 Old Site
                         </a>
-                        <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
+                        <Link href="/login" className="hidden text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
                             Login
                         </Link>
                         <Link href="/get-started" className="text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-lg px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-sm">
@@ -244,6 +414,9 @@ export default function Navbar() {
             {mobileOpen && (
                 <div className="fixed top-[64px] left-0 w-full h-[calc(100vh-64px)] bg-white z-[98] overflow-y-auto xl:hidden">
                     <div className="p-6 space-y-4">
+                        <div ref={searchRef}>
+                            <SearchBox mobile />
+                        </div>
                         {Object.entries(menus).map(([name, menu]) => (
                             <details key={name} className="rounded-xl border border-gray-100 bg-[#f8faff] px-4 py-2">
                                 <summary className="text-[15px] font-bold text-[#0a1628] cursor-pointer py-2">{name}</summary>

@@ -1,7 +1,98 @@
 'use client';
+import React from 'react';
 import ServicePageLayout from '@/components/templates/ServicePageLayout';
 
 export default function NBFCRegistrationPage() {
+  const renderTextWithLinks = (text: string) => {
+    const cosmosUrl = 'https://cosmos.rbi.org.in';
+    const parts = text.split(cosmosUrl);
+
+    return parts.flatMap((part, index) => {
+      const nodes: React.ReactNode[] = [];
+      if (part) nodes.push(part);
+      if (index < parts.length - 1) {
+        nodes.push(
+          <a key={`cosmos-${index}`} href={cosmosUrl} target="_blank" rel="noopener noreferrer">
+            RBI COSMOS Portal
+          </a>
+        );
+      }
+      return nodes;
+    });
+  };
+
+  const renderFormattedLine = (line: string) => {
+    const separator = line.includes(' — ') ? ' — ' : line.includes(': ') ? ': ' : null;
+
+    if (!separator) return renderTextWithLinks(line);
+
+    const [label, ...rest] = line.split(separator);
+    const value = rest.join(separator);
+
+    return (
+      <>
+        <span className="field-label">{label}</span>
+        {separator}
+        {renderTextWithLinks(value)}
+      </>
+    );
+  };
+
+  const renderContentBlock = (block: string, index: number) => {
+    const lines = block.split('\n').map((line) => line.trim()).filter(Boolean);
+    const isBulletList = lines.length > 0 && lines.every((line) => line.startsWith('•'));
+    const isNumberedList = lines.length > 0 && lines.every((line) => /^\d+(?:\.\d+)?\s/.test(line));
+    const stepMatch = block.match(/^Step\s+(\d+)\s+[–-]\s+(.+)\n([\s\S]+)/);
+
+    if (stepMatch) {
+      return (
+        <div key={index} className="process-card">
+          <h3>Step {stepMatch[1]} – {stepMatch[2]}</h3>
+          <p>{renderTextWithLinks(stepMatch[3])}</p>
+        </div>
+      );
+    }
+
+    if (isBulletList) {
+      return (
+        <ul key={index} className="clean-list">
+          {lines.map((line, itemIndex) => (
+            <li key={itemIndex}>{renderFormattedLine(line.replace(/^•\s*/, ''))}</li>
+          ))}
+        </ul>
+      );
+    }
+
+    if (isNumberedList) {
+      return (
+        <ol key={index} className="numbered-list">
+          {lines.map((line, itemIndex) => (
+            <li key={itemIndex}>{renderFormattedLine(line.replace(/^\d+(?:\.\d+)?\s*/, ''))}</li>
+          ))}
+        </ol>
+      );
+    }
+
+    const firstBulletIndex = lines.findIndex((line) => line.startsWith('•'));
+    if (firstBulletIndex > 0) {
+      const intro = lines.slice(0, firstBulletIndex).join(' ');
+      const bullets = lines.slice(firstBulletIndex);
+
+      return (
+        <React.Fragment key={index}>
+          <p>{renderTextWithLinks(intro)}</p>
+          <ul className="clean-list">
+            {bullets.map((line, itemIndex) => (
+              <li key={itemIndex}>{renderFormattedLine(line.replace(/^•\s*/, ''))}</li>
+            ))}
+          </ul>
+        </React.Fragment>
+      );
+    }
+
+    return <p key={index}>{renderTextWithLinks(block)}</p>;
+  };
+
   const sections = [
     {
       id: 'introduction',
@@ -836,6 +927,8 @@ When designed with regulatory foresight, NBFC Registration in India provides ins
     }
   ];
 
+  const tocSections = [...sections.map(({ id, title }) => ({ id, title })), { id: 'faq', title: 'Frequently Asked Questions' }];
+
   return (
     <ServicePageLayout
       tags={[
@@ -853,8 +946,9 @@ When designed with regulatory foresight, NBFC Registration in India provides ins
       ]}
       title="NBFC Registration in India"
       readTime="25 min read"
+      displayYear="2025"
       focusKeyword="NBFC Registration in India"
-      sections={sections}
+      sections={tocSections}
       ctaTitle="Ready to Launch Your NBFC?"
       ctaDescription="Get expert guidance on ₹10 Crore NOF structuring, COSMOS portal filing, business plan drafting, Annex XII director documentation, and end-to-end RBI Certificate of Registration process."
       quickFacts={[
@@ -883,26 +977,16 @@ When designed with regulatory foresight, NBFC Registration in India provides ins
       finalCtaDescription="Our compliance specialists provide end-to-end NBFC registration support — pre-filing audit, NOF computation, COSMOS portal filing, Annex XII documentation, business plan, all Board-approved policies, query handling, and ongoing post-registration compliance."
     >
       {sections.map((section) => (
-        <section key={section.id} id={section.id} className="mb-12">
-          <h2>{section.title}</h2>
+        <section key={section.id} className="mb-12">
+          <h2 id={section.id}>{section.title}</h2>
           <div className="prose max-w-none">
-            {section.content.split('\n\n').map((paragraph, idx) => (
-              paragraph.startsWith('•') ? (
-                <ul key={idx} className="list-disc pl-6">
-                  {paragraph.split('\n').filter(l => l.trim()).map((item, i) => (
-                    <li key={i}>{item.replace('• ', '')}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p key={idx}>{paragraph}</p>
-              )
-            ))}
+            {section.content.split('\n\n').map(renderContentBlock)}
           </div>
         </section>
       ))}
 
-      <section id="faq" className="mt-16">
-        <h2>Frequently Asked Questions (105+ FAQs)</h2>
+      <section className="mt-16">
+        <h2 id="faq">Frequently Asked Questions (105+ FAQs)</h2>
         {faqGroups.map((group, idx) => (
           <div key={idx} className="mb-8">
             <h3>{group.category}</h3>

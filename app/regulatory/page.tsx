@@ -51,7 +51,7 @@ const categories = [
         services: [
             { name: "Finance Company GIFT IFSC", href: "/ifsca/finance-company" },
             { name: "BATF Services", href: "/ifsca/batf-services" },
-            { name: "Aircraft Leasing IFSC", href: "/ifsca/aircraft-leasing" },
+            { name: "Aircraft Leasing IFSC", href: "/ifsca/aircraft-leasing-registration-in-ifsc" },
             { name: "FinTech Entity & Incentives", href: "/ifsca/fintech-entity" },
             { name: "ITFS Platform", href: "/ifsca/itfs-platform" },
             { name: "IFSCA Factoring License", href: "/ifsca/factoring-license" },

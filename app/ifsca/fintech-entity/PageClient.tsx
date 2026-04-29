@@ -106,7 +106,7 @@ export default function PageClient() {
             relatedArticles={[
                 { title: "Finance Company GIFT IFSC", href: "/ifsca/finance-company", category: "IFSCA", description: "Finance Company and Finance Unit registration in GIFT IFSC." },
                 { title: "BATF Services IFSC", href: "/ifsca/batf-services", category: "IFSCA", description: "BATF Service Provider registration in GIFT IFSC." },
-                { title: "Aircraft Leasing IFSC", href: "/ifsca/aircraft-leasing", category: "IFSCA", description: "Aircraft leasing registration and compliance in GIFT IFSC." },
+                { title: "Aircraft Leasing IFSC", href: "/ifsca/aircraft-leasing-registration-in-ifsc", category: "IFSCA", description: "Aircraft leasing registration and compliance in GIFT IFSC." },
                 { title: "PSP License IFSCA", href: "/regulatory/psp-license-ifsca", category: "IFSCA", description: "Payment System Provider license at GIFT IFSC." },
             ]}
             finalCtaTitle="Ready to Apply for IFSCA FinTech Authorization?"

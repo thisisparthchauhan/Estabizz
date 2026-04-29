@@ -9,9 +9,11 @@ const services = [
         desc: "End-to-end RBI licensing and compliance management — including capital structuring, policy drafting, application filing, and post-approval reporting.",
         tags: [
             { name: "NBFC", href: "/rbi/nbfc-account-aggregator-license" },
-            { name: "Payment Aggregator", href: "/rbi/rbi-services" },
-            { name: "PPI", href: "/rbi/nbfc-financial-modeling" },
+            { name: "Payment Aggregator", href: "/rbi/payment-aggregator-license-in-india" },
+            { name: "PPI", href: "/rbi/ppi-registration-in-india" },
             { name: "Account Aggregator", href: "/rbi/nbfc-account-aggregator-license" },
+            { name: "ARC Registration", href: "/rbi/arc-registration-in-india" },
+            { name: "NBFC SRO", href: "/rbi/nbfc-sro-registration" },
         ],
         icon: "🏦"
     },

@@ -2,10 +2,16 @@ import type { Metadata } from 'next';
 import PageClient from './PageClient';
 
 export const metadata: Metadata = {
-    title: "TechFin Authorization IFSCA: Technology Solutions for Financial Institutions in GIFT IFSC — FE Framework 2022",
-    description: "Complete guide to TechFin authorization under IFSCA FinTech Entity (FE) Framework 2022. Eligibility, permissible activities (AI/ML, Blockchain, RegTech, AgriTech, Cyber Security), sandbox entry, fees and incentive grants for TechFin entities in GIFT IFSC.",
-    keywords: "TechFin IFSCA, TechFin GIFT IFSC, IFSCA FE Framework TechFin, TechFin Authorization, RegTech IFSCA, AI ML FinTech IFSC, Blockchain IFSCA, TechFin Sandbox GIFT City",
-    alternates: { canonical: "/ifsca/techfin" }
+    title: "IFSCA TechFin Registration – Complete GIFT IFSC Authorization Guide for AI, RegTech, SupTech and Web 3.0 Firms",
+    description: "IFSCA TechFin Registration guide covering TechFin authorization, Limited Use Authorization, sandbox entry, AI/ML, RegTech, SupTech, cybersecurity, blockchain, KYC/AML technology, grants and GIFT IFSC setup.",
+    keywords: "IFSCA TechFin Registration, TechFin Authorization, TechFin GIFT IFSC, IFSCA FE Framework, Limited Use Authorization, IFSCA FinTech Sandbox, RegTech IFSCA, SupTech IFSCA, AI ML IFSCA, Blockchain IFSCA, Cybersecurity FinTech IFSCA, Web 3.0 IFSCA, IFSCA FinTech Incentive Scheme, ifsca-techfin-registration, techfin-registration-gift-ifsc",
+    alternates: { canonical: "/ifsca/techfin" },
+    openGraph: {
+        title: "IFSCA TechFin Registration in GIFT IFSC – Authorization & Sandbox Guide",
+        description: "Complete IFSCA TechFin Registration guide under the IFSCA FinTech Entity Framework. Direct Authorization, Limited Use Authorization, sandbox routes, grants up to INR 75 Lakhs and GIFT IFSC setup support by Estabizz.",
+        url: "/ifsca/techfin",
+        type: "article",
+    },
 };
 
 export default function Page() {

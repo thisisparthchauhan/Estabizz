@@ -53,7 +53,7 @@ const categories = [
             { name: "BATF Services", href: "/ifsca/batf-services-registration-in-gift-ifsc" },
             { name: "Aircraft Leasing IFSC", href: "/ifsca/aircraft-leasing-registration-in-ifsc" },
             { name: "FinTech Entity & Incentives", href: "/ifsca/ifsca-fintech-startup-incentives" },
-            { name: "ITFS Platform", href: "/ifsca/itfs-platform" },
+            { name: "ITFS Platform", href: "/ifsca/itfs-registration-in-gift-ifsc" },
             { name: "IFSCA Factoring License", href: "/ifsca/factoring-license" },
             { name: "TechFin Authorization", href: "/ifsca/techfin" },
             { name: "PSP License IFSCA", href: "/ifsca/psp-license" },

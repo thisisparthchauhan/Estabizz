@@ -51,11 +51,11 @@ const services = [
         tags: ["Payment Services", "E-Money", "Cross-Border", "GIFT IFSC"],
     },
     {
-        title: "ITFS Platform",
-        description: "IFSCA International Trade Finance Services Platform — registration, permissible activities (factoring, forfaiting, supply chain finance), participants and compliance in GIFT IFSC.",
-        href: "/ifsca/itfs-platform",
+        title: "IFSCA ITFS Registration",
+        description: "Professional support for setting up International Trade Finance Services Platform in GIFT IFSC, including ITFS operator structuring, USD 0.2 million capital readiness, fintech platform documentation, AML / KYC framework, SWIT application and post-registration compliance.",
+        href: "/ifsca/itfs-registration-in-gift-ifsc",
         icon: "🌐",
-        tags: ["Trade Finance", "Factoring", "Forfaiting", "Supply Chain"],
+        tags: ["ITFS", "Trade Finance", "Factoring", "GIFT IFSC"],
     },
     {
         title: "IFSCA Insurance Intermediary",

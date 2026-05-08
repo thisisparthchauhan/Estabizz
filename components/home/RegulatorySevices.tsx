@@ -55,6 +55,7 @@ const services = [
             { name: "PSP License", href: "/regulatory/psp-license-ifsca" },
             { name: "Finance Co.", href: "/ifsca/finance-company-in-gift-ifsc" },
             { name: "FinTech Grants", href: "/ifsca/ifsca-fintech-startup-incentives" },
+            { name: "ITFS", href: "/ifsca/itfs-registration-in-gift-ifsc" },
             { name: "BATF", href: "/ifsca/batf-services-registration-in-gift-ifsc" },
             { name: "Aircraft Leasing", href: "/ifsca/aircraft-leasing-registration-in-ifsc" },
         ],

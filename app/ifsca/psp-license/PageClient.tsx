@@ -134,7 +134,7 @@ export default function PageClient() {
             relatedArticles={[
                 { title: "Finance Company GIFT IFSC", href: "/ifsca/finance-company-in-gift-ifsc", category: "IFSCA", description: "Finance Company and Finance Unit registration in GIFT IFSC." },
                 { title: "FinTech Entity IFSC", href: "/ifsca/ifsca-fintech-startup-incentives", category: "IFSCA", description: "FinTech Entity authorisation, sandbox and incentive grants in GIFT IFSC." },
-                { title: "ITFS Platform IFSC", href: "/ifsca/itfs-platform", category: "IFSCA", description: "International Trade Finance Services Platform registration in GIFT IFSC." },
+                { title: "ITFS Platform IFSC", href: "/ifsca/itfs-registration-in-gift-ifsc", category: "IFSCA", description: "International Trade Finance Services Platform registration in GIFT IFSC." },
                 { title: "IFSCA Factoring License", href: "/ifsca/factoring-license", category: "IFSCA", description: "Factoring license registration in GIFT City under IFSCA Regulations." },
             ]}
             finalCtaTitle="Ready to Apply for PSP License in GIFT IFSC?"

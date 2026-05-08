@@ -155,7 +155,7 @@ export default function FinanceCompanyRegistrationPage() {
         { title: 'IFSCA BATF Services Registration', href: '/ifsca/batf-services-registration-in-gift-ifsc', category: 'IFSCA', description: 'Book-keeping, accounting, taxation and financial crime compliance services in GIFT IFSC.' },
         { title: 'IFSCA FinTech Registration', href: '/ifsca/ifsca-fintech-startup-incentives', category: 'IFSCA', description: 'IFSCA FinTech Entity authorisation and incentive framework in GIFT IFSC.' },
         { title: 'PSP License IFSCA', href: '/ifsca/psp-license', category: 'IFSCA', description: 'Payment Service Provider authorisation under IFSCA payment services framework.' },
-        { title: 'ITFS Platform IFSC', href: '/ifsca/itfs-platform', category: 'IFSCA', description: 'International Trade Finance Services platform registration in GIFT IFSC.' },
+        { title: 'ITFS Platform IFSC', href: '/ifsca/itfs-registration-in-gift-ifsc', category: 'IFSCA', description: 'International Trade Finance Services platform registration in GIFT IFSC.' },
         { title: 'IFSCA Factoring License in GIFT City', href: '/regulatory/ifsca-factoring-license-gift-city', category: 'IFSCA', description: 'Factoring registration and receivables assignment framework in GIFT IFSC.' }
       ]}
       finalCtaTitle="Start Your Finance Company in GIFT IFSC Journey with Estabizz"

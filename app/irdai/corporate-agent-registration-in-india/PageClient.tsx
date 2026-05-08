@@ -490,6 +490,47 @@ Risk Areas to Focus On:
 • Staff training and competency verification`
     },
     {
+      id: 'operational-restrictions',
+      title: 'Operational Restrictions for Corporate Agents',
+      content: `Corporate Agent Registration in India does not authorise unlimited or unconditional activity. Several practices are regulated, restricted or prohibited under IRDAI norms.
+
+Permitted within scope:
+• Solicitation and procurement of insurance business for tied insurers
+• Customer servicing for sourced policies
+• Premium collection in compliance with regulatory norms
+• Commission earnings within prescribed limits
+• Advertising of insurance products in line with IRDAI guidelines
+• Digital distribution subject to record maintenance and customer protection norms
+
+Not permitted:
+• Underwriting risk or issuing the agent's own insurance policy
+• Acting as an insurer
+• Solicitation through uncertified persons
+• Commission sharing with unregistered persons
+• Guaranteeing claim settlement, returns or bonus to customers
+• Tie-up with insurers beyond regulatory limits per line of business
+• Mis-selling, misleading advertisement or rebating
+• Use of customer data outside regulatory consent and privacy norms
+
+Crossing these regulatory boundaries — even unintentionally — may invite inspection observations, monetary penalties or enforcement action.`
+    },
+    {
+      id: 'strategic-benefits',
+      title: 'Strategic Benefits of Corporate Agent Registration in India',
+      content: `When approached as a regulated business vertical, Corporate Agent Registration in India offers several long-term advantages:
+
+• Recurring commission income from sourced and renewed policies
+• Insurance cross-sell opportunity across borrower / customer base
+• Embedded insurance integration in financial product journeys
+• Stronger customer lifecycle value and stickiness
+• Regulatory credibility before insurers, customers and partners
+• Suitable for NBFC, fintech, bank and MFI distribution models
+• Customer protection product offering with structured advisory
+• A long-term distribution vertical with renewal-led economics
+
+Corporate Agent Registration in India should be treated as a regulated business vertical with compliance, training and governance systems — not merely a commission-earning sales tool.`
+    },
+    {
       id: 'faq',
       title: 'Frequently Asked Questions (100+ FAQs)',
       content: ``
@@ -755,6 +796,195 @@ Risk Areas to Focus On:
           </div>
         ))}
       </section>
+
+      {/* ==================== HOW ESTABIZZ HELPS ==================== */}
+      <section id="how-estabizz-helps" className="mt-16">
+        <h2>How Estabizz Helps with Corporate Agent Registration in India</h2>
+        <div className="step-timeline">
+          <div className="step-item">
+            <div className="step-dot">1</div>
+            <div className="step-card">
+              <h4>Eligibility &amp; Structuring Review</h4>
+              <p>We review entity structure, business model, insurer tie-up strategy, capital readiness and regulatory suitability for Corporate Agent Registration in India.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">2</div>
+            <div className="step-card">
+              <h4>Capital &amp; Net Worth Documentation</h4>
+              <p>We assist with capital readiness, net worth certificate, financial documents and regulatory declarations.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">3</div>
+            <div className="step-card">
+              <h4>Principal Officer &amp; Specified Persons Support</h4>
+              <p>We assist in mapping qualification, training, certification and appointment documentation for Principal Officer and Specified Persons.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">4</div>
+            <div className="step-card">
+              <h4>Business Plan &amp; Financial Projections</h4>
+              <p>We prepare a 3-year business plan, revenue projections, insurer tie-up model, commission assumptions, expense forecast and compliance framework.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">5</div>
+            <div className="step-card">
+              <h4>IRDAI Application Support</h4>
+              <p>We assist in application preparation, document compilation, online filing support and IRDAI query response.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">6</div>
+            <div className="step-card">
+              <h4>Policy &amp; Compliance Framework</h4>
+              <p>We help draft the grievance redressal mechanism, record maintenance process, commission governance framework, internal controls and compliance calendar.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">7</div>
+            <div className="step-card">
+              <h4>Post-Registration Compliance</h4>
+              <p>We support renewal tracking, training compliance, net worth certification, insurer agreement review, regulatory circular tracking and inspection readiness.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">8</div>
+            <div className="step-card">
+              <h4>Ticket-Based Execution</h4>
+              <p>Estabizz follows a structured task-tracking system so clients receive organised updates throughout the engagement.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== WHY CHOOSE ESTABIZZ ==================== */}
+      <section id="why-choose-estabizz" className="mt-16">
+        <h2>Why Choose Estabizz for Corporate Agent Registration in India?</h2>
+        <div className="step-timeline">
+          <div className="step-item">
+            <div className="step-dot">1</div>
+            <div className="step-card">
+              <h4>IRDAI Regulatory Expertise</h4>
+              <p>Our team works across IRDAI licensing and compliance matters and understands insurance intermediary approval requirements.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">2</div>
+            <div className="step-card">
+              <h4>Insurance Distribution Understanding</h4>
+              <p>We understand NBFC, fintech, bank, MFI and corporate insurance distribution models and how they fit within the corporate agency framework.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">3</div>
+            <div className="step-card">
+              <h4>Compliance Depth, Not Just Documentation</h4>
+              <p>We focus on capital, governance, Principal Officer readiness, Specified Persons training, code of conduct and long-term compliance discipline.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">4</div>
+            <div className="step-card">
+              <h4>Business Plan Strength</h4>
+              <p>We prepare practical, regulator-facing business plans and financial projections suitable for Corporate Agent applicants.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">5</div>
+            <div className="step-card">
+              <h4>Multi-Regulator Experience</h4>
+              <p>Our experience across RBI, SEBI, IRDAI and IFSCA enables a wider financial regulatory perspective relevant for embedded distribution models.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">6</div>
+            <div className="step-card">
+              <h4>End-to-End Support</h4>
+              <p>From structuring to IRDAI application, query response and post-registration compliance, we provide organised professional handholding.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== REVIEWER & DISCLAIMER ==================== */}
+      <section id="reviewer" className="mt-16">
+        <h2>Reviewer &amp; Legal Disclaimer</h2>
+        <div className="info-box">
+          <p><strong>Reviewed by:</strong> CS Devyani Khambhati</p>
+          <p><strong>Designation:</strong> Compliance Expert | Estabizz Fintech Private Limited</p>
+          <p><strong>Expertise:</strong> IRDAI, RBI, SEBI, IFSCA, insurance intermediary licensing, corporate agent registration, insurance distribution compliance, business plan documentation and post-registration regulatory support.</p>
+          <p>This content has been prepared from a regulatory advisory perspective to help NBFCs, fintech companies, banks, microfinance institutions, corporates and insurance distribution businesses understand the broad IRDAI framework for Corporate Agent Registration in India.</p>
+        </div>
+        <p>
+          <strong>Legal Disclaimer:</strong> This content is for general informational purposes only and should not be
+          treated as legal, regulatory, insurance, financial or investment advice. IRDAI requirements, application
+          formats, fee structures, capital thresholds, training requirements, insurer tie-up limits, compliance
+          expectations and approval processes may change from time to time. Applicants should verify the latest
+          regulatory position and obtain professional advice before filing any application with IRDAI. Estabizz does
+          not promise or guarantee IRDAI approval; outcomes are subject to IRDAI scrutiny and the fulfilment of
+          prescribed conditions.
+        </p>
+        <p>
+          For a structured consultation with our IRDAI compliance team, you may also reach Estabizz on WhatsApp at{" "}
+          <a href="https://wa.me/919825600907" target="_blank" rel="noopener noreferrer">+91 98256 00907</a>.
+        </p>
+      </section>
+
+      {/* FAQ JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqGroups.flatMap((g) =>
+              g.faqs.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              }))
+            ),
+          }),
+        }}
+      />
+      {/* Service JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            serviceType: "Corporate Agent Registration in India",
+            provider: {
+              "@type": "Organization",
+              name: "Estabizz Fintech Private Limited",
+              url: "https://estabizz-site.vercel.app/",
+            },
+            areaServed: { "@type": "Country", name: "India" },
+            description:
+              "Professional regulatory consulting support for IRDAI Corporate Agent Registration covering life, general, health and composite insurance distribution — eligibility review, capital readiness, Principal Officer documentation, Specified Persons training, business plan, application filing and post-registration compliance.",
+            url: "https://estabizz-site.vercel.app/irdai/corporate-agent-registration-in-india",
+          }),
+        }}
+      />
+      {/* Breadcrumb JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
+              { "@type": "ListItem", position: 2, name: "IRDAI Services", item: "https://estabizz-site.vercel.app/irdai" },
+              { "@type": "ListItem", position: 3, name: "Corporate Agent Registration", item: "https://estabizz-site.vercel.app/irdai/corporate-agent-registration-in-india" },
+            ],
+          }),
+        }}
+      />
     </ServicePageLayout>
   );
 }

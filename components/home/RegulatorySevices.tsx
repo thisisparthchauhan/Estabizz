@@ -52,7 +52,7 @@ const services = [
         tags: [
             { name: "Broker Dealer", href: "/ifsca" },
             { name: "Factoring", href: "/regulatory/ifsca-factoring-license-gift-city" },
-            { name: "PSP License", href: "/regulatory/psp-license-ifsca" },
+            { name: "PSP IFSCA", href: "/ifsca/psp-license-ifsca" },
             { name: "Finance Co.", href: "/ifsca/finance-company-in-gift-ifsc" },
             { name: "FinTech Grants", href: "/ifsca/ifsca-fintech-startup-incentives" },
             { name: "ITFS", href: "/ifsca/itfs-registration-in-gift-ifsc" },

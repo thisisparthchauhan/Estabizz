@@ -56,7 +56,7 @@ const categories = [
             { name: "ITFS Platform", href: "/ifsca/itfs-registration-in-gift-ifsc" },
             { name: "IFSCA Factoring License", href: "/ifsca/factoring-license" },
             { name: "TechFin Authorization", href: "/ifsca/techfin" },
-            { name: "PSP License IFSCA", href: "/ifsca/psp-license" },
+            { name: "PSP License IFSCA", href: "/ifsca/psp-license-ifsca" },
         ],
     },
     {

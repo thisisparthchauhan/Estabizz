@@ -167,7 +167,7 @@ export default function ItfsRegistrationPage() {
         { title: 'Finance Company in GIFT IFSC', href: '/ifsca/finance-company-in-gift-ifsc', category: 'IFSCA', description: 'Finance Company and Finance Unit setup in GIFT IFSC.' },
         { title: 'IFSCA Factoring License in GIFT City', href: '/regulatory/ifsca-factoring-license-gift-city', category: 'IFSCA', description: 'Factor registration and receivables assignment framework in GIFT IFSC.' },
         { title: 'IFSCA FinTech and Startup Incentives', href: '/ifsca/ifsca-fintech-startup-incentives', category: 'IFSCA', description: 'FinTech Entity Authorization, sandbox and incentive grants.' },
-        { title: 'PSP License IFSCA', href: '/ifsca/psp-license', category: 'IFSCA', description: 'Payment Service Provider authorisation in GIFT IFSC.' },
+        { title: 'PSP License IFSCA', href: '/ifsca/psp-license-ifsca', category: 'IFSCA', description: 'Payment Service Provider authorisation in GIFT IFSC.' },
         { title: 'Payment Aggregator License in India', href: '/rbi/payment-aggregator-license-in-india', category: 'RBI', description: 'RBI payment aggregator authorisation guide.' }
       ]}
       finalCtaTitle="Start Your IFSCA ITFS Registration Journey with Estabizz"

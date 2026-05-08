@@ -168,7 +168,7 @@ export default function FinTechStartupIncentivesPage() {
         { title: 'Finance Company in GIFT IFSC', href: '/ifsca/finance-company-in-gift-ifsc', category: 'IFSCA', description: 'Finance Company and Finance Unit setup in GIFT IFSC.' },
         { title: 'IFSCA BATF Services Registration', href: '/ifsca/batf-services-registration-in-gift-ifsc', category: 'IFSCA', description: 'Book-keeping, accounting, taxation and FCC services in GIFT IFSC.' },
         { title: 'TechFin Authorization', href: '/ifsca/techfin', category: 'IFSCA', description: 'TechFin authorisation for advanced technology solutions in financial services.' },
-        { title: 'PSP License IFSCA', href: '/ifsca/psp-license', category: 'IFSCA', description: 'Payment Service Provider authorisation in GIFT IFSC.' },
+        { title: 'PSP License IFSCA', href: '/ifsca/psp-license-ifsca', category: 'IFSCA', description: 'Payment Service Provider authorisation in GIFT IFSC.' },
         { title: 'PPI Registration in India', href: '/rbi/ppi-registration-in-india', category: 'RBI', description: 'RBI authorisation guide for prepaid payment instruments.' }
       ]}
       finalCtaTitle="Start Your IFSCA FinTech and Startup Incentives Journey with Estabizz"

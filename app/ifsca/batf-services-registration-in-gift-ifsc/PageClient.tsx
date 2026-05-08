@@ -184,7 +184,7 @@ export default function BatfRegistrationPage() {
         { title: 'IFSCA Finance Company Registration', href: '/ifsca/finance-company-in-gift-ifsc', category: 'IFSCA', description: 'Finance Company and Finance Unit registration support in GIFT IFSC.' },
         { title: 'IFSCA Aircraft Leasing Registration', href: '/ifsca/aircraft-leasing-registration-in-ifsc', category: 'IFSCA', description: 'Aircraft operating and financial lease registration in GIFT IFSC.' },
         { title: 'IFSCA FinTech Registration', href: '/ifsca/ifsca-fintech-startup-incentives', category: 'IFSCA', description: 'IFSCA FinTech Entity authorisation and incentive framework in GIFT IFSC.' },
-        { title: 'PSP License IFSCA', href: '/ifsca/psp-license', category: 'IFSCA', description: 'Payment Service Provider authorisation under IFSCA payment services framework.' },
+        { title: 'PSP License IFSCA', href: '/ifsca/psp-license-ifsca', category: 'IFSCA', description: 'Payment Service Provider authorisation under IFSCA payment services framework.' },
         { title: 'ITFS Platform IFSC', href: '/ifsca/itfs-registration-in-gift-ifsc', category: 'IFSCA', description: 'International Trade Finance Services platform registration in GIFT IFSC.' }
       ]}
       finalCtaTitle="Start Your BATF Services Registration Journey with Estabizz"

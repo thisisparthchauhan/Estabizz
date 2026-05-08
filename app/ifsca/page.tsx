@@ -44,11 +44,11 @@ const services = [
         tags: ["TechFin", "RegTech", "AI/ML", "Blockchain", "GIFT IFSC"],
     },
     {
-        title: "PSP License",
-        description: "Payment Service Provider authorisation under IFSCA (Payment Services) Regulations 2024 — wallets, cross-border remittance, escrow, merchant acquisition in GIFT IFSC.",
-        href: "/ifsca/psp-license",
+        title: "PSP License – IFSCA",
+        description: "Professional support for Payment Service Provider authorisation in GIFT IFSC, including e-money issuance, escrow service, cross-border money transfer, merchant acquisition, safeguarding framework, capital readiness, AML/KYC documentation and post-authorisation compliance.",
+        href: "/ifsca/psp-license-ifsca",
         icon: "💳",
-        tags: ["Payment Services", "E-Money", "Cross-Border", "GIFT IFSC"],
+        tags: ["Payment Services", "E-Money", "Escrow", "GIFT IFSC"],
     },
     {
         title: "IFSCA ITFS Registration",

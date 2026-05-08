@@ -3,24 +3,32 @@ import ServicePageLayout from "@/components/templates/ServicePageLayout";
 
 export default function PageClient() {
     const sections = [
-        { id: "introduction", title: "Introduction" },
+        { id: "introduction", title: "What is IFSCA TechFin Registration?" },
+        { id: "gift-ifsc-overview", title: "GIFT IFSC and IFSCA Overview" },
         { id: "fintech-vs-techfin", title: "FinTech vs TechFin" },
-        { id: "regulatory-framework", title: "Regulatory Framework" },
-        { id: "techfin-activities", title: "TechFin Permissible Activities" },
+        { id: "regulatory-framework", title: "Legal & Regulatory Framework" },
+        { id: "who-can-apply", title: "Who Can Apply?" },
+        { id: "techfin-activities", title: "Eligible TechFin Activities" },
         { id: "eligibility", title: "Eligibility Conditions" },
-        { id: "direct-entry", title: "Authorization — Direct Entry" },
+        { id: "direct-entry", title: "Authorization vs Limited Use Authorization" },
         { id: "application-process", title: "Application Process" },
+        { id: "documents-required", title: "Documents Required" },
         { id: "sandbox-overview", title: "Sandbox Entry Overview" },
         { id: "regulatory-sandbox", title: "IFSCA Regulatory Sandbox" },
         { id: "innovation-sandbox", title: "IFSCA Innovation Sandbox" },
         { id: "iors", title: "Inter-Operable Regulatory Sandbox (IoRS)" },
         { id: "overseas-referral", title: "Overseas Regulatory Referral" },
+        { id: "use-cases", title: "TechFin Use Cases in Financial Services" },
         { id: "compliance", title: "Compliance & Reporting" },
         { id: "fees", title: "Fees Structure" },
         { id: "currency", title: "Currency & Office Setup" },
-        { id: "incentive-scheme", title: "TechFin Incentive Scheme" },
+        { id: "incentive-scheme", title: "IFSCA FinTech Incentive Scheme" },
         { id: "advantages", title: "Key Advantages" },
+        { id: "common-mistakes", title: "Common Mistakes" },
+        { id: "how-estabizz-helps", title: "How Estabizz Helps" },
+        { id: "why-choose-estabizz", title: "Why Choose Estabizz" },
         { id: "faqs", title: "FAQs" },
+        { id: "reviewer", title: "Reviewer & Disclaimer" },
     ];
 
     const faqs: { q: string; a: string }[] = [
@@ -88,6 +96,86 @@ export default function PageClient() {
             q: "What reports must TechFin entities submit to IFSCA?",
             a: "TechFin entities must furnish: (1) Duly certified copy of audited annual financial statements within 30 days of finalization; (2) Details of regulatory action within 15 days of receiving notice. All financial information must be submitted in US Dollars unless otherwise specified."
         },
+        {
+            q: "Is TechFin separate from FinTech under IFSCA?",
+            a: "TechFin is covered under the broader IFSCA FinTech Entity Framework. It refers to advanced or emerging technology solutions aiding financial products, financial services or financial institutions. FinTech and TechFin are two streams under the same Framework — Chapter I (a) and Chapter I (b) respectively."
+        },
+        {
+            q: "Can a RegTech company apply?",
+            a: "Yes. RegTech is an illustrative TechFin activity under Annexure I, Part B of the IFSCA FinTech Entity Framework. Compliance automation, regulatory reporting engines and supervisory workflow tools fall within scope, subject to IFSCA scrutiny."
+        },
+        {
+            q: "Can a cybersecurity solution provider apply?",
+            a: "Yes, where the solution aids financial products, services or institutions and satisfies IFSCA framework requirements. Threat intelligence, payment security, cyber resilience and identity protection tools for BFSI are eligible TechFin areas."
+        },
+        {
+            q: "Can a Web 3.0 company apply for IFSCA TechFin Registration?",
+            a: "Web 3.0 is listed among illustrative TechFin areas under the Framework. The specific business model must be assessed for regulatory suitability, applicable boundaries and IFSCA's current regulatory position before filing."
+        },
+        {
+            q: "Is grant approval automatic under the IFSCA FinTech Incentive Scheme?",
+            a: "No. Grant approval is subject to eligibility, evaluation, documentation, milestone completion and IFSCA approval. Applicants should not assume grant disbursement at the time of business planning."
+        },
+        {
+            q: "What is the maximum Green FinTech Grant?",
+            a: "The maximum Green FinTech Grant is INR 75 Lakhs, subject to scheme conditions. It is available to TechFin entities focused on Sustainable, Green or ESG-related financial technology."
+        },
+        {
+            q: "What documents are required for IFSCA TechFin Registration?",
+            a: "Documents typically include incorporation documents, constitutional documents (MoA/AoA/LLP Agreement), shareholding pattern, last 3 years audited financials (where applicable), promoter and director details, business model note, technology architecture, sandbox testing plan, cyber security note, regulatory assessment, FATF jurisdiction confirmation for foreign applicants, and prescribed declarations."
+        },
+        {
+            q: "How can Estabizz help with IFSCA TechFin Registration?",
+            a: "Estabizz assists with TechFin activity assessment, route selection between Authorization and Limited Use Authorization, eligibility review, technology and cybersecurity documentation, sandbox application, grant documentation, GIFT IFSC entity setup and post-authorisation compliance, with a structured ticket-based execution approach."
+        },
+        {
+            q: "Is the indicative timeline guaranteed by IFSCA?",
+            a: "No. Timelines indicated for sandbox suitability (typically 30 working days) and authorization are subject to completeness of application, depth of regulatory review, complexity of the technology solution and IFSCA scrutiny. Professional assistance may help reduce documentation gaps."
+        },
+        {
+            q: "Can an individual apply for TechFin Authorization?",
+            a: "Generally, an applicant should operate through an eligible entity structure such as a company or LLP for Authorization. Individual applicants do not directly fit the eligibility criteria under the FinTech Entity Framework."
+        },
+        {
+            q: "What is the Overseas Regulatory Referral Mechanism?",
+            a: "It allows eligible foreign TechFin applicants to access IFSCA via a referral from an overseas financial regulator under an MoU, collaboration or special arrangement between IFSCA and that regulator. IFSCA acts as the Principal Regulator in such cases."
+        },
+        {
+            q: "Does the TechFin authorization permit me to deliver regulated financial services?",
+            a: "No. A TechFin entity provides technology solutions that support regulated financial services and financial institutions. It does not, by itself, authorize the entity to provide regulated financial services. Entities seeking to deliver regulated financial services should evaluate the FinTech route under Chapter I (a) of the Framework."
+        },
+        {
+            q: "Is sandbox approval the same as final commercial authorization?",
+            a: "No. Limited Use Authorization is not full commercial authorization. It permits controlled testing within specified limits and conditions. Commercial scale-up is subject to subsequent evaluation and a separate authorization decision by IFSCA."
+        },
+        {
+            q: "What is FATF compliance and why does it matter for foreign applicants?",
+            a: "FATF (Financial Action Task Force) compliance refers to a jurisdiction's adherence to international anti-money laundering and counter-terrorism financing standards. Foreign TechFin applicants must be from a FATF-compliant jurisdiction to be eligible under the IFSCA FinTech Entity Framework."
+        },
+        {
+            q: "Can a SupTech solution provider apply?",
+            a: "Yes. Supervisory Technology (SupTech) is recognised under the Framework. Solutions supporting regulatory supervision, real-time data collection, automated reporting analysis and systemic risk monitoring are eligible TechFin areas."
+        },
+        {
+            q: "What is the difference between Regulatory Sandbox and Innovation Sandbox?",
+            a: "The Regulatory Sandbox allows live testing with real customers or investors under Limited Use Authorization. The Innovation Sandbox allows testing in isolation from the live market using market-related data made available by IFSC financial institutions."
+        },
+        {
+            q: "Are accelerator programs eligible under the IFSCA Framework?",
+            a: "Yes. Accelerators are listed as a permissible TechFin activity. The IFSCA FinTech Incentive Scheme also provides Accelerator Grant of up to INR 10 Lakhs per cohort, subject to eligibility and IFSCA approval."
+        },
+        {
+            q: "What is the indicative validity of Limited Use Authorization?",
+            a: "Limited Use Authorization is granted for a defined sandbox testing period as specified in the authorization letter, typically up to 12 months. An extension may be sought, subject to IFSCA's review and applicable extension fees."
+        },
+        {
+            q: "Can a parent company set up a branch in IFSC after TechFin Authorization?",
+            a: "Yes. Upon Authorization, an applicant may either incorporate a separate entity in IFSC or establish a branch / subsidiary of the Indian or foreign parent in IFSC, subject to applicable framework conditions."
+        },
+        {
+            q: "Are TechFin entities required to maintain books in a foreign currency?",
+            a: "Yes. Books of account must be maintained in a freely convertible foreign currency (other than INR) declared at the time of application. Financial reporting to IFSCA is generally in US Dollars unless otherwise specified."
+        },
     ];
 
     return (
@@ -95,19 +183,20 @@ export default function PageClient() {
             tags={[
                 { emoji: "🌐", label: "IFSCA" },
                 { emoji: "💻", label: "TechFin" },
+                { emoji: "🛡️", label: "GIFT IFSC" },
                 { emoji: "✅", label: "Expert Reviewed" },
             ]}
             breadcrumb={[
                 { label: "Home", href: "/" },
                 { label: "IFSCA Services", href: "/ifsca" },
-                { label: "TechFin Authorization", href: "/ifsca/techfin" },
+                { label: "IFSCA TechFin Registration", href: "/ifsca/techfin" },
             ]}
-            title="TechFin Authorization IFSCA: Technology Solutions for Financial Institutions in GIFT IFSC"
-            readTime="20 min read"
-            focusKeyword="TechFin IFSCA"
+            title="IFSCA TechFin Registration in GIFT IFSC – Complete Authorization and Sandbox Guide"
+            readTime="22 min read"
+            focusKeyword="IFSCA TechFin Registration"
             sections={sections}
-            ctaTitle="TechFin Authorization"
-            ctaDescription="Our regulatory experts provide end-to-end guidance for TechFin authorization under the IFSCA FE Framework 2022 — from eligibility assessment to sandbox entry and incentive grants."
+            ctaTitle="Apply for IFSCA TechFin Registration"
+            ctaDescription="Get structured regulatory support for IFSCA TechFin Registration — eligibility assessment, route selection between Authorization and Limited Use Authorization, sandbox application, AI/ML and cybersecurity documentation, IFSCA FinTech Incentive Scheme grant support and GIFT IFSC setup."
             quickFacts={[
                 { label: "Regulator", value: "IFSCA" },
                 { label: "Framework", value: "FE Framework, April 2022" },
@@ -119,29 +208,127 @@ export default function PageClient() {
                 { label: "Sandbox Timeline", value: "30 working days" },
             ]}
             relatedArticles={[
-                { title: "FinTech Entity & Incentive Scheme", href: "/ifsca/fintech-entity", category: "IFSCA", description: "FinTech Entity authorization, sandbox programs and incentive grants in GIFT IFSC." },
+                { title: "FinTech Entity & Incentive Scheme", href: "/ifsca/fintech-entity", category: "IFSCA", description: "IFSCA FinTech Entity authorization, sandbox programs and incentive grants in GIFT IFSC." },
+                { title: "ITFS Platform Registration", href: "/ifsca/itfs-platform", category: "IFSCA", description: "International Trade Finance Services platform registration under IFSCA framework." },
                 { title: "PSP License IFSCA", href: "/ifsca/psp-license", category: "IFSCA", description: "Payment Service Provider authorisation under IFSCA Payment Services Regulations 2024." },
-                { title: "IFSCA BATF Services", href: "/ifsca/batf-services", category: "IFSCA", description: "Book-keeping, Accounting, Taxation and Financial Crime Compliance Services in GIFT IFSC." },
                 { title: "Finance Company GIFT IFSC", href: "/ifsca/finance-company", category: "IFSCA", description: "Finance Company and Finance Unit registration in GIFT IFSC." },
+                { title: "IFSCA BATF Services", href: "/ifsca/batf-services", category: "IFSCA", description: "Book-keeping, Accounting, Taxation and Financial Crime Compliance Services in GIFT IFSC." },
+                { title: "RBI Payment Aggregator License", href: "/rbi/payment-aggregator-license-in-india", category: "RBI", description: "Domestic PA-O, PA-P and PA-CB authorization under RBI PA Master Direction 2025." },
             ]}
-            finalCtaTitle="Ready to Set Up Your TechFin Entity in GIFT IFSC?"
-            finalCtaDescription="Get expert assistance with IFSCA TechFin authorization — from application to sandbox entry, incentive grants and ongoing compliance."
+            finalCtaTitle="Start Your IFSCA TechFin Registration Journey with Estabizz"
+            finalCtaDescription="Build your TechFin entry into GIFT IFSC with structured regulatory support — eligibility review, Authorization or Limited Use Authorization route selection, sandbox documentation, technology note, IFSCA FinTech Incentive Scheme grant application support, IFSC setup and post-authorisation compliance assistance. WhatsApp our team at +91 98256 00907 for a structured consultation."
         >
             {/* Introduction */}
             <section id="introduction">
-                <h2>Introduction</h2>
+                <h2>What is IFSCA TechFin Registration?</h2>
                 <p>
-                    The IFSCA FinTech Entity (FE) Framework, issued vide Circular F.No. 521/IFSCA/FinTech/FE Framework/2022-23 on <strong>April 27, 2022</strong>, establishes a unique regulatory framework for both FinTech and <strong>TechFin</strong> entities operating from India's International Financial Services Centre (IFSC) at GIFT City.
+                    <strong>IFSCA TechFin Registration</strong> enables eligible technology-driven entities to enter GIFT IFSC under the IFSCA FinTech Entity Framework. A TechFin entity provides advanced or emerging technology solutions that aid and assist financial products, financial services and financial institutions — including RegTech, SupTech, Artificial Intelligence, Machine Learning, cybersecurity, digital identity, KYC / AML technology, distributed ledger technology, fraud detection, Web 3.0 and other innovation-led solutions.
                 </p>
                 <p>
-                    <strong>TechFin</strong> refers to technology companies that provide advanced or emerging technology solutions in allied areas which aid and assist activities in relation to financial products, financial services and financial institutions — as distinguished from FinTech companies that directly deliver regulated financial services.
+                    The IFSCA FinTech Entity (FE) Framework, issued vide Circular F.No. 521/IFSCA/FinTech/FE Framework/2022-23 on <strong>April 27, 2022</strong>, provides a unified regulatory pathway for both FinTech and <strong>TechFin</strong> entities operating from India's International Financial Services Centre (IFSC) at GIFT City. Under this Framework, eligible applicants may seek either direct <strong>Authorization</strong> or <strong>Limited Use Authorization</strong> via a sandbox route, subject to IFSCA scrutiny.
+                </p>
+                <p>
+                    IFSCA TechFin Registration is not a generic software registration. It is relevant where the technology solution directly supports or transforms financial services, regulatory compliance, supervisory processes, digital identity, risk management, cyber resilience, fraud monitoring or related financial infrastructure.
                 </p>
                 <div className="info-box">
-                    <strong>📌 Regulatory Reference:</strong> IFSCA Circular F.No. 521/IFSCA/FinTech/FE Framework/2022-23, dated April 27, 2022 — Framework for FinTech Entity in the International Financial Services Centres (IFSCs).
+                    <strong>📌 Regulatory Reference:</strong> IFSCA Circular F.No. 521/IFSCA/FinTech/FE Framework/2022-23, dated April 27, 2022 — Framework for FinTech Entity in the International Financial Services Centres (IFSCs). IFSCA TechFin Registration is part of the broader IFSCA FinTech Entity Framework, not a separate authorization stream.
                 </div>
                 <p>
                     GIFT IFSC has emerged as India's preferred global FinTech and TechFin hub, ranked at the top amongst 15 global financial centers likely to become more significant in the near future (Global Financial Centers Index, London, September 2021).
                 </p>
+            </section>
+
+            {/* GIFT IFSC and IFSCA Overview */}
+            <section id="gift-ifsc-overview">
+                <h2>GIFT IFSC and IFSCA Overview for TechFin Entities</h2>
+                <p>
+                    GIFT IFSC offers access to an international financial services ecosystem where technology companies can build and test solutions for regulated financial institutions and global financial markets. IFSCA acts as the unified regulator with consolidated powers across the financial services value chain within IFSC.
+                </p>
+                <table className="data-table">
+                    <thead>
+                        <tr>
+                            <th>Particular</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>GIFT City</strong></td>
+                            <td>Global Financial and IT Hub with Domestic Tariff Area and Multi Services SEZ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GIFT IFSC</strong></td>
+                            <td>India&rsquo;s first International Financial Services Centre</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IFSCA</strong></td>
+                            <td>Unified regulator for financial products, financial services and financial institutions in IFSC</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Regulatory Powers</strong></td>
+                            <td>IFSCA exercises powers relating to RBI, SEBI, IRDAI and PFRDA frameworks within IFSC</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TechFin Opportunity</strong></td>
+                            <td>GIFT IFSC is emerging as a global FinTech hub and supports technology-led innovation in financial services</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Business Ecosystem</strong></td>
+                            <td>Banking (IBUs), insurance, capital markets, finance companies, asset management, aircraft leasing, ITFS, GICs, BATF and FinTech entities</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            {/* Who Can Apply */}
+            <section id="who-can-apply">
+                <h2>Who Can Apply for IFSCA TechFin Registration?</h2>
+                <p>The IFSCA FinTech Entity Framework opens IFSCA TechFin Registration to a wide range of applicants, subject to eligibility verification and IFSCA scrutiny.</p>
+                <table className="data-table">
+                    <thead>
+                        <tr>
+                            <th>Applicant Type</th>
+                            <th>Eligibility Position</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>DPIIT-recognised Indian FinTech / TechFin startup</td>
+                            <td>Eligible</td>
+                        </tr>
+                        <tr>
+                            <td>Company incorporated in India under Companies Act, 2013</td>
+                            <td>Eligible</td>
+                        </tr>
+                        <tr>
+                            <td>LLP incorporated in India under LLP Act, 2008</td>
+                            <td>Eligible</td>
+                        </tr>
+                        <tr>
+                            <td>Branch of Indian company or LLP in IFSC</td>
+                            <td>Eligible</td>
+                        </tr>
+                        <tr>
+                            <td>Entity working in the RBI / SEBI / IRDAI / PFRDA ecosystem</td>
+                            <td>Eligible</td>
+                        </tr>
+                        <tr>
+                            <td>Foreign TechFin entity</td>
+                            <td>Eligible if from FATF-compliant jurisdiction</td>
+                        </tr>
+                        <tr>
+                            <td>Technology accelerator</td>
+                            <td>May be eligible under the accelerator route</td>
+                        </tr>
+                        <tr>
+                            <td>Individual applicant</td>
+                            <td>Generally should operate through an eligible entity structure</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div className="info-box">
+                    <strong>Note for Foreign Applicants:</strong> The FATF-compliant jurisdiction condition is critical and must be reviewed before filing. Applicants from non-FATF compliant jurisdictions are not eligible.
+                </div>
             </section>
 
             {/* FinTech vs TechFin */}
@@ -803,9 +990,304 @@ export default function PageClient() {
                 </div>
             </section>
 
+            {/* Documents Required */}
+            <section id="documents-required">
+                <h2>Documents Required for IFSCA TechFin Registration</h2>
+                <p>The following documents are typically required at the application stage. Specific requirements may vary depending on the chosen route, applicant profile and IFSCA&rsquo;s latest instructions.</p>
+                <table className="data-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Documents / Information</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Applicant Documents</strong></td>
+                            <td>Certificate of incorporation / registration, constitutional documents (MoA / AoA / LLP Agreement), registered office details</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Promoter / Parent Documents</strong></td>
+                            <td>Shareholding pattern, parent profile, FATF jurisdiction confirmation, group structure and regulatory background</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Business Model Documents</strong></td>
+                            <td>TechFin solution note, target users, financial services use case, revenue model and go-to-market plan</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technology Documents</strong></td>
+                            <td>Product architecture, technology stack, AI / ML model note (if applicable), cybersecurity controls, data flow and system design</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Financial Documents</strong></td>
+                            <td>Audited financial statements (last 3 years where applicable), revenue track record for the Authorization route, funding details</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sandbox Documents</strong></td>
+                            <td>Testing plan, risk controls, user protection note, testing boundaries, KPIs and exit strategy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Grant Documents</strong></td>
+                            <td>Grant proposal, budget, milestone plan, cost estimates, MVP / PoC note and end-use declaration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compliance Documents</strong></td>
+                            <td>Data protection note, AML / KYC relevance note, regulatory assessment, grievance process and prescribed declarations</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IFSC Setup Documents</strong></td>
+                            <td>Entity / branch / subsidiary setup plan where Authorization route is proposed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            {/* TechFin Use Cases */}
+            <section id="use-cases">
+                <h2>Practical Use Cases for IFSCA TechFin Registration</h2>
+                <p>The following practical use cases illustrate how TechFin entities deliver value within the GIFT IFSC ecosystem. Specific suitability is subject to regulatory review and the applicant&rsquo;s solution profile.</p>
+                <div className="step-timeline">
+                    <div className="step-item">
+                        <div className="step-dot">1</div>
+                        <div className="step-card">
+                            <h4>Regulatory Compliance Automation</h4>
+                            <p>Automated reporting, compliance workflows and regulatory monitoring for IFSC financial institutions.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">2</div>
+                        <div className="step-card">
+                            <h4>AML and Sanctions Screening</h4>
+                            <p>KYC, AML, CFT, beneficial ownership, sanctions screening and suspicious transaction monitoring.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">3</div>
+                        <div className="step-card">
+                            <h4>Cybersecurity for Financial Institutions</h4>
+                            <p>Threat intelligence, payment security, identity protection and cyber incident monitoring for IFSC banks, insurers and intermediaries.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">4</div>
+                        <div className="step-card">
+                            <h4>AI-Based Risk Analytics</h4>
+                            <p>Credit risk, market risk, fraud risk and operational risk analytics for regulated financial institutions.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">5</div>
+                        <div className="step-card">
+                            <h4>Blockchain and DLT Solutions</h4>
+                            <p>Record verification, tokenisation support, settlement innovation and secure financial data infrastructure.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">6</div>
+                        <div className="step-card">
+                            <h4>Trade Finance Technology</h4>
+                            <p>Digital document verification, supply chain finance support and trade finance analytics linked with ITFS-style ecosystems.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">7</div>
+                        <div className="step-card">
+                            <h4>SupTech Solutions</h4>
+                            <p>Technology tools for supervisory reporting, inspection analytics and regulatory oversight.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">8</div>
+                        <div className="step-card">
+                            <h4>Web 3.0 Financial Technology</h4>
+                            <p>Decentralised technology applications linked with financial service innovation, subject to regulatory boundaries.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Common Mistakes */}
+            <section id="common-mistakes">
+                <h2>Common Mistakes in IFSCA TechFin Registration</h2>
+                <p>The following recurring issues delay applications, attract regulatory queries or result in deficiency notices. Professional assistance may help reduce documentation gaps and route mismatches.</p>
+                <table className="data-table">
+                    <thead>
+                        <tr>
+                            <th>Mistake</th>
+                            <th>Risk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Confusing TechFin with generic IT services</td>
+                            <td>Wrong positioning before IFSCA</td>
+                        </tr>
+                        <tr>
+                            <td>Applying for direct Authorization without a working product</td>
+                            <td>Eligibility gap</td>
+                        </tr>
+                        <tr>
+                            <td>No revenue track record for direct Authorization</td>
+                            <td>Direct route ineligibility</td>
+                        </tr>
+                        <tr>
+                            <td>No clear financial services use case</td>
+                            <td>Regulatory suitability concern</td>
+                        </tr>
+                        <tr>
+                            <td>Weak innovation explanation in sandbox application</td>
+                            <td>Sandbox suitability concern</td>
+                        </tr>
+                        <tr>
+                            <td>No cybersecurity documentation</td>
+                            <td>Technology readiness concern</td>
+                        </tr>
+                        <tr>
+                            <td>No user protection plan for sandbox</td>
+                            <td>Sandbox approval risk</td>
+                        </tr>
+                        <tr>
+                            <td>Foreign applicant from non-FATF compliant jurisdiction</td>
+                            <td>Eligibility concern</td>
+                        </tr>
+                        <tr>
+                            <td>Assuming the IFSCA grant is automatic</td>
+                            <td>Financial planning risk</td>
+                        </tr>
+                        <tr>
+                            <td>No IFSC setup plan after Authorization</td>
+                            <td>Operational readiness gap</td>
+                        </tr>
+                        <tr>
+                            <td>No clear exit strategy for sandbox testing</td>
+                            <td>Regulatory query and refusal risk</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            {/* How Estabizz Helps */}
+            <section id="how-estabizz-helps">
+                <h2>How Estabizz Helps with IFSCA TechFin Registration</h2>
+                <div className="step-timeline">
+                    <div className="step-item">
+                        <div className="step-dot">1</div>
+                        <div className="step-card">
+                            <h4>TechFin Activity Assessment</h4>
+                            <p>We help identify whether the proposed solution qualifies as TechFin under the IFSCA FinTech Entity Framework, and how best to position it for regulatory review.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">2</div>
+                        <div className="step-card">
+                            <h4>Route Selection</h4>
+                            <p>We assist in choosing between direct Authorization, Limited Use Authorization, Regulatory Sandbox, Innovation Sandbox, IoRS and Overseas Regulatory Referral.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">3</div>
+                        <div className="step-card">
+                            <h4>Eligibility Review</h4>
+                            <p>We review applicant type, FATF jurisdiction, working product status, revenue track record and ecosystem linkages with RBI / SEBI / IRDAI / PFRDA.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">4</div>
+                        <div className="step-card">
+                            <h4>Technology Documentation</h4>
+                            <p>We help prepare solution architecture, technology use note, cybersecurity summary, AI / ML model note and data flow documentation.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">5</div>
+                        <div className="step-card">
+                            <h4>Sandbox Application Support</h4>
+                            <p>We assist with the testing plan, risk controls, user disclosures, success metrics, test boundaries and exit strategy.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">6</div>
+                        <div className="step-card">
+                            <h4>Grant Application Support</h4>
+                            <p>We assist with Startup Grant, PoC Grant, Sandbox Grant, Green FinTech Grant, Accelerator Grant and Listing Support documentation, where applicable.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">7</div>
+                        <div className="step-card">
+                            <h4>GIFT IFSC Setup Assistance</h4>
+                            <p>We support entity, subsidiary, branch or LLP setup in IFSC after Authorization, where required by the chosen route.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">8</div>
+                        <div className="step-card">
+                            <h4>Post-Authorization Compliance</h4>
+                            <p>We support periodic reporting, material change updates, cyber documentation, grant utilisation and regulatory correspondence.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">9</div>
+                        <div className="step-card">
+                            <h4>Ticket-Based Execution</h4>
+                            <p>Estabizz follows a structured task-tracking system so clients receive organised updates throughout the engagement.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Why Choose Estabizz */}
+            <section id="why-choose-estabizz">
+                <h2>Why Choose Estabizz for IFSCA TechFin Registration?</h2>
+                <div className="step-timeline">
+                    <div className="step-item">
+                        <div className="step-dot">1</div>
+                        <div className="step-card">
+                            <h4>IFSCA Regulatory Expertise</h4>
+                            <p>Our team works across IFSCA licensing and compliance matters and understands GIFT IFSC regulatory expectations.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">2</div>
+                        <div className="step-card">
+                            <h4>Technology &amp; Compliance Understanding</h4>
+                            <p>We combine fintech, regulatory, technology and documentation experience for TechFin business models.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">3</div>
+                        <div className="step-card">
+                            <h4>Sandbox Readiness Approach</h4>
+                            <p>We focus on test design, user protection, cyber readiness, risk controls and exit planning.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">4</div>
+                        <div className="step-card">
+                            <h4>Grant Documentation Strength</h4>
+                            <p>We help prepare grant applications with milestone clarity, cost justification and regulatory presentation.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">5</div>
+                        <div className="step-card">
+                            <h4>Multi-Regulator Experience</h4>
+                            <p>Our experience across RBI, SEBI, IRDAI and IFSCA helps with hybrid TechFin models touching multiple regulatory domains.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">6</div>
+                        <div className="step-card">
+                            <h4>End-to-End Support</h4>
+                            <p>From eligibility review to application, query support, IFSC setup and post-authorisation compliance, we provide organised professional handholding.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* FAQs */}
             <section id="faqs">
-                <h2>Frequently Asked Questions</h2>
+                <h2>Frequently Asked Questions on IFSCA TechFin Registration</h2>
                 <div className="faq-accordion">
                     {faqs.map((faq, i) => (
                         <details key={i} className="faq-item">
@@ -815,6 +1297,71 @@ export default function PageClient() {
                     ))}
                 </div>
             </section>
+
+            {/* Reviewer & Disclaimer */}
+            <section id="reviewer">
+                <h2>Reviewer &amp; Legal Disclaimer</h2>
+                <div className="info-box">
+                    <p><strong>Reviewed by:</strong> CS Devyani Khambhati</p>
+                    <p><strong>Designation:</strong> Compliance Expert | Estabizz Fintech Private Limited</p>
+                    <p><strong>Expertise:</strong> IFSCA, RBI, SEBI, IRDAI, GIFT City registrations, FinTech Entity Framework, TechFin authorization, sandbox authorization, startup incentive documentation and post-authorisation compliance.</p>
+                    <p>This content has been prepared from a regulatory advisory perspective to help TechFin companies, RegTech firms, SupTech platforms, AI / ML solution providers, cybersecurity companies, KYC / AML technology providers and Web 3.0 financial technology businesses understand the broad IFSCA framework for TechFin authorization in GIFT IFSC.</p>
+                </div>
+                <p>
+                    <strong>Legal Disclaimer:</strong> This content is for general informational purposes only and should not be treated as legal, regulatory, tax, financial or investment advice. IFSCA requirements, application formats, grant conditions, eligibility criteria, fees, sandbox rules, reporting obligations and approval processes may change from time to time. Applicants should verify the latest regulatory position and obtain professional advice before filing any application with IFSCA. Estabizz does not promise or guarantee IFSCA authorization, sandbox approval or grant approval; outcomes are subject to IFSCA scrutiny and the fulfilment of prescribed conditions.
+                </p>
+            </section>
+
+            {/* FAQ JSON-LD Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "FAQPage",
+                        mainEntity: faqs.map((f) => ({
+                            "@type": "Question",
+                            name: f.q,
+                            acceptedAnswer: { "@type": "Answer", text: f.a },
+                        })),
+                    }),
+                }}
+            />
+            {/* Service JSON-LD Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Service",
+                        serviceType: "IFSCA TechFin Registration",
+                        provider: {
+                            "@type": "Organization",
+                            name: "Estabizz Fintech Private Limited",
+                            url: "https://estabizz-site.vercel.app/",
+                        },
+                        areaServed: { "@type": "Place", name: "GIFT IFSC, Gujarat, India" },
+                        description:
+                            "Professional support for IFSCA TechFin Registration under the FinTech Entity Framework — Authorization, Limited Use Authorization, sandbox routes, RegTech, SupTech, AI/ML, cybersecurity, KYC/AML technology, DLT and Web 3.0 entry into GIFT IFSC, including IFSCA FinTech Incentive Scheme grant documentation.",
+                        url: "https://estabizz-site.vercel.app/ifsca/techfin",
+                    }),
+                }}
+            />
+            {/* Breadcrumb JSON-LD Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BreadcrumbList",
+                        itemListElement: [
+                            { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
+                            { "@type": "ListItem", position: 2, name: "IFSCA Services", item: "https://estabizz-site.vercel.app/ifsca" },
+                            { "@type": "ListItem", position: 3, name: "IFSCA TechFin Registration", item: "https://estabizz-site.vercel.app/ifsca/techfin" },
+                        ],
+                    }),
+                }}
+            />
         </ServicePageLayout>
     );
 }

@@ -30,11 +30,11 @@ const services = [
         tags: ["Book-keeping", "Accounting", "Taxation", "GIFT IFSC"],
     },
     {
-        title: "FinTech Entity & Incentive Scheme",
-        description: "IFSCA FinTech Entity authorization, sandbox programs, accelerator framework and financial incentive grants up to INR 75 Lakhs for FinTechs and TechFins in GIFT IFSC.",
-        href: "/ifsca/fintech-entity",
+        title: "IFSCA FinTech and Startup Incentives",
+        description: "Professional support for IFSCA FinTech Entity Authorization, Limited Use Authorization, sandbox application, TechFin activity mapping, startup grants, PoC Grant, Green FinTech Grant, Accelerator Grant and GIFT IFSC setup.",
+        href: "/ifsca/ifsca-fintech-startup-incentives",
         icon: "🚀",
-        tags: ["FinTech", "Sandbox", "Incentive Grants", "Accelerator"],
+        tags: ["FinTech", "Sandbox", "Startup Grants", "GIFT IFSC"],
     },
     {
         title: "TechFin Authorization",

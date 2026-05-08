@@ -121,8 +121,8 @@ export default function PageClient() {
             relatedArticles={[
                 { title: "FinTech Entity & Incentive Scheme", href: "/ifsca/fintech-entity", category: "IFSCA", description: "FinTech Entity authorization, sandbox programs and incentive grants in GIFT IFSC." },
                 { title: "PSP License IFSCA", href: "/ifsca/psp-license", category: "IFSCA", description: "Payment Service Provider authorisation under IFSCA Payment Services Regulations 2024." },
-                { title: "IFSCA BATF Services", href: "/ifsca/batf-services", category: "IFSCA", description: "Book-keeping, Accounting, Taxation and Financial Crime Compliance Services in GIFT IFSC." },
-                { title: "Finance Company GIFT IFSC", href: "/ifsca/finance-company", category: "IFSCA", description: "Finance Company and Finance Unit registration in GIFT IFSC." },
+                { title: "IFSCA BATF Services", href: "/ifsca/batf-services-registration-in-gift-ifsc", category: "IFSCA", description: "Book-keeping, Accounting, Taxation and Financial Crime Compliance Services in GIFT IFSC." },
+                { title: "Finance Company GIFT IFSC", href: "/ifsca/finance-company-in-gift-ifsc", category: "IFSCA", description: "Finance Company and Finance Unit registration in GIFT IFSC." },
             ]}
             finalCtaTitle="Ready to Set Up Your TechFin Entity in GIFT IFSC?"
             finalCtaDescription="Get expert assistance with IFSCA TechFin authorization — from application to sandbox entry, incentive grants and ongoing compliance."

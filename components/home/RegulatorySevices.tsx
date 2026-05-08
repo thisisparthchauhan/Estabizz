@@ -53,7 +53,9 @@ const services = [
             { name: "Broker Dealer", href: "/ifsca" },
             { name: "Factoring", href: "/regulatory/ifsca-factoring-license-gift-city" },
             { name: "PSP License", href: "/regulatory/psp-license-ifsca" },
-            { name: "Finance Co.", href: "/ifsca/finance-company" },
+            { name: "Finance Co.", href: "/ifsca/finance-company-in-gift-ifsc" },
+            { name: "BATF", href: "/ifsca/batf-services-registration-in-gift-ifsc" },
+            { name: "Aircraft Leasing", href: "/ifsca/aircraft-leasing-registration-in-ifsc" },
         ],
         icon: "🌐"
     },

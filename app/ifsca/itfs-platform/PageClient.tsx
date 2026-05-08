@@ -101,10 +101,10 @@ export default function PageClient() {
                 { label: "Platforms Active", value: "4" },
             ]}
             relatedArticles={[
-                { title: "Finance Company GIFT IFSC", href: "/ifsca/finance-company", category: "IFSCA", description: "Finance Company and Finance Unit registration in GIFT IFSC." },
+                { title: "Finance Company GIFT IFSC", href: "/ifsca/finance-company-in-gift-ifsc", category: "IFSCA", description: "Finance Company and Finance Unit registration in GIFT IFSC." },
                 { title: "IFSCA Factoring License", href: "/regulatory/ifsca-factoring-license-gift-city", category: "IFSCA", description: "Factor registration under IFSCA Regulations 2024." },
                 { title: "FinTech Entity & Incentives", href: "/ifsca/fintech-entity", category: "IFSCA", description: "FinTech Entity authorization and incentive grants in GIFT IFSC." },
-                { title: "BATF Services IFSC", href: "/ifsca/batf-services", category: "IFSCA", description: "BATF Service Provider registration in GIFT IFSC." },
+                { title: "BATF Services IFSC", href: "/ifsca/batf-services-registration-in-gift-ifsc", category: "IFSCA", description: "BATF Service Provider registration in GIFT IFSC." },
             ]}
             finalCtaTitle="Ready to Set Up an ITFS Platform in GIFT IFSC?"
             finalCtaDescription="Get expert assistance with your IFSCA ITFS Platform registration. Our team handles the complete process from application to compliance."

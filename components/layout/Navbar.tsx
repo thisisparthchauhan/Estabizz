@@ -8,7 +8,14 @@ interface MegaMenu { categories: MenuCategory[]; viewAll: string; viewAllLabel: 
 
 const linkMap: Record<string, string> = {
     // IFSCA (existing)
-    "Finance Company GIFT IFSC": "/ifsca/finance-company",
+    "Finance Company GIFT IFSC": "/ifsca/finance-company-in-gift-ifsc",
+    "IFSCA Finance Company Registration": "/ifsca/finance-company-in-gift-ifsc",
+    "IFSCA Finance Unit Registration": "/ifsca/finance-company-in-gift-ifsc",
+    "Finance Company in GIFT IFSC": "/ifsca/finance-company-in-gift-ifsc",
+    "GIFT IFSC Finance Company": "/ifsca/finance-company-in-gift-ifsc",
+    "Finance Unit in IFSC": "/ifsca/finance-company-in-gift-ifsc",
+    "GRCTC": "/ifsca/finance-company-in-gift-ifsc",
+    "Global Regional Corporate Treasury Centre": "/ifsca/finance-company-in-gift-ifsc",
     "IFSCA Factoring License": "/regulatory/ifsca-factoring-license-gift-city",
     "PSP License IFSCA": "/ifsca/psp-license",
     // RBI / NBFC
@@ -59,11 +66,14 @@ const linkMap: Record<string, string> = {
     "IFSCA Compliance": "/ifsca",
     "Aircraft Leasing IFSC": "/ifsca/aircraft-leasing-registration-in-ifsc",
     "IFSCA Aircraft Leasing": "/ifsca/aircraft-leasing-registration-in-ifsc",
-    "BATF Services IFSC": "/ifsca/batf-services",
+    "BATF Services IFSC": "/ifsca/batf-services-registration-in-gift-ifsc",
+    "BATF Services Registration": "/ifsca/batf-services-registration-in-gift-ifsc",
+    "IFSCA BATF Services Registration": "/ifsca/batf-services-registration-in-gift-ifsc",
+    "Book-keeping Accounting Taxation Financial Crime Compliance": "/ifsca/batf-services-registration-in-gift-ifsc",
     "FinTech Entity IFSC": "/ifsca/fintech-entity",
     "TechFin IFSC": "/ifsca/techfin",
     "ITFS Platform IFSC": "/ifsca/itfs-platform",
-    "IFSCA BATF Services": "/ifsca/batf-services",
+    "IFSCA BATF Services": "/ifsca/batf-services-registration-in-gift-ifsc",
     // Enterprise / Solutions
     "FEMA Compliance": "/fema/compliance-under-fema",
     "Transfer Pricing": "/services/transfer-pricing",

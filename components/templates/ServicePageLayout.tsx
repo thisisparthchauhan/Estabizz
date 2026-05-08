@@ -30,6 +30,7 @@ interface ServicePageLayoutProps {
     // Final CTA
     finalCtaTitle: string;
     finalCtaDescription: string;
+    finalCtaActions?: React.ReactNode;
     // Content
     children: React.ReactNode;
 }
@@ -37,7 +38,7 @@ interface ServicePageLayoutProps {
 export default function ServicePageLayout({
     tags, breadcrumb, title, heroDescription, heroActions, trustLine, readTime = "12 min read", displayYear = "2026", focusKeyword,
     sections, ctaTitle, ctaDescription, quickFacts,
-    relatedArticles, finalCtaTitle, finalCtaDescription, children
+    relatedArticles, finalCtaTitle, finalCtaDescription, finalCtaActions, children
 }: ServicePageLayoutProps) {
     const [activeSection, setActiveSection] = useState("");
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -372,14 +373,20 @@ export default function ServicePageLayout({
                 <div className="max-w-3xl mx-auto">
                     <h2 className="text-[28px] md:text-[32px] font-bold text-white mb-4">{finalCtaTitle}</h2>
                     <p className="text-[16px] text-blue-100 mb-8 max-w-2xl mx-auto">{finalCtaDescription}</p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#0096D6] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all">
-                            Get Started Free →
-                        </Link>
-                        <a href="tel:+919876543210" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20">
-                            Talk to Expert
-                        </a>
-                    </div>
+                    {finalCtaActions ? (
+                        <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
+                            {finalCtaActions}
+                        </div>
+                    ) : (
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#0096D6] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all">
+                                Get Started Free →
+                            </Link>
+                            <a href="tel:+919876543210" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20">
+                                Talk to Expert
+                            </a>
+                        </div>
+                    )}
                 </div>
             </section>
         </div>

@@ -49,8 +49,8 @@ const categories = [
         description: "Regulatory structuring and operational compliance support for entities operating within India's International Financial Services Centre ecosystem.",
         tags: ["Finance Company", "Factoring", "PSP License", "BATF", "Aircraft Leasing", "FinTech"],
         services: [
-            { name: "Finance Company GIFT IFSC", href: "/ifsca/finance-company" },
-            { name: "BATF Services", href: "/ifsca/batf-services" },
+            { name: "Finance Company GIFT IFSC", href: "/ifsca/finance-company-in-gift-ifsc" },
+            { name: "BATF Services", href: "/ifsca/batf-services-registration-in-gift-ifsc" },
             { name: "Aircraft Leasing IFSC", href: "/ifsca/aircraft-leasing-registration-in-ifsc" },
             { name: "FinTech Entity & Incentives", href: "/ifsca/fintech-entity" },
             { name: "ITFS Platform", href: "/ifsca/itfs-platform" },

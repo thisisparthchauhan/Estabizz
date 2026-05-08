@@ -177,10 +177,10 @@ export default function AircraftLeasingRegistrationPage() {
         { label: 'Timeline', value: 'Subject to IFSCA review' }
       ]}
       relatedArticles={[
-        { title: 'IFSCA Finance Company Registration', href: '/ifsca/finance-company', category: 'IFSCA', description: 'Finance Company and Finance Unit registration support in GIFT IFSC.' },
+        { title: 'IFSCA Finance Company Registration', href: '/ifsca/finance-company-in-gift-ifsc', category: 'IFSCA', description: 'Finance Company and Finance Unit registration support in GIFT IFSC.' },
         { title: 'IFSCA FinTech Registration', href: '/ifsca/fintech-entity', category: 'IFSCA', description: 'IFSCA FinTech Entity authorisation and incentive framework in GIFT IFSC.' },
         { title: 'PSP License IFSCA', href: '/ifsca/psp-license', category: 'IFSCA', description: 'Payment Service Provider authorisation under IFSCA payment services framework.' },
-        { title: 'BATF Services IFSC', href: '/ifsca/batf-services', category: 'IFSCA', description: 'Book-keeping, accounting, taxation and financial crime compliance services in GIFT IFSC.' },
+        { title: 'BATF Services IFSC', href: '/ifsca/batf-services-registration-in-gift-ifsc', category: 'IFSCA', description: 'Book-keeping, accounting, taxation and financial crime compliance services in GIFT IFSC.' },
         { title: 'ITFS Platform IFSC', href: '/ifsca/itfs-platform', category: 'IFSCA', description: 'International Trade Finance Services platform registration in GIFT IFSC.' }
       ]}
       finalCtaTitle="Start Your Aircraft Leasing Registration Journey with Estabizz"

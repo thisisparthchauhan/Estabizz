@@ -34,7 +34,7 @@ const categories = [
         services: [
             { name: "Stock Broker License", href: "/sebi/stock-broker-registration" },
             { name: "Merchant Banker", href: "/sebi/merchant-banker-registration" },
-            { name: "Portfolio Manager", href: "/sebi/portfolio-manager-registration" },
+            { name: "Portfolio Manager", href: "/sebi/pms-registration-in-india" },
             { name: "Investment Adviser", href: "/sebi/investment-adviser-registration" },
             { name: "Research Analyst", href: "/sebi/research-analyst-registration" },
             { name: "AIF Registration", href: "/sebi/aif-registration-in-india" },

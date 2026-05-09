@@ -1,55 +1,33 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 
-const testimonials = [
+/**
+ * Testimonials section.
+ *
+ * Per brand and regulatory guidelines, we do NOT publish fabricated client
+ * testimonials. Many of our regulatory engagements are confidential and
+ * cannot be publicly disclosed. We therefore display a confidentiality-led
+ * placeholder until verified, attributable client feedback is available.
+ */
+
+const placeholderCards: { title: string; body: string }[] = [
     {
-        name: "Rahul M.",
-        role: "Founder, FinTech Startup",
-        text: "Securing our NBFC license felt like an impossible maze until we partnered with Estabizz. Their team didn't just file papers; they structured our entire compliance framework. We got our approval 2 months ahead of schedule.",
-        rating: 5,
-        avatar: "RM"
+        title: "Confidentiality First",
+        body: "Our work is built around confidentiality. Many regulatory engagements cannot be publicly disclosed, but our approach remains consistent — structured execution, transparent communication and compliance-first delivery.",
     },
     {
-        name: "Priya S.",
-        role: "CFO, Investment Firm",
-        text: "The level of clarity and accountability Estabizz brings is unmatched. They handled our SEBI AIF registration with absolute precision. Their ex-regulator insights saved us from multiple operational bottlenecks.",
-        rating: 5,
-        avatar: "PS"
+        title: "Client Feedback Coming Soon",
+        body: "Verified client testimonials will be published progressively, with explicit consent. Where engagements involve regulator-facing applications, references are typically shared privately on request.",
     },
     {
-        name: "Amit D.",
-        role: "CEO, Insurance Aggregator",
-        text: "IRDAI compliance is complex, but Estabizz made it seamless. From the initial net-worth structuring to the final platform approval, their end-to-end ownership gave us complete peace of mind. Highly recommended.",
-        rating: 5,
-        avatar: "AD"
+        title: "Talk to Our Team",
+        body: "If you would like to evaluate our approach, our advisory team is happy to share representative engagement summaries and reference scenarios under a structured discussion, subject to confidentiality.",
     },
-    {
-        name: "Siddharth V.",
-        role: "Director, Payment Gateway",
-        text: "Applying for an RBI Payment Aggregator license is daunting. Estabizz guided us through the rigorous data localization and security audits seamlessly. Their portal is a game-changer for tracking progress.",
-        rating: 5,
-        avatar: "SV"
-    },
-    {
-        name: "Neha K.",
-        role: "Operations Head, GIFT City Fund",
-        text: "Setting up our operations in IFSCA GIFT City required a deep understanding of international financial regulations. The team at Estabizz delivered flawlessly. We were operational in record time.",
-        rating: 5,
-        avatar: "NK"
-    },
-    {
-        name: "Vikram R.",
-        role: "Managing Director, Lending Platform",
-        text: "We migrated our entire ongoing compliance management to Estabizz. The automated alerts, structured reporting, and dedicated advisory have completely removed our risk of non-compliance. A true partner.",
-        rating: 5,
-        avatar: "VR"
-    }
 ];
 
 export default function Testimonials() {
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
-    const [isHovered, setIsHovered] = useState(false);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -65,86 +43,52 @@ export default function Testimonials() {
         return () => observer.disconnect();
     }, []);
 
-    const duplicatedTestimonials = [...testimonials, ...testimonials];
-
     return (
         <section ref={sectionRef} className="py-24 relative overflow-hidden bg-transparent border-t border-[rgba(0,150,220,0.1)]">
             <div className="max-w-[1240px] mx-auto px-6 relative z-10">
 
-                <div className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                <div className={`text-center max-w-2xl mx-auto mb-12 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
                     <h2 className="text-[32px] md:text-[40px] font-black text-[#0a1628] leading-[1.2] mb-4">
-                        Client Testimonials
+                        What Our Clients Say
                     </h2>
-                    <p className="text-[16px] text-[#475569] font-medium font-bold text-[#0096D6]">
-                        Over 1000+ businesses trust us with their regulatory journey.
+                    <p className="text-[15px] md:text-[16px] text-[#475569] font-medium leading-relaxed">
+                        Our work is built around confidentiality. Many regulatory engagements cannot be publicly
+                        disclosed, but our approach remains consistent — structured execution, transparent
+                        communication and compliance-first delivery.
                     </p>
                 </div>
 
-                {/* Auto-scrolling Carousel */}
-                <div
-                    className="relative w-full overflow-hidden pb-10"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                >
-                    <div
-                        className={`flex gap-6 w-max items-stretch transition-all duration-700 delay-300 ease-out ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-12'} ${isHovered ? '[animation-play-state:paused]' : ''}`}
-                        style={{
-                            animation: 'scrollingCarousel 40s linear infinite',
-                        }}
-                    >
-                        {duplicatedTestimonials.map((testimonial, index) => (
-                            <div
-                                key={index}
-                                className="w-[350px] sm:w-[400px] shrink-0 bg-white/70 backdrop-blur-[16px] border border-[rgba(0,150,220,0.1)] rounded-[20px] p-8 relative flex flex-col group hover:bg-white/95 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(0,100,200,0.12)] transition-all duration-500 ease-out"
-                            >
-                                {/* Quote Mark */}
-                                <div className="absolute top-6 right-6 text-[60px] font-serif text-[rgba(0,150,220,0.1)] leading-none select-none pointer-events-none group-hover:text-[rgba(0,150,220,0.15)] transition-colors">
-                                    "
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    {placeholderCards.map((card, index) => (
+                        <div
+                            key={card.title}
+                            className="bg-white/80 backdrop-blur-[16px] border border-[rgba(0,150,220,0.12)] rounded-[20px] p-7 flex flex-col group hover:bg-white/95 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,100,200,0.10)] transition-all duration-500 ease-out"
+                            style={{
+                                opacity: isVisible ? 1 : 0,
+                                transform: isVisible ? "translateY(0)" : "translateY(20px)",
+                                transition: `all 0.5s cubic-bezier(0.4,0,0.2,1) ${0.15 + index * 0.1}s`,
+                            }}
+                        >
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="w-9 h-9 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-[#0096D6] text-[15px]">
+                                    💬
                                 </div>
-
-                                {/* Star Rating */}
-                                <div className="flex gap-1 mb-5">
-                                    {[...Array(testimonial.rating)].map((_, i) => (
-                                        <span key={i} className="text-[#F59E0B] text-[16px]">★</span>
-                                    ))}
-                                </div>
-
-                                {/* Testimonial Body */}
-                                <p className="text-[14.5px] text-[#475569] leading-[1.8] font-medium mb-8 flex-grow">
-                                    {testimonial.text}
-                                </p>
-
-                                {/* Author Avatar & Details */}
-                                <div className="flex items-center gap-4 mt-auto">
-                                    <div className="w-[45px] h-[45px] rounded-full bg-gradient-to-br from-[#0096D6] to-[#00B4E0] text-white flex items-center justify-center font-bold text-[14px] shadow-sm shrink-0">
-                                        {testimonial.avatar}
-                                    </div>
-                                    <div>
-                                        <div className="text-[15px] font-bold text-[#0a1628] leading-tight mb-0.5">
-                                            {testimonial.name}
-                                        </div>
-                                        <div className="text-[12px] font-semibold text-[#0096D6]">
-                                            {testimonial.role}
-                                        </div>
-                                    </div>
-                                </div>
+                                <h3 className="text-[15px] font-bold text-[#0a1628] leading-tight">
+                                    {card.title}
+                                </h3>
                             </div>
-                        ))}
-                    </div>
-
-                    {/* Edge fade masks */}
-                    <div className="absolute top-0 bottom-0 left-0 w-[80px] lg:w-[150px] bg-gradient-to-r from-[#f8faff] to-transparent pointer-events-none z-10"></div>
-                    <div className="absolute top-0 bottom-0 right-0 w-[80px] lg:w-[150px] bg-gradient-to-l from-[#f8faff] to-transparent pointer-events-none z-10"></div>
+                            <p className="text-[14px] text-[#475569] leading-[1.75] font-medium">
+                                {card.body}
+                            </p>
+                        </div>
+                    ))}
                 </div>
 
+                <p className="text-center text-[12px] text-[#64748b] mt-10 max-w-2xl mx-auto leading-relaxed">
+                    Estabizz does not publish fabricated client testimonials. Verified, attributable feedback will be
+                    added progressively with explicit client consent.
+                </p>
             </div>
-
-            <style dangerouslySetInnerHTML={{ __html: `
-            @keyframes scrollingCarousel {
-                0 % { transform: translateX(0); }
-                 100% {transform: translateX(-50%); }
-               }
-            `}}/>
         </section>
     );
 }

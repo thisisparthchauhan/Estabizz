@@ -3,6 +3,11 @@ import React from "react";
 import Link from "next/link";
 
 const footerLinks: Record<string, { label: string; href: string }[]> = {
+    "About": [
+        { label: "About Estabizz", href: "/contact" },
+        { label: "Estabizz Blogs", href: "/blogs" },
+        { label: "Contact Us", href: "/contact" },
+    ],
     "Regulatory Expertise": [
         { label: "RBI Licensing & Compliance", href: "/rbi" },
         { label: "SEBI Registrations", href: "/sebi" },
@@ -104,7 +109,7 @@ export default function Footer() {
                     </div>
 
                     {/* Link Columns - spread across remaining 9 cols */}
-                    <div className="lg:col-span-9 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8">
+                    <div className="lg:col-span-9 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-x-6 gap-y-8">
                         {Object.entries(footerLinks).map(([title, links]) => (
                             <div key={title}>
                                 <h4 className="text-[11px] font-bold text-white uppercase tracking-[0.08em] mb-4">{title}</h4>

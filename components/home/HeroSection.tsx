@@ -76,25 +76,25 @@ export default function HeroSection() {
               Simplify Fintech Compliance, <br class="hidden md:block"/> <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#0096D6] to-[#10b981] italic pr-2">Accelerate</span> Your Growth
           `}} />
 
-                    {/* Subtagline / Tagline combined logic */}
+                    {/* Primary tagline / hero promise */}
                     <div className="text-[#0077B6] font-bold text-[18px] md:text-[22px] italic mb-6 opacity-0 animate-[fadeUp_0.6s_ease_0.2s_forwards]">
-                        "We Comply. We Simplify."
+                        We Secure Your Licence. You Secure Your Future.
                     </div>
 
                     {/* Description */}
                     <div className="max-w-[640px] w-full space-y-4 mb-8 opacity-0 animate-[fadeUp_0.6s_ease_0.3s_forwards]">
                         <p className="text-[15px] text-[#475569] font-medium leading-relaxed">
-                            Expert regulatory guidance for IFSCA, RBI, SEBI, and IRDA licenses and other government licenses. We handle your compliance end-to-end so you can focus on building your business.
+                            Expert regulatory guidance for RBI, SEBI, IRDAI, IFSCA and allied government licences. Estabizz manages your licensing, documentation and compliance lifecycle end-to-end, so you can focus on building and scaling your business with confidence.
                         </p>
                         <p className="text-[15px] text-[#475569] font-medium leading-relaxed">
-                            Regulatory approvals are not just documents—they are the foundation of your dream. We manage your IFSCA, RBI, SEBI, IRDAI and government licensing end-to-end, so you can build boldly and grow without fear.
+                            Regulatory approvals are not just documents — they are the foundation of your business vision. We help you approach every licensing and compliance requirement with structure, clarity and accountability.
                         </p>
                     </div>
 
                     {/* Stats Row */}
                     <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-10 opacity-0 animate-[fadeUp_0.6s_ease_0.4s_forwards]">
                         <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
-                            <span className="w-2 h-2 rounded-full bg-[#10b981]"></span> {isMounted ? <StatCount end={500} suffix="+" /> : "500+"} Licenses Obtained
+                            <span className="w-2 h-2 rounded-full bg-[#10b981]"></span> {isMounted ? <StatCount end={500} suffix="+" /> : "500+"} Licences Obtained
                         </div>
                         <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
                             <span className="w-2 h-2 rounded-full bg-[#0096D6]"></span> {isMounted ? <StatCount end={1000} suffix="+" /> : "1000+"} Businesses Served
@@ -102,22 +102,36 @@ export default function HeroSection() {
                         <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
                             <span className="w-2 h-2 rounded-full bg-[#F59E0B]"></span> Pan India Services
                         </div>
+                        <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
+                            <span className="w-2 h-2 rounded-full bg-[#7c3aed]"></span> {isMounted ? <StatCount end={100} suffix="+" /> : "100+"} Associate Professionals
+                        </div>
                     </div>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center gap-4 mb-4 w-full sm:w-auto opacity-0 animate-[fadeUp_0.6s_ease_0.5s_forwards]">
-                        <a href="/signup" className="get-started-btn relative overflow-hidden w-full sm:w-auto bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-[0_8px_25px_rgba(0,150,220,0.3)] hover:shadow-[0_8px_30px_rgba(0,150,220,0.4)] hover:-translate-y-1 transition-all duration-300 group inline-flex items-center justify-center">
-                            <span className="relative z-10 flex items-center justify-center gap-2">Get Started Free <span className="group-hover:translate-x-1 transition-transform">→</span></span>
+                    <div className="flex flex-col sm:flex-row items-center gap-3 mb-4 w-full sm:w-auto opacity-0 animate-[fadeUp_0.6s_ease_0.5s_forwards]">
+                        <a href="/contact" className="get-started-btn relative overflow-hidden w-full sm:w-auto bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-[0_8px_25px_rgba(0,150,220,0.3)] hover:shadow-[0_8px_30px_rgba(0,150,220,0.4)] hover:-translate-y-1 transition-all duration-300 group inline-flex items-center justify-center">
+                            <span className="relative z-10 flex items-center justify-center gap-2">Get Free Consultation <span className="group-hover:translate-x-1 transition-transform">→</span></span>
                         </a>
 
-                        <button className="w-full sm:w-auto bg-white/90 backdrop-blur-md border-2 border-[#0096D6] text-[#0096D6] font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-sm hover:bg-blue-50 transition-all duration-300">
-                            Book a Free Consultation
-                        </button>
+                        <a href="/regulatory" className="w-full sm:w-auto bg-white/90 backdrop-blur-md border-2 border-[#0096D6] text-[#0096D6] font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-sm hover:bg-blue-50 transition-all duration-300 inline-flex items-center justify-center">
+                            Explore Regulatory Services
+                        </a>
+
+                        <a
+                            href="https://wa.me/919825600907"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="WhatsApp Estabizz Team"
+                            className="w-full sm:w-auto bg-[#25D366] hover:bg-[#1ebe5b] text-white font-bold text-[15px] rounded-[14px] px-6 py-4 shadow-sm transition-all duration-300 inline-flex items-center justify-center gap-2"
+                        >
+                            <span aria-hidden="true">💬</span>
+                            <span>WhatsApp Estabizz Team</span>
+                        </a>
                     </div>
 
                     {/* Trust Line */}
                     <div className="text-[12px] text-[#64748b] font-medium text-center lg:text-left opacity-0 animate-[fadeUp_0.6s_ease_0.6s_forwards]">
-                        No credit card required · Free consultation · Get queries solved in 24 hours
+                        No credit card required · Free consultation · Get your queries reviewed within 24 hours
                     </div>
 
                 </div>

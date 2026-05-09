@@ -32,7 +32,7 @@ const categories = [
         description: "Structured SEBI registration and governance support covering documentation, eligibility assessment, net worth compliance, and monitoring.",
         tags: ["Stock Broker", "RIA", "PMS", "AIF", "Research Analyst"],
         services: [
-            { name: "Stock Broker License", href: "/sebi/stock-broker-registration" },
+            { name: "Stock Broker License", href: "/sebi/stock-broker-registration-in-india" },
             { name: "Merchant Banker", href: "/sebi/merchant-banker-registration" },
             { name: "Portfolio Manager", href: "/sebi/pms-registration-in-india" },
             { name: "Investment Adviser", href: "/sebi/ria-registration-in-india" },

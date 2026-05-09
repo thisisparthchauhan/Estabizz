@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import ServicePageLayout from '@/components/templates/ServicePageLayout';
 
 export default function RTARegistrationPage() {
@@ -668,6 +669,49 @@ SEBI may suspend or cancel registration and may impose monetary penalties depend
           </div>
         </section>
       ))}
+
+      {/* ==================== VISUAL — PROCESS TIMELINE ==================== */}
+      <section id="process-timeline-visual" className="mt-16">
+        <h2>RTA Registration Process Timeline – Visual Reference</h2>
+        <p>
+          The following timeline summarises the indicative stages of an RTA Registration application —
+          from initial assessment and documentation to SEBI review, query handling and certificate
+          issuance. Actual duration depends on documentation quality, SEBI scrutiny and clarification
+          rounds.
+        </p>
+        <div className="my-6 rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white">
+          <Image
+            src="/images/sebi/rta/process-timeline.jpg"
+            alt="RTA Registration in India process timeline by Estabizz"
+            width={1600}
+            height={900}
+            sizes="(max-width: 768px) 100vw, 1024px"
+            className="w-full h-auto"
+            priority={false}
+          />
+        </div>
+      </section>
+
+      {/* ==================== VISUAL — END-TO-END FRAMEWORK ==================== */}
+      <section id="end-to-end-framework" className="mt-16">
+        <h2>RTA Registration Process Flowchart – End-to-End Framework</h2>
+        <div className="my-6 rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white">
+          <Image
+            src="/images/sebi/rta/process-flowchart.png"
+            alt="RTA Registration in India SEBI application flowchart by Estabizz"
+            width={2000}
+            height={1400}
+            sizes="(max-width: 768px) 100vw, 1024px"
+            className="w-full h-auto"
+            priority={false}
+          />
+        </div>
+        <p>
+          The RTA Registration process moves from incorporation and net worth confirmation to governance
+          structuring, application preparation, SEBI filing, regulatory scrutiny, fee payment, certificate
+          issuance and ongoing compliance support.
+        </p>
+      </section>
 
       <section id="faq" className="mt-16">
         <h2>Frequently Asked Questions on RTA Registration in India</h2>

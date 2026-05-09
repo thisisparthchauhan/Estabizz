@@ -22,7 +22,7 @@ const services = [
     { href: "/sebi/ria-registration-in-india", title: "RIA Registration in India", desc: "Professional support for SEBI Investment Adviser / RIA Registration covering individual, company, LLP and advisory entity applications, NISM certification mapping, net worth documentation, Form A filing, advisory agreement, risk profiling and post-registration compliance.", tag: "SEBI", emoji: "🧭" },
     { href: "/sebi/research-analyst-registration-in-india", title: "Research Analyst Registration in India", desc: "Professional support for SEBI Research Analyst Registration covering individual, company, LLP and research entity applications, NISM certification mapping, net worth documentation, Form A filing, research disclosure framework and post-registration compliance.", tag: "SEBI", emoji: "🔎" },
     { href: "/sebi/underwriter-registration", title: "Underwriter Registration with SEBI", desc: "SEBI registration requirements for underwriters operating in India.", tag: "SEBI", emoji: "📝" },
-    { href: "/sebi/social-stock-exchange-license", title: "Social Stock Exchange License", desc: "Regulatory guide for obtaining a Social Stock Exchange license under SEBI.", tag: "SEBI", emoji: "🌍" },
+    { href: "/sebi/social-stock-exchange-license-india", title: "Social Stock Exchange License in India", desc: "Professional support for Social Stock Exchange registration covering NPO and FPE eligibility, social intent mapping, ZCZP documentation, impact reporting, NSE / BSE SSE application support and post-listing compliance.", tag: "SEBI", emoji: "🌍" },
     { href: "/sebi/aif-registration-in-india", title: "AIF Registration in India", desc: "Professional support for SEBI AIF Registration covering Category I, Category II, Category III AIFs, fund structuring, sponsor contribution planning, PPM drafting, Form A filing, SEBI query response and post-registration compliance.", tag: "SEBI", emoji: "💎" },
 ];
 
@@ -62,7 +62,7 @@ export default function Page() {
                                 </div>
                                 <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#0096D6] transition-colors mb-2 leading-snug">{s.title}</h3>
                                 <p className="text-[13px] text-gray-500 leading-relaxed line-clamp-2">{s.desc}</p>
-                                <div className="mt-4 text-[13px] text-[#0096D6] font-semibold group-hover:underline">{s.title === "AIF Registration in India" ? "Explore AIF Registration" : s.title === "PMS Registration in India" ? "Explore PMS Registration" : s.title === "RIA Registration in India" ? "Explore RIA Registration" : s.title === "Research Analyst Registration in India" ? "Explore Research Analyst Registration" : s.title === "Stock Broker Registration in India" ? "Explore Stock Broker Registration" : "Read Guide"} →</div>
+                                <div className="mt-4 text-[13px] text-[#0096D6] font-semibold group-hover:underline">{s.title === "AIF Registration in India" ? "Explore AIF Registration" : s.title === "PMS Registration in India" ? "Explore PMS Registration" : s.title === "RIA Registration in India" ? "Explore RIA Registration" : s.title === "Research Analyst Registration in India" ? "Explore Research Analyst Registration" : s.title === "Stock Broker Registration in India" ? "Explore Stock Broker Registration" : s.title === "Social Stock Exchange License in India" ? "Explore Social Stock Exchange" : "Read Guide"} →</div>
                             </div>
                         </Link>
                     ))}

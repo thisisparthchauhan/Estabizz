@@ -12,18 +12,18 @@ const steps = [
         num: "02",
         title: "Regulator-Ready Documentation",
         badge: "Precision in Preparation",
-        body: "We draft and structure all required documentation — business plans, policies, declarations, compliance frameworks, and financial projections — aligned with regulator expectations. Every application is prepared with audit and inspection readiness in mind."
+        body: "We draft and structure business plans, policies, declarations, compliance frameworks, financial projections and supporting documents aligned with regulator expectations."
     },
     {
         num: "03",
         title: "Regulatory Filing & Liaison",
         badge: "Disciplined Execution",
-        body: "Your application is formally submitted to the respective authority — RBI, SEBI, IRDAI, IFSCA or MCA — with structured follow-ups, query management, and proactive engagement until resolution. We manage the dialogue. You stay informed."
+        body: "Your application is submitted to the respective authority — RBI, SEBI, IRDAI, IFSCA, MCA or other regulator — with structured follow-ups, query management and proactive coordination."
     },
     {
         num: "04",
         title: "Approval & Ongoing Compliance",
-        badge: "Beyond the License",
+        badge: "Beyond the Licence",
         body: "Licensing is only the beginning. We implement post-approval compliance systems, reporting mechanisms, and governance structures to ensure long-term regulatory stability."
     }
 ];

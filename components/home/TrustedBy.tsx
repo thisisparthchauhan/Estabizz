@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const companies = [
-    "Ezywise", "Thip", "Insurehub", "Cosmopayz", "Branch International", "Efficient Group", "GE Shipping", "Jainam Group", "Opus Capital", "KSHETRAPAL", "MAKS", "Market Wick", "Finergy Finance", "Fintara", "Devvrat Group", "Vayoonandan", "VSPA", "Western Fintrade", "SVCM", "Evermore", "LN Fintech", "Digitap", "Cashfree", "Rozarpay", "Digio", "Nutra trade", "Unique Solar", "Carebharat", "Ombeema", "CARE", "GROW"
+    "Ezywise", "Thip", "InsureHub", "Cosmopayz", "Branch International", "Efficient Group", "GE Shipping", "Jainam Group", "Opus Capital", "Kshetrapal", "MAKS", "Market Wick", "Finergy Finance", "Fintara", "Devvrat Group", "Vayoonandan", "VSPA", "Western Fintrade", "SVCM", "Evermore", "LN Fintech", "Digitap", "Cashfree", "Razorpay", "Digio", "Nutra Trade", "Unique Solar", "CareBharat", "Ombeema", "CARE", "GROW"
 ];
 
 export default function TrustedBy() {
@@ -40,8 +40,11 @@ export default function TrustedBy() {
 
             <div className="max-w-[1240px] mx-auto px-6 mb-12 text-center">
                 <h2 className="text-[16px] md:text-[18px] font-extrabold text-[#0a1628] uppercase tracking-widest text-[#94a3b8]">
-                    Trusted by India's Fastest Growing Business
+                    Trusted by India&apos;s Fastest Growing Businesses
                 </h2>
+                <p className="mt-4 text-[12px] text-[#64748b] max-w-3xl mx-auto">
+                    Names are displayed for representative trust-building purposes only where permitted. This does not imply endorsement unless expressly authorised.
+                </p>
             </div>
 
             <div className="relative w-full max-w-[1400px] mx-auto">

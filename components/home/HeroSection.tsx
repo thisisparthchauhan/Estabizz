@@ -66,8 +66,8 @@ export default function HeroSection() {
 
                     {/* Top Badge */}
                     <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-4 py-2 border border-blue-200 shadow-sm mb-6 rounded-full w-fit animate-[fadeDown_0.5s_ease_forwards]">
-                        <span className="text-[14px]">🏆</span>
-                        <span className="text-[#0096D6] text-[13px] font-bold tracking-wide">India's #1 Fintech Compliance Platform</span>
+                        <span className="text-[14px]">◆</span>
+                        <span className="text-[#0096D6] text-[13px] font-bold tracking-wide">India&apos;s #1 Fintech Compliance Platform</span>
                     </div>
 
                     {/* H1 Headline */}
@@ -77,24 +77,27 @@ export default function HeroSection() {
           `}} />
 
                     {/* Subtagline / Tagline combined logic */}
-                    <div className="text-[#0077B6] font-bold text-[18px] md:text-[22px] italic mb-6 opacity-0 animate-[fadeUp_0.6s_ease_0.2s_forwards]">
-                        "We Comply. We Simplify."
+                    <div className="text-[#0077B6] font-bold text-[18px] md:text-[22px] mb-6 opacity-0 animate-[fadeUp_0.6s_ease_0.2s_forwards]">
+                        We Secure Your Licence. You Secure Your Future.
                     </div>
 
                     {/* Description */}
                     <div className="max-w-[640px] w-full space-y-4 mb-8 opacity-0 animate-[fadeUp_0.6s_ease_0.3s_forwards]">
                         <p className="text-[15px] text-[#475569] font-medium leading-relaxed">
-                            Expert regulatory guidance for IFSCA, RBI, SEBI, and IRDA licenses and other government licenses. We handle your compliance end-to-end so you can focus on building your business.
+                            Expert regulatory guidance for RBI, SEBI, IRDAI, IFSCA and allied government licences. Estabizz manages your licensing, documentation and compliance lifecycle end-to-end, so you can focus on building and scaling your business with confidence.
                         </p>
                         <p className="text-[15px] text-[#475569] font-medium leading-relaxed">
-                            Regulatory approvals are not just documents—they are the foundation of your dream. We manage your IFSCA, RBI, SEBI, IRDAI and government licensing end-to-end, so you can build boldly and grow without fear.
+                            Regulatory approvals are not just documents — they are the foundation of your business vision. We help you approach every licensing and compliance requirement with structure, clarity and accountability.
+                        </p>
+                        <p className="text-[14px] text-[#0077B6] font-bold leading-relaxed">
+                            We Comply. We Simplify.
                         </p>
                     </div>
 
                     {/* Stats Row */}
                     <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-10 opacity-0 animate-[fadeUp_0.6s_ease_0.4s_forwards]">
                         <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
-                            <span className="w-2 h-2 rounded-full bg-[#10b981]"></span> {isMounted ? <StatCount end={500} suffix="+" /> : "500+"} Licenses Obtained
+                            <span className="w-2 h-2 rounded-full bg-[#10b981]"></span> {isMounted ? <StatCount end={500} suffix="+" /> : "500+"} Licences Obtained
                         </div>
                         <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
                             <span className="w-2 h-2 rounded-full bg-[#0096D6]"></span> {isMounted ? <StatCount end={1000} suffix="+" /> : "1000+"} Businesses Served
@@ -102,22 +105,28 @@ export default function HeroSection() {
                         <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
                             <span className="w-2 h-2 rounded-full bg-[#F59E0B]"></span> Pan India Services
                         </div>
+                        <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
+                            <span className="w-2 h-2 rounded-full bg-[#0a1628]"></span> {isMounted ? <StatCount end={100} suffix="+" /> : "100+"} Associate Professionals
+                        </div>
                     </div>
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 mb-4 w-full sm:w-auto opacity-0 animate-[fadeUp_0.6s_ease_0.5s_forwards]">
-                        <a href="/signup" className="get-started-btn relative overflow-hidden w-full sm:w-auto bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-[0_8px_25px_rgba(0,150,220,0.3)] hover:shadow-[0_8px_30px_rgba(0,150,220,0.4)] hover:-translate-y-1 transition-all duration-300 group inline-flex items-center justify-center">
-                            <span className="relative z-10 flex items-center justify-center gap-2">Get Started Free <span className="group-hover:translate-x-1 transition-transform">→</span></span>
+                        <a href="/contact" className="get-started-btn relative overflow-hidden w-full sm:w-auto bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-[0_8px_25px_rgba(0,150,220,0.3)] hover:shadow-[0_8px_30px_rgba(0,150,220,0.4)] hover:-translate-y-1 transition-all duration-300 group inline-flex items-center justify-center">
+                            <span className="relative z-10 flex items-center justify-center gap-2">Get Free Consultation <span className="group-hover:translate-x-1 transition-transform">→</span></span>
                         </a>
 
-                        <button className="w-full sm:w-auto bg-white/90 backdrop-blur-md border-2 border-[#0096D6] text-[#0096D6] font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-sm hover:bg-blue-50 transition-all duration-300">
-                            Book a Free Consultation
-                        </button>
+                        <a href="/regulatory" className="w-full sm:w-auto bg-white/90 backdrop-blur-md border-2 border-[#0096D6] text-[#0096D6] font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-sm hover:bg-blue-50 transition-all duration-300 text-center">
+                            Explore Regulatory Services
+                        </a>
+                        <a href="https://wa.me/919825600907" className="w-full sm:w-auto bg-[#10b981] text-white font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-sm hover:bg-[#059669] transition-all duration-300 text-center">
+                            WhatsApp Estabizz Team
+                        </a>
                     </div>
 
                     {/* Trust Line */}
                     <div className="text-[12px] text-[#64748b] font-medium text-center lg:text-left opacity-0 animate-[fadeUp_0.6s_ease_0.6s_forwards]">
-                        No credit card required · Free consultation · Get queries solved in 24 hours
+                        No credit card required • Free consultation • Get your queries reviewed within 24 hours
                     </div>
 
                 </div>
@@ -132,8 +141,8 @@ export default function HeroSection() {
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-[18px] text-[#0096D6]">📊</div>
                                 <div>
-                                    <h3 className="font-bold text-[#0a1628] text-[15px] leading-tight">Regulatory Status</h3>
-                                    <span className="text-[11px] text-gray-500 font-medium">Estabizz Network</span>
+                                    <h3 className="font-bold text-[#0a1628] text-[15px] leading-tight">Compliance Readiness</h3>
+                                    <span className="text-[11px] text-gray-500 font-medium">Estabizz Compliance Hub</span>
                                 </div>
                             </div>
 
@@ -145,19 +154,19 @@ export default function HeroSection() {
                         </div>
 
                         {/* Animated Progress Bars */}
-                        <ProgressBar label="SEBI Licensing Applications" targetProgress={88} color="#0096D6" />
-                        <ProgressBar label="RBI Compliance Filings" targetProgress={64} color="#0077B6" />
-                        <ProgressBar label="IFSCA Active Frameworks" targetProgress={92} color="#10b981" />
+                        <ProgressBar label="Documentation Readiness" targetProgress={88} color="#0096D6" />
+                        <ProgressBar label="Compliance Calendar Mapping" targetProgress={74} color="#0077B6" />
+                        <ProgressBar label="Policy Framework Coverage" targetProgress={92} color="#10b981" />
 
                         {/* Micro Stats */}
                         <div className="grid grid-cols-2 gap-3 mt-8">
                             <div className="bg-[#f8faff] rounded-xl p-3 border border-blue-50/50">
-                                <div className="text-[20px] font-black text-[#0096D6] mb-1">{isMounted ? <StatCount end={12} suffix="h" duration={1000} /> : "12h"}</div>
-                                <div className="text-[11px] font-semibold text-gray-500">Query Resolution</div>
+                                <div className="text-[20px] font-black text-[#0096D6] mb-1">{isMounted ? <StatCount end={24} suffix="h" duration={1000} /> : "24h"}</div>
+                                <div className="text-[11px] font-semibold text-gray-500">Query Review</div>
                             </div>
                             <div className="bg-[#f8faff] rounded-xl p-3 border border-blue-50/50">
-                                <div className="text-[20px] font-black text-[#10b981] mb-1">{isMounted ? <StatCount end={98} suffix="%" duration={1500} /> : "98%"}</div>
-                                <div className="text-[11px] font-semibold text-gray-500">Approval Rate</div>
+                                <div className="text-[20px] font-black text-[#10b981] mb-1">{isMounted ? <StatCount end={100} suffix="+" duration={1500} /> : "100+"}</div>
+                                <div className="text-[11px] font-semibold text-gray-500">Professionals</div>
                             </div>
                         </div>
 
@@ -178,10 +187,10 @@ export default function HeroSection() {
                 <div className="flex whitespace-nowrap animate-marquee-ticker group">
                     {[1, 2, 3, 4, 5, 6].map((_, idx) => (
                         <div key={idx} className="flex items-center gap-8 px-6 text-[13px] font-bold text-white tracking-wide mix-blend-overlay opacity-90">
-                            <span className="flex items-center gap-1.5"><span className="text-[#10b981] bg-white rounded-full w-[14px] h-[14px] flex items-center justify-center leading-none text-[10px]">✓</span> NBFC Compliant</span>
-                            <span className="flex items-center gap-1.5"><span className="text-[#10b981] bg-white rounded-full w-[14px] h-[14px] flex items-center justify-center leading-none text-[10px]">✓</span> SEBI AIF Process Complete</span>
-                            <span className="flex items-center gap-1.5"><span className="text-[#10b981] bg-white rounded-full w-[14px] h-[14px] flex items-center justify-center leading-none text-[10px]">✓</span> IRDAI Broker License Granted</span>
-                            <span className="flex items-center gap-1.5"><span className="text-[#10b981] bg-white rounded-full w-[14px] h-[14px] flex items-center justify-center leading-none text-[10px]">✓</span> IFSCA FME Active</span>
+                            <span className="flex items-center gap-1.5"><span className="text-[#10b981] bg-white rounded-full w-[14px] h-[14px] flex items-center justify-center leading-none text-[10px]">✓</span> RBI Licensing Support</span>
+                            <span className="flex items-center gap-1.5"><span className="text-[#10b981] bg-white rounded-full w-[14px] h-[14px] flex items-center justify-center leading-none text-[10px]">✓</span> SEBI Registration Advisory</span>
+                            <span className="flex items-center gap-1.5"><span className="text-[#10b981] bg-white rounded-full w-[14px] h-[14px] flex items-center justify-center leading-none text-[10px]">✓</span> IRDAI Compliance Readiness</span>
+                            <span className="flex items-center gap-1.5"><span className="text-[#10b981] bg-white rounded-full w-[14px] h-[14px] flex items-center justify-center leading-none text-[10px]">✓</span> IFSCA & GIFT City Structuring</span>
                         </div>
                     ))}
                 </div>

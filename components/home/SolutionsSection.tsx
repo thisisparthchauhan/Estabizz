@@ -7,7 +7,7 @@ const solutions = [
         icon: "🚀",
         title: "For Startups & New Businesses",
         subtitle: "Build Right. From Day One.",
-        body: "Incorporate your company, obtain GST registration, open banking channels, and establish a fully compliant foundation. We ensure your business begins its journey legally strong and future-ready.",
+        body: "Incorporate your company, obtain GST registration, open banking channels and establish a compliant foundation before you scale.",
         tags: ["Private Limited", "LLP", "OPC", "Section 8"],
         href: "/services"
     },
@@ -16,7 +16,7 @@ const solutions = [
         icon: "🏦",
         title: "For NBFCs & Lending Businesses",
         subtitle: "Regulated Lending. Managed with Precision.",
-        body: "Secure your NBFC licence, get your post-registration done, implement RBI-compliant frameworks, and manage returns, audits, and regulatory reporting seamlessly. We safeguard your lending operations with structured compliance oversight.",
+        body: "Secure your NBFC licence, complete post-registration readiness, implement RBI-compliant policies and manage returns, audits and regulatory reporting.",
         tags: ["RBI Licensing", "NBFC Compliance", "DNBS Reporting", "Regulatory Audits"],
         href: "/rbi"
     },
@@ -25,7 +25,7 @@ const solutions = [
         icon: "💳",
         title: "For Fintech Platforms",
         subtitle: "Compliance Architecture for Digital Finance.",
-        body: "From payment aggregator, PSP Registration or FME registrations, we design and manage your complete regulatory ecosystem. Operate with confidence in a fully governed fintech environment.",
+        body: "From Payment Aggregator and PPI to PSP, Account Aggregator and IFSCA permissions, we help design your regulatory ecosystem with clarity.",
         tags: ["PA Licence", "PSP Registration", "FME Approval", "IFSCA Support"],
         href: "/ifsca"
     },
@@ -34,9 +34,27 @@ const solutions = [
         icon: "📊",
         title: "For SMEs & Growing Enterprises",
         subtitle: "Structured Compliance. Sustainable Growth.",
-        body: "Comprehensive audit, taxation, ROC filings, and secretarial compliance—delivered with discipline and accountability. We streamline governance so you can scale without uncertainty.",
+        body: "Audit, taxation, ROC filings, secretarial compliance and governance support delivered with discipline and accountability.",
         tags: ["Audit", "ROC Filings", "Tax Advisory", "Compliance Management"],
         href: "/services/enterprise-services"
+    },
+    {
+        num: "05",
+        icon: "📈",
+        title: "For Capital Market Businesses",
+        subtitle: "SEBI Registration. Regulator-Ready Execution.",
+        body: "Support for AIF, PMS, RIA, Research Analyst, Stock Broker, Merchant Banker, RTA and capital market compliance.",
+        tags: ["AIF", "PMS", "RIA", "RA", "Stock Broker", "RTA"],
+        href: "/sebi"
+    },
+    {
+        num: "06",
+        icon: "🛡️",
+        title: "For Insurance & Risk Management Entities",
+        subtitle: "IRDAI Licensing. Built on Governance.",
+        body: "Support for insurance broker, corporate agent, IMF, ISNP, reinsurance broker and insurance intermediary compliance.",
+        tags: ["Broker", "Corporate Agent", "IMF", "ISNP", "Reinsurance"],
+        href: "/irdai"
     }
 ];
 
@@ -65,17 +83,17 @@ export default function SolutionsSection() {
                 {/* Header Content */}
                 <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                     <div className="text-[14px] font-bold text-[#0096D6] uppercase tracking-widest mb-4">
-                        Powering Seamless Compliance Across Every Stage of Business.
+                        Powering Seamless Compliance Across Every Stage of Business
                     </div>
                     <h2 className="text-[32px] md:text-[40px] font-black text-[#0a1628] leading-[1.2] mb-6 tracking-tight">
-                        Solutions Designed Around Your Business Stage.
+                        Powering Seamless Compliance Across Every Stage of Business
                     </h2>
                     <p className="text-[16px] text-[#475569] leading-relaxed font-medium">
-                        Whether you're a startup, insurance broker, NBFC, stockbroker, payment solution provider, or enterprise—we have the right compliance solution for you.
+                        Whether you are a startup, insurance broker, NBFC, stockbroker, payment solution provider or enterprise, Estabizz offers structured compliance support designed around your business reality.
                     </p>
                 </div>
 
-                {/* 4 Solution Cards */}
+                {/* Business stage cards */}
                 <div className="flex flex-col gap-6">
                     {solutions.map((sol, index) => {
                         const isFeatured = index === 1; // 2nd card (NBFCs)

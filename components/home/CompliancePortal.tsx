@@ -3,13 +3,13 @@ import React, { useEffect, useRef, useState } from "react";
 
 const checklistItems = [
     "Create your secure compliance account",
-    "Track all regulatory licenses and application status",
+    "Track all regulatory licences and application status",
     "Upload and manage documents digitally",
     "Receive real-time compliance alerts & reminders",
     "Access ready-to-use regulatory policy templates",
     "Apply for new registrations seamlessly",
     "Monitor your compliance calendar",
-    "Explore 100+ FAQs and regulatory guidance notes",
+    "Explore regulatory FAQs and guidance notes",
     "Manage intermediary compliance (NBFC, AIF, Broker, PA, RIA, FME, etc.)",
     "Avail exclusive registration support and structured execution"
 ];
@@ -24,7 +24,7 @@ const featureBlocks = [
     {
         icon: "🔒",
         title: "Secure Document Vault",
-        desc: "Encrypted storage for statutory documents, policies, licenses, and regulatory submissions — accessible anytime.",
+        desc: "Encrypted storage for statutory documents, policies, licences and regulatory submissions.",
         color: "#10b981"
     },
     {
@@ -48,7 +48,7 @@ const featureBlocks = [
     {
         icon: "📋",
         title: "Guided Application Management",
-        desc: "Apply for new licenses and registrations with structured documentation guidance and expert review support.",
+        desc: "Apply for new licences and registrations with structured documentation guidance and expert review support.",
         color: "#0077B6"
     }
 ];
@@ -89,7 +89,7 @@ export default function CompliancePortal() {
                         </div>
 
                         <p className="text-[15px] text-[#475569] leading-relaxed font-medium mb-10">
-                            Manage your entire compliance lifecycle through a secure, structured, and regulator-ready digital platform. From license tracking and document uploads to policy frameworks and compliance alerts — everything your business needs, in one place.
+                            Manage your compliance lifecycle through a secure, structured and regulator-ready digital platform. From licence tracking and document uploads to policy frameworks and compliance alerts, the Estabizz Compliance Hub brings everything your business needs into one place.
                         </p>
 
                         <div className="bg-[#f8faff] rounded-[20px] p-8 border border-[rgba(0,150,220,0.1)] shadow-inner">
@@ -142,15 +142,15 @@ export default function CompliancePortal() {
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4">
                             <a href="/contact" className="flex-1 text-center bg-gradient-to-r from-[#10b981] to-[#059669] text-white font-bold text-[14px] rounded-[12px] px-6 py-4 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(16,185,129,0.4)] transition-all duration-300">
-                                Launch Your Compliance Dashboard →
+                                Launch Your Compliance Dashboard
                             </a>
                             <a href="/contact" className="flex-1 text-center bg-white/10 border border-white/20 text-white font-bold text-[14px] rounded-[12px] px-6 py-4 hover:bg-white/20 transition-all duration-300">
-                                Create Your Account →
+                                Create Your Account
                             </a>
                         </div>
 
                         <p className="text-white/40 text-[12px] text-center mt-6 italic">
-                            Compliance is no longer fragmented. It is structured, monitored, and controlled — from a single secure platform.
+                            Compliance is no longer fragmented. It is structured, monitored and controlled from a single secure platform.
                         </p>
                     </div>
                 </div>

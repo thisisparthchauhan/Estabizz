@@ -6,29 +6,29 @@ const caseStudies = [
         regulator: "🏛️ RBI",
         color: "#0096D6", // Match Fix 10 exact color 
         title: "NBFC Registration – From Doubt to Discipline",
-        body: "When the founders approached us, they were unsure whether their business model and capital structure would even qualify for RBI approval. We began with clarity — restructuring documentation, refining the business plan, strengthening policy frameworks, and preparing them for every regulatory query. With structured preparation and continuous follow-up, the NBFC licence was secured within 4 months and 20 days. More than the approval, what mattered was the confidence restored along the way.",
-        highlight: "⏱️ Secured in 4 months 20 days"
+        body: "The founders were unsure whether their business model and capital structure would qualify for RBI approval. We helped restructure documentation, refine the business plan, strengthen policy frameworks and prepare for regulatory queries. With structured preparation and continuous follow-up, the NBFC licence was secured within 4 months and 20 days, subject to regulatory process and application facts.",
+        highlight: "Indicative result: 4 months 20 days"
     },
     {
         regulator: "📊 SEBI",
         color: "#7C3AED", // Match Fix 10 exact purple
         title: "SEBI Registration – Structuring a Capital Market Vision",
-        body: "An emerging investment firm approached us with ambition but limited regulatory understanding. We redesigned their operational framework, aligned their net-worth compliance, drafted required policies, and prepared them for SEBI scrutiny with precision. The registration was secured smoothly — with zero adverse observations — and a compliance system ready from day one.",
-        highlight: "✅ Zero adverse observations"
+        body: "An emerging investment firm approached us with ambition but limited regulatory clarity. We aligned net worth compliance, redesigned the operational framework, drafted required policies and prepared the application for SEBI scrutiny. The registration process was completed with a compliance system ready from day one.",
+        highlight: "Compliance system ready from day one"
     },
     {
         regulator: "🛡️ IRDAI",
         color: "#10b981", // Match Fix 10 exact green
         title: "IRDAI Licensing – Building from Foundation Up",
-        body: "The promoters had strong insurance domain experience but were unfamiliar with regulatory documentation and capital structuring norms. We guided them step-by-step — from principal officer eligibility to infrastructure readiness and regulatory submissions. The licence was granted within the expected regulatory cycle, supported by a compliance framework built for long-term sustainability.",
-        highlight: "🏗️ Built for long-term sustainability"
+        body: "The promoters had strong insurance domain experience but required guidance on regulatory documentation and capital structuring. We supported them through principal officer eligibility, infrastructure readiness, documentation and regulatory submission.",
+        highlight: "Built on governance readiness"
     },
     {
         regulator: "🌐 IFSCA",
         color: "#F59E0B", // Match Fix 10 exact orange
         title: "IFSCA Registration – Entering the IFSC Ecosystem",
-        body: "Setting up within GIFT City requires structured planning and regulatory clarity. We supported the entity with proper office space, application drafting, governance design, and regulator-facing communication aligned with IFSCA expectations. The approval was secured with disciplined coordination, enabling the firm to commence international operations confidently.",
-        highlight: "🌐 International operations launched"
+        body: "Setting up within GIFT City requires structured planning and regulatory clarity. We supported the entity with office planning, application drafting, governance design and regulator-facing communication aligned with IFSCA expectations.",
+        highlight: "IFSC entry structured professionally"
     }
 ];
 
@@ -56,13 +56,13 @@ export default function CaseStudies() {
         
         <div className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-[32px] md:text-[40px] font-black text-[#0a1628] leading-[1.2] mb-4 tracking-tight">
-            In the News
+            Regulatory Experience. Real Outcomes.
           </h2>
           <div className="text-[18px] font-bold text-[#0096D6] mb-6">
-            Regulatory Experience. Real Outcomes.
+            Representative engagements, shared without confidential client details.
           </div>
           <p className="text-[15px] text-[#475569] leading-relaxed font-medium">
-            Behind every approval is a journey of uncertainty, discipline, and structured execution. Here are a few representative engagements — shared without names, but with pride.
+            Behind every approval is a journey of uncertainty, discipline and structured execution. Here are a few representative engagements shared without confidential client details.
           </p>
         </div>
 
@@ -116,8 +116,8 @@ export default function CaseStudies() {
         </div>
 
         <div className={`text-center font-bold text-[18px] italic text-[#0077B6] transition-all duration-700 delay-500 ease-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          "Regulatory approvals are not secured by chance.<br/>
-          They are earned through structure, patience, and accountability."
+          Regulatory approvals are not secured by chance.<br/>
+          They are earned through structure, patience and accountability.
         </div>
 
       </div >

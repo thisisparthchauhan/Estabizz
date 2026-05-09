@@ -4,11 +4,11 @@ import React, { useEffect, useRef, useState } from "react";
 const pillars = [
     {
         title: "Regulatory Expertise",
-        body: "Qualified CAs, CSs and legal professionals with hands-on experience across RBI, SEBI, IRDAI, IFSCA and MCA frameworks. We understand the regulator's language — not just the form."
+        body: "Qualified CAs, CSs, lawyers and regulatory professionals with hands-on experience across RBI, SEBI, IRDAI, IFSCA and MCA frameworks. We understand the regulator's language — not just the form."
     },
     {
         title: "Regulator-Ready Documentation",
-        body: "Approvals move faster when documentation is precise. Every application is structured, reviewed, and submitted with regulatory discipline."
+        body: "Approvals move better when documentation is precise. Every application is structured, reviewed and prepared with regulatory discipline."
     },
     {
         title: "Complete Ownership",
@@ -16,7 +16,7 @@ const pillars = [
     },
     {
         title: "Transparent Commitments",
-        body: "Clear fee structure. Defined timelines. Structured communication. Because compliance should never begin with uncertainty."
+        body: "Clear fee structure, defined scope, realistic timelines and structured communication. Compliance should never begin with uncertainty."
     }
 ];
 
@@ -46,23 +46,21 @@ export default function WhyChooseUs() {
                 {/* Left Side Content */}
                 <div className={`transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
                     <h2 className="text-[32px] md:text-[40px] font-black text-[#0a1628] leading-[1.2] tracking-tight mb-4">
-                        Built on Trust. Driven by Accountability
+                        Built on Trust. Driven by Accountability.
                     </h2>
                     <div className="text-[18px] md:text-[20px] font-bold text-[#0096D6] italic mb-8">
-                        Because compliance is not a product — it is a responsibility.
+                            Compliance is not a product — it is a responsibility.
                     </div>
 
                     <div className="space-y-5">
                         <p className="text-[15px] md:text-[16px] text-[#475569] leading-[1.8] font-medium">
-                            We do not believe in transactional advisory. We believe in standing beside our clients during every regulatory milestone, every approval process, and every compliance cycle. Whether you are facing operational bottlenecks, regulatory queries, or new license requirements — we provide practical, end-to-end solutions designed around your business reality.
+                            We do not believe in transactional advisory. We stand beside our clients during every regulatory milestone, approval process and compliance cycle.
                         </p>
                         <p className="text-[15px] md:text-[16px] text-[#475569] leading-[1.8] font-medium">
-                            Strategic compliance requires more than documentation — it requires ownership. We partner with businesses to direct regulatory frameworks with clarity and discipline. From registration to long-term compliance management, we design structured, regulator-ready solutions that protect your enterprise and strengthen its foundation.
+                            Strategic compliance requires more than documentation. It requires ownership, clarity and execution discipline. From registration to long-term compliance management, Estabizz designs regulator-ready solutions that protect your enterprise and strengthen its foundation.
                         </p>
                         <p className="text-[18px] font-semibold text-[#0096D6] italic pt-2">
-                            We do not just guide.<br />
-                            Your challenges become our commitment.<br />
-                            We execute. We safeguard. We support.
+                            We do not just guide. We execute. We safeguard. We support.
                         </p>
                     </div>
                 </div>

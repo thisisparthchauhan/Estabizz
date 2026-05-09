@@ -3,35 +3,42 @@ import React from "react";
 import Link from "next/link";
 
 const footerLinks: Record<string, { label: string; href: string }[]> = {
+    "About": [
+        { label: "About Estabizz", href: "/services" },
+        { label: "Estabizz Blogs", href: "/blogs" },
+        { label: "Contact Us", href: "/contact" },
+    ],
     "Regulatory Expertise": [
         { label: "RBI Licensing & Compliance", href: "/rbi" },
         { label: "SEBI Registrations", href: "/sebi" },
         { label: "IRDAI Licensing", href: "/irdai" },
         { label: "IFSCA & GIFT City", href: "/ifsca" },
         { label: "FIU & AML Frameworks", href: "/fema" },
-        { label: "NBFC Compliance", href: "/rbi/nbfc-account-aggregator-license" },
+        { label: "NBFC Compliance", href: "/rbi/nbfc-legal-support" },
         { label: "AIF & PMS Compliance", href: "/sebi/aif-compliance-test-report" },
     ],
-    "Corporate & Sectoral": [
+    "Corporate & Sectoral Services": [
         { label: "Company Incorporation", href: "/services/enterprise-services" },
         { label: "Annual ROC Compliance", href: "/services/enterprise-services" },
         { label: "Tax & Audit", href: "/services/enterprise-services" },
-        { label: "Sectoral Licenses (FSSAI, Drug, Factory, BIS)", href: "/services" },
-        { label: "IPR & Trademark", href: "/services" },
+        { label: "Sectoral Licences", href: "/services" },
+        { label: "IPR & Trademark", href: "/services/trademark-search" },
     ],
     "Compliance Portal": [
-        { label: "Estabizz Compliance Hub", href: "/contact" },
-        { label: "Regulatory Dashboard", href: "/contact" },
-        { label: "License Tracker", href: "/contact" },
-        { label: "Document Vault", href: "/contact" },
-        { label: "Policy Library", href: "/contact" },
-        { label: "Compliance Calendar", href: "/contact" },
+        { label: "Estabizz Compliance Hub", href: "/login" },
+        { label: "Regulatory Dashboard", href: "/login" },
+        { label: "Licence Tracker", href: "/login" },
+        { label: "Document Vault", href: "/login" },
+        { label: "Policy Library", href: "/login" },
+        { label: "Compliance Calendar", href: "/login" },
     ],
     "Knowledge & Resources": [
-        { label: "Regulatory Updates", href: "/#" },
-        { label: "Case Highlights", href: "/#" },
-        { label: "FAQs", href: "/#" },
-        { label: "Guides & Insights", href: "/#" },
+        { label: "Regulatory Updates", href: "/resources/regulatory-updates" },
+        { label: "Content Framework", href: "/resources/service-page-content-framework" },
+        { label: "Proposal Templates", href: "/proposal-template" },
+        { label: "Case Highlights", href: "/" },
+        { label: "FAQs", href: "/resources/faqs" },
+        { label: "Guides & Insights", href: "/resources" },
     ],
     "Legal & Transparency": [
         { label: "Privacy Policy", href: "/legal/privacy-policy" },
@@ -63,9 +70,12 @@ export default function Footer() {
                             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0096D6] to-[#00B4E0] text-white flex items-center justify-center font-bold text-lg">E</div>
                             <span className="font-extrabold text-white text-xl tracking-tight">Estabizz Fintech</span>
                         </div>
-                        <p className="text-[13px] text-[#0096D6] font-bold italic mb-4">We Comply. We Simplify.</p>
+                        <p className="text-[13px] text-[#0096D6] font-bold mb-4">We Comply. We Simplify.</p>
                         <p className="text-[12px] text-gray-400 leading-relaxed mb-5 max-w-[300px]">
-                            Estabizz Fintech Private Limited — Structured regulatory advisory and compliance infrastructure partner supporting businesses across RBI, SEBI, IRDAI, IFSCA and allied frameworks.
+                            Estabizz Fintech Private Limited. Structured regulatory advisory and compliance infrastructure partner supporting businesses across RBI, SEBI, IRDAI, IFSCA and allied frameworks.
+                        </p>
+                        <p className="text-[11px] text-gray-500 leading-relaxed mb-5 max-w-[300px]">
+                            Estabizz Fintech Private Limited is a professional regulatory advisory firm. We do not represent or act on behalf of any government authority or regulator.
                         </p>
 
                         {/* Contact Info */}
@@ -104,7 +114,7 @@ export default function Footer() {
                     </div>
 
                     {/* Link Columns - spread across remaining 9 cols */}
-                    <div className="lg:col-span-9 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8">
+                    <div className="lg:col-span-9 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-8">
                         {Object.entries(footerLinks).map(([title, links]) => (
                             <div key={title}>
                                 <h4 className="text-[11px] font-bold text-white uppercase tracking-[0.08em] mb-4">{title}</h4>
@@ -131,13 +141,13 @@ export default function Footer() {
                 {/* Disclaimer */}
                 <div className="mb-6 p-4 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] rounded-lg">
                     <p className="text-[11px] text-gray-500 leading-relaxed">
-                        <strong className="text-gray-400">Disclaimer:</strong> Estabizz Fintech Private Limited operates as an independent regulatory advisory and compliance support organisation. We neither represent nor act for any statutory or regulatory authority. The issuance of any license, registration, or approval is solely within the jurisdiction and discretion of the concerned regulator and contingent upon satisfaction of prescribed eligibility and compliance conditions. The company does not commit to guaranteed approvals or defined timelines. Our services are advisory and documentation-based in nature, aimed at facilitating regulatory preparedness and structured compliance.
+                        <strong className="text-gray-400">Disclaimer:</strong> Estabizz Fintech Private Limited operates as an independent regulatory advisory and compliance support organisation. We neither represent nor act for any statutory or regulatory authority. The issuance of any licence, registration or approval is solely within the jurisdiction and discretion of the concerned regulator and is contingent upon satisfaction of prescribed eligibility and compliance conditions. The company does not commit to guaranteed approvals or defined timelines. Our services are advisory and documentation-based in nature, aimed at facilitating regulatory preparedness and structured compliance.
                     </p>
                 </div>
 
                 {/* Bottom Bar */}
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] text-gray-500">
-                    <p>&copy; 2014–2025 Estabizz Fintech Pvt. Ltd. All rights reserved. This is a structured compliance institution.</p>
+                    <p>&copy; 2026 Estabizz Fintech Private Limited. All rights reserved.</p>
                     <div className="flex flex-wrap gap-5">
                         <Link href="/legal/privacy-policy" className="hover:text-gray-300 transition-colors">Privacy Policy</Link>
                         <Link href="/legal/terms-conditions" className="hover:text-gray-300 transition-colors">Terms of Service</Link>

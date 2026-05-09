@@ -36,7 +36,7 @@ export default function FinalCTA() {
                     </h2>
 
                     <p className="text-[16px] md:text-[18px] text-[#94a3b8] leading-relaxed font-medium mb-10 max-w-2xl mx-auto">
-                        Regulatory approvals demand preparation, clarity, and disciplined execution. We guide you through every stage — from assessment to approval and beyond.
+                        Regulatory approvals demand preparation, clarity and disciplined execution. Estabizz guides you through every stage — from assessment to approval and beyond.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
@@ -50,6 +50,9 @@ export default function FinalCTA() {
                         <a href="tel:+919825600907" className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white/20 text-white font-bold text-[16px] rounded-[14px] px-8 py-[18px] hover:bg-white/10 hover:border-white/40 transition-all duration-300">
                             <span className="text-[20px]">📞</span> +91 98256 00907
                         </a>
+                        <a href="https://wa.me/919825600907" className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white/10 border-2 border-white/20 text-white font-bold text-[16px] rounded-[14px] px-8 py-[18px] hover:bg-white/20 hover:border-white/40 transition-all duration-300">
+                            WhatsApp Estabizz
+                        </a>
                     </div>
 
                     <div className="mt-10 text-[15px] text-white/70 font-semibold italic text-center">
@@ -57,7 +60,7 @@ export default function FinalCTA() {
                     </div>
 
                     <div className="mt-6 text-[12px] text-[#94a3b8] font-medium text-center">
-                        Trusted by regulated businesses across India and global financial centres.
+                        Regulatory strength begins with the right advisory partner.
                     </div>
                 </div>
 

@@ -55,6 +55,7 @@ const linkMap: Record<string, string> = {
     "Prepaid Payment Instrument": "/rbi/ppi-registration-in-india",
     // SEBI
     "Stock Broker License": "/sebi/stock-broker-registration-in-india",
+    "Stock Broker Licence": "/sebi/stock-broker-registration-in-india",
     "Stock Broker Registration in India": "/sebi/stock-broker-registration-in-india",
     "SEBI Stock Broker Registration": "/sebi/stock-broker-registration-in-india",
     "Stock Broker Licence India": "/sebi/stock-broker-registration-in-india",
@@ -128,9 +129,11 @@ const linkMap: Record<string, string> = {
     "Web Aggregator": "/irdai/insurance-marketing-firm-license",
     "Insurance Surveyor": "/irdai/insurance-repository-registration",
     "TPA License": "/irdai/isnp-registration",
+    "TPA Licence": "/irdai/isnp-registration",
     "Micro Insurance": "/irdai/ifsca-insurance-intermediary",
     // Fintech
     "Prepaid Instrument License": "/rbi/ppi-registration-in-india",
+    "Prepaid Instrument Licence": "/rbi/ppi-registration-in-india",
     "BBPS Agent Registration": "/rbi/lendtech-services",
     "UPI Third Party App": "/rbi/rbi-services",
     "Digital Lending Compliance": "/rbi/lendtech-services",
@@ -176,14 +179,58 @@ const linkMap: Record<string, string> = {
     "ESG Compliance": "/services/esg-consulting",
     // Startup
     "GST Registration": "/services/gst-appeal-services",
+    "Trademark Search": "/services/trademark-search",
+    "Tax & Audit": "/services/finance-accounting-outsourcing",
+    "Document Vault": "/login",
+    "Policy Library": "/login",
     // Other regulators
     "PFRDA Registration": "/services/enterprise-services",
     "NHB Registration": "/services/enterprise-services",
     "CERSAI Registration": "/services/enterprise-services",
     "DGFT IE Code": "/fema/fema-registration",
+    "FIU-IND Registration": "/services/enterprise-services",
+    "PMLA Compliance Advisory": "/services/legal-due-diligence",
+    "AML Policy Drafting": "/services/enterprise-services",
+    "AML Risk Assessment": "/services/legal-due-diligence",
+    "CKYC Registration & Reporting": "/services/enterprise-services",
+    "MCA / ROC Compliance": "/services/enterprise-services",
+    "Company Incorporation": "/services/enterprise-services",
+    "Annual ROC Compliance": "/services/enterprise-services",
+    "Corporate Governance": "/services/enterprise-services",
+    "Post-Registration Compliance": "/services",
+    "Sectoral Licences": "/services",
+    "FSSAI Licence": "/services/enterprise-services",
+    "APEDA Registration": "/services/enterprise-services",
+    "AYUSH Licence": "/services/enterprise-services",
+    "Factory Licence": "/services/enterprise-services",
+    "Drug Licence": "/services/enterprise-services",
+    "BIS Certification": "/services/enterprise-services",
+    "Compliance Calendar": "/resources/compliance-calendar",
+    "Regulatory Updates": "/resources/regulatory-updates",
+    "Circular Tracker": "/resources/circular-explainers",
+    "Circular Explainers": "/resources/circular-explainers",
+    "Regulatory Email Templates": "/resources/regulatory-update-email-template",
+    "Content Rebuild Command": "/resources/content-rebuild-command",
+    "Service Page Content Framework": "/resources/service-page-content-framework",
+    "Proposal Templates": "/proposal-template",
+    "Proposal Template": "/proposal-template",
+    "FAQ Engine": "/resources/faqs",
+    "Compliance FAQs": "/resources/faqs",
+    "Guides & Insights": "/resources",
+    "Case Highlights": "/",
+    "FAQs": "/services",
+    "Blogs": "/blogs",
     // Hidden pages — now accessible
     "Mutual Fund Registration": "/sebi/mutual-fund-registration",
-    "Social Stock Exchange": "/sebi/social-stock-exchange-license",
+    "Social Stock Exchange": "/sebi/social-stock-exchange-license-india",
+    "Social Stock Exchange License": "/sebi/social-stock-exchange-license-india",
+    "Social Stock Exchange License in India": "/sebi/social-stock-exchange-license-india",
+    "SEBI Social Stock Exchange": "/sebi/social-stock-exchange-license-india",
+    "SSE Registration": "/sebi/social-stock-exchange-license-india",
+    "NPO Social Stock Exchange": "/sebi/social-stock-exchange-license-india",
+    "FPE Social Stock Exchange": "/sebi/social-stock-exchange-license-india",
+    "Zero Coupon Zero Principal Instruments": "/sebi/social-stock-exchange-license-india",
+    "ZCZP Instruments": "/sebi/social-stock-exchange-license-india",
     "Underwriter Registration": "/sebi/underwriter-registration",
 };
 
@@ -191,6 +238,13 @@ const staticSearchLinks = [
     { label: "Home", href: "/", group: "Site" },
     { label: "All Services", href: "/services", group: "Site" },
     { label: "Regulatory Services", href: "/regulatory", group: "Site" },
+    { label: "Resources", href: "/resources", group: "Site" },
+    { label: "Regulatory Updates", href: "/resources/regulatory-updates", group: "Resources" },
+    { label: "Compliance FAQs", href: "/resources/faqs", group: "Resources" },
+    { label: "Regulatory Email Template", href: "/resources/regulatory-update-email-template", group: "Resources" },
+    { label: "Content Rebuild Command", href: "/resources/content-rebuild-command", group: "Resources" },
+    { label: "Service Page Content Framework", href: "/resources/service-page-content-framework", group: "Resources" },
+    { label: "Proposal Templates", href: "/proposal-template", group: "Resources" },
     { label: "RBI Services", href: "/rbi", group: "RBI" },
     { label: "SEBI Services", href: "/sebi", group: "SEBI" },
     { label: "IRDAI Services", href: "/irdai", group: "IRDAI" },
@@ -205,43 +259,54 @@ const staticSearchLinks = [
 const menus: Record<string, MegaMenu> = {
     Services: {
         categories: [
-            { label: "RBI Regulatory Services", icon: "🏦", items: ["NBFC Registration", "NBFC Account Aggregator", "Payment Aggregator", "Prepaid Instrument", "NBFC Business Plan", "NBFC Compliance", "NBFC-P2P License", "NBFC-MFI License", "NBFC Annual Return Filing", "AD Category II", "Credit Information Company"] },
-            { label: "SEBI Regulatory Services", icon: "📈", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "Research Analyst", "AIF Registration", "Mutual Fund Registration", "Social Stock Exchange", "Underwriter Registration"] },
-            { label: "IRDAI Regulatory Services", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA License", "Micro Insurance"] },
-            { label: "IFSCA & GIFT City", icon: "🌐", items: ["Finance Company GIFT IFSC", "IFSCA Factoring License", "PSP License IFSCA", "Fund Management Entity", "IFSCA Aircraft Leasing", "BATF Services IFSC"] },
-            { label: "Financial Intelligence", icon: "🔍", items: ["FEMA Compliance", "DGFT IE Code", "Transfer Pricing", "GST Registration"] },
-            { label: "Company Formation", icon: "🏛️", items: ["ESG Compliance", "PFRDA Registration"] },
+            { label: "RBI Regulatory Services", icon: "🏦", items: ["NBFC Registration", "NBFC Account Aggregator", "Payment Aggregator", "Prepaid Instrument", "Asset Reconstruction Company", "NBFC Compliance", "NBFC Business Plan", "AD Category II"] },
+            { label: "SEBI Regulatory Services", icon: "📈", items: ["Stock Broker Licence", "Investment Adviser", "Research Analyst", "Portfolio Manager", "AIF Registration", "Social Stock Exchange", "Mutual Fund Registration", "Underwriter Registration"] },
+            { label: "IRDAI Regulatory Services", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA Licence", "Micro Insurance"] },
+            { label: "IFSCA & GIFT City Services", icon: "🌐", items: ["Finance Company GIFT IFSC", "PSP License IFSCA", "ITFS Platform IFSC", "BATF Services IFSC", "IFSCA Aircraft Leasing", "IFSCA Factoring License", "FinTech Entity IFSC"] },
+            { label: "FIU / AML / PMLA Services", icon: "🔍", items: ["FIU-IND Registration", "PMLA Compliance Advisory", "AML Policy Drafting", "AML Risk Assessment", "CKYC Registration & Reporting"] },
+            { label: "Company Formation & Corporate Governance", icon: "🏛️", items: ["Company Incorporation", "MCA / ROC Compliance", "Annual ROC Compliance", "Corporate Governance", "GST Registration", "Transfer Pricing"] },
+            { label: "Sectoral & Operational Licences", icon: "⚙️", items: ["FSSAI Licence", "APEDA Registration", "AYUSH Licence", "Factory Licence", "Drug Licence", "BIS Certification"] },
+            { label: "Ongoing Regulatory Compliance", icon: "📋", items: ["Post-Registration Compliance", "RBI Compliance", "SEBI Compliance", "IRDAI Compliance", "IFSCA Compliance", "Compliance Calendar"] },
         ],
         viewAll: "/services", viewAllLabel: "View All Services →"
     },
     Regulatory: {
         categories: [
-            { label: "RBI Licenses", icon: "🏦", items: ["NBFC Registration", "NBFC Account Aggregator", "Payment Aggregator", "AD Category II", "Credit Information Company", "Prepaid Instrument", "NBFC Business Plan"] },
-            { label: "SEBI Licenses", icon: "📈", items: ["Stock Broker License", "Merchant Banker", "Portfolio Manager", "Investment Adviser", "Research Analyst", "AIF Registration", "Mutual Fund Registration", "Social Stock Exchange", "Underwriter Registration"] },
-            { label: "IFSCA Licenses", icon: "🌐", items: ["Finance Company GIFT IFSC", "IFSCA Factoring License", "PSP License IFSCA", "Fund Management Entity", "IFSCA Aircraft Leasing", "BATF Services IFSC", "FinTech Entity IFSC", "TechFin IFSC", "ITFS Platform IFSC"] },
-            { label: "IRDAI Licenses", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA License", "Micro Insurance"] },
-            { label: "FEMA & Other", icon: "⚖️", items: ["FEMA Compliance", "DGFT IE Code", "Transfer Pricing", "GST Registration", "PFRDA Registration"] },
+            { label: "RBI", icon: "🏦", items: ["NBFC Registration", "Payment Aggregator", "Prepaid Instrument", "NBFC Account Aggregator", "Asset Reconstruction Company", "AD Category II"] },
+            { label: "SEBI", icon: "📈", items: ["Stock Broker Licence", "AIF Registration", "Portfolio Manager", "Investment Adviser", "Research Analyst", "Social Stock Exchange"] },
+            { label: "IRDAI", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA Licence", "Micro Insurance"] },
+            { label: "IFSCA", icon: "🌐", items: ["Finance Company GIFT IFSC", "PSP License IFSCA", "ITFS Platform IFSC", "BATF Services IFSC", "IFSCA Aircraft Leasing", "FinTech Entity IFSC"] },
+            { label: "FIU-IND", icon: "🔍", items: ["FIU-IND Registration", "PMLA Compliance Advisory", "AML Policy Drafting", "CKYC Registration & Reporting"] },
+            { label: "MCA / ROC", icon: "🏛️", items: ["Company Incorporation", "MCA / ROC Compliance", "Annual ROC Compliance", "Corporate Governance"] },
+            { label: "Government Licences", icon: "⚖️", items: ["FSSAI Licence", "APEDA Registration", "AYUSH Licence", "Factory Licence", "Drug Licence", "BIS Certification"] },
         ],
         viewAll: "/regulatory", viewAllLabel: "View All Regulatory →"
     },
     Solutions: {
         categories: [
-            { label: "For Startups & New Businesses", icon: "🚀", items: ["GST Registration", "ESG Compliance", "PFRDA Registration", "NBFC Registration"] },
-            { label: "For NBFCs & Lending", icon: "🏦", items: ["NBFC Registration", "NBFC Compliance", "NBFC Account Aggregator", "NBFC Business Plan", "NBFC-P2P License", "NBFC-MFI License"] },
-            { label: "For Fintech Platforms", icon: "💳", items: ["Payment Aggregator License", "PSP License IFSCA", "Prepaid Instrument License", "Digital Lending Compliance", "UPI Third Party App"] },
-            { label: "For SMEs & Enterprises", icon: "🏗️", items: ["FEMA Compliance", "Transfer Pricing", "ESG Compliance", "Stock Broker License", "AIF Registration"] },
-            { label: "Specialised Compliance", icon: "📋", items: ["RBI Compliance", "SEBI Compliance", "IRDAI Compliance", "IFSCA Compliance"] },
+            { label: "Startups & New Businesses", icon: "🚀", items: ["Company Incorporation", "GST Registration", "Trademark Search", "FSSAI Licence"] },
+            { label: "NBFCs & Lending Businesses", icon: "🏦", items: ["NBFC Registration", "NBFC Compliance", "NBFC Account Aggregator", "Digital Lending Compliance", "NBFC Business Plan"] },
+            { label: "Fintech Platforms", icon: "💳", items: ["Payment Aggregator", "Prepaid Instrument Licence", "PSP License IFSCA", "UPI Third Party App", "FIU-IND Registration"] },
+            { label: "Insurance Intermediaries", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA Licence"] },
+            { label: "Capital Market Intermediaries", icon: "📈", items: ["Stock Broker Licence", "AIF Registration", "Portfolio Manager", "Investment Adviser", "Research Analyst"] },
+            { label: "SMEs & Growing Enterprises", icon: "🏗️", items: ["Annual ROC Compliance", "Tax & Audit", "Transfer Pricing", "Sectoral Licences", "Corporate Governance"] },
+            { label: "Foreign / GIFT City Entities", icon: "🌐", items: ["Finance Company GIFT IFSC", "PSP License IFSCA", "ITFS Platform IFSC", "IFSCA Aircraft Leasing", "BATF Services IFSC"] },
+            { label: "Compliance Teams & CFOs", icon: "📋", items: ["Compliance Calendar", "Document Vault", "Policy Library", "Post-Registration Compliance"] },
         ],
         viewAll: "/services", viewAllLabel: "Explore All Solutions →"
     },
     Resources: {
         categories: [
-            { label: "Regulatory Updates", icon: "📰", items: ["Latest News", "Media Coverage", "Press Releases", "Company Announcements"] },
-            { label: "Case Highlights", icon: "📁", items: [] },
-            { label: "Guides & Insights", icon: "📖", items: [] },
-            { label: "FAQs", icon: "❓", items: [] },
+            { label: "Regulatory Updates", icon: "📰", items: ["Regulatory Updates", "Circular Tracker", "Compliance Calendar"] },
+            { label: "Content Framework", icon: "📐", items: ["Service Page Content Framework", "Content Rebuild Command", "Proposal Templates"] },
+            { label: "Blogs", icon: "✍️", items: ["Blogs", "Guides & Insights"] },
+            { label: "Guides & Insights", icon: "📖", items: ["RBI Services", "SEBI Services", "IRDAI Services", "IFSCA Services"] },
+            { label: "FAQs", icon: "❓", items: ["FAQ Engine", "FAQs", "Compliance FAQs", "Contact Estabizz"] },
+            { label: "Case Highlights", icon: "📁", items: ["Case Highlights"] },
+            { label: "Compliance Calendar", icon: "📅", items: ["Compliance Calendar", "Post-Registration Compliance"] },
+            { label: "Circular Tracker", icon: "🔔", items: ["Circular Tracker", "Blogs"] },
         ],
-        viewAll: "/#", viewAllLabel: "View All Resources →"
+        viewAll: "/resources", viewAllLabel: "View All Resources →"
     },
 };
 
@@ -439,18 +504,17 @@ export default function Navbar() {
                                 {item} <svg className={`w-3 h-3 transition-transform ${activeMenu === item ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </div>
                         ))}
-                        <Link href="/contact" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] px-3 py-5 transition-colors">Contact</Link>
                     </div>
 
                     {/* Right */}
                     <div className="hidden xl:flex items-center gap-3">
                         <SearchBox />
-                        <a href="https://www.estabizz.com/" target="_blank" rel="noopener noreferrer" className="hidden text-[13.5px] font-semibold text-[#64748b] hover:text-[#0096D6] transition-colors px-3 py-2 border-r border-gray-200 pr-4">
-                            📚 Old Site
-                        </a>
-                        <Link href="/login" className="hidden text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
+                        <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
                             Login
                         </Link>
+                        <button type="button" className="text-[13.5px] font-semibold text-[#334155] px-3 py-2 border border-gray-200 rounded-lg bg-white cursor-default" aria-label="Country selector, India selected">
+                            Country: India
+                        </button>
                         <Link href="/get-started" className="text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-lg px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-sm">
                             Get Started
                         </Link>
@@ -551,9 +615,8 @@ export default function Navbar() {
                             </details>
                         ))}
                         <div className="border-t border-gray-100 pt-4 mt-4">
-                            <a href="https://www.estabizz.com/" target="_blank" rel="noopener noreferrer" className="block text-[15px] font-bold text-[#64748b] hover:text-[#0096D6] py-2">📚 Visit Old Site</a>
-                            <Link href="/pricing" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] py-2">Pricing</Link>
                             <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] py-2">Login</Link>
+                            <div className="block text-[15px] font-bold text-[#64748b] py-2">Country: India</div>
                         </div>
                         <Link href="/get-started" onClick={() => setMobileOpen(false)} className="block w-full text-center bg-[#0a1628] text-white font-bold text-[14px] rounded-lg py-3 mt-4">Get Started</Link>
                     </div>

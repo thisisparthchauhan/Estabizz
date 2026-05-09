@@ -75,10 +75,10 @@ export default function StatsSection() {
   return (
     <section ref={sectionRef} className="py-16 relative bg-transparent z-10 w-full max-w-[1240px] mx-auto px-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard icon="🏆" endValue={500} suffix="+" label="Licenses Obtained" isVisible={isVisible} delay={0.1} />
+        <StatCard icon="🏆" endValue={500} suffix="+" label="Licences Obtained" isVisible={isVisible} delay={0.1} />
         <StatCard icon="🏢" endValue={1000} suffix="+" label="Businesses Served" isVisible={isVisible} delay={0.2} />
-        <StatCard icon="✅" endValue={98.6} suffix="%" label="Approval Rate" isVisible={isVisible} delay={0.3} />
-        <StatCard icon="⚡" endValue="48hr" suffix="" label="Processing" hasCount={false} isVisible={isVisible} delay={0.4} />
+        <StatCard icon="🇮🇳" endValue="Pan India" suffix="" label="Regulatory Support" hasCount={false} isVisible={isVisible} delay={0.3} />
+        <StatCard icon="🤝" endValue={100} suffix="+" label="Associate Professionals" isVisible={isVisible} delay={0.4} />
       </div>
     </section>
   );

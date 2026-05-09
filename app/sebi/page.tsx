@@ -20,6 +20,7 @@ const services = [
     { href: "/sebi/underwriter-registration", title: "Underwriter Registration with SEBI", desc: "SEBI registration requirements for underwriters operating in India.", tag: "SEBI", emoji: "📝" },
     { href: "/sebi/social-stock-exchange-license", title: "Social Stock Exchange License", desc: "Regulatory guide for obtaining a Social Stock Exchange license under SEBI.", tag: "SEBI", emoji: "🌍" },
     { href: "/sebi/aif-registration-in-india", title: "AIF Registration in India", desc: "Complete SEBI AIF Regulations 2012 (Updated Nov 2025) guide for Category I/II/III Alternative Investment Funds — corpus, fees, PPM 40-clause framework, sponsor continuing interest, co-investment CIV, AI-only/LVF and compliance calendar.", tag: "SEBI", emoji: "💎" },
+    { href: "/sebi/rta-registration-in-india", title: "RTA Registration in India", desc: "SEBI Registrars to an Issue and Share Transfer Agents Regulations 2025 and Master Circular February 2026 guide — body corporate eligibility, ₹50 lakh net worth, Form A, investor portal, cyber security and 21-day grievance resolution.", tag: "SEBI", emoji: "📋" },
 ];
 
 export default function Page() {

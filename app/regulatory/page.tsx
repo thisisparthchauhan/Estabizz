@@ -37,7 +37,7 @@ const categories = [
             { name: "Portfolio Manager", href: "/sebi/portfolio-manager-registration" },
             { name: "Investment Adviser", href: "/sebi/investment-adviser-registration" },
             { name: "Research Analyst", href: "/sebi/research-analyst-registration" },
-            { name: "AIF Registration", href: "/sebi/aif-registration" },
+            { name: "AIF Registration", href: "/sebi/aif-registration-in-india" },
             { name: "Credit Rating Agency", href: "/sebi/credit-rating-agency" },
             { name: "Depository Participant", href: "/sebi/depository-participant-sebi-registration" },
             { name: "Mutual Fund Registration", href: "/sebi/mutual-fund-registration" },

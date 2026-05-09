@@ -19,7 +19,7 @@ const services = [
     { href: "/sebi/mutual-fund-registration", title: "Mutual Fund Registration with SEBI", desc: "Step-by-step SEBI registration process for mutual funds in India.", tag: "SEBI", emoji: "📊" },
     { href: "/sebi/underwriter-registration", title: "Underwriter Registration with SEBI", desc: "SEBI registration requirements for underwriters operating in India.", tag: "SEBI", emoji: "📝" },
     { href: "/sebi/social-stock-exchange-license", title: "Social Stock Exchange License", desc: "Regulatory guide for obtaining a Social Stock Exchange license under SEBI.", tag: "SEBI", emoji: "🌍" },
-    { href: "/sebi/aif-registration-in-india", title: "AIF Registration in India", desc: "Complete SEBI AIF Regulations 2012 (Updated Nov 2025) guide for Category I/II/III Alternative Investment Funds — corpus, fees, PPM 40-clause framework, sponsor continuing interest, co-investment CIV, AI-only/LVF and compliance calendar.", tag: "SEBI", emoji: "💎" },
+    { href: "/sebi/aif-registration-in-india", title: "AIF Registration in India", desc: "Professional support for SEBI AIF Registration covering Category I, Category II, Category III AIFs, fund structuring, sponsor contribution planning, PPM drafting, Form A filing, SEBI query response and post-registration compliance.", tag: "SEBI", emoji: "💎" },
 ];
 
 export default function Page() {
@@ -58,7 +58,7 @@ export default function Page() {
                                 </div>
                                 <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#0096D6] transition-colors mb-2 leading-snug">{s.title}</h3>
                                 <p className="text-[13px] text-gray-500 leading-relaxed line-clamp-2">{s.desc}</p>
-                                <div className="mt-4 text-[13px] text-[#0096D6] font-semibold group-hover:underline">Read Guide →</div>
+                                <div className="mt-4 text-[13px] text-[#0096D6] font-semibold group-hover:underline">{s.title === "AIF Registration in India" ? "Explore AIF Registration" : "Read Guide"} →</div>
                             </div>
                         </Link>
                     ))}

@@ -18,6 +18,7 @@ const services = [
     { href: "/sebi/reit-registration", title: "REIT Registration India", desc: "SEBI registration guide for Real Estate Investment Trusts in India.", tag: "SEBI", emoji: "🏢" },
     { href: "/sebi/mutual-fund-registration", title: "Mutual Fund Registration with SEBI", desc: "Step-by-step SEBI registration process for mutual funds in India.", tag: "SEBI", emoji: "📊" },
     { href: "/sebi/pms-registration-in-india", title: "PMS Registration in India", desc: "Professional support for SEBI PMS Registration covering discretionary, non-discretionary and advisory PMS structuring, ₹5 Crore net worth readiness, Principal Officer documentation, NISM certification, Form A filing, SEBI query response and post-registration compliance.", tag: "SEBI", emoji: "💼" },
+    { href: "/sebi/research-analyst-registration-in-india", title: "Research Analyst Registration in India", desc: "Professional support for SEBI Research Analyst Registration covering individual, company, LLP and research entity applications, NISM certification mapping, net worth documentation, Form A filing, research disclosure framework and post-registration compliance.", tag: "SEBI", emoji: "🔎" },
     { href: "/sebi/underwriter-registration", title: "Underwriter Registration with SEBI", desc: "SEBI registration requirements for underwriters operating in India.", tag: "SEBI", emoji: "📝" },
     { href: "/sebi/social-stock-exchange-license", title: "Social Stock Exchange License", desc: "Regulatory guide for obtaining a Social Stock Exchange license under SEBI.", tag: "SEBI", emoji: "🌍" },
     { href: "/sebi/aif-registration-in-india", title: "AIF Registration in India", desc: "Professional support for SEBI AIF Registration covering Category I, Category II, Category III AIFs, fund structuring, sponsor contribution planning, PPM drafting, Form A filing, SEBI query response and post-registration compliance.", tag: "SEBI", emoji: "💎" },
@@ -59,7 +60,7 @@ export default function Page() {
                                 </div>
                                 <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#0096D6] transition-colors mb-2 leading-snug">{s.title}</h3>
                                 <p className="text-[13px] text-gray-500 leading-relaxed line-clamp-2">{s.desc}</p>
-                                <div className="mt-4 text-[13px] text-[#0096D6] font-semibold group-hover:underline">{s.title === "AIF Registration in India" ? "Explore AIF Registration" : s.title === "PMS Registration in India" ? "Explore PMS Registration" : "Read Guide"} →</div>
+                                <div className="mt-4 text-[13px] text-[#0096D6] font-semibold group-hover:underline">{s.title === "AIF Registration in India" ? "Explore AIF Registration" : s.title === "PMS Registration in India" ? "Explore PMS Registration" : s.title === "Research Analyst Registration in India" ? "Explore Research Analyst Registration" : "Read Guide"} →</div>
                             </div>
                         </Link>
                     ))}

@@ -13,7 +13,11 @@ interface ServicePageLayoutProps {
     tags: Tag[];
     breadcrumb: BreadcrumbItem[];
     title: string;
+    heroDescription?: React.ReactNode;
+    heroActions?: React.ReactNode;
+    trustLine?: string;
     readTime?: string;
+    displayYear?: string;
     focusKeyword: string;
     // TOC
     sections: TocSection[];
@@ -26,14 +30,15 @@ interface ServicePageLayoutProps {
     // Final CTA
     finalCtaTitle: string;
     finalCtaDescription: string;
+    finalCtaActions?: React.ReactNode;
     // Content
     children: React.ReactNode;
 }
 
 export default function ServicePageLayout({
-    tags, breadcrumb, title, readTime = "12 min read", focusKeyword,
+    tags, breadcrumb, title, heroDescription, heroActions, trustLine, readTime = "12 min read", displayYear = "2026", focusKeyword,
     sections, ctaTitle, ctaDescription, quickFacts,
-    relatedArticles, finalCtaTitle, finalCtaDescription, children
+    relatedArticles, finalCtaTitle, finalCtaDescription, finalCtaActions, children
 }: ServicePageLayoutProps) {
     const [activeSection, setActiveSection] = useState("");
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -81,26 +86,32 @@ export default function ServicePageLayout({
         else if (platform === "copy") { navigator.clipboard.writeText(window.location.href); }
     };
 
+    const insightCards = quickFacts.slice(0, 4);
+    const radarLabels = tags.slice(0, 4);
+
     return (
-        <div className="bg-[#f8faff] min-h-screen font-sans text-gray-800">
+        <div className="min-h-screen bg-[#f6f9ff] font-sans text-gray-800">
             {/* Scroll Progress Bar */}
             <div
-                className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-[#0096D6] to-[#10b981] z-50 transition-all duration-150 ease-out"
+                className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-[#0096D6] via-[#d9a938] to-[#10b981] z-[120] transition-all duration-150 ease-out"
                 style={{ width: `${scrollProgress * 100}%` }}
             />
 
             {/* Hero Header */}
             <section
-                className="relative pt-24 pb-16 px-6 lg:px-8 border-b border-blue-100 overflow-hidden"
-                style={{ background: "linear-gradient(135deg, #f0f9ff, #e0f2fe, #eff6ff)" }}
+                className="relative pt-24 pb-12 px-6 lg:px-8 border-b border-blue-100 overflow-hidden"
+                style={{ background: "linear-gradient(135deg, #f7fbff 0%, #e8f6ff 50%, #fffaf0 100%)" }}
             >
                 <div
-                    className="absolute inset-0 opacity-[0.04] pointer-events-none"
+                    className="absolute inset-0 opacity-[0.075] pointer-events-none"
                     style={{ backgroundImage: "linear-gradient(#0096D6 1px, transparent 1px), linear-gradient(90deg, #0096D6 1px, transparent 1px)", backgroundSize: "40px 40px" }}
                 />
+                <div className="absolute -left-24 top-16 h-[360px] w-[360px] rounded-full bg-[#0096D6]/12 blur-[100px] pointer-events-none" />
+                <div className="absolute -right-24 bottom-8 h-[360px] w-[360px] rounded-full bg-[#d9a938]/14 blur-[100px] pointer-events-none" />
+
                 <div className="max-w-7xl mx-auto relative z-10">
                     {/* Breadcrumb */}
-                    <nav className="text-sm font-medium text-gray-500 mb-8 flex items-center space-x-2 flex-wrap">
+                    <nav className="text-sm font-semibold text-gray-500 mb-8 flex items-center space-x-2 flex-wrap">
                         {breadcrumb.map((item, i) => (
                             <React.Fragment key={i}>
                                 {i > 0 && <span>&gt;</span>}
@@ -113,52 +124,139 @@ export default function ServicePageLayout({
                         ))}
                     </nav>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-3 mb-6">
-                        {tags.map((tag, i) => (
-                            <span key={i} className="px-3 py-1 bg-blue-50 text-[#0096D6] border border-blue-100 rounded-full text-xs font-semibold shadow-sm">
-                                {tag.emoji} {tag.label}
-                            </span>
-                        ))}
-                    </div>
+                    <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_380px] xl:grid-cols-[minmax(0,1fr)_460px] lg:items-center">
+                        <div>
+                            {/* Tags */}
+                            <div className="flex flex-wrap gap-3 mb-7">
+                                {tags.map((tag, i) => (
+                                    <span key={i} className="px-4 py-2 bg-white/80 text-[#0096D6] border border-blue-100 rounded-full text-xs font-bold shadow-sm backdrop-blur-sm">
+                                        {tag.emoji} {tag.label}
+                                    </span>
+                                ))}
+                            </div>
 
-                    {/* Title */}
-                    <h1 className="text-[36px] font-black text-[#0a1628] leading-[1.2] mb-6 tracking-[-0.02em] max-w-4xl">
-                        {title}
-                    </h1>
+                            {/* Title */}
+                            <h1 className="text-[40px] md:text-[54px] font-black text-[#0a1628] leading-[1.05] mb-6 tracking-[-0.03em] max-w-4xl">
+                                {title}
+                            </h1>
 
-                    {/* Meta */}
-                    <div className="flex flex-wrap items-center gap-4 text-[13px] text-gray-500 font-medium mb-8">
-                        <div className="flex items-center gap-1.5"><span>📅</span> 2026</div>
-                        <span className="text-gray-300">|</span>
-                        <div className="flex items-center gap-1.5"><span>⏱️</span> {readTime}</div>
-                        <span className="text-gray-300">|</span>
-                        <div className="flex items-center gap-1.5"><span>👁️</span> Regulatory Guide</div>
-                        <span className="text-gray-300">|</span>
-                        <div className="flex items-center gap-1.5"><span>✅</span> Expert Reviewed</div>
-                    </div>
+                            {heroDescription && (
+                                <div className="max-w-4xl text-[17px] leading-[1.85] text-[#475569] mb-7">
+                                    {heroDescription}
+                                </div>
+                            )}
 
-                    <div className="inline-block px-4 py-2 border border-blue-200 bg-white/60 backdrop-blur-sm rounded-full text-sm text-[#0a1628] font-semibold shadow-sm">
-                        Focus: <span className="text-[#0096D6]">{focusKeyword}</span>
+                            {heroActions && (
+                                <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-7">
+                                    {heroActions}
+                                </div>
+                            )}
+
+                            {trustLine && (
+                                <div className="max-w-4xl text-[14px] font-semibold text-[#0a1628] bg-white/78 border border-blue-100 rounded-2xl px-5 py-4 mb-7 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-md">
+                                    {trustLine}
+                                </div>
+                            )}
+
+                            {/* Meta */}
+                            <div className="flex flex-wrap items-center gap-4 text-[13.5px] text-[#64748b] font-semibold mb-8">
+                                <div className="flex items-center gap-1.5"><span>📅</span> {displayYear}</div>
+                                <span className="text-gray-300">|</span>
+                                <div className="flex items-center gap-1.5"><span>⏱️</span> {readTime}</div>
+                                <span className="text-gray-300">|</span>
+                                <div className="flex items-center gap-1.5"><span>👁️</span> Regulatory Guide</div>
+                                <span className="text-gray-300">|</span>
+                                <div className="flex items-center gap-1.5"><span>✅</span> Expert Reviewed</div>
+                            </div>
+
+                            <div className="inline-block px-5 py-3 border border-blue-200 bg-white/76 backdrop-blur-sm rounded-full text-sm text-[#0a1628] font-bold shadow-sm">
+                                Focus: <span className="text-[#0096D6]">{focusKeyword}</span>
+                            </div>
+                        </div>
+
+                        <div className="hidden lg:block">
+                            <div className="relative overflow-hidden rounded-[32px] border border-blue-100 bg-white p-6 shadow-[0_28px_80px_rgba(0,80,140,0.13)]">
+                                <div className="absolute right-[-90px] top-[-90px] h-52 w-52 rounded-full bg-[#dff2ff] blur-3xl" />
+                                <div className="absolute left-[-80px] bottom-[-90px] h-48 w-48 rounded-full bg-[#fff0c8] blur-3xl" />
+                                <div className="relative">
+                                    <div className="mb-6 flex items-start justify-between gap-4">
+                                        <div>
+                                            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#1677f2]">Licence Snapshot</div>
+                                            <div className="mt-2 text-[24px] font-black leading-tight text-[#071426]">{ctaTitle}</div>
+                                        </div>
+                                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#071426] text-lg font-black text-white shadow-lg">E</div>
+                                    </div>
+
+                                    <p className="mb-6 text-[14px] font-medium leading-7 text-[#64748b]">{ctaDescription}</p>
+
+                                    <div className="mb-6 grid gap-3">
+                                        {quickFacts.slice(0, 5).map((fact, i) => (
+                                            <div key={`${fact.label}-${i}`} className="rounded-2xl border border-blue-100 bg-[#f8fbff] p-4">
+                                                <div className="text-[10px] font-black uppercase tracking-[0.16em] text-[#64748b]">{fact.label}</div>
+                                                <div className="mt-1 text-[15px] font-black leading-snug text-[#071426]">{fact.value}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="mb-6 grid grid-cols-2 gap-3">
+                                        <div className="rounded-2xl border border-blue-100 bg-white p-4">
+                                            <div className="text-[10px] font-black uppercase tracking-[0.16em] text-[#64748b]">Guide Year</div>
+                                            <div className="mt-1 text-[20px] font-black text-[#071426]">{displayYear}</div>
+                                        </div>
+                                        <div className="rounded-2xl border border-blue-100 bg-white p-4">
+                                            <div className="text-[10px] font-black uppercase tracking-[0.16em] text-[#64748b]">Read Time</div>
+                                            <div className="mt-1 text-[20px] font-black text-[#071426]">{readTime}</div>
+                                        </div>
+                                    </div>
+
+                                    {radarLabels.length > 0 && (
+                                        <div className="mb-6 flex flex-wrap gap-2">
+                                            {radarLabels.map((tag, i) => (
+                                                <span key={`${tag.label}-${i}`} className="rounded-full border border-blue-100 bg-white px-3 py-1.5 text-[11px] font-black text-[#1677f2]">
+                                                    {tag.emoji} {tag.label}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    <Link href="/contact" className="block w-full rounded-2xl bg-[#1677f2] px-5 py-4 text-center text-[14px] font-black text-white shadow-[0_16px_34px_rgba(22,119,242,0.24)] transition-all hover:-translate-y-1 hover:bg-[#0866d9]">
+                                        Book Free Consultation
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
+            {insightCards.length > 0 && (
+                <section className="relative z-20 -mt-7 px-5 md:px-6">
+                    <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 rounded-[28px] border border-blue-100 bg-white/92 p-3 shadow-[0_24px_70px_rgba(0,100,200,0.10)] backdrop-blur-xl sm:grid-cols-2 xl:grid-cols-4">
+                        {insightCards.map((fact, i) => (
+                            <div key={`${fact.label}-${i}`} className="rounded-[22px] border border-blue-50 bg-gradient-to-br from-[#f8fbff] to-white p-5">
+                                <div className="mb-2 text-[11px] font-black uppercase tracking-[0.16em] text-[#64748b]">{fact.label}</div>
+                                <div className="text-[18px] font-black leading-tight text-[#0a1628]">{fact.value}</div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
+
             {/* Main Layout */}
-            <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col xl:flex-row gap-10 items-start">
+            <div className="max-w-[1480px] mx-auto px-5 md:px-6 py-10 md:py-12 flex flex-col xl:flex-row gap-7 2xl:gap-10 items-start">
 
                 {/* Left TOC Sidebar */}
-                <aside className="hidden xl:block w-[220px] shrink-0 sticky top-[80px] bg-white border border-[rgba(0,150,220,0.1)] rounded-[16px] p-5 shadow-[0_4px_20px_rgba(0,100,200,0.03)] z-10">
-                    <h4 className="text-[12px] font-bold text-[#94a3b8] tracking-[0.1em] uppercase mb-4">Contents</h4>
-                    <nav className="flex flex-col space-y-1 max-h-[calc(100vh-160px)] overflow-y-auto pr-2">
+                <aside className="hidden xl:block w-[286px] shrink-0 sticky top-[88px] bg-white/88 border border-[rgba(0,150,220,0.12)] rounded-[24px] p-5 shadow-[0_18px_46px_rgba(0,100,200,0.08)] backdrop-blur-xl z-10">
+                    <h4 className="text-[12px] font-black text-[#94a3b8] tracking-[0.18em] uppercase mb-5">Contents</h4>
+                    <nav className="flex flex-col gap-1 max-h-[calc(100vh-160px)] overflow-y-auto pr-2">
                         {sections.map((section) => (
                             <a
                                 key={section.id}
                                 href={`#${section.id}`}
                                 onClick={(e) => scrollToSection(e, section.id)}
-                                className={`text-[13px] block py-2 pl-3 rounded-r-lg border-l-[3px] transition-all duration-200 ${activeSection === section.id
-                                    ? "border-l-[#0096D6] bg-[rgba(0,150,220,0.06)] text-[#0096D6] font-bold"
-                                    : "border-l-transparent text-[#64748b] hover:text-[#0096D6] hover:bg-blue-50/50"}`}
+                                className={`text-[13.5px] block py-3 pl-4 pr-3 rounded-xl border-l-[3px] leading-snug transition-all duration-200 ${activeSection === section.id
+                                    ? "border-l-[#0096D6] bg-[rgba(0,150,220,0.08)] text-[#0096D6] font-black shadow-sm"
+                                    : "border-l-transparent text-[#64748b] hover:text-[#0096D6] hover:bg-blue-50/70"}`}
                             >
                                 {section.title}
                             </a>
@@ -167,7 +265,7 @@ export default function ServicePageLayout({
                 </aside>
 
                 {/* Mobile TOC */}
-                <div className="xl:hidden w-full bg-white border border-[rgba(0,150,220,0.1)] rounded-[16px] p-5 mb-8 shadow-sm">
+                <div className="xl:hidden w-full bg-white/90 border border-[rgba(0,150,220,0.12)] rounded-[22px] p-5 mb-4 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-xl">
                     <details className="group">
                         <summary className="flex justify-between items-center font-bold cursor-pointer list-none text-[#0096D6]">
                             <span>Contents</span>
@@ -175,10 +273,10 @@ export default function ServicePageLayout({
                                 <svg fill="none" height="24" viewBox="0 0 24 24" width="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M6 9l6 6 6-6" /></svg>
                             </span>
                         </summary>
-                        <nav className="flex flex-col space-y-2 mt-4 max-h-[300px] overflow-y-auto">
+                        <nav className="flex flex-col gap-2 mt-4 max-h-[320px] overflow-y-auto">
                             {sections.map((section) => (
                                 <a key={section.id} href={`#${section.id}`} onClick={(e) => scrollToSection(e, section.id)}
-                                    className="text-[14px] text-gray-600 hover:text-[#0096D6] border-b border-gray-50 pb-2">
+                                    className="text-[14px] text-gray-600 hover:text-[#0096D6] border-b border-gray-50 pb-2 leading-snug">
                                     {section.title}
                                 </a>
                             ))}
@@ -187,80 +285,100 @@ export default function ServicePageLayout({
                 </div>
 
                 {/* Main Content */}
-                <main className="flex-1 w-full max-w-[760px] bg-white border border-[rgba(0,150,220,0.08)] rounded-2xl p-8 lg:p-12 shadow-[0_8px_30px_rgba(0,100,200,0.04)] article-content relative overflow-x-auto">
+                <main className="flex-1 w-full max-w-[860px] bg-white border border-[rgba(0,150,220,0.10)] rounded-[28px] p-6 md:p-9 lg:p-12 shadow-[0_24px_70px_rgba(0,100,200,0.08)] article-content relative overflow-x-auto">
                     <style dangerouslySetInnerHTML={{
                         __html: `
-              .article-content h2{font-size:24px;font-weight:800;color:#0a1628;padding:24px 0 8px;margin-top:48px;position:relative;scroll-margin-top:80px;padding-left:16px;transition:all 0.7s ease;opacity:0;transform:translateY(24px)}
+              .article-content{font-feature-settings:"kern";letter-spacing:0}
+              .article-content h2{font-size:30px;font-weight:900;color:#0a1628;padding:28px 0 10px;margin-top:54px;position:relative;scroll-margin-top:92px;padding-left:18px;transition:all 0.7s ease;opacity:0;transform:translateY(24px);line-height:1.2;letter-spacing:-0.015em}
               .article-content h2.visible{opacity:1;transform:translateY(0)}
-              .article-content h2::before{content:'';position:absolute;left:0;top:28px;bottom:12px;width:4px;background:linear-gradient(180deg,#0096D6,#10b981);border-radius:2px}
+              .article-content h2::before{content:'';position:absolute;left:0;top:32px;bottom:14px;width:5px;background:linear-gradient(180deg,#0096D6,#d9a938,#10b981);border-radius:999px}
               .article-content h2:first-of-type{margin-top:0}
-              .article-content h3{font-size:18px;font-weight:700;color:#0077B6;padding:16px 0 4px;scroll-margin-top:80px}
-              .article-content h4{font-size:15px;font-weight:700;color:#0a1628;margin-bottom:8px}
-              .article-content p{font-size:15px;line-height:1.85;color:#374151;margin-bottom:16px}
-              .article-content ul,.article-content ol{padding-left:4px;margin-bottom:24px}
+              .article-content h3{font-size:21px;font-weight:800;color:#0077B6;padding:18px 0 6px;scroll-margin-top:92px;line-height:1.35}
+              .article-content h4{font-size:16px;font-weight:800;color:#0a1628;margin-bottom:10px}
+              .article-content p{font-size:16.5px;line-height:1.95;color:#334155;margin-bottom:20px}
+              .article-content ul,.article-content ol{padding-left:4px;margin-bottom:28px}
               .article-content ul{list-style:none}
               .article-content ol{list-style:none;counter-reset:li-counter}
-              .article-content li{position:relative;padding-left:22px;margin-bottom:10px;font-size:15px;color:#374151;line-height:1.85;display:block}
-              .article-content ul>li::before{content:'◆';color:#0096D6;font-size:10px;position:absolute;left:0;top:7px;line-height:1}
-              .article-content ol>li::before{counter-increment:li-counter;content:counter(li-counter)'.';color:#0096D6;font-size:12px;font-weight:700;position:absolute;left:0;top:3px;line-height:1}
+              .article-content li{position:relative;padding-left:24px;margin-bottom:12px;font-size:15.5px;color:#334155;line-height:1.9;display:block}
+              .article-content ul>li::before{content:'◆';color:#0096D6;font-size:10px;position:absolute;left:0;top:9px;line-height:1}
+              .article-content ol>li::before{counter-increment:li-counter;content:counter(li-counter)'.';color:#0096D6;font-size:12px;font-weight:800;position:absolute;left:0;top:4px;line-height:1}
               .article-content li strong{color:#0a1628}
               .article-content li a{color:#0096D6;text-decoration:underline}
               .article-content p a,.article-content td a{color:#0096D6;text-decoration:underline}
               .article-content p strong{color:#0a1628}
-              .numbered-card{background:white;border:1px solid rgba(0,150,220,0.1);border-radius:12px;padding:16px 20px;transition:all 0.3s;margin-bottom:12px;display:flex;align-items:flex-start;gap:16px}
-              .numbered-card:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,100,200,0.08);border-color:rgba(0,150,220,0.3)}
-              .num-badge{width:32px;height:32px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,#0096D6,#10b981);color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px}
-              .faq-accordion{margin:24px 0}
-              .faq-item{border:1px solid #e2e8f0;border-radius:12px;margin-bottom:10px;overflow:hidden;background:white}
-              .faq-item summary{padding:16px 20px;cursor:pointer;font-weight:600;font-size:15px;color:#0a1628;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+              .article-content .clean-list{display:grid;gap:10px;margin:18px 0 28px}
+              .article-content .clean-list li{background:linear-gradient(135deg,#f8fbff,#ffffff);border:1px solid rgba(0,150,220,0.12);border-radius:16px;padding:14px 16px 14px 38px;margin:0;box-shadow:0 6px 20px rgba(0,100,200,0.035)}
+              .article-content .clean-list li::before{left:15px;top:20px}
+              .article-content .numbered-list{display:grid;gap:10px;margin:18px 0 28px;counter-reset:li-counter}
+              .article-content .numbered-list li{background:#fff;border:1px solid rgba(0,150,220,0.12);border-radius:16px;padding:15px 18px 15px 48px;margin:0;box-shadow:0 8px 24px rgba(0,100,200,0.045)}
+              .article-content .numbered-list li::before{left:15px;top:14px;width:20px;height:20px;border-radius:999px;background:#e0f2fe;display:flex;align-items:center;justify-content:center}
+              .article-content .field-label{font-weight:800;color:#0a1628}
+              .article-content .process-card{background:linear-gradient(135deg,#ffffff,#f8fbff);border:1px solid rgba(0,150,220,0.14);border-left:5px solid #0096D6;border-radius:18px;padding:20px 22px;margin:20px 0;box-shadow:0 10px 28px rgba(0,100,200,0.06)}
+              .article-content .process-card h3{padding:0;margin:0 0 8px 0;color:#0a1628;font-size:16px}
+              .article-content .process-card p{margin:0;font-size:14px;line-height:1.75}
+              .numbered-card{background:white;border:1px solid rgba(0,150,220,0.12);border-radius:18px;padding:18px 22px;transition:all 0.3s;margin-bottom:14px;display:flex;align-items:flex-start;gap:16px;box-shadow:0 8px 22px rgba(0,100,200,0.04)}
+              .numbered-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,100,200,0.10);border-color:rgba(0,150,220,0.32)}
+              .num-badge{width:34px;height:34px;flex-shrink:0;border-radius:14px;background:linear-gradient(135deg,#0096D6,#10b981);color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px}
+              .faq-accordion{margin:28px 0}
+              .faq-item{border:1px solid #e2e8f0;border-radius:16px;margin-bottom:12px;overflow:hidden;background:white;box-shadow:0 8px 22px rgba(0,100,200,0.035)}
+              .faq-item summary{padding:18px 22px;cursor:pointer;font-weight:700;font-size:15.5px;color:#0a1628;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
               .faq-item summary::-webkit-details-marker{display:none}
               .faq-item summary::after{content:'▼';color:#0096D6;font-size:11px;flex-shrink:0;transition:transform 0.2s}
               .faq-item[open] summary::after{transform:rotate(180deg)}
               .faq-item summary:hover{background:#f0f9ff}
-              .faq-item>div{padding:0 20px 16px 20px;font-size:14px;color:#374151;line-height:1.75;border-top:1px solid #f1f5f9}
+              .faq-item>div{padding:0 22px 18px 22px;font-size:15px;color:#374151;line-height:1.8;border-top:1px solid #f1f5f9}
               .faq-accordion summary::-webkit-details-marker{display:none}
-              .expert-quote{background:linear-gradient(135deg,#f0f9ff,#eff6ff);border-left:4px solid #0096D6;border-radius:0 12px 12px 0;padding:20px 24px;margin:32px 0}
+              .expert-quote{background:linear-gradient(135deg,#f0f9ff,#fffaf0);border-left:5px solid #0096D6;border-radius:0 18px 18px 0;padding:24px 28px;margin:36px 0;box-shadow:0 10px 26px rgba(0,100,200,0.05)}
               .expert-quote blockquote{font-size:16px;font-style:italic;color:#0a1628;line-height:1.75;margin:0 0 10px 0}
               .expert-quote cite{font-size:13px;color:#64748b;font-style:normal;font-weight:600}
-              .info-box{background:rgba(0,150,220,0.04);border:1px solid rgba(0,150,220,0.15);border-left:4px solid #0096D6;border-radius:12px;padding:20px 24px;margin:24px 0}
-              .warning-box{background:rgba(245,158,11,0.06);border:1px solid #fcd34d;border-left:4px solid #F59E0B;border-radius:12px;padding:20px 24px;margin:24px 0}
-              .success-box{background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.2);border-left:4px solid #10b981;border-radius:12px;padding:20px 24px;margin:24px 0}
-              .data-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;border:1px solid rgba(0,150,220,0.15);margin:24px 0}
+              .info-box{background:rgba(0,150,220,0.05);border:1px solid rgba(0,150,220,0.16);border-left:5px solid #0096D6;border-radius:18px;padding:22px 26px;margin:28px 0}
+              .warning-box{background:rgba(245,158,11,0.07);border:1px solid #fcd34d;border-left:5px solid #F59E0B;border-radius:18px;padding:22px 26px;margin:28px 0}
+              .success-box{background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.22);border-left:5px solid #10b981;border-radius:18px;padding:22px 26px;margin:28px 0}
+              .data-table{width:100%;border-collapse:collapse;border-radius:18px;overflow:hidden;border:1px solid rgba(0,150,220,0.15);margin:28px 0;box-shadow:0 10px 28px rgba(0,100,200,0.05)}
               .data-table thead tr{background:linear-gradient(90deg,#0077B6,#0096D6);color:white}
-              .data-table thead th{padding:14px 16px;font-size:13px;font-weight:700;text-align:left}
+              .data-table thead th{padding:15px 17px;font-size:13px;font-weight:800;text-align:left}
               .data-table tbody tr:nth-child(odd){background:white}
               .data-table tbody tr:nth-child(even){background:#fafbff}
-              .data-table tbody td{padding:12px 16px;font-size:13px;color:#374151;border-bottom:1px solid rgba(0,150,220,0.08)}
-              .step-timeline{position:relative;padding-left:24px;border-left:2px dashed #bfdbfe;margin:32px 0}
+              .data-table tbody td{padding:14px 17px;font-size:13.5px;color:#374151;border-bottom:1px solid rgba(0,150,220,0.08);line-height:1.65}
+              .step-timeline{position:relative;padding-left:26px;border-left:2px dashed #bfdbfe;margin:36px 0}
               .step-item{position:relative;margin-bottom:32px}
               .step-dot{position:absolute;left:-33px;top:16px;width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#0096D6,#0077B6);box-shadow:0 0 0 4px white}
-              .step-card{background:white;border-left:3px solid #0096D6;border-top:1px solid #e2e8f0;border-right:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;border-radius:0 12px 12px 0;padding:16px 20px;transition:box-shadow 0.3s}
-              .step-card:hover{box-shadow:0 4px 15px rgba(0,100,200,0.08)}
+              .step-card{background:white;border-left:4px solid #0096D6;border-top:1px solid #e2e8f0;border-right:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;border-radius:0 18px 18px 0;padding:18px 22px;transition:box-shadow 0.3s}
+              .step-card:hover{box-shadow:0 12px 28px rgba(0,100,200,0.09)}
               .step-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#0096D6;margin-bottom:4px}
               .badge-yes{background:#dcfce7;color:#16a34a;padding:2px 10px;border-radius:999px;font-weight:700;font-size:12px;display:inline-flex;align-items:center;gap:4px}
               .badge-no{background:#fee2e2;color:#dc2626;padding:2px 10px;border-radius:999px;font-weight:700;font-size:12px}
               .badge-optional{background:#fef3c7;color:#d97706;padding:2px 10px;border-radius:999px;font-weight:700;font-size:12px}
+              @media(max-width:768px){
+                .article-content h2{font-size:25px;margin-top:42px}
+                .article-content h3{font-size:19px}
+                .article-content p{font-size:15.5px;line-height:1.85}
+                .article-content li{font-size:15px}
+              }
             `}} />
                     {children}
                 </main>
 
                 {/* Right Sidebar */}
-                <aside className="w-full xl:w-[240px] shrink-0 flex flex-col gap-6 sticky top-[80px]">
+                <aside className="w-full xl:w-[280px] shrink-0 flex flex-col gap-6 sticky top-[88px]">
 
                     {/* CTA Card */}
-                    <div className="rounded-[16px] p-[24px] shadow-lg text-white" style={{ background: "linear-gradient(135deg, #0077B6, #0096D6)" }}>
-                        <h3 className="font-bold text-[18px] mb-2 leading-tight">{ctaTitle}</h3>
-                        <p className="text-white/80 text-[13px] mb-5 leading-relaxed">{ctaDescription}</p>
-                        <Link href="/contact" className="block w-full bg-white text-[#0077B6] font-bold text-[14px] py-3 rounded-xl hover:bg-blue-50 hover:shadow-lg transition duration-300 text-center">
+                    <div className="relative overflow-hidden rounded-[24px] p-[26px] shadow-[0_24px_60px_rgba(0,119,182,0.25)] text-white" style={{ background: "linear-gradient(135deg, #0077B6, #0096D6)" }}>
+                        <div className="absolute -right-12 -top-12 h-28 w-28 rounded-full bg-white/15 blur-2xl" />
+                        <div className="relative">
+                        <h3 className="font-black text-[21px] mb-3 leading-tight">{ctaTitle}</h3>
+                        <p className="text-white/86 text-[14px] mb-6 leading-7">{ctaDescription}</p>
+                        <Link href="/contact" className="block w-full bg-white text-[#0077B6] font-black text-[14px] py-3.5 rounded-2xl hover:bg-blue-50 hover:shadow-lg transition duration-300 text-center">
                             📞 Book Free Consultation
                         </Link>
-                        <div className="text-center text-white/70 text-[12px] mt-4 font-medium tracking-wide">
+                        <div className="text-center text-white/78 text-[12px] mt-4 font-bold tracking-wide">
                             ⚡ Response within 24 hours
+                        </div>
                         </div>
                     </div>
 
                     {/* Expert Card */}
-                    <div className="bg-white border border-gray-100 rounded-[16px] p-5 shadow-sm">
+                    <div className="bg-white border border-blue-100 rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)]">
                         <div className="flex items-center gap-3 mb-4">
                             <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-100 to-teal-100 text-[#0077B6] flex items-center justify-center font-bold text-xl border-2 border-white shadow-sm ring-2 ring-blue-50 shrink-0">
                                 DK
@@ -270,24 +388,24 @@ export default function ServicePageLayout({
                                 <div className="text-[12px] text-[#0096D6] font-medium">Compliance Expert</div>
                             </div>
                         </div>
-                        <div className="text-[13px] text-gray-600 leading-relaxed">
+                        <div className="text-[13.5px] text-gray-600 leading-relaxed">
                             Specialist in fintech regulatory compliance, government licenses and RBI, SEBI, IRDAI frameworks.
                         </div>
-                        <a href="mailto:contact@estabizz.com" className="mt-4 block text-center w-full py-2 bg-blue-50 text-[#0077B6] font-semibold text-[13px] rounded-lg hover:bg-[#0096D6] hover:text-white transition-colors">
+                        <a href="mailto:contact@estabizz.com" className="mt-4 block text-center w-full py-2.5 bg-blue-50 text-[#0077B6] font-bold text-[13px] rounded-xl hover:bg-[#0096D6] hover:text-white transition-colors">
                             Ask a Question
                         </a>
                     </div>
 
                     {/* Quick Facts */}
                     {quickFacts.length > 0 && (
-                        <div className="bg-white border border-[rgba(0,150,220,0.15)] rounded-[16px] p-5 shadow-sm relative overflow-hidden">
+                        <div className="bg-white border border-[rgba(0,150,220,0.15)] rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] relative overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#0096D6] to-[#10b981]" />
                             <h4 className="font-bold text-[#0a1628] flex items-center gap-2 mb-4">
                                 <span className="text-[#0096D6]">⚡</span> Quick Facts
                             </h4>
                             <div className="space-y-3">
                                 {quickFacts.map((fact, i) => (
-                                    <div key={i} className="flex justify-between items-center text-[13px] border-b border-gray-50 pb-2 last:border-0 last:pb-0">
+                                    <div key={i} className="flex justify-between items-center gap-4 text-[13px] border-b border-gray-50 pb-3 last:border-0 last:pb-0">
                                         <span className="text-gray-500">{fact.label}</span>
                                         <span className="font-semibold text-[#0a1628] text-right max-w-[120px]">{fact.value}</span>
                                     </div>
@@ -297,7 +415,7 @@ export default function ServicePageLayout({
                     )}
 
                     {/* Share */}
-                    <div className="bg-white border border-gray-100 rounded-[16px] p-5 shadow-sm text-center">
+                    <div className="bg-white border border-blue-100 rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] text-center">
                         <h4 className="font-bold text-[13px] text-gray-500 uppercase tracking-wider mb-3">Share Guide</h4>
                         <div className="flex justify-center gap-2">
                             <button onClick={() => handleShare("linkedin")} className="w-10 h-10 rounded-full bg-blue-50 text-[#0077B6] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Share on LinkedIn">
@@ -317,13 +435,13 @@ export default function ServicePageLayout({
 
             {/* Related Articles */}
             {relatedArticles.length > 0 && (
-                <section className="border-t border-gray-200 bg-white py-16">
+                <section className="border-t border-blue-100 bg-[#f8fbff] py-16">
                     <div className="max-w-7xl mx-auto px-6 lg:px-8">
                         <h2 className="text-2xl font-bold text-[#0a1628] mb-8 text-center">Related Articles</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {relatedArticles.map((article, i) => (
                                 <Link key={i} href={article.href} className="block group">
-                                    <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all h-full">
+                                    <div className="bg-white border border-blue-100 rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(0,100,200,0.10)] hover:border-blue-200 transition-all h-full">
                                         <div className="text-[12px] font-bold text-[#0096D6] uppercase tracking-wider mb-2">{article.category}</div>
                                         <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#0096D6] transition-colors mb-2">{article.title}</h3>
                                         <p className="text-[13px] text-gray-500 line-clamp-2">{article.description}</p>
@@ -336,18 +454,25 @@ export default function ServicePageLayout({
             )}
 
             {/* Final CTA */}
-            <section className="bg-gradient-to-br from-[#0a1628] to-[#1a2b45] py-16 text-center px-6">
-                <div className="max-w-3xl mx-auto">
+            <section className="relative overflow-hidden bg-gradient-to-br from-[#071224] via-[#0a315f] to-[#0077B6] py-20 text-center px-6">
+                <div className="absolute inset-0 opacity-[0.10] pointer-events-none" style={{ backgroundImage: "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)", backgroundSize: "54px 54px" }} />
+                <div className="relative z-10 max-w-3xl mx-auto">
                     <h2 className="text-[28px] md:text-[32px] font-bold text-white mb-4">{finalCtaTitle}</h2>
                     <p className="text-[16px] text-blue-100 mb-8 max-w-2xl mx-auto">{finalCtaDescription}</p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#0096D6] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all">
-                            Get Started Free →
-                        </Link>
-                        <a href="tel:+919876543210" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20">
-                            Talk to Expert
-                        </a>
-                    </div>
+                    {finalCtaActions ? (
+                        <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
+                            {finalCtaActions}
+                        </div>
+                    ) : (
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#0096D6] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all">
+                                Get Started Free →
+                            </Link>
+                            <a href="tel:+919876543210" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20">
+                                Talk to Expert
+                            </a>
+                        </div>
+                    )}
                 </div>
             </section>
         </div>

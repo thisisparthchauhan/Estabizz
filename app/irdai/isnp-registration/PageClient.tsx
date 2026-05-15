@@ -24,12 +24,27 @@ ISNP permission is not a replacement for an insurance intermediary licence. The 
 • Application Mode — ISNP portal / prescribed IRDAI process
 • Key Compliance Areas — Platform certification, customer verification, data security, policy servicing, record maintenance, eIA facilitation and grievance handling
 
-IRDAI supervises the establishment and operation of ISNP to ensure policyholder protection, secure digital distribution and orderly growth of insurance e-commerce in India.`
-    },
-    {
-      id: 'what-is-isnp',
-      title: 'What is an Insurance Self-Network Platform?',
-      content: `Insurance Self-Network Platform means an electronic platform set up by an eligible applicant with IRDAI permission for undertaking insurance e-commerce activities. It may be in the form of a web platform, mobile platform or other permitted digital interface used to sell and service insurance policies.
+    return (
+        <ServicePageLayout
+            tags={[{ emoji: "🛡️", label: "IRDAI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
+            breadcrumb={[{ label: "Home", href: "/" }, { label: "IRDAI Services", href: "/irdai" }, { label: "Isnp Registration" }]}
+            title="ISNP Certification in India: Complete Guide, Eligibility, Process & Compliance Insights"
+            readTime="15 min read"
+            focusKeyword="ISNP Certification in India"
+            sections={sections}
+            ctaTitle="Need Expert Help with Isnp Registration?"
+            ctaDescription="Our regulatory compliance experts provide end-to-end guidance for ISNP Certification in India."
+            quickFacts={quickFacts}
+            relatedArticles={[
+                { href: "/rbi/nbfc-account-aggregator-license", category: "RBI", title: "NBFC Account Aggregator License", description: "Complete RBI registration guide for NBFC-AA." },
+                { href: "/ifsca/psp-license-ifsca", category: "IFSCA", title: "PSP License IFSCA", description: "Payment services provider license guide." },
+                { href: "/regulatory/finance-company-gift-ifsc", category: "IFSCA", title: "Finance Company GIFT IFSC", description: "Setting up a Finance Company in GIFT City." }
+            ]}
+            finalCtaTitle="Ready to Get Started with Isnp Registration?"
+            finalCtaDescription="Book a free consultation with our regulatory experts. We guide you through every step of the process."
+        >
+            <h2 id="introduction">Introduction</h2>
+            <p>ls, particularly in regulated or sensitive digital environments. It reflects compliance with structured security standards and operational integrity expectations. In today’s compliance-driven ecosyste</p>
 
 A platform set up under ISNP framework typically supports:
 • Online insurance policy sale

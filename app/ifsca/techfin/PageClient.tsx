@@ -208,12 +208,10 @@ export default function PageClient() {
                 { label: "Sandbox Timeline", value: "30 working days" },
             ]}
             relatedArticles={[
-                { title: "FinTech Entity & Incentive Scheme", href: "/ifsca/fintech-entity", category: "IFSCA", description: "IFSCA FinTech Entity authorization, sandbox programs and incentive grants in GIFT IFSC." },
-                { title: "ITFS Platform Registration", href: "/ifsca/itfs-platform", category: "IFSCA", description: "International Trade Finance Services platform registration under IFSCA framework." },
-                { title: "PSP License IFSCA", href: "/ifsca/psp-license", category: "IFSCA", description: "Payment Service Provider authorisation under IFSCA Payment Services Regulations 2024." },
-                { title: "Finance Company GIFT IFSC", href: "/ifsca/finance-company", category: "IFSCA", description: "Finance Company and Finance Unit registration in GIFT IFSC." },
-                { title: "IFSCA BATF Services", href: "/ifsca/batf-services", category: "IFSCA", description: "Book-keeping, Accounting, Taxation and Financial Crime Compliance Services in GIFT IFSC." },
-                { title: "RBI Payment Aggregator License", href: "/rbi/payment-aggregator-license-in-india", category: "RBI", description: "Domestic PA-O, PA-P and PA-CB authorization under RBI PA Master Direction 2025." },
+                { title: "FinTech Entity & Incentive Scheme", href: "/ifsca/ifsca-fintech-startup-incentives", category: "IFSCA", description: "FinTech Entity authorization, sandbox programs and incentive grants in GIFT IFSC." },
+                { title: "PSP License IFSCA", href: "/ifsca/psp-license-ifsca", category: "IFSCA", description: "Payment Service Provider authorisation under IFSCA Payment Services Regulations 2024." },
+                { title: "IFSCA BATF Services", href: "/ifsca/batf-services-registration-in-gift-ifsc", category: "IFSCA", description: "Book-keeping, Accounting, Taxation and Financial Crime Compliance Services in GIFT IFSC." },
+                { title: "Finance Company GIFT IFSC", href: "/ifsca/finance-company-in-gift-ifsc", category: "IFSCA", description: "Finance Company and Finance Unit registration in GIFT IFSC." },
             ]}
             finalCtaTitle="Start Your IFSCA TechFin Registration Journey with Estabizz"
             finalCtaDescription="Build your TechFin entry into GIFT IFSC with structured regulatory support — eligibility review, Authorization or Limited Use Authorization route selection, sandbox documentation, technology note, IFSCA FinTech Incentive Scheme grant application support, IFSC setup and post-authorisation compliance assistance. WhatsApp our team at +91 98256 00907 for a structured consultation."

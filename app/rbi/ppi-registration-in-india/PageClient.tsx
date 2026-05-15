@@ -1,712 +1,525 @@
 'use client';
+
+import Link from 'next/link';
+import type { ReactNode } from 'react';
 import ServicePageLayout from '@/components/templates/ServicePageLayout';
 
+type TableRow = ReactNode[];
+type Card = { title: string; body: ReactNode };
+
+const whatsappUrl = 'https://wa.me/919825600907';
+
+const tocSections = [
+  { id: 'quick-overview', title: 'PPI Registration in India: Quick Overview' },
+  { id: 'what-is-ppi-registration', title: 'What is PPI Registration in India?' },
+  { id: 'legal-foundation', title: 'Legal Foundation' },
+  { id: 'what-is-ppi', title: 'What is a Prepaid Payment Instrument?' },
+  { id: 'types-of-ppis', title: 'Types of PPIs' },
+  { id: 'ppi-vs-pa', title: 'PPI Registration vs Payment Aggregator License' },
+  { id: 'who-requires-ppi', title: 'Who Requires PPI Registration?' },
+  { id: 'eligibility', title: 'Eligibility Criteria' },
+  { id: 'net-worth', title: 'Net Worth Requirement' },
+  { id: 'kyc-aml', title: 'KYC and AML Requirements' },
+  { id: 'issuance-loading-limits', title: 'Issuance, Loading and Limits' },
+  { id: 'escrow-fund-protection', title: 'Escrow and Customer Fund Protection' },
+  { id: 'interoperability', title: 'Interoperability and UPI Access' },
+  { id: 'customer-protection', title: 'Customer Protection and Grievance Redressal' },
+  { id: 'it-cyber-security', title: 'IT and Cyber Security Requirements' },
+  { id: 'technical-checklist', title: 'Technical Readiness Checklist' },
+  { id: 'documents-required', title: 'Documents Required' },
+  { id: 'registration-process', title: 'Step-by-Step Registration Process' },
+  { id: 'timeline', title: 'Timeline' },
+  { id: 'common-mistakes', title: 'Common Mistakes' },
+  { id: 'post-authorisation-compliance', title: 'Post-Authorisation Compliance' },
+  { id: 'supervisory-risk', title: 'Suspension and Cancellation Risks' },
+  { id: 'early-structuring', title: 'Why Early Structuring Matters' },
+  { id: 'how-estabizz-helps', title: 'How Estabizz Helps' },
+  { id: 'why-choose-estabizz', title: 'Why Choose Estabizz' },
+  { id: 'faqs', title: 'FAQs' },
+  { id: 'expert-review', title: 'Reviewer & Disclaimer' },
+  { id: 'speak-to-expert', title: 'Speak to Our RBI Compliance Expert' }
+];
+
+const faqs = [
+  { q: 'What is PPI Registration in India?', a: 'PPI Registration in India refers to RBI authorisation for entities that issue and operate Prepaid Payment Instruments such as wallets, cards, gift instruments and stored value payment products.' },
+  { q: 'Who regulates PPI Registration in India?', a: 'The Reserve Bank of India regulates Prepaid Payment Instruments under the Payment and Settlement Systems Act, 2007 and RBI Master Directions on PPIs.' },
+  { q: 'Is RBI authorisation mandatory for all PPIs?', a: 'RBI authorisation is required for entities issuing and operating payment systems involving PPIs, except closed system PPIs that are used only for purchase from the issuing entity and do not involve third-party settlement.' },
+  { q: 'What are the types of PPIs?', a: 'PPIs are broadly classified as closed system PPIs, semi-closed system PPIs and open system PPIs.' },
+  { q: 'What is a closed system PPI?', a: 'A closed system PPI is issued by an entity for purchase of goods and services only from that entity and does not permit third-party settlement.' },
+  { q: 'What is a semi-closed system PPI?', a: 'A semi-closed PPI can be used at a group of identified merchant locations or establishments that have a contract to accept the PPI.' },
+  { q: 'What is an open system PPI?', a: 'Open system PPIs are issued only by banks and can be used at any merchant for purchase of goods and services, with cash withdrawal permitted as per RBI framework.' },
+  { q: 'Can a non-bank company issue PPI?', a: 'Yes, a non-bank company may issue permitted PPIs after obtaining RBI authorisation, subject to eligibility and compliance requirements.' },
+  { q: 'Can an LLP apply for PPI authorisation?', a: 'PPI authorisation is generally available to eligible incorporated entities. LLP suitability must be checked under the applicable RBI framework, but company structure is generally preferred for regulated payment system authorisations.' },
+  { q: 'Is interest payable on PPI balances?', a: 'No. PPI issuers cannot pay interest on PPI balances.' },
+  { q: 'Can PPIs be loaded by cash?', a: 'Cash loading may be permitted subject to RBI-prescribed limits and conditions.' },
+  { q: 'Can PPIs be loaded by credit card or debit card?', a: 'PPIs may be loaded through permitted payment instruments subject to RBI directions.' },
+  { q: 'Is KYC mandatory for PPI holders?', a: 'KYC requirements depend on the PPI category and usage limits. Full-KYC PPIs generally allow wider functionality.' },
+  { q: 'Can PPI be used for fund transfer?', a: 'Fund transfer may be permitted depending on the PPI category, KYC status and RBI conditions.' },
+  { q: 'Can non-bank PPI issuers issue open system PPIs?', a: 'No. Open system PPIs are issued only by banks.' },
+  { q: 'Can a PPI issuer operate without RBI approval?', a: 'No entity can operate a payment system for issuance of PPIs without prior RBI approval or authorisation, unless the product falls outside authorisation requirements such as a valid closed system PPI.' },
+  { q: 'Is interoperability allowed for PPIs?', a: 'Interoperability is permitted for eligible PPIs subject to RBI and NPCI requirements.' },
+  { q: 'Can full-KYC PPIs access UPI?', a: 'RBI has enabled UPI access for full-KYC PPIs through third-party applications, subject to applicable operational framework.' },
+  { q: 'What documents are required for PPI Registration?', a: 'Documents generally include incorporation documents, MOA/AOA, board resolution, net worth certificate, business plan, KYC/AML policy, technology architecture, cyber security framework and customer protection policies.' },
+  { q: 'How long does PPI Registration take?', a: 'The timeline is indicative and depends on application quality, RBI review, business model clarity, technology readiness and query cycles.' },
+  { q: 'Can PPI Registration be transferred?', a: 'RBI authorisation is entity-specific and cannot be transferred like a normal commercial licence.' },
+  { q: 'Can RBI cancel PPI authorisation?', a: 'Yes. RBI may take action including cancellation where the issuer fails to comply with regulatory conditions.' },
+  { q: 'Is customer grievance redressal mandatory?', a: 'Yes. PPI issuers must maintain a proper customer grievance redressal and refund mechanism.' },
+  { q: 'Is cyber security compliance required for PPI issuers?', a: 'Yes. PPI issuers are payment system participants and must maintain robust technology, security and data protection controls.' },
+  { q: 'How can Estabizz help with PPI Registration?', a: 'Estabizz assists with PPI model assessment, eligibility review, business plan, policy drafting, technology compliance review, RBI application support, query response and post-authorisation compliance.' }
+];
+
+function DataTable({ headers, rows }: { headers: string[]; rows: TableRow[] }) {
+  return (
+    <div className="overflow-x-auto my-6 rounded-xl border border-[rgba(0,150,220,0.12)]">
+      <table className="data-table my-0 min-w-[680px]">
+        <thead>
+          <tr>{headers.map((header) => <th key={header}>{header}</th>)}</tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={index}>{row.map((cell, cellIndex) => <td key={cellIndex}>{cell}</td>)}</tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; columns?: string }) {
+  return (
+    <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>
+      {cards.map((card) => (
+        <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)]">
+          <h3 className="!p-0 !mb-2 !text-[#0a1628]">{card.title}</h3>
+          <div className="text-[14px] leading-7 text-gray-600">{card.body}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function FormulaCard({ children }: { children: ReactNode }) {
+  return (
+    <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#f0f9ff] to-white p-5 text-center text-[15px] font-bold leading-8 text-[#0a1628] shadow-sm">
+      {children}
+    </div>
+  );
+}
+
+function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+  return (
+    <section className="mb-12">
+      <h2 id={id}>{title}</h2>
+      {children}
+    </section>
+  );
+}
+
+function BulletList({ items }: { items: ReactNode[] }) {
+  return (
+    <ul className="clean-list">
+      {items.map((item, index) => <li key={index}>{item}</li>)}
+    </ul>
+  );
+}
+
 export default function PPIRegistrationPage() {
-  const sections = [
-    {
-      id: 'introduction',
-      title: 'PPI Registration in India',
-      content: `PPI Registration in India is the regulatory authorisation granted by the Reserve Bank of India (RBI) to entities intending to issue and operate Prepaid Payment Instruments (PPIs) such as digital wallets, prepaid cards, gift instruments, and mass transit cards.
-
-The framework governing PPI Registration in India is laid down under the Master Directions on Prepaid Payment Instruments, 2021, as updated up to December 27, 2024. These Directions are issued under Section 18 read with Section 10(2) of the Payment and Settlement Systems Act, 2007.
-
-No entity is permitted to set up or operate a payment system involving PPIs without prior approval or authorisation from RBI.`
-    },
-    {
-      id: 'legal-framework',
-      title: 'Legal Framework Governing PPI Registration in India',
-      content: `• Governing Legislation — Payment and Settlement Systems Act, 2007
-• Regulatory Authority — RBI – Department of Payment and Settlement Systems (DPSS)
-• Applicable Framework — Master Directions on Prepaid Payment Instruments, 2021 (Updated 2024)
-• Nature of Authorisation — Mandatory prior approval before commencement
-
-The Master Directions provide a consolidated regulatory structure covering eligibility, capital, issuance norms, escrow safeguards, interoperability, customer protection, and reporting.`
-    },
-    {
-      id: 'what-are-ppis',
-      title: 'What Are Prepaid Payment Instruments?',
-      content: `Under the Master Directions, PPIs are instruments that facilitate:
-• Purchase of goods and services
-• Financial services
-• Remittance facilities
-• Stored value transactions
-
-PPIs requiring RBI authorisation are classified into:
-
-Small PPIs:
-• KYC Level: Minimum details
-• Outstanding Limit: ₹10,000
-• Cash Withdrawal: Not permitted
-• Funds Transfer: Not permitted
-
-Full-KYC PPIs:
-• KYC Level: Full KYC
-• Outstanding Limit: ₹2,00,000
-• Cash Withdrawal: Permitted (subject to limits)
-• Funds Transfer: Permitted (subject to limits)
-
-Closed system instruments are outside RBI's regulatory purview as they are not treated as payment systems.`
-    },
-    {
-      id: 'who-needs',
-      title: 'Who Requires PPI Registration in India?',
-      content: `You require PPI Registration in India if your business model includes:
-• Issuing digital wallets
-• Launching prepaid cards
-• Offering reloadable stored-value instruments
-• Providing interoperable wallet services
-• Enabling funds transfer through prepaid systems
-• Operating gift PPIs or PPI-MTS
-
-Banks and non-bank entities both require approval under the PSS Act.`
-    },
-    {
-      id: 'eligibility-banks',
-      title: 'Eligibility for Banks',
-      content: `• Prior Approval — Required from RBI
-• Regulatory Clearance — NOC from respective regulatory department
-• Application Timeline — Within 30 days of obtaining clearance`
-    },
-    {
-      id: 'eligibility-nonbank',
-      title: 'Eligibility for Non-Bank Entities',
-      content: `• Incorporation — Company registered under Companies Act
-• MoA Coverage — Must include PPI issuance activity
-• Initial Net Worth — Minimum ₹5 Crore
-• Net Worth Within 3 Years — ₹15 Crore minimum
-• FDI Compliance — As per Consolidated FDI Policy
-• FATF Compliance — Must comply with RBI circulars on FATF jurisdictions
-
-The Master Directions clearly prescribe the net worth structure and maintenance obligations.`
-    },
-    {
-      id: 'net-worth',
-      title: 'Net Worth Calculation',
-      content: `Net worth must be computed as per RBI definition.
-
-Included Components:
-• Paid-up equity capital
-• Compulsorily convertible preference shares
-• Free reserves
-• Share premium account
-• Capital reserves (asset sale surplus)
-
-Excluded Components:
-• Revaluation reserves
-• Accumulated losses
-• Intangible assets
-• Deferred revenue expenditure
-
-Annual certification by a Chartered Accountant in prescribed format (Annex-2) is mandatory.`
-    },
-    {
-      id: 'capital-timeline',
-      title: 'Capital Requirement Timeline',
-      content: `• At Application — ₹5 Crore positive net worth
-• Within 3 Financial Years — ₹15 Crore
-• Ongoing — Maintain ₹15 Crore at all times
-
-Failure to maintain required net worth may result in regulatory restrictions.`
-    },
-    {
-      id: 'process',
-      title: 'Authorisation Process – Step-by-Step',
-      content: `The process is structured and compliance-intensive.
-
-• Step 1 — Submit Form A under PSS Regulations
-• Step 2 — RBI Screening & Fit and Proper Verification
-• Step 3 — In-Principle Approval (valid for 6 months)
-• Step 4 — Submit System Audit Report (SAR)
-• Step 5 — Submit Net Worth Certificate
-• Step 6 — RBI Due Diligence
-• Step 7 — Grant of Certificate of Authorisation (CoA)
-• Step 8 — Commencement within 6 months
-
-In-principle approval lapses automatically if SAR is not submitted within prescribed timeline.`
-    },
-    {
-      id: 'escrow',
-      title: 'Escrow Account Requirement (Critical Compliance)',
-      content: `Non-bank PPI issuers must:
-• Maintain escrow account with scheduled commercial bank
-• Ensure daily balance covers outstanding PPI value and merchant payments
-• Submit quarterly auditor certificate (Annex-5 format)
-• Avoid co-mingling of funds
-
-Permitted debits and credits to escrow are strictly regulated.`
-    },
-    {
-      id: 'core-portion',
-      title: 'Core Portion – Interest Earning Mechanism',
-      content: `An exception permits earning interest on the "core portion" of escrow balances, subject to:
-• Minimum one year operational history
-• 26 fortnights of lowest balance calculation
-• No loan or lien permitted
-
-The computation method is defined in paragraph 12.4 of the Master Directions.`
-    },
-    {
-      id: 'transaction-limits-small',
-      title: 'Transaction Limits – Small PPIs',
-      content: `• Monthly Load — ₹10,000
-• Annual Load — ₹1,20,000
-• Outstanding — ₹10,000
-• Cash Withdrawal — Not allowed
-• Funds Transfer — Not allowed`
-    },
-    {
-      id: 'transaction-limits-fullkyc',
-      title: 'Transaction Limits – Full-KYC PPIs',
-      content: `• Outstanding — ₹2,00,000
-• Pre-Registered Beneficiary Transfer — ₹2,00,000 per month
-• Other Transfers — ₹10,000 per month
-• Cash Withdrawal (Non-bank) — ₹2,000 per transaction; ₹10,000 monthly`
-    },
-    {
-      id: 'interoperability',
-      title: 'Interoperability Requirements',
-      content: `For full-KYC PPIs:
-• Wallet interoperability through UPI
-• Card interoperability via authorised card networks
-• Mandatory interoperability on acceptance infrastructure
-
-Compliance with NPCI standards is mandatory.
-
-For Card-Based PPIs:
-• Must be affiliated with authorised card networks
-• EMV Chip & PIN compliance mandatory
-• Interoperability must be available both on issuing and acceptance side`
-    },
-    {
-      id: 'kyc-aml',
-      title: 'KYC and AML Compliance',
-      content: `PPI Registration in India mandates:
-• Compliance with RBI Master Direction on KYC
-• Adherence to PMLA, 2002
-• Filing Suspicious Transaction Reports (STRs)
-• Maintenance of transaction logs for 10 years`
-    },
-    {
-      id: 'security-fraud',
-      title: 'Security and Fraud Risk Framework',
-      content: `Mandatory safeguards include:
-• Two Factor Authentication
-• Risk-based transaction monitoring
-• Velocity checks
-• Cooling period for beneficiary addition
-• SOC integration
-• Cyber incident reporting to RBI and CERT-In`
-    },
-    {
-      id: 'customer-liability',
-      title: 'Customer Liability in Unauthorised Transactions',
-      content: `• Issuer deficiency — Zero customer liability
-• Report within 3 days — Zero customer liability
-• Report within 4–7 days — Lesser of ₹10,000 or transaction value
-• After 7 days — As per Board-approved policy
-
-The burden of proof lies on the PPI issuer.`
-    },
-    {
-      id: 'reporting',
-      title: 'Reporting Requirements',
-      content: `• Net Worth Certificate — Annual
-• Escrow Auditor Certificate — Quarterly & Annual
-• PPI Statistics — As prescribed
-• Customer Grievance Report — Quarterly
-• System Audit Report — Annual`
-    },
-    {
-      id: 'validity-redemption',
-      title: 'Validity and Redemption',
-      content: `• Minimum validity: 1 year
-• 45-day pre-expiry caution mandatory
-• Non-bank issuers cannot transfer expired balance to P&L for 3 years
-• Redemption must be credited to bank account`
-    },
-    {
-      id: 'inspection-cooling',
-      title: 'Inspection, Suspension and Cooling Period',
-      content: `RBI may:
-• Conduct inspection
-• Impose additional conditions
-• Withdraw authorisation
-• Invoke one-year cooling period in specified cases`
-    },
-    {
-      id: 'common-mistakes',
-      title: 'Common Mistakes in PPI Registration in India',
-      content: `• Incorrect net worth structuring
-• Weak escrow monitoring systems
-• Inadequate SAR documentation
-• Poorly drafted Board policies
-• Non-aligned technology infrastructure
-• Underestimation of reporting burden`
-    },
-    {
-      id: 'professional-structuring',
-      title: 'Why Professional Structuring Improves Approval Probability',
-      content: `PPI Registration in India is not merely a licensing exercise. It is a regulatory commitment to:
-• Financial discipline
-• Technological robustness
-• Governance maturity
-• Customer protection integrity
-
-A well-structured business model, supported by compliant capital planning, audit readiness, escrow discipline, and cyber security framework significantly strengthens approval prospects.
-
-"In a payment ecosystem built on digital trust, compliance is not a cost of doing business — it is the architecture of credibility." — CS Devyani Khambhati – Compliance Expert`
-    },
-    {
-      id: 'docs-corporate',
-      title: 'Documentation Checklist – Corporate',
-      content: `When applying under Form A (as prescribed under the PSS Regulations), RBI expects a comprehensive submission. In practice, incomplete applications are returned without processing.
-
-• Certificate of Incorporation — Establish legal existence
-• Memorandum & Articles of Association — Must cover PPI issuance activity
-• Board Resolution approving application — Demonstrates governance approval
-• Shareholding pattern — Ownership transparency
-• Details of promoters — Fit and proper assessment
-• FDI details (if applicable) — Compliance with FDI policy
-
-The MoA must clearly authorise issuance and operation of Prepaid Payment Instruments. Generic fintech objects are not sufficient.`
-    },
-    {
-      id: 'docs-financial',
-      title: 'Documentation Checklist – Financial',
-      content: `• Latest audited financial statements — Evidence of financial stability
-• Net Worth Certificate (Annex-2 format) — Certified by Chartered Accountant
-• Projected financial statements (3 years) — Sustainability assessment
-• Capital infusion plan — Proof of future compliance with ₹15 crore requirement
-
-For newly incorporated entities, provisional balance sheet and CA certificate are required.`
-    },
-    {
-      id: 'docs-governance',
-      title: 'Documentation Checklist – Governance & Management',
-      content: `• Director Declaration (Annex-3 format) — Fit and proper compliance
-• Director Identification Number (DIN) details — Statutory compliance
-• Background and experience profile — Competency validation
-• Criminal / regulatory proceedings disclosure — Integrity check
-
-RBI performs independent due diligence before granting in-principle approval.`
-    },
-    {
-      id: 'business-plan',
-      title: 'Three-Year Business Plan Structure',
-      content: `Although RBI does not prescribe a specific format, a serious applicant must submit a credible 3-year projection plan.
-
-Business Model Overview should clearly explain:
-• Target customer segment
-• Revenue streams (MDR, interchange, service charges, float income)
-• Merchant acquisition strategy
-• Technology partnerships
-• UPI and card network participation
-
-Financial Projection:
-• Year 1 — Conservative estimate, pilot launch, initial revenue, moderate escrow liability
-• Year 2 — Growth stage, increased merchant base, scaled revenue, high escrow liability
-• Year 3 — Stabilisation, mature volume, sustainable revenue, optimised escrow liability
-
-The projection must demonstrate ability to:
-• Maintain ₹15 crore net worth
-• Sustain escrow balances
-• Meet operational expenditure
-• Invest in cybersecurity infrastructure`
-    },
-    {
-      id: 'escrow-conditions',
-      title: 'Mandatory Escrow Conditions',
-      content: `As per paragraph 12 of the Master Directions:
-• Escrow balance must not be lower than outstanding PPI liability at end of day
-• Only permitted credits and debits allowed
-• No co-mingling of funds
-• Quarterly and annual auditor certification required (Annex-5 format)`
-    },
-    {
-      id: 'escrow-credits',
-      title: 'Permitted Escrow Credits',
-      content: `• Customer loading amounts
-• Refunds
-• Settlement receipts from sponsor bank
-• Transfers from RBI current account`
-    },
-    {
-      id: 'escrow-debits',
-      title: 'Permitted Escrow Debits',
-      content: `• Merchant settlement
-• Sponsor bank payments
-• Government taxes
-• Customer refunds
-• Service charges at predetermined rates
-
-Improper structuring of escrow is a frequent ground for regulatory objection.`
-    },
-    {
-      id: 'sar-coverage',
-      title: 'System Audit Report (SAR) – What It Covers',
-      content: `The SAR must be submitted within 6 months of in-principle approval.
-
-SAR Covers:
-• IT infrastructure architecture
-• Application security audit
-• Cyber security controls
-• Risk management framework
-• Data localisation compliance
-• Disaster Recovery (RTO / RPO readiness)
-• SOC integration
-• Vendor risk management
-
-The audit must be conducted by a CERT-In empanelled auditor.`
-    },
-    {
-      id: 'sar-deficiencies',
-      title: 'Common SAR Deficiencies',
-      content: `• Incomplete penetration testing
-• Weak access control logs
-• No documented incident response framework
-• Absence of board-approved security policy
-• Non-alignment with RBI outsourcing circular
-
-A well-prepared SAR significantly improves final approval chances.`
-    },
-    {
-      id: 'risk-management',
-      title: 'Risk Management and Fraud Control Architecture',
-      content: `RBI expects a robust, board-approved risk framework.
-
-Minimum Security Controls:
-• Two Factor Authentication
-• Velocity monitoring
-• Cooling period after beneficiary addition
-• Real-time transaction alerts
-• Centralised MIS
-• Cyber incident reporting to RBI and CERT-In`
-    },
-    {
-      id: 'customer-protection',
-      title: 'Customer Protection Obligations',
-      content: `• Grievance redressal within 30 days
-• Dedicated nodal officer
-• Quarterly grievance reporting (Annex-6 format)
-• Transparent disclosure of fees
-
-Failure in customer protection can attract supervisory intervention.`
-    },
-    {
-      id: 'cooling-period',
-      title: 'Regulatory Cooling Period',
-      content: `A one-year cooling period applies if:
-• CoA is revoked
-• Authorisation is rejected
-• Licence is surrendered
-• Promoters attempt fresh application via new entity
-
-This provision ensures regulatory discipline.`
-    },
-    {
-      id: 'compliance-calendar',
-      title: 'Post-Registration Compliance Calendar',
-      content: `• Net Worth Certificate — Annual
-• Escrow Auditor Certificate — Quarterly + Annual
-• System Audit Report — Annual
-• Grievance Report — Quarterly
-• RBI Statistical Returns — As prescribed
-• Board Policy Review — Annual minimum`
-    },
-    {
-      id: 'strategic-considerations',
-      title: 'Strategic Considerations Before Applying',
-      content: `Before proceeding with PPI Registration in India, promoters should evaluate:
-• Capital adequacy roadmap
-• Technology ownership vs outsourcing model
-• Sponsor bank alignment
-• Interoperability strategy
-• Regulatory reporting capability
-• Escrow management discipline
-
-This is not a light-touch authorisation. It is a regulated payment system licence.
-
-"Regulatory approval in payments is not merely permission to transact — it is a declaration that your systems are worthy of public trust." — CS Devyani Khambhati – Compliance Expert`
-    },
-    {
-      id: 'final-advisory',
-      title: 'Final Advisory',
-      content: `PPI Registration in India is one of the most compliance-intensive fintech authorisations under RBI supervision. From capital maintenance to escrow discipline, from cyber security audits to customer liability frameworks, every layer demands structured planning.
-
-A properly documented application supported by:
-• Strong capital base
-• Clean governance history
-• Mature technology architecture
-• Transparent business model
-• Fully compliant escrow design
-
-— greatly enhances approval prospects.
-
-PPI Registration in India is a tightly regulated authorisation under RBI's Master Directions. It requires capital adequacy, escrow safeguarding, strict reporting discipline, and advanced risk management systems.
-
-For fintech promoters, NBFC groups, payment aggregators, and digital platforms, understanding the regulatory depth behind PPI Registration in India is essential before submitting an application.`
-    }
-  ];
-
-  const faqGroups = [
-    {
-      category: 'General Overview',
-      faqs: [
-        { q: "What is PPI Registration in India?", a: "PPI Registration in India is the authorisation granted by the Reserve Bank of India (RBI) to entities that wish to issue and operate Prepaid Payment Instruments such as digital wallets and prepaid cards under the Payment and Settlement Systems Act, 2007." },
-        { q: "What is a Prepaid Payment Instrument (PPI)?", a: "A PPI is an instrument that stores monetary value and allows the holder to purchase goods or services, undertake financial transactions, or transfer funds against the stored balance." },
-        { q: "Is RBI approval mandatory for issuing digital wallets in India?", a: "Yes. Any entity intending to issue PPIs that qualify as payment systems must obtain prior approval or authorisation from RBI." },
-        { q: "Who regulates PPIs in India?", a: "PPIs are regulated by the Reserve Bank of India through its Department of Payment and Settlement Systems (DPSS)." },
-        { q: "Are closed-loop gift cards regulated by RBI?", a: "Closed system instruments used only for purchases from the issuing entity are not treated as payment systems and do not require RBI authorisation." },
-        { q: "What are the types of PPIs recognised by RBI?", a: "RBI recognises Small PPIs (minimum-detail PPIs) and Full-KYC PPIs. Specific categories such as Gift PPIs and PPIs for Mass Transit Systems are also permitted." },
-        { q: "What is the difference between Small PPI and Full-KYC PPI?", a: "Small PPIs require minimum customer details and have restricted usage and lower limits. Full-KYC PPIs require complete KYC and permit higher balances, funds transfer, and cash withdrawal within prescribed limits." },
-        { q: "Can PPIs be issued in physical and digital form?", a: "Yes. PPIs may be issued as cards, wallets, or other digital instruments. Paper vouchers are not permitted." },
-        { q: "Can interest be paid on wallet balances?", a: "No. RBI does not permit payment of interest on PPI balances." },
-        { q: "Is PPI Registration a one-time approval?", a: "Authorisation is granted on a perpetual basis, subject to continued compliance with RBI conditions." }
-      ]
-    },
-    {
-      category: 'Eligibility & Applicability',
-      faqs: [
-        { q: "Who can apply for PPI Registration in India?", a: "Banks and non-bank companies incorporated in India may apply, subject to eligibility conditions." },
-        { q: "Can an LLP apply for PPI Registration?", a: "No. Non-bank applicants must be companies incorporated under the Companies Act." },
-        { q: "Can foreign companies apply directly for PPI Registration?", a: "No. The applicant must be an Indian incorporated company. FDI, if any, must comply with applicable policy." },
-        { q: "Is prior regulatory clearance required before applying to RBI?", a: "If the applicant is regulated by another financial sector regulator, a No Objection Certificate from that regulator is required." },
-        { q: "Is there a minimum net worth requirement for non-bank PPI issuers?", a: "Yes. A minimum positive net worth of ₹5 crore at the time of application is required." },
-        { q: "What is the net worth requirement after authorisation?", a: "Non-bank PPI issuers must achieve and maintain ₹15 crore net worth within three financial years of final authorisation." },
-        { q: "Can a startup fintech apply for PPI Registration?", a: "Yes, provided it meets the incorporation and net worth requirements prescribed by RBI." },
-        { q: "Is PPI Registration required for companies offering payment aggregation only?", a: "If the entity issues PPIs, registration is required. Payment aggregators are regulated under a separate framework." },
-        { q: "Can an NBFC automatically issue PPIs?", a: "No. Even if an entity is an NBFC, separate RBI authorisation under the PSS Act is required." },
-        { q: "Is the Memorandum of Association required to include PPI activity?", a: "Yes. The MoA must specifically permit issuance and operation of PPIs." }
-      ]
-    },
-    {
-      category: 'Legal & Regulatory Framework',
-      faqs: [
-        { q: "Under which law is PPI Registration governed?", a: "It is governed by the Payment and Settlement Systems Act, 2007." },
-        { q: "Which RBI document governs PPIs currently?", a: "The Master Directions on Prepaid Payment Instruments, 2021 (as updated)." },
-        { q: "Does PMLA apply to PPI issuers?", a: "Yes. Provisions of the Prevention of Money Laundering Act, 2002 apply." },
-        { q: "Are KYC norms applicable to PPI holders?", a: "Yes. KYC requirements apply based on the category of PPI issued." },
-        { q: "Are PPI issuers required to file Suspicious Transaction Reports?", a: "Yes. STRs must be filed with FIU-IND." },
-        { q: "How long must transaction records be maintained?", a: "Transaction logs must be maintained for at least ten years." },
-        { q: "Does RBI conduct inspections of PPI issuers?", a: "Yes. RBI has powers to inspect and supervise authorised entities." },
-        { q: "Are PPIs subject to interoperability requirements?", a: "Yes. Full-KYC PPIs must be interoperable through UPI or authorised card networks." },
-        { q: "Are escrow arrangements mandatory for non-bank PPI issuers?", a: "Yes. Outstanding balances must be maintained in an escrow account with a scheduled commercial bank." },
-        { q: "Can escrow funds be used freely by the company?", a: "No. Only specific debits and credits permitted under RBI Directions are allowed." }
-      ]
-    },
-    {
-      category: 'Registration / Application Process',
-      faqs: [
-        { q: "How do I apply for PPI Registration in India?", a: "Application must be made in Form A under the Payment and Settlement Systems Regulations." },
-        { q: "Where is the application submitted?", a: "To the Department of Payment and Settlement Systems (DPSS), RBI." },
-        { q: "What is in-principle approval?", a: "It is provisional approval granted by RBI, valid for six months, subject to compliance conditions." },
-        { q: "What happens after in-principle approval?", a: "The applicant must submit a System Audit Report and net worth certificate within the validity period." },
-        { q: "What is a System Audit Report (SAR)?", a: "It is an audit of the applicant's IT systems and security framework conducted by a qualified auditor." },
-        { q: "Can in-principle approval lapse?", a: "Yes, if conditions are not fulfilled within prescribed timelines." },
-        { q: "Is extension possible for SAR submission?", a: "A one-time extension may be requested with valid reasons." },
-        { q: "When is final Certificate of Authorisation granted?", a: "After RBI is satisfied with compliance, audit, and due diligence." },
-        { q: "Must operations begin within a certain period?", a: "Yes. Business must commence within six months of final authorisation." },
-        { q: "What happens if business does not commence?", a: "The authorisation may lapse automatically." }
-      ]
-    },
-    {
-      category: 'Capital, Net Worth & Infrastructure',
-      faqs: [
-        { q: "What constitutes net worth for PPI Registration?", a: "Paid-up equity, compulsorily convertible preference shares, free reserves, share premium, and certain capital reserves, adjusted for specified deductions." },
-        { q: "Are revaluation reserves included in net worth?", a: "No." },
-        { q: "Is annual net worth certification required?", a: "Yes. A Chartered Accountant certificate must be submitted annually." },
-        { q: "Is there a requirement to maintain escrow balance daily?", a: "Yes. Escrow balance must not fall below outstanding liability at end of day." },
-        { q: "Can interest be earned on escrow funds?", a: "Interest may be earned only on the 'core portion' under specified conditions." },
-        { q: "Can loans be taken against escrow funds?", a: "No." },
-        { q: "Is a separate escrow account required for each product?", a: "The Master Directions allow one or more escrow accounts, subject to conditions." },
-        { q: "Are disaster recovery systems required?", a: "Yes. PPI issuers must maintain appropriate disaster recovery capability." },
-        { q: "Is SOC integration required?", a: "Yes. Centralised monitoring of security events is required." },
-        { q: "Are cyber incidents reportable to RBI?", a: "Yes, immediately." }
-      ]
-    },
-    {
-      category: 'Documentation & Declarations',
-      faqs: [
-        { q: "Is a director declaration required?", a: "Yes. Directors must submit declaration and undertaking in prescribed format (Annex-3)." },
-        { q: "Is a CA certificate required at application stage?", a: "Yes, to certify compliance with net worth requirement (Annex-2)." },
-        { q: "Are audited financial statements required?", a: "Yes." },
-        { q: "Must FDI details be disclosed?", a: "Yes." },
-        { q: "Are details of promoters required?", a: "Yes, for fit and proper assessment." },
-        { q: "Is Board approval mandatory before applying?", a: "Yes." },
-        { q: "Are co-branding arrangements allowed?", a: "Yes, subject to compliance and approval conditions." },
-        { q: "Is separate approval required for co-branded PPIs?", a: "Yes, for non-bank issuers." },
-        { q: "Must brand name be disclosed to RBI?", a: "Yes." },
-        { q: "Is outsourcing permitted?", a: "Yes, subject to RBI outsourcing guidelines." }
-      ]
-    },
-    {
-      category: 'Timelines & Fees',
-      faqs: [
-        { q: "How long does RBI take to grant approval?", a: "There is no fixed statutory timeline. It depends on completeness and compliance." },
-        { q: "Is there an application fee?", a: "Yes, prescribed under the Regulations." },
-        { q: "How long is in-principle approval valid?", a: "Six months." },
-        { q: "Can RBI reject an application?", a: "Yes, if eligibility or compliance requirements are not met." },
-        { q: "Is there a cooling period after rejection?", a: "Yes. A one-year cooling period may apply in specified situations." },
-        { q: "Is renewal required periodically?", a: "Authorisation is perpetual but subject to compliance and regulatory oversight." },
-        { q: "Can RBI withdraw authorisation?", a: "Yes, for non-compliance." },
-        { q: "Are reporting timelines strictly enforced?", a: "Yes." },
-        { q: "Are quarterly returns mandatory?", a: "Yes, including grievance and escrow reports." },
-        { q: "Is late submission penalised?", a: "Regulatory action may follow." }
-      ]
-    },
-    {
-      category: 'Post-Registration Compliance',
-      faqs: [
-        { q: "Are annual system audits mandatory?", a: "Yes." },
-        { q: "Is customer grievance reporting required?", a: "Yes, quarterly." },
-        { q: "Must fees be transparently disclosed?", a: "Yes." },
-        { q: "Are customer alerts mandatory?", a: "Yes, for transactions." },
-        { q: "Is 2FA required for transactions?", a: "Yes, except certain specified categories." },
-        { q: "Can Small PPIs be converted to Full-KYC PPIs?", a: "Yes, after completing KYC." },
-        { q: "Must inactive PPIs be flagged?", a: "Yes, after one year of inactivity." },
-        { q: "Is redemption permitted after expiry?", a: "Yes, subject to rules." },
-        { q: "Can expired balances be transferred to P&L?", a: "Non-bank issuers cannot do so for at least three years." },
-        { q: "Is interoperability mandatory for Full-KYC PPIs?", a: "Yes." }
-      ]
-    },
-    {
-      category: 'Operational Restrictions & Permissions',
-      faqs: [
-        { q: "Can Small PPIs allow cash withdrawal?", a: "No." },
-        { q: "What is the maximum balance in Full-KYC PPI?", a: "₹2,00,000." },
-        { q: "What is the maximum balance in Small PPI?", a: "₹10,000." },
-        { q: "Are cross-border transactions allowed?", a: "Limited outward and inward use is permitted under specified conditions." },
-        { q: "Can PPIs be used under LRS?", a: "No." },
-        { q: "Are Gift PPIs reloadable?", a: "No." },
-        { q: "Are PPI-MTS instruments subject to validity limits?", a: "They may have perpetual validity." },
-        { q: "Can funds be transferred from Small PPIs?", a: "No." },
-        { q: "Is pre-registration of beneficiaries required?", a: "Yes, for higher transfer limits." },
-        { q: "Is cash loading permitted?", a: "Yes, subject to limits." }
-      ]
-    },
-    {
-      category: 'Penalties, Cancellation & Regulatory Action',
-      faqs: [
-        { q: "Can RBI revoke CoA for escrow violations?", a: "Yes." },
-        { q: "What happens if net worth falls below requirement?", a: "Regulatory restrictions may be imposed." },
-        { q: "Can directors be held responsible?", a: "Fit and proper standards apply." },
-        { q: "Is customer liability framework mandatory?", a: "Yes." },
-        { q: "Is customer compensation required in unauthorised transactions?", a: "Yes, as per prescribed liability framework." },
-        { q: "Can RBI impose additional conditions post approval?", a: "Yes." },
-        { q: "Is cooling period applicable after surrender?", a: "Yes." },
-        { q: "Can RBI inspect without prior notice?", a: "RBI has inspection powers under the Act." },
-        { q: "Is non-compliance reportable to Board?", a: "Yes." },
-        { q: "Can operations continue during regulatory review?", a: "Subject to RBI's direction." }
-      ]
-    },
-    {
-      category: 'Practical & Scenario-Based Questions',
-      faqs: [
-        { q: "Can a company operate wallet services while application is pending?", a: "No." },
-        { q: "Can escrow account be shifted to another bank?", a: "Yes, with prior intimation and safeguards." },
-        { q: "Can merchant payments be co-mingled with other funds?", a: "No." },
-        { q: "Are agents allowed to load wallets?", a: "Yes, subject to due diligence and board policy." },
-        { q: "Is RBI approval needed for major product changes?", a: "Yes, major changes must be communicated." },
-        { q: "Can PPIs be issued to foreign nationals visiting India?", a: "Yes, under specified conditions." },
-        { q: "Are grievance timelines prescribed?", a: "Yes, complaints should be resolved preferably within 30 days." },
-        { q: "Is compliance with card network rules mandatory?", a: "Yes, where cards are issued." },
-        { q: "Can escrow shortfall be adjusted later?", a: "No. Shortfall must be immediately reported." },
-        { q: "Does RBI require daily reconciliation?", a: "Yes, adequate monitoring is required." },
-        { q: "Can promoters reapply through new company after rejection?", a: "Cooling period restrictions may apply." },
-        { q: "Is Board-approved policy required for issuance categories?", a: "Yes." },
-        { q: "Are merchant lists required to be submitted to bank?", a: "Yes, for escrow monitoring." },
-        { q: "Can PPIs be used for peer-to-peer transfers?", a: "Only Full-KYC PPIs within prescribed limits." },
-        { q: "Is reporting to CERT-In mandatory in cyber incidents?", a: "Yes." },
-        { q: "Is pre-funding of overseas merchants allowed?", a: "No." },
-        { q: "Can PPI issuer set its own internal transaction caps?", a: "Yes, within regulatory ceilings." },
-        { q: "Are audit certificates required quarterly?", a: "Yes, for escrow balances." },
-        { q: "Can RBI place restrictions without cancelling licence?", a: "Yes." },
-        { q: "Is continuous compliance essential after registration?", a: "Yes. PPI Registration in India is an ongoing regulatory responsibility, not a one-time approval." }
-      ]
-    }
+  const overviewCards: Card[] = [
+    { title: 'Regulator', body: 'Reserve Bank of India' },
+    { title: 'Legal Framework', body: 'Payment and Settlement Systems Act, 2007' },
+    { title: 'Applicable Direction', body: 'RBI Master Directions on Prepaid Payment Instruments, 2021, as amended from time to time' },
+    { title: 'Authorisation Type', body: 'Certificate of Authorisation for issuing and operating PPIs' },
+    { title: 'Common Instruments', body: 'Wallets, cards, gift instruments and stored value instruments' },
+    { title: 'PPI Types', body: 'Closed System, Semi-Closed System and Open System PPIs' },
+    { title: 'Non-Bank Authorisation', body: 'Required for non-bank entities issuing semi-closed PPIs' },
+    { title: 'Open System PPIs', body: 'Issued only by banks' },
+    { title: 'Cash Withdrawal', body: 'Not permitted for semi-closed PPIs; permitted for open system PPIs issued by banks as per RBI framework' },
+    { title: 'Interest on PPI Balance', body: 'Not payable' },
+    { title: 'Timeline', body: 'Indicative and subject to RBI review' }
   ];
 
   return (
     <ServicePageLayout
       tags={[
-        { emoji: '🏦', label: 'RBI' },
-        { emoji: '👛', label: 'PPI' },
-        { emoji: '📜', label: 'Master Directions 2021 (Updated 2024)' },
-        { emoji: '⚖️', label: 'PSS Act 2007' },
-        { emoji: '👛', label: 'Digital Wallet' },
-        { emoji: '💳', label: 'Prepaid Card' }
+        { emoji: '🏦', label: 'RBI Regulatory Advisory' },
+        { emoji: '👛', label: 'Wallet & Prepaid Card Structuring' },
+        { emoji: '📜', label: 'PPI Authorisation Support' },
+        { emoji: '🔐', label: 'KYC & AML Framework' },
+        { emoji: '🏛️', label: 'Escrow and Settlement Compliance' },
+        { emoji: '✅', label: 'Post-Authorisation Compliance' }
       ]}
       breadcrumb={[
         { label: 'Home', href: '/' },
         { label: 'RBI Services', href: '/rbi' },
         { label: 'PPI Registration' }
       ]}
-      title="PPI Registration in India"
-      readTime="22 min read"
+      title="PPI Registration in India - Complete RBI Authorisation Guide for Prepaid Payment Instruments"
+      heroDescription={
+        <p className="m-0">
+          <strong>PPI Registration in India</strong> is the RBI authorisation required for entities that intend to issue and operate Prepaid Payment Instruments such as wallets, cards, gift instruments and other stored value payment instruments. Under RBI&apos;s Prepaid Payment Instrument framework, authorised issuers must comply with net worth, KYC, customer protection, interoperability, cyber security, escrow and reporting obligations.
+        </p>
+      }
+      heroActions={
+        <>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for PPI Registration</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-white text-[#0096D6] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check PPI Eligibility</Link>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm text-center">WhatsApp Estabizz Team</a>
+        </>
+      }
+      trustLine="Trusted support for RBI, SEBI, IRDAI, IFSCA and financial regulatory advisory across India and global markets."
+      readTime="26 min read"
+      displayYear="2025"
       focusKeyword="PPI Registration in India"
-      sections={sections}
-      ctaTitle="Ready to Launch Your Digital Wallet or Prepaid Card?"
-      ctaDescription="Get expert guidance on ₹5 Cr → ₹15 Cr net worth structuring, Form A application filing, escrow architecture, System Audit Report (SAR), interoperability planning, and end-to-end RBI Certificate of Authorisation."
+      sections={tocSections}
+      ctaTitle="Apply for PPI Registration"
+      ctaDescription="Get structured RBI support for wallet, prepaid card and stored value models, including business model review, net worth readiness, KYC/AML, escrow, technology documentation and post-authorisation compliance."
       quickFacts={[
-        { label: 'Regulator', value: 'Reserve Bank of India (DPSS)' },
-        { label: 'Master Direction', value: 'PPI Master Directions 2021 (Updated Dec 27, 2024)' },
-        { label: 'Legal Authority', value: 'PSS Act, 2007' },
-        { label: 'Eligible Entity', value: 'Company (Companies Act)' },
-        { label: 'Net Worth at Application', value: '₹5 Crore' },
-        { label: 'Net Worth Within 3 FY', value: '₹15 Crore (ongoing)' },
-        { label: 'Small PPI Limit', value: '₹10,000 outstanding' },
-        { label: 'Full-KYC PPI Limit', value: '₹2,00,000 outstanding' },
-        { label: 'In-Principle Validity', value: '6 months' },
-        { label: 'Commencement', value: 'Within 6 months of CoA' },
-        { label: 'Cooling Period', value: '1 year (specified cases)' },
-        { label: 'Application Form', value: 'Form A (PSS Regulations)' }
+        { label: 'Regulator', value: 'RBI' },
+        { label: 'Law', value: 'PSS Act, 2007' },
+        { label: 'Framework', value: 'PPI Master Directions' },
+        { label: 'Types', value: 'Closed / Semi-Closed / Open' },
+        { label: 'Non-Bank PPI', value: 'Authorisation required' },
+        { label: 'Open PPI', value: 'Banks only' },
+        { label: 'Interest', value: 'Not payable' },
+        { label: 'Timeline', value: 'Subject to RBI review' }
       ]}
       relatedArticles={[
-        { title: 'Payment Aggregator License', href: '/rbi/payment-aggregator-license-in-india', category: 'RBI', description: 'Payment Aggregator License — complete regulatory guide.' },
-        { title: 'NBFC Registration in India', href: '/rbi/nbfc-registration-in-india', category: 'RBI', description: 'NBFC Registration in India — complete regulatory guide.' },
-        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license', category: 'RBI', description: 'NBFC Account Aggregator License — complete regulatory guide.' },
-        { title: 'NBFC SRO Registration', href: '/rbi/nbfc-sro-registration', category: 'RBI', description: 'NBFC SRO Registration — complete regulatory guide.' },
-        { title: 'ARC Registration in India', href: '/rbi/arc-registration-in-india', category: 'RBI', description: 'ARC Registration in India — complete regulatory guide.' },
-        { title: 'LendTech Services', href: '/rbi/lendtech-services', category: 'RBI', description: 'LendTech Services — complete regulatory guide.' }
+        { title: 'Payment Aggregator License in India', href: '/rbi/payment-aggregator-license-in-india', category: 'RBI', description: 'RBI authorisation support for PA-O, PA-P and PA-CB payment aggregator models.' },
+        { title: 'NBFC Registration in India', href: '/rbi/nbfc-registration-in-india', category: 'RBI', description: 'RBI registration guide for NBFC-ICC with NOF, principal business test and COSMOS filing.' },
+        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license', category: 'RBI', description: 'RBI licensing framework for Account Aggregators and data sharing business models.' },
+        { title: 'RBI Services in India', href: '/rbi/rbi-services', category: 'RBI', description: 'RBI licensing, compliance and regulatory advisory support.' },
+        { title: 'NBFC Legal Support Services', href: '/rbi/nbfc-legal-support', category: 'RBI', description: 'Legal and compliance support for RBI-regulated financial entities.' }
       ]}
-      finalCtaTitle="Need Expert Support for PPI Authorisation?"
-      finalCtaDescription="Our compliance specialists provide end-to-end PPI authorisation support — Form A preparation, net-worth audit, MoA review, escrow agreement structuring, System Audit Report co-ordination with CERT-In auditors, interoperability planning, and ongoing reporting compliance under the PPI Master Directions."
+      finalCtaTitle="Start Your PPI Registration Journey with Estabizz"
+      finalCtaDescription="Build your PPI application with structured RBI regulatory support, business model assessment, net worth readiness review, KYC/AML framework, wallet technology documentation, customer fund protection structure, policy drafting and post-authorisation compliance assistance."
     >
-      {sections.map((section) => (
-        <section key={section.id} id={section.id} className="mb-12">
-          <h2>{section.title}</h2>
-          <div className="prose max-w-none">
-            {section.content.split('\n\n').map((paragraph, idx) => (
-              paragraph.startsWith('•') ? (
-                <ul key={idx} className="list-disc pl-6">
-                  {paragraph.split('\n').filter(l => l.trim()).map((item, i) => (
-                    <li key={i}>{item.replace('• ', '')}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p key={idx}>{paragraph}</p>
-              )
-            ))}
-          </div>
-        </section>
-      ))}
+      <Section id="quick-overview" title="PPI Registration in India: Quick Overview">
+        <CardGrid cards={overviewCards} />
+        <div className="info-box">The above details are indicative and must be evaluated based on the applicant&apos;s business model, PPI type, KYC framework, technology architecture, merchant network, settlement design and latest RBI directions at the time of filing.</div>
+      </Section>
 
-      <section id="faq" className="mt-16">
-        <h2>Frequently Asked Questions (120 FAQs)</h2>
-        {faqGroups.map((group, idx) => (
-          <div key={idx} className="mb-8">
-            <h3>{group.category}</h3>
-            <div className="faq-accordion">
-              {group.faqs.map((faq, i) => (
-                <details key={i} className="faq-item">
-                  <summary>{faq.q}</summary>
-                  <div>{faq.a}</div>
-                </details>
-              ))}
+      <Section id="what-is-ppi-registration" title="What is PPI Registration in India?">
+        <p>PPI Registration in India refers to RBI authorisation for entities that issue and operate Prepaid Payment Instruments. PPIs are payment instruments that facilitate purchase of goods and services, including financial services, remittance facilities and other permitted payment uses, against the value stored on such instruments.</p>
+        <p>No entity can set up and operate a payment system for issuance of PPIs without prior approval or authorisation from RBI, except closed system PPIs that are outside RBI authorisation where they are used only for purchase of goods and services from the issuing entity and do not permit third-party settlement.</p>
+      </Section>
+
+      <Section id="legal-foundation" title="Legal Foundation of PPI Registration in India">
+        <DataTable headers={['Particular', 'Details']} rows={[
+          ['Regulator', 'Reserve Bank of India'],
+          ['Primary Law', 'Payment and Settlement Systems Act, 2007'],
+          ['Key Provision', 'Section 18 read with Section 10(2)'],
+          ['Applicable Direction', 'RBI Master Directions on Prepaid Payment Instruments, 2021, as amended from time to time'],
+          ['Applicable Entities', 'PPI issuers and system participants'],
+          ['Authorisation Issued', 'Certificate of Authorisation, where applicable'],
+          ['Core Regulatory Focus', 'Customer fund safety, KYC, AML, cyber security, interoperability, grievance redressal and settlement discipline']
+        ]} />
+        <p>The RBI PPI framework provides the regulatory structure for authorisation, regulation and supervision of entities issuing and operating PPIs in India.</p>
+      </Section>
+
+      <Section id="what-is-ppi" title="What is a Prepaid Payment Instrument?">
+        <p>A Prepaid Payment Instrument is a payment instrument that allows the holder to purchase goods and services, including financial services and remittance facilities, using value stored on the instrument. PPIs may be issued in the form of wallets, cards or other permitted instruments.</p>
+        <BulletList items={['Wallet-based PPI', 'Card-based PPI', 'Gift instrument', 'Transit or mobility PPI', 'Semi-closed merchant network instrument', 'Bank-issued open system PPI']} />
+      </Section>
+
+      <Section id="types-of-ppis" title="Types of Prepaid Payment Instruments in India">
+        <DataTable headers={['PPI Type', 'Meaning', 'RBI Authorisation Position', 'Cash Withdrawal']} rows={[
+          ['Closed System PPI', 'Issued by an entity for purchase of goods and services only from that entity', 'Generally does not require RBI authorisation where no third-party settlement is involved', 'Not permitted'],
+          ['Semi-Closed System PPI', 'Used at a group of clearly identified merchant locations or establishments having a specific contract with issuer', 'RBI authorisation required for non-bank issuers', 'Not permitted'],
+          ['Open System PPI', 'Can be used at any merchant for purchase of goods and services', 'Issued only by banks', 'Permitted as per RBI framework']
+        ]} />
+        <div className="warning-box">Closed system PPIs should not be confused with semi-closed PPIs. If the instrument is accepted by third-party merchants or involves payment settlement outside the issuing entity&apos;s own goods and services, RBI authorisation must be carefully evaluated.</div>
+      </Section>
+
+      <Section id="ppi-vs-pa" title="PPI Registration vs Payment Aggregator License">
+        <DataTable headers={['Particular', 'PPI Registration', 'Payment Aggregator License']} rows={[
+          ['Core Activity', 'Issuance and operation of stored value instruments', 'Aggregation of customer payments and settlement to merchants'],
+          ['Regulator', 'RBI', 'RBI'],
+          ['Instrument', 'Wallet, card or stored value instrument', 'Payment collection and settlement infrastructure'],
+          ['Customer Fund Position', 'Customer stores value with issuer', 'PA collects funds for merchant settlement'],
+          ['Escrow / Settlement', 'Customer fund protection and settlement framework applies', 'Escrow framework for merchant settlement applies'],
+          ['Typical Business', 'Wallet, prepaid card, gift card, transit wallet', 'Online checkout, POS aggregation, merchant payment settlement'],
+          ['Authorisation', 'PPI issuer authorisation', 'PA authorisation']
+        ]} />
+        <p>Some fintech models may require both PPI and Payment Aggregator analysis depending on fund flow, wallet structure, merchant settlement and technology model.</p>
+      </Section>
+
+      <Section id="who-requires-ppi" title="Who Requires PPI Registration in India?">
+        <CardGrid cards={[
+          { title: 'Digital Wallet Companies', body: 'Entities issuing wallets for purchase of goods, services or remittances.' },
+          { title: 'Prepaid Card Issuers', body: 'Companies planning to issue reloadable or non-reloadable prepaid cards.' },
+          { title: 'Gift Instrument Platforms', body: 'Businesses issuing prepaid gift instruments beyond closed-loop structures.' },
+          { title: 'Transit and Mobility Payment Platforms', body: 'Entities enabling stored value instruments for travel, toll, metro, bus or mobility payments.' },
+          { title: 'Merchant Network Wallet Businesses', body: 'Companies creating instruments accepted across a group of identified merchants.' },
+          { title: 'Fintech Companies with Stored Value Models', body: 'Startups where users load value into an instrument for future payments.' }
+        ]} />
+        <p>Banks and non-banks have different permissions. Open system PPIs are issued only by banks, while non-bank entities generally require authorisation for semi-closed PPI issuance.</p>
+      </Section>
+
+      <Section id="eligibility" title="Eligibility Criteria for PPI Registration in India">
+        <DataTable headers={['Eligibility Criterion', 'Requirement', 'Practical Meaning']} rows={[
+          ['Entity Type', 'Company incorporated in India', 'Non-bank applicants should be properly incorporated and structured'],
+          ['Authorisation Requirement', 'Required for non-bank issuers of semi-closed PPIs', 'Application must be made to RBI'],
+          ['Business Model', 'Must clearly fall within permitted PPI activity', 'Wallet or stored value model must be clearly explained'],
+          ['Net Worth', 'Must meet RBI-prescribed minimum net worth', 'Capital readiness must be demonstrated'],
+          ['Fit and Proper', 'Promoters and directors should satisfy integrity expectations', 'Clean regulatory and financial track record is important'],
+          ['KYC / AML Framework', 'Required', 'Customer onboarding, due diligence and monitoring must be demonstrated'],
+          ['Technology Readiness', 'Required', 'Secure systems, audit controls and cyber resilience are expected'],
+          ['Customer Protection', 'Required', 'Grievance redressal, transparency and refund mechanisms must be in place']
+        ]} />
+      </Section>
+
+      <Section id="net-worth" title="Net Worth Requirement for PPI Registration in India">
+        <p>RBI prescribes minimum net worth requirements for non-bank PPI issuers. The exact requirement should be verified from the latest RBI Master Directions and applicable circulars before filing.</p>
+        <DataTable headers={['Requirement', 'Practical Position']} rows={[
+          ['Minimum Net Worth', 'As prescribed under RBI PPI framework'],
+          ['Certification', 'Statutory auditor / CA certificate may be required'],
+          ['Ongoing Maintenance', 'Net worth must be maintained continuously'],
+          ['Net Worth Review', 'RBI may review financial strength during application and supervision']
+        ]} />
+        <div className="warning-box">The latest net worth threshold must be verified at the time of filing. This page avoids relying on old capital thresholds and uses the current RBI PPI framework as the reference point.</div>
+      </Section>
+
+      <Section id="kyc-aml" title="KYC and AML Requirements for PPI Issuers">
+        <DataTable headers={['Requirement', 'Practical Meaning']} rows={[
+          ['Customer Due Diligence', 'PPI holders must be onboarded according to applicable KYC norms'],
+          ['Minimum Detail PPI', 'Limited-use instruments may have restrictions and limits'],
+          ['Full-KYC PPI', 'Higher usage, interoperability and broader functionality may be permitted'],
+          ['PMLA Compliance', 'AML obligations apply as applicable'],
+          ['Suspicious Transaction Monitoring', 'Transactions must be monitored for risk indicators'],
+          ['Record Maintenance', 'KYC and transaction records must be preserved'],
+          ['Periodic Updates', 'KYC updates must be undertaken as prescribed'],
+          ['FIU-IND Reporting', 'Applicable reporting obligations must be evaluated']
+        ]} />
+      </Section>
+
+      <Section id="issuance-loading-limits" title="Issuance, Loading and Operational Limits">
+        <DataTable headers={['Area', 'Regulatory Position']} rows={[
+          ['Form of PPI', 'Cards, wallets or other permitted instruments'],
+          ['Loading Channels', 'Cash, bank account, debit card, credit card and other permitted instruments'],
+          ['Currency', 'INR for domestic PPIs'],
+          ['Interest on Balance', 'No interest payable on PPI balances'],
+          ['Cash Loading', 'Subject to RBI-prescribed monthly and instrument limits'],
+          ['Gift Instruments', 'Generally non-reloadable and subject to value limits'],
+          ['Validity', 'Minimum validity and redemption norms apply'],
+          ['Refunds', 'Must follow RBI-prescribed norms and customer protection framework']
+        ]} />
+        <p>Loading, reloading, cash loading and usage limits should always be aligned with the latest RBI directions and PPI category.</p>
+      </Section>
+
+      <Section id="escrow-fund-protection" title="Escrow and Customer Fund Protection for PPI Issuers">
+        <p>Non-bank PPI issuers are required to maintain customer funds in accordance with RBI&apos;s fund protection and escrow / settlement framework. The objective is to ensure that customer balances are safeguarded and used only for permitted purposes.</p>
+        <DataTable headers={['Requirement', 'Practical Meaning']} rows={[
+          ['Designated Account / Escrow', 'Customer funds should be maintained in permitted account structure'],
+          ['Permitted Credits', 'PPI sale, reload amounts, refunds and permitted settlement inflows'],
+          ['Permitted Debits', 'Merchant settlement, permitted transfers, taxes, refunds and related permitted payments'],
+          ['No Interest to PPI Holder', 'PPI balances should not earn interest for holders'],
+          ['Reconciliation', 'Daily monitoring and reconciliation required'],
+          ['Customer Fund Safety', 'Funds should not be misused for business expenses']
+        ]} />
+      </Section>
+
+      <Section id="interoperability" title="Interoperability and UPI Access for PPIs">
+        <p>RBI has progressively enabled interoperability for certain PPI structures. Full-KYC PPIs may be allowed to participate in interoperable payment systems subject to applicable conditions. RBI has also enabled UPI access for full-KYC PPIs through third-party UPI applications, subject to applicable framework and operational arrangements.</p>
+        <BulletList items={['Full-KYC PPI interoperability', 'UPI access for eligible PPIs', 'NPCI operational requirements', 'Customer consent and security', 'Transaction monitoring', 'Technical integration readiness']} />
+        <p>Interoperability must be implemented only in accordance with RBI and NPCI requirements.</p>
+      </Section>
+
+      <Section id="customer-protection" title="Customer Protection and Grievance Redressal">
+        <BulletList items={['Transparent terms and conditions', 'Clear charges and fees disclosure', 'Customer complaint mechanism', 'Refund and failed transaction process', 'Transaction alerts', 'Customer liability framework', 'Fraud reporting mechanism', 'Ombudsman / escalation support where applicable']} />
+        <p>Customer protection is central to the PPI framework. Weak grievance handling can attract regulatory concern.</p>
+      </Section>
+
+      <Section id="it-cyber-security" title="IT and Cyber Security Requirements for PPI Registration">
+        <p>PPI issuers operate payment systems and are expected to maintain robust cyber resilience, payment security controls and data protection systems.</p>
+        <h3>IT Governance</h3>
+        <BulletList items={['Board-approved IT and information security policy', 'IT steering committee or technology risk oversight', 'Cyber risk assessment', 'Security incident response plan', 'Periodic audit and review']} />
+        <h3>Data Security</h3>
+        <BulletList items={['Encryption of sensitive data', 'Secure authentication', 'Access control', 'Secure application development', 'Log monitoring and forensic readiness']} />
+        <h3>Payment Security</h3>
+        <BulletList items={['Fraud monitoring', 'Transaction anomaly detection', 'Device and account risk controls', 'Secure APIs', 'Vulnerability assessment and penetration testing']} />
+        <h3>Data Localisation and Audit</h3>
+        <BulletList items={['Payment system data storage in India as applicable', 'Vendor and cloud architecture review', 'Contractual controls over data access', 'System audit', 'Cyber security audit', 'VAPT', 'Incident reporting', 'Board reporting']} />
+      </Section>
+
+      <Section id="technical-checklist" title="Technical Readiness Checklist for PPI Registration in India">
+        <DataTable headers={['Area', 'Status Indicator']} rows={[
+          ['Board-approved IT Policy', 'Required'],
+          ['Information Security Policy', 'Required'],
+          ['Data Localisation Review', 'Required'],
+          ['KYC Integration', 'Required'],
+          ['Transaction Monitoring', 'Required'],
+          ['Fraud Detection System', 'Required'],
+          ['Customer Grievance System', 'Required'],
+          ['Wallet Ledger System', 'Required'],
+          ['Daily Reconciliation', 'Required'],
+          ['Escrow / Settlement Reconciliation', 'Required'],
+          ['Audit Trail', 'Required'],
+          ['VAPT', 'Recommended / required as applicable'],
+          ['Cyber Incident Reporting', 'Required as applicable'],
+          ['BCP-DR Framework', 'Required'],
+          ['Vendor Risk Controls', 'Required']
+        ]} />
+      </Section>
+
+      <Section id="documents-required" title="Documents Required for PPI Registration in India">
+        <DataTable headers={['Category', 'Documents / Information']} rows={[
+          ['Company Documents', 'Certificate of Incorporation, MOA, AOA, PAN, registered office proof and board resolution'],
+          ['Capital Documents', 'Net worth certificate, audited financial statements, bank statements, capital infusion documents'],
+          ['Promoter and Director Documents', 'KYC, PAN, DIN, address proof, professional profile, fit and proper declarations'],
+          ['Business Documents', 'PPI business model, target customer segment, merchant network strategy, revenue model, 3-year financial projections'],
+          ['Policy Documents', 'KYC/AML policy, information security policy, customer grievance policy, risk management policy, refund policy'],
+          ['Technology Documents', 'Wallet architecture, transaction flow, cyber security framework, data localisation architecture, audit readiness documents'],
+          ['Escrow / Settlement Documents', 'Customer fund protection structure, bank account framework, reconciliation process'],
+          ['Compliance Documents', 'Regulatory declarations, board approvals, application forms and other RBI-prescribed documents']
+        ]} />
+      </Section>
+
+      <Section id="registration-process" title="Step-by-Step Process for PPI Registration in India">
+        <div className="step-timeline">
+          {[
+            ['Business Model Assessment', 'Evaluate whether the proposed model is closed system, semi-closed system, open system, wallet, card, gift instrument or another PPI structure.'],
+            ['Entity and Object Clause Review', 'Ensure the company structure and MOA object clause support PPI issuance and payment system activity.'],
+            ['Capital and Net Worth Readiness', 'Review net worth, capital source, auditor certification and financial strength.'],
+            ['Policy and Technology Preparation', 'Prepare KYC/AML policy, IT policy, customer protection framework, wallet architecture, reconciliation controls and cyber security documentation.'],
+            ['Application Preparation', 'Compile RBI application, business plan, financial documents, promoter details, technology details and regulatory declarations.'],
+            ['Submission to RBI', 'File application in the prescribed manner with supporting documents.'],
+            ['RBI Review and Clarifications', 'RBI may review business model, financial strength, governance, technology readiness, KYC framework and customer protection systems.'],
+            ['Grant of Authorisation', 'Upon regulatory satisfaction, RBI may grant authorisation for permitted PPI activity.'],
+            ['Post-Authorisation Setup', 'Implement operational controls, customer onboarding, escrow / settlement reconciliation, reporting, audit and compliance calendar.']
+          ].map(([title, body], index) => (
+            <div key={title} className="step-item">
+              <div className="step-dot" />
+              <div className="step-card">
+                <div className="step-label">Step {index + 1}</div>
+                <h3 className="!p-0 !mb-2 !text-[#0a1628]">{title}</h3>
+                <p className="!mb-0">{body}</p>
+              </div>
             </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="timeline" title="Indicative Timeline for PPI Registration in India">
+        <DataTable headers={['Stage', 'Activity', 'Estimated Duration']} rows={[
+          ['Stage 1', 'Business model and eligibility review', '2 to 3 weeks'],
+          ['Stage 2', 'Entity, capital and MOA readiness', '2 to 4 weeks'],
+          ['Stage 3', 'Policy, business plan and technology documentation', '3 to 6 weeks'],
+          ['Stage 4', 'Application submission', 'Case-specific'],
+          ['Stage 5', 'RBI scrutiny and clarifications', '3 to 6 months or more'],
+          ['Stage 6', 'Authorisation and operational readiness', 'Subject to RBI satisfaction']
+        ]} />
+        <div className="warning-box">The timeline is indicative and depends on application quality, regulatory scrutiny, business model clarity, technology readiness and query cycles.</div>
+      </Section>
+
+      <Section id="common-mistakes" title="Common Mistakes in PPI Registration Applications">
+        <DataTable headers={['Mistake', 'Risk']} rows={[
+          ['Confusing closed system and semi-closed PPI', 'Wrong regulatory assessment'],
+          ['MOA not covering PPI activity', 'Regulatory query or restructuring requirement'],
+          ['Weak net worth documentation', 'Application delay'],
+          ['Unclear fund flow', 'RBI may seek detailed clarification'],
+          ['Weak KYC/AML framework', 'Compliance concern'],
+          ['No customer grievance framework', 'Customer protection concern'],
+          ['Poor wallet ledger architecture', 'Operational risk'],
+          ['No daily reconciliation process', 'Settlement risk'],
+          ['Weak cyber security documentation', 'Technology compliance query'],
+          ['Improper merchant network explanation', 'Business model concern'],
+          ['No realistic business plan', 'Sustainability concern']
+        ]} />
+      </Section>
+
+      <Section id="post-authorisation-compliance" title="Post-Authorisation Compliance for PPI Issuers">
+        <DataTable headers={['Compliance Area', 'Requirement']} rows={[
+          ['KYC / AML Compliance', 'Customer onboarding, due diligence, monitoring and reporting'],
+          ['Customer Fund Protection', 'Proper account structure, reconciliation and permitted usage'],
+          ['Transaction Monitoring', 'Fraud detection and suspicious activity monitoring'],
+          ['Customer Grievance Redressal', 'Complaint handling, refund process and escalation'],
+          ['Technology Audit', 'System audit, cyber security review and VAPT where applicable'],
+          ['Data Security', 'Secure storage, access controls and data localisation'],
+          ['Reporting to RBI', 'Periodic and event-based reporting as prescribed'],
+          ['Board Oversight', 'Policy review, risk review and compliance monitoring'],
+          ['Interoperability Compliance', 'RBI / NPCI requirements where applicable'],
+          ['Agent / Vendor Oversight', 'Due diligence and contractual controls']
+        ]} />
+      </Section>
+
+      <Section id="supervisory-risk" title="Suspension, Cancellation and Supervisory Risk">
+        <DataTable headers={['Trigger', 'Possible Risk']} rows={[
+          ['Unauthorised PPI issuance', 'Regulatory action under PSS Act'],
+          ['Failure to maintain net worth', 'Supervisory concern'],
+          ['Misuse of customer funds', 'Severe regulatory action'],
+          ['KYC / AML breach', 'FIU / RBI concern'],
+          ['Cyber security breach', 'Supervisory action'],
+          ['False disclosures', 'Authorisation cancellation risk'],
+          ['Non-compliance with RBI directions', 'Penalty or restriction'],
+          ['Weak customer grievance handling', 'Regulatory scrutiny'],
+          ['Failure to submit reports', 'Supervisory action']
+        ]} />
+      </Section>
+
+      <Section id="early-structuring" title="Why Early Structuring Matters for PPI Registration in India">
+        <p>PPI Registration in India requires clarity on instrument type, customer fund flow, KYC framework, wallet architecture, settlement process, merchant acceptance network and cyber security. Early structuring helps identify whether the model requires RBI authorisation and whether the applicant is operationally ready before filing.</p>
+        <div className="expert-quote">
+          <blockquote>&quot;In payment businesses, trust is not built only through technology; it is built through disciplined handling of customer funds, transparent governance and regulatory readiness.&quot;</blockquote>
+          <cite>CS Devyani Khambhati - Compliance Expert</cite>
+        </div>
+      </Section>
+
+      <Section id="how-estabizz-helps" title="How Estabizz Helps with PPI Registration in India">
+        <CardGrid cards={[
+          { title: 'PPI Model Assessment', body: 'We help identify whether the model is closed system, semi-closed system, open system, wallet, card, gift instrument or another stored value structure.' },
+          { title: 'Eligibility and Net Worth Review', body: 'We assist in reviewing capital readiness, net worth documentation, auditor certification and financial eligibility.' },
+          { title: 'MOA and Entity Structuring', body: 'We review object clauses and assist with amendment requirements before application filing.' },
+          { title: 'RBI-Ready Business Plan', body: 'We prepare business plan, customer segment strategy, merchant network model, revenue model, 3-year financial projections and compliance narrative.' },
+          { title: 'Policy Documentation', body: 'We assist with KYC/AML policy, information security policy, customer grievance framework, refund policy, risk management policy and operational SOPs.' },
+          { title: 'Technology Compliance Review', body: 'We help map wallet architecture, ledger controls, transaction monitoring, reconciliation, data localisation, cyber security and vendor risk.' },
+          { title: 'Application and Query Support', body: 'We assist in application preparation and structured responses to RBI queries.' },
+          { title: 'Post-Authorisation Compliance', body: 'We support ongoing compliance calendar, policy review, audit coordination, reporting, customer grievance process and regulatory update tracking.' },
+          { title: 'Ticket-Based Execution', body: 'Estabizz follows a structured task-tracking system so clients receive organised updates throughout the engagement.' }
+        ]} />
+      </Section>
+
+      <Section id="why-choose-estabizz" title="Why Choose Estabizz for PPI Registration in India?">
+        <CardGrid cards={[
+          { title: 'RBI Regulatory Expertise', body: 'Our team works across RBI licensing and compliance matters and understands the regulatory expectations for payment system participants.' },
+          { title: 'Payment Business Understanding', body: 'We review fund flow, wallet structure, merchant network, KYC, technology and compliance together.' },
+          { title: 'Business Plan and Documentation Strength', body: 'We prepare practical, regulator-facing business plans, projections, governance documents and operating policies.' },
+          { title: 'Technology + Compliance Approach', body: 'PPI authorisation requires cyber-readiness, customer fund protection and robust operational systems. We integrate regulatory and technology documentation.' },
+          { title: 'Multi-Regulator Experience', body: 'Estabizz experience across RBI, SEBI, IRDAI and IFSCA enables a wider regulatory perspective.' },
+          { title: 'End-to-End Support', body: 'From eligibility review to authorisation application, query support and post-authorisation compliance, we provide organised professional handholding.' }
+        ]} />
+      </Section>
+
+      <Section id="faqs" title="FAQs on PPI Registration in India">
+        <div className="faq-accordion">
+          {faqs.map((faq) => (
+            <details key={faq.q} className="faq-item">
+              <summary>{faq.q}</summary>
+              <div>{faq.a}</div>
+            </details>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="expert-review" title="Reviewed by Estabizz Compliance Expert">
+        <div className="success-box">
+          <h3 className="!p-0 !mb-2 !text-[#0a1628]">CS Devyani Khambhati</h3>
+          <p className="!mb-2"><strong>Designation:</strong> Compliance Expert | Estabizz Fintech Private Limited</p>
+          <p className="!mb-2"><strong>Expertise:</strong> RBI, SEBI, IRDAI, IFSCA, fintech regulatory compliance, payment system authorisation, PPI registration, KYC/AML, cyber compliance and post-authorisation regulatory support.</p>
+          <p className="!mb-0">This content has been prepared from a regulatory advisory perspective to help fintech founders, wallet businesses, prepaid card issuers, payment companies and compliance teams understand the broad RBI framework for Prepaid Payment Instrument authorisation in India.</p>
+        </div>
+        <div className="warning-box">This content is for general informational purposes only and should not be treated as legal, regulatory, financial or investment advice. RBI requirements, application formats, net worth thresholds, KYC requirements, interoperability rules, escrow obligations, cyber security expectations, reporting obligations and approval processes may change from time to time. Applicants should verify the latest regulatory position and obtain professional advice before filing any application with RBI.</div>
+      </Section>
+
+      <Section id="speak-to-expert" title="Start Your PPI Registration Journey with Estabizz">
+        <div className="rounded-2xl bg-gradient-to-br from-[#0a1628] to-[#1a2b45] p-6 md:p-8 text-white">
+          <p className="!text-blue-100">Build your PPI application with structured RBI regulatory support, business model assessment, net worth readiness review, KYC/AML framework, wallet technology documentation, customer fund protection structure, policy drafting and post-authorisation compliance assistance.</p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Link href="/contact" className="rounded-xl bg-white px-5 py-3 text-center text-sm font-bold text-[#0077B6] hover:bg-blue-50">Speak to RBI Compliance Expert</Link>
+            <Link href="/get-started" className="rounded-xl bg-[#0096D6] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#0077B6]">Apply for PPI Registration</Link>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="rounded-xl bg-[#10b981] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#059669]">WhatsApp Estabizz Team</a>
           </div>
-        ))}
-      </section>
+        </div>
+      </Section>
     </ServicePageLayout>
   );
 }

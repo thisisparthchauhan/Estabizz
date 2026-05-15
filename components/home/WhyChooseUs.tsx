@@ -1,22 +1,23 @@
 "use client";
+
 import React, { useEffect, useRef, useState } from "react";
 
 const pillars = [
     {
         title: "Regulatory Expertise",
-        body: "Qualified CAs, CSs and legal professionals with hands-on experience across RBI, SEBI, IRDAI, IFSCA and MCA frameworks. We understand the regulator's language — not just the form."
+        body: "Qualified CAs, CSs, lawyers and regulatory professionals with hands-on experience across RBI, SEBI, IRDAI, IFSCA and MCA frameworks."
     },
     {
         title: "Regulator-Ready Documentation",
-        body: "Approvals move faster when documentation is precise. Every application is structured, reviewed, and submitted with regulatory discipline."
+        body: "Business plans, declarations, policy frameworks and supporting records are prepared with regulatory discipline."
     },
     {
         title: "Complete Ownership",
-        body: "From preparation to approval and ongoing compliance — we remain accountable at every stage. No handovers. No ambiguity."
+        body: "From preparation to approval and ongoing compliance, we keep the engagement structured and accountable."
     },
     {
         title: "Transparent Commitments",
-        body: "Clear fee structure. Defined timelines. Structured communication. Because compliance should never begin with uncertainty."
+        body: "Defined scope, realistic timelines, clear fees and practical communication from start to finish."
     }
 ];
 
@@ -26,76 +27,60 @@ export default function WhyChooseUs() {
 
     useEffect(() => {
         const observer = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting) {
+            ([entry]) => {
+                if (entry.isIntersecting) {
                     setIsVisible(true);
                     observer.disconnect();
                 }
             },
-            { threshold: 0.1 }
+            { threshold: 0.14 }
         );
         if (sectionRef.current) observer.observe(sectionRef.current);
         return () => observer.disconnect();
     }, []);
 
     return (
-        <section ref={sectionRef} className="py-[80px] relative bg-transparent overflow-hidden">
-
-            <div className="max-w-[1240px] mx-auto px-6 lg:px-[80px] relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 items-center">
-
-                {/* Left Side Content */}
-                <div className={`transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
-                    <h2 className="text-[32px] md:text-[40px] font-black text-[#0a1628] leading-[1.2] tracking-tight mb-4">
-                        Built on Trust. Driven by Accountability
-                    </h2>
-                    <div className="text-[18px] md:text-[20px] font-bold text-[#0096D6] italic mb-8">
-                        Because compliance is not a product — it is a responsibility.
+        <section ref={sectionRef} className="relative overflow-hidden bg-[#f7fbff] px-6 py-24">
+            <div className="absolute inset-0 opacity-60 bg-[radial-gradient(circle_at_15%_20%,rgba(0,150,214,0.10),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(217,169,56,0.10),transparent_30%)]" />
+            <div className="relative z-10 mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+                <div className={`transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
+                    <div className="mb-4 text-[13px] font-black uppercase tracking-[0.24em] text-[#1677f2]">
+                        Why Estabizz
                     </div>
-
-                    <div className="space-y-5">
-                        <p className="text-[15px] md:text-[16px] text-[#475569] leading-[1.8] font-medium">
-                            We do not believe in transactional advisory. We believe in standing beside our clients during every regulatory milestone, every approval process, and every compliance cycle. Whether you are facing operational bottlenecks, regulatory queries, or new license requirements — we provide practical, end-to-end solutions designed around your business reality.
-                        </p>
-                        <p className="text-[15px] md:text-[16px] text-[#475569] leading-[1.8] font-medium">
-                            Strategic compliance requires more than documentation — it requires ownership. We partner with businesses to direct regulatory frameworks with clarity and discipline. From registration to long-term compliance management, we design structured, regulator-ready solutions that protect your enterprise and strengthen its foundation.
-                        </p>
-                        <p className="text-[18px] font-semibold text-[#0096D6] italic pt-2">
-                            We do not just guide.<br />
-                            Your challenges become our commitment.<br />
-                            We execute. We safeguard. We support.
-                        </p>
+                    <h2 className="text-[clamp(34px,4vw,58px)] font-black leading-[1.06] tracking-[-0.04em] text-[#071426]">
+                        Built on trust. Driven by accountability.
+                    </h2>
+                    <p className="mt-6 max-w-[560px] text-[18px] font-black italic leading-relaxed text-[#1677f2]">
+                        Compliance is not a product. It is a responsibility.
+                    </p>
+                    <p className="mt-6 max-w-[620px] text-[16px] font-medium leading-[1.9] text-[#475569]">
+                        We stand beside clients during regulatory milestones, application preparation, query response and compliance cycles. The work is practical, structured and regulator-respectful.
+                    </p>
+                    <div className="mt-8 rounded-[24px] border border-blue-100 bg-white p-6 text-[18px] font-black italic leading-relaxed text-[#071426] shadow-[0_18px_50px_rgba(0,80,140,0.07)]">
+                        We do not just guide. We execute. We safeguard. We support.
                     </div>
                 </div>
 
-                {/* Right Side Cards (2x2 Grid) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:pl-10">
+                <div className="grid gap-5 sm:grid-cols-2">
                     {pillars.map((pillar, index) => (
                         <div
-                            key={index}
-                            className={`bg-white/80 backdrop-blur-[12px] p-6 text-left relative group hover:shadow-[0_10px_30px_rgba(0,150,220,0.1)] hover:-translate-y-1 transition-all duration-300 ease-out`}
+                            key={pillar.title}
+                            className="group rounded-[28px] border border-blue-100 bg-white p-7 shadow-[0_18px_50px_rgba(0,80,140,0.07)] transition-all duration-500 hover:-translate-y-1 hover:border-[#1677f2]/40"
                             style={{
-                                borderTop: '3px solid transparent',
-                                borderImage: 'linear-gradient(90deg, #0096D6, #10b981) 1',
-                                borderLeft: 'none', borderRight: 'none', borderBottom: 'none', // As 'border-image' behaves wildly without explicit sides sometimes, or standard box modeling.
                                 opacity: isVisible ? 1 : 0,
-                                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                                transition: `all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${0.3 + index * 0.15}s`
-              }}
-            >
-
-                    <div className="w-[40px] h-[40px] rounded-full bg-blue-50 flex items-center justify-center text-[18px] text-[#0096D6] mb-5 border border-blue-100 group-hover:scale-110 group-hover:bg-[#0096D6] group-hover:text-white transition-all duration-300">
-                        🔹
-                    </div>
-
-                    <h3 className="text-[16px] font-bold text-[#0a1628] mb-3 leading-snug">{pillar.title}</h3>
-                    <p className="text-[13px] text-[#64748b] leading-[1.75] font-medium">
-                        {pillar.body}
-                    </p>
+                                transform: isVisible ? "translateY(0)" : "translateY(26px)",
+                                transitionDelay: `${index * 90}ms`,
+                            }}
+                        >
+                            <div className="mb-8 flex h-[52px] w-[52px] items-center justify-center rounded-2xl bg-[#071426] px-4 py-3 text-[16px] font-black text-white">
+                                {index + 1}
+                            </div>
+                            <h3 className="text-[20px] font-black leading-tight text-[#071426]">{pillar.title}</h3>
+                            <p className="mt-4 text-[14.5px] font-medium leading-[1.8] text-[#64748b]">{pillar.body}</p>
+                        </div>
+                    ))}
                 </div>
-          ))}
             </div>
-
-        </div>
-    </section >
-  );
+        </section>
+    );
 }

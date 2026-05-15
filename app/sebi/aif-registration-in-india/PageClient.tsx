@@ -1,1085 +1,651 @@
 'use client';
+
+import Link from 'next/link';
+import type { ReactNode } from 'react';
 import ServicePageLayout from '@/components/templates/ServicePageLayout';
 
-export default function AIFRegistrationPage() {
-  const sections = [
-    {
-      id: 'introduction',
-      title: 'AIF Registration in India',
-      content: `AIF Registration in India is the regulatory approval granted by the Securities and Exchange Board of India (SEBI) to privately pooled investment vehicles operating under the SEBI (Alternative Investment Funds) Regulations, 2012, as amended up to November 19, 2025.
-
-If you are planning to launch a venture capital fund, private equity fund, debt fund, hedge fund, infrastructure fund, angel fund or social impact fund — AIF Registration in India is mandatory before raising capital.
-
-This guide explains the entire framework in a structured, SEBI-aligned manner.`
-    },
-    {
-      id: 'overview',
-      title: 'Overview of AIF Registration in India',
-      content: `An Alternative Investment Fund is:
-• A privately pooled investment vehicle
-• Established in India as a Trust / Company / LLP / Body Corporate
-• Collecting funds from Indian or foreign investors
-• Investing as per a defined investment policy
-• Not regulated under Mutual Fund or CIS Regulations`
-    },
-    {
-      id: 'why-aif',
-      title: 'Why AIF Registration in India?',
-      content: `Without AIF Registration:
-• You cannot pool capital legally
-• You risk regulatory enforcement under SEBI Act
-• You cannot market to institutional investors
-
-With AIF Registration:
-• Legal fund structuring
-• Institutional investor confidence
-• Tax pass-through eligibility (for Category I & II)
-• Structured governance
-• Global fundraising credibility`
-    },
-    {
-      id: 'categories',
-      title: 'Categories under AIF Registration in India',
-      content: `• Category I — Venture/SME/Social/Infra — No leverage — Positive spillover impact
-• Category II — PE / Debt — No leverage (except limited borrowing) — Commercial returns
-• Category III — Hedge / Trading — Leverage allowed — Market strategy returns
-• Specified AIF — Special structures — As notified — Regulatory purpose`
-    },
-    {
-      id: 'category-1-examples',
-      title: 'Category I AIF Examples (25+ Business Objects)',
-      content: `• Venture Capital Fund
-• Angel Fund
-• SME Fund
-• Social Impact Fund
-• Infrastructure Fund
-• Special Situation Fund
-• Startup Technology Fund
-• Deep Tech Innovation Fund
-• Climate Infrastructure Fund
-• Renewable Energy Fund
-• Agri-Tech Venture Fund
-• Healthcare Innovation Fund
-• Defence Manufacturing Fund
-• EV Mobility Fund
-• Impact Investing Fund
-• Education Innovation Fund
-• Microfinance Impact Fund
-• Rural Development Fund
-• Affordable Housing Fund
-• Fintech Startup Fund
-• AI & Robotics Fund
-• ESG Infrastructure Fund
-• Digital Bharat Fund
-• Women Entrepreneurship Fund
-• Social Stock Exchange Impact Fund`
-    },
-    {
-      id: 'category-2-examples',
-      title: 'Category II AIF Examples',
-      content: `• Private Equity Fund
-• Growth Capital Fund
-• Buyout Fund
-• Distressed Debt Fund
-• Credit Opportunities Fund
-• Mezzanine Fund
-• Structured Debt Fund
-• Real Estate PE Fund
-• NBFC Debt Fund
-• Pre-IPO Fund
-• PIPE Investment Fund
-• Fund of Funds
-• Corporate Credit Fund
-• Secondary Market PE Fund
-• Mid-Market Growth Fund
-• Acquisition Fund
-• Special Credit Fund
-• Family Office Fund
-• Strategic Investment Fund
-• Infrastructure Debt Fund
-• Real Estate Credit Fund
-• Corporate Bond Fund (Unlisted Focus)
-• Asset Reconstruction Investment Fund
-• Supply Chain Finance Fund
-• Emerging Companies Fund`
-    },
-    {
-      id: 'category-3-examples',
-      title: 'Category III AIF Examples',
-      content: `• Hedge Fund
-• Long-Short Equity Fund
-• Arbitrage Fund
-• Quant Strategy Fund
-• High Frequency Trading Fund
-• Derivatives Strategy Fund
-• Commodity Derivatives Fund
-• Macro Trading Fund
-• Structured Products Fund
-• Event Driven Fund
-• Market Neutral Fund
-• Volatility Fund
-• Global Macro Fund
-• Options Trading Fund
-• Credit Default Swap Fund
-• Multi-Strategy Fund
-• Crypto-Linked Structured Strategy Fund (subject to regulatory clarity)
-• Algorithmic Trading Fund
-• Tactical Allocation Fund
-• Risk Parity Fund
-• Leveraged Equity Fund
-• Short Bias Fund
-• Systematic Trading Fund
-• Hybrid Arbitrage Fund
-• Alternative Beta Fund`
-    },
-    {
-      id: 'capital',
-      title: 'Capital & Investment Requirements (SEBI)',
-      content: `Minimum Corpus Per Scheme:
-• General Scheme — ₹20 Crore
-• Social Impact Fund Scheme — ₹5 Crore
-
-Minimum Investment Per Investor:
-• General Investor — ₹1 Crore
-• Manager/Employee — ₹25 Lakh
-• Social Impact Fund (certain cases) — ₹2 Lakh
-• Accredited Investors — Relaxations available
-
-Sponsor/Manager Continuing Interest:
-• Category I & II — 2.5% of corpus OR ₹5 Crore (lower)
-• Category III — 5% of corpus OR ₹10 Crore (lower)`
-    },
-    {
-      id: 'fees',
-      title: 'Application Fees & Registration Fees',
-      content: `(Extracted from Second Schedule structure under AIF Regulations)
-
-• Category I — Application Fee ₹1,00,000 — Registration Fee ₹5,00,000
-• Category II — Application Fee ₹1,00,000 — Registration Fee ₹10,00,000
-• Category III — Application Fee ₹1,00,000 — Registration Fee ₹15,00,000
-
-(Scheme filing fee payable before launch, except first scheme)`
-    },
-    {
-      id: 'eligibility',
-      title: 'Eligibility for AIF Registration in India',
-      content: `• Legal Form — Trust / LLP / Company
-• Private Placement — No public solicitation
-• MOA/Trust Deed — Must permit AIF activity
-• Fit & Proper — As per Intermediaries Regulations
-• Investment Team — Certified personnel required
-• Infrastructure — Adequate manpower & systems
-• Investment Objective — Clearly defined`
-    },
-    {
-      id: 'net-worth',
-      title: 'Net Worth Requirements',
-      content: `SEBI does not prescribe corpus-based net worth for AIF entity itself but:
-• Manager must have adequate infrastructure
-• Continuing interest must be maintained
-• Financial capability must support operations
-
-Practical structuring suggests:
-• ₹5–10 crore net worth for Manager entity
-• Adequate working capital for 24 months`
-    },
-    {
-      id: 'scheme-types',
-      title: 'What Type of Schemes Can Be Launched?',
-      content: `• Category I — Close-ended (Min 3 years)
-• Category II — Close-ended (Min 3 years)
-• Category III — Open or Close-ended
-• Accredited Investor Fund — Extended tenure allowed`
-    },
-    {
-      id: 'scheme-design',
-      title: 'Key Points While Designing an AIF Scheme',
-      content: `Scheme Structuring Flow:
-Investment Thesis → Target Investors → Category Selection → Risk Framework → Tenure Structure → Distribution Waterfall → Compliance Matrix
-
-Critical Regulatory Design Areas:
-• 25% concentration limit (Category I & II)
-• 10% limit (Category III)
-• No leverage except permitted
-• Associate transactions need 75% investor approval
-• Demat holding requirement
-• Scheme filing 30 days prior to launch`
-    },
-    {
-      id: 'ppm',
-      title: 'Private Placement Memorandum (PPM)',
-      content: `Mandatory Disclosures:
-• Investment strategy
-• Targeted investors
-• Fees & expenses
-• Risk factors
-• Tenure
-• Conflict management
-• Winding up
-• Key service providers
-• Committee structure
-• Disciplinary history
-
-PPM Design Checklist:
-• Investment Mandate — Clear & measurable
-• Risk Section — Detailed and realistic
-• Fee Disclosure — Transparent
-• Conflict Policy — Robust
-• Valuation Policy — Defined methodology
-• Governance — Investment committee terms
-• Exit Strategy — Clear`
-    },
-    {
-      id: 'process',
-      title: 'AIF Registration Process',
-      content: `Structuring of Trust / LLP
-        ↓
-Drafting PPM
-        ↓
-Filing Form A with SEBI
-        ↓
-SEBI Clarifications
-        ↓
-In-Principle Approval
-        ↓
-Registration Fee Payment
-        ↓
-Certificate Grant`
-    },
-    {
-      id: 'documents',
-      title: 'Documents Required',
-      content: `• Form A — Yes
-• Trust Deed / LLP Agreement — Yes
-• MOA/AOA — If Company
-• PPM Draft — Yes
-• KMP Details — Yes
-• Net worth Certificate — Yes
-• Infrastructure Details — Yes
-• Fit & Proper Declarations — Yes
-• Business Plan (3-year projection) — Strongly advised
-• Sponsor Contribution Proof — Yes`
-    },
-    {
-      id: 'kmp',
-      title: 'AIF KMP Requirements',
-      content: `• At least one certified professional
-• Finance / CA / CFA / MBA qualification
-• Valid certification
-• Clean regulatory history
-• Adequate experience`
-    },
-    {
-      id: 'post-registration',
-      title: 'Post Registration Activities',
-      content: `After AIF Registration in India:
-• Raise capital via private placement
-• Launch schemes
-• Invest as per category rules
-• Appoint custodian
-• File periodic returns
-• Maintain books
-• Conduct audit`
-    },
-    {
-      id: 'rejection',
-      title: 'When SEBI May Reject Application',
-      content: `• Incomplete documents — Improper structuring
-• Ambiguous strategy — Overly broad object clause
-• Weak KMP — No certified personnel
-• Conflict risk — Associate transactions
-• Past regulatory issues — Sponsor history
-• Public solicitation risk — Improper marketing`
-    },
-    {
-      id: 'mandatory-registrations',
-      title: 'Post-Registration Mandatory Registrations',
-      content: `• PAN
-• GST (if applicable)
-• FIU-IND (if reporting entity)
-• Demat connectivity
-• Custodian appointment
-• Auditor appointment`
-    },
-    {
-      id: 'compliance-calendar',
-      title: 'Compliance Calendar (Illustrative)',
-      content: `• Quarterly Reporting to SEBI — Quarterly
-• Annual Audit — Annual
-• Investor Reporting — Quarterly
-• Valuation — Periodic
-• KYC Updates — Ongoing
-• Leverage Reporting (Cat III) — Periodic`
-    },
-    {
-      id: 'books',
-      title: 'Books & Accounts',
-      content: `• Separate bank accounts
-• Corpus tracking
-• Capital call records
-• Investment register
-• Valuation files
-• Audit working papers
-• Distribution waterfall tracking
-
-"In fund management, compliance is not an obstacle to performance — it is the architecture that protects performance." — CS Devyani Khambhati – Compliance Expert`
-    },
-    {
-      id: 'advanced-ppm',
-      title: 'Advanced PPM Structuring – Clause-by-Clause Guidance',
-      content: `When preparing a Private Placement Memorandum for AIF Registration in India, SEBI expects not just disclosure — but structured governance clarity.
-
-A. Fund Constitution Section:
-• Legal structure (Trust/LLP/Company)
-• Sponsor identity
-• Manager details
-• Trustee responsibilities
-• Category of AIF
-• Scheme type (open/close-ended)
-
-B. Investment Strategy & Policy — must clearly define:
-• Sector focus
-• Instrument type (equity, CCPS, debt, derivatives)
-• Geographic exposure
-• Stage of investment
-• Ticket size range
-• Co-investment policy
-• Exit mechanisms
-
-Avoid vague wording like "invest across sectors". SEBI often raises queries where mandate is overly broad.
-
-C. Risk Factors must include:
-• Regulatory risk
-• Liquidity risk
-• Valuation risk
-• Associate transaction risk
-• Leverage risk (Category III)
-• Taxation risk
-• Manager dependency risk
-
-D. Fee & Expense Disclosure:
-• Management Fee — Basis & percentage
-• Performance Fee / Carried Interest — Waterfall clarity
-• Hurdle Rate — If applicable
-• Setup Costs — Who bears
-• Operational Expenses — Allocation method
-• Associate Fees — Disclosure required
-
-E. Governance & Conflict Framework — SEBI closely examines:
-• Investment Committee constitution
-• Voting rights
-• Associate transaction approval (75% investor consent)
-• Conflict disclosure mechanism
-• Related party policy
-
-F. Valuation Methodology — must define:
-• Frequency of valuation
-• Valuer qualification
-• Fair value methodology
-• Write-down policy
-• Independent valuation requirement
-
-G. Distribution Waterfall:
-Return of Capital → Hurdle Return → Catch-Up (if any) → Carried Interest → Residual Distribution`
-    },
-    {
-      id: 'co-investment',
-      title: 'Co-Investment Scheme Framework (2025 Amendment)',
-      content: `As per September 09, 2025 Circular:
-
-Category I & II AIFs may offer co-investment through:
-• PMS Route
-• CIV Scheme Route
-
-CIV Scheme Key Conditions:
-• Separate Bank & Demat — Mandatory
-• Ring-fencing — Required
-• Investment Cap — 3x investor's proportion (with exceptions)
-• No Leverage — Strictly prohibited
-• Separate PPM Filing — Required
-• Compliance Test Report inclusion — Mandatory
-
-This has materially changed structuring strategy under AIF Registration in India.`
-    },
-    {
-      id: 'ai-only-lvf',
-      title: 'AI-Only Schemes & LVF Framework',
-      content: `As per December 08, 2025 Circular:
-
-AI-Only Scheme:
-• Only Accredited Investors
-• Name must include "AI only fund"
-• AI status remains valid through scheme life
-• Extension cap: 5 years total
-
-Large Value Fund (LVF):
-• For accredited investors
-• Exempt from standard PPM template
-• No annual PPM audit requirement
-
-Migration requires:
-• Positive consent of ALL investors
-• Reporting to SEBI within 15 days`
-    },
-    {
-      id: 'angel-fund',
-      title: 'Angel Fund – Special Chapter',
-      content: `Angel Funds fall under Category I but have special conditions:
-
-• Min corpus — ₹10 Crore
-• Min investment per angel — ₹25 Lakh
-• Lock-in — Minimum 3 years
-• Max number of investors per scheme — Limited
-• Investment in startups — As defined
-
-Angel Funds require very precise PPM drafting.`
-    },
-    {
-      id: 'leverage',
-      title: 'Leverage & Borrowing Matrix',
-      content: `• Category I — No leverage — Except temporary borrowing
-• Category II — No leverage — Except temporary borrowing
-• Category III — Yes — Subject to disclosure & limits
-• CIV Scheme — No — Prohibited
-
-Leverage misuse is a major enforcement trigger.`
-    },
-    {
-      id: 'inspection',
-      title: 'Inspection Powers of SEBI',
-      content: `Under SEBI Act & AIF Regulations, SEBI may:
-• Inspect books
-• Call for documents
-• Conduct inquiry
-• Issue directions
-• Impose penalty
-• Suspend or cancel registration`
-    },
-    {
-      id: 'suspension',
-      title: 'Grounds for Suspension / Cancellation',
-      content: `• Misrepresentation in PPM — Serious violation
-• Breach of concentration norms — Repeated violation
-• Unauthorized leverage — Category I/II
-• Non-filing of returns — Chronic default
-• Investor complaint — Substantiated
-• Fraudulent activity — Immediate action`
-    },
-    {
-      id: 'sop',
-      title: 'Internal SOP for AIF Registration in India',
-      content: `Sponsor Evaluation
-        ↓
-Category Mapping
-        ↓
-Trust Structuring
-        ↓
-PPM Drafting
-        ↓
-Investment Committee Formation
-        ↓
-Manager Certification Check
-        ↓
-Compliance Framework Drafting
-        ↓
-Form A Filing
-        ↓
-SEBI Query Management
-        ↓
-Registration Grant`
-    },
-    {
-      id: 'mandatory-appointments',
-      title: 'Post Registration – Mandatory Registrations & Appointments',
-      content: `• PAN — Yes
-• TAN — Yes
-• GST — If applicable
-• Demat connectivity — Yes
-• Custodian Appointment — Mandatory (based on size)
-• Banker Appointment — Yes
-• Auditor Appointment — Yes
-• Valuer Appointment — Yes`
-    },
-    {
-      id: 'compliance-detailed',
-      title: 'Compliance Calendar – Detailed',
-      content: `• Quarterly Report — Cat I & II: Yes | Cat III: Yes
-• Annual Audit — Cat I & II: Yes | Cat III: Yes
-• Valuation Report — Cat I & II: Periodic | Cat III: More frequent
-• Leverage Report — Cat I & II: NA | Cat III: Required
-• PPM Audit — Cat I & II: Yes | Cat III: Yes (except LVF exemption)
-• Compliance Test Report — Cat I & II: Mandatory | Cat III: Mandatory`
-    },
-    {
-      id: 'books-detail',
-      title: 'Accounting & Books of Account',
-      content: `AIF must maintain:
-• Capital contribution register
-• Investor ledger
-• Investment register
-• Expense allocation ledger
-• Bank reconciliation
-• Valuation working papers
-• Distribution statements
-• Associate transaction file
-
-Books must be maintained scheme-wise.`
-    },
-    {
-      id: 'cdmdf',
-      title: 'CDMDF Clarification',
-      content: `Corporate Debt Market Development Fund (CDMDF) is classified as Category I AIF.
-
-This demonstrates SEBI's flexibility in creating special-purpose AIF structures.`
-    },
-    {
-      id: 'business-plan',
-      title: '3-Year Business Plan Framework',
-      content: `While SEBI does not formally mandate submission of a 3-year financial projection in all cases, in practice, a well-prepared business plan significantly strengthens approval probability.
-
-A. Executive Overview — Category of AIF, Target corpus, Sponsor profile, Investment focus, Target investor segment, Expected deployment timeline
-
-B. Corpus Planning Model (illustrative ₹150 Cr commitments):
-• Year 1 — 40% drawdown — ₹60 Cr invested
-• Year 2 — 35% drawdown — ₹52.5 Cr invested
-• Year 3 — 25% drawdown — ₹37.5 Cr invested
-
-C. Revenue Model (Manager Level):
-• Management Fee — % of committed or invested capital
-• Performance Fee — % of profits above hurdle
-• Setup Fee — One-time (if applicable)
-• Advisory Income — If permitted
-
-D. Expense Model:
-• Team salary
-• Office infrastructure
-• Custodian fees
-• Legal & compliance
-• Audit & valuation
-• Technology systems
-• Insurance (D&O)
-
-E. Breakeven Analysis demonstrates:
-• At what corpus level manager becomes cash positive
-• Sensitivity to delayed fundraising
-• Stress test scenario (50% corpus)`
-    },
-    {
-      id: 'scheme-engineering',
-      title: 'Scheme Engineering – Tenure & Concentration',
-      content: `Tenure Planning:
-• Category I — 3 years minimum — Up to 2 years extension (75% investor approval)
-• Category II — 3 years minimum — Same
-• Category III — Flexible — As per PPM
-• AI-only Scheme — Extension cap 5 years total
-
-Concentration Limits:
-• Category I & II — 25% of corpus single investee limit
-• Category III — 10% of corpus single investee limit
-
-These limits must be reflected in PPM and internal compliance dashboard.`
-    },
-    {
-      id: 'capital-call',
-      title: 'Capital Call Mechanics',
-      content: `Capital Call Flow:
-Investment Approval → Capital Call Notice (10–15 days) → Investor Remittance → Deployment → Default Action (if any)
-
-PPM must clearly define:
-• Notice period
-• Default penalty
-• Dilution mechanism
-• Forfeiture clause`
-    },
-    {
-      id: 'investor-onboarding',
-      title: 'Investor Onboarding Compliance Framework',
-      content: `For AIF Registration in India, onboarding must include:
-• KYC verification
-• Accredited Investor status (if applicable)
-• AML screening
-• Source of funds confirmation
-• FATCA/CRS declaration
-• Investor agreement execution
-
-For AI-only schemes, investor status must be validated at onboarding stage.`
-    },
-    {
-      id: 'taxation',
-      title: 'Taxation Positioning (High-Level)',
-      content: `• Category I — Pass-through (subject to conditions)
-• Category II — Pass-through
-• Category III — Taxed at fund level in many cases
-
-GST applicability depends on management fee structure. Proper structuring during AIF Registration in India impacts long-term tax efficiency.`
-    },
-    {
-      id: 'wind-up',
-      title: 'Wind-Up & Liquidation Framework',
-      content: `SEBI Regulations provide for:
-• Expiry of tenure
-• Investor consent for early winding
-• SEBI direction
-• 75% investor consent for extension
-• Distribution of assets
-• Final audit
-• Intimation to SEBI
-
-Improper winding up is a high-risk compliance area.`
-    },
-    {
-      id: 'risk-map',
-      title: 'Advanced Compliance Risk Map',
-      content: `• Over-concentration — High severity — Mitigation: Automated tracking
-• Associate transactions — High severity — Mitigation: Investor approval
-• Leverage breach — Critical severity — Mitigation: Internal audit
-• Delayed reporting — Medium severity — Mitigation: Compliance calendar
-• Valuation dispute — High severity — Mitigation: Independent valuer
-• KMP resignation — Medium severity — Mitigation: Succession plan`
-    },
-    {
-      id: 'internal-control',
-      title: 'Internal Control Architecture',
-      content: `A professionally structured AIF Registration in India setup should include:
-• Investment Committee Charter
-• Conflict Register
-• Compliance Officer Appointment
-• Risk Register
-• Insider Trading Policy
-• Code of Conduct
-• Whistleblower Policy
-• Valuation Committee
-• IT & Data Security Policy`
-    },
-    {
-      id: 'query-management',
-      title: 'SEBI Query Management Strategy',
-      content: `During AIF Registration in India process, SEBI commonly seeks clarification on:
-• Investment objective clarity
-• Sponsor background
-• Conflict framework
-• Associate exposure
-• Fee disclosure
-• PPM inconsistencies
-• KMP qualification
-
-Response strategy:
-• Point-wise reply
-• Revised PPM with tracked changes
-• Supporting documentary proof
-• Legal justification
-• Timely response (within prescribed window)
-
-Delay in response is often treated negatively.`
-    },
-    {
-      id: 'timeline',
-      title: 'Practical Timeline for AIF Registration in India',
-      content: `• Structuring — 3–4 weeks
-• Filing Form A — Day 0
-• SEBI Initial Review — 30–60 days
-• Query Round — Variable
-• In-principle Approval — Post clarification
-• Fee Payment — Within specified period
-• Registration Certificate — Post payment
-
-Total realistic timeline: 3–6 months depending on complexity.`
-    },
-    {
-      id: 'operational-readiness',
-      title: 'Operational Readiness Checklist Before Launch',
-      content: `• PPM finalized
-• Bank account opened
-• Demat account opened
-• Custodian appointed
-• Valuer appointed
-• Auditor appointed
-• Investor agreement executed
-• Capital call system ready
-• Compliance reporting template ready`
-    },
-    {
-      id: 'post-registration-activities',
-      title: 'What Activities Can Be Done Post AIF Registration?',
-      content: `Once registration is granted:
-• Raise capital privately
-• Launch schemes
-• Invest in permitted instruments
-• Offer co-investment (if applicable)
-• Convert to AI-only or LVF (subject to conditions)
-• Create multiple schemes under umbrella registration`
-    },
-    {
-      id: 'ppm-master-structure',
-      title: 'AIF PPM Master Draft Structure (40-Clause Framework)',
-      content: `When preparing PPM for AIF Registration in India, professional drafting must follow a structured compliance architecture.
-
-SECTION A – CONSTITUTIONAL DISCLOSURES:
-1. Definitions & Interpretation
-2. Regulatory Background (SEBI AIF Regulations reference)
-3. Legal Structure (Trust / LLP / Company)
-4. Sponsor Details
-5. Manager Details
-6. Trustee Details
-7. Category of AIF
-8. Scheme Structure
-9. Tenure & Extension
-
-SECTION B – INVESTMENT FRAMEWORK:
-10. Investment Objective
-11. Investment Strategy
-12. Target Sectors
-13. Permissible Instruments
-14. Investment Restrictions
-15. Diversification & Concentration Norms
-16. Leverage Policy (if Category III)
-17. Co-Investment Policy (CIV/PMS route)
-18. Associate Transaction Policy
-19. Exit Strategy
-
-SECTION C – GOVERNANCE & RISK:
-20. Investment Committee Constitution
-21. Voting Framework
-22. Conflict of Interest Policy
-23. Risk Management Policy
-24. Valuation Policy
-25. Custody & Asset Holding Mechanism
-26. Borrowing Policy
-27. Insurance Coverage
-
-SECTION D – INVESTOR ECONOMICS:
-28. Capital Commitment
-29. Capital Call Process
-30. Default Consequences
-31. Management Fee
-32. Carried Interest
-33. Hurdle Rate
-34. Distribution Waterfall
-35. Expenses & Cost Allocation
-
-SECTION E – OPERATIONAL & COMPLIANCE:
-36. Reporting & Disclosure
-37. Audit & Valuation Frequency
-38. Winding Up Mechanism
-39. SEBI Inspection & Powers
-40. Investor Rights & Grievance Mechanism`
-    },
-    {
-      id: 'ic-structure',
-      title: 'Investment Committee Structuring Strategy',
-      content: `SEBI expects credible governance.
-
-Recommended IC Structure:
-• Chairperson — Independent or Sponsor representative
-• Investment Expert — Domain specialist
-• Finance Expert — CA/CFA
-• Compliance Representative — Internal control oversight
-• Observer (optional) — Trustee nominee
-
-Avoid concentration of power in one individual.`
-    },
-    {
-      id: 'investor-default',
-      title: 'Investor Default Framework',
-      content: `PPM must clearly define:
-• Notice period
-• Interest penalty
-• Suspension of rights
-• Dilution of units
-• Forfeiture clause
-• Legal recovery
-
-Ambiguity here is frequently questioned during AIF Registration in India.`
-    },
-    {
-      id: 'associate-governance',
-      title: 'Associate Transaction Governance',
-      content: `Any transaction with:
-• Sponsor
-• Manager
-• Group entity
-• Related party
-
-Requires:
-• Disclosure
-• 75% investor approval
-• Documentation trail
-
-SEBI treats conflict management as a serious compliance test.`
-    },
-    {
-      id: 'valuation-governance',
-      title: 'Valuation Governance Architecture',
-      content: `Mandatory Components:
-• Independent Valuer — As per regulations
-• Frequency — Periodic
-• Methodology — Clearly disclosed
-• Write-down policy — Defined
-• Audit oversight — Required
-
-Valuation disputes are one of the most common investor complaints.`
-    },
-    {
-      id: 'books-registers',
-      title: 'Books of Account – Detailed Register List',
-      content: `Under AIF Registration in India, books must be maintained scheme-wise.
-
-Core Registers:
-• Capital Commitment Register
-• Capital Call Register
-• Investor Ledger
-• Investment Register
-• Valuation Register
-• Distribution Register
-• Expense Allocation Register
-• Associate Transaction Register
-• Compliance Filing Register
-• IC Resolution Register
-
-Books must support SEBI inspection.`
-    },
-    {
-      id: 'compliance-lifecycle',
-      title: 'Compliance Lifecycle Model',
-      content: `Post-Registration Compliance Cycle:
-Capital Raise → Investment Deployment → Valuation → Reporting → Audit → Compliance Test Report → SEBI Filing → Cycle Repeats
-
-Compliance Test Report must include circular compliance including AI-only/LVF provisions.`
-    },
-    {
-      id: 'rejection-triggers',
-      title: 'When SEBI Returns / Closes / Rejects Application',
-      content: `Common Real-World Triggers:
-• Vague Investment Strategy — Misleading solicitation risk
-• Weak Sponsor Background — Investor protection concern
-• Poorly Drafted PPM — Disclosure deficiency
-• Inadequate Infrastructure — Operational risk
-• Conflict Exposure — Governance failure
-• Inconsistent Fee Structure — Investor exploitation risk
-• Non-response to Queries — Procedural non-cooperation
-
-AIF Registration in India requires disciplined, timely response.`
-    },
-    {
-      id: 'enforcement-matrix',
-      title: 'Enforcement Risk Matrix',
-      content: `• Leverage breach — Severe action
-• Associate misuse — Suspension risk
-• Fraud / Misrepresentation — Cancellation
-• Chronic non-reporting — Penalty
-• Investor complaint upheld — Inquiry`
-    },
-    {
-      id: 'compliance-manual',
-      title: 'Internal Compliance Manual – Suggested Chapters',
-      content: `• Regulatory Overview
-• Category Compliance
-• Investment Approval Process
-• Conflict Policy
-• Valuation Manual
-• Capital Call SOP
-• Reporting Framework
-• SEBI Filing SOP
-• Record Retention Policy
-• AML & KYC Policy
-• Data Security Policy
-• Whistleblower Policy
-
-A documented internal manual significantly reduces regulatory risk.`
-    },
-    {
-      id: 'data-tech',
-      title: 'Data & Technology Governance',
-      content: `Modern AIF Registration in India requires:
-• Secure data storage
-• Access control
-• Cyber policy
-• Backup & recovery protocol
-• Demat reconciliation process
-• MIS reporting dashboard`
-    },
-    {
-      id: 'final-checklist',
-      title: 'Final Professional Structuring Advice',
-      content: `Before filing for AIF Registration in India, ensure:
-• Category selection aligns with strategy
-• PPM is precise, not generic
-• Sponsor net worth documented
-• IC members credible
-• Conflict matrix prepared
-• Financial projection realistic
-• Compliance officer designated
-• Infrastructure documented
-
-Regulatory scrutiny today is deeper than ever.
-
-"A well-structured fund is not built on capital alone; it is built on discipline, disclosure, and integrity." — CS Devyani Khambhati – Compliance Expert
-
-"True fund leadership lies not in how capital is deployed, but in how responsibility is structured before capital is raised." — CS Devyani Khambhati – Compliance Expert
-
-"A disciplined fund structure is the silent assurance behind every successful investment story." — CS Devyani Khambhati – Compliance Expert`
-    },
-    {
-      id: 'closing',
-      title: 'Closing Insight',
-      content: `AIF Registration in India is a long-term regulatory commitment.
-
-The fund's credibility is tested not at launch — but through every quarterly filing, valuation report, and investor communication.
-
-AIF Registration in India is not just a licensing process — it is the creation of a regulated investment ecosystem. It is a strategic structuring exercise involving:
-• Capital engineering
-• Governance design
-• Compliance architecture
-• Investor psychology
-• Regulatory interpretation`
-    }
-  ];
-
-  const faqGroups = [
-    {
-      category: 'General Overview',
-      faqs: [
-        { q: "What is AIF Registration in India?", a: "AIF Registration in India refers to obtaining approval from the Securities and Exchange Board of India (SEBI) to operate a privately pooled investment vehicle under the SEBI (Alternative Investment Funds) Regulations, 2012. Without registration, pooling funds for investment is not permitted." },
-        { q: "Is AIF Registration in India mandatory before raising funds?", a: "Yes. Any entity intending to pool capital from investors for investment under the AIF framework must first obtain registration from SEBI. Fundraising without registration may attract regulatory action." },
-        { q: "Who regulates AIF Registration in India?", a: "AIF Registration in India is regulated by SEBI under the SEBI Act, 1992 and the SEBI (Alternative Investment Funds) Regulations, 2012, including amendments and circulars issued from time to time." },
-        { q: "What is an Alternative Investment Fund under Indian law?", a: "An Alternative Investment Fund is a privately pooled investment vehicle established in India that collects funds from investors for investing according to a defined investment policy, and is not covered under mutual fund or collective investment scheme regulations." },
-        { q: "Can an unregistered fund operate as an AIF in India?", a: "No. Operating as an AIF without registration is not permitted and may lead to regulatory proceedings under SEBI's enforcement powers." },
-        { q: "What are the categories of AIF under SEBI regulations?", a: "SEBI classifies AIFs into Category I, Category II and Category III based on investment strategy, economic intent, and leverage permissions." },
-        { q: "What is the difference between Category I, II and III AIF?", a: "Category I focuses on socially or economically desirable sectors. Category II includes private equity and debt funds. Category III allows leverage and complex trading strategies." },
-        { q: "Can foreign investors invest in an AIF registered in India?", a: "Yes, subject to applicable FEMA regulations and SEBI AIF Regulations. Foreign investors can participate through private placement." },
-        { q: "What is the minimum tenure for AIF schemes?", a: "Category I and II schemes must generally be close-ended with a minimum tenure of three years. Category III may be open or close-ended." },
-        { q: "Can one AIF launch multiple schemes?", a: "Yes. Once registered, an AIF can launch multiple schemes under the same registration, subject to SEBI filing requirements." }
-      ]
-    },
-    {
-      category: 'Eligibility & Applicability',
-      faqs: [
-        { q: "Who can apply for AIF Registration in India?", a: "A Trust, Company, LLP or body corporate established in India may apply, provided it meets eligibility and regulatory requirements." },
-        { q: "Can an LLP apply for AIF Registration?", a: "Yes, LLPs are permitted structures under the AIF Regulations." },
-        { q: "Can a private limited company apply for AIF Registration?", a: "Yes, provided its constitutional documents permit such activity." },
-        { q: "Can an individual apply for AIF Registration?", a: "No. An individual cannot directly apply. The AIF must be structured as a legal entity." },
-        { q: "Is prior experience mandatory for sponsor or manager?", a: "SEBI expects adequate professional experience and qualification of key management personnel to ensure proper management." },
-        { q: "What is meant by 'fit and proper' criteria?", a: "The sponsor, manager and key personnel must meet integrity, reputation, competence and financial soundness standards prescribed under SEBI regulations." },
-        { q: "Can a startup promoter apply for AIF Registration?", a: "Yes, provided regulatory requirements including infrastructure, governance and compliance capability are met." },
-        { q: "Is net worth mandatory for the sponsor?", a: "The regulations require sponsor/manager to maintain continuing interest in the fund. Financial capability is assessed during registration." },
-        { q: "Can an NBFC apply for AIF Registration?", a: "Yes, subject to compliance with both RBI and SEBI frameworks, where applicable." },
-        { q: "Can an existing unregistered fund convert into a registered AIF?", a: "Only through proper application and compliance with SEBI Regulations. Unregistered pooling activity may attract scrutiny." }
-      ]
-    },
-    {
-      category: 'Legal & Regulatory Framework',
-      faqs: [
-        { q: "Under which law is AIF Registration governed?", a: "Under the SEBI Act, 1992 and the SEBI (Alternative Investment Funds) Regulations, 2012." },
-        { q: "Are circulars issued by SEBI binding on AIFs?", a: "Yes. SEBI circulars issued under its regulatory powers are binding and must be complied with." },
-        { q: "What is the role of the Master Circular for AIFs?", a: "The Master Circular consolidates operational guidelines, reporting standards, PPM filing requirements and compliance instructions." },
-        { q: "What is an AI-only scheme in AIF?", a: "An AI-only scheme is restricted exclusively to Accredited Investors and must comply with naming and reporting conditions specified by SEBI." },
-        { q: "Can existing AIF schemes convert into AI-only schemes?", a: "Yes, subject to investor consent and compliance with SEBI's specified conditions." },
-        { q: "What is a Large Value Fund (LVF)?", a: "An LVF caters to accredited investors and is granted certain compliance relaxations under SEBI circulars." },
-        { q: "Is co-investment allowed in AIF?", a: "Yes. Category I and II AIFs may offer co-investment through permitted routes subject to regulatory conditions." },
-        { q: "What is the Compliance Test Report?", a: "It is a periodic report prepared by the manager and overseen by trustee/sponsor to confirm regulatory compliance." },
-        { q: "Can SEBI inspect an AIF?", a: "Yes. SEBI has inspection, inquiry and enforcement powers under the Act and Regulations." },
-        { q: "Are associate transactions permitted?", a: "Yes, but subject to disclosure and investor approval requirements." }
-      ]
-    },
-    {
-      category: 'Registration Process',
-      faqs: [
-        { q: "How do I apply for AIF Registration in India?", a: "By filing Form A with SEBI along with prescribed documents and application fee." },
-        { q: "What is Form A in AIF Registration?", a: "Form A is the prescribed application form under the AIF Regulations." },
-        { q: "Is PPM required at the time of application?", a: "Yes, a draft Private Placement Memorandum must be submitted." },
-        { q: "How long does SEBI take to process AIF application?", a: "Processing time varies depending on completeness of documents and clarification rounds. Realistic timeline: 3–6 months." },
-        { q: "Does SEBI ask for clarifications during application?", a: "Yes, SEBI may seek clarifications or additional information before granting approval." },
-        { q: "Is in-principle approval issued?", a: "SEBI may issue communication seeking fee payment after satisfaction of compliance." },
-        { q: "When is registration fee payable?", a: "After SEBI grants approval, before issuance of registration certificate." },
-        { q: "Can application be withdrawn?", a: "Yes, subject to SEBI procedures." },
-        { q: "What happens if application is incomplete?", a: "SEBI may return or reject the application." },
-        { q: "Is there a validity period for approval?", a: "Registration remains valid unless suspended or cancelled." }
-      ]
-    }
-  ];
-
+type TableRow = ReactNode[];
+type Card = { title: string; body: ReactNode };
+
+const whatsappUrl = 'https://wa.me/919825600907';
+
+const sections = [
+  { id: 'quick-overview', title: 'AIF Registration in India: Quick Overview' },
+  { id: 'what-is-aif-registration', title: 'What is AIF Registration in India?' },
+  { id: 'legal-background', title: 'Legal Background and Regulatory Authority' },
+  { id: 'what-is-aif', title: 'What is an Alternative Investment Fund?' },
+  { id: 'why-mandatory', title: 'Why AIF Registration is Mandatory' },
+  { id: 'categories', title: 'Categories of AIF' },
+  { id: 'category-i', title: 'Category I AIF' },
+  { id: 'category-ii', title: 'Category II AIF' },
+  { id: 'category-iii', title: 'Category III AIF' },
+  { id: 'special-structures', title: 'Angel Funds, AI-only Schemes and LVF' },
+  { id: 'who-can-apply', title: 'Who Can Apply?' },
+  { id: 'who-cannot-apply', title: 'Who Cannot Apply?' },
+  { id: 'eligibility', title: 'Eligibility Criteria' },
+  { id: 'corpus-commitment', title: 'Corpus, Investor Commitment and Continuing Interest' },
+  { id: 'capital-planning', title: 'Capital and Sponsor Contribution Planning' },
+  { id: 'ppm-framework', title: 'PPM Drafting Framework' },
+  { id: 'governance', title: 'Investment Committee and Governance' },
+  { id: 'documents-required', title: 'Documents Required' },
+  { id: 'registration-process', title: 'Step-by-Step Registration Process' },
+  { id: 'government-fees', title: 'Government Fees' },
+  { id: 'timeline', title: 'Timeline for Approval' },
+  { id: 'post-registration-activities', title: 'Post-Registration Activities' },
+  { id: 'post-registration-compliance', title: 'Post-Registration Compliance' },
+  { id: 'compliance-calendar', title: 'Compliance Calendar' },
+  { id: 'books-registers', title: 'Books of Account and Registers' },
+  { id: 'co-investment', title: 'Co-Investment and Associate Transactions' },
+  { id: 'inspection-enforcement', title: 'SEBI Inspection and Enforcement' },
+  { id: 'common-mistakes', title: 'Common Mistakes' },
+  { id: 'strategic-recommendations', title: 'Strategic Structuring Recommendations' },
+  { id: 'how-estabizz-helps', title: 'How Estabizz Helps' },
+  { id: 'why-choose-estabizz', title: 'Why Choose Estabizz' },
+  { id: 'faqs', title: 'FAQs' },
+  { id: 'expert-review', title: 'Reviewer & Disclaimer' },
+  { id: 'speak-to-expert', title: 'Speak to Our SEBI Compliance Expert' }
+];
+
+export const faqs = [
+  ['What is AIF Registration in India?', 'AIF Registration in India refers to obtaining approval from SEBI to operate a privately pooled investment vehicle under the SEBI AIF Regulations.'],
+  ['Is AIF Registration mandatory before raising funds?', 'Yes. Any entity intending to pool capital from investors under the AIF framework must obtain SEBI registration before fundraising.'],
+  ['Who regulates AIF Registration in India?', 'AIF Registration in India is regulated by the Securities and Exchange Board of India.'],
+  ['What is an Alternative Investment Fund?', 'An AIF is a privately pooled investment vehicle established in India that collects funds from investors for investment according to a defined investment policy.'],
+  ['Is AIF the same as a mutual fund?', 'No. AIFs are privately pooled investment vehicles and are not regulated as mutual funds.'],
+  ['What are the categories of AIF?', 'SEBI classifies AIFs into Category I, Category II and Category III.'],
+  ['What is Category I AIF?', 'Category I AIF generally invests in socially or economically beneficial sectors such as venture capital, SME, social impact and infrastructure.'],
+  ['What is Category II AIF?', 'Category II AIF includes private equity funds, debt funds, fund of funds and similar commercial investment strategies.'],
+  ['What is Category III AIF?', 'Category III AIF includes hedge funds and funds using complex or diverse trading strategies, including leverage where permitted.'],
+  ['Can foreign investors invest in Indian AIF?', 'Yes, subject to applicable FEMA regulations, SEBI AIF Regulations and private placement conditions.'],
+  ['Who can apply for AIF Registration?', 'A Trust, Company, LLP or body corporate established in India may apply, subject to eligibility and regulatory requirements.'],
+  ['Can an individual apply directly?', 'No. An individual cannot directly apply. The AIF must be structured as a legal entity.'],
+  ['Can an LLP apply?', 'Yes. LLP is a permitted structure under the AIF framework.'],
+  ['Can a private limited company apply?', 'Yes, provided its constitutional documents permit AIF activity and other requirements are met.'],
+  ['What is Form A?', 'Form A is the prescribed application form for AIF Registration.'],
+  ['Is PPM required?', 'Yes. A draft Private Placement Memorandum must be submitted.'],
+  ['What is the minimum corpus for an AIF scheme?', 'Generally, minimum corpus is Rs. 20 Crore per scheme, subject to applicable exceptions.'],
+  ['What is the minimum investment per investor?', 'Generally, minimum commitment is Rs. 1 Crore per investor, subject to applicable exceptions.'],
+  ['What is sponsor continuing interest?', 'It is the minimum contribution that sponsor or manager must maintain in the scheme to demonstrate alignment with investors.'],
+  ['What is continuing interest for Category I and II?', 'Generally, 2.5% of corpus or Rs. 5 Crore, whichever is lower.'],
+  ['What is continuing interest for Category III?', 'Generally, 5% of corpus or Rs. 10 Crore, whichever is lower.'],
+  ['Can AIF launch multiple schemes?', 'Yes. Once registered, an AIF may launch multiple schemes subject to SEBI filing requirements.'],
+  ['What is an AI-only scheme?', 'An AI-only scheme is restricted to Accredited Investors and must comply with SEBI-specified naming and reporting conditions.'],
+  ['What is LVF?', 'LVF means Large Value Fund for Accredited Investors and may enjoy certain compliance relaxations subject to SEBI framework.'],
+  ['Is co-investment allowed?', 'Yes. Category I and II AIFs may offer co-investment through permitted routes subject to regulatory conditions.'],
+  ['Are associate transactions permitted?', 'Yes, subject to disclosure, investor approval and conflict management requirements.'],
+  ['Can AIF use leverage?', 'Category I and II generally cannot use leverage except limited temporary borrowing. Category III may use leverage subject to regulatory conditions.'],
+  ['What is the application fee?', 'Application fee is generally Rs. 1,00,000, subject to latest SEBI fee schedule.'],
+  ['What is registration fee for Category I?', 'Registration fee is generally Rs. 5,00,000, subject to latest SEBI fee schedule.'],
+  ['What is registration fee for Category II?', 'Registration fee is generally Rs. 10,00,000, subject to latest SEBI fee schedule.'],
+  ['What is registration fee for Category III?', 'Registration fee is generally Rs. 15,00,000, subject to latest SEBI fee schedule.'],
+  ['How long does SEBI take to process AIF application?', 'Timeline varies depending on completeness of documents, PPM quality, category complexity and SEBI clarification rounds.'],
+  ['Can SEBI reject an incomplete application?', 'Yes. SEBI may return or reject incomplete or non-compliant applications.'],
+  ['Is registration valid forever?', 'Registration remains valid unless suspended or cancelled, subject to ongoing compliance.'],
+  ['What is Compliance Test Report?', 'Compliance Test Report is a periodic compliance document prepared by the manager and overseen by trustee or sponsor to confirm regulatory compliance.'],
+  ['Can SEBI inspect an AIF?', 'Yes. SEBI has inspection, inquiry and enforcement powers.'],
+  ['What books must AIF maintain?', 'AIF must maintain scheme-wise books such as investor ledger, capital call register, investment register, valuation register and distribution register.'],
+  ['Can an AIF publicly advertise?', 'No. AIFs raise funds through private placement and should avoid public solicitation.'],
+  ['How can Estabizz help with AIF Registration in India?', 'Estabizz assists with category selection, fund structuring, PPM drafting, sponsor contribution planning, Form A filing, SEBI query response and post-registration compliance.']
+].map(([q, a]) => ({ q, a }));
+
+function DataTable({ headers, rows }: { headers: string[]; rows: TableRow[] }) {
+  return (
+    <div className="overflow-x-auto my-6 rounded-xl border border-[rgba(0,150,220,0.12)]">
+      <table className="data-table my-0 min-w-[720px]">
+        <thead><tr>{headers.map((header) => <th key={header}>{header}</th>)}</tr></thead>
+        <tbody>{rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex}>{cell}</td>)}</tr>)}</tbody>
+      </table>
+    </div>
+  );
+}
+
+function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; columns?: string }) {
+  return (
+    <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>
+      {cards.map((card) => (
+        <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)]">
+          <h3 className="!p-0 !mb-2 !text-[#0a1628]">{card.title}</h3>
+          <div className="text-[14px] leading-7 text-gray-600">{card.body}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+  return <section className="mb-12"><h2 id={id}>{title}</h2>{children}</section>;
+}
+
+function Timeline({ steps }: { steps: { title: string; body: string }[] }) {
+  return (
+    <div className="step-timeline">
+      {steps.map((step, index) => (
+        <div className="step-item" key={step.title}>
+          <div className="step-dot" />
+          <div className="step-card">
+            <div className="step-label">Step {index + 1}</div>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Flow({ items }: { items: string[] }) {
+  return (
+    <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5">
+      <div className="grid grid-cols-1 gap-3">
+        {items.map((item, index) => (
+          <div key={item} className="flex items-center gap-3">
+            <div className="min-w-8 h-8 rounded-full bg-[#0a1628] text-white text-sm font-bold flex items-center justify-center">{index + 1}</div>
+            <div className="flex-1 rounded-xl bg-white border border-blue-100 px-4 py-3 text-sm font-semibold text-[#0a1628] shadow-sm">{item}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const categoryOneExamples = ['Venture Capital Fund', 'Angel Fund', 'SME Fund', 'Social Impact Fund', 'Infrastructure Fund', 'Startup Technology Fund', 'Deep Tech Innovation Fund', 'Renewable Energy Fund', 'Agri-Tech Venture Fund', 'Healthcare Innovation Fund', 'Defence Manufacturing Fund', 'Women Entrepreneurship Fund', 'Social Stock Exchange Impact Fund'];
+const categoryTwoExamples = ['Private Equity Fund', 'Growth Capital Fund', 'Buyout Fund', 'Debt Fund', 'Credit Opportunities Fund', 'Mezzanine Fund', 'Structured Debt Fund', 'Real Estate PE Fund', 'Pre-IPO Fund', 'Fund of Funds', 'Corporate Credit Fund', 'Strategic Investment Fund', 'Emerging Companies Fund'];
+const categoryThreeExamples = ['Hedge Fund', 'Long-Short Equity Fund', 'Arbitrage Fund', 'Quant Strategy Fund', 'Derivatives Strategy Fund', 'Market Neutral Fund', 'Event Driven Fund', 'Macro Trading Fund', 'Volatility Fund', 'Multi-Strategy Fund', 'Systematic Trading Fund', 'Alternative Beta Fund'];
+
+export default function PageClient() {
   return (
     <ServicePageLayout
       tags={[
-        { emoji: '📊', label: 'SEBI' },
-        { emoji: '💎', label: 'AIF' },
-        { emoji: '💎', label: 'Alternative Investment Fund' },
-        { emoji: '📜', label: 'AIF Regulations 2012' },
-        { emoji: '1️⃣', label: 'Category I' },
-        { emoji: '2️⃣', label: 'Category II' },
-        { emoji: '3️⃣', label: 'Category III' }
+        { emoji: '📈', label: 'SEBI Regulatory Advisory' },
+        { emoji: '💼', label: 'AIF Fund Structuring' },
+        { emoji: '📋', label: 'PPM & Form A Support' }
       ]}
       breadcrumb={[
         { label: 'Home', href: '/' },
         { label: 'SEBI Services', href: '/sebi' },
-        { label: 'AIF Registration' }
+        { label: 'AIF Registration in India' }
       ]}
-      title="AIF Registration in India"
-      readTime="30 min read"
-      focusKeyword="AIF Registration in India"
-      sections={sections}
-      ctaTitle="Ready to Launch Your Alternative Investment Fund?"
-      ctaDescription="Get expert guidance on Category selection, Form A filing with SEBI, PPM drafting (40-clause framework), Trust/LLP structuring, sponsor continuing interest, and end-to-end SEBI registration."
-      quickFacts={[
-        { label: 'Regulator', value: 'SEBI' },
-        { label: 'Governing Regulations', value: 'SEBI AIF Regulations, 2012 (Updated Nov 19, 2025)' },
-        { label: 'Master Circular', value: 'May 07, 2024' },
-        { label: 'Eligible Form', value: 'Trust / LLP / Company / Body Corporate' },
-        { label: 'Min Corpus per Scheme', value: '₹20 Crore (₹5 Cr for Social Impact)' },
-        { label: 'Min Investment per Investor', value: '₹1 Crore (₹25 Lakh employee)' },
-        { label: 'Cat I Registration Fee', value: '₹5,00,000 (App ₹1L)' },
-        { label: 'Cat II Registration Fee', value: '₹10,00,000 (App ₹1L)' },
-        { label: 'Cat III Registration Fee', value: '₹15,00,000 (App ₹1L)' },
-        { label: 'Sponsor Interest (Cat I/II)', value: '2.5% of corpus or ₹5 Cr (lower)' },
-        { label: 'Sponsor Interest (Cat III)', value: '5% of corpus or ₹10 Cr (lower)' },
-        { label: 'Approval Timeline', value: '3–6 months' }
-      ]}
-      relatedArticles={[
-        { title: 'AIF Compliance Test Report', href: '/sebi/aif-compliance-test-report', category: 'SEBI', description: 'AIF Compliance Test Report — complete regulatory guide.' },
-        { title: 'Alternative Asset Portfolio Valuation', href: '/sebi/alternative-asset-portfolio-valuation', category: 'SEBI', description: 'Alternative Asset Portfolio Valuation — complete regulatory guide.' },
-        { title: 'Mutual Fund Registration', href: '/sebi/mutual-fund-registration', category: 'SEBI', description: 'Mutual Fund Registration — complete regulatory guide.' },
-        { title: 'AMFI Registration', href: '/sebi/amfi-registration', category: 'SEBI', description: 'AMFI Registration — complete regulatory guide.' },
-        { title: 'REIT Registration', href: '/sebi/reit-registration', category: 'SEBI', description: 'REIT Registration — complete regulatory guide.' },
-        { title: 'Collective Investment Schemes', href: '/sebi/collective-investment-schemes', category: 'SEBI', description: 'Collective Investment Schemes — complete regulatory guide.' }
-      ]}
-      finalCtaTitle="Need Expert Support for AIF Registration?"
-      finalCtaDescription="Our compliance specialists provide end-to-end AIF registration support — Trust/LLP structuring, PPM drafting (40-clause framework), Form A filing, SEBI query management, Investment Committee constitution, sponsor continuing interest planning, and ongoing post-registration compliance including PPM audit, Compliance Test Report, and category-specific reporting."
-    >
-      {sections.map((section) => (
-        <section key={section.id} id={section.id} className="mb-12">
-          <h2>{section.title}</h2>
-          <div className="prose max-w-none">
-            {section.content.split('\n\n').map((paragraph, idx) => (
-              paragraph.startsWith('•') ? (
-                <ul key={idx} className="list-disc pl-6">
-                  {paragraph.split('\n').filter(l => l.trim()).map((item, i) => (
-                    <li key={i}>{item.replace('• ', '')}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p key={idx}>{paragraph}</p>
-              )
+      title="AIF Registration in India - Complete SEBI Compliance Guide for Fund Sponsors"
+      heroDescription={
+        <>
+          <p><strong>AIF Registration in India</strong> is the regulatory approval granted by the Securities and Exchange Board of India to privately pooled investment vehicles operating under the SEBI Alternative Investment Funds framework. If a sponsor or investment manager proposes to launch a venture capital fund, private equity fund, debt fund, hedge fund, infrastructure fund, angel fund, social impact fund or other privately pooled fund structure in India, SEBI AIF Registration must be obtained before raising capital from investors.</p>
+          <div className="flex flex-wrap gap-2 mt-5">
+            {['SEBI Regulatory Advisory', 'Category I / II / III AIF Structuring', 'PPM Drafting Support', 'Sponsor Contribution Planning', 'Form A Filing Support', 'SEBI Query Response', 'Post-Registration Compliance'].map((badge) => (
+              <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm">{badge}</span>
             ))}
           </div>
-        </section>
-      ))}
+        </>
+      }
+      heroActions={
+        <>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Apply for AIF Registration</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-white text-[#0096D6] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors">Check AIF Eligibility</Link>
+          <a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a>
+        </>
+      }
+      trustLine="Trusted support for RBI, SEBI, IRDAI, IFSCA and financial regulatory advisory across India and global markets."
+      readTime="32 min read"
+      displayYear="2026"
+      focusKeyword="AIF Registration in India"
+      sections={sections}
+      ctaTitle="Plan Your AIF"
+      ctaDescription="Discuss category selection, PPM, sponsor contribution and SEBI filing readiness with Estabizz."
+      quickFacts={[
+        { label: 'Regulator', value: 'SEBI' },
+        { label: 'Form', value: 'Form A' },
+        { label: 'Corpus', value: 'Rs. 20 Cr+' },
+        { label: 'Investor', value: 'Rs. 1 Cr+' },
+        { label: 'Mode', value: 'Private placement' }
+      ]}
+      relatedArticles={[
+        { title: 'AIF Compliance Test Report', href: '/sebi/aif-compliance-test-report', category: 'SEBI', description: 'Compliance test report requirements for Alternative Investment Funds.' },
+        { title: 'Alternative Asset Portfolio Valuation', href: '/sebi/alternative-asset-portfolio-valuation', category: 'SEBI', description: 'Valuation framework for alternative assets and portfolio governance.' },
+        { title: 'Collective Investment Schemes', href: '/sebi/collective-investment-schemes', category: 'SEBI', description: 'Understand the difference between CIS and AIF structures.' }
+      ]}
+      finalCtaTitle="Start Your AIF Registration Journey with Estabizz"
+      finalCtaDescription="Build your SEBI AIF application with structured regulatory support, category assessment, fund structuring, sponsor contribution planning, PPM drafting, Form A filing, SEBI query response, scheme launch support and post-registration compliance assistance."
+      finalCtaActions={
+        <>
+          <Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to SEBI Compliance Expert</Link>
+          <Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20">Apply for AIF Registration</Link>
+          <Link href="/get-started" className="w-full sm:w-auto px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl">Check AIF Eligibility</Link>
+          <a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a>
+        </>
+      }
+    >
+      <Section id="quick-overview" title="AIF Registration in India: Quick Overview">
+        <CardGrid columns="md:grid-cols-2" cards={[
+          { title: 'Regulator', body: 'Securities and Exchange Board of India' },
+          { title: 'Applicable Regulation', body: 'SEBI Alternative Investment Funds Regulations, 2012, as amended from time to time' },
+          { title: 'Registration Type', body: 'Alternative Investment Fund Registration' },
+          { title: 'Eligible Structures', body: 'Trust, Company, LLP or Body Corporate established in India' },
+          { title: 'Individual Applicant', body: 'Not eligible directly' },
+          { title: 'Main Categories', body: 'Category I, Category II and Category III AIF' },
+          { title: 'Minimum Corpus', body: 'Generally Rs. 20 Crore per scheme' },
+          { title: 'Minimum Investor Commitment', body: 'Generally Rs. 1 Crore per investor, subject to exceptions' },
+          { title: 'Category I and II Tenure', body: 'Close-ended, generally minimum 3 years' },
+          { title: 'Category III Tenure', body: 'Open-ended or close-ended, depending on strategy' },
+          { title: 'Sponsor / Manager Continuing Interest - Category I and II', body: '2.5% of corpus or Rs. 5 Crore, whichever is lower' },
+          { title: 'Sponsor / Manager Continuing Interest - Category III', body: '5% of corpus or Rs. 10 Crore, whichever is lower' },
+          { title: 'Application Form', body: 'Form A with SEBI' },
+          { title: 'PPM', body: 'Draft Private Placement Memorandum required' },
+          { title: 'Registration Validity', body: 'Valid unless suspended or cancelled' },
+          { title: 'Timeline', body: 'Indicative 3 to 6 months or more, depending on documentation and SEBI review' }
+        ]} />
+        <div className="warning-box">The above details are indicative and must be evaluated based on the proposed AIF category, legal structure, investment strategy, sponsor profile, manager capability, PPM quality, investor profile, FEMA position and latest SEBI regulations / circulars at the time of filing.</div>
+      </Section>
 
-      <section id="faq" className="mt-16">
-        <h2>Frequently Asked Questions (40 FAQs)</h2>
-        {faqGroups.map((group, idx) => (
-          <div key={idx} className="mb-8">
-            <h3>{group.category}</h3>
-            <div className="faq-accordion">
-              {group.faqs.map((faq, i) => (
-                <details key={i} className="faq-item">
-                  <summary>{faq.q}</summary>
-                  <div>{faq.a}</div>
-                </details>
-              ))}
-            </div>
+      <Section id="what-is-aif-registration" title="What is AIF Registration in India?">
+        <p>AIF Registration in India is the approval granted by SEBI to a privately pooled investment vehicle established in India for collecting funds from investors and investing such funds in accordance with a defined investment policy. An AIF is not regulated as a mutual fund or collective investment scheme and is governed separately under the SEBI AIF framework.</p>
+        <p>AIFs are generally structured for sophisticated investors and institutional capital. They are used for venture capital, private equity, debt, hedge fund strategies, infrastructure investments, social impact investments, angel investments and other alternative investment strategies.</p>
+        <div className="warning-box">No entity should pool investor funds under an AIF-like structure without SEBI registration. Unregistered pooling may attract regulatory scrutiny and enforcement action.</div>
+      </Section>
+
+      <Section id="legal-background" title="Legal Background of AIF Registration in India">
+        <DataTable headers={['Particular', 'Details']} rows={[
+          ['Regulator', 'Securities and Exchange Board of India'],
+          ['Primary Regulation', 'SEBI (Alternative Investment Funds) Regulations, 2012, as amended from time to time'],
+          ['Applicable Law', 'SEBI Act, 1992'],
+          ['Application Form', 'Form A'],
+          ['Registration Certificate', 'Form B after SEBI approval'],
+          ['Fundraising Mode', 'Private placement only'],
+          ['Core Regulatory Focus', 'Investor protection, private placement discipline, investment policy clarity, sponsor contribution, governance, disclosure and reporting'],
+          ['Key Documents', 'Constitutional documents, PPM, Form A, sponsor / manager details, KMP details, declarations and compliance documents']
+        ]} />
+        <p>SEBI’s AIF framework regulates privately pooled investment vehicles and prescribes category-wise investment conditions, eligibility, sponsor / manager continuing interest, disclosure obligations, scheme filing, reporting and compliance requirements. SEBI’s official website currently lists the consolidated AIF Regulations as last amended on April 18, 2026, and applicants should always verify the latest official version before filing.</p>
+      </Section>
+
+      <Section id="what-is-aif" title="What is an Alternative Investment Fund under SEBI?">
+        <p>An Alternative Investment Fund is a privately pooled investment vehicle established in India in the form of a trust, company, LLP or body corporate. It collects funds from Indian or foreign investors for investing as per a defined investment policy and is not covered under SEBI Mutual Fund Regulations or Collective Investment Scheme Regulations.</p>
+        <CardGrid columns="md:grid-cols-2" cards={['Privately pooled investment vehicle', 'Established in India', 'Fundraising from Indian or foreign investors', 'Defined investment policy', 'Private placement only', 'Not a mutual fund', 'Not a CIS', 'Regulated by SEBI'].map((item) => ({ title: item, body: 'A core feature to be tested while preparing the structure, PPM and investor onboarding framework.' }))} />
+      </Section>
+
+      <Section id="why-mandatory" title="Why AIF Registration in India is Mandatory">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+          <div className="rounded-xl border border-red-100 bg-red-50/40 p-5">
+            <h3 className="!p-0 !mb-3 !text-[#0a1628]">Without AIF Registration</h3>
+            <ul><li>Pooling capital may be treated as unauthorised</li><li>Fundraising cannot be legally undertaken as an AIF</li><li>Institutional investors may not participate</li><li>Enforcement and investor protection risk may arise</li><li>Sponsor credibility may be affected</li></ul>
           </div>
-        ))}
-      </section>
+          <div className="rounded-xl border border-emerald-100 bg-emerald-50/40 p-5">
+            <h3 className="!p-0 !mb-3 !text-[#0a1628]">With AIF Registration</h3>
+            <ul><li>Legal fund structuring</li><li>Institutional investor confidence</li><li>Category-wise regulatory clarity</li><li>SEBI-compliant PPM and governance framework</li><li>Tax pass-through possibility for Category I and II, subject to law</li><li>Global fundraising credibility</li></ul>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="categories" title="Categories under AIF Registration in India">
+        <DataTable headers={['Category', 'Nature', 'Leverage', 'Economic Intent', 'Examples']} rows={[
+          ['Category I', 'Funds investing in socially or economically desirable sectors', 'Generally no leverage', 'Positive spillover impact', 'Venture Capital Fund, SME Fund, Social Impact Fund, Infrastructure Fund'],
+          ['Category II', 'Funds not falling under Category I or III', 'No leverage except permitted temporary borrowing', 'Commercial returns', 'Private Equity Fund, Debt Fund, Fund of Funds, Real Estate PE Fund'],
+          ['Category III', 'Funds using complex or diverse trading strategies', 'Leverage may be allowed subject to regulations', 'Market strategy returns', 'Hedge Fund, Long-Short Fund, Quant Fund, Derivatives Strategy Fund']
+        ]} />
+        <div className="info-box">Correct category selection is one of the most important structuring decisions during AIF Registration in India. Wrong categorisation may lead to SEBI queries and delay.</div>
+      </Section>
+
+      <Section id="category-i" title="Category I AIF Registration in India">
+        <p>Category I AIF generally covers funds investing in sectors or strategies considered socially or economically beneficial. These include venture capital funds, SME funds, social impact funds, infrastructure funds, angel funds and other SEBI-specified sub-categories.</p>
+        <CardGrid columns="md:grid-cols-3" cards={categoryOneExamples.map((title) => ({ title, body: 'Illustrative Category I strategy, subject to SEBI category conditions and PPM disclosure.' }))} />
+        <div className="info-box">Category I AIFs are generally close-ended and do not undertake leverage except as permitted under regulations.</div>
+      </Section>
+
+      <Section id="category-ii" title="Category II AIF Registration in India">
+        <p>Category II AIF includes private equity funds, debt funds, real estate funds, fund of funds and other funds that do not fall under Category I or Category III. This is a common structure for commercial investment strategies where leverage is not proposed except limited temporary borrowing as permitted.</p>
+        <CardGrid columns="md:grid-cols-3" cards={categoryTwoExamples.map((title) => ({ title, body: 'Illustrative Category II strategy requiring clear investment policy and disclosure.' }))} />
+      </Section>
+
+      <Section id="category-iii" title="Category III AIF Registration in India">
+        <p>Category III AIF is suitable for funds using complex or diverse trading strategies, including hedge funds, long-short funds, quant funds, derivatives strategy funds, arbitrage funds and other market-linked strategies. Category III AIFs may be open-ended or close-ended and may use leverage subject to applicable disclosure and regulatory conditions.</p>
+        <CardGrid columns="md:grid-cols-3" cards={categoryThreeExamples.map((title) => ({ title, body: 'Illustrative Category III strategy requiring stronger risk controls, leverage monitoring and investor disclosure.' }))} />
+        <div className="warning-box">Category III strategies require stronger risk controls, leverage monitoring, valuation governance and investor disclosure.</div>
+      </Section>
+
+      <Section id="special-structures" title="Angel Funds, AI-only Schemes and Large Value Funds">
+        <DataTable headers={['Structure', 'Practical Meaning', 'Key Consideration']} rows={[
+          ['Angel Fund', 'Category I sub-category for angel investments', 'Special investor and corpus conditions apply'],
+          ['AI-only Scheme', 'Scheme restricted to Accredited Investors', 'Naming, consent and reporting conditions apply'],
+          ['Large Value Fund', 'Fund catering to accredited investors', 'Certain compliance relaxations may apply'],
+          ['Co-Investment Vehicle / CIV', 'Co-investment within AIF structure where permitted', 'Separate compliance, ring-fencing and reporting required']
+        ]} />
+        <p>These structures should be evaluated carefully based on investor profile, scheme strategy, tenure, compliance flexibility and latest SEBI circulars, including recent circulars on AI-only schemes, LVFs and co-investment routes.</p>
+      </Section>
+
+      <Section id="who-can-apply" title="Who Can Apply for AIF Registration in India?">
+        <DataTable headers={['Applicant Structure', 'Eligibility Position']} rows={[
+          ['Trust', 'Eligible and commonly used for AIF structuring'],
+          ['Company', 'Eligible if constitutional documents permit AIF activity'],
+          ['LLP', 'Eligible subject to regulatory conditions'],
+          ['Body Corporate', 'Eligible where permitted under regulations'],
+          ['Individual', 'Not eligible directly'],
+          ['NBFC / Regulated group sponsor', 'May sponsor / participate subject to SEBI and other applicable regulator conditions'],
+          ['Foreign investors', 'May invest subject to FEMA and applicable investment rules']
+        ]} />
+      </Section>
+
+      <Section id="who-cannot-apply" title="Who Cannot Apply for AIF Registration in India?">
+        <DataTable headers={['Applicant / Situation', 'Regulatory Concern']} rows={[
+          ['Individual applying directly', 'Not permitted as AIF structure'],
+          ['Unregistered pooling vehicle', 'Enforcement risk'],
+          ['Entity with public solicitation model', 'AIF is private placement structure'],
+          ['Sponsor / manager failing fit and proper criteria', 'Application risk'],
+          ['Vague investment strategy', 'SEBI query risk'],
+          ['Entity without adequate infrastructure', 'Operational concern'],
+          ['Weak or uncertified investment team', 'Governance concern'],
+          ['Applicant unable to maintain continuing interest', 'Eligibility and compliance concern']
+        ]} />
+      </Section>
+
+      <Section id="eligibility" title="Eligibility Criteria for AIF Registration in India">
+        <DataTable headers={['Eligibility Parameter', 'Regulatory Expectation']} rows={[
+          ['Legal Structure', 'Trust, Company, LLP or body corporate established in India'],
+          ['Private Placement', 'Fundraising through private placement only'],
+          ['Constitutional Documents', 'Must permit AIF activity'],
+          ['Sponsor and Manager', 'Fit and proper and financially capable'],
+          ['Investment Manager', 'Adequate infrastructure, manpower and systems'],
+          ['Key Investment Team', 'Qualified and experienced professionals'],
+          ['Investment Strategy', 'Clearly defined and category-appropriate'],
+          ['PPM', 'Detailed Private Placement Memorandum with required disclosures'],
+          ['Continuing Interest', 'Sponsor / manager contribution as prescribed'],
+          ['Investor Commitment', 'Minimum investor commitment as prescribed'],
+          ['Compliance Framework', 'Reporting, valuation, audit, KYC/AML and internal controls']
+        ]} />
+      </Section>
+
+      <Section id="corpus-commitment" title="Corpus and Investor Commitment under AIF Registration in India">
+        <DataTable headers={['Requirement', 'General Position']} rows={[
+          ['Minimum Corpus per Scheme', 'Rs. 20 Crore generally'],
+          ['Minimum Investor Commitment', 'Rs. 1 Crore generally'],
+          ['Manager / Employee Minimum Commitment', 'Rs. 25 Lakh generally'],
+          ['Category I and II Scheme Tenure', 'Close-ended with minimum 3 years'],
+          ['Category III Scheme Tenure', 'Open-ended or close-ended'],
+          ['Maximum Investors', 'As per SEBI framework'],
+          ['Private Placement', 'Mandatory']
+        ]} />
+        <h3>Sponsor / Manager Continuing Interest</h3>
+        <DataTable headers={['AIF Category', 'Continuing Interest Requirement']} rows={[
+          ['Category I and II', '2.5% of corpus or Rs. 5 Crore, whichever is lower'],
+          ['Category III', '5% of corpus or Rs. 10 Crore, whichever is lower']
+        ]} />
+        <div className="info-box">Continuing interest must generally be maintained throughout the scheme life and should not be achieved through waiver of management fee.</div>
+      </Section>
+
+      <Section id="capital-planning" title="Capital Structure Planning for AIF Registration in India">
+        <Flow items={['Sponsor Contribution', 'Investor Commitments', 'Capital Calls', 'Investment Deployment', 'Valuation and Reporting', 'Exit / Returns', 'Distribution Waterfall']} />
+        <DataTable headers={['Planning Area', 'Practical Importance']} rows={[
+          ['Sponsor Contribution', 'Demonstrates skin in the game'],
+          ['Investor Commitments', 'Basis for corpus and capital call planning'],
+          ['Capital Call Process', 'Must be clearly defined in PPM'],
+          ['Default Consequences', 'Must be documented to avoid disputes'],
+          ['Expense Allocation', 'Should be transparent'],
+          ['Distribution Waterfall', 'Must be legally and commercially clear'],
+          ['Manager Sustainability', 'Working capital and operating cost readiness must be demonstrated']
+        ]} />
+      </Section>
+
+      <Section id="ppm-framework" title="PPM Drafting Framework for AIF Registration in India">
+        <p>Private Placement Memorandum is one of the most important documents in AIF Registration in India. SEBI expects clear disclosure, strategy clarity, risk factors, fee transparency, governance framework and investor protection provisions.</p>
+        <DataTable headers={['Section', 'Clauses']} rows={[
+          ['Section A - Constitutional Disclosures', '1. Definitions and interpretation; 2. Regulatory background; 3. Legal structure; 4. Sponsor details; 5. Manager details; 6. Trustee details; 7. Category of AIF; 8. Scheme structure; 9. Tenure and extension'],
+          ['Section B - Investment Framework', '10. Investment objective; 11. Investment strategy; 12. Target sectors; 13. Permissible instruments; 14. Investment restrictions; 15. Diversification and concentration norms; 16. Leverage policy, if Category III; 17. Co-investment policy; 18. Associate transaction policy; 19. Exit strategy'],
+          ['Section C - Governance and Risk', '20. Investment Committee constitution; 21. Voting framework; 22. Conflict of interest policy; 23. Risk management policy; 24. Valuation policy; 25. Custody and asset holding mechanism; 26. Borrowing policy; 27. Insurance coverage'],
+          ['Section D - Investor Economics', '28. Capital commitment; 29. Capital call process; 30. Default consequences; 31. Management fee; 32. Carried interest; 33. Hurdle rate; 34. Distribution waterfall; 35. Expenses and cost allocation'],
+          ['Section E - Operational and Compliance', '36. Reporting and disclosure; 37. Audit and valuation frequency; 38. Winding up mechanism; 39. SEBI inspection and powers; 40. Investor rights and grievance mechanism']
+        ]} />
+        <div className="warning-box">Avoid vague investment mandates such as “invest across sectors”. AIF PPM should contain measurable, category-aligned and investor-understandable strategy language.</div>
+      </Section>
+
+      <Section id="governance" title="Investment Committee and Governance for AIF Registration in India">
+        <DataTable headers={['Role', 'Suggested Requirement']} rows={[
+          ['Chairperson', 'Independent or sponsor representative'],
+          ['Investment Expert', 'Domain specialist'],
+          ['Finance Expert', 'CA, CFA or experienced finance professional'],
+          ['Compliance Representative', 'Internal control and compliance oversight'],
+          ['Observer', 'Trustee or sponsor nominee, if required']
+        ]} />
+        <CardGrid columns="md:grid-cols-2" cards={['Investment Committee Charter', 'Voting framework', 'Conflict register', 'Associate transaction policy', 'Valuation committee', 'Compliance officer', 'Risk register', 'Whistleblower policy', 'Code of conduct', 'Data security framework'].map((title) => ({ title, body: 'Governance element to be aligned with the PPM, fund documents and internal controls.' }))} />
+        <div className="info-box">Avoid concentration of investment decision-making power in one individual. SEBI closely examines governance and conflict management.</div>
+      </Section>
+
+      <Section id="documents-required" title="Documents Required for AIF Registration in India">
+        <DataTable headers={['Document Category', 'Key Documents']} rows={[
+          ['Application Documents', 'Form A, application fee proof and SEBI-prescribed declarations'],
+          ['Constitutional Documents', 'Trust deed, LLP agreement, MOA / AOA or body corporate documents'],
+          ['Sponsor Documents', 'Sponsor profile, financials, net worth details, fit and proper declaration and contribution proof'],
+          ['Manager Documents', 'Manager profile, financials, infrastructure details, investment team profile and certifications'],
+          ['Trustee Documents', 'Trustee details and consent, where trust structure is used'],
+          ['PPM Documents', 'Draft Private Placement Memorandum, term sheet and scheme disclosures'],
+          ['Investment Strategy Documents', 'Category note, investment objective, target sectors and instrument strategy'],
+          ['Governance Documents', 'IC charter, conflict policy, valuation policy, risk policy and compliance manual'],
+          ['Investor Documents', 'Investor onboarding framework, KYC/AML process and commitment documents'],
+          ['Financial Documents', 'Net worth certificate, capital contribution plan and operating expense projections'],
+          ['Compliance Documents', 'Reporting framework, books of account framework, record retention policy and SEBI compliance matrix']
+        ]} />
+      </Section>
+
+      <Section id="registration-process" title="Step-by-Step Process for AIF Registration in India">
+        <Timeline steps={[
+          { title: 'Fund Structuring and Category Selection', body: 'Evaluate whether the proposed fund should be structured as Category I, Category II or Category III AIF.' },
+          { title: 'Legal Structure Finalisation', body: 'Choose Trust, Company, LLP or Body Corporate structure and align constitutional documents.' },
+          { title: 'Sponsor and Manager Readiness', body: 'Review sponsor background, manager capability, investment team qualifications and continuing interest planning.' },
+          { title: 'PPM and Policy Drafting', body: 'Prepare draft PPM, investment strategy, risk disclosures, valuation policy, conflict policy and governance documents.' },
+          { title: 'Form A Filing with SEBI', body: 'Submit Form A along with prescribed documents and application fee.' },
+          { title: 'SEBI Scrutiny', body: 'SEBI reviews legal structure, category, investment strategy, sponsor / manager profile, PPM disclosures and compliance readiness.' },
+          { title: 'Clarification and Query Response', body: 'Respond to SEBI observations with revised documents, tracked changes and supporting clarifications.' },
+          { title: 'Approval and Registration Fee Payment', body: 'Upon SEBI satisfaction, pay applicable registration fee.' },
+          { title: 'Certificate of Registration', body: 'SEBI grants certificate of registration as AIF in the approved category.' },
+          { title: 'Scheme Launch Readiness', body: 'Complete bank, demat, custodian, auditor, valuer, investor onboarding and scheme filing requirements before launch.' }
+        ]} />
+      </Section>
+
+      <Section id="government-fees" title="Government Fees for AIF Registration in India">
+        <DataTable headers={['AIF Category', 'Application Fee', 'Registration Fee']} rows={[
+          ['Category I AIF', 'Rs. 1,00,000', 'Rs. 5,00,000'],
+          ['Category II AIF', 'Rs. 1,00,000', 'Rs. 10,00,000'],
+          ['Category III AIF', 'Rs. 1,00,000', 'Rs. 15,00,000']
+        ]} />
+        <div className="warning-box">Scheme filing fee may apply before launch, except where exempted as per applicable framework. Fees must be verified from the latest SEBI regulations and fee schedule before filing or hardcoding in reusable website data.</div>
+      </Section>
+
+      <Section id="timeline" title="Timeline for AIF Registration in India">
+        <DataTable headers={['Stage', 'Indicative Timeline']} rows={[
+          ['Fund structuring and category mapping', '2 to 4 weeks'],
+          ['PPM and document drafting', '3 to 6 weeks'],
+          ['Form A filing', 'Case-specific'],
+          ['SEBI initial review', '30 to 60 days or more'],
+          ['Clarification and revised filing', 'Case-specific'],
+          ['Approval and fee payment', 'Subject to SEBI satisfaction'],
+          ['Overall timeline', 'Usually 3 to 6 months or more depending on complexity']
+        ]} />
+        <p>Timeline is indicative and depends on fund complexity, PPM quality, sponsor background, investment strategy, SEBI review and query response.</p>
+      </Section>
+
+      <Section id="post-registration-activities" title="Activities After AIF Registration in India">
+        <ul className="clean-list">
+          {['Raise capital through private placement', 'Launch scheme after required filing', 'Open bank account', 'Open demat account', 'Appoint custodian where applicable', 'Appoint auditor', 'Appoint independent valuer', 'Execute investor contribution agreements', 'Maintain KYC / AML records', 'Issue capital call notices', 'Deploy investments as per PPM', 'Maintain investor reporting framework'].map((item) => <li key={item}>{item}</li>)}
+        </ul>
+      </Section>
+
+      <Section id="post-registration-compliance" title="Post-Registration Compliance for AIFs">
+        <DataTable headers={['Compliance Area', 'Requirement']} rows={[
+          ['Private Placement Discipline', 'No public solicitation'],
+          ['Corpus and Investor Commitment', 'Maintain prescribed requirements'],
+          ['Sponsor Continuing Interest', 'Maintain throughout scheme life'],
+          ['Investment Restrictions', 'Follow category-wise restrictions'],
+          ['Valuation', 'Independent and periodic valuation as applicable'],
+          ['Investor Reporting', 'Periodic investor reports'],
+          ['SEBI Reporting', 'Regulatory returns and filings'],
+          ['Compliance Test Report', 'Prepare and submit / maintain as applicable'],
+          ['Audit', 'Annual audit and scheme-level records'],
+          ['KYC / AML', 'Investor due diligence and ongoing monitoring'],
+          ['Books of Account', 'Scheme-wise books and registers'],
+          ['Leverage Monitoring', 'Mandatory for Category III where applicable'],
+          ['Associate Transactions', 'Disclosure and investor approval as applicable']
+        ]} />
+      </Section>
+
+      <Section id="compliance-calendar" title="AIF Registration in India - Compliance Calendar">
+        <h3>Ongoing Compliance</h3>
+        <DataTable headers={['Compliance Item', 'Frequency', 'Responsibility', 'Risk if Missed']} rows={[
+          ['Sponsor Continuing Interest', 'Continuous', 'Sponsor / Manager', 'Regulatory breach'],
+          ['Investment Restrictions', 'Continuous', 'Investment Manager', 'SEBI action'],
+          ['Investor KYC / AML', 'Ongoing', 'Compliance Team', 'AML risk'],
+          ['Books of Account', 'Continuous', 'Finance Team', 'Inspection risk'],
+          ['Conflict Register', 'Continuous', 'Compliance Officer', 'Governance concern'],
+          ['Associate Transaction Approval', 'Event-based', 'Manager / Trustee', 'Investor protection issue']
+        ]} />
+        <h3>Quarterly Compliance</h3>
+        <DataTable headers={['Compliance Item', 'Applicability', 'Responsible Person']} rows={[
+          ['Investor Reporting', 'As per PPM and regulations', 'Fund Manager'],
+          ['SEBI Reporting', 'As prescribed', 'Compliance Officer'],
+          ['Valuation Review', 'As applicable', 'Valuer / Finance Team'],
+          ['Capital Call and Deployment Review', 'All schemes', 'Investment Team']
+        ]} />
+        <h3>Annual Compliance</h3>
+        <DataTable headers={['Compliance Item', 'Requirement']} rows={[
+          ['Annual Audit', 'Scheme and fund-level audit'],
+          ['Compliance Test Report', 'As prescribed under SEBI framework'],
+          ['Valuation Report', 'As per valuation policy and regulations'],
+          ['Investor Annual Statement', 'As per PPM and regulations'],
+          ['Financial Statements', 'Fund and scheme-level statements'],
+          ['Review of Policies', 'Risk, valuation, conflict and compliance policy review']
+        ]} />
+        <h3>Event-Based Compliance</h3>
+        <DataTable headers={['Event', 'Compliance Action']} rows={[
+          ['Scheme launch', 'PPM / information memorandum filing as applicable'],
+          ['Change in sponsor or manager', 'SEBI approval / intimation as applicable'],
+          ['Change in key investment team', 'Regulatory compliance check'],
+          ['Associate transaction', 'Disclosure and investor approval as applicable'],
+          ['Extension of tenure', 'Investor approval and SEBI reporting as applicable'],
+          ['Winding up', 'Investor approval, audit and SEBI intimation'],
+          ['Material PPM change', 'Investor consent and regulatory filing as applicable']
+        ]} />
+      </Section>
+
+      <Section id="books-registers" title="Books of Account and Registers for AIFs">
+        <DataTable headers={['Register / Record', 'Purpose']} rows={[
+          ['Capital Commitment Register', 'Investor commitment tracking'],
+          ['Capital Call Register', 'Drawdown and payment tracking'],
+          ['Investor Ledger', 'Investor-wise capital and distribution details'],
+          ['Investment Register', 'Portfolio holdings and transactions'],
+          ['Valuation Register', 'Valuation methodology and reports'],
+          ['Distribution Register', 'Distribution waterfall and payouts'],
+          ['Expense Allocation Register', 'Scheme expense allocation'],
+          ['Associate Transaction Register', 'Related party transaction control'],
+          ['Compliance Filing Register', 'SEBI and investor filing tracker'],
+          ['Investment Committee Resolution Register', 'Approval and decision trail'],
+          ['KYC / AML Register', 'Investor due diligence records']
+        ]} />
+        <p>Books must support SEBI inspection and investor reporting. Scheme-wise record keeping should be planned from day one.</p>
+      </Section>
+
+      <Section id="co-investment" title="Co-Investment and Associate Transaction Governance">
+        <DataTable headers={['Area', 'Regulatory / Practical Requirement']} rows={[
+          ['Co-Investment', 'Category I and II AIFs may offer co-investment through permitted routes, subject to conditions'],
+          ['CIV Route', 'Separate ring-fenced structure, bank and demat accounts and compliance requirements where applicable'],
+          ['Associate Transactions', 'Disclosure and investor approval requirements apply'],
+          ['Investor Approval', '75% investor approval by value may be required for associate transactions'],
+          ['Conflict Policy', 'Must be clearly documented in PPM'],
+          ['Documentation Trail', 'Board / IC notes, investor consent, valuation and disclosure records required']
+        ]} />
+        <div className="info-box">Conflict management is one of the most important governance tests in AIF Registration in India.</div>
+      </Section>
+
+      <Section id="inspection-enforcement" title="SEBI Inspection and Enforcement Powers">
+        <p>SEBI may inspect books, call for records, conduct inquiry, issue directions, impose penalties and suspend or cancel registration where serious non-compliance is observed.</p>
+        <DataTable headers={['Violation', 'Possible Consequence']} rows={[
+          ['Unregistered pooling', 'Enforcement action'],
+          ['Misrepresentation in PPM', 'Severe regulatory action'],
+          ['Leverage breach', 'Serious violation, especially for Category I / II'],
+          ['Associate misuse', 'Suspension / enforcement risk'],
+          ['Chronic non-reporting', 'Penalty and supervisory action'],
+          ['Investor complaint upheld', 'Inquiry and corrective directions'],
+          ['Fraudulent activity', 'Cancellation and enforcement action'],
+          ['Failure to maintain records', 'Inspection adverse finding']
+        ]} />
+      </Section>
+
+      <Section id="common-mistakes" title="Common Mistakes in AIF Registration in India">
+        <DataTable headers={['Mistake', 'Risk']} rows={[
+          ['Wrong category selection', 'SEBI query and delay'],
+          ['Vague investment strategy', 'PPM clarification'],
+          ['Weak sponsor background disclosure', 'Investor protection concern'],
+          ['Poorly drafted PPM', 'Disclosure deficiency'],
+          ['No certified investment professional', 'Application delay'],
+          ['Inadequate manager infrastructure', 'Operational concern'],
+          ['Unclear fee structure', 'Investor exploitation concern'],
+          ['No conflict policy', 'Governance weakness'],
+          ['Weak valuation policy', 'Investor dispute risk'],
+          ['Ambiguous capital call default clause', 'Future litigation risk'],
+          ['No compliance calendar', 'Post-registration default'],
+          ['Slow SEBI query response', 'Procedural delay']
+        ]} />
+      </Section>
+
+      <Section id="strategic-recommendations" title="Strategic Structuring Recommendations Before Applying">
+        <ul className="clean-list">
+          {['Select AIF category carefully', 'Prepare clear investment thesis', 'Avoid over-broad investment objective', 'Build sponsor contribution plan early', 'Prepare PPM with full risk disclosure', 'Appoint experienced investment manager', 'Ensure key investment team certification', 'Draft conflict and associate transaction policy', 'Prepare valuation methodology', 'Build compliance test report framework', 'Prepare SEBI query response strategy', 'Maintain scheme-wise record keeping framework'].map((item) => <li key={item}>{item}</li>)}
+        </ul>
+        <div className="expert-quote">
+          <blockquote>“True fund leadership lies not in how capital is deployed, but in how responsibility is structured before capital is raised.”</blockquote>
+          <cite>CS Devyani Khambhati - Compliance Expert</cite>
+        </div>
+      </Section>
+
+      <Section id="how-estabizz-helps" title="How Estabizz Helps with AIF Registration in India">
+        <CardGrid columns="md:grid-cols-2" cards={[
+          { title: 'AIF Category Assessment', body: 'We help evaluate whether the proposed fund should be Category I, Category II, Category III, Angel Fund, AI-only scheme, LVF or other suitable structure.' },
+          { title: 'Fund Structuring Support', body: 'We assist with Trust / LLP / Company structuring, sponsor-manager arrangement, trustee documentation and fund governance model.' },
+          { title: 'PPM Drafting and Review', body: 'We prepare SEBI-ready PPM with investment strategy, risk factors, fee structure, conflict policy, valuation policy and investor rights framework.' },
+          { title: 'Sponsor Contribution Planning', body: 'We assist with continuing interest mapping, capital contribution planning and supporting financial documentation.' },
+          { title: 'Form A and SEBI Filing', body: 'We assist in Form A preparation, document compilation, application filing support and SEBI query responses.' },
+          { title: 'Governance and Policy Documentation', body: 'We help draft investment committee charter, conflict policy, valuation policy, risk policy, KYC/AML policy and compliance manual.' },
+          { title: 'Post-Registration Compliance', body: 'We support scheme launch, PPM filing, reporting calendar, compliance test report, investor reporting, books of account and regulatory updates.' },
+          { title: 'Co-Investment and Associate Transaction Support', body: 'We assist in structuring co-investment, CIV-related documentation and associate transaction approval framework.' },
+          { title: 'Ticket-Based Execution', body: 'Estabizz follows a structured task-tracking system so clients receive organised updates throughout the engagement.' }
+        ]} />
+      </Section>
+
+      <Section id="why-choose-estabizz" title="Why Choose Estabizz for AIF Registration in India?">
+        <CardGrid columns="md:grid-cols-2" cards={[
+          { title: 'SEBI Regulatory Expertise', body: 'Our team works across SEBI licensing and compliance matters and understands fund registration scrutiny.' },
+          { title: 'Fund Structuring Depth', body: 'We understand category selection, sponsor-manager arrangements, PPM drafting, investor economics and governance architecture.' },
+          { title: 'Compliance-First PPM Approach', body: 'We focus on disclosure, risk factors, conflict policy, valuation, fees and investor protection from the drafting stage.' },
+          { title: 'Business Plan and Financial Modelling', body: 'We prepare practical fund business plans, corpus planning models, drawdown assumptions and manager sustainability projections.' },
+          { title: 'Multi-Regulator Experience', body: 'Estabizz’s experience across RBI, SEBI, IRDAI and IFSCA enables a wider financial regulatory perspective.' },
+          { title: 'End-to-End Support', body: 'From fund structuring to SEBI application, query response, scheme launch and post-registration compliance, we provide organised professional handholding.' }
+        ]} />
+      </Section>
+
+      <Section id="faqs" title="FAQs on AIF Registration in India">
+        <div className="faq-accordion">
+          {faqs.map((faq) => (
+            <details className="faq-item" key={faq.q}>
+              <summary>{faq.q}</summary>
+              <div>{faq.a}</div>
+            </details>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="expert-review" title="Reviewed by Estabizz Compliance Expert">
+        <div className="info-box">
+          <p><strong>Reviewed by:</strong> CS Devyani Khambhati</p>
+          <p><strong>Designation:</strong> Compliance Expert | Estabizz Fintech Private Limited</p>
+          <p><strong>Expertise:</strong> SEBI, RBI, IRDAI, IFSCA, AIF registration, fund structuring, PPM drafting, SEBI intermediary compliance, investment governance and post-registration regulatory support.</p>
+          <p>This content has been prepared from a regulatory advisory perspective to help fund sponsors, investment managers, family offices, venture capital firms, private equity firms, debt fund sponsors and institutional promoters understand the broad SEBI framework for AIF Registration in India.</p>
+        </div>
+        <div className="warning-box">
+          This content is for general informational purposes only and should not be treated as legal, regulatory, tax, investment or financial advice. SEBI requirements, application formats, fee structures, sponsor contribution norms, PPM filing requirements, reporting obligations and approval processes may change from time to time. Applicants should verify the latest SEBI regulations, master circulars and circulars before filing any AIF application.
+        </div>
+      </Section>
+
+      <Section id="speak-to-expert" title="Speak to Our SEBI Compliance Expert">
+        <p>Estabizz can help you assess the proposed AIF category, build the sponsor-manager structure, prepare PPM and Form A documentation, respond to SEBI observations and set up a post-registration compliance calendar.</p>
+        <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+          <Link href="/contact" className="px-5 py-3 bg-[#0a1628] text-white font-bold rounded-xl text-center">Speak to SEBI Compliance Expert</Link>
+          <Link href="/get-started" className="px-5 py-3 bg-white text-[#0096D6] font-bold rounded-xl border border-blue-200 text-center">Check AIF Eligibility</Link>
+          <a href={whatsappUrl} className="px-5 py-3 bg-[#10b981] text-white font-bold rounded-xl text-center">WhatsApp Estabizz Team</a>
+        </div>
+      </Section>
     </ServicePageLayout>
   );
 }

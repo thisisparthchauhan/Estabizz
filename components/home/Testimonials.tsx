@@ -32,7 +32,7 @@ export default function Testimonials() {
         <section ref={sectionRef} className="py-24 relative overflow-hidden bg-transparent border-t border-[rgba(0,150,220,0.1)]">
             <div className="max-w-[1240px] mx-auto px-6 relative z-10">
 
-                <div className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                <div className={`text-center max-w-2xl mx-auto mb-12 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
                     <h2 className="text-[32px] md:text-[40px] font-black text-[#0a1628] leading-[1.2] mb-4">
                         What Our Clients Say
                     </h2>
@@ -60,11 +60,18 @@ export default function Testimonials() {
                                 <div className="mt-6 text-[11px] font-bold uppercase tracking-[0.14em] text-[#0096D6]">
                                     Confidential engagement category
                                 </div>
+                                <h3 className="text-[15px] font-bold text-[#0a1628] leading-tight">
+                                    {card.title}
+                                </h3>
                             </div>
                         ))}
                     </div>
                 </div>
 
+                <p className="text-center text-[12px] text-[#64748b] mt-10 max-w-2xl mx-auto leading-relaxed">
+                    Estabizz does not publish fabricated client testimonials. Verified, attributable feedback will be
+                    added progressively with explicit client consent.
+                </p>
             </div>
 
         </section>

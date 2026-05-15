@@ -471,6 +471,33 @@ It is best suited for:
 • Compliance-focused promoters
 
 It is not ideal for casual or commission-only operators.`
+    },
+    {
+      id: 'operational-restrictions',
+      title: 'Operational Restrictions for Insurance Marketing Firms',
+      content: `Insurance Marketing Firm Registration in India authorises a defined distribution scope, but several practices remain regulated, restricted or prohibited under the IRDAI framework.
+
+Permitted within scope:
+• Distribution of specified life, general and health insurance products
+• Appointment and supervision of Insurance Sales Persons (ISPs)
+• Operations within approved districts
+• Permitted financial service activities as allowed under the regulations
+• Premium collection in line with insurer arrangements and regulatory norms
+• Online insurance distribution within IRDAI's regulatory framework
+
+Not permitted:
+• Acting as an insurer or assuming insurance risk
+• Underwriting risk or issuing the firm's own insurance policy
+• Operating outside approved districts without due process
+• Solicitation through untrained or uncertified persons
+• Engagement of sub-agents beyond the ISP framework
+• Mis-selling, misrepresentation or unfair inducement
+• Hidden / side commission arrangements
+• Use of customer data outside regulatory consent and privacy norms
+• Continuing operations after suspension or expiry of registration
+• Transfer of registration to another entity (registration is entity-specific)
+
+Crossing these regulatory boundaries — even unintentionally — may invite inspection observations, monetary penalties, suspension or cancellation.`
     }
   ];
 
@@ -715,6 +742,209 @@ It is not ideal for casual or commission-only operators.`
           </div>
         ))}
       </section>
+
+      {/* ==================== HOW ESTABIZZ HELPS ==================== */}
+      <section id="how-estabizz-helps" className="mt-16">
+        <h2>How Estabizz Helps with Insurance Marketing Firm Registration in India</h2>
+        <div className="step-timeline">
+          <div className="step-item">
+            <div className="step-dot">1</div>
+            <div className="step-card">
+              <h4>Eligibility &amp; Structure Review</h4>
+              <p>We review whether the applicant is eligible as a Company or LLP and whether the proposed structure is suitable for IMF registration.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">2</div>
+            <div className="step-card">
+              <h4>Object Clause &amp; Documentation Alignment</h4>
+              <p>We assist in aligning constitutional documents, object clause, ownership and fit and proper declarations.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">3</div>
+            <div className="step-card">
+              <h4>Net Worth &amp; Capital Readiness</h4>
+              <p>We help arrange ₹10 lakh net worth readiness documentation, CA certificate and financial records.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">4</div>
+            <div className="step-card">
+              <h4>Principal Officer Documentation</h4>
+              <p>We assist with Principal Officer qualification, training, examination, appointment and declaration documentation.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">5</div>
+            <div className="step-card">
+              <h4>ISP Framework Support</h4>
+              <p>We help prepare Insurance Sales Person recruitment, training, certification, supervision and conduct framework.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">6</div>
+            <div className="step-card">
+              <h4>Business Plan &amp; Financial Projections</h4>
+              <p>We prepare a 3-year business plan, district-wise operations plan, revenue model, ISP strategy, expense forecast and risk controls.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">7</div>
+            <div className="step-card">
+              <h4>IRDAI Application Support</h4>
+              <p>We assist in application preparation, document compilation, filing support and IRDAI clarification responses.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">8</div>
+            <div className="step-card">
+              <h4>Policy &amp; Compliance Framework</h4>
+              <p>We help draft SOPs, code of conduct framework, grievance redressal mechanism, record maintenance process and compliance calendar.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">9</div>
+            <div className="step-card">
+              <h4>Post-Registration Compliance</h4>
+              <p>We support net worth monitoring, ISP review, reporting, renewal tracking, inspection readiness and regulatory update tracking.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">10</div>
+            <div className="step-card">
+              <h4>Ticket-Based Execution</h4>
+              <p>Estabizz follows a structured task-tracking system so clients receive organised updates throughout the engagement.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== WHY CHOOSE ESTABIZZ ==================== */}
+      <section id="why-choose-estabizz" className="mt-16">
+        <h2>Why Choose Estabizz for Insurance Marketing Firm Registration in India?</h2>
+        <div className="step-timeline">
+          <div className="step-item">
+            <div className="step-dot">1</div>
+            <div className="step-card">
+              <h4>IRDAI Regulatory Expertise</h4>
+              <p>Our team works across IRDAI licensing and compliance matters and understands insurance intermediary approval requirements.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">2</div>
+            <div className="step-card">
+              <h4>Insurance Distribution Understanding</h4>
+              <p>We understand IMF, corporate agency, broker, POSP and digital insurance distribution models.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">3</div>
+            <div className="step-card">
+              <h4>Compliance Depth, Not Just Documentation</h4>
+              <p>We focus on net worth, Principal Officer readiness, ISP supervision, district operation and consumer protection.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">4</div>
+            <div className="step-card">
+              <h4>Business Plan Strength</h4>
+              <p>We prepare practical, regulator-facing business plans and financial projections suitable for IMF applicants.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">5</div>
+            <div className="step-card">
+              <h4>Multi-Regulator Experience</h4>
+              <p>Our experience across RBI, SEBI, IRDAI and IFSCA enables a wider financial regulatory perspective.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">6</div>
+            <div className="step-card">
+              <h4>End-to-End Support</h4>
+              <p>From structuring to IRDAI application, clarification response and post-registration compliance, we provide organised professional handholding.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== REVIEWER & DISCLAIMER ==================== */}
+      <section id="reviewer" className="mt-16">
+        <h2>Reviewer &amp; Legal Disclaimer</h2>
+        <div className="info-box">
+          <p><strong>Reviewed by:</strong> CS Devyani Khambhati</p>
+          <p><strong>Designation:</strong> Compliance Expert | Estabizz Fintech Private Limited</p>
+          <p><strong>Expertise:</strong> IRDAI, RBI, SEBI, IFSCA, insurance intermediary licensing, Insurance Marketing Firm registration, corporate agency, insurance broker registration, insurance distribution compliance and post-registration regulatory support.</p>
+          <p>This content has been prepared from a regulatory advisory perspective to help insurance entrepreneurs, regional distribution firms, fintech companies, NBFC-linked distribution models, LLPs, private limited companies and startups understand the broad IRDAI framework for Insurance Marketing Firm Registration in India.</p>
+        </div>
+        <p>
+          <strong>Legal Disclaimer:</strong> This content is for general informational purposes only and should not be
+          treated as legal, regulatory, insurance, financial or investment advice. IRDAI requirements, application
+          formats, fee structures, capital and net worth thresholds, training requirements, ISP framework,
+          district-based operation rules, compliance expectations and approval processes may change from time to time.
+          Applicants should verify the latest regulatory position and obtain professional advice before filing any
+          application with IRDAI. Estabizz does not promise or guarantee IRDAI approval; outcomes are subject to IRDAI
+          scrutiny and the fulfilment of prescribed conditions.
+        </p>
+        <p>
+          For a structured consultation with our IRDAI compliance team, you may also reach Estabizz on WhatsApp at{" "}
+          <a href="https://wa.me/919825600907" target="_blank" rel="noopener noreferrer">+91 98256 00907</a>.
+        </p>
+      </section>
+
+      {/* FAQ JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqGroups.flatMap((g) =>
+              g.faqs.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              }))
+            ),
+          }),
+        }}
+      />
+      {/* Service JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            serviceType: "Insurance Marketing Firm Registration in India",
+            provider: {
+              "@type": "Organization",
+              name: "Estabizz Fintech Private Limited",
+              url: "https://estabizz-site.vercel.app/",
+            },
+            areaServed: { "@type": "Country", name: "India" },
+            description:
+              "Professional regulatory consulting support for IRDAI Insurance Marketing Firm Registration covering Company / LLP structuring, ₹10 lakh net worth readiness, Principal Officer documentation, Insurance Sales Person framework, district-based operation plan, application filing and post-registration compliance.",
+            url: "https://estabizz-site.vercel.app/irdai/insurance-marketing-firm-registration-in-india",
+          }),
+        }}
+      />
+      {/* Breadcrumb JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
+              { "@type": "ListItem", position: 2, name: "IRDAI Services", item: "https://estabizz-site.vercel.app/irdai" },
+              { "@type": "ListItem", position: 3, name: "Insurance Marketing Firm Registration", item: "https://estabizz-site.vercel.app/irdai/insurance-marketing-firm-registration-in-india" },
+            ],
+          }),
+        }}
+      />
     </ServicePageLayout>
   );
 }

@@ -660,6 +660,36 @@ Failure to renew timely may lead to suspension of Reinsurance Broker Registratio
 • Keep PI policy renewal reminders automated
 
 "Compliance is not an annual activity; it is a daily discipline that safeguards regulatory credibility." — CS Devyani Khambhati – Compliance Expert`
+    },
+    {
+      id: 'operational-restrictions',
+      title: 'Operational Restrictions for Reinsurance Brokers',
+      content: `Reinsurance Broker Registration in India authorises a defined intermediary scope, but several practices remain regulated, restricted or prohibited under the IRDAI framework.
+
+Permitted within scope:
+• Treaty reinsurance placement for insurers
+• Facultative reinsurance placement for large or specialised risks
+• Catastrophe protection advisory
+• Reinsurance programme design (proportional / non-proportional / layered)
+• Domestic and international capacity sourcing
+• Claims recovery support from reinsurers
+• Reinsurance counterparty evaluation
+• Risk mitigation portfolio structuring for insurers
+
+Not permitted:
+• Acting as insurer or reinsurer
+• Underwriting risk or issuing the broker's own insurance policy
+• Accepting deposits from insurers
+• Sharing brokerage with unregistered persons
+• Use of client funds for own expenses
+• Mis-selling or misrepresentation
+• Hidden / side commission arrangements
+• Operating outside the scope of broker registration
+• Conducting reinsurance activity without continuous PI cover
+• Continuing operations after suspension or expiry of registration
+• Transfer of registration to another entity (registration is entity-specific)
+
+Crossing these regulatory boundaries — even unintentionally — may invite inspection observations, monetary penalties, suspension or cancellation.`
     }
   ];
 
@@ -667,166 +697,80 @@ Failure to renew timely may lead to suspension of Reinsurance Broker Registratio
     {
       category: 'General Overview',
       faqs: [
-        { q: "What is Composite Insurance Broker Registration in India?", a: "Composite Insurance Broker Registration in India is a licence granted by IRDAI that allows a company to carry on life insurance broking, general insurance broking, and reinsurance broking activities under one approval." },
-        { q: "Who grants Composite Insurance Broker Registration in India?", a: "The registration is granted by the Insurance Regulatory and Development Authority of India (IRDAI), which regulates insurance intermediaries in India." },
-        { q: "What activities can a Composite Insurance Broker undertake?", a: "A composite broker can solicit and arrange life insurance policies, general insurance policies, and reinsurance placements, along with risk advisory and claims assistance services." },
-        { q: "Is Composite Insurance Broker Registration mandatory to act as a broker?", a: "Yes. No entity can act as an insurance broker in India without valid registration from IRDAI." },
-        { q: "What is the difference between Direct Broker and Composite Broker?", a: "A direct broker operates either in life or general insurance, whereas a composite broker is authorised to operate across life, general, and reinsurance segments." },
-        { q: "Is reinsurance activity allowed under Composite Insurance Broker Registration?", a: "Yes. Composite brokers are permitted to carry out reinsurance broking in addition to direct broking." },
-        { q: "Can an unregistered entity solicit insurance business?", a: "No. Soliciting or arranging insurance business without registration is prohibited." },
-        { q: "Is the registration valid permanently?", a: "No. Registration is valid for a prescribed period and must be renewed before expiry." },
-        { q: "Can a company hold more than one category of broker registration?", a: "No. A company is registered under one specific category. Composite category covers all segments." },
-        { q: "Is the registration transferable to another entity?", a: "No. Registration is entity-specific and cannot be transferred." }
+        { q: "What is Reinsurance Broker Registration in India?", a: "Reinsurance Broker Registration in India is a licence granted by IRDAI that allows an eligible company to act as an intermediary between insurers and reinsurers for reinsurance placement and advisory activities." },
+        { q: "Who regulates Reinsurance Brokers in India?", a: "Reinsurance Brokers are regulated by the Insurance Regulatory and Development Authority of India." },
+        { q: "Which regulations govern Reinsurance Broker Registration?", a: "It is governed by the Insurance Act, 1938, IRDAI Act, 1999 and IRDAI Insurance Brokers Regulations, 2018." },
+        { q: "What does a Reinsurance Broker do?", a: "A reinsurance broker arranges treaty reinsurance, facultative reinsurance, catastrophe protection, reinsurance programme design and claims recovery support for insurers." },
+        { q: "Is Reinsurance Broker different from Direct Broker?", a: "Yes. Direct brokers deal with policyholders, while reinsurance brokers work at insurer-reinsurer level for reinsurance placement." },
+        { q: "Is Reinsurance Broker different from Composite Broker?", a: "Yes. A reinsurance broker focuses only on reinsurance broking, while a composite broker can undertake both direct insurance broking and reinsurance broking." }
       ]
     },
     {
       category: 'Eligibility & Applicability',
       faqs: [
-        { q: "Who can apply for Composite Insurance Broker Registration in India?", a: "Only a company incorporated under the Companies Act can apply." },
-        { q: "Can an LLP apply for Composite Insurance Broker Registration?", a: "No. Only a company structure is permitted." },
-        { q: "Can an individual apply for Composite Broker licence?", a: "No. Individuals cannot apply." },
-        { q: "Can a foreign-owned company apply?", a: "Yes, subject to compliance with applicable FDI norms and IRDAI approval requirements." },
-        { q: "Is there any restriction on promoters?", a: "Promoters must satisfy fit and proper criteria regarding integrity, financial soundness, and reputation." },
-        { q: "Can an existing Direct Broker upgrade to Composite category?", a: "Yes, subject to meeting enhanced capital and compliance requirements and obtaining approval." },
-        { q: "Is insurance experience mandatory for promoters?", a: "The Principal Officer must meet qualification and training requirements, and management must demonstrate competence." },
-        { q: "Can a company engaged in other financial activities apply?", a: "Yes, provided insurance broking is a main object and there is no conflict of interest." },
-        { q: "Is a minimum number of directors required?", a: "The company must comply with Companies Act requirements and IRDAI governance expectations." },
-        { q: "Are disqualified directors allowed?", a: "No. Persons disqualified under law cannot hold key positions." }
+        { q: "Who can apply for Reinsurance Broker Registration in India?", a: "As per the source document, only a company incorporated under the Companies Act can apply." },
+        { q: "Can an individual apply?", a: "No. Individuals cannot apply." },
+        { q: "Can a partnership firm apply?", a: "No. Partnership firms are not eligible." },
+        { q: "Can an LLP apply?", a: "The source document indicates company structure only. Verify the latest IRDAI position before filing." },
+        { q: "Can an insurer act as a reinsurance broker?", a: "No. An insurer or reinsurer cannot simultaneously act as a broker." },
+        { q: "Can a foreign-owned company apply?", a: "Yes, subject to compliance with applicable FDI norms and IRDAI approval requirements." }
       ]
     },
     {
-      category: 'Legal & Regulatory Framework',
+      category: 'Capital & Net Worth',
       faqs: [
-        { q: "Under which law is Composite Insurance Broker Registration governed?", a: "It is governed by the Insurance Act, IRDAI Act, and IRDAI (Insurance Brokers) Regulations, 2018." },
-        { q: "Does IRDAI issue circulars applicable to brokers?", a: "Yes. Brokers must comply with all circulars and guidelines issued from time to time." },
-        { q: "Are brokers bound by a Code of Conduct?", a: "Yes. Brokers must follow conduct requirements prescribed by IRDAI." },
-        { q: "Can IRDAI inspect a composite broker?", a: "Yes. IRDAI has inspection and supervisory powers." },
-        { q: "Is maintenance of books mandatory?", a: "Yes. Brokers must maintain prescribed books and records." },
-        { q: "Is there a regulatory reporting requirement?", a: "Yes. Periodic filings are required." },
-        { q: "Is professional indemnity insurance mandatory?", a: "Yes. It must be maintained continuously." },
-        { q: "Is capital maintenance monitored by IRDAI?", a: "Yes. Net worth must be maintained at all times." },
-        { q: "Can IRDAI impose conditions while granting licence?", a: "Yes. Registration may be granted with conditions." },
-        { q: "Can IRDAI suspend registration?", a: "Yes, for regulatory breaches." }
+        { q: "What is the minimum capital required?", a: "The minimum capital requirement is ₹4 Crore." },
+        { q: "What form should the capital take?", a: "The capital should be in the form of equity share capital." },
+        { q: "Must capital be maintained continuously?", a: "Yes. Capital and net worth requirements must be maintained continuously." },
+        { q: "What happens if net worth falls below ₹4 Crore?", a: "Immediate corrective action is required. IRDAI may seek explanation and take regulatory action if the deficiency is not rectified." },
+        { q: "Can unsecured loans be counted as capital?", a: "No. Unsecured loans cannot substitute paid-up equity capital." },
+        { q: "Can capital be infused in phases?", a: "Minimum required capital must be in place before approval." }
       ]
     },
     {
-      category: 'Registration / Application Process',
+      category: 'PI Insurance & Principal Officer',
       faqs: [
-        { q: "How do I apply for Composite Insurance Broker Registration in India?", a: "Application must be filed in the prescribed form along with required documents and fee." },
-        { q: "Is application filed online?", a: "Yes, through the regulatory portal as prescribed." },
-        { q: "What is the first step before applying?", a: "Incorporate a company with appropriate object clause and infuse required capital." },
-        { q: "Is Principal Officer appointment required before filing?", a: "Yes. The Principal Officer must meet qualification and training norms before approval." },
-        { q: "Does IRDAI conduct scrutiny of application?", a: "Yes. The Authority reviews documents and may seek clarifications." },
-        { q: "Can IRDAI reject an incomplete application?", a: "Yes. Incomplete or deficient applications may not be processed." },
-        { q: "Is personal hearing possible during review?", a: "Yes, if required by IRDAI." },
-        { q: "What happens after in-principle approval?", a: "Registration fee must be paid before certificate issuance." },
-        { q: "Is physical verification conducted?", a: "IRDAI may verify infrastructure and compliance readiness." },
-        { q: "When is registration certificate issued?", a: "After satisfaction of all conditions and payment of fees." }
+        { q: "Is Professional Indemnity Insurance mandatory?", a: "Yes. Professional Indemnity Insurance must be maintained continuously." },
+        { q: "Can operations continue if PI insurance lapses?", a: "No. PI insurance lapse is a serious compliance concern." },
+        { q: "Is Principal Officer appointment mandatory?", a: "Yes. A qualified, trained and certified Principal Officer is required." },
+        { q: "What if the Principal Officer resigns suddenly?", a: "The company must appoint a qualified replacement and inform IRDAI within the prescribed timeline. Operations should not continue without a compliant Principal Officer." },
+        { q: "Is reinsurance market expertise expected from the Principal Officer?", a: "Yes. The Principal Officer should demonstrate adequate understanding of the reinsurance market in addition to qualification, training and examination requirements." }
       ]
     },
     {
-      category: 'Capital, Net Worth & Infrastructure',
+      category: 'Documentation & Business Plan',
       faqs: [
-        { q: "What is the minimum capital required for Composite Insurance Broker Registration?", a: "₹5 Crore paid-up equity capital." },
-        { q: "Must capital be fully paid-up?", a: "Yes." },
-        { q: "Is net worth equal to minimum capital?", a: "Yes. Net worth must not fall below ₹5 Crore." },
-        { q: "Is there a deposit requirement?", a: "Yes. A specified percentage of capital must be kept as deposit with a scheduled bank." },
-        { q: "Can capital be reduced after registration?", a: "Not below regulatory minimum." },
-        { q: "Is professional indemnity cover required?", a: "Yes, minimum ₹5 Crore." },
-        { q: "Is office space mandatory?", a: "Yes. Adequate infrastructure must be available." },
-        { q: "Is IT system required?", a: "Yes. Proper systems for record maintenance are expected." },
-        { q: "Is grievance redressal mechanism compulsory?", a: "Yes." },
-        { q: "Is separate client account required?", a: "Yes, where client money is handled." }
+        { q: "What should the business plan include?", a: "It should include 3-year financial projections, business volume estimation, revenue forecast, expense structure, break-even analysis and reinsurance market strategy." },
+        { q: "What documents are required?", a: "Documents generally include incorporation documents, MOA, AOA, shareholding pattern, capital proof, net worth certificate, Principal Officer documents, business plan, PI insurance documents and board resolution." },
+        { q: "How is the application filed?", a: "The application must be filed with IRDAI in the prescribed form with documents and fees." },
+        { q: "Does IRDAI scrutinise the application?", a: "Yes. IRDAI reviews capital, promoter background, Principal Officer profile, business plan, infrastructure and compliance readiness." },
+        { q: "Can IRDAI ask for clarification?", a: "Yes. IRDAI may seek clarifications and additional documents during review." },
+        { q: "What is in-principle approval?", a: "It is a conditional approval granted by IRDAI subject to fulfilment of specified conditions before final registration." }
       ]
     },
     {
-      category: 'Documentation & Declarations',
+      category: 'Fees & Renewal',
       faqs: [
-        { q: "What documents are required for Composite Insurance Broker Registration?", a: "Corporate documents, capital certificates, net worth certificate, Principal Officer qualification proof, declarations, and business plan." },
-        { q: "Is a 3-year business plan mandatory?", a: "Yes. Projections must be submitted." },
-        { q: "Is a CA certificate required?", a: "Yes, for capital and net worth confirmation." },
-        { q: "Is director KYC required?", a: "Yes." },
-        { q: "Is a fit and proper declaration required?", a: "Yes, from directors and key persons." },
-        { q: "Is board resolution required?", a: "Yes." },
-        { q: "Is office proof required?", a: "Yes." },
-        { q: "Is bank certificate required for deposit?", a: "Yes." },
-        { q: "Is auditor appointment mandatory before application?", a: "Yes, as part of corporate compliance." },
-        { q: "Is shareholding pattern disclosure required?", a: "Yes." }
+        { q: "What is the application fee?", a: "The uploaded source document states application fee of ₹25,000, subject to latest verification." },
+        { q: "What is the registration fee?", a: "The uploaded source document states registration fee of ₹3,00,000, subject to latest verification." },
+        { q: "What is the renewal fee?", a: "The uploaded source document states renewal fee of ₹3,00,000, subject to latest verification." },
+        { q: "Is renewal automatic?", a: "No. Renewal is subject to timely filing, fee payment, compliance review and IRDAI satisfaction." },
+        { q: "When should renewal application be filed?", a: "The source document suggests planning renewal around 90 days before expiry, subject to latest IRDAI requirements." },
+        { q: "Can Reinsurance Broker Registration be transferred?", a: "No. Registration is entity-specific and cannot be transferred." }
       ]
     },
     {
-      category: 'Timelines & Fees',
+      category: 'Operations, Compliance & Inspection',
       faqs: [
-        { q: "How long does it take to get Composite Insurance Broker Registration?", a: "Processing time depends on documentation and regulatory review." },
-        { q: "Is application fee refundable?", a: "No." },
-        { q: "Is registration fee separate from application fee?", a: "Yes." },
-        { q: "Is renewal fee payable?", a: "Yes, before expiry." },
-        { q: "What happens if renewal fee is delayed?", a: "Registration may lapse or attract regulatory action." },
-        { q: "Is late filing penalised?", a: "Yes, regulatory action may follow." },
-        { q: "Is there a validity period for registration?", a: "Yes, as prescribed by regulations." },
-        { q: "Can application be withdrawn?", a: "Yes, but fees are non-refundable." },
-        { q: "Is fee structure prescribed in schedule?", a: "Yes." },
-        { q: "Can fee amount change?", a: "Yes, if regulations are amended." }
-      ]
-    },
-    {
-      category: 'Post-Registration Compliance',
-      faqs: [
-        { q: "Is annual return filing mandatory?", a: "Yes." },
-        { q: "Is net worth certification required annually?", a: "Yes." },
-        { q: "Must PI insurance be renewed continuously?", a: "Yes." },
-        { q: "Is internal audit required?", a: "Regulatory and financial audits are required." },
-        { q: "Is board oversight required?", a: "Yes, governance is expected." },
-        { q: "Is complaint register mandatory?", a: "Yes." },
-        { q: "Is commission reporting required?", a: "Yes." },
-        { q: "Must client funds be segregated?", a: "Yes." },
-        { q: "Are regulatory inspections routine?", a: "They may occur as per supervisory mechanism." },
-        { q: "Can IRDAI call for information anytime?", a: "Yes." }
-      ]
-    },
-    {
-      category: 'Operational Restrictions & Permissions',
-      faqs: [
-        { q: "Can composite broker represent multiple insurers?", a: "Yes." },
-        { q: "Can broker underwrite risk?", a: "No, brokers cannot act as insurers." },
-        { q: "Can broker give risk management advice?", a: "Yes." },
-        { q: "Can broker collect premium?", a: "Yes, subject to client money handling rules." },
-        { q: "Is rebating allowed?", a: "No." },
-        { q: "Can broker outsource core functions?", a: "Only within regulatory limits." },
-        { q: "Is advertising regulated?", a: "Yes, must comply with IRDAI norms." },
-        { q: "Can broker appoint sub-brokers?", a: "Only as permitted by regulation." },
-        { q: "Is data confidentiality mandatory?", a: "Yes." },
-        { q: "Can broker operate across India?", a: "Yes, subject to compliance." }
-      ]
-    },
-    {
-      category: 'Penalties, Cancellation & Regulatory Action',
-      faqs: [
-        { q: "What happens if capital falls below minimum?", a: "Regulatory action including suspension may follow." },
-        { q: "Can licence be cancelled for misrepresentation?", a: "Yes." },
-        { q: "Is failure to maintain PI insurance a violation?", a: "Yes." },
-        { q: "Can repeated non-compliance lead to cancellation?", a: "Yes." },
-        { q: "Can monetary penalty be imposed?", a: "Yes." },
-        { q: "Is there opportunity of hearing before cancellation?", a: "Yes, as per regulatory procedure." },
-        { q: "Can broker voluntarily surrender licence?", a: "Yes, with approval." },
-        { q: "What happens to pending policies on cancellation?", a: "Regulatory directions must be followed." },
-        { q: "Can suspended broker continue operations?", a: "No." },
-        { q: "Can cancelled broker reapply?", a: "Only subject to regulatory permission and satisfaction of conditions." }
-      ]
-    },
-    {
-      category: 'Practical & Scenario-Based Questions',
-      faqs: [
-        { q: "Can a startup with ₹5 Crore capital apply for Composite Insurance Broker Registration?", a: "Yes, if all eligibility and compliance conditions are met." },
-        { q: "Is experience mandatory for directors?", a: "They must satisfy fit and proper and competence expectations." },
-        { q: "Can net worth fluctuate temporarily?", a: "It must not fall below minimum at any time." },
-        { q: "Can IRDAI seek additional documents during review?", a: "Yes." },
-        { q: "Is renewal automatic if compliant?", a: "Renewal is subject to regulatory satisfaction." },
-        { q: "Can a composite broker downgrade category?", a: "Only with regulatory approval." },
-        { q: "Is reporting required if Principal Officer changes?", a: "Yes." },
-        { q: "Is merger of broker entities permitted?", a: "Subject to regulatory approval." },
-        { q: "Can capital be infused in phases?", a: "Minimum required capital must be in place before approval." },
-        { q: "Is regulatory compliance a one-time requirement?", a: "No. It is continuous throughout the life of registration." }
+        { q: "Can a reinsurance broker open branch offices?", a: "Branch opening must comply with regulatory requirements and may require intimation or approval." },
+        { q: "Can a reinsurance broker operate internationally?", a: "International placement activities must comply with IRDAI regulations, foreign exchange regulations and applicable laws." },
+        { q: "Can a reinsurance broker accept deposits from insurers?", a: "No. A broker cannot accept deposits or act as a financial intermediary beyond permitted broking activities." },
+        { q: "Can brokerage income be shared with unregistered entities?", a: "No. Brokerage sharing with unregistered persons is not permitted." },
+        { q: "Can a reinsurance broker outsource core placement functions?", a: "Core broking functions cannot be outsourced in a manner that dilutes responsibility. Outsourcing must comply with regulatory norms." },
+        { q: "Is client fund segregation required?", a: "Where client funds are handled, proper segregation and accounting controls must be maintained." },
+        { q: "Is AML compliance applicable?", a: "Applicable AML and reporting norms must be followed." },
+        { q: "Can IRDAI inspect a reinsurance broker?", a: "Yes. IRDAI may inspect records, books, placement files, governance and compliance systems." },
+        { q: "Can IRDAI suspend or cancel registration?", a: "Yes. Serious or repeated non-compliance may lead to suspension, cancellation or other regulatory action." }
       ]
     },
     {
@@ -1020,7 +964,7 @@ Failure to renew timely may lead to suspension of Reinsurance Broker Registratio
       ))}
 
       <section id="faq" className="mt-16">
-        <h2>Frequently Asked Questions (200+ FAQs)</h2>
+        <h2>Frequently Asked Questions on Reinsurance Broker Registration in India</h2>
         {faqGroups.map((group, idx) => (
           <div key={idx} className="mb-8">
             <h3>{group.category}</h3>
@@ -1035,6 +979,202 @@ Failure to renew timely may lead to suspension of Reinsurance Broker Registratio
           </div>
         ))}
       </section>
+
+      {/* ==================== HOW ESTABIZZ HELPS ==================== */}
+      <section id="how-estabizz-helps" className="mt-16">
+        <h2>How Estabizz Helps with Reinsurance Broker Registration in India</h2>
+        <div className="step-timeline">
+          <div className="step-item">
+            <div className="step-dot">1</div>
+            <div className="step-card">
+              <h4>Eligibility &amp; Structuring Review</h4>
+              <p>We review company structure, object clause, promoter profile, capital readiness and regulatory suitability.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">2</div>
+            <div className="step-card">
+              <h4>Capital &amp; Net Worth Documentation</h4>
+              <p>We assist with ₹4 Crore capital readiness, net worth certificate, capital source documentation and financial records.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">3</div>
+            <div className="step-card">
+              <h4>Principal Officer Documentation</h4>
+              <p>We assist in mapping qualification, training, examination, experience and appointment documentation.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">4</div>
+            <div className="step-card">
+              <h4>Reinsurance Business Plan</h4>
+              <p>We prepare a 3-year financial projection, business volume estimation, revenue forecast, expense structure, break-even analysis and reinsurance market positioning strategy.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">5</div>
+            <div className="step-card">
+              <h4>IRDAI Application Support</h4>
+              <p>We assist in application preparation, document compilation, filing support and IRDAI query response.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">6</div>
+            <div className="step-card">
+              <h4>Policy &amp; Governance Framework</h4>
+              <p>We help draft the risk management policy, conflict of interest policy, data protection framework, record retention policy and compliance manual.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">7</div>
+            <div className="step-card">
+              <h4>PI Insurance &amp; Compliance Support</h4>
+              <p>We support PI insurance planning, renewal tracking, compliance calendar and post-registration monitoring.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">8</div>
+            <div className="step-card">
+              <h4>Renewal &amp; Inspection Readiness</h4>
+              <p>We support renewal documentation, annual compliance review, net worth monitoring, regulatory filings and inspection-ready records.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">9</div>
+            <div className="step-card">
+              <h4>Ticket-Based Execution</h4>
+              <p>Estabizz follows a structured task-tracking system so clients receive organised updates throughout the engagement.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== WHY CHOOSE ESTABIZZ ==================== */}
+      <section id="why-choose-estabizz" className="mt-16">
+        <h2>Why Choose Estabizz for Reinsurance Broker Registration in India?</h2>
+        <div className="step-timeline">
+          <div className="step-item">
+            <div className="step-dot">1</div>
+            <div className="step-card">
+              <h4>IRDAI Regulatory Expertise</h4>
+              <p>Our team works across IRDAI licensing and compliance matters and understands insurance intermediary approval requirements.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">2</div>
+            <div className="step-card">
+              <h4>Reinsurance Market Understanding</h4>
+              <p>We understand treaty placement, facultative placement, catastrophe protection, reinsurance counterparty evaluation and claim recovery support.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">3</div>
+            <div className="step-card">
+              <h4>Compliance Depth, Not Just Documentation</h4>
+              <p>We focus on capital, net worth, Principal Officer readiness, PI insurance, governance, data confidentiality and long-term compliance.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">4</div>
+            <div className="step-card">
+              <h4>Business Plan Strength</h4>
+              <p>We prepare practical, regulator-facing reinsurance business plans and financial projections suitable for IRDAI scrutiny.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">5</div>
+            <div className="step-card">
+              <h4>Multi-Regulator Experience</h4>
+              <p>Our experience across RBI, SEBI, IRDAI and IFSCA enables a wider financial regulatory perspective.</p>
+            </div>
+          </div>
+          <div className="step-item">
+            <div className="step-dot">6</div>
+            <div className="step-card">
+              <h4>End-to-End Support</h4>
+              <p>From company structuring to IRDAI application, query response, renewal and post-registration compliance, we provide organised professional handholding.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== REVIEWER & DISCLAIMER ==================== */}
+      <section id="reviewer" className="mt-16">
+        <h2>Reviewer &amp; Legal Disclaimer</h2>
+        <div className="info-box">
+          <p><strong>Reviewed by:</strong> CS Devyani Khambhati</p>
+          <p><strong>Designation:</strong> Compliance Expert | Estabizz Fintech Private Limited</p>
+          <p><strong>Expertise:</strong> IRDAI, RBI, SEBI, IFSCA, insurance intermediary licensing, reinsurance broker registration, insurance broker compliance, reinsurance advisory structuring, business plan documentation and post-registration regulatory support.</p>
+          <p>This content has been prepared from a regulatory advisory perspective to help insurance professionals, reinsurance placement firms, risk advisory groups, corporate broking houses and international reinsurance intermediaries understand the broad IRDAI framework for Reinsurance Broker Registration in India.</p>
+        </div>
+        <p>
+          <strong>Legal Disclaimer:</strong> This content is for general informational purposes only and should not be
+          treated as legal, regulatory, insurance, financial or investment advice. IRDAI requirements, application
+          formats, fee structures, capital thresholds, net worth norms, PI insurance requirements, compliance
+          expectations and approval processes may change from time to time. Applicants should verify the latest
+          regulatory position and obtain professional advice before filing any application with IRDAI. Estabizz does
+          not promise or guarantee IRDAI approval; outcomes are subject to IRDAI scrutiny and the fulfilment of
+          prescribed conditions.
+        </p>
+        <p>
+          For a structured consultation with our IRDAI compliance team, you may also reach Estabizz on WhatsApp at{" "}
+          <a href="https://wa.me/919825600907" target="_blank" rel="noopener noreferrer">+91 98256 00907</a>.
+        </p>
+      </section>
+
+      {/* FAQ JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqGroups.flatMap((g) =>
+              g.faqs.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              }))
+            ),
+          }),
+        }}
+      />
+      {/* Service JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            serviceType: "Reinsurance Broker Registration in India",
+            provider: {
+              "@type": "Organization",
+              name: "Estabizz Fintech Private Limited",
+              url: "https://estabizz-site.vercel.app/",
+            },
+            areaServed: { "@type": "Country", name: "India" },
+            description:
+              "Professional regulatory consulting support for IRDAI Reinsurance Broker Registration covering treaty and facultative reinsurance — eligibility review, ₹4 Crore capital readiness, Principal Officer documentation, business plan, PI insurance, application filing and post-registration compliance.",
+            url: "https://estabizz-site.vercel.app/irdai/reinsurance-broker-registration-in-india",
+          }),
+        }}
+      />
+      {/* Breadcrumb JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
+              { "@type": "ListItem", position: 2, name: "IRDAI Services", item: "https://estabizz-site.vercel.app/irdai" },
+              { "@type": "ListItem", position: 3, name: "Reinsurance Broker Registration", item: "https://estabizz-site.vercel.app/irdai/reinsurance-broker-registration-in-india" },
+            ],
+          }),
+        }}
+      />
     </ServicePageLayout>
   );
 }

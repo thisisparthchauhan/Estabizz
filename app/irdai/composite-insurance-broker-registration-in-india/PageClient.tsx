@@ -35,8 +35,12 @@ export default function PageClient() {
         { id: "risk-areas", title: "Risk Areas" },
         { id: "financial-planning", title: "Financial Planning" },
         { id: "governance-advisory", title: "Governance Advisory" },
+        { id: "operational-restrictions", title: "Operational Restrictions" },
         { id: "conclusion", title: "Conclusion" },
+        { id: "how-estabizz-helps", title: "How Estabizz Helps" },
+        { id: "why-choose-estabizz", title: "Why Choose Estabizz" },
         { id: "faqs", title: "FAQs (200+)" },
+        { id: "reviewer", title: "Reviewer & Disclaimer" },
     ];
 
     // ============ FAQ DATA — grouped verbatim from source doc ============
@@ -1147,6 +1151,43 @@ export default function PageClient() {
                 <p>A structured compliance culture strengthens licence sustainability.</p>
             </section>
 
+            {/* ==================== OPERATIONAL RESTRICTIONS ==================== */}
+            <section id="operational-restrictions">
+                <h2>Operational Restrictions for Composite Insurance Brokers</h2>
+                <p>
+                    Composite Insurance Broker Registration in India authorises a wide operational scope, but several
+                    activities remain regulated, restricted or prohibited under IRDAI norms.
+                </p>
+                <table className="data-table">
+                    <thead>
+                        <tr>
+                            <th>Restriction / Permission</th>
+                            <th>Regulatory Position</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Representing multiple insurers</td><td>Permitted</td></tr>
+                        <tr><td>Underwriting risk</td><td>Not permitted</td></tr>
+                        <tr><td>Issuing own insurance policy</td><td>Not permitted</td></tr>
+                        <tr><td>Risk management advice</td><td>Permitted within scope</td></tr>
+                        <tr><td>Premium collection</td><td>Permitted, subject to client money rules</td></tr>
+                        <tr><td>Rebating</td><td>Prohibited</td></tr>
+                        <tr><td>Commission beyond prescribed limits</td><td>Not permitted</td></tr>
+                        <tr><td>Outsourcing core functions</td><td>Only within regulatory limits</td></tr>
+                        <tr><td>Franchise model</td><td>Must comply with regulatory framework</td></tr>
+                        <tr><td>Guaranteeing claim settlement</td><td>Not permitted</td></tr>
+                        <tr><td>Acting as insurer</td><td>Not permitted</td></tr>
+                        <tr><td>Use of client funds for own expenses</td><td>Strictly prohibited</td></tr>
+                        <tr><td>Data confidentiality</td><td>Mandatory</td></tr>
+                        <tr><td>Telemarketing solicitation</td><td>Must comply with IRDAI norms</td></tr>
+                    </tbody>
+                </table>
+                <div className="info-box">
+                    <strong>Note:</strong> Crossing these regulatory boundaries — even unintentionally — may invite
+                    inspection observations, monetary penalties or enforcement action.
+                </div>
+            </section>
+
             {/* ==================== CONCLUSION ==================== */}
             <section id="conclusion">
                 <h2>Conclusion</h2>
@@ -1164,6 +1205,118 @@ export default function PageClient() {
                     If you are planning to build a full-scale insurance broking house, Composite Insurance Broker
                     Registration in India is the correct regulatory foundation — provided it is executed with precision.
                 </p>
+            </section>
+
+            {/* ==================== HOW ESTABIZZ HELPS ==================== */}
+            <section id="how-estabizz-helps">
+                <h2>How Estabizz Helps with Composite Insurance Broker Registration in India</h2>
+                <div className="step-timeline">
+                    <div className="step-item">
+                        <div className="step-dot">1</div>
+                        <div className="step-card">
+                            <h4>Eligibility &amp; Structuring Review</h4>
+                            <p>We review company structure, object clause, promoter eligibility, capital readiness and overall regulatory suitability.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">2</div>
+                        <div className="step-card">
+                            <h4>Capital &amp; Net Worth Documentation</h4>
+                            <p>We assist with ₹5 Crore paid-up equity capital readiness, CA certificates, net worth certificate and deposit documentation.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">3</div>
+                        <div className="step-card">
+                            <h4>Principal Officer Documentation</h4>
+                            <p>We assist in mapping qualification, training, examination, experience and appointment documentation for the Principal Officer.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">4</div>
+                        <div className="step-card">
+                            <h4>Business Plan &amp; Financial Projections</h4>
+                            <p>We prepare a 3-year business plan, revenue projections, expense forecast, break-even analysis, branch strategy and product line strategy.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">5</div>
+                        <div className="step-card">
+                            <h4>IRDAI Application Support</h4>
+                            <p>We assist with application preparation, document compilation, online filing support and IRDAI query response.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">6</div>
+                        <div className="step-card">
+                            <h4>Policy &amp; Compliance Framework</h4>
+                            <p>We help draft the grievance mechanism, client money process, internal controls, compliance calendar and operational SOPs.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">7</div>
+                        <div className="step-card">
+                            <h4>Post-Registration Compliance</h4>
+                            <p>We support annual returns, net worth certification, PI insurance monitoring, compliance calendar, regulatory circular tracking and inspection readiness.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">8</div>
+                        <div className="step-card">
+                            <h4>Ticket-Based Execution</h4>
+                            <p>Estabizz follows a structured task-tracking system so clients receive organised updates throughout the engagement.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ==================== WHY CHOOSE ESTABIZZ ==================== */}
+            <section id="why-choose-estabizz">
+                <h2>Why Choose Estabizz for Composite Insurance Broker Registration in India?</h2>
+                <div className="step-timeline">
+                    <div className="step-item">
+                        <div className="step-dot">1</div>
+                        <div className="step-card">
+                            <h4>IRDAI Regulatory Expertise</h4>
+                            <p>Our team works across IRDAI licensing and compliance matters and understands insurance intermediary approval requirements.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">2</div>
+                        <div className="step-card">
+                            <h4>Compliance Depth, Not Just Documentation</h4>
+                            <p>We focus on capital, governance, Principal Officer readiness, fit and proper standards and long-term compliance discipline.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">3</div>
+                        <div className="step-card">
+                            <h4>Business Plan Strength</h4>
+                            <p>We prepare practical, regulator-facing business plans and financial projections suitable for composite broker applicants.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">4</div>
+                        <div className="step-card">
+                            <h4>Multi-Regulator Experience</h4>
+                            <p>Our experience across RBI, SEBI, IRDAI and IFSCA enables a wider financial regulatory perspective.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">5</div>
+                        <div className="step-card">
+                            <h4>100+ Associate Professionals</h4>
+                            <p>Our professional network supports legal, finance, compliance, documentation and regulatory advisory requirements.</p>
+                        </div>
+                    </div>
+                    <div className="step-item">
+                        <div className="step-dot">6</div>
+                        <div className="step-card">
+                            <h4>End-to-End Support</h4>
+                            <p>From company structuring to IRDAI application, query response and post-registration compliance, we provide organised professional handholding.</p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             {/* ==================== FAQS ==================== */}
@@ -1188,6 +1341,83 @@ export default function PageClient() {
                     </div>
                 ))}
             </section>
+
+            {/* ==================== REVIEWER & DISCLAIMER ==================== */}
+            <section id="reviewer">
+                <h2>Reviewer &amp; Legal Disclaimer</h2>
+                <div className="info-box">
+                    <p><strong>Reviewed by:</strong> CS Devyani Khambhati</p>
+                    <p><strong>Designation:</strong> Compliance Expert | Estabizz Fintech Private Limited</p>
+                    <p><strong>Expertise:</strong> IRDAI, RBI, SEBI, IFSCA, insurance intermediary licensing, composite broker registration, insurance compliance, business plan documentation and post-registration regulatory support.</p>
+                    <p>This content has been prepared from a regulatory advisory perspective to help promoters, insurance distribution groups, corporate broking houses and risk advisory firms understand the broad IRDAI framework for Composite Insurance Broker Registration in India.</p>
+                </div>
+                <p>
+                    <strong>Legal Disclaimer:</strong> This content is for general informational purposes only and should
+                    not be treated as legal, regulatory, insurance, financial or investment advice. IRDAI requirements,
+                    application formats, fee structures, capital thresholds, PI insurance norms, compliance expectations
+                    and approval processes may change from time to time. Applicants should verify the latest regulatory
+                    position and obtain professional advice before filing any application with IRDAI. Estabizz does not
+                    promise or guarantee IRDAI approval; outcomes are subject to IRDAI scrutiny and the fulfilment of
+                    prescribed conditions.
+                </p>
+                <p>
+                    For a structured consultation with our IRDAI compliance team, you may also reach Estabizz on
+                    WhatsApp at <a href="https://wa.me/919825600907" target="_blank" rel="noopener noreferrer">+91 98256 00907</a>.
+                </p>
+            </section>
+
+            {/* FAQ JSON-LD Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "FAQPage",
+                        mainEntity: faqGroups.flatMap((g) =>
+                            g.items.map((f) => ({
+                                "@type": "Question",
+                                name: f.q,
+                                acceptedAnswer: { "@type": "Answer", text: f.a },
+                            }))
+                        ),
+                    }),
+                }}
+            />
+            {/* Service JSON-LD Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Service",
+                        serviceType: "Composite Insurance Broker Registration in India",
+                        provider: {
+                            "@type": "Organization",
+                            name: "Estabizz Fintech Private Limited",
+                            url: "https://estabizz-site.vercel.app/",
+                        },
+                        areaServed: { "@type": "Country", name: "India" },
+                        description:
+                            "Professional regulatory consulting support for IRDAI Composite Insurance Broker Registration covering life insurance broking, general insurance broking and reinsurance broking — ₹5 Crore capital readiness, Principal Officer documentation, business plan, application filing and post-registration compliance.",
+                        url: "https://estabizz-site.vercel.app/irdai/composite-insurance-broker-registration-in-india",
+                    }),
+                }}
+            />
+            {/* Breadcrumb JSON-LD Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BreadcrumbList",
+                        itemListElement: [
+                            { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
+                            { "@type": "ListItem", position: 2, name: "IRDAI Services", item: "https://estabizz-site.vercel.app/irdai" },
+                            { "@type": "ListItem", position: 3, name: "Composite Insurance Broker Registration", item: "https://estabizz-site.vercel.app/irdai/composite-insurance-broker-registration-in-india" },
+                        ],
+                    }),
+                }}
+            />
         </ServicePageLayout>
     );
 }

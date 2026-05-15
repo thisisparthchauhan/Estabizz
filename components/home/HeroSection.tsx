@@ -1,246 +1,118 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 
-// For stats counting up
-const StatCount = ({ end, suffix = "", duration = 1800 }: { end: number, suffix?: string, duration?: number }) => {
-    const [count, setCount] = useState(0);
+const rotatingServices = [
+    "RBI Licensing",
+    "SEBI Registration",
+    "IRDAI Compliance",
+    "IFSCA GIFT City",
+    "AML & FIU Advisory",
+    "Global Market Entry",
+];
 
-    useEffect(() => {
-        let startTimestamp: number;
-        const step = (timestamp: number) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            // easeOutExpo
-            const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-            setCount(Math.floor(easeProgress * end));
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
-        };
-        window.requestAnimationFrame(step);
-    }, [end, duration]);
+const trustStats = [
+    "500+ Licences Obtained",
+    "1000+ Businesses Served",
+    "100+ Associate Professionals",
+    "India + Global Market Desk",
+];
 
-    return <span>{count}{suffix}</span>;
-};
-
-// Animated progress bar component
-const ProgressBar = ({ label, targetProgress, color }: { label: string, targetProgress: number, color: string }) => {
-    const [width, setWidth] = useState(0);
-
-    useEffect(() => {
-        // Slight delay before animating
-        const timer = setTimeout(() => {
-            setWidth(targetProgress);
-        }, 400);
-        return () => clearTimeout(timer);
-    }, [targetProgress]);
-
-    return (
-        <div className="mb-4">
-            <div className="flex justify-between text-[12px] font-bold text-[#334155] mb-1.5">
-                <span>{label}</span>
-                <span>{width}%</span>
-            </div>
-            <div className="h-[6px] bg-gray-100 rounded-full overflow-hidden">
-                <div
-                    className="h-full rounded-full transition-all duration-[1200ms] ease-out min-w-[5px]"
-                    style={{ width: `${width}%`, backgroundColor: color }}
-                />
-            </div>
-        </div>
-    );
-};
+const servicePills = [
+    "NBFC", "Payment Aggregator", "AIF", "PMS", "RIA", "Stock Broker", "Insurance Broker", "FME", "ITFS", "FIU-IND",
+];
 
 export default function HeroSection() {
-    const [isMounted, setIsMounted] = useState(false);
-    useEffect(() => setIsMounted(true), []);
+    const [activeWord, setActiveWord] = useState(0);
+
+    useEffect(() => {
+        const timer = window.setInterval(() => {
+            setActiveWord((index) => (index + 1) % rotatingServices.length);
+        }, 1900);
+        return () => window.clearInterval(timer);
+    }, []);
 
     return (
-        <section className="relative min-h-[100vh] flex flex-col justify-center pt-28 pb-10 overflow-hidden px-6 bg-transparent scroll-mt-24">
+        <section className="relative isolate overflow-hidden bg-white px-6 pb-20 pt-32 md:pt-36">
+            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_20%,rgba(0,150,214,0.16),transparent_34%),radial-gradient(circle_at_10%_80%,rgba(217,169,56,0.12),transparent_30%)]" />
+            <div className="absolute inset-x-0 bottom-0 -z-10 h-[48%] bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+            <div className="absolute bottom-0 left-0 -z-10 h-[220px] w-[220px] rounded-full bg-[#d8ecff] blur-3xl" />
+            <div className="absolute bottom-12 right-0 -z-10 h-[280px] w-[280px] rounded-full bg-[#bfe2ff] blur-3xl" />
 
-            {/* Main Content (Grid to allow space for the dashboard card) */}
-            <div className="relative z-10 max-w-[1240px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center flex-grow pt-4">
-
-                {/* Left Column - Text Content */}
-                <div className="lg:col-span-12 xl:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
-
-                    {/* Top Badge */}
-                    <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-4 py-2 border border-blue-200 shadow-sm mb-6 rounded-full w-fit animate-[fadeDown_0.5s_ease_forwards]">
-                        <span className="text-[14px]">◆</span>
-                        <span className="text-[#0096D6] text-[13px] font-bold tracking-wide">India&apos;s #1 Fintech Compliance Platform</span>
-                    </div>
-
-                    {/* H1 Headline */}
-                    <h1 className="text-[clamp(40px,5vw,60px)] font-black text-[#0a1628] leading-[1.15] tracking-tight mb-4 opacity-0 animate-[fadeUp_0.6s_ease_0.1s_forwards] w-full" dangerouslySetInnerHTML={{
-                        __html: `
-              Simplify Fintech Compliance, <br class="hidden md:block"/> <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#0096D6] to-[#10b981] italic pr-2">Accelerate</span> Your Growth
-          `}} />
-
-                    {/* Subtagline / Tagline combined logic */}
-                    <div className="text-[#0077B6] font-bold text-[18px] md:text-[22px] mb-6 opacity-0 animate-[fadeUp_0.6s_ease_0.2s_forwards]">
-                        We Secure Your Licence. You Secure Your Future.
-                    </div>
-
-                    {/* Description */}
-                    <div className="max-w-[640px] w-full space-y-4 mb-8 opacity-0 animate-[fadeUp_0.6s_ease_0.3s_forwards]">
-                        <p className="text-[15px] text-[#475569] font-medium leading-relaxed">
-                            Expert regulatory guidance for RBI, SEBI, IRDAI, IFSCA and allied government licences. Estabizz manages your licensing, documentation and compliance lifecycle end-to-end, so you can focus on building and scaling your business with confidence.
-                        </p>
-                        <p className="text-[15px] text-[#475569] font-medium leading-relaxed">
-                            Regulatory approvals are not just documents — they are the foundation of your business vision. We help you approach every licensing and compliance requirement with structure, clarity and accountability.
-                        </p>
-                        <p className="text-[14px] text-[#0077B6] font-bold leading-relaxed">
-                            We Comply. We Simplify.
-                        </p>
-                    </div>
-
-                    {/* Stats Row */}
-                    <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-10 opacity-0 animate-[fadeUp_0.6s_ease_0.4s_forwards]">
-                        <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
-                            <span className="w-2 h-2 rounded-full bg-[#10b981]"></span> {isMounted ? <StatCount end={500} suffix="+" /> : "500+"} Licences Obtained
-                        </div>
-                        <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
-                            <span className="w-2 h-2 rounded-full bg-[#0096D6]"></span> {isMounted ? <StatCount end={1000} suffix="+" /> : "1000+"} Businesses Served
-                        </div>
-                        <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
-                            <span className="w-2 h-2 rounded-full bg-[#F59E0B]"></span> Pan India Services
-                        </div>
-                        <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-4 py-2 border border-[rgba(0,150,220,0.15)] rounded-full shadow-sm text-[13px] text-[#334155] font-bold tracking-wide transition-all hover:-translate-y-1 hover:shadow-md">
-                            <span className="w-2 h-2 rounded-full bg-[#0a1628]"></span> {isMounted ? <StatCount end={100} suffix="+" /> : "100+"} Associate Professionals
-                        </div>
-                    </div>
-
-                    {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center gap-4 mb-4 w-full sm:w-auto opacity-0 animate-[fadeUp_0.6s_ease_0.5s_forwards]">
-                        <a href="/contact" className="get-started-btn relative overflow-hidden w-full sm:w-auto bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-[0_8px_25px_rgba(0,150,220,0.3)] hover:shadow-[0_8px_30px_rgba(0,150,220,0.4)] hover:-translate-y-1 transition-all duration-300 group inline-flex items-center justify-center">
-                            <span className="relative z-10 flex items-center justify-center gap-2">Get Free Consultation <span className="group-hover:translate-x-1 transition-transform">→</span></span>
-                        </a>
-
-                        <a href="/regulatory" className="w-full sm:w-auto bg-white/90 backdrop-blur-md border-2 border-[#0096D6] text-[#0096D6] font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-sm hover:bg-blue-50 transition-all duration-300 text-center">
-                            Explore Regulatory Services
-                        </a>
-                        <a href="https://wa.me/919825600907" className="w-full sm:w-auto bg-[#10b981] text-white font-bold text-[15px] rounded-[14px] px-8 py-4 shadow-sm hover:bg-[#059669] transition-all duration-300 text-center">
-                            WhatsApp Estabizz Team
-                        </a>
-                    </div>
-
-                    {/* Trust Line */}
-                    <div className="text-[12px] text-[#64748b] font-medium text-center lg:text-left opacity-0 animate-[fadeUp_0.6s_ease_0.6s_forwards]">
-                        No credit card required • Free consultation • Get your queries reviewed within 24 hours
-                    </div>
-
+            <div className="mx-auto max-w-[1180px] text-center">
+                <div className="mb-8 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-5 py-2 text-[12px] font-black uppercase tracking-[0.24em] text-[#0077B6] shadow-sm">
+                    Welcome to Estabizz
                 </div>
 
-                {/* Right Column - Compliance Dashboard Widget */}
-                <div className="lg:col-span-12 xl:col-span-5 flex justify-center lg:justify-end opacity-0 animate-[fadeLeft_0.8s_ease_0.2s_forwards] w-full pt-6 lg:pt-0">
+                <h1 className="mx-auto max-w-[1050px] text-[clamp(42px,7vw,86px)] font-black leading-[1.02] tracking-[-0.045em] text-[#120b45]">
+                    Your Trusted Partner for
+                    <span className="relative mt-2 block min-h-[1.08em] text-[#1677f2]">
+                        <span key={rotatingServices[activeWord]} className="inline-block animate-[heroWord_0.55s_ease]">
+                            {rotatingServices[activeWord]}
+                        </span>
+                        <span className="ml-1 inline-block h-[0.92em] w-[4px] translate-y-[6px] rounded-full bg-[#1677f2] animate-[blinkCaret_1s_steps(1)_infinite]" />
+                    </span>
+                </h1>
 
-                    <div className="relative w-full max-w-[420px] bg-white/90 backdrop-blur-xl border border-[rgba(0,150,220,0.15)] rounded-2xl p-6 shadow-[0_32px_80px_rgba(0,100,200,0.15)]">
+                <p className="mx-auto mt-7 max-w-[840px] text-[18px] font-medium leading-[1.85] text-[#64748b]">
+                    Expert regulatory guidance for RBI, SEBI, IRDAI, IFSCA and allied government licences. Estabizz manages licensing, documentation and compliance readiness so founders and compliance teams can move with clarity.
+                </p>
 
-                        {/* Header */}
-                        <div className="flex items-center justify-between mb-8 border-b border-gray-100 pb-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-[18px] text-[#0096D6]">📊</div>
-                                <div>
-                                    <h3 className="font-bold text-[#0a1628] text-[15px] leading-tight">Compliance Readiness</h3>
-                                    <span className="text-[11px] text-gray-500 font-medium">Estabizz Compliance Hub</span>
-                                </div>
-                            </div>
-
-                            {/* Live Badge Component */}
-                            <div className="flex items-center gap-1.5 bg-green-50 text-[#10b981] px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-green-100">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-[pulseDot_2s_infinite]"></span>
-                                Live
-                            </div>
-                        </div>
-
-                        {/* Animated Progress Bars */}
-                        <ProgressBar label="Documentation Readiness" targetProgress={88} color="#0096D6" />
-                        <ProgressBar label="Compliance Calendar Mapping" targetProgress={74} color="#0077B6" />
-                        <ProgressBar label="Policy Framework Coverage" targetProgress={92} color="#10b981" />
-
-                        {/* Micro Stats */}
-                        <div className="grid grid-cols-2 gap-3 mt-8">
-                            <div className="bg-[#f8faff] rounded-xl p-3 border border-blue-50/50">
-                                <div className="text-[20px] font-black text-[#0096D6] mb-1">{isMounted ? <StatCount end={24} suffix="h" duration={1000} /> : "24h"}</div>
-                                <div className="text-[11px] font-semibold text-gray-500">Query Review</div>
-                            </div>
-                            <div className="bg-[#f8faff] rounded-xl p-3 border border-blue-50/50">
-                                <div className="text-[20px] font-black text-[#10b981] mb-1">{isMounted ? <StatCount end={100} suffix="+" duration={1500} /> : "100+"}</div>
-                                <div className="text-[11px] font-semibold text-gray-500">Professionals</div>
-                            </div>
-                        </div>
-
-                        {/* Floating decoration logic embedded */}
-                        <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-br from-[#0096D6] to-[#10b981] rounded-full blur-[40px] opacity-20 pointer-events-none"></div>
-
-                    </div>
+                <div className="mx-auto mt-8 flex max-w-[780px] flex-wrap items-center justify-center gap-2">
+                    {["🇮🇳", "🇦🇪", "🇸🇬", "🇬🇧", "🇺🇸", "🇨🇦"].map((flag) => (
+                        <span key={flag} className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-white text-[20px] shadow-[0_12px_30px_rgba(0,90,150,0.12)]">
+                            {flag}
+                        </span>
+                    ))}
+                    <span className="ml-2 rounded-full bg-white px-4 py-2 text-[14px] font-black text-[#0a2b58] shadow-[0_12px_30px_rgba(0,90,150,0.10)]">
+                        We support India-first businesses expanding into global markets.
+                    </span>
                 </div>
 
-            </div>
+                <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                    <a href="/contact" className="rounded-xl bg-[#1677f2] px-9 py-4 text-[16px] font-black text-white shadow-[0_18px_45px_rgba(22,119,242,0.28)] transition-all hover:-translate-y-1 hover:bg-[#0866d9]">
+                        Schedule a Consultation
+                    </a>
+                    <a href="/regulatory" className="rounded-xl border border-blue-100 bg-white px-9 py-4 text-[16px] font-black text-[#0a2b58] shadow-[0_14px_35px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-1 hover:border-[#1677f2] hover:text-[#1677f2]">
+                        Explore Services
+                    </a>
+                </div>
 
-            {/* Ticker Bar directly integrated at the bottom of Hero for seamless entry */}
-            <div className="w-full mt-16 relative overflow-hidden bg-gradient-to-r from-[#0077B6] via-[#0096D6] to-[#00B4E0] py-3 opacity-0 animate-[fadeUp_0.6s_ease_0.7s_forwards]">
-                {/* Fade masks */}
-                <div className="absolute left-0 top-0 bottom-0 w-[60px] bg-gradient-to-r from-[#0077B6] to-transparent z-10"></div>
-                <div className="absolute right-0 top-0 bottom-0 w-[60px] bg-gradient-to-l from-[#00B4E0] to-transparent z-10"></div>
-
-                <div className="flex whitespace-nowrap animate-marquee-ticker group">
-                    {[1, 2, 3, 4, 5, 6].map((_, idx) => (
-                        <div key={idx} className="flex items-center gap-8 px-6 text-[13px] font-bold text-white tracking-wide mix-blend-overlay opacity-90">
-                            <span className="flex items-center gap-1.5"><span className="text-[#10b981] bg-white rounded-full w-[14px] h-[14px] flex items-center justify-center leading-none text-[10px]">✓</span> RBI Licensing Support</span>
-                            <span className="flex items-center gap-1.5"><span className="text-[#10b981] bg-white rounded-full w-[14px] h-[14px] flex items-center justify-center leading-none text-[10px]">✓</span> SEBI Registration Advisory</span>
-                            <span className="flex items-center gap-1.5"><span className="text-[#10b981] bg-white rounded-full w-[14px] h-[14px] flex items-center justify-center leading-none text-[10px]">✓</span> IRDAI Compliance Readiness</span>
-                            <span className="flex items-center gap-1.5"><span className="text-[#10b981] bg-white rounded-full w-[14px] h-[14px] flex items-center justify-center leading-none text-[10px]">✓</span> IFSCA & GIFT City Structuring</span>
+                <div className="mx-auto mt-10 grid max-w-[980px] grid-cols-2 gap-3 md:grid-cols-4">
+                    {trustStats.map((stat) => (
+                        <div key={stat} className="rounded-2xl border border-blue-100 bg-white/78 px-4 py-4 text-[13px] font-black text-[#0a1628] shadow-[0_16px_38px_rgba(0,80,140,0.08)] backdrop-blur-xl">
+                            {stat}
                         </div>
                     ))}
                 </div>
+
+                <div className="relative mx-auto mt-12 max-w-[980px] overflow-hidden rounded-[28px] border border-blue-100 bg-white/70 px-5 py-4 shadow-[0_18px_60px_rgba(0,80,140,0.08)] backdrop-blur-xl">
+                    <div className="absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent" />
+                    <div className="absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent" />
+                    <div className="flex w-max animate-[heroTicker_26s_linear_infinite] gap-3">
+                        {[...servicePills, ...servicePills].map((service, index) => (
+                            <span key={`${service}-${index}`} className="rounded-full border border-blue-100 bg-[#f8fbff] px-4 py-2 text-[12px] font-black text-[#0077B6]">
+                                {service}
+                            </span>
+                        ))}
+                    </div>
+                </div>
             </div>
 
-            <style dangerouslySetInnerHTML={{
-                __html: `
-          /* Keyframes */
-          @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-          @keyframes fadeLeft {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-          }
-          @keyframes pulseDot {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.4); }
-          }
-          @keyframes marqueeTicker {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-          }
-          .animate-marquee-ticker {
-            animation: marqueeTicker 30s linear infinite;
-          }
-          
-          /* Shimmer Button Effect CSS */
-          .get-started-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-            transform: skewX(-20deg);
-            animation: shimmerEffect 2.5s ease-in-out infinite;
-            z-index: 5;
-          }
-          @keyframes shimmerEffect {
-             0% { left: -100%; }
-             100% { left: 200%; }
-          }
-      `}} />
+            <style jsx global>{`
+                @keyframes heroWord {
+                    from { opacity: 0; transform: translateY(18px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes blinkCaret {
+                    0%, 45% { opacity: 1; }
+                    46%, 100% { opacity: 0; }
+                }
+                @keyframes heroTicker {
+                    from { transform: translateX(0); }
+                    to { transform: translateX(-50%); }
+                }
+            `}</style>
         </section>
     );
 }

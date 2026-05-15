@@ -73,6 +73,10 @@ export default function CompliancePortal() {
 
     return (
         <section ref={sectionRef} className="relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute left-[42%] top-[12%] h-[320px] w-[320px] rounded-full bg-[#0096D6]/12 blur-[90px]" />
+                <div className="absolute right-[4%] bottom-[8%] h-[280px] w-[280px] rounded-full bg-[#10b981]/12 blur-[80px]" />
+            </div>
             <div className="flex flex-col xl:flex-row min-h-[800px]">
 
                 {/* Left Side (Light) */}
@@ -92,7 +96,7 @@ export default function CompliancePortal() {
                             Manage your compliance lifecycle through a secure, structured and regulator-ready digital platform. From licence tracking and document uploads to policy frameworks and compliance alerts, the Estabizz Compliance Hub brings everything your business needs into one place.
                         </p>
 
-                        <div className="bg-[#f8faff] rounded-[20px] p-8 border border-[rgba(0,150,220,0.1)] shadow-inner">
+                        <div className="premium-glass rounded-[28px] p-8 border border-[rgba(0,150,220,0.12)]">
                             <h3 className="text-[16px] font-bold text-[#0a1628] mb-6 tracking-wide">
                                 What You Can Do Inside the Estabizz Portal
                             </h3>
@@ -110,8 +114,9 @@ export default function CompliancePortal() {
                 </div>
 
                 {/* Right Side (Dark Gradient) with Feature Blocks */}
-                <div className="w-full xl:w-7/12 py-24 px-6 xl:pr-0 relative flex items-center justify-center lg:justify-start" style={{ background: "linear-gradient(135deg, #0a1628, #0077B6)" }}>
+                <div className="w-full xl:w-7/12 py-24 px-6 xl:pr-0 relative flex items-center justify-center lg:justify-start" style={{ background: "linear-gradient(135deg, #071224, #0a315f 46%, #0077B6)" }}>
                     <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: "linear-gradient(#ffffff 2px, transparent 2px), linear-gradient(90deg, #ffffff 2px, transparent 2px)", backgroundSize: "60px 60px" }}></div>
+                    <div className="absolute left-8 top-10 hidden h-56 w-56 rounded-[42px] border border-white/10 bg-white/5 shadow-[0_30px_90px_rgba(0,0,0,0.22)] xl:block [transform:rotateX(62deg)_rotateZ(-18deg)]" />
 
                     <div className={`max-w-[600px] w-full mx-auto xl:ml-16 relative z-10 transition-all duration-[1000ms] delay-300 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-16'}`}>
 
@@ -120,7 +125,7 @@ export default function CompliancePortal() {
                             {featureBlocks.map((block, i) => (
                                 <div
                                     key={i}
-                                    className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[16px] p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group"
+                                    className="premium-dark-glass rounded-[20px] p-6 hover:bg-white/10 hover:border-white/25 transition-all duration-500 group hover:-translate-y-2"
                                     style={{
                                         opacity: isVisible ? 1 : 0,
                                         transform: isVisible ? 'translateY(0)' : 'translateY(20px)',

@@ -20,7 +20,7 @@ export default function FinalCTA() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative py-24 overflow-hidden" style={{ background: "radial-gradient(circle at center, #0077B6 0%, #0a1628 100%)" }}>
+        <section ref={sectionRef} className="relative py-24 overflow-hidden" style={{ background: "radial-gradient(circle at 50% 0%, #0096D6 0%, #0a315f 42%, #071224 100%)" }}>
 
             {/* Animated Particle overlay (pure CSS dot matrix drifting) */}
             <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden mix-blend-screen">
@@ -68,13 +68,13 @@ export default function FinalCTA() {
 
             <style dangerouslySetInnerHTML={{ __html: `
             @keyframes drift {
-                0 % { transform: translate(0, 0); }
-                   100% {transform: translate(-50px, -50px); }
-                }
+                0% { transform: translate(0, 0); }
+                100% { transform: translate(-50px, -50px); }
+            }
             @keyframes shine {
-                0 % { left: -100 %; }
-                   100% {left: 200%; }
-                }
+                0% { left: -100%; }
+                100% { left: 200%; }
+            }
             `}}/>
         </section>
     );

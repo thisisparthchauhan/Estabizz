@@ -310,6 +310,37 @@ const menus: Record<string, MegaMenu> = {
     },
 };
 
+const globalMarketRegions = [
+    {
+        region: "India & South Asia",
+        countries: ["India", "Bangladesh", "Sri Lanka", "Nepal", "Bhutan", "Maldives", "Pakistan", "Afghanistan"],
+    },
+    {
+        region: "GCC & Middle East",
+        countries: ["United Arab Emirates", "Saudi Arabia", "Qatar", "Oman", "Bahrain", "Kuwait", "Israel", "Jordan", "Turkey", "Lebanon", "Iraq", "Egypt"],
+    },
+    {
+        region: "Asia Pacific",
+        countries: ["Singapore", "Hong Kong", "Australia", "New Zealand", "Malaysia", "Indonesia", "Thailand", "Vietnam", "Philippines", "Japan", "South Korea", "China", "Taiwan", "Cambodia", "Laos", "Myanmar", "Brunei", "Mongolia"],
+    },
+    {
+        region: "Europe & UK",
+        countries: ["United Kingdom", "Ireland", "Germany", "France", "Netherlands", "Luxembourg", "Switzerland", "Italy", "Spain", "Portugal", "Sweden", "Norway", "Denmark", "Finland", "Austria", "Belgium", "Poland", "Czech Republic", "Estonia", "Lithuania", "Latvia", "Greece", "Cyprus", "Malta", "Romania", "Bulgaria", "Croatia", "Slovenia", "Slovakia", "Hungary", "Iceland", "Liechtenstein", "Monaco", "Andorra", "San Marino"],
+    },
+    {
+        region: "North America",
+        countries: ["United States", "Canada", "Mexico", "Bahamas", "Barbados", "Jamaica", "Trinidad and Tobago", "Dominican Republic"],
+    },
+    {
+        region: "Africa & Indian Ocean",
+        countries: ["Mauritius", "South Africa", "Kenya", "Nigeria", "Ghana", "Rwanda", "Egypt", "Morocco", "Tanzania", "Uganda", "Seychelles", "Ethiopia", "Zambia", "Botswana", "Namibia", "Senegal", "Ivory Coast", "Tunisia", "Algeria", "Madagascar"],
+    },
+    {
+        region: "LATAM",
+        countries: ["Brazil", "Argentina", "Chile", "Colombia", "Peru", "Uruguay", "Panama", "Costa Rica", "Ecuador", "Paraguay", "Bolivia", "Guatemala", "El Salvador", "Honduras", "Nicaragua"],
+    },
+];
+
 export default function Navbar() {
     const router = useRouter();
     const [scrolled, setScrolled] = useState(false);
@@ -320,6 +351,9 @@ export default function Navbar() {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchOpen, setSearchOpen] = useState(false);
     const searchRef = useRef<HTMLDivElement | null>(null);
+    const [countryOpen, setCountryOpen] = useState(false);
+    const desktopCountryRef = useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>;
+    const compactCountryRef = useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>;
 
     useEffect(() => {
         const h = () => setScrolled(window.scrollY > 10);
@@ -331,6 +365,12 @@ export default function Navbar() {
         const handlePointerDown = (event: MouseEvent) => {
             if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
                 setSearchOpen(false);
+            }
+            const target = event.target as Node;
+            const insideDesktopCountry = desktopCountryRef.current?.contains(target);
+            const insideCompactCountry = compactCountryRef.current?.contains(target);
+            if (!insideDesktopCountry && !insideCompactCountry) {
+                setCountryOpen(false);
             }
         };
 
@@ -408,6 +448,7 @@ export default function Navbar() {
     const openMenu = (menu: string) => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
         setSearchOpen(false);
+        setCountryOpen(false);
         setActiveMenu(menu);
         setActiveCategory(0);
     };
@@ -482,15 +523,85 @@ export default function Navbar() {
         </div>
     );
 
+    const CountrySelector = ({ compact = false, selectorRef }: { compact?: boolean; selectorRef: React.MutableRefObject<HTMLDivElement | null> }) => (
+        <div ref={(node) => { selectorRef.current = node; }} className="relative">
+            <button
+                type="button"
+                onClick={() => {
+                    setActiveMenu(null);
+                    setSearchOpen(false);
+                    setCountryOpen((open) => !open);
+                }}
+                className={`${compact ? "h-10 px-3" : "h-10 px-4"} inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white text-[13px] font-black text-[#0a1628] shadow-sm transition-all hover:border-[#0096D6]/40 hover:text-[#0096D6]`}
+                aria-expanded={countryOpen}
+                aria-label="Open country and global market selector"
+            >
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#e8f7ff] text-[11px]">IN</span>
+                <span className={compact ? "hidden sm:inline" : ""}>Country: India</span>
+                <svg className={`h-3.5 w-3.5 transition-transform ${countryOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+
+            {countryOpen && (
+                <div className={`${compact ? "right-[-54px] sm:right-0" : "right-0"} absolute top-[48px] w-[min(92vw,720px)] overflow-hidden rounded-[26px] border border-[#dbe7f3] bg-white shadow-[0_30px_90px_rgba(0,60,110,0.18)]`}>
+                    <div className="relative overflow-hidden border-b border-blue-100 bg-gradient-to-br from-[#071426] via-[#0a2947] to-[#006da8] p-5 text-white">
+                        <div className="absolute right-[-40px] top-[-60px] h-40 w-40 rounded-full bg-[#d9a938]/25 blur-3xl" />
+                        <div className="relative flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                            <div>
+                                <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8edcff]">Global Market Desk</div>
+                                <div className="mt-1 text-[22px] font-black tracking-tight">India base. Global expansion support.</div>
+                                <p className="mt-2 max-w-[480px] text-[13px] font-medium leading-relaxed text-white/78">
+                                    Select a market to discuss entity setup, licensing, fintech compliance, tax readiness and regulator-facing documentation.
+                                </p>
+                            </div>
+                            <Link
+                                href="/contact"
+                                onClick={() => setCountryOpen(false)}
+                                className="inline-flex shrink-0 items-center justify-center rounded-xl bg-white px-4 py-2 text-[12px] font-black text-[#0077B6] transition-transform hover:-translate-y-0.5"
+                            >
+                                Plan Expansion
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="max-h-[470px] overflow-y-auto p-5">
+                        <div className="grid gap-4 md:grid-cols-2">
+                            {globalMarketRegions.map((group) => (
+                                <div key={group.region} className="rounded-2xl border border-blue-100 bg-[#f8fbff] p-4">
+                                    <h3 className="text-[12px] font-black uppercase tracking-[0.16em] text-[#0096D6]">{group.region}</h3>
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        {group.countries.map((country) => (
+                                            <Link
+                                                key={country}
+                                                href="/contact"
+                                                onClick={() => setCountryOpen(false)}
+                                                className="rounded-full border border-white bg-white px-3 py-1.5 text-[11.5px] font-bold text-[#334155] shadow-sm transition-all hover:border-[#0096D6]/40 hover:text-[#0096D6]"
+                                            >
+                                                {country}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[12px] font-semibold leading-relaxed text-[#7a5200]">
+                            Country-specific regulatory requirements may change from time to time. Estabizz reviews applicability, eligibility and documentation before any filing or market-entry action.
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+
     return (
         <>
-            <nav className={`fixed top-0 w-full z-[100] transition-all duration-300 ${scrolled ? "bg-[rgba(255,255,255,0.95)] backdrop-blur-[20px] shadow-[0_2px_20px_rgba(0,100,200,0.06)] border-b border-[rgba(0,150,220,0.1)]" : "bg-white border-b border-gray-100"}`} style={{ height: "64px" }}>
-                <div className="max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between">
+            <nav className={`fixed top-0 w-full z-[1000] border-b border-[#dbe7f3] bg-white transition-all duration-300 ${scrolled ? "shadow-[0_14px_42px_rgba(15,23,42,0.10)]" : "shadow-[0_6px_22px_rgba(15,23,42,0.06)]"}`} style={{ height: "64px" }}>
+                <div className="max-w-[1480px] mx-auto px-5 2xl:px-6 h-full flex items-center justify-between">
 
                     {/* Logo */}
                     <Link href="/" className="flex flex-col group shrink-0">
                         <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0096D6] to-[#00B4E0] text-white flex items-center justify-center font-bold text-lg shadow-sm">E</div>
+                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#0096D6] via-[#0077B6] to-[#0a1628] text-white flex items-center justify-center font-bold text-lg shadow-[0_10px_24px_rgba(0,150,214,0.25)]">E</div>
                             <span className="font-extrabold text-[#0a1628] text-xl leading-none tracking-tight">Estabizz Fintech</span>
                         </div>
                         <span className="text-[10px] text-[#64748b] font-medium tracking-wide mt-0.5 pl-10">India&apos;s #1 Fintech Compliance Platform</span>
@@ -507,38 +618,40 @@ export default function Navbar() {
                     </div>
 
                     {/* Right */}
-                    <div className="hidden xl:flex items-center gap-3">
-                        <SearchBox />
+                    <div className="hidden xl:flex items-center gap-2 2xl:gap-3">
+                        <div className="hidden min-[1420px]:block">
+                            <SearchBox />
+                        </div>
                         <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
                             Login
                         </Link>
-                        <button type="button" className="text-[13.5px] font-semibold text-[#334155] px-3 py-2 border border-gray-200 rounded-lg bg-white cursor-default" aria-label="Country selector, India selected">
-                            Country: India
-                        </button>
-                        <Link href="/get-started" className="text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-lg px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-sm">
+                        <CountrySelector selectorRef={desktopCountryRef} />
+                        <Link href="/get-started" className="premium-border-sweep text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-xl px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-[0_12px_26px_rgba(0,150,214,0.22)]">
                             Get Started
                         </Link>
-                        <Link href="/contact" className="bg-[#0a1628] text-white font-bold text-[13.5px] rounded-lg px-5 py-2.5 hover:bg-[#1a2638] transition-colors">
+                        <Link href="/contact" className="bg-[#0a1628] text-white font-bold text-[13.5px] rounded-xl px-5 py-2.5 hover:bg-[#1a2638] transition-colors shadow-[0_12px_26px_rgba(10,22,40,0.18)]">
                             Book Consultation
                         </Link>
                     </div>
 
-                    {/* Mobile Hamburger */}
-                    <button onClick={() => setMobileOpen(!mobileOpen)} className="xl:hidden flex flex-col gap-1.5 p-2">
-                        <span className={`block w-6 h-0.5 bg-[#0a1628] transition-all ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
-                        <span className={`block w-6 h-0.5 bg-[#0a1628] transition-all ${mobileOpen ? "opacity-0" : ""}`} />
-                        <span className={`block w-6 h-0.5 bg-[#0a1628] transition-all ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-                    </button>
+                    <div className="xl:hidden flex items-center gap-2">
+                        <CountrySelector compact selectorRef={compactCountryRef} />
+                        <button onClick={() => setMobileOpen(!mobileOpen)} className="flex flex-col gap-1.5 p-2" aria-label="Open navigation menu">
+                            <span className={`block w-6 h-0.5 bg-[#0a1628] transition-all ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
+                            <span className={`block w-6 h-0.5 bg-[#0a1628] transition-all ${mobileOpen ? "opacity-0" : ""}`} />
+                            <span className={`block w-6 h-0.5 bg-[#0a1628] transition-all ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+                        </button>
+                    </div>
                 </div>
             </nav>
 
             {/* Mega Menu Dropdown */}
             {activeMenu && currentMenu && (
                 <div onMouseEnter={keepOpen} onMouseLeave={closeMenu}
-                    className="fixed top-[64px] left-0 w-full bg-white border-b border-gray-100 shadow-[0_20px_60px_rgba(0,0,0,0.08)] z-[99] animate-[fadeIn_0.15s_ease]">
-                    <div className="max-w-[1280px] mx-auto flex">
+                    className="fixed left-0 top-[64px] z-[999] w-full border-b border-[#dbe7f3] bg-white shadow-[0_30px_90px_rgba(15,23,42,0.18)] animate-[fadeIn_0.15s_ease]">
+                    <div className="mx-auto flex max-w-[1480px] bg-white">
                         {/* Left Categories */}
-                        <div className="w-[220px] border-r border-gray-100 py-4">
+                        <div className="w-[240px] shrink-0 border-r border-blue-100 py-4 bg-[#f8fbff]">
                             {currentMenu.categories.map((cat, i) => (
                                 <button key={i} onMouseEnter={() => setActiveCategory(i)}
                                     className={`w-full flex items-center gap-3 px-5 py-3 text-left text-[14px] transition-colors ${activeCategory === i ? "text-[#0096D6] font-bold bg-blue-50/50 border-l-[3px] border-[#0096D6] pl-[17px]" : "text-[#334155] hover:text-[#0096D6] hover:bg-gray-50 border-l-[3px] border-transparent pl-[17px]"}`}>
@@ -547,7 +660,7 @@ export default function Navbar() {
                             ))}
                         </div>
                         {/* Right Content */}
-                        <div className="flex-1 p-6">
+                        <div className="flex-1 bg-white p-6">
                             <h3 className="text-[18px] font-bold text-[#0a1628] mb-5">{currentMenu.categories[activeCategory]?.label}</h3>
                             {currentMenu.categories[activeCategory]?.items.length > 0 ? (
                                 <div className="grid grid-cols-3 gap-x-8 gap-y-3">
@@ -616,7 +729,28 @@ export default function Navbar() {
                         ))}
                         <div className="border-t border-gray-100 pt-4 mt-4">
                             <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] py-2">Login</Link>
-                            <div className="block text-[15px] font-bold text-[#64748b] py-2">Country: India</div>
+                            <details className="rounded-xl border border-blue-100 bg-[#f8fbff] px-4 py-2">
+                                <summary className="cursor-pointer py-2 text-[15px] font-bold text-[#0a1628]">Country / Global Markets</summary>
+                                <div className="mt-3 space-y-3 pb-2">
+                                    {globalMarketRegions.map((group) => (
+                                        <div key={group.region}>
+                                            <h4 className="text-[11px] font-black uppercase tracking-[0.16em] text-[#0096D6]">{group.region}</h4>
+                                            <div className="mt-2 flex flex-wrap gap-2">
+                                                {group.countries.map((country) => (
+                                                    <Link
+                                                        key={country}
+                                                        href="/contact"
+                                                        onClick={() => setMobileOpen(false)}
+                                                        className="rounded-full border border-blue-100 bg-white px-3 py-1.5 text-[11.5px] font-bold text-[#334155]"
+                                                    >
+                                                        {country}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </details>
                         </div>
                         <Link href="/get-started" onClick={() => setMobileOpen(false)} className="block w-full text-center bg-[#0a1628] text-white font-bold text-[14px] rounded-lg py-3 mt-4">Get Started</Link>
                     </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/home/HeroSection";
 import TrustedBy from "@/components/home/TrustedBy";
+import GlobalMarketsSection from "@/components/home/GlobalMarketsSection";
 import SolutionsSection from "@/components/home/SolutionsSection";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import RegulatoryServices from "@/components/home/RegulatorySevices";
@@ -70,6 +71,7 @@ export default function Home() {
                 <HeroSection />
                 <StatsSection />
                 <TrustedBy />
+                <GlobalMarketsSection />
                 <SolutionsSection />
                 <WhyChooseUs />
                 <RegulatoryServices />

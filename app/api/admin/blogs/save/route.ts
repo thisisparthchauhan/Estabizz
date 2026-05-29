@@ -45,49 +45,6 @@ function estimateReadingTime(text: string): number {
   return Math.max(1, Math.ceil(words / 238));
 }
 
-/** Convert a Mongoose IBlog document back to our Blog shape */
-function docToBlog(doc: InstanceType<typeof BlogModel>): Blog {
-  return {
-    id:            doc.blogId,
-    title:         doc.title,
-    slug:          doc.slug,
-    summary:       doc.summary,
-    content:       doc.content,
-    featuredImage: doc.featuredImage,
-    images:        doc.images ?? [],
-    category:      doc.category,
-    tags:          doc.tags ?? [],
-    author: {
-      id:           doc.author?.id ?? '',
-      firstName:    doc.author?.firstName ?? '',
-      lastName:     doc.author?.lastName ?? '',
-      email:        doc.author?.email ?? '',
-      bio:          doc.author?.bio ?? '',
-      profileImage: doc.author?.profileImage,
-      role:         (doc.author?.role ?? 'admin') as import('@/lib/blog/types').BlogAuthorRole,
-      designation:  doc.author?.designation ?? '',
-    },
-    status:        doc.status as BlogStatus,
-    featured:      doc.featured,
-    isUserSubmitted: doc.isUserSubmitted,
-    submittedBy:   doc.submittedBy,
-    reviewedBy:    doc.reviewedBy,
-    adminNotes:    doc.adminNotes,
-    focusKeyword:  doc.focusKeyword,
-    seoTitle:      doc.seoTitle,
-    metaDescription: doc.metaDescription,
-    faqs:          (doc.faqs ?? []).map((f, i) => ({ question: f.question ?? '', answer: f.answer ?? '', order: f.order ?? i })),
-    disclaimer:    doc.disclaimer,
-    ctaText:       doc.ctaText,
-    readingTime:   doc.readingTime,
-    views:         doc.views,
-    likeCount:     doc.likeCount,
-    publishedAt:   doc.publishedAt?.toISOString(),
-    createdAt:     (doc.createdAt as Date).toISOString(),
-    updatedAt:     (doc.updatedAt as Date).toISOString(),
-  };
-}
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -149,7 +106,7 @@ export async function POST(req: NextRequest) {
       const id   = `admin_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
       const slug = body.slug?.trim() || `${slugify(body.title)}-${Date.now()}`;
 
-      const doc = await BlogModel.create({
+      await BlogModel.create({
         blogId:          id,
         title:           body.title.trim(),
         slug,
@@ -174,9 +131,6 @@ export async function POST(req: NextRequest) {
         likeCount:       0,
         publishedAt:     isPublishing ? now : undefined,
       });
-
-      // Also mirror to in-memory store so it's immediately available to the page
-      addSubmission(docToBlog(doc));
 
       return NextResponse.json({ success: true, id, slug }, { status: 201 });
 

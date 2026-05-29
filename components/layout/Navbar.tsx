@@ -655,6 +655,12 @@ export default function Navbar() {
                                 {item} <svg className={`w-3 h-3 transition-transform ${activeMenu === item ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </div>
                         ))}
+                        <Link
+                            href="/blogs"
+                            className="text-[13.5px] font-semibold px-3 py-5 text-[#334155] hover:text-[#0096D6] transition-colors"
+                        >
+                            Insights
+                        </Link>
                     </div>
 
                     {/* Right */}
@@ -834,6 +840,13 @@ export default function Navbar() {
                                 </div>
                             </details>
                         ))}
+                        <Link
+                            href="/blogs"
+                            onClick={() => setMobileOpen(false)}
+                            className="flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#0096D6]"
+                        >
+                            ✍️ Regulatory Insights
+                        </Link>
                         <div className="border-t border-gray-100 pt-4 mt-4">
                             {authUser ? (
                                 <div className="mb-2">

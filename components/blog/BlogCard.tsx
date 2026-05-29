@@ -23,18 +23,26 @@ function authorDisplay(b: BlogSummary): string {
 function ImageBox({ src, alt, icon }: { src: string; alt: string; icon: string }) {
   return (
     <div className="relative h-full w-full overflow-hidden bg-gradient-to-br from-[#e8f4fd] via-[#eef6ff] to-[#e2eefe]">
-      <div className="absolute inset-0 flex items-center justify-center text-[56px] opacity-[0.15] select-none pointer-events-none">
-        {icon}
-      </div>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={alt}
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-        loading="lazy"
-        decoding="async"
-        onError={(e) => { e.currentTarget.style.display = "none"; }}
-      />
+      {src ? (
+        <>
+          <div className="absolute inset-0 flex items-center justify-center text-[56px] opacity-[0.15] select-none pointer-events-none">
+            {icon}
+          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={src}
+            alt={alt}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            loading="lazy"
+            decoding="async"
+            onError={(e) => { e.currentTarget.style.display = "none"; }}
+          />
+        </>
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center text-[56px] opacity-[0.15] select-none pointer-events-none">
+          {icon}
+        </div>
+      )}
     </div>
   );
 }

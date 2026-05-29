@@ -61,17 +61,17 @@ function docToBlog(doc: InstanceType<typeof BlogModel>): Blog {
 
 // ─── DB availability check ────────────────────────────────────────────────────
 
-let _dbAvailable: boolean | null = null;
+declare global { var __estabizz_dbAvailable: boolean | undefined }
 
 async function isDBAvailable(): Promise<boolean> {
-  if (_dbAvailable !== null) return _dbAvailable;
+  if (global.__estabizz_dbAvailable !== undefined) return global.__estabizz_dbAvailable;
   try {
     await connectDB();
-    _dbAvailable = true;
+    global.__estabizz_dbAvailable = true;
   } catch {
-    _dbAvailable = false;
+    global.__estabizz_dbAvailable = false;
   }
-  return _dbAvailable;
+  return global.__estabizz_dbAvailable;
 }
 
 // ─── Filters (shared between DB and in-memory paths) ─────────────────────────
@@ -122,15 +122,22 @@ export async function getPublishedBlogs(filters: BlogFilters = {}): Promise<Blog
       const limit = filters.limit ?? 50;
       const skip  = ((filters.page ?? 1) - 1) * limit;
       const docs  = await BlogModel.find(query).sort({ publishedAt: -1 }).skip(skip).limit(limit).lean();
-      return docs.map((d) => docToBlog(d as InstanceType<typeof BlogModel>));
+      const result = docs.map((d) => docToBlog(d as InstanceType<typeof BlogModel>));
+      // deduplicate by id
+      const seen = new Set<string>();
+      return result.filter(b => seen.has(b.id) ? false : (seen.add(b.id), true));
     }
   } catch (e) {
     console.warn('[repository] getPublishedBlogs DB error, using memory:', e);
-    _dbAvailable = false;
+    global.__estabizz_dbAvailable = false;
   }
   // fallback
   const base = applyFilters(memAllBlogs(), { ...filters, status: 'published' });
-  return paginate(base.sort((a, b) => new Date(b.publishedAt ?? b.createdAt).getTime() - new Date(a.publishedAt ?? a.createdAt).getTime()), filters.page, filters.limit);
+  const sorted = base.sort((a, b) => new Date(b.publishedAt ?? b.createdAt).getTime() - new Date(a.publishedAt ?? a.createdAt).getTime());
+  const paged = paginate(sorted, filters.page, filters.limit);
+  // deduplicate by id
+  const seen = new Set<string>();
+  return paged.filter(b => seen.has(b.id) ? false : (seen.add(b.id), true));
 }
 
 export async function getFeaturedBlogs(limit = 4): Promise<Blog[]> {
@@ -141,7 +148,7 @@ export async function getFeaturedBlogs(limit = 4): Promise<Blog[]> {
     }
   } catch (e) {
     console.warn('[repository] getFeaturedBlogs DB error:', e);
-    _dbAvailable = false;
+    global.__estabizz_dbAvailable = false;
   }
   return memAllBlogs().filter((b) => b.status === 'published' && b.featured).sort((a, b) => new Date(b.publishedAt ?? b.createdAt).getTime() - new Date(a.publishedAt ?? a.createdAt).getTime()).slice(0, limit);
 }
@@ -154,7 +161,7 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
     }
   } catch (e) {
     console.warn('[repository] getBlogBySlug DB error:', e);
-    _dbAvailable = false;
+    global.__estabizz_dbAvailable = false;
   }
   return memAllBlogs().find((b) => b.slug === slug && b.status === 'published') ?? null;
 }
@@ -177,7 +184,7 @@ export async function getAllBlogsForAdmin(filters: BlogFilters = {}): Promise<Bl
     }
   } catch (e) {
     console.warn('[repository] getAllBlogsForAdmin DB error:', e);
-    _dbAvailable = false;
+    global.__estabizz_dbAvailable = false;
   }
   return paginate(applyFilters(memAllBlogs(), filters).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()), filters.page, filters.limit);
 }
@@ -190,7 +197,7 @@ export async function getBlogByIdForAdmin(id: string): Promise<Blog | null> {
     }
   } catch (e) {
     console.warn('[repository] getBlogByIdForAdmin DB error:', e);
-    _dbAvailable = false;
+    global.__estabizz_dbAvailable = false;
   }
   return memAllBlogs().find((b) => b.id === id) ?? null;
 }
@@ -203,7 +210,7 @@ export async function getPendingSubmissions(): Promise<Blog[]> {
     }
   } catch (e) {
     console.warn('[repository] getPendingSubmissions DB error:', e);
-    _dbAvailable = false;
+    global.__estabizz_dbAvailable = false;
   }
   return memAllBlogs().filter((b) => b.isUserSubmitted && b.status === 'pending_review').sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
@@ -222,7 +229,7 @@ export async function getPublishedBlogCount(filters: Omit<BlogFilters, 'page' | 
     }
   } catch (e) {
     console.warn('[repository] getPublishedBlogCount DB error:', e);
-    _dbAvailable = false;
+    global.__estabizz_dbAvailable = false;
   }
   return applyFilters(memAllBlogs(), { ...filters, status: 'published' }).length;
 }
@@ -235,7 +242,7 @@ export async function getRelatedBlogs(blogId: string, categoryId: string, limit 
     }
   } catch (e) {
     console.warn('[repository] getRelatedBlogs DB error:', e);
-    _dbAvailable = false;
+    global.__estabizz_dbAvailable = false;
   }
   return memAllBlogs().filter((b) => b.status === 'published' && b.id !== blogId && b.category.id === categoryId).slice(0, limit);
 }

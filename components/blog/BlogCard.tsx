@@ -18,204 +18,244 @@ function authorDisplay(b: BlogSummary): string {
   return `${b.author.firstName} ${b.author.lastName}`.trim();
 }
 
-// ─── Image placeholder box ────────────────────────────────────────────────────
+// ─── Shared image component ───────────────────────────────────────────────────
 
-function ImageBox({ src, alt, icon }: { src: string; alt: string; icon: string }) {
+function CoverImage({
+  src,
+  alt,
+  icon,
+  className = "",
+}: {
+  src: string;
+  alt: string;
+  icon: string;
+  className?: string;
+}) {
   return (
-    <div className="relative h-full w-full overflow-hidden bg-gradient-to-br from-[#e8f4fd] via-[#eef6ff] to-[#e2eefe]">
-      {src ? (
-        <>
-          <div className="absolute inset-0 flex items-center justify-center text-[56px] opacity-[0.15] select-none pointer-events-none">
-            {icon}
-          </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={src}
-            alt={alt}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-            loading="lazy"
-            decoding="async"
-            onError={(e) => { e.currentTarget.style.display = "none"; }}
-          />
-        </>
-      ) : (
-        <div className="absolute inset-0 flex items-center justify-center text-[56px] opacity-[0.15] select-none pointer-events-none">
-          {icon}
-        </div>
+    <div className={`relative overflow-hidden bg-gradient-to-br from-[#e8f4fd] via-[#eef6ff] to-[#e2eefe] ${className}`}>
+      <span className="absolute inset-0 flex items-center justify-center text-5xl opacity-[0.12] select-none pointer-events-none">
+        {icon}
+      </span>
+      {src && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={src}
+          alt={alt}
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          loading="lazy"
+          decoding="async"
+          onError={(e) => {
+            e.currentTarget.style.display = "none";
+          }}
+        />
       )}
     </div>
   );
 }
 
-// ─── Featured badge ───────────────────────────────────────────────────────────
+// ─── Category badge ───────────────────────────────────────────────────────────
 
-function FeaturedBadge() {
+function CategoryBadge({
+  name,
+  color,
+  size = "sm",
+}: {
+  name: string;
+  color: string;
+  size?: "xs" | "sm";
+}) {
   return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-[#d9a938]/15 border border-[#d9a938]/50 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#b8860b]">
-      <span>★</span> Featured
+    <span
+      className={`inline-block font-black uppercase tracking-wider ${
+        size === "xs" ? "text-[9px]" : "text-[10px]"
+      }`}
+      style={{ color }}
+    >
+      {name}
     </span>
   );
 }
 
-// ─── Standard card (3-column grid) ───────────────────────────────────────────
+// ─── CardHero (large featured — left 60% of hero grid) ───────────────────────
 
-export function BlogCard({ blog }: { blog: BlogSummary }) {
+export function CardHero({ blog }: { blog: BlogSummary }) {
   return (
-    <Link
-      href={`/blogs/${blog.slug}`}
-      className={`
-        group flex flex-col overflow-hidden rounded-2xl bg-white
-        border border-[#e2eaf2]
-        shadow-[0_2px_12px_rgba(10,22,40,0.06)]
-        hover:shadow-[0_12px_40px_rgba(10,22,40,0.13)]
-        hover:-translate-y-1.5
-        hover:border-[#d9a938]/50
-        transition-all duration-300
-      `}
-    >
-      {/* Image */}
-      <div className="relative h-48 shrink-0 overflow-hidden">
-        <ImageBox src={blog.featuredImage.url} alt={blog.featuredImage.alt} icon={blog.category.icon} />
+    <Link href={`/blogs/${blog.slug}`} className="group block h-full">
+      <article className="relative h-full min-h-[420px] overflow-hidden rounded-none bg-[#0a1628]">
+        {/* Full-bleed image */}
+        <CoverImage
+          src={blog.featuredImage.url}
+          alt={blog.featuredImage.alt}
+          icon={blog.category.icon}
+          className="absolute inset-0 h-full w-full"
+        />
 
-        {/* Gradient overlay for legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
 
-        {/* Category badge */}
-        <div className="absolute left-3 top-3 z-10">
-          <span className="rounded-full bg-[#071224]/85 backdrop-blur-sm px-2.5 py-1 text-[10.5px] font-bold text-white border border-white/10">
+        {/* Category badge — top left */}
+        <div className="absolute left-4 top-4 z-10">
+          <span
+            className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-wider text-white"
+            style={{ backgroundColor: blog.category.color + "dd" }}
+          >
             {blog.category.icon} {blog.category.name}
           </span>
         </div>
 
-        {/* Gold featured badge */}
-        {blog.featured && (
-          <div className="absolute right-3 top-3 z-10">
-            <FeaturedBadge />
+        {/* Content overlay — bottom */}
+        <div className="absolute bottom-0 left-0 right-0 z-10 p-5 md:p-7">
+          <h2 className="mb-2 text-[22px] font-black leading-tight text-white md:text-[26px] line-clamp-3 group-hover:text-[#d9a938] transition-colors duration-200">
+            {blog.title}
+          </h2>
+          <div className="flex items-center gap-3 text-[12px] text-white/70">
+            <span className="font-semibold">{authorDisplay(blog)}</span>
+            <span className="opacity-50">·</span>
+            <span>{formatDate(blog.publishedAt)}</span>
           </div>
-        )}
-      </div>
-
-      {/* Body */}
-      <div className="flex flex-1 flex-col px-5 pt-4 pb-3">
-        <h3 className="mb-2 text-[15px] font-black leading-snug text-[#0a1628] line-clamp-2 group-hover:text-[#0096D6] transition-colors duration-200">
-          {blog.title}
-        </h3>
-        <p className="mb-4 flex-1 text-[13px] leading-[1.75] text-[#475569] line-clamp-3">
-          {blog.summary}
-        </p>
-
-        {/* Tags */}
-        {blog.tags.length > 0 && (
-          <div className="mb-3 flex flex-wrap gap-1.5">
-            {blog.tags.slice(0, 2).map((tag) => (
-              <span key={tag} className="rounded-full border border-[#dbe7f3] bg-[#f4f9ff] px-2 py-0.5 text-[10.5px] font-semibold text-[#0077B6]">
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Author + date */}
-        <div className="flex items-center justify-between border-t border-[#f0f4f8] pt-3">
-          <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[11px] font-black text-white shadow-sm">
-              {blog.author.firstName[0]}
-            </div>
-            <div>
-              <span className="block text-[11px] font-bold text-[#0a1628] leading-none">{authorDisplay(blog)}</span>
-              <span className="block text-[10px] text-[#94a3b8] leading-none mt-0.5">{formatDate(blog.publishedAt)}</span>
-            </div>
-          </div>
-          <span className="rounded-lg border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[10.5px] font-bold text-[#0096D6]">
-            {blog.readingTime} min read
-          </span>
         </div>
+      </article>
+    </Link>
+  );
+}
+
+// ─── CardFeaturedSide (right column — compact horizontal) ────────────────────
+
+export function CardFeaturedSide({ blog }: { blog: BlogSummary }) {
+  return (
+    <Link href={`/blogs/${blog.slug}`} className="group flex gap-3 py-3 border-b border-[#f0f0f0] last:border-b-0">
+      {/* Image left */}
+      <div className="relative h-[80px] w-[110px] shrink-0 overflow-hidden rounded">
+        <CoverImage
+          src={blog.featuredImage.url}
+          alt={blog.featuredImage.alt}
+          icon={blog.category.icon}
+          className="h-full w-full"
+        />
       </div>
 
-      {/* Read More footer — gold accent on hover */}
-      <div className="border-t border-[#f0f4f8] bg-[#f8fbff] group-hover:bg-[#fffbf0] group-hover:border-[#d9a938]/20 px-5 py-3 transition-colors duration-200">
-        <span className="flex items-center gap-1.5 text-[12px] font-black text-[#0096D6] group-hover:text-[#b8860b] group-hover:gap-2.5 transition-all duration-200">
-          Read Article
-          <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </span>
+      {/* Text right */}
+      <div className="flex-1 min-w-0 flex flex-col justify-between">
+        <div>
+          <CategoryBadge name={blog.category.name} color={blog.category.color} size="xs" />
+          <h3 className="mt-0.5 text-[13px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#0096D6] transition-colors duration-150">
+            {blog.title}
+          </h3>
+        </div>
+        <span className="text-[11px] text-[#6b7280]">{formatDate(blog.publishedAt)}</span>
       </div>
     </Link>
   );
 }
 
-// ─── Hero / featured card (full-width) ───────────────────────────────────────
+// ─── CardStandard (main grid card) ───────────────────────────────────────────
 
-export function BlogHeroCard({ blog }: { blog: BlogSummary }) {
+export function CardStandard({ blog }: { blog: BlogSummary }) {
   return (
-    <Link
-      href={`/blogs/${blog.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_4px_24px_rgba(10,22,40,0.08)] hover:shadow-[0_16px_56px_rgba(10,22,40,0.14)] hover:border-[#d9a938]/50 transition-all duration-300 lg:flex-row"
-    >
-      {/* Image — 45% on desktop */}
-      <div className="relative h-64 shrink-0 overflow-hidden lg:h-auto lg:w-[45%]">
-        <ImageBox src={blog.featuredImage.url} alt={blog.featuredImage.alt} icon={blog.category.icon} />
-        {/* Subtle right-edge gradient for blending */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/5 hidden lg:block pointer-events-none" />
-
-        <div className="absolute left-4 top-4 z-10 flex flex-wrap gap-2">
-          <span className="rounded-full bg-[#071224]/85 backdrop-blur-sm px-3 py-1 text-[11px] font-bold text-white border border-white/10">
-            {blog.category.icon} {blog.category.name}
-          </span>
-          {blog.featured && <FeaturedBadge />}
-        </div>
+    <Link href={`/blogs/${blog.slug}`} className="group flex flex-col overflow-hidden bg-white border border-[#e8e8e8] hover:border-[#d0d0d0] transition-all duration-200">
+      {/* Image top — 16:9 */}
+      <div className="relative aspect-video w-full shrink-0 overflow-hidden">
+        <CoverImage
+          src={blog.featuredImage.url}
+          alt={blog.featuredImage.alt}
+          icon={blog.category.icon}
+          className="h-full w-full"
+        />
       </div>
 
-      {/* Content */}
-      <div className="flex flex-1 flex-col justify-between p-6 lg:p-8">
-        {/* Tags */}
-        <div className="mb-4 flex flex-wrap gap-2">
-          {blog.tags.slice(0, 3).map((tag) => (
-            <span key={tag} className="rounded-full border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-0.5 text-[11px] font-semibold text-[#0077B6]">
-              {tag}
-            </span>
-          ))}
+      {/* Body */}
+      <div className="flex flex-1 flex-col p-4">
+        {/* Category */}
+        <div className="mb-2">
+          <CategoryBadge name={blog.category.name} color={blog.category.color} />
         </div>
 
-        <h2 className="mb-3 text-[22px] font-black leading-tight text-[#0a1628] group-hover:text-[#0096D6] transition-colors lg:text-[26px]">
+        {/* Title */}
+        <h3 className="mb-2 text-[16px] font-bold leading-snug text-[#111827] line-clamp-3 group-hover:text-[#0096D6] transition-colors duration-150">
           {blog.title}
-        </h2>
-        <p className="mb-5 text-[14px] leading-[1.8] text-[#475569] line-clamp-3 lg:line-clamp-4">
+        </h3>
+
+        {/* Summary */}
+        <p className="mb-4 flex-1 text-[13px] leading-[1.65] text-[#6b7280] line-clamp-2">
           {blog.summary}
         </p>
 
-        {/* Author + meta */}
-        <div className="flex items-center justify-between border-t border-[#f0f4f8] pt-4">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[13px] font-black text-white shadow-sm">
+        {/* Footer */}
+        <div className="flex items-center justify-between text-[11px] text-[#9ca3af] pt-3 border-t border-[#f3f4f6]">
+          <div className="flex items-center gap-2">
+            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[9px] font-black text-white">
               {blog.author.firstName[0]}
             </div>
-            <div>
-              <span className="block text-[13px] font-bold text-[#0a1628]">{authorDisplay(blog)}</span>
-              <span className="text-[11px] text-[#94a3b8]">{blog.author.designation}</span>
-            </div>
+            <span className="font-medium text-[#374151]">{authorDisplay(blog)}</span>
           </div>
-          <div className="flex items-center gap-3 text-[12px] text-[#94a3b8]">
+          <div className="flex items-center gap-2">
             <span>{formatDate(blog.publishedAt)}</span>
-            <span className="rounded-lg border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 font-bold text-[#0096D6]">
-              {blog.readingTime} min read
-            </span>
+            <span className="opacity-40">·</span>
+            <span>{blog.readingTime} min</span>
           </div>
-        </div>
-
-        {/* CTA */}
-        <div className="mt-5">
-          <span className="inline-flex items-center gap-2 rounded-xl bg-[#0a1628] group-hover:bg-[#d9a938] px-5 py-2.5 text-[13px] font-bold text-white group-hover:text-[#071224] shadow-md transition-all duration-300">
-            Read Full Article
-            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </span>
         </div>
       </div>
     </Link>
   );
+}
+
+// ─── CardList (list view — horizontal, full width) ────────────────────────────
+
+export function CardList({ blog }: { blog: BlogSummary }) {
+  return (
+    <Link
+      href={`/blogs/${blog.slug}`}
+      className="group flex items-start gap-4 py-4 border-b border-[#f0f0f0] last:border-b-0"
+    >
+      {/* Text left */}
+      <div className="flex-1 min-w-0">
+        <CategoryBadge name={blog.category.name} color={blog.category.color} size="xs" />
+        <h3 className="mt-1 text-[15px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#0096D6] transition-colors duration-150">
+          {blog.title}
+        </h3>
+        <span className="mt-1 block text-[11px] text-[#9ca3af]">{formatDate(blog.publishedAt)}</span>
+      </div>
+
+      {/* Image right */}
+      <div className="relative h-[80px] w-[120px] shrink-0 overflow-hidden rounded">
+        <CoverImage
+          src={blog.featuredImage.url}
+          alt={blog.featuredImage.alt}
+          icon={blog.category.icon}
+          className="h-full w-full"
+        />
+      </div>
+    </Link>
+  );
+}
+
+// ─── CardMini (tiny — title + date, no image) ────────────────────────────────
+
+export function CardMini({ blog }: { blog: BlogSummary }) {
+  return (
+    <Link
+      href={`/blogs/${blog.slug}`}
+      className="group flex items-start gap-3 py-2.5 border-b border-[#f0f0f0] last:border-b-0"
+      style={{ borderLeftColor: blog.category.color }}
+    >
+      <span
+        className="mt-1 block h-full w-[3px] shrink-0 rounded-full self-stretch min-h-[32px]"
+        style={{ backgroundColor: blog.category.color }}
+      />
+      <div className="min-w-0">
+        <h4 className="text-[13px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#0096D6] transition-colors duration-150">
+          {blog.title}
+        </h4>
+        <span className="mt-0.5 block text-[11px] text-[#9ca3af]">{formatDate(blog.publishedAt)}</span>
+      </div>
+    </Link>
+  );
+}
+
+// ─── BlogCard (backwards-compatible default export — CardStandard) ────────────
+
+export function BlogCard({ blog }: { blog: BlogSummary }) {
+  return <CardStandard blog={blog} />;
 }
 
 export default BlogCard;

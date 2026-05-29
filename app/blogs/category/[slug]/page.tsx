@@ -19,7 +19,7 @@ import {
   getAllCategories,
   getCategoryBySlug,
 } from "@/lib/blog/repository";
-import { BlogCard } from "@/components/blog/BlogCard";
+import { CardStandard } from "@/components/blog/BlogCard";
 import type { BlogSummary } from "@/lib/blog/types";
 
 // ─── Params ───────────────────────────────────────────────────────────────────
@@ -99,7 +99,7 @@ function buildBreadcrumbSchema(categoryName: string, categorySlug: string) {
   };
 }
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -109,97 +109,114 @@ export default async function CategoryBlogsPage({ params }: Props) {
 
   if (!category) return notFound();
 
-  // Only published blogs — category-filtered
-  const blogs: BlogSummary[] = await getPublishedBlogSummaries({ category: slug });
+  const blogs: BlogSummary[] = await getPublishedBlogSummaries({
+    category: slug,
+  });
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildBreadcrumbSchema(category.name, category.slug)),
+          __html: JSON.stringify(
+            buildBreadcrumbSchema(category.name, category.slug)
+          ),
         }}
       />
 
-      <main className="min-h-screen bg-[#f5f7fa] pt-[64px]">
+      <main className="min-h-screen bg-white pt-[64px]">
 
-        {/* ── Hero ──────────────────────────────────────────────────────────── */}
-        <section className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#071224] via-[#0a1e3a] to-[#091730]" />
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute -left-40 -top-40 h-[480px] w-[480px] rounded-full bg-[#0096D6]/10 blur-[120px]" />
-            <div className="absolute -right-20 bottom-0 h-[360px] w-[360px] rounded-full bg-[#d9a938]/8 blur-[110px]" />
-            <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:48px_48px]" />
-          </div>
-
-          <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 md:py-18">
+        {/* ── Category hero — white bg, editorial style ── */}
+        <div className="border-b border-[#e8e8e8] bg-white">
+          <div className="mx-auto max-w-screen-xl px-4 py-10 sm:px-6 lg:px-8">
             {/* Breadcrumb */}
-            <nav className="mb-5 flex items-center gap-2 text-[12px] text-white/45" aria-label="Breadcrumb">
-              <Link href="/" className="hover:text-white/80 transition-colors">Home</Link>
-              <span className="text-white/25">/</span>
-              <Link href="/blogs" className="hover:text-white/80 transition-colors">Regulatory Insights</Link>
-              <span className="text-white/25">/</span>
-              <span className="text-[#d9a938]/80">{category.name}</span>
+            <nav
+              className="mb-5 flex items-center gap-2 text-[12px] text-[#9ca3af]"
+              aria-label="Breadcrumb"
+            >
+              <Link href="/" className="hover:text-[#374151] transition-colors">
+                Home
+              </Link>
+              <span className="opacity-40">/</span>
+              <Link
+                href="/blogs"
+                className="hover:text-[#374151] transition-colors"
+              >
+                Regulatory Insights
+              </Link>
+              <span className="opacity-40">/</span>
+              <span className="text-[#374151]">{category.name}</span>
             </nav>
 
             {/* Category badge */}
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d9a938]/35 bg-[#d9a938]/10 px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.12em] text-[#d9a938]">
-              <span className="text-[16px]">{category.icon}</span>
-              {category.name}
+            <div className="mb-4">
+              <span
+                className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.12em] text-white"
+                style={{ backgroundColor: category.color }}
+              >
+                <span className="text-[16px]">{category.icon}</span>
+                {category.name}
+              </span>
             </div>
 
-            <h1 className="mb-3 text-[28px] font-black leading-tight text-white md:text-[36px] lg:text-[40px]">
+            {/* Large category title */}
+            <h1 className="mb-3 text-[32px] font-black leading-tight text-[#0a1628] md:text-[40px] lg:text-[48px]">
               {category.name}
             </h1>
-            <p className="max-w-2xl text-[15px] leading-7 text-white/60">
+
+            {/* Gold underline accent */}
+            <div className="mb-4 h-[4px] w-14 rounded-full bg-[#d9a938]" />
+
+            <p className="max-w-2xl text-[15px] leading-7 text-[#6b7280]">
               {category.description}
             </p>
 
-            <div className="mt-4 flex items-center gap-4">
-              <span className="text-[13px] text-white/45">
-                {blogs.length} published article{blogs.length !== 1 ? "s" : ""}
+            <div className="mt-5 flex items-center gap-4">
+              <span className="text-[13px] text-[#9ca3af]">
+                {blogs.length} published article
+                {blogs.length !== 1 ? "s" : ""}
               </span>
               <Link
                 href="/blogs"
-                className="text-[12px] font-bold text-[#d9a938]/70 hover:text-[#d9a938] transition-colors"
+                className="text-[12px] font-bold text-[#0096D6] hover:text-[#0077B6] transition-colors"
               >
                 ← All Categories
               </Link>
             </div>
           </div>
-        </section>
+        </div>
 
-        {/* ── Content ───────────────────────────────────────────────────────── */}
-        <div className="mx-auto max-w-7xl px-6 py-10 lg:py-14">
+        {/* ── Content ── */}
+        <div className="mx-auto max-w-screen-xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
 
           {blogs.length === 0 ? (
-            // ── Empty state ─────────────────────────────────────────────────
+            /* Empty state */
             <div className="flex flex-col items-center justify-center py-24 text-center">
               <div className="mb-4 text-5xl opacity-20">{category.icon}</div>
               <h2 className="mb-2 text-[20px] font-black text-[#0a1628]">
                 No articles yet
               </h2>
-              <p className="mb-6 max-w-sm text-[13px] leading-6 text-[#64748b]">
+              <p className="mb-6 max-w-sm text-[13px] leading-6 text-[#6b7280]">
                 No published articles in <strong>{category.name}</strong> yet.
                 Check back soon or explore other categories.
               </p>
               <Link
                 href="/blogs"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-5 py-2.5 text-[13px] font-bold text-white hover:bg-[#0a1628]/90 transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 rounded-lg bg-[#0a1628] px-5 py-2.5 text-[13px] font-bold text-white hover:bg-[#0a1628]/90 transition-colors"
               >
                 ← Browse All Articles
               </Link>
             </div>
           ) : (
-            // ── Blog grid ───────────────────────────────────────────────────
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            /* Blog grid — 3 columns */
+            <div className="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
               {blogs.map((blog) => (
-                <BlogCard key={blog.id} blog={blog} />
+                <CardStandard key={blog.id} blog={blog} />
               ))}
             </div>
           )}
 
-          {/* ── Category browser ─────────────────────────────────────────── */}
+          {/* Other categories strip */}
           <OtherCategories currentSlug={slug} />
         </div>
       </main>
@@ -216,11 +233,14 @@ async function OtherCategories({ currentSlug }: { currentSlug: string }) {
   if (others.length === 0) return null;
 
   return (
-    <section className="mt-14 border-t border-[#e8edf5] pt-10">
-      <div className="mb-5 flex items-center justify-between">
-        <h2 className="text-[16px] font-black text-[#0a1628]">
-          Browse Other Topics
-        </h2>
+    <section className="mt-14 border-t border-[#e8e8e8] pt-10">
+      <div className="mb-6 flex items-end justify-between">
+        <div>
+          <h2 className="text-[18px] font-black text-[#0a1628]">
+            Browse Other Topics
+          </h2>
+          <div className="mt-1 h-[3px] w-8 rounded-full bg-[#d9a938]" />
+        </div>
         <Link
           href="/blogs"
           className="text-[12px] font-bold text-[#0096D6] hover:text-[#0077B6] transition-colors"
@@ -233,7 +253,7 @@ async function OtherCategories({ currentSlug }: { currentSlug: string }) {
           <Link
             key={cat.slug}
             href={`/blogs/category/${cat.slug}`}
-            className="group inline-flex items-center gap-1.5 rounded-full border border-[#e2eaf2] bg-white px-3.5 py-2 text-[12px] font-semibold text-[#475569] hover:border-[#d9a938]/50 hover:bg-[#fffbf0] hover:text-[#b8860b] transition-all shadow-sm"
+            className="group inline-flex items-center gap-1.5 rounded-full border border-[#e0e0e0] bg-white px-3.5 py-2 text-[12px] font-semibold text-[#374151] hover:border-[#0096D6]/40 hover:text-[#0096D6] transition-all"
           >
             <span>{cat.icon}</span>
             {cat.name}

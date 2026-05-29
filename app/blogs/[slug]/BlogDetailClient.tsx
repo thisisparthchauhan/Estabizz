@@ -550,6 +550,39 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
               </section>
             )}
 
+            {/* Author box */}
+            <div className="mt-10 overflow-hidden rounded-sm border border-[#e8e8e8] bg-white">
+              <div className="flex flex-col gap-4 p-5 sm:flex-row sm:p-6">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[17px] font-black text-white">
+                  {blog.author.firstName[0]}
+                </div>
+                <div className="flex-1">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-[#9ca3af]">
+                    Written by
+                  </p>
+                  <p className="mt-0.5 text-[15px] font-black text-[#0a1628]">
+                    {blog.author.firstName} {blog.author.lastName}
+                  </p>
+                  {blog.author.designation && (
+                    <p className="text-[12px] font-semibold text-[#0096D6]">
+                      {blog.author.designation}
+                    </p>
+                  )}
+                  <p className="mt-2 text-[13px] leading-6 text-[#6b7280]">
+                    Estabizz Research Team prepares regulatory and compliance
+                    insights covering RBI, SEBI, IRDAI, IFSCA, MCA, FEMA and
+                    fintech licensing matters.
+                  </p>
+                  <p className="mt-3 text-[12.5px] font-semibold text-[#374151]">
+                    Need professional assistance? Contact the Estabizz Team at{" "}
+                    <a href="tel:9825600907" className="font-black text-[#0096D6] hover:text-[#0077B6]">
+                      9825600907
+                    </a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* Disclaimer */}
             <div className="mt-8 rounded-sm border border-[#e8e8e8] bg-[#f7f8fc] p-4 sm:p-5">
               <div className="flex gap-3">

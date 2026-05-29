@@ -225,6 +225,8 @@ function buildBreadcrumbSchema(blog: Blog) {
   };
 }
 
+export const dynamic = 'force-dynamic';
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default async function BlogDetailPage({ params }: Props) {

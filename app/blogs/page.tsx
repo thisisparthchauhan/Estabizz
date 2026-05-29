@@ -57,6 +57,9 @@ const BREADCRUMB_SCHEMA = {
   ],
 };
 
+// Force fresh render on every request so newly published blogs appear immediately
+export const dynamic = 'force-dynamic';
+
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default async function BlogsPage() {

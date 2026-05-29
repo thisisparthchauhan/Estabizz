@@ -99,6 +99,8 @@ function buildBreadcrumbSchema(categoryName: string, categorySlug: string) {
   };
 }
 
+export const dynamic = 'force-dynamic';
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default async function CategoryBlogsPage({ params }: Props) {

@@ -215,8 +215,41 @@ export async function getPendingSubmissions(): Promise<Blog[]> {
   return memAllBlogs().filter((b) => b.isUserSubmitted && b.status === 'pending_review').sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
 
-export function adminUpdateBlogStatus(id: string, patch: Partial<Blog>): Blog | null {
-  // In-memory path (used by the status-update API which hasn't been migrated yet)
+export async function adminUpdateBlogStatus(
+  id: string,
+  patch: Partial<Blog>
+): Promise<Blog | null> {
+  // ── MongoDB path (primary) ──────────────────────────────────────────────────
+  try {
+    if (await isDBAvailable()) {
+      const doc = await BlogModel.findOne({ blogId: id });
+      if (doc) {
+        if (patch.status !== undefined)      doc.status     = patch.status;
+        if (patch.adminNotes !== undefined)  doc.adminNotes = patch.adminNotes;
+        if (patch.reviewedBy !== undefined)  doc.reviewedBy = patch.reviewedBy;
+        if (patch.title !== undefined)       doc.title      = patch.title;
+        if (patch.slug !== undefined)        doc.slug       = patch.slug;
+        if (patch.summary !== undefined)     doc.summary    = patch.summary;
+        if (patch.content !== undefined)     doc.content    = patch.content;
+        if (patch.featured !== undefined)    doc.featured   = patch.featured;
+        if (patch.publishedAt !== undefined && patch.publishedAt) {
+          doc.publishedAt = new Date(patch.publishedAt);
+        }
+        // Ensure a publishedAt timestamp whenever a blog goes live
+        if (patch.status === 'published' && !doc.publishedAt) {
+          doc.publishedAt = new Date();
+        }
+        await doc.save();
+        return docToBlog(doc as InstanceType<typeof BlogModel>);
+      }
+      // Not found in DB — fall through to in-memory store (dev/mock blogs)
+    }
+  } catch (e) {
+    console.warn('[repository] adminUpdateBlogStatus DB error, using memory:', e);
+    global.__estabizz_dbAvailable = false;
+  }
+
+  // ── In-memory fallback ────────────────────────────────────────────────────
   return updateSubmission(id, patch);
 }
 

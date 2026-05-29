@@ -10,6 +10,7 @@ import { blogCategories } from '@/lib/blog/categories';
 import { addSubmission, updateSubmission, getSubmissionById } from '@/lib/blog/submissionStore';
 import { connectDB } from '@/lib/db';
 import BlogModel from '@/lib/models/Blog';
+import { requireAdmin } from '@/lib/admin/requireAdmin';
 
 const KNOWN_AUTHORS = [
   {
@@ -47,6 +48,10 @@ function estimateReadingTime(text: string): number {
 
 export async function POST(req: NextRequest) {
   try {
+    // ── Admin auth guard ──────────────────────────────────────────────────────
+    const auth = requireAdmin(req);
+    if (!auth.ok) return auth.response;
+
     const body = await req.json();
 
     // ── Validation ────────────────────────────────────────────────────────────

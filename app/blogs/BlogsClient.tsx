@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
-import { BlogCard, BlogHeroCard } from "@/components/blog/BlogCard";
 import type { BlogSummary, BlogCategory } from "@/lib/blog/types";
 
 interface Props {
@@ -10,269 +9,544 @@ interface Props {
   categories: BlogCategory[];
 }
 
+// ─── 3D tilt card wrapper ─────────────────────────────────────────────────────
+
+function TiltCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [style, setStyle] = useState({});
+
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width  - 0.5;
+    const y = (e.clientY - rect.top)  / rect.height - 0.5;
+    setStyle({
+      transform: `perspective(900px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale3d(1.02,1.02,1.02)`,
+      transition: "transform 0.08s ease-out",
+    });
+  };
+
+  const onLeave = () => {
+    setStyle({ transform: "perspective(900px) rotateY(0deg) rotateX(0deg) scale3d(1,1,1)", transition: "transform 0.45s ease" });
+  };
+
+  return (
+    <div ref={ref} style={style} onMouseMove={onMove} onMouseLeave={onLeave} className={className}>
+      {children}
+    </div>
+  );
+}
+
+// ─── Floating orb background ──────────────────────────────────────────────────
+
+function FloatingOrbs() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* Large orbs */}
+      <div className="absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full bg-[#0096D6]/12 blur-[100px] animate-[pulse_6s_ease-in-out_infinite]" />
+      <div className="absolute -right-20 top-20 h-[400px] w-[400px] rounded-full bg-[#d9a938]/10 blur-[90px] animate-[pulse_8s_ease-in-out_infinite_1s]" />
+      <div className="absolute bottom-0 left-1/2 h-[350px] w-[350px] -translate-x-1/2 rounded-full bg-[#0077B6]/10 blur-[80px] animate-[pulse_7s_ease-in-out_infinite_2s]" />
+      {/* Grid */}
+      <div className="absolute inset-0 opacity-[0.04]"
+        style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.15) 1px,transparent 1px)", backgroundSize: "60px 60px" }} />
+      {/* Diagonal lines */}
+      <div className="absolute inset-0 opacity-[0.025]"
+        style={{ backgroundImage: "repeating-linear-gradient(45deg,rgba(255,255,255,.3) 0,rgba(255,255,255,.3) 1px,transparent 0,transparent 50%)", backgroundSize: "30px 30px" }} />
+    </div>
+  );
+}
+
+// ─── Animated counter ─────────────────────────────────────────────────────────
+
+function Counter({ to, duration = 1200 }: { to: number; duration?: number }) {
+  const [val, setVal] = useState(0);
+  const started = useRef(false);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !started.current) {
+        started.current = true;
+        const start = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min((now - start) / duration, 1);
+          setVal(Math.round(p * to));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.5 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [to, duration]);
+
+  return <span ref={ref}>{val}</span>;
+}
+
+// ─── Shimmer line ─────────────────────────────────────────────────────────────
+
+function ShimmerLine() {
+  return (
+    <div className="relative h-px w-full overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#d9a938]/60 to-transparent animate-[shimmer_3s_ease-in-out_infinite]" />
+    </div>
+  );
+}
+
+// ─── Blog card — 3D glass ─────────────────────────────────────────────────────
+
+function GlassBlogCard({ blog, index }: { blog: BlogSummary; index: number }) {
+  const date = blog.publishedAt
+    ? new Date(blog.publishedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
+    : new Date(blog.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+
+  const initials = `${blog.author.firstName?.[0] ?? "E"}${blog.author.lastName?.[0] ?? ""}`;
+
+  return (
+    <TiltCard className="h-full">
+      <Link href={`/blogs/${blog.slug}`} className="group block h-full">
+        <article
+          className="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.03] backdrop-blur-sm transition-all duration-300 hover:border-[#d9a938]/40 hover:shadow-[0_0_40px_rgba(217,169,56,0.15),0_20px_60px_rgba(0,0,0,0.4)]"
+          style={{ animationDelay: `${index * 80}ms` }}
+        >
+          {/* Glow on hover */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            style={{ background: "radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(217,169,56,0.06),transparent 60%)" }} />
+
+          {/* Image */}
+          <div className="relative h-48 overflow-hidden">
+            {blog.featuredImage?.url ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img src={blog.featuredImage.url} alt={blog.featuredImage.alt || blog.title}
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center"
+                style={{ background: `linear-gradient(135deg, ${blog.category.color}22, ${blog.category.color}08)` }}>
+                <span className="text-5xl opacity-20 transition-transform duration-500 group-hover:scale-110 group-hover:opacity-30">
+                  {blog.category.icon}
+                </span>
+              </div>
+            )}
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050d1a]/80 via-transparent to-transparent" />
+
+            {/* Category badge */}
+            <div className="absolute left-3 top-3">
+              <span className="flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-[10.5px] font-bold text-white backdrop-blur-md">
+                {blog.category.icon} {blog.category.name}
+              </span>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="p-5">
+            <h3 className="mb-2.5 text-[15px] font-black leading-snug text-white line-clamp-2 group-hover:text-[#d9a938] transition-colors duration-300">
+              {blog.title}
+            </h3>
+            <p className="mb-4 text-[12.5px] leading-relaxed text-white/50 line-clamp-2">
+              {blog.summary}
+            </p>
+
+            {/* Footer */}
+            <div className="flex items-center justify-between border-t border-white/8 pt-3.5">
+              <div className="flex items-center gap-2">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[9px] font-black text-white">
+                  {initials}
+                </div>
+                <div>
+                  <p className="text-[10.5px] font-bold text-white/70 leading-none">{blog.author.firstName} {blog.author.lastName}</p>
+                  <p className="text-[9.5px] text-white/35 mt-0.5">{date}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="rounded-full border border-[#d9a938]/25 bg-[#d9a938]/8 px-2 py-0.5 text-[9.5px] font-bold text-[#d9a938]">
+                  {blog.readingTime} min
+                </span>
+                <span className="flex h-6 w-6 items-center justify-center rounded-full border border-white/10 bg-white/5 text-[10px] text-white/40 transition-all duration-300 group-hover:border-[#d9a938]/40 group-hover:bg-[#d9a938]/10 group-hover:text-[#d9a938]">
+                  →
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </Link>
+    </TiltCard>
+  );
+}
+
+// ─── Featured hero card ───────────────────────────────────────────────────────
+
+function FeaturedCard({ blog }: { blog: BlogSummary }) {
+  const date = blog.publishedAt
+    ? new Date(blog.publishedAt).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })
+    : new Date(blog.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
+
+  return (
+    <TiltCard className="w-full">
+      <Link href={`/blogs/${blog.slug}`} className="group block">
+        <article className="relative overflow-hidden rounded-3xl border border-[#d9a938]/20 bg-gradient-to-br from-[#0d1f36] to-[#071224] shadow-[0_0_80px_rgba(0,0,0,0.5),0_0_0_1px_rgba(217,169,56,0.1)] transition-all duration-500 hover:shadow-[0_0_100px_rgba(217,169,56,0.2),0_40px_80px_rgba(0,0,0,0.6)]">
+          <div className="flex flex-col lg:flex-row">
+            {/* Image */}
+            <div className="relative h-64 overflow-hidden lg:h-auto lg:w-[45%] shrink-0">
+              {blog.featuredImage?.url ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img src={blog.featuredImage.url} alt={blog.featuredImage.alt || blog.title}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              ) : (
+                <div className="flex h-full w-full min-h-[300px] items-center justify-center"
+                  style={{ background: `radial-gradient(circle at 40% 40%, ${blog.category.color}30, transparent 70%), linear-gradient(135deg,#0a1628,#071224)` }}>
+                  <span className="text-[120px] opacity-15">{blog.category.icon}</span>
+                </div>
+              )}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#071224]/80 hidden lg:block" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#071224]/90 to-transparent lg:hidden" />
+              {/* Featured badge */}
+              <div className="absolute left-4 top-4 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#d9a938] to-[#b8860b] px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-[#071224] shadow-[0_0_20px_rgba(217,169,56,0.5)]">
+                ✦ Featured
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="flex flex-1 flex-col justify-between p-7 lg:p-10">
+              <div>
+                <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold text-white/70">
+                  {blog.category.icon} {blog.category.name}
+                </span>
+                <h2 className="mb-4 text-[22px] font-black leading-tight tracking-tight text-white group-hover:text-[#d9a938] transition-colors duration-300 lg:text-[28px]">
+                  {blog.title}
+                </h2>
+                <p className="text-[14px] leading-relaxed text-white/55 line-clamp-3">
+                  {blog.summary}
+                </p>
+              </div>
+              <div className="mt-6 flex items-center justify-between border-t border-white/8 pt-5">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[11px] font-black text-white shadow-[0_0_14px_rgba(0,150,214,0.4)]">
+                    {blog.author.firstName?.[0]}{blog.author.lastName?.[0]}
+                  </div>
+                  <div>
+                    <p className="text-[12px] font-bold text-white/80">{blog.author.firstName} {blog.author.lastName}</p>
+                    <p className="text-[10.5px] text-white/40">{date} · {blog.readingTime} min read</p>
+                  </div>
+                </div>
+                <span className="group-hover:translate-x-1 transition-transform inline-flex items-center gap-2 rounded-xl border border-[#d9a938]/30 bg-[#d9a938]/10 px-4 py-2 text-[12px] font-bold text-[#d9a938]">
+                  Read Article <span className="transition-transform group-hover:translate-x-1">→</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </Link>
+    </TiltCard>
+  );
+}
+
+// ─── Main page ────────────────────────────────────────────────────────────────
+
 export default function BlogsClient({ initialBlogs, categories }: Props) {
   const [search, setSearch]               = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
 
-  // ── Filtering ──────────────────────────────────────────────────────────────
   const filteredBlogs = useMemo<BlogSummary[]>(() => {
     let result = initialBlogs;
-    if (activeCategory !== "all") {
-      result = result.filter((b) => b.category.slug === activeCategory);
-    }
+    if (activeCategory !== "all") result = result.filter((b) => b.category.slug === activeCategory);
     const q = search.trim().toLowerCase();
-    if (q) {
-      result = result.filter(
-        (b) =>
-          b.title.toLowerCase().includes(q) ||
-          b.summary.toLowerCase().includes(q) ||
-          b.category.name.toLowerCase().includes(q) ||
-          b.tags.some((t) => t.toLowerCase().includes(q))
-      );
-    }
+    if (q) result = result.filter((b) =>
+      b.title.toLowerCase().includes(q) ||
+      b.summary.toLowerCase().includes(q) ||
+      b.category.name.toLowerCase().includes(q) ||
+      b.tags.some((t) => t.toLowerCase().includes(q))
+    );
     return result;
   }, [initialBlogs, search, activeCategory]);
 
   const isFiltered = activeCategory !== "all" || search.trim().length > 0;
   const heroCard   = !isFiltered ? (initialBlogs.find((b) => b.featured) ?? null) : null;
   const gridCards  = useMemo<BlogSummary[]>(
-    () => (heroCard ? filteredBlogs.filter((b) => b.id !== heroCard.id) : filteredBlogs),
+    () => heroCard ? filteredBlogs.filter((b) => b.id !== heroCard.id) : filteredBlogs,
     [filteredBlogs, heroCard]
   );
-
   const clearFilters = useCallback(() => { setSearch(""); setActiveCategory("all"); }, []);
 
+  // Active categories that actually have blogs
+  const activeCats = useMemo(() => {
+    const slugs = new Set(initialBlogs.map((b) => b.category.slug));
+    return categories.filter((c) => slugs.has(c.slug));
+  }, [initialBlogs, categories]);
+
   return (
-    <main className="min-h-screen bg-[#f5f7fa] pt-[64px]">
+    <>
+      <style jsx global>{`
+        @keyframes shimmer {
+          0%   { transform: translateX(-100%); }
+          100% { transform: translateX(100%);  }
+        }
+        @keyframes floatY {
+          0%, 100% { transform: translateY(0px);    }
+          50%       { transform: translateY(-12px);  }
+        }
+        @keyframes floatYSlow {
+          0%, 100% { transform: translateY(0px);    }
+          50%       { transform: translateY(-20px);  }
+        }
+        @keyframes rotateOrb {
+          from { transform: rotate(0deg);   }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes fadeSlideUp {
+          from { opacity: 0; transform: translateY(28px); }
+          to   { opacity: 1; transform: translateY(0);    }
+        }
+        @keyframes glowPulse {
+          0%, 100% { opacity: 0.5; }
+          50%       { opacity: 1;  }
+        }
+        .fade-slide-up { animation: fadeSlideUp 0.6s ease both; }
+        .card-appear   { animation: fadeSlideUp 0.5s ease both; }
+      `}</style>
 
-      {/* ── Hero — dark navy with premium gold accents ──────────────────── */}
-      <section className="relative overflow-hidden">
-        {/* Background layers */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#071224] via-[#0a1e3a] to-[#091730]" />
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute -left-40 -top-40 h-[560px] w-[560px] rounded-full bg-[#0096D6]/10 blur-[130px]" />
-          <div className="absolute -right-20 bottom-0 h-[420px] w-[420px] rounded-full bg-[#d9a938]/8 blur-[120px]" />
-          {/* Subtle grid texture */}
-          <div className="absolute inset-0 opacity-[0.07] bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:48px_48px]" />
-        </div>
+      <main className="min-h-screen pt-[64px]" style={{ background: "linear-gradient(180deg,#050d1a 0%,#071224 40%,#0a1628 70%,#0d1f36 100%)" }}>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:py-20">
+        {/* ── HERO ──────────────────────────────────────────────────────────── */}
+        <section className="relative overflow-hidden min-h-[520px] flex items-center">
+          <FloatingOrbs />
 
-          {/* Breadcrumb */}
-          <nav className="mb-6 flex items-center gap-2 text-[12.5px] font-medium text-white/40">
-            <Link href="/" className="hover:text-white/70 transition-colors">Home</Link>
-            <span className="text-white/25">/</span>
-            <span className="text-[#d9a938]">Regulatory Insights</span>
-          </nav>
-
-          {/* Gold badge */}
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d9a938]/35 bg-[#d9a938]/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-[#d9a938]">
-            <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
-            </svg>
-            Estabizz Regulatory Insights
+          {/* Animated rotating ring */}
+          <div className="pointer-events-none absolute right-[8%] top-[10%] h-[320px] w-[320px] opacity-[0.07] hidden lg:block"
+            style={{ animation: "rotateOrb 30s linear infinite" }}>
+            <div className="h-full w-full rounded-full border-2 border-dashed border-[#d9a938]" />
+            <div className="absolute inset-8 rounded-full border border-[#0096D6]/60" style={{ animation: "rotateOrb 20s linear infinite reverse" }} />
+          </div>
+          {/* Floating 3D geometric card in background */}
+          <div className="pointer-events-none absolute right-[12%] top-[15%] hidden xl:block opacity-[0.12]"
+            style={{ animation: "floatYSlow 6s ease-in-out infinite", perspective: "800px" }}>
+            <div className="h-32 w-48 rounded-2xl border border-[#d9a938]/40 bg-gradient-to-br from-[#d9a938]/10 to-transparent backdrop-blur-sm"
+              style={{ transform: "rotateY(-20deg) rotateX(10deg)" }} />
+          </div>
+          <div className="pointer-events-none absolute right-[6%] top-[45%] hidden xl:block opacity-[0.08]"
+            style={{ animation: "floatY 5s ease-in-out infinite 1s", perspective: "800px" }}>
+            <div className="h-20 w-32 rounded-xl border border-[#0096D6]/40 bg-gradient-to-br from-[#0096D6]/10 to-transparent"
+              style={{ transform: "rotateY(-15deg) rotateX(8deg)" }} />
           </div>
 
-          {/* Title */}
-          <h1 className="mb-5 max-w-4xl text-[38px] font-black leading-[1.08] tracking-tight text-white md:text-[54px]">
-            Estabizz{" "}
-            <span className="text-[#d9a938]">Regulatory</span>{" "}
-            Insights
-          </h1>
+          <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-20">
+            {/* Breadcrumb */}
+            <nav className="fade-slide-up mb-6 flex items-center gap-2 text-[12px] text-white/35" style={{ animationDelay: "0ms" }}>
+              <Link href="/" className="hover:text-white/70 transition-colors">Home</Link>
+              <span>/</span>
+              <span className="text-[#d9a938]/80">Regulatory Insights</span>
+            </nav>
 
-          {/* Subtitle */}
-          <p className="mb-10 max-w-3xl text-[16px] leading-[1.85] text-white/85 md:text-[18px]">
-            Practical updates, licensing guides and compliance explainers for founders,
-            CFOs, fintechs and regulated businesses.
-          </p>
-
-          {/* Stats chips — navy border, gold icon */}
-          <div className="flex flex-wrap gap-3">
-            {[
-              { label: `${initialBlogs.length} Articles`,  icon: "📄" },
-              { label: `${categories.length} Categories`,  icon: "🗂" },
-              { label: "Expert Analysis",                  icon: "🔍" },
-              { label: "Updated Regularly",                icon: "🔔" },
-            ].map(({ label, icon }) => (
-              <div key={label} className="flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[12.5px] font-bold text-white/75 backdrop-blur-sm">
-                <span className="text-[#d9a938]">{icon}</span>
-                {label}
+            {/* Badge */}
+            <div className="fade-slide-up mb-5 inline-flex items-center gap-2" style={{ animationDelay: "60ms" }}>
+              <div className="flex items-center gap-2 rounded-full border border-[#d9a938]/30 bg-[#d9a938]/8 px-4 py-1.5 text-[10.5px] font-black uppercase tracking-[0.22em] text-[#d9a938] shadow-[0_0_24px_rgba(217,169,56,0.15)]">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#d9a938] opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#d9a938]" />
+                </span>
+                Estabizz Regulatory Insights
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
 
-      {/* ── Sticky search + filter bar ───────────────────────────────────── */}
-      <div className="sticky top-[64px] z-[200] border-b border-[#e2eaf2] bg-white/96 px-6 py-4 shadow-[0_4px_16px_rgba(10,22,40,0.06)] backdrop-blur-md">
-        <div className="mx-auto max-w-7xl space-y-3">
+            {/* Headline */}
+            <h1 className="fade-slide-up mb-5 max-w-4xl text-[40px] font-black leading-[1.06] tracking-tight text-white md:text-[58px] lg:text-[68px]"
+              style={{ animationDelay: "120ms" }}>
+              <span className="relative inline-block">
+                Estabizz
+                <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-gradient-to-r from-[#d9a938] to-transparent" />
+              </span>{" "}
+              <span style={{ background: "linear-gradient(135deg,#d9a938,#f0c040,#d9a938)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                Regulatory
+              </span>{" "}
+              <span className="text-white">Insights</span>
+            </h1>
 
-          {/* Search */}
-          <div className="relative">
-            <svg className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8]"
-              fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15z" />
-            </svg>
-            <input
-              type="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by topic, regulator, keyword…"
-              className="h-11 w-full rounded-xl border border-[#dbe7f3] bg-[#f5f7fa] pl-11 pr-10 text-[13.5px] font-medium text-[#0a1628] outline-none placeholder:text-[#94a3b8] focus:border-[#0096D6] focus:bg-white focus:ring-3 focus:ring-[#0096D6]/10 transition-all"
-            />
-            {search && (
-              <button onClick={() => setSearch("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-[#94a3b8] hover:text-[#334155] hover:bg-gray-100 transition-colors"
-                aria-label="Clear search">
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            )}
-          </div>
-
-          {/* Category tabs — gold active state */}
-          <div className="flex gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden pb-0.5">
-            <button
-              onClick={() => setActiveCategory("all")}
-              className={`shrink-0 rounded-full border px-4 py-1.5 text-[11.5px] font-black transition-all ${
-                activeCategory === "all"
-                  ? "border-[#0a1628] bg-[#0a1628] text-[#d9a938] shadow-sm"
-                  : "border-[#dbe7f3] bg-white text-[#334155] hover:border-[#0a1628] hover:text-[#0a1628]"
-              }`}
-            >
-              All Articles
-            </button>
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.slug)}
-                className={`shrink-0 flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-[11.5px] font-bold transition-all ${
-                  activeCategory === cat.slug
-                    ? "border-[#d9a938] bg-[#d9a938] text-[#071224] shadow-sm"
-                    : "border-[#dbe7f3] bg-white text-[#334155] hover:border-[#d9a938]/60 hover:text-[#0a1628]"
-                }`}
-              >
-                <span className="text-[11px]">{cat.icon}</span>
-                {cat.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── Main content ─────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-6 py-12">
-
-        {/* Results count row */}
-        <div className="mb-6 flex items-center justify-between">
-          <p className="text-[13px] font-semibold text-[#64748b]">
-            {filteredBlogs.length === 0 ? "No articles found"
-              : filteredBlogs.length === 1 ? "1 article"
-              : `${filteredBlogs.length} articles`}
-            {activeCategory !== "all" && (
-              <span className="ml-1">in <span className="font-black text-[#0a1628]">{categories.find((c) => c.slug === activeCategory)?.name}</span></span>
-            )}
-            {search.trim() && (
-              <span className="ml-1">matching <span className="font-black text-[#0096D6]">&ldquo;{search.trim()}&rdquo;</span></span>
-            )}
-          </p>
-          {isFiltered && (
-            <button onClick={clearFilters}
-              className="flex items-center gap-1.5 rounded-full border border-[#dbe7f3] bg-white px-3 py-1.5 text-[12px] font-bold text-[#64748b] hover:border-[#0096D6] hover:text-[#0096D6] transition-colors">
-              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-              Clear filters
-            </button>
-          )}
-        </div>
-
-        {filteredBlogs.length === 0 ? (
-          /* ── Empty state ── */
-          <div className="rounded-2xl border border-[#e2eaf2] bg-white px-8 py-16 text-center shadow-sm">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#f0f9ff] text-3xl">🔍</div>
-            <h2 className="mb-2 text-[20px] font-black text-[#0a1628]">No articles found</h2>
-            <p className="mx-auto mb-6 max-w-md text-[14px] leading-6 text-[#64748b]">
-              Try a different keyword or browse all categories. Our team publishes new regulatory insights regularly.
+            <p className="fade-slide-up mb-8 max-w-2xl text-[16px] leading-relaxed text-white/80 md:text-[18px]"
+              style={{ animationDelay: "180ms" }}>
+              Practical updates, licensing guides and compliance explainers for founders,
+              CFOs, fintechs and regulated businesses.
             </p>
-            <button onClick={clearFilters} className="rounded-xl bg-[#0a1628] px-6 py-2.5 text-[13px] font-bold text-white hover:bg-[#1a2638] transition-colors">
-              View all articles
-            </button>
-          </div>
-        ) : (
-          <>
-            {/* ── Featured / Hero card ── */}
-            {heroCard && (
-              <div className="mb-10">
-                <div className="mb-4 flex items-center gap-3">
-                  <span className="text-[10.5px] font-black uppercase tracking-[0.2em] text-[#d9a938]">✦ Featured Article</span>
-                  <div className="h-px flex-1 bg-gradient-to-r from-[#d9a938]/30 to-transparent" />
+
+            {/* Stats row */}
+            <div className="fade-slide-up flex flex-wrap items-center gap-6" style={{ animationDelay: "240ms" }}>
+              {[
+                { label: "Articles", value: initialBlogs.length, icon: "📄" },
+                { label: "Categories", value: activeCats.length || categories.length, icon: "📂" },
+                { label: "Expert Analysis", value: null, icon: "🎯" },
+                { label: "Updated Regularly", value: null, icon: "🔔" },
+              ].map(({ label, value, icon }) => (
+                <div key={label} className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-[12.5px] font-bold text-white/70 backdrop-blur-sm">
+                  <span>{icon}</span>
+                  {value !== null
+                    ? <><Counter to={value} />&nbsp;{label}</>
+                    : <span>{label}</span>
+                  }
                 </div>
-                <BlogHeroCard blog={heroCard} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <ShimmerLine />
+
+        {/* ── SEARCH + FILTER ───────────────────────────────────────────────── */}
+        <section className="sticky top-[64px] z-40 border-b border-white/[0.06] bg-[#071224]/90 backdrop-blur-xl">
+          <div className="mx-auto max-w-7xl px-6 py-4">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+              {/* Search */}
+              <div className="relative max-w-sm flex-1">
+                <svg className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" />
+                </svg>
+                <input
+                  type="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search topic, regulator, keyword..."
+                  className="h-10 w-full rounded-xl border border-white/10 bg-white/[0.06] pl-10 pr-4 text-[13px] font-medium text-white placeholder:text-white/30 outline-none backdrop-blur-sm transition-all focus:border-[#d9a938]/50 focus:ring-2 focus:ring-[#d9a938]/15"
+                />
               </div>
-            )}
 
-            {/* ── Grid ── */}
-            {filteredBlogs.length > 0 && (
-              <>
-                {heroCard && gridCards.length > 0 && (
-                  <div className="mb-6 flex items-center gap-3">
-                    <span className="text-[10.5px] font-black uppercase tracking-[0.2em] text-[#64748b]">All Articles</span>
-                    <div className="h-px flex-1 bg-[#e2eaf2]" />
-                  </div>
-                )}
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {gridCards.map((blog) => <BlogCard key={blog.id} blog={blog} />)}
+              {/* Category pills */}
+              <div className="flex items-center gap-2 overflow-x-auto pb-0.5 scrollbar-hide">
+                <button
+                  onClick={() => setActiveCategory("all")}
+                  className={`shrink-0 rounded-full px-4 py-1.5 text-[12px] font-bold transition-all ${
+                    activeCategory === "all"
+                      ? "bg-[#d9a938] text-[#071224] shadow-[0_0_20px_rgba(217,169,56,0.4)]"
+                      : "border border-white/10 bg-white/[0.05] text-white/60 hover:border-[#d9a938]/30 hover:text-white/90"
+                  }`}
+                >
+                  All
+                </button>
+                {activeCats.map((cat) => (
+                  <button
+                    key={cat.slug}
+                    onClick={() => setActiveCategory(cat.slug)}
+                    className={`shrink-0 flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[12px] font-bold transition-all ${
+                      activeCategory === cat.slug
+                        ? "bg-[#d9a938] text-[#071224] shadow-[0_0_20px_rgba(217,169,56,0.4)]"
+                        : "border border-white/10 bg-white/[0.05] text-white/60 hover:border-[#d9a938]/30 hover:text-white/90"
+                    }`}
+                  >
+                    <span>{cat.icon}</span>
+                    <span className="hidden sm:inline">{cat.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── CONTENT ───────────────────────────────────────────────────────── */}
+        <section className="mx-auto max-w-7xl px-6 py-12">
+
+          {/* Result count */}
+          <div className="mb-8 flex items-center justify-between">
+            <p className="text-[13px] font-semibold text-white/40">
+              {filteredBlogs.length === 0
+                ? "No articles found"
+                : filteredBlogs.length === 1
+                ? "1 article"
+                : `${filteredBlogs.length} articles`}
+              {activeCategory !== "all" && (
+                <span> in <span className="font-black text-[#d9a938]">{categories.find((c) => c.slug === activeCategory)?.name}</span></span>
+              )}
+              {search && <span> matching <span className="font-black text-white/80">&quot;{search}&quot;</span></span>}
+            </p>
+            {isFiltered && (
+              <button onClick={clearFilters} className="text-[12px] font-bold text-[#d9a938]/70 hover:text-[#d9a938] transition-colors">
+                Clear filters ×
+              </button>
+            )}
+          </div>
+
+          {/* Empty state */}
+          {filteredBlogs.length === 0 && (
+            <div className="flex flex-col items-center justify-center rounded-3xl border border-white/8 bg-white/[0.03] py-24 text-center">
+              <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-4xl"
+                style={{ animation: "floatY 3s ease-in-out infinite" }}>🔍</div>
+              <h2 className="mb-2 text-[22px] font-black text-white">No articles found</h2>
+              <p className="mb-8 max-w-sm text-[14px] text-white/40">Try a different keyword or browse all categories.</p>
+              <button onClick={clearFilters}
+                className="rounded-xl bg-gradient-to-r from-[#d9a938] to-[#b8860b] px-6 py-2.5 text-[13px] font-black text-[#071224] shadow-[0_0_24px_rgba(217,169,56,0.35)] transition-all hover:shadow-[0_0_36px_rgba(217,169,56,0.5)] hover:scale-105">
+                View all articles
+              </button>
+            </div>
+          )}
+
+          {/* Featured hero */}
+          {heroCard && (
+            <div className="card-appear mb-12" style={{ animationDelay: "0ms" }}>
+              <div className="mb-5 flex items-center gap-3">
+                <span className="text-[10.5px] font-black uppercase tracking-[0.22em] text-[#d9a938]">✦ Featured Article</span>
+                <div className="h-px flex-1" style={{ background: "linear-gradient(90deg,rgba(217,169,56,0.4),transparent)" }} />
+              </div>
+              <FeaturedCard blog={heroCard} />
+            </div>
+          )}
+
+          {/* Grid */}
+          {filteredBlogs.length > 0 && (
+            <>
+              {heroCard && gridCards.length > 0 && (
+                <div className="mb-8 flex items-center gap-3">
+                  <span className="text-[10.5px] font-black uppercase tracking-[0.22em] text-white/30">All Articles</span>
+                  <div className="h-px flex-1 bg-white/[0.06]" />
                 </div>
-              </>
-            )}
-          </>
-        )}
-      </section>
+              )}
 
-      {/* ── CTA — dark navy with gold accents ────────────────────────────── */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#071224] via-[#0a1e3a] to-[#091730]" />
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute -right-32 -top-32 h-[480px] w-[480px] rounded-full bg-[#0096D6]/10 blur-[130px]" />
-          <div className="absolute -bottom-20 -left-20 h-[360px] w-[360px] rounded-full bg-[#d9a938]/8 blur-[110px]" />
-        </div>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {gridCards.map((blog, i) => (
+                  <div key={blog.id} className="card-appear" style={{ animationDelay: `${i * 80}ms` }}>
+                    <GlassBlogCard blog={blog} index={i} />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </section>
 
-        <div className="relative z-10 mx-auto max-w-4xl px-6 py-16 text-center">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d9a938]/35 bg-[#d9a938]/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#d9a938]">
-            Expert Regulatory Support
+        {/* ── CTA SECTION ───────────────────────────────────────────────────── */}
+        <section className="relative mx-6 mb-16 overflow-hidden rounded-3xl">
+          {/* bg */}
+          <div className="absolute inset-0"
+            style={{ background: "linear-gradient(135deg,#0d1f36 0%,#071224 50%,#0a1a2e 100%)" }} />
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute right-0 top-0 h-[300px] w-[300px] rounded-full bg-[#d9a938]/8 blur-[100px]" />
+            <div className="absolute left-0 bottom-0 h-[200px] w-[200px] rounded-full bg-[#0096D6]/8 blur-[80px]" />
+            <div className="absolute inset-0 opacity-[0.03]"
+              style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.2) 1px,transparent 1px)", backgroundSize: "40px 40px" }} />
           </div>
 
-          <h2 className="mb-4 text-[30px] font-black leading-tight tracking-tight text-white md:text-[42px]">
-            Need help with regulatory<br className="hidden sm:block" /> licensing or compliance?
-          </h2>
-
-          <p className="mx-auto mb-8 max-w-2xl text-[15px] leading-[1.85] text-white/60 md:text-[17px]">
-            Estabizz Fintech Private Limited assists businesses with RBI, SEBI, IRDAI, IFSCA,
-            MCA, FIU-IND and allied regulatory matters.
-          </p>
-
-          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/contact" className="inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-[13.5px] font-black text-[#0a1628] shadow-[0_8px_24px_rgba(255,255,255,0.15)] hover:bg-[#f0f4f8] hover:-translate-y-0.5 transition-all">
-              Book Consultation
-            </Link>
-            <a href="https://wa.me/919825600907" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#10b981] px-7 py-3.5 text-[13.5px] font-black text-white shadow-[0_8px_24px_rgba(16,185,129,0.25)] hover:bg-[#059669] hover:-translate-y-0.5 transition-all">
-              <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg>
-              WhatsApp Estabizz Team
-            </a>
+          <div className="relative z-10 mx-auto max-w-4xl px-8 py-16 text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d9a938]/25 bg-[#d9a938]/8 px-4 py-1.5 text-[10.5px] font-black uppercase tracking-widest text-[#d9a938]">
+              ⚡ Expert Regulatory Advisory
+            </div>
+            <h2 className="mb-4 text-[28px] font-black leading-tight text-white lg:text-[38px]">
+              Need regulatory guidance for your business?
+            </h2>
+            <p className="mb-8 text-[15px] leading-relaxed text-white/55">
+              RBI, SEBI, IRDAI, IFSCA licensing and compliance — handled end-to-end by India&apos;s leading regulatory advisory team.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/contact"
+                className="rounded-xl bg-gradient-to-r from-[#d9a938] to-[#b8860b] px-7 py-3 text-[14px] font-black text-[#071224] shadow-[0_0_30px_rgba(217,169,56,0.4)] transition-all hover:shadow-[0_0_50px_rgba(217,169,56,0.6)] hover:scale-105">
+                Book Consultation →
+              </Link>
+              <Link href="/services"
+                className="rounded-xl border border-white/15 bg-white/[0.06] px-7 py-3 text-[14px] font-bold text-white/80 backdrop-blur-sm transition-all hover:border-white/30 hover:text-white hover:bg-white/10">
+                Explore Services
+              </Link>
+            </div>
           </div>
+        </section>
 
-          <p className="mt-6 text-[11.5px] font-medium text-white/35">
-            Trusted by 500+ regulated businesses · RBI · SEBI · IRDAI · IFSCA · MCA · FIU-IND
-          </p>
-        </div>
-      </section>
-
-    </main>
+      </main>
+    </>
   );
 }

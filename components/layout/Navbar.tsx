@@ -5,6 +5,12 @@ import { useRouter } from "next/navigation";
 
 interface MenuCategory { label: string; icon: string; items: string[]; }
 interface MegaMenu { categories: MenuCategory[]; viewAll: string; viewAllLabel: string; }
+interface AuthUser {
+    email: string;
+    firstName?: string;
+    lastName?: string;
+    role?: "user" | "admin";
+}
 
 const linkMap: Record<string, string> = {
     // IFSCA (existing)
@@ -255,6 +261,10 @@ const staticSearchLinks = [
     { label: "Book Consultation", href: "/contact", group: "Site" },
     { label: "Get Started", href: "/get-started", group: "Site" },
     { label: "Login", href: "/login", group: "Site" },
+    { label: "Admin Blog Dashboard", href: "/admin/blogs", group: "Admin" },
+    { label: "Create New Blog", href: "/admin/blogs/new", group: "Admin" },
+    { label: "Pending Blog Review", href: "/admin/blogs/pending", group: "Admin" },
+    { label: "Media Library", href: "/admin/media", group: "Admin" },
 ];
 
 const menus: Record<string, MegaMenu> = {
@@ -355,6 +365,10 @@ export default function Navbar() {
     const [countryOpen, setCountryOpen] = useState(false);
     const desktopCountryRef = useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>;
     const compactCountryRef = useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>;
+    const [authUser, setAuthUser] = useState<AuthUser | null>(null);
+    const [accountOpen, setAccountOpen] = useState(false);
+    const accountRef = useRef<HTMLDivElement | null>(null);
+    const isAdmin = authUser?.role === "admin";
 
     useEffect(() => {
         const h = () => setScrolled(window.scrollY > 10);
@@ -373,10 +387,30 @@ export default function Navbar() {
             if (!insideDesktopCountry && !insideCompactCountry) {
                 setCountryOpen(false);
             }
+            if (accountRef.current && !accountRef.current.contains(target)) {
+                setAccountOpen(false);
+            }
         };
 
         document.addEventListener("mousedown", handlePointerDown);
         return () => document.removeEventListener("mousedown", handlePointerDown);
+    }, []);
+
+    useEffect(() => {
+        let active = true;
+
+        fetch("/api/auth/me", { cache: "no-store" })
+            .then((response) => (response.ok ? response.json() : { user: null }))
+            .then((data) => {
+                if (active) setAuthUser(data.user || null);
+            })
+            .catch(() => {
+                if (active) setAuthUser(null);
+            });
+
+        return () => {
+            active = false;
+        };
     }, []);
 
     const searchItems = useMemo(() => {
@@ -450,6 +484,7 @@ export default function Navbar() {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
         setSearchOpen(false);
         setCountryOpen(false);
+        setAccountOpen(false);
         setActiveMenu(menu);
         setActiveCategory(0);
     };
@@ -459,6 +494,103 @@ export default function Navbar() {
     const keepOpen = () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
 
     const currentMenu = activeMenu ? menus[activeMenu] : null;
+    const handleLogout = async () => {
+        await fetch("/api/auth/logout", { method: "POST" }).catch(() => null);
+        setAuthUser(null);
+        setAccountOpen(false);
+        setMobileOpen(false);
+        router.push("/login");
+        router.refresh();
+    };
+
+    const AdminQuickLinks = ({ mobile = false }: { mobile?: boolean }) => {
+        if (!isAdmin) return null;
+
+        const links = [
+            ["Dashboard", "/admin/blogs"],
+            ["New Blog", "/admin/blogs/new"],
+            ["Pending Review", "/admin/blogs/pending"],
+            ["Media", "/admin/media"],
+        ];
+
+        return (
+            <div className={mobile ? "space-y-2" : "space-y-1"}>
+                {links.map(([label, href]) => (
+                    <Link
+                        key={href}
+                        href={href}
+                        onClick={() => {
+                            setAccountOpen(false);
+                            setMobileOpen(false);
+                        }}
+                        className={mobile ? "block rounded-lg border border-blue-100 bg-white px-3 py-2 text-[13px] font-bold text-[#0a1628]" : "block rounded-lg px-3 py-2 text-[13px] font-bold text-[#334155] hover:bg-[#f5fbff] hover:text-[#0096D6]"}
+                    >
+                        {label}
+                    </Link>
+                ))}
+            </div>
+        );
+    };
+
+    const AccountMenu = () => {
+        if (!authUser) {
+            return (
+                <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
+                    Login
+                </Link>
+            );
+        }
+
+        const displayName = authUser.firstName || authUser.email.split("@")[0];
+
+        return (
+            <div ref={accountRef} className="relative">
+                <button
+                    type="button"
+                    onClick={() => {
+                        setActiveMenu(null);
+                        setSearchOpen(false);
+                        setCountryOpen(false);
+                        setAccountOpen((open) => !open);
+                    }}
+                    className="inline-flex h-10 items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-3 text-[13px] font-black text-[#0a1628] shadow-sm transition-all hover:border-[#0096D6]/40 hover:text-[#0096D6]"
+                    aria-expanded={accountOpen}
+                    aria-label="Open account menu"
+                >
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#e8f7ff] text-[11px] font-black text-[#0077B6]">
+                        {displayName.slice(0, 1).toUpperCase()}
+                    </span>
+                    <span>{isAdmin ? "Admin" : "Account"}</span>
+                    <svg className={`h-3.5 w-3.5 transition-transform ${accountOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                {accountOpen && (
+                    <div className="absolute right-0 top-[48px] w-[260px] overflow-hidden rounded-2xl border border-[#dbe7f3] bg-white p-3 shadow-[0_22px_55px_rgba(15,23,42,0.16)]">
+                        <div className="border-b border-gray-100 px-3 pb-3">
+                            <div className="text-[13px] font-black text-[#0a1628]">{displayName}</div>
+                            <div className="mt-1 truncate text-[11.5px] font-semibold text-[#64748b]">{authUser.email}</div>
+                            {isAdmin && <div className="mt-2 inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-emerald-700">Admin Access</div>}
+                        </div>
+                        {isAdmin && (
+                            <div className="border-b border-gray-100 py-2">
+                                <AdminQuickLinks />
+                            </div>
+                        )}
+                        <button
+                            type="button"
+                            onClick={handleLogout}
+                            className="mt-2 w-full rounded-lg px-3 py-2 text-left text-[13px] font-bold text-red-600 hover:bg-red-50"
+                        >
+                            Logout
+                        </button>
+                    </div>
+                )}
+            </div>
+        );
+    };
+
     const SearchBox = ({ mobile = false }: { mobile?: boolean }) => (
         <div ref={mobile ? undefined : searchRef} className={`relative ${mobile ? "w-full" : "w-[240px]"}`}>
             <label className="sr-only" htmlFor={mobile ? "mobile-page-search" : "desktop-page-search"}>Search pages</label>
@@ -623,9 +755,12 @@ export default function Navbar() {
                         <div className="hidden min-[1420px]:block">
                             <SearchBox />
                         </div>
-                        <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
-                            Login
-                        </Link>
+                        <AccountMenu />
+                        {isAdmin && (
+                            <Link href="/admin/blogs" className="hidden 2xl:inline-flex h-10 items-center rounded-xl border border-emerald-200 bg-emerald-50 px-4 text-[12px] font-black text-emerald-700 hover:bg-emerald-100">
+                                Admin Panel
+                            </Link>
+                        )}
                         <CountrySelector selectorRef={desktopCountryRef} />
                         <Link href="/get-started" className="premium-border-sweep text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-xl px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-[0_12px_26px_rgba(0,150,214,0.22)]">
                             Get Started
@@ -729,7 +864,23 @@ export default function Navbar() {
                             </details>
                         ))}
                         <div className="border-t border-gray-100 pt-4 mt-4">
-                            <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] py-2">Login</Link>
+                            {authUser ? (
+                                <div className="rounded-xl border border-blue-100 bg-[#f8fbff] p-4">
+                                    <div className="text-[13px] font-black text-[#0a1628]">{authUser.firstName || "Estabizz User"}</div>
+                                    <div className="mt-1 text-[12px] font-semibold text-[#64748b]">{authUser.email}</div>
+                                    {isAdmin && (
+                                        <div className="mt-4">
+                                            <div className="mb-2 text-[11px] font-black uppercase tracking-[0.16em] text-[#0096D6]">Admin Tools</div>
+                                            <AdminQuickLinks mobile />
+                                        </div>
+                                    )}
+                                    <button type="button" onClick={handleLogout} className="mt-4 block w-full rounded-lg border border-red-100 bg-white px-3 py-2 text-left text-[13px] font-bold text-red-600">
+                                        Logout
+                                    </button>
+                                </div>
+                            ) : (
+                                <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] py-2">Login</Link>
+                            )}
                             <details className="rounded-xl border border-blue-100 bg-[#f8fbff] px-4 py-2">
                                 <summary className="cursor-pointer py-2 text-[15px] font-bold text-[#0a1628]">Country / Global Markets</summary>
                                 <div className="mt-3 space-y-3 pb-2">

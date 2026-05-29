@@ -31,7 +31,9 @@ export default function LoginPage() {
             if (!res.ok) {
                 setError(data.error || "Invalid credentials.");
             } else {
-                router.push("/");
+                const searchParams = new URLSearchParams(window.location.search);
+                const nextPath = searchParams.get("next");
+                router.push(nextPath?.startsWith("/") ? nextPath : data.user?.role === "admin" ? "/admin/blogs" : "/");
                 router.refresh();
             }
         } catch {

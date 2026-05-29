@@ -5,7 +5,7 @@ import Link from "next/link";
 const footerLinks: Record<string, { label: string; href: string }[]> = {
     "About": [
         { label: "About Estabizz", href: "/services" },
-        { label: "Estabizz Blogs", href: "/blogs" },
+        { label: "Regulatory Insights", href: "/blogs" },
         { label: "Contact Us", href: "/contact" },
     ],
     "Regulatory Expertise": [

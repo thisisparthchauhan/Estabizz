@@ -220,6 +220,7 @@ const linkMap: Record<string, string> = {
     "Case Highlights": "/",
     "FAQs": "/services",
     "Blogs": "/blogs",
+    "Regulatory Insights": "/blogs",
     // Hidden pages — now accessible
     "Mutual Fund Registration": "/sebi/mutual-fund-registration",
     "Social Stock Exchange": "/sebi/social-stock-exchange-license-india",
@@ -240,6 +241,7 @@ const staticSearchLinks = [
     { label: "Regulatory Services", href: "/regulatory", group: "Site" },
     { label: "Resources", href: "/resources", group: "Site" },
     { label: "Regulatory Updates", href: "/resources/regulatory-updates", group: "Resources" },
+    { label: "Regulatory Insights", href: "/blogs", group: "Resources" },
     { label: "Compliance FAQs", href: "/resources/faqs", group: "Resources" },
     { label: "Regulatory Email Template", href: "/resources/regulatory-update-email-template", group: "Resources" },
     { label: "Content Rebuild Command", href: "/resources/content-rebuild-command", group: "Resources" },
@@ -299,7 +301,7 @@ const menus: Record<string, MegaMenu> = {
         categories: [
             { label: "Regulatory Updates", icon: "📰", items: ["Regulatory Updates", "Circular Tracker", "Compliance Calendar"] },
             { label: "Content Framework", icon: "📐", items: ["Service Page Content Framework", "Content Rebuild Command", "Proposal Templates"] },
-            { label: "Blogs", icon: "✍️", items: ["Blogs", "Guides & Insights"] },
+            { label: "Regulatory Insights", icon: "✍️", items: ["Regulatory Insights", "Guides & Insights"] },
             { label: "Guides & Insights", icon: "📖", items: ["RBI Services", "SEBI Services", "IRDAI Services", "IFSCA Services"] },
             { label: "FAQs", icon: "❓", items: ["FAQ Engine", "FAQs", "Compliance FAQs", "Contact Estabizz"] },
             { label: "Case Highlights", icon: "📁", items: ["Case Highlights"] },

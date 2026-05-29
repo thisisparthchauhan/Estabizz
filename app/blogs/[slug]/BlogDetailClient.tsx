@@ -352,19 +352,23 @@ function fmt(iso?: string): string {
 
 function HeroImage({ src, alt, icon }: { src: string; alt: string; icon: string }) {
   return (
-    <div className="relative h-64 w-full overflow-hidden bg-[#f7f8fc] md:h-[400px] lg:h-[460px]">
-      <span className="absolute inset-0 flex items-center justify-center text-[100px] opacity-[0.08] select-none pointer-events-none">
+    <div className="relative h-64 w-full overflow-hidden bg-gradient-to-br from-[#eef4fb] via-[#f7f8fc] to-[#eaf2fb] md:h-[400px] lg:h-[460px]">
+      <span className="absolute inset-0 flex items-center justify-center text-[100px] opacity-[0.10] select-none pointer-events-none">
         {icon}
       </span>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={alt}
-        className="absolute inset-0 h-full w-full object-cover"
-        loading="eager"
-        fetchPriority="high"
-        onError={(e) => { e.currentTarget.style.display = "none"; }}
-      />
+      {src ? (
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={src}
+            alt={alt}
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="eager"
+            fetchPriority="high"
+            onError={(e) => { e.currentTarget.style.display = "none"; }}
+          />
+        </>
+      ) : null}
     </div>
   );
 }

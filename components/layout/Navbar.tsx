@@ -1,7 +1,15 @@
 "use client";
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+
+interface AuthUser {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    isAdmin: boolean;
+}
 
 interface MenuCategory { label: string; icon: string; items: string[]; }
 interface MegaMenu { categories: MenuCategory[]; viewAll: string; viewAllLabel: string; }
@@ -356,12 +364,42 @@ export default function Navbar() {
     const [countryOpen, setCountryOpen] = useState(false);
     const desktopCountryRef = useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>;
     const compactCountryRef = useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>;
+    const [authUser, setAuthUser] = useState<AuthUser | null>(null);
+    const [userMenuOpen, setUserMenuOpen] = useState(false);
+    const userMenuRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         const h = () => setScrolled(window.scrollY > 10);
         window.addEventListener("scroll", h);
         return () => window.removeEventListener("scroll", h);
     }, []);
+
+    // Fetch current auth state on mount
+    useEffect(() => {
+        fetch("/api/auth/me")
+            .then((r) => r.json())
+            .then((data) => setAuthUser(data.user ?? null))
+            .catch(() => setAuthUser(null));
+    }, []);
+
+    // Close user menu on outside click
+    useEffect(() => {
+        const handler = (e: MouseEvent) => {
+            if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+                setUserMenuOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handler);
+        return () => document.removeEventListener("mousedown", handler);
+    }, []);
+
+    const handleLogout = useCallback(async () => {
+        await fetch("/api/auth/logout", { method: "POST" });
+        setAuthUser(null);
+        setUserMenuOpen(false);
+        // Full reload so Navbar re-mounts cleanly after logout
+        window.location.href = "/";
+    }, [router]);
 
     useEffect(() => {
         const handlePointerDown = (event: MouseEvent) => {
@@ -624,9 +662,76 @@ export default function Navbar() {
                         <div className="hidden min-[1420px]:block">
                             <SearchBox />
                         </div>
-                        <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
-                            Login
-                        </Link>
+
+                        {/* Auth: logged-in user OR Login link */}
+                        {authUser ? (
+                            <div ref={userMenuRef} className="relative">
+                                <button
+                                    type="button"
+                                    onClick={() => setUserMenuOpen((o) => !o)}
+                                    className="flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-3 py-2 text-[13.5px] font-semibold text-[#0a1628] hover:border-[#0096D6]/40 hover:text-[#0096D6] transition-all shadow-sm"
+                                >
+                                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0077B6] text-[11px] font-black text-white uppercase">
+                                        {authUser.firstName[0]}{authUser.lastName?.[0] ?? ""}
+                                    </span>
+                                    <span>{authUser.firstName}</span>
+                                    <svg className={`h-3 w-3 transition-transform ${userMenuOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                {userMenuOpen && (
+                                    <div className="absolute right-0 top-[48px] w-56 rounded-xl border border-[#dbe7f3] bg-white shadow-[0_18px_45px_rgba(15,23,42,0.14)] py-1 z-[1100]">
+                                        {/* User info header */}
+                                        <div className="px-4 py-3 border-b border-gray-100">
+                                            <p className="text-[13px] font-bold text-[#0a1628]">{authUser.firstName} {authUser.lastName}</p>
+                                            <p className="text-[11px] text-[#64748b] truncate">{authUser.email}</p>
+                                            {authUser.isAdmin && (
+                                                <span className="mt-1 inline-block rounded-full bg-[#0096D6]/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#0096D6]">
+                                                    Admin Access
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        {/* Admin quick links */}
+                                        {authUser.isAdmin && (
+                                            <div className="border-b border-gray-100 py-1">
+                                                {[
+                                                    { label: "Dashboard",       href: "/admin" },
+                                                    { label: "New Blog",        href: "/admin/blogs/new" },
+                                                    { label: "Pending Review",  href: "/admin/blogs/pending" },
+                                                    { label: "Media",           href: "/admin/media" },
+                                                ].map((item) => (
+                                                    <Link
+                                                        key={item.href}
+                                                        href={item.href}
+                                                        onClick={() => setUserMenuOpen(false)}
+                                                        className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] hover:bg-[#f5fbff] hover:text-[#0096D6] transition-colors"
+                                                    >
+                                                        {item.label}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        )}
+
+                                        {/* Logout */}
+                                        <button
+                                            onClick={handleLogout}
+                                            className="w-full flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-red-600 hover:bg-red-50 transition-colors"
+                                        >
+                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                            </svg>
+                                            Logout
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
+                                Login
+                            </Link>
+                        )}
+
                         <CountrySelector selectorRef={desktopCountryRef} />
                         <Link href="/get-started" className="premium-border-sweep text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-xl px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-[0_12px_26px_rgba(0,150,214,0.22)]">
                             Get Started
@@ -730,7 +835,24 @@ export default function Navbar() {
                             </details>
                         ))}
                         <div className="border-t border-gray-100 pt-4 mt-4">
-                            <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] py-2">Login</Link>
+                            {authUser ? (
+                                <div className="mb-2">
+                                    <div className="flex items-center gap-3 py-2">
+                                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0077B6] text-[12px] font-black text-white uppercase">
+                                            {authUser.firstName[0]}{authUser.lastName?.[0] ?? ""}
+                                        </span>
+                                        <div>
+                                            <p className="text-[14px] font-bold text-[#0a1628]">{authUser.firstName} {authUser.lastName}</p>
+                                            <p className="text-[11px] text-[#64748b]">{authUser.email}</p>
+                                        </div>
+                                    </div>
+                                    <button onClick={() => { setMobileOpen(false); handleLogout(); }} className="block w-full text-left text-[14px] font-semibold text-red-600 py-2">
+                                        Sign Out
+                                    </button>
+                                </div>
+                            ) : (
+                                <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] py-2">Login</Link>
+                            )}
                             <details className="rounded-xl border border-blue-100 bg-[#f8fbff] px-4 py-2">
                                 <summary className="cursor-pointer py-2 text-[15px] font-bold text-[#0a1628]">Country / Global Markets</summary>
                                 <div className="mt-3 space-y-3 pb-2">

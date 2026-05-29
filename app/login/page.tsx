@@ -31,8 +31,8 @@ export default function LoginPage() {
             if (!res.ok) {
                 setError(data.error || "Invalid credentials.");
             } else {
-                router.push("/");
-                router.refresh();
+                // Full reload so Navbar re-mounts and re-fetches auth state
+                window.location.href = "/";
             }
         } catch {
             setError("Network error. Please try again.");

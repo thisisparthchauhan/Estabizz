@@ -511,6 +511,8 @@ export default function BlogEditorClient({ blog, categories }: Props) {
   const [touched, setTouched] = useState(false);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<ToastState | null>(null);
+  // Tracks the server-assigned id after first save so subsequent saves update the same record
+  const [savedId, setSavedId] = useState<string | undefined>(blog?.id);
   const [imagePreview, setImagePreview] = useState(false);
 
   function set<K extends keyof BlogFormData>(key: K, value: BlogFormData[K]) {
@@ -556,8 +558,8 @@ export default function BlogEditorClient({ blog, categories }: Props) {
     set("supportingImages", form.supportingImages.filter((_, idx) => idx !== i));
   }
 
-  // Save / Publish
-  function doSave(targetStatus: BlogStatus) {
+  // Save / Publish — calls real API
+  async function doSave(targetStatus: BlogStatus) {
     setTouched(true);
     const errs = validate(form);
     setErrors(errs);
@@ -567,30 +569,60 @@ export default function BlogEditorClient({ blog, categories }: Props) {
     }
     setSaving(true);
 
-    setTimeout(() => {
-      setSaving(false);
+    try {
+      const payload = {
+        id:                  savedId || blog?.id || undefined,
+        title:               form.title,
+        slug:                form.slug,
+        summary:             form.summary,
+        content:             form.content,
+        categoryId:          form.categoryId,
+        status:              targetStatus,
+        featuredImageUrl:    form.featuredImageUrl,
+        featuredImageAlt:    form.featuredImageAlt,
+        focusKeyword:        form.focusKeyword,
+        seoTitle:            form.seoTitle,
+        metaDescription:     form.metaDescription,
+        tags:                form.tags,
+        authorFirstName:     form.authorFirstName,
+        authorLastName:      form.authorLastName,
+        authorDesignation:   form.authorDesignation,
+        faqs:                form.faqs,
+        ctaBody:             form.ctaBody,
+        disclaimer:          form.disclaimer,
+      };
 
-      // TODO: Replace with real API call:
-      // const payload = { ...form, status: targetStatus, id: blog?.id };
-      // const res = await fetch('/api/admin/blogs/save', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(payload),
-      // });
-      // if (!res.ok) throw new Error(await res.text());
-      console.log("[Admin] Blog save (mock):", { status: targetStatus, title: form.title });
+      const res = await fetch('/api/admin/blogs/save', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setToast({ message: data.error || 'Save failed. Please try again.', type: 'error' });
+        return;
+      }
+
+      // Store the returned id so subsequent saves update instead of create
+      if (data.id) setSavedId(data.id);
 
       setForm((f) => ({ ...f, status: targetStatus }));
       setToast({
         message:
           targetStatus === "published"
-            ? "Blog published successfully!"
+            ? "✓ Blog published — now visible on the site!"
             : targetStatus === "draft"
             ? "Draft saved."
             : `Status updated to "${targetStatus}".`,
         type: "success",
       });
-    }, 700);
+    } catch {
+      setToast({ message: 'Network error. Please try again.', type: 'error' });
+    } finally {
+      setSaving(false);
+    }
   }
 
   const handleDraft   = () => doSave("draft");

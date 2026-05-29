@@ -81,7 +81,7 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
           </h1>
 
           {/* Subtitle */}
-          <p className="mb-10 max-w-3xl text-[16px] leading-[1.85] text-white/62 md:text-[18px]">
+          <p className="mb-10 max-w-3xl text-[16px] leading-[1.85] text-white/85 md:text-[18px]">
             Practical updates, licensing guides and compliance explainers for founders,
             CFOs, fintechs and regulated businesses.
           </p>

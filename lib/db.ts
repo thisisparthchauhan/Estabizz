@@ -17,10 +17,10 @@ if (!global.mongoose) {
 }
 
 export async function connectDB() {
-    const MONGODB_URI = process.env.MONGODB_URI;
+    const MONGODB_URI = getMongoUri();
 
     if (!MONGODB_URI) {
-        throw new Error('MONGODB_URI environment variable is not defined.');
+        throw new Error('MongoDB connection environment variable is not defined. Set MONGODB_URI, MONGO_URI, MONGODB_URL or DATABASE_URL.');
     }
 
     if (cached.conn) return cached.conn;
@@ -33,4 +33,8 @@ export async function connectDB() {
 
     cached.conn = await cached.promise;
     return cached.conn;
+}
+
+export function getMongoUri() {
+    return process.env.MONGODB_URI || process.env.MONGO_URI || process.env.MONGODB_URL || process.env.DATABASE_URL;
 }

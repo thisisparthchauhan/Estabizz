@@ -60,9 +60,6 @@ export default function Testimonials() {
                                 <div className="mt-6 text-[11px] font-bold uppercase tracking-[0.14em] text-[#0096D6]">
                                     Confidential engagement category
                                 </div>
-                                <h3 className="text-[15px] font-bold text-[#0a1628] leading-tight">
-                                    {card.title}
-                                </h3>
                             </div>
                         ))}
                     </div>

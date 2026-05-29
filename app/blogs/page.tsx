@@ -1,44 +1,81 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import BlogFilters from "@/components/blog/BlogFilters";
+import BlogCard from "@/components/blog/BlogCard";
+import { getPublishedBlogs } from "@/lib/blogService";
 
-export default function BlogsPage() {
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+    title: "Estabizz Regulatory Insights | RBI, SEBI, IRDAI, IFSCA & Fintech Blogs",
+    description: "Practical regulatory updates, licensing guides and compliance explainers for founders, CFOs, fintechs and regulated businesses by Estabizz Fintech.",
+    alternates: { canonical: "/blogs" },
+};
+
+export default async function BlogsPage() {
+    const blogs = await getPublishedBlogs({ limit: 60 });
+    const latest = blogs.slice(0, 3);
+
     return (
-        <main className="bg-[#f8faff] min-h-screen pt-24">
-            <section
-                className="relative overflow-hidden border-b border-blue-100 px-6 py-16"
-                style={{ background: "linear-gradient(135deg, #f0f9ff, #e0f2fe, #eff6ff)" }}
-            >
-                <div className="max-w-7xl mx-auto">
-                    <nav className="text-sm font-medium text-gray-500 mb-6 flex items-center gap-2">
-                        <Link href="/" className="hover:text-[#0096D6] transition-colors">Home</Link>
+        <main className="min-h-screen bg-[#f7fbff] pt-24">
+            <section className="relative overflow-hidden border-b border-[#dbe7f3] bg-white px-6 py-16">
+                <div className="absolute right-[-10%] top-[-40%] h-[420px] w-[420px] rounded-full bg-[#0096D6]/10 blur-[90px]" />
+                <div className="relative mx-auto max-w-7xl">
+                    <nav className="mb-8 flex items-center gap-2 text-[13px] font-bold text-[#64748b]">
+                        <Link href="/" className="hover:text-[#0096D6]">Home</Link>
                         <span>&gt;</span>
-                        <span className="text-[#0096D6]">Knowledge Hub</span>
+                        <span className="text-[#0096D6]">Blogs</span>
                     </nav>
-                    <span className="px-3 py-1 bg-blue-50 text-[#0096D6] border border-blue-100 rounded-full text-xs font-semibold mb-4 inline-block">
-                        Regulatory Insights
+                    <span className="rounded-full border border-[#dbe7f3] bg-[#f8fbff] px-4 py-2 text-[12px] font-black uppercase tracking-[0.18em] text-[#0096D6]">
+                        Regulatory Knowledge Platform
                     </span>
-                    <h1 className="text-[40px] md:text-[52px] font-black text-[#0a1628] leading-tight mb-4 tracking-tight">
-                        Estabizz Knowledge Hub
-                    </h1>
-                    <p className="text-[17px] md:text-[19px] text-gray-600 leading-relaxed max-w-3xl">
-                        Practical insights on RBI, SEBI, IRDAI, IFSCA, FEMA and fintech compliance will be published here.
-                    </p>
+                    <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_360px] lg:items-end">
+                        <div>
+                            <h1 className="text-[clamp(40px,6vw,76px)] font-black leading-[0.98] tracking-tight text-[#071426]">
+                                Estabizz Regulatory Insights
+                            </h1>
+                            <p className="mt-6 max-w-4xl text-[18px] font-medium leading-relaxed text-[#475569]">
+                                Practical updates, licensing guides and compliance explainers for founders, CFOs, fintechs and regulated businesses.
+                            </p>
+                        </div>
+                        <div className="rounded-[26px] border border-[#dbe7f3] bg-[#071426] p-6 text-white shadow-[0_28px_80px_rgba(7,20,38,0.18)]">
+                            <h2 className="text-[20px] font-black">Latest posts</h2>
+                            <div className="mt-4 space-y-4">
+                                {latest.map((blog) => (
+                                    <Link key={blog.slug} href={`/blogs/${blog.slug}`} className="block border-b border-white/10 pb-4 last:border-b-0 last:pb-0">
+                                        <span className="text-[11px] font-black uppercase tracking-[0.12em] text-[#d9a938]">{blog.category}</span>
+                                        <span className="mt-1 block text-[14px] font-bold leading-snug text-white/90">{blog.title}</span>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section className="max-w-7xl mx-auto px-6 py-16">
-                <div className="bg-white border border-gray-100 rounded-2xl p-8 md:p-10 shadow-sm text-center">
-                    <h2 className="text-[24px] font-black text-[#0a1628] mb-3">Insights are being curated</h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                        Our team is preparing regulator-focused articles, compliance explainers and licensing guides. For urgent advisory needs, connect directly with Estabizz.
-                    </p>
-                    <Link
-                        href="/get-started"
-                        className="mt-7 inline-flex px-7 py-3.5 bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all"
-                    >
-                        Start a Consultation
-                    </Link>
-                </div>
-            </section>
+            {blogs.length > 0 ? (
+                <BlogFilters blogs={blogs} />
+            ) : (
+                <section className="mx-auto max-w-7xl px-6 py-16">
+                    <div className="rounded-[28px] border border-[#dbe7f3] bg-white p-10 text-center shadow-sm">
+                        <h2 className="text-[26px] font-black text-[#071426]">Insights are being curated</h2>
+                        <p className="mx-auto mt-3 max-w-2xl text-[15px] font-medium leading-relaxed text-[#64748b]">
+                            Admin-created and approved user-submitted blogs will appear here once published.
+                        </p>
+                    </div>
+                </section>
+            )}
+
+            {blogs.length > 0 && (
+                <section className="mx-auto max-w-7xl px-6 pb-16">
+                    <h2 className="mb-6 text-[30px] font-black text-[#071426]">Featured compliance reads</h2>
+                    <div className="grid gap-6 md:grid-cols-3">
+                        {blogs.slice(0, 3).map((blog) => (
+                            <BlogCard key={blog.slug} blog={blog} />
+                        ))}
+                    </div>
+                </section>
+            )}
         </main>
     );
 }

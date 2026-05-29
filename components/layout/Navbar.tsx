@@ -220,6 +220,7 @@ const linkMap: Record<string, string> = {
     "Case Highlights": "/",
     "FAQs": "/services",
     "Blogs": "/blogs",
+    "Submit Blog": "/submit-blog",
     // Hidden pages — now accessible
     "Mutual Fund Registration": "/sebi/mutual-fund-registration",
     "Social Stock Exchange": "/sebi/social-stock-exchange-license-india",
@@ -299,7 +300,7 @@ const menus: Record<string, MegaMenu> = {
         categories: [
             { label: "Regulatory Updates", icon: "📰", items: ["Regulatory Updates", "Circular Tracker", "Compliance Calendar"] },
             { label: "Content Framework", icon: "📐", items: ["Service Page Content Framework", "Content Rebuild Command", "Proposal Templates"] },
-            { label: "Blogs", icon: "✍️", items: ["Blogs", "Guides & Insights"] },
+            { label: "Blogs", icon: "✍️", items: ["Blogs", "Submit Blog", "Guides & Insights"] },
             { label: "Guides & Insights", icon: "📖", items: ["RBI Services", "SEBI Services", "IRDAI Services", "IFSCA Services"] },
             { label: "FAQs", icon: "❓", items: ["FAQ Engine", "FAQs", "Compliance FAQs", "Contact Estabizz"] },
             { label: "Case Highlights", icon: "📁", items: ["Case Highlights"] },

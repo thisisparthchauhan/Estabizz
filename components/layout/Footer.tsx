@@ -6,6 +6,7 @@ const footerLinks: Record<string, { label: string; href: string }[]> = {
     "About": [
         { label: "About Estabizz", href: "/services" },
         { label: "Estabizz Blogs", href: "/blogs" },
+        { label: "Submit a Blog", href: "/submit-blog" },
         { label: "Contact Us", href: "/contact" },
     ],
     "Regulatory Expertise": [
@@ -34,6 +35,7 @@ const footerLinks: Record<string, { label: string; href: string }[]> = {
     ],
     "Knowledge & Resources": [
         { label: "Regulatory Updates", href: "/resources/regulatory-updates" },
+        { label: "Estabizz Blogs", href: "/blogs" },
         { label: "Content Framework", href: "/resources/service-page-content-framework" },
         { label: "Proposal Templates", href: "/proposal-template" },
         { label: "Case Highlights", href: "/" },

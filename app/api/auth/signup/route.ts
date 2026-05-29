@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { connectDB } from '@/lib/db';
 import User from '@/lib/models/User';
+import { isAdminEmail } from '@/lib/adminAuth';
 
 export async function POST(req: NextRequest) {
     try {
@@ -18,6 +19,13 @@ export async function POST(req: NextRequest) {
             return NextResponse.json(
                 { error: 'Password must be at least 8 characters.' },
                 { status: 400 }
+            );
+        }
+
+        if (isAdminEmail(email)) {
+            return NextResponse.json(
+                { error: 'This email is reserved for Estabizz admin access. Please ask the site administrator to create this account securely.' },
+                { status: 403 }
             );
         }
 

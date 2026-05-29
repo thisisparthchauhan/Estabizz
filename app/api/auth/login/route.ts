@@ -56,6 +56,7 @@ export async function POST(req: NextRequest) {
                 email: user.email,
                 firstName: user.firstName,
                 lastName: user.lastName,
+                role: user.role || 'user',
             },
             getJwtSecret(),
             { expiresIn: '7d' }
@@ -67,6 +68,7 @@ export async function POST(req: NextRequest) {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
+                role: user.role || 'user',
             },
         });
 

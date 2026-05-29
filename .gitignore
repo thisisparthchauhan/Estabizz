@@ -6,6 +6,7 @@ out
 .vercel-home
 .env.local
 .env*.local
+.env*
 
 # OS / IDE / build artifacts
 .DS_Store

@@ -5,7 +5,8 @@
     "scripts": {
         "dev": "npx tailwindcss -i ./app/globals.css -o ./public/tailwind.css --watch & next dev",
         "build": "npx tailwindcss -i ./app/globals.css -o ./public/tailwind.css && next build --webpack",
-        "start": "next start"
+        "start": "next start",
+        "admin:ensure": "node scripts/ensure-admin-users.mjs"
     },
     "engines": {
         "node": "22.x"
@@ -14,19 +15,21 @@
         "@anthropic-ai/sdk": "^0.91.1",
         "@types/bcryptjs": "^2.4.6",
         "@types/jsonwebtoken": "^9.0.10",
+        "@types/sanitize-html": "^2.16.1",
         "bcryptjs": "^3.0.3",
         "jsonwebtoken": "^9.0.3",
         "mongoose": "^9.4.1",
-        "next": "^16.2.4",
+        "next": "^16.2.6",
         "react": "^18.3.1",
-        "react-dom": "^18.3.1"
+        "react-dom": "^18.3.1",
+        "sanitize-html": "^2.17.4"
     },
     "devDependencies": {
         "@types/node": "^20.11.0",
         "@types/react": "^18.2.0",
         "@types/react-dom": "^18.2.0",
         "autoprefixer": "^10.5.0",
-        "postcss": "^8.5.10",
+        "postcss": "8.5.10",
         "tailwindcss": "^3.4.19",
         "typescript": "^5.3.3"
     },
@@ -45,6 +48,7 @@
         },
         "tinyglobby": {
             "picomatch": "4.0.4"
-        }
+        },
+        "postcss": "8.5.10"
     }
 }

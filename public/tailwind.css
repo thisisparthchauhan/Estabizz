@@ -2340,6 +2340,10 @@ video {
   gap: 0px;
 }
 
+.gap-0\.5 {
+  gap: 0.125rem;
+}
+
 .gap-1 {
   gap: 0.25rem;
 }
@@ -7801,8 +7805,16 @@ body::before {
 }
 
 @media (min-width: 1536px) {
+  .\32xl\:inline {
+    display: inline;
+  }
+
   .\32xl\:grid-cols-7 {
     grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .\32xl\:gap-1 {
+    gap: 0.25rem;
   }
 
   .\32xl\:gap-10 {
@@ -7813,9 +7825,23 @@ body::before {
     gap: 0.75rem;
   }
 
+  .\32xl\:px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .\32xl\:px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
   .\32xl\:px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+
+  .\32xl\:text-\[13\.5px\] {
+    font-size: 13.5px;
   }
 }
 

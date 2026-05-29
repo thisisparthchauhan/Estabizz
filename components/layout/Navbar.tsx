@@ -648,16 +648,16 @@ export default function Navbar() {
                     </Link>
 
                     {/* Desktop Nav */}
-                    <div className="hidden xl:flex items-center gap-1">
+                    <div className="hidden xl:flex items-center gap-0.5 2xl:gap-1">
                         {Object.keys(menus).map((item) => (
                             <div key={item} onMouseEnter={() => openMenu(item)} onMouseLeave={closeMenu}
-                                className={`relative cursor-pointer flex items-center gap-1 text-[13.5px] font-semibold px-3 py-5 transition-colors ${activeMenu === item ? "text-[#0096D6]" : "text-[#334155] hover:text-[#0096D6]"}`}>
+                                className={`relative cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors ${activeMenu === item ? "text-[#0096D6]" : "text-[#334155] hover:text-[#0096D6]"}`}>
                                 {item} <svg className={`w-3 h-3 transition-transform ${activeMenu === item ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </div>
                         ))}
                         <Link
                             href="/blogs"
-                            className="text-[13.5px] font-semibold px-3 py-5 text-[#334155] hover:text-[#0096D6] transition-colors"
+                            className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#0096D6] transition-colors"
                         >
                             Insights
                         </Link>
@@ -680,7 +680,7 @@ export default function Navbar() {
                                     <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0077B6] text-[11px] font-black text-white uppercase">
                                         {authUser.firstName[0]}{authUser.lastName?.[0] ?? ""}
                                     </span>
-                                    <span>{authUser.firstName}</span>
+                                    <span className="hidden 2xl:inline">{authUser.firstName}</span>
                                     <svg className={`h-3 w-3 transition-transform ${userMenuOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                     </svg>
@@ -739,10 +739,10 @@ export default function Navbar() {
                         )}
 
                         <CountrySelector selectorRef={desktopCountryRef} />
-                        <Link href="/get-started" className="premium-border-sweep text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-xl px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-[0_12px_26px_rgba(0,150,214,0.22)]">
+                        <Link href="/get-started" className="premium-border-sweep whitespace-nowrap text-[13px] 2xl:text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-xl px-3.5 2xl:px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-[0_12px_26px_rgba(0,150,214,0.22)]">
                             Get Started
                         </Link>
-                        <Link href="/contact" className="bg-[#0a1628] text-white font-bold text-[13.5px] rounded-xl px-5 py-2.5 hover:bg-[#1a2638] transition-colors shadow-[0_12px_26px_rgba(10,22,40,0.18)]">
+                        <Link href="/contact" className="bg-[#0a1628] whitespace-nowrap text-white font-bold text-[13px] 2xl:text-[13.5px] rounded-xl px-3.5 2xl:px-5 py-2.5 hover:bg-[#1a2638] transition-colors shadow-[0_12px_26px_rgba(10,22,40,0.18)]">
                             Book Consultation
                         </Link>
                     </div>

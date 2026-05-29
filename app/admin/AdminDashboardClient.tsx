@@ -30,14 +30,14 @@ function fmt(iso?: string): string {
   });
 }
 
-function statusLabel(s: string) {
+function statusBadge(s: string) {
   const MAP: Record<string, { label: string; cls: string }> = {
-    published:      { label: "Published",     cls: "bg-emerald-50 text-emerald-700 border-emerald-200" },
-    draft:          { label: "Draft",         cls: "bg-slate-100 text-slate-600 border-slate-200" },
-    pending_review: { label: "Pending",       cls: "bg-[#d9a938]/10 text-[#b8860b] border-[#d9a938]/30" },
-    approved:       { label: "Approved",      cls: "bg-blue-50 text-blue-700 border-blue-200" },
-    rejected:       { label: "Rejected",      cls: "bg-red-50 text-red-700 border-red-200" },
-    archived:       { label: "Archived",      cls: "bg-purple-50 text-purple-700 border-purple-200" },
+    published:      { label: "Published",  cls: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+    draft:          { label: "Draft",      cls: "bg-slate-100 text-slate-600 border-slate-200" },
+    pending_review: { label: "Pending",    cls: "bg-amber-50 text-amber-700 border-amber-200" },
+    approved:       { label: "Approved",   cls: "bg-blue-50 text-blue-700 border-blue-200" },
+    rejected:       { label: "Rejected",   cls: "bg-red-50 text-red-700 border-red-200" },
+    archived:       { label: "Archived",   cls: "bg-purple-50 text-purple-700 border-purple-200" },
   };
   const m = MAP[s] ?? { label: s, cls: "bg-slate-100 text-slate-500 border-slate-200" };
   return (
@@ -47,107 +47,144 @@ function statusLabel(s: string) {
   );
 }
 
-// ─── Stat card ────────────────────────────────────────────────────────────────
+// ─── SVG icons for stat cards ─────────────────────────────────────────────────
+
+function IconTotal() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="16" y1="13" x2="8" y2="13" />
+      <line x1="16" y1="17" x2="8" y2="17" />
+      <polyline points="10 9 9 9 8 9" />
+    </svg>
+  );
+}
+
+function IconPublished() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+
+function IconPending() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
+    </svg>
+  );
+}
+
+function IconDraft() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+    </svg>
+  );
+}
+
+// ─── Stat Card ────────────────────────────────────────────────────────────────
 
 interface StatCardProps {
   label: string;
   value: number;
-  icon: string;
-  accent: string;      // Tailwind bg class for icon bg
-  iconColor: string;   // Tailwind text class for icon
+  icon: React.ReactNode;
+  iconBg: string;
+  iconColor: string;
   href: string;
-  note?: string;
 }
 
-function StatCard({ label, value, icon, accent, iconColor, href, note }: StatCardProps) {
+function StatCard({ label, value, icon, iconBg, iconColor, href }: StatCardProps) {
   return (
     <Link
       href={href}
-      className="group relative flex flex-col justify-between rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_10px_rgba(10,22,40,0.05)] hover:shadow-[0_8px_30px_rgba(10,22,40,0.10)] hover:-translate-y-0.5 hover:border-[#d9a938]/40 transition-all duration-200"
+      className="flex flex-col justify-between rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_24px_rgba(10,22,40,0.09)] hover:-translate-y-0.5 hover:border-[#d9a938]/35 transition-all duration-200"
     >
-      <div className="flex items-start justify-between mb-3">
-        <div className={`flex h-10 w-10 items-center justify-center rounded-xl text-xl ${accent} ${iconColor}`}>
-          {icon}
-        </div>
-        <svg
-          className="h-4 w-4 text-[#cbd5e1] group-hover:text-[#d9a938] transition-colors"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
+      <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${iconBg} ${iconColor} mb-4`}>
+        {icon}
       </div>
       <div>
-        <div className="text-[28px] font-black text-[#0a1628] leading-none tabular-nums">
+        <div className="text-[30px] font-black text-[#0a1628] leading-none tabular-nums">
           {value}
         </div>
-        <div className="mt-1 text-[12px] font-semibold text-[#64748b]">{label}</div>
-        {note && (
-          <div className="mt-0.5 text-[10.5px] text-[#94a3b8]">{note}</div>
-        )}
+        <div className="mt-1.5 text-[12px] font-semibold text-[#64748b]">{label}</div>
       </div>
     </Link>
   );
 }
 
-// ─── Main dashboard ───────────────────────────────────────────────────────────
+// ─── Quick Action Card ────────────────────────────────────────────────────────
+
+function QuickCard({
+  title,
+  desc,
+  href,
+  cta,
+  ctaCls,
+}: {
+  title: string;
+  desc: string;
+  href: string;
+  cta: string;
+  ctaCls: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group flex flex-col justify-between rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_20px_rgba(10,22,40,0.08)] hover:-translate-y-0.5 hover:border-[#d9a938]/25 transition-all duration-200"
+    >
+      <div>
+        <h3 className="text-[13.5px] font-black text-[#0a1628] mb-1.5">{title}</h3>
+        <p className="text-[12px] text-[#64748b] leading-5">{desc}</p>
+      </div>
+      <div className="mt-4">
+        <span className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[11.5px] font-bold transition-all ${ctaCls}`}>
+          {cta} →
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+// ─── Main Dashboard ───────────────────────────────────────────────────────────
 
 export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
-  const CARDS: StatCardProps[] = [
+  const STAT_CARDS: StatCardProps[] = [
     {
       label:     "Total Blogs",
       value:     stats.total,
-      icon:      "☰",
-      accent:    "bg-[#0a1628]/8",
+      icon:      <IconTotal />,
+      iconBg:    "bg-[#0a1628]/8",
       iconColor: "text-[#0a1628]",
       href:      "/admin/blogs",
-      note:      "All statuses combined",
     },
     {
       label:     "Published",
       value:     stats.published,
-      icon:      "✓",
-      accent:    "bg-emerald-50",
+      icon:      <IconPublished />,
+      iconBg:    "bg-emerald-50",
       iconColor: "text-emerald-600",
       href:      "/admin/blogs",
-      note:      "Live on website",
-    },
-    {
-      label:     "Draft",
-      value:     stats.draft,
-      icon:      "✎",
-      accent:    "bg-slate-100",
-      iconColor: "text-slate-500",
-      href:      "/admin/blogs",
-      note:      "Work in progress",
     },
     {
       label:     "Pending Review",
       value:     stats.pending,
-      icon:      "◷",
-      accent:    "bg-[#d9a938]/10",
-      iconColor: "text-[#b8860b]",
+      icon:      <IconPending />,
+      iconBg:    "bg-amber-50",
+      iconColor: "text-amber-600",
       href:      "/admin/blogs/pending",
-      note:      "Awaiting editorial review",
     },
     {
-      label:     "Rejected",
-      value:     stats.rejected,
-      icon:      "✕",
-      accent:    "bg-red-50",
-      iconColor: "text-red-500",
+      label:     "Drafts",
+      value:     stats.draft,
+      icon:      <IconDraft />,
+      iconBg:    "bg-slate-100",
+      iconColor: "text-slate-500",
       href:      "/admin/blogs",
-      note:      "Did not pass review",
-    },
-    {
-      label:     "Archived",
-      value:     stats.archived,
-      icon:      "⊡",
-      accent:    "bg-purple-50",
-      iconColor: "text-purple-500",
-      href:      "/admin/blogs",
-      note:      "Hidden from public",
     },
   ];
 
@@ -157,49 +194,29 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
       {/* ── Page header ──────────────────────────────────────────────────────── */}
       <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#d9a938]/30 bg-[#d9a938]/8 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-[#b8860b] mb-2">
-            <span className="text-[#d9a938]">★</span>
-            Estabizz Admin
-          </div>
-          <h1 className="text-[22px] font-black text-[#0a1628] leading-tight">
-            Content Dashboard
-          </h1>
-          <p className="mt-0.5 text-[13px] text-[#64748b]">
-            Overview of all blogs and editorial activity
-          </p>
+          <h1 className="text-[22px] font-black text-[#0a1628] leading-tight">Dashboard</h1>
+          <p className="mt-0.5 text-[13px] text-[#64748b]">Content overview</p>
         </div>
-
-        <div className="flex items-center gap-2.5">
-          <Link
-            href="/admin/blogs/pending"
-            className="inline-flex items-center gap-2 rounded-xl border border-[#d9a938]/40 bg-[#d9a938]/10 px-4 py-2 text-[12px] font-bold text-[#b8860b] hover:bg-[#d9a938]/20 transition-colors"
-          >
-            <span>◷</span> Review Queue
-            {stats.pending > 0 && (
-              <span className="ml-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#d9a938] text-[9px] font-black text-[#071224]">
-                {stats.pending}
-              </span>
-            )}
-          </Link>
-          <Link
-            href="/admin/blogs/new"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-4 py-2 text-[12px] font-bold text-white hover:bg-[#0a1628]/90 shadow-sm transition-all"
-          >
-            <span className="text-[#d9a938]">✚</span> New Blog
-          </Link>
-        </div>
+        <Link
+          href="/admin/blogs/new"
+          className="inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-4 py-2.5 text-[13px] font-bold text-white hover:bg-[#0a1628]/90 shadow-sm transition-all self-start sm:self-auto"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+          New Blog
+        </Link>
       </div>
 
-      {/* ── 6 stat cards ─────────────────────────────────────────────────────── */}
-      <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-6">
-        {CARDS.map((card) => (
+      {/* ── 4 stat cards ─────────────────────────────────────────────────────── */}
+      <div className="mb-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        {STAT_CARDS.map((card) => (
           <StatCard key={card.label} {...card} />
         ))}
       </div>
 
-      {/* ── Recent blogs ─────────────────────────────────────────────────────── */}
-      <div className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_10px_rgba(10,22,40,0.04)] overflow-hidden">
-        {/* Header */}
+      {/* ── Recent blogs table ────────────────────────────────────────────────── */}
+      <div className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_8px_rgba(10,22,40,0.04)] overflow-hidden mb-6">
         <div className="flex items-center justify-between border-b border-[#f0f4f8] px-6 py-4">
           <div>
             <h2 className="text-[14px] font-black text-[#0a1628]">Recent Blogs</h2>
@@ -215,14 +232,19 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
 
         {recentBlogs.length === 0 ? (
           <div className="py-16 text-center">
-            <div className="text-3xl mb-3 opacity-20">☰</div>
+            <div className="w-12 h-12 mx-auto mb-4 rounded-2xl bg-[#f0f4f8] flex items-center justify-center">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+            </div>
             <p className="text-[13px] font-semibold text-[#94a3b8]">No blogs yet</p>
             <p className="text-[12px] text-[#cbd5e1] mt-1">Create your first blog to see it here.</p>
             <Link
               href="/admin/blogs/new"
               className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[#0a1628] px-4 py-2 text-[12px] font-bold text-white hover:bg-[#0a1628]/90 transition-colors"
             >
-              ✚ Create Blog
+              Create your first blog
             </Link>
           </div>
         ) : (
@@ -245,7 +267,7 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
                         {blog.title}
                       </div>
                       <div className="text-[11px] text-[#94a3b8] truncate mt-0.5">
-                        by {blog.author.firstName} {blog.author.lastName}
+                        {blog.author.firstName} {blog.author.lastName}
                       </div>
                     </td>
                     <td className="hidden md:table-cell px-4 py-3.5">
@@ -254,7 +276,7 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
                       </span>
                     </td>
                     <td className="hidden sm:table-cell px-4 py-3.5">
-                      {statusLabel(blog.status)}
+                      {statusBadge(blog.status)}
                     </td>
                     <td className="hidden lg:table-cell px-4 py-3.5 text-[12px] text-[#94a3b8] whitespace-nowrap">
                       {fmt(blog.publishedAt ?? blog.createdAt)}
@@ -264,7 +286,7 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
                         href={`/admin/blogs/edit/${blog.id}`}
                         className="inline-flex items-center gap-1 rounded-lg border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#0096D6] hover:bg-[#e0f0fa] transition-colors"
                       >
-                        ✎ Edit
+                        Edit
                       </Link>
                     </td>
                   </tr>
@@ -275,56 +297,22 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
         )}
       </div>
 
-      {/* ── Quick-action cards ───────────────────────────────────────────────── */}
-      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {[
-          {
-            title: "Write New Blog",
-            desc: "Draft an article for the Regulatory Insights section.",
-            icon: "✚",
-            href: "/admin/blogs/new",
-            cta: "Open Editor",
-            accent: "bg-[#0a1628]",
-            ctaCls: "bg-[#d9a938] text-[#071224]",
-          },
-          {
-            title: "Review Submissions",
-            desc: `${stats.pending} article${stats.pending !== 1 ? "s" : ""} in the review queue awaiting approval.`,
-            icon: "◷",
-            href: "/admin/blogs/pending",
-            cta: "Open Queue",
-            accent: "bg-[#d9a938]/10",
-            ctaCls: "bg-[#d9a938] text-[#071224]",
-          },
-          {
-            title: "Manage All Blogs",
-            desc: `${stats.total} total articles — filter, search and bulk-update status.`,
-            icon: "☰",
-            href: "/admin/blogs",
-            cta: "Open Library",
-            accent: "bg-[#f0f9ff]",
-            ctaCls: "bg-[#0096D6] text-white",
-          },
-        ].map((q) => (
-          <Link
-            key={q.title}
-            href={q.href}
-            className="group flex flex-col justify-between rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_8px_24px_rgba(10,22,40,0.09)] hover:-translate-y-0.5 hover:border-[#d9a938]/30 transition-all duration-200"
-          >
-            <div>
-              <div className={`mb-3 inline-flex h-9 w-9 items-center justify-center rounded-xl text-[17px] ${q.accent}`}>
-                {q.icon}
-              </div>
-              <h3 className="text-[13px] font-black text-[#0a1628] mb-1">{q.title}</h3>
-              <p className="text-[12px] text-[#64748b] leading-5">{q.desc}</p>
-            </div>
-            <div className="mt-4">
-              <span className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[11px] font-bold shadow-sm transition-all ${q.ctaCls}`}>
-                {q.cta} →
-              </span>
-            </div>
-          </Link>
-        ))}
+      {/* ── Quick actions ─────────────────────────────────────────────────────── */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <QuickCard
+          title="Write New Blog"
+          desc="Draft an article for the Regulatory Insights section."
+          href="/admin/blogs/new"
+          cta="Open Editor"
+          ctaCls="bg-[#d9a938] text-[#071224] hover:bg-[#c8921a]"
+        />
+        <QuickCard
+          title="Review Pending"
+          desc={`${stats.pending} article${stats.pending !== 1 ? "s" : ""} in the queue awaiting approval.`}
+          href="/admin/blogs/pending"
+          cta="Open Queue"
+          ctaCls="bg-[#0a1628] text-white hover:bg-[#0a1628]/90"
+        />
       </div>
     </div>
   );

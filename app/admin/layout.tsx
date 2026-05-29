@@ -1,65 +1,124 @@
 "use client";
 
-/**
- * Admin Layout
- *
- * Renders as a fixed full-screen overlay (z-[2000]) so the public
- * Navbar / Footer from the root layout are visually covered without
- * touching root layout.tsx.
- *
- * Sidebar: 10 items in 3 groups — Content, Library, System.
- * Active item: gold accent (#d9a938) with left border indicator.
- *
- * TODO: Add JWT / session guard here once auth is wired.
- */
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// ─── Navigation groups ────────────────────────────────────────────────────────
+// ─── SVG Icons ────────────────────────────────────────────────────────────────
 
-const NAV_GROUPS = [
-  {
-    label: "Content",
-    items: [
-      { label: "Dashboard",     href: "/admin",               icon: "⬡" },
-      { label: "Blogs",         href: "/admin/blogs",          icon: "☰" },
-      { label: "Pending Blogs", href: "/admin/blogs/pending",  icon: "◷" },
-      { label: "Add New Blog",  href: "/admin/blogs/new",      icon: "✚" },
-    ],
-  },
-  {
-    label: "Library",
-    items: [
-      { label: "Categories",    href: "/admin/categories",     icon: "⊟" },
-      { label: "Media Library", href: "/admin/media",          icon: "⊞" },
-      { label: "Authors",       href: "/admin/authors",        icon: "◉" },
-    ],
-  },
-  {
-    label: "System",
-    items: [
-      { label: "SEO Settings",  href: "/admin/seo",            icon: "◎" },
-      { label: "Admin Users",   href: "/admin/users",          icon: "⊛" },
-      { label: "Settings",      href: "/admin/settings",       icon: "⊕" },
-    ],
-  },
+function IconGrid() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="7" height="7" />
+      <rect x="14" y="3" width="7" height="7" />
+      <rect x="3" y="14" width="7" height="7" />
+      <rect x="14" y="14" width="7" height="7" />
+    </svg>
+  );
+}
+
+function IconList() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="8" y1="6" x2="21" y2="6" />
+      <line x1="8" y1="12" x2="21" y2="12" />
+      <line x1="8" y1="18" x2="21" y2="18" />
+      <line x1="3" y1="6" x2="3.01" y2="6" />
+      <line x1="3" y1="12" x2="3.01" y2="12" />
+      <line x1="3" y1="18" x2="3.01" y2="18" />
+    </svg>
+  );
+}
+
+function IconPlus() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19" />
+      <line x1="5" y1="12" x2="19" y2="12" />
+    </svg>
+  );
+}
+
+function IconClock() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
+    </svg>
+  );
+}
+
+function IconTag() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
+      <line x1="7" y1="7" x2="7.01" y2="7" />
+    </svg>
+  );
+}
+
+function IconImage() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+      <circle cx="8.5" cy="8.5" r="1.5" />
+      <polyline points="21 15 16 10 5 21" />
+    </svg>
+  );
+}
+
+function IconArrowLeft() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="19" y1="12" x2="5" y2="12" />
+      <polyline points="12 19 5 12 12 5" />
+    </svg>
+  );
+}
+
+function IconChevronLeft() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="15 18 9 12 15 6" />
+    </svg>
+  );
+}
+
+function IconChevronRight() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  );
+}
+
+// ─── Nav config ───────────────────────────────────────────────────────────────
+
+interface NavItem {
+  label: string;
+  href: string;
+  icon: React.ReactNode;
+  pendingBadge?: boolean;
+}
+
+const NAV_ITEMS: NavItem[] = [
+  { label: "Dashboard",      href: "/admin",               icon: <IconGrid /> },
+  { label: "All Blogs",      href: "/admin/blogs",          icon: <IconList /> },
+  { label: "New Blog",       href: "/admin/blogs/new",      icon: <IconPlus /> },
+  { label: "Pending Review", href: "/admin/blogs/pending",  icon: <IconClock />, pendingBadge: true },
+  { label: "Categories",     href: "/admin/categories",     icon: <IconTag /> },
+  { label: "Media",          href: "/admin/media",          icon: <IconImage /> },
 ];
 
-// ─── Page-title map ───────────────────────────────────────────────────────────
+// ─── Page title map ───────────────────────────────────────────────────────────
 
 const PAGE_TITLES: Record<string, string> = {
-  "/admin":                 "Dashboard",
-  "/admin/blogs":           "All Blogs",
-  "/admin/blogs/pending":   "Pending Review",
-  "/admin/blogs/new":       "New Blog",
-  "/admin/categories":      "Categories",
-  "/admin/media":           "Media Library",
-  "/admin/authors":         "Authors",
-  "/admin/seo":             "SEO Settings",
-  "/admin/users":           "Admin Users",
-  "/admin/settings":        "Settings",
+  "/admin":                "Dashboard",
+  "/admin/blogs":          "All Blogs",
+  "/admin/blogs/new":      "New Blog",
+  "/admin/blogs/pending":  "Pending Review",
+  "/admin/categories":     "Categories",
+  "/admin/media":          "Media",
 };
 
 function getPageTitle(pathname: string): string {
@@ -68,38 +127,52 @@ function getPageTitle(pathname: string): string {
   return "Admin";
 }
 
-// ─── SidebarLink ─────────────────────────────────────────────────────────────
+function getBreadcrumbs(pathname: string): string[] {
+  const title = getPageTitle(pathname);
+  if (pathname === "/admin") return ["Admin", "Dashboard"];
+  return ["Admin", title];
+}
+
+// ─── Sidebar link ─────────────────────────────────────────────────────────────
 
 function SidebarLink({
-  href,
-  icon,
-  label,
+  item,
   active,
   collapsed,
+  pendingCount,
 }: {
-  href: string;
-  icon: string;
-  label: string;
+  item: NavItem;
   active: boolean;
   collapsed: boolean;
+  pendingCount: number;
 }) {
   const base =
-    "group relative flex items-center gap-3 rounded-xl text-[13px] font-medium transition-all duration-150";
+    "relative flex items-center gap-3 rounded-xl text-[13px] font-medium transition-all duration-150 overflow-hidden";
   const activeClass =
-    "bg-[#d9a938]/15 text-[#d9a938] pl-[10px] pr-3 py-2.5 border-l-2 border-[#d9a938]";
+    "bg-[#d9a938]/15 text-[#d9a938] pl-[10px] pr-3 py-2.5 border-l-[3px] border-[#d9a938]";
   const idleClass =
-    "text-white/55 hover:text-white hover:bg-white/8 px-3 py-2.5";
+    "text-white/50 hover:text-white/80 hover:bg-white/[0.07] px-3 py-2.5";
 
   return (
-    <Link href={href} className={`${base} ${active ? activeClass : idleClass}`} title={label}>
-      <span
-        className={`text-[15px] shrink-0 leading-none transition-transform ${
-          active ? "text-[#d9a938]" : "group-hover:scale-110"
-        }`}
-      >
-        {icon}
+    <Link
+      href={item.href}
+      title={collapsed ? item.label : undefined}
+      className={`${base} ${active ? activeClass : idleClass}`}
+    >
+      <span className={`shrink-0 ${active ? "text-[#d9a938]" : ""}`}>
+        {item.icon}
       </span>
-      {!collapsed && <span className="truncate leading-none">{label}</span>}
+      {!collapsed && (
+        <span className="truncate leading-none flex-1">{item.label}</span>
+      )}
+      {!collapsed && item.pendingBadge && pendingCount > 0 && (
+        <span className="ml-auto flex h-4.5 min-w-[18px] items-center justify-center rounded-full bg-[#d9a938] px-1 text-[9.5px] font-black text-[#071224] leading-none">
+          {pendingCount > 99 ? "99+" : pendingCount}
+        </span>
+      )}
+      {collapsed && item.pendingBadge && pendingCount > 0 && (
+        <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-[#d9a938]" />
+      )}
     </Link>
   );
 }
@@ -109,12 +182,19 @@ function SidebarLink({
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const [pendingCount, setPendingCount] = useState(0);
 
-  // Exact match for /admin, prefix match for all others
+  // Fetch pending count once on mount
+  useEffect(() => {
+    fetch("/api/admin/blogs/pending-count")
+      .then((r) => r.ok ? r.json() : { count: 0 })
+      .then((d: { count?: number }) => setPendingCount(d.count ?? 0))
+      .catch(() => setPendingCount(0));
+  }, []);
+
   function isActive(href: string) {
     if (href === "/admin") return pathname === "/admin";
     if (href === "/admin/blogs") {
-      // Active only when on the blogs list, not on sub-paths like /new, /pending, /edit
       return (
         pathname === "/admin/blogs" ||
         pathname.startsWith("/admin/blogs/edit")
@@ -124,124 +204,122 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   const pageTitle = getPageTitle(pathname);
+  const breadcrumbs = getBreadcrumbs(pathname);
 
   return (
-    <div className="fixed inset-0 z-[2000] flex overflow-hidden bg-[#f0f4f8] font-sans">
+    <div className="fixed inset-0 z-[2000] flex overflow-hidden font-sans">
 
       {/* ── Sidebar ─────────────────────────────────────────────────────────── */}
       <aside
         className={`${
-          collapsed ? "w-[60px]" : "w-[228px]"
-        } shrink-0 flex flex-col bg-[#071224] border-r border-white/[0.07] transition-all duration-200 overflow-hidden`}
+          collapsed ? "w-[60px]" : "w-[220px]"
+        } shrink-0 flex flex-col bg-[#071224] border-r border-white/[0.06] transition-all duration-200 overflow-hidden`}
       >
         {/* Brand bar */}
         <div
-          className={`flex items-center gap-2.5 border-b border-white/[0.07] px-4 py-[15px] ${
+          className={`flex items-center gap-2.5 border-b border-white/[0.06] px-4 py-[14px] ${
             collapsed ? "justify-center" : ""
           }`}
         >
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#d9a938] via-[#b8860b] to-[#071224] flex items-center justify-center font-black text-[#071224] text-[14px] shrink-0 shadow-[0_4px_14px_rgba(217,169,56,0.35)]">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#d9a938] via-[#c8921a] to-[#8b6110] flex items-center justify-center font-black text-[#071224] text-[15px] shrink-0 shadow-[0_4px_14px_rgba(217,169,56,0.30)]">
             E
           </div>
           {!collapsed && (
             <div className="min-w-0">
-              <div className="text-[13px] font-black text-white leading-tight truncate tracking-wide">
-                Estabizz
+              <div className="text-[13px] font-black text-white leading-tight truncate">
+                Estabizz Admin
               </div>
-              <div className="text-[10px] text-[#d9a938]/80 font-semibold tracking-[0.08em] uppercase">
-                Admin Panel
+              <div className="text-[9.5px] text-[#d9a938]/70 font-semibold tracking-[0.09em] uppercase mt-0.5">
+                Content Panel
               </div>
             </div>
           )}
         </div>
 
-        {/* Nav groups */}
+        {/* Nav items */}
         <nav className="flex-1 overflow-y-auto py-3 [&::-webkit-scrollbar]:hidden">
-          {NAV_GROUPS.map((group, gi) => (
-            <div key={group.label} className={gi > 0 ? "mt-4" : ""}>
-              {/* Group label */}
-              {!collapsed && (
-                <div className="px-4 pb-1 pt-0.5">
-                  <span className="text-[9.5px] font-black uppercase tracking-[0.14em] text-white/25">
-                    {group.label}
-                  </span>
-                </div>
-              )}
-              {collapsed && gi > 0 && (
-                <div className="mx-3 mb-2 border-t border-white/[0.07]" />
-              )}
-              {/* Items */}
-              <div className="space-y-0.5 px-2">
-                {group.items.map((item) => (
-                  <SidebarLink
-                    key={item.href}
-                    href={item.href}
-                    icon={item.icon}
-                    label={item.label}
-                    active={isActive(item.href)}
-                    collapsed={collapsed}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
+          <div className="space-y-0.5 px-2">
+            {NAV_ITEMS.map((item) => (
+              <SidebarLink
+                key={item.href}
+                item={item}
+                active={isActive(item.href)}
+                collapsed={collapsed}
+                pendingCount={pendingCount}
+              />
+            ))}
+          </div>
         </nav>
 
-        {/* View Public Site */}
-        <div className="border-t border-white/[0.07] p-2">
+        {/* Back to Site */}
+        <div className="border-t border-white/[0.06] p-2">
           <a
             href="/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[12px] font-medium text-white/35 transition-all hover:text-[#d9a938]/80 hover:bg-white/[0.04]"
-            title="View Public Site"
+            className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-[12px] font-medium text-white/35 transition-all hover:text-[#d9a938]/80 hover:bg-white/[0.04] ${
+              collapsed ? "justify-center" : ""
+            }`}
+            title="Back to Site"
           >
-            <span className="text-[14px] shrink-0">↗</span>
-            {!collapsed && <span className="truncate">View Public Site</span>}
+            <span className="shrink-0"><IconArrowLeft /></span>
+            {!collapsed && <span className="truncate">Back to Site</span>}
           </a>
         </div>
 
         {/* Collapse toggle */}
-        <div className="p-2 border-t border-white/[0.07]">
+        <div className="p-2 border-t border-white/[0.06]">
           <button
             onClick={() => setCollapsed((c) => !c)}
-            className="w-full flex items-center justify-center py-2 rounded-xl text-white/25 hover:text-white/70 hover:bg-white/[0.06] text-[12px] transition-colors"
+            className="w-full flex items-center justify-center py-2 rounded-xl text-white/25 hover:text-white/60 hover:bg-white/[0.05] transition-colors"
             aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
-            {collapsed ? "▶" : "◀"}
+            {collapsed ? <IconChevronRight /> : <IconChevronLeft />}
           </button>
         </div>
       </aside>
 
       {/* ── Main area ───────────────────────────────────────────────────────── */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden bg-[#f4f7fb]">
 
         {/* Top bar */}
         <header className="h-[52px] shrink-0 flex items-center justify-between px-6 bg-white border-b border-[#e2e8f0] shadow-[0_1px_4px_rgba(15,23,42,0.05)]">
-          <div className="flex items-center gap-3">
-            {/* Breadcrumb */}
-            <span className="text-[12px] text-[#94a3b8] font-medium hidden sm:inline">
-              Admin
-            </span>
-            <span className="text-[#d9a938]/60 hidden sm:inline text-[11px]">/</span>
-            <span className="text-[13px] font-black text-[#0a1628]">
-              {pageTitle}
-            </span>
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2">
+            {breadcrumbs.map((crumb, i) => (
+              <React.Fragment key={crumb}>
+                {i > 0 && (
+                  <span className="text-[#d9a938]/50 text-[11px]">/</span>
+                )}
+                <span
+                  className={
+                    i === breadcrumbs.length - 1
+                      ? "text-[13px] font-black text-[#0a1628]"
+                      : "text-[12px] font-medium text-[#94a3b8] hidden sm:inline"
+                  }
+                >
+                  {crumb}
+                </span>
+              </React.Fragment>
+            ))}
           </div>
 
+          {/* Right side */}
           <div className="flex items-center gap-3">
-            {/* Pending badge */}
-            <Link
-              href="/admin/blogs/pending"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#d9a938]/10 border border-[#d9a938]/30 px-2.5 py-1 text-[11px] font-bold text-[#b8860b] hover:bg-[#d9a938]/20 transition-colors"
-            >
-              <span className="text-[8px] text-[#d9a938]">●</span>
-              Pending Review
-            </Link>
+            {pendingCount > 0 && (
+              <Link
+                href="/admin/blogs/pending"
+                className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#d9a938]/10 border border-[#d9a938]/30 px-2.5 py-1 text-[11px] font-bold text-[#b8860b] hover:bg-[#d9a938]/20 transition-colors"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#d9a938] shrink-0" />
+                Pending {pendingCount}
+              </Link>
+            )}
 
             <span className="text-[12px] font-medium text-[#94a3b8] hidden md:inline">
               admin@estabizz.com
             </span>
+
             <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#d9a938] to-[#b8860b] flex items-center justify-center text-[#071224] text-[11px] font-black shadow-sm">
               A
             </div>

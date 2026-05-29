@@ -20,6 +20,7 @@ import { blogCategories } from '@/lib/blog/categories';
 import { addSubmission } from '@/lib/blog/submissionStore';
 import { connectDB } from '@/lib/db';
 import BlogModel from '@/lib/models/Blog';
+import { sanitizeBlogHtml } from '@/lib/blog/sanitize';
 
 // ─── Validation helpers ───────────────────────────────────────────────────────
 
@@ -155,7 +156,7 @@ export async function POST(req: NextRequest) {
       slug,
 
       summary: body.summary?.trim() || '',
-      content: body.content.trim(),
+      content: sanitizeBlogHtml(body.content.trim()),
 
       featuredImage: {
         url:     body.featuredImageUrl?.trim() || '',

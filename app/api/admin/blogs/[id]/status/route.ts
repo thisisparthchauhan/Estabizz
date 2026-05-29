@@ -18,6 +18,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { adminUpdateBlogStatus } from '@/lib/blog/repository';
+import { requireAdmin } from '@/lib/admin/requireAdmin';
 import type { BlogStatus } from '@/lib/blog/types';
 
 const VALID_STATUSES: BlogStatus[] = [
@@ -33,11 +34,11 @@ type Params = { params: Promise<{ id: string }> };
 
 export async function PATCH(req: NextRequest, { params }: Params) {
   try {
-    const { id } = await params;
+    // ── Admin auth guard ──────────────────────────────────────────────────────
+    const auth = requireAdmin(req);
+    if (!auth.ok) return auth.response;
 
-    // TODO: verify admin session here
-    // const session = await getServerSession(authOptions);
-    // if (!session?.user?.isAdmin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const { id } = await params;
 
     const body = await req.json();
     const { status, adminNotes, reviewedBy } = body as {
@@ -59,7 +60,7 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     if (reviewedBy  !== undefined) patch.reviewedBy  = reviewedBy;
     if (status === 'published')    patch.publishedAt = new Date().toISOString();
 
-    const updated = adminUpdateBlogStatus(id, patch);
+    const updated = await adminUpdateBlogStatus(id, patch);
 
     if (!updated) {
       return NextResponse.json({ error: 'Blog not found.' }, { status: 404 });

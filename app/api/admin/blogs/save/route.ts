@@ -11,6 +11,7 @@ import { addSubmission, updateSubmission, getSubmissionById } from '@/lib/blog/s
 import { connectDB } from '@/lib/db';
 import BlogModel from '@/lib/models/Blog';
 import { requireAdmin } from '@/lib/admin/requireAdmin';
+import { sanitizeBlogHtml } from '@/lib/blog/sanitize';
 
 const KNOWN_AUTHORS = [
   {
@@ -62,6 +63,9 @@ export async function POST(req: NextRequest) {
     const category = blogCategories.find((c) => c.id === body.categoryId);
     if (!category) return NextResponse.json({ error: 'Invalid category.' }, { status: 400 });
 
+    // XSS defense: sanitize the article HTML before it is stored.
+    const cleanContent = sanitizeBlogHtml(body.content.trim());
+
     const now    = new Date();
     const nowISO = now.toISOString();
     const status: BlogStatus = body.status ?? 'draft';
@@ -88,7 +92,7 @@ export async function POST(req: NextRequest) {
         existing.title           = body.title.trim();
         existing.slug            = body.slug?.trim() || slugify(body.title);
         existing.summary         = body.summary?.trim() ?? '';
-        existing.content         = body.content.trim();
+        existing.content         = cleanContent;
         existing.status          = status;
         existing.category        = category;
         existing.tags            = tags;
@@ -116,7 +120,7 @@ export async function POST(req: NextRequest) {
         title:           body.title.trim(),
         slug,
         summary:         body.summary?.trim() ?? '',
-        content:         body.content.trim(),
+        content:         cleanContent,
         featuredImage:   { url: body.featuredImageUrl?.trim() ?? '', alt: body.featuredImageAlt?.trim() || body.title.trim(), caption: '' },
         images:          [],
         category,
@@ -153,7 +157,7 @@ export async function POST(req: NextRequest) {
         title:           body.title.trim(),
         slug:            body.slug?.trim() || slugify(body.title),
         summary:         body.summary?.trim() ?? '',
-        content:         body.content.trim(),
+        content:         cleanContent,
         status,
         category,
         tags,
@@ -179,7 +183,7 @@ export async function POST(req: NextRequest) {
     const blog: Blog = {
       id, title: body.title.trim(), slug,
       summary:   body.summary?.trim() ?? '',
-      content:   body.content.trim(),
+      content:   cleanContent,
       featuredImage: { url: body.featuredImageUrl?.trim() ?? '', alt: body.featuredImageAlt?.trim() || body.title.trim(), caption: '' },
       images:    [],
       category,  tags,

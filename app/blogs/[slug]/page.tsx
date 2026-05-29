@@ -17,6 +17,7 @@ import {
   getPublishedBlogSummaries,
 } from "@/lib/blog/repository";
 import type { Blog, BlogSummary } from "@/lib/blog/types";
+import { sanitizeBlogHtml } from "@/lib/blog/sanitize";
 import BlogDetailClient from "./BlogDetailClient";
 
 // ─── Params type (Next.js 15+ async params) ──────────────────────────────────
@@ -236,6 +237,12 @@ export default async function BlogDetailPage({ params }: Props) {
   // getBlogBySlug returns null for any non-published blog (draft, pending, etc.)
   // — this ensures unpublished content never renders publicly.
   if (!blog) return notFound();
+
+  // Authoritative XSS defense: sanitize the article HTML on the server before
+  // it ever reaches the client's dangerouslySetInnerHTML. Guarantees no
+  // <script>, event handlers, or javascript: URLs are rendered, regardless of
+  // how the content entered the database.
+  blog.content = sanitizeBlogHtml(blog.content);
 
   // Related blogs — same category, excluding current article
   const relatedFull = await getRelatedBlogs(blog.id, blog.category.id, 3);

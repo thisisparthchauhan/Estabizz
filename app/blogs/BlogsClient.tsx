@@ -215,9 +215,9 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
             )}
 
             {/* ── Grid ── */}
-            {gridCards.length > 0 && (
+            {filteredBlogs.length > 0 && (
               <>
-                {heroCard && (
+                {heroCard && gridCards.length > 0 && (
                   <div className="mb-6 flex items-center gap-3">
                     <span className="text-[10.5px] font-black uppercase tracking-[0.2em] text-[#64748b]">All Articles</span>
                     <div className="h-px flex-1 bg-[#e2eaf2]" />
@@ -227,12 +227,6 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
                   {gridCards.map((blog) => <BlogCard key={blog.id} blog={blog} />)}
                 </div>
               </>
-            )}
-
-            {!heroCard && (
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {filteredBlogs.map((blog) => <BlogCard key={blog.id} blog={blog} />)}
-              </div>
             )}
           </>
         )}

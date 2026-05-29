@@ -252,6 +252,83 @@ export function CardMini({ blog }: { blog: BlogSummary }) {
   );
 }
 
+// ─── CardHorizontal (Featured Analysis — large horizontal thought-leadership) ─
+
+export function CardHorizontal({
+  blog,
+  label = "Expert View",
+}: {
+  blog: BlogSummary;
+  label?: string;
+}) {
+  return (
+    <Link
+      href={`/blogs/${blog.slug}`}
+      className="group flex flex-col overflow-hidden border border-[#e8e8e8] bg-white transition-all duration-200 hover:border-[#d0d0d0] hover:shadow-[0_8px_30px_rgba(10,22,40,0.08)] sm:flex-row"
+    >
+      {/* Image left — 42% on desktop */}
+      <div className="relative aspect-video w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-[42%]">
+        <CoverImage
+          src={blog.featuredImage.url}
+          alt={blog.featuredImage.alt}
+          icon={blog.category.icon}
+          className="h-full min-h-[200px] w-full"
+        />
+        {/* Editorial label badge */}
+        <div className="absolute left-3 top-3">
+          <span className="inline-flex items-center gap-1 rounded-sm bg-[#0a1628] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#d9a938]">
+            {label}
+          </span>
+        </div>
+      </div>
+
+      {/* Content right */}
+      <div className="flex flex-1 flex-col justify-center p-5 sm:p-7">
+        <CategoryBadge name={blog.category.name} color={blog.category.color} />
+        <h3 className="mb-2.5 mt-1.5 text-[18px] font-black leading-snug text-[#0a1628] line-clamp-3 group-hover:text-[#0096D6] transition-colors duration-150 sm:text-[21px]">
+          {blog.title}
+        </h3>
+        <p className="mb-4 text-[13.5px] leading-[1.7] text-[#6b7280] line-clamp-3">
+          {blog.summary}
+        </p>
+        <div className="flex items-center gap-2.5 text-[11.5px] text-[#9ca3af]">
+          <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[9px] font-black text-white">
+            {blog.author.firstName[0]}
+          </div>
+          <span className="font-medium text-[#374151]">{authorDisplay(blog)}</span>
+          <span className="opacity-40">·</span>
+          <span>{formatDate(blog.publishedAt)}</span>
+          <span className="opacity-40">·</span>
+          <span>{blog.readingTime} min</span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+// ─── CardPopularRank (Most Popular — ranked 1..5, no image) ──────────────────
+
+export function CardPopularRank({ blog, rank }: { blog: BlogSummary; rank: number }) {
+  return (
+    <Link
+      href={`/blogs/${blog.slug}`}
+      className="group flex items-start gap-4 border-b border-[#f0f0f0] py-3.5 last:border-b-0"
+    >
+      {/* Rank number */}
+      <span className="shrink-0 text-[26px] font-black leading-none text-[#e2e8f0] transition-colors duration-150 group-hover:text-[#d9a938]">
+        {rank}
+      </span>
+      <div className="min-w-0 flex-1">
+        <CategoryBadge name={blog.category.name} color={blog.category.color} size="xs" />
+        <h4 className="mt-0.5 text-[13.5px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#0096D6] transition-colors duration-150">
+          {blog.title}
+        </h4>
+        <span className="mt-1 block text-[11px] text-[#9ca3af]">{blog.readingTime} min read</span>
+      </div>
+    </Link>
+  );
+}
+
 // ─── BlogCard (backwards-compatible default export — CardStandard) ────────────
 
 export function BlogCard({ blog }: { blog: BlogSummary }) {

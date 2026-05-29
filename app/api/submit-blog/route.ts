@@ -18,6 +18,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import type { Blog } from '@/lib/blog/types';
 import { blogCategories } from '@/lib/blog/categories';
 import { addSubmission } from '@/lib/blog/submissionStore';
+import { connectDB } from '@/lib/db';
+import BlogModel from '@/lib/models/Blog';
 
 // ─── Validation helpers ───────────────────────────────────────────────────────
 
@@ -214,8 +216,38 @@ export async function POST(req: NextRequest) {
       updatedAt:   now,
     };
 
-    // ── Persist ───────────────────────────────────────────────────────────────
-    // TODO: replace with real DB insert (see file header)
+    // ── Persist to MongoDB (with in-memory fallback) ──────────────────────────
+    try {
+      await connectDB();
+      await BlogModel.create({
+        blogId:          blog.id,
+        title:           blog.title,
+        slug:            blog.slug,
+        summary:         blog.summary,
+        content:         blog.content,
+        featuredImage:   blog.featuredImage,
+        images:          blog.images,
+        category:        blog.category,
+        tags:            blog.tags,
+        author:          blog.author,
+        status:          blog.status,
+        featured:        blog.featured,
+        isUserSubmitted: blog.isUserSubmitted,
+        submittedBy:     blog.submittedBy,
+        focusKeyword:    blog.focusKeyword,
+        seoTitle:        blog.seoTitle,
+        metaDescription: blog.metaDescription,
+        faqs:            blog.faqs,
+        disclaimer:      blog.disclaimer,
+        ctaText:         blog.ctaText,
+        readingTime:     blog.readingTime,
+        views:           0,
+        likeCount:       0,
+      });
+    } catch (dbErr) {
+      console.warn('[submit-blog] MongoDB unavailable, using in-memory store:', dbErr);
+    }
+    // Always mirror to in-memory store for immediate visibility in the same process
     addSubmission(blog);
 
     // TODO: send confirmation email to submitter

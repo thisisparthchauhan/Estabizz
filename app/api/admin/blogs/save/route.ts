@@ -1,24 +1,39 @@
 /**
  * POST /api/admin/blogs/save
- *
  * Creates or updates a blog from the admin editor.
- * Currently backed by the in-memory submissionStore.
- *
- * TODO: Replace addSubmission / updateSubmission with real DB calls
- * once MongoDB is wired:
- *   Create → Blog.create(payload)
- *   Update → Blog.findByIdAndUpdate(id, payload)
+ * Persists to MongoDB (production) with global in-memory fallback (dev).
  */
 
 import { NextRequest, NextResponse } from 'next/server';
 import type { Blog, BlogStatus } from '@/lib/blog/types';
 import { blogCategories } from '@/lib/blog/categories';
 import { addSubmission, updateSubmission, getSubmissionById } from '@/lib/blog/submissionStore';
+import { connectDB } from '@/lib/db';
+import BlogModel from '@/lib/models/Blog';
+
+const KNOWN_AUTHORS = [
+  {
+    id: 'author_estabizz_team',
+    firstName: 'Estabizz',
+    lastName: 'Compliance Team',
+    email: 'compliance@estabizz.com',
+    designation: 'Regulatory Advisory, Estabizz Fintech',
+    role: 'admin' as const,
+    bio: 'The Estabizz Compliance Team comprises regulatory advisers with extensive experience across RBI, SEBI, IRDAI and IFSCA frameworks.',
+  },
+  {
+    id: 'author_admin',
+    firstName: 'Admin',
+    lastName: 'Editor',
+    email: 'admin@estabizz.com',
+    designation: 'Senior Editor, Estabizz Fintech',
+    role: 'admin' as const,
+    bio: 'Senior editorial team member at Estabizz Fintech.',
+  },
+];
 
 function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .trim()
+  return text.toLowerCase().trim()
     .replace(/[^a-z0-9\s-]/g, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
@@ -30,143 +45,205 @@ function estimateReadingTime(text: string): number {
   return Math.max(1, Math.ceil(words / 238));
 }
 
+/** Convert a Mongoose IBlog document back to our Blog shape */
+function docToBlog(doc: InstanceType<typeof BlogModel>): Blog {
+  return {
+    id:            doc.blogId,
+    title:         doc.title,
+    slug:          doc.slug,
+    summary:       doc.summary,
+    content:       doc.content,
+    featuredImage: doc.featuredImage,
+    images:        doc.images ?? [],
+    category:      doc.category,
+    tags:          doc.tags ?? [],
+    author: {
+      id:           doc.author?.id ?? '',
+      firstName:    doc.author?.firstName ?? '',
+      lastName:     doc.author?.lastName ?? '',
+      email:        doc.author?.email ?? '',
+      bio:          doc.author?.bio ?? '',
+      profileImage: doc.author?.profileImage,
+      role:         (doc.author?.role ?? 'admin') as import('@/lib/blog/types').BlogAuthorRole,
+      designation:  doc.author?.designation ?? '',
+    },
+    status:        doc.status as BlogStatus,
+    featured:      doc.featured,
+    isUserSubmitted: doc.isUserSubmitted,
+    submittedBy:   doc.submittedBy,
+    reviewedBy:    doc.reviewedBy,
+    adminNotes:    doc.adminNotes,
+    focusKeyword:  doc.focusKeyword,
+    seoTitle:      doc.seoTitle,
+    metaDescription: doc.metaDescription,
+    faqs:          (doc.faqs ?? []).map((f, i) => ({ question: f.question ?? '', answer: f.answer ?? '', order: f.order ?? i })),
+    disclaimer:    doc.disclaimer,
+    ctaText:       doc.ctaText,
+    readingTime:   doc.readingTime,
+    views:         doc.views,
+    likeCount:     doc.likeCount,
+    publishedAt:   doc.publishedAt?.toISOString(),
+    createdAt:     (doc.createdAt as Date).toISOString(),
+    updatedAt:     (doc.updatedAt as Date).toISOString(),
+  };
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
     // ── Validation ────────────────────────────────────────────────────────────
-    if (!body.title?.trim()) {
-      return NextResponse.json({ error: 'Title is required.' }, { status: 400 });
-    }
-    if (!body.content?.trim()) {
-      return NextResponse.json({ error: 'Content is required.' }, { status: 400 });
-    }
-    if (!body.categoryId) {
-      return NextResponse.json({ error: 'Category is required.' }, { status: 400 });
-    }
+    if (!body.title?.trim())   return NextResponse.json({ error: 'Title is required.'    }, { status: 400 });
+    if (!body.content?.trim()) return NextResponse.json({ error: 'Content is required.'  }, { status: 400 });
+    if (!body.categoryId)      return NextResponse.json({ error: 'Category is required.' }, { status: 400 });
 
     const category = blogCategories.find((c) => c.id === body.categoryId);
-    if (!category) {
-      return NextResponse.json({ error: 'Invalid category.' }, { status: 400 });
-    }
+    if (!category) return NextResponse.json({ error: 'Invalid category.' }, { status: 400 });
 
-    const now = new Date().toISOString();
+    const now    = new Date();
+    const nowISO = now.toISOString();
     const status: BlogStatus = body.status ?? 'draft';
     const isPublishing = status === 'published';
 
-    // ── UPDATE existing blog ──────────────────────────────────────────────────
+    // Resolve author
+    const author = KNOWN_AUTHORS.find((a) => a.id === body.authorId) ?? KNOWN_AUTHORS[0];
+
+    const tags: string[] = Array.isArray(body.tags)
+      ? body.tags
+      : (body.tags?.split(',').map((t: string) => t.trim()).filter(Boolean) ?? []);
+
+    const faqs = Array.isArray(body.faqs) ? body.faqs : [];
+
+    // ── Try MongoDB first ─────────────────────────────────────────────────────
+    try {
+      await connectDB();
+
+      if (body.id) {
+        // UPDATE
+        const existing = await BlogModel.findOne({ blogId: body.id });
+        if (!existing) return NextResponse.json({ error: 'Blog not found.' }, { status: 404 });
+
+        existing.title           = body.title.trim();
+        existing.slug            = body.slug?.trim() || slugify(body.title);
+        existing.summary         = body.summary?.trim() ?? '';
+        existing.content         = body.content.trim();
+        existing.status          = status;
+        existing.category        = category;
+        existing.tags            = tags;
+        existing.featuredImage   = { url: body.featuredImageUrl?.trim() ?? '', alt: body.featuredImageAlt?.trim() || body.title.trim(), caption: '' };
+        existing.seoTitle        = body.seoTitle?.trim()        || body.title.trim();
+        existing.metaDescription = body.metaDescription?.trim() ?? '';
+        existing.focusKeyword    = body.focusKeyword?.trim()    ?? '';
+        existing.faqs            = faqs;
+        existing.ctaText         = body.ctaBody?.trim()         || undefined;
+        existing.disclaimer      = body.disclaimer?.trim()      || undefined;
+        existing.readingTime     = estimateReadingTime(body.content);
+        existing.author          = { ...existing.author, id: author.id, firstName: author.firstName, lastName: author.lastName, email: author.email, designation: author.designation, bio: author.bio, role: author.role };
+        if (isPublishing && !existing.publishedAt) existing.publishedAt = now;
+
+        await existing.save();
+        return NextResponse.json({ success: true, id: existing.blogId, slug: existing.slug }, { status: 200 });
+      }
+
+      // CREATE
+      const id   = `admin_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+      const slug = body.slug?.trim() || `${slugify(body.title)}-${Date.now()}`;
+
+      const doc = await BlogModel.create({
+        blogId:          id,
+        title:           body.title.trim(),
+        slug,
+        summary:         body.summary?.trim() ?? '',
+        content:         body.content.trim(),
+        featuredImage:   { url: body.featuredImageUrl?.trim() ?? '', alt: body.featuredImageAlt?.trim() || body.title.trim(), caption: '' },
+        images:          [],
+        category,
+        tags,
+        author:          { id: author.id, firstName: author.firstName, lastName: author.lastName, email: author.email, bio: author.bio, role: author.role, designation: author.designation },
+        status,
+        featured:        false,
+        isUserSubmitted: false,
+        focusKeyword:    body.focusKeyword?.trim()    ?? '',
+        seoTitle:        body.seoTitle?.trim()        || body.title.trim(),
+        metaDescription: body.metaDescription?.trim() ?? '',
+        faqs,
+        disclaimer:      body.disclaimer?.trim()      || undefined,
+        ctaText:         body.ctaBody?.trim()         || undefined,
+        readingTime:     estimateReadingTime(body.content),
+        views:           0,
+        likeCount:       0,
+        publishedAt:     isPublishing ? now : undefined,
+      });
+
+      // Also mirror to in-memory store so it's immediately available to the page
+      addSubmission(docToBlog(doc));
+
+      return NextResponse.json({ success: true, id, slug }, { status: 201 });
+
+    } catch (dbErr) {
+      console.warn('[admin/blogs/save] MongoDB unavailable, using in-memory store:', dbErr);
+      // Fall through to in-memory fallback below
+    }
+
+    // ── In-memory fallback ────────────────────────────────────────────────────
     if (body.id) {
       const existing = getSubmissionById(body.id);
-      if (!existing) {
-        return NextResponse.json({ error: 'Blog not found.' }, { status: 404 });
-      }
+      if (!existing) return NextResponse.json({ error: 'Blog not found.' }, { status: 404 });
 
       const patch: Partial<Blog> = {
         title:           body.title.trim(),
         slug:            body.slug?.trim() || slugify(body.title),
-        summary:         body.summary?.trim() || '',
+        summary:         body.summary?.trim() ?? '',
         content:         body.content.trim(),
         status,
         category,
-        tags:            Array.isArray(body.tags) ? body.tags : (body.tags?.split(',').map((t: string) => t.trim()).filter(Boolean) ?? []),
-        featuredImage: {
-          url:     body.featuredImageUrl?.trim() || '',
-          alt:     body.featuredImageAlt?.trim() || body.title.trim(),
-          caption: '',
-        },
-        seoTitle:        body.seoTitle?.trim() || body.title.trim(),
-        metaDescription: body.metaDescription?.trim() || body.summary?.trim() || '',
-        focusKeyword:    body.focusKeyword?.trim() || '',
-        faqs:            Array.isArray(body.faqs) ? body.faqs : [],
-        ctaText:         body.ctaBody?.trim() || undefined,
-        disclaimer:      body.disclaimer?.trim() || undefined,
+        tags,
+        featuredImage:   { url: body.featuredImageUrl?.trim() ?? '', alt: body.featuredImageAlt?.trim() || body.title.trim(), caption: '' },
+        seoTitle:        body.seoTitle?.trim()        || body.title.trim(),
+        metaDescription: body.metaDescription?.trim() ?? '',
+        focusKeyword:    body.focusKeyword?.trim()    ?? '',
+        faqs:            faqs.map((f: { question: string; answer: string }, i: number) => ({ ...f, order: i })),
+        ctaText:         body.ctaBody?.trim()         || undefined,
+        disclaimer:      body.disclaimer?.trim()      || undefined,
         readingTime:     estimateReadingTime(body.content),
-        updatedAt:       now,
-        publishedAt:     isPublishing ? (existing.publishedAt ?? now) : existing.publishedAt,
-        author: {
-          ...existing.author,
-          firstName:   body.authorFirstName?.trim() || existing.author.firstName,
-          lastName:    body.authorLastName?.trim()  || existing.author.lastName,
-          designation: body.authorDesignation?.trim() || existing.author.designation,
-        },
+        updatedAt:       nowISO,
+        publishedAt:     isPublishing ? (existing.publishedAt ?? nowISO) : existing.publishedAt,
+        author:          { ...existing.author, id: author.id, firstName: author.firstName, lastName: author.lastName, email: author.email, designation: author.designation },
       };
-
       const updated = updateSubmission(body.id, patch);
       return NextResponse.json({ success: true, id: updated?.id, slug: updated?.slug }, { status: 200 });
     }
 
-    // ── CREATE new blog ───────────────────────────────────────────────────────
     const id   = `admin_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
     const slug = body.slug?.trim() || `${slugify(body.title)}-${Date.now()}`;
 
-    // Parse author from editor
-    const authorFirstName = body.authorFirstName?.trim() || 'Estabizz';
-    const authorLastName  = body.authorLastName?.trim()  || 'Compliance Team';
-
     const blog: Blog = {
-      id,
-      title:   body.title.trim(),
-      slug,
-      summary: body.summary?.trim() || '',
-      content: body.content.trim(),
-
-      featuredImage: {
-        url:     body.featuredImageUrl?.trim() || '',
-        alt:     body.featuredImageAlt?.trim() || body.title.trim(),
-        caption: '',
-      },
-      images: [],
-
-      category,
-      tags: Array.isArray(body.tags)
-        ? body.tags
-        : (body.tags?.split(',').map((t: string) => t.trim()).filter(Boolean) ?? []),
-
-      author: {
-        id:           `author_admin`,
-        firstName:    authorFirstName,
-        lastName:     authorLastName,
-        email:        body.authorEmail?.trim() || 'compliance@estabizz.com',
-        bio:          '',
-        role:         'admin',
-        designation:  body.authorDesignation?.trim() || 'Estabizz Compliance Team',
-        profileImage: undefined,
-      },
-
-      status,
-      featured:        false,
-      isUserSubmitted: false,
-
-      submittedBy: undefined,
-      reviewedBy:  undefined,
-      adminNotes:  undefined,
-
-      focusKeyword:    body.focusKeyword?.trim()    || '',
+      id, title: body.title.trim(), slug,
+      summary:   body.summary?.trim() ?? '',
+      content:   body.content.trim(),
+      featuredImage: { url: body.featuredImageUrl?.trim() ?? '', alt: body.featuredImageAlt?.trim() || body.title.trim(), caption: '' },
+      images:    [],
+      category,  tags,
+      author:    { id: author.id, firstName: author.firstName, lastName: author.lastName, email: author.email, bio: author.bio, role: author.role, designation: author.designation },
+      status,    featured: false, isUserSubmitted: false,
+      submittedBy: undefined, reviewedBy: undefined, adminNotes: undefined,
+      focusKeyword:    body.focusKeyword?.trim()    ?? '',
       seoTitle:        body.seoTitle?.trim()        || body.title.trim(),
-      metaDescription: body.metaDescription?.trim() || body.summary?.trim() || '',
-
-      faqs:       Array.isArray(body.faqs) ? body.faqs : [],
+      metaDescription: body.metaDescription?.trim() ?? '',
+      faqs: faqs.map((f: { question: string; answer: string }, i: number) => ({ ...f, order: i })),
       disclaimer: body.disclaimer?.trim() || undefined,
       ctaText:    body.ctaBody?.trim()    || undefined,
-
       readingTime: estimateReadingTime(body.content),
-      views:       0,
-      likeCount:   0,
-
-      publishedAt: isPublishing ? now : undefined,
-      createdAt:   now,
-      updatedAt:   now,
+      views: 0, likeCount: 0,
+      publishedAt: isPublishing ? nowISO : undefined,
+      createdAt: nowISO, updatedAt: nowISO,
     };
 
     addSubmission(blog);
-
     return NextResponse.json({ success: true, id, slug }, { status: 201 });
 
   } catch (err) {
     console.error('[admin/blogs/save] Error:', err);
-    return NextResponse.json(
-      { error: 'An unexpected error occurred.' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'An unexpected error occurred.' }, { status: 500 });
   }
 }

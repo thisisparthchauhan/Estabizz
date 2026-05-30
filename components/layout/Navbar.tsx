@@ -499,7 +499,7 @@ export default function Navbar() {
 
     const currentMenu = activeMenu ? menus[activeMenu] : null;
     const SearchBox = ({ mobile = false }: { mobile?: boolean }) => (
-        <div ref={mobile ? undefined : searchRef} className={`relative ${mobile ? "w-full" : "w-[240px]"}`}>
+        <div ref={mobile ? undefined : searchRef} className={`relative ${mobile ? "w-full" : "w-[200px] 2xl:w-[240px]"}`}>
             <label className="sr-only" htmlFor={mobile ? "mobile-page-search" : "desktop-page-search"}>Search pages</label>
             <div className="relative">
                 <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -577,7 +577,9 @@ export default function Navbar() {
                 aria-label="Open country and global market selector"
             >
                 <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#e8f7ff] text-[11px]">IN</span>
-                <span className={compact ? "hidden sm:inline" : ""}>Country: India</span>
+                <span className={compact ? "hidden sm:inline" : ""}>
+                    <span className="hidden 2xl:inline">Country: </span>India
+                </span>
                 <svg className={`h-3.5 w-3.5 transition-transform ${countryOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -665,7 +667,7 @@ export default function Navbar() {
 
                     {/* Right */}
                     <div className="hidden xl:flex items-center gap-2 2xl:gap-3">
-                        <div className="hidden min-[1420px]:block">
+                        <div className="hidden min-[1440px]:block">
                             <SearchBox />
                         </div>
 

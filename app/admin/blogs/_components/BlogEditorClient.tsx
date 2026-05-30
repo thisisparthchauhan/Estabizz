@@ -20,6 +20,7 @@ import React, {
 import Link from "next/link";
 import type { Blog, BlogCategory, BlogStatus } from "@/lib/blog/types";
 import { blogCategories } from "@/lib/blog/categories";
+import { CloudinaryUploader } from "./CloudinaryUploader";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -765,7 +766,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
           <div className="mb-6">
             <p className="text-[12px] font-bold text-[#334155] mb-3">Featured Image</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
-              <Field label="Image URL" hint="Paste a URL or /images/… path">
+              <Field label="Image URL" hint="Upload an image or paste a URL / /images/… path">
                 <div className="flex gap-2">
                   <input
                     type="url"
@@ -776,6 +777,12 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                     }}
                     placeholder="https://… or /images/…"
                     className={inputCls}
+                  />
+                  <CloudinaryUploader
+                    onUploaded={(url) => {
+                      set("featuredImageUrl", url);
+                      setImagePreview(true);
+                    }}
                   />
                   {form.featuredImageUrl && (
                     <button
@@ -833,13 +840,19 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                     </button>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <input
-                      type="url"
-                      value={img.url}
-                      onChange={(e) => updateSupportingImage(i, { url: e.target.value })}
-                      placeholder="Image URL"
-                      className={`${inputCls} text-[12.5px] py-2`}
-                    />
+                    <div className="flex gap-2">
+                      <input
+                        type="url"
+                        value={img.url}
+                        onChange={(e) => updateSupportingImage(i, { url: e.target.value })}
+                        placeholder="Image URL"
+                        className={`${inputCls} text-[12.5px] py-2`}
+                      />
+                      <CloudinaryUploader
+                        size="sm"
+                        onUploaded={(url) => updateSupportingImage(i, { url })}
+                      />
+                    </div>
                     <input
                       type="text"
                       value={img.alt}
@@ -848,6 +861,17 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                       className={`${inputCls} text-[12.5px] py-2`}
                     />
                   </div>
+                  {img.url && (
+                    <div className="mt-2.5 overflow-hidden rounded-lg border border-[#dbe7f3] bg-white">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={img.url}
+                        alt={img.alt || "preview"}
+                        className="h-28 w-full object-cover"
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                      />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

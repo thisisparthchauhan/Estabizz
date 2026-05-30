@@ -68,3 +68,12 @@ export function updateSubmission(id: string, patch: Partial<Blog>): Blog | null 
   s[idx] = { ...s[idx], ...patch, updatedAt: new Date().toISOString() };
   return s[idx];
 }
+
+/** Permanently remove a blog from the store. Returns true if it existed. */
+export function deleteSubmission(id: string): boolean {
+  const s   = store();
+  const idx = s.findIndex((b) => b.id === id);
+  if (idx === -1) return false;
+  s.splice(idx, 1);
+  return true;
+}

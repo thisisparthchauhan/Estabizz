@@ -327,7 +327,7 @@ function RightSidebar({
           </p>
           <Link
             href="/contact"
-            className="inline-block w-full rounded-lg bg-[#d9a938] py-2 text-[12px] font-black text-[#071224] hover:bg-[#f0c040] transition-colors"
+            className="inline-block w-full rounded-lg bg-[#1677f2] py-2 text-[12px] font-black text-white hover:bg-[#3b8ef5] transition-colors"
           >
             Contact Us
           </Link>
@@ -393,7 +393,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
     <main className="relative z-[1] min-h-screen bg-white pt-[64px]">
 
       {/* ── Breadcrumb ── */}
-      <div className="border-b border-[#f0f0f0] bg-[#f7f8fc]">
+      <div className="border-b border-blue-100 bg-[#f5fbff]">
         <div className="mx-auto max-w-screen-xl px-4 py-2.5">
           <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-[12px] text-[#9ca3af]">
             <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link>
@@ -420,14 +420,14 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
             {blog.category.icon} {blog.category.name}
           </span>
           {blog.featured && (
-            <span className="ml-2 inline-flex items-center gap-1 rounded-full border border-[#d9a938]/50 bg-[#d9a938]/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#b8860b]">
+            <span className="ml-2 inline-flex items-center gap-1 rounded-full border border-[#1677f2]/50 bg-[#1677f2]/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#0866d9]">
               ★ Featured
             </span>
           )}
         </div>
 
         {/* Title */}
-        <h1 className="mb-4 max-w-3xl text-[26px] font-black leading-tight text-[#0a1628] sm:text-[30px] lg:text-[36px]">
+        <h1 className="mb-4 max-w-3xl text-[26px] font-black leading-tight tracking-[-0.02em] text-[#120b45] sm:text-[30px] lg:text-[36px]">
           {blog.title}
         </h1>
 
@@ -602,7 +602,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
 
             {/* CTA box */}
             <div className="mt-10 overflow-hidden rounded-sm bg-[#0a1628] p-6 sm:p-8">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#d9a938]/35 bg-[#d9a938]/10 px-3 py-1 text-[11px] font-bold text-[#d9a938]">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#1677f2]/35 bg-[#1677f2]/10 px-3 py-1 text-[11px] font-bold text-[#1677f2]">
                 <span>✦</span> REGULATORY ADVISORY
               </div>
               <h3 className="mb-2 text-[18px] font-black leading-snug text-white sm:text-[20px]">
@@ -614,7 +614,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-lg bg-[#d9a938] px-5 py-2.5 text-[13px] font-black text-[#071224] hover:bg-[#f0c040] transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#1677f2] px-5 py-2.5 text-[13px] font-black text-white hover:bg-[#3b8ef5] transition-colors"
                 >
                   Book Consultation →
                 </Link>
@@ -665,7 +665,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
                 <h2 className="text-[20px] font-black text-[#0a1628]">
                   More in {blog.category.name}
                 </h2>
-                <div className="mt-1 h-[3px] w-10 rounded-full bg-[#d9a938]" />
+                <div className="mt-1 h-[3px] w-10 rounded-full bg-[#1677f2]" />
               </div>
               <Link
                 href={`/blogs/category/${blog.category.slug}`}

@@ -17,7 +17,7 @@ function fmt(iso?: string): string {
 const STATUS_META: Record<BlogStatus, { label: string; cls: string }> = {
   published:      { label: "Published",      cls: "bg-emerald-50 text-emerald-700 border-emerald-200" },
   draft:          { label: "Draft",          cls: "bg-slate-100 text-slate-600 border-slate-200" },
-  pending_review: { label: "Pending Review", cls: "bg-[#d9a938]/10 text-[#b8860b] border-[#d9a938]/40" },
+  pending_review: { label: "Pending Review", cls: "bg-[#1677f2]/10 text-[#0866d9] border-[#1677f2]/40" },
   approved:       { label: "Approved",       cls: "bg-blue-50 text-blue-700 border-blue-200" },
   rejected:       { label: "Rejected",       cls: "bg-red-50 text-red-700 border-red-200" },
   archived:       { label: "Archived",       cls: "bg-purple-50 text-purple-700 border-purple-200" },
@@ -79,7 +79,7 @@ export default function MyBlogsClient({ initialBlogs, email }: Props) {
             </p>
             <Link
               href="/submit-blog"
-              className="inline-flex items-center gap-2 rounded-lg bg-[#d9a938] px-5 py-2.5 text-[13px] font-black text-[#071224] hover:bg-[#f0c040] transition-colors"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#1677f2] px-5 py-2.5 text-[13px] font-black text-white hover:bg-[#3b8ef5] transition-colors"
             >
               Submit Your First Article
             </Link>
@@ -134,7 +134,7 @@ export default function MyBlogsClient({ initialBlogs, email }: Props) {
         {/* Pending note */}
         {blogs.some((b) => b.status === "pending_review") && (
           <p className="mt-4 text-[12.5px] leading-6 text-[#94a3b8]">
-            Submissions marked <strong className="text-[#b8860b]">Pending Review</strong> are awaiting
+            Submissions marked <strong className="text-[#0866d9]">Pending Review</strong> are awaiting
             admin approval and are not yet publicly visible.
           </p>
         )}

@@ -721,6 +721,24 @@ export default function Navbar() {
                                             </div>
                                         )}
 
+                                        {/* My submissions (all logged-in users) */}
+                                        <div className="border-b border-gray-100 py-1">
+                                            <Link
+                                                href="/my-blogs"
+                                                onClick={() => setUserMenuOpen(false)}
+                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] hover:bg-[#f5fbff] hover:text-[#0096D6] transition-colors"
+                                            >
+                                                My Submissions
+                                            </Link>
+                                            <Link
+                                                href="/submit-blog"
+                                                onClick={() => setUserMenuOpen(false)}
+                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] hover:bg-[#f5fbff] hover:text-[#0096D6] transition-colors"
+                                            >
+                                                Submit an Article
+                                            </Link>
+                                        </div>
+
                                         {/* Logout */}
                                         <button
                                             onClick={handleLogout}

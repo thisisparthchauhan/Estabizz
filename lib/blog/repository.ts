@@ -10,7 +10,7 @@
 
 import type { Blog, BlogCategory, BlogFilters, BlogPaginationOptions, BlogSummary, FeaturedBlogDTO } from './types';
 import { blogCategories } from './categories';
-import { getSubmissions, updateSubmission } from './submissionStore';
+import { getSubmissions, updateSubmission, deleteSubmission } from './submissionStore';
 import { connectDB } from '@/lib/db';
 import BlogModel from '@/lib/models/Blog';
 import type { BlogStatus } from './types';
@@ -251,6 +251,88 @@ export async function adminUpdateBlogStatus(
 
   // ── In-memory fallback ────────────────────────────────────────────────────
   return updateSubmission(id, patch);
+}
+
+/**
+ * Permanently delete a blog by id. Admin-level — deletes any blog.
+ * Returns true if a record was removed.
+ */
+export async function adminDeleteBlog(id: string): Promise<boolean> {
+  let removed = false;
+  try {
+    if (await isDBAvailable()) {
+      const res = await BlogModel.deleteOne({ blogId: id });
+      if (res.deletedCount && res.deletedCount > 0) removed = true;
+    }
+  } catch (e) {
+    console.warn('[repository] adminDeleteBlog DB error, using memory:', e);
+    global.__estabizz_dbAvailable = false;
+  }
+  // Also clear any in-memory copy (and covers dev/mock blogs)
+  if (deleteSubmission(id)) removed = true;
+  return removed;
+}
+
+/**
+ * Delete a blog only if it was submitted by the given email (ownership check).
+ * Used by the user-facing "My Submissions" delete. Returns:
+ *   'deleted'   — removed successfully
+ *   'not_found' — no such blog
+ *   'forbidden' — blog exists but is not owned by this email
+ */
+export async function deleteOwnBlog(
+  id: string,
+  ownerEmail: string
+): Promise<'deleted' | 'not_found' | 'forbidden'> {
+  const email = ownerEmail.toLowerCase().trim();
+
+  try {
+    if (await isDBAvailable()) {
+      const doc = await BlogModel.findOne({ blogId: id });
+      if (doc) {
+        const submitter = (doc.submittedBy?.email ?? doc.author?.email ?? '').toLowerCase();
+        if (submitter !== email) return 'forbidden';
+        await BlogModel.deleteOne({ blogId: id });
+        deleteSubmission(id); // clear any mirror
+        return 'deleted';
+      }
+    }
+  } catch (e) {
+    console.warn('[repository] deleteOwnBlog DB error, using memory:', e);
+    global.__estabizz_dbAvailable = false;
+  }
+
+  // In-memory fallback
+  const mem = getSubmissions().find((b) => b.id === id);
+  if (!mem) return 'not_found';
+  const submitter = (mem.submittedBy?.email ?? mem.author?.email ?? '').toLowerCase();
+  if (submitter !== email) return 'forbidden';
+  return deleteSubmission(id) ? 'deleted' : 'not_found';
+}
+
+/**
+ * Return all blogs submitted by a given email (any status) — for the
+ * user-facing "My Submissions" page. Newest first.
+ */
+export async function getBlogsByOwnerEmail(ownerEmail: string): Promise<Blog[]> {
+  const email = ownerEmail.toLowerCase().trim();
+  if (!email) return [];
+
+  try {
+    if (await isDBAvailable()) {
+      const docs = await BlogModel.find({
+        $or: [{ 'submittedBy.email': email }, { 'author.email': email }],
+      }).sort({ createdAt: -1 }).lean();
+      return docs.map((d) => docToBlog(d as InstanceType<typeof BlogModel>));
+    }
+  } catch (e) {
+    console.warn('[repository] getBlogsByOwnerEmail DB error, using memory:', e);
+    global.__estabizz_dbAvailable = false;
+  }
+
+  return getSubmissions()
+    .filter((b) => (b.submittedBy?.email ?? b.author?.email ?? '').toLowerCase() === email)
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
 
 export async function getPublishedBlogCount(filters: Omit<BlogFilters, 'page' | 'limit'> = {}): Promise<number> {

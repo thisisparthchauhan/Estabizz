@@ -61,14 +61,40 @@ const STATUS_TABS: Array<{ key: BlogStatus | "all"; label: string }> = [
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function AdminBlogsClient({ initialBlogs }: Props) {
+  const [blogs,     setBlogs]         = useState<Blog[]>(initialBlogs);
   const [activeTab, setActiveTab]     = useState<BlogStatus | "all">("all");
   const [search,    setSearch]        = useState("");
   const [sortKey,   setSortKey]       = useState<SortKey>("date");
   const [sortDir,   setSortDir]       = useState<SortDir>("desc");
 
+  // Delete confirmation state
+  const [deleteTarget, setDeleteTarget] = useState<Blog | null>(null);
+  const [deleting,     setDeleting]     = useState(false);
+  const [toast,        setToast]        = useState<{ msg: string; type: "ok" | "err" } | null>(null);
+
+  async function confirmDelete() {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/admin/blogs/${deleteTarget.id}`, { method: "DELETE" });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setToast({ msg: data.error || "Delete failed.", type: "err" });
+      } else {
+        setBlogs((prev) => prev.filter((b) => b.id !== deleteTarget.id));
+        setToast({ msg: "Blog deleted.", type: "ok" });
+      }
+    } catch {
+      setToast({ msg: "Network error. Please try again.", type: "err" });
+    } finally {
+      setDeleting(false);
+      setDeleteTarget(null);
+    }
+  }
+
   // ── Derived list ───────────────────────────────────────────────────────────
   const filtered = useMemo(() => {
-    let list = [...initialBlogs];
+    let list = [...blogs];
 
     // Status filter
     if (activeTab !== "all") {
@@ -103,12 +129,12 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
     });
 
     return list;
-  }, [initialBlogs, activeTab, search, sortKey, sortDir]);
+  }, [blogs, activeTab, search, sortKey, sortDir]);
 
   // ── Tab counts ─────────────────────────────────────────────────────────────
   function countFor(key: BlogStatus | "all") {
-    if (key === "all") return initialBlogs.length;
-    return initialBlogs.filter((b) => b.status === key).length;
+    if (key === "all") return blogs.length;
+    return blogs.filter((b) => b.status === key).length;
   }
 
   // ── Sort toggle ────────────────────────────────────────────────────────────
@@ -138,7 +164,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
         <div>
           <h1 className="text-[21px] font-black text-[#0a1628] leading-tight">All Blogs</h1>
           <p className="mt-0.5 text-[13px] text-[#64748b]">
-            {initialBlogs.length} article{initialBlogs.length !== 1 ? "s" : ""} — search, filter and manage
+            {blogs.length} article{blogs.length !== 1 ? "s" : ""} — search, filter and manage
           </p>
         </div>
         <div className="flex items-center gap-2.5">
@@ -354,6 +380,13 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                             ↗ View
                           </Link>
                         )}
+                        <button
+                          onClick={() => setDeleteTarget(blog)}
+                          className="inline-flex items-center gap-1 rounded-lg border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-bold text-red-600 hover:bg-red-100 transition-colors whitespace-nowrap"
+                          title="Delete blog"
+                        >
+                          🗑 Delete
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -366,10 +399,67 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
         {/* Footer count */}
         {filtered.length > 0 && (
           <div className="border-t border-[#f0f4f8] bg-[#f8fafc] px-6 py-3 text-[12px] text-[#94a3b8]">
-            Showing {filtered.length} of {initialBlogs.length} articles
+            Showing {filtered.length} of {blogs.length} articles
           </div>
         )}
       </div>
+
+      {/* ── Delete confirmation modal ─────────────────────────────────────────── */}
+      {deleteTarget && (
+        <div
+          className="fixed inset-0 z-[3000] flex items-center justify-center bg-black/50 p-4"
+          onClick={() => !deleting && setDeleteTarget(null)}
+        >
+          <div
+            className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-red-50 text-[20px]">
+              🗑
+            </div>
+            <h3 className="text-[16px] font-black text-[#0a1628]">Delete this blog?</h3>
+            <p className="mt-1.5 text-[13px] leading-6 text-[#64748b]">
+              You are about to permanently delete{" "}
+              <span className="font-bold text-[#0a1628]">“{deleteTarget.title}”</span>.
+              This action cannot be undone.
+            </p>
+            <div className="mt-5 flex justify-end gap-2.5">
+              <button
+                onClick={() => setDeleteTarget(null)}
+                disabled={deleting}
+                className="rounded-lg border border-[#e2eaf2] bg-white px-4 py-2 text-[13px] font-bold text-[#475569] hover:bg-[#f8fafc] transition-colors disabled:opacity-50"
+              >
+                No, keep it
+              </button>
+              <button
+                onClick={confirmDelete}
+                disabled={deleting}
+                className="rounded-lg bg-red-600 px-4 py-2 text-[13px] font-bold text-white hover:bg-red-700 transition-colors disabled:opacity-60"
+              >
+                {deleting ? "Deleting…" : "Yes, delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Toast ─────────────────────────────────────────────────────────────── */}
+      {toast && (
+        <div
+          className={`fixed bottom-6 right-6 z-[3000] rounded-xl px-4 py-3 text-[13px] font-bold text-white shadow-lg ${
+            toast.type === "ok" ? "bg-[#0a1628]" : "bg-red-600"
+          }`}
+          onAnimationEnd={() => {}}
+        >
+          {toast.msg}
+          <button
+            onClick={() => setToast(null)}
+            className="ml-3 text-white/60 hover:text-white"
+          >
+            ✕
+          </button>
+        </div>
+      )}
     </div>
   );
 }

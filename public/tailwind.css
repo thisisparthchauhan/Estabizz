@@ -1710,6 +1710,10 @@ video {
   width: 200%;
 }
 
+.w-\[200px\] {
+  width: 200px;
+}
+
 .w-\[206px\] {
   width: 206px;
 }
@@ -7798,8 +7802,8 @@ body::before {
   }
 }
 
-@media (min-width: 1420px) {
-  .min-\[1420px\]\:block {
+@media (min-width: 1440px) {
+  .min-\[1440px\]\:block {
     display: block;
   }
 }
@@ -7807,6 +7811,10 @@ body::before {
 @media (min-width: 1536px) {
   .\32xl\:inline {
     display: inline;
+  }
+
+  .\32xl\:w-\[240px\] {
+    width: 240px;
   }
 
   .\32xl\:grid-cols-7 {

@@ -126,9 +126,11 @@ export default async function CategoryBlogsPage({ params }: Props) {
 
       <main className="min-h-screen bg-white pt-[64px]">
 
-        {/* ── Category hero — white bg, editorial style ── */}
-        <div className="border-b border-[#e8e8e8] bg-white">
-          <div className="mx-auto max-w-screen-xl px-4 py-10 sm:px-6 lg:px-8">
+        {/* ── Category hero — homepage gradient + editorial style ── */}
+        <div className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_20%,rgba(0,150,214,0.16),transparent_36%),radial-gradient(circle_at_5%_90%,rgba(22,119,242,0.10),transparent_32%)]" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+          <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
             {/* Breadcrumb */}
             <nav
               className="mb-5 flex items-center gap-2 text-[12px] text-[#9ca3af]"
@@ -160,12 +162,12 @@ export default async function CategoryBlogsPage({ params }: Props) {
             </div>
 
             {/* Large category title */}
-            <h1 className="mb-3 text-[32px] font-black leading-tight text-[#0a1628] md:text-[40px] lg:text-[48px]">
+            <h1 className="mb-3 text-[32px] font-black leading-tight tracking-[-0.03em] text-[#120b45] md:text-[40px] lg:text-[48px]">
               {category.name}
             </h1>
 
-            {/* Gold underline accent */}
-            <div className="mb-4 h-[4px] w-14 rounded-full bg-[#d9a938]" />
+            {/* Accent underline */}
+            <div className="mb-4 h-[4px] w-14 rounded-full bg-[#1677f2]" />
 
             <p className="max-w-2xl text-[15px] leading-7 text-[#6b7280]">
               {category.description}
@@ -239,7 +241,7 @@ async function OtherCategories({ currentSlug }: { currentSlug: string }) {
           <h2 className="text-[18px] font-black text-[#0a1628]">
             Browse Other Topics
           </h2>
-          <div className="mt-1 h-[3px] w-8 rounded-full bg-[#d9a938]" />
+          <div className="mt-1 h-[3px] w-8 rounded-full bg-[#1677f2]" />
         </div>
         <Link
           href="/blogs"

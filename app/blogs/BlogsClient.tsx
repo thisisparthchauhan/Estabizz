@@ -33,7 +33,7 @@ function SectionHeading({
         <h2 className="text-[20px] font-black tracking-tight text-[#0a1628] leading-tight">
           {title}
         </h2>
-        <div className="mt-1.5 h-[3px] w-12 rounded-full bg-[#d9a938]" />
+        <div className="mt-1.5 h-[3px] w-12 rounded-full bg-[#1677f2]" />
       </div>
       {href && hrefLabel && (
         <Link
@@ -74,7 +74,7 @@ function NewsletterCTA() {
       <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr]">
         {/* Left — copy + form */}
         <div className="px-7 py-10 md:px-10 md:py-12">
-          <p className="mb-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#d9a938]">
+          <p className="mb-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
             Estabizz Regulatory Intelligence
           </p>
           <h2 className="mb-3 text-[24px] font-black leading-tight text-white md:text-[28px]">
@@ -86,7 +86,7 @@ function NewsletterCTA() {
           </p>
 
           {done ? (
-            <div className="flex items-center gap-2 rounded-lg border border-[#d9a938]/40 bg-[#d9a938]/10 px-4 py-3 text-[13px] font-bold text-[#d9a938]">
+            <div className="flex items-center gap-2 rounded-lg border border-[#1677f2]/40 bg-[#1677f2]/10 px-4 py-3 text-[13px] font-bold text-[#1677f2]">
               ✓ You&apos;re subscribed. Watch your inbox for regulatory updates.
             </div>
           ) : (
@@ -97,11 +97,11 @@ function NewsletterCTA() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email address"
-                className="h-11 flex-1 rounded-lg border border-white/15 bg-white/[0.06] px-4 text-[13.5px] text-white placeholder:text-white/35 outline-none focus:border-[#d9a938]/50 focus:ring-2 focus:ring-[#d9a938]/15"
+                className="h-11 flex-1 rounded-lg border border-white/15 bg-white/[0.06] px-4 text-[13.5px] text-white placeholder:text-white/35 outline-none focus:border-[#1677f2]/50 focus:ring-2 focus:ring-[#1677f2]/15"
               />
               <button
                 type="submit"
-                className="h-11 shrink-0 rounded-lg bg-[#d9a938] px-6 text-[13.5px] font-black text-[#071224] hover:bg-[#f0c040] transition-colors"
+                className="h-11 shrink-0 rounded-lg bg-[#1677f2] px-6 text-[13.5px] font-black text-white hover:bg-[#3b8ef5] transition-colors"
               >
                 Subscribe
               </button>
@@ -121,16 +121,16 @@ function NewsletterCTA() {
           </div>
           <a
             href="tel:9825600907"
-            className="inline-flex items-center gap-2.5 rounded-lg border border-white/15 bg-white/[0.05] px-5 py-3 text-[15px] font-black text-white transition-colors hover:border-[#d9a938]/50 hover:text-[#d9a938]"
+            className="inline-flex items-center gap-2.5 rounded-lg border border-white/15 bg-white/[0.05] px-5 py-3 text-[15px] font-black text-white transition-colors hover:border-[#1677f2]/50 hover:text-[#1677f2]"
           >
-            <svg className="h-4 w-4 text-[#d9a938]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="h-4 w-4 text-[#1677f2]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
             Estabizz Team 9825600907
           </a>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#d9a938] px-5 py-3 text-[13.5px] font-black text-[#071224] hover:bg-[#f0c040] transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#1677f2] px-5 py-3 text-[13.5px] font-black text-white hover:bg-[#3b8ef5] transition-colors"
           >
             Speak to an Expert →
           </Link>
@@ -222,16 +222,18 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
     <main className="min-h-screen bg-white pt-[64px]">
 
       {/* ── BLOG HEADER AREA ────────────────────────────────────────────────── */}
-      <header className="border-b border-[#e8e8e8] bg-white">
-        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-10">
-          <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#d9a938]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#d9a938]" />
+      <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+        {/* Homepage-style ambient gradients */}
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_20%,rgba(0,150,214,0.16),transparent_36%),radial-gradient(circle_at_5%_90%,rgba(22,119,242,0.10),transparent_32%)]" />
+        <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+        <div className="mx-auto max-w-screen-xl px-4 py-10 sm:py-14">
+          <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-[#0077B6] shadow-sm">
             Estabizz Regulatory Intelligence
           </div>
-          <h1 className="mt-2 text-[32px] font-black leading-none tracking-tight text-[#0a1628] sm:text-[42px]">
-            Estabizz Insights
+          <h1 className="mt-4 text-[34px] font-black leading-[1.05] tracking-[-0.03em] text-[#120b45] sm:text-[48px]">
+            Estabizz <span className="text-[#1677f2]">Insights</span>
           </h1>
-          <p className="mt-3 max-w-2xl text-[14.5px] leading-relaxed text-[#6b7280] sm:text-[16px]">
+          <p className="mt-3 max-w-2xl text-[15px] font-medium leading-relaxed text-[#64748b] sm:text-[17px]">
             Regulatory updates, licensing insights and financial compliance
             intelligence for Indian businesses.
           </p>
@@ -315,10 +317,10 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
       {!isFiltered && tickerItems.length > 0 && (
         <div className="border-b border-[#e8e8e8] bg-white">
           <div className="mx-auto flex max-w-screen-xl items-center gap-4 px-4 py-2.5">
-            <span className="flex shrink-0 items-center gap-1.5 rounded-sm bg-[#0a1628] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#d9a938]">
+            <span className="flex shrink-0 items-center gap-1.5 rounded-sm bg-[#0a1628] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#1677f2]">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#d9a938] opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#d9a938]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1677f2] opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#1677f2]" />
               </span>
               Latest Update
             </span>

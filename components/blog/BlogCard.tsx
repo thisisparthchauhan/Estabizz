@@ -105,7 +105,7 @@ export function CardHero({ blog }: { blog: BlogSummary }) {
 
         {/* Content overlay — bottom */}
         <div className="absolute bottom-0 left-0 right-0 z-10 p-5 md:p-7">
-          <h2 className="mb-2 text-[22px] font-black leading-tight text-white md:text-[26px] line-clamp-3 group-hover:text-[#d9a938] transition-colors duration-200">
+          <h2 className="mb-2 text-[22px] font-black leading-tight text-white md:text-[26px] line-clamp-3 group-hover:text-[#1677f2] transition-colors duration-200">
             {blog.title}
           </h2>
           <div className="flex items-center gap-3 text-[12px] text-white/70">
@@ -276,7 +276,7 @@ export function CardHorizontal({
         />
         {/* Editorial label badge */}
         <div className="absolute left-3 top-3">
-          <span className="inline-flex items-center gap-1 rounded-sm bg-[#0a1628] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#d9a938]">
+          <span className="inline-flex items-center gap-1 rounded-sm bg-[#0a1628] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#1677f2]">
             {label}
           </span>
         </div>
@@ -315,7 +315,7 @@ export function CardPopularRank({ blog, rank }: { blog: BlogSummary; rank: numbe
       className="group flex items-start gap-4 border-b border-[#f0f0f0] py-3.5 last:border-b-0"
     >
       {/* Rank number */}
-      <span className="shrink-0 text-[26px] font-black leading-none text-[#e2e8f0] transition-colors duration-150 group-hover:text-[#d9a938]">
+      <span className="shrink-0 text-[26px] font-black leading-none text-[#e2e8f0] transition-colors duration-150 group-hover:text-[#1677f2]">
         {rank}
       </span>
       <div className="min-w-0 flex-1">

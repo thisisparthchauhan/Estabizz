@@ -382,14 +382,14 @@ body::before {
   color: #d9a938;
 }
 
-/* Important — dark navy */
+/* Important — dark navy with blue accent */
 .callout-important {
   background: linear-gradient(135deg, #0a1628 0%, #0c2040 100%);
-  border: 1px solid rgba(217, 169, 56, 0.35);
+  border: 1px solid rgba(22, 119, 242, 0.4);
 }
 
 .callout-important .callout-title {
-  color: #d9a938;
+  color: #4f9dfb;
 }
 
 .callout-important .callout-body p,
@@ -399,7 +399,7 @@ body::before {
 
 .callout-important .callout-icon::before {
   content: "★";
-  color: #d9a938;
+  color: #1677f2;
 }
 
 /* Success — green */
@@ -458,8 +458,7 @@ body::before {
   margin: 2.5rem 0;
   border: none;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #d9a938/40, transparent);
-  background: linear-gradient(90deg, transparent, rgba(217,169,56,0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(22,119,242,0.4), transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {

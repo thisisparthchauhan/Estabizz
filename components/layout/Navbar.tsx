@@ -663,6 +663,12 @@ export default function Navbar() {
                         >
                             Insights
                         </Link>
+                        <Link
+                            href="/19-5"
+                            className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#0096D6] transition-colors"
+                        >
+                            19/5
+                        </Link>
                     </div>
 
                     {/* Right */}
@@ -866,6 +872,13 @@ export default function Navbar() {
                             className="flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#0096D6]"
                         >
                             ✍️ Regulatory Insights
+                        </Link>
+                        <Link
+                            href="/19-5"
+                            onClick={() => setMobileOpen(false)}
+                            className="mt-2 flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#0096D6]"
+                        >
+                            🏛️ 19/5
                         </Link>
                         <div className="border-t border-gray-100 pt-4 mt-4">
                             {authUser ? (

@@ -65,7 +65,7 @@ export default function ChatWidget() {
         const contactPattern = /(\/contact)/;
         return text.split(contactPattern).map((part, i) =>
             part === "/contact" ? (
-                <Link key={i} href="/contact" className="underline font-semibold text-[#0096D6] hover:text-[#0077B6]" onClick={() => setOpen(false)}>
+                <Link key={i} href="/contact" className="underline font-semibold text-[#1677f2] hover:text-[#0077B6]" onClick={() => setOpen(false)}>
                     book a free consultation
                 </Link>
             ) : part
@@ -79,7 +79,7 @@ export default function ChatWidget() {
                 onClick={() => setOpen((v) => !v)}
                 aria-label="Open AI chat"
                 className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 active:scale-95"
-                style={{ background: "linear-gradient(135deg, #0096D6, #0a1628)" }}
+                style={{ background: "linear-gradient(135deg, #1677f2, #0a1628)" }}
             >
                 {open ? (
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,7 +92,7 @@ export default function ChatWidget() {
                 )}
                 {/* Pulse ring */}
                 {!open && (
-                    <span className="absolute w-full h-full rounded-full animate-ping opacity-30" style={{ background: "#0096D6" }} />
+                    <span className="absolute w-full h-full rounded-full animate-ping opacity-30" style={{ background: "#1677f2" }} />
                 )}
             </button>
 
@@ -103,7 +103,7 @@ export default function ChatWidget() {
 
                     {/* Header */}
                     <div className="flex items-center gap-3 px-4 py-3 text-white flex-shrink-0"
-                        style={{ background: "linear-gradient(135deg, #0096D6, #0a1628)" }}>
+                        style={{ background: "linear-gradient(135deg, #1677f2, #0a1628)" }}>
                         <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center font-bold text-sm flex-shrink-0">AI</div>
                         <div className="min-w-0">
                             <p className="font-bold text-sm leading-tight">Estabizz AI</p>
@@ -120,11 +120,11 @@ export default function ChatWidget() {
                         {messages.map((msg, i) => (
                             <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                                 {msg.role === "assistant" && (
-                                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] flex items-center justify-center text-white text-[10px] font-bold mr-2 flex-shrink-0 mt-0.5">AI</div>
+                                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center text-white text-[10px] font-bold mr-2 flex-shrink-0 mt-0.5">AI</div>
                                 )}
                                 <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${
                                     msg.role === "user"
-                                        ? "bg-[#0096D6] text-white rounded-tr-sm"
+                                        ? "bg-[#1677f2] text-white rounded-tr-sm"
                                         : "bg-white text-[#0a1628] shadow-sm border border-gray-100 rounded-tl-sm"
                                 }`}>
                                     {msg.role === "assistant" ? formatMsg(msg.content) : msg.content}
@@ -133,11 +133,11 @@ export default function ChatWidget() {
                         ))}
                         {loading && (
                             <div className="flex justify-start">
-                                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] flex items-center justify-center text-white text-[10px] font-bold mr-2 flex-shrink-0">AI</div>
+                                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center text-white text-[10px] font-bold mr-2 flex-shrink-0">AI</div>
                                 <div className="bg-white border border-gray-100 shadow-sm rounded-2xl rounded-tl-sm px-4 py-3 flex gap-1 items-center">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#0096D6] animate-bounce" style={{ animationDelay: "0ms" }} />
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#0096D6] animate-bounce" style={{ animationDelay: "150ms" }} />
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#0096D6] animate-bounce" style={{ animationDelay: "300ms" }} />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#1677f2] animate-bounce" style={{ animationDelay: "0ms" }} />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#1677f2] animate-bounce" style={{ animationDelay: "150ms" }} />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#1677f2] animate-bounce" style={{ animationDelay: "300ms" }} />
                                 </div>
                             </div>
                         )}
@@ -149,7 +149,7 @@ export default function ChatWidget() {
                         <div className="px-4 pb-2 bg-[#f8faff] flex flex-wrap gap-1.5">
                             {["NBFC registration?", "SEBI AIF license?", "Insurance broker?", "FEMA compliance?"].map((q) => (
                                 <button key={q} onClick={() => setInput(q)}
-                                    className="px-2.5 py-1 bg-white border border-blue-100 text-[#0096D6] rounded-full text-xs font-medium hover:bg-blue-50 transition-colors">
+                                    className="px-2.5 py-1 bg-white border border-blue-100 text-[#1677f2] rounded-full text-xs font-medium hover:bg-blue-50 transition-colors">
                                     {q}
                                 </button>
                             ))}
@@ -164,13 +164,13 @@ export default function ChatWidget() {
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKey}
                             placeholder="Ask about licenses, compliance..."
-                            className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all min-w-0"
+                            className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all min-w-0"
                         />
                         <button
                             onClick={send}
                             disabled={!input.trim() || loading}
                             className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90"
-                            style={{ background: "linear-gradient(135deg, #0096D6, #0a1628)" }}
+                            style={{ background: "linear-gradient(135deg, #1677f2, #0a1628)" }}
                         >
                             <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />

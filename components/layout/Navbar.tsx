@@ -520,7 +520,7 @@ export default function Navbar() {
                     }}
                     onKeyDown={handleSearchKeyDown}
                     placeholder="Search pages..."
-                    className={`w-full rounded-lg border border-[#dbe7f3] bg-white pl-9 pr-3 text-[13.5px] font-medium text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:border-[#0096D6] focus:ring-4 focus:ring-[#0096D6]/10 ${mobile ? "h-11" : "h-10"}`}
+                    className={`w-full rounded-lg border border-[#dbe7f3] bg-white pl-9 pr-3 text-[13.5px] font-medium text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10 ${mobile ? "h-11" : "h-10"}`}
                     aria-expanded={searchOpen}
                     aria-controls={mobile ? "mobile-page-search-results" : "desktop-page-search-results"}
                 />
@@ -550,7 +550,7 @@ export default function Navbar() {
                                         <span className="block text-[13.5px] font-bold text-[#0a1628]">{item.label}</span>
                                         <span className="mt-0.5 block text-[11.5px] font-medium text-[#64748b]">{item.group}</span>
                                     </span>
-                                    <span className="mt-0.5 shrink-0 text-[12px] font-bold text-[#0096D6]">Open</span>
+                                    <span className="mt-0.5 shrink-0 text-[12px] font-bold text-[#1677f2]">Open</span>
                                 </Link>
                             ))}
                         </div>
@@ -573,11 +573,11 @@ export default function Navbar() {
                     setSearchOpen(false);
                     setCountryOpen((open) => !open);
                 }}
-                className={`${compact ? "h-10 px-3" : "h-10 px-4"} inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white text-[13px] font-black text-[#0a1628] shadow-sm transition-all hover:border-[#0096D6]/40 hover:text-[#0096D6]`}
+                className={`${compact ? "h-10 px-3" : "h-10 px-4"} inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white text-[13px] font-black text-[#0a1628] shadow-sm transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2]`}
                 aria-expanded={countryOpen}
                 aria-label="Open country and global market selector"
             >
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#e8f7ff] text-[11px]">IN</span>
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#eaf6ff] text-[11px]">IN</span>
                 <span className={compact ? "hidden sm:inline" : ""}>
                     <span className="hidden 2xl:inline">Country: </span>India
                 </span>
@@ -589,7 +589,7 @@ export default function Navbar() {
             {countryOpen && (
                 <div className={`${compact ? "right-[-54px] sm:right-0" : "right-0"} absolute top-[48px] w-[min(92vw,720px)] overflow-hidden rounded-[26px] border border-[#dbe7f3] bg-white shadow-[0_30px_90px_rgba(0,60,110,0.18)]`}>
                     <div className="relative overflow-hidden border-b border-blue-100 bg-gradient-to-br from-[#071426] via-[#0a2947] to-[#006da8] p-5 text-white">
-                        <div className="absolute right-[-40px] top-[-60px] h-40 w-40 rounded-full bg-[#d9a938]/25 blur-3xl" />
+                        <div className="absolute right-[-40px] top-[-60px] h-40 w-40 rounded-full bg-[#1677f2]/25 blur-3xl" />
                         <div className="relative flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                             <div>
                                 <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8edcff]">Global Market Desk</div>
@@ -611,14 +611,14 @@ export default function Navbar() {
                         <div className="grid gap-4 md:grid-cols-2">
                             {globalMarketRegions.map((group) => (
                                 <div key={group.region} className="rounded-2xl border border-blue-100 bg-[#f8fbff] p-4">
-                                    <h3 className="text-[12px] font-black uppercase tracking-[0.16em] text-[#0096D6]">{group.region}</h3>
+                                    <h3 className="text-[12px] font-black uppercase tracking-[0.16em] text-[#1677f2]">{group.region}</h3>
                                     <div className="mt-3 flex flex-wrap gap-2">
                                         {group.countries.map((country) => (
                                             <Link
                                                 key={country}
                                                 href="/contact"
                                                 onClick={() => setCountryOpen(false)}
-                                                className="rounded-full border border-white bg-white px-3 py-1.5 text-[11.5px] font-bold text-[#334155] shadow-sm transition-all hover:border-[#0096D6]/40 hover:text-[#0096D6]"
+                                                className="rounded-full border border-white bg-white px-3 py-1.5 text-[11.5px] font-bold text-[#334155] shadow-sm transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2]"
                                             >
                                                 {country}
                                             </Link>
@@ -654,19 +654,19 @@ export default function Navbar() {
                     <div className="hidden xl:flex items-center gap-0.5 2xl:gap-1">
                         {Object.keys(menus).map((item) => (
                             <div key={item} onMouseEnter={() => openMenu(item)} onMouseLeave={closeMenu}
-                                className={`relative cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors ${activeMenu === item ? "text-[#0096D6]" : "text-[#334155] hover:text-[#0096D6]"}`}>
+                                className={`relative cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors ${activeMenu === item ? "text-[#1677f2]" : "text-[#334155] hover:text-[#1677f2]"}`}>
                                 {item} <svg className={`w-3 h-3 transition-transform ${activeMenu === item ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </div>
                         ))}
                         <Link
                             href="/blogs"
-                            className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#0096D6] transition-colors"
+                            className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#1677f2] transition-colors"
                         >
                             Insights
                         </Link>
                         <Link
                             href="/19-5"
-                            className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#0096D6] transition-colors"
+                            className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#1677f2] transition-colors"
                         >
                             19/5
                         </Link>
@@ -684,9 +684,9 @@ export default function Navbar() {
                                 <button
                                     type="button"
                                     onClick={() => setUserMenuOpen((o) => !o)}
-                                    className="flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-3 py-2 text-[13.5px] font-semibold text-[#0a1628] hover:border-[#0096D6]/40 hover:text-[#0096D6] transition-all shadow-sm"
+                                    className="flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-3 py-2 text-[13.5px] font-semibold text-[#0a1628] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-all shadow-sm"
                                 >
-                                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0077B6] text-[11px] font-black text-white uppercase">
+                                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0077B6] text-[11px] font-black text-white uppercase">
                                         {authUser.firstName[0]}{authUser.lastName?.[0] ?? ""}
                                     </span>
                                     <span className="hidden 2xl:inline">{authUser.firstName}</span>
@@ -701,7 +701,7 @@ export default function Navbar() {
                                             <p className="text-[13px] font-bold text-[#0a1628]">{authUser.firstName} {authUser.lastName}</p>
                                             <p className="text-[11px] text-[#64748b] truncate">{authUser.email}</p>
                                             {authUser.isAdmin && (
-                                                <span className="mt-1 inline-block rounded-full bg-[#0096D6]/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#0096D6]">
+                                                <span className="mt-1 inline-block rounded-full bg-[#1677f2]/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#1677f2]">
                                                     Admin Access
                                                 </span>
                                             )}
@@ -720,7 +720,7 @@ export default function Navbar() {
                                                         key={item.href}
                                                         href={item.href}
                                                         onClick={() => setUserMenuOpen(false)}
-                                                        className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] hover:bg-[#f5fbff] hover:text-[#0096D6] transition-colors"
+                                                        className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] hover:bg-[#f5fbff] hover:text-[#1677f2] transition-colors"
                                                     >
                                                         {item.label}
                                                     </Link>
@@ -733,14 +733,14 @@ export default function Navbar() {
                                             <Link
                                                 href="/my-blogs"
                                                 onClick={() => setUserMenuOpen(false)}
-                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] hover:bg-[#f5fbff] hover:text-[#0096D6] transition-colors"
+                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] hover:bg-[#f5fbff] hover:text-[#1677f2] transition-colors"
                                             >
                                                 My Submissions
                                             </Link>
                                             <Link
                                                 href="/submit-blog"
                                                 onClick={() => setUserMenuOpen(false)}
-                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] hover:bg-[#f5fbff] hover:text-[#0096D6] transition-colors"
+                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] hover:bg-[#f5fbff] hover:text-[#1677f2] transition-colors"
                                             >
                                                 Submit an Article
                                             </Link>
@@ -760,13 +760,13 @@ export default function Navbar() {
                                 )}
                             </div>
                         ) : (
-                            <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#0096D6] transition-colors px-3 py-2">
+                            <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#1677f2] transition-colors px-3 py-2">
                                 Login
                             </Link>
                         )}
 
                         <CountrySelector selectorRef={desktopCountryRef} />
-                        <Link href="/get-started" className="premium-border-sweep whitespace-nowrap text-[13px] 2xl:text-[13.5px] font-bold bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white rounded-xl px-3.5 2xl:px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-[0_12px_26px_rgba(0,150,214,0.22)]">
+                        <Link href="/get-started" className="premium-border-sweep whitespace-nowrap text-[13px] 2xl:text-[13.5px] font-bold bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white rounded-xl px-3.5 2xl:px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-[0_12px_26px_rgba(0,150,214,0.22)]">
                             Get Started
                         </Link>
                         <Link href="/contact" className="bg-[#0a1628] whitespace-nowrap text-white font-bold text-[13px] 2xl:text-[13.5px] rounded-xl px-3.5 2xl:px-5 py-2.5 hover:bg-[#1a2638] transition-colors shadow-[0_12px_26px_rgba(10,22,40,0.18)]">
@@ -794,7 +794,7 @@ export default function Navbar() {
                         <div className="w-[240px] shrink-0 border-r border-blue-100 py-4 bg-[#f8fbff]">
                             {currentMenu.categories.map((cat, i) => (
                                 <button key={i} onMouseEnter={() => setActiveCategory(i)}
-                                    className={`w-full flex items-center gap-3 px-5 py-3 text-left text-[14px] transition-colors ${activeCategory === i ? "text-[#0096D6] font-bold bg-blue-50/50 border-l-[3px] border-[#0096D6] pl-[17px]" : "text-[#334155] hover:text-[#0096D6] hover:bg-gray-50 border-l-[3px] border-transparent pl-[17px]"}`}>
+                                    className={`w-full flex items-center gap-3 px-5 py-3 text-left text-[14px] transition-colors ${activeCategory === i ? "text-[#1677f2] font-bold bg-blue-50/50 border-l-[3px] border-[#1677f2] pl-[17px]" : "text-[#334155] hover:text-[#1677f2] hover:bg-gray-50 border-l-[3px] border-transparent pl-[17px]"}`}>
                                     <span className="text-[16px]">{cat.icon}</span> {cat.label}
                                 </button>
                             ))}
@@ -810,9 +810,9 @@ export default function Navbar() {
                                             <Link
                                                 key={j}
                                                 href={linkMap[item] || "#"}
-                                                className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#0096D6] font-medium hover:text-[#0077B6]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}
+                                                className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}
                                             >
-                                                <span className={`${isLive ? 'text-[#0096D6]' : 'text-[#cbd5e1]'} text-[8px]`}>›</span>
+                                                <span className={`${isLive ? 'text-[#1677f2]' : 'text-[#cbd5e1]'} text-[8px]`}>›</span>
                                                 {item}
                                                 {isLive && (
                                                     <span className="ml-1 px-1.5 py-0.5 rounded-[4px] bg-[#10b981]/10 text-[#10b981] text-[9px] font-bold tracking-wider uppercase">Live</span>
@@ -825,8 +825,8 @@ export default function Navbar() {
                                 <p className="text-[14px] text-[#94a3b8]">Upcoming content...</p>
                             )}
                             <div className="flex items-center justify-between mt-8 pt-4 border-t border-gray-100">
-                                <Link href={currentMenu.viewAll} className="text-[14px] font-bold text-[#0096D6] hover:underline">{currentMenu.viewAllLabel}</Link>
-                                <span className="text-[13px] text-[#94a3b8]">Need help? <Link href="/contact" className="text-[#0096D6] underline">Talk to an expert</Link></span>
+                                <Link href={currentMenu.viewAll} className="text-[14px] font-bold text-[#1677f2] hover:underline">{currentMenu.viewAllLabel}</Link>
+                                <span className="text-[13px] text-[#94a3b8]">Need help? <Link href="/contact" className="text-[#1677f2] underline">Talk to an expert</Link></span>
                             </div>
                         </div>
                     </div>
@@ -846,7 +846,7 @@ export default function Navbar() {
                                 <div className="mt-2 space-y-4 pb-2">
                                     {menu.categories.map((cat, i) => (
                                         <div key={i}>
-                                            <h4 className="text-[12px] font-black text-[#0096D6] uppercase tracking-wide mb-2">{cat.icon} {cat.label}</h4>
+                                            <h4 className="text-[12px] font-black text-[#1677f2] uppercase tracking-wide mb-2">{cat.icon} {cat.label}</h4>
                                             <div className="grid grid-cols-1 gap-1">
                                                 {cat.items.slice(0, 4).map((item, j) => {
                                                     const isLive = !!linkMap[item];
@@ -855,7 +855,7 @@ export default function Navbar() {
                                                             key={j}
                                                             href={linkMap[item] || "/get-started"}
                                                             onClick={() => setMobileOpen(false)}
-                                                            className={`block rounded-lg px-3 py-2 text-[13px] ${isLive ? 'text-[#0a1628] bg-white border border-gray-100' : 'text-[#64748b] hover:text-[#0096D6]'}`}
+                                                            className={`block rounded-lg px-3 py-2 text-[13px] ${isLive ? 'text-[#0a1628] bg-white border border-gray-100' : 'text-[#64748b] hover:text-[#1677f2]'}`}
                                                         >
                                                             {item}
                                                         </Link>
@@ -870,14 +870,14 @@ export default function Navbar() {
                         <Link
                             href="/blogs"
                             onClick={() => setMobileOpen(false)}
-                            className="flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#0096D6]"
+                            className="flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#1677f2]"
                         >
                             ✍️ Regulatory Insights
                         </Link>
                         <Link
                             href="/19-5"
                             onClick={() => setMobileOpen(false)}
-                            className="mt-2 flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#0096D6]"
+                            className="mt-2 flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#1677f2]"
                         >
                             🏛️ 19/5
                         </Link>
@@ -885,7 +885,7 @@ export default function Navbar() {
                             {authUser ? (
                                 <div className="mb-2">
                                     <div className="flex items-center gap-3 py-2">
-                                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0077B6] text-[12px] font-black text-white uppercase">
+                                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0077B6] text-[12px] font-black text-white uppercase">
                                             {authUser.firstName[0]}{authUser.lastName?.[0] ?? ""}
                                         </span>
                                         <div>
@@ -905,7 +905,7 @@ export default function Navbar() {
                                 <div className="mt-3 space-y-3 pb-2">
                                     {globalMarketRegions.map((group) => (
                                         <div key={group.region}>
-                                            <h4 className="text-[11px] font-black uppercase tracking-[0.16em] text-[#0096D6]">{group.region}</h4>
+                                            <h4 className="text-[11px] font-black uppercase tracking-[0.16em] text-[#1677f2]">{group.region}</h4>
                                             <div className="mt-2 flex flex-wrap gap-2">
                                                 {group.countries.map((country) => (
                                                     <Link

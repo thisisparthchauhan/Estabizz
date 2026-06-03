@@ -312,7 +312,7 @@ export default function ContactClient() {
                                     </div>
                                     <div>
                                         <p className="text-xs text-gray-400 font-medium">Office</p>
-                                        <p className="text-sm font-semibold text-[#0a1628]">Mumbai, Maharashtra, India</p>
+                                        <p className="text-sm font-semibold leading-relaxed text-[#0a1628]">15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421</p>
                                     </div>
                                 </div>
                             </div>

@@ -137,8 +137,8 @@ export default function Footer() {
                         </p>
 
                         <div className="mt-6 space-y-3">
-                            <div className="rounded-2xl border border-blue-100 bg-white p-4 text-[13px] font-semibold text-[#475569]">
-                                Ahmedabad, Gujarat, India
+                            <div className="rounded-2xl border border-blue-100 bg-white p-4 text-[13px] font-semibold leading-relaxed text-[#475569]">
+                                15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421
                             </div>
                             <a href="tel:+919825600907" className="block rounded-2xl border border-blue-100 bg-white p-4 text-[13px] font-semibold text-[#475569] transition-colors hover:text-[#1677f2]">
                                 +91 98256 00907

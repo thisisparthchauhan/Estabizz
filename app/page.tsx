@@ -43,9 +43,8 @@ const organizationSchema = {
     },
     slogan: "We Comply. We Simplify.",
     sameAs: [
-        "https://www.linkedin.com/company/estabizz",
-        "https://www.instagram.com/estabizz",
-        "https://www.facebook.com/estabizz"
+        "https://www.linkedin.com/company/estabizz-fintech/",
+        "https://www.instagram.com/estabizzlegal/"
     ]
 };
 

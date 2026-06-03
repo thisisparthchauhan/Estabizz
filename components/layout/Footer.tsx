@@ -141,7 +141,7 @@ export default function Footer() {
                                 Ahmedabad, Gujarat, India
                             </div>
                             <a href="tel:+919825600907" className="block rounded-2xl border border-blue-100 bg-white p-4 text-[13px] font-semibold text-[#475569] transition-colors hover:text-[#1677f2]">
-                                +91 98256 00907 | +91 98256 12234
+                                +91 98256 00907
                             </a>
                             <a href="mailto:info@estabizz.com" className="block rounded-2xl border border-blue-100 bg-white p-4 text-[13px] font-semibold text-[#475569] transition-colors hover:text-[#1677f2]">
                                 info@estabizz.com
@@ -150,9 +150,8 @@ export default function Footer() {
 
                         <div className="mt-5 flex gap-3">
                             {[
-                                { icon: "IG", label: "Instagram", href: "https://instagram.com/estabizz" },
-                                { icon: "in", label: "LinkedIn", href: "https://linkedin.com/company/estabizz" },
-                                { icon: "f", label: "Facebook", href: "https://facebook.com/estabizz" },
+                                { icon: "IG", label: "Instagram", href: "https://www.instagram.com/estabizzlegal/" },
+                                { icon: "in", label: "LinkedIn", href: "https://www.linkedin.com/company/estabizz-fintech/" },
                             ].map((s) => (
                                 <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" title={s.label}
                                     className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-100 bg-white text-[12px] font-black text-[#64748b] transition-all hover:-translate-y-1 hover:border-[#1677f2] hover:bg-[#1677f2] hover:text-white">

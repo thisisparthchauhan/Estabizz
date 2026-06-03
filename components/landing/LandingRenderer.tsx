@@ -7,6 +7,10 @@ function Paragraph({ text }: { text: string }) {
   return <p className="text-[15.5px] leading-[1.85] text-[#475569]">{text}</p>;
 }
 
+function Subheading({ text }: { text: string }) {
+  return <h3 className="pt-1 text-[17px] font-black text-[#0a1628] sm:text-[19px]">{text}</h3>;
+}
+
 function Bullets({ items }: { items: string[] }) {
   return (
     <ul className="space-y-2.5">
@@ -154,7 +158,8 @@ function Contact({ phone, web, email, text }: { phone: string; web?: string; ema
 
 function RenderBlock({ block }: { block: Block }) {
   switch (block.type) {
-    case "p":        return <Paragraph text={block.text} />;
+    case "p":          return <Paragraph text={block.text} />;
+    case "subheading": return <Subheading text={block.text} />;
     case "bullets":  return <Bullets items={block.items} />;
     case "checks":   return <Checks items={block.items} />;
     case "numbered": return <Numbered items={block.items} />;

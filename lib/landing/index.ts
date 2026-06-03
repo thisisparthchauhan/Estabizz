@@ -17,6 +17,7 @@ import { llpWindingUp } from "./pages/llpWindingUp";
 import { moaPrivate } from "./pages/moaPrivate";
 import { moaPublic } from "./pages/moaPublic";
 import { moaSection8 } from "./pages/moaSection8";
+import { ngoRegistration } from "./pages/ngoRegistration";
 
 export const LANDING_PAGES: LandingPage[] = [
   companyRegistration,
@@ -30,6 +31,7 @@ export const LANDING_PAGES: LandingPage[] = [
   moaPrivate,
   moaPublic,
   moaSection8,
+  ngoRegistration,
 ];
 
 export function getLandingPage(slug: string): LandingPage | undefined {

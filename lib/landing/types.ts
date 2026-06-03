@@ -8,6 +8,7 @@
 
 export type Block =
   | { type: "p"; text: string }
+  | { type: "subheading"; text: string }
   | { type: "bullets"; items: string[] }
   | { type: "checks"; items: string[] }           // ✓-style list
   | { type: "numbered"; items: { lead?: string; text: string }[] }

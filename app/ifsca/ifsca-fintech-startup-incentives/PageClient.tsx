@@ -143,7 +143,7 @@ export default function FinTechStartupIncentivesPage() {
       heroActions={
         <>
           <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for IFSCA FinTech Authorization</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-white text-[#0096D6] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check Startup Grant Eligibility</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check Startup Grant Eligibility</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm text-center">WhatsApp Estabizz Team</a>
         </>
       }
@@ -175,7 +175,7 @@ export default function FinTechStartupIncentivesPage() {
       finalCtaDescription="Build your FinTech or TechFin entry into GIFT IFSC with structured regulatory support, eligibility review, Authorization or Limited Use Authorization route selection, sandbox documentation, startup grant application, accelerator advisory, business model preparation and post-authorisation compliance assistance."
       finalCtaActions={
         <>
-          <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#0096D6] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all text-center">Speak to IFSCA Compliance Expert</Link>
+          <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#1677f2] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all text-center">Speak to IFSCA Compliance Expert</Link>
           <Link href="/get-started" className="w-full sm:w-auto px-8 py-3.5 bg-white text-[#0077B6] font-bold rounded-xl hover:bg-blue-50 transition-all text-center">Apply for IFSCA FinTech Authorization</Link>
           <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20 text-center">Check Grant Eligibility</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-3.5 bg-[#10b981] hover:bg-[#059669] text-white font-bold rounded-xl shadow-lg transition-all text-center">WhatsApp Estabizz Team</a>

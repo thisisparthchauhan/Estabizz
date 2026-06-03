@@ -159,7 +159,7 @@ export default function BatfRegistrationPage() {
       heroActions={
         <>
           <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for BATF Registration</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-white text-[#0096D6] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check BATF Eligibility</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check BATF Eligibility</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm text-center">WhatsApp Estabizz Team</a>
         </>
       }
@@ -475,7 +475,7 @@ export default function BatfRegistrationPage() {
         <p>Build your BATF Services setup in GIFT IFSC with structured regulatory support, service scope assessment, IFSC entity structuring, safeguarding review, Principal Officer and Compliance Officer documentation, business plan, application filing and post-registration compliance assistance.</p>
         <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-6">
           <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors text-center">Speak to IFSCA Compliance Expert</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-[#0096D6] text-white font-bold rounded-xl hover:bg-[#0077B6] transition-colors text-center">Apply for BATF Services Registration</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-xl hover:bg-[#0077B6] transition-colors text-center">Apply for BATF Services Registration</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors text-center">WhatsApp Estabizz Team</a>
         </div>
       </Section>

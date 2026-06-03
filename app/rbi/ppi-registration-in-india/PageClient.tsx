@@ -162,7 +162,7 @@ export default function PPIRegistrationPage() {
       heroActions={
         <>
           <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for PPI Registration</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-white text-[#0096D6] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check PPI Eligibility</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check PPI Eligibility</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm text-center">WhatsApp Estabizz Team</a>
         </>
       }
@@ -515,7 +515,7 @@ export default function PPIRegistrationPage() {
           <p className="!text-blue-100">Build your PPI application with structured RBI regulatory support, business model assessment, net worth readiness review, KYC/AML framework, wallet technology documentation, customer fund protection structure, policy drafting and post-authorisation compliance assistance.</p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link href="/contact" className="rounded-xl bg-white px-5 py-3 text-center text-sm font-bold text-[#0077B6] hover:bg-blue-50">Speak to RBI Compliance Expert</Link>
-            <Link href="/get-started" className="rounded-xl bg-[#0096D6] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#0077B6]">Apply for PPI Registration</Link>
+            <Link href="/get-started" className="rounded-xl bg-[#1677f2] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#0077B6]">Apply for PPI Registration</Link>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="rounded-xl bg-[#10b981] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#059669]">WhatsApp Estabizz Team</a>
           </div>
         </div>

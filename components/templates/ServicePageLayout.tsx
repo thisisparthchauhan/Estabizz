@@ -93,21 +93,18 @@ export default function ServicePageLayout({
         <div className="min-h-screen bg-[#f6f9ff] font-sans text-gray-800">
             {/* Scroll Progress Bar */}
             <div
-                className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-[#0096D6] via-[#d9a938] to-[#10b981] z-[120] transition-all duration-150 ease-out"
+                className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-[#1677f2] to-[#0866d9] z-[120] transition-all duration-150 ease-out"
                 style={{ width: `${scrollProgress * 100}%` }}
             />
 
             {/* Hero Header */}
             <section
-                className="relative pt-24 pb-12 px-6 lg:px-8 border-b border-blue-100 overflow-hidden"
-                style={{ background: "linear-gradient(135deg, #f7fbff 0%, #e8f6ff 50%, #fffaf0 100%)" }}
+                className="relative pt-24 pb-12 px-6 lg:px-8 border-b border-blue-100 overflow-hidden bg-white"
             >
-                <div
-                    className="absolute inset-0 opacity-[0.075] pointer-events-none"
-                    style={{ backgroundImage: "linear-gradient(#0096D6 1px, transparent 1px), linear-gradient(90deg, #0096D6 1px, transparent 1px)", backgroundSize: "40px 40px" }}
-                />
-                <div className="absolute -left-24 top-16 h-[360px] w-[360px] rounded-full bg-[#0096D6]/12 blur-[100px] pointer-events-none" />
-                <div className="absolute -right-24 bottom-8 h-[360px] w-[360px] rounded-full bg-[#d9a938]/14 blur-[100px] pointer-events-none" />
+                <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
+                <div className="absolute inset-x-0 bottom-0 pointer-events-none h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="absolute -left-24 top-16 h-[360px] w-[360px] rounded-full bg-[#1677f2]/10 blur-[100px] pointer-events-none" />
+                <div className="absolute -right-24 bottom-8 h-[360px] w-[360px] rounded-full bg-[#1677f2]/12 blur-[100px] pointer-events-none" />
 
                 <div className="max-w-7xl mx-auto relative z-10">
                     {/* Breadcrumb */}
@@ -116,9 +113,9 @@ export default function ServicePageLayout({
                             <React.Fragment key={i}>
                                 {i > 0 && <span>&gt;</span>}
                                 {item.href ? (
-                                    <Link href={item.href} className="hover:text-[#0096D6] transition-colors">{item.label}</Link>
+                                    <Link href={item.href} className="hover:text-[#1677f2] transition-colors">{item.label}</Link>
                                 ) : (
-                                    <span className="text-[#0096D6]">{item.label}</span>
+                                    <span className="text-[#1677f2]">{item.label}</span>
                                 )}
                             </React.Fragment>
                         ))}
@@ -129,14 +126,14 @@ export default function ServicePageLayout({
                             {/* Tags */}
                             <div className="flex flex-wrap gap-3 mb-7">
                                 {tags.map((tag, i) => (
-                                    <span key={i} className="px-4 py-2 bg-white/80 text-[#0096D6] border border-blue-100 rounded-full text-xs font-bold shadow-sm backdrop-blur-sm">
+                                    <span key={i} className="px-4 py-2 bg-white/80 text-[#1677f2] border border-blue-100 rounded-full text-xs font-bold shadow-sm backdrop-blur-sm">
                                         {tag.emoji} {tag.label}
                                     </span>
                                 ))}
                             </div>
 
                             {/* Title */}
-                            <h1 className="text-[40px] md:text-[54px] font-black text-[#0a1628] leading-[1.05] mb-6 tracking-[-0.03em] max-w-4xl">
+                            <h1 className="text-[40px] md:text-[54px] font-black text-[#120b45] leading-[1.05] mb-6 tracking-[-0.03em] max-w-4xl">
                                 {title}
                             </h1>
 
@@ -170,7 +167,7 @@ export default function ServicePageLayout({
                             </div>
 
                             <div className="inline-block px-5 py-3 border border-blue-200 bg-white/76 backdrop-blur-sm rounded-full text-sm text-[#0a1628] font-bold shadow-sm">
-                                Focus: <span className="text-[#0096D6]">{focusKeyword}</span>
+                                Focus: <span className="text-[#1677f2]">{focusKeyword}</span>
                             </div>
                         </div>
 
@@ -255,8 +252,8 @@ export default function ServicePageLayout({
                                 href={`#${section.id}`}
                                 onClick={(e) => scrollToSection(e, section.id)}
                                 className={`text-[13.5px] block py-3 pl-4 pr-3 rounded-xl border-l-[3px] leading-snug transition-all duration-200 ${activeSection === section.id
-                                    ? "border-l-[#0096D6] bg-[rgba(0,150,220,0.08)] text-[#0096D6] font-black shadow-sm"
-                                    : "border-l-transparent text-[#64748b] hover:text-[#0096D6] hover:bg-blue-50/70"}`}
+                                    ? "border-l-[#1677f2] bg-[rgba(0,150,220,0.08)] text-[#1677f2] font-black shadow-sm"
+                                    : "border-l-transparent text-[#64748b] hover:text-[#1677f2] hover:bg-blue-50/70"}`}
                             >
                                 {section.title}
                             </a>
@@ -267,7 +264,7 @@ export default function ServicePageLayout({
                 {/* Mobile TOC */}
                 <div className="xl:hidden w-full bg-white/90 border border-[rgba(0,150,220,0.12)] rounded-[22px] p-5 mb-4 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-xl">
                     <details className="group">
-                        <summary className="flex justify-between items-center font-bold cursor-pointer list-none text-[#0096D6]">
+                        <summary className="flex justify-between items-center font-bold cursor-pointer list-none text-[#1677f2]">
                             <span>Contents</span>
                             <span className="transition group-open:rotate-180">
                                 <svg fill="none" height="24" viewBox="0 0 24 24" width="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M6 9l6 6 6-6" /></svg>
@@ -276,7 +273,7 @@ export default function ServicePageLayout({
                         <nav className="flex flex-col gap-2 mt-4 max-h-[320px] overflow-y-auto">
                             {sections.map((section) => (
                                 <a key={section.id} href={`#${section.id}`} onClick={(e) => scrollToSection(e, section.id)}
-                                    className="text-[14px] text-gray-600 hover:text-[#0096D6] border-b border-gray-50 pb-2 leading-snug">
+                                    className="text-[14px] text-gray-600 hover:text-[#1677f2] border-b border-gray-50 pb-2 leading-snug">
                                     {section.title}
                                 </a>
                             ))}
@@ -291,7 +288,7 @@ export default function ServicePageLayout({
               .article-content{font-feature-settings:"kern";letter-spacing:0}
               .article-content h2{font-size:30px;font-weight:900;color:#0a1628;padding:28px 0 10px;margin-top:54px;position:relative;scroll-margin-top:92px;padding-left:18px;transition:all 0.7s ease;opacity:0;transform:translateY(24px);line-height:1.2;letter-spacing:-0.015em}
               .article-content h2.visible{opacity:1;transform:translateY(0)}
-              .article-content h2::before{content:'';position:absolute;left:0;top:32px;bottom:14px;width:5px;background:linear-gradient(180deg,#0096D6,#d9a938,#10b981);border-radius:999px}
+              .article-content h2::before{content:'';position:absolute;left:0;top:32px;bottom:14px;width:5px;background:linear-gradient(180deg,#1677f2,#0866d9);border-radius:999px}
               .article-content h2:first-of-type{margin-top:0}
               .article-content h3{font-size:21px;font-weight:800;color:#0077B6;padding:18px 0 6px;scroll-margin-top:92px;line-height:1.35}
               .article-content h4{font-size:16px;font-weight:800;color:#0a1628;margin-bottom:10px}
@@ -300,11 +297,11 @@ export default function ServicePageLayout({
               .article-content ul{list-style:none}
               .article-content ol{list-style:none;counter-reset:li-counter}
               .article-content li{position:relative;padding-left:24px;margin-bottom:12px;font-size:15.5px;color:#334155;line-height:1.9;display:block}
-              .article-content ul>li::before{content:'◆';color:#0096D6;font-size:10px;position:absolute;left:0;top:9px;line-height:1}
-              .article-content ol>li::before{counter-increment:li-counter;content:counter(li-counter)'.';color:#0096D6;font-size:12px;font-weight:800;position:absolute;left:0;top:4px;line-height:1}
+              .article-content ul>li::before{content:'◆';color:#1677f2;font-size:10px;position:absolute;left:0;top:9px;line-height:1}
+              .article-content ol>li::before{counter-increment:li-counter;content:counter(li-counter)'.';color:#1677f2;font-size:12px;font-weight:800;position:absolute;left:0;top:4px;line-height:1}
               .article-content li strong{color:#0a1628}
-              .article-content li a{color:#0096D6;text-decoration:underline}
-              .article-content p a,.article-content td a{color:#0096D6;text-decoration:underline}
+              .article-content li a{color:#1677f2;text-decoration:underline}
+              .article-content p a,.article-content td a{color:#1677f2;text-decoration:underline}
               .article-content p strong{color:#0a1628}
               .article-content .clean-list{display:grid;gap:10px;margin:18px 0 28px}
               .article-content .clean-list li{background:linear-gradient(135deg,#f8fbff,#ffffff);border:1px solid rgba(0,150,220,0.12);border-radius:16px;padding:14px 16px 14px 38px;margin:0;box-shadow:0 6px 20px rgba(0,100,200,0.035)}
@@ -313,39 +310,39 @@ export default function ServicePageLayout({
               .article-content .numbered-list li{background:#fff;border:1px solid rgba(0,150,220,0.12);border-radius:16px;padding:15px 18px 15px 48px;margin:0;box-shadow:0 8px 24px rgba(0,100,200,0.045)}
               .article-content .numbered-list li::before{left:15px;top:14px;width:20px;height:20px;border-radius:999px;background:#e0f2fe;display:flex;align-items:center;justify-content:center}
               .article-content .field-label{font-weight:800;color:#0a1628}
-              .article-content .process-card{background:linear-gradient(135deg,#ffffff,#f8fbff);border:1px solid rgba(0,150,220,0.14);border-left:5px solid #0096D6;border-radius:18px;padding:20px 22px;margin:20px 0;box-shadow:0 10px 28px rgba(0,100,200,0.06)}
+              .article-content .process-card{background:linear-gradient(135deg,#ffffff,#f8fbff);border:1px solid rgba(0,150,220,0.14);border-left:5px solid #1677f2;border-radius:18px;padding:20px 22px;margin:20px 0;box-shadow:0 10px 28px rgba(0,100,200,0.06)}
               .article-content .process-card h3{padding:0;margin:0 0 8px 0;color:#0a1628;font-size:16px}
               .article-content .process-card p{margin:0;font-size:14px;line-height:1.75}
               .numbered-card{background:white;border:1px solid rgba(0,150,220,0.12);border-radius:18px;padding:18px 22px;transition:all 0.3s;margin-bottom:14px;display:flex;align-items:flex-start;gap:16px;box-shadow:0 8px 22px rgba(0,100,200,0.04)}
               .numbered-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,100,200,0.10);border-color:rgba(0,150,220,0.32)}
-              .num-badge{width:34px;height:34px;flex-shrink:0;border-radius:14px;background:linear-gradient(135deg,#0096D6,#10b981);color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px}
+              .num-badge{width:34px;height:34px;flex-shrink:0;border-radius:14px;background:linear-gradient(135deg,#1677f2,#0866d9);color:white;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px}
               .faq-accordion{margin:28px 0}
               .faq-item{border:1px solid #e2e8f0;border-radius:16px;margin-bottom:12px;overflow:hidden;background:white;box-shadow:0 8px 22px rgba(0,100,200,0.035)}
               .faq-item summary{padding:18px 22px;cursor:pointer;font-weight:700;font-size:15.5px;color:#0a1628;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
               .faq-item summary::-webkit-details-marker{display:none}
-              .faq-item summary::after{content:'▼';color:#0096D6;font-size:11px;flex-shrink:0;transition:transform 0.2s}
+              .faq-item summary::after{content:'▼';color:#1677f2;font-size:11px;flex-shrink:0;transition:transform 0.2s}
               .faq-item[open] summary::after{transform:rotate(180deg)}
               .faq-item summary:hover{background:#f0f9ff}
               .faq-item>div{padding:0 22px 18px 22px;font-size:15px;color:#374151;line-height:1.8;border-top:1px solid #f1f5f9}
               .faq-accordion summary::-webkit-details-marker{display:none}
-              .expert-quote{background:linear-gradient(135deg,#f0f9ff,#fffaf0);border-left:5px solid #0096D6;border-radius:0 18px 18px 0;padding:24px 28px;margin:36px 0;box-shadow:0 10px 26px rgba(0,100,200,0.05)}
+              .expert-quote{background:linear-gradient(135deg,#f0f9ff,#eaf6ff);border-left:5px solid #1677f2;border-radius:0 18px 18px 0;padding:24px 28px;margin:36px 0;box-shadow:0 10px 26px rgba(0,100,200,0.05)}
               .expert-quote blockquote{font-size:16px;font-style:italic;color:#0a1628;line-height:1.75;margin:0 0 10px 0}
               .expert-quote cite{font-size:13px;color:#64748b;font-style:normal;font-weight:600}
-              .info-box{background:rgba(0,150,220,0.05);border:1px solid rgba(0,150,220,0.16);border-left:5px solid #0096D6;border-radius:18px;padding:22px 26px;margin:28px 0}
+              .info-box{background:rgba(0,150,220,0.05);border:1px solid rgba(0,150,220,0.16);border-left:5px solid #1677f2;border-radius:18px;padding:22px 26px;margin:28px 0}
               .warning-box{background:rgba(245,158,11,0.07);border:1px solid #fcd34d;border-left:5px solid #F59E0B;border-radius:18px;padding:22px 26px;margin:28px 0}
               .success-box{background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.22);border-left:5px solid #10b981;border-radius:18px;padding:22px 26px;margin:28px 0}
               .data-table{width:100%;border-collapse:collapse;border-radius:18px;overflow:hidden;border:1px solid rgba(0,150,220,0.15);margin:28px 0;box-shadow:0 10px 28px rgba(0,100,200,0.05)}
-              .data-table thead tr{background:linear-gradient(90deg,#0077B6,#0096D6);color:white}
+              .data-table thead tr{background:linear-gradient(90deg,#0866d9,#1677f2);color:white}
               .data-table thead th{padding:15px 17px;font-size:13px;font-weight:800;text-align:left}
               .data-table tbody tr:nth-child(odd){background:white}
               .data-table tbody tr:nth-child(even){background:#fafbff}
               .data-table tbody td{padding:14px 17px;font-size:13.5px;color:#374151;border-bottom:1px solid rgba(0,150,220,0.08);line-height:1.65}
               .step-timeline{position:relative;padding-left:26px;border-left:2px dashed #bfdbfe;margin:36px 0}
               .step-item{position:relative;margin-bottom:32px}
-              .step-dot{position:absolute;left:-33px;top:16px;width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#0096D6,#0077B6);box-shadow:0 0 0 4px white}
-              .step-card{background:white;border-left:4px solid #0096D6;border-top:1px solid #e2e8f0;border-right:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;border-radius:0 18px 18px 0;padding:18px 22px;transition:box-shadow 0.3s}
+              .step-dot{position:absolute;left:-33px;top:16px;width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#1677f2,#0866d9);box-shadow:0 0 0 4px white}
+              .step-card{background:white;border-left:4px solid #1677f2;border-top:1px solid #e2e8f0;border-right:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;border-radius:0 18px 18px 0;padding:18px 22px;transition:box-shadow 0.3s}
               .step-card:hover{box-shadow:0 12px 28px rgba(0,100,200,0.09)}
-              .step-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#0096D6;margin-bottom:4px}
+              .step-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#1677f2;margin-bottom:4px}
               .badge-yes{background:#dcfce7;color:#16a34a;padding:2px 10px;border-radius:999px;font-weight:700;font-size:12px;display:inline-flex;align-items:center;gap:4px}
               .badge-no{background:#fee2e2;color:#dc2626;padding:2px 10px;border-radius:999px;font-weight:700;font-size:12px}
               .badge-optional{background:#fef3c7;color:#d97706;padding:2px 10px;border-radius:999px;font-weight:700;font-size:12px}
@@ -363,12 +360,12 @@ export default function ServicePageLayout({
                 <aside className="w-full xl:w-[280px] shrink-0 flex flex-col gap-6 sticky top-[88px]">
 
                     {/* CTA Card */}
-                    <div className="relative overflow-hidden rounded-[24px] p-[26px] shadow-[0_24px_60px_rgba(0,119,182,0.25)] text-white" style={{ background: "linear-gradient(135deg, #0077B6, #0096D6)" }}>
+                    <div className="relative overflow-hidden rounded-[24px] p-[26px] shadow-[0_24px_60px_rgba(22,119,242,0.25)] text-white" style={{ background: "linear-gradient(135deg, #1677f2, #0866d9)" }}>
                         <div className="absolute -right-12 -top-12 h-28 w-28 rounded-full bg-white/15 blur-2xl" />
                         <div className="relative">
                         <h3 className="font-black text-[21px] mb-3 leading-tight">{ctaTitle}</h3>
                         <p className="text-white/86 text-[14px] mb-6 leading-7">{ctaDescription}</p>
-                        <Link href="/contact" className="block w-full bg-white text-[#0077B6] font-black text-[14px] py-3.5 rounded-2xl hover:bg-blue-50 hover:shadow-lg transition duration-300 text-center">
+                        <Link href="/contact" className="block w-full bg-white text-[#1677f2] font-black text-[14px] py-3.5 rounded-2xl hover:bg-blue-50 hover:shadow-lg transition duration-300 text-center">
                             📞 Book Free Consultation
                         </Link>
                         <div className="text-center text-white/78 text-[12px] mt-4 font-bold tracking-wide">
@@ -385,13 +382,13 @@ export default function ServicePageLayout({
                             </div>
                             <div>
                                 <h4 className="font-bold text-[15px] text-[#0a1628] leading-tight">CS Devyani Khambhati</h4>
-                                <div className="text-[12px] text-[#0096D6] font-medium">Compliance Expert</div>
+                                <div className="text-[12px] text-[#1677f2] font-medium">Compliance Expert</div>
                             </div>
                         </div>
                         <div className="text-[13.5px] text-gray-600 leading-relaxed">
                             Specialist in fintech regulatory compliance, government licenses and RBI, SEBI, IRDAI frameworks.
                         </div>
-                        <a href="mailto:contact@estabizz.com" className="mt-4 block text-center w-full py-2.5 bg-blue-50 text-[#0077B6] font-bold text-[13px] rounded-xl hover:bg-[#0096D6] hover:text-white transition-colors">
+                        <a href="mailto:contact@estabizz.com" className="mt-4 block text-center w-full py-2.5 bg-blue-50 text-[#0077B6] font-bold text-[13px] rounded-xl hover:bg-[#1677f2] hover:text-white transition-colors">
                             Ask a Question
                         </a>
                     </div>
@@ -399,9 +396,9 @@ export default function ServicePageLayout({
                     {/* Quick Facts */}
                     {quickFacts.length > 0 && (
                         <div className="bg-white border border-[rgba(0,150,220,0.15)] rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] relative overflow-hidden">
-                            <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#0096D6] to-[#10b981]" />
+                            <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#1677f2] to-[#10b981]" />
                             <h4 className="font-bold text-[#0a1628] flex items-center gap-2 mb-4">
-                                <span className="text-[#0096D6]">⚡</span> Quick Facts
+                                <span className="text-[#1677f2]">⚡</span> Quick Facts
                             </h4>
                             <div className="space-y-3">
                                 {quickFacts.map((fact, i) => (
@@ -442,8 +439,8 @@ export default function ServicePageLayout({
                             {relatedArticles.map((article, i) => (
                                 <Link key={i} href={article.href} className="block group">
                                     <div className="bg-white border border-blue-100 rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(0,100,200,0.10)] hover:border-blue-200 transition-all h-full">
-                                        <div className="text-[12px] font-bold text-[#0096D6] uppercase tracking-wider mb-2">{article.category}</div>
-                                        <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#0096D6] transition-colors mb-2">{article.title}</h3>
+                                        <div className="text-[12px] font-bold text-[#1677f2] uppercase tracking-wider mb-2">{article.category}</div>
+                                        <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#1677f2] transition-colors mb-2">{article.title}</h3>
                                         <p className="text-[13px] text-gray-500 line-clamp-2">{article.description}</p>
                                     </div>
                                 </Link>
@@ -454,7 +451,7 @@ export default function ServicePageLayout({
             )}
 
             {/* Final CTA */}
-            <section className="relative overflow-hidden bg-gradient-to-br from-[#071224] via-[#0a315f] to-[#0077B6] py-20 text-center px-6">
+            <section className="relative overflow-hidden bg-gradient-to-br from-[#0a1628] to-[#0c2040] py-20 text-center px-6">
                 <div className="absolute inset-0 opacity-[0.10] pointer-events-none" style={{ backgroundImage: "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)", backgroundSize: "54px 54px" }} />
                 <div className="relative z-10 max-w-3xl mx-auto">
                     <h2 className="text-[28px] md:text-[32px] font-bold text-white mb-4">{finalCtaTitle}</h2>
@@ -465,10 +462,10 @@ export default function ServicePageLayout({
                         </div>
                     ) : (
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#0096D6] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all">
+                            <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-[#1677f2] hover:bg-[#0866d9] text-white font-bold rounded-xl shadow-[0_14px_35px_rgba(22,119,242,0.28)] transition-all">
                                 Get Started Free →
                             </Link>
-                            <a href="tel:+919876543210" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20">
+                            <a href="tel:9825600907" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20">
                                 Talk to Expert
                             </a>
                         </div>

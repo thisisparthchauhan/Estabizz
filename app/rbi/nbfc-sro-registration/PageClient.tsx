@@ -178,7 +178,7 @@ export default function NBFCSRORegistrationPage() {
       heroActions={
         <>
           <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for NBFC SRO Registration</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-white text-[#0096D6] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check SRO Eligibility</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check SRO Eligibility</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm text-center">WhatsApp Estabizz Team</a>
         </>
       }
@@ -484,7 +484,7 @@ export default function NBFCSRORegistrationPage() {
           <p className="!text-blue-100">Build your SRO application with structured regulatory support, Rs. 2 crore net worth readiness review, governance framework, business plan, policy documentation, member representation mapping and post-recognition compliance assistance.</p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link href="/contact" className="rounded-xl bg-white px-5 py-3 text-center text-sm font-bold text-[#0077B6] hover:bg-blue-50">Speak to RBI Compliance Expert</Link>
-            <Link href="/get-started" className="rounded-xl bg-[#0096D6] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#0077B6]">Apply for NBFC SRO Registration</Link>
+            <Link href="/get-started" className="rounded-xl bg-[#1677f2] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#0077B6]">Apply for NBFC SRO Registration</Link>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="rounded-xl bg-[#10b981] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#059669]">WhatsApp Estabizz Team</a>
           </div>
         </div>

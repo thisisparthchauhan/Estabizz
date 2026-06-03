@@ -88,7 +88,7 @@ const mistakes = [
 /* ─── sub-components  ─── */
 const NumberCard = ({ n, title, desc }: { n: number, title: string, desc: string }) => (
     <div className="flex items-start gap-4 p-5 bg-white rounded-xl border border-[rgba(0,150,220,0.1)] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0096D6] to-[#10b981] text-white flex items-center justify-center text-sm font-bold shrink-0">{n}</div>
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#1677f2] to-[#10b981] text-white flex items-center justify-center text-sm font-bold shrink-0">{n}</div>
         <div><h4 className="font-bold text-[#0a1628] text-[15px] mb-1">{title}</h4><p className="text-[13px] text-[#64748b] leading-relaxed">{desc}</p></div>
     </div>
 );
@@ -102,7 +102,7 @@ const FAQAccordion = ({ groups }: { groups: FAQGroup[] }) => {
                 <div key={gi} className="border border-[rgba(0,150,220,0.1)] rounded-2xl overflow-hidden">
                     <button onClick={() => setOG(p => ({ ...p, [gi]: !p[gi] }))} className="w-full flex items-center justify-between p-5 bg-[rgba(0,150,220,0.04)] hover:bg-[rgba(0,150,220,0.08)] transition-colors">
                         <span className="font-bold text-[#0a1628] text-[16px]">{gi + 1}. {g.title}</span>
-                        <svg className={`w-5 h-5 text-[#0096D6] transition-transform duration-300 ${openGroups[gi] ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                        <svg className={`w-5 h-5 text-[#1677f2] transition-transform duration-300 ${openGroups[gi] ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                     </button>
                     {openGroups[gi] && (
                         <div className="divide-y divide-gray-100">
@@ -111,7 +111,7 @@ const FAQAccordion = ({ groups }: { groups: FAQGroup[] }) => {
                                 return (
                                     <div key={qi} className="border-t border-gray-50">
                                         <button onClick={() => setOQ(p => ({ ...p, [key]: !p[key] }))} className="w-full flex items-start gap-3 p-4 text-left hover:bg-blue-50/30 transition-colors">
-                                            <svg className={`w-4 h-4 text-[#0096D6] mt-1 shrink-0 transition-transform duration-300 ${openQs[key] ? 'rotate-90' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                                            <svg className={`w-4 h-4 text-[#1677f2] mt-1 shrink-0 transition-transform duration-300 ${openQs[key] ? 'rotate-90' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                                             <span className="font-semibold text-[#0a1628] text-[14px]">{item.q}</span>
                                         </button>
                                         {openQs[key] && <p className="px-11 pb-4 text-[13px] text-[#64748b] leading-[1.8]">{item.a}</p>}
@@ -160,37 +160,38 @@ export default function FinanceCompanyArticleClient() {
     }, []);
 
     const H2 = ({ id, children }: { id: string, children: React.ReactNode }) => (
-        <h2 data-section={id} className="text-[24px] font-extrabold text-[#0a1628] mt-12 mb-4 pl-5 border-l-4 border-l-transparent scroll-mt-20 relative" style={{ borderImage: "linear-gradient(to bottom,#0096D6,#10b981) 1" }}>{children}</h2>
+        <h2 data-section={id} className="text-[24px] font-extrabold text-[#0a1628] mt-12 mb-4 pl-5 border-l-4 border-l-transparent scroll-mt-20 relative" style={{ borderImage: "linear-gradient(to bottom,#1677f2,#10b981) 1" }}>{children}</h2>
     );
     const H3 = ({ children }: { children: React.ReactNode }) => <h3 className="text-[18px] font-bold text-[#0077B6] mt-6 mb-3">{children}</h3>;
     const P = ({ children }: { children: React.ReactNode }) => <p className="text-[15px] leading-[1.85] text-[#374151] mb-4">{children}</p>;
-    const Bullet = ({ items }: { items: string[] }) => <ul className="space-y-2 mb-4 ml-1">{items.map((it, i) => <li key={i} className="flex items-start gap-2.5 text-[14px] text-[#374151] leading-[1.8]"><span className="text-[#0096D6] mt-1 text-[10px]">◆</span>{it}</li>)}</ul>;
+    const Bullet = ({ items }: { items: string[] }) => <ul className="space-y-2 mb-4 ml-1">{items.map((it, i) => <li key={i} className="flex items-start gap-2.5 text-[14px] text-[#374151] leading-[1.8]"><span className="text-[#1677f2] mt-1 text-[10px]">◆</span>{it}</li>)}</ul>;
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#f8faff] to-[#f0f9ff] text-[#374151] font-sans">
             {/* Navbar */}
             {/* Progress bar */}
-            <div className="fixed top-[64px] left-0 h-[3px] z-[200]" style={{ width: `${progress}%`, background: "linear-gradient(90deg,#0096D6,#10b981)" }} />
+            <div className="fixed top-[64px] left-0 h-[3px] z-[200]" style={{ width: `${progress}%`, background: "linear-gradient(90deg,#1677f2,#10b981)" }} />
 
             {/* HERO */}
-            <header className="relative pt-24 pb-16 px-6 overflow-hidden" style={{ background: "linear-gradient(135deg,#f0f9ff,#e0f2fe,#eff6ff)" }}>
-                <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none' stroke='%230096D6' stroke-width='.5'/%3E%3C/svg%3E\")" }} />
+            <header className="relative pt-24 pb-16 px-6 overflow-hidden bg-white">
+                <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
+                <div className="absolute inset-x-0 bottom-0 pointer-events-none h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
                 <div className="max-w-[1280px] mx-auto relative z-10">
-                    <nav className="flex items-center gap-2 text-[13px] text-[#64748b] mb-6"><a href="/" className="hover:text-[#0096D6]">Home</a><span>›</span><span>IFSCA</span><span>›</span><span className="text-[#0096D6] font-semibold">Finance Company in GIFT IFSC</span></nav>
-                    <div className="flex flex-wrap gap-2 mb-6">{["🏛️ IFSCA", "🌐 GIFT City", "📋 Complete Guide", "💰 Treasury", "2025 Framework"].map(t => <span key={t} className="px-3 py-1 bg-white/80 border border-[rgba(0,150,220,0.15)] rounded-full text-[12px] font-semibold text-[#0096D6]">{t}</span>)}</div>
-                    <h1 className="text-[clamp(28px,4vw,36px)] font-black text-[#0a1628] leading-[1.2] tracking-tight max-w-4xl mb-6">Finance Company in GIFT IFSC – Complete Strategic Guide for Global Treasury &amp; Finance Setup</h1>
+                    <nav className="flex items-center gap-2 text-[13px] text-[#64748b] mb-6"><a href="/" className="hover:text-[#1677f2]">Home</a><span>›</span><span>IFSCA</span><span>›</span><span className="text-[#1677f2] font-semibold">Finance Company in GIFT IFSC</span></nav>
+                    <div className="flex flex-wrap gap-2 mb-6">{["🏛️ IFSCA", "🌐 GIFT City", "📋 Complete Guide", "💰 Treasury", "2025 Framework"].map(t => <span key={t} className="px-3 py-1 bg-white/80 border border-[rgba(0,150,220,0.15)] rounded-full text-[12px] font-semibold text-[#1677f2]">{t}</span>)}</div>
+                    <h1 className="text-[clamp(28px,4vw,36px)] font-black text-[#120b45] leading-[1.2] tracking-tight max-w-4xl mb-6">Finance Company in GIFT IFSC – Complete Strategic Guide for Global Treasury &amp; Finance Setup</h1>
                     <div className="flex flex-wrap items-center gap-4 text-[13px] text-[#64748b] font-medium mb-4"><span>📅 2025</span><span>⏱️ 20 min read</span><span>👁️ Regulatory Guide</span><span>✅ Expert Reviewed</span></div>
-                    <span className="inline-block px-4 py-1.5 border border-[#0096D6] rounded-full text-[12px] font-bold text-[#0096D6]">Focus: Finance Company in GIFT IFSC</span>
+                    <span className="inline-block px-4 py-1.5 border border-[#1677f2] rounded-full text-[12px] font-bold text-[#1677f2]">Focus: Finance Company in GIFT IFSC</span>
                 </div>
             </header>
 
             {/* Mobile TOC Toggle */}
             <div className="xl:hidden sticky top-[3px] z-50 bg-white/95 backdrop-blur-md border-b border-blue-100 px-4 py-3">
-                <button onClick={() => setTocOpen(!tocOpen)} className="flex items-center gap-2 text-[14px] font-bold text-[#0096D6]">
+                <button onClick={() => setTocOpen(!tocOpen)} className="flex items-center gap-2 text-[14px] font-bold text-[#1677f2]">
                     <svg className={`w-4 h-4 transition-transform ${tocOpen ? 'rotate-90' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
                     Table of Contents
                 </button>
-                {tocOpen && <div className="mt-3 space-y-1 max-h-[60vh] overflow-y-auto">{tocItems.map(t => <button key={t} onClick={() => scrollTo(t)} className={`block w-full text-left px-3 py-2 text-[13px] rounded-lg transition-colors ${activeSection === t ? 'bg-[rgba(0,150,220,0.06)] text-[#0096D6] font-bold' : 'text-[#64748b] hover:text-[#0096D6]'}`}>{t}</button>)}</div>}
+                {tocOpen && <div className="mt-3 space-y-1 max-h-[60vh] overflow-y-auto">{tocItems.map(t => <button key={t} onClick={() => scrollTo(t)} className={`block w-full text-left px-3 py-2 text-[13px] rounded-lg transition-colors ${activeSection === t ? 'bg-[rgba(0,150,220,0.06)] text-[#1677f2] font-bold' : 'text-[#64748b] hover:text-[#1677f2]'}`}>{t}</button>)}</div>}
             </div>
 
             {/* 3-COLUMN LAYOUT */}
@@ -200,7 +201,7 @@ export default function FinanceCompanyArticleClient() {
                 <aside className="hidden xl:block w-[220px] shrink-0">
                     <div className="sticky top-20 bg-white rounded-2xl border border-[rgba(0,150,220,0.1)] shadow-sm p-5 max-h-[calc(100vh-100px)] overflow-y-auto">
                         <h4 className="text-[12px] font-bold text-[#94a3b8] uppercase tracking-[.08em] mb-4">Contents</h4>
-                        <nav className="space-y-0.5">{tocItems.map(t => <button key={t} onClick={() => scrollTo(t)} className={`block w-full text-left px-3 py-[7px] rounded-lg text-[13px] transition-all duration-200 ${activeSection === t ? 'bg-[rgba(0,150,220,0.06)] text-[#0096D6] font-bold border-l-[3px] border-[#0096D6] -ml-px' : 'text-[#64748b] hover:text-[#0096D6]'}`}>{t}</button>)}</nav>
+                        <nav className="space-y-0.5">{tocItems.map(t => <button key={t} onClick={() => scrollTo(t)} className={`block w-full text-left px-3 py-[7px] rounded-lg text-[13px] transition-all duration-200 ${activeSection === t ? 'bg-[rgba(0,150,220,0.06)] text-[#1677f2] font-bold border-l-[3px] border-[#1677f2] -ml-px' : 'text-[#64748b] hover:text-[#1677f2]'}`}>{t}</button>)}</nav>
                     </div>
                 </aside>
 
@@ -218,9 +219,9 @@ export default function FinanceCompanyArticleClient() {
                     {/* SECTION: Regulatory Background */}
                     <H2 id="Regulatory Background">Regulatory Background and Legal Framework</H2>
                     <P>The regulatory structure governing a Finance Company in GIFT IFSC is primarily based on the following legal framework:</P>
-                    <div className="bg-[rgba(0,150,220,0.04)] border-l-4 border-[#0096D6] rounded-xl p-6 mb-6">
-                        <h4 className="font-bold text-[#0096D6] text-[15px] mb-4">📋 Legal Framework</h4>
-                        <div className="flex flex-wrap gap-2">{["International Financial Services Centres Authority Act, 2019", "IFSCA (Finance Company) Regulations, 2021", "Corporate Governance and Disclosure Guidelines issued by IFSCA", "Framework for Global / Regional Corporate Treasury Centres (2025)", "AML / CFT / KYC Guidelines issued by IFSCA"].map(a => <span key={a} className="px-3 py-1.5 bg-white border border-[rgba(0,150,220,0.2)] rounded-full text-[12px] font-semibold text-[#0077B6] hover:bg-[#0096D6] hover:text-white transition-colors cursor-default">{a}</span>)}</div>
+                    <div className="bg-[rgba(0,150,220,0.04)] border-l-4 border-[#1677f2] rounded-xl p-6 mb-6">
+                        <h4 className="font-bold text-[#1677f2] text-[15px] mb-4">📋 Legal Framework</h4>
+                        <div className="flex flex-wrap gap-2">{["International Financial Services Centres Authority Act, 2019", "IFSCA (Finance Company) Regulations, 2021", "Corporate Governance and Disclosure Guidelines issued by IFSCA", "Framework for Global / Regional Corporate Treasury Centres (2025)", "AML / CFT / KYC Guidelines issued by IFSCA"].map(a => <span key={a} className="px-3 py-1.5 bg-white border border-[rgba(0,150,220,0.2)] rounded-full text-[12px] font-semibold text-[#0077B6] hover:bg-[#1677f2] hover:text-white transition-colors cursor-default">{a}</span>)}</div>
                     </div>
                     <P>The regulations allow finance companies to operate within the IFSC ecosystem and provide financial services primarily in foreign currencies.</P>
                     <P>According to the circular issued by the Authority, the regulatory framework is designed to regulate finance companies operating in IFSC and align them with global treasury and financial management practices.</P>
@@ -252,8 +253,8 @@ export default function FinanceCompanyArticleClient() {
                     <P>A Finance Company in GIFT IFSC must maintain minimum capital in the form of owned funds.</P>
                     <P>For Global or Regional Corporate Treasury Centres:</P>
                     <div className="bg-gradient-to-br from-[rgba(0,150,220,0.06)] to-[rgba(16,185,129,0.04)] border border-[rgba(0,150,220,0.15)] rounded-2xl p-7 mb-6">
-                        <h4 className="font-bold text-[#0096D6] text-[15px] mb-2">💰 Capital Requirement</h4>
-                        <div className="text-[36px] font-black text-[#0096D6] mb-1">USD 200,000</div>
+                        <h4 className="font-bold text-[#1677f2] text-[15px] mb-2">💰 Capital Requirement</h4>
+                        <div className="text-[36px] font-black text-[#1677f2] mb-1">USD 200,000</div>
                         <p className="text-[14px] text-[#64748b] font-medium mb-4">Minimum Owned Fund (GRCTC)</p>
                         <div className="space-y-2 mb-4">{["Paid-up capital", "Free reserves", "Share premium balance", "Capital reserves"].map(x => <div key={x} className="flex items-center gap-2 text-[14px] text-[#374151]"><span className="text-[#10b981] font-bold">✓</span>{x}</div>)}</div>
                         <p className="text-[12px] text-[#F59E0B] font-semibold">⚠️ Revaluation reserves, accumulated losses and intangible assets are EXCLUDED while computing owned funds.</p>
@@ -263,7 +264,7 @@ export default function FinanceCompanyArticleClient() {
                     {/* Permissible Activities */}
                     <H2 id="Permissible Activities">Permissible Activities of Finance Company in GIFT IFSC</H2>
                     <P>A Finance Company in GIFT IFSC may undertake a wide range of treasury and financial services activities. These include:</P>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">{activities.map((a, i) => <div key={i} className="p-4 bg-white rounded-xl border border-[rgba(0,150,220,0.1)] hover:border-[#0096D6] hover:shadow-md transition-all duration-300"><div className="text-[20px] mb-2">{a.icon}</div><h4 className="font-bold text-[#0a1628] text-[14px] mb-1">{a.t}</h4><p className="text-[12px] text-[#64748b] leading-relaxed">{a.d}</p></div>)}</div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">{activities.map((a, i) => <div key={i} className="p-4 bg-white rounded-xl border border-[rgba(0,150,220,0.1)] hover:border-[#1677f2] hover:shadow-md transition-all duration-300"><div className="text-[20px] mb-2">{a.icon}</div><h4 className="font-bold text-[#0a1628] text-[14px] mb-1">{a.t}</h4><p className="text-[12px] text-[#64748b] leading-relaxed">{a.d}</p></div>)}</div>
                     <P>These activities allow multinational companies to manage global treasury operations efficiently.</P>
 
                     {/* Registration Process */}
@@ -271,9 +272,9 @@ export default function FinanceCompanyArticleClient() {
                     <P>The registration procedure involves several regulatory stages.</P>
                     <div className="relative pl-8 mb-6">{regSteps.map((s, i) => (
                         <div key={i} className="relative mb-6 last:mb-0">
-                            {i < regSteps.length - 1 && <div className="absolute left-[-20px] top-10 w-[2px] h-[calc(100%)] bg-gradient-to-b from-[#0096D6] to-[#10b981]" />}
-                            <div className="absolute left-[-28px] top-0 w-9 h-9 rounded-full bg-gradient-to-br from-[#0096D6] to-[#10b981] text-white flex items-center justify-center text-[13px] font-bold z-10">{i + 1}</div>
-                            <div className="bg-white border-l-[3px] border-[#0096D6] rounded-r-xl p-4 ml-4 shadow-sm">
+                            {i < regSteps.length - 1 && <div className="absolute left-[-20px] top-10 w-[2px] h-[calc(100%)] bg-gradient-to-b from-[#1677f2] to-[#10b981]" />}
+                            <div className="absolute left-[-28px] top-0 w-9 h-9 rounded-full bg-gradient-to-br from-[#1677f2] to-[#10b981] text-white flex items-center justify-center text-[13px] font-bold z-10">{i + 1}</div>
+                            <div className="bg-white border-l-[3px] border-[#1677f2] rounded-r-xl p-4 ml-4 shadow-sm">
                                 <h4 className="font-bold text-[#0a1628] text-[15px] mb-1">Step {i + 1} – {s.t}</h4>
                                 <p className="text-[13px] text-[#64748b] leading-relaxed">{s.d}</p>
                             </div>
@@ -293,7 +294,7 @@ export default function FinanceCompanyArticleClient() {
                     <div className="flex flex-wrap gap-3 mb-6">{["Entity Formation", "Finance Co Registration", "Provisional Approval", "Full Certificate"].map((s, i) => (
                         <div key={i} className="flex items-center gap-2">
                             <div className="px-4 py-2 bg-white border border-[rgba(0,150,220,0.15)] rounded-xl text-[13px] font-bold text-[#0a1628]">{s}</div>
-                            {i < 3 && <span className="text-[#0096D6] font-bold">→</span>}
+                            {i < 3 && <span className="text-[#1677f2] font-bold">→</span>}
                         </div>
                     ))}</div>
                     <P>Once registration is granted, the company must commence operations within six months unless an extension is approved by the Authority.</P>
@@ -306,7 +307,7 @@ export default function FinanceCompanyArticleClient() {
                         { t: "Risk Management Policy", d: "Procedures to identify, monitor and manage financial risks." },
                         { t: "Activity Approval Policy", d: "Controls governing permissible financial activities and delegation of authority." },
                         { t: "Change in Control", d: "Any merger, acquisition or change in management involving significant shareholding requires prior approval of the Authority." },
-                    ].map((g, i) => <div key={i} className="bg-white rounded-xl p-5 border-t-[3px] border-[#0096D6] shadow-sm"><h4 className="font-bold text-[#0a1628] text-[15px] mb-2">{g.t}</h4><p className="text-[13px] text-[#64748b] leading-relaxed">{g.d}</p></div>)}</div>
+                    ].map((g, i) => <div key={i} className="bg-white rounded-xl p-5 border-t-[3px] border-[#1677f2] shadow-sm"><h4 className="font-bold text-[#0a1628] text-[15px] mb-2">{g.t}</h4><p className="text-[13px] text-[#64748b] leading-relaxed">{g.d}</p></div>)}</div>
                     <P>These governance requirements ensure financial discipline and regulatory transparency.</P>
 
                     {/* AML */}
@@ -325,7 +326,7 @@ export default function FinanceCompanyArticleClient() {
                     <H2 id="Operational Structure">Operational Structure of a Finance Company in GIFT IFSC</H2>
                     <P>A Finance Company in GIFT IFSC generally operates as a centralised financial management entity for global corporate groups. Unlike traditional financial institutions that provide services to external customers, many IFSC finance companies operate primarily for group entities or related service recipients.</P>
                     <P>The operational structure typically includes the following components.</P>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">{opStructure.map((o, i) => <div key={i} className="bg-white rounded-xl p-5 border-t-[3px] border-[#0096D6] shadow-sm"><div className="text-[20px] mb-2">{o.icon}</div><h4 className="font-bold text-[#0a1628] text-[15px] mb-3">{o.t}</h4><ul className="space-y-1">{o.items.map((it, j) => <li key={j} className="flex items-start gap-2 text-[13px] text-[#64748b]"><span className="text-[#0096D6] mt-0.5 text-[8px]">◆</span>{it}</li>)}</ul></div>)}</div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">{opStructure.map((o, i) => <div key={i} className="bg-white rounded-xl p-5 border-t-[3px] border-[#1677f2] shadow-sm"><div className="text-[20px] mb-2">{o.icon}</div><h4 className="font-bold text-[#0a1628] text-[15px] mb-3">{o.t}</h4><ul className="space-y-1">{o.items.map((it, j) => <li key={j} className="flex items-start gap-2 text-[13px] text-[#64748b]"><span className="text-[#1677f2] mt-0.5 text-[8px]">◆</span>{it}</li>)}</ul></div>)}</div>
 
                     {/* Currency */}
                     <H2 id="Currency of Operations">Currency of Operations in IFSC</H2>
@@ -393,11 +394,11 @@ export default function FinanceCompanyArticleClient() {
                     <H2 id="Business Models">Business Models for Finance Company in GIFT IFSC</H2>
                     <P>A Finance Company in GIFT IFSC may operate under multiple business models depending on the financial objectives of the corporate group establishing the entity.</P>
                     <div className="space-y-5 mb-6">{bizModels.map(m => (
-                        <div key={m.n} className="relative p-6 bg-white rounded-xl border-l-4 overflow-hidden shadow-sm" style={{ borderImage: "linear-gradient(to bottom,#0096D6,#10b981) 1" }}>
+                        <div key={m.n} className="relative p-6 bg-white rounded-xl border-l-4 overflow-hidden shadow-sm" style={{ borderImage: "linear-gradient(to bottom,#1677f2,#10b981) 1" }}>
                             <div className="absolute top-2 right-4 text-[64px] font-black text-[rgba(0,150,220,0.06)] select-none pointer-events-none leading-none">{m.n}</div>
                             <h4 className="font-bold text-[#0a1628] text-[17px] mb-2">{m.t}</h4>
                             <p className="text-[14px] text-[#374151] leading-[1.8] mb-3">{m.d}</p>
-                            <ul className="space-y-1">{m.items.map((it, j) => <li key={j} className="flex items-start gap-2 text-[13px] text-[#64748b]"><span className="text-[#0096D6] mt-0.5 text-[8px]">◆</span>{it}</li>)}</ul>
+                            <ul className="space-y-1">{m.items.map((it, j) => <li key={j} className="flex items-start gap-2 text-[13px] text-[#64748b]"><span className="text-[#1677f2] mt-0.5 text-[8px]">◆</span>{it}</li>)}</ul>
                         </div>
                     ))}</div>
 
@@ -416,10 +417,10 @@ export default function FinanceCompanyArticleClient() {
 
                     {/* NBFC vs FC */}
                     <H2 id="NBFC vs Finance Company">Comparison: NBFC vs Finance Company in GIFT IFSC</H2>
-                    <span className="inline-block px-3 py-1 bg-[rgba(0,150,220,0.08)] border border-[rgba(0,150,220,0.2)] rounded-full text-[12px] font-bold text-[#0096D6] mb-4">📊 Comparison Table</span>
+                    <span className="inline-block px-3 py-1 bg-[rgba(0,150,220,0.08)] border border-[rgba(0,150,220,0.2)] rounded-full text-[12px] font-bold text-[#1677f2] mb-4">📊 Comparison Table</span>
                     <div className="overflow-x-auto mb-6 rounded-2xl border border-gray-100 shadow-sm">
                         <table className="w-full min-w-[600px] text-[13px]">
-                            <thead><tr style={{ background: "linear-gradient(135deg,#0077B6,#0096D6)" }}><th className="p-3 text-left text-white font-bold">Particulars</th><th className="p-3 text-left text-white font-bold">RBI NBFC</th><th className="p-3 text-left text-white font-bold">GIFT IFSC Finance Company</th></tr></thead>
+                            <thead><tr style={{ background: "linear-gradient(135deg,#0077B6,#1677f2)" }}><th className="p-3 text-left text-white font-bold">Particulars</th><th className="p-3 text-left text-white font-bold">RBI NBFC</th><th className="p-3 text-left text-white font-bold">GIFT IFSC Finance Company</th></tr></thead>
                             <tbody>{compTable.map((r, i) => <tr key={i} className={i % 2 === 0 ? '' : 'bg-gray-50/50'}><td className="p-3 bg-[#f8faff] font-semibold text-[#0a1628] border-r border-gray-100">{r[0]}</td><td className="p-3 text-[#64748b] border-r border-gray-100">{r[1]}</td><td className="p-3 bg-[rgba(0,150,220,0.04)] text-[#0077B6] font-bold">{r[2]}</td></tr>)}</tbody>
                         </table>
                     </div>
@@ -434,12 +435,12 @@ export default function FinanceCompanyArticleClient() {
 
                     {/* Expert Quote */}
                     <H2 id="Expert Insight">Expert Insight</H2>
-                    <div className="relative bg-[rgba(0,150,220,0.04)] border-l-[5px] border-[#0096D6] rounded-2xl p-7 mb-8">
+                    <div className="relative bg-[rgba(0,150,220,0.04)] border-l-[5px] border-[#1677f2] rounded-2xl p-7 mb-8">
                         <div className="absolute top-4 left-6 text-[72px] font-serif text-[rgba(0,150,220,0.12)] leading-none select-none">&ldquo;</div>
                         <p className="italic text-[17px] text-[#0a1628] leading-[1.8] mb-5 mt-8 relative z-10">&ldquo;True financial innovation does not begin with complex products; it begins with disciplined governance and a culture that respects regulatory intent.&rdquo;</p>
                         <div className="flex items-center gap-3">
-                            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#0096D6] to-[#0077B6] text-white flex items-center justify-center text-[14px] font-bold">DK</div>
-                            <div><div className="font-bold text-[#0a1628] text-[15px]">CS Devyani Khambhati</div><div className="text-[13px] text-[#0096D6] font-semibold">Compliance Expert ✅</div></div>
+                            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0077B6] text-white flex items-center justify-center text-[14px] font-bold">DK</div>
+                            <div><div className="font-bold text-[#0a1628] text-[15px]">CS Devyani Khambhati</div><div className="text-[13px] text-[#1677f2] font-semibold">Compliance Expert ✅</div></div>
                         </div>
                     </div>
 
@@ -454,36 +455,36 @@ export default function FinanceCompanyArticleClient() {
                     <div className="sticky top-20 space-y-5">
 
                         {/* CTA Card */}
-                        <div className="rounded-2xl p-6 text-white" style={{ background: "linear-gradient(135deg,#0077B6,#0096D6)" }}>
+                        <div className="rounded-2xl p-6 text-white" style={{ background: "linear-gradient(135deg,#0077B6,#1677f2)" }}>
                             <h3 className="font-bold text-[16px] mb-2 leading-snug">Set Up Finance Company in GIFT City?</h3>
                             <p className="text-white/80 text-[13px] leading-relaxed mb-5">Get expert IFSCA regulatory guidance from our compliance team.</p>
-                            <button className="w-full bg-white text-[#0096D6] font-bold text-[14px] rounded-xl py-3 hover:bg-blue-50 transition-colors">📞 Book Free Consultation</button>
+                            <button className="w-full bg-white text-[#1677f2] font-bold text-[14px] rounded-xl py-3 hover:bg-blue-50 transition-colors">📞 Book Free Consultation</button>
                             <p className="text-white/70 text-[12px] text-center mt-3">⚡ Response within 24 hours</p>
                         </div>
 
                         {/* Expert Card */}
                         <div className="bg-white rounded-2xl border border-[rgba(0,150,220,0.1)] p-5">
                             <div className="flex items-center gap-3 mb-3">
-                                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#0096D6] to-[#0077B6] text-white flex items-center justify-center text-[18px] font-bold">DK</div>
-                                <div><div className="font-bold text-[#0a1628] text-[15px]">CS Devyani Khambhati</div><div className="text-[13px] text-[#0096D6] font-semibold">Compliance Expert</div></div>
+                                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0077B6] text-white flex items-center justify-center text-[18px] font-bold">DK</div>
+                                <div><div className="font-bold text-[#0a1628] text-[15px]">CS Devyani Khambhati</div><div className="text-[13px] text-[#1677f2] font-semibold">Compliance Expert</div></div>
                             </div>
                             <p className="text-[12px] text-[#94a3b8] mb-3">IFSCA · GIFT City · Treasury</p>
                             <div className="text-[13px] mb-3">⭐⭐⭐⭐⭐ <span className="text-[12px] text-[#64748b]">Expert Reviewed</span></div>
-                            <button className="w-full border-2 border-[#0096D6] text-[#0096D6] font-bold text-[13px] rounded-xl py-2.5 hover:bg-blue-50 transition-colors">Ask a Question →</button>
+                            <button className="w-full border-2 border-[#1677f2] text-[#1677f2] font-bold text-[13px] rounded-xl py-2.5 hover:bg-blue-50 transition-colors">Ask a Question →</button>
                         </div>
 
                         {/* Quick Facts */}
                         <div className="bg-white rounded-2xl border border-[rgba(0,150,220,0.1)] p-5">
                             <h4 className="font-bold text-[#0a1628] text-[15px] mb-4">📌 Quick Facts</h4>
                             {[["Regulator", "IFSCA"], ["Location", "GIFT City, Gujarat"], ["Min Capital", "USD 200,000"], ["Personnel", "Min 5 required"], ["Operations", "Within 6 months"], ["Currency", "Foreign currencies"]].map(([l, v], i) => (
-                                <div key={i} className={`flex justify-between py-3 ${i > 0 ? 'border-t border-gray-100' : ''}`}><span className="text-[12px] text-[#94a3b8]">{l}</span><span className="text-[13px] text-[#0096D6] font-bold">{v}</span></div>
+                                <div key={i} className={`flex justify-between py-3 ${i > 0 ? 'border-t border-gray-100' : ''}`}><span className="text-[12px] text-[#94a3b8]">{l}</span><span className="text-[13px] text-[#1677f2] font-bold">{v}</span></div>
                             ))}
                         </div>
 
                         {/* Share */}
                         <div className="bg-white rounded-2xl border border-[rgba(0,150,220,0.1)] p-5">
                             <h4 className="font-bold text-[#0a1628] text-[14px] mb-4">Share This Guide</h4>
-                            <div className="flex gap-3">{[{ l: "in", c: "LinkedIn" }, { l: "𝕏", c: "Twitter" }, { l: "💬", c: "WhatsApp" }, { l: "🔗", c: "Copy" }].map((s, i) => <button key={i} title={s.c} className="w-10 h-10 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center text-[14px] hover:bg-[#0096D6] hover:text-white hover:border-[#0096D6] transition-all duration-300">{s.l}</button>)}</div>
+                            <div className="flex gap-3">{[{ l: "in", c: "LinkedIn" }, { l: "𝕏", c: "Twitter" }, { l: "💬", c: "WhatsApp" }, { l: "🔗", c: "Copy" }].map((s, i) => <button key={i} title={s.c} className="w-10 h-10 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center text-[14px] hover:bg-[#1677f2] hover:text-white hover:border-[#1677f2] transition-all duration-300">{s.l}</button>)}</div>
                         </div>
 
                     </div>
@@ -493,10 +494,10 @@ export default function FinanceCompanyArticleClient() {
 
             {/* MOBILE RIGHT SIDEBAR */}
             <div className="lg:hidden px-4 pb-8 max-w-[760px] mx-auto space-y-5">
-                <div className="rounded-2xl p-6 text-white" style={{ background: "linear-gradient(135deg,#0077B6,#0096D6)" }}>
+                <div className="rounded-2xl p-6 text-white" style={{ background: "linear-gradient(135deg,#0077B6,#1677f2)" }}>
                     <h3 className="font-bold text-[16px] mb-2">Set Up Finance Company in GIFT City?</h3>
                     <p className="text-white/80 text-[13px] mb-4">Get expert IFSCA regulatory guidance from our compliance team.</p>
-                    <button className="w-full bg-white text-[#0096D6] font-bold text-[14px] rounded-xl py-3">📞 Book Free Consultation</button>
+                    <button className="w-full bg-white text-[#1677f2] font-bold text-[14px] rounded-xl py-3">📞 Book Free Consultation</button>
                 </div>
             </div>
 
@@ -504,20 +505,20 @@ export default function FinanceCompanyArticleClient() {
             <section className="max-w-[1280px] mx-auto px-6 pb-12">
                 <h3 className="text-[20px] font-bold text-[#0a1628] mb-6">Related Articles</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">{[{ tag: "IFSCA", t: "PSP License – IFSCA" }, { tag: "GIFT City", t: "IFSCA Factoring License" }, { tag: "RBI", t: "NBFC License – Complete Guide" }].map((a, i) => (
-                    <a key={i} href="#" className="group bg-white rounded-2xl border border-[rgba(0,150,220,0.1)] p-6 hover:border-[#0096D6] hover:shadow-lg transition-all duration-300">
-                        <span className="inline-block px-2.5 py-1 bg-blue-50 text-[#0096D6] rounded-full text-[11px] font-bold mb-3">{a.tag}</span>
-                        <h4 className="font-bold text-[#0a1628] text-[15px] mb-2 group-hover:text-[#0096D6] transition-colors">{a.t}</h4>
-                        <span className="text-[#0096D6] text-[13px] font-semibold">Read More →</span>
+                    <a key={i} href="#" className="group bg-white rounded-2xl border border-[rgba(0,150,220,0.1)] p-6 hover:border-[#1677f2] hover:shadow-lg transition-all duration-300">
+                        <span className="inline-block px-2.5 py-1 bg-blue-50 text-[#1677f2] rounded-full text-[11px] font-bold mb-3">{a.tag}</span>
+                        <h4 className="font-bold text-[#0a1628] text-[15px] mb-2 group-hover:text-[#1677f2] transition-colors">{a.t}</h4>
+                        <span className="text-[#1677f2] text-[13px] font-semibold">Read More →</span>
                     </a>
                 ))}</div>
             </section>
 
             {/* CTA Banner */}
-            <section className="py-16 px-6 text-center text-white" style={{ background: "linear-gradient(135deg,#0055A5,#0096D6)" }}>
+            <section className="py-16 px-6 text-center text-white" style={{ background: "linear-gradient(135deg,#0055A5,#1677f2)" }}>
                 <h2 className="text-[28px] md:text-[36px] font-black mb-4">Ready to Set Up Finance Company in GIFT City?</h2>
                 <p className="text-white/80 text-[16px] mb-8 max-w-xl mx-auto">Partner with India's leading IFSCA compliance experts and get your finance company operational faster.</p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                    <button className="bg-white text-[#0096D6] font-bold text-[15px] rounded-xl px-8 py-4 hover:bg-blue-50 transition-colors">Get Started Free →</button>
+                    <button className="bg-white text-[#1677f2] font-bold text-[15px] rounded-xl px-8 py-4 hover:bg-blue-50 transition-colors">Get Started Free →</button>
                     <button className="border-2 border-white/30 text-white font-bold text-[15px] rounded-xl px-8 py-4 hover:bg-white/10 transition-colors">Talk to Expert</button>
                 </div>
             </section>

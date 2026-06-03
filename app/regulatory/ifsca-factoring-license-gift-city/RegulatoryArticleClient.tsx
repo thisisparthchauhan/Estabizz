@@ -76,34 +76,32 @@ export default function RegulatoryArticleClient() {
       </Head>
 
       <div
-        className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-[#0096D6] to-[#10b981] z-50 transition-all duration-150 ease-out"
+        className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-[#1677f2] to-[#10b981] z-50 transition-all duration-150 ease-out"
         style={{ width: `${scrollProgress * 100}%` }}
       ></div>
 
-      <section className="relative pt-24 pb-16 px-6 lg:px-8 border-b border-blue-100 overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #f0f9ff, #e0f2fe, #eff6ff)" }}>
-        <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{ backgroundImage: "linear-gradient(#0096D6 1px, transparent 1px), linear-gradient(90deg, #0096D6 1px, transparent 1px)", backgroundSize: "40px 40px" }}
-        ></div>
+      <section className="relative pt-24 pb-16 px-6 lg:px-8 border-b border-blue-100 overflow-hidden bg-white">
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]"></div>
+        <div className="absolute inset-x-0 bottom-0 pointer-events-none h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">
           <nav className="text-sm font-medium text-gray-500 mb-8 flex items-center space-x-2">
-            <a href="/" className="hover:text-[#0096D6] transition-colors">Home</a>
+            <a href="/" className="hover:text-[#1677f2] transition-colors">Home</a>
             <span>&gt;</span>
-            <a href="/" className="hover:text-[#0096D6] transition-colors">IFSCA</a>
+            <a href="/" className="hover:text-[#1677f2] transition-colors">IFSCA</a>
             <span>&gt;</span>
-            <span className="text-[#0096D6]">Factoring License</span>
+            <span className="text-[#1677f2]">Factoring License</span>
           </nav>
 
           <div className="flex flex-wrap gap-3 mb-6">
-            <span className="px-3 py-1 bg-blue-50 text-[#0096D6] border border-blue-100 rounded-full text-xs font-semibold shadow-sm">🏛️ IFSCA</span>
-            <span className="px-3 py-1 bg-blue-50 text-[#0096D6] border border-blue-100 rounded-full text-xs font-semibold shadow-sm">📄 Factoring</span>
-            <span className="px-3 py-1 bg-blue-50 text-[#0096D6] border border-blue-100 rounded-full text-xs font-semibold shadow-sm">🌐 GIFT City</span>
-            <span className="px-3 py-1 bg-blue-50 text-[#0096D6] border border-blue-100 rounded-full text-xs font-semibold shadow-sm">📋 Regulatory Guide</span>
-            <span className="px-3 py-1 bg-blue-50 text-[#0096D6] border border-blue-100 rounded-full text-xs font-semibold shadow-sm">2024 Regulations</span>
+            <span className="px-3 py-1 bg-blue-50 text-[#1677f2] border border-blue-100 rounded-full text-xs font-semibold shadow-sm">🏛️ IFSCA</span>
+            <span className="px-3 py-1 bg-blue-50 text-[#1677f2] border border-blue-100 rounded-full text-xs font-semibold shadow-sm">📄 Factoring</span>
+            <span className="px-3 py-1 bg-blue-50 text-[#1677f2] border border-blue-100 rounded-full text-xs font-semibold shadow-sm">🌐 GIFT City</span>
+            <span className="px-3 py-1 bg-blue-50 text-[#1677f2] border border-blue-100 rounded-full text-xs font-semibold shadow-sm">📋 Regulatory Guide</span>
+            <span className="px-3 py-1 bg-blue-50 text-[#1677f2] border border-blue-100 rounded-full text-xs font-semibold shadow-sm">2024 Regulations</span>
           </div>
 
-          <h1 className="text-[36px] font-[900] text-[#0a1628] leading-[1.2] mb-6 tracking-[-0.02em] max-w-4xl">
+          <h1 className="text-[36px] font-[900] text-[#120b45] leading-[1.2] mb-6 tracking-[-0.02em] max-w-4xl">
             IFSCA Factoring License in GIFT City – Complete Regulatory Guide for Finance Companies
           </h1>
 
@@ -118,7 +116,7 @@ export default function RegulatoryArticleClient() {
           </div>
 
           <div className="inline-block px-4 py-2 border border-blue-200 bg-white/60 backdrop-blur-sm rounded-full text-sm text-[#0a1628] font-semibold shadow-sm">
-            Focus: <span className="text-[#0096D6]">IFSCA Factoring License in GIFT City</span>
+            Focus: <span className="text-[#1677f2]">IFSCA Factoring License in GIFT City</span>
           </div>
         </div>
       </section>
@@ -134,8 +132,8 @@ export default function RegulatoryArticleClient() {
                 href={`#${section.id}`}
                 onClick={(e) => scrollToSection(e, section.id)}
                 className={`text-[13px] block py-2 pl-3 rounded-r-lg transition-all duration-200 ${activeSection === section.id
-                  ? "border-l-[3px] border-l-[#0096D6] bg-[rgba(0,150,220,0.06)] text-[#0096D6] font-bold"
-                  : "border-l-[3px] border-l-transparent text-[#64748b] hover:text-[#0096D6] hover:bg-blue-50/50"
+                  ? "border-l-[3px] border-l-[#1677f2] bg-[rgba(0,150,220,0.06)] text-[#1677f2] font-bold"
+                  : "border-l-[3px] border-l-transparent text-[#64748b] hover:text-[#1677f2] hover:bg-blue-50/50"
                   }`}
               >
                 {section.title}
@@ -149,12 +147,12 @@ export default function RegulatoryArticleClient() {
             __html: `
             .article-content h2 { font-size: 24px; font-weight: 800; color: #0a1628; padding: 24px 0 8px; margin-top: 48px; position: relative; scroll-margin-top: 80px; padding-left: 16px; transition: all 0.7s ease; opacity: 0; transform: translateY(24px); }
             .article-content h2.visible { opacity: 1; transform: translateY(0); }
-            .article-content h2::before { content: ''; position: absolute; left: 0; top: 28px; bottom: 12px; width: 4px; background: linear-gradient(180deg, #0096D6, #10b981); border-radius: 2px; }
+            .article-content h2::before { content: ''; position: absolute; left: 0; top: 28px; bottom: 12px; width: 4px; background: linear-gradient(180deg, #1677f2, #10b981); border-radius: 2px; }
             .article-content h3 { font-size: 18px; font-weight: 700; color: #0077B6; margin-top: 32px; padding: 16px 0 4px; scroll-margin-top: 80px; }
             .article-content p { font-size: 15px; line-height: 1.85; color: #374151; margin-bottom: 16px; }
             .article-content ul { padding-left: 8px; margin-bottom: 24px; }
             .article-content li { display: flex; align-items: flex-start; margin-bottom: 8px; font-size: 15px; color: #374151; line-height: 1.85; }
-            .article-content li::before { content: '◆'; color: #0096D6; font-size: 12px; margin-right: 12px; margin-top: 4px; }
+            .article-content li::before { content: '◆'; color: #1677f2; font-size: 12px; margin-right: 12px; margin-top: 4px; }
           `}} />
 
           <h2 id="introduction" className="!mt-0">Introduction</h2>
@@ -174,19 +172,19 @@ export default function RegulatoryArticleClient() {
           {/* 3 highlight cards (1 row) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
             <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#0096D6] to-[#0077B6]"></div>
+              <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#1677f2] to-[#0077B6]"></div>
               <div className="text-2xl mb-2">🏛️</div>
               <div className="font-bold text-[#0a1628] text-[15px] mb-1">IFSCA Regulated</div>
               <div className="text-gray-500 text-[13px]">Governed under 2024 Regulations</div>
             </div>
             <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#0096D6] to-[#0077B6]"></div>
+              <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#1677f2] to-[#0077B6]"></div>
               <div className="text-2xl mb-2">🌐</div>
               <div className="font-bold text-[#0a1628] text-[15px] mb-1">GIFT City IFSC</div>
               <div className="text-gray-500 text-[13px]">Gujarat International Finance Hub</div>
             </div>
             <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#0096D6] to-[#0077B6]"></div>
+              <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#1677f2] to-[#0077B6]"></div>
               <div className="text-2xl mb-2">📋</div>
               <div className="font-bold text-[#0a1628] text-[15px] mb-1">2024 Framework</div>
               <div className="text-gray-500 text-[13px]">Registration of Factors Regulations</div>
@@ -201,26 +199,26 @@ export default function RegulatoryArticleClient() {
           <p className="font-semibold text-[#0a1628] mt-6">The primary legal foundation includes:</p>
 
           {/* Legal Framework Pills */}
-          <div className="bg-[rgba(0,150,220,0.04)] border border-[rgba(0,150,220,0.15)] border-l-[4px] border-l-[#0096D6] rounded-xl p-6 my-6">
-            <h4 className="text-[#0096D6] font-bold text-[16px] mb-4 flex items-center gap-2">📋 Legal Framework</h4>
+          <div className="bg-[rgba(0,150,220,0.04)] border border-[rgba(0,150,220,0.15)] border-l-[4px] border-l-[#1677f2] rounded-xl p-6 my-6">
+            <h4 className="text-[#1677f2] font-bold text-[16px] mb-4 flex items-center gap-2">📋 Legal Framework</h4>
             <div className="flex flex-wrap gap-2">
               <span className="bg-white border border-blue-100 text-[#374151] px-4 py-2 rounded-full text-[13px] font-medium shadow-sm inline-flex items-center gap-2">
-                <span className="text-[#0096D6]">◆</span> Factoring Regulation Act, 2011
+                <span className="text-[#1677f2]">◆</span> Factoring Regulation Act, 2011
               </span>
               <span className="bg-white border border-blue-100 text-[#374151] px-4 py-2 rounded-full text-[13px] font-medium shadow-sm inline-flex items-center gap-2">
-                <span className="text-[#0096D6]">◆</span> IFSCA Act, 2019
+                <span className="text-[#1677f2]">◆</span> IFSCA Act, 2019
               </span>
               <span className="bg-white border border-blue-100 text-[#374151] px-4 py-2 rounded-full text-[13px] font-medium shadow-sm inline-flex items-center gap-2">
-                <span className="text-[#0096D6]">◆</span> Registration of Assignment of Receivables Rules, 2012
+                <span className="text-[#1677f2]">◆</span> Registration of Assignment of Receivables Rules, 2012
               </span>
               <span className="bg-white border border-blue-100 text-[#374151] px-4 py-2 rounded-full text-[13px] font-medium shadow-sm inline-flex items-center gap-2">
-                <span className="text-[#0096D6]">◆</span> Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002
+                <span className="text-[#1677f2]">◆</span> Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002
               </span>
               <span className="bg-white border border-blue-100 text-[#374151] px-4 py-2 rounded-full text-[13px] font-medium shadow-sm inline-flex items-center gap-2">
-                <span className="text-[#0096D6]">◆</span> IFSCA (Finance Company) Regulations, 2021
+                <span className="text-[#1677f2]">◆</span> IFSCA (Finance Company) Regulations, 2021
               </span>
               <span className="bg-white border border-blue-100 text-[#374151] px-4 py-2 rounded-full text-[13px] font-medium shadow-sm inline-flex items-center gap-2">
-                <span className="text-[#0096D6]">◆</span> IFSCA (Registration of Factors and Registration of Assignment of Receivables) Regulations, 2024
+                <span className="text-[#1677f2]">◆</span> IFSCA (Registration of Factors and Registration of Assignment of Receivables) Regulations, 2024
               </span>
             </div>
           </div>
@@ -394,9 +392,9 @@ export default function RegulatoryArticleClient() {
               { s: "Step 7", title: "Commencement of Operations", desc: "Once the certificate is granted, the entity must commence factoring business within six months. Failure to commence operations within this timeframe may trigger regulatory review.", isFinal: true }
             ].map((step, i) => (
               <div key={i} className="mb-8 relative z-10">
-                <div className={`absolute -left-[35px] top-4 w-4 h-4 rounded-full ${step.isFinal ? 'bg-gradient-to-r from-[#10b981] to-[#059669]' : 'bg-gradient-to-r from-[#0096D6] to-[#10b981]'} shadow-[0_0_0_4px_white]`}></div>
-                <div className={`bg-white border-l-[3px] ${step.isFinal ? 'border-l-[#10b981]' : 'border-l-[#0096D6]'} rounded-r-xl p-5 shadow-sm border-t border-r border-b border-gray-100 hover:shadow-md transition duration-300 relative overflow-hidden`}>
-                  <div className={`text-[12px] font-bold ${step.isFinal ? 'text-[#10b981]' : 'text-[#0096D6]'} uppercase tracking-wider mb-1`}>{step.s}</div>
+                <div className={`absolute -left-[35px] top-4 w-4 h-4 rounded-full ${step.isFinal ? 'bg-gradient-to-r from-[#10b981] to-[#059669]' : 'bg-gradient-to-r from-[#1677f2] to-[#10b981]'} shadow-[0_0_0_4px_white]`}></div>
+                <div className={`bg-white border-l-[3px] ${step.isFinal ? 'border-l-[#10b981]' : 'border-l-[#1677f2]'} rounded-r-xl p-5 shadow-sm border-t border-r border-b border-gray-100 hover:shadow-md transition duration-300 relative overflow-hidden`}>
+                  <div className={`text-[12px] font-bold ${step.isFinal ? 'text-[#10b981]' : 'text-[#1677f2]'} uppercase tracking-wider mb-1`}>{step.s}</div>
                   <h4 className="text-[15px] font-bold text-[#0a1628] mb-2">{step.title}</h4>
                   <p className="text-[14px] text-[#64748b] !mb-0">{step.desc}</p>
                   {step.isFinal && (
@@ -422,25 +420,25 @@ export default function RegulatoryArticleClient() {
 
             <div className="flex flex-col md:flex-row items-center md:items-center gap-3 md:gap-2 min-w-0">
               <div className="w-full md:flex-1 md:min-w-0 relative group">
-                <div className="bg-gradient-to-br from-[#0a1628] to-[#1a2b45] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(10,22,40,0.3)] px-4 border-l-4 border-l-[#0096D6]">
+                <div className="bg-gradient-to-br from-[#0a1628] to-[#1a2b45] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(10,22,40,0.3)] px-4 border-l-4 border-l-[#1677f2]">
                   Company Formation
                 </div>
-                <div className="md:hidden flex justify-center py-2 text-[#0096D6] font-bold">↓</div>
+                <div className="md:hidden flex justify-center py-2 text-[#1677f2] font-bold">↓</div>
               </div>
 
-              <div className="hidden md:block text-[#0096D6] font-bold shrink-0">→</div>
+              <div className="hidden md:block text-[#1677f2] font-bold shrink-0">→</div>
 
               <div className="w-full md:flex-1 md:min-w-0 relative group">
-                <div className="bg-gradient-to-br from-[#0a1628] to-[#1a2b45] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(10,22,40,0.3)] px-4 border-l-4 border-l-[#0096D6]">
+                <div className="bg-gradient-to-br from-[#0a1628] to-[#1a2b45] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(10,22,40,0.3)] px-4 border-l-4 border-l-[#1677f2]">
                   Finance Co Registration
                 </div>
-                <div className="md:hidden flex justify-center py-2 text-[#0096D6] font-bold">↓</div>
+                <div className="md:hidden flex justify-center py-2 text-[#1677f2] font-bold">↓</div>
               </div>
 
-              <div className="hidden md:block text-[#0096D6] font-bold shrink-0">→</div>
+              <div className="hidden md:block text-[#1677f2] font-bold shrink-0">→</div>
 
               <div className="w-full md:flex-1 md:min-w-0 relative group">
-                <div className="bg-gradient-to-br from-[#0077B6] to-[#0096D6] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(0,150,220,0.4)] px-4 border-t-4 border-t-blue-300 relative">
+                <div className="bg-gradient-to-br from-[#0077B6] to-[#1677f2] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(0,150,220,0.4)] px-4 border-t-4 border-t-blue-300 relative">
                   <span className="absolute -top-2 -right-2 flex h-4 w-4">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-4 w-4 bg-blue-500 border-2 border-white"></span>
@@ -450,7 +448,7 @@ export default function RegulatoryArticleClient() {
               </div>
             </div>
 
-            <div className="flex justify-center md:justify-end md:pr-[15%] text-[#0096D6] text-xl py-4 font-bold">
+            <div className="flex justify-center md:justify-end md:pr-[15%] text-[#1677f2] text-xl py-4 font-bold">
               ↓
             </div>
 
@@ -461,26 +459,26 @@ export default function RegulatoryArticleClient() {
                 </div>
               </div>
 
-              <div className="hidden md:block text-[#0096D6] font-bold shrink-0">←</div>
-              <div className="md:hidden flex justify-center py-2 text-[#0096D6] font-bold">↓</div>
+              <div className="hidden md:block text-[#1677f2] font-bold shrink-0">←</div>
+              <div className="md:hidden flex justify-center py-2 text-[#1677f2] font-bold">↓</div>
 
               <div className="w-full md:flex-1 md:min-w-0 relative group">
-                <div className="bg-gradient-to-br from-[#0077B6] to-[#0096D6] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(0,150,220,0.4)] px-4">
+                <div className="bg-gradient-to-br from-[#0077B6] to-[#1677f2] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(0,150,220,0.4)] px-4">
                   Certificate Granted
                 </div>
-                <div className="md:hidden flex justify-center py-2 text-[#0096D6] font-bold">↓</div>
+                <div className="md:hidden flex justify-center py-2 text-[#1677f2] font-bold">↓</div>
               </div>
 
-              <div className="hidden md:block text-[#0096D6] font-bold shrink-0">←</div>
+              <div className="hidden md:block text-[#1677f2] font-bold shrink-0">←</div>
 
               <div className="w-full md:flex-1 md:min-w-0 relative group">
-                <div className="bg-gradient-to-br from-[#0077B6] to-[#0096D6] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(0,150,220,0.4)] px-4">
+                <div className="bg-gradient-to-br from-[#0077B6] to-[#1677f2] rounded-xl p-4 text-center text-white font-medium shadow-md transition-all group-hover:shadow-[0_0_20px_rgba(0,150,220,0.4)] px-4">
                   IFSCA Review
                 </div>
               </div>
             </div>
 
-            <div className="text-[12px] font-bold text-[#0096D6] bg-blue-50 px-3 py-1 rounded-full border border-blue-100 shadow-sm hidden md:inline-block">
+            <div className="text-[12px] font-bold text-[#1677f2] bg-blue-50 px-3 py-1 rounded-full border border-blue-100 shadow-sm hidden md:inline-block">
               Stages 3–6: Factoring registration pathway
             </div>
           </div>
@@ -570,12 +568,12 @@ export default function RegulatoryArticleClient() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-            <div className="bg-white border text-center border-gray-100 rounded-2xl p-6 shadow-sm border-t-4 border-t-[#0096D6] hover:shadow-md transition">
+            <div className="bg-white border text-center border-gray-100 rounded-2xl p-6 shadow-sm border-t-4 border-t-[#1677f2] hover:shadow-md transition">
               <div className="text-3xl mb-3">📄</div>
               <h3 className="!mt-0 !pt-0 text-[16px] mb-2">Direct Factoring</h3>
               <p className="!mb-0 text-[14px]">The Factor may purchase receivables directly from businesses.</p>
             </div>
-            <div className="bg-white border text-center border-gray-100 rounded-2xl p-6 shadow-sm border-t-4 border-t-[#0096D6] hover:shadow-md transition">
+            <div className="bg-white border text-center border-gray-100 rounded-2xl p-6 shadow-sm border-t-4 border-t-[#1677f2] hover:shadow-md transition">
               <div className="text-3xl mb-3">🌐</div>
               <h3 className="!mt-0 !pt-0 text-[16px] mb-2">Platform-Based Factoring (ITFS)</h3>
               <p className="!mb-0 text-[14px]">Factoring transactions may also occur through International Trade Financing Services Platforms (ITFS).</p>
@@ -591,7 +589,7 @@ export default function RegulatoryArticleClient() {
 
           <div className="bg-[rgba(0,150,220,0.06)] border border-[rgba(0,150,220,0.2)] rounded-xl p-6 md:p-8 my-6 flex flex-col md:flex-row items-center gap-6">
             <div className="text-center md:text-left shrink-0">
-              <div className="text-[36px] font-black text-[#0096D6] leading-none mb-2">10 days</div>
+              <div className="text-[36px] font-black text-[#1677f2] leading-none mb-2">10 days</div>
               <div className="text-[13px] font-bold text-[#64748b] uppercase tracking-wider">Filing deadline after assignment (TReDS)</div>
             </div>
             <div className="hidden md:block w-px h-16 bg-blue-200"></div>
@@ -714,23 +712,23 @@ export default function RegulatoryArticleClient() {
           <div className="bg-white border border-[rgba(0,150,220,0.1)] rounded-xl p-6 mt-6 mb-6 shadow-sm">
             <div className="space-y-4">
               <div className="flex items-start gap-4">
-                <span className="bg-gradient-to-br from-[#0096D6] to-[#0077B6] w-6 h-6 rounded-full text-white flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5 shadow-sm">1</span>
+                <span className="bg-gradient-to-br from-[#1677f2] to-[#0077B6] w-6 h-6 rounded-full text-white flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5 shadow-sm">1</span>
                 <span className="text-[#374151] text-[14px] leading-relaxed">Financial strength of the applicant</span>
               </div>
               <div className="flex items-start gap-4">
-                <span className="bg-gradient-to-br from-[#0096D6] to-[#0077B6] w-6 h-6 rounded-full text-white flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5 shadow-sm">2</span>
+                <span className="bg-gradient-to-br from-[#1677f2] to-[#0077B6] w-6 h-6 rounded-full text-white flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5 shadow-sm">2</span>
                 <span className="text-[#374151] text-[14px] leading-relaxed">Experience of management in financial services</span>
               </div>
               <div className="flex items-start gap-4">
-                <span className="bg-gradient-to-br from-[#0096D6] to-[#0077B6] w-6 h-6 rounded-full text-white flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5 shadow-sm">3</span>
+                <span className="bg-gradient-to-br from-[#1677f2] to-[#0077B6] w-6 h-6 rounded-full text-white flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5 shadow-sm">3</span>
                 <span className="text-[#374151] text-[14px] leading-relaxed">Technology infrastructure for receivable financing</span>
               </div>
               <div className="flex items-start gap-4">
-                <span className="bg-gradient-to-br from-[#0096D6] to-[#0077B6] w-6 h-6 rounded-full text-white flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5 shadow-sm">4</span>
+                <span className="bg-gradient-to-br from-[#1677f2] to-[#0077B6] w-6 h-6 rounded-full text-white flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5 shadow-sm">4</span>
                 <span className="text-[#374151] text-[14px] leading-relaxed">Governance framework</span>
               </div>
               <div className="flex items-start gap-4">
-                <span className="bg-gradient-to-br from-[#0096D6] to-[#0077B6] w-6 h-6 rounded-full text-white flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5 shadow-sm">5</span>
+                <span className="bg-gradient-to-br from-[#1677f2] to-[#0077B6] w-6 h-6 rounded-full text-white flex items-center justify-center text-[12px] font-bold shrink-0 mt-0.5 shadow-sm">5</span>
                 <span className="text-[#374151] text-[14px] leading-relaxed">Fit and Proper status of promoters and KMP</span>
               </div>
             </div>
@@ -749,12 +747,12 @@ export default function RegulatoryArticleClient() {
           </p>
 
           <div className="mt-8 mb-10 overflow-x-auto rounded-[16px] shadow-[0_4px_20px_rgba(0,100,200,0.06)] border border-[rgba(0,150,220,0.1)]">
-            <div className="bg-blue-50/50 py-3 px-5 text-[12px] font-bold text-[#0096D6] uppercase tracking-wider flex items-center gap-2 border-b border-[rgba(0,150,220,0.1)]">
+            <div className="bg-blue-50/50 py-3 px-5 text-[12px] font-bold text-[#1677f2] uppercase tracking-wider flex items-center gap-2 border-b border-[rgba(0,150,220,0.1)]">
               <span>📊 Comparison Table</span>
             </div>
             <table className="w-full text-left border-collapse min-w-[700px]">
               <thead>
-                <tr className="bg-gradient-to-r from-[#0077B6] to-[#0096D6] text-white">
+                <tr className="bg-gradient-to-r from-[#0077B6] to-[#1677f2] text-white">
                   <th className="p-4 text-[13px] font-bold w-[25%] border-r border-white/10">Particulars</th>
                   <th className="p-4 text-[13px] font-bold w-[37.5%] border-r border-white/10">RBI NBFC Factoring</th>
                   <th className="p-4 text-[13px] font-bold w-[37.5%]">IFSC Factoring (GIFT City)</th>
@@ -810,10 +808,10 @@ export default function RegulatoryArticleClient() {
             Professional guidance significantly reduces approval delays and regulatory queries.
           </p>
 
-          <div className="relative mt-12 mb-10 p-7 md:p-10 rounded-2xl border border-[rgba(0,150,220,0.15)] border-l-[5px] border-l-[#0096D6]"
+          <div className="relative mt-12 mb-10 p-7 md:p-10 rounded-2xl border border-[rgba(0,150,220,0.15)] border-l-[5px] border-l-[#1677f2]"
             style={{ background: "linear-gradient(135deg, rgba(0,150,220,0.04), rgba(16,185,129,0.02))" }}
           >
-            <div className="absolute top-4 left-4 text-[72px] leading-none text-[#0096D6] opacity-10 font-serif italic max-h-[40px] overflow-hidden select-none pointer-events-none">
+            <div className="absolute top-4 left-4 text-[72px] leading-none text-[#1677f2] opacity-10 font-serif italic max-h-[40px] overflow-hidden select-none pointer-events-none">
               "
             </div>
             <p className="relative z-10 text-[18px] leading-[1.8] text-[#0a1628] italic font-medium mb-8 mt-4 pr-4">
@@ -821,7 +819,7 @@ export default function RegulatoryArticleClient() {
             </p>
 
             <div className="flex items-center gap-4 border-t border-[rgba(0,150,220,0.1)] pt-6">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#0096D6] to-[#10b981] flex items-center justify-center text-white font-bold text-xl shadow-md shrink-0 border-2 border-white ring-2 ring-blue-50/50">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#1677f2] to-[#10b981] flex items-center justify-center text-white font-bold text-xl shadow-md shrink-0 border-2 border-white ring-2 ring-blue-50/50">
                 DK
               </div>
               <div>
@@ -831,8 +829,8 @@ export default function RegulatoryArticleClient() {
                     Expert
                   </span>
                 </div>
-                <div className="text-[13px] text-[#0096D6] font-medium flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#0096D6] inline-block"></span>
+                <div className="text-[13px] text-[#1677f2] font-medium flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1677f2] inline-block"></span>
                   Compliance Expert
                 </div>
               </div>
@@ -858,7 +856,7 @@ export default function RegulatoryArticleClient() {
 
         <aside className="w-full xl:w-[240px] shrink-0 flex flex-col gap-6 sticky top-[80px]">
 
-          <div className="rounded-[16px] p-[24px] shadow-lg text-white" style={{ background: "linear-gradient(135deg, #0077B6, #0096D6)" }}>
+          <div className="rounded-[16px] p-[24px] shadow-lg text-white" style={{ background: "linear-gradient(135deg, #0077B6, #1677f2)" }}>
             <h3 className="font-bold text-[18px] mb-2 leading-tight">Need IFSCA Factoring License?</h3>
             <p className="text-white/80 text-[13px] mb-5 leading-relaxed">Expert guidance for factoring registration in GIFT City IFSC.</p>
             <button className="w-full bg-white text-[#0077B6] font-bold text-[14px] py-3 rounded-xl hover:bg-blue-50 hover:shadow-lg transition duration-300">
@@ -876,15 +874,15 @@ export default function RegulatoryArticleClient() {
               </div>
               <div>
                 <h4 className="font-bold text-[15px] text-[#0a1628] leading-tight">CS Devyani Khambhati</h4>
-                <div className="text-[12px] text-[#0096D6] font-medium">Compliance Expert</div>
+                <div className="text-[12px] text-[#1677f2] font-medium">Compliance Expert</div>
               </div>
             </div>
           </div>
 
           <div className="bg-white border border-[rgba(0,150,220,0.15)] rounded-[16px] p-5 shadow-sm relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#0096D6] to-[#10b981]"></div>
+            <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#1677f2] to-[#10b981]"></div>
             <h4 className="font-bold text-[#0a1628] flex items-center gap-2 mb-4">
-              <span className="text-[#0096D6]">⚡</span> Quick Facts
+              <span className="text-[#1677f2]">⚡</span> Quick Facts
             </h4>
             <div className="space-y-3">
               <div className="flex justify-between items-center text-[13px] border-b border-gray-50 pb-2">
@@ -926,22 +924,22 @@ export default function RegulatoryArticleClient() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <a href="/regulatory/finance-company-gift-ifsc" className="block group">
               <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all h-full">
-                <div className="text-[12px] font-bold text-[#0096D6] uppercase tracking-wider mb-2">IFSC Entity Setup</div>
-                <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#0096D6] transition-colors mb-2">Finance Company in GIFT IFSC</h3>
+                <div className="text-[12px] font-bold text-[#1677f2] uppercase tracking-wider mb-2">IFSC Entity Setup</div>
+                <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#1677f2] transition-colors mb-2">Finance Company in GIFT IFSC</h3>
                 <p className="text-[13px] text-gray-500 line-clamp-2">Complete regulatory guide for setting up a unified Finance Company.</p>
               </div>
             </a>
             <a href="/ifsca/psp-license-ifsca" className="block group">
               <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all h-full">
-                <div className="text-[12px] font-bold text-[#0096D6] uppercase tracking-wider mb-2">Payment Services</div>
-                <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#0096D6] transition-colors mb-2">PSP License – IFSCA</h3>
+                <div className="text-[12px] font-bold text-[#1677f2] uppercase tracking-wider mb-2">Payment Services</div>
+                <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#1677f2] transition-colors mb-2">PSP License – IFSCA</h3>
                 <p className="text-[13px] text-gray-500 line-clamp-2">Complete Authorisation Guide with Critical Compliance Insights.</p>
               </div>
             </a>
             <a href="/rbi/nbfc-registration-in-india" className="block group">
               <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all h-full">
-                <div className="text-[12px] font-bold text-[#0096D6] uppercase tracking-wider mb-2">Domestic Setup</div>
-                <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#0096D6] transition-colors mb-2">NBFC License Guide</h3>
+                <div className="text-[12px] font-bold text-[#1677f2] uppercase tracking-wider mb-2">Domestic Setup</div>
+                <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#1677f2] transition-colors mb-2">NBFC License Guide</h3>
                 <p className="text-[13px] text-gray-500 line-clamp-2">Reserve Bank of India registration guidelines.</p>
               </div>
             </a>
@@ -953,10 +951,10 @@ export default function RegulatoryArticleClient() {
         <div className="max-w-3xl mx-auto">
           <h2 className="text-[28px] md:text-[32px] font-bold text-white mb-4">Ready to Apply for IFSCA Factoring License?</h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-            <a href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#0096D6] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all focus:ring-4 focus:ring-blue-500/30">
+            <a href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#1677f2] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all focus:ring-4 focus:ring-blue-500/30">
               Get Started Free →
             </a>
-            <a href="tel:+919876543210" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20">
+            <a href="tel:9825600907" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20">
               Talk to Expert
             </a>
           </div>

@@ -168,7 +168,7 @@ export default function RegulatoryServices() {
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute inset-0 opacity-[0.16]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.09) 1px, transparent 1px)", backgroundSize: "70px 70px" }} />
                 <div className="absolute -left-32 top-10 h-[460px] w-[460px] rounded-full bg-[#0096D6]/25 blur-[120px]" />
-                <div className="absolute right-[-120px] bottom-[-80px] h-[420px] w-[420px] rounded-full bg-[#d9a938]/18 blur-[120px]" />
+                <div className="absolute right-[-120px] bottom-[-80px] h-[420px] w-[420px] rounded-full bg-[#1677f2]/18 blur-[120px]" />
                 <div className="absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" />
             </div>
             <div className="max-w-[1240px] mx-auto px-6 relative z-10">
@@ -215,7 +215,7 @@ export default function RegulatoryServices() {
                                     <span
                                         key={i}
                                         onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.location.href = tag.href; }}
-                                    className="px-3 py-1 bg-[rgba(0,150,220,0.12)] border border-[rgba(0,150,220,0.24)] text-[#89dcff] rounded-full text-[11px] font-semibold whitespace-nowrap hover:bg-[#d9a938] hover:border-[#d9a938] hover:text-[#0a1628] transition-colors cursor-pointer"
+                                    className="px-3 py-1 bg-[rgba(0,150,220,0.12)] border border-[rgba(0,150,220,0.24)] text-[#4f9dfb] rounded-full text-[11px] font-semibold whitespace-nowrap hover:bg-[#1677f2] hover:border-[#1677f2] hover:text-[#0a1628] transition-colors cursor-pointer"
                                     >
                                         {tag.name}
                                     </span>

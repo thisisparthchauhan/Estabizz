@@ -61,7 +61,7 @@ export default function ProcessSection() {
                 </div>
 
                 <div className="relative grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-                    <div className="absolute left-8 right-8 top-[42px] hidden h-px bg-gradient-to-r from-[#1677f2] via-[#10b981] to-[#d9a938] xl:block" />
+                    <div className="absolute left-8 right-8 top-[42px] hidden h-px bg-gradient-to-r from-[#1677f2] via-[#10b981] to-[#0866d9] xl:block" />
                     {steps.map((step, index) => (
                         <div
                             key={step.num}

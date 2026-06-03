@@ -9,11 +9,17 @@ import type { LandingPage } from "./types";
 import { companyRegistration } from "./pages/companyRegistration";
 import { changeCompanyName } from "./pages/changeCompanyName";
 import { appointmentOfDirectors } from "./pages/appointmentOfDirectors";
+import { indianSubsidiary } from "./pages/indianSubsidiary";
+import { increaseAuthorisedCapital } from "./pages/increaseAuthorisedCapital";
+import { dinEkyc } from "./pages/dinEkyc";
 
 export const LANDING_PAGES: LandingPage[] = [
   companyRegistration,
+  indianSubsidiary,
   changeCompanyName,
+  increaseAuthorisedCapital,
   appointmentOfDirectors,
+  dinEkyc,
 ];
 
 export function getLandingPage(slug: string): LandingPage | undefined {

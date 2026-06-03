@@ -179,7 +179,7 @@ export default function PageClient() {
       heroActions={
         <>
           <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Apply for AIF Registration</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-white text-[#0096D6] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors">Check AIF Eligibility</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors">Check AIF Eligibility</Link>
           <a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a>
         </>
       }
@@ -206,7 +206,7 @@ export default function PageClient() {
       finalCtaDescription="Build your SEBI AIF application with structured regulatory support, category assessment, fund structuring, sponsor contribution planning, PPM drafting, Form A filing, SEBI query response, scheme launch support and post-registration compliance assistance."
       finalCtaActions={
         <>
-          <Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to SEBI Compliance Expert</Link>
+          <Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to SEBI Compliance Expert</Link>
           <Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20">Apply for AIF Registration</Link>
           <Link href="/get-started" className="w-full sm:w-auto px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl">Check AIF Eligibility</Link>
           <a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a>
@@ -642,7 +642,7 @@ export default function PageClient() {
         <p>Estabizz can help you assess the proposed AIF category, build the sponsor-manager structure, prepare PPM and Form A documentation, respond to SEBI observations and set up a post-registration compliance calendar.</p>
         <div className="flex flex-col sm:flex-row flex-wrap gap-3">
           <Link href="/contact" className="px-5 py-3 bg-[#0a1628] text-white font-bold rounded-xl text-center">Speak to SEBI Compliance Expert</Link>
-          <Link href="/get-started" className="px-5 py-3 bg-white text-[#0096D6] font-bold rounded-xl border border-blue-200 text-center">Check AIF Eligibility</Link>
+          <Link href="/get-started" className="px-5 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 text-center">Check AIF Eligibility</Link>
           <a href={whatsappUrl} className="px-5 py-3 bg-[#10b981] text-white font-bold rounded-xl text-center">WhatsApp Estabizz Team</a>
         </div>
       </Section>

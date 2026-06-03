@@ -23,6 +23,8 @@ import { opcConversion } from "./pages/opcConversion";
 import { nidhiCompany } from "./pages/nidhiCompany";
 import { publicRegistration } from "./pages/publicRegistration";
 import { privateWindingUp } from "./pages/privateWindingUp";
+import { removalOfDirector } from "./pages/removalOfDirector";
+import { registeredOfficeChange } from "./pages/registeredOfficeChange";
 
 export const LANDING_PAGES: LandingPage[] = [
   companyRegistration,
@@ -34,6 +36,8 @@ export const LANDING_PAGES: LandingPage[] = [
   changeCompanyName,
   increaseAuthorisedCapital,
   appointmentOfDirectors,
+  removalOfDirector,
+  registeredOfficeChange,
   dinEkyc,
   opcConversion,
   privateWindingUp,

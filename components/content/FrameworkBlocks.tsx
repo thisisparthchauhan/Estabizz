@@ -13,11 +13,11 @@ export function ResourceCardGrid({
                 <Link
                     key={card.href}
                     href={card.href}
-                    className="group rounded-2xl border border-blue-100 bg-white p-7 shadow-sm transition-all hover:-translate-y-1 hover:border-[#0096D6]/40 hover:shadow-[0_18px_45px_rgba(0,100,200,0.12)]"
+                    className="group rounded-2xl border border-blue-100 bg-white p-7 shadow-sm transition-all hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_18px_45px_rgba(0,100,200,0.12)]"
                 >
-                    <h2 className="mb-3 text-[20px] font-black text-[#0a1628] group-hover:text-[#0096D6]">{card.title}</h2>
+                    <h2 className="mb-3 text-[20px] font-black text-[#0a1628] group-hover:text-[#1677f2]">{card.title}</h2>
                     <p className="mb-6 text-[14px] leading-7 text-[#64748b]">{card.description}</p>
-                    <span className="text-[14px] font-bold text-[#0096D6]">{card.button || "Open Resource"} →</span>
+                    <span className="text-[14px] font-bold text-[#1677f2]">{card.button || "Open Resource"} →</span>
                 </Link>
             ))}
         </div>
@@ -99,7 +99,7 @@ export function ProcessTimeline({
                 <div key={step.title} className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
                     <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0a1628] text-sm font-black text-white">{index + 1}</div>
                     <h3 className="text-[18px] font-black text-[#0a1628]">{step.title}</h3>
-                    {step.subtitle && <p className="mt-1 text-[13px] font-bold uppercase tracking-[0.12em] text-[#0096D6]">{step.subtitle}</p>}
+                    {step.subtitle && <p className="mt-1 text-[13px] font-bold uppercase tracking-[0.12em] text-[#1677f2]">{step.subtitle}</p>}
                     <p className="mt-3 text-[14px] leading-7 text-[#64748b]">{step.description}</p>
                 </div>
             ))}
@@ -132,7 +132,7 @@ export function FinalCTA({
             <h2 className="mb-4 text-[30px] font-black leading-tight md:text-[40px]">{title}</h2>
             <p className="mb-7 max-w-3xl text-[16px] leading-8 text-blue-100">{text}</p>
             <div className="flex flex-col gap-3 sm:flex-row">
-                <Link href={primary.href} className="rounded-xl bg-[#0096D6] px-6 py-3 text-center text-sm font-black text-white">{primary.label}</Link>
+                <Link href={primary.href} className="rounded-xl bg-[#1677f2] px-6 py-3 text-center text-sm font-black text-white">{primary.label}</Link>
                 {secondary && <Link href={secondary.href} className="rounded-xl border border-white/25 px-6 py-3 text-center text-sm font-black text-white">{secondary.label}</Link>}
                 <Link href="https://wa.me/919825600907" className="rounded-xl border border-white/25 px-6 py-3 text-center text-sm font-black text-white">WhatsApp Estabizz Team</Link>
             </div>

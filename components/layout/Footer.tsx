@@ -72,7 +72,7 @@ export default function Footer() {
         <footer className="relative overflow-hidden border-t border-blue-100 bg-[#f8fbff] text-[#475569]">
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute left-[-12%] top-[-12%] h-[520px] w-[520px] rounded-full bg-[#1677f2]/08 blur-[130px]" />
-                <div className="absolute bottom-[-18%] right-[-8%] h-[520px] w-[520px] rounded-full bg-[#0096D6]/08 blur-[140px]" />
+                <div className="absolute bottom-[-18%] right-[-8%] h-[520px] w-[520px] rounded-full bg-[#1677f2]/08 blur-[140px]" />
             </div>
 
             <div className="relative z-10 mx-auto max-w-[1400px] px-6 pb-8 pt-14">

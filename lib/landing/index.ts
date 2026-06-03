@@ -18,15 +18,21 @@ import { moaPrivate } from "./pages/moaPrivate";
 import { moaPublic } from "./pages/moaPublic";
 import { moaSection8 } from "./pages/moaSection8";
 import { ngoRegistration } from "./pages/ngoRegistration";
+import { opcRegistration } from "./pages/opcRegistration";
+import { opcConversion } from "./pages/opcConversion";
+import { nidhiCompany } from "./pages/nidhiCompany";
 
 export const LANDING_PAGES: LandingPage[] = [
   companyRegistration,
   indianSubsidiary,
+  opcRegistration,
   llpRegistration,
+  nidhiCompany,
   changeCompanyName,
   increaseAuthorisedCapital,
   appointmentOfDirectors,
   dinEkyc,
+  opcConversion,
   llpWindingUp,
   moaPrivate,
   moaPublic,

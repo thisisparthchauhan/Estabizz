@@ -87,7 +87,6 @@ export default function ServicePageLayout({
     };
 
     const insightCards = quickFacts.slice(0, 4);
-    const radarLabels = tags.slice(0, 4);
 
     return (
         <div className="min-h-screen bg-[#f6f9ff] font-sans text-gray-800">
@@ -99,7 +98,7 @@ export default function ServicePageLayout({
 
             {/* Hero Header */}
             <section
-                className="relative pt-24 pb-12 px-6 lg:px-8 border-b border-blue-100 overflow-hidden bg-white"
+                className="relative pt-24 pb-10 px-6 lg:px-8 border-b border-blue-100 overflow-hidden bg-white"
             >
                 <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
                 <div className="absolute inset-x-0 bottom-0 pointer-events-none h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
@@ -121,7 +120,7 @@ export default function ServicePageLayout({
                         ))}
                     </nav>
 
-                    <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_380px] xl:grid-cols-[minmax(0,1fr)_460px] lg:items-center">
+                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_360px] xl:grid-cols-[minmax(0,1fr)_400px] lg:items-start">
                         <div>
                             {/* Tags */}
                             <div className="flex flex-wrap gap-3 mb-7">
@@ -133,7 +132,7 @@ export default function ServicePageLayout({
                             </div>
 
                             {/* Title */}
-                            <h1 className="text-[40px] md:text-[54px] font-black text-[#120b45] leading-[1.05] mb-6 tracking-[-0.03em] max-w-4xl">
+                            <h1 className="text-[30px] md:text-[44px] font-black text-[#120b45] leading-[1.08] mb-5 tracking-[-0.03em] max-w-4xl">
                                 {title}
                             </h1>
 
@@ -156,7 +155,7 @@ export default function ServicePageLayout({
                             )}
 
                             {/* Meta */}
-                            <div className="flex flex-wrap items-center gap-4 text-[13.5px] text-[#64748b] font-semibold mb-8">
+                            <div className="flex flex-wrap items-center gap-4 text-[13.5px] text-[#64748b] font-semibold mb-6">
                                 <div className="flex items-center gap-1.5"><span>📅</span> {displayYear}</div>
                                 <span className="text-gray-300">|</span>
                                 <div className="flex items-center gap-1.5"><span>⏱️</span> {readTime}</div>
@@ -171,52 +170,30 @@ export default function ServicePageLayout({
                             </div>
                         </div>
 
-                        <div className="hidden lg:block">
-                            <div className="relative overflow-hidden rounded-[32px] border border-blue-100 bg-white p-6 shadow-[0_28px_80px_rgba(0,80,140,0.13)]">
-                                <div className="absolute right-[-90px] top-[-90px] h-52 w-52 rounded-full bg-[#dff2ff] blur-3xl" />
-                                <div className="absolute left-[-80px] bottom-[-90px] h-48 w-48 rounded-full bg-[#fff0c8] blur-3xl" />
+                        <div className="hidden lg:block lg:sticky lg:top-[88px]">
+                            <div className="relative overflow-hidden rounded-[26px] border border-blue-100 bg-white p-6 shadow-[0_22px_60px_rgba(0,80,140,0.10)]">
+                                <div className="absolute right-[-80px] top-[-80px] h-44 w-44 rounded-full bg-[#dff2ff] blur-3xl" />
                                 <div className="relative">
-                                    <div className="mb-6 flex items-start justify-between gap-4">
+                                    <div className="mb-5 flex items-start justify-between gap-4">
                                         <div>
-                                            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#1677f2]">Licence Snapshot</div>
-                                            <div className="mt-2 text-[24px] font-black leading-tight text-[#071426]">{ctaTitle}</div>
+                                            <div className="text-[10.5px] font-black uppercase tracking-[0.22em] text-[#1677f2]">Licence Snapshot</div>
+                                            <div className="mt-1.5 text-[20px] font-black leading-tight text-[#120b45]">{ctaTitle}</div>
                                         </div>
-                                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#071426] text-lg font-black text-white shadow-lg">E</div>
+                                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0a1628] text-base font-black text-white shadow-lg">E</div>
                                     </div>
 
-                                    <p className="mb-6 text-[14px] font-medium leading-7 text-[#64748b]">{ctaDescription}</p>
+                                    <p className="mb-5 text-[13.5px] font-medium leading-6 text-[#64748b]">{ctaDescription}</p>
 
-                                    <div className="mb-6 grid gap-3">
-                                        {quickFacts.slice(0, 5).map((fact, i) => (
-                                            <div key={`${fact.label}-${i}`} className="rounded-2xl border border-blue-100 bg-[#f8fbff] p-4">
-                                                <div className="text-[10px] font-black uppercase tracking-[0.16em] text-[#64748b]">{fact.label}</div>
-                                                <div className="mt-1 text-[15px] font-black leading-snug text-[#071426]">{fact.value}</div>
+                                    <div className="mb-5 grid grid-cols-2 gap-2.5">
+                                        {quickFacts.slice(0, 4).map((fact, i) => (
+                                            <div key={`${fact.label}-${i}`} className="rounded-xl border border-blue-100 bg-[#f8fbff] p-3.5">
+                                                <div className="text-[9.5px] font-black uppercase tracking-[0.14em] text-[#64748b]">{fact.label}</div>
+                                                <div className="mt-1 text-[13.5px] font-black leading-snug text-[#0a1628]">{fact.value}</div>
                                             </div>
                                         ))}
                                     </div>
 
-                                    <div className="mb-6 grid grid-cols-2 gap-3">
-                                        <div className="rounded-2xl border border-blue-100 bg-white p-4">
-                                            <div className="text-[10px] font-black uppercase tracking-[0.16em] text-[#64748b]">Guide Year</div>
-                                            <div className="mt-1 text-[20px] font-black text-[#071426]">{displayYear}</div>
-                                        </div>
-                                        <div className="rounded-2xl border border-blue-100 bg-white p-4">
-                                            <div className="text-[10px] font-black uppercase tracking-[0.16em] text-[#64748b]">Read Time</div>
-                                            <div className="mt-1 text-[20px] font-black text-[#071426]">{readTime}</div>
-                                        </div>
-                                    </div>
-
-                                    {radarLabels.length > 0 && (
-                                        <div className="mb-6 flex flex-wrap gap-2">
-                                            {radarLabels.map((tag, i) => (
-                                                <span key={`${tag.label}-${i}`} className="rounded-full border border-blue-100 bg-white px-3 py-1.5 text-[11px] font-black text-[#1677f2]">
-                                                    {tag.emoji} {tag.label}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    <Link href="/contact" className="block w-full rounded-2xl bg-[#1677f2] px-5 py-4 text-center text-[14px] font-black text-white shadow-[0_16px_34px_rgba(22,119,242,0.24)] transition-all hover:-translate-y-1 hover:bg-[#0866d9]">
+                                    <Link href="/contact" className="block w-full rounded-2xl bg-[#1677f2] px-5 py-3.5 text-center text-[14px] font-black text-white shadow-[0_16px_34px_rgba(22,119,242,0.24)] transition-all hover:-translate-y-0.5 hover:bg-[#0866d9]">
                                         Book Free Consultation
                                     </Link>
                                 </div>
@@ -227,7 +204,7 @@ export default function ServicePageLayout({
             </section>
 
             {insightCards.length > 0 && (
-                <section className="relative z-20 -mt-7 px-5 md:px-6">
+                <section className="relative z-20 -mt-7 px-5 md:px-6 lg:hidden">
                     <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 rounded-[28px] border border-blue-100 bg-white/92 p-3 shadow-[0_24px_70px_rgba(0,100,200,0.10)] backdrop-blur-xl sm:grid-cols-2 xl:grid-cols-4">
                         {insightCards.map((fact, i) => (
                             <div key={`${fact.label}-${i}`} className="rounded-[22px] border border-blue-50 bg-gradient-to-br from-[#f8fbff] to-white p-5">

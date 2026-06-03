@@ -81,7 +81,7 @@ export default function FeaturedBlogs() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <div className="inline-flex items-center gap-2 bg-[#0096D6]/10 text-[#0096D6] text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+                    <div className="inline-flex items-center gap-2 bg-[#1677f2]/10 text-[#1677f2] text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                         </svg>
@@ -111,7 +111,7 @@ export default function FeaturedBlogs() {
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 />
                                 <div className="absolute top-3 left-3">
-                                    <span className="bg-[#0096D6] text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+                                    <span className="bg-[#1677f2] text-white text-xs font-semibold px-2.5 py-1 rounded-full">
                                         {blog.category}
                                     </span>
                                 </div>
@@ -119,7 +119,7 @@ export default function FeaturedBlogs() {
 
                             {/* Content */}
                             <div className="p-5">
-                                <h3 className="font-bold text-[#0a1628] text-base leading-snug mb-2 line-clamp-2 group-hover:text-[#0096D6] transition-colors">
+                                <h3 className="font-bold text-[#0a1628] text-base leading-snug mb-2 line-clamp-2 group-hover:text-[#1677f2] transition-colors">
                                     {blog.title}
                                 </h3>
                                 <p className="text-gray-500 text-sm line-clamp-2 mb-4">
@@ -129,7 +129,7 @@ export default function FeaturedBlogs() {
                                 {/* Author & Meta */}
                                 <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                                     <div className="flex items-center gap-2">
-                                        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#0096D6] to-[#0077B6] flex items-center justify-center text-white text-xs font-bold">
+                                        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0077B6] flex items-center justify-center text-white text-xs font-bold">
                                             {blog.author.firstName[0]}
                                         </div>
                                         <span className="text-xs text-gray-500">
@@ -160,7 +160,7 @@ export default function FeaturedBlogs() {
                 <div className="text-center mt-10">
                     <Link
                         href="/blogs"
-                        className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-semibold px-8 py-3 rounded-lg hover:shadow-lg hover:shadow-[#0096D6]/25 transition-all duration-300"
+                        className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-semibold px-8 py-3 rounded-lg hover:shadow-lg hover:shadow-[#1677f2]/25 transition-all duration-300"
                     >
                         View All Blogs
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

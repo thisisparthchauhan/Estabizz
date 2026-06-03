@@ -50,14 +50,14 @@ export default function Testimonials() {
                                 key={label}
                                 className="bg-white/80 backdrop-blur-[16px] border border-[rgba(0,150,220,0.1)] rounded-[20px] p-8 relative flex flex-col group hover:bg-white/95 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,100,200,0.12)] transition-all duration-500 ease-out"
                             >
-                                <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#0096D6] font-black mb-5">
+                                <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#1677f2] font-black mb-5">
                                     {index + 1}
                                 </div>
                                 <h3 className="text-[16px] font-bold text-[#0a1628] mb-3">{label}</h3>
                                 <p className="text-[14px] text-[#64748b] leading-7 font-medium">
                                     Client feedback coming soon.
                                 </p>
-                                <div className="mt-6 text-[11px] font-bold uppercase tracking-[0.14em] text-[#0096D6]">
+                                <div className="mt-6 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1677f2]">
                                     Confidential engagement category
                                 </div>
                             </div>

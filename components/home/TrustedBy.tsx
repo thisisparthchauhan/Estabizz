@@ -30,7 +30,7 @@ export default function TrustedBy() {
 
     // Helper to render pills
     const renderPill = (name: string, index: number) => (
-        <div key={`${name}-${index}`} className="flex-shrink-0 premium-glass border border-[rgba(0,150,220,0.18)] rounded-full px-5 py-2 mx-3 shadow-sm hover:shadow-[0_14px_34px_rgba(0,150,220,0.16)] hover:bg-[#0096D6] hover:text-white transition-all duration-300 hover:-translate-y-1 cursor-default">
+        <div key={`${name}-${index}`} className="flex-shrink-0 premium-glass border border-[rgba(0,150,220,0.18)] rounded-full px-5 py-2 mx-3 shadow-sm hover:shadow-[0_14px_34px_rgba(0,150,220,0.16)] hover:bg-[#1677f2] hover:text-white transition-all duration-300 hover:-translate-y-1 cursor-default">
             <span className="text-[13px] font-bold text-[#334155] group-hover:text-white transition-colors">{name}</span>
         </div>
     );
@@ -81,7 +81,7 @@ export default function TrustedBy() {
            animation: marqueeRight 30s linear infinite;
         }
         /* Make hover text white via global selector inside pill */
-        .hover\\:bg-\\[\\#0096D6\\]:hover span {
+        .hover\\:bg-\\[\\#1677f2\\]:hover span {
           color: white;
         }
       `}} />

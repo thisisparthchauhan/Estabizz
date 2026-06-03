@@ -19,7 +19,7 @@ const featureBlocks = [
         icon: "📊",
         title: "Compliance Dashboard",
         desc: "A centralised control panel to monitor filings, approvals, deadlines, and regulatory status across authorities.",
-        color: "#0096D6"
+        color: "#1677f2"
     },
     {
         icon: "🔒",
@@ -74,7 +74,7 @@ export default function CompliancePortal() {
     return (
         <section ref={sectionRef} className="relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute left-[42%] top-[12%] h-[320px] w-[320px] rounded-full bg-[#0096D6]/10 blur-[90px]" />
+                <div className="absolute left-[42%] top-[12%] h-[320px] w-[320px] rounded-full bg-[#1677f2]/10 blur-[90px]" />
                 <div className="absolute right-[4%] bottom-[8%] h-[280px] w-[280px] rounded-full bg-[#1677f2]/10 blur-[80px]" />
             </div>
             <div className="flex flex-col xl:flex-row min-h-[800px]">
@@ -82,7 +82,7 @@ export default function CompliancePortal() {
                 {/* Left Side (Light) */}
                 <div className="w-full xl:w-5/12 bg-white py-24 px-6 xl:pl-0 flex justify-end">
                     <div className={`max-w-[500px] w-full xl:mr-16 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
-                        <div className="text-[11px] font-bold text-[#0096D6] uppercase tracking-[0.2em] mb-4">
+                        <div className="text-[11px] font-bold text-[#1677f2] uppercase tracking-[0.2em] mb-4">
                             FOR FOUNDERS, CFOs & COMPLIANCE TEAMS
                         </div>
                         <h2 className="text-[36px] md:text-[42px] font-black text-[#0a1628] leading-[1.1] mb-2">

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 const caseStudies = [
     {
         regulator: "🏛️ RBI",
-        color: "#0096D6", // Match Fix 10 exact color 
+        color: "#1677f2", // Match Fix 10 exact color 
         title: "NBFC Registration – From Doubt to Discipline",
         body: "The founders were unsure whether their business model and capital structure would qualify for RBI approval. We helped restructure documentation, refine the business plan, strengthen policy frameworks and prepare for regulatory queries. With structured preparation and continuous follow-up, the NBFC licence was secured within 4 months and 20 days, subject to regulatory process and application facts.",
         highlight: "Indicative result: 4 months 20 days"
@@ -58,7 +58,7 @@ export default function CaseStudies() {
           <h2 className="text-[32px] md:text-[40px] font-black text-[#0a1628] leading-[1.2] mb-4 tracking-tight">
             Regulatory Experience. Real Outcomes.
           </h2>
-          <div className="text-[18px] font-bold text-[#0096D6] mb-6">
+          <div className="text-[18px] font-bold text-[#1677f2] mb-6">
             Representative engagements, shared without confidential client details.
           </div>
           <p className="text-[15px] text-[#475569] leading-relaxed font-medium">

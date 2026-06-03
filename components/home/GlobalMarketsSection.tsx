@@ -14,7 +14,7 @@ const regions = [
         title: "GCC & Middle East",
         description: "Market-entry, fintech structuring and documentation support for UAE, Saudi Arabia, Qatar and allied markets.",
         markets: ["UAE", "Saudi Arabia", "Qatar", "Oman"],
-        accent: "#0096D6",
+        accent: "#1677f2",
     },
     {
         title: "UK, Europe & Global Funds",

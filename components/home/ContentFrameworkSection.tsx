@@ -37,7 +37,7 @@ export default function ContentFrameworkSection() {
         <section ref={ref} className="bg-[#f8faff] py-24">
             <div className="mx-auto max-w-[1240px] px-6">
                 <div className={`mx-auto mb-14 max-w-3xl text-center transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-                    <div className="mb-4 text-[12px] font-black uppercase tracking-[0.18em] text-[#0096D6]">Content, Compliance and Trust</div>
+                    <div className="mb-4 text-[12px] font-black uppercase tracking-[0.18em] text-[#1677f2]">Content, Compliance and Trust</div>
                     <h2 className="mb-5 text-[32px] font-black leading-tight text-[#0a1628] md:text-[42px]">Build Content, Compliance and Trust with Estabizz</h2>
                     <p className="text-[16px] font-medium leading-8 text-[#475569]">
                         Our website is designed not only to explain licences, but to help founders, CFOs and compliance teams understand regulatory obligations, approval risks, documentation expectations and post-registration compliance in one place.
@@ -55,7 +55,7 @@ export default function ContentFrameworkSection() {
                 </div>
 
                 <div className="mt-10 text-center">
-                    <Link href="/resources" className="inline-flex rounded-xl bg-gradient-to-r from-[#0096D6] to-[#0077B6] px-7 py-3.5 text-sm font-bold text-white shadow-lg">Explore Resources</Link>
+                    <Link href="/resources" className="inline-flex rounded-xl bg-gradient-to-r from-[#1677f2] to-[#0077B6] px-7 py-3.5 text-sm font-bold text-white shadow-lg">Explore Resources</Link>
                 </div>
             </div>
         </section>

@@ -20,7 +20,7 @@ export default function FinalCTA() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative py-24 overflow-hidden" style={{ background: "radial-gradient(circle at 50% 0%, #0096D6 0%, #0a315f 42%, #071224 100%)" }}>
+        <section ref={sectionRef} className="relative py-24 overflow-hidden" style={{ background: "radial-gradient(circle at 50% 0%, rgba(22,119,242,0.32) 0%, #0a1628 46%, #0c2040 100%)" }}>
 
             {/* Animated Particle overlay (pure CSS dot matrix drifting) */}
             <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden mix-blend-screen">
@@ -40,7 +40,7 @@ export default function FinalCTA() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-                        <a href="/contact" className="relative overflow-hidden group w-full sm:w-auto bg-gradient-to-r from-[#10b981] to-[#059669] text-white font-bold text-[16px] rounded-[14px] px-10 py-5 shadow-[0_10px_30px_rgba(16,185,129,0.3)] hover:-translate-y-1 transition-all duration-300 text-center">
+                        <a href="/contact" className="relative overflow-hidden group w-full sm:w-auto bg-[#1677f2] text-white font-bold text-[16px] rounded-[14px] px-10 py-5 shadow-[0_14px_35px_rgba(22,119,242,0.32)] hover:-translate-y-1 hover:bg-[#0866d9] transition-all duration-300 text-center">
                             <span className="absolute top-0 -left-full w-1/2 h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-30 skew-x-[-20deg] group-hover:animate-[shine_1s_ease-out] z-0" />
                             <span className="relative z-10 flex items-center justify-center gap-2">
                                 Request a Structured Assessment <span className="group-hover:translate-x-1.5 transition-transform">→</span>

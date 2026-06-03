@@ -146,7 +146,7 @@ export default function PageClient() {
                     <details key={i} className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
                         <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]">
                             <span>{item.q}</span>
-                            <span className="text-[#0096D6] transition-transform group-open:rotate-180 shrink-0 ml-4">▼</span>
+                            <span className="text-[#1677f2] transition-transform group-open:rotate-180 shrink-0 ml-4">▼</span>
                         </summary>
                         <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151] leading-relaxed">
                             {item.a}

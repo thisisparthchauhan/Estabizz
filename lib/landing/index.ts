@@ -12,14 +12,18 @@ import { appointmentOfDirectors } from "./pages/appointmentOfDirectors";
 import { indianSubsidiary } from "./pages/indianSubsidiary";
 import { increaseAuthorisedCapital } from "./pages/increaseAuthorisedCapital";
 import { dinEkyc } from "./pages/dinEkyc";
+import { llpRegistration } from "./pages/llpRegistration";
+import { llpWindingUp } from "./pages/llpWindingUp";
 
 export const LANDING_PAGES: LandingPage[] = [
   companyRegistration,
   indianSubsidiary,
+  llpRegistration,
   changeCompanyName,
   increaseAuthorisedCapital,
   appointmentOfDirectors,
   dinEkyc,
+  llpWindingUp,
 ];
 
 export function getLandingPage(slug: string): LandingPage | undefined {

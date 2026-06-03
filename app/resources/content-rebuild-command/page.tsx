@@ -52,19 +52,21 @@ const complianceRows = [
 
 export default function ContentRebuildCommandPage() {
     return (
-        <main className="min-h-screen bg-[#f8faff] pt-20">
-            <section className="border-b border-blue-100 px-6 py-16" style={{ background: "linear-gradient(135deg,#eff6ff,#f8fbff,#fffaf0)" }}>
-                <div className="mx-auto max-w-7xl">
-                    <nav className="mb-6 flex gap-2 text-sm font-medium text-gray-500">
-                        <Link href="/" className="hover:text-[#0096D6]">Home</Link><span>&gt;</span><Link href="/resources" className="hover:text-[#0096D6]">Resources</Link><span>&gt;</span><span className="text-[#0096D6]">Content Rebuild Command</span>
+        <main className="min-h-screen bg-white pt-[64px]">
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link><span className="opacity-40">/</span><Link href="/resources" className="hover:text-[#374151] transition-colors">Resources</Link><span className="opacity-40">/</span><span className="text-[#374151]">Content Rebuild Command</span>
                     </nav>
-                    <span className="mb-4 inline-block rounded-full border border-blue-100 bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#0096D6]">Reference Content Rebuild System</span>
-                    <h1 className="max-w-5xl text-[38px] font-black leading-tight text-[#0a1628] md:text-[52px]">Content Rebuild Command for SEO, GEO and AEO Regulatory Pages</h1>
+                    <span className="mb-4 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">Reference Content Rebuild System</span>
+                    <h1 className="max-w-5xl text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">Content Rebuild Command for <span className="text-[#1677f2]">SEO, GEO and AEO Regulatory Pages</span></h1>
                     <p className="mt-5 max-w-3xl text-[16px] leading-8 text-[#64748b]">
                         Use this Estabizz framework whenever a competitor or reference URL is provided. The objective is not to copy the page, but to understand the regulatory concept and rebuild it into original, practical, legally safe and conversion-focused Estabizz content.
                     </p>
                 </div>
-            </section>
+            </header>
 
             <div className="mx-auto max-w-7xl px-6 py-14">
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_360px]">
@@ -74,7 +76,7 @@ export default function ContentRebuildCommandPage() {
                             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                                 {rebuildRules.map((rule, index) => (
                                     <div key={rule} className="rounded-2xl bg-[#f8fbff] p-4">
-                                        <span className="text-xs font-black text-[#0096D6]">Rule {index + 1}</span>
+                                        <span className="text-xs font-black text-[#1677f2]">Rule {index + 1}</span>
                                         <p className="mt-2 text-[14px] font-semibold leading-7 text-[#475569]">{rule}</p>
                                     </div>
                                 ))}
@@ -114,7 +116,7 @@ export default function ContentRebuildCommandPage() {
                             <p className="mb-6 text-[14px] leading-7 text-blue-100">
                                 Before publishing, verify originality, regulatory safety, CTA strength, FAQ quality and internal link validity.
                             </p>
-                            <Link href="/resources/service-page-content-framework" className="block rounded-xl bg-[#0096D6] px-5 py-3 text-center text-sm font-black text-white">Open Service Page Framework</Link>
+                            <Link href="/resources/service-page-content-framework" className="block rounded-xl bg-[#1677f2] px-5 py-3 text-center text-sm font-black text-white">Open Service Page Framework</Link>
                             <Link href="/proposal-template" className="mt-3 block rounded-xl border border-white/25 px-5 py-3 text-center text-sm font-black text-white">Open Proposal Template</Link>
                         </div>
                     </aside>

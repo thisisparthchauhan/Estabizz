@@ -60,25 +60,27 @@ export default async function RegulatoryUpdateDetailPage({ params }: Props) {
     };
 
     return (
-        <main className="min-h-screen bg-[#f8faff] pt-20">
+        <main className="min-h-screen bg-white pt-[64px]">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-            <section className="border-b border-blue-100 px-6 py-14" style={{ background: "linear-gradient(135deg,#f0f9ff,#e0f2fe,#eff6ff)" }}>
-                <div className="mx-auto max-w-7xl">
-                    <nav className="mb-6 flex flex-wrap gap-2 text-sm font-medium text-gray-500">
-                        <Link href="/" className="hover:text-[#0096D6]">Home</Link><span>&gt;</span><Link href="/resources" className="hover:text-[#0096D6]">Resources</Link><span>&gt;</span><Link href="/resources/regulatory-updates" className="hover:text-[#0096D6]">Regulatory Updates</Link>
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="mx-auto max-w-7xl px-6 py-14">
+                    <nav className="mb-5 flex flex-wrap items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link><span className="opacity-40">/</span><Link href="/resources" className="hover:text-[#374151] transition-colors">Resources</Link><span className="opacity-40">/</span><Link href="/resources/regulatory-updates" className="hover:text-[#374151] transition-colors">Regulatory Updates</Link>
                     </nav>
                     <div className="mb-5 flex flex-wrap gap-2">
-                        <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-black text-[#0096D6]">{update.regulator}</span>
-                        <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-[#64748b]">{new Date(update.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</span>
-                        <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-[#64748b]">{update.circularNumber}</span>
+                        <span className="rounded-full bg-[#f5fbff] px-3 py-1 text-xs font-black text-[#0077B6]">{update.regulator}</span>
+                        <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#64748b]">{new Date(update.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</span>
+                        <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#64748b]">{update.circularNumber}</span>
                         <span className={`rounded-full px-3 py-1 text-xs font-black ${update.riskRating === "High" ? "bg-red-50 text-red-600" : update.riskRating === "Moderate" ? "bg-amber-50 text-amber-700" : "bg-green-50 text-green-700"}`}>{update.riskRating} Risk</span>
                     </div>
-                    <h1 className="mb-4 max-w-4xl text-[38px] font-black leading-tight text-[#0a1628] md:text-[52px]">{update.title}</h1>
-                    <p className="mb-5 max-w-3xl text-[18px] leading-8 text-gray-600">{update.subtitle}</p>
+                    <h1 className="mb-4 max-w-4xl text-[34px] font-black leading-[1.1] tracking-[-0.03em] text-[#120b45] md:text-[48px]">{update.title}</h1>
+                    <p className="mb-5 max-w-3xl text-[18px] leading-8 text-[#475569]">{update.subtitle}</p>
                     <p className="text-[13px] font-semibold text-[#64748b]">Affected entities: {update.affectedEntities.join(", ")} • Last reviewed: {new Date(update.lastReviewed).toLocaleDateString("en-IN")}</p>
                 </div>
-            </section>
+            </header>
 
             <article className="mx-auto max-w-5xl px-6 py-14">
                 <Section title="Regulatory Reference Table">
@@ -147,7 +149,7 @@ export default async function RegulatoryUpdateDetailPage({ params }: Props) {
                     <h2 className="mb-3 text-[28px] font-black">Need Help Implementing This Regulatory Update?</h2>
                     <p className="mb-6 text-blue-100">Estabizz can help you understand applicability, prepare internal action notes, update policies and maintain compliance evidence.</p>
                     <div className="flex flex-wrap gap-3">
-                        <Link href="/contact" className="rounded-xl bg-[#0096D6] px-6 py-3 text-sm font-bold">Speak to Compliance Expert</Link>
+                        <Link href="/contact" className="rounded-xl bg-[#1677f2] px-6 py-3 text-sm font-bold">Speak to Compliance Expert</Link>
                         <Link href="/contact" className="rounded-xl bg-white/10 px-6 py-3 text-sm font-bold">Request Circular Impact Review</Link>
                         <a href="https://wa.me/919825600907" className="rounded-xl bg-[#10b981] px-6 py-3 text-sm font-bold">WhatsApp Estabizz Team</a>
                     </div>

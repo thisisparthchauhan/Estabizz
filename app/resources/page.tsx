@@ -20,19 +20,21 @@ const cards = [
 
 export default function ResourcesPage() {
     return (
-        <main className="min-h-screen bg-[#f8faff] pt-20">
-            <section className="border-b border-blue-100 px-6 py-16" style={{ background: "linear-gradient(135deg,#f0f9ff,#e0f2fe,#eff6ff)" }}>
-                <div className="mx-auto max-w-7xl">
-                    <nav className="mb-6 flex gap-2 text-sm font-medium text-gray-500">
-                        <Link href="/" className="hover:text-[#0096D6]">Home</Link><span>&gt;</span><span className="text-[#0096D6]">Resources</span>
+        <main className="min-h-screen bg-white pt-[64px]">
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link><span className="opacity-40">/</span><span className="text-[#374151]">Resources</span>
                     </nav>
-                    <span className="mb-4 inline-block rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-bold text-[#0096D6]">Regulatory Knowledge System</span>
-                    <h1 className="mb-5 max-w-4xl text-[40px] font-black leading-tight text-[#0a1628] md:text-[52px]">Resources for Regulatory Compliance Teams</h1>
-                    <p className="max-w-3xl text-[17px] leading-8 text-gray-600">
+                    <span className="mb-4 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">Regulatory Knowledge System</span>
+                    <h1 className="mb-5 max-w-4xl text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">Resources for <span className="text-[#1677f2]">Regulatory Compliance Teams</span></h1>
+                    <p className="max-w-3xl text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px]">
                         Practical regulatory updates, compliance FAQs, circular templates and implementation resources for founders, CFOs, compliance officers and regulated financial entities.
                     </p>
                 </div>
-            </section>
+            </header>
 
             <section className="mx-auto max-w-7xl px-6 py-16">
                 <ResourceCardGrid cards={cards} />

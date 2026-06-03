@@ -14,6 +14,9 @@ import { increaseAuthorisedCapital } from "./pages/increaseAuthorisedCapital";
 import { dinEkyc } from "./pages/dinEkyc";
 import { llpRegistration } from "./pages/llpRegistration";
 import { llpWindingUp } from "./pages/llpWindingUp";
+import { moaPrivate } from "./pages/moaPrivate";
+import { moaPublic } from "./pages/moaPublic";
+import { moaSection8 } from "./pages/moaSection8";
 
 export const LANDING_PAGES: LandingPage[] = [
   companyRegistration,
@@ -24,6 +27,9 @@ export const LANDING_PAGES: LandingPage[] = [
   appointmentOfDirectors,
   dinEkyc,
   llpWindingUp,
+  moaPrivate,
+  moaPublic,
+  moaSection8,
 ];
 
 export function getLandingPage(slug: string): LandingPage | undefined {

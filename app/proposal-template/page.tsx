@@ -51,28 +51,31 @@ const processSteps = [
 
 export default function ProposalTemplatePage() {
     return (
-        <main className="min-h-screen bg-[#f8faff] pt-20">
-            <section className="border-b border-blue-100 px-6 py-16" style={{ background: "linear-gradient(135deg,#eff6ff,#f8fbff,#fffaf0)" }}>
-                <div className="mx-auto max-w-7xl">
-                    <nav className="mb-6 flex gap-2 text-sm font-medium text-gray-500">
-                        <Link href="/" className="hover:text-[#0096D6]">Home</Link><span>&gt;</span><Link href="/resources" className="hover:text-[#0096D6]">Resources</Link><span>&gt;</span><span className="text-[#0096D6]">Proposal Template</span>
+        <main className="min-h-screen bg-white pt-[64px]">
+            {/* Hero — homepage-themed */}
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link><span className="opacity-40">/</span><Link href="/resources" className="hover:text-[#374151] transition-colors">Resources</Link><span className="opacity-40">/</span><span className="text-[#374151]">Proposal Template</span>
                     </nav>
-                    <div className="mb-5 inline-flex rounded-full border border-blue-100 bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#0096D6]">Browser-Style Proposal System</div>
+                    <div className="mb-5 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">Browser-Style Proposal System</div>
                     <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0a1628] text-2xl font-black text-white">E</div>
-                    <h1 className="max-w-4xl text-[38px] font-black leading-tight text-[#0a1628] md:text-[52px]">[Licence / Registration Name] - Regulatory Registration & Compliance Proposal</h1>
+                    <h1 className="max-w-4xl text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">[Licence / Registration Name] - Regulatory Registration &amp; Compliance Proposal</h1>
                     <p className="mt-5 max-w-3xl text-[18px] font-semibold text-[#475569]">Prepared by Estabizz Fintech Private Limited</p>
                     <p className="mt-5 max-w-3xl text-[16px] leading-8 text-[#64748b]">
                         A reusable client-facing proposal format for regulatory licences, registrations and compliance engagements across RBI, SEBI, IRDAI, IFSCA and allied government frameworks.
                     </p>
                 </div>
-            </section>
+            </header>
 
             <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 py-14 lg:grid-cols-[280px_1fr]">
                 <aside className="hidden lg:block">
                     <div className="sticky top-24 rounded-2xl border border-blue-100 bg-white p-5 shadow-sm">
-                        <p className="mb-4 text-xs font-black uppercase tracking-[0.16em] text-[#0096D6]">Proposal Sections</p>
+                        <p className="mb-4 text-xs font-black uppercase tracking-[0.16em] text-[#0077B6]">Proposal Sections</p>
                         {["Introduction", "Regulatory Overview", "Scope", "Requirements", "Timeline", "Commercials", "Closing Note"].map((item) => (
-                            <a key={item} href={`#${item.toLowerCase().replaceAll(" ", "-")}`} className="block rounded-lg px-3 py-2 text-[13px] font-bold text-[#475569] hover:bg-blue-50 hover:text-[#0096D6]">{item}</a>
+                            <a key={item} href={`#${item.toLowerCase().replaceAll(" ", "-")}`} className="block rounded-lg px-3 py-2 text-[13px] font-bold text-[#475569] hover:bg-[#f5fbff] hover:text-[#1677f2]">{item}</a>
                         ))}
                     </div>
                 </aside>

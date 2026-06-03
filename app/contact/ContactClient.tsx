@@ -95,23 +95,22 @@ export default function ContactClient() {
     };
 
     return (
-        <div className="bg-[#f8faff] min-h-screen pt-24">
-            {/* Hero */}
-            <section className="relative py-16 px-6 border-b border-blue-100 overflow-hidden"
-                style={{ background: "linear-gradient(135deg, #f0f9ff, #e0f2fe, #eff6ff)" }}>
-                <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
-                    style={{ backgroundImage: "linear-gradient(#0096D6 1px, transparent 1px), linear-gradient(90deg, #0096D6 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
-                <div className="max-w-7xl mx-auto relative z-10">
-                    <nav className="text-sm font-medium text-gray-500 mb-6 flex items-center space-x-2">
-                        <Link href="/" className="hover:text-[#0096D6] transition-colors">Home</Link>
-                        <span>&gt;</span>
-                        <span className="text-[#0096D6]">Contact Us</span>
+        <div className="min-h-screen bg-white pt-[64px]">
+            {/* Hero — homepage-themed */}
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 sm:py-16">
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link>
+                        <span className="opacity-40">/</span>
+                        <span className="text-[#374151]">Contact Us</span>
                     </nav>
-                    <span className="px-3 py-1 bg-blue-50 text-[#0096D6] border border-blue-100 rounded-full text-xs font-semibold mb-4 inline-block">📞 Free Consultation</span>
-                    <h1 className="text-[40px] font-black text-[#0a1628] leading-tight mb-4 tracking-tight">Get Expert Regulatory Guidance</h1>
-                    <p className="text-[17px] text-gray-600 max-w-2xl">Book a free consultation with our regulatory compliance experts. We specialise in RBI, SEBI, IRDAI, FEMA and fintech regulatory frameworks in India.</p>
+                    <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">📞 Free Consultation</div>
+                    <h1 className="mt-4 text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">Get Expert <span className="text-[#1677f2]">Regulatory Guidance</span></h1>
+                    <p className="mt-4 max-w-2xl text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px]">Book a free consultation with our regulatory compliance experts. We specialise in RBI, SEBI, IRDAI, FEMA and fintech regulatory frameworks in India.</p>
                 </div>
-            </section>
+            </header>
 
             {/* Contact Section */}
             <section className="max-w-7xl mx-auto px-6 py-16">
@@ -133,7 +132,7 @@ export default function ContactClient() {
                                     <p className="text-gray-500">Your inquiry has been received. Our team will contact you within 24 hours.</p>
                                     <button
                                         onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", company: "", service: "", message: "" }); }}
-                                        className="mt-6 px-6 py-2.5 bg-[#0096D6] text-white font-semibold rounded-xl text-sm hover:bg-[#0077B6] transition-colors"
+                                        className="mt-6 px-6 py-2.5 bg-[#1677f2] text-white font-semibold rounded-xl text-sm hover:bg-[#0866d9] transition-colors"
                                     >
                                         Send Another Message
                                     </button>
@@ -150,7 +149,7 @@ export default function ContactClient() {
                                                 onChange={handleChange}
                                                 required
                                                 placeholder="Your full name"
-                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all"
+                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all"
                                             />
                                         </div>
                                         <div>
@@ -162,7 +161,7 @@ export default function ContactClient() {
                                                 onChange={handleChange}
                                                 required
                                                 placeholder="your@email.com"
-                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all"
+                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all"
                                             />
                                         </div>
                                     </div>
@@ -176,7 +175,7 @@ export default function ContactClient() {
                                                 onChange={handleChange}
                                                 required
                                                 placeholder="+91 98765 43210"
-                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all"
+                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all"
                                             />
                                         </div>
                                         <div>
@@ -187,7 +186,7 @@ export default function ContactClient() {
                                                 value={form.company}
                                                 onChange={handleChange}
                                                 placeholder="Your company name"
-                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all"
+                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all"
                                             />
                                         </div>
                                     </div>
@@ -198,7 +197,7 @@ export default function ContactClient() {
                                             value={form.service}
                                             onChange={handleChange}
                                             required
-                                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all bg-white"
+                                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all bg-white"
                                         >
                                             <option value="">Select a service...</option>
                                             {services.map((s, i) => (
@@ -214,7 +213,7 @@ export default function ContactClient() {
                                             onChange={handleChange}
                                             rows={5}
                                             placeholder="Describe your requirements or questions..."
-                                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all resize-none"
+                                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all resize-none"
                                         />
                                         {/* AI Recommendation Button */}
                                         <button
@@ -246,7 +245,7 @@ export default function ContactClient() {
                                                             key={i}
                                                             type="button"
                                                             onClick={() => setForm(f => ({ ...f, service: rec.service }))}
-                                                            className={`w-full text-left px-3 py-2.5 rounded-lg border transition-all text-sm ${form.service === rec.service ? "bg-[#0096D6] border-[#0096D6] text-white" : "bg-white border-purple-200 text-[#0a1628] hover:border-[#0096D6]"}`}
+                                                            className={`w-full text-left px-3 py-2.5 rounded-lg border transition-all text-sm ${form.service === rec.service ? "bg-[#1677f2] border-[#1677f2] text-white" : "bg-white border-purple-200 text-[#0a1628] hover:border-[#1677f2]"}`}
                                                         >
                                                             <span className="font-semibold">{rec.service}</span>
                                                             <span className={`block text-xs mt-0.5 ${form.service === rec.service ? "text-blue-100" : "text-gray-500"}`}>{rec.reason}</span>
@@ -259,7 +258,7 @@ export default function ContactClient() {
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full py-4 bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                                        className="w-full py-4 bg-[#1677f2] text-white font-bold rounded-xl shadow-[0_14px_35px_rgba(22,119,242,0.28)] hover:bg-[#0866d9] transition-all disabled:opacity-70 disabled:cursor-not-allowed"
                                     >
                                         {loading ? (
                                             <span className="flex items-center justify-center gap-2">
@@ -283,30 +282,30 @@ export default function ContactClient() {
                             <h3 className="text-[16px] font-bold text-[#0a1628] mb-4">Contact Information</h3>
                             <div className="space-y-4">
                                 <div className="flex items-start gap-3">
-                                    <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-                                        <svg className="w-4 h-4 text-[#0096D6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div className="w-9 h-9 rounded-lg bg-[#f5fbff] flex items-center justify-center flex-shrink-0">
+                                        <svg className="w-4 h-4 text-[#1677f2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                         </svg>
                                     </div>
                                     <div>
                                         <p className="text-xs text-gray-400 font-medium">Phone</p>
-                                        <a href="tel:+919876543210" className="text-sm font-semibold text-[#0a1628] hover:text-[#0096D6]">+91 98765 43210</a>
+                                        <a href="tel:9825600907" className="text-sm font-semibold text-[#0a1628] hover:text-[#1677f2]">+91 98256 00907</a>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-                                        <svg className="w-4 h-4 text-[#0096D6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div className="w-9 h-9 rounded-lg bg-[#f5fbff] flex items-center justify-center flex-shrink-0">
+                                        <svg className="w-4 h-4 text-[#1677f2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                         </svg>
                                     </div>
                                     <div>
                                         <p className="text-xs text-gray-400 font-medium">Email</p>
-                                        <a href="mailto:info@estabizz.com" className="text-sm font-semibold text-[#0a1628] hover:text-[#0096D6]">info@estabizz.com</a>
+                                        <a href="mailto:info@estabizz.com" className="text-sm font-semibold text-[#0a1628] hover:text-[#1677f2]">info@estabizz.com</a>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-                                        <svg className="w-4 h-4 text-[#0096D6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div className="w-9 h-9 rounded-lg bg-[#f5fbff] flex items-center justify-center flex-shrink-0">
+                                        <svg className="w-4 h-4 text-[#1677f2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
@@ -320,7 +319,7 @@ export default function ContactClient() {
                         </div>
 
                         {/* Response Time */}
-                        <div className="bg-gradient-to-br from-[#0096D6] to-[#0077B6] rounded-2xl p-6 text-white">
+                        <div className="bg-gradient-to-br from-[#1677f2] to-[#0866d9] rounded-2xl p-6 text-white">
                             <div className="text-3xl mb-3">⚡</div>
                             <h3 className="text-[16px] font-bold mb-2">Quick Response Guaranteed</h3>
                             <p className="text-blue-100 text-sm">We respond to all inquiries within 24 hours. For urgent matters, call us directly.</p>
@@ -350,7 +349,7 @@ export default function ContactClient() {
                         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
                             <h3 className="text-[14px] font-bold text-[#0a1628] mb-4 uppercase tracking-wider">Your Expert</h3>
                             <div className="flex items-center gap-3 mb-3">
-                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] flex items-center justify-center text-white font-bold text-lg">CS</div>
+                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center text-white font-bold text-lg">CS</div>
                                 <div>
                                     <p className="font-bold text-[#0a1628] text-sm">CS Devyani Khambhati</p>
                                     <p className="text-xs text-gray-500">Regulatory Compliance Expert</p>

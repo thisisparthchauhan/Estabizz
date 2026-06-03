@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const footerLinks: Record<string, { label: string; href: string }[]> = {
     "About": [
@@ -124,9 +125,9 @@ export default function Footer() {
                 <div className="mb-12 grid grid-cols-1 gap-10 xl:grid-cols-[350px_1fr]">
                     <div>
                         <Link href="/" className="mb-4 flex items-center gap-3">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1677f2] via-[#0866d9] to-[#0a1628] text-xl font-black text-white shadow-[0_18px_40px_rgba(22,119,242,0.25)]">E</div>
-                            <div>
-                                <div className="text-[24px] font-black tracking-tight text-[#120b45]">Estabizz Fintech</div>
+                            <Image src="/estabizz-logo.png" alt="Estabizz" width={747} height={314} className="h-10 w-auto" />
+                            <div className="leading-tight">
+                                <div className="text-[20px] font-black tracking-tight text-[#120b45]">Fintech</div>
                                 <div className="text-[12px] font-bold text-[#1677f2]">We Comply. We Simplify.</div>
                             </div>
                         </Link>

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 interface AuthUser {
@@ -643,10 +644,10 @@ export default function Navbar() {
                     {/* Logo */}
                     <Link href="/" className="flex flex-col group shrink-0">
                         <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#0096D6] via-[#0077B6] to-[#0a1628] text-white flex items-center justify-center font-bold text-lg shadow-[0_10px_24px_rgba(0,150,214,0.25)]">E</div>
-                            <span className="font-extrabold text-[#0a1628] text-xl leading-none tracking-tight">Estabizz Fintech</span>
+                            <Image src="/estabizz-logo.png" alt="Estabizz" width={747} height={314} priority className="h-8 w-auto" />
+                            <span className="font-extrabold text-[#0a1628] text-xl leading-none tracking-tight">Fintech</span>
                         </div>
-                        <span className="text-[10px] text-[#64748b] font-medium tracking-wide mt-0.5 pl-10">India&apos;s #1 Fintech Compliance Platform</span>
+                        <span className="text-[10px] text-[#64748b] font-medium tracking-wide mt-0.5">India&apos;s #1 Fintech Compliance Platform</span>
                     </Link>
 
                     {/* Desktop Nav */}

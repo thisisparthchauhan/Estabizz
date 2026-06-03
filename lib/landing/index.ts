@@ -21,9 +21,12 @@ import { ngoRegistration } from "./pages/ngoRegistration";
 import { opcRegistration } from "./pages/opcRegistration";
 import { opcConversion } from "./pages/opcConversion";
 import { nidhiCompany } from "./pages/nidhiCompany";
+import { publicRegistration } from "./pages/publicRegistration";
+import { privateWindingUp } from "./pages/privateWindingUp";
 
 export const LANDING_PAGES: LandingPage[] = [
   companyRegistration,
+  publicRegistration,
   indianSubsidiary,
   opcRegistration,
   llpRegistration,
@@ -33,6 +36,7 @@ export const LANDING_PAGES: LandingPage[] = [
   appointmentOfDirectors,
   dinEkyc,
   opcConversion,
+  privateWindingUp,
   llpWindingUp,
   moaPrivate,
   moaPublic,

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Login – Estabizz Compliance Portal | Estabizz Fintech",
+    title: "Login – Estabizz Compliance Portal",
     description: "Log in to the Estabizz Compliance Hub to track licences, manage documents and monitor regulatory compliance across RBI, SEBI, IRDAI and IFSCA frameworks.",
     alternates: { canonical: "/login" },
     robots: { index: false, follow: true },

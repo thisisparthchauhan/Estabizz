@@ -642,12 +642,12 @@ export default function Navbar() {
                 <div className="max-w-[1480px] mx-auto px-5 2xl:px-6 h-full flex items-center justify-between">
 
                     {/* Logo */}
-                    <Link href="/" className="flex flex-col group shrink-0">
-                        <div className="flex items-center gap-2">
-                            <Image src="/estabizz-logo.png" alt="Estabizz" width={747} height={314} priority className="h-8 w-auto" />
-                            <span className="font-extrabold text-[#0a1628] text-xl leading-none tracking-tight">Fintech</span>
+                    <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+                        <Image src="/estabizz-logo.png" alt="Estabizz" width={747} height={314} priority className="h-9 w-auto transition-transform group-hover:scale-[1.03]" />
+                        <div className="leading-tight">
+                            <div className="font-black text-[#0a1628] text-[19px] leading-none tracking-tight">Fintech</div>
+                            <div className="mt-1 text-[11px] font-bold tracking-tight text-[#1677f2]">We Comply. We Simplify.</div>
                         </div>
-                        <span className="text-[10px] text-[#64748b] font-medium tracking-wide mt-0.5">India&apos;s #1 Fintech Compliance Platform</span>
                     </Link>
 
                     {/* Desktop Nav */}
@@ -766,11 +766,8 @@ export default function Navbar() {
                         )}
 
                         <CountrySelector selectorRef={desktopCountryRef} />
-                        <Link href="/get-started" className="premium-border-sweep whitespace-nowrap text-[13px] 2xl:text-[13.5px] font-bold bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white rounded-xl px-3.5 2xl:px-5 py-2.5 hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-[0_12px_26px_rgba(0,150,214,0.22)]">
+                        <Link href="/get-started" className="whitespace-nowrap text-[13px] 2xl:text-[13.5px] font-bold bg-[#1677f2] text-white rounded-xl px-4 2xl:px-6 py-2.5 hover:-translate-y-0.5 hover:bg-[#0866d9] transition-all shadow-[0_12px_28px_rgba(22,119,242,0.28)]">
                             Get Started
-                        </Link>
-                        <Link href="/contact" className="bg-[#0a1628] whitespace-nowrap text-white font-bold text-[13px] 2xl:text-[13.5px] rounded-xl px-3.5 2xl:px-5 py-2.5 hover:bg-[#1a2638] transition-colors shadow-[0_12px_26px_rgba(10,22,40,0.18)]">
-                            Book Consultation
                         </Link>
                     </div>
 

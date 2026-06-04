@@ -115,6 +115,7 @@ const NAV_ITEMS: NavItem[] = [
 
 const PAGE_TITLES: Record<string, string> = {
   "/admin":                "Dashboard",
+  "/admin/leads":          "Leads",
   "/admin/blogs":          "All Blogs",
   "/admin/blogs/new":      "New Blog",
   "/admin/blogs/pending":  "Pending Review",
@@ -294,7 +295,7 @@ export default function AdminShell({
           {/* Breadcrumb */}
           <div className="flex items-center gap-2">
             {breadcrumbs.map((crumb, i) => (
-              <React.Fragment key={crumb}>
+              <React.Fragment key={i}>
                 {i > 0 && (
                   <span className="text-[#1677f2]/50 text-[11px]">/</span>
                 )}

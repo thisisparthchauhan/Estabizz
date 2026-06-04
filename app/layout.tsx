@@ -25,6 +25,18 @@ export const metadata: Metadata = {
             follow: true,
         },
     },
+    openGraph: {
+        type: "website",
+        siteName: "Estabizz Fintech",
+        title: "Estabizz Fintech | Regulatory Advisory, Licensing & Compliance",
+        description: "Expert RBI, SEBI, IRDAI, IFSCA and FEMA licensing & compliance advisory for fintech and regulated businesses in India.",
+        locale: "en_IN",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Estabizz Fintech | Regulatory Advisory, Licensing & Compliance",
+        description: "Expert RBI, SEBI, IRDAI, IFSCA and FEMA licensing & compliance advisory for fintech and regulated businesses in India.",
+    },
 };
 
 export default function RootLayout({

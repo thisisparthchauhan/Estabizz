@@ -99,34 +99,45 @@ export default function GlobalMarketsSection() {
                     style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "translateY(0)" : "translateY(34px)" }}
                 >
                     <div className="grid gap-5 lg:grid-cols-[0.72fr_1fr]">
-                        <div className="relative min-h-[480px] overflow-hidden rounded-[30px] border border-blue-100 bg-[#f8fbff] p-6 shadow-[0_16px_44px_rgba(0,80,140,0.10)]">
-                            <div className="absolute inset-x-8 top-12 h-[210px] rounded-full bg-[#1677f2]/12 blur-[80px]" />
-                            <div className="relative flex min-h-[360px] items-center justify-center">
-                                <div className="absolute h-[280px] w-[280px] rounded-full border border-[#1677f2]/20" />
-                                <div className="absolute h-[206px] w-[206px] rounded-full border border-dashed border-[#1677f2]/25 animate-[spin_18s_linear_infinite]" />
-                                <div className="absolute h-[134px] w-[134px] rounded-full bg-[radial-gradient(circle,rgba(22,119,242,0.20),rgba(0,150,214,0.10)_48%,transparent_72%)] shadow-[0_0_70px_rgba(22,119,242,0.22)]" />
-                                <div className="relative flex h-[112px] w-[112px] items-center justify-center rounded-full border border-blue-100 bg-white text-center text-[12px] font-black uppercase tracking-[0.16em] text-[#120b45] shadow-sm">
-                                    Global
-                                    <br />
-                                    Compliance
-                                </div>
+                        <div className="relative flex h-full flex-col overflow-hidden rounded-[30px] border border-blue-100 bg-[#f8fbff] p-6 shadow-[0_16px_44px_rgba(0,80,140,0.10)]">
+                            <div className="pointer-events-none absolute left-1/2 top-20 h-[200px] w-[200px] -translate-x-1/2 rounded-full bg-[#1677f2]/10 blur-[70px]" />
 
-                                {orbitNodes.map((node, index) => {
-                                    const angle = (index / orbitNodes.length) * 360;
-                                    return (
-                                        <div
-                                            key={node}
-                                            className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-2xl border border-blue-100 bg-white text-[10px] font-black text-[#0a2b58] shadow-[0_10px_28px_rgba(0,80,140,0.12)]"
-                                            style={{ transform: `rotate(${angle}deg) translateX(136px) rotate(-${angle}deg)` }}
-                                        >
-                                            {node}
-                                        </div>
-                                    );
-                                })}
+                            <div className="relative text-center text-[10px] font-black uppercase tracking-[0.22em] text-[#94a3b8]">
+                                Regulatory Coverage
                             </div>
-                            <div className="relative rounded-2xl border border-blue-100 bg-[#f5fbff] px-4 py-3">
-                                <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#94a3b8]">Expansion Path</div>
-                                <div className="mt-1 text-[18px] font-black text-[#1677f2]">India to Global</div>
+
+                            {/* Contained compliance orbit */}
+                            <div className="relative flex flex-1 items-center justify-center py-6">
+                                <div className="relative flex h-[230px] w-[230px] items-center justify-center">
+                                    <div className="absolute h-[230px] w-[230px] rounded-full border border-[#1677f2]/15" />
+                                    <div className="absolute h-[162px] w-[162px] rounded-full border border-dashed border-[#1677f2]/30 animate-[spin_24s_linear_infinite]" />
+                                    <div className="absolute h-[118px] w-[118px] rounded-full bg-[radial-gradient(circle,rgba(22,119,242,0.18),transparent_72%)]" />
+                                    <div className="relative z-10 flex h-[90px] w-[90px] items-center justify-center rounded-full border border-blue-100 bg-white text-center text-[10px] font-black uppercase leading-[1.3] tracking-[0.12em] text-[#120b45] shadow-[0_8px_24px_rgba(0,80,140,0.12)]">
+                                        Global<br />Compliance
+                                    </div>
+
+                                    {orbitNodes.map((node, index) => {
+                                        const angle = (index / orbitNodes.length) * 360;
+                                        return (
+                                            <div
+                                                key={node}
+                                                className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl border border-blue-100 bg-white text-[9.5px] font-black text-[#0a2b58] shadow-[0_8px_22px_rgba(0,80,140,0.12)]"
+                                                style={{ transform: `rotate(${angle}deg) translateX(95px) rotate(-${angle}deg)` }}
+                                            >
+                                                {node}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+
+                            {/* Expansion path */}
+                            <div className="relative flex items-center justify-between gap-3 rounded-2xl border border-blue-100 bg-white px-4 py-3">
+                                <div>
+                                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#94a3b8]">Expansion Path</div>
+                                    <div className="mt-0.5 text-[16px] font-black text-[#1677f2]">India → Global</div>
+                                </div>
+                                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1677f2] text-[15px] font-black text-white shadow-[0_8px_20px_rgba(22,119,242,0.3)]">→</span>
                             </div>
                         </div>
 

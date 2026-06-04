@@ -389,15 +389,25 @@ export default function LiveBackground() {
       mouse.y = e.clientY;
     };
 
+    // Pause the animation loop when the tab is hidden (saves CPU/battery)
+    const handleVisibility = () => {
+      cancelAnimationFrame(animationFrameId);
+      if (!document.hidden) {
+        animationFrameId = requestAnimationFrame(render);
+      }
+    };
+
     window.addEventListener('resize', handledDebouncedResize);
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('visibilitychange', handleVisibility);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handledDebouncedResize);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, [isClient]);
 

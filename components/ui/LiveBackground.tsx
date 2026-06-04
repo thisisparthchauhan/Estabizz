@@ -51,7 +51,7 @@ export default function LiveBackground() {
             speedY: -(Math.random() * 0.4 + 0.1),
             speedX: (Math.random() - 0.5) * 0.2,
             phase: Math.random() * Math.PI * 2,
-            color: Math.random() > 0.5 ? '0,150,220' : '16,185,129'
+            color: Math.random() > 0.5 ? '0,150,220' : '22,119,242'
         }));
 
         const nodes = Array.from({ length: 16 }, () => ({
@@ -88,7 +88,7 @@ export default function LiveBackground() {
 
         const blobs = [
             { x: width * 0.8, y: height * 0.2, r: 400, color: 'rgba(0,150,220,0.07)' },
-            { x: width * 0.2, y: height * 0.8, r: 500, color: 'rgba(16,185,129,0.06)' },
+            { x: width * 0.2, y: height * 0.8, r: 500, color: 'rgba(22,119,242,0.06)' },
             { x: width / 2, y: height / 2, r: 350, color: 'rgba(0,150,220,0.05)', followMouse: true },
             { x: width / 2, y: height / 2, r: 600, color: 'rgba(0,150,220,0.04)', pulse: true }
         ];

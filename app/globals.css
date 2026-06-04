@@ -25,8 +25,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: var(--estabizz-ink);
   background:
-    radial-gradient(circle at 8% 8%, rgba(0, 150, 214, 0.13), transparent 30vw),
-    radial-gradient(circle at 92% 12%, rgba(217, 169, 56, 0.12), transparent 26vw),
+    radial-gradient(circle at 8% 8%, rgba(22, 119, 242, 0.10), transparent 30vw),
+    radial-gradient(circle at 92% 12%, rgba(0, 150, 214, 0.10), transparent 26vw),
     linear-gradient(180deg, #f9fcff 0%, #eef7ff 45%, #f8fbff 100%);
   overflow-x: hidden;
 }
@@ -132,9 +132,9 @@ body::before {
 
 .premium-mesh {
   background:
-    radial-gradient(circle at 15% 20%, rgba(0,150,214,0.18), transparent 28%),
-    radial-gradient(circle at 85% 18%, rgba(217,169,56,0.16), transparent 25%),
-    radial-gradient(circle at 60% 90%, rgba(16,185,129,0.14), transparent 28%),
+    radial-gradient(circle at 15% 20%, rgba(0,150,214,0.16), transparent 28%),
+    radial-gradient(circle at 85% 18%, rgba(22,119,242,0.14), transparent 25%),
+    radial-gradient(circle at 60% 90%, rgba(22,119,242,0.10), transparent 28%),
     linear-gradient(135deg, rgba(255,255,255,0.94), rgba(241,248,255,0.86));
   background-size: 180% 180%;
   animation: softGradientShift 18s ease infinite;

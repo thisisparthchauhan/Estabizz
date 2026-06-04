@@ -11,21 +11,21 @@ const caseStudies = [
     },
     {
         regulator: "📊 SEBI",
-        color: "#7C3AED", // Match Fix 10 exact purple
+        color: "#1677f2",
         title: "SEBI Registration – Structuring a Capital Market Vision",
         body: "An emerging investment firm approached us with ambition but limited regulatory clarity. We aligned net worth compliance, redesigned the operational framework, drafted required policies and prepared the application for SEBI scrutiny. The registration process was completed with a compliance system ready from day one.",
         highlight: "Compliance system ready from day one"
     },
     {
         regulator: "🛡️ IRDAI",
-        color: "#10b981", // Match Fix 10 exact green
+        color: "#1677f2",
         title: "IRDAI Licensing – Building from Foundation Up",
         body: "The promoters had strong insurance domain experience but required guidance on regulatory documentation and capital structuring. We supported them through principal officer eligibility, infrastructure readiness, documentation and regulatory submission.",
         highlight: "Built on governance readiness"
     },
     {
         regulator: "🌐 IFSCA",
-        color: "#F59E0B", // Match Fix 10 exact orange
+        color: "#1677f2",
         title: "IFSCA Registration – Entering the IFSC Ecosystem",
         body: "Setting up within GIFT City requires structured planning and regulatory clarity. We supported the entity with office planning, application drafting, governance design and regulator-facing communication aligned with IFSCA expectations.",
         highlight: "IFSC entry structured professionally"
@@ -106,7 +106,7 @@ export default function CaseStudies() {
               </p>
 
               {/* Highlight Box */}
-              <div className="mt-auto bg-gray-50/80 border border-gray-100 border-l-[3px] rounded-r-lg px-4 py-3" style={{ borderLeftColor: caseStudy.color }}>
+              <div className="mt-auto bg-[#f5fbff] border border-blue-100 border-l-[3px] rounded-r-lg px-4 py-3" style={{ borderLeftColor: caseStudy.color }}>
                 <span className="text-[13px] font-bold tracking-wide" style={{ color: caseStudy.color }}>
                   {caseStudy.highlight}
                 </span>

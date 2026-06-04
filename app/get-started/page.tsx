@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GetStartedForm from "./GetStartedForm";
 
 export const metadata: Metadata = {
     title: "Get Started – Book a Free Regulatory Consultation",
@@ -84,47 +85,7 @@ export default function GetStartedPage() {
                         <h2 className="text-[24px] font-black text-[#0a1628] mb-2">Lead Enquiry</h2>
                         <p className="text-gray-500 text-sm mb-8">Share a few details and our advisory team will help map the next steps.</p>
 
-                        <form className="space-y-6">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <label className="block">
-                                    <span className="block text-sm font-semibold text-[#0a1628] mb-2">Full Name</span>
-                                    <input type="text" className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all" />
-                                </label>
-                                <label className="block">
-                                    <span className="block text-sm font-semibold text-[#0a1628] mb-2">Email Address</span>
-                                    <input type="email" className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all" />
-                                </label>
-                            </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <label className="block">
-                                    <span className="block text-sm font-semibold text-[#0a1628] mb-2">Mobile Number</span>
-                                    <input type="tel" className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all" />
-                                </label>
-                                <label className="block">
-                                    <span className="block text-sm font-semibold text-[#0a1628] mb-2">Company Name</span>
-                                    <input type="text" className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all" />
-                                </label>
-                            </div>
-                            <label className="block">
-                                <span className="block text-sm font-semibold text-[#0a1628] mb-2">Service Required</span>
-                                <select className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all bg-white">
-                                    <option value="">Select a service...</option>
-                                    {services.map((service) => (
-                                        <option key={service} value={service}>{service}</option>
-                                    ))}
-                                </select>
-                            </label>
-                            <label className="block">
-                                <span className="block text-sm font-semibold text-[#0a1628] mb-2">Message</span>
-                                <textarea rows={5} className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all resize-none" />
-                            </label>
-                            <button
-                                type="button"
-                                className="w-full sm:w-auto px-8 py-3.5 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors"
-                            >
-                                Submit Enquiry
-                            </button>
-                        </form>
+                        <GetStartedForm services={services} />
                     </div>
 
                     <aside className="bg-[#0a1628] rounded-2xl p-8 text-white h-fit">

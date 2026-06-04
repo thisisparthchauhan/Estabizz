@@ -103,6 +103,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Dashboard",      href: "/admin",               icon: <IconGrid /> },
+  { label: "Leads",          href: "/admin/leads",          icon: <IconList /> },
   { label: "All Blogs",      href: "/admin/blogs",          icon: <IconList /> },
   { label: "New Blog",       href: "/admin/blogs/new",      icon: <IconPlus /> },
   { label: "Pending Review", href: "/admin/blogs/pending",  icon: <IconClock />, pendingBadge: true },

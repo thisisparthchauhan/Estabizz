@@ -85,13 +85,29 @@ export default function ContactClient() {
         }
     };
 
+    const [submitError, setSubmitError] = useState("");
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        // Simulate form submission
-        await new Promise(res => setTimeout(res, 1200));
-        setLoading(false);
-        setSubmitted(true);
+        setSubmitError("");
+        try {
+            const res = await fetch("/api/leads", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...form, source: "contact" }),
+            });
+            const data = await res.json();
+            if (res.ok && data.ok) {
+                setSubmitted(true);
+            } else {
+                setSubmitError(data.error || "Something went wrong. Please try again or call +91 98256 00907.");
+            }
+        } catch {
+            setSubmitError("Network error. Please try again or call +91 98256 00907.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -255,6 +271,11 @@ export default function ContactClient() {
                                             </div>
                                         )}
                                     </div>
+                                    {/* Honeypot — hidden from users, catches bots */}
+                                    <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" onChange={() => {}} />
+                                    {submitError && (
+                                        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[13px] font-semibold text-red-600">{submitError}</p>
+                                    )}
                                     <button
                                         type="submit"
                                         disabled={loading}

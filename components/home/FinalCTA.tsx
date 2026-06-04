@@ -20,7 +20,7 @@ export default function FinalCTA() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative py-24 overflow-hidden" style={{ background: "radial-gradient(circle at 50% 0%, rgba(22,119,242,0.32) 0%, #0a1628 46%, #0c2040 100%)" }}>
+        <section ref={sectionRef} className="relative py-14 overflow-hidden" style={{ background: "radial-gradient(circle at 50% 0%, rgba(22,119,242,0.32) 0%, #0a1628 46%, #0c2040 100%)" }}>
 
             {/* Animated Particle overlay (pure CSS dot matrix drifting) */}
             <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden mix-blend-screen">
@@ -31,35 +31,31 @@ export default function FinalCTA() {
             <div className="max-w-[800px] mx-auto px-6 relative z-10 text-center">
 
                 <div className={`transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-                    <h2 className="text-[36px] md:text-[48px] font-black text-white leading-[1.15] tracking-tight mb-4">
+                    <h2 className="text-[28px] md:text-[38px] font-black text-white leading-[1.12] tracking-tight mb-3">
                         Begin Your Licensing Process with Confidence
                     </h2>
 
-                    <p className="text-[16px] md:text-[18px] text-[#94a3b8] leading-relaxed font-medium mb-10 max-w-2xl mx-auto">
+                    <p className="text-[14.5px] md:text-[16px] text-[#94a3b8] leading-relaxed font-medium mb-7 max-w-2xl mx-auto">
                         Regulatory approvals demand preparation, clarity and disciplined execution. Estabizz guides you through every stage — from assessment to approval and beyond.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-                        <a href="/contact" className="relative overflow-hidden group w-full sm:w-auto bg-[#1677f2] text-white font-bold text-[16px] rounded-[14px] px-10 py-5 shadow-[0_14px_35px_rgba(22,119,242,0.32)] hover:-translate-y-1 hover:bg-[#0866d9] transition-all duration-300 text-center">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+                        <a href="/contact" className="relative overflow-hidden group w-full sm:w-auto bg-[#1677f2] text-white font-bold text-[15px] rounded-xl px-8 py-3.5 shadow-[0_14px_35px_rgba(22,119,242,0.32)] hover:-translate-y-0.5 hover:bg-[#0866d9] transition-all duration-300 text-center">
                             <span className="absolute top-0 -left-full w-1/2 h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-30 skew-x-[-20deg] group-hover:animate-[shine_1s_ease-out] z-0" />
                             <span className="relative z-10 flex items-center justify-center gap-2">
                                 Request a Structured Assessment <span className="group-hover:translate-x-1.5 transition-transform">→</span>
                             </span>
                         </a>
 
-                        <a href="tel:+919825600907" className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white/20 text-white font-bold text-[16px] rounded-[14px] px-8 py-[18px] hover:bg-white/10 hover:border-white/40 transition-all duration-300">
-                            <span className="text-[20px]">📞</span> +91 98256 00907
+                        <a href="tel:+919825600907" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-transparent border border-white/20 text-white font-bold text-[15px] rounded-xl px-6 py-3.5 hover:bg-white/10 hover:border-white/40 transition-all duration-300">
+                            <span className="text-[17px]">📞</span> +91 98256 00907
                         </a>
-                        <a href="https://wa.me/919825600907" className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white/10 border-2 border-white/20 text-white font-bold text-[16px] rounded-[14px] px-8 py-[18px] hover:bg-white/20 hover:border-white/40 transition-all duration-300">
+                        <a href="https://wa.me/919825600907" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-bold text-[15px] rounded-xl px-6 py-3.5 hover:bg-white/20 hover:border-white/40 transition-all duration-300">
                             WhatsApp Estabizz
                         </a>
                     </div>
 
-                    <div className="mt-10 text-[15px] text-white/70 font-semibold italic text-center">
-                        Regulatory strength begins with the right advisory partner.
-                    </div>
-
-                    <div className="mt-6 text-[12px] text-[#94a3b8] font-medium text-center">
+                    <div className="mt-7 text-[13.5px] text-white/65 font-semibold italic text-center">
                         Regulatory strength begins with the right advisory partner.
                     </div>
                 </div>

@@ -100,7 +100,7 @@ function CopyLinkButton() {
     <button
       onClick={copy}
       title="Copy link"
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e0e0e0] bg-white text-[#374151] hover:border-[#0096D6] hover:text-[#0096D6] transition-colors"
+      className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e0e0e0] bg-white text-[#374151] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors"
     >
       {copied ? (
         <svg className="h-4 w-4 text-[#10b981]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -203,7 +203,7 @@ function LeftSidebar({
                         item.level === 3 ? "ml-3 text-[11px]" : ""
                       } ${
                         activeId === item.id
-                          ? "bg-[#0096D6]/8 font-bold text-[#0096D6] border-l-2 border-[#0096D6] pl-[6px]"
+                          ? "bg-[#1677f2]/8 font-bold text-[#1677f2] border-l-2 border-[#1677f2] pl-[6px]"
                           : "text-[#6b7280] hover:text-[#111827]"
                       }`}
                     >
@@ -241,13 +241,13 @@ function MobileToc({ items }: { items: TocItem[] }) {
         className="flex w-full items-center justify-between px-4 py-3.5 text-[13px] font-bold text-[#0a1628]"
       >
         <span className="flex items-center gap-2">
-          <svg className="h-4 w-4 text-[#0096D6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="h-4 w-4 text-[#1677f2]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h12M4 14h8" />
           </svg>
           Table of Contents
         </span>
         <svg
-          className={`h-4 w-4 text-[#0096D6] transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`h-4 w-4 text-[#1677f2] transition-transform duration-200 ${open ? "rotate-180" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -267,7 +267,7 @@ function MobileToc({ items }: { items: TocItem[] }) {
                     setOpen(false);
                     scrollToId(item.id);
                   }}
-                  className={`block text-[13px] leading-snug text-[#374151] transition-colors hover:text-[#0096D6] ${
+                  className={`block text-[13px] leading-snug text-[#374151] transition-colors hover:text-[#1677f2] ${
                     item.level === 3 ? "ml-4" : ""
                   }`}
                 >
@@ -305,7 +305,7 @@ function RightSidebar({
             </p>
             <Link
               href={`/blogs/category/${categorySlug}`}
-              className="text-[11px] font-bold text-[#0096D6] hover:text-[#0077B6] transition-colors"
+              className="text-[11px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
             >
               See all →
             </Link>
@@ -450,7 +450,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
         {/* Author row */}
         <div className="flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-b border-[#f0f0f0] py-4">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[13px] font-black text-white">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[13px] font-black text-white">
               {blog.author.firstName[0]}
             </div>
             <div>
@@ -472,7 +472,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
           )}
 
           <span className="ml-auto flex items-center gap-1.5 rounded-lg border border-[#e0e0e0] bg-[#f7f8fc] px-2.5 py-1 text-[12px] font-bold text-[#374151]">
-            <svg className="h-3.5 w-3.5 text-[#0096D6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="h-3.5 w-3.5 text-[#1677f2]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             {blog.readingTime} min read
@@ -530,10 +530,10 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
                         key={i}
                         className="group overflow-hidden rounded-sm border border-[#e0e0e0] bg-white"
                       >
-                        <summary className="flex cursor-pointer items-start justify-between gap-4 px-5 py-4 text-[14px] font-bold text-[#0a1628] transition-colors hover:text-[#0096D6] [list-style:none] [&::-webkit-details-marker]:hidden">
+                        <summary className="flex cursor-pointer items-start justify-between gap-4 px-5 py-4 text-[14px] font-bold text-[#0a1628] transition-colors hover:text-[#1677f2] [list-style:none] [&::-webkit-details-marker]:hidden">
                           <span className="flex-1 leading-snug">{faq.question}</span>
                           <svg
-                            className="mt-0.5 h-4 w-4 shrink-0 text-[#0096D6] transition-transform duration-200 group-open:rotate-180"
+                            className="mt-0.5 h-4 w-4 shrink-0 text-[#1677f2] transition-transform duration-200 group-open:rotate-180"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -553,7 +553,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
             {/* Author box */}
             <div className="mt-10 overflow-hidden rounded-sm border border-[#e8e8e8] bg-white">
               <div className="flex flex-col gap-4 p-5 sm:flex-row sm:p-6">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[17px] font-black text-white">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[17px] font-black text-white">
                   {blog.author.firstName[0]}
                 </div>
                 <div className="flex-1">
@@ -564,7 +564,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
                     {blog.author.firstName} {blog.author.lastName}
                   </p>
                   {blog.author.designation && (
-                    <p className="text-[12px] font-semibold text-[#0096D6]">
+                    <p className="text-[12px] font-semibold text-[#1677f2]">
                       {blog.author.designation}
                     </p>
                   )}
@@ -575,7 +575,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
                   </p>
                   <p className="mt-3 text-[12.5px] font-semibold text-[#374151]">
                     Need professional assistance? Contact the Estabizz Team at{" "}
-                    <a href="tel:9825600907" className="font-black text-[#0096D6] hover:text-[#0077B6]">
+                    <a href="tel:9825600907" className="font-black text-[#1677f2] hover:text-[#0077B6]">
                       9825600907
                     </a>.
                   </p>
@@ -633,7 +633,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
             <div className="mt-8 flex items-center justify-between border-t border-[#f0f0f0] pt-6">
               <Link
                 href="/blogs"
-                className="inline-flex items-center gap-2 text-[13px] font-bold text-[#0096D6] hover:text-[#0077B6] transition-colors"
+                className="inline-flex items-center gap-2 text-[13px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
               >
                 <svg className="h-3.5 w-3.5 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -669,7 +669,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
               </div>
               <Link
                 href={`/blogs/category/${blog.category.slug}`}
-                className="text-[12px] font-bold text-[#0096D6] hover:text-[#0077B6] transition-colors"
+                className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
               >
                 See all →
               </Link>

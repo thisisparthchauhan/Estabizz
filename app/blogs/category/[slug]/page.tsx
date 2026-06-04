@@ -180,7 +180,7 @@ export default async function CategoryBlogsPage({ params }: Props) {
               </span>
               <Link
                 href="/blogs"
-                className="text-[12px] font-bold text-[#0096D6] hover:text-[#0077B6] transition-colors"
+                className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
               >
                 ← All Categories
               </Link>
@@ -245,7 +245,7 @@ async function OtherCategories({ currentSlug }: { currentSlug: string }) {
         </div>
         <Link
           href="/blogs"
-          className="text-[12px] font-bold text-[#0096D6] hover:text-[#0077B6] transition-colors"
+          className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
         >
           All Articles →
         </Link>
@@ -255,7 +255,7 @@ async function OtherCategories({ currentSlug }: { currentSlug: string }) {
           <Link
             key={cat.slug}
             href={`/blogs/category/${cat.slug}`}
-            className="group inline-flex items-center gap-1.5 rounded-full border border-[#e0e0e0] bg-white px-3.5 py-2 text-[12px] font-semibold text-[#374151] hover:border-[#0096D6]/40 hover:text-[#0096D6] transition-all"
+            className="group inline-flex items-center gap-1.5 rounded-full border border-[#e0e0e0] bg-white px-3.5 py-2 text-[12px] font-semibold text-[#374151] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-all"
           >
             <span>{cat.icon}</span>
             {cat.name}

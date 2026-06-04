@@ -38,7 +38,7 @@ function SectionHeading({
       {href && hrefLabel && (
         <Link
           href={href}
-          className="text-[12px] font-bold text-[#0096D6] hover:text-[#0077B6] transition-colors"
+          className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
         >
           {hrefLabel}
         </Link>
@@ -290,7 +290,7 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search articles, topics, regulations..."
-                className="h-9 w-full rounded-lg border border-[#e0e0e0] bg-white pl-9 pr-4 text-[13px] text-[#111827] placeholder:text-[#9ca3af] outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-[#0096D6]/10"
+                className="h-9 w-full rounded-lg border border-[#e0e0e0] bg-white pl-9 pr-4 text-[13px] text-[#111827] placeholder:text-[#9ca3af] outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10"
               />
             </div>
             {isFiltered && (
@@ -334,7 +334,7 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
                   <span className="font-black uppercase tracking-wide" style={{ color: b.category.color }}>
                     {b.category.name.split(" ")[0]}
                   </span>
-                  <span className="font-semibold text-[#374151] group-hover:text-[#0096D6] transition-colors">
+                  <span className="font-semibold text-[#374151] group-hover:text-[#1677f2] transition-colors">
                     {b.title}
                   </span>
                   <span className="text-[#cbd5e1]">·</span>

@@ -138,7 +138,7 @@ export function CardFeaturedSide({ blog }: { blog: BlogSummary }) {
       <div className="flex-1 min-w-0 flex flex-col justify-between">
         <div>
           <CategoryBadge name={blog.category.name} color={blog.category.color} size="xs" />
-          <h3 className="mt-0.5 text-[13px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#0096D6] transition-colors duration-150">
+          <h3 className="mt-0.5 text-[13px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150">
             {blog.title}
           </h3>
         </div>
@@ -171,7 +171,7 @@ export function CardStandard({ blog }: { blog: BlogSummary }) {
         </div>
 
         {/* Title */}
-        <h3 className="mb-2 text-[16px] font-bold leading-snug text-[#111827] line-clamp-3 group-hover:text-[#0096D6] transition-colors duration-150">
+        <h3 className="mb-2 text-[16px] font-bold leading-snug text-[#111827] line-clamp-3 group-hover:text-[#1677f2] transition-colors duration-150">
           {blog.title}
         </h3>
 
@@ -183,7 +183,7 @@ export function CardStandard({ blog }: { blog: BlogSummary }) {
         {/* Footer */}
         <div className="flex items-center justify-between text-[11px] text-[#9ca3af] pt-3 border-t border-[#f3f4f6]">
           <div className="flex items-center gap-2">
-            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[9px] font-black text-white">
+            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[9px] font-black text-white">
               {blog.author.firstName[0]}
             </div>
             <span className="font-medium text-[#374151]">{authorDisplay(blog)}</span>
@@ -210,7 +210,7 @@ export function CardList({ blog }: { blog: BlogSummary }) {
       {/* Text left */}
       <div className="flex-1 min-w-0">
         <CategoryBadge name={blog.category.name} color={blog.category.color} size="xs" />
-        <h3 className="mt-1 text-[15px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#0096D6] transition-colors duration-150">
+        <h3 className="mt-1 text-[15px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150">
           {blog.title}
         </h3>
         <span className="mt-1 block text-[11px] text-[#9ca3af]">{formatDate(blog.publishedAt)}</span>
@@ -243,7 +243,7 @@ export function CardMini({ blog }: { blog: BlogSummary }) {
         style={{ backgroundColor: blog.category.color }}
       />
       <div className="min-w-0">
-        <h4 className="text-[13px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#0096D6] transition-colors duration-150">
+        <h4 className="text-[13px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150">
           {blog.title}
         </h4>
         <span className="mt-0.5 block text-[11px] text-[#9ca3af]">{formatDate(blog.publishedAt)}</span>
@@ -285,14 +285,14 @@ export function CardHorizontal({
       {/* Content right */}
       <div className="flex flex-1 flex-col justify-center p-5 sm:p-7">
         <CategoryBadge name={blog.category.name} color={blog.category.color} />
-        <h3 className="mb-2.5 mt-1.5 text-[18px] font-black leading-snug text-[#0a1628] line-clamp-3 group-hover:text-[#0096D6] transition-colors duration-150 sm:text-[21px]">
+        <h3 className="mb-2.5 mt-1.5 text-[18px] font-black leading-snug text-[#0a1628] line-clamp-3 group-hover:text-[#1677f2] transition-colors duration-150 sm:text-[21px]">
           {blog.title}
         </h3>
         <p className="mb-4 text-[13.5px] leading-[1.7] text-[#6b7280] line-clamp-3">
           {blog.summary}
         </p>
         <div className="flex items-center gap-2.5 text-[11.5px] text-[#9ca3af]">
-          <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[9px] font-black text-white">
+          <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[9px] font-black text-white">
             {blog.author.firstName[0]}
           </div>
           <span className="font-medium text-[#374151]">{authorDisplay(blog)}</span>
@@ -320,7 +320,7 @@ export function CardPopularRank({ blog, rank }: { blog: BlogSummary; rank: numbe
       </span>
       <div className="min-w-0 flex-1">
         <CategoryBadge name={blog.category.name} color={blog.category.color} size="xs" />
-        <h4 className="mt-0.5 text-[13.5px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#0096D6] transition-colors duration-150">
+        <h4 className="mt-0.5 text-[13.5px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150">
           {blog.title}
         </h4>
         <span className="mt-1 block text-[11px] text-[#9ca3af]">{blog.readingTime} min read</span>

@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 const cards = [
     { title: "Content Rebuild Command", description: "Internal Estabizz framework for rebuilding reference content into original SEO, GEO and AEO optimised regulatory pages.", href: "/resources/content-rebuild-command" },
     { title: "Regulatory Updates", description: "Practical RBI, SEBI, IRDAI and IFSCA circular updates with compliance impact, action checklist and risk rating.", href: "/resources/regulatory-updates" },
+    { title: "Circular Explainers", description: "Complex RBI, SEBI, IRDAI and IFSCA circulars decoded into plain English — what changed, who's affected, action checklist and risk rating.", href: "/resources/circular-explainers" },
     { title: "Regulatory Email Templates", description: "Structured formats for converting circulars into client-ready compliance update emails.", href: "/resources/regulatory-update-email-template" },
     { title: "Service Page Content Framework", description: "Master content structure for premium licence pages covering eligibility, process, fees, compliance, FAQs and CTAs.", href: "/resources/service-page-content-framework" },
     { title: "FAQ Engine", description: "Search-friendly FAQs covering eligibility, documents, process, fees, post-registration compliance and regulatory risks.", href: "/resources/faqs" },

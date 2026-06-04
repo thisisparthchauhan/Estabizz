@@ -250,6 +250,8 @@ const staticSearchLinks = [
     { label: "Regulatory Services", href: "/regulatory", group: "Site" },
     { label: "Resources", href: "/resources", group: "Site" },
     { label: "Regulatory Updates", href: "/resources/regulatory-updates", group: "Resources" },
+    { label: "Circular Explainers", href: "/resources/circular-explainers", group: "Resources" },
+    { label: "Compliance Calendar", href: "/resources/compliance-calendar", group: "Resources" },
     { label: "Regulatory Insights", href: "/blogs", group: "Resources" },
     { label: "Compliance FAQs", href: "/resources/faqs", group: "Resources" },
     { label: "Regulatory Email Template", href: "/resources/regulatory-update-email-template", group: "Resources" },

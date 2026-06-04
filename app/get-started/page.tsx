@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+    title: "Get Started – Book a Free Regulatory Consultation | Estabizz Fintech",
+    description: "Start your regulatory journey with Estabizz. Expert support for RBI, SEBI, IRDAI, IFSCA, MCA and fintech licensing — share your requirement and our advisory team will map the next steps.",
+    keywords: "Get Started Estabizz, Regulatory Consultation India, RBI SEBI IRDAI IFSCA Advisory, Fintech Licensing Support",
+    alternates: { canonical: "/get-started" },
+};
 
 const trustIndicators = [
     "100+ Associate Professionals",

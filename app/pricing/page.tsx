@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+    title: "Engagement Models & Pricing – Scope-Based Advisory Fees | Estabizz Fintech",
+    description: "Transparent, scope-based engagement models for regulatory, licensing and compliance assignments across RBI, SEBI, IRDAI and IFSCA. Request a custom quote from Estabizz Fintech.",
+    keywords: "Estabizz Pricing, Regulatory Advisory Fees, Compliance Engagement Models, Custom Quote",
+    alternates: { canonical: "/pricing" },
+};
 
 const engagementModels = [
     {

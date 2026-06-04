@@ -65,7 +65,7 @@ export default function SignupPage() {
         </button>
     );
 
-    const inputClass = "w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2196F3] focus:ring-2 focus:ring-[#2196F3]/10 transition-all";
+    const inputClass = "w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all";
 
     return (
         <div className="min-h-screen flex">
@@ -75,12 +75,12 @@ export default function SignupPage() {
                 style={{ background: "linear-gradient(135deg, #0B1B2B 0%, #0d2a45 50%, #1a3a5c 100%)" }}
             >
                 <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
-                <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-[#2196F3]/20 rounded-full blur-[80px]" />
+                <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-[#1677f2]/20 rounded-full blur-[80px]" />
                 <div className="absolute bottom-1/4 right-1/4 w-56 h-56 bg-blue-400/10 rounded-full blur-[60px]" />
 
                 <div className="relative">
                     <Link href="/" className="flex items-center gap-3">
-                        <div className="w-9 h-9 bg-gradient-to-br from-[#2196F3] to-[#0077B6] rounded-xl flex items-center justify-center">
+                        <div className="w-9 h-9 bg-gradient-to-br from-[#1677f2] to-[#0077B6] rounded-xl flex items-center justify-center">
                             <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
@@ -91,7 +91,7 @@ export default function SignupPage() {
 
                 <div className="relative space-y-6">
                     <div>
-                        <p className="text-[#2196F3] text-sm font-semibold tracking-wider uppercase mb-3">Join 1000+ businesses</p>
+                        <p className="text-[#1677f2] text-sm font-semibold tracking-wider uppercase mb-3">Join 1000+ businesses</p>
                         <h2 className="text-4xl font-bold text-white leading-tight">
                             Start Your<br />Compliance Journey
                         </h2>
@@ -155,7 +155,7 @@ export default function SignupPage() {
                                 <div className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-xl px-3 py-3 text-sm text-gray-600 whitespace-nowrap">
                                     🇮🇳 +91
                                 </div>
-                                <input type="tel" name="mobile" value={form.mobile} onChange={handleChange} placeholder="9876543210" className="flex-1 border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2196F3] focus:ring-2 focus:ring-[#2196F3]/10 transition-all" />
+                                <input type="tel" name="mobile" value={form.mobile} onChange={handleChange} placeholder="9876543210" className="flex-1 border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all" />
                             </div>
                         </div>
 
@@ -183,7 +183,7 @@ export default function SignupPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-gradient-to-r from-[#2196F3] to-[#0077B6] hover:from-[#1976D2] hover:to-[#005f8f] text-white font-semibold py-3.5 rounded-xl transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-md hover:shadow-blue-300/40 mt-1"
+                            className="w-full bg-gradient-to-r from-[#1677f2] to-[#0077B6] hover:from-[#0866d9] hover:to-[#005f8f] text-white font-semibold py-3.5 rounded-xl transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-md hover:shadow-blue-300/40 mt-1"
                         >
                             {loading ? (
                                 <span className="flex items-center justify-center gap-2">
@@ -199,7 +199,7 @@ export default function SignupPage() {
 
                     <p className="text-center text-gray-500 text-sm mt-6">
                         Already have an account?{" "}
-                        <Link href="/login" className="text-[#2196F3] font-semibold hover:underline">Log in</Link>
+                        <Link href="/login" className="text-[#1677f2] font-semibold hover:underline">Log in</Link>
                     </p>
 
                     <p className="text-center text-gray-400 text-xs mt-4">

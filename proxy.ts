@@ -26,7 +26,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 
-export function middleware(request: NextRequest): NextResponse {
+export function proxy(request: NextRequest): NextResponse {
   const { pathname } = request.nextUrl;
 
   // ── Protect all /admin/* routes ──────────────────────────────────────────

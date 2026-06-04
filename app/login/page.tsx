@@ -59,12 +59,12 @@ export default function LoginPage() {
                     }}
                 />
                 {/* Glow blobs */}
-                <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-[#2196F3]/20 rounded-full blur-[80px]" />
+                <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-[#1677f2]/20 rounded-full blur-[80px]" />
                 <div className="absolute bottom-1/4 right-1/4 w-56 h-56 bg-blue-400/10 rounded-full blur-[60px]" />
 
                 <div className="relative">
                     <Link href="/" className="flex items-center gap-3">
-                        <div className="w-9 h-9 bg-gradient-to-br from-[#2196F3] to-[#0077B6] rounded-xl flex items-center justify-center">
+                        <div className="w-9 h-9 bg-gradient-to-br from-[#1677f2] to-[#0077B6] rounded-xl flex items-center justify-center">
                             <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
@@ -75,7 +75,7 @@ export default function LoginPage() {
 
                 <div className="relative space-y-6">
                     <div>
-                        <p className="text-[#2196F3] text-sm font-semibold tracking-wider uppercase mb-3">Trusted by 1000+ businesses</p>
+                        <p className="text-[#1677f2] text-sm font-semibold tracking-wider uppercase mb-3">Trusted by 1000+ businesses</p>
                         <h2 className="text-4xl font-bold text-white leading-tight">
                             India&apos;s #1 Fintech<br />Compliance Platform
                         </h2>
@@ -115,14 +115,14 @@ export default function LoginPage() {
                         <button
                             type="button"
                             onClick={() => { setTab("email"); setForm({ identifier: "", password: "" }); setError(""); }}
-                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${tab === "email" ? "bg-white text-[#2196F3] shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
+                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${tab === "email" ? "bg-white text-[#1677f2] shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
                         >
                             Email
                         </button>
                         <button
                             type="button"
                             onClick={() => { setTab("phone"); setForm({ identifier: "", password: "" }); setError(""); }}
-                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${tab === "phone" ? "bg-white text-[#2196F3] shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
+                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${tab === "phone" ? "bg-white text-[#1677f2] shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
                         >
                             Phone Number
                         </button>
@@ -145,7 +145,7 @@ export default function LoginPage() {
                                     onChange={handleChange}
                                     required
                                     placeholder="Enter your email"
-                                    className="w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2196F3] focus:ring-2 focus:ring-[#2196F3]/10 transition-all"
+                                    className="w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all"
                                 />
                             </div>
                         ) : (
@@ -162,7 +162,7 @@ export default function LoginPage() {
                                         onChange={handleChange}
                                         required
                                         placeholder="9876543210"
-                                        className="flex-1 border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#2196F3] focus:ring-2 focus:ring-[#2196F3]/10 transition-all"
+                                        className="flex-1 border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all"
                                     />
                                 </div>
                             </div>
@@ -171,7 +171,7 @@ export default function LoginPage() {
                         <div>
                             <div className="flex items-center justify-between mb-1.5">
                                 <label className="block text-sm font-medium text-gray-700">Password</label>
-                                <Link href="/contact" className="text-xs text-[#2196F3] hover:underline">Need help?</Link>
+                                <Link href="/contact" className="text-xs text-[#1677f2] hover:underline">Need help?</Link>
                             </div>
                             <div className="relative">
                                 <input
@@ -181,7 +181,7 @@ export default function LoginPage() {
                                     onChange={handleChange}
                                     required
                                     placeholder="Enter your password"
-                                    className="w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 pr-11 text-sm focus:outline-none focus:border-[#2196F3] focus:ring-2 focus:ring-[#2196F3]/10 transition-all"
+                                    className="w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 pr-11 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all"
                                 />
                                 <button
                                     type="button"
@@ -204,7 +204,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-gradient-to-r from-[#2196F3] to-[#0077B6] hover:from-[#1976D2] hover:to-[#005f8f] text-white font-semibold py-3.5 rounded-xl transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-md hover:shadow-blue-300/40 mt-1"
+                            className="w-full bg-gradient-to-r from-[#1677f2] to-[#0077B6] hover:from-[#0866d9] hover:to-[#005f8f] text-white font-semibold py-3.5 rounded-xl transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed shadow-md hover:shadow-blue-300/40 mt-1"
                         >
                             {loading ? (
                                 <span className="flex items-center justify-center gap-2">
@@ -220,7 +220,7 @@ export default function LoginPage() {
 
                     <p className="text-center text-gray-500 text-sm mt-6">
                         Don&apos;t have an account?{" "}
-                        <Link href="/signup" className="text-[#2196F3] font-semibold hover:underline">Sign up</Link>
+                        <Link href="/signup" className="text-[#1677f2] font-semibold hover:underline">Sign up</Link>
                     </p>
                 </div>
             </div>

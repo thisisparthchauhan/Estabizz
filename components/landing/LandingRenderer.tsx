@@ -97,7 +97,7 @@ function Callout({ tone = "blue", label, text }: { tone?: "blue" | "navy" | "amb
   }
   if (tone === "amber") {
     return (
-      <div className="rounded-2xl border border-amber-200 border-l-4 border-l-[#d9a938] bg-[#fffbf0] p-5 sm:p-6">
+      <div className="rounded-2xl border border-amber-200 border-l-4 border-l-[#f59e0b] bg-[#fffbf0] p-5 sm:p-6">
         {label && <p className="mb-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#92400e]">{label}</p>}
         <p className="text-[14.5px] leading-[1.75] text-[#78350f]">{text}</p>
       </div>
@@ -216,7 +216,7 @@ export function LandingRenderer({ page }: { page: LandingPage }) {
           </div>
 
           {page.urgency && (
-            <div className="mt-6 rounded-xl border border-amber-200 border-l-4 border-l-[#d9a938] bg-[#fffbf0] px-4 py-3 text-[13px] font-semibold leading-[1.6] text-[#78350f]">
+            <div className="mt-6 rounded-xl border border-amber-200 border-l-4 border-l-[#f59e0b] bg-[#fffbf0] px-4 py-3 text-[13px] font-semibold leading-[1.6] text-[#78350f]">
               ⚠ {page.urgency}
             </div>
           )}

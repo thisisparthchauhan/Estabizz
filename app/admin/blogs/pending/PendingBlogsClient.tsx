@@ -180,7 +180,7 @@ function ConfirmModal({
   const colorMap = {
     danger:  { ring: 'ring-red-100',    icon: 'bg-red-100 text-red-600',      btn: 'bg-red-600 hover:bg-red-700 text-white' },
     warning: { ring: 'ring-amber-100',  icon: 'bg-amber-100 text-amber-600',  btn: 'bg-amber-500 hover:bg-amber-600 text-white' },
-    success: { ring: 'ring-[#d9a938]/20', icon: 'bg-[#d9a938]/15 text-[#b8860b]', btn: 'bg-[#d9a938] hover:bg-[#c9981f] text-[#071224]' },
+    success: { ring: 'ring-[#1677f2]/20', icon: 'bg-[#1677f2]/15 text-[#b8860b]', btn: 'bg-[#1677f2] hover:bg-[#c9981f] text-[#071224]' },
   };
   const c = colorMap[ac.variant];
 
@@ -211,7 +211,7 @@ function ConfirmModal({
           {config.action === 'publish' && (
             <div className="mb-4 rounded-xl border border-[#dbe7f3] bg-[#f8fbff] px-3.5 py-2.5">
               <p className="text-[11px] font-bold text-[#64748b] uppercase tracking-wide mb-0.5">Public URL</p>
-              <p className="text-[12.5px] font-mono text-[#0096D6] break-all">
+              <p className="text-[12.5px] font-mono text-[#1677f2] break-all">
                 estabizz.com/blogs/{config.blogSlug}
               </p>
             </div>
@@ -229,7 +229,7 @@ function ConfirmModal({
                 onChange={(e) => setNotes(e.target.value)}
                 rows={3}
                 placeholder={ac.notePlaceholder}
-                className="w-full rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none focus:border-[#0096D6] focus:ring-3 focus:ring-[#0096D6]/10 resize-none"
+                className="w-full rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none focus:border-[#1677f2] focus:ring-3 focus:ring-[#1677f2]/10 resize-none"
               />
             </div>
           )}
@@ -314,7 +314,7 @@ function ReviewPanel({
               {/* Summary */}
               {blog.summary && (
                 <div className="mb-5 p-4 rounded-xl bg-[#f0faff] border border-[#c3e8fb]">
-                  <p className="text-[11px] font-black uppercase tracking-wide text-[#0096D6] mb-1">Summary</p>
+                  <p className="text-[11px] font-black uppercase tracking-wide text-[#1677f2] mb-1">Summary</p>
                   <p className="text-[13.5px] text-[#334155] leading-relaxed">{blog.summary}</p>
                 </div>
               )}
@@ -369,9 +369,9 @@ function ReviewPanel({
 
               {/* Submitter info */}
               <div>
-                <p className="text-[11px] font-black uppercase tracking-wide text-[#0096D6] mb-3">Submitter</p>
+                <p className="text-[11px] font-black uppercase tracking-wide text-[#1677f2] mb-3">Submitter</p>
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] flex items-center justify-center text-white font-black text-[13px] shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center text-white font-black text-[13px] shrink-0">
                     {initials(blog.author.firstName, blog.author.lastName)}
                   </div>
                   <div className="min-w-0">
@@ -428,19 +428,19 @@ function ReviewPanel({
                 <div className="space-y-2">
                   <button
                     onClick={() => { onClose(); onAction('publish'); }}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#d9a938] text-[#071224] text-[13px] font-bold hover:bg-[#c9981f] transition-all shadow-[0_4px_12px_rgba(217,169,56,0.25)]"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#1677f2] text-[#071224] text-[13px] font-bold hover:bg-[#c9981f] transition-all shadow-[0_4px_12px_rgba(217,169,56,0.25)]"
                   >
                     ✓ Approve &amp; Publish
                   </button>
                   <button
                     onClick={() => { onClose(); onAction('approve'); }}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#d9a938]/10 border border-[#d9a938]/40 text-[#b8860b] text-[13px] font-bold hover:bg-[#d9a938]/20 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#1677f2]/10 border border-[#1677f2]/40 text-[#b8860b] text-[13px] font-bold hover:bg-[#1677f2]/20 transition-colors"
                   >
                     ✓ Approve Only
                   </button>
                   <Link
                     href={`/admin/blogs/edit/${blog.id}`}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-[#dbe7f3] bg-white text-[#334155] text-[13px] font-semibold hover:border-[#0096D6] hover:text-[#0096D6] transition-colors"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-[#dbe7f3] bg-white text-[#334155] text-[13px] font-semibold hover:border-[#1677f2] hover:text-[#1677f2] transition-colors"
                   >
                     ✎ Edit in Editor ↗
                   </Link>
@@ -512,10 +512,10 @@ function EmptyState() {
         No submissions are currently waiting for review. New user articles will appear here automatically.
       </p>
       <div className="flex gap-3">
-        <Link href="/admin/blogs" className="px-5 py-2.5 rounded-xl border border-[#dbe7f3] bg-white text-[13px] font-semibold text-[#334155] hover:border-[#0096D6] hover:text-[#0096D6] transition-colors">
+        <Link href="/admin/blogs" className="px-5 py-2.5 rounded-xl border border-[#dbe7f3] bg-white text-[13px] font-semibold text-[#334155] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors">
           All Blogs
         </Link>
-        <Link href="/submit-blog" target="_blank" className="px-5 py-2.5 rounded-xl bg-[#0096D6] text-white text-[13px] font-bold hover:bg-[#0077B6] transition-colors">
+        <Link href="/submit-blog" target="_blank" className="px-5 py-2.5 rounded-xl bg-[#1677f2] text-white text-[13px] font-bold hover:bg-[#0077B6] transition-colors">
           Submit Test Article ↗
         </Link>
       </div>
@@ -544,7 +544,7 @@ function BlogCard({
       {/* Top bar */}
       <div className="flex items-center justify-between gap-3 px-5 pt-4 pb-3 border-b border-[#f0f6ff]">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[12px] font-bold px-2.5 py-1 rounded-lg border border-[#dbe7f3] bg-[#f8fbff] text-[#0096D6]">
+          <span className="text-[12px] font-bold px-2.5 py-1 rounded-lg border border-[#dbe7f3] bg-[#f8fbff] text-[#1677f2]">
             {blog.category.icon} {blog.category.name}
           </span>
           <span className={`text-[11px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wide ${sm.pill}`}>
@@ -575,7 +575,7 @@ function BlogCard({
 
         {/* Submitter row */}
         <div className="flex items-center gap-2.5 mb-4 p-2.5 rounded-xl bg-[#f8fbff] border border-[#eef4fb]">
-          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] flex items-center justify-center text-white text-[10px] font-black shrink-0">
+          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center text-white text-[10px] font-black shrink-0">
             {initials(blog.author.firstName, blog.author.lastName)}
           </div>
           <div className="min-w-0 flex-1">
@@ -588,7 +588,7 @@ function BlogCard({
           </div>
           <a
             href={`mailto:${blog.author.email}`}
-            className="text-[11.5px] text-[#0096D6] hover:underline shrink-0 font-medium"
+            className="text-[11.5px] text-[#1677f2] hover:underline shrink-0 font-medium"
             onClick={(e) => e.stopPropagation()}
           >
             {blog.author.email}
@@ -626,21 +626,21 @@ function BlogCard({
 
           <Link
             href={`/admin/blogs/edit/${blog.id}`}
-            className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-semibold text-[#334155] hover:border-[#0096D6] hover:text-[#0096D6] transition-colors"
+            className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-semibold text-[#334155] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors"
           >
             Edit ↗
           </Link>
 
           <button
             onClick={() => onAction('approve')}
-            className="px-4 py-2 rounded-xl border border-[#d9a938]/40 bg-[#d9a938]/10 text-[#b8860b] text-[12.5px] font-bold hover:bg-[#d9a938]/20 transition-colors"
+            className="px-4 py-2 rounded-xl border border-[#1677f2]/40 bg-[#1677f2]/10 text-[#b8860b] text-[12.5px] font-bold hover:bg-[#1677f2]/20 transition-colors"
           >
             Approve
           </button>
 
           <button
             onClick={() => onAction('publish')}
-            className="px-4 py-2 rounded-xl bg-[#d9a938] text-[#071224] text-[12.5px] font-bold hover:bg-[#c9981f] transition-all shadow-[0_3px_10px_rgba(217,169,56,0.25)]"
+            className="px-4 py-2 rounded-xl bg-[#1677f2] text-[#071224] text-[12.5px] font-bold hover:bg-[#c9981f] transition-all shadow-[0_3px_10px_rgba(217,169,56,0.25)]"
           >
             Approve &amp; Publish
           </button>
@@ -771,7 +771,7 @@ export default function PendingBlogsClient({ initialBlogs }: { initialBlogs: Blo
               <Link
                 href="/submit-blog"
                 target="_blank"
-                className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-semibold text-[#334155] hover:border-[#0096D6] hover:text-[#0096D6] transition-colors"
+                className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-semibold text-[#334155] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors"
               >
                 Submit Page ↗
               </Link>
@@ -790,7 +790,7 @@ export default function PendingBlogsClient({ initialBlogs }: { initialBlogs: Blo
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
             {[
               { label: 'Pending Review', value: pending.length,                           color: 'text-amber-600',  bg: 'bg-amber-50 border-amber-200'   },
-              { label: 'Total Received', value: total,                                    color: 'text-[#0096D6]',  bg: 'bg-[#f0faff] border-[#c3e8fb]'  },
+              { label: 'Total Received', value: total,                                    color: 'text-[#1677f2]',  bg: 'bg-[#f0faff] border-[#c3e8fb]'  },
               { label: 'This Session',   value: blogs.filter(b => b.status !== 'pending_review').length, color: 'text-emerald-600', bg: 'bg-emerald-50 border-emerald-200' },
               { label: 'Avg. Words',     value: pending.length > 0 ? Math.round(pending.reduce((s, b) => s + wordCount(b.content), 0) / pending.length) : '—', color: 'text-[#0a1628]', bg: 'bg-white border-[#e2eaf2]' },
             ].map((s) => (

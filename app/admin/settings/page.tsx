@@ -68,14 +68,14 @@ export default function SettingsPage() {
         ))}
       </div>
 
-      <div className="mt-5 rounded-2xl border border-[#d9a938]/30 bg-[#d9a938]/8 px-6 py-4">
+      <div className="mt-5 rounded-2xl border border-[#1677f2]/30 bg-[#1677f2]/8 px-6 py-4">
         <div className="flex items-start gap-3">
-          <span className="text-[#d9a938] text-lg mt-0.5 shrink-0">ℹ</span>
+          <span className="text-[#1677f2] text-lg mt-0.5 shrink-0">ℹ</span>
           <p className="text-[12px] text-[#b8860b] font-medium leading-5">
             Settings are currently read-only / informational. A fully editable settings
             panel with database persistence is planned. For now, site configuration lives
             in environment variables and{" "}
-            <code className="rounded bg-[#d9a938]/15 px-1 py-0.5 font-mono text-[11px]">
+            <code className="rounded bg-[#1677f2]/15 px-1 py-0.5 font-mono text-[11px]">
               lib/blog/
             </code>{" "}
             source files.

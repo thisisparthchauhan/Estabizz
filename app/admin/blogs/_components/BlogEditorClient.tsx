@@ -187,7 +187,7 @@ function validate(form: BlogFormData): FormErrors {
 // ─── Shared styles ────────────────────────────────────────────────────────────
 
 const inputCls =
-  "w-full rounded-xl border border-[#dbe7f3] bg-white px-3.5 py-2.5 text-[13.5px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none transition-all focus:border-[#0096D6] focus:ring-2 focus:ring-[#0096D6]/12";
+  "w-full rounded-xl border border-[#dbe7f3] bg-white px-3.5 py-2.5 text-[13.5px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none transition-all focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/12";
 
 const errorInputCls =
   "w-full rounded-xl border border-red-300 bg-red-50/30 px-3.5 py-2.5 text-[13.5px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none focus:border-red-400 focus:ring-2 focus:ring-red-300/20";
@@ -293,7 +293,7 @@ function ContentEditor({
   const wordCount = value.replace(/<[^>]*>/g, "").trim().split(/\s+/).filter(Boolean).length;
 
   return (
-    <div className="rounded-xl border border-[#dbe7f3] bg-white overflow-hidden focus-within:border-[#0096D6] focus-within:ring-2 focus-within:ring-[#0096D6]/12 transition-all">
+    <div className="rounded-xl border border-[#dbe7f3] bg-white overflow-hidden focus-within:border-[#1677f2] focus-within:ring-2 focus-within:ring-[#1677f2]/12 transition-all">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-1 border-b border-[#e8f0f8] bg-[#f8fbff] p-2">
         {TOOLBAR.map((btn) => (
@@ -301,7 +301,7 @@ function ContentEditor({
             key={btn.title}
             type="button"
             onClick={() => insert(btn.before, btn.after, btn.placeholder)}
-            className="px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold text-[#334155] hover:bg-[#0096D6] hover:text-white transition-colors leading-none"
+            className="px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold text-[#334155] hover:bg-[#1677f2] hover:text-white transition-colors leading-none"
           >
             {btn.title}
           </button>
@@ -360,7 +360,7 @@ function FaqEditor({
       {faqs.map((faq, i) => (
         <div key={i} className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-4 space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-black uppercase tracking-wider text-[#0096D6]">FAQ {i + 1}</span>
+            <span className="text-[11px] font-black uppercase tracking-wider text-[#1677f2]">FAQ {i + 1}</span>
             <button
               type="button"
               onClick={() => removeFaq(i)}
@@ -394,7 +394,7 @@ function FaqEditor({
       <button
         type="button"
         onClick={addFaq}
-        className="w-full flex items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#0096D6]/30 bg-[#f0faff] py-3 text-[13px] font-semibold text-[#0096D6] hover:border-[#0096D6] hover:bg-[#e8f7ff] transition-colors"
+        className="w-full flex items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#1677f2]/30 bg-[#f0faff] py-3 text-[13px] font-semibold text-[#1677f2] hover:border-[#1677f2] hover:bg-[#e8f7ff] transition-colors"
       >
         + Add FAQ
       </button>
@@ -456,7 +456,7 @@ function ActionBar({
       <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
         {/* Left */}
         <div className="flex items-center gap-3 min-w-0">
-          <span className="hidden sm:inline-flex items-center rounded-lg bg-[#0a1628] px-2.5 py-1 text-[10.5px] font-black text-[#d9a938] uppercase tracking-wider shrink-0">
+          <span className="hidden sm:inline-flex items-center rounded-lg bg-[#0a1628] px-2.5 py-1 text-[10.5px] font-black text-[#1677f2] uppercase tracking-wider shrink-0">
             Admin Blog Panel
           </span>
           <span className="text-[13px] text-[#94a3b8] truncate max-w-[240px] hidden md:inline">
@@ -480,7 +480,7 @@ function ActionBar({
               type="button"
               onClick={onUpdate}
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-[#0096D6] text-white text-[12.5px] font-bold hover:bg-[#0077B6] transition-all disabled:opacity-50 shadow-sm"
+              className="px-5 py-2 rounded-xl bg-[#1677f2] text-white text-[12.5px] font-bold hover:bg-[#0077B6] transition-all disabled:opacity-50 shadow-sm"
             >
               {saving ? "Saving…" : "Save Changes"}
             </button>
@@ -489,7 +489,7 @@ function ActionBar({
               type="button"
               onClick={onPublish}
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-[#d9a938] text-[#071224] text-[12.5px] font-bold hover:bg-[#c8921a] transition-all disabled:opacity-50 shadow-[0_4px_12px_rgba(217,169,56,0.25)]"
+              className="px-5 py-2 rounded-xl bg-[#1677f2] text-[#071224] text-[12.5px] font-bold hover:bg-[#c8921a] transition-all disabled:opacity-50 shadow-[0_4px_12px_rgba(217,169,56,0.25)]"
             >
               {saving ? "Publishing…" : "Publish"}
             </button>
@@ -648,7 +648,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
         <div>
           <Link
             href="/admin/blogs"
-            className="inline-flex items-center gap-1.5 text-[12px] text-[#64748b] hover:text-[#0096D6] transition-colors font-medium"
+            className="inline-flex items-center gap-1.5 text-[12px] text-[#64748b] hover:text-[#1677f2] transition-colors font-medium"
           >
             ← All Blogs
           </Link>
@@ -691,7 +691,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                     <button
                       type="button"
                       onClick={resetSlug}
-                      className="shrink-0 px-3 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12px] font-semibold text-[#94a3b8] hover:text-[#0096D6] hover:border-[#0096D6] transition-colors"
+                      className="shrink-0 px-3 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12px] font-semibold text-[#94a3b8] hover:text-[#1677f2] hover:border-[#1677f2] transition-colors"
                       title="Re-generate from title"
                     >
                       Auto
@@ -788,7 +788,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                     <button
                       type="button"
                       onClick={() => setImagePreview((p) => !p)}
-                      className="shrink-0 px-3 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12px] font-semibold text-[#64748b] hover:border-[#0096D6] hover:text-[#0096D6] transition-colors"
+                      className="shrink-0 px-3 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12px] font-semibold text-[#64748b] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors"
                     >
                       {imagePreview ? "Hide" : "Preview"}
                     </button>
@@ -830,7 +830,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
               {form.supportingImages.map((img, i) => (
                 <div key={i} className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-3.5">
                   <div className="flex items-center justify-between mb-2.5">
-                    <span className="text-[11px] font-black uppercase tracking-wider text-[#0096D6]">Image {i + 1}</span>
+                    <span className="text-[11px] font-black uppercase tracking-wider text-[#1677f2]">Image {i + 1}</span>
                     <button
                       type="button"
                       onClick={() => removeSupportingImage(i)}
@@ -879,7 +879,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
               <button
                 type="button"
                 onClick={addSupportingImage}
-                className="mt-3 w-full flex items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#0096D6]/30 bg-[#f0faff] py-2.5 text-[13px] font-semibold text-[#0096D6] hover:border-[#0096D6] hover:bg-[#e8f7ff] transition-colors"
+                className="mt-3 w-full flex items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#1677f2]/30 bg-[#f0faff] py-2.5 text-[13px] font-semibold text-[#1677f2] hover:border-[#1677f2] hover:bg-[#e8f7ff] transition-colors"
               >
                 + Add Supporting Image
               </button>
@@ -1026,7 +1026,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
               type="button"
               onClick={handleUpdate}
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-[#0096D6] text-white text-[12.5px] font-bold hover:bg-[#0077B6] transition-all disabled:opacity-50 shadow-sm"
+              className="px-5 py-2 rounded-xl bg-[#1677f2] text-white text-[12.5px] font-bold hover:bg-[#0077B6] transition-all disabled:opacity-50 shadow-sm"
             >
               {saving ? "Saving…" : "Save Changes"}
             </button>
@@ -1035,7 +1035,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
               type="button"
               onClick={handlePublish}
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-[#d9a938] text-[#071224] text-[12.5px] font-bold hover:bg-[#c8921a] transition-all disabled:opacity-50 shadow-[0_4px_12px_rgba(217,169,56,0.25)]"
+              className="px-5 py-2 rounded-xl bg-[#1677f2] text-[#071224] text-[12.5px] font-bold hover:bg-[#c8921a] transition-all disabled:opacity-50 shadow-[0_4px_12px_rgba(217,169,56,0.25)]"
             >
               {saving ? "Publishing…" : "Publish"}
             </button>

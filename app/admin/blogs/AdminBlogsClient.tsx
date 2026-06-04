@@ -30,7 +30,7 @@ const STATUS_META: Record<
 > = {
   published:      { label: "Published",     cls: "bg-emerald-50 text-emerald-700 border-emerald-200",     dotCls: "bg-emerald-500" },
   draft:          { label: "Draft",         cls: "bg-slate-100  text-slate-600  border-slate-200",        dotCls: "bg-slate-400" },
-  pending_review: { label: "Pending",       cls: "bg-[#d9a938]/10 text-[#b8860b] border-[#d9a938]/30",   dotCls: "bg-[#d9a938]" },
+  pending_review: { label: "Pending",       cls: "bg-[#1677f2]/10 text-[#b8860b] border-[#1677f2]/30",   dotCls: "bg-[#1677f2]" },
   approved:       { label: "Approved",      cls: "bg-blue-50    text-blue-700   border-blue-200",         dotCls: "bg-blue-500" },
   rejected:       { label: "Rejected",      cls: "bg-red-50     text-red-700    border-red-200",          dotCls: "bg-red-500" },
   archived:       { label: "Archived",      cls: "bg-purple-50  text-purple-700 border-purple-200",       dotCls: "bg-purple-500" },
@@ -150,7 +150,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
   function SortIcon({ col }: { col: SortKey }) {
     if (sortKey !== col) return <span className="ml-1 text-[#cbd5e1]">⇅</span>;
     return (
-      <span className="ml-1 text-[#d9a938]">
+      <span className="ml-1 text-[#1677f2]">
         {sortDir === "asc" ? "↑" : "↓"}
       </span>
     );
@@ -170,7 +170,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
         <div className="flex items-center gap-2.5">
           <Link
             href="/admin/blogs/pending"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-[#d9a938]/40 bg-[#d9a938]/10 px-3.5 py-2 text-[12px] font-bold text-[#b8860b] hover:bg-[#d9a938]/20 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-[#1677f2]/40 bg-[#1677f2]/10 px-3.5 py-2 text-[12px] font-bold text-[#b8860b] hover:bg-[#1677f2]/20 transition-colors"
           >
             ◷ Pending
           </Link>
@@ -178,7 +178,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
             href="/admin/blogs/new"
             className="inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-4 py-2 text-[12px] font-bold text-white hover:bg-[#0a1628]/90 shadow-sm transition-all"
           >
-            <span className="text-[#d9a938]">✚</span> New Blog
+            <span className="text-[#1677f2]">✚</span> New Blog
           </Link>
         </div>
       </div>
@@ -199,9 +199,9 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                   className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-bold transition-all ${
                     isActive
                       ? tab.key === "all"
-                        ? "bg-[#0a1628] text-[#d9a938]"
-                        : "bg-[#d9a938] text-[#071224]"
-                      : "border border-[#e2eaf2] text-[#475569] hover:border-[#d9a938]/40 hover:text-[#0a1628]"
+                        ? "bg-[#0a1628] text-[#1677f2]"
+                        : "bg-[#1677f2] text-[#071224]"
+                      : "border border-[#e2eaf2] text-[#475569] hover:border-[#1677f2]/40 hover:text-[#0a1628]"
                   }`}
                 >
                   {tab.label}
@@ -209,7 +209,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                     className={`rounded-full px-1.5 py-0.5 text-[9.5px] font-black ${
                       isActive
                         ? tab.key === "all"
-                          ? "bg-white/15 text-[#d9a938]"
+                          ? "bg-white/15 text-[#1677f2]"
                           : "bg-[#071224]/20 text-[#071224]"
                         : "bg-slate-100 text-[#94a3b8]"
                     }`}
@@ -230,7 +230,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search title, author, category, tag…"
-                className="w-full rounded-xl border border-[#e2eaf2] bg-[#f8fafc] pl-8 pr-3 py-2 text-[13px] text-[#0a1628] placeholder:text-[#94a3b8] focus:outline-none focus:border-[#d9a938]/60 focus:ring-2 focus:ring-[#d9a938]/15 transition-colors"
+                className="w-full rounded-xl border border-[#e2eaf2] bg-[#f8fafc] pl-8 pr-3 py-2 text-[13px] text-[#0a1628] placeholder:text-[#94a3b8] focus:outline-none focus:border-[#1677f2]/60 focus:ring-2 focus:ring-[#1677f2]/15 transition-colors"
               />
             </div>
             {search && (
@@ -311,9 +311,9 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                   >
                     {/* Title */}
                     <td className="px-6 py-3.5 max-w-[260px]">
-                      <div className="text-[13px] font-bold text-[#0a1628] truncate group-hover:text-[#0096D6] transition-colors leading-snug">
+                      <div className="text-[13px] font-bold text-[#0a1628] truncate group-hover:text-[#1677f2] transition-colors leading-snug">
                         {blog.featured && (
-                          <span className="mr-1 text-[10px] text-[#d9a938]">★</span>
+                          <span className="mr-1 text-[10px] text-[#1677f2]">★</span>
                         )}
                         {blog.title}
                       </div>
@@ -344,7 +344,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                     {/* Author */}
                     <td className="hidden lg:table-cell px-4 py-3.5">
                       <div className="flex items-center gap-2">
-                        <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[9px] font-black text-white">
+                        <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[9px] font-black text-white">
                           {blog.author.firstName[0]}
                         </div>
                         <span className="text-[12px] text-[#475569] whitespace-nowrap">
@@ -358,14 +358,14 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                       <div className="flex items-center gap-1.5">
                         <Link
                           href={`/admin/blogs/edit/${blog.id}`}
-                          className="inline-flex items-center gap-1 rounded-lg border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#0096D6] hover:bg-[#e0f0fa] transition-colors whitespace-nowrap"
+                          className="inline-flex items-center gap-1 rounded-lg border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#e0f0fa] transition-colors whitespace-nowrap"
                         >
                           ✎ Edit
                         </Link>
                         {blog.status === "pending_review" && (
                           <Link
                             href="/admin/blogs/pending"
-                            className="inline-flex items-center gap-1 rounded-lg border border-[#d9a938]/40 bg-[#d9a938]/10 px-2.5 py-1 text-[11px] font-bold text-[#b8860b] hover:bg-[#d9a938]/20 transition-colors whitespace-nowrap"
+                            className="inline-flex items-center gap-1 rounded-lg border border-[#1677f2]/40 bg-[#1677f2]/10 px-2.5 py-1 text-[11px] font-bold text-[#b8860b] hover:bg-[#1677f2]/20 transition-colors whitespace-nowrap"
                           >
                             Review
                           </Link>

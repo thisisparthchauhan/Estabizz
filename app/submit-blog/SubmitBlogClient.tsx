@@ -100,7 +100,7 @@ function readingTime(text: string): number {
 // ─── Small UI primitives ──────────────────────────────────────────────────────
 
 const inputCls =
-  'w-full rounded-xl border border-[#dbe7f3] bg-white px-4 py-3 text-[14px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none transition-all focus:border-[#0096D6] focus:ring-3 focus:ring-[#0096D6]/10';
+  'w-full rounded-xl border border-[#dbe7f3] bg-white px-4 py-3 text-[14px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none transition-all focus:border-[#1677f2] focus:ring-3 focus:ring-[#1677f2]/10';
 
 const errorInputCls =
   'w-full rounded-xl border border-red-300 bg-red-50/40 px-4 py-3 text-[14px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none transition-all focus:border-red-400 focus:ring-3 focus:ring-red-200/30';
@@ -167,7 +167,7 @@ function FormSection({
   return (
     <div className="bg-white rounded-2xl border border-[#e2eaf2] shadow-[0_2px_12px_rgba(10,22,40,0.06)] overflow-hidden">
       <div className="flex items-start gap-3.5 px-6 py-4 border-b border-[#f0f6ff] bg-[#fafcff]">
-        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#0096D6] to-[#0a1628] flex items-center justify-center text-white font-black text-[13px] shrink-0 mt-0.5">
+        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center text-white font-black text-[13px] shrink-0 mt-0.5">
           {step}
         </div>
         <div>
@@ -230,7 +230,7 @@ function SupportingImages({
         <button
           type="button"
           onClick={add}
-          className="flex items-center gap-2 text-[13px] font-semibold text-[#0096D6] hover:text-[#0077B6] transition-colors"
+          className="flex items-center gap-2 text-[13px] font-semibold text-[#1677f2] hover:text-[#0077B6] transition-colors"
         >
           <span className="text-lg leading-none">+</span> Add another image URL
         </button>
@@ -256,7 +256,7 @@ function SuccessScreen({ title }: { title: string }) {
     <div className="min-h-[calc(100vh-64px)] bg-[#f8fbff] flex items-center justify-center px-4 py-16">
       <div className="max-w-[580px] w-full text-center">
         {/* Check icon */}
-        <div className="mx-auto mb-6 w-20 h-20 rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] flex items-center justify-center shadow-[0_16px_48px_rgba(0,150,214,0.25)]">
+        <div className="mx-auto mb-6 w-20 h-20 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center shadow-[0_16px_48px_rgba(0,150,214,0.25)]">
           <svg viewBox="0 0 24 24" className="w-10 h-10 text-white" fill="none" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
           </svg>
@@ -282,11 +282,11 @@ function SuccessScreen({ title }: { title: string }) {
         {/* Process steps */}
         <div className="grid grid-cols-3 gap-3 mb-8">
           {[
-            { step: '1', label: 'Received',    sub: 'Your article is in our queue',  color: 'bg-[#0096D6]',  done: true  },
+            { step: '1', label: 'Received',    sub: 'Your article is in our queue',  color: 'bg-[#1677f2]',  done: true  },
             { step: '2', label: 'Under Review', sub: 'Editorial review in progress',  color: 'bg-amber-400', done: false },
             { step: '3', label: 'Decision',     sub: 'Publish or feedback from team', color: 'bg-[#10b981]', done: false },
           ].map((s) => (
-            <div key={s.step} className={`rounded-xl border p-3.5 text-center ${s.done ? 'border-[#0096D6]/30 bg-[#f0faff]' : 'border-[#e2eaf2] bg-white'}`}>
+            <div key={s.step} className={`rounded-xl border p-3.5 text-center ${s.done ? 'border-[#1677f2]/30 bg-[#f0faff]' : 'border-[#e2eaf2] bg-white'}`}>
               <div className={`mx-auto mb-2 w-7 h-7 rounded-full ${s.done ? s.color : 'bg-[#e2eaf2]'} flex items-center justify-center text-[11px] font-black ${s.done ? 'text-white' : 'text-[#94a3b8]'}`}>
                 {s.done ? '✓' : s.step}
               </div>
@@ -305,7 +305,7 @@ function SuccessScreen({ title }: { title: string }) {
           </Link>
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[#dbe7f3] bg-white text-[14px] font-semibold text-[#334155] hover:border-[#0096D6] hover:text-[#0096D6] transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[#dbe7f3] bg-white text-[14px] font-semibold text-[#334155] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors"
           >
             Back to Home
           </Link>
@@ -396,13 +396,13 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
         <div className="relative overflow-hidden bg-gradient-to-br from-[#071224] via-[#0a1e3c] to-[#0a2952]">
           {/* Background glows */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute left-[-10%] top-[-10%] w-[480px] h-[480px] rounded-full bg-[#0096D6]/14 blur-[120px]" />
-            <div className="absolute right-[-6%] bottom-[-10%] w-[420px] h-[420px] rounded-full bg-[#d9a938]/10 blur-[110px]" />
+            <div className="absolute left-[-10%] top-[-10%] w-[480px] h-[480px] rounded-full bg-[#1677f2]/14 blur-[120px]" />
+            <div className="absolute right-[-6%] bottom-[-10%] w-[420px] h-[420px] rounded-full bg-[#1677f2]/10 blur-[110px]" />
             <div className="absolute inset-0 opacity-[0.12] bg-[linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.07)_1px,transparent_1px)] bg-[length:52px_52px]" />
           </div>
 
           <div className="relative z-10 mx-auto max-w-[1100px] px-6 py-14 md:py-18 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#0096D6]/30 bg-[#0096D6]/12 text-[#8edcff] text-[12px] font-black uppercase tracking-[0.2em] mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#1677f2]/30 bg-[#1677f2]/12 text-[#8edcff] text-[12px] font-black uppercase tracking-[0.2em] mb-6">
               ✍ Estabizz Regulatory Insights
             </div>
 
@@ -423,7 +423,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
                 { n: '3', label: 'Publication',      sub: 'Published on approval',             icon: '🚀' },
               ].map((s) => (
                 <div key={s.n} className="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-sm text-left">
-                  <div className="w-9 h-9 rounded-xl bg-[#0096D6]/25 border border-[#0096D6]/40 flex items-center justify-center text-[16px] shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-[#1677f2]/25 border border-[#1677f2]/40 flex items-center justify-center text-[16px] shrink-0">
                     {s.icon}
                   </div>
                   <div>
@@ -594,7 +594,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
 
               {/* Editorial Standards card */}
               <div className="rounded-2xl border border-[#dbe7f3] bg-gradient-to-br from-[#f0faff] to-[#f8fbff] p-5">
-                <h4 className="text-[12px] font-black uppercase tracking-[0.14em] text-[#0096D6] mb-3">
+                <h4 className="text-[12px] font-black uppercase tracking-[0.14em] text-[#1677f2] mb-3">
                   Editorial Standards
                 </h4>
                 <ul className="space-y-2">
@@ -607,7 +607,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
                     'No plagiarised or AI-generated boilerplate',
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2 text-[12.5px] text-[#334155]">
-                      <span className="text-[#0096D6] font-bold shrink-0 mt-0.5">›</span>
+                      <span className="text-[#1677f2] font-bold shrink-0 mt-0.5">›</span>
                       {item}
                     </li>
                   ))}
@@ -763,7 +763,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
                     className="sr-only"
                   />
                   <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
-                    form.declaration ? 'bg-[#0096D6] border-[#0096D6]' : errors.declaration ? 'border-red-400 bg-white' : 'border-[#b0bec5] bg-white'
+                    form.declaration ? 'bg-[#1677f2] border-[#1677f2]' : errors.declaration ? 'border-red-400 bg-white' : 'border-[#b0bec5] bg-white'
                   }`}>
                     {form.declaration && (
                       <svg viewBox="0 0 12 10" className="w-3 h-2.5 text-white" fill="none" stroke="currentColor">
@@ -796,7 +796,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <Link
                 href="/blogs"
-                className="text-[13.5px] font-semibold text-[#64748b] hover:text-[#0096D6] transition-colors"
+                className="text-[13.5px] font-semibold text-[#64748b] hover:text-[#1677f2] transition-colors"
               >
                 ← Browse published articles first
               </Link>
@@ -804,7 +804,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
               <button
                 type="submit"
                 disabled={step === 'submitting'}
-                className="flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold text-[15px] hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-[0_8px_24px_rgba(0,150,214,0.28)] disabled:opacity-60 disabled:cursor-not-allowed min-w-[200px]"
+                className="flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold text-[15px] hover:from-[#0077B6] hover:to-[#005f8f] transition-all shadow-[0_8px_24px_rgba(0,150,214,0.28)] disabled:opacity-60 disabled:cursor-not-allowed min-w-[200px]"
               >
                 {step === 'submitting' ? (
                   <>

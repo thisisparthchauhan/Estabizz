@@ -63,7 +63,7 @@ export default async function AuthorsPage() {
                 className="flex items-center justify-between px-6 py-3.5 hover:bg-[#f8fafc] transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0096D6] to-[#0a1628] text-[13px] font-black text-white">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[13px] font-black text-white">
                     {author.name[0]}
                   </div>
                   <div>
@@ -71,7 +71,7 @@ export default async function AuthorsPage() {
                     <div className="text-[11px] text-[#94a3b8]">{author.designation}</div>
                   </div>
                 </div>
-                <span className="rounded-full border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#0096D6]">
+                <span className="rounded-full border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#1677f2]">
                   {author.count} article{author.count !== 1 ? "s" : ""}
                 </span>
               </div>
@@ -80,8 +80,8 @@ export default async function AuthorsPage() {
         )}
 
         <div className="border-t border-[#f0f4f8] bg-[#fffbf0] px-6 py-4">
-          <div className="flex items-center gap-3 rounded-xl border border-[#d9a938]/30 bg-[#d9a938]/8 px-4 py-3">
-            <span className="text-[#d9a938] text-lg">ℹ</span>
+          <div className="flex items-center gap-3 rounded-xl border border-[#1677f2]/30 bg-[#1677f2]/8 px-4 py-3">
+            <span className="text-[#1677f2] text-lg">ℹ</span>
             <p className="text-[12px] text-[#b8860b] font-medium">
               Author profiles are currently derived from blog data. A dedicated author
               management panel (add bio, avatar, social links) is planned for a future release.

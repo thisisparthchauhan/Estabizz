@@ -23,8 +23,8 @@ export default function MediaLibraryPage() {
           URL in the blog editor. Full media library with Cloudinary integration is on
           the development roadmap.
         </p>
-        <div className="inline-flex items-center gap-3 rounded-xl border border-[#d9a938]/30 bg-[#d9a938]/8 px-4 py-3 text-[12px] text-[#b8860b] font-medium">
-          <span className="text-[#d9a938]">ℹ</span>
+        <div className="inline-flex items-center gap-3 rounded-xl border border-[#1677f2]/30 bg-[#1677f2]/8 px-4 py-3 text-[12px] text-[#b8860b] font-medium">
+          <span className="text-[#1677f2]">ℹ</span>
           Coming soon — Cloudinary / S3 integration planned
         </div>
       </div>

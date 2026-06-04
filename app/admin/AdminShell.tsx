@@ -150,7 +150,7 @@ function SidebarLink({
   const base =
     "relative flex items-center gap-3 rounded-xl text-[13px] font-medium transition-all duration-150 overflow-hidden";
   const activeClass =
-    "bg-[#d9a938]/15 text-[#d9a938] pl-[10px] pr-3 py-2.5 border-l-[3px] border-[#d9a938]";
+    "bg-[#1677f2]/15 text-[#1677f2] pl-[10px] pr-3 py-2.5 border-l-[3px] border-[#1677f2]";
   const idleClass =
     "text-white/50 hover:text-white/80 hover:bg-white/[0.07] px-3 py-2.5";
 
@@ -160,19 +160,19 @@ function SidebarLink({
       title={collapsed ? item.label : undefined}
       className={`${base} ${active ? activeClass : idleClass}`}
     >
-      <span className={`shrink-0 ${active ? "text-[#d9a938]" : ""}`}>
+      <span className={`shrink-0 ${active ? "text-[#1677f2]" : ""}`}>
         {item.icon}
       </span>
       {!collapsed && (
         <span className="truncate leading-none flex-1">{item.label}</span>
       )}
       {!collapsed && item.pendingBadge && pendingCount > 0 && (
-        <span className="ml-auto flex h-4.5 min-w-[18px] items-center justify-center rounded-full bg-[#d9a938] px-1 text-[9.5px] font-black text-[#071224] leading-none">
+        <span className="ml-auto flex h-4.5 min-w-[18px] items-center justify-center rounded-full bg-[#1677f2] px-1 text-[9.5px] font-black text-[#071224] leading-none">
           {pendingCount > 99 ? "99+" : pendingCount}
         </span>
       )}
       {collapsed && item.pendingBadge && pendingCount > 0 && (
-        <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-[#d9a938]" />
+        <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-[#1677f2]" />
       )}
     </Link>
   );
@@ -228,7 +228,7 @@ export default function AdminShell({
             collapsed ? "justify-center" : ""
           }`}
         >
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#d9a938] via-[#c8921a] to-[#8b6110] flex items-center justify-center font-black text-[#071224] text-[15px] shrink-0 shadow-[0_4px_14px_rgba(217,169,56,0.30)]">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#1677f2] via-[#c8921a] to-[#8b6110] flex items-center justify-center font-black text-[#071224] text-[15px] shrink-0 shadow-[0_4px_14px_rgba(217,169,56,0.30)]">
             E
           </div>
           {!collapsed && (
@@ -236,7 +236,7 @@ export default function AdminShell({
               <div className="text-[13px] font-black text-white leading-tight truncate">
                 Estabizz Admin
               </div>
-              <div className="text-[9.5px] text-[#d9a938]/70 font-semibold tracking-[0.09em] uppercase mt-0.5">
+              <div className="text-[9.5px] text-[#1677f2]/70 font-semibold tracking-[0.09em] uppercase mt-0.5">
                 Content Panel
               </div>
             </div>
@@ -264,7 +264,7 @@ export default function AdminShell({
             href="/"
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-[12px] font-medium text-white/35 transition-all hover:text-[#d9a938]/80 hover:bg-white/[0.04] ${
+            className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-[12px] font-medium text-white/35 transition-all hover:text-[#1677f2]/80 hover:bg-white/[0.04] ${
               collapsed ? "justify-center" : ""
             }`}
             title="Back to Site"
@@ -296,7 +296,7 @@ export default function AdminShell({
             {breadcrumbs.map((crumb, i) => (
               <React.Fragment key={crumb}>
                 {i > 0 && (
-                  <span className="text-[#d9a938]/50 text-[11px]">/</span>
+                  <span className="text-[#1677f2]/50 text-[11px]">/</span>
                 )}
                 <span
                   className={
@@ -316,9 +316,9 @@ export default function AdminShell({
             {pendingCount > 0 && (
               <Link
                 href="/admin/blogs/pending"
-                className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#d9a938]/10 border border-[#d9a938]/30 px-2.5 py-1 text-[11px] font-bold text-[#b8860b] hover:bg-[#d9a938]/20 transition-colors"
+                className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#1677f2]/10 border border-[#1677f2]/30 px-2.5 py-1 text-[11px] font-bold text-[#b8860b] hover:bg-[#1677f2]/20 transition-colors"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#d9a938] shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#1677f2] shrink-0" />
                 Pending {pendingCount}
               </Link>
             )}
@@ -327,7 +327,7 @@ export default function AdminShell({
               {adminEmail ?? "admin@estabizz.com"}
             </span>
 
-            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#d9a938] to-[#b8860b] flex items-center justify-center text-[#071224] text-[11px] font-black uppercase shadow-sm">
+            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#1677f2] to-[#b8860b] flex items-center justify-center text-[#071224] text-[11px] font-black uppercase shadow-sm">
               {adminEmail?.[0] ?? "A"}
             </div>
           </div>

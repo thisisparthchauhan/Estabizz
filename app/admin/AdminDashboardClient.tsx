@@ -102,7 +102,7 @@ function StatCard({ label, value, icon, iconBg, iconColor, href }: StatCardProps
   return (
     <Link
       href={href}
-      className="flex flex-col justify-between rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_24px_rgba(10,22,40,0.09)] hover:-translate-y-0.5 hover:border-[#d9a938]/35 transition-all duration-200"
+      className="flex flex-col justify-between rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_24px_rgba(10,22,40,0.09)] hover:-translate-y-0.5 hover:border-[#1677f2]/35 transition-all duration-200"
     >
       <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${iconBg} ${iconColor} mb-4`}>
         {icon}
@@ -135,7 +135,7 @@ function QuickCard({
   return (
     <Link
       href={href}
-      className="group flex flex-col justify-between rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_20px_rgba(10,22,40,0.08)] hover:-translate-y-0.5 hover:border-[#d9a938]/25 transition-all duration-200"
+      className="group flex flex-col justify-between rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_20px_rgba(10,22,40,0.08)] hover:-translate-y-0.5 hover:border-[#1677f2]/25 transition-all duration-200"
     >
       <div>
         <h3 className="text-[13.5px] font-black text-[#0a1628] mb-1.5">{title}</h3>
@@ -224,7 +224,7 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
           </div>
           <Link
             href="/admin/blogs"
-            className="text-[12px] font-bold text-[#0096D6] hover:text-[#0077B6] transition-colors"
+            className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
           >
             View all →
           </Link>
@@ -263,7 +263,7 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
                 {recentBlogs.map((blog) => (
                   <tr key={blog.id} className="group hover:bg-[#f8fafc] transition-colors">
                     <td className="px-6 py-3.5 max-w-[240px]">
-                      <div className="text-[13px] font-bold text-[#0a1628] truncate group-hover:text-[#0096D6] transition-colors">
+                      <div className="text-[13px] font-bold text-[#0a1628] truncate group-hover:text-[#1677f2] transition-colors">
                         {blog.title}
                       </div>
                       <div className="text-[11px] text-[#94a3b8] truncate mt-0.5">
@@ -284,7 +284,7 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
                     <td className="px-4 py-3.5">
                       <Link
                         href={`/admin/blogs/edit/${blog.id}`}
-                        className="inline-flex items-center gap-1 rounded-lg border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#0096D6] hover:bg-[#e0f0fa] transition-colors"
+                        className="inline-flex items-center gap-1 rounded-lg border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#e0f0fa] transition-colors"
                       >
                         Edit
                       </Link>
@@ -304,7 +304,7 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
           desc="Draft an article for the Regulatory Insights section."
           href="/admin/blogs/new"
           cta="Open Editor"
-          ctaCls="bg-[#d9a938] text-[#071224] hover:bg-[#c8921a]"
+          ctaCls="bg-[#1677f2] text-[#071224] hover:bg-[#c8921a]"
         />
         <QuickCard
           title="Review Pending"

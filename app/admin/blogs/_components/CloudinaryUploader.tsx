@@ -89,8 +89,8 @@ export function CloudinaryUploader({
         disabled={uploading}
         className={`shrink-0 inline-flex items-center justify-center gap-1.5 rounded-xl border font-bold transition-colors disabled:opacity-60 ${pad} ${
           uploading
-            ? "border-[#dbe7f3] bg-[#f0faff] text-[#0096D6]"
-            : "border-[#0096D6]/40 bg-[#f0faff] text-[#0096D6] hover:border-[#0096D6] hover:bg-[#e8f7ff]"
+            ? "border-[#dbe7f3] bg-[#f0faff] text-[#1677f2]"
+            : "border-[#1677f2]/40 bg-[#f0faff] text-[#1677f2] hover:border-[#1677f2] hover:bg-[#e8f7ff]"
         }`}
         title="Upload an image to Cloudinary"
       >

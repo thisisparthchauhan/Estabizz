@@ -73,7 +73,7 @@ export default function Footer() {
         <footer className="relative overflow-hidden bg-[#0a1628] text-white/70">
             <div className="pointer-events-none absolute inset-0">
                 <div className="absolute left-[-10%] top-[-25%] h-[440px] w-[440px] rounded-full bg-[#1677f2]/15 blur-[140px]" />
-                <div className="absolute bottom-[-15%] right-[-8%] h-[420px] w-[420px] rounded-full bg-[#0096D6]/12 blur-[150px]" />
+                <div className="absolute bottom-[-15%] right-[-8%] h-[420px] w-[420px] rounded-full bg-[#1677f2]/12 blur-[150px]" />
             </div>
             <div className="relative h-[3px] w-full bg-gradient-to-r from-transparent via-[#1677f2] to-transparent" />
 

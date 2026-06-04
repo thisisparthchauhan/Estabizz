@@ -66,8 +66,8 @@ export default function SeoSettingsPage() {
         </div>
 
         <div className="border-t border-[#f0f4f8] bg-[#fffbf0] px-6 py-4">
-          <div className="flex items-start gap-3 rounded-xl border border-[#d9a938]/30 bg-[#d9a938]/8 px-4 py-3">
-            <span className="text-[#d9a938] text-lg mt-0.5 shrink-0">ℹ</span>
+          <div className="flex items-start gap-3 rounded-xl border border-[#1677f2]/30 bg-[#1677f2]/8 px-4 py-3">
+            <span className="text-[#1677f2] text-lg mt-0.5 shrink-0">ℹ</span>
             <p className="text-[12px] text-[#b8860b] font-medium leading-5">
               These settings are currently read-only / informational. Editable global
               SEO configuration (with sitemap regeneration and search-console integration)

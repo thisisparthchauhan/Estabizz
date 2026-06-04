@@ -43,12 +43,12 @@ export default async function CategoriesPage() {
         </div>
 
         <div className="border-t border-[#f0f4f8] bg-[#fffbf0] px-6 py-4">
-          <div className="flex items-center gap-3 rounded-xl border border-[#d9a938]/30 bg-[#d9a938]/8 px-4 py-3">
-            <span className="text-[#d9a938] text-lg">ℹ</span>
+          <div className="flex items-center gap-3 rounded-xl border border-[#1677f2]/30 bg-[#1677f2]/8 px-4 py-3">
+            <span className="text-[#1677f2] text-lg">ℹ</span>
             <p className="text-[12px] text-[#b8860b] font-medium">
               Full category management (add, edit, delete, reorder) is in the development roadmap.
               Categories are currently defined in{" "}
-              <code className="rounded bg-[#d9a938]/15 px-1 py-0.5 font-mono text-[11px]">
+              <code className="rounded bg-[#1677f2]/15 px-1 py-0.5 font-mono text-[11px]">
                 lib/blog/categories.ts
               </code>
               .

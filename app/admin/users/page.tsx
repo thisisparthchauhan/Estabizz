@@ -54,7 +54,7 @@ export default function AdminUsersPage() {
                 <tr key={user.email} className="hover:bg-[#f8fafc] transition-colors">
                   <td className="px-6 py-3.5">
                     <div className="flex items-center gap-2.5">
-                      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#d9a938] to-[#b8860b] text-[11px] font-black text-[#071224]">
+                      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#b8860b] text-[11px] font-black text-[#071224]">
                         {user.name[0]}
                       </div>
                       <span className="text-[13px] font-bold text-[#0a1628]">{user.name}</span>
@@ -64,7 +64,7 @@ export default function AdminUsersPage() {
                   <td className="px-4 py-3.5">
                     <span className={`rounded-full border px-2 py-0.5 text-[10.5px] font-bold ${
                       user.role === "Super Admin"
-                        ? "bg-[#d9a938]/10 text-[#b8860b] border-[#d9a938]/30"
+                        ? "bg-[#1677f2]/10 text-[#b8860b] border-[#1677f2]/30"
                         : "bg-blue-50 text-blue-700 border-blue-200"
                     }`}>
                       {user.role}
@@ -83,8 +83,8 @@ export default function AdminUsersPage() {
         </div>
 
         <div className="border-t border-[#f0f4f8] bg-[#fffbf0] px-6 py-4">
-          <div className="flex items-start gap-3 rounded-xl border border-[#d9a938]/30 bg-[#d9a938]/8 px-4 py-3">
-            <span className="text-[#d9a938] text-lg mt-0.5 shrink-0">ℹ</span>
+          <div className="flex items-start gap-3 rounded-xl border border-[#1677f2]/30 bg-[#1677f2]/8 px-4 py-3">
+            <span className="text-[#1677f2] text-lg mt-0.5 shrink-0">ℹ</span>
             <p className="text-[12px] text-[#b8860b] font-medium leading-5">
               User management requires authentication to be wired. Full role-based access
               control (RBAC) with JWT sessions is on the development roadmap.

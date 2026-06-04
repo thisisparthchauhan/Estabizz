@@ -47,10 +47,10 @@ export default function FinalCTA() {
                             </span>
                         </a>
 
-                        <a href="tel:+919825600907" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-transparent border border-white/20 text-white font-bold text-[15px] rounded-xl px-6 py-3.5 hover:bg-white/10 hover:border-white/40 transition-all duration-300">
+                        <a href="tel:+919825600907" className="w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center gap-2 bg-transparent border border-white/20 text-white font-bold text-[15px] rounded-xl px-6 py-3.5 hover:bg-white/10 hover:border-white/40 transition-all duration-300">
                             <span className="text-[17px]">📞</span> +91 98256 00907
                         </a>
-                        <a href="https://wa.me/919825600907" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-bold text-[15px] rounded-xl px-6 py-3.5 hover:bg-white/20 hover:border-white/40 transition-all duration-300">
+                        <a href="https://wa.me/919825600907" className="w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-bold text-[15px] rounded-xl px-6 py-3.5 hover:bg-white/20 hover:border-white/40 transition-all duration-300">
                             WhatsApp Estabizz
                         </a>
                     </div>

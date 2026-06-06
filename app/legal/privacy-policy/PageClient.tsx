@@ -3,144 +3,121 @@ import ServicePageLayout from "@/components/templates/ServicePageLayout";
 
 export default function PageClient() {
     const sections = [
-    { id: "introduction", title: "1. Introduction" },
-    { id: "what-is", title: "2. What Is" },
-    { id: "regulatory-framework", title: "3. Regulatory Framework" },
-    { id: "who-needs", title: "4. Who Needs" },
-    { id: "eligibility", title: "5. Eligibility Criteria" },
-    { id: "documents", title: "6. Documents Required" },
-    { id: "process", title: "7. Registration Process" },
-    { id: "fees", title: "8. Fees Structure" },
-    { id: "timeline", title: "9. Timeline" },
-    { id: "compliance", title: "10. Compliance Requirements" },
-    { id: "faq", title: "11. FAQs" }
+        { id: "introduction", title: "1. Introduction" },
+        { id: "scope", title: "2. Scope of this Policy" },
+        { id: "information-collected", title: "3. Information We Collect" },
+        { id: "use-of-information", title: "4. How We Use Information" },
+        { id: "cookies", title: "5. Cookies and Analytics" },
+        { id: "sharing", title: "6. Disclosure and Sharing" },
+        { id: "security", title: "7. Data Storage and Security" },
+        { id: "rights", title: "8. User Rights and Choices" },
+        { id: "retention", title: "9. Data Retention" },
+        { id: "updates", title: "10. Policy Updates" },
+        { id: "contact", title: "11. Contact Details" },
+        { id: "faq", title: "12. FAQs" }
     ];
 
     const quickFacts = [
-        { label: "Regulator", value: "Legal" },
-        { label: "Service Type", value: "Privacy Policy" },
-        { label: "Updated", value: "2026" },
-        { label: "Expert Review", value: "✓ Verified" },
+        { label: "Company", value: "Estabizz Fintech Private Limited" },
+        { label: "Policy Type", value: "Website Privacy Policy" },
+        { label: "Last Updated", value: "2026" },
+        { label: "Contact Email", value: "info@estabizz.com" },
     ];
 
-    const faqs: { q: string; a: string }[] = [
-                    { q: "What is a Privacy Policy?", a: "A Privacy Policy is a legal document explaining how a business collects, uses, stores, and protects personal data of users." },
-                    { q: "Is a Privacy Policy mandatory in India?", a: "Yes, it is mandatory for businesses handling personal data under applicable IT laws and data protection principles." },
-                    { q: "Who needs a Privacy Policy?", a: "Any business collecting user data must have one, including: • Websites • Mobile apps • Fintech platforms" },
-                    { q: "What type of data is covered under a Privacy Policy?", a: "It includes personal and sensitive data such as: • Name, email, phone • Financial information • IP address" },
-                    { q: "What is personal data in a Privacy Policy?", a: "Personal data refers to any information that can identify an individual directly or indirectly." },
-                    { q: "What is sensitive personal data?", a: "It includes: • Financial details • Passwords • Health data" },
-                    { q: "Why is a Privacy Policy important?", a: "It builds trust and ensures compliance with legal requirements." },
-                    { q: "Can I run a website without a Privacy Policy?", a: "No, operating without it may lead to legal risks and penalties." },
-                    { q: "Does a small business need a Privacy Policy?", a: "Yes, if it collects any user data, even basic contact details." },
-                    { q: "Is Privacy Policy same as Terms & Conditions?", a: "No, Privacy Policy deals with data handling, while Terms govern usage rules." },
-                    { q: "Where should Privacy Policy be displayed?", a: "It should be clearly visible on: • Website footer • App interface" },
-                    { q: "Is user consent required in Privacy Policy?", a: "Yes, consent is essential before collecting personal data." },
-                    { q: "Can Privacy Policy be copied from another website?", a: "No, it must be customized as per your business practices." },
-                    { q: "What is data collection disclosure?", a: "It explains what data is collected and why." },
-                    { q: "What is data usage clause?", a: "It specifies how collected data will be used. Section 2: Eligibility & Applicability" },
-                    { q: "Which businesses must comply with Privacy Policy requirements?", a: "All businesses collecting user data digitally must comply." },
-                    { q: "Does an e-commerce website need a Privacy Policy?", a: "Yes, it is mandatory due to user data handling." },
-                    { q: "Do fintech companies require a Privacy Policy?", a: "Yes, especially due to financial data handling." },
-                    { q: "Is Privacy Policy required for mobile apps?", a: "Yes, it is compulsory for app-based services." },
-                    { q: "Do startups need a Privacy Policy?", a: "Yes, even early-stage startups must comply." },
-                    { q: "Is Privacy Policy required for blogs?", a: "Yes, if user data like emails or cookies are collected." },
-                    { q: "Do offline businesses need Privacy Policy?", a: "Only if they collect data digitally." },
-                    { q: "Is Privacy Policy required for SaaS platforms?", a: "Yes, due to continuous user data processing." },
-                    { q: "Is Privacy Policy applicable to foreign companies operating in India?", a: "Yes, if they process Indian user data." },
-                    { q: "Do freelancers need Privacy Policy?", a: "Yes, if they collect client information online. Section 3: Registration Process" },
+    const faqs = [
+        { q: "What is the purpose of this Privacy Policy?", a: "This Privacy Policy explains how Estabizz collects, uses, stores and protects information received through its website, forms, calls, emails and client communication channels." },
+        { q: "Does Estabizz collect personal information?", a: "Yes. Estabizz may collect information such as name, email address, phone number, company name, service interest and documents voluntarily shared for advisory or compliance support." },
+        { q: "Does Estabizz sell user data?", a: "No. Estabizz does not sell personal information. Information may be shared only where required for service delivery, legal compliance, professional review or regulatory documentation support." },
+        { q: "Can a user request correction of personal details?", a: "Yes. Users may contact Estabizz at info@estabizz.com to request correction or update of their submitted information, subject to verification." },
+        { q: "Is this Privacy Policy legal advice?", a: "No. This policy is for website transparency and user information. It should not be treated as legal, regulatory, tax, investment or financial advice." },
     ];
 
     return (
         <ServicePageLayout
-            tags={[{ emoji: "🔒", label: "Legal" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
-            breadcrumb={[{ label: "Home", href: "/" }, { label: "Legal", href: "/legal" }, { label: "Privacy Policy" }]}
-            title="Privacy Policy for Businesses: Legal Rules You Must Follow in India"
-            readTime="15 min read"
-            focusKeyword="Privacy Policy for Businesses"
+            tags={[{ emoji: "🔒", label: "Privacy" }, { emoji: "⚖️", label: "Legal Policy" }, { emoji: "✅", label: "Website Transparency" }]}
+            breadcrumb={[{ label: "Home", href: "/" }, { label: "Legal" }, { label: "Privacy Policy" }]}
+            title="Privacy Policy"
+            readTime="8 min read"
+            focusKeyword="Privacy Policy"
             sections={sections}
-            ctaTitle="Need Expert Help with Privacy Policy?"
-            ctaDescription="Our regulatory compliance experts provide end-to-end guidance for Privacy Policy for Businesses."
+            ctaTitle="Questions About Your Data?"
+            ctaDescription="Contact Estabizz for privacy, website data or communication-related queries."
             quickFacts={quickFacts}
             relatedArticles={[
-                { href: "/rbi/nbfc-account-aggregator-license", category: "RBI", title: "NBFC Account Aggregator License", description: "Complete RBI registration guide for NBFC-AA." },
-                { href: "/ifsca/psp-license-ifsca", category: "IFSCA", title: "PSP License IFSCA", description: "Payment services provider license guide." },
-                { href: "/regulatory/finance-company-gift-ifsc", category: "IFSCA", title: "Finance Company GIFT IFSC", description: "Setting up a Finance Company in GIFT City." }
+                { href: "/legal/terms-conditions", category: "Legal", title: "Terms and Conditions", description: "Website terms governing use of Estabizz digital properties." },
+                { href: "/legal/refund-policy", category: "Legal", title: "Refund Policy", description: "Professional service fee and refund-related policy information." },
+                { href: "/contact", category: "Contact", title: "Contact Estabizz", description: "Reach the Estabizz team for service or privacy-related queries." }
             ]}
-            finalCtaTitle="Ready to Get Started with Privacy Policy?"
-            finalCtaDescription="Book a free consultation with our regulatory experts. We guide you through every step of the process."
+            finalCtaTitle="Need to Contact Estabizz?"
+            finalCtaDescription="For privacy, service, documentation or regulatory advisory queries, please contact Estabizz through the official contact details provided on this page."
         >
             <h2 id="introduction">Introduction</h2>
-            <p>icy. Privacy Policy for Businesses – Complete Legal & Compliance Guide You Must Know 📌 INTRODUCTION Privacy Policy for Businesses is a critical legal document that defines how an organisation collects</p>
+            <p>Privacy Policy of Estabizz Fintech Private Limited explains how we collect, use, protect and manage information shared by visitors, clients, prospective clients and users of our website. We respect the confidentiality of business and personal information shared with us for regulatory advisory, licensing, documentation and compliance support.</p>
+            <p>This policy is intended to provide clear information about our data handling practices. It does not create any guarantee of service outcome, regulatory approval or legal opinion.</p>
 
-            <h2 id="what-is">What is Privacy Policy</h2>
-            <p>This page provides comprehensive information about Privacy Policy for Businesses including regulatory framework, eligibility criteria, documentation requirements, and step-by-step process.</p>
-
-            <h2 id="regulatory-framework">Regulatory Framework</h2>
+            <h2 id="scope">Scope of this Policy</h2>
+            <p>This Privacy Policy applies to information collected through the Estabizz website, contact forms, consultation requests, WhatsApp links, email communication, blog submission forms, proposal requests and other digital communication channels operated by Estabizz Fintech Private Limited.</p>
             <div className="info-box">
-                <p>This service falls under the regulatory jurisdiction of Legal. Compliance with all applicable regulations is mandatory.</p>
+                <p>This policy does not apply to third-party websites, payment gateways, external platforms or regulator portals that may be linked from the Estabizz website. Users should review the privacy terms of such third-party platforms separately.</p>
             </div>
 
-            <h2 id="who-needs">Who Needs This Service</h2>
-            <p>Businesses and individuals who require Privacy Policy for Businesses include entities operating in the regulated financial services sector.</p>
-
-            <h2 id="eligibility">Eligibility Criteria</h2>
-            <p>Eligibility requirements are defined by the relevant regulatory authority. Key criteria include entity type, capital requirements, and fit & proper standards for directors/promoters.</p>
-
-            <h2 id="documents">Documents Required</h2>
-            <ul>
-                <li>Certificate of Incorporation</li>
-                <li>Memorandum and Articles of Association</li>
-                <li>Net Worth Certificate (CA certified)</li>
-                <li>Business Plan</li>
-                <li>KYC documents for Directors</li>
-                <li>Board Resolution</li>
-            </ul>
-
-            <h2 id="process">Registration Process</h2>
-            <div className="step-timeline">
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Preparation & Documentation</h4><p className="text-[13px] text-[#64748b] !mb-0">Gather all required documents and ensure eligibility criteria are met.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Application Filing</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit the complete application to the regulatory authority with supporting documents.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Regulatory Review</h4><p className="text-[13px] text-[#64748b] !mb-0">The regulatory authority reviews the application and may seek clarifications.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Approval & Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Upon approval, set up compliance framework and begin operations.</p></div></div>
-            </div>
-
-            <h2 id="fees">Fees Structure</h2>
+            <h2 id="information-collected">Information We Collect</h2>
             <div className="overflow-x-auto my-6">
                 <table className="data-table">
-                    <thead><tr><th>Particulars</th><th>Amount</th><th>Remarks</th></tr></thead>
+                    <thead><tr><th>Information Category</th><th>Examples</th><th>Purpose</th></tr></thead>
                     <tbody>
-                        <tr><td>Regulatory Application Fee</td><td>As prescribed</td><td>Non-refundable</td></tr>
-                        <tr><td>Professional/Advisory Fees</td><td>Variable</td><td>Depends on scope</td></tr>
-                        <tr><td>Compliance Setup Cost</td><td>Variable</td><td>One-time</td></tr>
+                        <tr><td>Contact Information</td><td>Name, email, phone number, company name</td><td>Responding to enquiries and consultation requests</td></tr>
+                        <tr><td>Service Information</td><td>Licence type, business model, regulator category, project details</td><td>Understanding advisory scope and applicability</td></tr>
+                        <tr><td>Documents Shared Voluntarily</td><td>Incorporation documents, KYC, drafts, business notes</td><td>Professional review, documentation support and service execution</td></tr>
+                        <tr><td>Website Usage Data</td><td>IP address, device type, browser, pages visited</td><td>Website security, analytics and user experience improvement</td></tr>
+                        <tr><td>Communication Data</td><td>Email correspondence, call notes, WhatsApp messages</td><td>Client coordination, query tracking and service records</td></tr>
                     </tbody>
                 </table>
             </div>
 
-            <h2 id="timeline">Timeline</h2>
-            <div className="overflow-x-auto my-6">
-                <table className="data-table">
-                    <thead><tr><th>Stage</th><th>Estimated Time</th><th>Notes</th></tr></thead>
-                    <tbody>
-                        <tr><td>Document Preparation</td><td>2–4 weeks</td><td>Depends on complexity</td></tr>
-                        <tr><td>Regulatory Review</td><td>3–6 months</td><td>Case-by-case</td></tr>
-                        <tr><td>Approval</td><td>1–2 months</td><td>After compliance confirmation</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 id="compliance">Compliance Requirements</h2>
-            <p>Post-registration compliance is critical to maintain the license/registration in good standing.</p>
+            <h2 id="use-of-information">How We Use Information</h2>
             <ul>
-                <li>Regular filings and returns</li>
-                <li>Governance and board oversight</li>
-                <li>Annual audit and reporting</li>
-                <li>KYC/AML compliance</li>
-                <li>Customer grievance redressal</li>
+                <li>To respond to enquiries, consultation requests and service interest forms.</li>
+                <li>To evaluate regulatory applicability, documentation requirements and advisory scope.</li>
+                <li>To prepare proposals, checklists, client notes, regulatory documents and compliance support records.</li>
+                <li>To communicate updates, reminders, service information and regulatory insights where appropriate.</li>
+                <li>To improve website functionality, security, analytics and user experience.</li>
+                <li>To comply with applicable legal, contractual, professional or regulatory requirements.</li>
             </ul>
 
-            <h2 id="faq">Frequently Asked Questions (FAQs)</h2>
-            {faqs.length > 0 ? (
+            <h2 id="cookies">Cookies and Analytics</h2>
+            <p>The Estabizz website may use cookies, analytics tools or similar technologies to understand page usage, improve website performance and maintain security. Users may control cookies through browser settings, but disabling cookies may affect certain website functions.</p>
+
+            <h2 id="sharing">Disclosure and Sharing</h2>
+            <p>Estabizz may share information with internal team members, associate professionals, technology vendors, payment processors, legal or compliance consultants and other service providers only where required for service delivery, operational support, legal compliance or user-requested communication.</p>
+            <div className="info-box">
+                <p>Estabizz does not sell personal information. Information may be disclosed if required by law, court order, regulator direction, government authority or for protection of legitimate legal rights.</p>
+            </div>
+
+            <h2 id="security">Data Storage and Security</h2>
+            <p>We take reasonable administrative, technical and organisational measures to protect information shared with us. However, no website, digital platform or internet transmission can be guaranteed to be completely secure. Users should avoid sharing unnecessary sensitive information through unsecured channels.</p>
+
+            <h2 id="rights">User Rights and Choices</h2>
+            <p>Users may contact Estabizz to request correction, update or review of personal information submitted to us. Requests may be subject to identity verification, legal retention requirements and ongoing service obligations.</p>
+
+            <h2 id="retention">Data Retention</h2>
+            <p>Information may be retained for as long as reasonably required for enquiry handling, client service records, legal documentation, compliance evidence, dispute resolution, audit, accounting or statutory purposes. Retention periods may vary depending on the nature of the service and applicable law.</p>
+
+            <h2 id="updates">Policy Updates</h2>
+            <p>Estabizz may update this Privacy Policy from time to time to reflect changes in legal requirements, website features, service processes or internal data handling practices. The updated policy will be made available on this page.</p>
+
+            <h2 id="contact">Contact Details</h2>
+            <div className="info-box">
+                <p><strong>Estabizz Fintech Private Limited</strong></p>
+                <p>15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421</p>
+                <p><strong>Phone:</strong> +91 98256 00907</p>
+                <p><strong>Email:</strong> info@estabizz.com</p>
+            </div>
+
+            <h2 id="disclaimer">Legal Disclaimer</h2>
+            <p>This Privacy Policy is for general website transparency and informational purposes only. It should not be treated as legal, regulatory, tax, investment or financial advice. Data protection requirements may change from time to time, and users should obtain professional advice for their own website or business-specific privacy documentation.</p>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
             <div className="space-y-3 my-6">
                 {faqs.map((item, i) => (
                     <details key={i} className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
@@ -154,9 +131,6 @@ export default function PageClient() {
                     </details>
                 ))}
             </div>
-            ) : (
-            <div className="info-box"><p>Detailed FAQs will be added shortly. Contact us for specific queries about Privacy Policy for Businesses.</p></div>
-            )}
         </ServicePageLayout>
     );
 }

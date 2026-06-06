@@ -3,144 +3,104 @@ import ServicePageLayout from "@/components/templates/ServicePageLayout";
 
 export default function PageClient() {
     const sections = [
-    { id: "introduction", title: "1. Introduction" },
-    { id: "what-is", title: "2. What Is" },
-    { id: "regulatory-framework", title: "3. Regulatory Framework" },
-    { id: "who-needs", title: "4. Who Needs" },
-    { id: "eligibility", title: "5. Eligibility Criteria" },
-    { id: "documents", title: "6. Documents Required" },
-    { id: "process", title: "7. Registration Process" },
-    { id: "fees", title: "8. Fees Structure" },
-    { id: "timeline", title: "9. Timeline" },
-    { id: "compliance", title: "10. Compliance Requirements" },
-    { id: "faq", title: "11. FAQs" }
+        { id: "introduction", title: "1. Introduction" },
+        { id: "use-of-website", title: "2. Use of Website" },
+        { id: "service-information", title: "3. Service Information" },
+        { id: "consultation", title: "4. Consultation and Engagement" },
+        { id: "payments", title: "5. Payments and Commercials" },
+        { id: "user-responsibility", title: "6. User Responsibility" },
+        { id: "intellectual-property", title: "7. Intellectual Property" },
+        { id: "limitations", title: "8. Limitations" },
+        { id: "third-party-links", title: "9. Third-Party Links" },
+        { id: "governing-law", title: "10. Governing Law" },
+        { id: "contact", title: "11. Contact Details" },
+        { id: "faq", title: "12. FAQs" }
     ];
 
     const quickFacts = [
-        { label: "Regulator", value: "Legal" },
-        { label: "Service Type", value: "Terms Conditions" },
-        { label: "Updated", value: "2026" },
-        { label: "Expert Review", value: "✓ Verified" },
+        { label: "Company", value: "Estabizz Fintech Private Limited" },
+        { label: "Policy Type", value: "Website Terms and Conditions" },
+        { label: "Last Updated", value: "2026" },
+        { label: "Jurisdiction", value: "India" },
     ];
 
-    const faqs: { q: string; a: string }[] = [
-                    { q: "What are Terms and Conditions for a website?", a: "Terms and Conditions are a legally binding agreement defining how users can access and use a website. They outline rights, responsibilities, and limitations of liability." },
-                    { q: "Why are Terms and Conditions important?", a: "They protect the business from disputes and misuse. They also define legal boundaries for users." },
-                    { q: "What is the difference between Terms and Conditions and Privacy Policy?", a: "Terms govern usage, while Privacy Policy governs data handling. Both serve different compliance purposes." },
-                    { q: "Can a small business operate without Terms and Conditions?", a: "Yes, but it is risky. Lack of terms increases exposure to disputes and legal liability." },
-                    { q: "Who drafts Terms and Conditions?", a: "Typically, legal professionals or compliance experts draft them to ensure regulatory alignment." },
-                    { q: "Do free websites need Terms and Conditions?", a: "Yes, even free platforms need them to limit liability and control user behaviour ." },
-                    { q: "What is a click-wrap agreement?", a: "It is a system where users must click “I Agree” before using services, making it legally enforceable." },
-                    { q: "Can Terms and Conditions be verbal?", a: "No, they must be documented and accepted digitally or in writing." },
-                    { q: "What is browse-wrap agreement?", a: "It assumes user acceptance by browsing the site, but it is weak legally." },
-                    { q: "Can I use a template for Terms and Conditions?", a: "Templates can be used as a base but must be customised for your business." },
-                    { q: "Do Terms and Conditions apply to mobile apps?", a: "Yes, they are required for both websites and mobile applications." },
-                    { q: "What is the main purpose of Terms and Conditions?", a: "To define user rights, restrict misuse, and limit legal liability. ### Section 2: Eligibility & Applicability (16–30)" },
-                    { q: "Who must have Terms and Conditions?", a: "Any business operating a website or app, including fintech, NBFCs, and service providers." },
-                    { q: "Do startups need Terms and Conditions?", a: "Yes, especially for investor confidence and legal protection." },
-                    { q: "Do consultants need Terms and Conditions?", a: "Yes, to clarify advisory scope and avoid liability claims." },
-                    { q: "Do insurance brokers need special Terms?", a: "Yes, including claim disclaimers and insurer dependency clauses." },
-                    { q: "Can individuals have Terms and Conditions?", a: "Yes, freelancers and professionals can use them." },
-                    { q: "Do SaaS companies need Terms?", a: "Yes, to define service usage and subscription policies." },
-                    { q: "Can NGOs require Terms and Conditions?", a: "Yes, especially for online donations and engagement." },
-                    { q: "Do marketplaces need different Terms?", a: "Yes, including third-party liability clauses." },
-                    { q: "Is Terms required for blogs?", a: "Recommended, especially for disclaimers and content usage." },
-                    { q: "Do mobile apps require separate Terms?", a: "Yes, tailored for app usage and platform policies." },
-                    { q: "Is there any registration required for Terms and Conditions?", a: "No formal registration is required. It must be drafted and published." },
-                    { q: "How do I create Terms and Conditions?", a: "Define services, risks, and obligations, then draft legally compliant clauses." },
-                    { q: "Who should approve Terms and Conditions?", a: "Business owners and legal advisors should approve them." },
+    const faqs = [
+        { q: "What do these Terms and Conditions cover?", a: "These terms govern use of the Estabizz website, information pages, consultation requests, digital forms and website-linked communication channels." },
+        { q: "Does website content guarantee regulatory approval?", a: "No. Website content is informational. Any licence, registration or approval remains subject to the concerned regulator, authority and applicable eligibility." },
+        { q: "When does a client engagement start?", a: "A client engagement starts only after scope, commercials, required documents and engagement terms are confirmed between the client and Estabizz." },
+        { q: "Can website content be copied?", a: "No. Website content, layouts, service descriptions and resources are protected and should not be copied or reused without permission." },
+        { q: "How can I contact Estabizz about these terms?", a: "You may contact Estabizz at info@estabizz.com or +91 98256 00907 for website or service-related queries." },
     ];
 
     return (
         <ServicePageLayout
-            tags={[{ emoji: "📜", label: "Legal" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
-            breadcrumb={[{ label: "Home", href: "/" }, { label: "Legal", href: "/legal" }, { label: "Terms Conditions" }]}
-            title="Terms and Conditions for Website: Essential Legal Clauses Every Business Must Know"
-            readTime="15 min read"
-            focusKeyword="Terms and Conditions for Website"
+            tags={[{ emoji: "📜", label: "Legal" }, { emoji: "⚖️", label: "Website Terms" }, { emoji: "✅", label: "Transparent Use" }]}
+            breadcrumb={[{ label: "Home", href: "/" }, { label: "Legal" }, { label: "Terms and Conditions" }]}
+            title="Terms and Conditions"
+            readTime="8 min read"
+            focusKeyword="Terms and Conditions"
             sections={sections}
-            ctaTitle="Need Expert Help with Terms Conditions?"
-            ctaDescription="Our regulatory compliance experts provide end-to-end guidance for Terms and Conditions for Website."
+            ctaTitle="Need Assistance?"
+            ctaDescription="Contact Estabizz for website, service scope or engagement-related queries."
             quickFacts={quickFacts}
             relatedArticles={[
-                { href: "/rbi/nbfc-account-aggregator-license", category: "RBI", title: "NBFC Account Aggregator License", description: "Complete RBI registration guide for NBFC-AA." },
-                { href: "/ifsca/psp-license-ifsca", category: "IFSCA", title: "PSP License IFSCA", description: "Payment services provider license guide." },
-                { href: "/regulatory/finance-company-gift-ifsc", category: "IFSCA", title: "Finance Company GIFT IFSC", description: "Setting up a Finance Company in GIFT City." }
+                { href: "/legal/privacy-policy", category: "Legal", title: "Privacy Policy", description: "How Estabizz handles website and user information." },
+                { href: "/legal/refund-policy", category: "Legal", title: "Refund Policy", description: "Refund-related terms for professional services." },
+                { href: "/contact", category: "Contact", title: "Contact Estabizz", description: "Speak to the Estabizz team." }
             ]}
-            finalCtaTitle="Ready to Get Started with Terms Conditions?"
-            finalCtaDescription="Book a free consultation with our regulatory experts. We guide you through every step of the process."
+            finalCtaTitle="Speak to Estabizz"
+            finalCtaDescription="For service scope, consultation, proposal or website-related questions, contact Estabizz through the official contact details."
         >
             <h2 id="introduction">Introduction</h2>
-            <p>Terms and Conditions for Website – Complete Legal Guide to User Rights & Obligations 📘 INTRODUCTION Terms and Conditions for Website form the legal foundation governing the relationship between a serv</p>
+            <p>Terms and Conditions of Estabizz Fintech Private Limited govern the use of this website, its service pages, resources, forms, consultation links and digital communication channels. By accessing or using this website, users agree to read these terms carefully and use the website only for lawful and appropriate purposes.</p>
+            <p>Estabizz operates as an independent regulatory advisory and compliance support organisation. We do not represent any government authority, regulator, exchange or statutory body.</p>
 
-            <h2 id="what-is">What is Terms Conditions</h2>
-            <p>This page provides comprehensive information about Terms and Conditions for Website including regulatory framework, eligibility criteria, documentation requirements, and step-by-step process.</p>
+            <h2 id="use-of-website">Use of Website</h2>
+            <ul>
+                <li>Users may access the website for information, enquiry and service evaluation purposes.</li>
+                <li>Users must not misuse the website, submit false information, attempt unauthorised access or interfere with website functionality.</li>
+                <li>Website content should not be treated as a substitute for professional advice based on specific facts.</li>
+            </ul>
 
-            <h2 id="regulatory-framework">Regulatory Framework</h2>
+            <h2 id="service-information">Service Information</h2>
+            <p>Service pages are prepared for general informational and client education purposes. Regulatory requirements, fee schedules, timelines, forms, portal processes and eligibility conditions may change from time to time. Users should verify current requirements before taking any business or compliance decision.</p>
+            <div className="info-box"><p>Nothing on this website should be interpreted as guaranteed approval, assured licence grant, fixed regulator timeline or official regulator communication.</p></div>
+
+            <h2 id="consultation">Consultation and Engagement</h2>
+            <p>Submitting an enquiry, using a WhatsApp link or booking a consultation does not automatically create a professional engagement. Scope of work, commercials, timelines, responsibilities and document requirements are confirmed separately through proposal, email, invoice, engagement note or mutually agreed communication.</p>
+
+            <h2 id="payments">Payments and Commercials</h2>
+            <p>Professional fees, government fees, regulatory fees, filing fees, third-party charges and taxes may be different depending on the service. Statutory or regulator fees are generally payable separately by the client unless expressly agreed otherwise.</p>
+
+            <h2 id="user-responsibility">User Responsibility</h2>
+            <ul>
+                <li>Provide accurate, complete and lawful information.</li>
+                <li>Share authentic documents and disclose relevant facts.</li>
+                <li>Review service scope, timelines, assumptions and limitations before payment.</li>
+                <li>Respond to document and clarification requests within reasonable time.</li>
+            </ul>
+
+            <h2 id="intellectual-property">Intellectual Property</h2>
+            <p>All website content, design elements, service structures, text, graphics, resources and downloadable material belong to Estabizz or are used with appropriate rights. Users may not copy, reproduce, republish or commercially exploit website content without written permission.</p>
+
+            <h2 id="limitations">Limitations</h2>
+            <p>Regulatory outcomes depend on eligibility, documentation quality, regulator review, query rounds, legal position and business facts. Estabizz provides advisory and documentation support but does not control decisions of any regulator, authority, bank, exchange, portal or third-party institution.</p>
+
+            <h2 id="third-party-links">Third-Party Links</h2>
+            <p>The website may contain links to regulator websites, portals, payment gateways, social media platforms or third-party resources. Estabizz is not responsible for third-party website content, availability, security or privacy practices.</p>
+
+            <h2 id="governing-law">Governing Law</h2>
+            <p>These terms are governed by applicable laws of India. Any dispute will be handled as per applicable legal procedure and agreed engagement terms, where any professional engagement exists.</p>
+
+            <h2 id="contact">Contact Details</h2>
             <div className="info-box">
-                <p>This service falls under the regulatory jurisdiction of Legal. Compliance with all applicable regulations is mandatory.</p>
+                <p><strong>Estabizz Fintech Private Limited</strong></p>
+                <p>15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421</p>
+                <p><strong>Phone:</strong> +91 98256 00907</p>
+                <p><strong>Email:</strong> info@estabizz.com</p>
             </div>
 
-            <h2 id="who-needs">Who Needs This Service</h2>
-            <p>Businesses and individuals who require Terms and Conditions for Website include entities operating in the regulated financial services sector.</p>
-
-            <h2 id="eligibility">Eligibility Criteria</h2>
-            <p>Eligibility requirements are defined by the relevant regulatory authority. Key criteria include entity type, capital requirements, and fit & proper standards for directors/promoters.</p>
-
-            <h2 id="documents">Documents Required</h2>
-            <ul>
-                <li>Certificate of Incorporation</li>
-                <li>Memorandum and Articles of Association</li>
-                <li>Net Worth Certificate (CA certified)</li>
-                <li>Business Plan</li>
-                <li>KYC documents for Directors</li>
-                <li>Board Resolution</li>
-            </ul>
-
-            <h2 id="process">Registration Process</h2>
-            <div className="step-timeline">
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Preparation & Documentation</h4><p className="text-[13px] text-[#64748b] !mb-0">Gather all required documents and ensure eligibility criteria are met.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Application Filing</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit the complete application to the regulatory authority with supporting documents.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Regulatory Review</h4><p className="text-[13px] text-[#64748b] !mb-0">The regulatory authority reviews the application and may seek clarifications.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Approval & Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Upon approval, set up compliance framework and begin operations.</p></div></div>
-            </div>
-
-            <h2 id="fees">Fees Structure</h2>
-            <div className="overflow-x-auto my-6">
-                <table className="data-table">
-                    <thead><tr><th>Particulars</th><th>Amount</th><th>Remarks</th></tr></thead>
-                    <tbody>
-                        <tr><td>Regulatory Application Fee</td><td>As prescribed</td><td>Non-refundable</td></tr>
-                        <tr><td>Professional/Advisory Fees</td><td>Variable</td><td>Depends on scope</td></tr>
-                        <tr><td>Compliance Setup Cost</td><td>Variable</td><td>One-time</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 id="timeline">Timeline</h2>
-            <div className="overflow-x-auto my-6">
-                <table className="data-table">
-                    <thead><tr><th>Stage</th><th>Estimated Time</th><th>Notes</th></tr></thead>
-                    <tbody>
-                        <tr><td>Document Preparation</td><td>2–4 weeks</td><td>Depends on complexity</td></tr>
-                        <tr><td>Regulatory Review</td><td>3–6 months</td><td>Case-by-case</td></tr>
-                        <tr><td>Approval</td><td>1–2 months</td><td>After compliance confirmation</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 id="compliance">Compliance Requirements</h2>
-            <p>Post-registration compliance is critical to maintain the license/registration in good standing.</p>
-            <ul>
-                <li>Regular filings and returns</li>
-                <li>Governance and board oversight</li>
-                <li>Annual audit and reporting</li>
-                <li>KYC/AML compliance</li>
-                <li>Customer grievance redressal</li>
-            </ul>
-
-            <h2 id="faq">Frequently Asked Questions (FAQs)</h2>
-            {faqs.length > 0 ? (
+            <h2 id="faq">Frequently Asked Questions</h2>
             <div className="space-y-3 my-6">
                 {faqs.map((item, i) => (
                     <details key={i} className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
@@ -148,15 +108,10 @@ export default function PageClient() {
                             <span>{item.q}</span>
                             <span className="text-[#0096D6] transition-transform group-open:rotate-180 shrink-0 ml-4">▼</span>
                         </summary>
-                        <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151] leading-relaxed">
-                            {item.a}
-                        </div>
+                        <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151] leading-relaxed">{item.a}</div>
                     </details>
                 ))}
             </div>
-            ) : (
-            <div className="info-box"><p>Detailed FAQs will be added shortly. Contact us for specific queries about Terms and Conditions for Website.</p></div>
-            )}
         </ServicePageLayout>
     );
 }

@@ -568,7 +568,7 @@ export default function PageClient() {
                 </ul>
                 <div className="warning-box">
                     RBI evaluates the architecture design itself — not just documentation. Applicants who
-                    submit generic IT policy documents without a credible technical implementation are likely
+                    submit standard IT policy documents without a credible technical implementation are likely
                     to face delays or rejection.
                 </div>
             </section>

@@ -3,160 +3,138 @@ import ServicePageLayout from "@/components/templates/ServicePageLayout";
 
 export default function PageClient() {
     const sections = [
-    { id: "introduction", title: "1. Introduction" },
-    { id: "what-is", title: "2. What Is" },
-    { id: "regulatory-framework", title: "3. Regulatory Framework" },
-    { id: "who-needs", title: "4. Who Needs" },
-    { id: "eligibility", title: "5. Eligibility Criteria" },
-    { id: "documents", title: "6. Documents Required" },
-    { id: "process", title: "7. Registration Process" },
-    { id: "fees", title: "8. Fees Structure" },
-    { id: "timeline", title: "9. Timeline" },
-    { id: "compliance", title: "10. Compliance Requirements" },
-    { id: "faq", title: "11. FAQs" }
+        { id: "introduction", title: "Introduction" },
+        { id: "what-is", title: "What is Underwriter Registration" },
+        { id: "regulatory-framework", title: "SEBI Framework" },
+        { id: "who-needs", title: "Who Needs Registration" },
+        { id: "eligibility", title: "Eligibility Criteria" },
+        { id: "documents", title: "Documents Required" },
+        { id: "process", title: "Registration Process" },
+        { id: "fees", title: "Fees and Net Worth" },
+        { id: "timeline", title: "Timeline" },
+        { id: "compliance", title: "Post-Registration Compliance" },
+        { id: "faq", title: "FAQs" },
     ];
 
     const quickFacts = [
         { label: "Regulator", value: "SEBI" },
-        { label: "Service Type", value: "Underwriter Registration" },
-        { label: "Updated", value: "2026" },
-        { label: "Expert Review", value: "✓ Verified" },
+        { label: "Framework", value: "SEBI Underwriters Regulations" },
+        { label: "Applicant", value: "Eligible body corporate / institution" },
+        { label: "Review", value: "Expert reviewed" },
     ];
 
-    const faqs: { q: string; a: string }[] = [
-                    { q: "What is SEBI Underwriter Registration in India?", a: "It is a licence issued by SEBI allowing an entity to act as an underwriter for securities issues. It ensures the underwriter can guarantee subscription in case of undersubscription." },
-                    { q: "What does an underwriter do in an IPO?", a: "An underwriter guarantees subscription of shares. If the public does not subscribe fully, the underwriter purchases the remaining portion." },
-                    { q: "Is SEBI registration mandatory for underwriting?", a: "Yes, it is mandatory. As per applicable regulations, no entity can act as an underwriter without SEBI registration." },
-                    { q: "What is underwriting in simple terms?", a: "It is a commitment to buy unsubscribed shares in a securities issue, ensuring full subscription." },
-                    { q: "Who regulates underwriters in India?", a: "Underwriters are regulated by the Securities and Exchange Board of India (SEBI)." },
-                    { q: "What is an underwriting agreement?", a: "It is a contract between issuer and underwriter defining obligations, commission, and risk terms." },
-                    { q: "Is underwriting compulsory for all IPOs?", a: "No, but it is commonly used to ensure issue success and investor confidence." },
-                    { q: "What is firm underwriting?", a: "It is a commitment where the underwriter agrees to subscribe regardless of public response." },
-                    { q: "What is soft underwriting?", a: "It is a non-binding commitment where the underwriter may not be obligated to subscribe." },
-                    { q: "What is underwriting commission?", a: "It is the fee paid to underwriters for taking underwriting risk." },
-                    { q: "Can individuals become underwriters?", a: "No, only entities such as companies, banks, or institutions can register." },
-                    { q: "What is the role of underwriters in capital markets?", a: "They reduce risk for issuers and ensure smooth capital raising." },
-                    { q: "Is underwriting risky?", a: "Yes, it involves financial exposure if the issue is undersubscribed." },
-                    { q: "What is syndicate underwriting?", a: "Multiple underwriters share the risk of underwriting an issue." },
-                    { q: "What is underwriting obligation?", a: "It is the commitment to subscribe to unsubscribed securities." },
-                    { q: "Can underwriting be partial?", a: "Yes, underwriters can take responsibility for a portion of the issue." },
-                    { q: "What is the purpose of underwriting?", a: "To ensure successful subscription of securities and protect issuers." },
-                    { q: "Is underwriting a financial service?", a: "Yes, it is a regulated capital market activity. ### Section 2: Eligibility & Applicability (19–36)" },
-                    { q: "Who can apply for SEBI Underwriter Registration?", a: "Entities such as: • Companies • Banks • Financial institutions • NBFCs" },
-                    { q: "What is the minimum net worth required?", a: "Minimum ₹20 lakhs, as per regulatory guidelines." },
-                    { q: "Can an NBFC become an underwriter?", a: "Yes, if it meets eligibility and obtains SEBI approval." },
-                    { q: "Can a startup apply for underwriting licence ?", a: "Yes, but only if it meets financial and compliance criteria." },
-                    { q: "Is experience required for registration?", a: "Yes, experienced personnel in capital markets are expected." },
-                    { q: "What is “fit and proper” criteria?", a: "It includes integrity, financial soundness, and clean track record." },
-                    { q: "Can LLP apply for underwriting registration?", a: "Practically, companies are preferred due to regulatory expectations." },
+    const faqs = [
+        { q: "What is SEBI Underwriter Registration in India?", a: "It is SEBI registration for eligible entities that undertake underwriting obligations in securities issuances." },
+        { q: "Is SEBI registration mandatory for underwriting?", a: "Yes. A person cannot act as an underwriter in India without SEBI registration, unless specifically exempt under applicable law." },
+        { q: "Who regulates underwriters in India?", a: "Underwriters are regulated by the Securities and Exchange Board of India." },
+        { q: "What does an underwriter do?", a: "An underwriter commits to subscribe to securities if an issue is not fully subscribed, subject to the underwriting agreement." },
+        { q: "Does registration guarantee business from issuers?", a: "No. Registration permits the regulated activity, but business depends on issuer relationships, capability and market conditions." },
     ];
 
     return (
         <ServicePageLayout
-            tags={[{ emoji: "📈", label: "SEBI" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
+            tags={[{ emoji: "📈", label: "SEBI" }, { emoji: "📋", label: "Capital Market Intermediary" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "SEBI Services", href: "/sebi" }, { label: "Underwriter Registration" }]}
-            title="SEBI Underwriter Registration in India: Complete Guide, Eligibility, Process & Compliance"
-            readTime="15 min read"
-            focusKeyword="Regulatory Compliance"
+            title="SEBI Underwriter Registration in India: Eligibility, Process and Compliance Guide"
+            readTime="12 min read"
+            focusKeyword="SEBI Underwriter Registration in India"
             sections={sections}
-            ctaTitle="Need Expert Help with Underwriter Registration?"
-            ctaDescription="Our regulatory compliance experts provide end-to-end guidance for Regulatory Compliance."
+            ctaTitle="Need SEBI Underwriter Registration Support?"
+            ctaDescription="Get structured assistance for eligibility review, net worth documentation, SEBI application preparation, policy drafting and query response."
             quickFacts={quickFacts}
             relatedArticles={[
-                { href: "/rbi/nbfc-account-aggregator-license", category: "RBI", title: "NBFC Account Aggregator License", description: "Complete RBI registration guide for NBFC-AA." },
-                { href: "/ifsca/psp-license-ifsca", category: "IFSCA", title: "PSP License IFSCA", description: "Payment services provider license guide." },
-                { href: "/regulatory/finance-company-gift-ifsc", category: "IFSCA", title: "Finance Company GIFT IFSC", description: "Setting up a Finance Company in GIFT City." }
+                { href: "/sebi/rta-registration-in-india", category: "SEBI", title: "RTA Registration", description: "Related SEBI intermediary framework for issue and investor records." },
+                { href: "/sebi/stock-broker-registration-in-india", category: "SEBI", title: "Stock Broker Registration", description: "SEBI and exchange-level registration for broking entities." },
+                { href: "/sebi/aif-registration-in-india", category: "SEBI", title: "AIF Registration", description: "SEBI registration guide for alternative investment funds." },
             ]}
-            finalCtaTitle="Ready to Get Started with Underwriter Registration?"
-            finalCtaDescription="Book a free consultation with our regulatory experts. We guide you through every step of the process."
+            finalCtaTitle="Prepare Your SEBI Underwriter Application with Discipline"
+            finalCtaDescription="Speak with Estabizz for eligibility assessment, documents, application support and post-registration compliance planning."
         >
             <h2 id="introduction">Introduction</h2>
-            <p>ation in India SEBI Underwriter Registration in India is a regulatory approval required for entities that intend to undertake underwriting activities in the Indian securities market, particularly in p</p>
+            <p>SEBI Underwriter Registration in India is required for eligible entities intending to undertake underwriting activities in securities issuances. Underwriting involves a financial commitment to subscribe to unsubscribed securities under an underwriting agreement, making it a regulated capital market activity requiring net worth strength, fit and proper status, documentation discipline and SEBI scrutiny.</p>
 
             <h2 id="what-is">What is Underwriter Registration</h2>
-            <p>This page provides comprehensive information about Regulatory Compliance including regulatory framework, eligibility criteria, documentation requirements, and step-by-step process.</p>
+            <p>Underwriter registration authorises an eligible applicant to act as an underwriter for public issues, rights issues or other securities issuances where underwriting is permitted. The underwriter assumes subscription risk and must maintain records, agreements, books of account and compliance controls as prescribed.</p>
 
-            <h2 id="regulatory-framework">Regulatory Framework</h2>
+            <h2 id="regulatory-framework">SEBI Framework</h2>
             <div className="info-box">
-                <p>This service falls under the regulatory jurisdiction of SEBI. Compliance with all applicable regulations is mandatory.</p>
+                <p>The framework is governed by SEBI regulations for underwriters, the SEBI Act, 1992, SEBI Intermediaries Regulations, 2008 and applicable circulars or schedules as amended from time to time. Fee amounts and net worth requirements should be verified from the latest official SEBI schedule before filing.</p>
             </div>
 
-            <h2 id="who-needs">Who Needs This Service</h2>
-            <p>Businesses and individuals who require Regulatory Compliance include entities operating in the regulated financial services sector.</p>
+            <h2 id="who-needs">Who Needs Registration</h2>
+            <ul>
+                <li>Entities planning to underwrite securities issues</li>
+                <li>Financial institutions entering capital market underwriting activity</li>
+                <li>Merchant banking or securities market groups adding underwriting capability</li>
+                <li>Companies intending to participate in issue subscription risk arrangements</li>
+            </ul>
 
             <h2 id="eligibility">Eligibility Criteria</h2>
-            <p>Eligibility requirements are defined by the relevant regulatory authority. Key criteria include entity type, capital requirements, and fit & proper standards for directors/promoters.</p>
+            <ul>
+                <li>Applicant should be an eligible legal entity permitted under the SEBI framework</li>
+                <li>Promoters, directors and key persons should satisfy fit and proper criteria</li>
+                <li>Prescribed net worth and financial soundness must be maintained</li>
+                <li>Adequate infrastructure, experienced personnel and internal controls are expected</li>
+                <li>The applicant should have proper books, records and compliance systems</li>
+            </ul>
 
             <h2 id="documents">Documents Required</h2>
             <ul>
-                <li>Certificate of Incorporation</li>
-                <li>Memorandum and Articles of Association</li>
-                <li>Net Worth Certificate (CA certified)</li>
-                <li>Business Plan</li>
-                <li>KYC documents for Directors</li>
-                <li>Board Resolution</li>
+                <li>Incorporation documents, MOA, AOA and PAN</li>
+                <li>Board resolution approving SEBI underwriter application</li>
+                <li>Net worth certificate and audited financial statements</li>
+                <li>Promoter, director and key person KYC with fit and proper declarations</li>
+                <li>Business plan, underwriting risk policy and internal control framework</li>
+                <li>Infrastructure details, compliance officer details and prescribed declarations</li>
             </ul>
 
             <h2 id="process">Registration Process</h2>
             <div className="step-timeline">
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Preparation & Documentation</h4><p className="text-[13px] text-[#64748b] !mb-0">Gather all required documents and ensure eligibility criteria are met.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Application Filing</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit the complete application to the regulatory authority with supporting documents.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Regulatory Review</h4><p className="text-[13px] text-[#64748b] !mb-0">The regulatory authority reviews the application and may seek clarifications.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Approval & Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Upon approval, set up compliance framework and begin operations.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Eligibility Review</h4><p className="text-[13px] text-[#64748b] !mb-0">Review legal structure, net worth, fit and proper status and business plan.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Documentation</h4><p className="text-[13px] text-[#64748b] !mb-0">Prepare forms, declarations, policies, financial records and supporting documents.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>SEBI Filing and Review</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit application and respond to SEBI observations or clarifications.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Certificate and Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Complete fee payment, registration formalities and ongoing compliance setup.</p></div></div>
             </div>
 
-            <h2 id="fees">Fees Structure</h2>
+            <h2 id="fees">Fees and Net Worth</h2>
             <div className="overflow-x-auto my-6">
                 <table className="data-table">
-                    <thead><tr><th>Particulars</th><th>Amount</th><th>Remarks</th></tr></thead>
+                    <thead><tr><th>Particular</th><th>Position</th><th>Verification Note</th></tr></thead>
                     <tbody>
-                        <tr><td>Regulatory Application Fee</td><td>As prescribed</td><td>Non-refundable</td></tr>
-                        <tr><td>Professional/Advisory Fees</td><td>Variable</td><td>Depends on scope</td></tr>
-                        <tr><td>Compliance Setup Cost</td><td>Variable</td><td>One-time</td></tr>
+                        <tr><td>Application fee</td><td>As prescribed by SEBI</td><td>Verify latest SEBI fee schedule</td></tr>
+                        <tr><td>Registration fee</td><td>As prescribed by SEBI</td><td>Payable subject to approval stage</td></tr>
+                        <tr><td>Net worth</td><td>Prescribed under applicable framework</td><td>Verify latest official regulation before filing</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <h2 id="timeline">Timeline</h2>
-            <div className="overflow-x-auto my-6">
-                <table className="data-table">
-                    <thead><tr><th>Stage</th><th>Estimated Time</th><th>Notes</th></tr></thead>
-                    <tbody>
-                        <tr><td>Document Preparation</td><td>2–4 weeks</td><td>Depends on complexity</td></tr>
-                        <tr><td>Regulatory Review</td><td>3–6 months</td><td>Case-by-case</td></tr>
-                        <tr><td>Approval</td><td>1–2 months</td><td>After compliance confirmation</td></tr>
-                    </tbody>
-                </table>
-            </div>
+            <p>The registration timeline is indicative and may range from a few months depending on documentation quality, SEBI scrutiny, query rounds, net worth readiness and application facts. No approval timeline should be treated as guaranteed.</p>
 
-            <h2 id="compliance">Compliance Requirements</h2>
-            <p>Post-registration compliance is critical to maintain the license/registration in good standing.</p>
+            <h2 id="compliance">Post-Registration Compliance</h2>
             <ul>
-                <li>Regular filings and returns</li>
-                <li>Governance and board oversight</li>
-                <li>Annual audit and reporting</li>
-                <li>KYC/AML compliance</li>
-                <li>Customer grievance redressal</li>
+                <li>Maintain prescribed net worth and fit and proper status</li>
+                <li>Execute proper underwriting agreements</li>
+                <li>Maintain books, records and issue-wise underwriting documents</li>
+                <li>Submit reports and information as required by SEBI</li>
+                <li>Cooperate with inspection, inquiry or regulatory review</li>
             </ul>
 
-            <h2 id="faq">Frequently Asked Questions (FAQs)</h2>
-            {faqs.length > 0 ? (
+            <div className="disclaimer-box">
+                <strong>Disclaimer:</strong> This content is for general information only and should not be treated as legal or regulatory advice. SEBI requirements, forms, fees and eligibility norms may change from time to time.
+            </div>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
             <div className="space-y-3 my-6">
                 {faqs.map((item, i) => (
                     <details key={i} className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
                         <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]">
-                            <span>{item.q}</span>
-                            <span className="text-[#0096D6] transition-transform group-open:rotate-180 shrink-0 ml-4">▼</span>
+                            <span>{item.q}</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span>
                         </summary>
-                        <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151] leading-relaxed">
-                            {item.a}
-                        </div>
+                        <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151] leading-relaxed">{item.a}</div>
                     </details>
                 ))}
             </div>
-            ) : (
-            <div className="info-box"><p>Detailed FAQs will be added shortly. Contact us for specific queries about Regulatory Compliance.</p></div>
-            )}
         </ServicePageLayout>
     );
 }

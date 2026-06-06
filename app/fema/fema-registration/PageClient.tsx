@@ -34,7 +34,7 @@ export default function PageClient() {
             focusKeyword="FEMA Registration in India"
             sections={sections}
             ctaTitle="Need Expert Help with Fema Registration?"
-            ctaDescription="Our regulatory compliance experts provide end-to-end guidance for FEMA Registration in India."
+            ctaDescription="Estabizz provides structured advisory, documentation and compliance support for FEMA Registration in India."
             quickFacts={quickFacts}
             relatedArticles={[
                 { href: "/rbi/nbfc-account-aggregator-license", category: "RBI", title: "NBFC Account Aggregator License", description: "Complete RBI registration guide for NBFC-AA." },
@@ -42,76 +42,111 @@ export default function PageClient() {
                 { href: "/regulatory/finance-company-gift-ifsc", category: "IFSCA", title: "Finance Company GIFT IFSC", description: "Setting up a Finance Company in GIFT City." }
             ]}
             finalCtaTitle="Ready to Get Started with Fema Registration?"
-            finalCtaDescription="Book a free consultation with our regulatory experts. We guide you through every step of the process."
+            finalCtaDescription="Speak with Estabizz to evaluate applicability, documentation gaps, timeline and compliance readiness before proceeding."
         >
             <h2 id="introduction">Introduction</h2>
-            <p>is a critical compliance requirement for businesses and individuals dealing with foreign investments, cross-border transactions, or overseas remittances. From a regulatory standpoint, FEMA ensures tha</p>
+            <p>FEMA Registration in India is required where a business or individual undertakes a foreign exchange transaction, inbound investment, outbound investment, external commercial borrowing, compounding, reporting or other cross-border compliance activity that must be documented under the Foreign Exchange Management Act, 1999. A clean FEMA filing approach helps avoid avoidable bank queries, late fees and regulatory complications.</p>
+            <p>Estabizz assists clients with practical regulatory interpretation, documentation, filing readiness and post-approval compliance planning. Approval, registration or acceptance always remains subject to the applicable regulator, exchange, authority or reviewing institution.</p>
 
-            <h2 id="what-is">What is Fema Registration</h2>
-            <p>This page provides comprehensive information about FEMA Registration in India including regulatory framework, eligibility criteria, documentation requirements, and step-by-step process.</p>
+            <h2 id="what-is">What is FEMA Registration in India?</h2>
+            <p>FEMA Registration in India is a specialised compliance and advisory area that must be evaluated according to the applicant's legal structure, business model, documentation quality and applicable regulatory framework. In simple terms, it helps the applicant operate, report or structure the activity with clearer regulatory evidence.</p>
 
             <h2 id="regulatory-framework">Regulatory Framework</h2>
-            <div className="info-box">
-                <p>This service falls under the regulatory jurisdiction of FEMA. Compliance with all applicable regulations is mandatory.</p>
+            <div className="overflow-x-auto my-6">
+                <table className="data-table">
+                    <thead><tr><th>Particular</th><th>Details</th></tr></thead>
+                    <tbody>
+                        <tr><td>Regulator / Authority</td><td>Reserve Bank of India and authorised dealer bank framework under FEMA</td></tr>
+                        <tr><td>Applicable framework</td><td>Foreign Exchange Management Act, 1999, RBI directions, authorised dealer bank process and applicable FEMA rules / regulations.</td></tr>
+                        <tr><td>Regulatory approach</td><td>Requirements must be verified from latest law, circulars, directions, portal process and regulator guidance before filing.</td></tr>
+                        <tr><td>Approval position</td><td>Subject to regulatory scrutiny, documentation quality and applicable eligibility.</td></tr>
+                    </tbody>
+                </table>
             </div>
 
-            <h2 id="who-needs">Who Needs This Service</h2>
-            <p>Businesses and individuals who require FEMA Registration in India include entities operating in the regulated financial services sector.</p>
+            <h2 id="who-needs">Who Needs This Service?</h2>
+            <p>Indian companies receiving foreign investment, entities making overseas investment, businesses handling ECB, exporters, importers, foreign shareholders and Indian residents undertaking regulated foreign exchange transactions should evaluate FEMA registration and reporting requirements before execution.</p>
 
             <h2 id="eligibility">Eligibility Criteria</h2>
-            <p>Eligibility requirements are defined by the relevant regulatory authority. Key criteria include entity type, capital requirements, and fit & proper standards for directors/promoters.</p>
+            <div className="overflow-x-auto my-6">
+                <table className="data-table">
+                    <thead><tr><th>Criteria</th><th>Requirement</th><th>Practical Note</th></tr></thead>
+                    <tbody>
+                        <tr><td>Applicant type</td><td>Company, LLP, resident individual, foreign investor or other eligible person</td><td>Depends on the specific FEMA transaction</td></tr>
+                        <tr><td>Authorised dealer bank</td><td>Required for most FEMA reporting and banking validations</td><td>Bank-level scrutiny is often detailed</td></tr>
+                        <tr><td>Transaction documents</td><td>Commercial, investment, valuation and remittance records</td><td>Documents must match the actual transaction</td></tr>
+                        <tr><td>Regulatory status</td><td>No unresolved contravention for the same transaction, unless being regularised</td><td>Compounding may be required in some cases</td></tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h2 id="documents">Documents Required</h2>
-            <ul>
-                <li>Certificate of Incorporation</li>
-                <li>Memorandum and Articles of Association</li>
-                <li>Net Worth Certificate (CA certified)</li>
-                <li>Business Plan</li>
-                <li>KYC documents for Directors</li>
-                <li>Board Resolution</li>
-            </ul>
+            <div className="overflow-x-auto my-6">
+                <table className="data-table">
+                    <thead><tr><th>Document</th><th>Purpose</th><th>Practical Note</th></tr></thead>
+                    <tbody>
+                        <tr><td>Entity incorporation documents and PAN</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Board resolution or partner approval, where applicable</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>FIRC, KYC and remittance documents</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Share valuation certificate, pricing note or transaction agreement</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>FEMA forms / filings relevant to the transaction</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Authorised dealer bank correspondence</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Auditor / CA certificate, if applicable</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Declaration, undertaking and supporting legal note</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <h2 id="process">Registration Process</h2>
+            <h2 id="process">Registration / Advisory Process</h2>
             <div className="step-timeline">
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Preparation & Documentation</h4><p className="text-[13px] text-[#64748b] !mb-0">Gather all required documents and ensure eligibility criteria are met.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Application Filing</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit the complete application to the regulatory authority with supporting documents.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Regulatory Review</h4><p className="text-[13px] text-[#64748b] !mb-0">The regulatory authority reviews the application and may seek clarifications.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Approval & Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Upon approval, set up compliance framework and begin operations.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Applicability and Scope Review</h4><p className="text-[13px] text-[#64748b] !mb-0">Confirm whether the activity, transaction or business model falls under the relevant framework.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Document Gap Assessment</h4><p className="text-[13px] text-[#64748b] !mb-0">Review records, approvals, policies and supporting evidence before drafting.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Application / Note Preparation</h4><p className="text-[13px] text-[#64748b] !mb-0">Prepare forms, checklists, policies, explanations and supporting documents as applicable.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Filing, Review and Query Support</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit through the prescribed process and respond to regulator, bank, auditor or authority queries.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 5</div><h4>Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Maintain records, calendars, policies and evidence for future review or inspection.</p></div></div>
             </div>
 
-            <h2 id="fees">Fees Structure</h2>
+            <h2 id="fees">Fees and Cost Overview</h2>
             <div className="overflow-x-auto my-6">
                 <table className="data-table">
-                    <thead><tr><th>Particulars</th><th>Amount</th><th>Remarks</th></tr></thead>
+                    <thead><tr><th>Particular</th><th>Amount / Position</th><th>Verification Note</th></tr></thead>
                     <tbody>
-                        <tr><td>Regulatory Application Fee</td><td>As prescribed</td><td>Non-refundable</td></tr>
-                        <tr><td>Professional/Advisory Fees</td><td>Variable</td><td>Depends on scope</td></tr>
-                        <tr><td>Compliance Setup Cost</td><td>Variable</td><td>One-time</td></tr>
+                        <tr><td>Government / RBI fee</td><td>As applicable to the specific filing or compounding matter</td><td>To be verified from the latest official schedule</td></tr>
+                        <tr><td>AD bank charges</td><td>As per bank process</td><td>Bank charges vary</td></tr>
+                        <tr><td>Professional fees</td><td>Depends on transaction complexity</td><td>Quoted after document review</td></tr>
                     </tbody>
                 </table>
             </div>
 
-            <h2 id="timeline">Timeline</h2>
+            <h2 id="timeline">Indicative Timeline</h2>
             <div className="overflow-x-auto my-6">
                 <table className="data-table">
-                    <thead><tr><th>Stage</th><th>Estimated Time</th><th>Notes</th></tr></thead>
+                    <thead><tr><th>Stage</th><th>Indicative Timeline</th><th>Practical Note</th></tr></thead>
                     <tbody>
-                        <tr><td>Document Preparation</td><td>2–4 weeks</td><td>Depends on complexity</td></tr>
-                        <tr><td>Regulatory Review</td><td>3–6 months</td><td>Case-by-case</td></tr>
-                        <tr><td>Approval</td><td>1–2 months</td><td>After compliance confirmation</td></tr>
+                        <tr><td>Document review</td><td>3 to 7 working days</td><td>Depends on availability of bank and transaction records</td></tr>
+                        <tr><td>Filing / bank submission</td><td>1 to 2 weeks</td><td>Subject to form and portal readiness</td></tr>
+                        <tr><td>Bank / regulator review</td><td>Case-specific</td><td>Queries may extend timeline</td></tr>
                     </tbody>
                 </table>
             </div>
+            <div className="info-box"><p>Timelines are indicative and depend on documentation quality, authority review, portal availability, query rounds and business-specific facts.</p></div>
 
             <h2 id="compliance">Compliance Requirements</h2>
-            <p>Post-registration compliance is critical to maintain the license/registration in good standing.</p>
             <ul>
-                <li>Regular filings and returns</li>
-                <li>Governance and board oversight</li>
-                <li>Annual audit and reporting</li>
-                <li>KYC/AML compliance</li>
-                <li>Customer grievance redressal</li>
+                <li>Maintain transaction-wise FEMA records and bank acknowledgements</li>
+                <li>Track reporting deadlines for FDI, ODI, ECB and other filings</li>
+                <li>Keep valuation, board approval and remittance documents aligned</li>
+                <li>Respond to authorised dealer bank queries with proper evidence</li>
+                <li>Review compounding exposure where delayed filing or contravention exists</li>
             </ul>
+            <h3>Common Mistakes to Avoid</h3>
+            <ul>
+                <li>Using copied documents without matching the actual business model.</li>
+                <li>Submitting inconsistent financial, legal or operational information.</li>
+                <li>Ignoring post-registration or post-filing compliance requirements.</li>
+                <li>Missing authority queries, renewal timelines or reporting deadlines.</li>
+            </ul>
+            <div className="info-box"><p>This content is for general informational purposes only and should not be treated as legal, regulatory, tax, investment or financial advice. Requirements may change from time to time and should be verified from the latest official framework before taking action.</p></div>
 
             <h2 id="faq">Frequently Asked Questions (FAQs)</h2>
             {faqs.length > 0 ? (
@@ -129,7 +164,7 @@ export default function PageClient() {
                 ))}
             </div>
             ) : (
-            <div className="info-box"><p>Detailed FAQs will be added shortly. Contact us for specific queries about FEMA Registration in India.</p></div>
+            <div className="info-box"><p>For additional questions, please contact Estabizz for a service-specific clarification.</p></div>
             )}
         </ServicePageLayout>
     );

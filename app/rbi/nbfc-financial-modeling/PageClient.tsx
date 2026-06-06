@@ -423,7 +423,7 @@ export default function PageClient() {
                     <h3>Why NBFC Financial Modelling Fails in Practice</h3>
                     <p><strong>Common real-world issues:</strong></p>
                     <ul>
-                        <li>Promoters copy generic templates</li>
+                        <li>Promoters copy standard templates</li>
                         <li>No understanding of lending cycle</li>
                         <li>No linkage between disbursement and recovery</li>
                         <li>Ignoring regulatory ratios</li>

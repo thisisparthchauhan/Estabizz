@@ -226,7 +226,7 @@ export default function NBFCBusinessPlanClient() {
                 <li>Competitive landscape analysis with differentiation strategy</li>
             </ul>
             <div className="success-box">
-                <strong>✅ Best Practice:</strong> RBI gives higher credibility to business plans that demonstrate a niche market focus with deep understanding of the target segment, rather than broad, generic lending strategies that try to serve all customer types simultaneously.
+                <strong>✅ Best Practice:</strong> RBI gives higher credibility to business plans that demonstrate a niche market focus with deep understanding of the target segment, rather than broad, broad lending strategies that try to serve all customer types simultaneously.
             </div>
 
             <h2 id="product-portfolio">Product Portfolio Design</h2>

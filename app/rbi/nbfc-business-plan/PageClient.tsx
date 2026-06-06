@@ -224,7 +224,7 @@ export default function PageClient() {
                     <p>👉 RBI increasingly rejects applications where the business plan lacks depth or appears templated.</p>
                     <h3>Common Mistakes to Avoid</h3>
                     <ul>
-                        <li>Using generic templates without customization</li>
+                        <li>Using standard templates without customization</li>
                         <li>Ignoring RBI&apos;s risk expectations</li>
                         <li>Overstating revenue projections</li>
                         <li>Not defining target customer segment</li>

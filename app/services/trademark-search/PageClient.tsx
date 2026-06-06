@@ -3,134 +3,128 @@ import ServicePageLayout from "@/components/templates/ServicePageLayout";
 
 export default function PageClient() {
     const sections = [
-    { id: "introduction", title: "1. Introduction" },
-    { id: "what-is", title: "2. What Is" },
-    { id: "regulatory-framework", title: "3. Regulatory Framework" },
-    { id: "who-needs", title: "4. Who Needs" },
-    { id: "eligibility", title: "5. Eligibility Criteria" },
-    { id: "documents", title: "6. Documents Required" },
-    { id: "process", title: "7. Registration Process" },
-    { id: "fees", title: "8. Fees Structure" },
-    { id: "timeline", title: "9. Timeline" },
-    { id: "compliance", title: "10. Compliance Requirements" },
-    { id: "faq", title: "11. FAQs" }
+        { id: "introduction", title: "Introduction" },
+        { id: "what-is", title: "What is Trademark Search" },
+        { id: "regulatory-framework", title: "Legal Framework" },
+        { id: "who-needs", title: "Who Should Search" },
+        { id: "documents", title: "Information Required" },
+        { id: "process", title: "Search Process" },
+        { id: "fees", title: "Fees and Scope" },
+        { id: "timeline", title: "Timeline" },
+        { id: "compliance", title: "Common Mistakes" },
+        { id: "faq", title: "FAQs" },
     ];
 
     const quickFacts = [
-        { label: "Regulator", value: "IP" },
-        { label: "Service Type", value: "Trademark Search" },
-        { label: "Updated", value: "2026" },
-        { label: "Expert Review", value: "✓ Verified" },
+        { label: "Authority", value: "Trademark Registry, India" },
+        { label: "Law", value: "Trade Marks Act, 1999" },
+        { label: "Service Type", value: "Trademark availability and conflict search" },
+        { label: "Review", value: "Expert reviewed" },
     ];
 
-    const faqs: { q: string; a: string }[] = [];
+    const faqs = [
+        { q: "What is Trademark Search India?", a: "Trademark Search India is a pre-filing review to check whether a proposed brand name, logo or mark conflicts with existing or pending trademarks." },
+        { q: "Is trademark search mandatory before filing?", a: "It is not a separate statutory filing, but it is strongly recommended before applying to reduce objection and opposition risk." },
+        { q: "Which authority handles trademark registration in India?", a: "Trademark applications are handled by the Indian Trademark Registry under the Controller General of Patents, Designs and Trade Marks." },
+        { q: "Can a similar trademark be rejected?", a: "Yes. A mark may face objection or opposition if it is identical or deceptively similar to an earlier mark in the same or related class." },
+        { q: "Does search guarantee registration?", a: "No. Search reduces risk, but registration remains subject to examination, objections, opposition and legal review." },
+    ];
 
     return (
         <ServicePageLayout
-            tags={[{ emoji: "™️", label: "IP" }, { emoji: "📋", label: "Complete Guide" }, { emoji: "✅", label: "Expert Reviewed" }]}
+            tags={[{ emoji: "™️", label: "Trademark" }, { emoji: "🔎", label: "Brand Search" }, { emoji: "✅", label: "Expert Reviewed" }]}
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Trademark Search" }]}
-            title="Trademark Search India: Essential Tips to Avoid Costly Trademark Mistakes"
-            readTime="15 min read"
+            title="Trademark Search India: Complete Guide to Check Brand Availability Before Filing"
+            readTime="10 min read"
             focusKeyword="Trademark Search India"
             sections={sections}
-            ctaTitle="Need Expert Help with Trademark Search?"
-            ctaDescription="Our regulatory compliance experts provide end-to-end guidance for Trademark Search India."
+            ctaTitle="Need Help Checking Your Trademark?"
+            ctaDescription="Get a structured trademark availability review before filing your brand name, logo or device mark application."
             quickFacts={quickFacts}
             relatedArticles={[
-                { href: "/rbi/nbfc-account-aggregator-license", category: "RBI", title: "NBFC Account Aggregator License", description: "Complete RBI registration guide for NBFC-AA." },
-                { href: "/ifsca/psp-license-ifsca", category: "IFSCA", title: "PSP License IFSCA", description: "Payment services provider license guide." },
-                { href: "/regulatory/finance-company-gift-ifsc", category: "IFSCA", title: "Finance Company GIFT IFSC", description: "Setting up a Finance Company in GIFT City." }
+                { href: "/services/enterprise-services", category: "Corporate", title: "Company Incorporation", description: "Start your business with proper legal and governance documentation." },
+                { href: "/services/legal-due-diligence", category: "Legal", title: "Legal Due Diligence", description: "Review legal risks before transactions, investment or expansion." },
+                { href: "/contact", category: "Support", title: "Speak to Estabizz", description: "Discuss your trademark and brand protection requirement." },
             ]}
-            finalCtaTitle="Ready to Get Started with Trademark Search?"
-            finalCtaDescription="Book a free consultation with our regulatory experts. We guide you through every step of the process."
+            finalCtaTitle="Protect Your Brand Before You File"
+            finalCtaDescription="Speak with Estabizz for trademark search, class identification, filing support, objection response and brand documentation."
         >
             <h2 id="introduction">Introduction</h2>
-            <p>rk Search India – Powerful & Complete Guide to Check Trademark Availability Before Registration Trademark Search India is the first and most critical step before filing any trademark application in In</p>
+            <p>Trademark Search India is the first practical step before filing a trademark application for a brand name, logo, tagline or device mark. A proper search helps identify identical or similar marks, class conflicts, phonetic similarity and possible objection risk before the applicant spends time and money on filing.</p>
 
             <h2 id="what-is">What is Trademark Search</h2>
-            <p>This page provides comprehensive information about Trademark Search India including regulatory framework, eligibility criteria, documentation requirements, and step-by-step process.</p>
+            <p>A trademark search compares a proposed mark against existing and pending marks on the Trademark Registry database. It should also consider spelling variations, phonetic similarity, class relevance, business activity and market usage. The purpose is not only to find exact matches but to assess whether the proposed mark is likely to face objection or opposition.</p>
 
-            <h2 id="regulatory-framework">Regulatory Framework</h2>
+            <h2 id="regulatory-framework">Legal Framework</h2>
             <div className="info-box">
-                <p>This service falls under the regulatory jurisdiction of IP. Compliance with all applicable regulations is mandatory.</p>
+                <p>Trademark matters in India are governed by the Trade Marks Act, 1999, Trade Marks Rules, 2017 and practice followed by the Indian Trademark Registry. Classification is generally based on the Nice Classification system.</p>
             </div>
 
-            <h2 id="who-needs">Who Needs This Service</h2>
-            <p>Businesses and individuals who require Trademark Search India include entities operating in the regulated financial services sector.</p>
-
-            <h2 id="eligibility">Eligibility Criteria</h2>
-            <p>Eligibility requirements are defined by the relevant regulatory authority. Key criteria include entity type, capital requirements, and fit & proper standards for directors/promoters.</p>
-
-            <h2 id="documents">Documents Required</h2>
+            <h2 id="who-needs">Who Should Search</h2>
             <ul>
-                <li>Certificate of Incorporation</li>
-                <li>Memorandum and Articles of Association</li>
-                <li>Net Worth Certificate (CA certified)</li>
-                <li>Business Plan</li>
-                <li>KYC documents for Directors</li>
-                <li>Board Resolution</li>
+                <li>Startups finalising a new brand name</li>
+                <li>Companies launching a product, app, platform or service line</li>
+                <li>Founders checking name availability before incorporation or fundraising</li>
+                <li>Businesses expanding into new trademark classes</li>
+                <li>Applicants who received an objection and want risk review</li>
             </ul>
 
-            <h2 id="process">Registration Process</h2>
+            <h2 id="documents">Information Required</h2>
+            <ul>
+                <li>Proposed brand name, logo or tagline</li>
+                <li>Business activity and product or service description</li>
+                <li>Preferred trademark class, if already identified</li>
+                <li>Applicant details, if filing support is also required</li>
+                <li>Website, product deck or brand usage material, where available</li>
+            </ul>
+
+            <h2 id="process">Search Process</h2>
             <div className="step-timeline">
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Preparation & Documentation</h4><p className="text-[13px] text-[#64748b] !mb-0">Gather all required documents and ensure eligibility criteria are met.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Application Filing</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit the complete application to the regulatory authority with supporting documents.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Regulatory Review</h4><p className="text-[13px] text-[#64748b] !mb-0">The regulatory authority reviews the application and may seek clarifications.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Approval & Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Upon approval, set up compliance framework and begin operations.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Brand and Class Mapping</h4><p className="text-[13px] text-[#64748b] !mb-0">Understand the mark, business activity and relevant trademark class.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Registry Search</h4><p className="text-[13px] text-[#64748b] !mb-0">Check exact, similar, phonetic and class-wise conflicts on the public database.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Risk Review</h4><p className="text-[13px] text-[#64748b] !mb-0">Assess objection, opposition and brand confusion risk.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Filing Recommendation</h4><p className="text-[13px] text-[#64748b] !mb-0">Recommend filing, modification or alternate brand strategy.</p></div></div>
             </div>
 
-            <h2 id="fees">Fees Structure</h2>
+            <h2 id="fees">Fees and Scope</h2>
             <div className="overflow-x-auto my-6">
                 <table className="data-table">
-                    <thead><tr><th>Particulars</th><th>Amount</th><th>Remarks</th></tr></thead>
+                    <thead><tr><th>Service</th><th>Position</th><th>Note</th></tr></thead>
                     <tbody>
-                        <tr><td>Regulatory Application Fee</td><td>As prescribed</td><td>Non-refundable</td></tr>
-                        <tr><td>Professional/Advisory Fees</td><td>Variable</td><td>Depends on scope</td></tr>
-                        <tr><td>Compliance Setup Cost</td><td>Variable</td><td>One-time</td></tr>
+                        <tr><td>Trademark search</td><td>Professional fee depends on scope</td><td>Class-wise and conflict-depth based</td></tr>
+                        <tr><td>Government fee</td><td>No government fee for search</td><td>Government fee applies at filing stage</td></tr>
+                        <tr><td>Trademark filing</td><td>As per latest official fee schedule</td><td>Applicant category affects fee</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <h2 id="timeline">Timeline</h2>
-            <div className="overflow-x-auto my-6">
-                <table className="data-table">
-                    <thead><tr><th>Stage</th><th>Estimated Time</th><th>Notes</th></tr></thead>
-                    <tbody>
-                        <tr><td>Document Preparation</td><td>2–4 weeks</td><td>Depends on complexity</td></tr>
-                        <tr><td>Regulatory Review</td><td>3–6 months</td><td>Case-by-case</td></tr>
-                        <tr><td>Approval</td><td>1–2 months</td><td>After compliance confirmation</td></tr>
-                    </tbody>
-                </table>
-            </div>
+            <p>A basic trademark availability search may be completed within 1 to 2 working days. A detailed risk note with class mapping and filing recommendation may take 2 to 4 working days depending on brand complexity and number of classes.</p>
 
-            <h2 id="compliance">Compliance Requirements</h2>
-            <p>Post-registration compliance is critical to maintain the license/registration in good standing.</p>
+            <h2 id="compliance">Common Mistakes</h2>
             <ul>
-                <li>Regular filings and returns</li>
-                <li>Governance and board oversight</li>
-                <li>Annual audit and reporting</li>
-                <li>KYC/AML compliance</li>
-                <li>Customer grievance redressal</li>
+                <li>Checking only exact spelling and ignoring phonetic similarity</li>
+                <li>Choosing the wrong trademark class</li>
+                <li>Copying a competitor's brand style or logo pattern</li>
+                <li>Filing without assessing existing pending applications</li>
+                <li>Assuming company name approval means trademark availability</li>
             </ul>
 
-            <h2 id="faq">Frequently Asked Questions (FAQs)</h2>
-            {faqs.length > 0 ? (
+            <div className="disclaimer-box">
+                <strong>Disclaimer:</strong> Trademark search is a risk assessment exercise and does not guarantee registration. Final acceptance depends on registry examination, third-party opposition, document quality and applicable law.
+            </div>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
             <div className="space-y-3 my-6">
                 {faqs.map((item, i) => (
                     <details key={i} className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
                         <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]">
-                            <span>{item.q}</span>
-                            <span className="text-[#0096D6] transition-transform group-open:rotate-180 shrink-0 ml-4">▼</span>
+                            <span>{item.q}</span><span className="text-[#0096D6] shrink-0 ml-4">▼</span>
                         </summary>
-                        <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151] leading-relaxed">
-                            {item.a}
-                        </div>
+                        <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151] leading-relaxed">{item.a}</div>
                     </details>
                 ))}
             </div>
-            ) : (
-            <div className="info-box"><p>Detailed FAQs will be added shortly. Contact us for specific queries about Trademark Search India.</p></div>
-            )}
         </ServicePageLayout>
     );
 }

@@ -455,7 +455,7 @@ export default function PageClient() {
                         <tr>
                             <td>Draft Offer Document</td>
                             <td>Scheme-specific investor disclosure document</td>
-                            <td>Must provide &quot;true and fair view&quot; — generic drafts rejected</td>
+                            <td>Must provide &quot;true and fair view&quot; — unsubstantiated drafts may be rejected</td>
                         </tr>
                     </tbody>
                 </table>

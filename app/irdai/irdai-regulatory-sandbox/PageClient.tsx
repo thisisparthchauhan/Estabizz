@@ -36,7 +36,7 @@ export default function PageClient() {
                     { q: "Is sandbox only for startups?", a: "No, it is open to: • Insurance companies • Intermediaries • Technology firms" },
                     { q: "What is the risk limitation in sandbox?", a: "Risk exposure is capped. IRDAI ensures consumer protection during testing." },
                     { q: "Can rejected applications be re-applied?", a: "Yes, applicants can reapply after addressing deficiencies." },
-                    { q: "What is the legal basis of sandbox?", a: "It is governed under IRDAI Regulatory Sandbox Regulations, as per applicable guidelines. Section 2: Eligibility & Applicability" },
+                    { q: "What is the legal basis of sandbox?", a: "It is governed under IRDAI Regulatory Sandbox Regulations, as per applicable guidelines." },
                     { q: "Can a fintech company apply for sandbox?", a: "Yes, if it has an insurance-linked innovation and meets IRDAI conditions." },
                     { q: "Can foreign companies apply for sandbox?", a: "Generally, applications must be routed through Indian entities." },
                     { q: "Is there any minimum capital requirement?", a: "It depends on the nature of the proposal. Financial capability must be demonstrated." },
@@ -48,7 +48,7 @@ export default function PageClient() {
                     { q: "Can NBFCs apply under sandbox?", a: "Yes, if the product involves insurance distribution or integration." },
                     { q: "Can digital-only insurance models apply?", a: "Yes, digital innovation is one of the key focus areas." },
                     { q: "Is sandbox open for health insurance innovations?", a: "Yes, all segments including life, general, and health are covered." },
-                    { q: "Can rejected applicants appeal?", a: "There is no formal appeal, but reapplication is allowed. Section 3: Registration Process" },
+                    { q: "Can rejected applicants appeal?", a: "There is no formal appeal, but reapplication is allowed." },
     ];
 
     return (
@@ -60,7 +60,7 @@ export default function PageClient() {
             focusKeyword="IRDAI Regulatory Sandbox in India"
             sections={sections}
             ctaTitle="Need Expert Help with Irdai Regulatory Sandbox?"
-            ctaDescription="Our regulatory compliance experts provide end-to-end guidance for IRDAI Regulatory Sandbox in India."
+            ctaDescription="Estabizz provides structured advisory, documentation and compliance support for IRDAI Regulatory Sandbox in India."
             quickFacts={quickFacts}
             relatedArticles={[
                 { href: "/rbi/nbfc-account-aggregator-license", category: "RBI", title: "NBFC Account Aggregator License", description: "Complete RBI registration guide for NBFC-AA." },
@@ -68,76 +68,111 @@ export default function PageClient() {
                 { href: "/regulatory/finance-company-gift-ifsc", category: "IFSCA", title: "Finance Company GIFT IFSC", description: "Setting up a Finance Company in GIFT City." }
             ]}
             finalCtaTitle="Ready to Get Started with Irdai Regulatory Sandbox?"
-            finalCtaDescription="Book a free consultation with our regulatory experts. We guide you through every step of the process."
+            finalCtaDescription="Speak with Estabizz to evaluate applicability, documentation gaps, timeline and compliance readiness before proceeding."
         >
             <h2 id="introduction">Introduction</h2>
-            <p>intermediaries, and InsurTech entities to test innovative insurance products, technologies, and business models in a controlled environment under the supervision of the Insurance Regulatory and Develo</p>
+            <p>IRDAI Regulatory Sandbox in India allows eligible insurance sector innovations to be tested in a controlled environment subject to IRDAI review. It is meant for genuine product, process, distribution, technology or service innovations that need limited regulatory relaxation or supervised testing before wider rollout.</p>
+            <p>Estabizz assists clients with practical regulatory interpretation, documentation, filing readiness and post-approval compliance planning. Approval, registration or acceptance always remains subject to the applicable regulator, exchange, authority or reviewing institution.</p>
 
-            <h2 id="what-is">What is Irdai Regulatory Sandbox</h2>
-            <p>This page provides comprehensive information about IRDAI Regulatory Sandbox in India including regulatory framework, eligibility criteria, documentation requirements, and step-by-step process.</p>
+            <h2 id="what-is">What is IRDAI Regulatory Sandbox in India?</h2>
+            <p>IRDAI Regulatory Sandbox in India is a specialised compliance and advisory area that must be evaluated according to the applicant's legal structure, business model, documentation quality and applicable regulatory framework. In simple terms, it helps the applicant operate, report or structure the activity with clearer regulatory evidence.</p>
 
             <h2 id="regulatory-framework">Regulatory Framework</h2>
-            <div className="info-box">
-                <p>This service falls under the regulatory jurisdiction of IRDAI. Compliance with all applicable regulations is mandatory.</p>
+            <div className="overflow-x-auto my-6">
+                <table className="data-table">
+                    <thead><tr><th>Particular</th><th>Details</th></tr></thead>
+                    <tbody>
+                        <tr><td>Regulator / Authority</td><td>Insurance Regulatory and Development Authority of India</td></tr>
+                        <tr><td>Applicable framework</td><td>IRDAI regulatory sandbox framework and applicable innovation testing circulars.</td></tr>
+                        <tr><td>Regulatory approach</td><td>Requirements must be verified from latest law, circulars, directions, portal process and regulator guidance before filing.</td></tr>
+                        <tr><td>Approval position</td><td>Subject to regulatory scrutiny, documentation quality and applicable eligibility.</td></tr>
+                    </tbody>
+                </table>
             </div>
 
-            <h2 id="who-needs">Who Needs This Service</h2>
-            <p>Businesses and individuals who require IRDAI Regulatory Sandbox in India include entities operating in the regulated financial services sector.</p>
+            <h2 id="who-needs">Who Needs This Service?</h2>
+            <p>Insurers, insurance intermediaries, insurtech startups, technology providers and insurance ecosystem participants with a clear innovation use case may evaluate sandbox participation, subject to IRDAI criteria and testing safeguards.</p>
 
             <h2 id="eligibility">Eligibility Criteria</h2>
-            <p>Eligibility requirements are defined by the relevant regulatory authority. Key criteria include entity type, capital requirements, and fit & proper standards for directors/promoters.</p>
+            <div className="overflow-x-auto my-6">
+                <table className="data-table">
+                    <thead><tr><th>Criteria</th><th>Requirement</th><th>Practical Note</th></tr></thead>
+                    <tbody>
+                        <tr><td>Innovation fit</td><td>Proposal must show genuine insurance-sector innovation</td><td>Routine business models may not qualify</td></tr>
+                        <tr><td>Consumer protection</td><td>Testing safeguards and grievance process required</td><td>Policyholder risk must be controlled</td></tr>
+                        <tr><td>Testing plan</td><td>Defined cohort, duration, metrics and exit plan</td><td>IRDAI reviews practicality</td></tr>
+                        <tr><td>Regulatory relaxation</td><td>Specific relaxation must be justified</td><td>Blanket exemption is not available</td></tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h2 id="documents">Documents Required</h2>
-            <ul>
-                <li>Certificate of Incorporation</li>
-                <li>Memorandum and Articles of Association</li>
-                <li>Net Worth Certificate (CA certified)</li>
-                <li>Business Plan</li>
-                <li>KYC documents for Directors</li>
-                <li>Board Resolution</li>
-            </ul>
+            <div className="overflow-x-auto my-6">
+                <table className="data-table">
+                    <thead><tr><th>Document</th><th>Purpose</th><th>Practical Note</th></tr></thead>
+                    <tbody>
+                        <tr><td>Sandbox application and innovation note</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Applicant incorporation / registration documents</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Testing plan, cohort details and risk controls</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Consumer consent and disclosure framework</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Technology and data security note</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Grievance redressal and exit plan</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Board / management approval</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Declarations and supporting documents</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <h2 id="process">Registration Process</h2>
+            <h2 id="process">Registration / Advisory Process</h2>
             <div className="step-timeline">
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Preparation & Documentation</h4><p className="text-[13px] text-[#64748b] !mb-0">Gather all required documents and ensure eligibility criteria are met.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Application Filing</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit the complete application to the regulatory authority with supporting documents.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Regulatory Review</h4><p className="text-[13px] text-[#64748b] !mb-0">The regulatory authority reviews the application and may seek clarifications.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Approval & Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Upon approval, set up compliance framework and begin operations.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Applicability and Scope Review</h4><p className="text-[13px] text-[#64748b] !mb-0">Confirm whether the activity, transaction or business model falls under the relevant framework.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Document Gap Assessment</h4><p className="text-[13px] text-[#64748b] !mb-0">Review records, approvals, policies and supporting evidence before drafting.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Application / Note Preparation</h4><p className="text-[13px] text-[#64748b] !mb-0">Prepare forms, checklists, policies, explanations and supporting documents as applicable.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Filing, Review and Query Support</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit through the prescribed process and respond to regulator, bank, auditor or authority queries.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 5</div><h4>Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Maintain records, calendars, policies and evidence for future review or inspection.</p></div></div>
             </div>
 
-            <h2 id="fees">Fees Structure</h2>
+            <h2 id="fees">Fees and Cost Overview</h2>
             <div className="overflow-x-auto my-6">
                 <table className="data-table">
-                    <thead><tr><th>Particulars</th><th>Amount</th><th>Remarks</th></tr></thead>
+                    <thead><tr><th>Particular</th><th>Amount / Position</th><th>Verification Note</th></tr></thead>
                     <tbody>
-                        <tr><td>Regulatory Application Fee</td><td>As prescribed</td><td>Non-refundable</td></tr>
-                        <tr><td>Professional/Advisory Fees</td><td>Variable</td><td>Depends on scope</td></tr>
-                        <tr><td>Compliance Setup Cost</td><td>Variable</td><td>One-time</td></tr>
+                        <tr><td>Application fee</td><td>As prescribed, if applicable</td><td>Verify latest IRDAI sandbox process</td></tr>
+                        <tr><td>Testing cost</td><td>Project-specific</td><td>Technology and operational cost may apply</td></tr>
+                        <tr><td>Professional fees</td><td>Scope-based</td><td>Depends on proposal depth</td></tr>
                     </tbody>
                 </table>
             </div>
 
-            <h2 id="timeline">Timeline</h2>
+            <h2 id="timeline">Indicative Timeline</h2>
             <div className="overflow-x-auto my-6">
                 <table className="data-table">
-                    <thead><tr><th>Stage</th><th>Estimated Time</th><th>Notes</th></tr></thead>
+                    <thead><tr><th>Stage</th><th>Indicative Timeline</th><th>Practical Note</th></tr></thead>
                     <tbody>
-                        <tr><td>Document Preparation</td><td>2–4 weeks</td><td>Depends on complexity</td></tr>
-                        <tr><td>Regulatory Review</td><td>3–6 months</td><td>Case-by-case</td></tr>
-                        <tr><td>Approval</td><td>1–2 months</td><td>After compliance confirmation</td></tr>
+                        <tr><td>Innovation assessment</td><td>1 to 2 weeks</td><td>Use case clarity is important</td></tr>
+                        <tr><td>Application preparation</td><td>2 to 4 weeks</td><td>Testing safeguards needed</td></tr>
+                        <tr><td>IRDAI review</td><td>Case-specific</td><td>Subject to sandbox window and queries</td></tr>
                     </tbody>
                 </table>
             </div>
+            <div className="info-box"><p>Timelines are indicative and depend on documentation quality, authority review, portal availability, query rounds and business-specific facts.</p></div>
 
             <h2 id="compliance">Compliance Requirements</h2>
-            <p>Post-registration compliance is critical to maintain the license/registration in good standing.</p>
             <ul>
-                <li>Regular filings and returns</li>
-                <li>Governance and board oversight</li>
-                <li>Annual audit and reporting</li>
-                <li>KYC/AML compliance</li>
-                <li>Customer grievance redressal</li>
+                <li>Operate only within approved sandbox scope</li>
+                <li>Maintain consumer consent and test records</li>
+                <li>Report incidents and outcomes to IRDAI</li>
+                <li>Do not commercially scale until permitted</li>
+                <li>Prepare exit or transition plan after testing</li>
             </ul>
+            <h3>Common Mistakes to Avoid</h3>
+            <ul>
+                <li>Using copied documents without matching the actual business model.</li>
+                <li>Submitting inconsistent financial, legal or operational information.</li>
+                <li>Ignoring post-registration or post-filing compliance requirements.</li>
+                <li>Missing authority queries, renewal timelines or reporting deadlines.</li>
+            </ul>
+            <div className="info-box"><p>This content is for general informational purposes only and should not be treated as legal, regulatory, tax, investment or financial advice. Requirements may change from time to time and should be verified from the latest official framework before taking action.</p></div>
 
             <h2 id="faq">Frequently Asked Questions (FAQs)</h2>
             {faqs.length > 0 ? (
@@ -155,7 +190,7 @@ export default function PageClient() {
                 ))}
             </div>
             ) : (
-            <div className="info-box"><p>Detailed FAQs will be added shortly. Contact us for specific queries about IRDAI Regulatory Sandbox in India.</p></div>
+            <div className="info-box"><p>For additional questions, please contact Estabizz for a service-specific clarification.</p></div>
             )}
         </ServicePageLayout>
     );

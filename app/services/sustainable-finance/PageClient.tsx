@@ -38,7 +38,7 @@ export default function PageClient() {
                     { q: "What is impact investing?", a: "Investments generating measurable social impact." },
                     { q: "What is sustainable banking?", a: "Banking aligned with ESG principles." },
                     { q: "What is net-zero financing?", a: "Financing aligned with carbon neutrality goals." },
-                    { q: "What is responsible investing?", a: "Investing with ethical and sustainability considerations. Section 2: Eligibility & Applicability" },
+                    { q: "What is responsible investing?", a: "Investing with ethical and sustainability considerations." },
                     { q: "Who can participate in sustainable finance?", a: "Companies, investors, banks, and financial institutions." },
                     { q: "Can NBFCs engage in sustainable finance?", a: "Yes, under applicable regulatory frameworks." },
                     { q: "Is sustainable finance mandatory in India?", a: "Partially mandatory through ESG disclosures for listed entities." },
@@ -46,7 +46,7 @@ export default function PageClient() {
                     { q: "Can SMEs access sustainable finance?", a: "Yes, through green funding schemes." },
                     { q: "Is ESG applicable to unlisted companies?", a: "Not mandatory but increasingly expected." },
                     { q: "Can banks issue green loans?", a: "Yes, under sustainable lending frameworks." },
-                    { q: "Is sustainable finance applicable to insurance companies?", a: "Yes, through ESG-based investments. Section 3: Registration Process" },
+                    { q: "Is sustainable finance applicable to insurance companies?", a: "Yes, through ESG-based investments." },
                     { q: "Is there registration for sustainable finance activities?", a: "No single registration; depends on activity type." },
                     { q: "How to issue green bonds in India?", a: "Through SEBI guidelines and disclosures." },
     ];
@@ -60,7 +60,7 @@ export default function PageClient() {
             focusKeyword="Sustainable Finance in India"
             sections={sections}
             ctaTitle="Need Expert Help with Sustainable Finance?"
-            ctaDescription="Our regulatory compliance experts provide end-to-end guidance for Sustainable Finance in India."
+            ctaDescription="Estabizz provides structured advisory, documentation and compliance support for Sustainable Finance in India."
             quickFacts={quickFacts}
             relatedArticles={[
                 { href: "/rbi/nbfc-account-aggregator-license", category: "RBI", title: "NBFC Account Aggregator License", description: "Complete RBI registration guide for NBFC-AA." },
@@ -68,76 +68,111 @@ export default function PageClient() {
                 { href: "/regulatory/finance-company-gift-ifsc", category: "IFSCA", title: "Finance Company GIFT IFSC", description: "Setting up a Finance Company in GIFT City." }
             ]}
             finalCtaTitle="Ready to Get Started with Sustainable Finance?"
-            finalCtaDescription="Book a free consultation with our regulatory experts. We guide you through every step of the process."
+            finalCtaDescription="Speak with Estabizz to evaluate applicability, documentation gaps, timeline and compliance readiness before proceeding."
         >
             <h2 id="introduction">Introduction</h2>
-            <p>ry insights for businesses and investors. Sustainable Finance – Complete & Essential Guide for 2026 (Expert Compliance Insight) Introduction Sustainable Finance is emerging as a critical pillar in Ind</p>
+            <p>Sustainable Finance in India covers advisory, documentation and compliance support for businesses raising, deploying or reporting capital linked to environmental, social or governance outcomes. It is relevant for green debt, impact finance, sustainability-linked lending, ESG disclosures and responsible investment documentation.</p>
+            <p>Estabizz assists clients with practical regulatory interpretation, documentation, filing readiness and post-approval compliance planning. Approval, registration or acceptance always remains subject to the applicable regulator, exchange, authority or reviewing institution.</p>
 
-            <h2 id="what-is">What is Sustainable Finance</h2>
-            <p>This page provides comprehensive information about Sustainable Finance in India including regulatory framework, eligibility criteria, documentation requirements, and step-by-step process.</p>
+            <h2 id="what-is">What is Sustainable Finance in India?</h2>
+            <p>Sustainable Finance in India is a specialised compliance and advisory area that must be evaluated according to the applicant's legal structure, business model, documentation quality and applicable regulatory framework. In simple terms, it helps the applicant operate, report or structure the activity with clearer regulatory evidence.</p>
 
             <h2 id="regulatory-framework">Regulatory Framework</h2>
-            <div className="info-box">
-                <p>This service falls under the regulatory jurisdiction of ESG. Compliance with all applicable regulations is mandatory.</p>
+            <div className="overflow-x-auto my-6">
+                <table className="data-table">
+                    <thead><tr><th>Particular</th><th>Details</th></tr></thead>
+                    <tbody>
+                        <tr><td>Regulator / Authority</td><td>SEBI, RBI, MCA and sector-specific frameworks as applicable</td></tr>
+                        <tr><td>Applicable framework</td><td>ESG, green finance, BRSR, sustainable lending, climate-risk and disclosure frameworks depending on entity type.</td></tr>
+                        <tr><td>Regulatory approach</td><td>Requirements must be verified from latest law, circulars, directions, portal process and regulator guidance before filing.</td></tr>
+                        <tr><td>Approval position</td><td>Subject to regulatory scrutiny, documentation quality and applicable eligibility.</td></tr>
+                    </tbody>
+                </table>
             </div>
 
-            <h2 id="who-needs">Who Needs This Service</h2>
-            <p>Businesses and individuals who require Sustainable Finance in India include entities operating in the regulated financial services sector.</p>
+            <h2 id="who-needs">Who Needs This Service?</h2>
+            <p>Listed entities, lenders, fund managers, startups, manufacturers, infrastructure companies, financial institutions and impact businesses planning sustainability-linked financing or ESG reporting should evaluate sustainable finance readiness.</p>
 
             <h2 id="eligibility">Eligibility Criteria</h2>
-            <p>Eligibility requirements are defined by the relevant regulatory authority. Key criteria include entity type, capital requirements, and fit & proper standards for directors/promoters.</p>
+            <div className="overflow-x-auto my-6">
+                <table className="data-table">
+                    <thead><tr><th>Criteria</th><th>Requirement</th><th>Practical Note</th></tr></thead>
+                    <tbody>
+                        <tr><td>Use of proceeds</td><td>Funds should be linked to credible green, social or sustainability objectives</td><td>Avoid vague impact claims</td></tr>
+                        <tr><td>Governance</td><td>Board and management oversight of ESG commitments</td><td>Documentation supports investor confidence</td></tr>
+                        <tr><td>Measurement</td><td>Defined KPIs, targets and reporting method</td><td>Impact must be measurable</td></tr>
+                        <tr><td>Disclosure</td><td>Clear risk, use-of-funds and progress reporting</td><td>Greenwashing risk must be controlled</td></tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h2 id="documents">Documents Required</h2>
-            <ul>
-                <li>Certificate of Incorporation</li>
-                <li>Memorandum and Articles of Association</li>
-                <li>Net Worth Certificate (CA certified)</li>
-                <li>Business Plan</li>
-                <li>KYC documents for Directors</li>
-                <li>Board Resolution</li>
-            </ul>
+            <div className="overflow-x-auto my-6">
+                <table className="data-table">
+                    <thead><tr><th>Document</th><th>Purpose</th><th>Practical Note</th></tr></thead>
+                    <tbody>
+                        <tr><td>Sustainability or ESG policy</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Use-of-proceeds framework</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Project details and impact assumptions</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Financial documents and funding plan</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>KPI and target measurement note</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Board / management approvals</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>External review or assurance inputs, where applicable</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                        <tr><td>Investor / lender disclosure documents</td><td>Supports application, review or compliance evidence</td><td>Final checklist depends on facts, regulator process and latest requirements</td></tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <h2 id="process">Registration Process</h2>
+            <h2 id="process">Registration / Advisory Process</h2>
             <div className="step-timeline">
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Preparation & Documentation</h4><p className="text-[13px] text-[#64748b] !mb-0">Gather all required documents and ensure eligibility criteria are met.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Application Filing</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit the complete application to the regulatory authority with supporting documents.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Regulatory Review</h4><p className="text-[13px] text-[#64748b] !mb-0">The regulatory authority reviews the application and may seek clarifications.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Approval & Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Upon approval, set up compliance framework and begin operations.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Applicability and Scope Review</h4><p className="text-[13px] text-[#64748b] !mb-0">Confirm whether the activity, transaction or business model falls under the relevant framework.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Document Gap Assessment</h4><p className="text-[13px] text-[#64748b] !mb-0">Review records, approvals, policies and supporting evidence before drafting.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Application / Note Preparation</h4><p className="text-[13px] text-[#64748b] !mb-0">Prepare forms, checklists, policies, explanations and supporting documents as applicable.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Filing, Review and Query Support</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit through the prescribed process and respond to regulator, bank, auditor or authority queries.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 5</div><h4>Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Maintain records, calendars, policies and evidence for future review or inspection.</p></div></div>
             </div>
 
-            <h2 id="fees">Fees Structure</h2>
+            <h2 id="fees">Fees and Cost Overview</h2>
             <div className="overflow-x-auto my-6">
                 <table className="data-table">
-                    <thead><tr><th>Particulars</th><th>Amount</th><th>Remarks</th></tr></thead>
+                    <thead><tr><th>Particular</th><th>Amount / Position</th><th>Verification Note</th></tr></thead>
                     <tbody>
-                        <tr><td>Regulatory Application Fee</td><td>As prescribed</td><td>Non-refundable</td></tr>
-                        <tr><td>Professional/Advisory Fees</td><td>Variable</td><td>Depends on scope</td></tr>
-                        <tr><td>Compliance Setup Cost</td><td>Variable</td><td>One-time</td></tr>
+                        <tr><td>Regulatory fee</td><td>Usually not a single licence fee</td><td>Depends on instrument or filing</td></tr>
+                        <tr><td>Assurance / review cost</td><td>As applicable</td><td>External review may be needed</td></tr>
+                        <tr><td>Professional fees</td><td>Scope-based</td><td>Depends on documentation and reporting depth</td></tr>
                     </tbody>
                 </table>
             </div>
 
-            <h2 id="timeline">Timeline</h2>
+            <h2 id="timeline">Indicative Timeline</h2>
             <div className="overflow-x-auto my-6">
                 <table className="data-table">
-                    <thead><tr><th>Stage</th><th>Estimated Time</th><th>Notes</th></tr></thead>
+                    <thead><tr><th>Stage</th><th>Indicative Timeline</th><th>Practical Note</th></tr></thead>
                     <tbody>
-                        <tr><td>Document Preparation</td><td>2–4 weeks</td><td>Depends on complexity</td></tr>
-                        <tr><td>Regulatory Review</td><td>3–6 months</td><td>Case-by-case</td></tr>
-                        <tr><td>Approval</td><td>1–2 months</td><td>After compliance confirmation</td></tr>
+                        <tr><td>Readiness assessment</td><td>1 to 2 weeks</td><td>Data availability is key</td></tr>
+                        <tr><td>Framework documentation</td><td>2 to 4 weeks</td><td>Depends on project complexity</td></tr>
+                        <tr><td>Review / reporting support</td><td>Case-specific</td><td>May align with funding or reporting cycle</td></tr>
                     </tbody>
                 </table>
             </div>
+            <div className="info-box"><p>Timelines are indicative and depend on documentation quality, authority review, portal availability, query rounds and business-specific facts.</p></div>
 
             <h2 id="compliance">Compliance Requirements</h2>
-            <p>Post-registration compliance is critical to maintain the license/registration in good standing.</p>
             <ul>
-                <li>Regular filings and returns</li>
-                <li>Governance and board oversight</li>
-                <li>Annual audit and reporting</li>
-                <li>KYC/AML compliance</li>
-                <li>Customer grievance redressal</li>
+                <li>Track use of proceeds and impact indicators</li>
+                <li>Maintain evidence for ESG claims</li>
+                <li>Update disclosures and lender / investor reports</li>
+                <li>Avoid unsupported green or social claims</li>
+                <li>Review regulatory developments in ESG and sustainable finance</li>
             </ul>
+            <h3>Common Mistakes to Avoid</h3>
+            <ul>
+                <li>Using copied documents without matching the actual business model.</li>
+                <li>Submitting inconsistent financial, legal or operational information.</li>
+                <li>Ignoring post-registration or post-filing compliance requirements.</li>
+                <li>Missing authority queries, renewal timelines or reporting deadlines.</li>
+            </ul>
+            <div className="info-box"><p>This content is for general informational purposes only and should not be treated as legal, regulatory, tax, investment or financial advice. Requirements may change from time to time and should be verified from the latest official framework before taking action.</p></div>
 
             <h2 id="faq">Frequently Asked Questions (FAQs)</h2>
             {faqs.length > 0 ? (
@@ -155,7 +190,7 @@ export default function PageClient() {
                 ))}
             </div>
             ) : (
-            <div className="info-box"><p>Detailed FAQs will be added shortly. Contact us for specific queries about Sustainable Finance in India.</p></div>
+            <div className="info-box"><p>For additional questions, please contact Estabizz for a service-specific clarification.</p></div>
             )}
         </ServicePageLayout>
     );

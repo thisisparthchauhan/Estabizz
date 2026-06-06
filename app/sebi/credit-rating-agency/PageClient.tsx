@@ -462,7 +462,7 @@ export default function PageClient() {
                         <tr>
                             <td><strong>Rating Methodology</strong></td>
                             <td>Scientific and consistent approach</td>
-                            <td>Documented, sector-wise models — not generic templates</td>
+                            <td>Documented, sector-wise models — not standard templates</td>
                         </tr>
                         <tr>
                             <td><strong>Independence Framework</strong></td>

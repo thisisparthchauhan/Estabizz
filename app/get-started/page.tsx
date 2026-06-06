@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LeadEnquiryForm from "@/components/forms/LeadEnquiryForm";
 
 const trustIndicators = [
     "100+ Associate Professionals",
@@ -13,17 +14,6 @@ const supportSteps = [
     "Application drafting and filing",
     "Regulatory query handling",
     "Post-approval compliance support",
-];
-
-const services = [
-    "RBI Licensing",
-    "SEBI Registration",
-    "IRDAI Advisory",
-    "IFSCA / GIFT City",
-    "MCA Compliance",
-    "Fintech Licensing",
-    "Ongoing Compliance",
-    "Other Advisory",
 ];
 
 export default function GetStartedPage() {
@@ -80,50 +70,11 @@ export default function GetStartedPage() {
             <section id="enquiry" className="max-w-7xl mx-auto px-6 pb-16">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
                     <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-                        <h2 className="text-[24px] font-black text-[#0a1628] mb-2">Lead Enquiry</h2>
-                        <p className="text-gray-500 text-sm mb-8">Share a few details and our advisory team will help map the next steps.</p>
-
-                        <form className="space-y-6">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <label className="block">
-                                    <span className="block text-sm font-semibold text-[#0a1628] mb-2">Full Name</span>
-                                    <input type="text" className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all" />
-                                </label>
-                                <label className="block">
-                                    <span className="block text-sm font-semibold text-[#0a1628] mb-2">Email Address</span>
-                                    <input type="email" className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all" />
-                                </label>
-                            </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <label className="block">
-                                    <span className="block text-sm font-semibold text-[#0a1628] mb-2">Mobile Number</span>
-                                    <input type="tel" className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all" />
-                                </label>
-                                <label className="block">
-                                    <span className="block text-sm font-semibold text-[#0a1628] mb-2">Company Name</span>
-                                    <input type="text" className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all" />
-                                </label>
-                            </div>
-                            <label className="block">
-                                <span className="block text-sm font-semibold text-[#0a1628] mb-2">Service Required</span>
-                                <select className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all bg-white">
-                                    <option value="">Select a service...</option>
-                                    {services.map((service) => (
-                                        <option key={service} value={service}>{service}</option>
-                                    ))}
-                                </select>
-                            </label>
-                            <label className="block">
-                                <span className="block text-sm font-semibold text-[#0a1628] mb-2">Message</span>
-                                <textarea rows={5} className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all resize-none" />
-                            </label>
-                            <button
-                                type="button"
-                                className="w-full sm:w-auto px-8 py-3.5 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors"
-                            >
-                                Submit Enquiry
-                            </button>
-                        </form>
+                        <LeadEnquiryForm
+                            source="get-started"
+                            title="Lead Enquiry"
+                            description="Share a few details and our advisory team will help map the next steps."
+                        />
                     </div>
 
                     <aside className="bg-[#0a1628] rounded-2xl p-8 text-white h-fit">

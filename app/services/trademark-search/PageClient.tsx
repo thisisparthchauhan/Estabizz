@@ -7,7 +7,7 @@ export default function PageClient() {
         { id: "what-is", title: "What is Trademark Search" },
         { id: "regulatory-framework", title: "Legal Framework" },
         { id: "who-needs", title: "Who Should Search" },
-        { id: "documents", title: "Information Required" },
+        { id: "documents", title: "Trademark Search Documents" },
         { id: "process", title: "Search Process" },
         { id: "fees", title: "Fees and Scope" },
         { id: "timeline", title: "Timeline" },
@@ -69,13 +69,15 @@ export default function PageClient() {
                 <li>Applicants who received an objection and want risk review</li>
             </ul>
 
-            <h2 id="documents">Information Required</h2>
+            <h2 id="documents">Trademark Search Documents</h2>
             <ul>
-                <li>Proposed brand name, logo or tagline</li>
-                <li>Business activity and product or service description</li>
-                <li>Preferred trademark class, if already identified</li>
-                <li>Applicant details, if filing support is also required</li>
-                <li>Website, product deck or brand usage material, where available</li>
+                <li>Proposed brand name</li>
+                <li>Applicant name</li>
+                <li>Business activity</li>
+                <li>Trademark class</li>
+                <li>Logo, if applicable</li>
+                <li>Existing brand usage details</li>
+                <li>Similar competitor marks, if known</li>
             </ul>
 
             <h2 id="process">Search Process</h2>

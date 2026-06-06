@@ -126,7 +126,7 @@ export default function RegulatoryArticleClient() {
       <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col xl:flex-row gap-10 items-start">
 
         <aside className="hidden xl:block w-[220px] shrink-0 sticky top-[80px] bg-white border border-[rgba(0,150,220,0.1)] rounded-[16px] p-5 shadow-[0_4px_20px_rgba(0,100,200,0.03)] z-10">
-          <h4 className="text-[12px] font-bold text-[#94a3b8] tracking-[0.1em] uppercase mb-4">Contents</h4>
+          <h4 className="text-[12px] font-bold text-[#94a3b8] tracking-[0.1em] uppercase mb-4">On this page</h4>
           <nav className="flex flex-col space-y-1 max-h-[calc(100vh-200px)] overflow-y-auto pr-2 custom-scrollbar">
             {sections.map((section) => (
               <a

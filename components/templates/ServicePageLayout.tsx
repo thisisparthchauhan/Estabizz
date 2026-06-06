@@ -88,6 +88,18 @@ export default function ServicePageLayout({
 
     const insightCards = quickFacts.slice(0, 4);
     const radarLabels = tags.slice(0, 4);
+    const getTocTitle = (section: TocSection) => {
+        const title = section.title.replace(/^\d+\.\s*/, "").trim();
+        if (section.id === "introduction") return "Overview";
+        if (section.id === "who-needs") return "Applicability";
+        if (section.id === "regulatory-framework") return "Regulatory Framework";
+        if (section.id === "documents") return "Documents Required";
+        if (section.id === "process") return "Process";
+        if (section.id === "timeline") return "Timeline";
+        if (section.id === "compliance") return "Compliance Requirements";
+        if (section.id === "faq") return "FAQs";
+        return title;
+    };
 
     return (
         <div className="min-h-screen bg-[#f6f9ff] font-sans text-gray-800">
@@ -245,10 +257,10 @@ export default function ServicePageLayout({
             {/* Main Layout */}
             <div className="max-w-[1480px] mx-auto px-5 md:px-6 py-10 md:py-12 flex flex-col xl:flex-row gap-7 2xl:gap-10 items-start">
 
-                {/* Left TOC Sidebar */}
-                <aside className="hidden xl:block w-[286px] shrink-0 sticky top-[88px] bg-white/88 border border-[rgba(0,150,220,0.12)] rounded-[24px] p-5 shadow-[0_18px_46px_rgba(0,100,200,0.08)] backdrop-blur-xl z-10">
-                    <h4 className="text-[12px] font-black text-[#94a3b8] tracking-[0.18em] uppercase mb-5">Contents</h4>
-                    <nav className="flex flex-col gap-1 max-h-[calc(100vh-160px)] overflow-y-auto pr-2">
+                {/* Single responsive TOC */}
+                <aside className="w-full xl:w-[286px] shrink-0 xl:sticky xl:top-[88px] bg-white/88 border border-[rgba(0,150,220,0.12)] rounded-[24px] p-5 shadow-[0_18px_46px_rgba(0,100,200,0.08)] backdrop-blur-xl z-10">
+                    <h4 className="text-[12px] font-black text-[#94a3b8] tracking-[0.18em] uppercase mb-5">On this page</h4>
+                    <nav className="flex flex-col gap-1 max-h-[320px] xl:max-h-[calc(100vh-160px)] overflow-y-auto pr-2">
                         {sections.map((section) => (
                             <a
                                 key={section.id}
@@ -258,31 +270,11 @@ export default function ServicePageLayout({
                                     ? "border-l-[#0096D6] bg-[rgba(0,150,220,0.08)] text-[#0096D6] font-black shadow-sm"
                                     : "border-l-transparent text-[#64748b] hover:text-[#0096D6] hover:bg-blue-50/70"}`}
                             >
-                                {section.title}
+                                {getTocTitle(section)}
                             </a>
                         ))}
                     </nav>
                 </aside>
-
-                {/* Mobile TOC */}
-                <div className="xl:hidden w-full bg-white/90 border border-[rgba(0,150,220,0.12)] rounded-[22px] p-5 mb-4 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-xl">
-                    <details className="group">
-                        <summary className="flex justify-between items-center font-bold cursor-pointer list-none text-[#0096D6]">
-                            <span>Contents</span>
-                            <span className="transition group-open:rotate-180">
-                                <svg fill="none" height="24" viewBox="0 0 24 24" width="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M6 9l6 6 6-6" /></svg>
-                            </span>
-                        </summary>
-                        <nav className="flex flex-col gap-2 mt-4 max-h-[320px] overflow-y-auto">
-                            {sections.map((section) => (
-                                <a key={section.id} href={`#${section.id}`} onClick={(e) => scrollToSection(e, section.id)}
-                                    className="text-[14px] text-gray-600 hover:text-[#0096D6] border-b border-gray-50 pb-2 leading-snug">
-                                    {section.title}
-                                </a>
-                            ))}
-                        </nav>
-                    </details>
-                </div>
 
                 {/* Main Content */}
                 <main className="flex-1 w-full max-w-[860px] bg-white border border-[rgba(0,150,220,0.10)] rounded-[28px] p-6 md:p-9 lg:p-12 shadow-[0_24px_70px_rgba(0,100,200,0.08)] article-content relative overflow-x-auto">

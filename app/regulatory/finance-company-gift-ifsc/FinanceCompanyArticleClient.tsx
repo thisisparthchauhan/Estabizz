@@ -199,7 +199,7 @@ export default function FinanceCompanyArticleClient() {
                 {/* LEFT SIDEBAR */}
                 <aside className="hidden xl:block w-[220px] shrink-0">
                     <div className="sticky top-20 bg-white rounded-2xl border border-[rgba(0,150,220,0.1)] shadow-sm p-5 max-h-[calc(100vh-100px)] overflow-y-auto">
-                        <h4 className="text-[12px] font-bold text-[#94a3b8] uppercase tracking-[.08em] mb-4">Contents</h4>
+                        <h4 className="text-[12px] font-bold text-[#94a3b8] uppercase tracking-[.08em] mb-4">On this page</h4>
                         <nav className="space-y-0.5">{tocItems.map(t => <button key={t} onClick={() => scrollTo(t)} className={`block w-full text-left px-3 py-[7px] rounded-lg text-[13px] transition-all duration-200 ${activeSection === t ? 'bg-[rgba(0,150,220,0.06)] text-[#0096D6] font-bold border-l-[3px] border-[#0096D6] -ml-px' : 'text-[#64748b] hover:text-[#0096D6]'}`}>{t}</button>)}</nav>
                     </div>
                 </aside>

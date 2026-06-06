@@ -45,18 +45,22 @@ export default function HeroSection() {
                 </div>
 
                 <h1 className="mx-auto max-w-[1050px] text-[clamp(42px,7vw,86px)] font-black leading-[1.02] tracking-[-0.045em] text-[#120b45]">
-                    Your Trusted Partner for
-                    <span className="relative mt-2 block min-h-[1.08em] text-[#1677f2]">
-                        <span key={rotatingServices[activeWord]} className="inline-block animate-[heroWord_0.55s_ease]">
-                            {rotatingServices[activeWord]}
-                        </span>
-                        <span className="ml-1 inline-block h-[0.92em] w-[4px] translate-y-[6px] rounded-full bg-[#1677f2] animate-[blinkCaret_1s_steps(1)_infinite]" />
+                    India&apos;s Regulatory Compliance & Licensing Partner
+                    <span className="relative mt-2 block text-[#1677f2]">
+                        for RBI, SEBI, IRDAI, IFSCA and Global Market Entry
                     </span>
                 </h1>
 
                 <p className="mx-auto mt-7 max-w-[840px] text-[18px] font-medium leading-[1.85] text-[#64748b]">
-                    Expert regulatory guidance for RBI, SEBI, IRDAI, IFSCA and allied government licences. Estabizz manages licensing, documentation and compliance readiness so founders and compliance teams can move with clarity.
+                    Estabizz Fintech Private Limited supports regulated businesses, fintech platforms, financial intermediaries and growth-stage companies with RBI, SEBI, IRDAI, IFSCA, MCA, FIU-IND and global market-entry licensing, documentation, regulatory filings, policy frameworks and post-approval compliance.
                 </p>
+
+                <div className="mx-auto mt-6 inline-flex max-w-full items-center gap-2 rounded-full border border-blue-100 bg-white px-4 py-2 text-[13px] font-black text-[#0a2b58] shadow-[0_12px_30px_rgba(0,90,150,0.08)]">
+                    <span className="text-[#64748b]">Specialised support:</span>
+                    <span key={rotatingServices[activeWord]} className="inline-block min-w-[170px] text-left text-[#1677f2] animate-[heroWord_0.55s_ease]">
+                        {rotatingServices[activeWord]}
+                    </span>
+                </div>
 
                 <div className="mx-auto mt-8 flex max-w-[780px] flex-wrap items-center justify-center gap-2">
                     {["🇮🇳", "🇦🇪", "🇸🇬", "🇬🇧", "🇺🇸", "🇨🇦"].map((flag) => (

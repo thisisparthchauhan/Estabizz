@@ -23,12 +23,6 @@ export default function TrustedBy() {
         return () => observer.disconnect();
     }, []);
 
-    // Split into two halves for two rows
-    const midpoint = Math.ceil(companies.length / 2);
-    const row1 = companies.slice(0, midpoint);
-    const row2 = companies.slice(midpoint);
-
-    // Helper to render pills
     const renderPill = (name: string, index: number) => (
         <div key={`${name}-${index}`} className="flex-shrink-0 premium-glass border border-[rgba(0,150,220,0.18)] rounded-full px-5 py-2 mx-3 shadow-sm hover:shadow-[0_14px_34px_rgba(0,150,220,0.16)] hover:bg-[#0096D6] hover:text-white transition-all duration-300 hover:-translate-y-1 cursor-default">
             <span className="text-[13px] font-bold text-[#334155] group-hover:text-white transition-colors">{name}</span>
@@ -41,10 +35,10 @@ export default function TrustedBy() {
 
             <div className="max-w-[1240px] mx-auto px-6 mb-12 text-center relative z-10">
                 <h2 className="text-[16px] md:text-[18px] font-extrabold text-[#0a1628] uppercase tracking-widest text-[#94a3b8]">
-                    Trusted by India&apos;s Fastest Growing Businesses
+                    Trusted by Businesses Across Financial Services, Insurance, Fintech and Global Markets
                 </h2>
                 <p className="mt-4 text-[12px] text-[#64748b] max-w-3xl mx-auto">
-                    Names are displayed for representative trust-building purposes only where permitted. This does not imply endorsement unless expressly authorised.
+                    Client names are displayed only where permitted and do not imply endorsement unless expressly authorised.
                 </p>
             </div>
 
@@ -53,14 +47,8 @@ export default function TrustedBy() {
                 <div className="absolute left-0 top-0 bottom-0 w-[80px] md:w-[120px] bg-gradient-to-r from-[#f8faff] to-transparent z-10 pointer-events-none"></div>
                 <div className="absolute right-0 top-0 bottom-0 w-[80px] md:w-[120px] bg-gradient-to-l from-[#f8faff] to-transparent z-10 pointer-events-none"></div>
 
-                {/* Row 1 - Scroll Left */}
-                <div className="flex w-fit animate-marquee-left mb-6 whitespace-nowrap group">
-                    {[...row1, ...row1, ...row1, ...row1].map((c, i) => renderPill(c, i))}
-                </div>
-
-                {/* Row 2 - Scroll Right */}
-                <div className="flex w-fit animate-marquee-right whitespace-nowrap group">
-                    {[...row2, ...row2, ...row2, ...row2].map((c, i) => renderPill(c, i))}
+                <div className="flex w-fit animate-marquee-left whitespace-nowrap group">
+                    {[...companies, ...companies].map((c, i) => renderPill(c, i))}
                 </div>
             </div>
 
@@ -70,15 +58,8 @@ export default function TrustedBy() {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-        @keyframes marqueeRight {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
-        }
         .animate-marquee-left {
-          animation: marqueeLeft 30s linear infinite;
-        }
-        .animate-marquee-right {
-           animation: marqueeRight 30s linear infinite;
+          animation: marqueeLeft 48s linear infinite;
         }
         /* Make hover text white via global selector inside pill */
         .hover\\:bg-\\[\\#0096D6\\]:hover span {

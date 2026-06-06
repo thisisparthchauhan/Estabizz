@@ -70,7 +70,7 @@ export default function Page() {
                     <p className="text-blue-100 mb-8">Our team specialises in IRDAI registration, insurance broker licensing, ISNP compliance and insurance regulatory frameworks in India.</p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link href="/contact" className="px-8 py-3.5 bg-gradient-to-r from-[#0096D6] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Get Started Free →</Link>
-                        <a href="tel:+919876543210" className="px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20">Talk to Expert</a>
+                        <a href="tel:+919825600907" className="px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20">Talk to Expert</a>
                     </div>
                 </div>
             </section>

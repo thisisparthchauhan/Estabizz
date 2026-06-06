@@ -215,11 +215,8 @@ const linkMap: Record<string, string> = {
     "Regulatory Updates": "/resources/regulatory-updates",
     "Circular Tracker": "/resources/circular-explainers",
     "Circular Explainers": "/resources/circular-explainers",
-    "Regulatory Email Templates": "/resources/regulatory-update-email-template",
-    "Content Rebuild Command": "/resources/content-rebuild-command",
-    "Service Page Content Framework": "/resources/service-page-content-framework",
-    "Proposal Templates": "/proposal-template",
-    "Proposal Template": "/proposal-template",
+    "Compliance Guides": "/resources",
+    "Client Education Notes": "/blogs",
     "FAQ Engine": "/resources/faqs",
     "Compliance FAQs": "/resources/faqs",
     "Guides & Insights": "/resources",
@@ -248,10 +245,9 @@ const staticSearchLinks = [
     { label: "Resources", href: "/resources", group: "Site" },
     { label: "Regulatory Updates", href: "/resources/regulatory-updates", group: "Resources" },
     { label: "Compliance FAQs", href: "/resources/faqs", group: "Resources" },
-    { label: "Regulatory Email Template", href: "/resources/regulatory-update-email-template", group: "Resources" },
-    { label: "Content Rebuild Command", href: "/resources/content-rebuild-command", group: "Resources" },
-    { label: "Service Page Content Framework", href: "/resources/service-page-content-framework", group: "Resources" },
-    { label: "Proposal Templates", href: "/proposal-template", group: "Resources" },
+    { label: "Compliance Guides", href: "/resources", group: "Resources" },
+    { label: "Circular Explainers", href: "/resources/circular-explainers", group: "Resources" },
+    { label: "Client Education Notes", href: "/blogs", group: "Resources" },
     { label: "RBI Services", href: "/rbi", group: "RBI" },
     { label: "SEBI Services", href: "/sebi", group: "SEBI" },
     { label: "IRDAI Services", href: "/irdai", group: "IRDAI" },
@@ -265,6 +261,7 @@ const staticSearchLinks = [
     { label: "Create New Blog", href: "/admin/blogs/new", group: "Admin" },
     { label: "Pending Blog Review", href: "/admin/blogs/pending", group: "Admin" },
     { label: "Media Library", href: "/admin/media", group: "Admin" },
+    { label: "Internal Resources", href: "/admin/resources", group: "Admin" },
 ];
 
 const menus: Record<string, MegaMenu> = {
@@ -309,7 +306,7 @@ const menus: Record<string, MegaMenu> = {
     Resources: {
         categories: [
             { label: "Regulatory Updates", icon: "📰", items: ["Regulatory Updates", "Circular Tracker", "Compliance Calendar"] },
-            { label: "Content Framework", icon: "📐", items: ["Service Page Content Framework", "Content Rebuild Command", "Proposal Templates"] },
+            { label: "Compliance Guides", icon: "📐", items: ["Compliance Guides", "Guides & Insights", "Client Education Notes"] },
             { label: "Blogs", icon: "✍️", items: ["Blogs", "Submit Blog", "Guides & Insights"] },
             { label: "Guides & Insights", icon: "📖", items: ["RBI Services", "SEBI Services", "IRDAI Services", "IFSCA Services"] },
             { label: "FAQs", icon: "❓", items: ["FAQ Engine", "FAQs", "Compliance FAQs", "Contact Estabizz"] },
@@ -511,6 +508,7 @@ export default function Navbar() {
             ["New Blog", "/admin/blogs/new"],
             ["Pending Review", "/admin/blogs/pending"],
             ["Media", "/admin/media"],
+            ["Internal Resources", "/admin/resources"],
         ];
 
         return (

@@ -17,10 +17,10 @@ const resources = [
         button: "Explore FAQs"
     },
     {
-        title: "Circular Impact Emails",
-        text: "Professional circular-based email drafts with reference table, risk rating and action checklist.",
-        href: "/resources/regulatory-update-email-template",
-        button: "View Template"
+        title: "Circular Explainers",
+        text: "Plain-English circular explainers with practical compliance impact, risk areas and action points.",
+        href: "/resources/circular-explainers",
+        button: "View Explainers"
     }
 ];
 

@@ -50,7 +50,7 @@ export default function RegulatoryUpdatesPage() {
                             <p className="mb-6 text-[14px] leading-7 text-gray-600">{update.summary}</p>
                             <div className="flex flex-wrap gap-3">
                                 <Link href={`/resources/regulatory-updates/${update.slug}`} className="rounded-xl bg-[#0a1628] px-4 py-2 text-[13px] font-bold text-white">Read Compliance Impact</Link>
-                                <Link href="/resources/regulatory-update-email-template" className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-2 text-[13px] font-bold text-[#0096D6]">Email Format</Link>
+                                <Link href="/resources/circular-explainers" className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-2 text-[13px] font-bold text-[#0096D6]">Circular Explainers</Link>
                             </div>
                         </article>
                     ))}

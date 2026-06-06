@@ -86,7 +86,7 @@ export default function LoginPage() {
                         </p>
                     </div>
                     <div className="flex flex-wrap gap-3">
-                        {["RBI Licensed", "SEBI Registered", "IFSCA Compliant"].map((tag) => (
+                        {["RBI Licensing Advisory", "SEBI Registration Support", "IFSCA Compliance Assistance"].map((tag) => (
                             <span key={tag} className="text-xs bg-white/5 border border-white/10 text-gray-300 px-3 py-1.5 rounded-full">
                                 ✓ {tag}
                             </span>

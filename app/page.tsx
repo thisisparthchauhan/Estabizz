@@ -37,8 +37,10 @@ const organizationSchema = {
     telephone: "+91 98256 00907",
     address: {
         "@type": "PostalAddress",
-        addressLocality: "Ahmedabad",
+        streetAddress: "15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj",
+        addressLocality: "Gandhinagar",
         addressRegion: "Gujarat",
+        postalCode: "382421",
         addressCountry: "IN"
     },
     slogan: "We Comply. We Simplify.",

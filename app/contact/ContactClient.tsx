@@ -175,7 +175,7 @@ export default function ContactClient() {
                                                 value={form.phone}
                                                 onChange={handleChange}
                                                 required
-                                                placeholder="+91 98765 43210"
+                                                placeholder="+91 98256 00907"
                                                 className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#0096D6] focus:ring-2 focus:ring-blue-50 transition-all"
                                             />
                                         </div>
@@ -290,7 +290,7 @@ export default function ContactClient() {
                                     </div>
                                     <div>
                                         <p className="text-xs text-gray-400 font-medium">Phone</p>
-                                        <a href="tel:+919876543210" className="text-sm font-semibold text-[#0a1628] hover:text-[#0096D6]">+91 98765 43210</a>
+                                        <a href="tel:+919825600907" className="text-sm font-semibold text-[#0a1628] hover:text-[#0096D6]">+91 98256 00907</a>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
@@ -313,7 +313,7 @@ export default function ContactClient() {
                                     </div>
                                     <div>
                                         <p className="text-xs text-gray-400 font-medium">Office</p>
-                                        <p className="text-sm font-semibold text-[#0a1628]">Mumbai, Maharashtra, India</p>
+                                        <p className="text-sm font-semibold text-[#0a1628]">15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421</p>
                                     </div>
                                 </div>
                             </div>

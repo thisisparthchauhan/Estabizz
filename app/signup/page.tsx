@@ -101,10 +101,10 @@ export default function SignupPage() {
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                         {[
-                            { icon: "🏛️", label: "RBI Licensed" },
-                            { icon: "📈", label: "SEBI Registered" },
-                            { icon: "🌐", label: "IFSCA Compliant" },
-                            { icon: "🛡️", label: "IRDAI Approved" },
+                            { icon: "🏛️", label: "RBI Licensing Advisory" },
+                            { icon: "📈", label: "SEBI Registration Support" },
+                            { icon: "🌐", label: "IFSCA Compliance Assistance" },
+                            { icon: "🛡️", label: "IRDAI Licensing Support" },
                         ].map(({ icon, label }) => (
                             <div key={label} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2.5">
                                 <span className="text-base">{icon}</span>

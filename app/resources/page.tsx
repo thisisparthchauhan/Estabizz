@@ -3,19 +3,19 @@ import Link from "next/link";
 import { ResourceCardGrid } from "@/components/content/FrameworkBlocks";
 
 export const metadata: Metadata = {
-    title: "Resources – Regulatory Updates, FAQs, Templates & Compliance Guides | Estabizz",
-    description: "Explore Estabizz resources for regulatory updates, compliance FAQs, circular explainers, email templates, compliance calendars and licensing guides across RBI, SEBI, IRDAI and IFSCA.",
+    title: "Resources – Regulatory Updates, FAQs, Blogs & Compliance Guides | Estabizz",
+    description: "Explore Estabizz resources for regulatory updates, compliance guides, FAQs, regulatory insights, circular explainers and client education notes across RBI, SEBI, IRDAI and IFSCA.",
     alternates: { canonical: "/resources" }
 };
 
 const cards = [
-    { title: "Content Rebuild Command", description: "Internal Estabizz framework for rebuilding reference content into original SEO, GEO and AEO optimised regulatory pages.", href: "/resources/content-rebuild-command" },
     { title: "Regulatory Updates", description: "Practical RBI, SEBI, IRDAI and IFSCA circular updates with compliance impact, action checklist and risk rating.", href: "/resources/regulatory-updates" },
-    { title: "Regulatory Email Templates", description: "Structured formats for converting circulars into client-ready compliance update emails.", href: "/resources/regulatory-update-email-template" },
-    { title: "Service Page Content Framework", description: "Master content structure for premium licence pages covering eligibility, process, fees, compliance, FAQs and CTAs.", href: "/resources/service-page-content-framework" },
-    { title: "FAQ Engine", description: "Search-friendly FAQs covering eligibility, documents, process, fees, post-registration compliance and regulatory risks.", href: "/resources/faqs" },
+    { title: "Compliance Guides", description: "Practical licensing and compliance guides for founders, CFOs and regulated businesses.", href: "/resources" },
+    { title: "FAQs", description: "Search-friendly FAQs covering eligibility, documents, process, fees, post-registration compliance and regulatory risks.", href: "/resources/faqs" },
+    { title: "Blog / Regulatory Insights", description: "Professional regulatory insights and education notes for Indian finance and compliance teams.", href: "/blogs" },
+    { title: "Circular Explainers", description: "Plain-English explanations of complex regulatory circulars and their practical business impact.", href: "/resources/circular-explainers" },
+    { title: "Client Education Notes", description: "Decision-oriented notes to help clients understand licensing, documentation and compliance readiness.", href: "/blogs" },
     { title: "Compliance Calendars", description: "Ongoing filing and reporting timelines for regulated entities.", href: "/resources/compliance-calendar" },
-    { title: "Proposal Templates", description: "Browser-style client proposal structure for licensing scope, timelines, commercials and regulatory support.", href: "/proposal-template" },
 ];
 
 export default function ResourcesPage() {

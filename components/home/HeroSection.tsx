@@ -12,10 +12,10 @@ const rotatingServices = [
 ];
 
 const trustStats = [
-    "500+ Licences Obtained",
+    "500+ Licences & Regulatory Assignments",
     "1000+ Businesses Served",
     "100+ Associate Professionals",
-    "India + Global Market Desk",
+    "45+ Countries Supported",
 ];
 
 const servicePills = [

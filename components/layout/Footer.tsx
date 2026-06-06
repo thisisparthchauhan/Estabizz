@@ -36,8 +36,8 @@ const footerLinks: Record<string, { label: string; href: string }[]> = {
     "Knowledge & Resources": [
         { label: "Regulatory Updates", href: "/resources/regulatory-updates" },
         { label: "Estabizz Blogs", href: "/blogs" },
-        { label: "Content Framework", href: "/resources/service-page-content-framework" },
-        { label: "Proposal Templates", href: "/proposal-template" },
+        { label: "Circular Explainers", href: "/resources/circular-explainers" },
+        { label: "Client Education Notes", href: "/blogs" },
         { label: "Case Highlights", href: "/" },
         { label: "FAQs", href: "/resources/faqs" },
         { label: "Guides & Insights", href: "/resources" },
@@ -140,10 +140,10 @@ export default function Footer() {
 
                         <div className="mt-6 space-y-3">
                             <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-4 text-[13px] font-semibold text-white/70">
-                                Ahmedabad, Gujarat, India
+                                15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421
                             </div>
                             <a href="tel:+919825600907" className="block rounded-2xl border border-white/10 bg-white/[0.05] p-4 text-[13px] font-semibold text-white/70 transition-colors hover:text-[#8edcff]">
-                                +91 98256 00907 | +91 98256 12234
+                                +91 98256 00907
                             </a>
                             <a href="mailto:info@estabizz.com" className="block rounded-2xl border border-white/10 bg-white/[0.05] p-4 text-[13px] font-semibold text-white/70 transition-colors hover:text-[#8edcff]">
                                 info@estabizz.com

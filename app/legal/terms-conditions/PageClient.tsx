@@ -1,117 +1,128 @@
-"use client";
-import ServicePageLayout from "@/components/templates/ServicePageLayout";
+import LegalPolicyLayout from "@/components/templates/LegalPolicyLayout";
 
 export default function PageClient() {
-    const sections = [
-        { id: "introduction", title: "1. Introduction" },
-        { id: "use-of-website", title: "2. Use of Website" },
-        { id: "service-information", title: "3. Service Information" },
-        { id: "consultation", title: "4. Consultation and Engagement" },
-        { id: "payments", title: "5. Payments and Commercials" },
-        { id: "user-responsibility", title: "6. User Responsibility" },
-        { id: "intellectual-property", title: "7. Intellectual Property" },
-        { id: "limitations", title: "8. Limitations" },
-        { id: "third-party-links", title: "9. Third-Party Links" },
-        { id: "governing-law", title: "10. Governing Law" },
-        { id: "contact", title: "11. Contact Details" },
-        { id: "faq", title: "12. FAQs" }
-    ];
-
-    const quickFacts = [
-        { label: "Company", value: "Estabizz Fintech Private Limited" },
-        { label: "Policy Type", value: "Website Terms and Conditions" },
-        { label: "Last Updated", value: "2026" },
-        { label: "Jurisdiction", value: "India" },
-    ];
-
-    const faqs = [
-        { q: "What do these Terms and Conditions cover?", a: "These terms govern use of the Estabizz website, information pages, consultation requests, digital forms and website-linked communication channels." },
-        { q: "Does website content guarantee regulatory approval?", a: "No. Website content is informational. Any licence, registration or approval remains subject to the concerned regulator, authority and applicable eligibility." },
-        { q: "When does a client engagement start?", a: "A client engagement starts only after scope, commercials, required documents and engagement terms are confirmed between the client and Estabizz." },
-        { q: "Can website content be copied?", a: "No. Website content, layouts, service descriptions and resources are protected and should not be copied or reused without permission." },
-        { q: "How can I contact Estabizz about these terms?", a: "You may contact Estabizz at info@estabizz.com or +91 98256 00907 for website or service-related queries." },
-    ];
-
     return (
-        <ServicePageLayout
-            tags={[{ emoji: "📜", label: "Legal" }, { emoji: "⚖️", label: "Website Terms" }, { emoji: "✅", label: "Transparent Use" }]}
-            breadcrumb={[{ label: "Home", href: "/" }, { label: "Legal" }, { label: "Terms and Conditions" }]}
-            title="Terms and Conditions"
-            readTime="8 min read"
-            focusKeyword="Terms and Conditions"
-            sections={sections}
-            ctaTitle="Need Assistance?"
-            ctaDescription="Contact Estabizz for website, service scope or engagement-related queries."
-            quickFacts={quickFacts}
-            relatedArticles={[
-                { href: "/legal/privacy-policy", category: "Legal", title: "Privacy Policy", description: "How Estabizz handles website and user information." },
-                { href: "/legal/refund-policy", category: "Legal", title: "Refund Policy", description: "Refund-related terms for professional services." },
-                { href: "/contact", category: "Contact", title: "Contact Estabizz", description: "Speak to the Estabizz team." }
+        <LegalPolicyLayout
+            title="Terms of Use"
+            description="These Terms of Use govern access to and use of the Estabizz Fintech Private Limited website, service information, resources, forms, consultation links, blog features and digital communication channels."
+            sections={[
+                {
+                    id: "acceptance",
+                    title: "1. Acceptance of Terms",
+                    content: (
+                        <>
+                            <p>By accessing or using this website, submitting any form, requesting a consultation, using website resources, submitting a blog or communicating with Estabizz through this website, you agree to these Terms of Use.</p>
+                            <p>If you do not agree with these terms, you should not use this website or submit information through it.</p>
+                        </>
+                    ),
+                },
+                {
+                    id: "company-details",
+                    title: "2. Company Details",
+                    content: (
+                        <>
+                            <p><strong>Company:</strong> Estabizz Fintech Private Limited</p>
+                            <p><strong>CIN:</strong> U74999GJ2021PTC123384</p>
+                            <p><strong>Registered Office:</strong> 15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421</p>
+                            <p><strong>Email:</strong> <a href="mailto:info@estabizz.com">info@estabizz.com</a></p>
+                        </>
+                    ),
+                },
+                {
+                    id: "website-use",
+                    title: "3. Scope of Website Use",
+                    content: (
+                        <>
+                            <p>The Estabizz website provides information relating to regulatory advisory, licensing, registration, documentation, compliance, governance, blog resources and related professional support services.</p>
+                            <p>The content on this website is for general informational purposes only. It does not constitute legal, regulatory, tax, investment, financial or professional advice for any specific person or business unless a separate written engagement is executed.</p>
+                        </>
+                    ),
+                },
+                {
+                    id: "service-enquiries",
+                    title: "4. Service Enquiries and Engagement",
+                    content: (
+                        <>
+                            <p>Submission of a form, call request, WhatsApp message, email or document does not automatically create a client relationship. A professional engagement begins only after scope, commercials and terms are agreed in writing or through an accepted proposal.</p>
+                            <p>Any advice, documentation or application support is subject to the facts shared by the client, applicable eligibility, regulatory requirements, document quality and regulator review.</p>
+                        </>
+                    ),
+                },
+                {
+                    id: "user-obligations",
+                    title: "5. User Obligations",
+                    content: (
+                        <ul>
+                            <li>Users must provide accurate, complete and lawful information.</li>
+                            <li>Users must not submit misleading, false, infringing, defamatory or unlawful content.</li>
+                            <li>Users must not misuse website forms, admin routes, blog submission features or communication channels.</li>
+                            <li>Users remain responsible for verifying business facts, eligibility, documents and regulatory position before taking any action.</li>
+                        </ul>
+                    ),
+                },
+                {
+                    id: "payments",
+                    title: "6. Payments, Fees and Third-Party Charges",
+                    content: (
+                        <>
+                            <p>Professional fees, payment milestones, scope and exclusions shall be governed by the accepted proposal, invoice, engagement note or written communication issued by Estabizz.</p>
+                            <p>Government fees, statutory fees, regulator fees, exchange fees, portal charges, payment gateway charges, stamp duty, taxes and third-party professional charges may be payable separately unless expressly included in writing.</p>
+                        </>
+                    ),
+                },
+                {
+                    id: "no-guarantee",
+                    title: "7. No Regulatory Approval Guarantee",
+                    content: (
+                        <p>Estabizz is an independent regulatory advisory and compliance support organisation. We do not represent or act on behalf of any government authority, regulator, exchange, ministry or statutory body. No content, proposal, consultation, application support or engagement should be understood as a guarantee of licence, registration, approval, renewal, funding, clearance or defined timeline.</p>
+                    ),
+                },
+                {
+                    id: "intellectual-property",
+                    title: "8. Intellectual Property",
+                    content: (
+                        <p>All website content, layouts, service pages, blog content, templates, graphics, designs, documents, text and branding are owned by or licensed to Estabizz, unless stated otherwise. Users must not copy, reproduce, republish, scrape, distribute or commercially exploit website content without prior written permission.</p>
+                    ),
+                },
+                {
+                    id: "third-party-links",
+                    title: "9. Third-Party Links and Platforms",
+                    content: (
+                        <p>The website may contain links to regulator portals, payment gateways, social media platforms, WhatsApp, third-party tools or external websites. Estabizz is not responsible for the content, availability, security, privacy practices or terms of such third-party platforms.</p>
+                    ),
+                },
+                {
+                    id: "limitation",
+                    title: "10. Limitation of Liability",
+                    content: (
+                        <p>To the fullest extent permitted by law, Estabizz shall not be liable for indirect, incidental, consequential, punitive, special or business losses arising from website use, reliance on general content, third-party links, technical interruptions, user-submitted inaccuracies, regulatory changes or outcomes outside Estabizz's control.</p>
+                    ),
+                },
+                {
+                    id: "indemnity",
+                    title: "11. Indemnity",
+                    content: (
+                        <p>Users agree to indemnify and hold Estabizz harmless from claims, losses, liabilities, damages, costs or expenses arising from misuse of the website, inaccurate information submitted by the user, breach of these terms, infringement of third-party rights or unlawful conduct.</p>
+                    ),
+                },
+                {
+                    id: "law-contact",
+                    title: "12. Governing Law, Jurisdiction and Contact",
+                    content: (
+                        <>
+                            <p>These Terms of Use shall be governed by the laws of India. Subject to applicable law, disputes shall fall under the jurisdiction of courts and authorities in Gujarat, India.</p>
+                            <p>For website, terms, grievance or service-related queries, contact: <a href="mailto:info@estabizz.com">info@estabizz.com</a>.</p>
+                        </>
+                    ),
+                },
+                {
+                    id: "updates",
+                    title: "13. Changes to Terms",
+                    content: (
+                        <p>Estabizz may update these Terms of Use from time to time. Continued use of the website after updates are published shall be treated as acceptance of the revised terms.</p>
+                    ),
+                },
             ]}
-            finalCtaTitle="Speak to Estabizz"
-            finalCtaDescription="For service scope, consultation, proposal or website-related questions, contact Estabizz through the official contact details."
-        >
-            <h2 id="introduction">Introduction</h2>
-            <p>Terms and Conditions of Estabizz Fintech Private Limited govern the use of this website, its service pages, resources, forms, consultation links and digital communication channels. By accessing or using this website, users agree to read these terms carefully and use the website only for lawful and appropriate purposes.</p>
-            <p>Estabizz operates as an independent regulatory advisory and compliance support organisation. We do not represent any government authority, regulator, exchange or statutory body.</p>
-
-            <h2 id="use-of-website">Use of Website</h2>
-            <ul>
-                <li>Users may access the website for information, enquiry and service evaluation purposes.</li>
-                <li>Users must not misuse the website, submit false information, attempt unauthorised access or interfere with website functionality.</li>
-                <li>Website content should not be treated as a substitute for professional advice based on specific facts.</li>
-            </ul>
-
-            <h2 id="service-information">Service Information</h2>
-            <p>Service pages are prepared for general informational and client education purposes. Regulatory requirements, fee schedules, timelines, forms, portal processes and eligibility conditions may change from time to time. Users should verify current requirements before taking any business or compliance decision.</p>
-            <div className="info-box"><p>Nothing on this website should be interpreted as guaranteed approval, assured licence grant, fixed regulator timeline or official regulator communication.</p></div>
-
-            <h2 id="consultation">Consultation and Engagement</h2>
-            <p>Submitting an enquiry, using a WhatsApp link or booking a consultation does not automatically create a professional engagement. Scope of work, commercials, timelines, responsibilities and document requirements are confirmed separately through proposal, email, invoice, engagement note or mutually agreed communication.</p>
-
-            <h2 id="payments">Payments and Commercials</h2>
-            <p>Professional fees, government fees, regulatory fees, filing fees, third-party charges and taxes may be different depending on the service. Statutory or regulator fees are generally payable separately by the client unless expressly agreed otherwise.</p>
-
-            <h2 id="user-responsibility">User Responsibility</h2>
-            <ul>
-                <li>Provide accurate, complete and lawful information.</li>
-                <li>Share authentic documents and disclose relevant facts.</li>
-                <li>Review service scope, timelines, assumptions and limitations before payment.</li>
-                <li>Respond to document and clarification requests within reasonable time.</li>
-            </ul>
-
-            <h2 id="intellectual-property">Intellectual Property</h2>
-            <p>All website content, design elements, service structures, text, graphics, resources and downloadable material belong to Estabizz or are used with appropriate rights. Users may not copy, reproduce, republish or commercially exploit website content without written permission.</p>
-
-            <h2 id="limitations">Limitations</h2>
-            <p>Regulatory outcomes depend on eligibility, documentation quality, regulator review, query rounds, legal position and business facts. Estabizz provides advisory and documentation support but does not control decisions of any regulator, authority, bank, exchange, portal or third-party institution.</p>
-
-            <h2 id="third-party-links">Third-Party Links</h2>
-            <p>The website may contain links to regulator websites, portals, payment gateways, social media platforms or third-party resources. Estabizz is not responsible for third-party website content, availability, security or privacy practices.</p>
-
-            <h2 id="governing-law">Governing Law</h2>
-            <p>These terms are governed by applicable laws of India. Any dispute will be handled as per applicable legal procedure and agreed engagement terms, where any professional engagement exists.</p>
-
-            <h2 id="contact">Contact Details</h2>
-            <div className="info-box">
-                <p><strong>Estabizz Fintech Private Limited</strong></p>
-                <p>15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421</p>
-                <p><strong>Phone:</strong> +91 98256 00907</p>
-                <p><strong>Email:</strong> info@estabizz.com</p>
-            </div>
-
-            <h2 id="faq">Frequently Asked Questions</h2>
-            <div className="space-y-3 my-6">
-                {faqs.map((item, i) => (
-                    <details key={i} className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                        <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]">
-                            <span>{item.q}</span>
-                            <span className="text-[#0096D6] transition-transform group-open:rotate-180 shrink-0 ml-4">▼</span>
-                        </summary>
-                        <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151] leading-relaxed">{item.a}</div>
-                    </details>
-                ))}
-            </div>
-        </ServicePageLayout>
+        />
     );
 }

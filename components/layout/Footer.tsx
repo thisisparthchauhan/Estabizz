@@ -44,10 +44,10 @@ const footerLinks: Record<string, { label: string; href: string }[]> = {
     ],
     "Legal & Transparency": [
         { label: "Privacy Policy", href: "/legal/privacy-policy" },
-        { label: "Terms & Conditions", href: "/legal/terms-conditions" },
-        { label: "Refund Policy", href: "/legal/refund-policy" },
-        { label: "Disclaimer", href: "/legal/privacy-policy" },
-        { label: "Cookie Policy", href: "/legal/privacy-policy" },
+        { label: "Terms of Use", href: "/legal/terms-conditions" },
+        { label: "Refund & Cancellation", href: "/legal/refund-policy" },
+        { label: "Disclaimer", href: "/legal/disclaimer" },
+        { label: "Cookie Policy", href: "/legal/cookie-policy" },
     ],
     "Company & Network": [
         { label: "Associate Professional Partner", href: "/contact" },
@@ -201,8 +201,10 @@ export default function Footer() {
                     <p>&copy; 2026 Estabizz Fintech Private Limited. All rights reserved.</p>
                     <div className="flex flex-wrap justify-center gap-5">
                         <Link href="/legal/privacy-policy" className="transition-colors hover:text-white/70">Privacy Policy</Link>
-                        <Link href="/legal/terms-conditions" className="transition-colors hover:text-white/70">Terms of Service</Link>
-                        <Link href="/legal/refund-policy" className="transition-colors hover:text-white/70">Refund Policy</Link>
+                        <Link href="/legal/terms-conditions" className="transition-colors hover:text-white/70">Terms of Use</Link>
+                        <Link href="/legal/refund-policy" className="transition-colors hover:text-white/70">Refund & Cancellation</Link>
+                        <Link href="/legal/disclaimer" className="transition-colors hover:text-white/70">Disclaimer</Link>
+                        <Link href="/legal/cookie-policy" className="transition-colors hover:text-white/70">Cookie Policy</Link>
                     </div>
                 </div>
             </div>

@@ -1,122 +1,109 @@
-"use client";
-import ServicePageLayout from "@/components/templates/ServicePageLayout";
+import LegalPolicyLayout from "@/components/templates/LegalPolicyLayout";
 
 export default function PageClient() {
-    const sections = [
-        { id: "introduction", title: "1. Introduction" },
-        { id: "professional-services", title: "2. Professional Service Nature" },
-        { id: "non-refundable", title: "3. Non-Refundable Items" },
-        { id: "eligible-refunds", title: "4. Possible Refund Situations" },
-        { id: "request-process", title: "5. Refund Request Process" },
-        { id: "timelines", title: "6. Review Timelines" },
-        { id: "client-responsibility", title: "7. Client Responsibility" },
-        { id: "regulatory-outcomes", title: "8. Regulatory Outcomes" },
-        { id: "contact", title: "9. Contact Details" },
-        { id: "faq", title: "10. FAQs" }
-    ];
-
-    const quickFacts = [
-        { label: "Company", value: "Estabizz Fintech Private Limited" },
-        { label: "Policy Type", value: "Professional Service Refund Policy" },
-        { label: "Last Updated", value: "2026" },
-        { label: "Contact Email", value: "info@estabizz.com" },
-    ];
-
-    const faqs = [
-        { q: "Is refund automatic if regulator approval is not granted?", a: "No. Regulatory approval is outside Estabizz's control. Refund eligibility depends on agreed scope, work completed and the reason for closure." },
-        { q: "Are government or regulator fees refundable?", a: "No. Government, regulator, portal, filing, payment gateway and third-party fees are governed by the respective authority or vendor and are generally non-refundable." },
-        { q: "Can duplicate payment be refunded?", a: "Yes. Duplicate payments may be reviewed and refunded after verification of transaction records." },
-        { q: "How can a refund request be submitted?", a: "A refund request should be sent to info@estabizz.com with payment details, service name, invoice reference and reason for request." },
-        { q: "Can service scope be adjusted instead of refund?", a: "In suitable cases, Estabizz may consider scope adjustment or service credit, subject to internal review and mutual agreement." },
-    ];
-
     return (
-        <ServicePageLayout
-            tags={[{ emoji: "💰", label: "Refund" }, { emoji: "⚖️", label: "Service Terms" }, { emoji: "✅", label: "Transparent Policy" }]}
-            breadcrumb={[{ label: "Home", href: "/" }, { label: "Legal" }, { label: "Refund Policy" }]}
-            title="Refund Policy"
-            readTime="7 min read"
-            focusKeyword="Refund Policy"
-            sections={sections}
-            ctaTitle="Refund or Billing Query?"
-            ctaDescription="Contact Estabizz with invoice details and service reference for review."
-            quickFacts={quickFacts}
-            relatedArticles={[
-                { href: "/legal/terms-conditions", category: "Legal", title: "Terms and Conditions", description: "Website and engagement-related terms." },
-                { href: "/legal/privacy-policy", category: "Legal", title: "Privacy Policy", description: "Website data handling and user privacy policy." },
-                { href: "/contact", category: "Contact", title: "Contact Estabizz", description: "Reach the Estabizz team for billing or service queries." }
+        <LegalPolicyLayout
+            title="Refund & Cancellation Policy"
+            description="This Refund & Cancellation Policy explains how Estabizz Fintech Private Limited reviews cancellations, professional fee refunds, government fee exclusions and billing-related requests for advisory, documentation and compliance support services."
+            sections={[
+                {
+                    id: "purpose",
+                    title: "1. Purpose",
+                    content: (
+                        <p>This policy applies to payments made to Estabizz Fintech Private Limited for regulatory advisory, licensing support, registration assistance, documentation, compliance review, blog/resource related paid services, proposal-based work and allied professional support services.</p>
+                    ),
+                },
+                {
+                    id: "company-details",
+                    title: "2. Company Details",
+                    content: (
+                        <>
+                            <p><strong>Company:</strong> Estabizz Fintech Private Limited</p>
+                            <p><strong>CIN:</strong> U74999GJ2021PTC123384</p>
+                            <p><strong>Registered Office:</strong> 15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421</p>
+                            <p><strong>Email:</strong> <a href="mailto:info@estabizz.com">info@estabizz.com</a></p>
+                        </>
+                    ),
+                },
+                {
+                    id: "professional-services",
+                    title: "3. Nature of Professional Services",
+                    content: (
+                        <>
+                            <p>Estabizz services generally involve expert time, business model review, document examination, research, drafting, coordination, regulatory interpretation, application preparation and professional communication.</p>
+                            <p>Accordingly, refund eligibility depends on the agreed scope, stage of work, professional time already spent, documents reviewed, deliverables prepared and reasons for cancellation.</p>
+                        </>
+                    ),
+                },
+                {
+                    id: "cancellation",
+                    title: "4. Cancellation Before Work Starts",
+                    content: (
+                        <p>If a client requests cancellation before any professional work, review, drafting, consultation, coordination or document processing has started, Estabizz may review the request and consider refund of professional fees after deducting payment gateway charges, administrative costs or other applicable deductions.</p>
+                    ),
+                },
+                {
+                    id: "non-refundable",
+                    title: "5. Non-Refundable Items",
+                    content: (
+                        <ul>
+                            <li>Government fees, regulator fees, statutory charges, exchange fees, portal fees, stamp duty and taxes already paid.</li>
+                            <li>Professional fees for work already completed or substantially performed.</li>
+                            <li>Fees for consultation, document review, business model assessment, policy drafting, application preparation or query response already delivered.</li>
+                            <li>Third-party charges such as certification, audit, payment gateway, courier, translation, professional associate or technology costs.</li>
+                            <li>Cases where delay or closure is caused by incomplete, inaccurate or delayed information from the client.</li>
+                        </ul>
+                    ),
+                },
+                {
+                    id: "possible-refunds",
+                    title: "6. Possible Refund Situations",
+                    content: (
+                        <p>Refunds may be considered in limited situations such as duplicate payment, payment made for the wrong service, cancellation before work starts, or where Estabizz is unable to take up the agreed scope for internal reasons. Each request is reviewed on its own facts.</p>
+                    ),
+                },
+                {
+                    id: "regulatory-outcome",
+                    title: "7. No Refund Based on Regulatory Outcome",
+                    content: (
+                        <p>Regulatory approvals, licences, registrations, renewals and permissions are subject to regulator review, eligibility, documentation quality, query rounds, statutory conditions and regulatory scrutiny. Refunds are not automatic merely because an application is delayed, queried, returned, rejected, withdrawn or not approved by a regulator.</p>
+                    ),
+                },
+                {
+                    id: "refund-process",
+                    title: "8. Refund Request Process",
+                    content: (
+                        <>
+                            <p>Refund or cancellation requests must be sent to <a href="mailto:info@estabizz.com">info@estabizz.com</a> with the client name, invoice details, payment proof, service name, reason for request and relevant communication records.</p>
+                            <p>Estabizz may seek further information before deciding the request. Approved refunds, if any, will be processed through the original payment mode or another lawful payment method, subject to banking and payment gateway timelines.</p>
+                        </>
+                    ),
+                },
+                {
+                    id: "service-credit",
+                    title: "9. Service Credit or Scope Adjustment",
+                    content: (
+                        <p>In some cases, Estabizz may offer service credit, revised scope, alternate service support or adjusted deliverables instead of a cash refund, depending on the facts and mutual understanding with the client.</p>
+                    ),
+                },
+                {
+                    id: "taxes",
+                    title: "10. Taxes and Invoices",
+                    content: (
+                        <p>GST, TDS, invoice adjustments, accounting entries and tax treatment shall be handled as per applicable law. Any refund may be adjusted for taxes, statutory deductions, payment gateway deductions or accounting requirements.</p>
+                    ),
+                },
+                {
+                    id: "law-contact",
+                    title: "11. Governing Law and Contact",
+                    content: (
+                        <>
+                            <p>This policy shall be governed by the laws of India. Subject to applicable law, disputes shall fall under the jurisdiction of courts and authorities in Gujarat, India.</p>
+                            <p>For billing, cancellation or refund-related queries, contact: <a href="mailto:info@estabizz.com">info@estabizz.com</a>.</p>
+                        </>
+                    ),
+                },
             ]}
-            finalCtaTitle="Need Help with a Billing Query?"
-            finalCtaDescription="Please contact Estabizz with your payment reference, service name and concern so the team can review the matter."
-        >
-            <h2 id="introduction">Introduction</h2>
-            <p>Refund Policy of Estabizz Fintech Private Limited explains how refund requests are reviewed for professional advisory, documentation, compliance and regulatory support services. Because most Estabizz services involve expert time, document review, drafting, coordination and professional effort, refund eligibility depends on the stage of work and agreed scope.</p>
-            <p>This policy is intended to create transparency before payment. It does not guarantee refund in every case and does not override specific written engagement terms agreed with a client.</p>
-
-            <h2 id="professional-services">Professional Service Nature</h2>
-            <p>Estabizz provides professional services that may include consultation, regulatory applicability review, documentation, drafting, filing support, compliance planning, policy preparation and query support. These services are effort-based and may begin immediately after confirmation, payment, document sharing or team allocation.</p>
-
-            <h2 id="non-refundable">Non-Refundable Items</h2>
-            <ul>
-                <li>Consultation fees once consultation has been delivered or scheduled with professional allocation.</li>
-                <li>Drafting, review, research, document preparation or advisory work already performed.</li>
-                <li>Government, regulator, portal, filing, payment gateway, stamp, certification or third-party fees.</li>
-                <li>Fees for work delayed due to incomplete, incorrect or delayed client documents.</li>
-                <li>Matters where regulator, bank, portal or authority review is pending or adverse due to facts outside Estabizz control.</li>
-            </ul>
-
-            <h2 id="eligible-refunds">Possible Refund Situations</h2>
-            <div className="overflow-x-auto my-6">
-                <table className="data-table">
-                    <thead><tr><th>Situation</th><th>Possible Position</th><th>Review Note</th></tr></thead>
-                    <tbody>
-                        <tr><td>Duplicate payment</td><td>May be refundable</td><td>Subject to payment verification</td></tr>
-                        <tr><td>Service not started</td><td>May be reviewed</td><td>Professional allocation and preparatory work will be checked</td></tr>
-                        <tr><td>Wrong service selected</td><td>May be adjusted</td><td>Service credit or revised scope may be considered</td></tr>
-                        <tr><td>Client cancels after work starts</td><td>Generally not refundable for completed effort</td><td>Balance, if any, depends on internal review</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 id="request-process">Refund Request Process</h2>
-            <ol>
-                <li>Email the request to info@estabizz.com.</li>
-                <li>Provide name, phone number, invoice / payment reference, service name and reason.</li>
-                <li>Estabizz will review scope, work status, team allocation, documents shared and payment records.</li>
-                <li>Decision will be communicated through email or other recorded communication.</li>
-            </ol>
-
-            <h2 id="timelines">Review Timelines</h2>
-            <p>Refund requests are generally reviewed within a reasonable time after complete information is received. Bank, payment gateway or accounting processing timelines may apply separately where any refund is approved.</p>
-
-            <h2 id="client-responsibility">Client Responsibility</h2>
-            <p>Clients are expected to review service scope, proposal, invoice, assumptions, document requirements and timelines before payment. Delay or failure to provide documents, approvals or clarifications may affect timelines and refund eligibility.</p>
-
-            <h2 id="regulatory-outcomes">Regulatory Outcomes</h2>
-            <div className="info-box">
-                <p>Regulatory approval, registration, licence grant, query outcome or authority decision is outside Estabizz's control. Fees are charged for professional advisory and documentation support, not for guaranteed approval.</p>
-            </div>
-
-            <h2 id="contact">Contact Details</h2>
-            <div className="info-box">
-                <p><strong>Estabizz Fintech Private Limited</strong></p>
-                <p>15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421</p>
-                <p><strong>Phone:</strong> +91 98256 00907</p>
-                <p><strong>Email:</strong> info@estabizz.com</p>
-            </div>
-
-            <h2 id="faq">Frequently Asked Questions</h2>
-            <div className="space-y-3 my-6">
-                {faqs.map((item, i) => (
-                    <details key={i} className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                        <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]">
-                            <span>{item.q}</span>
-                            <span className="text-[#0096D6] transition-transform group-open:rotate-180 shrink-0 ml-4">▼</span>
-                        </summary>
-                        <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151] leading-relaxed">{item.a}</div>
-                    </details>
-                ))}
-            </div>
-        </ServicePageLayout>
+        />
     );
 }

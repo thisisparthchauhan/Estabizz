@@ -3,8 +3,7 @@ import PageClient from './PageClient';
 
 export const metadata: Metadata = {
     title: "Privacy Policy | Estabizz Fintech Private Limited",
-    description: "Privacy Policy of Estabizz Fintech Private Limited explaining website data collection, use, storage, disclosure, user choices and official contact details.",
-    keywords: "Estabizz Privacy Policy, Estabizz Fintech data policy, privacy policy India",
+    description: "Privacy Policy for Estabizz Fintech Private Limited covering website data, lead forms, WhatsApp consent, communication records, cookies, data sharing, retention and grievance contact.",
     alternates: { canonical: "/legal/privacy-policy" }
 };
 

@@ -3,58 +3,42 @@ import React from "react";
 import Link from "next/link";
 
 const footerLinks: Record<string, { label: string; href: string }[]> = {
-    "About": [
-        { label: "About Estabizz", href: "/services" },
-        { label: "Estabizz Blogs", href: "/blogs" },
-        { label: "Submit a Blog", href: "/submit-blog" },
+    "Company": [
+        { label: "About Estabizz", href: "/about" },
+        { label: "Regulatory Insights", href: "/blogs" },
         { label: "Contact Us", href: "/contact" },
+        { label: "Pricing", href: "/pricing" },
     ],
-    "Regulatory Expertise": [
-        { label: "RBI Licensing & Compliance", href: "/rbi" },
-        { label: "SEBI Registrations", href: "/sebi" },
-        { label: "IRDAI Licensing", href: "/irdai" },
-        { label: "IFSCA & GIFT City", href: "/ifsca" },
-        { label: "FIU & AML Frameworks", href: "/fema" },
-        { label: "NBFC Compliance", href: "/rbi/nbfc-legal-support" },
-        { label: "AIF & PMS Compliance", href: "/sebi/aif-compliance-test-report" },
+    "Regulatory Services": [
+        { label: "RBI Services", href: "/rbi" },
+        { label: "SEBI Services", href: "/sebi" },
+        { label: "IRDAI Services", href: "/irdai" },
+        { label: "IFSCA Services", href: "/ifsca" },
+        { label: "FIU-IND & PMLA", href: "/fiu-ind-pmla" },
     ],
-    "Corporate & Sectoral Services": [
-        { label: "Company Incorporation", href: "/services/enterprise-services" },
-        { label: "Annual ROC Compliance", href: "/services/enterprise-services" },
-        { label: "Tax & Audit", href: "/services/enterprise-services" },
-        { label: "Sectoral Licences", href: "/services" },
-        { label: "IPR & Trademark", href: "/services/trademark-search" },
+    "Corporate Services": [
+        { label: "Company Incorporation", href: "/services/company-incorporation" },
+        { label: "Trademark Search", href: "/services/trademark-search" },
+        { label: "India Entry Strategy", href: "/services/india-entry-strategy" },
     ],
-    "Compliance Portal": [
-        { label: "Estabizz Compliance Hub", href: "/login" },
-        { label: "Regulatory Dashboard", href: "/login" },
-        { label: "Licence Tracker", href: "/login" },
-        { label: "Document Vault", href: "/login" },
-        { label: "Policy Library", href: "/login" },
-        { label: "Compliance Calendar", href: "/login" },
+    "Compliance Hub": [
+        { label: "Compliance Hub", href: "/compliance-hub" },
+        { label: "Compliance Calendar", href: "/resources/compliance-calendar" },
+        { label: "Client Login", href: "/login" },
     ],
-    "Knowledge & Resources": [
+    "Resources": [
         { label: "Regulatory Updates", href: "/resources/regulatory-updates" },
-        { label: "Estabizz Blogs", href: "/blogs" },
+        { label: "Compliance Guides", href: "/resources" },
+        { label: "FAQs", href: "/resources/faqs" },
         { label: "Circular Explainers", href: "/resources/circular-explainers" },
         { label: "Client Education Notes", href: "/blogs" },
-        { label: "Case Highlights", href: "/" },
-        { label: "FAQs", href: "/resources/faqs" },
-        { label: "Guides & Insights", href: "/resources" },
     ],
-    "Legal & Transparency": [
+    "Legal": [
         { label: "Privacy Policy", href: "/legal/privacy-policy" },
-        { label: "Terms of Use", href: "/legal/terms-conditions" },
-        { label: "Refund & Cancellation", href: "/legal/refund-policy" },
+        { label: "Terms of Use", href: "/legal/terms-of-use" },
+        { label: "Refund Policy", href: "/legal/refund-policy" },
         { label: "Disclaimer", href: "/legal/disclaimer" },
         { label: "Cookie Policy", href: "/legal/cookie-policy" },
-    ],
-    "Company & Network": [
-        { label: "Associate Professional Partner", href: "/contact" },
-        { label: "Careers", href: "/contact" },
-        { label: "Team Estabizz", href: "/contact" },
-        { label: "Pricing", href: "/contact" },
-        { label: "Estabizz Compliance Network", href: "/contact" },
     ],
 };
 
@@ -114,9 +98,9 @@ export default function Footer() {
                                 <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#ffd97a]">Global markets</div>
                                 <div className="mt-3 flex flex-wrap gap-2">
                                     {footerMarkets.map((market) => (
-                                        <Link key={market} href="/contact" className="rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-[11px] font-bold text-white/76 transition-colors hover:border-[#8edcff]/40 hover:text-[#8edcff]">
+                                        <span key={market} className="rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-[11px] font-bold text-white/76">
                                             {market}
-                                        </Link>
+                                        </span>
                                     ))}
                                 </div>
                             </div>
@@ -168,7 +152,7 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7">
+                    <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
                         {Object.entries(footerLinks).map(([title, links]) => (
                             <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.045] p-4 backdrop-blur-xl">
                                 <h4 className="mb-4 text-[11px] font-black uppercase tracking-[0.14em] text-white">{title}</h4>
@@ -201,8 +185,8 @@ export default function Footer() {
                     <p>&copy; 2026 Estabizz Fintech Private Limited. All rights reserved.</p>
                     <div className="flex flex-wrap justify-center gap-5">
                         <Link href="/legal/privacy-policy" className="transition-colors hover:text-white/70">Privacy Policy</Link>
-                        <Link href="/legal/terms-conditions" className="transition-colors hover:text-white/70">Terms of Use</Link>
-                        <Link href="/legal/refund-policy" className="transition-colors hover:text-white/70">Refund & Cancellation</Link>
+                        <Link href="/legal/terms-of-use" className="transition-colors hover:text-white/70">Terms of Use</Link>
+                        <Link href="/legal/refund-policy" className="transition-colors hover:text-white/70">Refund Policy</Link>
                         <Link href="/legal/disclaimer" className="transition-colors hover:text-white/70">Disclaimer</Link>
                         <Link href="/legal/cookie-policy" className="transition-colors hover:text-white/70">Cookie Policy</Link>
                     </div>

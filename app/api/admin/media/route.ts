@@ -5,7 +5,7 @@ import Media from "@/lib/models/Media";
 import { validateBlogImages } from "@/lib/blogSecurity";
 
 export async function GET(req: NextRequest) {
-    const { response } = requireAdminRequest(req);
+    const { response } = await requireAdminRequest(req);
     if (response) return response;
 
     try {
@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-    const { response } = requireAdminRequest(req);
+    const { response } = await requireAdminRequest(req);
     if (response) return response;
 
     try {

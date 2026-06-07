@@ -4,7 +4,7 @@ import { createAdminBlog, getAdminBlogStats, listAdminBlogs } from "@/lib/blogSe
 import { validateBlogImages } from "@/lib/blogSecurity";
 
 export async function GET(req: NextRequest) {
-    const { response } = requireAdminRequest(req);
+    const { response } = await requireAdminRequest(req);
     if (response) return response;
 
     try {
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-    const { admin, response } = requireAdminRequest(req);
+    const { admin, response } = await requireAdminRequest(req);
     if (response) return response;
 
     try {

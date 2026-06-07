@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { connectDB } from '@/lib/db';
 import User from '@/lib/models/User';
+import { isAdminEmail } from '@/lib/adminAuth';
 
 function getJwtSecret() {
     const secret = process.env.JWT_SECRET;
@@ -50,13 +51,15 @@ export async function POST(req: NextRequest) {
             );
         }
 
+        const role = user.role === 'admin' && isAdminEmail(user.email) ? 'admin' : 'user';
+
         const token = jwt.sign(
             {
                 id: user._id.toString(),
                 email: user.email,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                role: user.role || 'user',
+                role,
             },
             getJwtSecret(),
             { expiresIn: '7d' }
@@ -68,7 +71,7 @@ export async function POST(req: NextRequest) {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
-                role: user.role || 'user',
+                role,
             },
         });
 

@@ -257,11 +257,6 @@ const staticSearchLinks = [
     { label: "Book Consultation", href: "/contact", group: "Site" },
     { label: "Get Started", href: "/get-started", group: "Site" },
     { label: "Login", href: "/login", group: "Site" },
-    { label: "Admin Blog Dashboard", href: "/admin/blogs", group: "Admin" },
-    { label: "Create New Blog", href: "/admin/blogs/new", group: "Admin" },
-    { label: "Pending Blog Review", href: "/admin/blogs/pending", group: "Admin" },
-    { label: "Media Library", href: "/admin/media", group: "Admin" },
-    { label: "Internal Resources", href: "/admin/resources", group: "Admin" },
 ];
 
 const menus: Record<string, MegaMenu> = {

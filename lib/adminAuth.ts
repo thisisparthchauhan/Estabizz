@@ -42,8 +42,7 @@ export function isAdminEmail(email?: string | null) {
 
 export function hasAdminPermission(token: AdminToken | null, _permission = "blogs:manage") {
     if (!token?.email) return false;
-    if (token.role === "admin") return true;
-    return isAdminEmail(token.email);
+    return token.role === "admin" && isAdminEmail(token.email);
 }
 
 export function canManageBlogs(token: AdminToken | null) {
@@ -74,9 +73,26 @@ export function verifyAdminCookie(tokenValue?: string) {
     }
 }
 
+export async function verifyAdminCookieWithDatabase(tokenValue?: string) {
+    const decoded = verifyAdminCookie(tokenValue);
+    if (!decoded?.email) return null;
+
+    const adminUser = await getAdminUserByEmail(decoded.email);
+    if (!adminUser || !isAdminEmail(decoded.email)) return null;
+
+    return {
+        ...decoded,
+        id: adminUser._id?.toString?.() || decoded.id,
+        email: String(adminUser.email).toLowerCase(),
+        firstName: adminUser.firstName,
+        lastName: adminUser.lastName,
+        role: "admin",
+    };
+}
+
 export async function requireAdminPage() {
     const cookieStore = await cookies();
-    const admin = verifyAdminCookie(cookieStore.get("auth_token")?.value);
+    const admin = await verifyAdminCookieWithDatabase(cookieStore.get("auth_token")?.value);
 
     if (!admin) {
         redirect("/login?next=/admin/blogs");
@@ -85,8 +101,8 @@ export async function requireAdminPage() {
     return admin;
 }
 
-export function requireAdminRequest(req: NextRequest) {
-    const admin = verifyAdminCookie(req.cookies.get("auth_token")?.value);
+export async function requireAdminRequest(req: NextRequest) {
+    const admin = await verifyAdminCookieWithDatabase(req.cookies.get("auth_token")?.value);
 
     if (!admin) {
         return {

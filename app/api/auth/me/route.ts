@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+import { getAdminUserByEmail, isAdminEmail } from "@/lib/adminAuth";
 
 interface AuthToken {
     id: string;
@@ -21,6 +22,10 @@ export async function GET() {
 
     try {
         const decoded = jwt.verify(token, secret) as AuthToken;
+        const adminUser = decoded.email && isAdminEmail(decoded.email)
+            ? await getAdminUserByEmail(decoded.email)
+            : null;
+        const role = adminUser ? "admin" : "user";
 
         return NextResponse.json({
             user: {
@@ -28,7 +33,7 @@ export async function GET() {
                 email: decoded.email,
                 firstName: decoded.firstName,
                 lastName: decoded.lastName,
-                role: decoded.role || "user",
+                role,
             },
         });
     } catch {

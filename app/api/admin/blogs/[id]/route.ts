@@ -4,7 +4,7 @@ import { deleteAdminBlog, getAdminBlogById, updateAdminBlog } from "@/lib/blogSe
 import { validateBlogImages } from "@/lib/blogSecurity";
 
 export async function GET(req: NextRequest, context: { params: Promise<{ id: string }> }) {
-    const { response } = requireAdminRequest(req);
+    const { response } = await requireAdminRequest(req);
     if (response) return response;
 
     try {
@@ -23,7 +23,7 @@ export async function GET(req: NextRequest, context: { params: Promise<{ id: str
 }
 
 export async function PATCH(req: NextRequest, context: { params: Promise<{ id: string }> }) {
-    const { response } = requireAdminRequest(req);
+    const { response } = await requireAdminRequest(req);
     if (response) return response;
 
     try {
@@ -46,7 +46,7 @@ export async function PATCH(req: NextRequest, context: { params: Promise<{ id: s
 }
 
 export async function DELETE(req: NextRequest, context: { params: Promise<{ id: string }> }) {
-    const { response } = requireAdminRequest(req);
+    const { response } = await requireAdminRequest(req);
     if (response) return response;
 
     try {

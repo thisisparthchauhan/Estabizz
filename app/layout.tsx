@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import LiveBackground from "@/components/ui/LiveBackground";
 import ReadingProgress from "@/components/ui/ReadingProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
@@ -59,6 +60,18 @@ export default function RootLayout({
                 </div>
                 <ScrollToTop />
                 <ChatWidget />
+                <Script
+                    src="https://www.googletagmanager.com/gtag/js?id=G-HHLKJM5Q87"
+                    strategy="afterInteractive"
+                />
+                <Script id="google-analytics" strategy="afterInteractive">
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-HHLKJM5Q87');
+                    `}
+                </Script>
             </body>
         </html>
     );

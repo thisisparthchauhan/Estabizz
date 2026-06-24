@@ -672,6 +672,14 @@ export default function Navbar() {
                         >
                             19/5
                         </Link>
+                        {/* Old Site — placeholder, link to be added later */}
+                        <a
+                            href="#"
+                            onClick={(e) => e.preventDefault()}
+                            className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#1677f2] transition-colors cursor-pointer"
+                        >
+                            Old Site
+                        </a>
                     </div>
 
                     {/* Right */}
@@ -880,6 +888,14 @@ export default function Navbar() {
                         >
                             🏛️ 19/5
                         </Link>
+                        {/* Old Site — placeholder, link to be added later */}
+                        <a
+                            href="#"
+                            onClick={(e) => e.preventDefault()}
+                            className="mt-2 flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#1677f2] cursor-pointer"
+                        >
+                            🗂️ Old Site
+                        </a>
                         <div className="border-t border-gray-100 pt-4 mt-4">
                             {authUser ? (
                                 <div className="mb-2">

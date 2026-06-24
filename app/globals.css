@@ -16,7 +16,10 @@
 
 html {
   scroll-behavior: smooth;
-  background: #f8fbff;
+  /* Match footer background so overscroll below the footer stays dark, not white */
+  background: #0a1628;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -29,6 +32,9 @@ body {
     radial-gradient(circle at 92% 12%, rgba(0, 150, 214, 0.10), transparent 26vw),
     linear-gradient(180deg, #f9fcff 0%, #eef7ff 45%, #f8fbff 100%);
   overflow-x: hidden;
+  overscroll-behavior-y: none;
+  margin: 0;
+  padding: 0;
 }
 
 ::selection {

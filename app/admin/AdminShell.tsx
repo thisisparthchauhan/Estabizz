@@ -77,6 +77,15 @@ function IconLayout() {
   );
 }
 
+function IconEdit() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+      <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+    </svg>
+  );
+}
+
 function IconArrowLeft() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -113,6 +122,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Dashboard",      href: "/admin",               icon: <IconGrid /> },
+  { label: "Website Editor", href: "/admin/website",        icon: <IconEdit /> },
   { label: "Leads",          href: "/admin/leads",          icon: <IconList /> },
   { label: "All Blogs",      href: "/admin/blogs",          icon: <IconList /> },
   { label: "New Blog",       href: "/admin/blogs/new",      icon: <IconPlus /> },
@@ -126,6 +136,7 @@ const NAV_ITEMS: NavItem[] = [
 
 const PAGE_TITLES: Record<string, string> = {
   "/admin":                "Dashboard",
+  "/admin/website":        "Website Editor",
   "/admin/leads":          "Leads",
   "/admin/blogs":          "All Blogs",
   "/admin/blogs/new":      "New Blog",
@@ -138,6 +149,7 @@ const PAGE_TITLES: Record<string, string> = {
 function getPageTitle(pathname: string): string {
   if (PAGE_TITLES[pathname]) return PAGE_TITLES[pathname];
   if (pathname.startsWith("/admin/blogs/edit")) return "Edit Blog";
+  if (pathname.startsWith("/admin/website")) return "Website Editor";
   return "Admin";
 }
 

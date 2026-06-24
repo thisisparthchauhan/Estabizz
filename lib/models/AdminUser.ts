@@ -43,8 +43,12 @@ const AdminUserSchema = new Schema<IAdminUser>(
     role: {
       type: String,
       required: true,
-      enum: ['super_admin', 'admin', 'editor', 'reviewer'] satisfies AdminRole[],
-      default: 'editor',
+      enum: [
+        'super_admin', 'website_editor', 'content_writer',
+        'compliance_reviewer', 'seo_manager', 'admin_viewer',
+        'admin', 'editor', 'reviewer',
+      ] satisfies AdminRole[],
+      default: 'admin_viewer',
     },
 
     status: {

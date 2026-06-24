@@ -14,6 +14,8 @@ import ResourcesSection from "@/components/home/ResourcesSection";
 import FinalCTA from "@/components/home/FinalCTA";
 import StatsSection from "@/components/home/StatsSection";
 import FeaturedBlogs from "@/components/home/FeaturedBlogs";
+import { getContent } from "@/lib/content/getContent";
+import type { HeroContent } from "@/lib/content/heroDefaults";
 
 export const metadata: Metadata = {
     title: "Estabizz Fintech Private Limited | India's Fintech Compliance Platform",
@@ -62,14 +64,15 @@ const websiteSchema = {
     }
 };
 
-export default function Home() {
+export default async function Home() {
+    const heroContent = (await getContent("homepage.hero")) as Partial<HeroContent>;
     return (
         <div className="bg-transparent min-h-screen font-sans text-gray-800">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
 
             <main>
-                <HeroSection />
+                <HeroSection content={heroContent} />
                 <StatsSection />
                 <TrustedBy />
                 <GlobalMarketsSection />

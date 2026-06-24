@@ -1,6 +1,7 @@
 import type { ContentDefault } from '@/lib/content/types';
 import { FOOTER_DEFAULTS } from '@/lib/content/footerDefaults';
 import { NAVBAR_DEFAULTS } from '@/lib/content/navbarDefaults';
+import { HERO_DEFAULTS } from '@/lib/content/heroDefaults';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Content defaults registry
@@ -23,6 +24,13 @@ export const CONTENT_DEFAULTS: Record<string, ContentDefault> = {
     group: 'Navigation',
     // Sourced from the single source of truth in navbarDefaults.ts
     fields: { ...NAVBAR_DEFAULTS },
+  },
+
+  'homepage.hero': {
+    key: 'homepage.hero',
+    label: 'Hero Section',
+    group: 'Homepage',
+    fields: { ...HERO_DEFAULTS },
   },
 
   'global.footer': {

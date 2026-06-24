@@ -1,36 +1,23 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { HERO_DEFAULTS, type HeroContent } from "@/lib/content/heroDefaults";
 
-const rotatingServices = [
-    "RBI Licensing",
-    "SEBI Registration",
-    "IRDAI Compliance",
-    "IFSCA GIFT City",
-    "AML & FIU Advisory",
-    "Global Market Entry",
-];
+export default function HeroSection({ content }: { content?: Partial<HeroContent> }) {
+    const c: HeroContent = { ...HERO_DEFAULTS, ...content };
+    const rotatingServices = c.rotatingWords?.length ? c.rotatingWords : HERO_DEFAULTS.rotatingWords;
+    const trustStats = c.trustStats?.length ? c.trustStats : HERO_DEFAULTS.trustStats;
+    const servicePills = c.servicePills?.length ? c.servicePills : HERO_DEFAULTS.servicePills;
 
-const trustStats = [
-    "500+ Licences Obtained",
-    "1000+ Businesses Served",
-    "100+ Associate Professionals",
-    "India + Global Market Desk",
-];
-
-const servicePills = [
-    "NBFC", "Payment Aggregator", "AIF", "PMS", "RIA", "Stock Broker", "Insurance Broker", "FME", "ITFS", "FIU-IND",
-];
-
-export default function HeroSection() {
     const [activeWord, setActiveWord] = useState(0);
 
     useEffect(() => {
+        setActiveWord(0);
         const timer = window.setInterval(() => {
             setActiveWord((index) => (index + 1) % rotatingServices.length);
         }, 1900);
         return () => window.clearInterval(timer);
-    }, []);
+    }, [rotatingServices.length]);
 
     return (
         <section className="relative isolate overflow-hidden bg-white px-6 pb-20 pt-32 md:pt-36">
@@ -41,11 +28,11 @@ export default function HeroSection() {
 
             <div className="mx-auto max-w-[1180px] text-center">
                 <div className="mb-8 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-5 py-2 text-[12px] font-black uppercase tracking-[0.24em] text-[#0077B6] shadow-sm">
-                    Welcome to Estabizz
+                    {c.welcomeLabel}
                 </div>
 
                 <h1 className="mx-auto max-w-[1050px] text-[clamp(42px,7vw,86px)] font-black leading-[1.02] tracking-[-0.045em] text-[#120b45]">
-                    Your Trusted Partner for
+                    {c.headingPrefix}
                     <span className="relative mt-2 block min-h-[1.08em] text-[#1677f2]">
                         <span key={rotatingServices[activeWord]} className="inline-block animate-[heroWord_0.55s_ease]">
                             {rotatingServices[activeWord]}
@@ -55,7 +42,7 @@ export default function HeroSection() {
                 </h1>
 
                 <p className="mx-auto mt-7 max-w-[840px] text-[18px] font-medium leading-[1.85] text-[#64748b]">
-                    Expert regulatory guidance for RBI, SEBI, IRDAI, IFSCA and allied government licences. Estabizz manages licensing, documentation and compliance readiness so founders and compliance teams can move with clarity.
+                    {c.subheading}
                 </p>
 
                 <div className="mx-auto mt-8 flex max-w-[780px] flex-wrap items-center justify-center gap-2">
@@ -65,16 +52,16 @@ export default function HeroSection() {
                         </span>
                     ))}
                     <span className="ml-2 rounded-full bg-white px-4 py-2 text-[14px] font-black text-[#0a2b58] shadow-[0_12px_30px_rgba(0,90,150,0.10)]">
-                        We support India-first businesses expanding into global markets.
+                        {c.supportLine}
                     </span>
                 </div>
 
                 <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                    <a href="/contact" className="rounded-xl bg-[#1677f2] px-9 py-4 text-[16px] font-black text-white shadow-[0_18px_45px_rgba(22,119,242,0.28)] transition-all hover:-translate-y-1 hover:bg-[#0866d9]">
-                        Schedule a Consultation
+                    <a href={c.primaryBtnLink} className="rounded-xl bg-[#1677f2] px-9 py-4 text-[16px] font-black text-white shadow-[0_18px_45px_rgba(22,119,242,0.28)] transition-all hover:-translate-y-1 hover:bg-[#0866d9]">
+                        {c.primaryBtnText}
                     </a>
-                    <a href="/regulatory" className="rounded-xl border border-blue-100 bg-white px-9 py-4 text-[16px] font-black text-[#0a2b58] shadow-[0_14px_35px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-1 hover:border-[#1677f2] hover:text-[#1677f2]">
-                        Explore Services
+                    <a href={c.secondaryBtnLink} className="rounded-xl border border-blue-100 bg-white px-9 py-4 text-[16px] font-black text-[#0a2b58] shadow-[0_14px_35px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-1 hover:border-[#1677f2] hover:text-[#1677f2]">
+                        {c.secondaryBtnText}
                     </a>
                 </div>
 

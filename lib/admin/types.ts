@@ -6,8 +6,35 @@
 
 // ─── Enumerations ─────────────────────────────────────────────────────────────
 
-/** Hierarchical roles — widest access first */
-export type AdminRole = 'super_admin' | 'admin' | 'editor' | 'reviewer';
+/**
+ * Roles. The six business roles are listed first; the original four
+ * (admin/editor/reviewer) are retained for backward compatibility with
+ * existing accounts and the blog workflow.
+ */
+export type AdminRole =
+  | 'super_admin'         // full access to everything
+  | 'website_editor'      // edit website sections (no publish, no delete-page, no users)
+  | 'content_writer'      // create/edit drafts → approval
+  | 'compliance_reviewer' // approve / reject / comment on drafts
+  | 'seo_manager'         // SEO fields only
+  | 'admin_viewer'        // read-only
+  // legacy roles (kept for compatibility)
+  | 'admin'
+  | 'editor'
+  | 'reviewer';
+
+/** Human-friendly role labels for the admin UI. */
+export const ROLE_LABELS: Record<AdminRole, string> = {
+  super_admin: 'Super Admin',
+  website_editor: 'Website Editor',
+  content_writer: 'Content Writer',
+  compliance_reviewer: 'Compliance Reviewer',
+  seo_manager: 'SEO Manager',
+  admin_viewer: 'Admin Viewer',
+  admin: 'Administrator',
+  editor: 'Editor',
+  reviewer: 'Reviewer',
+};
 
 /** Account lifecycle states */
 export type AdminStatus = 'active' | 'inactive' | 'suspended';
@@ -34,7 +61,9 @@ export type AdminPermission =
   | 'publish_content'   // approve & make content changes live
   | 'manage_navigation' // edit navbar & footer
   | 'delete_content'    // soft-delete content → Recycle Bin
-  | 'purge_content';    // permanently delete from Recycle Bin (admin only, needs password)
+  | 'purge_content'     // permanently delete from Recycle Bin (admin only, needs password)
+  | 'manage_seo'        // edit SEO fields (title, meta, slug, OG, canonical, index)
+  | 'view_admin';       // read-only access to the admin panel
 
 // ─── Role → default permission mapping ────────────────────────────────────────
 
@@ -56,7 +85,44 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     'manage_navigation',
     'delete_content',
     'purge_content',
+    'manage_seo',
+    'view_admin',
   ],
+
+  // ── The six business roles ──────────────────────────────────────────────────
+  website_editor: [
+    'manage_content',     // edit website sections
+    'manage_navigation',  // navbar + footer
+    'manage_media',
+    'view_admin',
+    // NOT publish_content (sends for approval), NOT delete/purge, NOT users
+  ],
+  content_writer: [
+    'manage_blogs',
+    'create_blog',
+    'edit_blog',
+    'manage_media',
+    'manage_content',     // drafts → approval
+    'view_admin',
+    // changes go for approval; cannot publish
+  ],
+  compliance_reviewer: [
+    'manage_blogs',
+    'approve_blog',
+    'reject_blog',
+    'publish_blog',
+    'archive_blog',
+    'publish_content',    // approve/reject/publish content changes
+    'view_admin',
+  ],
+  seo_manager: [
+    'manage_seo',
+    'view_admin',
+  ],
+  admin_viewer: [
+    'view_admin',         // read-only
+  ],
+
   admin: [
     'manage_blogs',
     'create_blog',
@@ -73,6 +139,8 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     'manage_navigation',
     'delete_content',
     'purge_content',
+    'manage_seo',
+    'view_admin',
     // manage_users intentionally excluded — only super_admin
   ],
   editor: [

@@ -1,5 +1,6 @@
 import type { ContentDefault } from '@/lib/content/types';
 import { FOOTER_DEFAULTS } from '@/lib/content/footerDefaults';
+import { NAVBAR_DEFAULTS } from '@/lib/content/navbarDefaults';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Content defaults registry
@@ -16,6 +17,14 @@ import { FOOTER_DEFAULTS } from '@/lib/content/footerDefaults';
 
 export const CONTENT_DEFAULTS: Record<string, ContentDefault> = {
   // ── Footer (Navigation group) ───────────────────────────────────────────────
+  'global.navbar': {
+    key: 'global.navbar',
+    label: 'Navbar',
+    group: 'Navigation',
+    // Sourced from the single source of truth in navbarDefaults.ts
+    fields: { ...NAVBAR_DEFAULTS },
+  },
+
   'global.footer': {
     key: 'global.footer',
     label: 'Footer',

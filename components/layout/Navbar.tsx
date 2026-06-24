@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from "react"
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { NAVBAR_DEFAULTS, type NavbarContent } from "@/lib/content/navbarDefaults";
 
 interface AuthUser {
     id: string;
@@ -354,7 +355,10 @@ const globalMarketRegions = [
     },
 ];
 
-export default function Navbar() {
+export default function Navbar({ content }: { content?: Partial<NavbarContent> }) {
+    // Editable navbar content (quick links + CTA) from the CMS, with fallback.
+    const nav: NavbarContent = { ...NAVBAR_DEFAULTS, ...content };
+    const quickLinks = nav.quickLinks?.length ? nav.quickLinks : NAVBAR_DEFAULTS.quickLinks;
     const router = useRouter();
     const [scrolled, setScrolled] = useState(false);
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -660,26 +664,27 @@ export default function Navbar() {
                                 {item} <svg className={`w-3 h-3 transition-transform ${activeMenu === item ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </div>
                         ))}
-                        <Link
-                            href="/blogs"
-                            className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#1677f2] transition-colors"
-                        >
-                            Insights
-                        </Link>
-                        <Link
-                            href="/19-5"
-                            className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#1677f2] transition-colors"
-                        >
-                            19/5
-                        </Link>
-                        <a
-                            href="https://old.estabizz.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#1677f2] transition-colors cursor-pointer"
-                        >
-                            Old Site
-                        </a>
+                        {quickLinks.map((link) =>
+                            link.newTab ? (
+                                <a
+                                    key={link.label}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#1677f2] transition-colors cursor-pointer"
+                                >
+                                    {link.label}
+                                </a>
+                            ) : (
+                                <Link
+                                    key={link.label}
+                                    href={link.href}
+                                    className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#1677f2] transition-colors"
+                                >
+                                    {link.label}
+                                </Link>
+                            )
+                        )}
                     </div>
 
                     {/* Right */}
@@ -776,8 +781,8 @@ export default function Navbar() {
                         )}
 
                         <CountrySelector selectorRef={desktopCountryRef} />
-                        <Link href="/get-started" className="whitespace-nowrap text-[13px] 2xl:text-[13.5px] font-bold bg-[#1677f2] text-white rounded-xl px-4 2xl:px-6 py-2.5 hover:-translate-y-0.5 hover:bg-[#0866d9] transition-all shadow-[0_12px_28px_rgba(22,119,242,0.28)]">
-                            Get Started
+                        <Link href={nav.ctaHref} className="whitespace-nowrap text-[13px] 2xl:text-[13.5px] font-bold bg-[#1677f2] text-white rounded-xl px-4 2xl:px-6 py-2.5 hover:-translate-y-0.5 hover:bg-[#0866d9] transition-all shadow-[0_12px_28px_rgba(22,119,242,0.28)]">
+                            {nav.ctaLabel}
                         </Link>
                     </div>
 
@@ -874,28 +879,28 @@ export default function Navbar() {
                                 </div>
                             </details>
                         ))}
-                        <Link
-                            href="/blogs"
-                            onClick={() => setMobileOpen(false)}
-                            className="flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#1677f2]"
-                        >
-                            ✍️ Regulatory Insights
-                        </Link>
-                        <Link
-                            href="/19-5"
-                            onClick={() => setMobileOpen(false)}
-                            className="mt-2 flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#1677f2]"
-                        >
-                            🏛️ 19/5
-                        </Link>
-                        <a
-                            href="https://old.estabizz.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="mt-2 flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#1677f2] cursor-pointer"
-                        >
-                            🗂️ Old Site
-                        </a>
+                        {quickLinks.map((link, i) =>
+                            link.newTab ? (
+                                <a
+                                    key={link.label}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`${i === 0 ? "" : "mt-2 "}flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#1677f2] cursor-pointer`}
+                                >
+                                    {link.icon} {link.label}
+                                </a>
+                            ) : (
+                                <Link
+                                    key={link.label}
+                                    href={link.href}
+                                    onClick={() => setMobileOpen(false)}
+                                    className={`${i === 0 ? "" : "mt-2 "}flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#1677f2]`}
+                                >
+                                    {link.icon} {link.label}
+                                </Link>
+                            )
+                        )}
                         <div className="border-t border-gray-100 pt-4 mt-4">
                             {authUser ? (
                                 <div className="mb-2">
@@ -938,7 +943,7 @@ export default function Navbar() {
                                 </div>
                             </details>
                         </div>
-                        <Link href="/get-started" onClick={() => setMobileOpen(false)} className="block w-full text-center bg-[#0a1628] text-white font-bold text-[14px] rounded-lg py-3 mt-4">Get Started</Link>
+                        <Link href={nav.ctaHref} onClick={() => setMobileOpen(false)} className="block w-full text-center bg-[#0a1628] text-white font-bold text-[14px] rounded-lg py-3 mt-4">{nav.ctaLabel}</Link>
                     </div>
                 </div>
             )}

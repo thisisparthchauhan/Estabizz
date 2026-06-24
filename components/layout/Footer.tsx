@@ -68,7 +68,35 @@ const regulators: { label: string; href: string }[] = [
     { label: "ROC", href: "/services/enterprise-services" },
 ];
 
-export default function Footer() {
+// Editable contact details — managed from Admin → Navigation → Footer.
+// These literals are the built-in fallback; if the CMS has live values they
+// are passed in via the `contact` prop from the (server) root layout.
+export interface FooterContact {
+    description: string;
+    address: string;
+    phone: string;
+    email: string;
+    cin: string;
+    instagramUrl: string;
+    linkedinUrl: string;
+    copyright: string;
+}
+
+const FOOTER_DEFAULTS: FooterContact = {
+    description: "Structured regulatory advisory and compliance infrastructure partner for Indian and global businesses.",
+    address: "15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421",
+    phone: "+91 98256 00907",
+    email: "info@estabizz.com",
+    cin: "U74999GJ2021PTC123384",
+    instagramUrl: "https://www.instagram.com/estabizzlegal/",
+    linkedinUrl: "https://www.linkedin.com/company/estabizz-fintech/",
+    copyright: "© 2026 Estabizz Fintech Private Limited. All rights reserved.",
+};
+
+export default function Footer({ contact }: { contact?: Partial<FooterContact> }) {
+    const c: FooterContact = { ...FOOTER_DEFAULTS, ...contact };
+    // tel: href needs a digits-only version of the phone number
+    const phoneHref = `tel:${c.phone.replace(/[^\d+]/g, "")}`;
     return (
         <footer className="relative overflow-hidden bg-[#0a1628] text-white/70">
             <div className="pointer-events-none absolute inset-0">
@@ -90,25 +118,25 @@ export default function Footer() {
                         </Link>
 
                         <p className="max-w-[320px] text-[13px] leading-relaxed text-white/55">
-                            Structured regulatory advisory and compliance infrastructure partner for Indian and global businesses.
+                            {c.description}
                         </p>
 
                         <div className="mt-5 space-y-2.5">
                             <div className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-[12.5px] leading-relaxed text-white/65">
-                                15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421
+                                {c.address}
                             </div>
-                            <a href="tel:+919825600907" className="block rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-[12.5px] font-semibold text-white/70 transition-colors hover:border-[#1677f2]/40 hover:text-[#4f9dfb]">
-                                +91 98256 00907
+                            <a href={phoneHref} className="block rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-[12.5px] font-semibold text-white/70 transition-colors hover:border-[#1677f2]/40 hover:text-[#4f9dfb]">
+                                {c.phone}
                             </a>
-                            <a href="mailto:info@estabizz.com" className="block rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-[12.5px] font-semibold text-white/70 transition-colors hover:border-[#1677f2]/40 hover:text-[#4f9dfb]">
-                                info@estabizz.com
+                            <a href={`mailto:${c.email}`} className="block rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-[12.5px] font-semibold text-white/70 transition-colors hover:border-[#1677f2]/40 hover:text-[#4f9dfb]">
+                                {c.email}
                             </a>
                         </div>
 
                         <div className="mt-4 flex gap-2.5">
                             {[
-                                { icon: "IG", label: "Instagram", href: "https://www.instagram.com/estabizzlegal/" },
-                                { icon: "in", label: "LinkedIn", href: "https://www.linkedin.com/company/estabizz-fintech/" },
+                                { icon: "IG", label: "Instagram", href: c.instagramUrl },
+                                { icon: "in", label: "LinkedIn", href: c.linkedinUrl },
                             ].map((s) => (
                                 <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" title={s.label}
                                     className="flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/[0.05] text-[12px] font-black text-white/65 transition-all hover:-translate-y-1 hover:border-[#1677f2] hover:bg-[#1677f2] hover:text-white">
@@ -118,7 +146,7 @@ export default function Footer() {
                         </div>
 
                         <div className="mt-4 text-[11px] font-semibold text-white/35">
-                            CIN: U74999GJ2021PTC123384
+                            CIN: {c.cin}
                         </div>
                     </div>
 
@@ -154,7 +182,7 @@ export default function Footer() {
                 </p>
 
                 <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-[12px] font-medium text-white/40 md:flex-row">
-                    <p>&copy; 2026 Estabizz Fintech Private Limited. All rights reserved.</p>
+                    <p>{c.copyright}</p>
                     <div className="flex flex-wrap justify-center gap-5">
                         <Link href="/legal/privacy-policy" className="transition-colors hover:text-[#4f9dfb]">Privacy Policy</Link>
                         <Link href="/legal/terms-conditions" className="transition-colors hover:text-[#4f9dfb]">Terms of Service</Link>

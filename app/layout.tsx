@@ -4,7 +4,8 @@ import ReadingProgress from "@/components/ui/ReadingProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import ChatWidget from "@/components/ui/ChatWidget";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import Footer, { type FooterContact } from "@/components/layout/Footer";
+import { getContent } from "@/lib/content/getContent";
 import "@/app/globals.css"; // Assuming the user will have this
 
 // metadataBase is inherited by every page/route that uses relative canonical/OG URLs.
@@ -39,11 +40,13 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    // Live footer contact details from the CMS (falls back to defaults).
+    const footerContact = (await getContent("global.footer")) as Partial<FooterContact>;
     return (
         <html lang="en">
             <head>
@@ -67,7 +70,7 @@ export default function RootLayout({
                 <div className="relative z-10 w-full min-h-screen bg-transparent">
                     <Navbar />
                     {children}
-                    <Footer />
+                    <Footer contact={footerContact} />
                 </div>
                 <ScrollToTop />
                 <ChatWidget />

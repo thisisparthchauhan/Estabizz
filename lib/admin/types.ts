@@ -28,7 +28,13 @@ export type AdminPermission =
   | 'delete_blog'       // permanently delete a blog post
   | 'manage_categories' // create / edit / delete blog categories
   | 'manage_media'      // upload and manage images
-  | 'manage_users';     // manage other admin accounts
+  | 'manage_users'      // manage other admin accounts
+  // ── Site content CMS ────────────────────────────────────────────────────────
+  | 'manage_content'    // edit website content (homepage, pages)
+  | 'publish_content'   // approve & make content changes live
+  | 'manage_navigation' // edit navbar & footer
+  | 'delete_content'    // soft-delete content → Recycle Bin
+  | 'purge_content';    // permanently delete from Recycle Bin (admin only, needs password)
 
 // ─── Role → default permission mapping ────────────────────────────────────────
 
@@ -45,6 +51,11 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     'manage_categories',
     'manage_media',
     'manage_users',
+    'manage_content',
+    'publish_content',
+    'manage_navigation',
+    'delete_content',
+    'purge_content',
   ],
   admin: [
     'manage_blogs',
@@ -57,6 +68,11 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     'delete_blog',
     'manage_categories',
     'manage_media',
+    'manage_content',
+    'publish_content',
+    'manage_navigation',
+    'delete_content',
+    'purge_content',
     // manage_users intentionally excluded — only super_admin
   ],
   editor: [
@@ -65,6 +81,9 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     'edit_blog',
     'manage_categories',
     'manage_media',
+    // content editors can edit & submit, but NOT publish or delete
+    'manage_content',
+    'manage_navigation',
   ],
   reviewer: [
     'manage_blogs',
@@ -72,6 +91,8 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     'publish_blog',
     'reject_blog',
     'archive_blog',
+    // reviewers can approve/publish content changes
+    'publish_content',
   ],
 };
 

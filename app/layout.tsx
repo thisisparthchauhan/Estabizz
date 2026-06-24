@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import LiveBackground from "@/components/ui/LiveBackground";
 import ReadingProgress from "@/components/ui/ReadingProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
@@ -49,6 +48,18 @@ export default function RootLayout({
         <html lang="en">
             <head>
                 <link rel="stylesheet" href="/tailwind.css" />
+                {/* Google Analytics — placed in <head> so it appears in server-rendered HTML, required for GTM tag detection */}
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-HHLKJM5Q87" />
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-HHLKJM5Q87');
+                        `,
+                    }}
+                />
             </head>
             <body className="antialiased selection:bg-[#1677f2] selection:text-white relative bg-transparent">
                 <LiveBackground />
@@ -60,18 +71,6 @@ export default function RootLayout({
                 </div>
                 <ScrollToTop />
                 <ChatWidget />
-                <Script
-                    src="https://www.googletagmanager.com/gtag/js?id=G-HHLKJM5Q87"
-                    strategy="afterInteractive"
-                />
-                <Script id="google-analytics" strategy="afterInteractive">
-                    {`
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', 'G-HHLKJM5Q87');
-                    `}
-                </Script>
             </body>
         </html>
     );

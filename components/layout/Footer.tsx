@@ -2,99 +2,17 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { FOOTER_DEFAULTS, type FooterContent } from "@/lib/content/footerDefaults";
 
-const footerLinks: Record<string, { label: string; href: string }[]> = {
-    "About": [
-        { label: "About Estabizz", href: "/services" },
-        { label: "Regulatory Insights", href: "/blogs" },
-        { label: "Contact Us", href: "/contact" },
-    ],
-    "Regulatory Expertise": [
-        { label: "RBI Licensing & Compliance", href: "/rbi" },
-        { label: "SEBI Registrations", href: "/sebi" },
-        { label: "IRDAI Licensing", href: "/irdai" },
-        { label: "IFSCA & GIFT City", href: "/ifsca" },
-        { label: "FIU & AML Frameworks", href: "/fema" },
-        { label: "NBFC Compliance", href: "/rbi/nbfc-legal-support" },
-        { label: "AIF & PMS Compliance", href: "/sebi/aif-compliance-test-report" },
-    ],
-    "Corporate & Sectoral Services": [
-        { label: "Company Incorporation", href: "/services/enterprise-services" },
-        { label: "Annual ROC Compliance", href: "/services/enterprise-services" },
-        { label: "Tax & Audit", href: "/services/enterprise-services" },
-        { label: "Sectoral Licences", href: "/services" },
-        { label: "IPR & Trademark", href: "/services/trademark-search" },
-    ],
-    "Compliance Portal": [
-        { label: "Estabizz Compliance Hub", href: "/login" },
-        { label: "Regulatory Dashboard", href: "/login" },
-        { label: "Licence Tracker", href: "/login" },
-        { label: "Document Vault", href: "/login" },
-        { label: "Policy Library", href: "/login" },
-        { label: "Compliance Calendar", href: "/login" },
-    ],
-    "Knowledge & Resources": [
-        { label: "Regulatory Updates", href: "/resources/regulatory-updates" },
-        { label: "Content Framework", href: "/resources/service-page-content-framework" },
-        { label: "Proposal Templates", href: "/proposal-template" },
-        { label: "Case Highlights", href: "/" },
-        { label: "FAQs", href: "/resources/faqs" },
-        { label: "Guides & Insights", href: "/resources" },
-    ],
-    "Legal & Transparency": [
-        { label: "Privacy Policy", href: "/legal/privacy-policy" },
-        { label: "Terms & Conditions", href: "/legal/terms-conditions" },
-        { label: "Refund Policy", href: "/legal/refund-policy" },
-        { label: "Disclaimer", href: "/legal/privacy-policy" },
-        { label: "Cookie Policy", href: "/legal/privacy-policy" },
-    ],
-    "Company & Network": [
-        { label: "Associate Professional Partner", href: "/contact" },
-        { label: "Careers", href: "/contact" },
-        { label: "Team Estabizz", href: "/contact" },
-        { label: "Pricing", href: "/contact" },
-        { label: "Estabizz Compliance Network", href: "/contact" },
-    ],
-};
+// The footer content is managed from Admin → Navigation → Footer. Live values
+// arrive via the `content` prop from the (server) root layout; FOOTER_DEFAULTS
+// (single source of truth in lib/content/footerDefaults.ts) is the fallback.
+export type { FooterContent };
 
-const regulators: { label: string; href: string }[] = [
-    { label: "RBI", href: "/rbi" },
-    { label: "SEBI", href: "/sebi" },
-    { label: "IRDAI", href: "/irdai" },
-    { label: "IFSCA", href: "/ifsca" },
-    { label: "MCA", href: "/services/enterprise-services" },
-    { label: "FIU-IND", href: "/fema" },
-    { label: "PMLA", href: "/services/legal-due-diligence" },
-    { label: "ROC", href: "/services/enterprise-services" },
-];
-
-// Editable contact details — managed from Admin → Navigation → Footer.
-// These literals are the built-in fallback; if the CMS has live values they
-// are passed in via the `contact` prop from the (server) root layout.
-export interface FooterContact {
-    description: string;
-    address: string;
-    phone: string;
-    email: string;
-    cin: string;
-    instagramUrl: string;
-    linkedinUrl: string;
-    copyright: string;
-}
-
-const FOOTER_DEFAULTS: FooterContact = {
-    description: "Structured regulatory advisory and compliance infrastructure partner for Indian and global businesses.",
-    address: "15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421",
-    phone: "+91 98256 00907",
-    email: "info@estabizz.com",
-    cin: "U74999GJ2021PTC123384",
-    instagramUrl: "https://www.instagram.com/estabizzlegal/",
-    linkedinUrl: "https://www.linkedin.com/company/estabizz-fintech/",
-    copyright: "© 2026 Estabizz Fintech Private Limited. All rights reserved.",
-};
-
-export default function Footer({ contact }: { contact?: Partial<FooterContact> }) {
-    const c: FooterContact = { ...FOOTER_DEFAULTS, ...contact };
+export default function Footer({ content }: { content?: Partial<FooterContent> }) {
+    const c: FooterContent = { ...FOOTER_DEFAULTS, ...content };
+    const columns = c.columns?.length ? c.columns : FOOTER_DEFAULTS.columns;
+    const regulators = c.regulators?.length ? c.regulators : FOOTER_DEFAULTS.regulators;
     // tel: href needs a digits-only version of the phone number
     const phoneHref = `tel:${c.phone.replace(/[^\d+]/g, "")}`;
     return (
@@ -152,11 +70,11 @@ export default function Footer({ contact }: { contact?: Partial<FooterContact> }
 
                     {/* Link columns */}
                     <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7">
-                        {Object.entries(footerLinks).map(([title, links]) => (
-                            <div key={title}>
-                                <h4 className="mb-3.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#4f9dfb]">{title}</h4>
+                        {columns.map((col) => (
+                            <div key={col.title}>
+                                <h4 className="mb-3.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#4f9dfb]">{col.title}</h4>
                                 <ul className="space-y-2">
-                                    {links.map((link) => (
+                                    {col.links.map((link) => (
                                         <li key={link.label}>
                                             <Link href={link.href} className="inline-block text-[12.5px] font-medium leading-relaxed text-white/55 transition-all hover:pl-1 hover:text-white">{link.label}</Link>
                                         </li>

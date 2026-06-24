@@ -1,4 +1,5 @@
 import type { ContentDefault } from '@/lib/content/types';
+import { FOOTER_DEFAULTS } from '@/lib/content/footerDefaults';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Content defaults registry
@@ -19,18 +20,8 @@ export const CONTENT_DEFAULTS: Record<string, ContentDefault> = {
     key: 'global.footer',
     label: 'Footer',
     group: 'Navigation',
-    fields: {
-      description:
-        'Structured regulatory advisory and compliance infrastructure partner for Indian and global businesses.',
-      address:
-        '15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421',
-      phone: '+91 98256 00907',
-      email: 'info@estabizz.com',
-      cin: 'U74999GJ2021PTC123384',
-      instagramUrl: 'https://www.instagram.com/estabizzlegal/',
-      linkedinUrl: 'https://www.linkedin.com/company/estabizz-fintech/',
-      copyright: '© 2026 Estabizz Fintech Private Limited. All rights reserved.',
-    },
+    // Sourced from the single source of truth in footerDefaults.ts
+    fields: { ...FOOTER_DEFAULTS },
   },
 };
 

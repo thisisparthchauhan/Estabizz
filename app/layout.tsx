@@ -4,7 +4,7 @@ import ReadingProgress from "@/components/ui/ReadingProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import ChatWidget from "@/components/ui/ChatWidget";
 import Navbar from "@/components/layout/Navbar";
-import Footer, { type FooterContact } from "@/components/layout/Footer";
+import Footer, { type FooterContent } from "@/components/layout/Footer";
 import { getContent } from "@/lib/content/getContent";
 import "@/app/globals.css"; // Assuming the user will have this
 
@@ -45,8 +45,8 @@ export default async function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    // Live footer contact details from the CMS (falls back to defaults).
-    const footerContact = (await getContent("global.footer")) as Partial<FooterContact>;
+    // Live footer content from the CMS (falls back to defaults).
+    const footerContent = (await getContent("global.footer")) as Partial<FooterContent>;
     return (
         <html lang="en">
             <head>
@@ -70,7 +70,7 @@ export default async function RootLayout({
                 <div className="relative z-10 w-full min-h-screen bg-transparent">
                     <Navbar />
                     {children}
-                    <Footer contact={footerContact} />
+                    <Footer content={footerContent} />
                 </div>
                 <ScrollToTop />
                 <ChatWidget />

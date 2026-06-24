@@ -1,65 +1,11 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { SOLUTIONS_DEFAULTS, type SolutionsContent } from "@/lib/content/solutionsDefaults";
 
-const solutions = [
-    {
-        num: "01",
-        icon: "🚀",
-        title: "Startups & New Businesses",
-        subtitle: "Build Right. From Day One.",
-        body: "Incorporation, GST, banking readiness and early compliance foundations before scale.",
-        tags: ["Private Limited", "LLP", "OPC", "Section 8"],
-        href: "/services"
-    },
-    {
-        num: "02",
-        icon: "🏦",
-        title: "NBFCs & Lending Businesses",
-        subtitle: "Regulated Lending. Managed with Precision.",
-        body: "NBFC licence, RBI policy stack, returns, audits, governance and post-registration compliance.",
-        tags: ["RBI Licensing", "NBFC Compliance", "DNBS Reporting"],
-        href: "/rbi"
-    },
-    {
-        num: "03",
-        icon: "💳",
-        title: "Fintech Platforms",
-        subtitle: "Compliance Architecture for Digital Finance.",
-        body: "Payment Aggregator, PPI, PSP, Account Aggregator and IFSCA route evaluation.",
-        tags: ["PA Licence", "PPI", "PSP", "IFSCA"],
-        href: "/ifsca"
-    },
-    {
-        num: "04",
-        icon: "📊",
-        title: "SMEs & Growing Enterprises",
-        subtitle: "Structured Compliance. Sustainable Growth.",
-        body: "ROC, tax, audit, secretarial, governance and sectoral licence support.",
-        tags: ["Audit", "ROC", "Tax", "Governance"],
-        href: "/services/enterprise-services"
-    },
-    {
-        num: "05",
-        icon: "📈",
-        title: "Capital Market Businesses",
-        subtitle: "SEBI Registration. Regulator-Ready Execution.",
-        body: "AIF, PMS, RIA, Research Analyst, Stock Broker, Merchant Banker and RTA support.",
-        tags: ["AIF", "PMS", "RIA", "Stock Broker"],
-        href: "/sebi"
-    },
-    {
-        num: "06",
-        icon: "🛡️",
-        title: "Insurance & Risk Entities",
-        subtitle: "IRDAI Licensing. Built on Governance.",
-        body: "Insurance broker, corporate agent, IMF, ISNP and reinsurance intermediary support.",
-        tags: ["Broker", "Corporate Agent", "IMF", "ISNP"],
-        href: "/irdai"
-    }
-];
-
-export default function SolutionsSection() {
+export default function SolutionsSection({ content }: { content?: Partial<SolutionsContent> }) {
+    const c: SolutionsContent = { ...SOLUTIONS_DEFAULTS, ...content };
+    const solutions = c.cards?.length ? c.cards : SOLUTIONS_DEFAULTS.cards;
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
 
@@ -83,13 +29,13 @@ export default function SolutionsSection() {
             <div className="mx-auto max-w-[1180px]">
                 <div className={`mx-auto mb-14 max-w-[860px] text-center transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
                     <div className="mb-4 text-[13px] font-black uppercase tracking-[0.24em] text-[#1677f2]">
-                        Business Stage Solutions
+                        {c.label}
                     </div>
                     <h2 className="text-[clamp(34px,4.4vw,58px)] font-black leading-[1.08] tracking-[-0.035em] text-[#071426]">
-                        Compliance support designed around where your business is going.
+                        {c.heading}
                     </h2>
                     <p className="mx-auto mt-5 max-w-[760px] text-[17px] font-medium leading-relaxed text-[#64748b]">
-                        Whether you are starting, scaling or entering a regulated financial market, Estabizz structures the licensing and compliance path with practical clarity.
+                        {c.description}
                     </p>
                 </div>
 

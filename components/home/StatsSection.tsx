@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import { STATS_DEFAULTS, type StatsContent, type StatItem } from "@/lib/content/statsDefaults";
 
 const useCountUp = (end: number, duration: number, isVisible: boolean) => {
     const [count, setCount] = useState(0);
@@ -33,8 +34,14 @@ const useCountUp = (end: number, duration: number, isVisible: boolean) => {
     return count;
 };
 
-const StatCard = ({ icon, endValue, suffix = "", label, hasCount = true, isVisible, delay }: any) => {
-    const count = useCountUp(hasCount ? endValue : 0, 1800, isVisible);
+const StatCard = ({ item, isVisible, delay }: { item: StatItem; isVisible: boolean; delay: number }) => {
+    const numeric = Number(item.value);
+    const canCount = item.animate && !Number.isNaN(numeric) && item.value.trim() !== "";
+    const count = useCountUp(canCount ? numeric : 0, 1800, isVisible);
+
+    // SEO-safe: the real value is always in the DOM. The count-up only replaces
+    // it once the section scrolls into view (so crawlers & no-JS see the number).
+    const display = canCount ? (isVisible ? count : numeric) : item.value;
 
     return (
         <div
@@ -45,16 +52,17 @@ const StatCard = ({ icon, endValue, suffix = "", label, hasCount = true, isVisib
                 transitionDelay: `${delay}s`
       }}
     >
-      <div className="text-[24px] mb-4">{icon}</div>
+      <div className="text-[24px] mb-4">{item.icon}</div>
       <div className="text-[32px] md:text-[40px] font-black text-[#0a1628] leading-tight mb-1">
-        {hasCount ? count : endValue}{suffix}
+        {display}{item.suffix}
       </div>
-      <div className="text-[14px] font-bold text-[#64748b] tracking-wide">{label}</div>
+      <div className="text-[14px] font-bold text-[#64748b] tracking-wide">{item.label}</div>
     </div>
   );
 };
 
-export default function StatsSection() {
+export default function StatsSection({ content }: { content?: Partial<StatsContent> }) {
+  const items = content?.items?.length ? content.items : STATS_DEFAULTS.items;
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -75,10 +83,9 @@ export default function StatsSection() {
   return (
     <section ref={sectionRef} className="py-16 relative bg-transparent z-10 w-full max-w-[1240px] mx-auto px-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard icon="🏆" endValue={500} suffix="+" label="Licences Obtained" isVisible={isVisible} delay={0.1} />
-        <StatCard icon="🏢" endValue={1000} suffix="+" label="Businesses Served" isVisible={isVisible} delay={0.2} />
-        <StatCard icon="🌐" endValue="India + Global" suffix="" label="Market Expansion Support" hasCount={false} isVisible={isVisible} delay={0.3} />
-        <StatCard icon="🤝" endValue={100} suffix="+" label="Associate Professionals" isVisible={isVisible} delay={0.4} />
+        {items.map((item, i) => (
+          <StatCard key={i} item={item} isVisible={isVisible} delay={0.1 * (i + 1)} />
+        ))}
       </div>
     </section>
   );

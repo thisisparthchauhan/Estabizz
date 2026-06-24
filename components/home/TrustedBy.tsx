@@ -1,11 +1,10 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import { TRUSTED_BY_DEFAULTS, type TrustedByContent } from "@/lib/content/trustedByDefaults";
 
-const companies = [
-    "Ezywise", "Thip", "InsureHub", "Cosmopayz", "Branch International", "Efficient Group", "GE Shipping", "Jainam Group", "Opus Capital", "Kshetrapal", "MAKS", "Market Wick", "Finergy Finance", "Fintara", "Devvrat Group", "Vayoonandan", "VSPA", "Western Fintrade", "SVCM", "Evermore", "LN Fintech", "Digitap", "Cashfree", "Razorpay", "Digio", "Nutra Trade", "Unique Solar", "CareBharat", "Ombeema", "CARE", "GROW"
-];
-
-export default function TrustedBy() {
+export default function TrustedBy({ content }: { content?: Partial<TrustedByContent> }) {
+    const c: TrustedByContent = { ...TRUSTED_BY_DEFAULTS, ...content };
+    const companies = c.companies?.length ? c.companies : TRUSTED_BY_DEFAULTS.companies;
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
 
@@ -41,10 +40,10 @@ export default function TrustedBy() {
 
             <div className="max-w-[1240px] mx-auto px-6 mb-12 text-center relative z-10">
                 <h2 className="text-[16px] md:text-[18px] font-extrabold text-[#0a1628] uppercase tracking-widest text-[#94a3b8]">
-                    Trusted by India&apos;s Fastest Growing Businesses
+                    {c.heading}
                 </h2>
                 <p className="mt-4 text-[12px] text-[#64748b] max-w-3xl mx-auto">
-                    Names are displayed for representative trust-building purposes only where permitted. This does not imply endorsement unless expressly authorised.
+                    {c.disclaimer}
                 </p>
             </div>
 

@@ -16,6 +16,9 @@ import StatsSection from "@/components/home/StatsSection";
 import FeaturedBlogs from "@/components/home/FeaturedBlogs";
 import { getContent } from "@/lib/content/getContent";
 import type { HeroContent } from "@/lib/content/heroDefaults";
+import type { StatsContent } from "@/lib/content/statsDefaults";
+import type { TrustedByContent } from "@/lib/content/trustedByDefaults";
+import type { SolutionsContent } from "@/lib/content/solutionsDefaults";
 
 export const metadata: Metadata = {
     title: "Estabizz Fintech Private Limited | India's Fintech Compliance Platform",
@@ -65,7 +68,12 @@ const websiteSchema = {
 };
 
 export default async function Home() {
-    const heroContent = (await getContent("homepage.hero")) as Partial<HeroContent>;
+    const [heroContent, statsContent, trustedByContent, solutionsContent] = (await Promise.all([
+        getContent("homepage.hero"),
+        getContent("homepage.stats"),
+        getContent("homepage.trustedBy"),
+        getContent("homepage.solutions"),
+    ])) as [Partial<HeroContent>, Partial<StatsContent>, Partial<TrustedByContent>, Partial<SolutionsContent>];
     return (
         <div className="bg-transparent min-h-screen font-sans text-gray-800">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
@@ -73,10 +81,10 @@ export default async function Home() {
 
             <main>
                 <HeroSection content={heroContent} />
-                <StatsSection />
-                <TrustedBy />
+                <StatsSection content={statsContent} />
+                <TrustedBy content={trustedByContent} />
                 <GlobalMarketsSection />
-                <SolutionsSection />
+                <SolutionsSection content={solutionsContent} />
                 <WhyChooseUs />
                 <RegulatoryServices />
                 <ProcessSection />

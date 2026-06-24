@@ -12,10 +12,17 @@ export const metadata: Metadata = {
 type Params = { params: Promise<{ pageId: string }> };
 
 // Map a section key to the admin route that edits it.
+const SECTION_ROUTES: Record<string, string> = {
+  "homepage.hero": "hero",
+  "homepage.stats": "stats",
+  "homepage.trustedBy": "trusted-by",
+  "homepage.solutions": "solutions",
+};
+
 function editorHref(key: string, pageId: string): string | null {
   if (key === "global.navbar" || key === "global.footer") return "/admin/navigation";
-  if (key === "homepage.hero") return `/admin/website/${pageId}/hero`;
-  return null; // editor not built yet
+  const slug = SECTION_ROUTES[key];
+  return slug ? `/admin/website/${pageId}/${slug}` : null;
 }
 
 function statusBadge(status: string) {

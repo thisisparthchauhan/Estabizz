@@ -38,10 +38,10 @@ export const PAGES: PageEntry[] = [
     sections: [
       { key: 'global.navbar',            name: 'Header / Navbar',                 note: 'Top of every page',          editorReady: true },
       { key: 'homepage.hero',            name: 'Hero Section',                    note: 'Main banner',                editorReady: true },
-      { key: 'homepage.stats',           name: 'Statistics / Achievements',       note: 'Counters',                   editorReady: false },
-      { key: 'homepage.trustedBy',       name: 'Client Logos / Trusted By',                                           editorReady: false },
+      { key: 'homepage.stats',           name: 'Statistics / Achievements',       note: 'Counters',                   editorReady: true },
+      { key: 'homepage.trustedBy',       name: 'Client Logos / Trusted By',                                           editorReady: true },
       { key: 'homepage.globalMarkets',   name: 'Global Market Desk',                                                  editorReady: false },
-      { key: 'homepage.solutions',       name: 'Business Stage Solutions',        note: 'Audience cards',             editorReady: false },
+      { key: 'homepage.solutions',       name: 'Business Stage Solutions',        note: 'Audience cards',             editorReady: true },
       { key: 'homepage.whyChooseUs',     name: 'Why Estabizz',                                                        editorReady: false },
       { key: 'homepage.regulatoryServices', name: 'Regulatory Services',          note: 'Service categories',         editorReady: false },
       { key: 'homepage.process',         name: 'Execution Process',                                                   editorReady: false },

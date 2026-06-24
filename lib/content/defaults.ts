@@ -2,6 +2,9 @@ import type { ContentDefault } from '@/lib/content/types';
 import { FOOTER_DEFAULTS } from '@/lib/content/footerDefaults';
 import { NAVBAR_DEFAULTS } from '@/lib/content/navbarDefaults';
 import { HERO_DEFAULTS } from '@/lib/content/heroDefaults';
+import { STATS_DEFAULTS } from '@/lib/content/statsDefaults';
+import { TRUSTED_BY_DEFAULTS } from '@/lib/content/trustedByDefaults';
+import { SOLUTIONS_DEFAULTS } from '@/lib/content/solutionsDefaults';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Content defaults registry
@@ -31,6 +34,27 @@ export const CONTENT_DEFAULTS: Record<string, ContentDefault> = {
     label: 'Hero Section',
     group: 'Homepage',
     fields: { ...HERO_DEFAULTS },
+  },
+
+  'homepage.stats': {
+    key: 'homepage.stats',
+    label: 'Statistics / Achievements',
+    group: 'Homepage',
+    fields: { ...STATS_DEFAULTS },
+  },
+
+  'homepage.trustedBy': {
+    key: 'homepage.trustedBy',
+    label: 'Client Logos / Trusted By',
+    group: 'Homepage',
+    fields: { ...TRUSTED_BY_DEFAULTS },
+  },
+
+  'homepage.solutions': {
+    key: 'homepage.solutions',
+    label: 'Business Stage Solutions',
+    group: 'Homepage',
+    fields: { ...SOLUTIONS_DEFAULTS },
   },
 
   'global.footer': {

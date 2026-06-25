@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission } from '@/lib/admin/requirePermission';
-import { getAllAdminUsers, createAdminUser } from '@/lib/admin/repository';
+import {
+  getAllAdminUsers,
+  createAdminUser,
+  createAdminLoginCredential,
+  getLoginReadyEmails,
+} from '@/lib/admin/repository';
+import { ADMIN_EMAIL_ALLOWLIST } from '@/lib/admin/seedData';
 import type { AdminRole } from '@/lib/admin/types';
-import { ROLE_DEFAULT_PERMISSIONS } from '@/lib/admin/types';
 
 const VALID_ROLES: AdminRole[] = [
   'super_admin', 'website_editor', 'content_writer',
@@ -20,7 +25,15 @@ export async function GET(req: NextRequest) {
 
   try {
     const users = await getAllAdminUsers();
-    return NextResponse.json({ users });
+    const loginReadySet = await getLoginReadyEmails(users.map(u => u.email));
+
+    const enriched = users.map(u => ({
+      ...u,
+      loginReady: loginReadySet.has(u.email.toLowerCase()) ||
+                  ADMIN_EMAIL_ALLOWLIST.has(u.email.toLowerCase()),
+    }));
+
+    return NextResponse.json({ users: enriched });
   } catch (err) {
     console.error('[admin/users] GET error:', err);
     return NextResponse.json({ error: 'Unable to load users.' }, { status: 500 });
@@ -35,9 +48,12 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json() as Record<string, unknown>;
-    const fullName = String(body.fullName ?? '').trim();
-    const email    = String(body.email    ?? '').toLowerCase().trim();
-    const role     = body.role as AdminRole;
+    const fullName          = String(body.fullName          ?? '').trim();
+    const email             = String(body.email             ?? '').toLowerCase().trim();
+    const role              = body.role as AdminRole;
+    const createLoginAccess = body.createLoginAccess === true;
+    const password          = String(body.password          ?? '').trim();
+    const confirmPassword   = String(body.confirmPassword   ?? '').trim();
 
     if (!fullName) {
       return NextResponse.json({ error: 'Full Name is required.' }, { status: 400 });
@@ -49,8 +65,28 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'A valid Role is required.' }, { status: 400 });
     }
 
+    if (createLoginAccess) {
+      if (!password) {
+        return NextResponse.json({ error: 'A password is required to create login access.' }, { status: 400 });
+      }
+      if (password.length < 8) {
+        return NextResponse.json({ error: 'Password must be at least 8 characters.' }, { status: 400 });
+      }
+      if (password !== confirmPassword) {
+        return NextResponse.json({ error: 'Passwords do not match.' }, { status: 400 });
+      }
+    }
+
     const user = await createAdminUser({ fullName, email, role });
-    return NextResponse.json({ success: true, user });
+
+    if (createLoginAccess) {
+      await createAdminLoginCredential(user.id, password);
+    }
+
+    const loginReady = createLoginAccess ||
+      ADMIN_EMAIL_ALLOWLIST.has(email.toLowerCase());
+
+    return NextResponse.json({ success: true, user: { ...user, loginReady } });
   } catch (err: unknown) {
     console.error('[admin/users] POST error:', err);
     const msg = err instanceof Error ? err.message : '';
@@ -60,4 +96,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unable to create user.' }, { status: 500 });
   }
 }
-

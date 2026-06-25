@@ -35,7 +35,7 @@ type Params = { params: Promise<{ id: string }> };
 export async function PATCH(req: NextRequest, { params }: Params) {
   try {
     // ── Admin auth guard ──────────────────────────────────────────────────────
-    const auth = requireAdmin(req);
+    const auth = await requireAdmin(req);
     if (!auth.ok) return auth.response;
 
     const { id } = await params;

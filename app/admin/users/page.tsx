@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
-import { getAdminUserByEmail, getAllAdminUsers } from "@/lib/admin/repository";
+import { getAdminUserByEmail, getAllAdminUsers, getLoginReadyEmails } from "@/lib/admin/repository";
 import { ADMIN_EMAIL_ALLOWLIST } from "@/lib/admin/seedData";
 import type { AdminContext } from "@/lib/admin/requirePermission";
 import UsersClient from "./UsersClient";
@@ -32,17 +32,22 @@ export default async function UsersPage() {
 
   const canManage = viewer?.permissions.includes("manage_users") ?? false;
 
-  // Only load users list if viewer has permission (avoids unnecessary DB call).
-  const initialUsers = canManage ? await getAllAdminUsers() : [];
+  const rawUsers = canManage ? await getAllAdminUsers() : [];
 
-  // Pass the allowlist so the client can flag users who have login access.
-  const allowlistEmails = Array.from(ADMIN_EMAIL_ALLOWLIST);
+  const loginReadySet = canManage
+    ? await getLoginReadyEmails(rawUsers.map(u => u.email))
+    : new Set<string>();
+
+  const initialUsers = rawUsers.map(u => ({
+    ...u,
+    loginReady: loginReadySet.has(u.email.toLowerCase()) ||
+                ADMIN_EMAIL_ALLOWLIST.has(u.email.toLowerCase()),
+  }));
 
   return (
     <UsersClient
       viewer={viewer}
       initialUsers={initialUsers}
-      allowlistEmails={allowlistEmails}
     />
   );
 }

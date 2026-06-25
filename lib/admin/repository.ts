@@ -214,6 +214,72 @@ export async function updateAdminUserById(
   return doc ? mongoDocToAdminUser(doc) : null;
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Login credential helpers
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Returns the set of emails (lowercase) that have a login credential
+ * in the User collection. Used to annotate admin user lists.
+ */
+export async function getLoginReadyEmails(emails: string[]): Promise<Set<string>> {
+  if (emails.length === 0) return new Set();
+  try {
+    const { connectDB } = await import('@/lib/db');
+    const User = (await import('@/lib/models/User')).default;
+    await connectDB();
+    const normalised = emails.map(e => e.toLowerCase());
+    const docs = await User.find({ email: { $in: normalised } }, 'email').lean();
+    return new Set((docs as { email: string }[]).map(d => d.email.toLowerCase()));
+  } catch {
+    return new Set();
+  }
+}
+
+/**
+ * Create or update the login credential (User collection entry) for an
+ * active admin user. Uses the same bcrypt-12 approach as createAdminLogin.mjs.
+ *
+ * Throws if the admin user is not found or not active.
+ */
+export async function createAdminLoginCredential(
+  adminId: string,
+  password: string
+): Promise<void> {
+  const AdminUserModel = await getAdminUserModel();
+  const adminDoc = await AdminUserModel.findById(adminId).lean();
+  if (!adminDoc) throw new Error('Admin user not found.');
+  if (adminDoc.status !== 'active') throw new Error('Cannot create login access for an inactive or suspended user. Reactivate the account first.');
+
+  const bcrypt = await import('bcryptjs');
+  const hash   = await bcrypt.hash(password, 12);
+
+  const { connectDB } = await import('@/lib/db');
+  const User = (await import('@/lib/models/User')).default;
+  await connectDB();
+
+  const parts     = adminDoc.fullName.trim().split(/\s+/);
+  const firstName = parts[0] ?? 'Admin';
+  const lastName  = parts.slice(1).join(' ') || 'User';
+
+  await User.findOneAndUpdate(
+    { email: adminDoc.email },
+    { $set: { firstName, lastName, email: adminDoc.email, password: hash } },
+    { upsert: true, new: true }
+  );
+}
+
+/**
+ * Reset the login password for an admin user by their MongoDB _id.
+ * Same as createAdminLoginCredential — upserts the User record.
+ */
+export async function resetAdminPasswordById(
+  adminId: string,
+  newPassword: string
+): Promise<void> {
+  await createAdminLoginCredential(adminId, newPassword);
+}
+
 /**
  * Update the lastLoginAt timestamp for an admin user.
  * Called after a successful admin authentication.

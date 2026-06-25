@@ -193,10 +193,15 @@ export interface AdminUser {
    * bcrypt hash of the admin's password.
    * May be undefined when the admin authenticates through the existing
    * User model (same email + password) rather than a separate admin credential.
-   *
-   * TODO: Populate this field when the dedicated /admin/login flow is built.
    */
   passwordHash?: string;
+
+  /**
+   * Computed at query time (not stored in DB).
+   * True when a login credential exists in the User collection for this email,
+   * or when the email is in the static admin allowlist.
+   */
+  loginReady?: boolean;
 
   /**
    * OAuth provider subject identifier (e.g. Google sub, GitHub id).

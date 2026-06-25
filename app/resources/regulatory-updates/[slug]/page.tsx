@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { regulatoryUpdates } from "@/lib/regulatoryUpdates";
+import { getPublishedUpdateBySlug } from "@/lib/regulatory/repository";
+import type { PublicRegulatoryUpdate, ImpactLevel } from "@/lib/regulatory/types";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -15,6 +17,24 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
+
+    // Prefer a live published update from the Regulatory Update Desk.
+    const live = await getPublishedUpdateBySlug(slug);
+    if (live) {
+        return {
+            title: live.seoTitle || `${live.title} – Regulatory Update | Estabizz`,
+            description: live.seoDescription || live.summary,
+            alternates: { canonical: live.canonicalUrl || `/resources/regulatory-updates/${live.slug}` },
+            openGraph: {
+                title: live.title,
+                description: live.summary,
+                type: "article",
+                url: `/resources/regulatory-updates/${live.slug}`,
+                ...(live.featuredImageUrl ? { images: [live.featuredImageUrl] } : {}),
+            },
+        };
+    }
+
     const update = getUpdate(slug);
     if (!update) return {};
 
@@ -33,6 +53,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function RegulatoryUpdateDetailPage({ params }: Props) {
     const { slug } = await params;
+
+    // A live published update takes priority over the illustrative examples.
+    const live = await getPublishedUpdateBySlug(slug);
+    if (live) return <LiveUpdateDetail update={live} />;
+
     const update = getUpdate(slug);
     if (!update) notFound();
 
@@ -175,4 +200,99 @@ function ActionTable({ rows, headers = ["Action Item", "Responsibility", "Sugges
 
 function Checklist({ items }: { items: string[] }) {
     return <div className="grid grid-cols-1 gap-3 md:grid-cols-2">{items.map((item) => <div key={item} className="rounded-xl border border-blue-100 bg-white p-4 text-sm font-semibold text-[#0a1628] shadow-sm">{item}</div>)}</div>;
+}
+
+// ── Live (admin-published) regulatory update ─────────────────────────────────
+
+const LIVE_IMPACT_STYLES: Record<ImpactLevel, string> = {
+    Low: "bg-green-50 text-green-700",
+    Medium: "bg-blue-50 text-blue-700",
+    High: "bg-amber-50 text-amber-700",
+    Critical: "bg-red-50 text-red-600",
+};
+
+function liveDate(iso: string | null): string {
+    if (!iso) return "";
+    try { return new Date(iso).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }); } catch { return ""; }
+}
+
+function LiveUpdateDetail({ update }: { update: PublicRegulatoryUpdate }) {
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: update.title,
+        description: update.summary,
+        datePublished: update.publishedAt ?? update.publishedDate ?? undefined,
+        author: { "@type": "Organization", name: "Estabizz Fintech Private Limited" },
+        publisher: { "@type": "Organization", name: "Estabizz Fintech Private Limited" },
+        mainEntityOfPage: `https://estabizz-site.vercel.app/resources/regulatory-updates/${update.slug}`,
+    };
+
+    return (
+        <main className="min-h-screen bg-white pt-[64px]">
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+                <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="mx-auto max-w-5xl px-6 py-14">
+                    <nav className="mb-5 flex flex-wrap items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link><span className="opacity-40">/</span><Link href="/resources" className="hover:text-[#374151] transition-colors">Resources</Link><span className="opacity-40">/</span><Link href="/resources/regulatory-updates" className="hover:text-[#374151] transition-colors">Regulatory Updates</Link>
+                    </nav>
+                    <div className="mb-5 flex flex-wrap gap-2">
+                        <span className="rounded-full bg-[#f5fbff] px-3 py-1 text-xs font-black text-[#0077B6]">{update.regulator}</span>
+                        <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#64748b]">{update.category}</span>
+                        {update.sourceDate && <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#64748b]">{liveDate(update.sourceDate)}</span>}
+                        <span className={`rounded-full px-3 py-1 text-xs font-black ${LIVE_IMPACT_STYLES[update.impactLevel]}`}>{update.impactLevel} Impact</span>
+                    </div>
+                    <h1 className="mb-4 max-w-4xl text-[34px] font-black leading-[1.1] tracking-[-0.03em] text-[#120b45] md:text-[44px]">{update.title}</h1>
+                    <p className="mb-5 max-w-3xl text-[17px] leading-8 text-[#475569]">{update.summary}</p>
+                    {(update.applicableTo.length > 0 || update.effectiveDate) && (
+                        <p className="text-[13px] font-semibold text-[#64748b]">
+                            {update.applicableTo.length > 0 && <>Applicable to: {update.applicableTo.join(", ")}</>}
+                            {update.effectiveDate && <> • Effective from: {liveDate(update.effectiveDate)}</>}
+                        </p>
+                    )}
+                </div>
+            </header>
+
+            <article className="mx-auto max-w-3xl px-6 py-12">
+                {update.detailedContent ? (
+                    <div
+                        className="prose prose-slate max-w-none text-[15px] leading-8 text-[#334155] [&_a]:text-[#1677f2] [&_h2]:text-[#0a1628] [&_h3]:text-[#0a1628] [&_h2]:font-black [&_h3]:font-bold [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6"
+                        dangerouslySetInnerHTML={{ __html: update.detailedContent }}
+                    />
+                ) : (
+                    <p className="text-[15px] leading-8 text-[#475569]">{update.summary}</p>
+                )}
+
+                {update.tags.length > 0 && (
+                    <div className="mt-8 flex flex-wrap gap-2">
+                        {update.tags.map((t) => (
+                            <span key={t} className="rounded-full border border-blue-100 bg-[#f5fbff] px-3 py-1 text-[12px] font-semibold text-[#0077B6]">{t}</span>
+                        ))}
+                    </div>
+                )}
+
+                {update.sourceUrl && (
+                    <div className="mt-8 rounded-2xl border border-blue-100 bg-[#f8fbff] p-5">
+                        <p className="text-[12px] font-bold uppercase tracking-wide text-[#94a3b8]">Official Source</p>
+                        <a href={update.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-[14px] font-bold text-[#1677f2] hover:underline">
+                            {update.sourceTitle || update.sourceUrl} ↗
+                        </a>
+                    </div>
+                )}
+
+                <div className="mt-10 rounded-3xl bg-[#0a1628] p-8 text-white">
+                    <h2 className="mb-3 text-[26px] font-black">Need help understanding this update?</h2>
+                    <p className="mb-6 text-blue-100">Estabizz can help you assess applicability, prepare internal action notes and maintain compliance evidence — subject to eligibility, documentation and applicable law.</p>
+                    <div className="flex flex-wrap gap-3">
+                        <Link href="/contact" className="rounded-xl bg-[#1677f2] px-6 py-3 text-sm font-bold">Speak to a Compliance Expert</Link>
+                        <a href="https://wa.me/919825600907" className="rounded-xl bg-[#10b981] px-6 py-3 text-sm font-bold">WhatsApp Estabizz Team</a>
+                    </div>
+                </div>
+
+                <p className="mt-8 rounded-2xl border border-blue-100 bg-white p-5 text-[12px] leading-6 text-[#64748b]">This update is for general informational purposes only and should not be treated as legal, regulatory, tax, investment or financial advice. Regulatory requirements may change from time to time. Businesses should verify the latest circular, regulation and regulator guidance before taking any action.</p>
+            </article>
+        </main>
+    );
 }

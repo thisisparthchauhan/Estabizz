@@ -12,6 +12,7 @@ export interface IBackupItemCounts {
   contentAudit: number;
   mediaAssets: number;
   adminUsers: number;
+  regulatoryUpdates: number;
 }
 
 export interface IBackupSnapshot extends Document {
@@ -45,11 +46,12 @@ const BackupSnapshotSchema = new Schema<IBackupSnapshot>(
     completedAt:     { type: Date },
     summary:         { type: String },
     itemCounts: {
-      contentBlocks:   { type: Number, default: 0 },
-      contentVersions: { type: Number, default: 0 },
-      contentAudit:    { type: Number, default: 0 },
-      mediaAssets:     { type: Number, default: 0 },
-      adminUsers:      { type: Number, default: 0 },
+      contentBlocks:     { type: Number, default: 0 },
+      contentVersions:   { type: Number, default: 0 },
+      contentAudit:      { type: Number, default: 0 },
+      mediaAssets:       { type: Number, default: 0 },
+      adminUsers:        { type: Number, default: 0 },
+      regulatoryUpdates: { type: Number, default: 0 },
     },
     errorMessage: { type: String },
     payload:      { type: Schema.Types.Mixed, select: false },

@@ -153,6 +153,15 @@ function IconSearch() {
   );
 }
 
+function IconShield() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <polyline points="9 12 11 14 15 10"/>
+    </svg>
+  );
+}
+
 // ─── Nav config ───────────────────────────────────────────────────────────────
 
 interface NavItem {
@@ -170,6 +179,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Users & Roles",  href: "/admin/users",          icon: <IconUsers /> },
   { label: "Website Editor", href: "/admin/website",        icon: <IconEdit /> },
   { label: "Page SEO",       href: "/admin/seo",            icon: <IconSearch /> },
+  { label: "Regulatory Updates", href: "/admin/regulatory-updates", icon: <IconShield /> },
   { label: "Leads",          href: "/admin/leads",          icon: <IconList /> },
   { label: "All Blogs",      href: "/admin/blogs",          icon: <IconList /> },
   { label: "New Blog",       href: "/admin/blogs/new",      icon: <IconPlus /> },
@@ -191,6 +201,7 @@ const PAGE_TITLES: Record<string, string> = {
   "/admin/users":          "Users & Roles",
   "/admin/website":        "Website Editor",
   "/admin/seo":            "Page SEO",
+  "/admin/regulatory-updates": "Regulatory Update Desk",
   "/admin/leads":          "Leads",
   "/admin/blogs":          "All Blogs",
   "/admin/blogs/new":      "New Blog",

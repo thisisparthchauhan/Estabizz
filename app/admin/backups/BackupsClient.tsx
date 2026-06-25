@@ -176,11 +176,12 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
                 <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-2">Items Backed Up</div>
                 <div className="grid grid-cols-2 gap-2">
                   {[
-                    ["Content Sections", selected.itemCounts.contentBlocks],
-                    ["Version History",  selected.itemCounts.contentVersions],
-                    ["Activity Records", selected.itemCounts.contentAudit],
-                    ["Media Files",      selected.itemCounts.mediaAssets],
-                    ["Admin Users",      selected.itemCounts.adminUsers],
+                    ["Content Sections",   selected.itemCounts.contentBlocks],
+                    ["Version History",    selected.itemCounts.contentVersions],
+                    ["Activity Records",   selected.itemCounts.contentAudit],
+                    ["Media Files",        selected.itemCounts.mediaAssets],
+                    ["Regulatory Updates", selected.itemCounts.regulatoryUpdates],
+                    ["Admin Users",        selected.itemCounts.adminUsers],
                   ].map(([label, val]) => (
                     <div key={String(label)} className="rounded-xl border border-[#f0f4f8] bg-[#f8fafc] p-3 text-center">
                       <div className="text-[18px] font-black text-[#1677f2]">{String(val)}</div>

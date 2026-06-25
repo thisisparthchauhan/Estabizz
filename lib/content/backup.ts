@@ -14,6 +14,7 @@ import ContentVersion from '@/lib/models/ContentVersion';
 import ContentAudit from '@/lib/models/ContentAudit';
 import MediaAsset from '@/lib/models/MediaAsset';
 import AdminUser from '@/lib/models/AdminUser';
+import RegulatoryUpdate from '@/lib/models/RegulatoryUpdate';
 import BackupSnapshot from '@/lib/models/BackupSnapshot';
 import type { BackupSnapshotRecord, BackupListResult, BackupItemCounts, GitHubBackupConfig } from './backupTypes';
 
@@ -63,7 +64,7 @@ function buildFileName(): FilenameResult {
 interface PayloadResult { payload: Record<string, unknown>; itemCounts: BackupItemCounts; jsonStr: string }
 
 async function collectPayload(actor: string, role: string, fileName: string): Promise<PayloadResult> {
-  const [contentBlocks, contentVersions, contentAudit, mediaAssets, adminUsers] = await Promise.all([
+  const [contentBlocks, contentVersions, contentAudit, mediaAssets, adminUsers, regulatoryUpdates] = await Promise.all([
     // All content blocks — no sensitive fields in this collection
     ContentBlock.find({}).lean(),
 
@@ -85,14 +86,25 @@ async function collectPayload(actor: string, role: string, fileName: string): Pr
     AdminUser.find({}).select(
       'fullName email role status permissions createdAt updatedAt'
     ).lean(),
+
+    // Regulatory updates — content only. This collection holds no credentials
+    // or secrets, so every field is safe to include for full restorability.
+    RegulatoryUpdate.find({}).select(
+      'title slug regulator category summary detailedContent ' +
+      'sourceTitle sourceUrl sourceDate publishedDate effectiveDate ' +
+      'impactLevel applicableTo tags status seoTitle seoDescription canonicalUrl featuredImageUrl ' +
+      'createdBy createdByRole updatedBy reviewedBy reviewComment publishedBy archivedBy ' +
+      'publishedAt archivedAt createdAt updatedAt'
+    ).lean(),
   ]);
 
   const itemCounts: BackupItemCounts = {
-    contentBlocks:   contentBlocks.length,
-    contentVersions: contentVersions.length,
-    contentAudit:    contentAudit.length,
-    mediaAssets:     mediaAssets.length,
-    adminUsers:      adminUsers.length,
+    contentBlocks:     contentBlocks.length,
+    contentVersions:   contentVersions.length,
+    contentAudit:      contentAudit.length,
+    mediaAssets:       mediaAssets.length,
+    adminUsers:        adminUsers.length,
+    regulatoryUpdates: regulatoryUpdates.length,
   };
 
   const payload: Record<string, unknown> = {
@@ -111,6 +123,7 @@ async function collectPayload(actor: string, role: string, fileName: string): Pr
     contentAudit,
     mediaAssets,
     adminUsers,
+    regulatoryUpdates,
   };
 
   const jsonStr = JSON.stringify(payload, null, 2);
@@ -172,7 +185,7 @@ export async function createBackup(actor: string, role: string): Promise<BackupS
     fileName,
     createdBy:     actor,
     createdByRole: role,
-    itemCounts:    { contentBlocks: 0, contentVersions: 0, contentAudit: 0, mediaAssets: 0, adminUsers: 0 },
+    itemCounts:    { contentBlocks: 0, contentVersions: 0, contentAudit: 0, mediaAssets: 0, adminUsers: 0, regulatoryUpdates: 0 },
   });
 
   try {
@@ -196,7 +209,7 @@ export async function createBackup(actor: string, role: string): Promise<BackupS
       }
     }
 
-    const summary = `${itemCounts.contentBlocks} content sections, ${itemCounts.mediaAssets} media files, ${itemCounts.adminUsers} admin users`;
+    const summary = `${itemCounts.contentBlocks} content sections, ${itemCounts.mediaAssets} media files, ${itemCounts.regulatoryUpdates} regulatory updates, ${itemCounts.adminUsers} admin users`;
 
     await BackupSnapshot.findByIdAndUpdate(snapshot._id, {
       $set: {
@@ -278,11 +291,12 @@ function toRecord(doc: Record<string, unknown>): BackupSnapshotRecord {
     completedAt:     doc.completedAt instanceof Date ? doc.completedAt.toISOString() : undefined,
     summary:         (doc.summary         as string | undefined),
     itemCounts: {
-      contentBlocks:   Number(counts.contentBlocks   ?? 0),
-      contentVersions: Number(counts.contentVersions ?? 0),
-      contentAudit:    Number(counts.contentAudit    ?? 0),
-      mediaAssets:     Number(counts.mediaAssets     ?? 0),
-      adminUsers:      Number(counts.adminUsers      ?? 0),
+      contentBlocks:     Number(counts.contentBlocks     ?? 0),
+      contentVersions:   Number(counts.contentVersions   ?? 0),
+      contentAudit:      Number(counts.contentAudit      ?? 0),
+      mediaAssets:       Number(counts.mediaAssets       ?? 0),
+      adminUsers:        Number(counts.adminUsers        ?? 0),
+      regulatoryUpdates: Number(counts.regulatoryUpdates ?? 0),
     },
     errorMessage: (doc.errorMessage as string | undefined),
   };

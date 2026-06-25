@@ -4,13 +4,18 @@ import { buildPageMetadata } from '@/lib/seo/pageMetadata';
 import { SEO_REGULATORY_UPDATES_DEFAULTS, type SeoContent } from '@/lib/content/seoDefaults';
 import Link from "next/link";
 import { regulators, regulatoryUpdates } from "@/lib/regulatoryUpdates";
+import { listPublishedUpdates } from "@/lib/regulatory/repository";
+import RegulatoryUpdatesListClient from "./RegulatoryUpdatesListClient";
 
 export async function generateMetadata(): Promise<Metadata> {
     const seo = await getContent('seo.regulatory-updates') as Partial<SeoContent>;
     return buildPageMetadata(seo, SEO_REGULATORY_UPDATES_DEFAULTS, '/resources/regulatory-updates');
 }
 
-export default function RegulatoryUpdatesPage() {
+export default async function RegulatoryUpdatesPage() {
+    // Only published updates from the Regulatory Update Desk are ever shown.
+    const published = await listPublishedUpdates();
+
     return (
         <main className="min-h-screen bg-white pt-[64px]">
             <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
@@ -35,30 +40,38 @@ export default function RegulatoryUpdatesPage() {
             </header>
 
             <section className="mx-auto max-w-7xl px-6 py-12">
-                <div className="mb-8 flex flex-wrap gap-2">
-                    {regulators.map((regulator) => (
-                        <span key={regulator} className="rounded-full border border-blue-100 bg-white px-4 py-2 text-[12px] font-bold text-[#0a1628] shadow-sm">{regulator}</span>
-                    ))}
-                </div>
+                {published.length > 0 ? (
+                    // Live updates from the Regulatory Update Desk (published only).
+                    <RegulatoryUpdatesListClient updates={published} />
+                ) : (
+                    // Fallback: illustrative compliance examples until live updates are published.
+                    <>
+                        <div className="mb-8 flex flex-wrap gap-2">
+                            {regulators.map((regulator) => (
+                                <span key={regulator} className="rounded-full border border-blue-100 bg-white px-4 py-2 text-[12px] font-bold text-[#0a1628] shadow-sm">{regulator}</span>
+                            ))}
+                        </div>
 
-                <div id="latest-updates" className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-                    {regulatoryUpdates.map((update) => (
-                        <article key={update.slug} className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-                            <div className="mb-4 flex items-center justify-between gap-3">
-                                <span className="rounded-full bg-blue-50 px-3 py-1 text-[11px] font-black text-[#1677f2]">{update.regulator}</span>
-                                <span className={`rounded-full px-3 py-1 text-[11px] font-black ${update.riskRating === "High" ? "bg-red-50 text-red-600" : update.riskRating === "Moderate" ? "bg-amber-50 text-amber-700" : "bg-green-50 text-green-700"}`}>{update.riskRating} Risk</span>
-                            </div>
-                            <h2 className="mb-3 text-[19px] font-black leading-snug text-[#0a1628]">{update.title}</h2>
-                            <p className="mb-3 text-[12px] font-semibold text-[#64748b]">{new Date(update.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</p>
-                            <p className="mb-4 text-[13px] leading-7 text-gray-600"><strong>Affected:</strong> {update.affectedEntities.join(", ")}</p>
-                            <p className="mb-6 text-[14px] leading-7 text-gray-600">{update.summary}</p>
-                            <div className="flex flex-wrap gap-3">
-                                <Link href={`/resources/regulatory-updates/${update.slug}`} className="rounded-xl bg-[#0a1628] px-4 py-2 text-[13px] font-bold text-white">Read Compliance Impact</Link>
-                                <Link href="/resources/regulatory-update-email-template" className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-2 text-[13px] font-bold text-[#1677f2]">Email Format</Link>
-                            </div>
-                        </article>
-                    ))}
-                </div>
+                        <div id="latest-updates" className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                            {regulatoryUpdates.map((update) => (
+                                <article key={update.slug} className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                                    <div className="mb-4 flex items-center justify-between gap-3">
+                                        <span className="rounded-full bg-blue-50 px-3 py-1 text-[11px] font-black text-[#1677f2]">{update.regulator}</span>
+                                        <span className={`rounded-full px-3 py-1 text-[11px] font-black ${update.riskRating === "High" ? "bg-red-50 text-red-600" : update.riskRating === "Moderate" ? "bg-amber-50 text-amber-700" : "bg-green-50 text-green-700"}`}>{update.riskRating} Risk</span>
+                                    </div>
+                                    <h2 className="mb-3 text-[19px] font-black leading-snug text-[#0a1628]">{update.title}</h2>
+                                    <p className="mb-3 text-[12px] font-semibold text-[#64748b]">{new Date(update.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</p>
+                                    <p className="mb-4 text-[13px] leading-7 text-gray-600"><strong>Affected:</strong> {update.affectedEntities.join(", ")}</p>
+                                    <p className="mb-6 text-[14px] leading-7 text-gray-600">{update.summary}</p>
+                                    <div className="flex flex-wrap gap-3">
+                                        <Link href={`/resources/regulatory-updates/${update.slug}`} className="rounded-xl bg-[#0a1628] px-4 py-2 text-[13px] font-bold text-white">Read Compliance Impact</Link>
+                                        <Link href="/resources/regulatory-update-email-template" className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-2 text-[13px] font-bold text-[#1677f2]">Email Format</Link>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                    </>
+                )}
             </section>
         </main>
     );

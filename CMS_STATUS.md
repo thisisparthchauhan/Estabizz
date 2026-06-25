@@ -11,7 +11,7 @@
 - **Live content store:** MongoDB. **Firebase is NOT used** (legacy env vars are dead).
 - **Media hosting:** Cloudinary (already wired).
 - **Auth:** JWT in `auth_token` cookie; admin gated by email allowlist + role/permission lookup.
-- **Content engine:** working and proven. 15 of 15 homepage content sections editable. Navbar + footer editable. Homepage SEO settings are editable and connected to live metadata.
+- **Content engine:** working and proven. 17 of 17 homepage sections editable. Navbar + footer editable. Homepage SEO settings are editable and connected to live metadata.
 - **Approval Queue UI:** built at `/admin/approval-queue` for pending website content, SEO changes and existing pending blog submissions.
 - **Change History UI:** built at `/admin/change-history` with read-only activity filters, before/after details, reviewer comments and IST timestamps.
 - **Restore UI:** built at `/admin/restore` for permission-gated restore of previous published CMS versions.

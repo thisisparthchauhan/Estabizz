@@ -34,7 +34,7 @@ const ContentBlockSchema = new Schema<IContentBlock>(
 
     status: {
       type: String,
-      enum: ['published', 'draft', 'pending_approval', 'deleted'],
+      enum: ['published', 'draft', 'pending_approval', 'rejected', 'deleted'],
       default: 'published',
       index: true,
     },

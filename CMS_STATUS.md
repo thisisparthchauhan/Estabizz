@@ -1,7 +1,7 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-06-25 (IST) · Phase: **1 — Website CMS** · Last batch: **1B (Content Framework + Resources + Homepage SEO)**
+> Last updated: 2026-06-25 (IST) · Phase: **2A — Approval Queue UI** · Last batch: **2A (Approval Queue UI)**
 
 ---
 
@@ -12,6 +12,7 @@
 - **Media hosting:** Cloudinary (already wired).
 - **Auth:** JWT in `auth_token` cookie; admin gated by email allowlist + role/permission lookup.
 - **Content engine:** working and proven. 15 of 15 homepage content sections editable. Navbar + footer editable. Homepage SEO settings are editable and connected to live metadata.
+- **Approval Queue UI:** built at `/admin/approval-queue` for pending website content, SEO changes and existing pending blog submissions.
 - **All work is LOCAL.** Nothing pushed to production yet (awaiting owner approval).
 
 ### How content works (do not change this design)
@@ -104,9 +105,9 @@ Draft → Preview → Submit for Review → Compliance Review → Final Approval
 
 ---
 
-## 6. Pending system screens (Phase 1, after sections)
+## 6. System screens
 
-1. **Approval Queue UI** — review & approve/reject pending changes (workflow backend exists).
+1. **Approval Queue UI — DONE** — review & approve/reject pending website content, SEO changes and existing pending blog submissions.
 2. **Change History UI** — who changed what, old → new, date/time (versions are recorded).
 3. **Restore UI** — one-click roll back to a previous published version.
 4. **Media Library** — Cloudinary uploads, alt text, "used where", upload date.
@@ -156,7 +157,8 @@ Do not start Sales CRM or Client Ticket Management until the Website CMS foundat
 
 **Batch 1A — DONE** (Case Highlights + Testimonials).
 **Batch 1B — DONE** (`homepage.contentFramework` + `homepage.resources` + `seo.homepage`).
-**Then:** Approval Queue UI → Change History UI → Restore UI.
+**Phase 2A — DONE:** Approval Queue UI.
+**Next after owner approval:** Change History UI → Restore UI.
 
 Per-section checklist (the proven pattern):
 1. Create `lib/content/<x>Defaults.ts` (single source of truth)

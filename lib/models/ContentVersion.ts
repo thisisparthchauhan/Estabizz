@@ -23,7 +23,7 @@ const ContentVersionSchema = new Schema<IContentVersion>(
     snapshot: { type: Schema.Types.Mixed, default: {} },
     status: {
       type: String,
-      enum: ['published', 'draft', 'pending_approval', 'deleted'],
+      enum: ['published', 'draft', 'pending_approval', 'rejected', 'deleted'],
       default: 'published',
     },
     changedBy: { type: String, default: '' },

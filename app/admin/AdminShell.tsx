@@ -122,11 +122,12 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Dashboard",      href: "/admin",               icon: <IconGrid /> },
+  { label: "Approval Queue", href: "/admin/approval-queue", icon: <IconClock />, pendingBadge: true },
   { label: "Website Editor", href: "/admin/website",        icon: <IconEdit /> },
   { label: "Leads",          href: "/admin/leads",          icon: <IconList /> },
   { label: "All Blogs",      href: "/admin/blogs",          icon: <IconList /> },
   { label: "New Blog",       href: "/admin/blogs/new",      icon: <IconPlus /> },
-  { label: "Pending Review", href: "/admin/blogs/pending",  icon: <IconClock />, pendingBadge: true },
+  { label: "Pending Review", href: "/admin/blogs/pending",  icon: <IconClock /> },
   { label: "Categories",     href: "/admin/categories",     icon: <IconTag /> },
   { label: "Media",          href: "/admin/media",          icon: <IconImage /> },
   { label: "Navigation",     href: "/admin/navigation",     icon: <IconLayout /> },
@@ -136,6 +137,7 @@ const NAV_ITEMS: NavItem[] = [
 
 const PAGE_TITLES: Record<string, string> = {
   "/admin":                "Dashboard",
+  "/admin/approval-queue": "Approval Queue",
   "/admin/website":        "Website Editor",
   "/admin/leads":          "Leads",
   "/admin/blogs":          "All Blogs",
@@ -218,7 +220,7 @@ export default function AdminShell({
 
   // Fetch pending count once on mount
   useEffect(() => {
-    fetch("/api/admin/blogs/pending-count")
+    fetch("/api/admin/approval-queue/count")
       .then((r) => r.ok ? r.json() : { count: 0 })
       .then((d: { count?: number }) => setPendingCount(d.count ?? 0))
       .catch(() => setPendingCount(0));
@@ -340,7 +342,7 @@ export default function AdminShell({
           <div className="flex items-center gap-3">
             {pendingCount > 0 && (
               <Link
-                href="/admin/blogs/pending"
+                href="/admin/approval-queue"
                 className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#1677f2]/10 border border-[#1677f2]/30 px-2.5 py-1 text-[11px] font-bold text-[#b8860b] hover:bg-[#1677f2]/20 transition-colors"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#1677f2] shrink-0" />

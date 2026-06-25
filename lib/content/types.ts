@@ -11,9 +11,10 @@
  *   published        — live on the public site
  *   draft            — saved by an editor, not yet submitted
  *   pending_approval — editor submitted, waiting for admin approval
+ *   rejected         — reviewed and not approved for publishing
  *   deleted          — soft-deleted, sitting in the Recycle Bin
  */
-export type ContentStatus = 'published' | 'draft' | 'pending_approval' | 'deleted';
+export type ContentStatus = 'published' | 'draft' | 'pending_approval' | 'rejected' | 'deleted';
 
 /**
  * The editable payload of a content block.

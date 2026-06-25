@@ -72,7 +72,8 @@ export type ContentAuditAction =
   | 'restore'
   | 'soft_delete'
   | 'restore_from_bin'
-  | 'purge';
+  | 'purge'
+  | 'backup';
 
 export interface ContentAudit {
   action: ContentAuditAction;

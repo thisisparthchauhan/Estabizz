@@ -63,6 +63,7 @@ export type AdminPermission =
   | 'delete_content'    // soft-delete content → Recycle Bin
   | 'purge_content'     // permanently delete from Recycle Bin (admin only, needs password)
   | 'manage_seo'        // edit SEO fields (title, meta, slug, OG, canonical, index)
+  | 'manage_backups'    // create and download CMS data backups (super_admin + admin only)
   | 'view_admin';       // read-only access to the admin panel
 
 // ─── Role → default permission mapping ────────────────────────────────────────
@@ -86,6 +87,7 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     'delete_content',
     'purge_content',
     'manage_seo',
+    'manage_backups',
     'view_admin',
   ],
 
@@ -141,6 +143,7 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     'delete_content',
     'purge_content',
     'manage_seo',
+    'manage_backups',
     'view_admin',
     // manage_users intentionally excluded — only super_admin
   ],

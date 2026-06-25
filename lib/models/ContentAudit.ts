@@ -24,6 +24,7 @@ const ContentAuditSchema = new Schema<IContentAudit>(
       enum: [
         'create', 'edit', 'submit', 'approve', 'reject',
         'publish', 'restore', 'soft_delete', 'restore_from_bin', 'purge',
+        'backup',
       ],
     },
     blockKey:          { type: String, required: true, index: true },

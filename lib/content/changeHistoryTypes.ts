@@ -6,6 +6,7 @@ export type ChangeHistoryStatus =
   | 'pending_approval'
   | 'pending_review'
   | 'approved'
+  | 'restored'
   | 'rejected'
   | 'requested_changes'
   | 'deleted'

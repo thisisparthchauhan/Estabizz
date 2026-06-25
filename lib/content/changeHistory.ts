@@ -78,6 +78,7 @@ function statusLabel(status: ChangeHistoryStatus): string {
     pending_approval: 'Pending approval',
     pending_review: 'Pending approval',
     approved: 'Approved',
+    restored: 'Restored',
     rejected: 'Rejected',
     requested_changes: 'Requested changes',
     deleted: 'Deleted',
@@ -173,6 +174,7 @@ function actionForVersion(version: VersionDoc): { action: string; status: Change
   if (version.status === 'draft' && note.includes('changes requested')) return { action: 'Requested changes', status: 'requested_changes' };
   if (version.status === 'draft') return { action: 'Saved draft', status: 'draft' };
   if (version.status === 'deleted') return { action: 'Deleted', status: 'deleted' };
+  if (note.startsWith('restored')) return { action: 'Restored', status: 'restored' };
   if (note.startsWith('approved')) return { action: 'Approved', status: 'approved' };
   if (note.includes('created')) return { action: 'Created', status: 'published' };
   return { action: 'Published', status: 'published' };
@@ -202,6 +204,7 @@ function auditMatches(version: VersionDoc, audit: AuditDoc): boolean {
   if (version.status === 'rejected') return audit.action === 'reject';
   if ((version.note ?? '').toLowerCase().includes('changes requested')) return audit.action === 'reject';
   if ((version.note ?? '').toLowerCase().startsWith('approved')) return audit.action === 'approve';
+  if ((version.note ?? '').toLowerCase().startsWith('restored')) return audit.action === 'restore';
   return audit.action === 'publish' || audit.action === 'edit' || audit.action === 'create';
 }
 
@@ -222,6 +225,7 @@ function matchesStatus(item: ChangeHistoryItem, status?: string): boolean {
   if (status === 'draft') return item.status === 'draft';
   if (status === 'pending') return item.status === 'pending_approval' || item.status === 'pending_review';
   if (status === 'approved') return item.status === 'approved';
+  if (status === 'restored') return item.status === 'restored';
   if (status === 'rejected') return item.status === 'rejected';
   if (status === 'requested_changes') return item.status === 'requested_changes';
   return true;
@@ -299,7 +303,7 @@ async function contentItems(admin: AdminContext): Promise<ChangeHistoryItem[]> {
     const matchedAudit = audits.find((audit) => audit.blockKey === version.blockKey && auditMatches(version, audit));
     const action = actionForVersion(version);
     const comment = commentFromNote(version.note) || matchedAudit?.detail || '';
-    const reviewed = ['Approved', 'Rejected', 'Requested changes'].includes(action.action);
+    const reviewed = ['Approved', 'Rejected', 'Requested changes', 'Restored'].includes(action.action);
 
     return {
       id: `content:${String(version._id)}`,

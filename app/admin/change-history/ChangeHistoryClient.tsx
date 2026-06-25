@@ -8,7 +8,7 @@ interface Props {
   viewerEmail: string;
 }
 
-type StatusFilter = "all" | "published" | "draft" | "pending" | "approved" | "rejected" | "requested_changes";
+type StatusFilter = "all" | "published" | "draft" | "pending" | "approved" | "restored" | "rejected" | "requested_changes";
 type TypeFilter = "all" | "website" | "seo" | "blogs";
 
 const statusOptions: { value: StatusFilter; label: string }[] = [
@@ -17,6 +17,7 @@ const statusOptions: { value: StatusFilter; label: string }[] = [
   { value: "draft", label: "Draft" },
   { value: "pending", label: "Pending approval" },
   { value: "approved", label: "Approved" },
+  { value: "restored", label: "Restored" },
   { value: "rejected", label: "Rejected" },
   { value: "requested_changes", label: "Requested changes" },
 ];
@@ -31,6 +32,7 @@ const typeOptions: { value: TypeFilter; label: string }[] = [
 const statusMeta: Record<string, { label: string; cls: string }> = {
   published: { label: "Published", cls: "border-green-200 bg-green-50 text-green-700" },
   approved: { label: "Approved", cls: "border-blue-200 bg-blue-50 text-blue-700" },
+  restored: { label: "Restored", cls: "border-emerald-200 bg-emerald-50 text-emerald-700" },
   draft: { label: "Draft", cls: "border-slate-200 bg-slate-50 text-slate-600" },
   pending_approval: { label: "Pending approval", cls: "border-amber-200 bg-amber-50 text-amber-700" },
   pending_review: { label: "Pending approval", cls: "border-amber-200 bg-amber-50 text-amber-700" },

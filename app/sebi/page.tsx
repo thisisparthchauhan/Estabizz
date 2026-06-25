@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
+import { getContent } from '@/lib/content/getContent';
+import { buildPageMetadata } from '@/lib/seo/pageMetadata';
+import { SEO_SEBI_DEFAULTS, type SeoContent } from '@/lib/content/seoDefaults';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-    title: "SEBI Services – Registration, Compliance & Licensing Guide | Estabizz Fintech",
-    description: "Complete SEBI regulatory services – AMFI registration, credit rating agency, depository participant, REIT, mutual fund, AIF compliance and more. Expert guidance.",
-    keywords: "SEBI Services India, SEBI Registration, AMFI Registration, AIF Compliance",
-    alternates: { canonical: "/sebi" }
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const seo = await getContent('seo.sebi') as Partial<SeoContent>;
+    return buildPageMetadata(seo, SEO_SEBI_DEFAULTS, '/sebi');
+}
 
 const services = [
     { href: "/sebi/amfi-registration", title: "AMFI Registration", desc: "Complete guide to AMFI registration for mutual fund distributors in India.", tag: "SEBI", emoji: "📈" },

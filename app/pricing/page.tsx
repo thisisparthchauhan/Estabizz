@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { getContent } from '@/lib/content/getContent';
+import { buildPageMetadata } from '@/lib/seo/pageMetadata';
+import { SEO_PRICING_DEFAULTS, type SeoContent } from '@/lib/content/seoDefaults';
 import Link from "next/link";
 
-export const metadata: Metadata = {
-    title: "Engagement Models & Pricing – Scope-Based Advisory Fees",
-    description: "Transparent, scope-based engagement models for regulatory, licensing and compliance assignments across RBI, SEBI, IRDAI and IFSCA. Request a custom quote from Estabizz Fintech.",
-    keywords: "Estabizz Pricing, Regulatory Advisory Fees, Compliance Engagement Models, Custom Quote",
-    alternates: { canonical: "/pricing" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const seo = await getContent('seo.pricing') as Partial<SeoContent>;
+    return buildPageMetadata(seo, SEO_PRICING_DEFAULTS, '/pricing');
+}
 
 const engagementModels = [
     {

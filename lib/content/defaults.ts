@@ -15,7 +15,22 @@ import { CASE_STUDIES_DEFAULTS } from '@/lib/content/caseStudiesDefaults';
 import { TESTIMONIALS_DEFAULTS } from '@/lib/content/testimonialsDefaults';
 import { CONTENT_FRAMEWORK_DEFAULTS } from '@/lib/content/contentFrameworkDefaults';
 import { RESOURCES_DEFAULTS } from '@/lib/content/resourcesDefaults';
-import { SEO_HOMEPAGE_DEFAULTS } from '@/lib/content/seoDefaults';
+import {
+  SEO_HOMEPAGE_DEFAULTS,
+  SEO_CONTACT_DEFAULTS,
+  SEO_BLOGS_DEFAULTS,
+  SEO_RBI_DEFAULTS,
+  SEO_SEBI_DEFAULTS,
+  SEO_IRDAI_DEFAULTS,
+  SEO_IFSCA_DEFAULTS,
+  SEO_FEMA_DEFAULTS,
+  SEO_SERVICES_DEFAULTS,
+  SEO_PRICING_DEFAULTS,
+  SEO_RESOURCES_DEFAULTS,
+  SEO_REGULATORY_UPDATES_DEFAULTS,
+  SEO_LEGAL_PRIVACY_DEFAULTS,
+  SEO_LOGIN_DEFAULTS,
+} from '@/lib/content/seoDefaults';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Content defaults registry
@@ -136,6 +151,99 @@ export const CONTENT_DEFAULTS: Record<string, ContentDefault> = {
     label: 'SEO Settings',
     group: 'Homepage',
     fields: { ...SEO_HOMEPAGE_DEFAULTS },
+  },
+
+  // ── Page-wise SEO ────────────────────────────────────────────────────────────
+
+  'seo.contact': {
+    key: 'seo.contact',
+    label: 'Contact – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_CONTACT_DEFAULTS },
+  },
+
+  'seo.blogs': {
+    key: 'seo.blogs',
+    label: 'Blogs Listing – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_BLOGS_DEFAULTS },
+  },
+
+  'seo.rbi': {
+    key: 'seo.rbi',
+    label: 'RBI Services – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_RBI_DEFAULTS },
+  },
+
+  'seo.sebi': {
+    key: 'seo.sebi',
+    label: 'SEBI Services – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_SEBI_DEFAULTS },
+  },
+
+  'seo.irdai': {
+    key: 'seo.irdai',
+    label: 'IRDAI Services – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_IRDAI_DEFAULTS },
+  },
+
+  'seo.ifsca': {
+    key: 'seo.ifsca',
+    label: 'IFSCA Services – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_IFSCA_DEFAULTS },
+  },
+
+  'seo.fema': {
+    key: 'seo.fema',
+    label: 'FEMA Services – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_FEMA_DEFAULTS },
+  },
+
+  'seo.services': {
+    key: 'seo.services',
+    label: 'Business Services – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_SERVICES_DEFAULTS },
+  },
+
+  'seo.pricing': {
+    key: 'seo.pricing',
+    label: 'Pricing – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_PRICING_DEFAULTS },
+  },
+
+  'seo.resources': {
+    key: 'seo.resources',
+    label: 'Resources – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_RESOURCES_DEFAULTS },
+  },
+
+  'seo.regulatory-updates': {
+    key: 'seo.regulatory-updates',
+    label: 'Regulatory Updates – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_REGULATORY_UPDATES_DEFAULTS },
+  },
+
+  'seo.legal-privacy': {
+    key: 'seo.legal-privacy',
+    label: 'Privacy Policy – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_LEGAL_PRIVACY_DEFAULTS },
+  },
+
+  'seo.login': {
+    key: 'seo.login',
+    label: 'Login – SEO',
+    group: 'Page SEO',
+    fields: { ...SEO_LOGIN_DEFAULTS },
   },
 
   'homepage.finalCta': {

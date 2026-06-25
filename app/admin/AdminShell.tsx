@@ -144,6 +144,15 @@ function IconTrash() {
   );
 }
 
+function IconSearch() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="8"/>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+  );
+}
+
 // ─── Nav config ───────────────────────────────────────────────────────────────
 
 interface NavItem {
@@ -160,6 +169,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Restore",        href: "/admin/restore",        icon: <IconClock /> },
   { label: "Users & Roles",  href: "/admin/users",          icon: <IconUsers /> },
   { label: "Website Editor", href: "/admin/website",        icon: <IconEdit /> },
+  { label: "Page SEO",       href: "/admin/seo",            icon: <IconSearch /> },
   { label: "Leads",          href: "/admin/leads",          icon: <IconList /> },
   { label: "All Blogs",      href: "/admin/blogs",          icon: <IconList /> },
   { label: "New Blog",       href: "/admin/blogs/new",      icon: <IconPlus /> },
@@ -180,6 +190,7 @@ const PAGE_TITLES: Record<string, string> = {
   "/admin/restore":        "Restore",
   "/admin/users":          "Users & Roles",
   "/admin/website":        "Website Editor",
+  "/admin/seo":            "Page SEO",
   "/admin/leads":          "Leads",
   "/admin/blogs":          "All Blogs",
   "/admin/blogs/new":      "New Blog",

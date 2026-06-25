@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
+import { getContent } from '@/lib/content/getContent';
+import { buildPageMetadata } from '@/lib/seo/pageMetadata';
+import { SEO_IRDAI_DEFAULTS, type SeoContent } from '@/lib/content/seoDefaults';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-    title: "IRDAI Services – Insurance Broker, ISNP & Regulatory Compliance | Estabizz Fintech",
-    description: "Complete IRDAI regulatory services in India – insurance broker license, ISNP registration, insurance marketing firm, regulatory sandbox and more. Expert guidance by Estabizz Fintech.",
-    keywords: "IRDAI Services India, Insurance Broker License, ISNP Registration, IRDAI Regulatory Sandbox",
-    alternates: { canonical: "/irdai" }
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const seo = await getContent('seo.irdai') as Partial<SeoContent>;
+    return buildPageMetadata(seo, SEO_IRDAI_DEFAULTS, '/irdai');
+}
 
 const services = [
     { href: "/irdai/irda-insurance-broker-license", title: "IRDA Insurance Broker License", desc: "Complete guide to obtaining IRDAI insurance broker license with eligibility, process & compliance.", tag: "IRDAI", emoji: "🛡️" },

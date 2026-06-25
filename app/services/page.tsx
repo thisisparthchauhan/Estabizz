@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
+import { getContent } from '@/lib/content/getContent';
+import { buildPageMetadata } from '@/lib/seo/pageMetadata';
+import { SEO_SERVICES_DEFAULTS, type SeoContent } from '@/lib/content/seoDefaults';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-    title: "Business Services – GST, Legal, ESG, Transfer Pricing & More | Estabizz Fintech",
-    description: "Comprehensive business services in India – enterprise consulting, GST appeal, legal due diligence, ESG consulting, transfer pricing, trademark search, sustainable finance and more.",
-    keywords: "Business Services India, GST Appeal, Legal Due Diligence, ESG Consulting, Transfer Pricing",
-    alternates: { canonical: "/services" }
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const seo = await getContent('seo.services') as Partial<SeoContent>;
+    return buildPageMetadata(seo, SEO_SERVICES_DEFAULTS, '/services');
+}
 
 const services = [
     { href: "/services/enterprise-services", title: "Enterprise Services", desc: "End-to-end enterprise consulting services for large organisations operating in India.", tag: "Services", emoji: "🏢" },

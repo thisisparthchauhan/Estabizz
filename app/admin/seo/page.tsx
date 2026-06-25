@@ -1,81 +1,69 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
+import jwt from "jsonwebtoken";
+import { getAdminUserByEmail } from "@/lib/admin/repository";
+import { connectDB } from "@/lib/db";
+import ContentBlock from "@/lib/models/ContentBlock";
+import { SEO_PAGE_CATALOG } from "@/lib/content/seoPageCatalog";
+import type { SeoContent } from "@/lib/content/seoDefaults";
+import type { AdminContext } from "@/lib/admin/requirePermission";
+import PageSeoClient, { type SeoPageItem } from "./PageSeoClient";
 
 export const metadata: Metadata = {
-  title: "SEO Settings — Estabizz Admin",
+  title: "Page SEO — Estabizz Admin",
   robots: { index: false, follow: false },
 };
 
-const SEO_FIELDS = [
-  {
-    label: "Default Meta Title Template",
-    value: "%s | Estabizz Regulatory Insights",
-    note: "%s is replaced with each page's title",
-  },
-  {
-    label: "Default Meta Description",
-    value:
-      "Expert insights on RBI, SEBI, IRDAI, IFSCA, MCA and allied regulatory matters for Indian fintech and financial services businesses.",
-    note: "Used when individual articles do not define their own description",
-  },
-  {
-    label: "OG Image (default)",
-    value: "/images/og-default.png",
-    note: "Displayed when sharing on social platforms",
-  },
-  {
-    label: "Canonical Domain",
-    value: "https://www.estabizz.com",
-    note: "Used in sitemap and structured data",
-  },
-  {
-    label: "Sitemap Regeneration",
-    value: "On publish (manual trigger)",
-    note: "TODO: wire revalidatePath + next-sitemap once DB layer is added",
-  },
-];
+async function getViewer(): Promise<AdminContext | null> {
+  const token  = (await cookies()).get("auth_token")?.value;
+  const secret = process.env.JWT_SECRET;
+  if (!token || !secret) return null;
+  try {
+    const decoded = jwt.verify(token, secret) as { email?: string };
+    const email   = decoded.email?.toLowerCase().trim();
+    if (!email) return null;
+    const admin = await getAdminUserByEmail(email);
+    if (!admin || admin.status !== "active") return null;
+    return { email: admin.email, role: admin.role, permissions: admin.permissions };
+  } catch {
+    return null;
+  }
+}
 
-export default function SeoSettingsPage() {
-  return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
-      <div className="mb-6">
-        <h1 className="text-[21px] font-black text-[#0a1628]">SEO Settings</h1>
-        <p className="mt-0.5 text-[13px] text-[#64748b]">
-          Global defaults for blog meta tags, Open Graph and sitemap configuration.
-        </p>
-      </div>
+export default async function PageSeoPage() {
+  const viewer = await getViewer();
+  const canView = viewer?.permissions.includes("view_admin") ?? false;
 
-      <div className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
-        <div className="border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">
-            Global SEO Defaults
-          </span>
-        </div>
+  let pages: SeoPageItem[] = [];
 
-        <div className="divide-y divide-[#f8fafc]">
-          {SEO_FIELDS.map((field) => (
-            <div key={field.label} className="px-6 py-4">
-              <div className="text-[12px] font-black uppercase tracking-wider text-[#94a3b8] mb-1.5">
-                {field.label}
-              </div>
-              <div className="rounded-xl border border-[#e2eaf2] bg-[#f8fafc] px-4 py-2.5 text-[13px] text-[#0a1628] font-medium">
-                {field.value}
-              </div>
-              <p className="mt-1 text-[11px] text-[#94a3b8]">{field.note}</p>
-            </div>
-          ))}
-        </div>
+  if (canView) {
+    await connectDB();
 
-        <div className="border-t border-[#f0f4f8] bg-[#fffbf0] px-6 py-4">
-          <div className="flex items-start gap-3 rounded-xl border border-[#1677f2]/30 bg-[#1677f2]/8 px-4 py-3">
-            <span className="text-[#1677f2] text-lg mt-0.5 shrink-0">ℹ</span>
-            <p className="text-[12px] text-[#b8860b] font-medium leading-5">
-              These settings are currently read-only / informational. Editable global
-              SEO configuration (with sitemap regeneration and search-console integration)
-              is on the development roadmap.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    // One query for all SEO keys — status, timestamps, updatedBy, and live fields
+    const seoKeys = SEO_PAGE_CATALOG.map(p => p.key);
+    const blocks = await ContentBlock.find({ key: { $in: seoKeys } })
+      .select("key fields status updatedBy updatedAt")
+      .lean<{ key: string; fields: Record<string, unknown>; status: string; updatedBy: string; updatedAt: Date }[]>();
+
+    const blockMap = Object.fromEntries(blocks.map(b => [b.key, b]));
+
+    pages = SEO_PAGE_CATALOG.map(entry => {
+      const block = blockMap[entry.key];
+      return {
+        key:     entry.key,
+        label:   entry.label,
+        path:    entry.path,
+        group:   entry.group,
+        defaults: entry.defaults,
+        current: block?.fields
+          ? { ...entry.defaults, ...(block.fields as Partial<SeoContent>) } as SeoContent
+          : { ...entry.defaults },
+        status: (block?.status ?? "default") as SeoPageItem["status"],
+        lastUpdatedBy: block?.updatedBy || undefined,
+        lastUpdatedAt: block?.updatedAt ? block.updatedAt.toISOString() : undefined,
+      };
+    });
+  }
+
+  return <PageSeoClient viewer={viewer} pages={pages} />;
 }

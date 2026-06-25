@@ -26,6 +26,7 @@ export function buildPageMetadata(
   const ogDescription = s.ogDescription?.trim() || description;
   const twTitle = s.twitterTitle?.trim() || ogTitle;
   const twDescription = s.twitterDescription?.trim() || ogDescription;
+  const twImage = s.twitterImage?.trim() || s.ogImage?.trim() || '';
 
   const index = s.robotsIndex !== false;
   const follow = s.robotsFollow !== false;
@@ -47,7 +48,7 @@ export function buildPageMetadata(
       card: "summary_large_image",
       title: twTitle,
       description: twDescription,
-      ...(s.ogImage?.trim() ? { images: [s.ogImage.trim()] } : {}),
+      ...(twImage ? { images: [twImage] } : {}),
     },
   };
 

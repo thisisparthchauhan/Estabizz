@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { getContent } from '@/lib/content/getContent';
+import { buildPageMetadata } from '@/lib/seo/pageMetadata';
+import { SEO_REGULATORY_UPDATES_DEFAULTS, type SeoContent } from '@/lib/content/seoDefaults';
 import Link from "next/link";
 import { regulators, regulatoryUpdates } from "@/lib/regulatoryUpdates";
 
-export const metadata: Metadata = {
-    title: "Regulatory Updates India – RBI, SEBI, IRDAI, IFSCA Circulars & Compliance Insights",
-    description: "Stay updated with RBI, SEBI, IRDAI, IFSCA and compliance circulars explained in professional Indian English with impact analysis, affected entities, action checklist, implementation timeline and regulatory risk rating by Estabizz.",
-    alternates: { canonical: "/resources/regulatory-updates" }
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const seo = await getContent('seo.regulatory-updates') as Partial<SeoContent>;
+    return buildPageMetadata(seo, SEO_REGULATORY_UPDATES_DEFAULTS, '/resources/regulatory-updates');
+}
 
 export default function RegulatoryUpdatesPage() {
     return (

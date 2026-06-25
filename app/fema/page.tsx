@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
+import { getContent } from '@/lib/content/getContent';
+import { buildPageMetadata } from '@/lib/seo/pageMetadata';
+import { SEO_FEMA_DEFAULTS, type SeoContent } from '@/lib/content/seoDefaults';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-    title: "FEMA Services – Foreign Exchange Compliance & Registration | Estabizz Fintech",
-    description: "Complete FEMA regulatory services in India – FEMA registration, compliance under FEMA, foreign exchange management and cross-border transaction guidance. Expert advisory by Estabizz Fintech.",
-    keywords: "FEMA Services India, FEMA Registration, Foreign Exchange Compliance, FEMA Compliance",
-    alternates: { canonical: "/fema" }
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const seo = await getContent('seo.fema') as Partial<SeoContent>;
+    return buildPageMetadata(seo, SEO_FEMA_DEFAULTS, '/fema');
+}
 
 const services = [
     { href: "/fema/fema-registration", title: "FEMA Registration", desc: "Complete guide to FEMA registration for foreign exchange dealers and authorised persons in India.", tag: "FEMA", emoji: "💱" },

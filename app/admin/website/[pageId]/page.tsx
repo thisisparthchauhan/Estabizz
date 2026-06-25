@@ -17,6 +17,9 @@ const SECTION_ROUTES: Record<string, string> = {
   "homepage.stats": "stats",
   "homepage.trustedBy": "trusted-by",
   "homepage.solutions": "solutions",
+  "homepage.globalMarkets": "global-markets",
+  "homepage.whyChooseUs": "why-estabizz",
+  "homepage.finalCta": "final-cta",
 };
 
 function editorHref(key: string, pageId: string): string | null {

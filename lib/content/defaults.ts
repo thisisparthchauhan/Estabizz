@@ -5,6 +5,9 @@ import { HERO_DEFAULTS } from '@/lib/content/heroDefaults';
 import { STATS_DEFAULTS } from '@/lib/content/statsDefaults';
 import { TRUSTED_BY_DEFAULTS } from '@/lib/content/trustedByDefaults';
 import { SOLUTIONS_DEFAULTS } from '@/lib/content/solutionsDefaults';
+import { GLOBAL_MARKETS_DEFAULTS } from '@/lib/content/globalMarketsDefaults';
+import { WHY_ESTABIZZ_DEFAULTS } from '@/lib/content/whyEstabizzDefaults';
+import { FINAL_CTA_DEFAULTS } from '@/lib/content/finalCtaDefaults';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Content defaults registry
@@ -55,6 +58,27 @@ export const CONTENT_DEFAULTS: Record<string, ContentDefault> = {
     label: 'Business Stage Solutions',
     group: 'Homepage',
     fields: { ...SOLUTIONS_DEFAULTS },
+  },
+
+  'homepage.globalMarkets': {
+    key: 'homepage.globalMarkets',
+    label: 'Global Market Desk',
+    group: 'Homepage',
+    fields: { ...GLOBAL_MARKETS_DEFAULTS },
+  },
+
+  'homepage.whyChooseUs': {
+    key: 'homepage.whyChooseUs',
+    label: 'Why Estabizz',
+    group: 'Homepage',
+    fields: { ...WHY_ESTABIZZ_DEFAULTS },
+  },
+
+  'homepage.finalCta': {
+    key: 'homepage.finalCta',
+    label: 'Final CTA',
+    group: 'Homepage',
+    fields: { ...FINAL_CTA_DEFAULTS },
   },
 
   'global.footer': {

@@ -19,6 +19,9 @@ import type { HeroContent } from "@/lib/content/heroDefaults";
 import type { StatsContent } from "@/lib/content/statsDefaults";
 import type { TrustedByContent } from "@/lib/content/trustedByDefaults";
 import type { SolutionsContent } from "@/lib/content/solutionsDefaults";
+import type { GlobalMarketsContent } from "@/lib/content/globalMarketsDefaults";
+import type { WhyEstabizzContent } from "@/lib/content/whyEstabizzDefaults";
+import type { FinalCtaContent } from "@/lib/content/finalCtaDefaults";
 
 export const metadata: Metadata = {
     title: "Estabizz Fintech Private Limited | India's Fintech Compliance Platform",
@@ -68,12 +71,21 @@ const websiteSchema = {
 };
 
 export default async function Home() {
-    const [heroContent, statsContent, trustedByContent, solutionsContent] = (await Promise.all([
+    const [
+        heroContent, statsContent, trustedByContent, solutionsContent,
+        globalMarketsContent, whyChooseUsContent, finalCtaContent,
+    ] = (await Promise.all([
         getContent("homepage.hero"),
         getContent("homepage.stats"),
         getContent("homepage.trustedBy"),
         getContent("homepage.solutions"),
-    ])) as [Partial<HeroContent>, Partial<StatsContent>, Partial<TrustedByContent>, Partial<SolutionsContent>];
+        getContent("homepage.globalMarkets"),
+        getContent("homepage.whyChooseUs"),
+        getContent("homepage.finalCta"),
+    ])) as [
+        Partial<HeroContent>, Partial<StatsContent>, Partial<TrustedByContent>, Partial<SolutionsContent>,
+        Partial<GlobalMarketsContent>, Partial<WhyEstabizzContent>, Partial<FinalCtaContent>,
+    ];
     return (
         <div className="bg-transparent min-h-screen font-sans text-gray-800">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
@@ -83,9 +95,9 @@ export default async function Home() {
                 <HeroSection content={heroContent} />
                 <StatsSection content={statsContent} />
                 <TrustedBy content={trustedByContent} />
-                <GlobalMarketsSection />
+                <GlobalMarketsSection content={globalMarketsContent} />
                 <SolutionsSection content={solutionsContent} />
-                <WhyChooseUs />
+                <WhyChooseUs content={whyChooseUsContent} />
                 <RegulatoryServices />
                 <ProcessSection />
                 <CaseStudies />
@@ -94,7 +106,7 @@ export default async function Home() {
                 <FeaturedBlogs />
                 <ContentFrameworkSection />
                 <ResourcesSection />
-                <FinalCTA />
+                <FinalCTA content={finalCtaContent} />
             </main>
         </div>
     );

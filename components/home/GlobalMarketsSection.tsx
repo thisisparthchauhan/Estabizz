@@ -2,37 +2,14 @@
 
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-
-const regions = [
-    {
-        title: "India & GIFT City",
-        description: "RBI, SEBI, IRDAI, IFSCA, FIU-IND and corporate compliance support from India outward.",
-        markets: ["India", "GIFT IFSC", "South Asia"],
-        accent: "#1677f2",
-    },
-    {
-        title: "GCC & Middle East",
-        description: "Market-entry, fintech structuring and documentation support for UAE, Saudi Arabia, Qatar and allied markets.",
-        markets: ["UAE", "Saudi Arabia", "Qatar", "Oman"],
-        accent: "#1677f2",
-    },
-    {
-        title: "UK, Europe & Global Funds",
-        description: "Cross-border compliance planning for fund, fintech, payments and corporate structures.",
-        markets: ["UK", "EU", "Luxembourg", "Ireland"],
-        accent: "#10b981",
-    },
-    {
-        title: "APAC & North America",
-        description: "Regulatory research, partner coordination and founder-ready documentation for expansion planning.",
-        markets: ["Singapore", "Australia", "USA", "Canada"],
-        accent: "#7C3AED",
-    },
-];
+import { GLOBAL_MARKETS_DEFAULTS, type GlobalMarketsContent } from "@/lib/content/globalMarketsDefaults";
 
 const orbitNodes = ["RBI", "SEBI", "IRDAI", "IFSCA", "FIU", "MCA"];
 
-export default function GlobalMarketsSection() {
+export default function GlobalMarketsSection({ content }: { content?: Partial<GlobalMarketsContent> }) {
+    const c: GlobalMarketsContent = { ...GLOBAL_MARKETS_DEFAULTS, ...content };
+    const features = c.features?.length ? c.features : GLOBAL_MARKETS_DEFAULTS.features;
+    const regions = c.regions?.length ? c.regions : GLOBAL_MARKETS_DEFAULTS.regions;
     const sectionRef = useRef<HTMLElement>(null);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -62,34 +39,30 @@ export default function GlobalMarketsSection() {
                     style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "translateY(0)" : "translateY(28px)" }}
                 >
                     <div className="mb-5 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">
-                        Global Market Desk
+                        {c.label}
                     </div>
                     <h2 className="max-w-[620px] text-[clamp(32px,4.2vw,52px)] font-black leading-[1.05] tracking-[-0.03em] text-[#120b45]">
-                        India-built compliance intelligence for <span className="text-[#1677f2]">global expansion.</span>
+                        {c.headingMain} <span className="text-[#1677f2]">{c.headingHighlight}</span>
                     </h2>
                     <p className="mt-6 max-w-[620px] text-[16px] font-medium leading-[1.7] text-[#475569]">
-                        Estabizz is expanding its advisory lens from India to global markets. We help founders, CFOs and regulated businesses evaluate market entry, licensing routes, documentation expectations and compliance readiness with a structured, regulator-respectful approach.
+                        {c.description}
                     </p>
 
                     <div className="mt-7 grid gap-3 sm:grid-cols-3">
-                        {[
-                            ["Regulatory mapping", "Country-wise applicability review"],
-                            ["Entity planning", "Structure, ownership and governance notes"],
-                            ["Launch readiness", "Policies, filings and evidence packs"],
-                        ].map(([title, text]) => (
-                            <div key={title} className="rounded-2xl border border-blue-100 bg-white p-4 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
-                                <div className="text-[13px] font-black text-[#120b45]">{title}</div>
-                                <div className="mt-2 text-[12px] font-medium leading-relaxed text-[#64748b]">{text}</div>
+                        {features.map((f) => (
+                            <div key={f.title} className="rounded-2xl border border-blue-100 bg-white p-4 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
+                                <div className="text-[13px] font-black text-[#120b45]">{f.title}</div>
+                                <div className="mt-2 text-[12px] font-medium leading-relaxed text-[#64748b]">{f.text}</div>
                             </div>
                         ))}
                     </div>
 
                     <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                        <Link href="/contact" className="inline-flex items-center justify-center rounded-2xl bg-[#1677f2] px-6 py-4 text-[14px] font-black text-white shadow-[0_14px_35px_rgba(22,119,242,0.28)] transition-all hover:-translate-y-0.5 hover:bg-[#0866d9]">
-                            Plan Global Expansion
+                        <Link href={c.primaryBtnLink} className="inline-flex items-center justify-center rounded-2xl bg-[#1677f2] px-6 py-4 text-[14px] font-black text-white shadow-[0_14px_35px_rgba(22,119,242,0.28)] transition-all hover:-translate-y-0.5 hover:bg-[#0866d9]">
+                            {c.primaryBtnText}
                         </Link>
-                        <a href="https://wa.me/919825600907" className="inline-flex items-center justify-center rounded-2xl border border-blue-100 bg-white px-6 py-4 text-[14px] font-black text-[#0a2b58] shadow-[0_10px_28px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-0.5 hover:border-[#1677f2] hover:text-[#1677f2]">
-                            WhatsApp Estabizz Team
+                        <a href={c.whatsappLink} className="inline-flex items-center justify-center rounded-2xl border border-blue-100 bg-white px-6 py-4 text-[14px] font-black text-[#0a2b58] shadow-[0_10px_28px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-0.5 hover:border-[#1677f2] hover:text-[#1677f2]">
+                            {c.whatsappText}
                         </a>
                     </div>
                 </div>

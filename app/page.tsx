@@ -27,19 +27,17 @@ import type { ProcessContent } from "@/lib/content/processDefaults";
 import type { CompliancePortalContent } from "@/lib/content/compliancePortalDefaults";
 import type { CaseStudiesContent } from "@/lib/content/caseStudiesDefaults";
 import type { TestimonialsContent } from "@/lib/content/testimonialsDefaults";
+import type { ContentFrameworkContent } from "@/lib/content/contentFrameworkDefaults";
+import type { ResourcesContent } from "@/lib/content/resourcesDefaults";
+import { SEO_HOMEPAGE_DEFAULTS, type SeoContent } from "@/lib/content/seoDefaults";
+import { buildPageMetadata } from "@/lib/seo/pageMetadata";
 
-export const metadata: Metadata = {
-    title: "Estabizz Fintech Private Limited | India's Fintech Compliance Platform",
-    description: "Premium regulatory advisory and compliance support for RBI, SEBI, IRDAI, IFSCA, FIU-IND, MCA and sectoral licences. Licensing, documentation, compliance portal and post-registration support.",
-    keywords: "Estabizz Fintech, fintech compliance India, RBI licensing, SEBI registration, IRDAI licence, IFSCA GIFT City, FIU IND AML compliance, regulatory advisory India",
-    alternates: { canonical: "/" },
-    openGraph: {
-        title: "Estabizz Fintech | India's Fintech Compliance Platform",
-        description: "We Secure Your Licence. You Secure Your Future. Regulatory advisory for RBI, SEBI, IRDAI, IFSCA and allied frameworks.",
-        url: "https://estabizz-site.vercel.app/",
-        type: "website"
-    }
-};
+// Homepage SEO is managed from Admin → Website Editor → Homepage → SEO Settings.
+// Built from CMS content with safe fallbacks; the homepage route always stays "/".
+export async function generateMetadata(): Promise<Metadata> {
+    const seo = (await getContent("seo.homepage")) as Partial<SeoContent>;
+    return buildPageMetadata(seo, SEO_HOMEPAGE_DEFAULTS, "/");
+}
 
 const organizationSchema = {
     "@context": "https://schema.org",
@@ -75,12 +73,32 @@ const websiteSchema = {
     }
 };
 
+const allowedHomepageSchemaTypes = ["WebSite", "Organization", "ProfessionalService", "LocalBusiness"];
+
+function getHomepageSchemaType(seo: Partial<SeoContent>): string {
+    const schemaType = seo.schemaType?.trim();
+    return schemaType && allowedHomepageSchemaTypes.includes(schemaType)
+        ? schemaType
+        : SEO_HOMEPAGE_DEFAULTS.schemaType;
+}
+
+function buildHomepageSchema(seo: Partial<SeoContent>) {
+    const schemaType = getHomepageSchemaType(seo);
+    if (schemaType === "WebSite") return websiteSchema;
+
+    return {
+        ...organizationSchema,
+        "@type": schemaType,
+    };
+}
+
 export default async function Home() {
     const [
         heroContent, statsContent, trustedByContent, solutionsContent,
         globalMarketsContent, whyChooseUsContent, finalCtaContent,
         regulatoryServicesContent, processContent, compliancePortalContent,
-        caseStudiesContent, testimonialsContent,
+        caseStudiesContent, testimonialsContent, contentFrameworkContent, resourcesContent,
+        seoContent,
     ] = (await Promise.all([
         getContent("homepage.hero"),
         getContent("homepage.stats"),
@@ -94,11 +112,15 @@ export default async function Home() {
         getContent("homepage.compliancePortal"),
         getContent("homepage.caseStudies"),
         getContent("homepage.testimonials"),
+        getContent("homepage.contentFramework"),
+        getContent("homepage.resources"),
+        getContent("seo.homepage"),
     ])) as [
         Partial<HeroContent>, Partial<StatsContent>, Partial<TrustedByContent>, Partial<SolutionsContent>,
         Partial<GlobalMarketsContent>, Partial<WhyEstabizzContent>, Partial<FinalCtaContent>,
         Partial<RegulatoryServicesContent>, Partial<ProcessContent>, Partial<CompliancePortalContent>,
-        Partial<CaseStudiesContent>, Partial<TestimonialsContent>,
+        Partial<CaseStudiesContent>, Partial<TestimonialsContent>, Partial<ContentFrameworkContent>, Partial<ResourcesContent>,
+        Partial<SeoContent>,
     ];
 
     // Privacy: strip non-public items on the SERVER so confidential/internal
@@ -113,10 +135,12 @@ export default async function Home() {
         ...caseStudiesContent,
         cases: (caseStudiesContent.cases ?? []).filter((cs) => cs.visible !== false),
     };
+    const homepageSchema = buildHomepageSchema(seoContent);
+
     return (
         <div className="bg-transparent min-h-screen font-sans text-gray-800">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema) }} />
 
             <main>
                 <HeroSection content={heroContent} />
@@ -131,8 +155,8 @@ export default async function Home() {
                 <CompliancePortal content={compliancePortalContent} />
                 <Testimonials content={safeTestimonials} />
                 <FeaturedBlogs />
-                <ContentFrameworkSection />
-                <ResourcesSection />
+                <ContentFrameworkSection content={contentFrameworkContent} />
+                <ResourcesSection content={resourcesContent} />
                 <FinalCTA content={finalCtaContent} />
             </main>
         </div>

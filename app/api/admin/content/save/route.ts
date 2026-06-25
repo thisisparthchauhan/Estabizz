@@ -16,12 +16,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { requirePermission } from '@/lib/admin/requirePermission';
 import { saveContent } from '@/lib/content/repository';
+import type { AdminPermission } from '@/lib/admin/types';
 
 export async function POST(req: NextRequest) {
   try {
-    const auth = await requirePermission(req, 'manage_content');
-    if (!auth.ok) return auth.response;
-
     const body = await req.json();
     const { key, fields } = body as { key?: string; fields?: Record<string, unknown> };
 
@@ -32,8 +30,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Fields must be an object.' }, { status: 400 });
     }
 
+    const trimmedKey = key.trim();
+    const permission: AdminPermission = trimmedKey.startsWith('seo.') ? 'manage_seo' : 'manage_content';
+    const auth = await requirePermission(req, permission);
+    if (!auth.ok) return auth.response;
+
     const result = await saveContent({
-      key,
+      key: trimmedKey,
       fields,
       actorEmail: auth.admin.email,
       actorRole: auth.admin.role,

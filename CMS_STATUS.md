@@ -1,7 +1,7 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-06-25 (IST) · Phase: **1 — Website CMS** · Last batch: **1A (Case Highlights + Testimonials)**
+> Last updated: 2026-06-25 (IST) · Phase: **1 — Website CMS** · Last batch: **1B (Content Framework + Resources + Homepage SEO)**
 
 ---
 
@@ -11,7 +11,7 @@
 - **Live content store:** MongoDB. **Firebase is NOT used** (legacy env vars are dead).
 - **Media hosting:** Cloudinary (already wired).
 - **Auth:** JWT in `auth_token` cookie; admin gated by email allowlist + role/permission lookup.
-- **Content engine:** working and proven. 12 of 17 homepage sections editable. Navbar + footer editable.
+- **Content engine:** working and proven. 15 of 15 homepage content sections editable. Navbar + footer editable. Homepage SEO settings are editable and connected to live metadata.
 - **All work is LOCAL.** Nothing pushed to production yet (awaiting owner approval).
 
 ### How content works (do not change this design)
@@ -23,7 +23,7 @@
 
 ---
 
-## 2. Completed homepage sections (14 of 17) — DO NOT DISTURB
+## 2. Completed homepage sections (17 of 17) — DO NOT DISTURB
 
 | # | Section | Content key | Editor route |
 |---|---|---|---|
@@ -41,6 +41,9 @@
 | 12 | Footer | `global.footer` | /admin/navigation |
 | 13 | Regulatory Experience / Case Highlights | `homepage.caseStudies` | …/case-highlights |
 | 14 | Testimonials | `homepage.testimonials` | …/testimonials |
+| 15 | Content, Compliance & Trust | `homepage.contentFramework` | …/content-framework |
+| 16 | Resource Architecture | `homepage.resources` | …/resource-architecture |
+| 17 | SEO Settings (homepage) | `seo.homepage` | …/seo |
 
 All verified: TypeScript clean, renders from DB, save loop works, zero runtime errors, SEO-safe stats.
 
@@ -48,13 +51,9 @@ All verified: TypeScript clean, renders from DB, save loop works, zero runtime e
 
 ---
 
-## 3. Pending homepage sections (3 of 17)
+## 3. Pending homepage sections
 
-| # | Section | Content key | Notes |
-|---|---|---|---|
-| 1 | Content, Compliance & Trust | `homepage.contentFramework` | Batch 1B |
-| 2 | Resource Architecture | `homepage.resources` | Batch 1B |
-| 3 | SEO Settings (homepage) | `seo.homepage` | First page-wise SEO block |
+No homepage sections remain pending. Batch 1B completed the final two homepage content sections and the first page-wise SEO block.
 
 ---
 
@@ -156,8 +155,7 @@ Do not start Sales CRM or Client Ticket Management until the Website CMS foundat
 ## 10. Next development batch
 
 **Batch 1A — DONE** (Case Highlights + Testimonials).
-**Batch 1B (next, awaiting approval):** `homepage.contentFramework` (Content, Compliance & Trust) + `homepage.resources` (Resource Architecture).
-**Batch 1C:** `seo.homepage` (first page-wise SEO block).
+**Batch 1B — DONE** (`homepage.contentFramework` + `homepage.resources` + `seo.homepage`).
 **Then:** Approval Queue UI → Change History UI → Restore UI.
 
 Per-section checklist (the proven pattern):
@@ -187,7 +185,7 @@ Per-section checklist (the proven pattern):
 - ❌ Do not remove the hardcoded defaults or the MongoDB fallback in `getContent()`.
 - ❌ Do not use Firebase.
 - ❌ Do not push to production without owner approval — keep work local.
-- ❌ Do not disturb the 12 completed sections unless needed for consistency.
+- ❌ Do not disturb the 17 completed homepage sections unless needed for consistency.
 - ❌ Do not build a free-form drag-and-drop designer; editing is controlled (text, image, link, order, show/hide, presets).
 - ❌ Do not let non-approved content go live unless the role permits.
 - ❌ Do not use technical words in the admin UI (schema, JSON, object, payload, component, database). Use: Page, Section, Heading, Description, Button, Image, Colour, Status, Preview, Save, Submit for Review, Approve, Publish, Hide, Restore.

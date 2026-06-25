@@ -7,16 +7,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission } from '@/lib/admin/requirePermission';
 import { getContentForEdit } from '@/lib/content/repository';
+import type { AdminPermission } from '@/lib/admin/types';
 
 type Params = { params: Promise<{ key: string }> };
 
 export async function GET(req: NextRequest, { params }: Params) {
   try {
-    const auth = await requirePermission(req, 'manage_content');
+    const { key } = await params;
+    const decodedKey = decodeURIComponent(key);
+    const permission: AdminPermission = decodedKey.startsWith('seo.') ? 'manage_seo' : 'manage_content';
+    const auth = await requirePermission(req, permission);
     if (!auth.ok) return auth.response;
 
-    const { key } = await params;
-    const block = await getContentForEdit(decodeURIComponent(key));
+    const block = await getContentForEdit(decodedKey);
 
     if (!block) {
       return NextResponse.json({ error: 'Unknown content block.' }, { status: 404 });

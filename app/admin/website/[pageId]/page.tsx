@@ -25,6 +25,9 @@ const SECTION_ROUTES: Record<string, string> = {
   "homepage.compliancePortal": "compliance-portal",
   "homepage.caseStudies": "case-highlights",
   "homepage.testimonials": "testimonials",
+  "homepage.contentFramework": "content-framework",
+  "homepage.resources": "resource-architecture",
+  "seo.homepage": "seo",
 };
 
 function editorHref(key: string, pageId: string): string | null {

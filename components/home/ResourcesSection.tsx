@@ -2,29 +2,13 @@
 
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { RESOURCES_DEFAULTS, type ResourcesContent } from "@/lib/content/resourcesDefaults";
 
-const resources = [
-    {
-        title: "Regulatory Updates",
-        text: "RBI, SEBI, IRDAI, IFSCA and MCA updates explained with practical compliance impact.",
-        href: "/resources/regulatory-updates",
-        button: "View Updates"
-    },
-    {
-        title: "Compliance FAQs",
-        text: "Detailed, search-friendly FAQs for licensing, registration, post-approval compliance and regulator queries.",
-        href: "/resources/faqs",
-        button: "Explore FAQs"
-    },
-    {
-        title: "Circular Impact Emails",
-        text: "Professional circular-based email drafts with reference table, risk rating and action checklist.",
-        href: "/resources/regulatory-update-email-template",
-        button: "View Template"
-    }
-];
-
-export default function ResourcesSection() {
+export default function ResourcesSection({ content }: { content?: Partial<ResourcesContent> }) {
+    const c: ResourcesContent = { ...RESOURCES_DEFAULTS, ...content };
+    const resources = (c.cards?.length ? c.cards : RESOURCES_DEFAULTS.cards)
+        .map((card, index) => ({ ...RESOURCES_DEFAULTS.cards[index % RESOURCES_DEFAULTS.cards.length], ...card }))
+        .filter((card) => card.visible !== false);
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
 
@@ -44,17 +28,17 @@ export default function ResourcesSection() {
         <section ref={sectionRef} className="bg-white py-24">
             <div className="mx-auto max-w-[1240px] px-6">
                 <div className={`mx-auto mb-14 max-w-3xl text-center transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-                    <div className="mb-4 text-[12px] font-black uppercase tracking-[0.18em] text-[#1677f2]">Resource Architecture</div>
-                    <h2 className="mb-5 text-[32px] font-black leading-tight text-[#0a1628] md:text-[42px]">Stay Ahead of Regulatory Change</h2>
+                    <div className="mb-4 text-[12px] font-black uppercase tracking-[0.18em] text-[#1677f2]">{c.label}</div>
+                    <h2 className="mb-5 text-[32px] font-black leading-tight text-[#0a1628] md:text-[42px]">{c.heading}</h2>
                     <p className="text-[16px] font-medium leading-8 text-[#475569]">
-                        Regulatory updates become valuable only when they are converted into action. Estabizz helps founders, CFOs and compliance teams understand what changed, who is affected and what needs to be done next.
+                        {c.description}
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                     {resources.map((resource, index) => (
                         <Link
-                            key={resource.title}
+                            key={`${resource.title}-${index}`}
                             href={resource.href}
                             className={`group rounded-2xl border border-blue-100 bg-[#fbfdff] p-7 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_18px_45px_rgba(0,100,200,0.12)] ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                             style={{ transitionDelay: `${index * 0.1}s` }}

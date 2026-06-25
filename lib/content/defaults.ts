@@ -13,6 +13,9 @@ import { PROCESS_DEFAULTS } from '@/lib/content/processDefaults';
 import { COMPLIANCE_PORTAL_DEFAULTS } from '@/lib/content/compliancePortalDefaults';
 import { CASE_STUDIES_DEFAULTS } from '@/lib/content/caseStudiesDefaults';
 import { TESTIMONIALS_DEFAULTS } from '@/lib/content/testimonialsDefaults';
+import { CONTENT_FRAMEWORK_DEFAULTS } from '@/lib/content/contentFrameworkDefaults';
+import { RESOURCES_DEFAULTS } from '@/lib/content/resourcesDefaults';
+import { SEO_HOMEPAGE_DEFAULTS } from '@/lib/content/seoDefaults';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Content defaults registry
@@ -112,6 +115,27 @@ export const CONTENT_DEFAULTS: Record<string, ContentDefault> = {
     label: 'Testimonials',
     group: 'Homepage',
     fields: { ...TESTIMONIALS_DEFAULTS },
+  },
+
+  'homepage.contentFramework': {
+    key: 'homepage.contentFramework',
+    label: 'Content, Compliance & Trust',
+    group: 'Homepage',
+    fields: { ...CONTENT_FRAMEWORK_DEFAULTS },
+  },
+
+  'homepage.resources': {
+    key: 'homepage.resources',
+    label: 'Resource Architecture',
+    group: 'Homepage',
+    fields: { ...RESOURCES_DEFAULTS },
+  },
+
+  'seo.homepage': {
+    key: 'seo.homepage',
+    label: 'SEO Settings',
+    group: 'Homepage',
+    fields: { ...SEO_HOMEPAGE_DEFAULTS },
   },
 
   'homepage.finalCta': {

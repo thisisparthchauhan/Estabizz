@@ -1,59 +1,11 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import { COMPLIANCE_PORTAL_DEFAULTS, type CompliancePortalContent } from "@/lib/content/compliancePortalDefaults";
 
-const checklistItems = [
-    "Create your secure compliance account",
-    "Track all regulatory licences and application status",
-    "Upload and manage documents digitally",
-    "Receive real-time compliance alerts & reminders",
-    "Access ready-to-use regulatory policy templates",
-    "Apply for new registrations seamlessly",
-    "Monitor your compliance calendar",
-    "Explore regulatory FAQs and guidance notes",
-    "Manage intermediary compliance (NBFC, AIF, Broker, PA, RIA, FME, etc.)",
-    "Avail exclusive registration support and structured execution"
-];
-
-const featureBlocks = [
-    {
-        icon: "📊",
-        title: "Compliance Dashboard",
-        desc: "A centralised control panel to monitor filings, approvals, deadlines, and regulatory status across authorities.",
-        color: "#1677f2"
-    },
-    {
-        icon: "🔒",
-        title: "Secure Document Vault",
-        desc: "Encrypted storage for statutory documents, policies, licences and regulatory submissions.",
-        color: "#10b981"
-    },
-    {
-        icon: "📅",
-        title: "Smart Compliance Calendar",
-        desc: "Automated reminders for RBI, SEBI, IRDAI, IFSCA, ROC, Income Tax and other regulatory filings.",
-        color: "#F59E0B"
-    },
-    {
-        icon: "📚",
-        title: "Policy & Framework Library",
-        desc: "Ready-to-adopt AML, KYC, grievance redressal, risk management, internal audit and other mandatory compliance policies.",
-        color: "#7C3AED"
-    },
-    {
-        icon: "🔔",
-        title: "Regulatory Alert System",
-        desc: "Stay updated with regulatory circulars, notifications, and industry-specific compliance changes.",
-        color: "#EF4444"
-    },
-    {
-        icon: "📋",
-        title: "Guided Application Management",
-        desc: "Apply for new licences and registrations with structured documentation guidance and expert review support.",
-        color: "#0077B6"
-    }
-];
-
-export default function CompliancePortal() {
+export default function CompliancePortal({ content }: { content?: Partial<CompliancePortalContent> }) {
+    const c: CompliancePortalContent = { ...COMPLIANCE_PORTAL_DEFAULTS, ...content };
+    const checklistItems = c.checklistItems?.length ? c.checklistItems : COMPLIANCE_PORTAL_DEFAULTS.checklistItems;
+    const featureBlocks = c.features?.length ? c.features : COMPLIANCE_PORTAL_DEFAULTS.features;
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
 
@@ -83,22 +35,22 @@ export default function CompliancePortal() {
                 <div className="w-full xl:w-5/12 bg-white py-24 px-6 xl:pl-0 flex justify-end">
                     <div className={`max-w-[500px] w-full xl:mr-16 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
                         <div className="text-[11px] font-bold text-[#1677f2] uppercase tracking-[0.2em] mb-4">
-                            FOR FOUNDERS, CFOs & COMPLIANCE TEAMS
+                            {c.label}
                         </div>
                         <h2 className="text-[36px] md:text-[42px] font-black text-[#0a1628] leading-[1.1] mb-2">
-                            COMPLIANCE PORTAL
+                            {c.heading}
                         </h2>
                         <div className="text-[18px] font-bold text-[#0077B6] mb-6 italic">
-                            One Portal. Complete Regulatory Control.
+                            {c.subtitle}
                         </div>
 
                         <p className="text-[15px] text-[#475569] leading-relaxed font-medium mb-10">
-                            Manage your compliance lifecycle through a secure, structured and regulator-ready digital platform. From licence tracking and document uploads to policy frameworks and compliance alerts, the Estabizz Compliance Hub brings everything your business needs into one place.
+                            {c.description}
                         </p>
 
                         <div className="rounded-[28px] p-8 border border-blue-100 bg-[#f8fbff] shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
                             <h3 className="text-[16px] font-bold text-[#120b45] mb-6 tracking-wide">
-                                What You Can Do Inside the Estabizz Portal
+                                {c.checklistTitle}
                             </h3>
                             <ul className="space-y-4">
                                 {checklistItems.map((item, i) => (
@@ -142,16 +94,16 @@ export default function CompliancePortal() {
 
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <a href="/contact" className="flex-1 text-center bg-[#1677f2] text-white font-bold text-[14px] rounded-[12px] px-6 py-4 hover:-translate-y-0.5 hover:bg-[#0866d9] shadow-[0_14px_35px_rgba(22,119,242,0.28)] transition-all duration-300">
-                                Launch Your Compliance Dashboard
+                            <a href={c.primaryBtnLink} className="flex-1 text-center bg-[#1677f2] text-white font-bold text-[14px] rounded-[12px] px-6 py-4 hover:-translate-y-0.5 hover:bg-[#0866d9] shadow-[0_14px_35px_rgba(22,119,242,0.28)] transition-all duration-300">
+                                {c.primaryBtnText}
                             </a>
-                            <a href="/contact" className="flex-1 text-center bg-white border border-blue-100 text-[#0a2b58] font-bold text-[14px] rounded-[12px] px-6 py-4 hover:border-[#1677f2] hover:text-[#1677f2] transition-all duration-300">
-                                Create Your Account
+                            <a href={c.secondaryBtnLink} className="flex-1 text-center bg-white border border-blue-100 text-[#0a2b58] font-bold text-[14px] rounded-[12px] px-6 py-4 hover:border-[#1677f2] hover:text-[#1677f2] transition-all duration-300">
+                                {c.secondaryBtnText}
                             </a>
                         </div>
 
                         <p className="text-[#94a3b8] text-[12px] text-center mt-6 italic">
-                            Compliance is no longer fragmented. It is structured, monitored and controlled from a single secure platform.
+                            {c.footnote}
                         </p>
                     </div>
                 </div>

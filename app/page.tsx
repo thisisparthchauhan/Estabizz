@@ -22,6 +22,9 @@ import type { SolutionsContent } from "@/lib/content/solutionsDefaults";
 import type { GlobalMarketsContent } from "@/lib/content/globalMarketsDefaults";
 import type { WhyEstabizzContent } from "@/lib/content/whyEstabizzDefaults";
 import type { FinalCtaContent } from "@/lib/content/finalCtaDefaults";
+import type { RegulatoryServicesContent } from "@/lib/content/regulatoryServicesDefaults";
+import type { ProcessContent } from "@/lib/content/processDefaults";
+import type { CompliancePortalContent } from "@/lib/content/compliancePortalDefaults";
 
 export const metadata: Metadata = {
     title: "Estabizz Fintech Private Limited | India's Fintech Compliance Platform",
@@ -74,6 +77,7 @@ export default async function Home() {
     const [
         heroContent, statsContent, trustedByContent, solutionsContent,
         globalMarketsContent, whyChooseUsContent, finalCtaContent,
+        regulatoryServicesContent, processContent, compliancePortalContent,
     ] = (await Promise.all([
         getContent("homepage.hero"),
         getContent("homepage.stats"),
@@ -82,9 +86,13 @@ export default async function Home() {
         getContent("homepage.globalMarkets"),
         getContent("homepage.whyChooseUs"),
         getContent("homepage.finalCta"),
+        getContent("homepage.regulatoryServices"),
+        getContent("homepage.process"),
+        getContent("homepage.compliancePortal"),
     ])) as [
         Partial<HeroContent>, Partial<StatsContent>, Partial<TrustedByContent>, Partial<SolutionsContent>,
         Partial<GlobalMarketsContent>, Partial<WhyEstabizzContent>, Partial<FinalCtaContent>,
+        Partial<RegulatoryServicesContent>, Partial<ProcessContent>, Partial<CompliancePortalContent>,
     ];
     return (
         <div className="bg-transparent min-h-screen font-sans text-gray-800">
@@ -98,10 +106,10 @@ export default async function Home() {
                 <GlobalMarketsSection content={globalMarketsContent} />
                 <SolutionsSection content={solutionsContent} />
                 <WhyChooseUs content={whyChooseUsContent} />
-                <RegulatoryServices />
-                <ProcessSection />
+                <RegulatoryServices content={regulatoryServicesContent} />
+                <ProcessSection content={processContent} />
                 <CaseStudies />
-                <CompliancePortal />
+                <CompliancePortal content={compliancePortalContent} />
                 <Testimonials />
                 <FeaturedBlogs />
                 <ContentFrameworkSection />

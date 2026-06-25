@@ -20,6 +20,9 @@ const SECTION_ROUTES: Record<string, string> = {
   "homepage.globalMarkets": "global-markets",
   "homepage.whyChooseUs": "why-estabizz",
   "homepage.finalCta": "final-cta",
+  "homepage.regulatoryServices": "regulatory-services",
+  "homepage.process": "process",
+  "homepage.compliancePortal": "compliance-portal",
 };
 
 function editorHref(key: string, pageId: string): string | null {

@@ -8,6 +8,9 @@ import { SOLUTIONS_DEFAULTS } from '@/lib/content/solutionsDefaults';
 import { GLOBAL_MARKETS_DEFAULTS } from '@/lib/content/globalMarketsDefaults';
 import { WHY_ESTABIZZ_DEFAULTS } from '@/lib/content/whyEstabizzDefaults';
 import { FINAL_CTA_DEFAULTS } from '@/lib/content/finalCtaDefaults';
+import { REGULATORY_SERVICES_DEFAULTS } from '@/lib/content/regulatoryServicesDefaults';
+import { PROCESS_DEFAULTS } from '@/lib/content/processDefaults';
+import { COMPLIANCE_PORTAL_DEFAULTS } from '@/lib/content/compliancePortalDefaults';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Content defaults registry
@@ -72,6 +75,27 @@ export const CONTENT_DEFAULTS: Record<string, ContentDefault> = {
     label: 'Why Estabizz',
     group: 'Homepage',
     fields: { ...WHY_ESTABIZZ_DEFAULTS },
+  },
+
+  'homepage.regulatoryServices': {
+    key: 'homepage.regulatoryServices',
+    label: 'Regulatory Services',
+    group: 'Homepage',
+    fields: { ...REGULATORY_SERVICES_DEFAULTS },
+  },
+
+  'homepage.process': {
+    key: 'homepage.process',
+    label: 'Execution Process',
+    group: 'Homepage',
+    fields: { ...PROCESS_DEFAULTS },
+  },
+
+  'homepage.compliancePortal': {
+    key: 'homepage.compliancePortal',
+    label: 'Compliance Portal',
+    group: 'Homepage',
+    fields: { ...COMPLIANCE_PORTAL_DEFAULTS },
   },
 
   'homepage.finalCta': {

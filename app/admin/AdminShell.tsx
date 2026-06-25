@@ -131,7 +131,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "New Blog",       href: "/admin/blogs/new",      icon: <IconPlus /> },
   { label: "Pending Review", href: "/admin/blogs/pending",  icon: <IconClock /> },
   { label: "Categories",     href: "/admin/categories",     icon: <IconTag /> },
-  { label: "Media",          href: "/admin/media",          icon: <IconImage /> },
+  { label: "Media Library",   href: "/admin/media-library",  icon: <IconImage /> },
   { label: "Navigation",     href: "/admin/navigation",     icon: <IconLayout /> },
 ];
 
@@ -148,7 +148,7 @@ const PAGE_TITLES: Record<string, string> = {
   "/admin/blogs/new":      "New Blog",
   "/admin/blogs/pending":  "Pending Review",
   "/admin/categories":     "Categories",
-  "/admin/media":          "Media",
+  "/admin/media-library":  "Media Library",
   "/admin/navigation":     "Navigation",
 };
 

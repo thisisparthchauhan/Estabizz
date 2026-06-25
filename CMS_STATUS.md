@@ -1,7 +1,7 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-06-25 (IST) · Phase: **2C — Restore UI** · Last batch: **2C (Restore UI)**
+> Last updated: 2026-06-25 (IST) · Phase: **2D — Media Library** · Last batch: **2D (Media Library)**
 
 ---
 
@@ -15,6 +15,7 @@
 - **Approval Queue UI:** built at `/admin/approval-queue` for pending website content, SEO changes and existing pending blog submissions.
 - **Change History UI:** built at `/admin/change-history` with read-only activity filters, before/after details, reviewer comments and IST timestamps.
 - **Restore UI:** built at `/admin/restore` for permission-gated restore of previous published CMS versions.
+- **Media Library:** built at `/admin/media-library`. Cloudinary-backed. Upload JPG/PNG/WebP/SVG/PDF, search, filter, grid/list view, edit alt text/caption/tags, copy link, soft remove. Records stored in `media_assets` MongoDB collection. Permission-gated (upload: `manage_media`; remove: `delete_content`).
 - **All work is LOCAL.** Nothing pushed to production yet (awaiting owner approval).
 
 ### How content works (do not change this design)
@@ -112,7 +113,7 @@ Draft → Preview → Submit for Review → Compliance Review → Final Approval
 1. **Approval Queue UI — DONE** — review & approve/reject pending website content, SEO changes and existing pending blog submissions.
 2. **Change History UI — DONE** — who changed what, old → new, date/time, reviewer comments and before/after details.
 3. **Restore UI — DONE** — restore previous published content/SEO versions with confirmation, audit and history records.
-4. **Media Library** — Cloudinary uploads, alt text, "used where", upload date.
+4. **Media Library — DONE** — Cloudinary-backed upload (JPG/PNG/WebP/SVG/PDF), grid/list view, search, type filter, alt text/caption/tags editor, copy link, soft remove. MongoDB `media_assets` collection.
 5. **Page-wise SEO editor** — all pages, not just blogs (see §7).
 6. **Preview modes** — desktop / tablet / mobile.
 7. **Users & Roles screen** — assign the 6 roles in-app.
@@ -162,7 +163,8 @@ Do not start Sales CRM or Client Ticket Management until the Website CMS foundat
 **Phase 2A — DONE:** Approval Queue UI.
 **Phase 2B — DONE:** Change History UI.
 **Phase 2C — DONE:** Restore UI.
-**Next after owner approval:** Media Library or owner-selected CMS foundation module.
+**Phase 2D — DONE:** Media Library (Cloudinary-backed, MongoDB `media_assets` collection, grid/list UI, full permission gating).
+**Next after owner approval:** Page-wise SEO editor, Users & Roles screen, or owner-selected module.
 
 Per-section checklist (the proven pattern):
 1. Create `lib/content/<x>Defaults.ts` (single source of truth)

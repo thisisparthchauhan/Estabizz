@@ -117,6 +117,7 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
   ],
   seo_manager: [
     'manage_seo',
+    'manage_media',
     'view_admin',
   ],
   admin_viewer: [

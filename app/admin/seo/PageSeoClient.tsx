@@ -188,6 +188,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
   const [draft,   setDraft]   = useState<Partial<SeoContent>>({});
   const [saving,  setSaving]  = useState(false);
   const [toast,   setToast]   = useState<Toast | null>(null);
+  const [search,  setSearch]  = useState("");
 
   function showToast(msg: string, ok = true) {
     setToast({ msg, ok });
@@ -241,10 +242,24 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
 
   // ── Group pages ───────────────────────────────────────────────────────────
 
+  const normalizedSearch = search.trim().toLowerCase();
+  const visiblePages = normalizedSearch
+    ? pages.filter(page => {
+        const searchable = [
+          page.label,
+          page.path,
+          page.current.seoTitle,
+          page.current.seoTitle?.trim() ? "" : page.defaults.seoTitle,
+        ].join(" ").toLowerCase();
+        return searchable.includes(normalizedSearch);
+      })
+    : pages;
+
   const grouped: Record<string, SeoPageItem[]> = {};
-  for (const p of pages) {
+  for (const p of visiblePages) {
     (grouped[p.group] ??= []).push(p);
   }
+  const hasVisiblePages = visiblePages.length > 0;
 
   const titleLen = (draft.seoTitle ?? "").length;
   const descLen  = (draft.metaDescription ?? "").length;
@@ -522,6 +537,17 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
               </div>
             )}
 
+            {/* Search */}
+            <div className="rounded-2xl border border-[#e2eaf2] bg-white px-5 py-4 shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+              <input
+                type="search"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="Search pages by name, path or SEO title"
+                className="w-full rounded-xl border border-[#e2eaf2] bg-[#f8fafc] px-4 py-2.5 text-[13px] font-medium text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:bg-white focus:outline-none transition-colors"
+              />
+            </div>
+
             {/* Page groups */}
             {GROUP_ORDER.map(group => {
               const groupPages = grouped[group];
@@ -574,6 +600,13 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                 </div>
               );
             })}
+
+            {!hasVisiblePages && (
+              <div className="rounded-2xl border border-[#e2eaf2] bg-white px-5 py-10 text-center shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+                <div className="text-[15px] font-black text-[#0a1628]">No SEO pages found for this search.</div>
+                <p className="mt-1 text-[12px] text-[#64748b]">Try a different page name, path or title.</p>
+              </div>
+            )}
 
             {/* Quick-reference guide */}
             <div className="rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_12px_rgba(10,22,40,0.05)]">

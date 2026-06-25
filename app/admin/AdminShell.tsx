@@ -111,6 +111,17 @@ function IconChevronRight() {
   );
 }
 
+function IconUsers() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 00-3-3.87" />
+      <path d="M16 3.13a4 4 0 010 7.75" />
+    </svg>
+  );
+}
+
 // ─── Nav config ───────────────────────────────────────────────────────────────
 
 interface NavItem {
@@ -125,6 +136,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Approval Queue", href: "/admin/approval-queue", icon: <IconClock />, pendingBadge: true },
   { label: "Change History", href: "/admin/change-history", icon: <IconList /> },
   { label: "Restore",        href: "/admin/restore",        icon: <IconClock /> },
+  { label: "Users & Roles",  href: "/admin/users",          icon: <IconUsers /> },
   { label: "Website Editor", href: "/admin/website",        icon: <IconEdit /> },
   { label: "Leads",          href: "/admin/leads",          icon: <IconList /> },
   { label: "All Blogs",      href: "/admin/blogs",          icon: <IconList /> },
@@ -142,6 +154,7 @@ const PAGE_TITLES: Record<string, string> = {
   "/admin/approval-queue": "Approval Queue",
   "/admin/change-history": "Change History",
   "/admin/restore":        "Restore",
+  "/admin/users":          "Users & Roles",
   "/admin/website":        "Website Editor",
   "/admin/leads":          "Leads",
   "/admin/blogs":          "All Blogs",

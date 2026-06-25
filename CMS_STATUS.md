@@ -1,7 +1,7 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-06-25 (IST) · Phase: **2D — Media Library** · Last batch: **2D (Media Library)**
+> Last updated: 2026-06-25 (IST) · Phase: **2E — Users & Roles** · Last batch: **2E (Users & Roles)**
 
 ---
 
@@ -16,6 +16,7 @@
 - **Change History UI:** built at `/admin/change-history` with read-only activity filters, before/after details, reviewer comments and IST timestamps.
 - **Restore UI:** built at `/admin/restore` for permission-gated restore of previous published CMS versions.
 - **Media Library:** built at `/admin/media-library`. Cloudinary-backed. Upload JPG/PNG/WebP/SVG/PDF, search, filter, grid/list view, edit alt text/caption/tags, copy link, soft remove. Records stored in `media_assets` MongoDB collection. Permission-gated (upload: `manage_media`; remove: `delete_content`).
+- **Users & Roles:** built at `/admin/users`. View, search, filter, create and edit admin users. Role and status change. Permission-gated (`manage_users` = super_admin only). MongoDB `admin_users` collection. Self-demotion warning. Last super_admin protection. Login-setup note for new users.
 - **All work is LOCAL.** Nothing pushed to production yet (awaiting owner approval).
 
 ### How content works (do not change this design)
@@ -164,7 +165,8 @@ Do not start Sales CRM or Client Ticket Management until the Website CMS foundat
 **Phase 2B — DONE:** Change History UI.
 **Phase 2C — DONE:** Restore UI.
 **Phase 2D — DONE:** Media Library (Cloudinary-backed, MongoDB `media_assets` collection, grid/list UI, full permission gating).
-**Next after owner approval:** Page-wise SEO editor, Users & Roles screen, or owner-selected module.
+**Phase 2E — DONE:** Users & Roles screen (MongoDB admin_users, role/status management, last-super-admin protection, self-demotion warning, permission view).
+**Next after owner approval:** Page-wise SEO editor, Recycle Bin, or owner-selected module.
 
 Per-section checklist (the proven pattern):
 1. Create `lib/content/<x>Defaults.ts` (single source of truth)

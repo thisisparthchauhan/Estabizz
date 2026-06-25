@@ -11,10 +11,20 @@ import { getAdminUserByEmail } from '@/lib/admin/repository';
 import { ROLE_LABELS } from '@/lib/admin/types';
 import { getPendingSubmissions, getBlogByIdForAdmin, adminUpdateBlogStatus } from '@/lib/blog/repository';
 import type { Blog } from '@/lib/blog/types';
+import RegulatoryUpdate from '@/lib/models/RegulatoryUpdate';
+import {
+  approvePendingChanges,
+  getUpdateForAdmin,
+  publishUpdate,
+  rejectPendingChanges,
+  rejectUpdate,
+} from '@/lib/regulatory/repository';
+import type { RegulatoryPendingRevision, RegulatoryUpdateRecord } from '@/lib/regulatory/types';
 
-export type QueueItemType = 'content' | 'blog';
-export type QueueItemStatus = 'pending_approval' | 'rejected' | 'pending_review';
+export type QueueItemType = 'content' | 'blog' | 'regulatory_update';
+export type QueueItemStatus = 'pending_approval' | 'rejected' | 'pending_review' | 'published';
 export type QueueAction = 'approve' | 'reject' | 'request_changes';
+export type RegulatoryQueueKind = 'pending_publication' | 'pending_changes';
 
 export interface ChangedField {
   field: string;
@@ -39,6 +49,13 @@ export interface ApprovalQueueItem {
   changedFields: ChangedField[];
   previewPath: string;
   reviewerComment?: string;
+  regulator?: string;
+  category?: string;
+  impactLevel?: string;
+  summary?: string;
+  sourceUrl?: string;
+  regulatoryKind?: RegulatoryQueueKind;
+  hasPendingChanges?: boolean;
 }
 
 const contentMetaByKey = new Map(
@@ -189,6 +206,66 @@ function blogFields(blog: Blog): ContentFields {
   };
 }
 
+const REGULATORY_FIELD_LABELS: Record<string, string> = {
+  title: 'Title',
+  regulator: 'Regulator',
+  category: 'Category',
+  summary: 'Summary',
+  detailedContent: 'Detailed Content',
+  sourceTitle: 'Source Title',
+  sourceUrl: 'Source Link',
+  sourceDate: 'Source Date',
+  publishedDate: 'Published Date',
+  effectiveDate: 'Effective Date',
+  impactLevel: 'Impact Level',
+  applicableTo: 'Applicable To',
+  tags: 'Tags',
+  seoTitle: 'SEO Title',
+  seoDescription: 'SEO Description',
+  canonicalUrl: 'Canonical Link',
+  featuredImageUrl: 'Featured Image',
+};
+
+function dateForQueue(value: string | null | undefined): string {
+  return value ?? '';
+}
+
+function regulatoryFields(record: RegulatoryUpdateRecord): ContentFields {
+  return {
+    title: record.title,
+    regulator: record.regulator,
+    category: record.category,
+    summary: record.summary,
+    detailedContent: record.detailedContent,
+    sourceTitle: record.sourceTitle,
+    sourceUrl: record.sourceUrl,
+    sourceDate: dateForQueue(record.sourceDate),
+    publishedDate: dateForQueue(record.publishedDate),
+    effectiveDate: dateForQueue(record.effectiveDate),
+    impactLevel: record.impactLevel,
+    applicableTo: record.applicableTo,
+    tags: record.tags,
+    seoTitle: record.seoTitle,
+    seoDescription: record.seoDescription,
+    canonicalUrl: record.canonicalUrl,
+    featuredImageUrl: record.featuredImageUrl,
+  };
+}
+
+function pendingRevisionFields(pending: RegulatoryPendingRevision | null): ContentFields {
+  if (!pending) return {};
+  return Object.fromEntries(
+    Object.entries(pending).map(([key, value]) => [key, value ?? ''])
+  ) as ContentFields;
+}
+
+function regulatoryDiff(current: ContentFields, proposed: ContentFields): ChangedField[] {
+  return diffFields(current, proposed).map((change) => ({
+    ...change,
+    field: REGULATORY_FIELD_LABELS[change.field.charAt(0).toLowerCase() + change.field.slice(1).replace(/\s/g, '')] ?? change.field,
+  }));
+}
+
 async function blogItems(): Promise<ApprovalQueueItem[]> {
   const blogs = await getPendingSubmissions();
   return blogs.map((blog) => ({
@@ -211,10 +288,96 @@ async function blogItems(): Promise<ApprovalQueueItem[]> {
   }));
 }
 
+async function regulatoryItems(): Promise<ApprovalQueueItem[]> {
+  await connectDB();
+  const docs = await RegulatoryUpdate.find({
+    $or: [
+      { status: 'pending_approval' },
+      { status: 'published', hasPendingChanges: true },
+    ],
+  }).sort({ updatedAt: -1 }).limit(500).lean();
+
+  return Promise.all((docs as unknown as Record<string, unknown>[]).map(async (doc) => {
+    const record = {
+      id:               String(doc._id),
+      title:            String(doc.title ?? ''),
+      slug:             String(doc.slug ?? ''),
+      regulator:        String(doc.regulator ?? ''),
+      category:         String(doc.category ?? ''),
+      summary:          String(doc.summary ?? ''),
+      detailedContent:  String(doc.detailedContent ?? ''),
+      sourceTitle:      String(doc.sourceTitle ?? ''),
+      sourceUrl:        String(doc.sourceUrl ?? ''),
+      sourceDate:       isoForQueue(doc.sourceDate),
+      publishedDate:    isoForQueue(doc.publishedDate),
+      effectiveDate:    isoForQueue(doc.effectiveDate),
+      impactLevel:      String(doc.impactLevel ?? ''),
+      applicableTo:     Array.isArray(doc.applicableTo) ? (doc.applicableTo as unknown[]).map(String) : [],
+      tags:             Array.isArray(doc.tags) ? (doc.tags as unknown[]).map(String) : [],
+      status:           String(doc.status ?? 'draft') as ApprovalQueueItem['status'],
+      seoTitle:         String(doc.seoTitle ?? ''),
+      seoDescription:   String(doc.seoDescription ?? ''),
+      canonicalUrl:     String(doc.canonicalUrl ?? ''),
+      featuredImageUrl: String(doc.featuredImageUrl ?? ''),
+      createdBy:        String(doc.createdBy ?? ''),
+      createdByRole:    String(doc.createdByRole ?? ''),
+      updatedBy:        String(doc.updatedBy ?? ''),
+      reviewComment:    String(doc.reviewComment ?? ''),
+      createdAt:        isoForQueue(doc.createdAt) || new Date().toISOString(),
+      updatedAt:        isoForQueue(doc.updatedAt) || new Date().toISOString(),
+      hasPendingChanges: !!doc.hasPendingChanges,
+      pendingRevision: doc.pendingRevision as RegulatoryPendingRevision | null,
+      pendingSubmittedBy: String(doc.pendingSubmittedBy ?? ''),
+      pendingSubmittedAt: isoForQueue(doc.pendingSubmittedAt),
+      pendingReviewComment: String(doc.pendingReviewComment ?? ''),
+    };
+    const isPendingChanges = record.hasPendingChanges && record.status === 'published';
+    const currentFields = regulatoryFields(record as RegulatoryUpdateRecord);
+    const proposedFields = isPendingChanges
+      ? { ...currentFields, ...pendingRevisionFields(record.pendingRevision) }
+      : currentFields;
+    const submittedBy = isPendingChanges
+      ? record.pendingSubmittedBy || record.updatedBy || record.createdBy
+      : record.updatedBy || record.createdBy;
+
+    return {
+      id: `regulatory_update:${record.id}`,
+      type: 'regulatory_update',
+      key: record.id,
+      title: record.title,
+      pageName: 'Regulatory Update',
+      sectionName: record.title,
+      submittedBy,
+      submittedByRole: await submitterRole(submittedBy),
+      submittedAt: (isPendingChanges ? record.pendingSubmittedAt : record.updatedAt) || record.updatedAt,
+      updatedAt: record.updatedAt,
+      status: record.status,
+      currentFields: isPendingChanges ? currentFields : {},
+      proposedFields,
+      changedFields: regulatoryDiff(isPendingChanges ? currentFields : {}, proposedFields),
+      previewPath: isPendingChanges ? `/resources/regulatory-updates/${record.slug}` : `/admin/regulatory-updates`,
+      reviewerComment: isPendingChanges ? record.pendingReviewComment : record.reviewComment,
+      regulator: record.regulator,
+      category: record.category,
+      impactLevel: record.impactLevel,
+      summary: record.summary,
+      sourceUrl: record.sourceUrl,
+      regulatoryKind: isPendingChanges ? 'pending_changes' : 'pending_publication',
+      hasPendingChanges: record.hasPendingChanges,
+    } satisfies ApprovalQueueItem;
+  }));
+}
+
+function isoForQueue(value: unknown): string | null {
+  if (!value) return null;
+  const date = value instanceof Date ? value : new Date(String(value));
+  return Number.isNaN(date.getTime()) ? null : date.toISOString();
+}
+
 export async function listApprovalQueueItems(): Promise<ApprovalQueueItem[]> {
   try {
-    const [content, blogs] = await Promise.all([contentItems(), blogItems()]);
-    return [...content, ...blogs].sort((a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime());
+    const [content, blogs, regulatory] = await Promise.all([contentItems(), blogItems(), regulatoryItems()]);
+    return [...content, ...blogs, ...regulatory].sort((a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime());
   } catch (err) {
     console.error('[listApprovalQueueItems] Error:', err);
     return [];
@@ -223,7 +386,7 @@ export async function listApprovalQueueItems(): Promise<ApprovalQueueItem[]> {
 
 export async function countPendingApprovalItems(): Promise<number> {
   const items = await listApprovalQueueItems();
-  return items.filter((item) => item.status === 'pending_approval' || item.status === 'pending_review').length;
+  return items.filter((item) => item.status === 'pending_approval' || item.status === 'pending_review' || item.hasPendingChanges).length;
 }
 
 function hasPermission(admin: AdminContext, permission: AdminPermission): boolean {
@@ -240,6 +403,10 @@ export function canReviewQueueItem(admin: AdminContext, item: Pick<ApprovalQueue
 
   if (item.type === 'blog') {
     return hasPermission(admin, 'approve_blog') || hasPermission(admin, 'reject_blog') || hasPermission(admin, 'publish_blog');
+  }
+
+  if (item.type === 'regulatory_update') {
+    return hasPermission(admin, 'publish_content');
   }
 
   if (item.key.startsWith('seo.')) {
@@ -326,4 +493,36 @@ export async function reviewBlogChange(id: string, reviewer: AdminContext, actio
     reviewedBy: reviewer.email,
     adminNotes: action === 'request_changes' ? `Changes requested: ${comment.trim()}` : comment.trim(),
   });
+}
+
+export async function reviewRegulatoryChange(id: string, reviewer: AdminContext, action: QueueAction, comment = ''): Promise<void> {
+  const record = await getUpdateForAdmin(id);
+  if (!record) throw new Error('Regulatory update was not found.');
+
+  const submitter = (record.hasPendingChanges
+    ? record.pendingSubmittedBy
+    : record.updatedBy || record.createdBy || '').toLowerCase();
+  if (submitter && submitter === reviewer.email.toLowerCase()) {
+    throw new Error('You cannot review your own change.');
+  }
+
+  if (record.hasPendingChanges && record.status === 'published') {
+    if (action === 'approve') {
+      await approvePendingChanges(id, reviewer.email, reviewer.role);
+      return;
+    }
+    await rejectPendingChanges(id, reviewer.email, reviewer.role, comment);
+    return;
+  }
+
+  if (record.status === 'pending_approval') {
+    if (action === 'approve') {
+      await publishUpdate(id, reviewer.email, reviewer.role);
+      return;
+    }
+    await rejectUpdate(id, reviewer.email, reviewer.role, comment);
+    return;
+  }
+
+  throw new Error('This regulatory update is not waiting for review.');
 }

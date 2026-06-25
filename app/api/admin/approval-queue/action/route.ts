@@ -6,12 +6,13 @@ import {
   canReviewQueueItem,
   rejectContentChange,
   reviewBlogChange,
+  reviewRegulatoryChange,
   type QueueAction,
   type QueueItemType,
 } from '@/lib/content/approvalQueue';
 
 const ACTIONS: QueueAction[] = ['approve', 'reject', 'request_changes'];
-const ITEM_TYPES: QueueItemType[] = ['content', 'blog'];
+const ITEM_TYPES: QueueItemType[] = ['content', 'blog', 'regulatory_update'];
 
 export async function POST(req: NextRequest) {
   try {
@@ -45,8 +46,14 @@ export async function POST(req: NextRequest) {
       }
       revalidatePath('/', 'layout');
     } else {
-      await reviewBlogChange(key, auth.admin, action, comment);
-      revalidatePath('/blogs');
+      if (itemType === 'blog') {
+        await reviewBlogChange(key, auth.admin, action, comment);
+        revalidatePath('/blogs');
+      } else {
+        await reviewRegulatoryChange(key, auth.admin, action, comment);
+        revalidatePath('/resources/regulatory-updates');
+        revalidatePath('/resources/regulatory-updates/[slug]', 'page');
+      }
     }
 
     return NextResponse.json({ success: true, action });

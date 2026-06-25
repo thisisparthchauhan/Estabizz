@@ -16,12 +16,13 @@ interface Props {
   viewer: Viewer | null;
 }
 
-type FilterMode = "pending" | "website" | "seo" | "blogs" | "rejected";
+type FilterMode = "pending" | "website" | "seo" | "regulatory" | "blogs" | "rejected";
 
 const statusMeta: Record<string, { label: string; cls: string }> = {
   pending_approval: { label: "Pending", cls: "border-amber-200 bg-amber-50 text-amber-700" },
   pending_review: { label: "Pending", cls: "border-amber-200 bg-amber-50 text-amber-700" },
   rejected: { label: "Rejected", cls: "border-red-200 bg-red-50 text-red-700" },
+  published: { label: "Published", cls: "border-emerald-200 bg-emerald-50 text-emerald-700" },
 };
 
 function formatIST(iso: string): string {
@@ -52,6 +53,9 @@ function canReview(viewer: Viewer | null, item: ApprovalQueueItem): boolean {
   if (item.type === "blog") {
     return hasPermission(viewer, "approve_blog") || hasPermission(viewer, "reject_blog") || hasPermission(viewer, "publish_blog");
   }
+  if (item.type === "regulatory_update") {
+    return hasPermission(viewer, "publish_content");
+  }
   if (item.key.startsWith("seo.")) {
     return hasPermission(viewer, "manage_seo") || hasPermission(viewer, "publish_content");
   }
@@ -59,9 +63,10 @@ function canReview(viewer: Viewer | null, item: ApprovalQueueItem): boolean {
 }
 
 function filterItem(item: ApprovalQueueItem, mode: FilterMode): boolean {
-  if (mode === "pending") return item.status === "pending_approval" || item.status === "pending_review";
+  if (mode === "pending") return item.status === "pending_approval" || item.status === "pending_review" || !!item.hasPendingChanges;
   if (mode === "website") return item.type === "content" && !item.key.startsWith("seo.") && item.status === "pending_approval";
   if (mode === "seo") return item.type === "content" && item.key.startsWith("seo.") && item.status === "pending_approval";
+  if (mode === "regulatory") return item.type === "regulatory_update";
   if (mode === "blogs") return item.type === "blog" && item.status === "pending_review";
   return item.status === "rejected";
 }
@@ -76,7 +81,21 @@ function matchesText(item: ApprovalQueueItem, text: string): boolean {
     item.submittedBy,
     item.submittedByRole,
     item.title,
-  ].some((value) => value.toLowerCase().includes(q));
+    item.regulator,
+    item.category,
+    item.impactLevel,
+    item.summary,
+  ].some((value) => String(value ?? "").toLowerCase().includes(q));
+}
+
+function typeLabel(item: ApprovalQueueItem): string {
+  if (item.type === "blog") return "Blog";
+  if (item.type === "regulatory_update") return "Regulatory Update";
+  return item.key.startsWith("seo.") ? "SEO" : "Website Content";
+}
+
+function regulatoryStateLabel(item: ApprovalQueueItem): string {
+  return item.regulatoryKind === "pending_changes" ? "Pending Changes" : "Pending Publication";
 }
 
 function isWithinRange(item: ApprovalQueueItem, from: string, to: string): boolean {
@@ -141,11 +160,20 @@ function DetailDrawer({
                   {statusMeta[item.status]?.label ?? item.status}
                 </span>
                 <span className="rounded-full border border-[#dbe7f3] bg-white px-2.5 py-0.5 text-[10px] font-bold text-[#64748b]">
-                  {item.type === "blog" ? "Blog" : item.key.startsWith("seo.") ? "SEO" : "Website Content"}
+                  {typeLabel(item)}
                 </span>
+                {item.type === "regulatory_update" && (
+                  <span className="rounded-full border border-[#cfe3ff] bg-[#f5faff] px-2.5 py-0.5 text-[10px] font-bold text-[#1677f2]">
+                    {regulatoryStateLabel(item)}
+                  </span>
+                )}
               </div>
               <h2 className="text-[20px] font-black leading-tight text-[#0a1628]">{item.sectionName}</h2>
-              <p className="mt-1 text-[12px] text-[#64748b]">{item.pageName} · {item.key}</p>
+              <p className="mt-1 text-[12px] text-[#64748b]">
+                {item.type === "regulatory_update"
+                  ? [item.regulator, item.category, item.impactLevel].filter(Boolean).join(" · ")
+                  : `${item.pageName} · ${item.key}`}
+              </p>
             </div>
             <button type="button" onClick={onClose} className="rounded-xl px-3 py-2 text-[18px] text-[#94a3b8] hover:bg-[#f0f4f8] hover:text-[#0a1628]">x</button>
           </div>
@@ -158,6 +186,12 @@ function DetailDrawer({
               ["Role", item.submittedByRole || "Unknown"],
               ["Submitted On", formatIST(item.submittedAt)],
               ["Last Updated", formatIST(item.updatedAt)],
+              ...(item.type === "regulatory_update" ? [
+                ["Regulator", item.regulator || "Unknown"],
+                ["Category", item.category || "Unknown"],
+                ["Impact Level", item.impactLevel || "Unknown"],
+                ["Review Type", regulatoryStateLabel(item)],
+              ] : []),
             ].map(([label, value]) => (
               <div key={label} className="rounded-xl border border-[#e2eaf2] bg-[#fbfdff] px-4 py-3">
                 <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">{label}</div>
@@ -165,6 +199,18 @@ function DetailDrawer({
               </div>
             ))}
           </div>
+
+          {item.type === "regulatory_update" && (
+            <div className="mb-5 rounded-2xl border border-[#e2eaf2] bg-white p-5">
+              <div className="mb-2 text-[12px] font-black uppercase tracking-wide text-[#94a3b8]">Regulatory Update</div>
+              <p className="text-[13px] leading-6 text-[#475569]">{item.summary || "No summary provided."}</p>
+              {item.sourceUrl && (
+                <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex rounded-xl border border-blue-100 bg-blue-50 px-4 py-2 text-[12px] font-bold text-[#1677f2] hover:border-[#1677f2]/40">
+                  Source Link
+                </a>
+              )}
+            </div>
+          )}
 
           <div className="mb-5 rounded-2xl border border-[#e2eaf2] bg-white">
             <div className="border-b border-[#f0f4f8] bg-[#f8fafc] px-5 py-3">
@@ -207,12 +253,14 @@ function DetailDrawer({
         <div className="shrink-0 border-t border-[#e2eaf2] bg-[#fbfdff] px-6 py-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <Link href={item.previewPath} target="_blank" className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2 text-[12px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2]">
-              Preview
+              {item.type === "regulatory_update" ? "Review Regulatory Update" : "Preview"}
             </Link>
             <div className="flex flex-wrap items-center gap-2">
-              <button type="button" onClick={() => onAction("request_changes")} disabled={!allowed || !!actionLoading} className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-2 text-[12px] font-bold text-amber-700 disabled:cursor-not-allowed disabled:opacity-50">
-                {actionLoading === "request_changes" ? "Saving..." : "Request Changes"}
-              </button>
+              {item.type !== "regulatory_update" && (
+                <button type="button" onClick={() => onAction("request_changes")} disabled={!allowed || !!actionLoading} className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-2 text-[12px] font-bold text-amber-700 disabled:cursor-not-allowed disabled:opacity-50">
+                  {actionLoading === "request_changes" ? "Saving..." : "Request Changes"}
+                </button>
+              )}
               <button type="button" onClick={() => onAction("reject")} disabled={!allowed || !!actionLoading} className="rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-[12px] font-bold text-red-700 disabled:cursor-not-allowed disabled:opacity-50">
                 {actionLoading === "reject" ? "Saving..." : "Reject"}
               </button>
@@ -250,9 +298,10 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
   }, [fromDate, items, mode, search, submittedBy, toDate]);
 
   const counts = useMemo(() => ({
-    pending: items.filter((item) => item.status === "pending_approval" || item.status === "pending_review").length,
+    pending: items.filter((item) => item.status === "pending_approval" || item.status === "pending_review" || !!item.hasPendingChanges).length,
     website: items.filter((item) => item.type === "content" && !item.key.startsWith("seo.") && item.status === "pending_approval").length,
     seo: items.filter((item) => item.type === "content" && item.key.startsWith("seo.") && item.status === "pending_approval").length,
+    regulatory: items.filter((item) => item.type === "regulatory_update").length,
     blogs: items.filter((item) => item.type === "blog" && item.status === "pending_review").length,
     rejected: items.filter((item) => item.status === "rejected").length,
   }), [items]);
@@ -299,7 +348,7 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
       <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h1 className="text-[22px] font-black text-[#0a1628]">Approval Queue</h1>
-          <p className="mt-1 text-[13px] text-[#64748b]">Review pending website changes before they go live.</p>
+          <p className="mt-1 text-[13px] text-[#64748b]">Review pending website, SEO, blog and regulatory updates before they go live.</p>
         </div>
         <div className="rounded-2xl border border-[#e2eaf2] bg-white px-5 py-3 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
           <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Pending Changes</div>
@@ -319,6 +368,7 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
           <FilterButton active={mode === "pending"} onClick={() => setMode("pending")}>All Pending ({counts.pending})</FilterButton>
           <FilterButton active={mode === "website"} onClick={() => setMode("website")}>Website Content ({counts.website})</FilterButton>
           <FilterButton active={mode === "seo"} onClick={() => setMode("seo")}>SEO Changes ({counts.seo})</FilterButton>
+          <FilterButton active={mode === "regulatory"} onClick={() => setMode("regulatory")}>Regulatory Updates ({counts.regulatory})</FilterButton>
           <FilterButton active={mode === "blogs"} onClick={() => setMode("blogs")}>Blogs ({counts.blogs})</FilterButton>
           <FilterButton active={mode === "rejected"} onClick={() => setMode("rejected")}>Rejected ({counts.rejected})</FilterButton>
         </div>
@@ -349,10 +399,17 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
                         {statusMeta[item.status]?.label ?? item.status}
                       </span>
                       <span className="text-[11px] font-bold text-[#94a3b8]">{item.pageName}</span>
+                      {item.type === "regulatory_update" && (
+                        <span className="rounded-full border border-[#cfe3ff] bg-[#f5faff] px-2.5 py-0.5 text-[10px] font-bold text-[#1677f2]">
+                          {regulatoryStateLabel(item)}
+                        </span>
+                      )}
                     </div>
                     <div className="text-[14px] font-black text-[#0a1628]">{item.sectionName}</div>
                     <div className="mt-1 text-[12px] text-[#64748b]">
-                      {item.key} · Submitted By {item.submittedBy || "Unknown"} · {item.submittedByRole}
+                      {item.type === "regulatory_update"
+                        ? `${[item.regulator, item.category, item.impactLevel].filter(Boolean).join(" · ")} · Submitted By ${item.submittedBy || "Unknown"} · ${item.submittedByRole}`
+                        : `${item.key} · Submitted By ${item.submittedBy || "Unknown"} · ${item.submittedByRole}`}
                     </div>
                   </div>
                   <div className="hidden text-right lg:block">
@@ -360,7 +417,9 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
                     <div className="mt-1 text-[11px] text-[#94a3b8]">Last updated {formatIST(item.updatedAt)}</div>
                   </div>
                   <div className="flex items-center justify-end gap-2">
-                    <button type="button" onClick={() => openItem(item)} className="rounded-lg border border-[#dbe7f3] bg-white px-3.5 py-1.5 text-[12px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2]">Preview</button>
+                    <button type="button" onClick={() => openItem(item)} className="rounded-lg border border-[#dbe7f3] bg-white px-3.5 py-1.5 text-[12px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2]">
+                      {item.type === "regulatory_update" ? "Details" : "Preview"}
+                    </button>
                     <button type="button" onClick={() => openItem(item)} disabled={!allowed} className="rounded-lg bg-[#1677f2] px-3.5 py-1.5 text-[12px] font-bold text-white hover:bg-[#0f63d6] disabled:cursor-not-allowed disabled:opacity-45">Review</button>
                   </div>
                 </div>

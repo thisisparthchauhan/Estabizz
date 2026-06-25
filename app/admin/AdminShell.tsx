@@ -123,6 +123,7 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { label: "Dashboard",      href: "/admin",               icon: <IconGrid /> },
   { label: "Approval Queue", href: "/admin/approval-queue", icon: <IconClock />, pendingBadge: true },
+  { label: "Change History", href: "/admin/change-history", icon: <IconList /> },
   { label: "Website Editor", href: "/admin/website",        icon: <IconEdit /> },
   { label: "Leads",          href: "/admin/leads",          icon: <IconList /> },
   { label: "All Blogs",      href: "/admin/blogs",          icon: <IconList /> },
@@ -138,6 +139,7 @@ const NAV_ITEMS: NavItem[] = [
 const PAGE_TITLES: Record<string, string> = {
   "/admin":                "Dashboard",
   "/admin/approval-queue": "Approval Queue",
+  "/admin/change-history": "Change History",
   "/admin/website":        "Website Editor",
   "/admin/leads":          "Leads",
   "/admin/blogs":          "All Blogs",

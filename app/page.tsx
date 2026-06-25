@@ -25,6 +25,8 @@ import type { FinalCtaContent } from "@/lib/content/finalCtaDefaults";
 import type { RegulatoryServicesContent } from "@/lib/content/regulatoryServicesDefaults";
 import type { ProcessContent } from "@/lib/content/processDefaults";
 import type { CompliancePortalContent } from "@/lib/content/compliancePortalDefaults";
+import type { CaseStudiesContent } from "@/lib/content/caseStudiesDefaults";
+import type { TestimonialsContent } from "@/lib/content/testimonialsDefaults";
 
 export const metadata: Metadata = {
     title: "Estabizz Fintech Private Limited | India's Fintech Compliance Platform",
@@ -78,6 +80,7 @@ export default async function Home() {
         heroContent, statsContent, trustedByContent, solutionsContent,
         globalMarketsContent, whyChooseUsContent, finalCtaContent,
         regulatoryServicesContent, processContent, compliancePortalContent,
+        caseStudiesContent, testimonialsContent,
     ] = (await Promise.all([
         getContent("homepage.hero"),
         getContent("homepage.stats"),
@@ -89,11 +92,27 @@ export default async function Home() {
         getContent("homepage.regulatoryServices"),
         getContent("homepage.process"),
         getContent("homepage.compliancePortal"),
+        getContent("homepage.caseStudies"),
+        getContent("homepage.testimonials"),
     ])) as [
         Partial<HeroContent>, Partial<StatsContent>, Partial<TrustedByContent>, Partial<SolutionsContent>,
         Partial<GlobalMarketsContent>, Partial<WhyEstabizzContent>, Partial<FinalCtaContent>,
         Partial<RegulatoryServicesContent>, Partial<ProcessContent>, Partial<CompliancePortalContent>,
+        Partial<CaseStudiesContent>, Partial<TestimonialsContent>,
     ];
+
+    // Privacy: strip non-public items on the SERVER so confidential/internal
+    // content is never serialized into the page sent to the browser.
+    const safeTestimonials: Partial<TestimonialsContent> = {
+        ...testimonialsContent,
+        testimonials: (testimonialsContent.testimonials ?? []).filter(
+            (t) => t.consent === "consent_received" && t.visible
+        ),
+    };
+    const safeCaseStudies: Partial<CaseStudiesContent> = {
+        ...caseStudiesContent,
+        cases: (caseStudiesContent.cases ?? []).filter((cs) => cs.visible !== false),
+    };
     return (
         <div className="bg-transparent min-h-screen font-sans text-gray-800">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
@@ -108,9 +127,9 @@ export default async function Home() {
                 <WhyChooseUs content={whyChooseUsContent} />
                 <RegulatoryServices content={regulatoryServicesContent} />
                 <ProcessSection content={processContent} />
-                <CaseStudies />
+                <CaseStudies content={safeCaseStudies} />
                 <CompliancePortal content={compliancePortalContent} />
-                <Testimonials />
+                <Testimonials content={safeTestimonials} />
                 <FeaturedBlogs />
                 <ContentFrameworkSection />
                 <ResourcesSection />

@@ -1,7 +1,7 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-06-25 (IST) · Phase: **1 — Website CMS**
+> Last updated: 2026-06-25 (IST) · Phase: **1 — Website CMS** · Last batch: **1A (Case Highlights + Testimonials)**
 
 ---
 
@@ -23,7 +23,7 @@
 
 ---
 
-## 2. Completed homepage sections (12 of 17) — DO NOT DISTURB
+## 2. Completed homepage sections (14 of 17) — DO NOT DISTURB
 
 | # | Section | Content key | Editor route |
 |---|---|---|---|
@@ -39,20 +39,22 @@
 | 10 | Compliance Portal | `homepage.compliancePortal` | …/compliance-portal |
 | 11 | Final CTA | `homepage.finalCta` | …/final-cta |
 | 12 | Footer | `global.footer` | /admin/navigation |
+| 13 | Regulatory Experience / Case Highlights | `homepage.caseStudies` | …/case-highlights |
+| 14 | Testimonials | `homepage.testimonials` | …/testimonials |
 
 All verified: TypeScript clean, renders from DB, save loop works, zero runtime errors, SEO-safe stats.
 
+**Privacy note (testimonials):** non-public testimonials (consent ≠ "consent_received", or not visible) are filtered on the **server** in `app/page.tsx` before being passed to the client, so confidential/internal feedback is never serialized into the page sent to the browser. Hidden case cards are likewise filtered server-side. Do not remove this server-side filtering.
+
 ---
 
-## 3. Pending homepage sections (5 of 17)
+## 3. Pending homepage sections (3 of 17)
 
 | # | Section | Content key | Notes |
 |---|---|---|---|
-| 1 | Regulatory Experience / Case Highlights | `homepage.caseStudies` | **Regulatory safe-wording required** (see §8) |
-| 2 | Testimonials | `homepage.testimonials` | Add consent + visibility; "feedback coming soon" fallback |
-| 3 | Content, Compliance & Trust | `homepage.contentFramework` | |
-| 4 | Resource Architecture | `homepage.resources` | |
-| 5 | SEO Settings (homepage) | `seo.homepage` | First page-wise SEO block |
+| 1 | Content, Compliance & Trust | `homepage.contentFramework` | Batch 1B |
+| 2 | Resource Architecture | `homepage.resources` | Batch 1B |
+| 3 | SEO Settings (homepage) | `seo.homepage` | First page-wise SEO block |
 
 ---
 
@@ -153,7 +155,9 @@ Do not start Sales CRM or Client Ticket Management until the Website CMS foundat
 
 ## 10. Next development batch
 
-**Batch:** Remaining homepage sections — `homepage.caseStudies`, `homepage.testimonials`, `homepage.contentFramework`, `homepage.resources`, then `seo.homepage`.
+**Batch 1A — DONE** (Case Highlights + Testimonials).
+**Batch 1B (next, awaiting approval):** `homepage.contentFramework` (Content, Compliance & Trust) + `homepage.resources` (Resource Architecture).
+**Batch 1C:** `seo.homepage` (first page-wise SEO block).
 **Then:** Approval Queue UI → Change History UI → Restore UI.
 
 Per-section checklist (the proven pattern):

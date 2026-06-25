@@ -23,6 +23,8 @@ const SECTION_ROUTES: Record<string, string> = {
   "homepage.regulatoryServices": "regulatory-services",
   "homepage.process": "process",
   "homepage.compliancePortal": "compliance-portal",
+  "homepage.caseStudies": "case-highlights",
+  "homepage.testimonials": "testimonials",
 };
 
 function editorHref(key: string, pageId: string): string | null {

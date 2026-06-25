@@ -11,6 +11,8 @@ import { FINAL_CTA_DEFAULTS } from '@/lib/content/finalCtaDefaults';
 import { REGULATORY_SERVICES_DEFAULTS } from '@/lib/content/regulatoryServicesDefaults';
 import { PROCESS_DEFAULTS } from '@/lib/content/processDefaults';
 import { COMPLIANCE_PORTAL_DEFAULTS } from '@/lib/content/compliancePortalDefaults';
+import { CASE_STUDIES_DEFAULTS } from '@/lib/content/caseStudiesDefaults';
+import { TESTIMONIALS_DEFAULTS } from '@/lib/content/testimonialsDefaults';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Content defaults registry
@@ -96,6 +98,20 @@ export const CONTENT_DEFAULTS: Record<string, ContentDefault> = {
     label: 'Compliance Portal',
     group: 'Homepage',
     fields: { ...COMPLIANCE_PORTAL_DEFAULTS },
+  },
+
+  'homepage.caseStudies': {
+    key: 'homepage.caseStudies',
+    label: 'Regulatory Experience / Case Highlights',
+    group: 'Homepage',
+    fields: { ...CASE_STUDIES_DEFAULTS },
+  },
+
+  'homepage.testimonials': {
+    key: 'homepage.testimonials',
+    label: 'Testimonials',
+    group: 'Homepage',
+    fields: { ...TESTIMONIALS_DEFAULTS },
   },
 
   'homepage.finalCta': {

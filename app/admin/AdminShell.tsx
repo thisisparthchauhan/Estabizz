@@ -122,6 +122,18 @@ function IconUsers() {
   );
 }
 
+function IconTrash() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="3 6 5 6 21 6"/>
+      <path d="M19 6l-1 14H6L5 6"/>
+      <path d="M10 11v6"/>
+      <path d="M14 11v6"/>
+      <path d="M9 6V4h6v2"/>
+    </svg>
+  );
+}
+
 // ─── Nav config ───────────────────────────────────────────────────────────────
 
 interface NavItem {
@@ -144,6 +156,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Pending Review", href: "/admin/blogs/pending",  icon: <IconClock /> },
   { label: "Categories",     href: "/admin/categories",     icon: <IconTag /> },
   { label: "Media Library",   href: "/admin/media-library",  icon: <IconImage /> },
+  { label: "Recycle Bin",    href: "/admin/recycle-bin",    icon: <IconTrash /> },
   { label: "Navigation",     href: "/admin/navigation",     icon: <IconLayout /> },
 ];
 
@@ -162,6 +175,7 @@ const PAGE_TITLES: Record<string, string> = {
   "/admin/blogs/pending":  "Pending Review",
   "/admin/categories":     "Categories",
   "/admin/media-library":  "Media Library",
+  "/admin/recycle-bin":   "Recycle Bin",
   "/admin/navigation":     "Navigation",
 };
 

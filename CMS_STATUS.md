@@ -172,6 +172,7 @@ Do not start Sales CRM or Client Ticket Management until the Website CMS foundat
 **Phase 2F — DONE:** User Login Access Flow (in-panel credential creation, bcrypt-12 password hashing, reset-password API, requireAdmin DB fallback for MongoDB-created admins, Login Ready badge, no script dependency for new users).
 **Phase 2G — DONE:** Recycle Bin (`/admin/recycle-bin`). Removed media + deleted content blocks. Restore (audit recorded) + Permanent Delete with "DELETE" confirmation (audit before purge). Permission-gated. Business-friendly language throughout. Cloudinary files NOT purged (manual cleanup). Content purge safe — site uses hardcoded defaults for missing block keys.
 **Phase 2H — DONE:** GitHub JSON Backup (`/admin/backups`). Manual JSON snapshot of all CMS data (ContentBlock, ContentVersion, ContentAudit, MediaAsset metadata, AdminUser safe fields). Optional GitHub push via env vars. Download as JSON. Permission-gated (manage_backups = super_admin + admin). Audit record on every backup. Secrets never included.
+**Phase 2H-A — DONE:** Admin permission sync/backfill (`scripts/syncAdminRolePermissions.mjs`). Adds any missing default permissions for each user's role without removing existing/custom permissions. Uses MongoDB `$addToSet` (idempotent). Supports `--dry-run`. Existing super_admin and legacy admin users receive `manage_backups` if missing; non-admin roles do not. Error messages redact MongoDB URI.
 **Next after owner approval:** Page-wise SEO editor, or owner-selected module.
 
 Per-section checklist (the proven pattern):

@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission } from '@/lib/admin/requirePermission';
 import { restoreRecycleBinItem } from '@/lib/content/recycleBin';
+import { revalidatePath } from 'next/cache';
+
+const VALID_TYPES = new Set(['media', 'content', 'regulatory']);
 
 // ── POST /api/admin/recycle-bin/restore ────────────────────────────────────
 
@@ -11,12 +14,16 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json() as Record<string, unknown>;
     const id   = String(body.id   ?? '').trim();
-    const type = String(body.type ?? '') as 'media' | 'content';
+    const type = String(body.type ?? '') as 'media' | 'content' | 'regulatory';
 
-    if (!id)                                  return NextResponse.json({ error: 'Item ID is required.'              }, { status: 400 });
-    if (type !== 'media' && type !== 'content') return NextResponse.json({ error: 'Item type must be media or content.' }, { status: 400 });
+    if (!id)                  return NextResponse.json({ error: 'Item ID is required.' }, { status: 400 });
+    if (!VALID_TYPES.has(type)) return NextResponse.json({ error: 'Unsupported item type.' }, { status: 400 });
 
-    const result = await restoreRecycleBinItem(auth.admin.email, id, type);
+    const result = await restoreRecycleBinItem(auth.admin.email, id, type, auth.admin.role);
+
+    // A regulatory update restored to "published" must reappear publicly.
+    if (type === 'regulatory') revalidatePath('/resources/regulatory-updates');
+
     return NextResponse.json({ success: true, name: result.name });
   } catch (err) {
     console.error('[recycle-bin/restore] POST error:', err);

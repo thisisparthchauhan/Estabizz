@@ -10,7 +10,9 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type RegulatoryAuditAction =
-  | 'create' | 'update' | 'submit' | 'publish' | 'reject' | 'archive';
+  | 'create' | 'update' | 'save_pending_revision' | 'submit'
+  | 'approve_pending_revision' | 'publish' | 'reject' | 'archive'
+  | 'move_to_draft' | 'delete' | 'restore' | 'purge';
 
 export interface IRegulatoryUpdateAudit extends Document {
   action: RegulatoryAuditAction;
@@ -27,7 +29,11 @@ const RegulatoryUpdateAuditSchema = new Schema<IRegulatoryUpdateAudit>(
     action: {
       type: String,
       required: true,
-      enum: ['create', 'update', 'submit', 'publish', 'reject', 'archive'],
+      enum: [
+        'create', 'update', 'save_pending_revision', 'submit',
+        'approve_pending_revision', 'publish', 'reject', 'archive',
+        'move_to_draft', 'delete', 'restore', 'purge',
+      ],
     },
     updateId:  { type: String, required: true, index: true },
     title:     { type: String, default: '' },

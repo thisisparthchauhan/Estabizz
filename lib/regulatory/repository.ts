@@ -24,6 +24,7 @@ import {
 import type {
   RegulatoryUpdateRecord, PublicRegulatoryUpdate, RegulatoryUpdateInput,
   RegulatorOption, CategoryOption, ImpactLevel, RegulatoryUpdateStatus,
+  RegulatoryPendingRevision,
 } from '@/lib/regulatory/types';
 
 // ─── Validation error (carries a friendly message + HTTP 400) ─────────────────
@@ -100,6 +101,18 @@ async function generateUniqueSlug(base: string, excludeId?: string): Promise<str
 
 type RawDoc = Record<string, unknown>;
 
+/** Convert a stored pendingRevision (may hold Date values) into a client-safe shape. */
+function jsonSafePending(raw: unknown): RegulatoryPendingRevision | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const src = raw as Record<string, unknown>;
+  const out: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(src)) {
+    if (v instanceof Date) out[k] = v.toISOString();
+    else out[k] = v;
+  }
+  return out as RegulatoryPendingRevision;
+}
+
 function toRecord(doc: RawDoc): RegulatoryUpdateRecord {
   return {
     id:               String(doc._id),
@@ -133,6 +146,16 @@ function toRecord(doc: RawDoc): RegulatoryUpdateRecord {
     archivedAt:       iso(doc.archivedAt),
     createdAt:        iso(doc.createdAt) ?? new Date().toISOString(),
     updatedAt:        iso(doc.updatedAt) ?? new Date().toISOString(),
+
+    hasPendingChanges:    !!doc.hasPendingChanges,
+    pendingRevision:      jsonSafePending(doc.pendingRevision),
+    pendingSubmittedBy:   String(doc.pendingSubmittedBy ?? ''),
+    pendingSubmittedAt:   iso(doc.pendingSubmittedAt),
+    pendingReviewComment: String(doc.pendingReviewComment ?? ''),
+
+    deletedFromStatus: String(doc.deletedFromStatus ?? ''),
+    deletedAt:         iso(doc.deletedAt),
+    deletedBy:         String(doc.deletedBy ?? ''),
   };
 }
 
@@ -295,8 +318,15 @@ export async function listUpdatesForAdmin(filters: ListFilters): Promise<Regulat
 
   if (filters.regulator && filters.regulator !== 'all')   query.regulator   = filters.regulator;
   if (filters.category && filters.category !== 'all')     query.category    = filters.category;
-  if (filters.status && filters.status !== 'all')         query.status      = filters.status;
   if (filters.impactLevel && filters.impactLevel !== 'all') query.impactLevel = filters.impactLevel;
+
+  // Deleted items live in the Recycle Bin: exclude them from the default ("all")
+  // desk view, but allow an explicit "Deleted" filter to surface them here too.
+  if (filters.status && filters.status !== 'all') {
+    query.status = filters.status;
+  } else {
+    query.status = { $ne: 'deleted' };
+  }
 
   const search = filters.search?.trim();
   if (search) {
@@ -357,27 +387,218 @@ export async function updateUpdate(
   await connectDB();
   const existing = await RegulatoryUpdate.findById(id);
   if (!existing) throw new RegulatoryValidationError('Update not found.');
-
-  const { set, titleForSlug } = normaliseInput(input, false);
-  set.updatedBy = actor;
-
-  // Explicit slug change, or regenerate when the title changes and no slug given.
-  if (input.slug !== undefined && String(input.slug).trim()) {
-    set.slug = await generateUniqueSlug(String(input.slug), id);
-  } else if (titleForSlug && titleForSlug !== existing.title && !existing.slug) {
-    set.slug = await generateUniqueSlug(titleForSlug, id);
+  if (existing.status === 'deleted') {
+    throw new RegulatoryValidationError('This update is in the Recycle Bin. Restore it before editing.');
   }
 
-  // Do not let a non-publisher silently change live content: editing a published
-  // update without publish rights sends it back for review.
+  const { set } = normaliseInput(input, false);
+
+  // ── CRITICAL LIFECYCLE RULE ────────────────────────────────────────────────
+  // A live published update must STAY public while edits are under review.
+  // If a non-publisher edits a published item, the edits are stored as a
+  // PENDING REVISION and the live published fields are left untouched, so the
+  // public website keeps showing the last approved version.
   if (existing.status === 'published' && !canPublish) {
-    set.status = 'pending_approval';
+    const merged = { ...(existing.pendingRevision ?? {}), ...set };
+    await RegulatoryUpdate.findByIdAndUpdate(id, {
+      $set: {
+        pendingRevision:      merged,
+        hasPendingChanges:    true,
+        pendingSubmittedBy:   actor,
+        pendingSubmittedAt:   new Date(),
+        pendingReviewComment: '',
+        updatedBy:            actor,
+      },
+    });
+    const fresh = await RegulatoryUpdate.findById(id).lean();
+    const record = toRecord(fresh as unknown as RawDoc);
+    await writeAudit('save_pending_revision', record.id, record.title, actor, actorRole,
+      'Edits saved as pending changes. The published version stays live until approved.');
+    return record;
+  }
+
+  // ── Direct edit (publisher on a published item, or any edit on a non-published
+  //    item) — applies straight to the live fields. ───────────────────────────
+  set.updatedBy = actor;
+
+  // Explicit slug change, or regenerate when the title changes and no slug exists.
+  if (input.slug !== undefined && String(input.slug).trim()) {
+    set.slug = await generateUniqueSlug(String(input.slug), id);
+  } else if (set.title && set.title !== existing.title && !existing.slug) {
+    set.slug = await generateUniqueSlug(String(set.title), id);
+  }
+
+  // A publisher's direct edit of a published item supersedes any staged
+  // pending revision, so clear it.
+  if (existing.status === 'published' && canPublish && existing.hasPendingChanges) {
+    set.hasPendingChanges = false;
+    set.pendingRevision = null;
+    set.pendingSubmittedBy = '';
+    set.pendingReviewComment = '';
   }
 
   const updated = await RegulatoryUpdate.findByIdAndUpdate(id, { $set: set }, { new: true }).lean();
   const record = toRecord(updated as unknown as RawDoc);
   await writeAudit('update', record.id, record.title, actor, actorRole, 'Details updated.');
   return record;
+}
+
+// ─── Admin: pending-revision approval / rejection ─────────────────────────────
+
+/** Apply a published item's staged pending changes to the live fields. */
+export async function approvePendingChanges(
+  id: string, actor: string, actorRole: string,
+): Promise<RegulatoryUpdateRecord> {
+  await connectDB();
+  const existing = await RegulatoryUpdate.findById(id);
+  if (!existing) throw new RegulatoryValidationError('Update not found.');
+  if (!existing.hasPendingChanges || !existing.pendingRevision) {
+    throw new RegulatoryValidationError('There are no pending changes to approve.');
+  }
+
+  const pending = existing.pendingRevision as Record<string, unknown>;
+  await RegulatoryUpdate.findByIdAndUpdate(id, {
+    $set: {
+      ...pending,                 // apply staged edits to live fields
+      hasPendingChanges:    false,
+      pendingRevision:      null,
+      pendingSubmittedBy:   '',
+      pendingReviewComment: '',
+      reviewedBy:           actor,
+      updatedBy:            actor,
+    },
+    $unset: { pendingSubmittedAt: 1 },
+  });
+
+  const fresh = await RegulatoryUpdate.findById(id).lean();
+  const record = toRecord(fresh as unknown as RawDoc);
+  await writeAudit('approve_pending_revision', record.id, record.title, actor, actorRole,
+    'Pending changes approved and applied to the live version.');
+  return record;
+}
+
+/** Discard a published item's staged pending changes; the live version is unchanged. */
+export async function rejectPendingChanges(
+  id: string, actor: string, actorRole: string, comment: string,
+): Promise<RegulatoryUpdateRecord> {
+  await connectDB();
+  const existing = await RegulatoryUpdate.findById(id);
+  if (!existing) throw new RegulatoryValidationError('Update not found.');
+  if (!existing.hasPendingChanges) {
+    throw new RegulatoryValidationError('There are no pending changes to reject.');
+  }
+
+  const note = String(comment ?? '').trim().slice(0, 1000);
+  await RegulatoryUpdate.findByIdAndUpdate(id, {
+    $set: {
+      hasPendingChanges:    false,
+      pendingRevision:      null,
+      pendingSubmittedBy:   '',
+      pendingReviewComment: note,
+      reviewedBy:           actor,
+      updatedBy:            actor,
+    },
+    $unset: { pendingSubmittedAt: 1 },
+  });
+
+  const fresh = await RegulatoryUpdate.findById(id).lean();
+  const record = toRecord(fresh as unknown as RawDoc);
+  await writeAudit('reject', record.id, record.title, actor, actorRole,
+    note ? `Pending changes rejected: ${note}` : 'Pending changes rejected. Live version unchanged.');
+  return record;
+}
+
+// ─── Admin: move a published item back to draft (unpublish) ───────────────────
+
+export async function moveToDraft(
+  id: string, actor: string, actorRole: string,
+): Promise<RegulatoryUpdateRecord> {
+  await connectDB();
+  const existing = await RegulatoryUpdate.findById(id);
+  if (!existing) throw new RegulatoryValidationError('Update not found.');
+  if (existing.status === 'deleted') {
+    throw new RegulatoryValidationError('This update is in the Recycle Bin.');
+  }
+  existing.status = 'draft';
+  // Becoming a draft means edits apply directly, so drop any staged revision.
+  existing.hasPendingChanges = false;
+  existing.pendingRevision = null;
+  existing.pendingSubmittedBy = '';
+  existing.updatedBy = actor;
+  await existing.save();
+  const record = toRecord(existing.toObject() as unknown as RawDoc);
+  await writeAudit('move_to_draft', record.id, record.title, actor, actorRole,
+    'Moved to Draft (removed from the public website).');
+  return record;
+}
+
+// ─── Admin: soft-delete / restore / purge (Recycle Bin) ───────────────────────
+
+export async function deleteUpdate(
+  id: string, actor: string, actorRole: string,
+): Promise<RegulatoryUpdateRecord> {
+  await connectDB();
+  const existing = await RegulatoryUpdate.findById(id);
+  if (!existing) throw new RegulatoryValidationError('Update not found.');
+  if (existing.status === 'deleted') {
+    throw new RegulatoryValidationError('This update is already in the Recycle Bin.');
+  }
+  existing.deletedFromStatus = existing.status;   // remember where to restore to
+  existing.status = 'deleted';
+  existing.deletedAt = new Date();
+  existing.deletedBy = actor;
+  existing.updatedBy = actor;
+  await existing.save();
+  const record = toRecord(existing.toObject() as unknown as RawDoc);
+  await writeAudit('delete', record.id, record.title, actor, actorRole,
+    `Moved to Recycle Bin (was ${record.deletedFromStatus || 'unknown'}).`);
+  return record;
+}
+
+/** Valid statuses an item may be restored back into. */
+const RESTORABLE: RegulatoryUpdateStatus[] = [
+  'published', 'draft', 'pending_approval', 'rejected', 'archived',
+];
+
+export async function restoreDeletedUpdate(
+  id: string, actor: string, actorRole: string,
+): Promise<{ record: RegulatoryUpdateRecord; name: string }> {
+  await connectDB();
+  const existing = await RegulatoryUpdate.findById(id);
+  if (!existing) throw new RegulatoryValidationError('Item not found in Recycle Bin.');
+  if (existing.status !== 'deleted') {
+    throw new RegulatoryValidationError('This update is not in the Recycle Bin.');
+  }
+
+  const prior = String(existing.deletedFromStatus ?? '') as RegulatoryUpdateStatus;
+  const target: RegulatoryUpdateStatus = RESTORABLE.includes(prior) ? prior : 'draft';
+
+  existing.status = target;
+  existing.deletedFromStatus = '';
+  existing.deletedBy = '';
+  existing.deletedAt = undefined;
+  existing.updatedBy = actor;
+  await existing.save();
+
+  const record = toRecord(existing.toObject() as unknown as RawDoc);
+  await writeAudit('restore', record.id, record.title, actor, actorRole,
+    `Restored from Recycle Bin to ${target}.`);
+  return { record, name: record.title };
+}
+
+export async function purgeDeletedUpdate(
+  id: string, actor: string, actorRole: string,
+): Promise<{ name: string }> {
+  await connectDB();
+  const existing = await RegulatoryUpdate.findById(id);
+  if (!existing) throw new RegulatoryValidationError('Item not found in Recycle Bin.');
+
+  const title = existing.title;
+  // Write the audit record BEFORE deleting so the purge stays accountable.
+  await writeAudit('purge', String(existing._id), title, actor, actorRole,
+    'Permanently deleted from the Recycle Bin.');
+  await RegulatoryUpdate.findByIdAndDelete(id);
+  return { name: title };
 }
 
 // ─── Admin: workflow transitions ──────────────────────────────────────────────
@@ -388,6 +609,7 @@ export async function submitForReview(
   await connectDB();
   const existing = await RegulatoryUpdate.findById(id);
   if (!existing) throw new RegulatoryValidationError('Update not found.');
+  if (existing.status === 'deleted') throw new RegulatoryValidationError('This update is in the Recycle Bin.');
   if (!existing.title || !existing.summary || !existing.regulator || !existing.category) {
     throw new RegulatoryValidationError('Add a title, regulator, category and summary before submitting.');
   }
@@ -405,6 +627,7 @@ export async function publishUpdate(
   await connectDB();
   const existing = await RegulatoryUpdate.findById(id);
   if (!existing) throw new RegulatoryValidationError('Update not found.');
+  if (existing.status === 'deleted') throw new RegulatoryValidationError('This update is in the Recycle Bin. Restore it first.');
   if (!existing.title || !existing.summary || !existing.regulator || !existing.category) {
     throw new RegulatoryValidationError('A title, regulator, category and summary are required to publish.');
   }
@@ -426,6 +649,7 @@ export async function rejectUpdate(
   await connectDB();
   const existing = await RegulatoryUpdate.findById(id);
   if (!existing) throw new RegulatoryValidationError('Update not found.');
+  if (existing.status === 'deleted') throw new RegulatoryValidationError('This update is in the Recycle Bin.');
   existing.status = 'rejected';
   existing.reviewedBy = actor;
   existing.reviewComment = String(comment ?? '').trim().slice(0, 1000);
@@ -442,6 +666,7 @@ export async function archiveUpdate(
   await connectDB();
   const existing = await RegulatoryUpdate.findById(id);
   if (!existing) throw new RegulatoryValidationError('Update not found.');
+  if (existing.status === 'deleted') throw new RegulatoryValidationError('This update is in the Recycle Bin.');
   existing.status = 'archived';
   existing.archivedBy = actor;
   existing.archivedAt = new Date();

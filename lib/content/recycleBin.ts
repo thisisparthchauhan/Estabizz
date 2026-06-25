@@ -8,6 +8,8 @@ import { connectDB } from '@/lib/db';
 import MediaAsset from '@/lib/models/MediaAsset';
 import ContentBlock from '@/lib/models/ContentBlock';
 import ContentAudit from '@/lib/models/ContentAudit';
+import RegulatoryUpdate from '@/lib/models/RegulatoryUpdate';
+import { restoreDeletedUpdate, purgeDeletedUpdate } from '@/lib/regulatory/repository';
 import { CONTENT_DEFAULTS } from '@/lib/content/defaults';
 import type { RecycleBinFilters, RecycleBinItem, RecycleBinResult } from './recycleBinTypes';
 
@@ -127,6 +129,40 @@ export async function listRecycleBinItems(
     }
   }
 
+  // ── Deleted regulatory updates ─────────────────────────────────────────────
+  if (type === 'all' || type === 'regulatory') {
+    const q: Record<string, unknown> = { status: 'deleted' };
+    if (from) q.deletedAt = { $gte: new Date(`${from}T00:00:00`) };
+    if (to)   q.deletedAt = { $lte: new Date(`${to}T23:59:59`) };
+    if (removedByF) q.deletedBy = { $regex: removedByF, $options: 'i' };
+
+    const docs = await RegulatoryUpdate.find(q)
+      .select('title slug regulator category deletedBy deletedAt deletedFromStatus updatedAt')
+      .sort({ deletedAt: -1, updatedAt: -1 })
+      .lean<Array<{
+        _id: unknown; title: string; slug: string; regulator?: string; category?: string;
+        deletedBy?: string; deletedAt?: Date; deletedFromStatus?: string; updatedAt: Date;
+      }>>();
+
+    for (const doc of docs) {
+      const name = (doc.title || 'Regulatory update').trim();
+      if (search && !name.toLowerCase().includes(search) && !(doc.slug ?? '').toLowerCase().includes(search)) continue;
+
+      items.push({
+        id:             String(doc._id),
+        type:           'regulatory',
+        name,
+        subType:        'Regulatory Update',
+        location:       [doc.regulator, doc.category].filter(Boolean).join(' — ') || 'Regulatory Desk',
+        removedBy:      doc.deletedBy ?? 'Unknown',
+        removedAt:      doc.deletedAt
+                          ? new Date(doc.deletedAt).toISOString()
+                          : new Date(doc.updatedAt).toISOString(),
+        originalStatus: doc.deletedFromStatus || 'draft',
+      });
+    }
+  }
+
   items.sort((a, b) => new Date(b.removedAt).getTime() - new Date(a.removedAt).getTime());
 
   const total      = items.length;
@@ -141,9 +177,17 @@ export async function listRecycleBinItems(
 export async function restoreRecycleBinItem(
   actor: string,
   id:    string,
-  type:  'media' | 'content'
+  type:  'media' | 'content' | 'regulatory',
+  actorRole: string = ''
 ): Promise<{ name: string }> {
   await connectDB();
+
+  if (type === 'regulatory') {
+    // Restores to the status it held before deletion (published → published,
+    // draft → draft, otherwise draft). Writes a RegulatoryUpdateAudit record.
+    const { name } = await restoreDeletedUpdate(id, actor, actorRole);
+    return { name };
+  }
 
   if (type === 'media') {
     const doc = await MediaAsset.findByIdAndUpdate(
@@ -193,9 +237,16 @@ export async function restoreRecycleBinItem(
 export async function purgeRecycleBinItem(
   actor: string,
   id:    string,
-  type:  'media' | 'content'
+  type:  'media' | 'content' | 'regulatory',
+  actorRole: string = ''
 ): Promise<{ name: string }> {
   await connectDB();
+
+  if (type === 'regulatory') {
+    // Writes a RegulatoryUpdateAudit 'purge' record before deleting the document.
+    const { name } = await purgeDeletedUpdate(id, actor, actorRole);
+    return { name };
+  }
 
   if (type === 'media') {
     const doc = await MediaAsset.findById(id).lean<LeanMediaDoc | null>();

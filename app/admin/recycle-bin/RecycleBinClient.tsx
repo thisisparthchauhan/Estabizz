@@ -30,9 +30,18 @@ function formatIST(iso?: string): string {
 }
 
 function typeLabel(type: string): string {
-  if (type === "media")   return "Media";
-  if (type === "content") return "Website Content";
+  if (type === "media")      return "Media";
+  if (type === "content")    return "Website Content";
+  if (type === "regulatory") return "Regulatory Update";
   return type;
+}
+
+function statusBeforeLabel(originalStatus: string): string {
+  const map: Record<string, string> = {
+    active: "Active", published: "Published", draft: "Draft",
+    pending_approval: "Pending Review", rejected: "Rejected", archived: "Archived",
+  };
+  return map[originalStatus] ?? (originalStatus || "—");
 }
 
 // ─── Sub-type badge ────────────────────────────────────────────────────────────
@@ -46,6 +55,7 @@ function SubTypeBadge({ subType }: { subType: string }) {
     "Website Section":"bg-amber-50 text-amber-700 border-amber-200",
     "SEO Block":      "bg-green-50 text-green-700 border-green-200",
     "Global Block":   "bg-cyan-50 text-cyan-700 border-cyan-200",
+    "Regulatory Update":"bg-indigo-50 text-indigo-700 border-indigo-200",
   };
   const cls = map[subType] ?? "bg-gray-50 text-gray-600 border-gray-200";
   return (
@@ -240,6 +250,11 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                 The content block will be deleted. The website will show the built-in default content for this section.
               </div>
             )}
+            {purgeTarget.type === "regulatory" && (
+              <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2.5 text-[11px] text-amber-800 leading-5">
+                This regulatory update will be permanently removed. Its accountability record is kept for audit.
+              </div>
+            )}
 
             <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">
               Type DELETE to confirm
@@ -319,7 +334,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
               {selected.contentKey && <DetailRow label="Content Key"    value={selected.contentKey} />}
               <DetailRow label="Deleted By"   value={selected.removedBy} />
               <DetailRow label="Deleted On"   value={formatIST(selected.removedAt)} />
-              <DetailRow label="Status Before" value={selected.originalStatus === 'active' ? 'Active' : 'Published'} />
+              <DetailRow label="Status Before" value={statusBeforeLabel(selected.originalStatus)} />
             </div>
 
             {/* Actions */}
@@ -406,6 +421,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                     <option value="all">All Types</option>
                     <option value="media">Media</option>
                     <option value="content">Website Content</option>
+                    <option value="regulatory">Regulatory Updates</option>
                   </select>
                 </div>
 
@@ -485,7 +501,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                                 className="h-8 w-8 rounded-lg object-cover border border-[#e2eaf2] shrink-0" />
                             ) : (
                               <div className="h-8 w-8 rounded-lg border border-[#e2eaf2] bg-[#f8fafc] flex items-center justify-center shrink-0">
-                                {item.type === "content" ? (
+                                {item.type === "content" || item.type === "regulatory" ? (
                                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
                                     <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/>
                                   </svg>
@@ -565,6 +581,10 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                 <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
                   <div className="font-bold text-[#0a1628] mb-1">Website content</div>
                   Deleted content sections. Restore sets the section to Draft — it needs to be reviewed and published before going live again.
+                </div>
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
+                  <div className="font-bold text-[#0a1628] mb-1">Regulatory updates</div>
+                  Deleted regulatory updates. Restore returns the update to the status it had before deletion (a published update goes back live).
                 </div>
                 <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
                   <div className="font-bold text-[#0a1628] mb-1">Permissions</div>

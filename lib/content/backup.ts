@@ -94,7 +94,11 @@ async function collectPayload(actor: string, role: string, fileName: string): Pr
       'sourceTitle sourceUrl sourceDate publishedDate effectiveDate ' +
       'impactLevel applicableTo tags status seoTitle seoDescription canonicalUrl featuredImageUrl ' +
       'createdBy createdByRole updatedBy reviewedBy reviewComment publishedBy archivedBy ' +
-      'publishedAt archivedAt createdAt updatedAt'
+      'publishedAt archivedAt ' +
+      // Lifecycle fields (Phase 3B) — all content, no secrets
+      'pendingRevision hasPendingChanges pendingSubmittedBy pendingSubmittedAt pendingReviewComment ' +
+      'deletedFromStatus deletedAt deletedBy ' +
+      'createdAt updatedAt'
     ).lean(),
   ]);
 

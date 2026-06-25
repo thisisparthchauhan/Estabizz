@@ -21,7 +21,7 @@ export type CategoryOption =
 export type ImpactLevel = 'Low' | 'Medium' | 'High' | 'Critical';
 
 export type RegulatoryUpdateStatus =
-  | 'draft' | 'pending_approval' | 'published' | 'rejected' | 'archived';
+  | 'draft' | 'pending_approval' | 'published' | 'rejected' | 'archived' | 'deleted';
 
 export interface IRegulatoryUpdate extends Document {
   title: string;
@@ -61,6 +61,19 @@ export interface IRegulatoryUpdate extends Document {
   publishedAt?: Date;
   archivedAt?: Date;
 
+  // Pending revision — edits to a published item awaiting approval.
+  // Public reads NEVER use this; only the live top-level fields are public.
+  pendingRevision?: Record<string, unknown> | null;
+  hasPendingChanges: boolean;
+  pendingSubmittedBy: string;
+  pendingSubmittedAt?: Date;
+  pendingReviewComment: string;
+
+  // Soft-delete (Recycle Bin) lifecycle
+  deletedFromStatus: string;
+  deletedAt?: Date;
+  deletedBy: string;
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -74,7 +87,7 @@ const CATEGORIES: CategoryOption[] = [
 ];
 const IMPACT_LEVELS: ImpactLevel[] = ['Low', 'Medium', 'High', 'Critical'];
 const STATUSES: RegulatoryUpdateStatus[] = [
-  'draft', 'pending_approval', 'published', 'rejected', 'archived',
+  'draft', 'pending_approval', 'published', 'rejected', 'archived', 'deleted',
 ];
 
 const RegulatoryUpdateSchema = new Schema<IRegulatoryUpdate>(
@@ -118,6 +131,18 @@ const RegulatoryUpdateSchema = new Schema<IRegulatoryUpdate>(
 
     publishedAt:     { type: Date },
     archivedAt:      { type: Date },
+
+    // Pending revision (edits awaiting approval) — never read by the public site.
+    pendingRevision:      { type: Schema.Types.Mixed, default: null },
+    hasPendingChanges:    { type: Boolean, default: false, index: true },
+    pendingSubmittedBy:   { type: String, default: '' },
+    pendingSubmittedAt:   { type: Date },
+    pendingReviewComment: { type: String, default: '' },
+
+    // Soft-delete lifecycle (Recycle Bin)
+    deletedFromStatus: { type: String, default: '' },
+    deletedAt:         { type: Date },
+    deletedBy:         { type: String, default: '' },
   },
   {
     timestamps: true,

@@ -1,7 +1,4 @@
-// Public Content Pages - minimal server-side repository.
-//
-// Phase 4B only needs duplicate checks and a safe imported-record writer for the
-// dry-run/import foundation. No admin APIs or public renderers are connected.
+// Public Content Pages - server-side repository.
 
 import { connectDB } from '@/lib/db';
 import PublicContentPage from '@/lib/models/PublicContentPage';
@@ -18,6 +15,7 @@ import type {
   PublicContentQuickFact,
   PublicContentRelatedPage,
   PublicContentSourceReference,
+  PublicContentWorkingCopy,
 } from '@/lib/publicContent/types';
 
 type RawDoc = Record<string, unknown>;
@@ -107,6 +105,46 @@ export async function pageExistsForImport(fullPath: string, slug: string): Promi
     fullPathMatch: fullPathDoc ? toRecord(fullPathDoc as unknown as RawDoc) : null,
     slugMatch: slugDoc ? toRecord(slugDoc as unknown as RawDoc) : null,
   };
+}
+
+export async function savePendingChanges(
+  fullPath: string,
+  submittedBy: string,
+  changes: PublicContentWorkingCopy
+): Promise<void> {
+  await connectDB();
+  const result = await PublicContentPage.updateOne(
+    { fullPath, status: 'published' },
+    {
+      $set: {
+        pendingRevision: changes,
+        hasPendingChanges: true,
+        pendingSubmittedBy: submittedBy,
+        pendingSubmittedAt: new Date(),
+        updatedAt: new Date(),
+      },
+    }
+  );
+  if (result.matchedCount === 0) {
+    throw new Error('Content page not found or not in published state.');
+  }
+}
+
+export async function clearPendingChanges(fullPath: string): Promise<void> {
+  await connectDB();
+  await PublicContentPage.updateOne(
+    { fullPath },
+    {
+      $set: {
+        pendingRevision: null,
+        hasPendingChanges: false,
+        pendingSubmittedBy: '',
+        pendingReviewComment: '',
+        updatedAt: new Date(),
+      },
+      $unset: { pendingSubmittedAt: '' },
+    }
+  );
 }
 
 export async function createImportedPublicContentPage(input: PublicContentImportInput): Promise<PublicContentPageRecord> {

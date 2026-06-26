@@ -214,6 +214,18 @@ export interface PublicContentPageRecord {
   updatedAt: string;
 }
 
+export interface PublicContentWorkingCopy {
+  title: string;
+  summary: string;
+  hero: PublicContentHero | null;
+  sections: PublicContentSection[];
+  quickFacts: PublicContentQuickFact[];
+  ctaCards: PublicContentCtaCard[];
+  seoTitle: string;
+  seoDescription: string;
+  canonicalUrl: string;
+}
+
 export interface PublicContentImportInput {
   title: string;
   slug: string;

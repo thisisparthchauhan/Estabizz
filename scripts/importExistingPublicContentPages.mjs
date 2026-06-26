@@ -15,6 +15,8 @@
  *   node scripts/importExistingPublicContentPages.mjs --dry-run
  *   node scripts/importExistingPublicContentPages.mjs --dry-run --only=/rbi/nbfc-registration-in-india
  *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-registration-in-india
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/payment-aggregator-license-in-india
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/ppi-registration-in-india
  */
 
 import fs from 'node:fs';
@@ -25,8 +27,27 @@ import { discoverExistingPublicContentPages } from '../lib/publicContent/discove
 const APPLY = process.argv.includes('--apply');
 const DRY_RUN = !APPLY;
 const SAMPLE_FULL_PATH = '/rbi/nbfc-registration-in-india';
-const CONFIRM_BROAD_APPLY = process.argv.includes('--confirm-broad-apply');
+const PHASE_4L_IMPORT_PATHS = [
+  SAMPLE_FULL_PATH,
+  '/rbi/payment-aggregator-license-in-india',
+  '/rbi/ppi-registration-in-india',
+];
 const ONLY_FULL_PATH = parseOnlyArg();
+
+const DEFAULT_PAGE_DESIGN = {
+  themePreset: 'default',
+  accentPreset: 'navy',
+  textScale: 'standard',
+  headingStyle: 'classic',
+  sectionSpacing: 'standard',
+  cardStyle: 'flat',
+  heroLayout: 'image_top',
+};
+
+const DEFAULT_SECTION_DESIGN = {
+  stylePreset: 'standard',
+  imagePosition: 'top',
+};
 
 function parseOnlyArg() {
   const equalsArg = process.argv.find((arg) => arg.startsWith('--only='));
@@ -116,6 +137,226 @@ function extractNbfcSections() {
   return sections;
 }
 
+function decodeText(value) {
+  return String(value ?? '')
+    .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function extractStringProp(text, prop) {
+  const match = text.match(new RegExp(`${prop}=["'\`]([^"'\`]+)["'\`]`));
+  return decodeText(match?.[1] ?? '');
+}
+
+function extractObjectPairs(text, keys) {
+  const items = [];
+  const objectPattern = /\{([\s\S]*?)\}/g;
+  let match;
+  while ((match = objectPattern.exec(text)) !== null) {
+    const raw = match[1];
+    const item = {};
+    for (const key of keys) {
+      const keyMatch = raw.match(new RegExp(`${key}:\\s*['"\`]([^'"\`]+)['"\`]`));
+      if (keyMatch?.[1]) item[key] = decodeText(keyMatch[1]);
+    }
+    if (Object.keys(item).length === keys.length) items.push(item);
+  }
+  return items;
+}
+
+function extractPropObjectArray(clientText, prop, keys) {
+  const marker = `${prop}={[`;
+  const start = clientText.indexOf(marker);
+  if (start === -1) return [];
+  const bodyStart = start + marker.length;
+  const end = clientText.indexOf(']}', bodyStart);
+  if (end === -1) return [];
+  return extractObjectPairs(clientText.slice(bodyStart, end), keys);
+}
+
+function extractVariableCards(clientText, variableName) {
+  const marker = `const ${variableName}`;
+  const start = clientText.indexOf(marker);
+  if (start === -1) return '';
+  const arrayStart = clientText.indexOf('[', start);
+  const arrayEnd = clientText.indexOf('];', arrayStart);
+  if (arrayStart === -1 || arrayEnd === -1) return '';
+
+  return extractObjectPairs(clientText.slice(arrayStart, arrayEnd), ['title', 'body'])
+    .map((card) => `${card.title}: ${card.body}`)
+    .join('\n');
+}
+
+function extractRows(tableMarkup) {
+  const rowsStart = tableMarkup.indexOf('rows={[');
+  if (rowsStart === -1) return '';
+  const rowsEnd = tableMarkup.indexOf(']}', rowsStart);
+  if (rowsEnd === -1) return '';
+  const rawRows = tableMarkup.slice(rowsStart + 'rows={['.length, rowsEnd);
+  const rows = [];
+  const rowPattern = /\[([^\[\]]+)\]/g;
+  let rowMatch;
+  while ((rowMatch = rowPattern.exec(rawRows)) !== null) {
+    const values = [...rowMatch[1].matchAll(/['"`]([^'"`]+)['"`]/g)].map((m) => decodeText(m[1]));
+    if (values.length >= 2) rows.push(`${values[0]}: ${values.slice(1).join(' - ')}`);
+  }
+  return rows.join('\n');
+}
+
+function extractBulletItems(listMarkup) {
+  const itemsStart = listMarkup.indexOf('items={[');
+  if (itemsStart === -1) return '';
+  const itemsEnd = listMarkup.lastIndexOf(']}');
+  if (itemsEnd === -1 || itemsEnd <= itemsStart) return '';
+  return listMarkup
+    .slice(itemsStart + 'items={['.length, itemsEnd)
+    .split(/\n\s*,\s*\n/)
+    .map((item) => cleanSectionMarkup(item))
+    .filter(Boolean)
+    .map((item) => `- ${item}`)
+    .join('\n');
+}
+
+function cleanSectionMarkup(markup) {
+  return decodeText(markup)
+    .replace(/<Link\b[^>]*>([\s\S]*?)<\/Link>/g, '$1')
+    .replace(/<a\b[^>]*>([\s\S]*?)<\/a>/g, '$1')
+    .replace(/<strong\b[^>]*>([\s\S]*?)<\/strong>/g, '$1')
+    .replace(/<br\s*\/?>/g, '\n')
+    .replace(/<[^>]+>/g, '\n')
+    .replace(/[{}]/g, ' ')
+    .replace(/\s*\n\s*/g, '\n')
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
+function sectionBodyFromMarkup(markup, clientText) {
+  let text = markup;
+
+  text = text.replace(/<CardGrid\s+cards=\{([A-Za-z0-9_]+)\}[^/]*\/>/g, (_match, variableName) => {
+    return `\n${extractVariableCards(clientText, variableName)}\n`;
+  });
+
+  text = text.replace(/<DataTable[\s\S]*?\/>/g, (match) => `\n${extractRows(match)}\n`);
+  text = text.replace(/<BulletList[\s\S]*?\/>/g, (match) => `\n${extractBulletItems(match)}\n`);
+  text = text.replace(/<FormulaCard>([\s\S]*?)<\/FormulaCard>/g, (_match, inner) => `\n${cleanSectionMarkup(inner)}\n`);
+
+  return cleanSectionMarkup(text);
+}
+
+function extractServiceLayoutSections(fullPath) {
+  const file = path.join(process.cwd(), fullPath.replace(/^\//, 'app/'), 'PageClient.tsx');
+  const clientText = fs.readFileSync(file, 'utf8');
+  const sections = [];
+  const pattern = /<Section\s+id="([^"]+)"\s+title="([^"]+)">([\s\S]*?)<\/Section>/g;
+  let match;
+
+  while ((match = pattern.exec(clientText)) !== null) {
+    const body = sectionBodyFromMarkup(match[3], clientText);
+    sections.push({
+      id: match[1],
+      title: decodeText(match[2]),
+      body,
+      design: { ...DEFAULT_SECTION_DESIGN },
+    });
+  }
+
+  if (sections.length) return sections;
+
+  return [...clientText.matchAll(/\{\s*id:\s*'([^']+)'\s*,\s*title:\s*'([^']+)'/g)].map((tocMatch) => ({
+    id: tocMatch[1],
+    title: decodeText(tocMatch[2]),
+    body: '',
+    design: { ...DEFAULT_SECTION_DESIGN },
+  }));
+}
+
+function buildServiceLayoutBaseline(item, now) {
+  const file = path.join(process.cwd(), item.fullPath.replace(/^\//, 'app/'), 'PageClient.tsx');
+  const clientText = fs.readFileSync(file, 'utf8');
+  const sections = extractServiceLayoutSections(item.fullPath);
+  const title = extractStringProp(clientText, 'title') || item.title;
+  const trustLine = extractStringProp(clientText, 'trustLine');
+  const readingTime = extractStringProp(clientText, 'readTime') || '20 min read';
+  const summary = item.seoDescription || title;
+  const quickFacts = extractPropObjectArray(clientText, 'quickFacts', ['label', 'value']);
+  const relatedPages = extractPropObjectArray(clientText, 'relatedArticles', ['title', 'href', 'category', 'description']);
+  const ctaTitle = extractStringProp(clientText, 'ctaTitle') || 'Need Expert Support?';
+  const ctaDescription = extractStringProp(clientText, 'ctaDescription') || summary;
+  const finalCtaTitle = extractStringProp(clientText, 'finalCtaTitle') || ctaTitle;
+  const finalCtaDescription = extractStringProp(clientText, 'finalCtaDescription') || ctaDescription;
+
+  return {
+    title,
+    slug: item.slug,
+    fullPath: item.fullPath,
+    pageType: item.pageType,
+    menuGroup: item.menuGroup,
+    category: 'RBI Payments',
+    regulator: item.regulator,
+    serviceType: title,
+    summary,
+    hero: {
+      title,
+      description: summary,
+      trustLine,
+    },
+    heroImage: null,
+    pageDesign: { ...DEFAULT_PAGE_DESIGN },
+    badges: [
+      { emoji: '', label: 'RBI' },
+      { emoji: '', label: title.includes('PPI') ? 'PPI' : 'Payment Aggregator' },
+      { emoji: '', label: 'Guide' },
+    ],
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'RBI Services', href: '/rbi' },
+      { label: title },
+    ],
+    sections,
+    snapshotCards: quickFacts,
+    quickFacts,
+    ctaCards: [
+      { title: ctaTitle, description: ctaDescription },
+      { title: finalCtaTitle, description: finalCtaDescription },
+    ],
+    expertProfile: {
+      name: 'CS Devyani Khambhati',
+      role: 'Compliance Expert',
+      initials: 'DK',
+      bio: 'Specialist in fintech regulatory compliance, government licenses and RBI, SEBI, IRDAI frameworks.',
+      email: 'contact@estabizz.com',
+    },
+    relatedPages,
+    sourceReferences: [],
+    reviewedBy: 'CS Devyani Khambhati',
+    lastReviewedAt: new Date('2025-07-17T00:00:00.000Z'),
+    readingTime,
+    status: 'published',
+    publishedAt: now,
+    createdBy: 'system:import',
+    updatedBy: 'system:import',
+    publishedBy: 'system:import',
+    seoTitle: item.seoTitle || title,
+    seoDescription: item.seoDescription || summary,
+    canonicalUrl: item.fullPath,
+    ogImage: '',
+    pendingRevision: null,
+    hasPendingChanges: false,
+    pendingSubmittedBy: '',
+    pendingReviewComment: '',
+    deletedFromStatus: '',
+    deletedBy: '',
+    createdAt: now,
+    updatedAt: now,
+  };
+}
+
 function buildNbfcBaseline(item, now) {
   const sections = extractNbfcSections();
   const summary = item.seoDescription || 'Complete RBI NBFC registration guide covering eligibility, Net Owned Fund, COSMOS filing, documentation, approval process and post-registration compliance.';
@@ -135,6 +376,8 @@ function buildNbfcBaseline(item, now) {
       description: summary,
       trustLine: 'RBI licensing support for NBFC-ICC, Base Layer structuring, COSMOS filing and post-registration compliance planning.',
     },
+    heroImage: null,
+    pageDesign: { ...DEFAULT_PAGE_DESIGN },
     badges: [
       { emoji: '', label: 'RBI' },
       { emoji: '', label: 'NBFC' },
@@ -148,7 +391,7 @@ function buildNbfcBaseline(item, now) {
       { label: 'RBI Services', href: '/rbi' },
       { label: 'NBFC Registration' },
     ],
-    sections,
+    sections: sections.map((section) => ({ ...section, design: { ...DEFAULT_SECTION_DESIGN } })),
     snapshotCards: [
       { label: 'Regulator', value: 'Reserve Bank of India (RBI)' },
       { label: 'Governing Law', value: 'RBI Act, 1934 - Section 45-IA' },
@@ -222,6 +465,7 @@ function buildNbfcBaseline(item, now) {
 
 function buildImportRecord(item, now) {
   if (item.fullPath === SAMPLE_FULL_PATH) return buildNbfcBaseline(item, now);
+  if (PHASE_4L_IMPORT_PATHS.includes(item.fullPath)) return buildServiceLayoutBaseline(item, now);
 
   return {
     title: item.title,
@@ -234,6 +478,8 @@ function buildImportRecord(item, now) {
     serviceType: '',
     summary: item.seoDescription || '',
     hero: null,
+    heroImage: null,
+    pageDesign: { ...DEFAULT_PAGE_DESIGN },
     badges: [],
     breadcrumbs: [],
     sections: [],
@@ -298,8 +544,11 @@ async function applyImport(items) {
 
 async function run() {
   loadEnv();
-  if (APPLY && !ONLY_FULL_PATH && !CONFIRM_BROAD_APPLY) {
-    throw new Error('Broad apply is blocked. Pass --only=/rbi/nbfc-registration-in-india for the approved sample import, or --confirm-broad-apply for a separately approved broad import.');
+  if (APPLY && !ONLY_FULL_PATH) {
+    throw new Error(`Broad apply is blocked. Pass --only for one approved managed path only: ${PHASE_4L_IMPORT_PATHS.join(', ')}.`);
+  }
+  if (APPLY && ONLY_FULL_PATH && !PHASE_4L_IMPORT_PATHS.includes(ONLY_FULL_PATH)) {
+    throw new Error(`Apply is limited to approved managed paths only: ${PHASE_4L_IMPORT_PATHS.join(', ')}.`);
   }
 
   const { summary, items } = await discoverExistingPublicContentPages();

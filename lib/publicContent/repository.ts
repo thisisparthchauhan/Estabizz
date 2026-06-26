@@ -2,6 +2,10 @@
 
 import { connectDB } from '@/lib/db';
 import PublicContentPage from '@/lib/models/PublicContentPage';
+import {
+  isManagedPublicContentPath,
+  PUBLIC_CONTENT_MANAGED_PATHS,
+} from '@/lib/publicContent/managedPaths';
 import { PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN } from '@/lib/publicContent/types';
 import type {
   PublicContentImage,
@@ -94,6 +98,16 @@ export async function findPublicContentPageBySlug(slug: string): Promise<PublicC
   return doc ? toRecord(doc as unknown as RawDoc) : null;
 }
 
+export async function findManagedPublicContentPagesWithPendingChanges(): Promise<PublicContentPageRecord[]> {
+  await connectDB();
+  const docs = await PublicContentPage.find({
+    fullPath: { $in: [...PUBLIC_CONTENT_MANAGED_PATHS] },
+    status: 'published',
+    hasPendingChanges: true,
+  }).lean();
+  return docs.map((doc) => toRecord(doc as unknown as RawDoc));
+}
+
 export async function pageExistsForImport(fullPath: string, slug: string): Promise<{
   exists: boolean;
   fullPathMatch: PublicContentPageRecord | null;
@@ -152,18 +166,18 @@ export async function clearPendingChanges(fullPath: string): Promise<void> {
   );
 }
 
-const SAMPLE_FULL_PATH = '/rbi/nbfc-registration-in-india';
-
-export async function moveSamplePublicContentPageToRecycleBin(
+export async function movePublicContentPageToRecycleBin(
+  fullPath: string,
   deletedBy: string
 ): Promise<{ name: string }> {
+  if (!isManagedPublicContentPath(fullPath)) throw new Error('This page is not available for Recycle Bin yet.');
   await connectDB();
-  const doc = await PublicContentPage.findOne({ fullPath: SAMPLE_FULL_PATH }).lean() as unknown as RawDoc | null;
+  const doc = await PublicContentPage.findOne({ fullPath }).lean() as unknown as RawDoc | null;
   if (!doc) throw new Error('Content page not found.');
   if (doc.status === 'deleted') throw new Error('This page is already in the Recycle Bin.');
 
   await PublicContentPage.updateOne(
-    { fullPath: SAMPLE_FULL_PATH, status: { $ne: 'deleted' } },
+    { fullPath, status: { $ne: 'deleted' } },
     {
       $set: {
         status: 'deleted',
@@ -183,7 +197,13 @@ export async function moveSamplePublicContentPageToRecycleBin(
   return { name: String(doc.title ?? '') };
 }
 
-export async function restoreSamplePublicContentPageFromRecycleBin(
+export async function moveSamplePublicContentPageToRecycleBin(
+  deletedBy: string
+): Promise<{ name: string }> {
+  return movePublicContentPageToRecycleBin('/rbi/nbfc-registration-in-india', deletedBy);
+}
+
+export async function restorePublicContentPageFromRecycleBin(
   id: string,
   restoredBy: string
 ): Promise<{ name: string; restoredStatus: string }> {
@@ -191,7 +211,7 @@ export async function restoreSamplePublicContentPageFromRecycleBin(
   const doc = await PublicContentPage.findOne({
     _id: id,
     status: 'deleted',
-    fullPath: SAMPLE_FULL_PATH,
+    fullPath: { $in: [...PUBLIC_CONTENT_MANAGED_PATHS] },
   }).lean() as unknown as RawDoc | null;
   if (!doc) throw new Error('Content page not found in Recycle Bin or has already been restored.');
 
@@ -203,13 +223,20 @@ export async function restoreSamplePublicContentPageFromRecycleBin(
   const result = await PublicContentPage.updateOne(
     { _id: id, status: 'deleted' },
     {
-      $set: { status: safeStatus, updatedAt: new Date() },
+      $set: { status: safeStatus, updatedBy: restoredBy, updatedAt: new Date() },
       $unset: { deletedAt: '', deletedBy: '', deletedFromStatus: '' },
     }
   );
   if (result.matchedCount === 0) throw new Error('Restore failed. The page may have already been restored.');
 
   return { name: String(doc.title ?? ''), restoredStatus: safeStatus };
+}
+
+export async function restoreSamplePublicContentPageFromRecycleBin(
+  id: string,
+  restoredBy: string
+): Promise<{ name: string; restoredStatus: string }> {
+  return restorePublicContentPageFromRecycleBin(id, restoredBy);
 }
 
 export async function approvePendingPublicContentPageChanges(

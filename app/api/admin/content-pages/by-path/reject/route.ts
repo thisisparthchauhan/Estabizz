@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission } from '@/lib/admin/requirePermission';
 import { rejectPendingPublicContentPageChanges } from '@/lib/publicContent/repository';
-
-const SAMPLE_FULL_PATH = '/rbi/nbfc-registration-in-india';
+import { isManagedPublicContentPath } from '@/lib/publicContent/managedPaths';
 
 export async function POST(req: NextRequest) {
   const auth = await requirePermission(req, 'publish_content');
@@ -17,8 +16,8 @@ export async function POST(req: NextRequest) {
 
   const bodyObj = body as Record<string, unknown>;
   const fullPath = typeof bodyObj.fullPath === 'string' ? bodyObj.fullPath.trim() : '';
-  if (fullPath !== SAMPLE_FULL_PATH) {
-    return NextResponse.json({ error: 'Rejection is available for the sample page only.' }, { status: 400 });
+  if (!isManagedPublicContentPath(fullPath)) {
+    return NextResponse.json({ error: 'Rejection is available for managed content pages only.' }, { status: 400 });
   }
 
   const comment = typeof bodyObj.comment === 'string' ? bodyObj.comment.trim() : '';
@@ -27,7 +26,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    await rejectPendingPublicContentPageChanges(SAMPLE_FULL_PATH, comment);
+    await rejectPendingPublicContentPageChanges(fullPath, comment);
     return NextResponse.json({ ok: true, message: 'Pending changes rejected.' });
   } catch (err) {
     console.error('[content-pages/by-path/reject] POST error:', err);

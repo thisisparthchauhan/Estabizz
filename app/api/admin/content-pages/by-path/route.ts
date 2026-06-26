@@ -5,6 +5,7 @@ import {
   savePendingChanges,
   clearPendingChanges,
 } from '@/lib/publicContent/repository';
+import { isManagedPublicContentPath } from '@/lib/publicContent/managedPaths';
 import {
   PUBLIC_CONTENT_ACCENT_PRESET_OPTIONS,
   PUBLIC_CONTENT_CARD_STYLE_OPTIONS,
@@ -29,7 +30,6 @@ import type {
   PublicContentSectionDesign,
 } from '@/lib/publicContent/types';
 
-const SAMPLE_FULL_PATH = '/rbi/nbfc-registration-in-india';
 const MAX_BODY_BYTES = 300 * 1024; // 300 KB
 
 // ─── Image URL safety ─────────────────────────────────────────────────────────
@@ -52,6 +52,7 @@ const BLOCKED_IMAGE_URL = [
   /\bqa\s+marker\b/i,
   /phase4j/i,
   /phase4k/i,
+  /phase4l/i,
 ];
 
 const BLOCKED_DESIGN_VALUE = [
@@ -70,6 +71,7 @@ const BLOCKED_DESIGN_VALUE = [
   /\bmigration\b/i,
   /\bdebug\b/i,
   /phase4k/i,
+  /phase4l/i,
 ];
 
 function isValidImageUrl(url: string): boolean {
@@ -378,8 +380,8 @@ export async function GET(req: NextRequest) {
   if (!auth.ok) return auth.response;
 
   const fullPath = req.nextUrl.searchParams.get('fullPath')?.trim() || '';
-  if (fullPath !== SAMPLE_FULL_PATH) {
-    return NextResponse.json({ error: 'Visual editor is available for the sample page only.' }, { status: 404 });
+  if (!isManagedPublicContentPath(fullPath)) {
+    return NextResponse.json({ error: 'Visual editor is available for managed content pages only.' }, { status: 404 });
   }
 
   try {
@@ -423,8 +425,9 @@ export async function PATCH(req: NextRequest) {
   }
 
   const bodyObj = body as Record<string, unknown>;
-  if (bodyObj.fullPath !== SAMPLE_FULL_PATH) {
-    return NextResponse.json({ error: 'Editor is available for the sample page only.' }, { status: 400 });
+  const fullPath = typeof bodyObj.fullPath === 'string' ? bodyObj.fullPath.trim() : '';
+  if (!isManagedPublicContentPath(fullPath)) {
+    return NextResponse.json({ error: 'Editor is available for managed content pages only.' }, { status: 400 });
   }
 
   const workingCopyResult = validateWorkingCopy(bodyObj.workingCopy);
@@ -433,7 +436,7 @@ export async function PATCH(req: NextRequest) {
   }
 
   try {
-    await savePendingChanges(SAMPLE_FULL_PATH, auth.admin.email, workingCopyResult.workingCopy);
+    await savePendingChanges(fullPath, auth.admin.email, workingCopyResult.workingCopy);
     return NextResponse.json({
       ok: true,
       hasPendingChanges: true,
@@ -450,12 +453,12 @@ export async function DELETE(req: NextRequest) {
   if (!auth.ok) return auth.response;
 
   const fullPath = req.nextUrl.searchParams.get('fullPath')?.trim() || '';
-  if (fullPath !== SAMPLE_FULL_PATH) {
-    return NextResponse.json({ error: 'Editor is available for the sample page only.' }, { status: 400 });
+  if (!isManagedPublicContentPath(fullPath)) {
+    return NextResponse.json({ error: 'Editor is available for managed content pages only.' }, { status: 400 });
   }
 
   try {
-    await clearPendingChanges(SAMPLE_FULL_PATH);
+    await clearPendingChanges(fullPath);
     return NextResponse.json({
       ok: true,
       hasPendingChanges: false,

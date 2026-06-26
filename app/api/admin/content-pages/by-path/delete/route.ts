@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { requirePermission } from '@/lib/admin/requirePermission';
-import { moveSamplePublicContentPageToRecycleBin } from '@/lib/publicContent/repository';
-
-const SAMPLE_FULL_PATH = '/rbi/nbfc-registration-in-india';
+import { movePublicContentPageToRecycleBin } from '@/lib/publicContent/repository';
+import { isManagedPublicContentPath } from '@/lib/publicContent/managedPaths';
 
 export async function POST(req: NextRequest) {
   const auth = await requirePermission(req, 'delete_content');
@@ -18,13 +17,13 @@ export async function POST(req: NextRequest) {
 
   const bodyObj = body as Record<string, unknown>;
   const fullPath = typeof bodyObj.fullPath === 'string' ? bodyObj.fullPath.trim() : '';
-  if (fullPath !== SAMPLE_FULL_PATH) {
-    return NextResponse.json({ error: 'Move to Recycle Bin is available for the sample page only.' }, { status: 400 });
+  if (!isManagedPublicContentPath(fullPath)) {
+    return NextResponse.json({ error: 'Move to Recycle Bin is available for managed content pages only.' }, { status: 400 });
   }
 
   try {
-    const { name } = await moveSamplePublicContentPageToRecycleBin(auth.admin.email);
-    revalidatePath(SAMPLE_FULL_PATH);
+    const { name } = await movePublicContentPageToRecycleBin(fullPath, auth.admin.email);
+    revalidatePath(fullPath);
     return NextResponse.json({ ok: true, name, message: 'Page moved to Recycle Bin. The public page is now unavailable.' });
   } catch (err) {
     console.error('[content-pages/by-path/delete] POST error:', err);

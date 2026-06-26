@@ -21,12 +21,12 @@ import {
 } from '@/lib/regulatory/repository';
 import type { RegulatoryPendingRevision, RegulatoryUpdateRecord } from '@/lib/regulatory/types';
 import {
+  findManagedPublicContentPagesWithPendingChanges,
   findPublicContentPageByFullPath,
   approvePendingPublicContentPageChanges,
   rejectPendingPublicContentPageChanges,
 } from '@/lib/publicContent/repository';
-
-const PUBLIC_CONTENT_SAMPLE_PATH = '/rbi/nbfc-registration-in-india';
+import { isManagedPublicContentPath } from '@/lib/publicContent/managedPaths';
 
 export type QueueItemType = 'content' | 'blog' | 'regulatory_update' | 'public_content_page';
 export type QueueItemStatus = 'pending_approval' | 'rejected' | 'pending_review' | 'published';
@@ -460,33 +460,34 @@ function publicContentDiff(currentFields: ContentFields, proposedFields: Content
 }
 
 async function publicContentPageItems(): Promise<ApprovalQueueItem[]> {
-  const page = await findPublicContentPageByFullPath(PUBLIC_CONTENT_SAMPLE_PATH);
-  if (!page || !page.hasPendingChanges) return [];
+  const pages = await findManagedPublicContentPagesWithPendingChanges();
 
-  const currentFields = publicContentPageFields(page);
-  const revision = page.pendingRevision ?? {};
-  const proposedFields = publicContentPageRevisionFields(revision, page);
-  const submittedBy = page.pendingSubmittedBy || '';
+  return Promise.all(pages.map(async (page) => {
+    const currentFields = publicContentPageFields(page);
+    const revision = page.pendingRevision ?? {};
+    const proposedFields = publicContentPageRevisionFields(revision, page);
+    const submittedBy = page.pendingSubmittedBy || '';
 
-  return [{
-    id: `public_content_page:${page.fullPath}`,
-    type: 'public_content_page',
-    key: page.fullPath,
-    title: page.title,
-    pageName: 'Content Pages',
-    sectionName: page.title,
-    submittedBy,
-    submittedByRole: await submitterRole(submittedBy),
-    submittedAt: page.pendingSubmittedAt ?? page.updatedAt,
-    updatedAt: page.updatedAt,
-    status: 'pending_approval',
-    currentFields,
-    proposedFields,
-    changedFields: publicContentDiff(currentFields, proposedFields),
-    previewPath: page.fullPath,
-    reviewerComment: page.pendingReviewComment,
-    hasPendingChanges: true,
-  }];
+    return {
+      id: `public_content_page:${page.fullPath}`,
+      type: 'public_content_page',
+      key: page.fullPath,
+      title: page.title,
+      pageName: 'Public Content Page',
+      sectionName: page.fullPath,
+      submittedBy,
+      submittedByRole: await submitterRole(submittedBy),
+      submittedAt: page.pendingSubmittedAt ?? page.updatedAt,
+      updatedAt: page.updatedAt,
+      status: 'pending_approval',
+      currentFields,
+      proposedFields,
+      changedFields: publicContentDiff(currentFields, proposedFields),
+      previewPath: page.fullPath,
+      reviewerComment: page.pendingReviewComment,
+      hasPendingChanges: true,
+    } satisfies ApprovalQueueItem;
+  }));
 }
 
 function isoForQueue(value: unknown): string | null {
@@ -661,6 +662,7 @@ export async function reviewPublicContentPageChange(
   action: QueueAction,
   comment = ''
 ): Promise<void> {
+  if (!isManagedPublicContentPath(fullPath)) throw new Error('This content page is not available for review.');
   const page = await findPublicContentPageByFullPath(fullPath);
   if (!page) throw new Error('Content page was not found.');
   if (!page.hasPendingChanges) throw new Error('This page has no pending changes to review.');

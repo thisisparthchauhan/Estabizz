@@ -17,6 +17,7 @@ import AdminUser from '@/lib/models/AdminUser';
 import RegulatoryUpdate from '@/lib/models/RegulatoryUpdate';
 import PublicContentPage from '@/lib/models/PublicContentPage';
 import BackupSnapshot from '@/lib/models/BackupSnapshot';
+import { PUBLIC_CONTENT_MANAGED_PATHS } from '@/lib/publicContent/managedPaths';
 import type { BackupSnapshotRecord, BackupListResult, BackupItemCounts, GitHubBackupConfig } from './backupTypes';
 
 // ── GitHub env-var config ─────────────────────────────────────────────────────
@@ -102,9 +103,9 @@ async function collectPayload(actor: string, role: string, fileName: string): Pr
       'createdAt updatedAt'
     ).lean(),
 
-    // Public content pages — CMS-managed public guide pages (sample: /rbi/nbfc-registration-in-india).
+    // Public content pages — only the currently approved CMS-managed guide pages.
     // pendingRevision included for full restorability. No credentials or secrets in this collection.
-    PublicContentPage.find({}).select(
+    PublicContentPage.find({ fullPath: { $in: [...PUBLIC_CONTENT_MANAGED_PATHS] } }).select(
       'title slug fullPath pageType menuGroup regulator status summary ' +
       'hero heroImage pageDesign sections quickFacts ctaCards relatedPages sourceReferences ' +
       'seoTitle seoDescription canonicalUrl reviewedBy lastReviewedAt readingTime ' +

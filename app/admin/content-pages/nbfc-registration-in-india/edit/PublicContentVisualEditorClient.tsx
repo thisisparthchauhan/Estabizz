@@ -38,8 +38,6 @@ import type {
 
 // ─── Constants ─────────────────────────────────────────────────────────────────
 
-const SAMPLE_FULL_PATH = "/rbi/nbfc-registration-in-india";
-
 type TabKey = "visual" | "structure" | "seo" | "design";
 
 type BlockKey =
@@ -660,9 +658,9 @@ function EditPanel({
 // ─── Inspector ────────────────────────────────────────────────────────────────
 
 function Inspector({
-  workingCopy, activeBlock,
+  workingCopy, activeBlock, fullPath,
 }: {
-  workingCopy: PublicContentWorkingCopy; activeBlock: BlockKey;
+  workingCopy: PublicContentWorkingCopy; activeBlock: BlockKey; fullPath: string;
 }) {
   const block = BLOCKS.find((b) => b.key === activeBlock) ?? BLOCKS[0];
 
@@ -690,7 +688,7 @@ function Inspector({
     if (activeBlock === "seo") return [
       { label: "SEO Title", value: workingCopy.seoTitle || "Not set" },
       { label: "SEO Description", value: previewText(workingCopy.seoDescription, 180) },
-      { label: "Canonical URL", value: workingCopy.canonicalUrl || SAMPLE_FULL_PATH },
+      { label: "Canonical URL", value: workingCopy.canonicalUrl || fullPath },
     ];
     return [{ label: block.label, value: block.description }];
   })();
@@ -1090,7 +1088,13 @@ function DesignTab({
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export default function PublicContentVisualEditorClient({ viewer }: { viewer: AdminContext | null }) {
+export default function PublicContentVisualEditorClient({
+  viewer,
+  fullPath,
+}: {
+  viewer: AdminContext | null;
+  fullPath: string;
+}) {
   const canView   = viewer?.permissions.includes("view_admin")    ?? false;
   const canDelete = viewer?.permissions.includes("delete_content") ?? false;
 
@@ -1128,7 +1132,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
       setLoading(true);
       setError("");
       try {
-        const res = await fetch(`/api/admin/content-pages/by-path?fullPath=${encodeURIComponent(SAMPLE_FULL_PATH)}`);
+        const res = await fetch(`/api/admin/content-pages/by-path?fullPath=${encodeURIComponent(fullPath)}`);
         const data = (await res.json()) as ApiResponse;
         if (!res.ok || !data.page) throw new Error(data.error || "Unable to load page.");
         if (!cancelled) {
@@ -1149,7 +1153,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
 
     loadPage();
     return () => { cancelled = true; };
-  }, [canView]);
+  }, [canView, fullPath]);
 
   // Working copy update helpers
   function updateField<K extends keyof PublicContentWorkingCopy>(key: K, value: PublicContentWorkingCopy[K]) {
@@ -1315,7 +1319,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
       const res = await fetch("/api/admin/content-pages/by-path", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fullPath: SAMPLE_FULL_PATH, workingCopy }),
+        body: JSON.stringify({ fullPath, workingCopy }),
       });
       const data = (await res.json()) as SaveResponse;
       if (!res.ok) throw new Error(data.error || "Save failed.");
@@ -1339,7 +1343,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
     setDiscarding(true);
     setSaveMessage(null);
     try {
-      const res = await fetch(`/api/admin/content-pages/by-path?fullPath=${encodeURIComponent(SAMPLE_FULL_PATH)}`, {
+      const res = await fetch(`/api/admin/content-pages/by-path?fullPath=${encodeURIComponent(fullPath)}`, {
         method: "DELETE",
       });
       const data = (await res.json()) as SaveResponse;
@@ -1372,12 +1376,12 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ fullPath: SAMPLE_FULL_PATH, comment: "" }),
+        body: JSON.stringify({ fullPath, comment: "" }),
       });
       const data = await res.json() as { ok?: boolean; error?: string };
       if (!res.ok) throw new Error(data.error || "Approval failed.");
       // Reload fresh state from server
-      const getRes = await fetch(`/api/admin/content-pages/by-path?fullPath=${encodeURIComponent(SAMPLE_FULL_PATH)}`);
+      const getRes = await fetch(`/api/admin/content-pages/by-path?fullPath=${encodeURIComponent(fullPath)}`);
       const getData = await getRes.json() as ApiResponse;
       if (getRes.ok && getData.page) {
         setPage(getData.page);
@@ -1407,11 +1411,11 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ fullPath: SAMPLE_FULL_PATH, comment: rejectComment.trim() }),
+        body: JSON.stringify({ fullPath, comment: rejectComment.trim() }),
       });
       const data = await res.json() as { ok?: boolean; error?: string };
       if (!res.ok) throw new Error(data.error || "Rejection failed.");
-      const getRes = await fetch(`/api/admin/content-pages/by-path?fullPath=${encodeURIComponent(SAMPLE_FULL_PATH)}`);
+      const getRes = await fetch(`/api/admin/content-pages/by-path?fullPath=${encodeURIComponent(fullPath)}`);
       const getData = await getRes.json() as ApiResponse;
       if (getRes.ok && getData.page) {
         setPage(getData.page);
@@ -1443,7 +1447,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
       const res = await fetch("/api/admin/content-pages/by-path/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fullPath: SAMPLE_FULL_PATH }),
+        body: JSON.stringify({ fullPath }),
       });
       const data = await res.json() as { ok?: boolean; name?: string; message?: string; error?: string };
       if (!res.ok) throw new Error(data.error || "Unable to move to Recycle Bin.");
@@ -1502,7 +1506,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
         <div className="mb-5 flex flex-col gap-4 rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)] xl:flex-row xl:items-center xl:justify-between">
           <div>
             <div className="text-xs font-black uppercase tracking-[0.14em] text-[#1677f2]">
-              Public Content Pages › NBFC Registration in India
+              Public Content Pages › {page?.title || "Content Page"}
             </div>
             <h1 className="mt-2 text-[28px] font-black tracking-tight text-[#120b45]">Visual Editor</h1>
             <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -1520,7 +1524,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
                 </span>
               )}
               <span className="rounded-full border border-blue-100 bg-[#f8fbff] px-3 py-1 text-xs font-bold text-[#334155]">
-                {SAMPLE_FULL_PATH}
+                {fullPath}
               </span>
             </div>
           </div>
@@ -1529,7 +1533,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
               className="rounded-xl border border-blue-100 bg-white px-4 py-2.5 text-sm font-black text-[#1677f2] transition hover:border-[#1677f2]">
               Back to Content Pages
             </Link>
-            <a href={SAMPLE_FULL_PATH} target="_blank" rel="noopener noreferrer"
+            <a href={fullPath} target="_blank" rel="noopener noreferrer"
               className="rounded-xl border border-blue-100 bg-white px-4 py-2.5 text-sm font-black text-[#0a1628] transition hover:border-[#1677f2]">
               Open Live Page
             </a>
@@ -1687,7 +1691,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
                   <VisualPreview page={page} activeBlock={activeBlock} onSelect={setActiveBlock} />
                 )}
 
-                <Inspector workingCopy={workingCopy} activeBlock={activeBlock} />
+                <Inspector workingCopy={workingCopy} activeBlock={activeBlock} fullPath={fullPath} />
               </div>
             )}
 

@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 import { getAdminUserByEmail } from '@/lib/admin/repository';
 import type { AdminContext } from '@/lib/admin/requirePermission';
 import { publicContentPathForEditorSlug } from '@/lib/publicContent/managedPaths';
-import PublicContentVisualEditorClient from './PublicContentVisualEditorClient';
+import PublicContentVisualEditorClient from '../../nbfc-registration-in-india/edit/PublicContentVisualEditorClient';
 
 export const metadata: Metadata = {
-  title: 'NBFC Registration Visual Editor — Estabizz Admin',
+  title: 'Public Content Visual Editor — Estabizz Admin',
   robots: { index: false, follow: false },
 };
 
@@ -28,12 +29,15 @@ async function getViewer(): Promise<AdminContext | null> {
   }
 }
 
-export default async function NbfcRegistrationVisualEditorPage() {
+export default async function ManagedPublicContentEditorPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const fullPath = publicContentPathForEditorSlug(slug);
+  if (!fullPath) notFound();
+
   const viewer = await getViewer();
-  return (
-    <PublicContentVisualEditorClient
-      viewer={viewer}
-      fullPath={publicContentPathForEditorSlug('nbfc-registration-in-india') ?? '/rbi/nbfc-registration-in-india'}
-    />
-  );
+  return <PublicContentVisualEditorClient viewer={viewer} fullPath={fullPath} />;
 }

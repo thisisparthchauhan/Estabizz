@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission } from '@/lib/admin/requirePermission';
 import { restoreRecycleBinItem } from '@/lib/content/recycleBin';
 import { revalidatePath } from 'next/cache';
+import { PUBLIC_CONTENT_MANAGED_PATHS } from '@/lib/publicContent/managedPaths';
 
 const VALID_TYPES = new Set(['media', 'content', 'regulatory', 'public_content_page']);
 
@@ -23,7 +24,9 @@ export async function POST(req: NextRequest) {
 
     // A regulatory update restored to "published" must reappear publicly.
     if (type === 'regulatory') revalidatePath('/resources/regulatory-updates');
-    if (type === 'public_content_page') revalidatePath('/rbi/nbfc-registration-in-india');
+    if (type === 'public_content_page') {
+      for (const fullPath of PUBLIC_CONTENT_MANAGED_PATHS) revalidatePath(fullPath);
+    }
 
     return NextResponse.json({ success: true, name: result.name });
   } catch (err) {

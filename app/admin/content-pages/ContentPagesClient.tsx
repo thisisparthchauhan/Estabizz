@@ -2,6 +2,10 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import type { AdminContext } from "@/lib/admin/requirePermission";
+import {
+  editorSlugForPublicContentPath,
+  isManagedPublicContentPath,
+} from "@/lib/publicContent/managedPaths";
 
 type ImportStatus =
   | "importable"
@@ -63,9 +67,6 @@ const STATUS_STYLES: Record<ImportStatus, string> = {
   excluded_for_now: "border-zinc-200 bg-zinc-50 text-zinc-600",
   skipped_existing: "border-blue-200 bg-blue-50 text-blue-700",
 };
-
-const SAMPLE_EDITOR_PATH = "/rbi/nbfc-registration-in-india";
-const SAMPLE_EDITOR_ROUTE = "/admin/content-pages/nbfc-registration-in-india/edit";
 
 function labelise(value: string): string {
   if (!value) return "All";
@@ -257,6 +258,9 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
               <tbody className="divide-y divide-blue-50">
                 {filtered.map((item) => {
                   const canOpen = item.fullPath.startsWith("/") && !item.fullPath.includes("[");
+                  const isManaged = isManagedPublicContentPath(item.fullPath);
+                  const editorSlug = isManaged ? editorSlugForPublicContentPath(item.fullPath) : "";
+                  const editorRoute = editorSlug ? `/admin/content-pages/${editorSlug}/edit` : "";
                   return (
                     <tr key={`${item.fullPath}-${item.sourceFile}`} className="align-top hover:bg-[#f8fbff]">
                       <td className="max-w-[260px] px-4 py-3">
@@ -286,13 +290,17 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
                       <td className="max-w-[260px] px-4 py-3 text-[12px] font-semibold leading-5 text-[#64748b]">{item.sourceFile}</td>
                       <td className="max-w-[320px] px-4 py-3 text-[12px] font-medium leading-5 text-[#64748b]">{item.reason}</td>
                       <td className="px-4 py-3">
-                        {item.fullPath === SAMPLE_EDITOR_PATH && item.existingDbMatch ? (
+                        {isManaged && item.existingDbMatch ? (
                           <a
-                            href={SAMPLE_EDITOR_ROUTE}
+                            href={editorRoute}
                             className="inline-flex rounded-lg bg-[#0a1628] px-3 py-2 text-[12px] font-black text-white transition hover:bg-[#1677f2]"
                           >
                             Open Editor
                           </a>
+                        ) : isManaged ? (
+                          <span className="inline-flex rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[12px] font-black text-amber-700">
+                            Import First
+                          </span>
                         ) : (
                           <span className="inline-flex rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[12px] font-black text-slate-500">
                             Coming Soon

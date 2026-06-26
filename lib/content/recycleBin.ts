@@ -11,7 +11,8 @@ import ContentAudit from '@/lib/models/ContentAudit';
 import RegulatoryUpdate from '@/lib/models/RegulatoryUpdate';
 import PublicContentPage from '@/lib/models/PublicContentPage';
 import { restoreDeletedUpdate, purgeDeletedUpdate } from '@/lib/regulatory/repository';
-import { restoreSamplePublicContentPageFromRecycleBin } from '@/lib/publicContent/repository';
+import { restorePublicContentPageFromRecycleBin } from '@/lib/publicContent/repository';
+import { PUBLIC_CONTENT_MANAGED_PATHS } from '@/lib/publicContent/managedPaths';
 import { CONTENT_DEFAULTS } from '@/lib/content/defaults';
 import type { RecycleBinFilters, RecycleBinItem, RecycleBinResult } from './recycleBinTypes';
 
@@ -133,7 +134,10 @@ export async function listRecycleBinItems(
 
   // ── Deleted public content pages ───────────────────────────────────────────
   if (type === 'all' || type === 'public_content_page') {
-    const q: Record<string, unknown> = { status: 'deleted' };
+    const q: Record<string, unknown> = {
+      status: 'deleted',
+      fullPath: { $in: [...PUBLIC_CONTENT_MANAGED_PATHS] },
+    };
     if (from) q.deletedAt = { ...(q.deletedAt as object ?? {}), $gte: new Date(`${from}T00:00:00`) };
     if (to)   q.deletedAt = { ...(q.deletedAt as object ?? {}), $lte: new Date(`${to}T23:59:59`) };
     if (removedByF) q.deletedBy = { $regex: removedByF, $options: 'i' };
@@ -219,7 +223,7 @@ export async function restoreRecycleBinItem(
   await connectDB();
 
   if (type === 'public_content_page') {
-    const { name } = await restoreSamplePublicContentPageFromRecycleBin(id, actor);
+    const { name } = await restorePublicContentPageFromRecycleBin(id, actor);
     return { name };
   }
 

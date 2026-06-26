@@ -2,6 +2,11 @@ export const PUBLIC_CONTENT_MANAGED_PATHS = [
   '/rbi/nbfc-registration-in-india',
   '/rbi/payment-aggregator-license-in-india',
   '/rbi/ppi-registration-in-india',
+  '/rbi/arc-registration-in-india',
+  '/rbi/nbfc-sro-registration',
+  '/rbi/lendtech-services',
+  '/rbi/nbfc-aa-license-guide',
+  '/rbi/nbfc-account-aggregator-license',
 ] as const;
 
 export type PublicContentManagedPath = (typeof PUBLIC_CONTENT_MANAGED_PATHS)[number];
@@ -12,6 +17,11 @@ export const PUBLIC_CONTENT_EDITOR_SLUGS: Record<PublicContentManagedPath, strin
   '/rbi/nbfc-registration-in-india': 'nbfc-registration-in-india',
   '/rbi/payment-aggregator-license-in-india': 'payment-aggregator-license-in-india',
   '/rbi/ppi-registration-in-india': 'ppi-registration-in-india',
+  '/rbi/arc-registration-in-india': 'arc-registration-in-india',
+  '/rbi/nbfc-sro-registration': 'nbfc-sro-registration',
+  '/rbi/lendtech-services': 'lendtech-services',
+  '/rbi/nbfc-aa-license-guide': 'nbfc-aa-license-guide',
+  '/rbi/nbfc-account-aggregator-license': 'nbfc-account-aggregator-license',
 };
 
 const PATH_BY_EDITOR_SLUG = Object.fromEntries(

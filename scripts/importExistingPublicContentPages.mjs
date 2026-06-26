@@ -17,6 +17,11 @@
  *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-registration-in-india
  *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/payment-aggregator-license-in-india
  *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/ppi-registration-in-india
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/arc-registration-in-india
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-sro-registration
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/lendtech-services
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-aa-license-guide
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-account-aggregator-license
  */
 
 import fs from 'node:fs';
@@ -27,10 +32,15 @@ import { discoverExistingPublicContentPages } from '../lib/publicContent/discove
 const APPLY = process.argv.includes('--apply');
 const DRY_RUN = !APPLY;
 const SAMPLE_FULL_PATH = '/rbi/nbfc-registration-in-india';
-const PHASE_4L_IMPORT_PATHS = [
+const APPROVED_IMPORT_PATHS = [
   SAMPLE_FULL_PATH,
   '/rbi/payment-aggregator-license-in-india',
   '/rbi/ppi-registration-in-india',
+  '/rbi/arc-registration-in-india',
+  '/rbi/nbfc-sro-registration',
+  '/rbi/lendtech-services',
+  '/rbi/nbfc-aa-license-guide',
+  '/rbi/nbfc-account-aggregator-license',
 ];
 const ONLY_FULL_PATH = parseOnlyArg();
 
@@ -249,6 +259,33 @@ function sectionBodyFromMarkup(markup, clientText) {
   return cleanSectionMarkup(text);
 }
 
+function extractHeadingSections(clientText) {
+  const layoutStart = clientText.indexOf('<ServicePageLayout');
+  const layoutEnd = clientText.lastIndexOf('</ServicePageLayout>');
+  if (layoutStart === -1 || layoutEnd === -1 || layoutEnd <= layoutStart) return [];
+
+  const content = clientText.slice(layoutStart, layoutEnd);
+  const sections = [];
+  const h2Pattern = /<h2\s+id="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g;
+  const matches = [...content.matchAll(h2Pattern)];
+
+  for (let index = 0; index < matches.length; index++) {
+    const current = matches[index];
+    const next = matches[index + 1];
+    const bodyStart = (current.index ?? 0) + current[0].length;
+    const bodyEnd = next?.index ?? content.length;
+    const body = sectionBodyFromMarkup(content.slice(bodyStart, bodyEnd), clientText);
+    sections.push({
+      id: current[1],
+      title: decodeText(cleanSectionMarkup(current[2])),
+      body,
+      design: { ...DEFAULT_SECTION_DESIGN },
+    });
+  }
+
+  return sections;
+}
+
 function extractServiceLayoutSections(fullPath) {
   const file = path.join(process.cwd(), fullPath.replace(/^\//, 'app/'), 'PageClient.tsx');
   const clientText = fs.readFileSync(file, 'utf8');
@@ -267,6 +304,25 @@ function extractServiceLayoutSections(fullPath) {
   }
 
   if (sections.length) return sections;
+
+  const lowerSectionPattern = /<section\s+id="([^"]+)"[^>]*>([\s\S]*?)<\/section>/g;
+  while ((match = lowerSectionPattern.exec(clientText)) !== null) {
+    const h2Match = match[2].match(/<h2[^>]*>([\s\S]*?)<\/h2>/);
+    const title = decodeText(cleanSectionMarkup(h2Match?.[1] ?? match[1]));
+    const bodyMarkup = h2Match ? match[2].replace(h2Match[0], '') : match[2];
+    const body = sectionBodyFromMarkup(bodyMarkup, clientText);
+    sections.push({
+      id: match[1],
+      title,
+      body,
+      design: { ...DEFAULT_SECTION_DESIGN },
+    });
+  }
+
+  if (sections.length) return sections;
+
+  const headingSections = extractHeadingSections(clientText);
+  if (headingSections.length) return headingSections;
 
   return [...clientText.matchAll(/\{\s*id:\s*'([^']+)'\s*,\s*title:\s*'([^']+)'/g)].map((tocMatch) => ({
     id: tocMatch[1],
@@ -290,6 +346,17 @@ function buildServiceLayoutBaseline(item, now) {
   const ctaDescription = extractStringProp(clientText, 'ctaDescription') || summary;
   const finalCtaTitle = extractStringProp(clientText, 'finalCtaTitle') || ctaTitle;
   const finalCtaDescription = extractStringProp(clientText, 'finalCtaDescription') || ctaDescription;
+  const serviceBadge = title.includes('NBFC')
+    ? 'NBFC'
+    : title.includes('ARC')
+      ? 'ARC'
+      : title.includes('LendTech')
+        ? 'LendTech'
+        : title.includes('PPI')
+          ? 'PPI'
+          : title.includes('Payment Aggregator')
+            ? 'Payment Aggregator'
+            : 'RBI Guide';
 
   return {
     title,
@@ -297,7 +364,7 @@ function buildServiceLayoutBaseline(item, now) {
     fullPath: item.fullPath,
     pageType: item.pageType,
     menuGroup: item.menuGroup,
-    category: 'RBI Payments',
+    category: 'RBI Guide',
     regulator: item.regulator,
     serviceType: title,
     summary,
@@ -310,7 +377,7 @@ function buildServiceLayoutBaseline(item, now) {
     pageDesign: { ...DEFAULT_PAGE_DESIGN },
     badges: [
       { emoji: '', label: 'RBI' },
-      { emoji: '', label: title.includes('PPI') ? 'PPI' : 'Payment Aggregator' },
+      { emoji: '', label: serviceBadge },
       { emoji: '', label: 'Guide' },
     ],
     breadcrumbs: [
@@ -465,7 +532,7 @@ function buildNbfcBaseline(item, now) {
 
 function buildImportRecord(item, now) {
   if (item.fullPath === SAMPLE_FULL_PATH) return buildNbfcBaseline(item, now);
-  if (PHASE_4L_IMPORT_PATHS.includes(item.fullPath)) return buildServiceLayoutBaseline(item, now);
+  if (APPROVED_IMPORT_PATHS.includes(item.fullPath)) return buildServiceLayoutBaseline(item, now);
 
   return {
     title: item.title,
@@ -545,10 +612,10 @@ async function applyImport(items) {
 async function run() {
   loadEnv();
   if (APPLY && !ONLY_FULL_PATH) {
-    throw new Error(`Broad apply is blocked. Pass --only for one approved managed path only: ${PHASE_4L_IMPORT_PATHS.join(', ')}.`);
+    throw new Error(`Broad apply is blocked. Pass --only for one approved managed path only: ${APPROVED_IMPORT_PATHS.join(', ')}.`);
   }
-  if (APPLY && ONLY_FULL_PATH && !PHASE_4L_IMPORT_PATHS.includes(ONLY_FULL_PATH)) {
-    throw new Error(`Apply is limited to approved managed paths only: ${PHASE_4L_IMPORT_PATHS.join(', ')}.`);
+  if (APPLY && ONLY_FULL_PATH && !APPROVED_IMPORT_PATHS.includes(ONLY_FULL_PATH)) {
+    throw new Error(`Apply is limited to approved managed paths only: ${APPROVED_IMPORT_PATHS.join(', ')}.`);
   }
 
   const { summary, items } = await discoverExistingPublicContentPages();

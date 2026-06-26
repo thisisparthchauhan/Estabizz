@@ -41,6 +41,7 @@ const BLOCKED_SOURCE_TERMS = [
   'phase4j',
   'phase4k',
   'phase4l',
+  'phase4m',
 ];
 
 function pageDesign(page: PublicContentPageRenderData): PublicContentPageDesign {

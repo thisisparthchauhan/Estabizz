@@ -43,19 +43,47 @@ function isValidImageUrl(url: string): boolean {
   return !BLOCKED_IMAGE_URL.some((p) => p.test(url));
 }
 
-function validateImage(raw: unknown): PublicContentImage | null {
-  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+function isSafeImageReference(value: string): boolean {
+  const trimmed = value.trim();
+  if (!trimmed) return true;
+  return !BLOCKED_IMAGE_URL.some((p) => p.test(trimmed));
+}
+
+type ImageValidationResult =
+  | { ok: true; image: PublicContentImage | null }
+  | { ok: false; error: string };
+
+function validateImage(raw: unknown): ImageValidationResult {
+  if (raw === null || raw === undefined) return { ok: true, image: null };
+  if (typeof raw !== 'object' || Array.isArray(raw)) {
+    return { ok: false, error: 'Please choose a valid HTTPS image and add alt text before saving.' };
+  }
   const r = raw as Record<string, unknown>;
   const url = typeof r.url === 'string' ? r.url.trim() : '';
-  if (!isValidImageUrl(url)) return null;
+  if (!isValidImageUrl(url)) {
+    return { ok: false, error: 'Please choose a valid HTTPS image and add alt text before saving.' };
+  }
   const alt = typeof r.alt === 'string' ? r.alt.trim() : '';
-  if (!alt) return null;
+  if (!alt) {
+    return { ok: false, error: 'Please add alt text for each selected image before saving.' };
+  }
+  const publicId = typeof r.publicId === 'string' ? r.publicId.trim() : '';
+  if (publicId && !isSafeImageReference(publicId)) {
+    return { ok: false, error: 'Please choose a valid HTTPS image and add alt text before saving.' };
+  }
+  const source = typeof r.source === 'string' ? r.source.trim() : '';
+  if (source && source !== 'media_library') {
+    return { ok: false, error: 'Please choose a valid HTTPS image and add alt text before saving.' };
+  }
   return {
-    url,
-    alt,
-    ...(typeof r.caption === 'string' && r.caption.trim() ? { caption: r.caption.trim().slice(0, 300) } : {}),
-    ...(typeof r.publicId === 'string' && r.publicId.trim() ? { publicId: r.publicId.trim() } : {}),
-    source: 'media_library',
+    ok: true,
+    image: {
+      url,
+      alt,
+      ...(typeof r.caption === 'string' && r.caption.trim() ? { caption: r.caption.trim().slice(0, 300) } : {}),
+      ...(publicId ? { publicId } : {}),
+      source: 'media_library',
+    },
   };
 }
 
@@ -146,15 +174,25 @@ function str(v: unknown, max: number): string {
   return v.slice(0, max);
 }
 
-function validateWorkingCopy(raw: unknown): PublicContentWorkingCopy | null {
-  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+type WorkingCopyValidationResult =
+  | { ok: true; workingCopy: PublicContentWorkingCopy }
+  | { ok: false; error: string };
+
+const GENERIC_WORKING_COPY_ERROR = 'Some page fields need a quick review before saving.';
+
+function validateWorkingCopy(raw: unknown): WorkingCopyValidationResult {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+    return { ok: false, error: GENERIC_WORKING_COPY_ERROR };
+  }
   const b = raw as Record<string, unknown>;
 
-  if (typeof b.title !== 'string' || b.title.length > 300) return null;
-  if (typeof b.summary !== 'string' || b.summary.length > 15000) return null;
-  if (typeof b.seoTitle !== 'string' || b.seoTitle.length > 200) return null;
-  if (typeof b.seoDescription !== 'string' || b.seoDescription.length > 1000) return null;
-  if (typeof b.canonicalUrl !== 'string' || b.canonicalUrl.length > 500) return null;
+  if (typeof b.title !== 'string' || b.title.length > 300) return { ok: false, error: GENERIC_WORKING_COPY_ERROR };
+  if (typeof b.summary !== 'string' || b.summary.length > 15000) return { ok: false, error: GENERIC_WORKING_COPY_ERROR };
+  if (typeof b.seoTitle !== 'string' || b.seoTitle.length > 200) return { ok: false, error: GENERIC_WORKING_COPY_ERROR };
+  if (typeof b.seoDescription !== 'string' || b.seoDescription.length > 1000) return { ok: false, error: GENERIC_WORKING_COPY_ERROR };
+  if (typeof b.canonicalUrl !== 'string' || b.canonicalUrl.length > 500) {
+    return { ok: false, error: GENERIC_WORKING_COPY_ERROR };
+  }
 
   let hero: PublicContentHero | null = null;
   if (b.hero && typeof b.hero === 'object' && !Array.isArray(b.hero)) {
@@ -171,27 +209,38 @@ function validateWorkingCopy(raw: unknown): PublicContentWorkingCopy | null {
     };
   }
 
-  const heroImage = b.heroImage ? validateImage(b.heroImage) : null;
+  const heroImageResult = validateImage(b.heroImage);
+  if (!heroImageResult.ok) return heroImageResult;
+  const heroImage = heroImageResult.image;
 
-  if (!Array.isArray(b.sections) || b.sections.length > 200) return null;
-  const sections: PublicContentSection[] = b.sections.map((s: unknown) => {
+  if (!Array.isArray(b.sections) || b.sections.length > 200) {
+    return { ok: false, error: GENERIC_WORKING_COPY_ERROR };
+  }
+  const sections: PublicContentSection[] = [];
+  for (const s of b.sections) {
     const sec = (s && typeof s === 'object' && !Array.isArray(s)) ? s as Record<string, unknown> : {};
-    const sectionImage = sec.image ? validateImage(sec.image) : null;
-    return {
+    const sectionImageResult = validateImage(sec.image);
+    if (!sectionImageResult.ok) return sectionImageResult;
+    const sectionImage = sectionImageResult.image;
+    sections.push({
       id: str(sec.id, 100) || undefined,
       title: str(sec.title, 300) || undefined,
       body: str(sec.body, 25000) || undefined,
       ...(sectionImage ? { image: sectionImage } : {}),
-    };
-  });
+    });
+  }
 
-  if (!Array.isArray(b.quickFacts) || b.quickFacts.length > 50) return null;
+  if (!Array.isArray(b.quickFacts) || b.quickFacts.length > 50) {
+    return { ok: false, error: GENERIC_WORKING_COPY_ERROR };
+  }
   const quickFacts: PublicContentQuickFact[] = b.quickFacts.map((f: unknown) => {
     const fact = (f && typeof f === 'object' && !Array.isArray(f)) ? f as Record<string, unknown> : {};
     return { label: str(fact.label, 200), value: str(fact.value, 200) };
   });
 
-  if (!Array.isArray(b.ctaCards) || b.ctaCards.length > 20) return null;
+  if (!Array.isArray(b.ctaCards) || b.ctaCards.length > 20) {
+    return { ok: false, error: GENERIC_WORKING_COPY_ERROR };
+  }
   const ctaCards: PublicContentCtaCard[] = b.ctaCards.map((c: unknown) => {
     const card = (c && typeof c === 'object' && !Array.isArray(c)) ? c as Record<string, unknown> : {};
     return {
@@ -203,16 +252,19 @@ function validateWorkingCopy(raw: unknown): PublicContentWorkingCopy | null {
   });
 
   return {
-    title: b.title.trim(),
-    summary: b.summary,
-    hero,
-    heroImage,
-    sections,
-    quickFacts,
-    ctaCards,
-    seoTitle: b.seoTitle.trim(),
-    seoDescription: b.seoDescription.trim(),
-    canonicalUrl: b.canonicalUrl.trim(),
+    ok: true,
+    workingCopy: {
+      title: b.title.trim(),
+      summary: b.summary,
+      hero,
+      heroImage,
+      sections,
+      quickFacts,
+      ctaCards,
+      seoTitle: b.seoTitle.trim(),
+      seoDescription: b.seoDescription.trim(),
+      canonicalUrl: b.canonicalUrl.trim(),
+    },
   };
 }
 
@@ -272,13 +324,13 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: 'Editor is available for the sample page only.' }, { status: 400 });
   }
 
-  const workingCopy = validateWorkingCopy(bodyObj.workingCopy);
-  if (!workingCopy) {
-    return NextResponse.json({ error: 'Invalid working copy data.' }, { status: 400 });
+  const workingCopyResult = validateWorkingCopy(bodyObj.workingCopy);
+  if (!workingCopyResult.ok) {
+    return NextResponse.json({ error: workingCopyResult.error }, { status: 400 });
   }
 
   try {
-    await savePendingChanges(SAMPLE_FULL_PATH, auth.admin.email, workingCopy);
+    await savePendingChanges(SAMPLE_FULL_PATH, auth.admin.email, workingCopyResult.workingCopy);
     return NextResponse.json({
       ok: true,
       hasPendingChanges: true,

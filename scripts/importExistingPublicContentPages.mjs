@@ -196,7 +196,6 @@ function buildNbfcBaseline(item, now) {
     ],
     sourceReferences: [
       { title: 'RBI COSMOS Portal', url: 'https://cosmos.rbi.org.in', regulator: 'RBI' },
-      { title: 'Imported source file', url: item.sourceFile, regulator: 'RBI' },
     ],
     reviewedBy: 'CS Devyani Khambhati',
     lastReviewedAt: new Date('2025-07-17T00:00:00.000Z'),
@@ -243,7 +242,7 @@ function buildImportRecord(item, now) {
     ctaCards: [],
     expertProfile: null,
     relatedPages: [],
-    sourceReferences: [{ title: 'Imported source file', url: item.sourceFile }],
+    sourceReferences: [],
     reviewedBy: '',
     readingTime: '',
     status: 'published',

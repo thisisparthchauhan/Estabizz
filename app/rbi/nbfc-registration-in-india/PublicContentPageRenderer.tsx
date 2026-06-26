@@ -10,6 +10,20 @@ interface NormalisedSection {
   body: string;
 }
 
+type SourceReference = PublicContentPageRenderData['sourceReferences'][number];
+
+const BLOCKED_SOURCE_TERMS = [
+  'imported source file',
+  'source file',
+  'migration',
+  'importer',
+  'debug',
+  'qa',
+  'qa marker',
+  'phase4e',
+  'phase4d',
+];
+
 function slugify(input: string, index: number): string {
   const slug = input
     .toLowerCase()
@@ -33,6 +47,22 @@ function normaliseSections(page: PublicContentPageRenderData): NormalisedSection
       };
     })
     .filter((section) => section.title || section.body);
+}
+
+function isPublicSourceReference(source: SourceReference): boolean {
+  const title = source.title?.trim() || '';
+  const titleLower = title.toLowerCase();
+  const url = source.url?.trim() || '';
+  const urlLower = url.toLowerCase();
+
+  if (!title) return false;
+  if (BLOCKED_SOURCE_TERMS.some((term) => titleLower.includes(term))) return false;
+  if (!urlLower.startsWith('https://') && !urlLower.startsWith('http://')) return false;
+  if (urlLower.startsWith('app/') || urlLower.startsWith('/users/')) return false;
+  if (urlLower.includes('localhost')) return false;
+  if (urlLower.includes('.tsx') || urlLower.includes('.ts')) return false;
+
+  return true;
 }
 
 function renderTextWithLinks(text: string) {
@@ -160,6 +190,7 @@ export default function PublicContentPageRenderer({ page }: { page: PublicConten
     category: related.category || page.regulator || 'Related',
     description: related.description || '',
   }));
+  const publicSourceReferences = page.sourceReferences.filter(isPublicSourceReference);
 
   return (
     <ServicePageLayout
@@ -197,17 +228,13 @@ export default function PublicContentPageRenderer({ page }: { page: PublicConten
         </section>
       )}
 
-      {page.sourceReferences.length > 0 && (
+      {publicSourceReferences.length > 0 && (
         <section className="mt-16">
           <h2 id="source-references">Source References</h2>
           <ul className="clean-list">
-            {page.sourceReferences.map((source, index) => (
+            {publicSourceReferences.map((source, index) => (
               <li key={`${source.title}-${index}`}>
-                {source.url ? (
-                  <a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a>
-                ) : (
-                  source.title
-                )}
+                <a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a>
               </li>
             ))}
           </ul>

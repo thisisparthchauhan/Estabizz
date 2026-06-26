@@ -27,6 +27,7 @@ export interface IPublicContentPage extends Document {
 
   hero: Record<string, unknown> | null;
   heroImage?: Record<string, unknown> | null;
+  pageDesign?: Record<string, unknown> | null;
   badges: Record<string, unknown>[];
   breadcrumbs: Record<string, unknown>[];
   sections: Record<string, unknown>[];
@@ -81,6 +82,7 @@ const PublicContentPageSchema = new Schema(
 
     hero:             { type: Schema.Types.Mixed, default: null },
     heroImage:        { type: Schema.Types.Mixed, default: null },
+    pageDesign:       { type: Schema.Types.Mixed, default: null },
     badges:           { type: Array, default: [] },
     breadcrumbs:      { type: Array, default: [] },
     sections:         { type: Array, default: [] },

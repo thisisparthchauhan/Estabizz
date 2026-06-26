@@ -2,6 +2,7 @@
 
 import { connectDB } from '@/lib/db';
 import PublicContentPage from '@/lib/models/PublicContentPage';
+import { PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN } from '@/lib/publicContent/types';
 import type {
   PublicContentImage,
   PublicContentImportInput,
@@ -17,6 +18,7 @@ import type {
   PublicContentRelatedPage,
   PublicContentSourceReference,
   PublicContentWorkingCopy,
+  PublicContentPageDesign,
 } from '@/lib/publicContent/types';
 
 type RawDoc = Record<string, unknown>;
@@ -45,6 +47,7 @@ function toRecord(doc: RawDoc): PublicContentPageRecord {
     summary: String(doc.summary ?? ''),
     hero: (doc.hero as Record<string, unknown> | null) ?? null,
     heroImage: (doc.heroImage as PublicContentImage | null) ?? null,
+    pageDesign: (doc.pageDesign as PublicContentPageDesign | null) ?? PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN,
     badges: arrayOf<PublicContentBadge>(doc.badges),
     breadcrumbs: arrayOf<PublicContentBreadcrumb>(doc.breadcrumbs),
     sections: Array.isArray(doc.sections) ? (doc.sections as Record<string, unknown>[]) : [],
@@ -231,6 +234,7 @@ export async function approvePendingPublicContentPageChanges(
   if (typeof revision.summary === 'string') update.summary = revision.summary;
   if ('hero' in revision) update.hero = revision.hero ?? null;
   if ('heroImage' in revision) update.heroImage = revision.heroImage ?? null;
+  if ('pageDesign' in revision) update.pageDesign = revision.pageDesign ?? null;
   if (Array.isArray(revision.sections)) update.sections = revision.sections;
   if (Array.isArray(revision.quickFacts)) update.quickFacts = revision.quickFacts;
   if (Array.isArray(revision.ctaCards)) update.ctaCards = revision.ctaCards;

@@ -38,6 +38,16 @@ export type PublicContentRegulator =
   | 'FEMA'
   | 'Other';
 
+export type PublicContentThemePreset = 'default' | 'premium' | 'minimal';
+export type PublicContentAccentPreset = 'navy' | 'gold' | 'emerald' | 'slate';
+export type PublicContentTextScale = 'standard' | 'large';
+export type PublicContentHeadingStyle = 'classic' | 'modern';
+export type PublicContentSectionSpacing = 'standard' | 'spacious';
+export type PublicContentCardStyle = 'flat' | 'soft' | 'bordered';
+export type PublicContentHeroLayout = 'text_only' | 'image_top' | 'image_right';
+export type PublicContentSectionStylePreset = 'standard' | 'highlight' | 'soft_card';
+export type PublicContentSectionImagePosition = 'top' | 'left' | 'right';
+
 export const PUBLIC_CONTENT_STATUS_OPTIONS: PublicContentPageStatus[] = [
   'published',
   'draft',
@@ -107,6 +117,46 @@ export const PUBLIC_CONTENT_REGULATOR_OPTIONS: PublicContentRegulator[] = [
   'Other',
 ];
 
+export const PUBLIC_CONTENT_THEME_PRESET_OPTIONS: PublicContentThemePreset[] = ['default', 'premium', 'minimal'];
+export const PUBLIC_CONTENT_ACCENT_PRESET_OPTIONS: PublicContentAccentPreset[] = ['navy', 'gold', 'emerald', 'slate'];
+export const PUBLIC_CONTENT_TEXT_SCALE_OPTIONS: PublicContentTextScale[] = ['standard', 'large'];
+export const PUBLIC_CONTENT_HEADING_STYLE_OPTIONS: PublicContentHeadingStyle[] = ['classic', 'modern'];
+export const PUBLIC_CONTENT_SECTION_SPACING_OPTIONS: PublicContentSectionSpacing[] = ['standard', 'spacious'];
+export const PUBLIC_CONTENT_CARD_STYLE_OPTIONS: PublicContentCardStyle[] = ['flat', 'soft', 'bordered'];
+export const PUBLIC_CONTENT_HERO_LAYOUT_OPTIONS: PublicContentHeroLayout[] = ['text_only', 'image_top', 'image_right'];
+export const PUBLIC_CONTENT_SECTION_STYLE_OPTIONS: PublicContentSectionStylePreset[] = ['standard', 'highlight', 'soft_card'];
+export const PUBLIC_CONTENT_SECTION_IMAGE_POSITION_OPTIONS: PublicContentSectionImagePosition[] = ['top', 'left', 'right'];
+
+export interface PublicContentPageDesign {
+  themePreset: PublicContentThemePreset;
+  accentPreset: PublicContentAccentPreset;
+  textScale: PublicContentTextScale;
+  headingStyle: PublicContentHeadingStyle;
+  sectionSpacing: PublicContentSectionSpacing;
+  cardStyle: PublicContentCardStyle;
+  heroLayout: PublicContentHeroLayout;
+}
+
+export interface PublicContentSectionDesign {
+  stylePreset: PublicContentSectionStylePreset;
+  imagePosition: PublicContentSectionImagePosition;
+}
+
+export const PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN: PublicContentPageDesign = {
+  themePreset: 'default',
+  accentPreset: 'navy',
+  textScale: 'standard',
+  headingStyle: 'classic',
+  sectionSpacing: 'standard',
+  cardStyle: 'flat',
+  heroLayout: 'image_top',
+};
+
+export const PUBLIC_CONTENT_DEFAULT_SECTION_DESIGN: PublicContentSectionDesign = {
+  stylePreset: 'standard',
+  imagePosition: 'top',
+};
+
 export interface PublicContentImage {
   url: string;
   publicId?: string;
@@ -141,6 +191,7 @@ export interface PublicContentSection {
   title?: string;
   body?: string;
   image?: PublicContentImage | null;
+  design?: PublicContentSectionDesign;
   blocks?: unknown[];
 }
 
@@ -191,6 +242,7 @@ export interface PublicContentPageRecord {
   summary: string;
   hero: PublicContentHero | null;
   heroImage: PublicContentImage | null;
+  pageDesign: PublicContentPageDesign;
   badges: PublicContentBadge[];
   breadcrumbs: PublicContentBreadcrumb[];
   sections: PublicContentSection[];
@@ -229,6 +281,7 @@ export interface PublicContentWorkingCopy {
   summary: string;
   hero: PublicContentHero | null;
   heroImage: PublicContentImage | null;
+  pageDesign: PublicContentPageDesign;
   sections: PublicContentSection[];
   quickFacts: PublicContentQuickFact[];
   ctaCards: PublicContentCtaCard[];

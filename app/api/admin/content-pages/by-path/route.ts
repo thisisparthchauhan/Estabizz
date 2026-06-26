@@ -5,6 +5,19 @@ import {
   savePendingChanges,
   clearPendingChanges,
 } from '@/lib/publicContent/repository';
+import {
+  PUBLIC_CONTENT_ACCENT_PRESET_OPTIONS,
+  PUBLIC_CONTENT_CARD_STYLE_OPTIONS,
+  PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN,
+  PUBLIC_CONTENT_DEFAULT_SECTION_DESIGN,
+  PUBLIC_CONTENT_HEADING_STYLE_OPTIONS,
+  PUBLIC_CONTENT_HERO_LAYOUT_OPTIONS,
+  PUBLIC_CONTENT_SECTION_IMAGE_POSITION_OPTIONS,
+  PUBLIC_CONTENT_SECTION_SPACING_OPTIONS,
+  PUBLIC_CONTENT_SECTION_STYLE_OPTIONS,
+  PUBLIC_CONTENT_TEXT_SCALE_OPTIONS,
+  PUBLIC_CONTENT_THEME_PRESET_OPTIONS,
+} from '@/lib/publicContent/types';
 import type {
   PublicContentImage,
   PublicContentWorkingCopy,
@@ -12,6 +25,8 @@ import type {
   PublicContentSection,
   PublicContentQuickFact,
   PublicContentCtaCard,
+  PublicContentPageDesign,
+  PublicContentSectionDesign,
 } from '@/lib/publicContent/types';
 
 const SAMPLE_FULL_PATH = '/rbi/nbfc-registration-in-india';
@@ -36,6 +51,25 @@ const BLOCKED_IMAGE_URL = [
   /\bdebug\b/i,
   /\bqa\s+marker\b/i,
   /phase4j/i,
+  /phase4k/i,
+];
+
+const BLOCKED_DESIGN_VALUE = [
+  /style=/i,
+  /class=/i,
+  /<script/i,
+  /javascript:/i,
+  /expression\(/i,
+  /url\(/i,
+  /data:/i,
+  /position:/i,
+  /fixed/i,
+  /absolute/i,
+  /z-index/i,
+  /import/i,
+  /\bmigration\b/i,
+  /\bdebug\b/i,
+  /phase4k/i,
 ];
 
 function isValidImageUrl(url: string): boolean {
@@ -87,6 +121,63 @@ function validateImage(raw: unknown): ImageValidationResult {
   };
 }
 
+// ─── Controlled design presets ────────────────────────────────────────────────
+
+const DESIGN_ERROR = 'Please choose one of the available design options before saving.';
+
+function enumValue<T extends string>(raw: unknown, allowed: readonly T[], fallback: T): T | null {
+  if (raw === undefined || raw === null || raw === '') return fallback;
+  if (typeof raw !== 'string') return null;
+  const value = raw.trim();
+  if (BLOCKED_DESIGN_VALUE.some((p) => p.test(value))) return null;
+  return allowed.includes(value as T) ? (value as T) : null;
+}
+
+type PageDesignValidationResult =
+  | { ok: true; pageDesign: PublicContentPageDesign }
+  | { ok: false; error: string };
+
+function validatePageDesign(raw: unknown): PageDesignValidationResult {
+  if (raw !== undefined && raw !== null && (typeof raw !== 'object' || Array.isArray(raw))) {
+    return { ok: false, error: DESIGN_ERROR };
+  }
+  const source = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw as Record<string, unknown> : {};
+  const pageDesign: PublicContentPageDesign = {
+    themePreset: enumValue(source.themePreset, PUBLIC_CONTENT_THEME_PRESET_OPTIONS, PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.themePreset) ?? PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.themePreset,
+    accentPreset: enumValue(source.accentPreset, PUBLIC_CONTENT_ACCENT_PRESET_OPTIONS, PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.accentPreset) ?? PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.accentPreset,
+    textScale: enumValue(source.textScale, PUBLIC_CONTENT_TEXT_SCALE_OPTIONS, PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.textScale) ?? PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.textScale,
+    headingStyle: enumValue(source.headingStyle, PUBLIC_CONTENT_HEADING_STYLE_OPTIONS, PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.headingStyle) ?? PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.headingStyle,
+    sectionSpacing: enumValue(source.sectionSpacing, PUBLIC_CONTENT_SECTION_SPACING_OPTIONS, PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.sectionSpacing) ?? PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.sectionSpacing,
+    cardStyle: enumValue(source.cardStyle, PUBLIC_CONTENT_CARD_STYLE_OPTIONS, PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.cardStyle) ?? PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.cardStyle,
+    heroLayout: enumValue(source.heroLayout, PUBLIC_CONTENT_HERO_LAYOUT_OPTIONS, PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.heroLayout) ?? PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN.heroLayout,
+  };
+  const invalid = (Object.keys(pageDesign) as Array<keyof PublicContentPageDesign>).some((key) => {
+    if (!(key in source) || source[key] === undefined || source[key] === null || source[key] === '') return false;
+    return typeof source[key] !== 'string' || pageDesign[key] !== String(source[key]).trim();
+  });
+  return invalid ? { ok: false, error: DESIGN_ERROR } : { ok: true, pageDesign };
+}
+
+type SectionDesignValidationResult =
+  | { ok: true; design: PublicContentSectionDesign }
+  | { ok: false; error: string };
+
+function validateSectionDesign(raw: unknown): SectionDesignValidationResult {
+  if (raw !== undefined && raw !== null && (typeof raw !== 'object' || Array.isArray(raw))) {
+    return { ok: false, error: DESIGN_ERROR };
+  }
+  const source = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw as Record<string, unknown> : {};
+  const design: PublicContentSectionDesign = {
+    stylePreset: enumValue(source.stylePreset, PUBLIC_CONTENT_SECTION_STYLE_OPTIONS, PUBLIC_CONTENT_DEFAULT_SECTION_DESIGN.stylePreset) ?? PUBLIC_CONTENT_DEFAULT_SECTION_DESIGN.stylePreset,
+    imagePosition: enumValue(source.imagePosition, PUBLIC_CONTENT_SECTION_IMAGE_POSITION_OPTIONS, PUBLIC_CONTENT_DEFAULT_SECTION_DESIGN.imagePosition) ?? PUBLIC_CONTENT_DEFAULT_SECTION_DESIGN.imagePosition,
+  };
+  const invalid = (['stylePreset', 'imagePosition'] as const).some((key) => {
+    if (!(key in source) || source[key] === undefined || source[key] === null || source[key] === '') return false;
+    return typeof source[key] !== 'string' || design[key] !== String(source[key]).trim();
+  });
+  return invalid ? { ok: false, error: DESIGN_ERROR } : { ok: true, design };
+}
+
 // ─── Safe mappers ──────────────────────────────────────────────────────────────
 
 function toEditorPage(page: NonNullable<Awaited<ReturnType<typeof findPublicContentPageByFullPath>>>) {
@@ -121,6 +212,7 @@ function toEditorPage(page: NonNullable<Awaited<ReturnType<typeof findPublicCont
     canonicalUrl: page.canonicalUrl,
     ogImage: page.ogImage,
     heroImage: page.heroImage,
+    pageDesign: page.pageDesign,
     hasPendingChanges: page.hasPendingChanges,
     updatedAt: page.updatedAt,
   };
@@ -132,6 +224,7 @@ function liveToWorkingCopy(page: NonNullable<Awaited<ReturnType<typeof findPubli
     summary: page.summary,
     hero: page.hero as PublicContentHero | null,
     heroImage: (page.heroImage as PublicContentImage | null) ?? null,
+    pageDesign: page.pageDesign ?? PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN,
     sections: page.sections as PublicContentSection[],
     quickFacts: page.quickFacts as PublicContentQuickFact[],
     ctaCards: page.ctaCards as PublicContentCtaCard[],
@@ -152,6 +245,9 @@ function revisionToWorkingCopy(
     heroImage: ('heroImage' in revision
       ? (revision.heroImage as PublicContentImage | null)
       : (fallback.heroImage as PublicContentImage | null)) ?? null,
+    pageDesign: ('pageDesign' in revision
+      ? (revision.pageDesign as PublicContentPageDesign)
+      : fallback.pageDesign) ?? PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN,
     sections: Array.isArray(revision.sections)
       ? (revision.sections as PublicContentSection[])
       : (fallback.sections as PublicContentSection[]),
@@ -213,6 +309,9 @@ function validateWorkingCopy(raw: unknown): WorkingCopyValidationResult {
   if (!heroImageResult.ok) return heroImageResult;
   const heroImage = heroImageResult.image;
 
+  const pageDesignResult = validatePageDesign(b.pageDesign);
+  if (!pageDesignResult.ok) return pageDesignResult;
+
   if (!Array.isArray(b.sections) || b.sections.length > 200) {
     return { ok: false, error: GENERIC_WORKING_COPY_ERROR };
   }
@@ -222,11 +321,14 @@ function validateWorkingCopy(raw: unknown): WorkingCopyValidationResult {
     const sectionImageResult = validateImage(sec.image);
     if (!sectionImageResult.ok) return sectionImageResult;
     const sectionImage = sectionImageResult.image;
+    const sectionDesignResult = validateSectionDesign(sec.design);
+    if (!sectionDesignResult.ok) return sectionDesignResult;
     sections.push({
       id: str(sec.id, 100) || undefined,
       title: str(sec.title, 300) || undefined,
       body: str(sec.body, 25000) || undefined,
       ...(sectionImage ? { image: sectionImage } : {}),
+      design: sectionDesignResult.design,
     });
   }
 
@@ -258,6 +360,7 @@ function validateWorkingCopy(raw: unknown): WorkingCopyValidationResult {
       summary: b.summary,
       hero,
       heroImage,
+      pageDesign: pageDesignResult.pageDesign,
       sections,
       quickFacts,
       ctaCards,

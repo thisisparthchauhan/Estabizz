@@ -1,5 +1,6 @@
 import { connectDB } from '@/lib/db';
 import PublicContentPage from '@/lib/models/PublicContentPage';
+import { PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN } from '@/lib/publicContent/types';
 import type {
   PublicContentBadge,
   PublicContentBreadcrumb,
@@ -15,6 +16,7 @@ import type {
   PublicContentSection,
   PublicContentSourceReference,
   PublicContentHero,
+  PublicContentPageDesign,
 } from '@/lib/publicContent/types';
 
 export interface PublicContentPageRenderData {
@@ -29,6 +31,7 @@ export interface PublicContentPageRenderData {
   summary: string;
   hero: PublicContentHero | null;
   heroImage: PublicContentImage | null;
+  pageDesign: PublicContentPageDesign;
   badges: PublicContentBadge[];
   breadcrumbs: PublicContentBreadcrumb[];
   sections: PublicContentSection[];
@@ -79,6 +82,7 @@ function toPublicRenderData(doc: RawDoc): PublicContentPageRenderData {
     summary: String(doc.summary ?? ''),
     hero: (doc.hero as PublicContentHero | null) ?? null,
     heroImage: (doc.heroImage as PublicContentImage | null) ?? null,
+    pageDesign: (doc.pageDesign as PublicContentPageDesign | null) ?? PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN,
     badges: arrayOf<PublicContentBadge>(doc.badges),
     breadcrumbs: arrayOf<PublicContentBreadcrumb>(doc.breadcrumbs),
     sections: arrayOf<PublicContentSection>(doc.sections),

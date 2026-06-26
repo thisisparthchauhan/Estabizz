@@ -3,6 +3,10 @@
 import Link from "next/link";
 import React, { useEffect, useMemo, useState } from "react";
 import type { AdminContext } from "@/lib/admin/requirePermission";
+import {
+  PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN,
+  PUBLIC_CONTENT_DEFAULT_SECTION_DESIGN,
+} from "@/lib/publicContent/types";
 import type {
   PublicContentBadge,
   PublicContentBreadcrumb,
@@ -19,13 +23,24 @@ import type {
   PublicContentSourceReference,
   PublicContentHero,
   PublicContentWorkingCopy,
+  PublicContentPageDesign,
+  PublicContentSectionDesign,
+  PublicContentThemePreset,
+  PublicContentAccentPreset,
+  PublicContentTextScale,
+  PublicContentHeadingStyle,
+  PublicContentSectionSpacing,
+  PublicContentCardStyle,
+  PublicContentHeroLayout,
+  PublicContentSectionStylePreset,
+  PublicContentSectionImagePosition,
 } from "@/lib/publicContent/types";
 
 // ─── Constants ─────────────────────────────────────────────────────────────────
 
 const SAMPLE_FULL_PATH = "/rbi/nbfc-registration-in-india";
 
-type TabKey = "visual" | "structure" | "seo";
+type TabKey = "visual" | "structure" | "seo" | "design";
 
 type BlockKey =
   | "hero"
@@ -52,6 +67,7 @@ interface EditorPage {
   summary: string;
   hero: PublicContentHero | null;
   heroImage: PublicContentImage | null;
+  pageDesign: PublicContentPageDesign;
   badges: PublicContentBadge[];
   breadcrumbs: PublicContentBreadcrumb[];
   sections: PublicContentSection[];
@@ -106,8 +122,24 @@ const BLOCKS: Array<{ key: BlockKey; label: string; description: string }> = [
 const TAB_LABELS: Array<{ key: TabKey; label: string }> = [
   { key: "visual", label: "Visual Editor" },
   { key: "structure", label: "Content Structure" },
+  { key: "design", label: "Design & Layout" },
   { key: "seo", label: "SEO & Settings" },
 ];
+
+const PAGE_DESIGN_LABELS = {
+  themePreset: { default: "Default", premium: "Premium", minimal: "Minimal" } satisfies Record<PublicContentThemePreset, string>,
+  accentPreset: { navy: "Navy", gold: "Gold", emerald: "Emerald", slate: "Slate" } satisfies Record<PublicContentAccentPreset, string>,
+  textScale: { standard: "Standard", large: "Large" } satisfies Record<PublicContentTextScale, string>,
+  headingStyle: { classic: "Classic", modern: "Modern" } satisfies Record<PublicContentHeadingStyle, string>,
+  sectionSpacing: { standard: "Standard", spacious: "Spacious" } satisfies Record<PublicContentSectionSpacing, string>,
+  cardStyle: { flat: "Flat", soft: "Soft", bordered: "Bordered" } satisfies Record<PublicContentCardStyle, string>,
+  heroLayout: { text_only: "Text Only", image_top: "Image on Top", image_right: "Image on Right" } satisfies Record<PublicContentHeroLayout, string>,
+};
+
+const SECTION_DESIGN_LABELS = {
+  stylePreset: { standard: "Standard", highlight: "Highlight", soft_card: "Soft Card" } satisfies Record<PublicContentSectionStylePreset, string>,
+  imagePosition: { top: "Top", left: "Left", right: "Right" } satisfies Record<PublicContentSectionImagePosition, string>,
+};
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -117,12 +149,29 @@ function pageToWorkingCopy(page: EditorPage): PublicContentWorkingCopy {
     summary: page.summary,
     hero: page.hero,
     heroImage: page.heroImage ?? null,
+    pageDesign: { ...PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN, ...(page.pageDesign ?? {}) },
     sections: page.sections,
     quickFacts: page.quickFacts,
     ctaCards: page.ctaCards,
     seoTitle: page.seoTitle,
     seoDescription: page.seoDescription,
     canonicalUrl: page.canonicalUrl,
+  };
+}
+
+function normalisePageDesign(design?: Partial<PublicContentPageDesign> | null): PublicContentPageDesign {
+  return { ...PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN, ...(design ?? {}) };
+}
+
+function normaliseSectionDesign(design?: Partial<PublicContentSectionDesign> | null): PublicContentSectionDesign {
+  return { ...PUBLIC_CONTENT_DEFAULT_SECTION_DESIGN, ...(design ?? {}) };
+}
+
+function normaliseWorkingCopy(workingCopy: PublicContentWorkingCopy): PublicContentWorkingCopy {
+  return {
+    ...workingCopy,
+    pageDesign: normalisePageDesign(workingCopy.pageDesign),
+    sections: workingCopy.sections.map((section) => ({ ...section, design: normaliseSectionDesign(section.design) })),
   };
 }
 
@@ -212,6 +261,35 @@ function EditField({
           className={`${base} h-10 py-0`} />
       )}
       {hint && <p className="text-[11px] font-medium text-[#94a3b8]">{hint}</p>}
+    </div>
+  );
+}
+
+function PresetGroup<T extends string>({
+  label, value, options, labels, onChange, disabled = false,
+}: {
+  label: string; value: T; options: T[]; labels: Record<T, string>; onChange: (value: T) => void; disabled?: boolean;
+}) {
+  return (
+    <div className="grid gap-2">
+      <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b]">{label}</div>
+      <div className="flex flex-wrap gap-2">
+        {options.map((option) => (
+          <button
+            key={option}
+            type="button"
+            disabled={disabled}
+            onClick={() => onChange(option)}
+            className={`rounded-xl border px-3 py-2 text-xs font-black transition disabled:cursor-not-allowed disabled:opacity-55 ${
+              option === value
+                ? "border-[#1677f2] bg-[#1677f2] text-white shadow-[0_8px_20px_rgba(22,119,242,0.18)]"
+                : "border-blue-100 bg-white text-[#334155] hover:border-[#1677f2]/50 hover:bg-blue-50"
+            }`}
+          >
+            {labels[option]}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -867,6 +945,149 @@ function SeoTab({
   );
 }
 
+// ─── Design & Layout Tab ─────────────────────────────────────────────────────
+
+const PAGE_DESIGN_OPTIONS = {
+  themePreset: ["default", "premium", "minimal"] as PublicContentThemePreset[],
+  accentPreset: ["navy", "gold", "emerald", "slate"] as PublicContentAccentPreset[],
+  textScale: ["standard", "large"] as PublicContentTextScale[],
+  headingStyle: ["classic", "modern"] as PublicContentHeadingStyle[],
+  sectionSpacing: ["standard", "spacious"] as PublicContentSectionSpacing[],
+  cardStyle: ["flat", "soft", "bordered"] as PublicContentCardStyle[],
+  heroLayout: ["text_only", "image_top", "image_right"] as PublicContentHeroLayout[],
+};
+
+const SECTION_DESIGN_OPTIONS = {
+  stylePreset: ["standard", "highlight", "soft_card"] as PublicContentSectionStylePreset[],
+  imagePosition: ["top", "left", "right"] as PublicContentSectionImagePosition[],
+};
+
+function DesignPreview({ workingCopy }: { workingCopy: PublicContentWorkingCopy }) {
+  const design = normalisePageDesign(workingCopy.pageDesign);
+  const firstSection = workingCopy.sections[0];
+  const sectionDesign = normaliseSectionDesign(firstSection?.design);
+  const accentClass: Record<PublicContentAccentPreset, string> = {
+    navy: "border-[#1677f2] bg-[#f5fbff]",
+    gold: "border-amber-200 bg-amber-50",
+    emerald: "border-emerald-200 bg-emerald-50",
+    slate: "border-slate-200 bg-slate-50",
+  };
+  const cardClass: Record<PublicContentCardStyle, string> = {
+    flat: "shadow-none",
+    soft: "shadow-[0_16px_36px_rgba(0,80,140,0.10)]",
+    bordered: "border-2",
+  };
+  const sectionClass: Record<PublicContentSectionStylePreset, string> = {
+    standard: "bg-white",
+    highlight: "border-l-4",
+    soft_card: "bg-white shadow-[0_12px_28px_rgba(0,80,140,0.08)]",
+  };
+  return (
+    <div className={`rounded-2xl border p-4 ${accentClass[design.accentPreset]} ${cardClass[design.cardStyle]}`}>
+      <div className="mb-3 flex flex-wrap gap-2 text-[10px] font-black uppercase tracking-[0.12em] text-[#1677f2]">
+        <span className="rounded-full bg-white px-2.5 py-1">Live page unchanged</span>
+        <span className="rounded-full bg-white px-2.5 py-1">Design changes will appear after approval</span>
+      </div>
+      <div className={design.heroLayout === "image_right" ? "grid gap-4 md:grid-cols-[minmax(0,1fr)_180px]" : "grid gap-4"}>
+        {workingCopy.heroImage?.url && design.heroLayout !== "text_only" && (
+          <div className={design.heroLayout === "image_right" ? "md:order-2" : ""}>
+            <img src={workingCopy.heroImage.url} alt={workingCopy.heroImage.alt || ""} className="h-32 w-full rounded-xl object-cover" />
+          </div>
+        )}
+        <div>
+          <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b]">Preview</div>
+          <h3 className={`mt-2 text-2xl font-black text-[#120b45] ${design.headingStyle === "modern" ? "tracking-normal" : "tracking-tight"}`}>
+            {workingCopy.hero?.title || workingCopy.title}
+          </h3>
+          <p className={`mt-2 font-medium text-[#475569] ${design.textScale === "large" ? "text-base leading-8" : "text-sm leading-6"}`}>
+            {previewText(workingCopy.summary, 220)}
+          </p>
+        </div>
+      </div>
+      {firstSection && (
+        <div className={`${design.sectionSpacing === "spacious" ? "mt-6" : "mt-4"} rounded-xl border p-4 ${accentClass[design.accentPreset]} ${sectionClass[sectionDesign.stylePreset]}`}>
+          <div className="text-[10px] font-black uppercase tracking-[0.12em] text-[#64748b]">Article Section</div>
+          <div className="mt-1 text-base font-black text-[#0a1628]">{firstSection.title || "Section preview"}</div>
+          <p className={`mt-2 font-medium text-[#64748b] ${design.textScale === "large" ? "text-sm leading-7" : "text-xs leading-5"}`}>
+            {previewText(firstSection.body || "", 150)}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DesignTab({
+  workingCopy, selectedSection, onSelectSection, onUpdatePageDesign, onUpdateSectionDesign, canEdit,
+}: {
+  workingCopy: PublicContentWorkingCopy;
+  selectedSection: number;
+  onSelectSection: (index: number) => void;
+  onUpdatePageDesign: <K extends keyof PublicContentPageDesign>(key: K, value: PublicContentPageDesign[K]) => void;
+  onUpdateSectionDesign: <K extends keyof PublicContentSectionDesign>(index: number, key: K, value: PublicContentSectionDesign[K]) => void;
+  canEdit: boolean;
+}) {
+  const design = normalisePageDesign(workingCopy.pageDesign);
+  const section = workingCopy.sections[selectedSection] ?? workingCopy.sections[0];
+  const sectionIndex = workingCopy.sections[selectedSection] ? selectedSection : 0;
+  const sectionDesign = normaliseSectionDesign(section?.design);
+  return (
+    <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
+      <div className="grid gap-5">
+        <div className="rounded-2xl border border-blue-100 bg-white p-5">
+          <div className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1677f2]">Design & Layout</div>
+          <p className="mt-2 text-sm font-bold text-[#64748b]">
+            Use approved brand presets only. Live page unchanged. Design changes will appear after approval.
+          </p>
+        </div>
+        <div className="rounded-2xl border border-blue-100 bg-white p-5">
+          <div className="mb-4 text-[13px] font-black text-[#0a1628]">Page Style</div>
+          <div className="grid gap-5">
+            <PresetGroup label="Theme Preset" value={design.themePreset} options={PAGE_DESIGN_OPTIONS.themePreset} labels={PAGE_DESIGN_LABELS.themePreset} onChange={(value) => onUpdatePageDesign("themePreset", value)} disabled={!canEdit} />
+            <PresetGroup label="Brand Accent" value={design.accentPreset} options={PAGE_DESIGN_OPTIONS.accentPreset} labels={PAGE_DESIGN_LABELS.accentPreset} onChange={(value) => onUpdatePageDesign("accentPreset", value)} disabled={!canEdit} />
+            <PresetGroup label="Text Size" value={design.textScale} options={PAGE_DESIGN_OPTIONS.textScale} labels={PAGE_DESIGN_LABELS.textScale} onChange={(value) => onUpdatePageDesign("textScale", value)} disabled={!canEdit} />
+            <PresetGroup label="Heading Style" value={design.headingStyle} options={PAGE_DESIGN_OPTIONS.headingStyle} labels={PAGE_DESIGN_LABELS.headingStyle} onChange={(value) => onUpdatePageDesign("headingStyle", value)} disabled={!canEdit} />
+            <PresetGroup label="Section Spacing" value={design.sectionSpacing} options={PAGE_DESIGN_OPTIONS.sectionSpacing} labels={PAGE_DESIGN_LABELS.sectionSpacing} onChange={(value) => onUpdatePageDesign("sectionSpacing", value)} disabled={!canEdit} />
+            <PresetGroup label="Card Style" value={design.cardStyle} options={PAGE_DESIGN_OPTIONS.cardStyle} labels={PAGE_DESIGN_LABELS.cardStyle} onChange={(value) => onUpdatePageDesign("cardStyle", value)} disabled={!canEdit} />
+            <PresetGroup label="Hero Layout" value={design.heroLayout} options={PAGE_DESIGN_OPTIONS.heroLayout} labels={PAGE_DESIGN_LABELS.heroLayout} onChange={(value) => onUpdatePageDesign("heroLayout", value)} disabled={!canEdit} />
+          </div>
+        </div>
+        <div className="rounded-2xl border border-blue-100 bg-white p-5">
+          <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+              <div className="text-[13px] font-black text-[#0a1628]">Selected Article Section</div>
+              <p className="mt-1 text-xs font-bold text-[#64748b]">Section-level presets are optional and limited.</p>
+            </div>
+            <select value={sectionIndex} onChange={(e) => onSelectSection(Number(e.target.value))}
+              className="rounded-xl border border-blue-100 bg-[#f8fbff] px-3 py-2 text-sm font-bold text-[#0a1628] outline-none focus:border-[#1677f2]">
+              {workingCopy.sections.map((item, index) => (
+                <option key={item.id || index} value={index}>{index + 1}. {item.title || `Section ${index + 1}`}</option>
+              ))}
+            </select>
+          </div>
+          {section ? (
+            <div className="grid gap-5">
+              <PresetGroup label="Section Style" value={sectionDesign.stylePreset} options={SECTION_DESIGN_OPTIONS.stylePreset} labels={SECTION_DESIGN_LABELS.stylePreset} onChange={(value) => onUpdateSectionDesign(sectionIndex, "stylePreset", value)} disabled={!canEdit} />
+              <PresetGroup label="Image Position" value={sectionDesign.imagePosition} options={SECTION_DESIGN_OPTIONS.imagePosition} labels={SECTION_DESIGN_LABELS.imagePosition} onChange={(value) => onUpdateSectionDesign(sectionIndex, "imagePosition", value)} disabled={!canEdit} />
+            </div>
+          ) : (
+            <div className="rounded-xl border border-dashed border-blue-200 bg-blue-50 p-5 text-sm font-bold text-[#64748b]">No article sections available.</div>
+          )}
+        </div>
+        {!canEdit && (
+          <div className="rounded-xl border border-blue-100 bg-blue-50 p-4 text-sm font-bold text-[#1677f2]">
+            You can view design controls, but you do not have permission to save changes.
+          </div>
+        )}
+      </div>
+      <div className="rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)]">
+        <div className="mb-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">Local Preview</div>
+        <DesignPreview workingCopy={workingCopy} />
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function PublicContentVisualEditorClient({ viewer }: { viewer: AdminContext | null }) {
@@ -886,6 +1107,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
 
   const [activeTab, setActiveTab] = useState<TabKey>("visual");
   const [activeBlock, setActiveBlock] = useState<BlockKey>("hero");
+  const [selectedDesignSection, setSelectedDesignSection] = useState(0);
 
   const [saving, setSaving] = useState(false);
   const [discarding, setDiscarding] = useState(false);
@@ -911,7 +1133,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
         if (!res.ok || !data.page) throw new Error(data.error || "Unable to load page.");
         if (!cancelled) {
           setPage(data.page);
-          const wc = data.workingCopy ?? pageToWorkingCopy(data.page);
+          const wc = normaliseWorkingCopy(data.workingCopy ?? pageToWorkingCopy(data.page));
           setWorkingCopy(wc);
           setSavedWorkingCopy(wc);
           setHasPendingChanges(data.hasPendingChanges ?? false);
@@ -971,6 +1193,35 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
 
   function updateSeo(field: "seoTitle" | "seoDescription" | "canonicalUrl", value: string) {
     updateField(field, value);
+  }
+
+  function updatePageDesign<K extends keyof PublicContentPageDesign>(key: K, value: PublicContentPageDesign[K]) {
+    setWorkingCopy((prev) => prev ? {
+      ...prev,
+      pageDesign: { ...normalisePageDesign(prev.pageDesign), [key]: value },
+    } : prev);
+    setIsDirty(true);
+    setSaveMessage(null);
+  }
+
+  function updateSectionDesign<K extends keyof PublicContentSectionDesign>(
+    index: number,
+    key: K,
+    value: PublicContentSectionDesign[K]
+  ) {
+    setWorkingCopy((prev) => {
+      if (!prev) return prev;
+      const sections = [...prev.sections];
+      const current = sections[index];
+      if (!current) return prev;
+      sections[index] = {
+        ...current,
+        design: { ...normaliseSectionDesign(current.design), [key]: value },
+      };
+      return { ...prev, sections };
+    });
+    setIsDirty(true);
+    setSaveMessage(null);
   }
 
   function handlePickerSelect(image: PublicContentImage) {
@@ -1094,7 +1345,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
       const data = (await res.json()) as SaveResponse;
       if (!res.ok) throw new Error(data.error || "Discard failed.");
       if (page) {
-        const liveWc = pageToWorkingCopy(page);
+        const liveWc = normaliseWorkingCopy(pageToWorkingCopy(page));
         setWorkingCopy(liveWc);
         setSavedWorkingCopy(liveWc);
       }
@@ -1130,7 +1381,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
       const getData = await getRes.json() as ApiResponse;
       if (getRes.ok && getData.page) {
         setPage(getData.page);
-        const wc = getData.workingCopy ?? pageToWorkingCopy(getData.page);
+        const wc = normaliseWorkingCopy(getData.workingCopy ?? pageToWorkingCopy(getData.page));
         setWorkingCopy(wc);
         setSavedWorkingCopy(wc);
         setHasPendingChanges(getData.hasPendingChanges ?? false);
@@ -1160,7 +1411,16 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
       });
       const data = await res.json() as { ok?: boolean; error?: string };
       if (!res.ok) throw new Error(data.error || "Rejection failed.");
+      const getRes = await fetch(`/api/admin/content-pages/by-path?fullPath=${encodeURIComponent(SAMPLE_FULL_PATH)}`);
+      const getData = await getRes.json() as ApiResponse;
+      if (getRes.ok && getData.page) {
+        setPage(getData.page);
+        const wc = normaliseWorkingCopy(getData.workingCopy ?? pageToWorkingCopy(getData.page));
+        setWorkingCopy(wc);
+        setSavedWorkingCopy(wc);
+      }
       setHasPendingChanges(false);
+      setIsDirty(false);
       setShowRejectPanel(false);
       setRejectComment("");
       setSaveMessage({ type: "success", text: "Pending changes rejected." });
@@ -1455,6 +1715,18 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
                   </div>
                 )}
               </div>
+            )}
+
+            {/* Design & Layout tab */}
+            {activeTab === "design" && (
+              <DesignTab
+                workingCopy={workingCopy}
+                selectedSection={selectedDesignSection}
+                onSelectSection={setSelectedDesignSection}
+                onUpdatePageDesign={updatePageDesign}
+                onUpdateSectionDesign={updateSectionDesign}
+                canEdit={canEdit}
+              />
             )}
 
             {/* SEO & Settings tab */}

@@ -383,6 +383,7 @@ function publicContentPageFields(
     summary: page.summary,
     hero: page.hero ?? null,
     heroImage: (page.heroImage as unknown) ?? null,
+    pageDesign: page.pageDesign,
     sections: page.sections,
     quickFacts: page.quickFacts,
     ctaCards: page.ctaCards,
@@ -401,6 +402,7 @@ function publicContentPageRevisionFields(
     summary: typeof revision.summary === 'string' ? revision.summary : fallback.summary,
     hero: (revision.hero as unknown) ?? fallback.hero ?? null,
     heroImage: ('heroImage' in revision ? (revision.heroImage as unknown) : (fallback.heroImage as unknown)) ?? null,
+    pageDesign: ('pageDesign' in revision ? (revision.pageDesign as unknown) : fallback.pageDesign),
     sections: Array.isArray(revision.sections) ? revision.sections : fallback.sections,
     quickFacts: Array.isArray(revision.quickFacts) ? revision.quickFacts : fallback.quickFacts,
     ctaCards: Array.isArray(revision.ctaCards) ? revision.ctaCards : fallback.ctaCards,
@@ -408,6 +410,53 @@ function publicContentPageRevisionFields(
     seoDescription: typeof revision.seoDescription === 'string' ? revision.seoDescription : fallback.seoDescription,
     canonicalUrl: typeof revision.canonicalUrl === 'string' ? revision.canonicalUrl : fallback.canonicalUrl,
   } as ContentFields;
+}
+
+const PUBLIC_CONTENT_CHANGE_LABELS: Array<[RegExp, string]> = [
+  [/^Page Design Theme Preset$/i, 'Theme Preset changed'],
+  [/^Page Design Accent Preset$/i, 'Brand Accent changed'],
+  [/^Page Design Text Scale$/i, 'Text Size changed'],
+  [/^Page Design Heading Style$/i, 'Heading Style changed'],
+  [/^Page Design Section Spacing$/i, 'Section Spacing changed'],
+  [/^Page Design Card Style$/i, 'Card Style changed'],
+  [/^Page Design Hero Layout$/i, 'Hero Layout changed'],
+  [/^Sections \d+ Design Style Preset$/i, 'Section Style changed'],
+  [/^Sections \d+ Design Image Position$/i, 'Image Position changed'],
+];
+
+const PUBLIC_CONTENT_VALUE_LABELS: Record<string, string> = {
+  default: 'Default',
+  premium: 'Premium',
+  minimal: 'Minimal',
+  navy: 'Navy',
+  gold: 'Gold',
+  emerald: 'Emerald',
+  slate: 'Slate',
+  standard: 'Standard',
+  large: 'Large',
+  classic: 'Classic',
+  modern: 'Modern',
+  spacious: 'Spacious',
+  flat: 'Flat',
+  soft: 'Soft',
+  bordered: 'Bordered',
+  text_only: 'Text Only',
+  image_top: 'Image on Top',
+  image_right: 'Image on Right',
+  highlight: 'Highlight',
+  soft_card: 'Soft Card',
+  top: 'Top',
+  left: 'Left',
+  right: 'Right',
+};
+
+function publicContentDiff(currentFields: ContentFields, proposedFields: ContentFields): ChangedField[] {
+  return diffFields(currentFields, proposedFields).map((change) => ({
+    ...change,
+    field: PUBLIC_CONTENT_CHANGE_LABELS.find(([pattern]) => pattern.test(change.field))?.[1] ?? change.field,
+    oldValue: PUBLIC_CONTENT_VALUE_LABELS[change.oldValue] ?? change.oldValue,
+    newValue: PUBLIC_CONTENT_VALUE_LABELS[change.newValue] ?? change.newValue,
+  }));
 }
 
 async function publicContentPageItems(): Promise<ApprovalQueueItem[]> {
@@ -433,7 +482,7 @@ async function publicContentPageItems(): Promise<ApprovalQueueItem[]> {
     status: 'pending_approval',
     currentFields,
     proposedFields,
-    changedFields: diffFields(currentFields, proposedFields),
+    changedFields: publicContentDiff(currentFields, proposedFields),
     previewPath: page.fullPath,
     reviewerComment: page.pendingReviewComment,
     hasPendingChanges: true,

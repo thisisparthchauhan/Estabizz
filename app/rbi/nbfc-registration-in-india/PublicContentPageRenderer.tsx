@@ -3,13 +3,20 @@
 import React from 'react';
 import ServicePageLayout from '@/components/templates/ServicePageLayout';
 import type { PublicContentPageRenderData } from '@/lib/publicContent/rendering';
-import type { PublicContentImage } from '@/lib/publicContent/types';
+import {
+  PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN,
+  PUBLIC_CONTENT_DEFAULT_SECTION_DESIGN,
+  type PublicContentImage,
+  type PublicContentPageDesign,
+  type PublicContentSectionDesign,
+} from '@/lib/publicContent/types';
 
 interface NormalisedSection {
   id: string;
   title: string;
   body: string;
   image: PublicContentImage | null;
+  design: PublicContentSectionDesign;
 }
 
 type SourceReference = PublicContentPageRenderData['sourceReferences'][number];
@@ -25,7 +32,35 @@ const BLOCKED_SOURCE_TERMS = [
   'phase4e',
   'phase4d',
   'phase4j',
+  'phase4k',
 ];
+
+function pageDesign(page: PublicContentPageRenderData): PublicContentPageDesign {
+  return { ...PUBLIC_CONTENT_DEFAULT_PAGE_DESIGN, ...(page.pageDesign ?? {}) };
+}
+
+function sectionDesign(section: PublicContentPageRenderData['sections'][number]): PublicContentSectionDesign {
+  return { ...PUBLIC_CONTENT_DEFAULT_SECTION_DESIGN, ...(section.design ?? {}) };
+}
+
+const accentClass: Record<PublicContentPageDesign['accentPreset'], string> = {
+  navy: 'border-[#1677f2] bg-[#f5fbff]',
+  gold: 'border-amber-200 bg-amber-50',
+  emerald: 'border-emerald-200 bg-emerald-50',
+  slate: 'border-slate-200 bg-slate-50',
+};
+
+const sectionClass: Record<PublicContentSectionDesign['stylePreset'], string> = {
+  standard: '',
+  highlight: 'rounded-2xl border-l-4 bg-[#f8fbff] px-5 py-5',
+  soft_card: 'rounded-2xl border border-blue-100 bg-white px-5 py-5 shadow-[0_14px_34px_rgba(0,80,140,0.06)]',
+};
+
+const themeClass: Record<PublicContentPageDesign['themePreset'], string> = {
+  default: '',
+  premium: 'rounded-3xl bg-[radial-gradient(circle_at_top_right,rgba(22,119,242,0.08),transparent_34%),linear-gradient(180deg,#ffffff,#f8fbff)] p-4 md:p-6',
+  minimal: 'border-t border-blue-100 pt-6',
+};
 
 function slugify(input: string, index: number): string {
   const slug = input
@@ -48,6 +83,7 @@ function normaliseSections(page: PublicContentPageRenderData): NormalisedSection
         title,
         body,
         image: section.image ?? null,
+        design: sectionDesign(section),
       };
     })
     .filter((section) => section.title || section.body);
@@ -172,6 +208,7 @@ function renderBody(body: string, sectionId: string) {
 
 export default function PublicContentPageRenderer({ page }: { page: PublicContentPageRenderData }) {
   const sections = normaliseSections(page);
+  const design = pageDesign(page);
   const tocSections = sections.map(({ id, title }) => ({ id, title }));
   const firstCta = page.ctaCards[0];
   const finalCta = page.ctaCards[1] ?? firstCta;
@@ -195,6 +232,17 @@ export default function PublicContentPageRenderer({ page }: { page: PublicConten
     description: related.description || '',
   }));
   const publicSourceReferences = page.sourceReferences.filter(isPublicSourceReference);
+  const articleTextClass = design.textScale === 'large' ? 'text-[17px] leading-8' : '';
+  const headingClass = design.headingStyle === 'modern' ? 'tracking-normal' : '';
+  const sectionSpacingClass = design.sectionSpacing === 'spacious' ? 'mb-16' : 'mb-12';
+  const cardClass = design.cardStyle === 'bordered'
+    ? 'border-2'
+    : design.cardStyle === 'soft'
+      ? 'shadow-[0_16px_36px_rgba(0,80,140,0.08)]'
+      : '';
+  const heroImageClass = design.heroLayout === 'image_right'
+    ? 'mb-8 grid gap-5 overflow-hidden rounded-2xl border border-[#e2eaf2] bg-white md:grid-cols-[minmax(0,1fr)_280px]'
+    : 'mb-8 overflow-hidden rounded-2xl border border-[#e2eaf2] bg-white';
 
   return (
     <ServicePageLayout
@@ -214,12 +262,13 @@ export default function PublicContentPageRenderer({ page }: { page: PublicConten
       finalCtaTitle={finalCta?.title || 'Need Expert Support?'}
       finalCtaDescription={finalCta?.description || page.summary || 'Our compliance specialists can help you plan the next step.'}
     >
-      {page.heroImage?.url && (
-        <div className="mb-8 overflow-hidden rounded-2xl border border-[#e2eaf2]">
+      <div className={themeClass[design.themePreset]}>
+      {page.heroImage?.url && design.heroLayout !== 'text_only' && (
+        <div className={`${heroImageClass} ${cardClass}`}>
           <img
             src={page.heroImage.url}
             alt={page.heroImage.alt}
-            className="h-auto w-full object-cover"
+            className={design.heroLayout === 'image_right' ? 'h-full min-h-48 w-full object-cover md:order-2' : 'h-auto w-full object-cover'}
           />
           {page.heroImage.caption && (
             <p className="border-t border-[#e2eaf2] bg-[#f8fafc] px-4 py-2 text-[12px] text-[#64748b]">
@@ -231,10 +280,17 @@ export default function PublicContentPageRenderer({ page }: { page: PublicConten
 
       {sections.length > 0 ? (
         sections.map((section) => (
-          <section key={section.id} className="mb-12">
-            <h2 id={section.id}>{section.title}</h2>
+          <section
+            key={section.id}
+            className={`${sectionSpacingClass} ${sectionClass[section.design.stylePreset]} ${accentClass[design.accentPreset]} ${cardClass}`}
+          >
+            <h2 id={section.id} className={headingClass}>{section.title}</h2>
             {section.image?.url && (
-              <div className="mb-5 overflow-hidden rounded-xl border border-[#e2eaf2]">
+              <div className={`mb-5 overflow-hidden rounded-xl border border-[#e2eaf2] ${
+                section.design.imagePosition === 'left' ? 'md:float-left md:mr-6 md:w-5/12' :
+                section.design.imagePosition === 'right' ? 'md:float-right md:ml-6 md:w-5/12' :
+                ''
+              }`}>
                 <img
                   src={section.image.url}
                   alt={section.image.alt}
@@ -247,15 +303,15 @@ export default function PublicContentPageRenderer({ page }: { page: PublicConten
                 )}
               </div>
             )}
-            <div className="prose max-w-none">
+            <div className={`prose max-w-none ${articleTextClass}`}>
               {renderBody(section.body, section.id)}
             </div>
           </section>
         ))
       ) : (
         <section className="mb-12">
-          <h2 id="overview">{title}</h2>
-          <div className="prose max-w-none">
+          <h2 id="overview" className={headingClass}>{title}</h2>
+          <div className={`prose max-w-none ${articleTextClass}`}>
             <p>{page.summary || heroDescription || title}</p>
           </div>
         </section>
@@ -273,6 +329,7 @@ export default function PublicContentPageRenderer({ page }: { page: PublicConten
           </ul>
         </section>
       )}
+      </div>
     </ServicePageLayout>
   );
 }

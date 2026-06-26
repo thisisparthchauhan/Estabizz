@@ -106,7 +106,7 @@ async function collectPayload(actor: string, role: string, fileName: string): Pr
     // pendingRevision included for full restorability. No credentials or secrets in this collection.
     PublicContentPage.find({}).select(
       'title slug fullPath pageType menuGroup regulator status summary ' +
-      'hero heroImage sections quickFacts ctaCards relatedPages sourceReferences ' +
+      'hero heroImage pageDesign sections quickFacts ctaCards relatedPages sourceReferences ' +
       'seoTitle seoDescription canonicalUrl reviewedBy lastReviewedAt readingTime ' +
       'hasPendingChanges pendingRevision pendingSubmittedBy pendingSubmittedAt pendingReviewComment ' +
       'deletedFromStatus deletedAt deletedBy createdAt updatedAt publishedAt updatedBy publishedBy'

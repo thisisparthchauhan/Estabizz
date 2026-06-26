@@ -136,7 +136,7 @@ export async function createImportedPublicContentPage(input: PublicContentImport
     ctaCards: [],
     expertProfile: null,
     relatedPages: [],
-    sourceReferences: input.sourceFile ? [{ title: 'Imported source file', url: input.sourceFile }] : [],
+    sourceReferences: [],
     reviewedBy: '',
     readingTime: '',
     status: 'published',

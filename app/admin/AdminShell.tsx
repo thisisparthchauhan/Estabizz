@@ -218,6 +218,7 @@ const PAGE_TITLES: Record<string, string> = {
 function getPageTitle(pathname: string): string {
   if (PAGE_TITLES[pathname]) return PAGE_TITLES[pathname];
   if (pathname.startsWith("/admin/blogs/edit")) return "Edit Blog";
+  if (pathname.startsWith("/admin/content-pages")) return "Content Pages";
   if (pathname.startsWith("/admin/website")) return "Website Editor";
   return "Admin";
 }

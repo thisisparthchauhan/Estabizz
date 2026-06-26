@@ -64,6 +64,9 @@ const STATUS_STYLES: Record<ImportStatus, string> = {
   skipped_existing: "border-blue-200 bg-blue-50 text-blue-700",
 };
 
+const SAMPLE_EDITOR_PATH = "/rbi/nbfc-registration-in-india";
+const SAMPLE_EDITOR_ROUTE = "/admin/content-pages/nbfc-registration-in-india/edit";
+
 function labelise(value: string): string {
   if (!value) return "All";
   if (value === "19_5") return "19/5";
@@ -173,7 +176,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
           <div>
             <h1 className="text-[28px] font-black tracking-tight text-[#120b45]">Public Content Pages</h1>
             <p className="mt-2 max-w-3xl text-sm font-medium leading-6 text-[#64748b]">
-              Review existing public service, regulatory, resource, legal and 19/5 pages before migration.
+              Review existing public service, regulatory, resource, legal and 19/5 pages before CMS setup.
             </p>
           </div>
           <div className="rounded-full border border-blue-100 bg-white px-4 py-2 text-xs font-bold text-[#1677f2] shadow-sm">
@@ -236,7 +239,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
           </div>
 
           <div className="overflow-x-auto">
-            <table className="min-w-[1180px] w-full text-left">
+            <table className="min-w-[1280px] w-full text-left">
               <thead className="bg-[#f8fbff] text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b]">
                 <tr>
                   <th className="px-4 py-3">Title</th>
@@ -247,6 +250,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
                   <th className="px-4 py-3">Import Status</th>
                   <th className="px-4 py-3">Source File</th>
                   <th className="px-4 py-3">Reason</th>
+                  <th className="px-4 py-3">Visual Editor</th>
                   <th className="px-4 py-3">Open Page</th>
                 </tr>
               </thead>
@@ -282,6 +286,20 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
                       <td className="max-w-[260px] px-4 py-3 text-[12px] font-semibold leading-5 text-[#64748b]">{item.sourceFile}</td>
                       <td className="max-w-[320px] px-4 py-3 text-[12px] font-medium leading-5 text-[#64748b]">{item.reason}</td>
                       <td className="px-4 py-3">
+                        {item.fullPath === SAMPLE_EDITOR_PATH && item.existingDbMatch ? (
+                          <a
+                            href={SAMPLE_EDITOR_ROUTE}
+                            className="inline-flex rounded-lg bg-[#0a1628] px-3 py-2 text-[12px] font-black text-white transition hover:bg-[#1677f2]"
+                          >
+                            Open Editor
+                          </a>
+                        ) : (
+                          <span className="inline-flex rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[12px] font-black text-slate-500">
+                            Coming Soon
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3">
                         {canOpen ? (
                           <a
                             href={item.fullPath}
@@ -301,7 +319,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
 
                 {!loading && filtered.length === 0 && (
                   <tr>
-                    <td colSpan={9} className="px-4 py-12 text-center text-sm font-semibold text-[#64748b]">
+                    <td colSpan={10} className="px-4 py-12 text-center text-sm font-semibold text-[#64748b]">
                       No content pages found for this view.
                     </td>
                   </tr>

@@ -130,8 +130,6 @@ Draft → Preview → Submit for Review → Compliance Review → Final Approval
 9. **Backup system — DONE** — `/admin/backups`. Manual JSON snapshot: ContentBlock, ContentVersion, ContentAudit, MediaAsset metadata, AdminUser safe metadata. Optional GitHub push via env vars. Download as JSON. Permission-gated: view_admin→view, manage_backups→create/download. MongoDB `backup_snapshots` collection. Audit record `system:backup` on every backup.
 10. **Design presets** per section — Default / Light / Dark / Premium / Minimal / Highlight + show/hide (controlled, not free-design).
 11. **Regulatory Update Desk — DONE (Foundation 3A + Lifecycle 3B + Approval Queue 3C)** — `/admin/regulatory-updates`. List + search + filters (incl. Deleted), add/edit drawer with Preview, workflow actions (Submit for Review / Publish / Reject / Archive) plus lifecycle: Pending Changes for published items (Approve / Reject), Move to Draft, Move to Recycle Bin. Public published-only listing + DB-first detail at `/resources/regulatory-updates`. Dedicated `regulatory_updates` + `regulatory_update_audit` collections. Deleted items integrate into the unified Recycle Bin (restore / permanent delete). Permission-gated with existing keys. Backed up in the GitHub JSON backup.
-12. **Public Content Pages CMS Foundation — STARTED (Phase 4B)** — model/types/import dry-run foundation for existing public service, regulatory, resource, legal and 19/5 pages. No public renderer, admin editor, Approval Queue, Recycle Bin or Backup integration connected yet.
-
 ---
 
 ## 7. Page-wise SEO (applies to ALL pages)

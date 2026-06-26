@@ -3,6 +3,7 @@
 import { connectDB } from '@/lib/db';
 import PublicContentPage from '@/lib/models/PublicContentPage';
 import type {
+  PublicContentImage,
   PublicContentImportInput,
   PublicContentPageRecord,
   PublicContentPageStatus,
@@ -43,6 +44,7 @@ function toRecord(doc: RawDoc): PublicContentPageRecord {
     serviceType: String(doc.serviceType ?? ''),
     summary: String(doc.summary ?? ''),
     hero: (doc.hero as Record<string, unknown> | null) ?? null,
+    heroImage: (doc.heroImage as PublicContentImage | null) ?? null,
     badges: arrayOf<PublicContentBadge>(doc.badges),
     breadcrumbs: arrayOf<PublicContentBreadcrumb>(doc.breadcrumbs),
     sections: Array.isArray(doc.sections) ? (doc.sections as Record<string, unknown>[]) : [],
@@ -228,6 +230,7 @@ export async function approvePendingPublicContentPageChanges(
   if (typeof revision.title === 'string') update.title = revision.title;
   if (typeof revision.summary === 'string') update.summary = revision.summary;
   if ('hero' in revision) update.hero = revision.hero ?? null;
+  if ('heroImage' in revision) update.heroImage = revision.heroImage ?? null;
   if (Array.isArray(revision.sections)) update.sections = revision.sections;
   if (Array.isArray(revision.quickFacts)) update.quickFacts = revision.quickFacts;
   if (Array.isArray(revision.ctaCards)) update.ctaCards = revision.ctaCards;

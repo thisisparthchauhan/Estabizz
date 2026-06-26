@@ -8,6 +8,7 @@ import type {
   PublicContentBreadcrumb,
   PublicContentCtaCard,
   PublicContentExpertProfile,
+  PublicContentImage,
   PublicContentMenuGroup,
   PublicContentPageStatus,
   PublicContentPageType,
@@ -50,6 +51,7 @@ interface EditorPage {
   serviceType: string;
   summary: string;
   hero: PublicContentHero | null;
+  heroImage: PublicContentImage | null;
   badges: PublicContentBadge[];
   breadcrumbs: PublicContentBreadcrumb[];
   sections: PublicContentSection[];
@@ -114,6 +116,7 @@ function pageToWorkingCopy(page: EditorPage): PublicContentWorkingCopy {
     title: page.title,
     summary: page.summary,
     hero: page.hero,
+    heroImage: page.heroImage ?? null,
     sections: page.sections,
     quickFacts: page.quickFacts,
     ctaCards: page.ctaCards,
@@ -213,11 +216,147 @@ function EditField({
   );
 }
 
+// ─── Media Picker ─────────────────────────────────────────────────────────────
+
+interface PickerItem {
+  _id: string;
+  secureUrl: string;
+  title: string;
+  fileName: string;
+  altText: string;
+  caption: string;
+  publicId: string;
+}
+
+function MediaPickerModal({
+  onSelect,
+  onClose,
+}: {
+  onSelect: (image: PublicContentImage) => void;
+  onClose: () => void;
+}) {
+  const [items, setItems] = useState<PickerItem[]>([]);
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    const params = new URLSearchParams({ type: "image", limit: "24" });
+    if (query) params.set("search", query);
+    fetch(`/api/admin/media?${params}`)
+      .then((r) => r.json() as Promise<{ items?: PickerItem[] }>)
+      .then((d) => { if (!cancelled) setItems(d.items ?? []); })
+      .catch(() => { if (!cancelled) setItems([]); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [query]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[9100] flex items-center justify-center bg-black/60 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="flex w-full max-w-3xl max-h-[82vh] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between border-b border-blue-100 px-5 py-4">
+          <div className="text-[14px] font-black text-[#0a1628]">Select from Media Library</div>
+          <button type="button" onClick={onClose} className="rounded-lg p-1 text-[#94a3b8] hover:text-[#0a1628]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div className="border-b border-blue-100 px-5 py-3">
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") setQuery(search); }}
+              placeholder="Search images…"
+              className="flex-1 rounded-xl border border-blue-100 bg-[#f8fbff] px-3 py-2 text-sm text-[#0a1628] outline-none focus:border-[#1677f2]"
+            />
+            <button
+              type="button"
+              onClick={() => setQuery(search)}
+              className="rounded-xl bg-[#1677f2] px-4 py-2 text-sm font-black text-white hover:bg-[#0866d9]"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+        <div className="flex-1 overflow-y-auto p-5">
+          {loading ? (
+            <div className="flex h-32 items-center justify-center text-sm text-[#64748b]">Loading…</div>
+          ) : items.length === 0 ? (
+            <div className="flex h-32 flex-col items-center justify-center gap-2 text-sm text-[#64748b]">
+              <div>No images found.</div>
+              <a href="/admin/media-library" target="_blank" rel="noopener noreferrer"
+                className="text-xs font-bold text-[#1677f2] hover:underline">
+                Upload images in Media Library →
+              </a>
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
+              {items.map((item) => (
+                <button
+                  key={item._id}
+                  type="button"
+                  onClick={() => {
+                    onSelect({
+                      url: item.secureUrl,
+                      publicId: item.publicId,
+                      alt: item.altText || "",
+                      caption: item.caption || undefined,
+                      source: "media_library",
+                    });
+                    onClose();
+                  }}
+                  className="group overflow-hidden rounded-xl border border-blue-100 bg-[#f8fbff] text-left transition hover:border-[#1677f2] hover:ring-2 hover:ring-[#1677f2]/20"
+                >
+                  <div className="h-24 overflow-hidden bg-[#f0f4f8]">
+                    <img
+                      src={item.secureUrl}
+                      alt={item.altText || item.title || item.fileName}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="px-2 py-1.5">
+                    <div className="truncate text-[10px] font-semibold text-[#475569]">
+                      {item.title || item.fileName}
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="flex items-center justify-between border-t border-blue-100 px-5 py-3">
+          <a href="/admin/media-library" target="_blank" rel="noopener noreferrer"
+            className="text-xs font-bold text-[#1677f2] hover:underline">
+            Open Media Library →
+          </a>
+          <button type="button" onClick={onClose}
+            className="rounded-xl border border-blue-100 px-4 py-2 text-sm font-bold text-[#475569] hover:text-[#0a1628]">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Edit Panel ───────────────────────────────────────────────────────────────
 
 function EditPanel({
   workingCopy, activeBlock,
   onUpdateTitle, onUpdateSummary, onUpdateSection, onUpdateQuickFact, onUpdateCtaCard, onSwitchToSeo,
+  onOpenHeroImagePicker, onRemoveHeroImage, onUpdateHeroImageAlt, onUpdateHeroImageCaption,
+  onOpenSectionImagePicker, onRemoveSectionImage, onUpdateSectionImageAlt, onUpdateSectionImageCaption,
 }: {
   workingCopy: PublicContentWorkingCopy; activeBlock: BlockKey;
   onUpdateTitle: (v: string) => void; onUpdateSummary: (v: string) => void;
@@ -225,6 +364,14 @@ function EditPanel({
   onUpdateQuickFact: (i: number, f: "label" | "value", v: string) => void;
   onUpdateCtaCard: (i: number, f: "title" | "description" | "href" | "label", v: string) => void;
   onSwitchToSeo: () => void;
+  onOpenHeroImagePicker: () => void;
+  onRemoveHeroImage: () => void;
+  onUpdateHeroImageAlt: (v: string) => void;
+  onUpdateHeroImageCaption: (v: string) => void;
+  onOpenSectionImagePicker: (i: number) => void;
+  onRemoveSectionImage: (i: number) => void;
+  onUpdateSectionImageAlt: (i: number, v: string) => void;
+  onUpdateSectionImageCaption: (i: number, v: string) => void;
 }) {
   const panelClass = "rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)]";
   const sectionHead = "mb-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#1677f2]";
@@ -238,8 +385,53 @@ function EditPanel({
         </p>
         <div className="grid gap-5">
           {activeBlock === "hero" && (
-            <EditField label="Page Title" value={workingCopy.title} onChange={onUpdateTitle}
-              maxLength={200} placeholder="Enter the page title" />
+            <>
+              <EditField label="Page Title" value={workingCopy.title} onChange={onUpdateTitle}
+                maxLength={200} placeholder="Enter the page title" />
+              <div className="grid gap-3 rounded-xl border border-blue-100 bg-[#f0f8ff] p-4">
+                <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#1677f2]">Hero Image (optional)</div>
+                {workingCopy.heroImage?.url ? (
+                  <>
+                    <div className="overflow-hidden rounded-xl border border-blue-100 bg-white">
+                      <img src={workingCopy.heroImage.url} alt={workingCopy.heroImage.alt || ""}
+                        className="h-36 w-full object-cover" />
+                    </div>
+                    <div className="flex gap-2">
+                      <button type="button" onClick={onOpenHeroImagePicker}
+                        className="flex-1 rounded-xl bg-[#1677f2] px-3 py-2 text-[11px] font-black text-white hover:bg-[#0866d9] transition-colors">
+                        Change Image
+                      </button>
+                      <button type="button" onClick={onRemoveHeroImage}
+                        className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-[11px] font-black text-red-600 hover:bg-red-100 transition-colors">
+                        Remove
+                      </button>
+                    </div>
+                    <EditField label="Image Alt Text" value={workingCopy.heroImage.alt}
+                      onChange={onUpdateHeroImageAlt} maxLength={300}
+                      placeholder="Describe the image for accessibility"
+                      hint="Required — shown when the image cannot load" />
+                    <EditField label="Caption (optional)" value={workingCopy.heroImage.caption || ""}
+                      onChange={onUpdateHeroImageCaption} maxLength={300}
+                      placeholder="Optional image caption shown below the image" />
+                  </>
+                ) : (
+                  <>
+                    <div className="flex h-24 items-center justify-center rounded-xl border border-dashed border-blue-200 bg-white">
+                      <div className="text-center">
+                        <svg className="mx-auto mb-1 text-[#cbd5e1]" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                          <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" />
+                        </svg>
+                        <div className="text-[11px] font-semibold text-[#94a3b8]">No image selected</div>
+                      </div>
+                    </div>
+                    <button type="button" onClick={onOpenHeroImagePicker}
+                      className="rounded-xl bg-[#1677f2] px-3 py-2 text-[11px] font-black text-white hover:bg-[#0866d9] transition-colors">
+                      Add Image from Media Library
+                    </button>
+                  </>
+                )}
+              </div>
+            </>
           )}
           <EditField label="Opening Summary" value={workingCopy.summary} onChange={onUpdateSummary}
             multiline rows={7} maxLength={5000} placeholder="Enter the opening summary shown on the page" />
@@ -288,6 +480,37 @@ function EditPanel({
                 onChange={(v) => onUpdateSection(index, "title", v)} maxLength={200} />
               <EditField label="Section Content" value={section.body || ""}
                 onChange={(v) => onUpdateSection(index, "body", v)} multiline rows={5} />
+              <div className="grid gap-2 rounded-xl border border-blue-100 bg-white p-3">
+                <div className="text-[10px] font-black uppercase tracking-[0.10em] text-[#64748b]">Section Image (optional)</div>
+                {section.image?.url ? (
+                  <>
+                    <div className="overflow-hidden rounded-xl border border-blue-100">
+                      <img src={section.image.url} alt={section.image.alt || ""} className="h-28 w-full object-cover" />
+                    </div>
+                    <div className="flex gap-2">
+                      <button type="button" onClick={() => onOpenSectionImagePicker(index)}
+                        className="flex-1 rounded-xl bg-[#1677f2] px-2.5 py-1.5 text-[10px] font-black text-white hover:bg-[#0866d9] transition-colors">
+                        Change
+                      </button>
+                      <button type="button" onClick={() => onRemoveSectionImage(index)}
+                        className="rounded-xl border border-red-200 bg-red-50 px-2.5 py-1.5 text-[10px] font-black text-red-600 hover:bg-red-100 transition-colors">
+                        Remove
+                      </button>
+                    </div>
+                    <EditField label="Alt Text" value={section.image.alt}
+                      onChange={(v) => onUpdateSectionImageAlt(index, v)} maxLength={200}
+                      hint="Required" />
+                    <EditField label="Caption" value={section.image.caption || ""}
+                      onChange={(v) => onUpdateSectionImageCaption(index, v)} maxLength={200}
+                      placeholder="Optional" />
+                  </>
+                ) : (
+                  <button type="button" onClick={() => onOpenSectionImagePicker(index)}
+                    className="rounded-xl border border-dashed border-blue-200 bg-blue-50 px-3 py-2 text-[10px] font-black text-[#1677f2] hover:bg-blue-100 transition-colors">
+                    + Add Image
+                  </button>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -369,6 +592,7 @@ function Inspector({
     if (activeBlock === "hero") return [
       { label: "Title", value: workingCopy.title },
       { label: "Trust Line", value: workingCopy.hero?.trustLine || "Not set" },
+      { label: "Hero Image", value: workingCopy.heroImage?.url ? `Set — ${workingCopy.heroImage.alt || "no alt text"}` : "Not set" },
     ];
     if (activeBlock === "summary") return [
       { label: "Summary", value: previewText(workingCopy.summary, 220) },
@@ -430,6 +654,11 @@ function VisualPreview({
             <p className="mt-3 max-w-3xl text-sm font-medium leading-6 text-[#475569]">{page.hero?.description || page.summary}</p>
             {page.hero?.trustLine && (
               <div className="mt-4 rounded-xl border border-blue-100 bg-white/80 p-3 text-sm font-bold text-[#0a1628]">{page.hero.trustLine}</div>
+            )}
+            {page.heroImage?.url && (
+              <div className="mt-4 overflow-hidden rounded-xl border border-blue-100">
+                <img src={page.heroImage.url} alt={page.heroImage.alt || ""} className="h-36 w-full object-cover" />
+              </div>
             )}
           </BlockShell>
         </div>
@@ -665,6 +894,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
   const [rejectComment, setRejectComment] = useState("");
   const [rejecting, setRejecting] = useState(false);
   const [deleting,  setDeleting]  = useState(false);
+  const [pickerFor, setPickerFor] = useState<null | string>(null);
   const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   // Load page from API
@@ -741,6 +971,82 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
 
   function updateSeo(field: "seoTitle" | "seoDescription" | "canonicalUrl", value: string) {
     updateField(field, value);
+  }
+
+  function handlePickerSelect(image: PublicContentImage) {
+    if (pickerFor === "hero") {
+      updateField("heroImage", image);
+    } else if (pickerFor && pickerFor.startsWith("section-")) {
+      const idx = parseInt(pickerFor.slice("section-".length), 10);
+      setWorkingCopy((prev) => {
+        if (!prev) return prev;
+        const sections = [...prev.sections];
+        sections[idx] = { ...sections[idx], image };
+        return { ...prev, sections };
+      });
+      setIsDirty(true);
+      setSaveMessage(null);
+    }
+    setPickerFor(null);
+  }
+
+  function handleRemoveHeroImage() { updateField("heroImage", null); }
+
+  function handleUpdateHeroImageAlt(alt: string) {
+    setWorkingCopy((prev) => {
+      if (!prev || !prev.heroImage) return prev;
+      return { ...prev, heroImage: { ...prev.heroImage, alt } };
+    });
+    setIsDirty(true);
+    setSaveMessage(null);
+  }
+
+  function handleUpdateHeroImageCaption(caption: string) {
+    setWorkingCopy((prev) => {
+      if (!prev || !prev.heroImage) return prev;
+      return { ...prev, heroImage: { ...prev.heroImage, caption } };
+    });
+    setIsDirty(true);
+    setSaveMessage(null);
+  }
+
+  function handleRemoveSectionImage(index: number) {
+    setWorkingCopy((prev) => {
+      if (!prev) return prev;
+      const sections = [...prev.sections];
+      const { image: _removed, ...rest } = sections[index];
+      void _removed;
+      sections[index] = rest;
+      return { ...prev, sections };
+    });
+    setIsDirty(true);
+    setSaveMessage(null);
+  }
+
+  function handleUpdateSectionImageAlt(index: number, alt: string) {
+    setWorkingCopy((prev) => {
+      if (!prev) return prev;
+      const sections = [...prev.sections];
+      const img = sections[index].image;
+      if (!img) return prev;
+      sections[index] = { ...sections[index], image: { ...img, alt } };
+      return { ...prev, sections };
+    });
+    setIsDirty(true);
+    setSaveMessage(null);
+  }
+
+  function handleUpdateSectionImageCaption(index: number, caption: string) {
+    setWorkingCopy((prev) => {
+      if (!prev) return prev;
+      const sections = [...prev.sections];
+      const img = sections[index].image;
+      if (!img) return prev;
+      sections[index] = { ...sections[index], image: { ...img, caption } };
+      return { ...prev, sections };
+    });
+    setIsDirty(true);
+    setSaveMessage(null);
   }
 
   function handleReset() {
@@ -924,6 +1230,12 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
   // ─── Render ─────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-[#f6f9ff] p-5 md:p-6">
+      {pickerFor !== null && (
+        <MediaPickerModal
+          onSelect={handlePickerSelect}
+          onClose={() => setPickerFor(null)}
+        />
+      )}
       <div className="mx-auto max-w-[1540px]">
 
         {/* ── Header ─────────────────────────────────────────────────────────── */}
@@ -1102,6 +1414,14 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
                     onUpdateQuickFact={updateQuickFact}
                     onUpdateCtaCard={updateCtaCard}
                     onSwitchToSeo={() => setActiveTab("seo")}
+                    onOpenHeroImagePicker={() => setPickerFor("hero")}
+                    onRemoveHeroImage={handleRemoveHeroImage}
+                    onUpdateHeroImageAlt={handleUpdateHeroImageAlt}
+                    onUpdateHeroImageCaption={handleUpdateHeroImageCaption}
+                    onOpenSectionImagePicker={(i) => setPickerFor(`section-${i}`)}
+                    onRemoveSectionImage={handleRemoveSectionImage}
+                    onUpdateSectionImageAlt={handleUpdateSectionImageAlt}
+                    onUpdateSectionImageCaption={handleUpdateSectionImageCaption}
                   />
                 ) : (
                   <VisualPreview page={page} activeBlock={activeBlock} onSelect={setActiveBlock} />

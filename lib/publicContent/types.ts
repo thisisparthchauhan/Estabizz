@@ -107,6 +107,14 @@ export const PUBLIC_CONTENT_REGULATOR_OPTIONS: PublicContentRegulator[] = [
   'Other',
 ];
 
+export interface PublicContentImage {
+  url: string;
+  publicId?: string;
+  alt: string;
+  caption?: string;
+  source?: 'media_library';
+}
+
 export interface PublicContentBadge {
   label: string;
   emoji?: string;
@@ -132,6 +140,7 @@ export interface PublicContentSection {
   id?: string;
   title?: string;
   body?: string;
+  image?: PublicContentImage | null;
   blocks?: unknown[];
 }
 
@@ -181,6 +190,7 @@ export interface PublicContentPageRecord {
   serviceType: string;
   summary: string;
   hero: PublicContentHero | null;
+  heroImage: PublicContentImage | null;
   badges: PublicContentBadge[];
   breadcrumbs: PublicContentBreadcrumb[];
   sections: PublicContentSection[];
@@ -218,6 +228,7 @@ export interface PublicContentWorkingCopy {
   title: string;
   summary: string;
   hero: PublicContentHero | null;
+  heroImage: PublicContentImage | null;
   sections: PublicContentSection[];
   quickFacts: PublicContentQuickFact[];
   ctaCards: PublicContentCtaCard[];

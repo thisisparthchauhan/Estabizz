@@ -6,6 +6,7 @@ import {
   clearPendingChanges,
 } from '@/lib/publicContent/repository';
 import type {
+  PublicContentImage,
   PublicContentWorkingCopy,
   PublicContentHero,
   PublicContentSection,
@@ -15,6 +16,48 @@ import type {
 
 const SAMPLE_FULL_PATH = '/rbi/nbfc-registration-in-india';
 const MAX_BODY_BYTES = 300 * 1024; // 300 KB
+
+// ─── Image URL safety ─────────────────────────────────────────────────────────
+
+const BLOCKED_IMAGE_URL = [
+  /^app\//i,
+  /^\/users\//i,
+  /^\/private\//i,
+  /localhost/i,
+  /127\.0\.0\.1/i,
+  /\.tsx?($|\?)/i,
+  /\.jsx?($|\?)/i,
+  /^javascript:/i,
+  /^data:/i,
+  /^file:/i,
+  /imported\s+source/i,
+  /\bmigration\b/i,
+  /\bimporter\b/i,
+  /\bdebug\b/i,
+  /\bqa\s+marker\b/i,
+  /phase4j/i,
+];
+
+function isValidImageUrl(url: string): boolean {
+  if (!url.startsWith('https://')) return false;
+  return !BLOCKED_IMAGE_URL.some((p) => p.test(url));
+}
+
+function validateImage(raw: unknown): PublicContentImage | null {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+  const r = raw as Record<string, unknown>;
+  const url = typeof r.url === 'string' ? r.url.trim() : '';
+  if (!isValidImageUrl(url)) return null;
+  const alt = typeof r.alt === 'string' ? r.alt.trim() : '';
+  if (!alt) return null;
+  return {
+    url,
+    alt,
+    ...(typeof r.caption === 'string' && r.caption.trim() ? { caption: r.caption.trim().slice(0, 300) } : {}),
+    ...(typeof r.publicId === 'string' && r.publicId.trim() ? { publicId: r.publicId.trim() } : {}),
+    source: 'media_library',
+  };
+}
 
 // ─── Safe mappers ──────────────────────────────────────────────────────────────
 
@@ -49,6 +92,7 @@ function toEditorPage(page: NonNullable<Awaited<ReturnType<typeof findPublicCont
     seoDescription: page.seoDescription,
     canonicalUrl: page.canonicalUrl,
     ogImage: page.ogImage,
+    heroImage: page.heroImage,
     hasPendingChanges: page.hasPendingChanges,
     updatedAt: page.updatedAt,
   };
@@ -59,6 +103,7 @@ function liveToWorkingCopy(page: NonNullable<Awaited<ReturnType<typeof findPubli
     title: page.title,
     summary: page.summary,
     hero: page.hero as PublicContentHero | null,
+    heroImage: (page.heroImage as PublicContentImage | null) ?? null,
     sections: page.sections as PublicContentSection[],
     quickFacts: page.quickFacts as PublicContentQuickFact[],
     ctaCards: page.ctaCards as PublicContentCtaCard[],
@@ -76,6 +121,9 @@ function revisionToWorkingCopy(
     title: typeof revision.title === 'string' ? revision.title : fallback.title,
     summary: typeof revision.summary === 'string' ? revision.summary : fallback.summary,
     hero: (revision.hero as PublicContentHero | null) ?? (fallback.hero as PublicContentHero | null),
+    heroImage: ('heroImage' in revision
+      ? (revision.heroImage as PublicContentImage | null)
+      : (fallback.heroImage as PublicContentImage | null)) ?? null,
     sections: Array.isArray(revision.sections)
       ? (revision.sections as PublicContentSection[])
       : (fallback.sections as PublicContentSection[]),
@@ -123,13 +171,17 @@ function validateWorkingCopy(raw: unknown): PublicContentWorkingCopy | null {
     };
   }
 
+  const heroImage = b.heroImage ? validateImage(b.heroImage) : null;
+
   if (!Array.isArray(b.sections) || b.sections.length > 200) return null;
   const sections: PublicContentSection[] = b.sections.map((s: unknown) => {
     const sec = (s && typeof s === 'object' && !Array.isArray(s)) ? s as Record<string, unknown> : {};
+    const sectionImage = sec.image ? validateImage(sec.image) : null;
     return {
       id: str(sec.id, 100) || undefined,
       title: str(sec.title, 300) || undefined,
       body: str(sec.body, 25000) || undefined,
+      ...(sectionImage ? { image: sectionImage } : {}),
     };
   });
 
@@ -154,6 +206,7 @@ function validateWorkingCopy(raw: unknown): PublicContentWorkingCopy | null {
     title: b.title.trim(),
     summary: b.summary,
     hero,
+    heroImage,
     sections,
     quickFacts,
     ctaCards,

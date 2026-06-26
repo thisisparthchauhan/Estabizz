@@ -3,11 +3,13 @@
 import React from 'react';
 import ServicePageLayout from '@/components/templates/ServicePageLayout';
 import type { PublicContentPageRenderData } from '@/lib/publicContent/rendering';
+import type { PublicContentImage } from '@/lib/publicContent/types';
 
 interface NormalisedSection {
   id: string;
   title: string;
   body: string;
+  image: PublicContentImage | null;
 }
 
 type SourceReference = PublicContentPageRenderData['sourceReferences'][number];
@@ -22,6 +24,7 @@ const BLOCKED_SOURCE_TERMS = [
   'qa marker',
   'phase4e',
   'phase4d',
+  'phase4j',
 ];
 
 function slugify(input: string, index: number): string {
@@ -44,6 +47,7 @@ function normaliseSections(page: PublicContentPageRenderData): NormalisedSection
         id: section.id?.trim() || slugify(title, index),
         title,
         body,
+        image: section.image ?? null,
       };
     })
     .filter((section) => section.title || section.body);
@@ -210,10 +214,39 @@ export default function PublicContentPageRenderer({ page }: { page: PublicConten
       finalCtaTitle={finalCta?.title || 'Need Expert Support?'}
       finalCtaDescription={finalCta?.description || page.summary || 'Our compliance specialists can help you plan the next step.'}
     >
+      {page.heroImage?.url && (
+        <div className="mb-8 overflow-hidden rounded-2xl border border-[#e2eaf2]">
+          <img
+            src={page.heroImage.url}
+            alt={page.heroImage.alt}
+            className="h-auto w-full object-cover"
+          />
+          {page.heroImage.caption && (
+            <p className="border-t border-[#e2eaf2] bg-[#f8fafc] px-4 py-2 text-[12px] text-[#64748b]">
+              {page.heroImage.caption}
+            </p>
+          )}
+        </div>
+      )}
+
       {sections.length > 0 ? (
         sections.map((section) => (
           <section key={section.id} className="mb-12">
             <h2 id={section.id}>{section.title}</h2>
+            {section.image?.url && (
+              <div className="mb-5 overflow-hidden rounded-xl border border-[#e2eaf2]">
+                <img
+                  src={section.image.url}
+                  alt={section.image.alt}
+                  className="h-auto w-full object-cover"
+                />
+                {section.image.caption && (
+                  <p className="border-t border-[#e2eaf2] bg-[#f8fafc] px-4 py-2 text-[12px] text-[#64748b]">
+                    {section.image.caption}
+                  </p>
+                )}
+              </div>
+            )}
             <div className="prose max-w-none">
               {renderBody(section.body, section.id)}
             </div>

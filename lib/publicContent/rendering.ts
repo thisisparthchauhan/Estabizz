@@ -5,6 +5,7 @@ import type {
   PublicContentBreadcrumb,
   PublicContentCtaCard,
   PublicContentExpertProfile,
+  PublicContentImage,
   PublicContentMenuGroup,
   PublicContentPageStatus,
   PublicContentPageType,
@@ -27,6 +28,7 @@ export interface PublicContentPageRenderData {
   serviceType: string;
   summary: string;
   hero: PublicContentHero | null;
+  heroImage: PublicContentImage | null;
   badges: PublicContentBadge[];
   breadcrumbs: PublicContentBreadcrumb[];
   sections: PublicContentSection[];
@@ -76,6 +78,7 @@ function toPublicRenderData(doc: RawDoc): PublicContentPageRenderData {
     serviceType: String(doc.serviceType ?? ''),
     summary: String(doc.summary ?? ''),
     hero: (doc.hero as PublicContentHero | null) ?? null,
+    heroImage: (doc.heroImage as PublicContentImage | null) ?? null,
     badges: arrayOf<PublicContentBadge>(doc.badges),
     breadcrumbs: arrayOf<PublicContentBreadcrumb>(doc.breadcrumbs),
     sections: arrayOf<PublicContentSection>(doc.sections),

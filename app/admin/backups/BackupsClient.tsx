@@ -181,6 +181,7 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
                     ["Activity Records",   selected.itemCounts.contentAudit],
                     ["Media Files",        selected.itemCounts.mediaAssets],
                     ["Regulatory Updates", selected.itemCounts.regulatoryUpdates],
+                    ["Content Pages",      selected.itemCounts.publicContentPages],
                     ["Admin Users",        selected.itemCounts.adminUsers],
                   ].map(([label, val]) => (
                     <div key={String(label)} className="rounded-xl border border-[#f0f4f8] bg-[#f8fafc] p-3 text-center">

@@ -30,9 +30,10 @@ function formatIST(iso?: string): string {
 }
 
 function typeLabel(type: string): string {
-  if (type === "media")      return "Media";
-  if (type === "content")    return "Website Content";
-  if (type === "regulatory") return "Regulatory Update";
+  if (type === "media")               return "Media";
+  if (type === "content")             return "Website Content";
+  if (type === "regulatory")          return "Regulatory Update";
+  if (type === "public_content_page") return "Content Page";
   return type;
 }
 
@@ -56,6 +57,7 @@ function SubTypeBadge({ subType }: { subType: string }) {
     "SEO Block":      "bg-green-50 text-green-700 border-green-200",
     "Global Block":   "bg-cyan-50 text-cyan-700 border-cyan-200",
     "Regulatory Update":"bg-indigo-50 text-indigo-700 border-indigo-200",
+    "Content Page":     "bg-teal-50 text-teal-700 border-teal-200",
   };
   const cls = map[subType] ?? "bg-gray-50 text-gray-600 border-gray-200";
   return (
@@ -240,51 +242,67 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
               {purgeTarget.name}
             </div>
 
-            {purgeTarget.type === "media" && (
-              <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2.5 text-[11px] text-amber-800 leading-5">
-                The record will be removed from the library. The file on Cloudinary will not be deleted automatically — manual cleanup may be required.
-              </div>
-            )}
-            {purgeTarget.type === "content" && (
-              <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2.5 text-[11px] text-amber-800 leading-5">
-                The content block will be deleted. The website will show the built-in default content for this section.
-              </div>
-            )}
-            {purgeTarget.type === "regulatory" && (
-              <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2.5 text-[11px] text-amber-800 leading-5">
-                This regulatory update will be permanently removed. Its accountability record is kept for audit.
-              </div>
-            )}
+            {purgeTarget.type === "public_content_page" ? (
+              <>
+                <div className="mb-4 rounded-xl border border-blue-100 bg-blue-50 px-3 py-2.5 text-[11px] text-blue-800 leading-5">
+                  Content Pages are protected from permanent deletion. This safeguard ensures the page does not revert to an older cached version of the site. Use <strong>Restore</strong> to bring the page back online.
+                </div>
+                <div className="mt-4 flex gap-3">
+                  <button onClick={closePurge}
+                    className="flex-1 rounded-xl bg-[#1677f2] px-4 py-2.5 text-[12px] font-black text-white hover:bg-[#1265d8] transition-colors">
+                    Close
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                {purgeTarget.type === "media" && (
+                  <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2.5 text-[11px] text-amber-800 leading-5">
+                    The record will be removed from the library. The file on Cloudinary will not be deleted automatically — manual cleanup may be required.
+                  </div>
+                )}
+                {purgeTarget.type === "content" && (
+                  <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2.5 text-[11px] text-amber-800 leading-5">
+                    The content block will be deleted. The website will show the built-in default content for this section.
+                  </div>
+                )}
+                {purgeTarget.type === "regulatory" && (
+                  <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2.5 text-[11px] text-amber-800 leading-5">
+                    This regulatory update will be permanently removed. Its accountability record is kept for audit.
+                  </div>
+                )}
 
-            <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">
-              Type DELETE to confirm
-            </label>
-            <input
-              type="text"
-              value={purgeText}
-              onChange={e => setPurgeText(e.target.value)}
-              placeholder="DELETE"
-              className="mt-1 w-full rounded-xl border border-red-200 bg-white px-3 py-2.5 text-[13px] font-mono text-[#0a1628] uppercase placeholder:text-[#94a3b8] placeholder:normal-case placeholder:font-sans focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-200"
-            />
+                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">
+                  Type DELETE to confirm
+                </label>
+                <input
+                  type="text"
+                  value={purgeText}
+                  onChange={e => setPurgeText(e.target.value)}
+                  placeholder="DELETE"
+                  className="mt-1 w-full rounded-xl border border-red-200 bg-white px-3 py-2.5 text-[13px] font-mono text-[#0a1628] uppercase placeholder:text-[#94a3b8] placeholder:normal-case placeholder:font-sans focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-200"
+                />
 
-            {purgeError && (
-              <div className="mt-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-[11px] font-semibold text-red-700">
-                {purgeError}
-              </div>
+                {purgeError && (
+                  <div className="mt-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-[11px] font-semibold text-red-700">
+                    {purgeError}
+                  </div>
+                )}
+
+                <div className="mt-4 flex gap-3">
+                  <button
+                    onClick={confirmPurge}
+                    disabled={purging || purgeText.trim().toUpperCase() !== "DELETE"}
+                    className="flex-1 rounded-xl bg-red-600 px-4 py-2.5 text-[12px] font-black text-white hover:bg-red-700 disabled:opacity-50 transition-colors"
+                  >
+                    {purging ? "Deleting…" : "Permanently Delete"}
+                  </button>
+                  <button onClick={closePurge} className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[12px] font-bold text-[#475569] hover:text-[#0a1628]">
+                    Cancel
+                  </button>
+                </div>
+              </>
             )}
-
-            <div className="mt-4 flex gap-3">
-              <button
-                onClick={confirmPurge}
-                disabled={purging || purgeText.trim().toUpperCase() !== "DELETE"}
-                className="flex-1 rounded-xl bg-red-600 px-4 py-2.5 text-[12px] font-black text-white hover:bg-red-700 disabled:opacity-50 transition-colors"
-              >
-                {purging ? "Deleting…" : "Permanently Delete"}
-              </button>
-              <button onClick={closePurge} className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[12px] font-bold text-[#475569] hover:text-[#0a1628]">
-                Cancel
-              </button>
-            </div>
           </div>
         </div>
       )}
@@ -422,6 +440,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                     <option value="media">Media</option>
                     <option value="content">Website Content</option>
                     <option value="regulatory">Regulatory Updates</option>
+                    <option value="public_content_page">Content Pages</option>
                   </select>
                 </div>
 
@@ -501,7 +520,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                                 className="h-8 w-8 rounded-lg object-cover border border-[#e2eaf2] shrink-0" />
                             ) : (
                               <div className="h-8 w-8 rounded-lg border border-[#e2eaf2] bg-[#f8fafc] flex items-center justify-center shrink-0">
-                                {item.type === "content" || item.type === "regulatory" ? (
+                                {item.type === "content" || item.type === "regulatory" || item.type === "public_content_page" ? (
                                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
                                     <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/>
                                   </svg>

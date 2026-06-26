@@ -9,7 +9,9 @@ import MediaAsset from '@/lib/models/MediaAsset';
 import ContentBlock from '@/lib/models/ContentBlock';
 import ContentAudit from '@/lib/models/ContentAudit';
 import RegulatoryUpdate from '@/lib/models/RegulatoryUpdate';
+import PublicContentPage from '@/lib/models/PublicContentPage';
 import { restoreDeletedUpdate, purgeDeletedUpdate } from '@/lib/regulatory/repository';
+import { restoreSamplePublicContentPageFromRecycleBin } from '@/lib/publicContent/repository';
 import { CONTENT_DEFAULTS } from '@/lib/content/defaults';
 import type { RecycleBinFilters, RecycleBinItem, RecycleBinResult } from './recycleBinTypes';
 
@@ -129,6 +131,40 @@ export async function listRecycleBinItems(
     }
   }
 
+  // ── Deleted public content pages ───────────────────────────────────────────
+  if (type === 'all' || type === 'public_content_page') {
+    const q: Record<string, unknown> = { status: 'deleted' };
+    if (from) q.deletedAt = { ...(q.deletedAt as object ?? {}), $gte: new Date(`${from}T00:00:00`) };
+    if (to)   q.deletedAt = { ...(q.deletedAt as object ?? {}), $lte: new Date(`${to}T23:59:59`) };
+    if (removedByF) q.deletedBy = { $regex: removedByF, $options: 'i' };
+
+    const docs = await PublicContentPage.find(q)
+      .select('title fullPath deletedBy deletedAt deletedFromStatus updatedAt')
+      .sort({ deletedAt: -1, updatedAt: -1 })
+      .lean<Array<{
+        _id: unknown; title: string; fullPath: string;
+        deletedBy?: string; deletedAt?: Date; deletedFromStatus?: string; updatedAt: Date;
+      }>>();
+
+    for (const doc of docs) {
+      const name = (doc.title || 'Content Page').trim();
+      if (search && !name.toLowerCase().includes(search) && !(doc.fullPath ?? '').toLowerCase().includes(search)) continue;
+
+      items.push({
+        id:             String(doc._id),
+        type:           'public_content_page',
+        name,
+        subType:        'Content Page',
+        location:       doc.fullPath || 'Public Content Pages',
+        removedBy:      doc.deletedBy ?? 'Unknown',
+        removedAt:      doc.deletedAt
+                          ? new Date(doc.deletedAt).toISOString()
+                          : new Date(doc.updatedAt).toISOString(),
+        originalStatus: doc.deletedFromStatus || 'published',
+      });
+    }
+  }
+
   // ── Deleted regulatory updates ─────────────────────────────────────────────
   if (type === 'all' || type === 'regulatory') {
     const q: Record<string, unknown> = { status: 'deleted' };
@@ -177,10 +213,15 @@ export async function listRecycleBinItems(
 export async function restoreRecycleBinItem(
   actor: string,
   id:    string,
-  type:  'media' | 'content' | 'regulatory',
+  type:  'media' | 'content' | 'regulatory' | 'public_content_page',
   actorRole: string = ''
 ): Promise<{ name: string }> {
   await connectDB();
+
+  if (type === 'public_content_page') {
+    const { name } = await restoreSamplePublicContentPageFromRecycleBin(id, actor);
+    return { name };
+  }
 
   if (type === 'regulatory') {
     // Restores to the status it held before deletion (published → published,
@@ -237,10 +278,14 @@ export async function restoreRecycleBinItem(
 export async function purgeRecycleBinItem(
   actor: string,
   id:    string,
-  type:  'media' | 'content' | 'regulatory',
+  type:  'media' | 'content' | 'regulatory' | 'public_content_page',
   actorRole: string = ''
 ): Promise<{ name: string }> {
   await connectDB();
+
+  if (type === 'public_content_page') {
+    throw new Error('Content Pages are protected and cannot be permanently deleted. Use Restore to bring the page back online.');
+  }
 
   if (type === 'regulatory') {
     // Writes a RegulatoryUpdateAudit 'purge' record before deleting the document.

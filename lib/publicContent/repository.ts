@@ -147,6 +147,66 @@ export async function clearPendingChanges(fullPath: string): Promise<void> {
   );
 }
 
+const SAMPLE_FULL_PATH = '/rbi/nbfc-registration-in-india';
+
+export async function moveSamplePublicContentPageToRecycleBin(
+  deletedBy: string
+): Promise<{ name: string }> {
+  await connectDB();
+  const doc = await PublicContentPage.findOne({ fullPath: SAMPLE_FULL_PATH }).lean() as unknown as RawDoc | null;
+  if (!doc) throw new Error('Content page not found.');
+  if (doc.status === 'deleted') throw new Error('This page is already in the Recycle Bin.');
+
+  await PublicContentPage.updateOne(
+    { fullPath: SAMPLE_FULL_PATH, status: { $ne: 'deleted' } },
+    {
+      $set: {
+        status: 'deleted',
+        deletedFromStatus: String(doc.status ?? 'published'),
+        deletedAt: new Date(),
+        deletedBy,
+        pendingRevision: null,
+        hasPendingChanges: false,
+        pendingSubmittedBy: '',
+        pendingReviewComment: '',
+        updatedAt: new Date(),
+      },
+      $unset: { pendingSubmittedAt: '' },
+    }
+  );
+
+  return { name: String(doc.title ?? '') };
+}
+
+export async function restoreSamplePublicContentPageFromRecycleBin(
+  id: string,
+  restoredBy: string
+): Promise<{ name: string; restoredStatus: string }> {
+  await connectDB();
+  const doc = await PublicContentPage.findOne({
+    _id: id,
+    status: 'deleted',
+    fullPath: SAMPLE_FULL_PATH,
+  }).lean() as unknown as RawDoc | null;
+  if (!doc) throw new Error('Content page not found in Recycle Bin or has already been restored.');
+
+  const fromStatus = String(doc.deletedFromStatus ?? '');
+  const safeStatus = ['published', 'draft', 'pending_approval'].includes(fromStatus)
+    ? fromStatus
+    : 'published';
+
+  const result = await PublicContentPage.updateOne(
+    { _id: id, status: 'deleted' },
+    {
+      $set: { status: safeStatus, updatedAt: new Date() },
+      $unset: { deletedAt: '', deletedBy: '', deletedFromStatus: '' },
+    }
+  );
+  if (result.matchedCount === 0) throw new Error('Restore failed. The page may have already been restored.');
+
+  return { name: String(doc.title ?? ''), restoredStatus: safeStatus };
+}
+
 export async function approvePendingPublicContentPageChanges(
   fullPath: string,
   reviewedBy: string,

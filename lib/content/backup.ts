@@ -15,6 +15,7 @@ import ContentAudit from '@/lib/models/ContentAudit';
 import MediaAsset from '@/lib/models/MediaAsset';
 import AdminUser from '@/lib/models/AdminUser';
 import RegulatoryUpdate from '@/lib/models/RegulatoryUpdate';
+import PublicContentPage from '@/lib/models/PublicContentPage';
 import BackupSnapshot from '@/lib/models/BackupSnapshot';
 import type { BackupSnapshotRecord, BackupListResult, BackupItemCounts, GitHubBackupConfig } from './backupTypes';
 
@@ -64,7 +65,7 @@ function buildFileName(): FilenameResult {
 interface PayloadResult { payload: Record<string, unknown>; itemCounts: BackupItemCounts; jsonStr: string }
 
 async function collectPayload(actor: string, role: string, fileName: string): Promise<PayloadResult> {
-  const [contentBlocks, contentVersions, contentAudit, mediaAssets, adminUsers, regulatoryUpdates] = await Promise.all([
+  const [contentBlocks, contentVersions, contentAudit, mediaAssets, adminUsers, regulatoryUpdates, publicContentPages] = await Promise.all([
     // All content blocks — no sensitive fields in this collection
     ContentBlock.find({}).lean(),
 
@@ -100,15 +101,26 @@ async function collectPayload(actor: string, role: string, fileName: string): Pr
       'deletedFromStatus deletedAt deletedBy ' +
       'createdAt updatedAt'
     ).lean(),
+
+    // Public content pages — CMS-managed public guide pages (sample: /rbi/nbfc-registration-in-india).
+    // pendingRevision included for full restorability. No credentials or secrets in this collection.
+    PublicContentPage.find({}).select(
+      'title slug fullPath pageType menuGroup regulator status summary ' +
+      'sections quickFacts ctaCards relatedPages sourceReferences ' +
+      'seoTitle seoDescription canonicalUrl reviewedBy lastReviewedAt readingTime ' +
+      'hasPendingChanges pendingRevision pendingSubmittedBy pendingSubmittedAt pendingReviewComment ' +
+      'deletedFromStatus deletedAt deletedBy createdAt updatedAt publishedAt updatedBy publishedBy'
+    ).lean(),
   ]);
 
   const itemCounts: BackupItemCounts = {
-    contentBlocks:     contentBlocks.length,
-    contentVersions:   contentVersions.length,
-    contentAudit:      contentAudit.length,
-    mediaAssets:       mediaAssets.length,
-    adminUsers:        adminUsers.length,
-    regulatoryUpdates: regulatoryUpdates.length,
+    contentBlocks:      contentBlocks.length,
+    contentVersions:    contentVersions.length,
+    contentAudit:       contentAudit.length,
+    mediaAssets:        mediaAssets.length,
+    adminUsers:         adminUsers.length,
+    regulatoryUpdates:  regulatoryUpdates.length,
+    publicContentPages: publicContentPages.length,
   };
 
   const payload: Record<string, unknown> = {
@@ -128,6 +140,7 @@ async function collectPayload(actor: string, role: string, fileName: string): Pr
     mediaAssets,
     adminUsers,
     regulatoryUpdates,
+    publicContentPages,
   };
 
   const jsonStr = JSON.stringify(payload, null, 2);
@@ -189,7 +202,7 @@ export async function createBackup(actor: string, role: string): Promise<BackupS
     fileName,
     createdBy:     actor,
     createdByRole: role,
-    itemCounts:    { contentBlocks: 0, contentVersions: 0, contentAudit: 0, mediaAssets: 0, adminUsers: 0, regulatoryUpdates: 0 },
+    itemCounts:    { contentBlocks: 0, contentVersions: 0, contentAudit: 0, mediaAssets: 0, adminUsers: 0, regulatoryUpdates: 0, publicContentPages: 0 },
   });
 
   try {
@@ -213,7 +226,7 @@ export async function createBackup(actor: string, role: string): Promise<BackupS
       }
     }
 
-    const summary = `${itemCounts.contentBlocks} content sections, ${itemCounts.mediaAssets} media files, ${itemCounts.regulatoryUpdates} regulatory updates, ${itemCounts.adminUsers} admin users`;
+    const summary = `${itemCounts.contentBlocks} content sections, ${itemCounts.mediaAssets} media files, ${itemCounts.regulatoryUpdates} regulatory updates, ${itemCounts.publicContentPages} content pages, ${itemCounts.adminUsers} admin users`;
 
     await BackupSnapshot.findByIdAndUpdate(snapshot._id, {
       $set: {
@@ -295,12 +308,13 @@ function toRecord(doc: Record<string, unknown>): BackupSnapshotRecord {
     completedAt:     doc.completedAt instanceof Date ? doc.completedAt.toISOString() : undefined,
     summary:         (doc.summary         as string | undefined),
     itemCounts: {
-      contentBlocks:     Number(counts.contentBlocks     ?? 0),
-      contentVersions:   Number(counts.contentVersions   ?? 0),
-      contentAudit:      Number(counts.contentAudit      ?? 0),
-      mediaAssets:       Number(counts.mediaAssets       ?? 0),
-      adminUsers:        Number(counts.adminUsers        ?? 0),
-      regulatoryUpdates: Number(counts.regulatoryUpdates ?? 0),
+      contentBlocks:      Number(counts.contentBlocks      ?? 0),
+      contentVersions:    Number(counts.contentVersions    ?? 0),
+      contentAudit:       Number(counts.contentAudit       ?? 0),
+      mediaAssets:        Number(counts.mediaAssets        ?? 0),
+      adminUsers:         Number(counts.adminUsers         ?? 0),
+      regulatoryUpdates:  Number(counts.regulatoryUpdates  ?? 0),
+      publicContentPages: Number(counts.publicContentPages ?? 0),
     },
     errorMessage: (doc.errorMessage as string | undefined),
   };

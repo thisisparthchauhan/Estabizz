@@ -9,6 +9,7 @@ export interface BackupItemCounts {
   mediaAssets: number;
   adminUsers: number;
   regulatoryUpdates: number;
+  publicContentPages: number;
 }
 
 export interface BackupSnapshotRecord {

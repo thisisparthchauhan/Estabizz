@@ -641,7 +641,8 @@ function SeoTab({
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function PublicContentVisualEditorClient({ viewer }: { viewer: AdminContext | null }) {
-  const canView = viewer?.permissions.includes("view_admin") ?? false;
+  const canView   = viewer?.permissions.includes("view_admin")    ?? false;
+  const canDelete = viewer?.permissions.includes("delete_content") ?? false;
 
   const [page, setPage] = useState<EditorPage | null>(null);
   const [workingCopy, setWorkingCopy] = useState<PublicContentWorkingCopy | null>(null);
@@ -663,6 +664,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
   const [showRejectPanel, setShowRejectPanel] = useState(false);
   const [rejectComment, setRejectComment] = useState("");
   const [rejecting, setRejecting] = useState(false);
+  const [deleting,  setDeleting]  = useState(false);
   const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   // Load page from API
@@ -866,6 +868,35 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
     }
   }
 
+  async function handleMoveToRecycleBin() {
+    if (!canDelete || !page) return;
+    if (!window.confirm("Move this page to the Recycle Bin? The public page will be taken offline immediately.")) return;
+    setDeleting(true);
+    setSaveMessage(null);
+    try {
+      const res = await fetch("/api/admin/content-pages/by-path/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fullPath: SAMPLE_FULL_PATH }),
+      });
+      const data = await res.json() as { ok?: boolean; name?: string; message?: string; error?: string };
+      if (!res.ok) throw new Error(data.error || "Unable to move to Recycle Bin.");
+      setPage(null);
+      setWorkingCopy(null);
+      setSavedWorkingCopy(null);
+      setHasPendingChanges(false);
+      setIsDirty(false);
+      setSaveMessage({ type: "success", text: "Page moved to Recycle Bin. The public page is now offline. Go to Admin › Recycle Bin to restore it." });
+    } catch (err) {
+      setSaveMessage({
+        type: "error",
+        text: err instanceof Error ? err.message : "Unable to move to Recycle Bin.",
+      });
+    } finally {
+      setDeleting(false);
+    }
+  }
+
   const sectionNav = useMemo(() => {
     if (!workingCopy) return BLOCKS;
     return BLOCKS.map((block) => {
@@ -963,6 +994,12 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
                   Reject Changes
                 </button>
               </>
+            )}
+            {canDelete && !!page && (
+              <button type="button" onClick={handleMoveToRecycleBin} disabled={deleting}
+                className="rounded-xl border border-red-300 bg-red-50 px-4 py-2.5 text-sm font-black text-red-700 transition hover:bg-red-100 disabled:opacity-60 disabled:cursor-not-allowed">
+                {deleting ? "Moving…" : "Move to Recycle Bin"}
+              </button>
             )}
           </div>
         </div>

@@ -3,7 +3,7 @@
 // SERVER-SIDE ONLY — do not import from "use client" components.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export type RecycleBinItemType = 'media' | 'content' | 'regulatory';
+export type RecycleBinItemType = 'media' | 'content' | 'regulatory' | 'public_content_page';
 
 export interface RecycleBinItem {
   id: string;

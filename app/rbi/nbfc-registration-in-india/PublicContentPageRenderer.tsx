@@ -35,6 +35,41 @@ function normaliseSections(page: PublicContentPageRenderData): NormalisedSection
     .filter((section) => section.title || section.body);
 }
 
+function renderTextWithLinks(text: string) {
+  const cosmosUrl = 'https://cosmos.rbi.org.in';
+  const parts = text.split(cosmosUrl);
+
+  return parts.flatMap((part, index) => {
+    const nodes: React.ReactNode[] = [];
+    if (part) nodes.push(part);
+    if (index < parts.length - 1) {
+      nodes.push(
+        <a key={`cosmos-${index}`} href={cosmosUrl} target="_blank" rel="noopener noreferrer">
+          RBI COSMOS Portal
+        </a>
+      );
+    }
+    return nodes;
+  });
+}
+
+function renderFormattedLine(line: string) {
+  const separator = line.includes(' - ') ? ' - ' : line.includes(': ') ? ': ' : null;
+
+  if (!separator) return renderTextWithLinks(line);
+
+  const [label, ...rest] = line.split(separator);
+  const value = rest.join(separator);
+
+  return (
+    <>
+      <span className="field-label">{label}</span>
+      {separator}
+      {renderTextWithLinks(value)}
+    </>
+  );
+}
+
 function renderBody(body: string, sectionId: string) {
   const blocks = body.split('\n\n').map((block) => block.trim()).filter(Boolean);
   if (!blocks.length) return null;
@@ -42,20 +77,62 @@ function renderBody(body: string, sectionId: string) {
   return blocks.map((block, blockIndex) => {
     const lines = block.split('\n').map((line) => line.trim()).filter(Boolean);
     const isBulletList = lines.length > 0 && lines.every((line) => line.startsWith('\u2022') || line.startsWith('- '));
+    const isNumberedList = lines.length > 0 && lines.every((line) => /^\d+(?:\.\d+)?\s/.test(line));
+    const stepMatch = block.match(/^Step\s+(\d+)\s+[\u2013-]\s+(.+)\n([\s\S]+)/);
+
+    if (stepMatch) {
+      return (
+        <div key={`${sectionId}-step-${blockIndex}`} className="process-card">
+          <h3>Step {stepMatch[1]} - {stepMatch[2]}</h3>
+          <p>{renderTextWithLinks(stepMatch[3])}</p>
+        </div>
+      );
+    }
 
     if (isBulletList) {
       return (
         <ul key={`${sectionId}-list-${blockIndex}`} className="clean-list">
           {lines.map((line, itemIndex) => (
             <li key={`${sectionId}-item-${blockIndex}-${itemIndex}`}>
-              {line.replace(/^\u2022\s*/, '').replace(/^-\s*/, '')}
+              {renderFormattedLine(line.replace(/^\u2022\s*/, '').replace(/^-\s*/, ''))}
             </li>
           ))}
         </ul>
       );
     }
 
-    return <p key={`${sectionId}-p-${blockIndex}`}>{block}</p>;
+    if (isNumberedList) {
+      return (
+        <ol key={`${sectionId}-numbered-${blockIndex}`} className="numbered-list">
+          {lines.map((line, itemIndex) => (
+            <li key={`${sectionId}-numbered-item-${blockIndex}-${itemIndex}`}>
+              {renderFormattedLine(line.replace(/^\d+(?:\.\d+)?\s*/, ''))}
+            </li>
+          ))}
+        </ol>
+      );
+    }
+
+    const firstBulletIndex = lines.findIndex((line) => line.startsWith('\u2022') || line.startsWith('- '));
+    if (firstBulletIndex > 0) {
+      const intro = lines.slice(0, firstBulletIndex).join(' ');
+      const bullets = lines.slice(firstBulletIndex);
+
+      return (
+        <React.Fragment key={`${sectionId}-mixed-${blockIndex}`}>
+          <p>{renderTextWithLinks(intro)}</p>
+          <ul className="clean-list">
+            {bullets.map((line, itemIndex) => (
+              <li key={`${sectionId}-mixed-item-${blockIndex}-${itemIndex}`}>
+                {renderFormattedLine(line.replace(/^\u2022\s*/, '').replace(/^-\s*/, ''))}
+              </li>
+            ))}
+          </ul>
+        </React.Fragment>
+      );
+    }
+
+    return <p key={`${sectionId}-p-${blockIndex}`}>{renderTextWithLinks(block)}</p>;
   });
 }
 

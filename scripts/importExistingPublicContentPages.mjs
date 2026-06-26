@@ -13,7 +13,8 @@
  * Usage:
  *   node scripts/importExistingPublicContentPages.mjs
  *   node scripts/importExistingPublicContentPages.mjs --dry-run
- *   node scripts/importExistingPublicContentPages.mjs --apply
+ *   node scripts/importExistingPublicContentPages.mjs --dry-run --only=/rbi/nbfc-registration-in-india
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-registration-in-india
  */
 
 import fs from 'node:fs';
@@ -23,6 +24,19 @@ import { discoverExistingPublicContentPages } from '../lib/publicContent/discove
 
 const APPLY = process.argv.includes('--apply');
 const DRY_RUN = !APPLY;
+const SAMPLE_FULL_PATH = '/rbi/nbfc-registration-in-india';
+const CONFIRM_BROAD_APPLY = process.argv.includes('--confirm-broad-apply');
+const ONLY_FULL_PATH = parseOnlyArg();
+
+function parseOnlyArg() {
+  const equalsArg = process.argv.find((arg) => arg.startsWith('--only='));
+  if (equalsArg) return equalsArg.slice('--only='.length).trim();
+
+  const onlyIndex = process.argv.indexOf('--only');
+  if (onlyIndex !== -1) return String(process.argv[onlyIndex + 1] ?? '').trim();
+
+  return '';
+}
 
 function loadEnv() {
   const file = path.join(process.cwd(), '.env.local');
@@ -65,97 +79,286 @@ function printTable(items) {
   }
 }
 
+function buildSummaryForItems(items, dbChecked) {
+  const count = (status) => items.filter((c) => c.importStatus === status).length;
+  return {
+    total: items.length,
+    importable: count('importable'),
+    needsManualMapping: count('needs_manual_mapping'),
+    redirectsAliases: count('redirect/alias'),
+    skipped: count('excluded_for_now') + count('skipped_existing'),
+    existingDbMatches: dbChecked
+      ? items.filter((c) => c.existingDbMatch).length
+      : 0,
+    dbChecked,
+  };
+}
+
+function extractNbfcSections() {
+  const file = path.join(process.cwd(), 'app/rbi/nbfc-registration-in-india/PageClient.tsx');
+  const text = fs.readFileSync(file, 'utf8');
+  const sections = [];
+  const pattern = /\{\s*id:\s*'([^']+)'\s*,\s*title:\s*'([^']+)'\s*,\s*content:\s*`([\s\S]*?)`\s*\}/g;
+  let match;
+
+  while ((match = pattern.exec(text)) !== null) {
+    sections.push({
+      id: match[1],
+      title: match[2],
+      body: match[3].trim(),
+    });
+  }
+
+  if (!sections.length) {
+    throw new Error('Unable to extract NBFC Registration baseline sections from PageClient.tsx.');
+  }
+
+  return sections;
+}
+
+function buildNbfcBaseline(item, now) {
+  const sections = extractNbfcSections();
+  const summary = item.seoDescription || 'Complete RBI NBFC registration guide covering eligibility, Net Owned Fund, COSMOS filing, documentation, approval process and post-registration compliance.';
+
+  return {
+    title: 'NBFC Registration in India',
+    slug: 'nbfc-registration-in-india',
+    fullPath: SAMPLE_FULL_PATH,
+    pageType: 'guide',
+    menuGroup: 'regulatory',
+    category: 'RBI Licensing',
+    regulator: 'RBI',
+    serviceType: 'NBFC Registration',
+    summary,
+    hero: {
+      title: 'NBFC Registration in India',
+      description: summary,
+      trustLine: 'RBI licensing support for NBFC-ICC, Base Layer structuring, COSMOS filing and post-registration compliance planning.',
+    },
+    badges: [
+      { emoji: '', label: 'RBI' },
+      { emoji: '', label: 'NBFC' },
+      { emoji: '', label: 'SBR Master Direction 2023' },
+      { emoji: '', label: 'Section 45-IA' },
+      { emoji: '', label: 'NBFC-ICC' },
+      { emoji: '', label: 'Base Layer' },
+    ],
+    breadcrumbs: [
+      { label: 'Home', href: '/' },
+      { label: 'RBI Services', href: '/rbi' },
+      { label: 'NBFC Registration' },
+    ],
+    sections,
+    snapshotCards: [
+      { label: 'Regulator', value: 'Reserve Bank of India (RBI)' },
+      { label: 'Governing Law', value: 'RBI Act, 1934 - Section 45-IA' },
+      { label: 'Master Direction', value: 'SBR Directions 2023 (Updated July 17, 2025)' },
+      { label: 'Eligible Entity', value: 'Company (Companies Act 2013)' },
+    ],
+    quickFacts: [
+      { label: 'Regulator', value: 'Reserve Bank of India (RBI)' },
+      { label: 'Governing Law', value: 'RBI Act, 1934 - Section 45-IA' },
+      { label: 'Master Direction', value: 'SBR Directions 2023 (Updated July 17, 2025)' },
+      { label: 'Eligible Entity', value: 'Company (Companies Act 2013)' },
+      { label: 'NBFC-ICC NOF', value: 'Rs. 10 Crore (by March 31, 2027)' },
+      { label: 'NBFC-P2P / AA NOF', value: 'Rs. 2 Crore' },
+      { label: 'NBFC-IFC / IDF NOF', value: 'Rs. 300 Crore' },
+      { label: 'Principal Business Test', value: '50-50 Rule' },
+      { label: 'Leverage Ratio (BL)', value: 'Max 7x owned fund' },
+      { label: 'NPA Classification', value: '90 days overdue (from Mar 31, 2026)' },
+      { label: 'Approval Timeline', value: '4-8 months (well-prepared)' },
+      { label: 'Application Portal', value: 'RBI COSMOS' },
+    ],
+    ctaCards: [
+      {
+        title: 'Ready to Launch Your NBFC?',
+        description: 'Get expert guidance on Rs. 10 Crore NOF structuring, COSMOS portal filing, business plan drafting, Annex XII director documentation, and end-to-end RBI Certificate of Registration process.',
+      },
+      {
+        title: 'Need Expert Support for NBFC Registration?',
+        description: 'Our compliance specialists provide end-to-end NBFC registration support - pre-filing audit, NOF computation, COSMOS portal filing, Annex XII documentation, business plan, Board-approved policies, query handling, and ongoing post-registration compliance.',
+      },
+    ],
+    expertProfile: {
+      name: 'CS Devyani Khambhati',
+      role: 'Compliance Expert',
+      initials: 'DK',
+      bio: 'Specialist in fintech regulatory compliance, government licenses and RBI, SEBI, IRDAI frameworks.',
+      email: 'contact@estabizz.com',
+    },
+    relatedPages: [
+      { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license', category: 'RBI', description: 'NBFC Account Aggregator License - complete regulatory guide.' },
+      { title: 'NBFC Business Plan', href: '/rbi/nbfc-business-plan', category: 'RBI', description: 'NBFC Business Plan - complete regulatory guide.' },
+      { title: 'NBFC Takeover', href: '/rbi/nbfc-takeover', category: 'RBI', description: 'NBFC Takeover - complete regulatory guide.' },
+      { title: 'NBFC Legal Support Services', href: '/rbi/nbfc-legal-support', category: 'RBI', description: 'NBFC Legal Support Services - complete regulatory guide.' },
+      { title: 'NBFC Financial Modeling', href: '/rbi/nbfc-financial-modeling', category: 'RBI', description: 'NBFC Financial Modeling - complete regulatory guide.' },
+      { title: 'ARC Registration in India', href: '/rbi/arc-registration-in-india', category: 'RBI', description: 'ARC Registration in India - complete regulatory guide.' },
+    ],
+    sourceReferences: [
+      { title: 'RBI COSMOS Portal', url: 'https://cosmos.rbi.org.in', regulator: 'RBI' },
+      { title: 'Imported source file', url: item.sourceFile, regulator: 'RBI' },
+    ],
+    reviewedBy: 'CS Devyani Khambhati',
+    lastReviewedAt: new Date('2025-07-17T00:00:00.000Z'),
+    readingTime: '25 min read',
+    status: 'published',
+    publishedAt: now,
+    createdBy: 'system:import',
+    updatedBy: 'system:import',
+    publishedBy: 'system:import',
+    seoTitle: item.seoTitle || 'NBFC Registration in India - Complete RBI Approval Guide',
+    seoDescription: item.seoDescription || summary,
+    canonicalUrl: SAMPLE_FULL_PATH,
+    ogImage: '',
+    pendingRevision: null,
+    hasPendingChanges: false,
+    pendingSubmittedBy: '',
+    pendingReviewComment: '',
+    deletedFromStatus: '',
+    deletedBy: '',
+    createdAt: now,
+    updatedAt: now,
+  };
+}
+
+function buildImportRecord(item, now) {
+  if (item.fullPath === SAMPLE_FULL_PATH) return buildNbfcBaseline(item, now);
+
+  return {
+    title: item.title,
+    slug: item.slug,
+    fullPath: item.fullPath,
+    pageType: item.pageType,
+    menuGroup: item.menuGroup,
+    category: '',
+    regulator: item.regulator,
+    serviceType: '',
+    summary: item.seoDescription || '',
+    hero: null,
+    badges: [],
+    breadcrumbs: [],
+    sections: [],
+    snapshotCards: [],
+    quickFacts: [],
+    ctaCards: [],
+    expertProfile: null,
+    relatedPages: [],
+    sourceReferences: [{ title: 'Imported source file', url: item.sourceFile }],
+    reviewedBy: '',
+    readingTime: '',
+    status: 'published',
+    publishedAt: now,
+    createdBy: 'system:import',
+    updatedBy: 'system:import',
+    publishedBy: 'system:import',
+    seoTitle: item.seoTitle || '',
+    seoDescription: item.seoDescription || '',
+    canonicalUrl: item.fullPath,
+    ogImage: '',
+    pendingRevision: null,
+    hasPendingChanges: false,
+    pendingSubmittedBy: '',
+    pendingReviewComment: '',
+    deletedFromStatus: '',
+    deletedBy: '',
+    createdAt: now,
+    updatedAt: now,
+  };
+}
+
 async function applyImport(items) {
   const importable = items.filter((c) => c.importStatus === 'importable');
   const col = mongoose.connection.collection('public_content_pages');
   const now = new Date();
   let imported = 0;
+  let skippedExisting = items.filter((c) => c.importStatus === 'skipped_existing').length;
+  const inserted = [];
 
   for (const item of importable) {
     const existing = await col.findOne({ $or: [{ fullPath: item.fullPath }, { slug: item.slug }] });
-    if (existing) continue;
+    if (existing) {
+      skippedExisting++;
+      continue;
+    }
 
-    await col.insertOne({
-      title: item.title,
-      slug: item.slug,
-      fullPath: item.fullPath,
-      pageType: item.pageType,
-      menuGroup: item.menuGroup,
-      category: '',
-      regulator: item.regulator,
-      serviceType: '',
-      summary: item.seoDescription || '',
-      hero: null,
-      badges: [],
-      breadcrumbs: [],
-      sections: [],
-      snapshotCards: [],
-      quickFacts: [],
-      ctaCards: [],
-      expertProfile: null,
-      relatedPages: [],
-      sourceReferences: [{ title: 'Imported source file', url: item.sourceFile }],
-      reviewedBy: '',
-      readingTime: '',
-      status: 'published',
-      publishedAt: now,
-      createdBy: 'system:import',
-      updatedBy: 'system:import',
-      publishedBy: 'system:import',
-      seoTitle: item.seoTitle || '',
-      seoDescription: item.seoDescription || '',
-      canonicalUrl: item.fullPath,
-      ogImage: '',
-      pendingRevision: null,
-      hasPendingChanges: false,
-      pendingSubmittedBy: '',
-      pendingReviewComment: '',
-      deletedFromStatus: '',
-      deletedBy: '',
-      createdAt: now,
-      updatedAt: now,
-    });
+    const record = buildImportRecord(item, now);
+    const result = await col.insertOne(record);
     imported++;
+    inserted.push({
+      id: String(result.insertedId),
+      title: record.title,
+      slug: record.slug,
+      fullPath: record.fullPath,
+      status: record.status,
+      sections: record.sections.length,
+    });
   }
 
-  return imported;
+  return { imported, skippedExisting, inserted };
 }
 
 async function run() {
   loadEnv();
+  if (APPLY && !ONLY_FULL_PATH && !CONFIRM_BROAD_APPLY) {
+    throw new Error('Broad apply is blocked. Pass --only=/rbi/nbfc-registration-in-india for the approved sample import, or --confirm-broad-apply for a separately approved broad import.');
+  }
+
   const { summary, items } = await discoverExistingPublicContentPages();
+  const targetItems = ONLY_FULL_PATH
+    ? items.filter((item) => item.fullPath === ONLY_FULL_PATH)
+    : items;
+
+  if (ONLY_FULL_PATH && targetItems.length === 0) {
+    throw new Error(`No discovered public content page matched --only=${ONLY_FULL_PATH}.`);
+  }
+
+  const displaySummary = ONLY_FULL_PATH
+    ? buildSummaryForItems(targetItems, summary.dbChecked)
+    : summary;
 
   console.log(DRY_RUN
     ? 'DRY RUN - no changes will be written. Pass --apply to import.\n'
     : 'APPLY MODE - writing importable public content pages.\n');
 
+  if (ONLY_FULL_PATH) {
+    console.log(`Only filter: ${ONLY_FULL_PATH}`);
+    console.log(`Matched pages: ${targetItems.length}\n`);
+  }
+
   console.log('Summary');
   console.log('-'.repeat(72));
-  console.log(`Total routes/content records scanned: ${summary.total}`);
-  console.log(`Importable pages:                    ${summary.importable}`);
-  console.log(`Needs manual mapping:                ${summary.needsManualMapping}`);
-  console.log(`Redirects/aliases:                   ${summary.redirectsAliases}`);
-  console.log(`Skipped/excluded:                    ${summary.skipped}`);
-  console.log(`Existing DB matches:                 ${summary.dbChecked ? summary.existingDbMatches : 'not checked (MONGODB_URI missing)'}`);
+  console.log(`Total routes/content records scanned: ${displaySummary.total}`);
+  console.log(`Importable pages:                    ${displaySummary.importable}`);
+  console.log(`Needs manual mapping:                ${displaySummary.needsManualMapping}`);
+  console.log(`Redirects/aliases:                   ${displaySummary.redirectsAliases}`);
+  console.log(`Skipped/excluded:                    ${displaySummary.skipped}`);
+  console.log(`Existing DB matches:                 ${displaySummary.dbChecked ? displaySummary.existingDbMatches : 'not checked (MONGODB_URI missing)'}`);
   console.log(`MongoDB writes:                      ${DRY_RUN ? 0 : 'pending apply'}\n`);
 
-  printTable(items);
+  printTable(targetItems);
 
-  const nbfc = items.find((c) => c.fullPath === '/rbi/nbfc-registration-in-india');
+  const nbfc = items.find((c) => c.fullPath === SAMPLE_FULL_PATH);
   console.log('\nKey check');
   console.log('-'.repeat(72));
   if (nbfc) {
-    console.log(`/rbi/nbfc-registration-in-india detected as ${nbfc.importStatus} (${nbfc.pageType}, ${nbfc.menuGroup}, ${nbfc.regulator}).`);
+    console.log(`${SAMPLE_FULL_PATH} detected as ${nbfc.importStatus} (${nbfc.pageType}, ${nbfc.menuGroup}, ${nbfc.regulator}).`);
+    if (ONLY_FULL_PATH === SAMPLE_FULL_PATH) {
+      const baselineSections = extractNbfcSections().length;
+      console.log(`Sample baseline sections ready: ${baselineSections}`);
+    }
   } else {
-    console.log('/rbi/nbfc-registration-in-india was NOT detected.');
+    console.log(`${SAMPLE_FULL_PATH} was NOT detected.`);
   }
 
   if (DRY_RUN) {
     console.log('\nDry run complete. No MongoDB writes occurred.');
   } else {
     if (!process.env.MONGODB_URI) throw new Error('MONGODB_URI is required for --apply.');
-    const imported = await applyImport(items);
-    console.log(`\nApply complete. Imported ${imported} public content pages.`);
+    const result = await applyImport(targetItems);
+    console.log(`\nApply complete. Imported ${result.imported} public content pages. Skipped existing: ${result.skippedExisting}.`);
+    for (const doc of result.inserted) {
+      console.log(`Imported: ${doc.title} | ${doc.fullPath} | ${doc.slug} | ${doc.status} | sections=${doc.sections}`);
+    }
   }
 
   if (mongoose.connection.readyState !== 0) await mongoose.disconnect();

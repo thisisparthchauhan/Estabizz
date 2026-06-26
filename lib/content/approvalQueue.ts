@@ -20,8 +20,15 @@ import {
   rejectUpdate,
 } from '@/lib/regulatory/repository';
 import type { RegulatoryPendingRevision, RegulatoryUpdateRecord } from '@/lib/regulatory/types';
+import {
+  findPublicContentPageByFullPath,
+  approvePendingPublicContentPageChanges,
+  rejectPendingPublicContentPageChanges,
+} from '@/lib/publicContent/repository';
 
-export type QueueItemType = 'content' | 'blog' | 'regulatory_update';
+const PUBLIC_CONTENT_SAMPLE_PATH = '/rbi/nbfc-registration-in-india';
+
+export type QueueItemType = 'content' | 'blog' | 'regulatory_update' | 'public_content_page';
 export type QueueItemStatus = 'pending_approval' | 'rejected' | 'pending_review' | 'published';
 export type QueueAction = 'approve' | 'reject' | 'request_changes';
 export type RegulatoryQueueKind = 'pending_publication' | 'pending_changes';
@@ -368,6 +375,69 @@ async function regulatoryItems(): Promise<ApprovalQueueItem[]> {
   }));
 }
 
+function publicContentPageFields(
+  page: Awaited<ReturnType<typeof findPublicContentPageByFullPath>> & object
+): ContentFields {
+  return {
+    title: page.title,
+    summary: page.summary,
+    hero: page.hero ?? null,
+    sections: page.sections,
+    quickFacts: page.quickFacts,
+    ctaCards: page.ctaCards,
+    seoTitle: page.seoTitle,
+    seoDescription: page.seoDescription,
+    canonicalUrl: page.canonicalUrl,
+  } as ContentFields;
+}
+
+function publicContentPageRevisionFields(
+  revision: Record<string, unknown>,
+  fallback: Awaited<ReturnType<typeof findPublicContentPageByFullPath>> & object
+): ContentFields {
+  return {
+    title: typeof revision.title === 'string' ? revision.title : fallback.title,
+    summary: typeof revision.summary === 'string' ? revision.summary : fallback.summary,
+    hero: (revision.hero as unknown) ?? fallback.hero ?? null,
+    sections: Array.isArray(revision.sections) ? revision.sections : fallback.sections,
+    quickFacts: Array.isArray(revision.quickFacts) ? revision.quickFacts : fallback.quickFacts,
+    ctaCards: Array.isArray(revision.ctaCards) ? revision.ctaCards : fallback.ctaCards,
+    seoTitle: typeof revision.seoTitle === 'string' ? revision.seoTitle : fallback.seoTitle,
+    seoDescription: typeof revision.seoDescription === 'string' ? revision.seoDescription : fallback.seoDescription,
+    canonicalUrl: typeof revision.canonicalUrl === 'string' ? revision.canonicalUrl : fallback.canonicalUrl,
+  } as ContentFields;
+}
+
+async function publicContentPageItems(): Promise<ApprovalQueueItem[]> {
+  const page = await findPublicContentPageByFullPath(PUBLIC_CONTENT_SAMPLE_PATH);
+  if (!page || !page.hasPendingChanges) return [];
+
+  const currentFields = publicContentPageFields(page);
+  const revision = page.pendingRevision ?? {};
+  const proposedFields = publicContentPageRevisionFields(revision, page);
+  const submittedBy = page.pendingSubmittedBy || '';
+
+  return [{
+    id: `public_content_page:${page.fullPath}`,
+    type: 'public_content_page',
+    key: page.fullPath,
+    title: page.title,
+    pageName: 'Content Pages',
+    sectionName: page.title,
+    submittedBy,
+    submittedByRole: await submitterRole(submittedBy),
+    submittedAt: page.pendingSubmittedAt ?? page.updatedAt,
+    updatedAt: page.updatedAt,
+    status: 'pending_approval',
+    currentFields,
+    proposedFields,
+    changedFields: diffFields(currentFields, proposedFields),
+    previewPath: page.fullPath,
+    reviewerComment: page.pendingReviewComment,
+    hasPendingChanges: true,
+  }];
+}
+
 function isoForQueue(value: unknown): string | null {
   if (!value) return null;
   const date = value instanceof Date ? value : new Date(String(value));
@@ -376,8 +446,15 @@ function isoForQueue(value: unknown): string | null {
 
 export async function listApprovalQueueItems(): Promise<ApprovalQueueItem[]> {
   try {
-    const [content, blogs, regulatory] = await Promise.all([contentItems(), blogItems(), regulatoryItems()]);
-    return [...content, ...blogs, ...regulatory].sort((a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime());
+    const [content, blogs, regulatory, publicContent] = await Promise.all([
+      contentItems(),
+      blogItems(),
+      regulatoryItems(),
+      publicContentPageItems(),
+    ]);
+    return [...content, ...blogs, ...regulatory, ...publicContent].sort(
+      (a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime()
+    );
   } catch (err) {
     console.error('[listApprovalQueueItems] Error:', err);
     return [];
@@ -525,4 +602,26 @@ export async function reviewRegulatoryChange(id: string, reviewer: AdminContext,
   }
 
   throw new Error('This regulatory update is not waiting for review.');
+}
+
+export async function reviewPublicContentPageChange(
+  fullPath: string,
+  reviewer: AdminContext,
+  action: QueueAction,
+  comment = ''
+): Promise<void> {
+  const page = await findPublicContentPageByFullPath(fullPath);
+  if (!page) throw new Error('Content page was not found.');
+  if (!page.hasPendingChanges) throw new Error('This page has no pending changes to review.');
+
+  if (page.pendingSubmittedBy && page.pendingSubmittedBy.toLowerCase() === reviewer.email.toLowerCase()) {
+    throw new Error('You cannot review your own change.');
+  }
+
+  if (action === 'approve') {
+    await approvePendingPublicContentPageChanges(fullPath, reviewer.email, comment);
+    return;
+  }
+
+  await rejectPendingPublicContentPageChanges(fullPath, comment);
 }

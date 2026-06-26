@@ -147,6 +147,62 @@ export async function clearPendingChanges(fullPath: string): Promise<void> {
   );
 }
 
+export async function approvePendingPublicContentPageChanges(
+  fullPath: string,
+  reviewedBy: string,
+  comment: string
+): Promise<void> {
+  await connectDB();
+  const doc = await PublicContentPage.findOne({ fullPath, hasPendingChanges: true }).lean() as unknown as RawDoc | null;
+  if (!doc) throw new Error('No pending changes found for this page.');
+
+  const revision = (doc.pendingRevision as Record<string, unknown> | null) ?? {};
+  const update: Record<string, unknown> = {
+    pendingRevision: null,
+    hasPendingChanges: false,
+    pendingSubmittedBy: '',
+    pendingReviewComment: comment,
+    updatedAt: new Date(),
+  };
+
+  if (typeof revision.title === 'string') update.title = revision.title;
+  if (typeof revision.summary === 'string') update.summary = revision.summary;
+  if ('hero' in revision) update.hero = revision.hero ?? null;
+  if (Array.isArray(revision.sections)) update.sections = revision.sections;
+  if (Array.isArray(revision.quickFacts)) update.quickFacts = revision.quickFacts;
+  if (Array.isArray(revision.ctaCards)) update.ctaCards = revision.ctaCards;
+  if (typeof revision.seoTitle === 'string') update.seoTitle = revision.seoTitle;
+  if (typeof revision.seoDescription === 'string') update.seoDescription = revision.seoDescription;
+  if (typeof revision.canonicalUrl === 'string') update.canonicalUrl = revision.canonicalUrl;
+
+  const result = await PublicContentPage.updateOne(
+    { fullPath, hasPendingChanges: true },
+    { $set: update, $unset: { pendingSubmittedAt: '' } }
+  );
+  if (result.matchedCount === 0) throw new Error('Pending changes were already processed.');
+}
+
+export async function rejectPendingPublicContentPageChanges(
+  fullPath: string,
+  comment: string
+): Promise<void> {
+  await connectDB();
+  const result = await PublicContentPage.updateOne(
+    { fullPath, hasPendingChanges: true },
+    {
+      $set: {
+        pendingRevision: null,
+        hasPendingChanges: false,
+        pendingSubmittedBy: '',
+        pendingReviewComment: comment,
+        updatedAt: new Date(),
+      },
+      $unset: { pendingSubmittedAt: '' },
+    }
+  );
+  if (result.matchedCount === 0) throw new Error('No pending changes found for this page.');
+}
+
 export async function createImportedPublicContentPage(input: PublicContentImportInput): Promise<PublicContentPageRecord> {
   await connectDB();
   const now = new Date();

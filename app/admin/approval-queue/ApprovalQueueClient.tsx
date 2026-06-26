@@ -16,7 +16,7 @@ interface Props {
   viewer: Viewer | null;
 }
 
-type FilterMode = "pending" | "website" | "seo" | "regulatory" | "blogs" | "rejected";
+type FilterMode = "pending" | "website" | "seo" | "regulatory" | "blogs" | "content-pages" | "rejected";
 
 const statusMeta: Record<string, { label: string; cls: string }> = {
   pending_approval: { label: "Pending", cls: "border-amber-200 bg-amber-50 text-amber-700" },
@@ -68,6 +68,7 @@ function filterItem(item: ApprovalQueueItem, mode: FilterMode): boolean {
   if (mode === "seo") return item.type === "content" && item.key.startsWith("seo.") && item.status === "pending_approval";
   if (mode === "regulatory") return item.type === "regulatory_update";
   if (mode === "blogs") return item.type === "blog" && item.status === "pending_review";
+  if (mode === "content-pages") return item.type === "public_content_page";
   return item.status === "rejected";
 }
 
@@ -91,6 +92,7 @@ function matchesText(item: ApprovalQueueItem, text: string): boolean {
 function typeLabel(item: ApprovalQueueItem): string {
   if (item.type === "blog") return "Blog";
   if (item.type === "regulatory_update") return "Regulatory Update";
+  if (item.type === "public_content_page") return "Content Page";
   return item.key.startsWith("seo.") ? "SEO" : "Website Content";
 }
 
@@ -303,6 +305,7 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
     seo: items.filter((item) => item.type === "content" && item.key.startsWith("seo.") && item.status === "pending_approval").length,
     regulatory: items.filter((item) => item.type === "regulatory_update").length,
     blogs: items.filter((item) => item.type === "blog" && item.status === "pending_review").length,
+    contentPages: items.filter((item) => item.type === "public_content_page").length,
     rejected: items.filter((item) => item.status === "rejected").length,
   }), [items]);
 
@@ -370,6 +373,7 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
           <FilterButton active={mode === "seo"} onClick={() => setMode("seo")}>SEO Changes ({counts.seo})</FilterButton>
           <FilterButton active={mode === "regulatory"} onClick={() => setMode("regulatory")}>Regulatory Updates ({counts.regulatory})</FilterButton>
           <FilterButton active={mode === "blogs"} onClick={() => setMode("blogs")}>Blogs ({counts.blogs})</FilterButton>
+          <FilterButton active={mode === "content-pages"} onClick={() => setMode("content-pages")}>Content Pages ({counts.contentPages})</FilterButton>
           <FilterButton active={mode === "rejected"} onClick={() => setMode("rejected")}>Rejected ({counts.rejected})</FilterButton>
         </div>
         <div className="grid gap-3 lg:grid-cols-[1.2fr_1fr_160px_160px]">

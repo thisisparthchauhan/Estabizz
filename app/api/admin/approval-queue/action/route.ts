@@ -7,12 +7,13 @@ import {
   rejectContentChange,
   reviewBlogChange,
   reviewRegulatoryChange,
+  reviewPublicContentPageChange,
   type QueueAction,
   type QueueItemType,
 } from '@/lib/content/approvalQueue';
 
 const ACTIONS: QueueAction[] = ['approve', 'reject', 'request_changes'];
-const ITEM_TYPES: QueueItemType[] = ['content', 'blog', 'regulatory_update'];
+const ITEM_TYPES: QueueItemType[] = ['content', 'blog', 'regulatory_update', 'public_content_page'];
 
 export async function POST(req: NextRequest) {
   try {
@@ -49,10 +50,13 @@ export async function POST(req: NextRequest) {
       if (itemType === 'blog') {
         await reviewBlogChange(key, auth.admin, action, comment);
         revalidatePath('/blogs');
-      } else {
+      } else if (itemType === 'regulatory_update') {
         await reviewRegulatoryChange(key, auth.admin, action, comment);
         revalidatePath('/resources/regulatory-updates');
         revalidatePath('/resources/regulatory-updates/[slug]', 'page');
+      } else {
+        await reviewPublicContentPageChange(key, auth.admin, action, comment);
+        revalidatePath(key);
       }
     }
 

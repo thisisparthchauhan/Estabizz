@@ -648,6 +648,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
   const [savedWorkingCopy, setSavedWorkingCopy] = useState<PublicContentWorkingCopy | null>(null);
   const [hasPendingChanges, setHasPendingChanges] = useState(false);
   const [canEdit, setCanEdit] = useState(false);
+  const [canPublish, setCanPublish] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
 
   const [loading, setLoading] = useState(canView);
@@ -658,6 +659,10 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
 
   const [saving, setSaving] = useState(false);
   const [discarding, setDiscarding] = useState(false);
+  const [approving, setApproving] = useState(false);
+  const [showRejectPanel, setShowRejectPanel] = useState(false);
+  const [rejectComment, setRejectComment] = useState("");
+  const [rejecting, setRejecting] = useState(false);
   const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   // Load page from API
@@ -679,6 +684,7 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
           setSavedWorkingCopy(wc);
           setHasPendingChanges(data.hasPendingChanges ?? false);
           setCanEdit(data.canEdit ?? false);
+          setCanPublish(data.canPublish ?? false);
         }
       } catch {
         if (!cancelled) setError("Unable to load the visual editor. Please try again.");
@@ -797,6 +803,69 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
     }
   }
 
+  async function handleApprove() {
+    if (!canPublish || !hasPendingChanges) return;
+    if (!window.confirm("Approve these changes? They will be published immediately to the live page.")) return;
+    setApproving(true);
+    setSaveMessage(null);
+    try {
+      const res = await fetch("/api/admin/content-pages/by-path/approve", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ fullPath: SAMPLE_FULL_PATH, comment: "" }),
+      });
+      const data = await res.json() as { ok?: boolean; error?: string };
+      if (!res.ok) throw new Error(data.error || "Approval failed.");
+      // Reload fresh state from server
+      const getRes = await fetch(`/api/admin/content-pages/by-path?fullPath=${encodeURIComponent(SAMPLE_FULL_PATH)}`);
+      const getData = await getRes.json() as ApiResponse;
+      if (getRes.ok && getData.page) {
+        setPage(getData.page);
+        const wc = getData.workingCopy ?? pageToWorkingCopy(getData.page);
+        setWorkingCopy(wc);
+        setSavedWorkingCopy(wc);
+        setHasPendingChanges(getData.hasPendingChanges ?? false);
+      }
+      setIsDirty(false);
+      setSaveMessage({ type: "success", text: "Changes approved and published to the live page." });
+    } catch (err) {
+      setSaveMessage({
+        type: "error",
+        text: err instanceof Error ? err.message : "Unable to approve changes.",
+      });
+    } finally {
+      setApproving(false);
+    }
+  }
+
+  async function handleReject() {
+    if (!canPublish || !hasPendingChanges || !rejectComment.trim()) return;
+    setRejecting(true);
+    setSaveMessage(null);
+    try {
+      const res = await fetch("/api/admin/content-pages/by-path/reject", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ fullPath: SAMPLE_FULL_PATH, comment: rejectComment.trim() }),
+      });
+      const data = await res.json() as { ok?: boolean; error?: string };
+      if (!res.ok) throw new Error(data.error || "Rejection failed.");
+      setHasPendingChanges(false);
+      setShowRejectPanel(false);
+      setRejectComment("");
+      setSaveMessage({ type: "success", text: "Pending changes rejected." });
+    } catch (err) {
+      setSaveMessage({
+        type: "error",
+        text: err instanceof Error ? err.message : "Unable to reject changes.",
+      });
+    } finally {
+      setRejecting(false);
+    }
+  }
+
   const sectionNav = useMemo(() => {
     if (!workingCopy) return BLOCKS;
     return BLOCKS.map((block) => {
@@ -883,6 +952,18 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
                 Coming Soon
               </span>
             )}
+            {canPublish && hasPendingChanges && (
+              <>
+                <button type="button" onClick={handleApprove} disabled={approving}
+                  className="rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-black text-white transition hover:bg-emerald-700 disabled:opacity-60 disabled:cursor-not-allowed">
+                  {approving ? "Approving…" : "Approve Changes"}
+                </button>
+                <button type="button" onClick={() => { setShowRejectPanel((v) => !v); setSaveMessage(null); }}
+                  className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-black text-red-700 transition hover:bg-red-100">
+                  Reject Changes
+                </button>
+              </>
+            )}
           </div>
         </div>
 
@@ -894,6 +975,33 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
               : "border-red-200 bg-red-50 text-red-700"
           }`}>
             {saveMessage.text}
+          </div>
+        )}
+
+        {/* ── Reject panel ────────────────────────────────────────────────────── */}
+        {showRejectPanel && canPublish && hasPendingChanges && (
+          <div className="mb-5 rounded-2xl border border-red-200 bg-red-50 p-5">
+            <div className="mb-3 text-sm font-black text-red-700">Reject Pending Changes</div>
+            <p className="mb-3 text-xs font-medium text-red-600">
+              Provide a comment explaining why these changes are being rejected. The editor will see this note.
+            </p>
+            <textarea
+              value={rejectComment}
+              onChange={(e) => setRejectComment(e.target.value)}
+              rows={3}
+              placeholder="Reason for rejection (required)"
+              className="mb-3 w-full resize-y rounded-xl border border-red-200 bg-white px-3.5 py-2.5 text-sm text-[#0a1628] outline-none focus:border-red-400"
+            />
+            <div className="flex flex-wrap gap-2">
+              <button type="button" onClick={handleReject} disabled={rejecting || !rejectComment.trim()}
+                className="rounded-xl bg-red-600 px-4 py-2 text-sm font-black text-white transition hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                {rejecting ? "Rejecting…" : "Confirm Rejection"}
+              </button>
+              <button type="button" onClick={() => { setShowRejectPanel(false); setRejectComment(""); }}
+                className="rounded-xl border border-red-200 bg-white px-4 py-2 text-sm font-black text-red-600 transition hover:bg-red-50">
+                Cancel
+              </button>
+            </div>
           </div>
         )}
 
@@ -1007,9 +1115,11 @@ export default function PublicContentVisualEditorClient({ viewer }: { viewer: Ad
             {/* Pending Changes status bar */}
             {hasPendingChanges && (
               <div className="mt-5 rounded-2xl border border-amber-100 bg-amber-50 p-4">
-                <div className="text-sm font-black text-amber-700">Pending Changes Saved</div>
+                <div className="text-sm font-black text-amber-700">Pending Changes Awaiting Approval</div>
                 <p className="mt-1 text-xs font-medium text-amber-600">
-                  The live page is showing the published version. Pending changes are saved and ready for review in the next phase.
+                  {canPublish
+                    ? "You can approve or reject these changes using the buttons above. The live page will update immediately on approval."
+                    : "These changes are saved and waiting for review by someone with publishing access. The live page is unchanged until approved."}
                 </p>
               </div>
             )}

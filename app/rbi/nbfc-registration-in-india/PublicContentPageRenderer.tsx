@@ -1,0 +1,141 @@
+'use client';
+
+import React from 'react';
+import ServicePageLayout from '@/components/templates/ServicePageLayout';
+import type { PublicContentPageRenderData } from '@/lib/publicContent/rendering';
+
+interface NormalisedSection {
+  id: string;
+  title: string;
+  body: string;
+}
+
+function slugify(input: string, index: number): string {
+  const slug = input
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/[\s_]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return slug || `section-${index + 1}`;
+}
+
+function normaliseSections(page: PublicContentPageRenderData): NormalisedSection[] {
+  return page.sections
+    .map((section, index) => {
+      const title = section.title?.trim() || `Section ${index + 1}`;
+      const body = section.body?.trim() || '';
+      return {
+        id: section.id?.trim() || slugify(title, index),
+        title,
+        body,
+      };
+    })
+    .filter((section) => section.title || section.body);
+}
+
+function renderBody(body: string, sectionId: string) {
+  const blocks = body.split('\n\n').map((block) => block.trim()).filter(Boolean);
+  if (!blocks.length) return null;
+
+  return blocks.map((block, blockIndex) => {
+    const lines = block.split('\n').map((line) => line.trim()).filter(Boolean);
+    const isBulletList = lines.length > 0 && lines.every((line) => line.startsWith('\u2022') || line.startsWith('- '));
+
+    if (isBulletList) {
+      return (
+        <ul key={`${sectionId}-list-${blockIndex}`} className="clean-list">
+          {lines.map((line, itemIndex) => (
+            <li key={`${sectionId}-item-${blockIndex}-${itemIndex}`}>
+              {line.replace(/^\u2022\s*/, '').replace(/^-\s*/, '')}
+            </li>
+          ))}
+        </ul>
+      );
+    }
+
+    return <p key={`${sectionId}-p-${blockIndex}`}>{block}</p>;
+  });
+}
+
+export default function PublicContentPageRenderer({ page }: { page: PublicContentPageRenderData }) {
+  const sections = normaliseSections(page);
+  const tocSections = sections.map(({ id, title }) => ({ id, title }));
+  const firstCta = page.ctaCards[0];
+  const finalCta = page.ctaCards[1] ?? firstCta;
+  const title = page.hero?.title?.trim() || page.title;
+  const heroDescription = page.hero?.description?.trim() || page.summary;
+  const tags = page.badges.length
+    ? page.badges.map((badge) => ({ emoji: badge.emoji ?? '', label: badge.label }))
+    : [{ emoji: '', label: page.regulator === 'Other' ? 'Public Page' : page.regulator }];
+  const breadcrumb = page.breadcrumbs.length
+    ? page.breadcrumbs
+    : [
+        { label: 'Home', href: '/' },
+        { label: 'RBI Services', href: '/rbi' },
+        { label: title },
+      ];
+  const quickFacts = page.quickFacts.length ? page.quickFacts : page.snapshotCards;
+  const relatedArticles = page.relatedPages.map((related) => ({
+    href: related.href,
+    title: related.title,
+    category: related.category || page.regulator || 'Related',
+    description: related.description || '',
+  }));
+
+  return (
+    <ServicePageLayout
+      tags={tags}
+      breadcrumb={breadcrumb}
+      title={title}
+      heroDescription={heroDescription}
+      trustLine={page.hero?.trustLine}
+      readTime={page.readingTime || '12 min read'}
+      displayYear={page.lastReviewedAt ? new Date(page.lastReviewedAt).getFullYear().toString() : '2026'}
+      focusKeyword={page.serviceType || page.category || title}
+      sections={tocSections}
+      ctaTitle={firstCta?.title || 'Need Expert Support?'}
+      ctaDescription={firstCta?.description || page.summary || 'Speak with Estabizz for practical regulatory support.'}
+      quickFacts={quickFacts}
+      relatedArticles={relatedArticles}
+      finalCtaTitle={finalCta?.title || 'Need Expert Support?'}
+      finalCtaDescription={finalCta?.description || page.summary || 'Our compliance specialists can help you plan the next step.'}
+    >
+      {sections.length > 0 ? (
+        sections.map((section) => (
+          <section key={section.id} className="mb-12">
+            <h2 id={section.id}>{section.title}</h2>
+            <div className="prose max-w-none">
+              {renderBody(section.body, section.id)}
+            </div>
+          </section>
+        ))
+      ) : (
+        <section className="mb-12">
+          <h2 id="overview">{title}</h2>
+          <div className="prose max-w-none">
+            <p>{page.summary || heroDescription || title}</p>
+          </div>
+        </section>
+      )}
+
+      {page.sourceReferences.length > 0 && (
+        <section className="mt-16">
+          <h2 id="source-references">Source References</h2>
+          <ul className="clean-list">
+            {page.sourceReferences.map((source, index) => (
+              <li key={`${source.title}-${index}`}>
+                {source.url ? (
+                  <a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a>
+                ) : (
+                  source.title
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </ServicePageLayout>
+  );
+}

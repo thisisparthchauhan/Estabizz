@@ -13,7 +13,7 @@ type Params = { params: Promise<{ id: string }> };
 
 export async function DELETE(req: NextRequest, { params }: Params) {
   try {
-    const auth = requireAdmin(req);
+    const auth = await requireAdmin(req);
     if (!auth.ok) return auth.response;
 
     const { id } = await params;

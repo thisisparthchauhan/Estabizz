@@ -3,6 +3,7 @@
 > Read this first. It explains what the project is, how it's built, the
 > conventions you MUST follow, and how to deploy. Keeping to these rules avoids
 > breaking a live production site.
+> codex will review your output once you done
 
 ## 1. What this is
 

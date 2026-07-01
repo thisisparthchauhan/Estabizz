@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import { getContent } from '@/lib/content/getContent';
+import { buildPageMetadata } from '@/lib/seo/pageMetadata';
+import { SEO_IFSCA_DEFAULTS, type SeoContent } from '@/lib/content/seoDefaults';
 
-export const metadata: Metadata = {
-    title: "IFSCA Services - Finance Company, Aircraft Leasing, PSP License, FinTech, ITFS, BATF & More | Estabizz Fintech",
-    description: "Complete IFSCA regulatory services — Finance Company registration, Aircraft Leasing, PSP License, FinTech Entity, ITFS Platform, BATF Services, GRCTC, Factoring and compliance guidance at GIFT IFSC.",
-    keywords: "IFSCA, Finance Company, Aircraft Leasing, PSP License, FinTech Entity, ITFS Platform, BATF Services, GRCTC, GIFT IFSC, IFSCA Registration",
-    alternates: { canonical: "/ifsca" }
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const seo = await getContent('seo.ifsca') as Partial<SeoContent>;
+    return buildPageMetadata(seo, SEO_IFSCA_DEFAULTS, '/ifsca');
+}
 
 const services = [
     {

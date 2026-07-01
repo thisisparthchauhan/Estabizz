@@ -36,8 +36,8 @@ export async function requirePermission(
   req: NextRequest,
   permission: AdminPermission
 ): Promise<PermissionResult> {
-  // 1. JWT + admin allowlist
-  const base = requireAdmin(req);
+  // 1. JWT + admin allowlist / active DB user
+  const base = await requireAdmin(req);
   if (!base.ok) return { ok: false, response: base.response };
 
   // 2. Load role & permissions

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { getContent } from '@/lib/content/getContent';
+import { buildPageMetadata } from '@/lib/seo/pageMetadata';
+import { SEO_RESOURCES_DEFAULTS, type SeoContent } from '@/lib/content/seoDefaults';
 import Link from "next/link";
 import { ResourceCardGrid } from "@/components/content/FrameworkBlocks";
 
-export const metadata: Metadata = {
-    title: "Resources – Regulatory Updates, FAQs, Templates & Compliance Guides | Estabizz",
-    description: "Explore Estabizz resources for regulatory updates, compliance FAQs, circular explainers, email templates, compliance calendars and licensing guides across RBI, SEBI, IRDAI and IFSCA.",
-    alternates: { canonical: "/resources" }
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const seo = await getContent('seo.resources') as Partial<SeoContent>;
+    return buildPageMetadata(seo, SEO_RESOURCES_DEFAULTS, '/resources');
+}
 
 const cards = [
     { title: "Content Rebuild Command", description: "Internal Estabizz framework for rebuilding reference content into original SEO, GEO and AEO optimised regulatory pages.", href: "/resources/content-rebuild-command" },

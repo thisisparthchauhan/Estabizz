@@ -3,14 +3,16 @@
  *
  * Usage (inside a route handler, Node.js runtime):
  *
- *   const auth = requireAdmin(req);
+ *   const auth = await requireAdmin(req);
  *   if (!auth.ok) return auth.response;
  *   // ...auth.email is a verified admin
  *
  * What it checks:
  *   1. `auth_token` cookie is present.
  *   2. The JWT signature verifies against process.env.JWT_SECRET.
- *   3. The email in the payload is in the admin allowlist (active admins).
+ *   3. The email is either in the static admin allowlist (legacy/seed users)
+ *      OR exists as an active record in the `admin_users` MongoDB collection
+ *      (users created via the admin panel).
  *
  * Runs in the Node.js runtime only (uses jsonwebtoken) — do NOT call from
  * Edge middleware. API route handlers are Node.js by default, so this is safe.
@@ -25,7 +27,7 @@ export type AdminAuthResult =
   | { ok: true; email: string }
   | { ok: false; response: NextResponse };
 
-export function requireAdmin(req: NextRequest): AdminAuthResult {
+export async function requireAdmin(req: NextRequest): Promise<AdminAuthResult> {
   const token = req.cookies.get('auth_token')?.value;
 
   if (!token) {
@@ -63,15 +65,34 @@ export function requireAdmin(req: NextRequest): AdminAuthResult {
     };
   }
 
-  if (!email || !ADMIN_EMAIL_ALLOWLIST.has(email)) {
+  if (!email) {
     return {
       ok: false,
-      response: NextResponse.json(
-        { error: 'Admin access required.' },
-        { status: 403 }
-      ),
+      response: NextResponse.json({ error: 'Admin access required.' }, { status: 403 }),
     };
   }
 
-  return { ok: true, email };
+  // Fast path: static allowlist covers legacy/seed admin accounts
+  if (ADMIN_EMAIL_ALLOWLIST.has(email)) {
+    return { ok: true, email };
+  }
+
+  // DB fallback: accept any active admin_users record created via the panel
+  try {
+    const { connectDB } = await import('@/lib/db');
+    const AdminUserModel = (await import('@/lib/models/AdminUser')).default;
+    await connectDB();
+    const doc = await AdminUserModel.findOne({ email, status: 'active' }).lean();
+    if (doc) return { ok: true, email };
+  } catch {
+    // DB unavailable — fall through to deny
+  }
+
+  return {
+    ok: false,
+    response: NextResponse.json(
+      { error: 'Admin access required.' },
+      { status: 403 }
+    ),
+  };
 }

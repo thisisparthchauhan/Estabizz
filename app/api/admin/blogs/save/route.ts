@@ -50,7 +50,7 @@ function estimateReadingTime(text: string): number {
 export async function POST(req: NextRequest) {
   try {
     // ── Admin auth guard ──────────────────────────────────────────────────────
-    const auth = requireAdmin(req);
+    const auth = await requireAdmin(req);
     if (!auth.ok) return auth.response;
 
     const body = await req.json();

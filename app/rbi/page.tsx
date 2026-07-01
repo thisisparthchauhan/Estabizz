@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
+import { getContent } from '@/lib/content/getContent';
+import { buildPageMetadata } from '@/lib/seo/pageMetadata';
+import { SEO_RBI_DEFAULTS, type SeoContent } from '@/lib/content/seoDefaults';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-    title: "RBI Services – NBFC Registration, Account Aggregator & Compliance | Estabizz Fintech",
-    description: "Complete RBI regulatory services in India – NBFC registration, Account Aggregator license, LendTech compliance, NBFC business plans and more. Expert guidance by Estabizz Fintech.",
-    keywords: "RBI Services India, NBFC Registration, Account Aggregator License",
-    alternates: { canonical: "/rbi" }
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const seo = await getContent('seo.rbi') as Partial<SeoContent>;
+    return buildPageMetadata(seo, SEO_RBI_DEFAULTS, '/rbi');
+}
 
 const services = [
     { href: "/rbi/nbfc-account-aggregator-license", title: "NBFC Account Aggregator License", desc: "Complete RBI registration guide for NBFC-AA with eligibility, process & compliance.", tag: "RBI", emoji: "🔗" },

@@ -3,6 +3,7 @@
 // resolved plain object down as props.
 import { connectDB } from '@/lib/db';
 import ContentBlock from '@/lib/models/ContentBlock';
+import ContentVersion from '@/lib/models/ContentVersion';
 import { getDefaultFields } from '@/lib/content/defaults';
 import type { ContentFields } from '@/lib/content/types';
 
@@ -29,7 +30,15 @@ export async function getContent(key: string): Promise<ContentFields> {
       .lean<{ fields?: ContentFields }>()
       .exec();
 
-    if (!block?.fields) return { ...defaults };
+    if (!block?.fields) {
+      const latestPublished = await ContentVersion.findOne({ blockKey: key, status: 'published' })
+        .sort({ createdAt: -1 })
+        .lean<{ snapshot?: ContentFields }>()
+        .exec();
+
+      if (latestPublished?.snapshot) return { ...defaults, ...latestPublished.snapshot };
+      return { ...defaults };
+    }
 
     // Live fields win, but defaults fill any gaps.
     return { ...defaults, ...block.fields };

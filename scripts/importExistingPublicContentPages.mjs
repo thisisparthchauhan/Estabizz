@@ -80,6 +80,17 @@ const APPROVED_IMPORT_PATHS = [
   '/sebi/reit-registration',
   '/irdai/corporate-agent-registration-in-india',
   '/irdai/composite-insurance-broker-registration-in-india',
+  // Phase 4R additions
+  '/services/data-storage-policy',
+  '/services/enterprise-services',
+  '/services/legal-due-diligence',
+  '/services/legal-process-outsourcing',
+  '/services/pap-license',
+  '/services/sustainable-finance',
+  '/services/sustainable-supply-chain',
+  '/services/trademark-search',
+  '/sebi/credit-rating-agency',
+  '/sebi/depository-participant-sebi-registration',
 ];
 const ONLY_FULL_PATH = parseOnlyArg();
 

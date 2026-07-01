@@ -39,6 +39,17 @@ export const PUBLIC_CONTENT_MANAGED_PATHS = [
   '/sebi/reit-registration',
   '/irdai/corporate-agent-registration-in-india',
   '/irdai/composite-insurance-broker-registration-in-india',
+  // Phase 4R additions
+  '/services/data-storage-policy',
+  '/services/enterprise-services',
+  '/services/legal-due-diligence',
+  '/services/legal-process-outsourcing',
+  '/services/pap-license',
+  '/services/sustainable-finance',
+  '/services/sustainable-supply-chain',
+  '/services/trademark-search',
+  '/sebi/credit-rating-agency',
+  '/sebi/depository-participant-sebi-registration',
 ] as const;
 
 export type PublicContentManagedPath = (typeof PUBLIC_CONTENT_MANAGED_PATHS)[number];
@@ -83,6 +94,17 @@ export const PUBLIC_CONTENT_EDITOR_SLUGS: Record<PublicContentManagedPath, strin
   '/sebi/reit-registration': 'reit-registration',
   '/irdai/corporate-agent-registration-in-india': 'corporate-agent-registration-in-india',
   '/irdai/composite-insurance-broker-registration-in-india': 'composite-insurance-broker-registration-in-india',
+  // Phase 4R
+  '/services/data-storage-policy': 'data-storage-policy',
+  '/services/enterprise-services': 'enterprise-services',
+  '/services/legal-due-diligence': 'legal-due-diligence',
+  '/services/legal-process-outsourcing': 'legal-process-outsourcing',
+  '/services/pap-license': 'pap-license',
+  '/services/sustainable-finance': 'sustainable-finance',
+  '/services/sustainable-supply-chain': 'sustainable-supply-chain',
+  '/services/trademark-search': 'trademark-search',
+  '/sebi/credit-rating-agency': 'credit-rating-agency',
+  '/sebi/depository-participant-sebi-registration': 'depository-participant-sebi-registration',
 };
 
 const PATH_BY_EDITOR_SLUG = Object.fromEntries(

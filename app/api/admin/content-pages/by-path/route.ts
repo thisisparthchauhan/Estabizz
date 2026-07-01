@@ -58,6 +58,7 @@ const BLOCKED_IMAGE_URL = [
   /phase4o/i,
   /phase4p/i,
   /phase4q/i,
+  /phase4r/i,
 ];
 
 const BLOCKED_DESIGN_VALUE = [
@@ -82,6 +83,7 @@ const BLOCKED_DESIGN_VALUE = [
   /phase4o/i,
   /phase4p/i,
   /phase4q/i,
+  /phase4r/i,
 ];
 
 function isValidImageUrl(url: string): boolean {

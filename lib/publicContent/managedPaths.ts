@@ -7,6 +7,14 @@ export const PUBLIC_CONTENT_MANAGED_PATHS = [
   '/rbi/lendtech-services',
   '/rbi/nbfc-aa-license-guide',
   '/rbi/nbfc-account-aggregator-license',
+  // Phase 4N additions
+  '/rbi/full-fledged-money-changers',
+  '/rbi/nbfc-financial-modeling',
+  '/rbi/nbfc-for-sale',
+  '/rbi/nbfc-legal-support',
+  '/rbi/nbfc-marketing-strategy',
+  '/rbi/nbfc-takeover',
+  '/rbi/rbi-services',
 ] as const;
 
 export type PublicContentManagedPath = (typeof PUBLIC_CONTENT_MANAGED_PATHS)[number];
@@ -22,6 +30,13 @@ export const PUBLIC_CONTENT_EDITOR_SLUGS: Record<PublicContentManagedPath, strin
   '/rbi/lendtech-services': 'lendtech-services',
   '/rbi/nbfc-aa-license-guide': 'nbfc-aa-license-guide',
   '/rbi/nbfc-account-aggregator-license': 'nbfc-account-aggregator-license',
+  '/rbi/full-fledged-money-changers': 'full-fledged-money-changers',
+  '/rbi/nbfc-financial-modeling': 'nbfc-financial-modeling',
+  '/rbi/nbfc-for-sale': 'nbfc-for-sale',
+  '/rbi/nbfc-legal-support': 'nbfc-legal-support',
+  '/rbi/nbfc-marketing-strategy': 'nbfc-marketing-strategy',
+  '/rbi/nbfc-takeover': 'nbfc-takeover',
+  '/rbi/rbi-services': 'rbi-services',
 };
 
 const PATH_BY_EDITOR_SLUG = Object.fromEntries(

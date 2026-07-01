@@ -22,6 +22,13 @@
  *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/lendtech-services
  *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-aa-license-guide
  *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-account-aggregator-license
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/full-fledged-money-changers
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-financial-modeling
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-for-sale
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-legal-support
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-marketing-strategy
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/nbfc-takeover
+ *   node scripts/importExistingPublicContentPages.mjs --apply --only=/rbi/rbi-services
  */
 
 import fs from 'node:fs';
@@ -41,6 +48,14 @@ const APPROVED_IMPORT_PATHS = [
   '/rbi/lendtech-services',
   '/rbi/nbfc-aa-license-guide',
   '/rbi/nbfc-account-aggregator-license',
+  // Phase 4N additions
+  '/rbi/full-fledged-money-changers',
+  '/rbi/nbfc-financial-modeling',
+  '/rbi/nbfc-for-sale',
+  '/rbi/nbfc-legal-support',
+  '/rbi/nbfc-marketing-strategy',
+  '/rbi/nbfc-takeover',
+  '/rbi/rbi-services',
 ];
 const ONLY_FULL_PATH = parseOnlyArg();
 

@@ -21,6 +21,13 @@ export const PUBLIC_CONTENT_MANAGED_PATHS = [
   '/sebi/mutual-fund-registration',
   '/sebi/ria-registration-in-india',
   '/sebi/stock-broker-registration-in-india',
+  // Phase 4P additions
+  '/irdai/insurance-broker-registration-in-india',
+  '/irdai/reinsurance-broker-registration-in-india',
+  '/ifsca/aircraft-leasing-registration-in-ifsc',
+  '/ifsca/psp-license-ifsca',
+  '/fema/compliance-under-fema',
+  '/fema/fema-registration',
 ] as const;
 
 export type PublicContentManagedPath = (typeof PUBLIC_CONTENT_MANAGED_PATHS)[number];
@@ -48,6 +55,12 @@ export const PUBLIC_CONTENT_EDITOR_SLUGS: Record<PublicContentManagedPath, strin
   '/sebi/mutual-fund-registration': 'mutual-fund-registration',
   '/sebi/ria-registration-in-india': 'ria-registration-in-india',
   '/sebi/stock-broker-registration-in-india': 'stock-broker-registration-in-india',
+  '/irdai/insurance-broker-registration-in-india': 'insurance-broker-registration-in-india',
+  '/irdai/reinsurance-broker-registration-in-india': 'reinsurance-broker-registration-in-india',
+  '/ifsca/aircraft-leasing-registration-in-ifsc': 'aircraft-leasing-registration-in-ifsc',
+  '/ifsca/psp-license-ifsca': 'psp-license-ifsca',
+  '/fema/compliance-under-fema': 'compliance-under-fema',
+  '/fema/fema-registration': 'fema-registration',
 };
 
 const PATH_BY_EDITOR_SLUG = Object.fromEntries(

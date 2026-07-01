@@ -62,6 +62,13 @@ const APPROVED_IMPORT_PATHS = [
   '/sebi/mutual-fund-registration',
   '/sebi/ria-registration-in-india',
   '/sebi/stock-broker-registration-in-india',
+  // Phase 4P additions
+  '/irdai/insurance-broker-registration-in-india',
+  '/irdai/reinsurance-broker-registration-in-india',
+  '/ifsca/aircraft-leasing-registration-in-ifsc',
+  '/ifsca/psp-license-ifsca',
+  '/fema/compliance-under-fema',
+  '/fema/fema-registration',
 ];
 const ONLY_FULL_PATH = parseOnlyArg();
 

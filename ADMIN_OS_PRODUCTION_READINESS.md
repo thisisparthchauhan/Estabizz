@@ -35,7 +35,7 @@ This document records the results of the Phase 5C production readiness audit. It
 | API protection | PASS | `requirePermission` on all write/delete/publish APIs |
 | Backup/restore readiness | PASS | Phase 5B confirmed; restore fix applied |
 | Cookie/session security | PASS | `httpOnly`, `secure` (in prod), `sameSite: lax`, 7-day expiry |
-| SEO / robots / sitemap | PARTIAL | robots.txt correct; sitemap missing 46 service pages — Phase 6A task |
+| SEO / robots / sitemap | PASS | Phase 6A: sitemap rewritten — 46 CMS pages, robots correct, canonical strategy documented |
 | Error handling | PARTIAL | No custom `not-found.tsx` or `error.tsx` — Next.js defaults apply |
 | Media / Cloudinary | PASS | Permission-gated; no API secret in frontend |
 | Artifact scan | PASS | No QA scripts, backup JSON, token/session files, DS_Store |
@@ -189,9 +189,17 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
+Disallow: /login
+Disallow: /signup
+Disallow: /my-blogs
+Disallow: /proposal-template
+Disallow: /resources/content-rebuild-command
+Disallow: /resources/regulatory-update-email-template
+Disallow: /resources/service-page-content-framework
 Sitemap: https://www.estabizz.com/sitemap.xml
+Host: https://www.estabizz.com
 ```
-Admin panel and API routes are correctly blocked from crawlers.
+Admin panel, API routes, auth routes, and internal tools are correctly blocked from crawlers (Phase 6A extended).
 
 ---
 
@@ -454,6 +462,51 @@ Run these tests within 30 minutes of any production deployment:
 - **No push to GitHub was performed in Phase 5C.** All work is local.
 - **No deployment to Vercel was performed in Phase 5C.**
 - **No deployment to any hosting provider was performed in Phase 5C.**
-- **Phase 6A has not been started.**
+- **Phase 6A was started after Phase 5C completion — see §22.**
 - **No new public content pages were migrated in Phase 5C.**
 - **No public page expansion was performed in Phase 5C.**
+
+---
+
+## 22. Phase 6A SEO Readiness Addendum
+
+> Added: Phase 6A (2026-07-02 IST). The §3 SEO row has been updated from PARTIAL to PASS.
+
+### What changed in Phase 6A
+
+| Item | Before Phase 6A | After Phase 6A |
+|---|---|---|
+| `app/sitemap.ts` | Homepage + 1 static URL group only; **46 CMS pages missing** | Full rewrite — all 46 CMS pages + 19 hub pages + regulatory + blogs |
+| `app/robots.ts` | Disallowed only `/admin/`, `/api/`; hardcoded URL | Extended disallow list; URL from `getSiteUrl()` |
+| Site URL management | Scattered hardcoded `https://www.estabizz.com` in sitemap/robots | Centralized via `lib/seo/siteUrl.ts` → `getSiteUrl()` |
+| Sitemap URL count | ~4 URLs | 69 URLs (Phase 6A baseline) |
+| Canonical strategy | Not documented | Documented in `ADMIN_OS_SEO_DEPLOYMENT_CHECKLIST.md` |
+
+### Phase 6A audit results
+
+| Check | Status |
+|---|---|
+| `app/sitemap.ts` includes 46 CMS-managed published pages | PASS — confirmed 46 via smoke test |
+| Sitemap excludes `/admin`, `/api`, `localhost`, draft/pending/deleted records | PASS |
+| `app/robots.ts` disallows admin, API, auth, and internal tool routes | PASS |
+| `robots.txt` sitemap pointer uses production URL | PASS |
+| `getSiteUrl()` never returns localhost in production (no env var) | PASS — fallback is `https://www.estabizz.com` |
+| TypeScript clean after rewrites | PASS — `npx tsc --noEmit` clean |
+| Production build succeeds | PASS — 137 pages, `/sitemap.xml` as `○ Static` |
+| No QA scripts, token/session files, `.env` tracked | PASS — artifact scan clean |
+| No push to GitHub | Confirmed |
+| No deployment | Confirmed |
+| Phase 6B not started | Confirmed |
+
+### New environment variable
+
+| Variable | Purpose |
+|---|---|
+| `NEXT_PUBLIC_SITE_URL` | Optional. Override canonical site URL for staging. Falls back to `https://www.estabizz.com`. |
+
+### Phase 6A SEO smoke test results (dev server)
+
+- `/sitemap.xml` → 200 OK, 69 URLs, 46 CMS pages, no admin/API/localhost URLs
+- `/robots.txt` → 200 OK, `Disallow: /admin/` ✓, `Sitemap: https://www.estabizz.com/sitemap.xml` ✓
+
+Full SEO deployment checklist: **`ADMIN_OS_SEO_DEPLOYMENT_CHECKLIST.md`**

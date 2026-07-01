@@ -1,17 +1,24 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { getPublicContentPageRenderState } from '@/lib/publicContent/rendering';
+import PublicContentPageRenderer from '@/components/publicContent/PublicContentPageRenderer';
 import PageClient from './PageClient';
 
-export const metadata: Metadata = {
+const FULL_PATH = '/sebi/research-analyst-registration-in-india';
+
+export const dynamic = 'force-dynamic';
+
+const FALLBACK_METADATA: Metadata = {
     title: 'Research Analyst Registration in India – Complete & Critical SEBI Compliance Guide',
     description: 'Research Analyst Registration in India under SEBI Regulations explained in detail. Learn eligibility, qualification, NISM certification, net worth, Form A, documents, process, fees, compliance, disclosures and penalties.',
     keywords: 'Research Analyst Registration in India, SEBI Research Analyst Registration, Research Analyst License, SEBI RA Registration, Stock Research Analyst Registration, Equity Research Analyst Registration, Research Entity Registration, YouTube Stock Recommendation SEBI Registration, Telegram Stock Tips SEBI Registration',
-    alternates: { canonical: '/sebi/research-analyst-registration-in-india' },
+    alternates: { canonical: FULL_PATH },
     openGraph: {
         title: 'Research Analyst Registration in India – Complete & Critical SEBI Compliance Guide',
         description: 'SEBI Research Analyst Registration guide covering eligibility, qualification, NISM certification, net worth, Form A, fees, disclosures, conflicts and compliance.',
-        url: '/sebi/research-analyst-registration-in-india',
-        type: 'article'
-    }
+        url: FULL_PATH,
+        type: 'article',
+    },
 };
 
 const faqSchema = {
@@ -23,8 +30,8 @@ const faqSchema = {
         { '@type': 'Question', name: 'Can an individual apply for Research Analyst Registration?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, an individual can apply if qualification, certification, net worth and fit and proper requirements are met.' } },
         { '@type': 'Question', name: 'Is NISM certification mandatory?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. NISM Research Analyst certification is mandatory.' } },
         { '@type': 'Question', name: 'Can Research Analyst manage client funds?', acceptedAnswer: { '@type': 'Answer', text: 'No. Client fund management requires separate PMS registration where applicable.' } },
-        { '@type': 'Question', name: 'Can Research Analyst guarantee returns?', acceptedAnswer: { '@type': 'Answer', text: 'No. Guaranteeing returns is prohibited.' } }
-    ]
+        { '@type': 'Question', name: 'Can Research Analyst guarantee returns?', acceptedAnswer: { '@type': 'Answer', text: 'No. Guaranteeing returns is prohibited.' } },
+    ],
 };
 
 const serviceSchema = {
@@ -35,10 +42,10 @@ const serviceSchema = {
     provider: {
         '@type': 'Organization',
         name: 'Estabizz Fintech Private Limited',
-        url: 'https://estabizz-site.vercel.app/'
+        url: 'https://estabizz-site.vercel.app/',
     },
     areaServed: 'India',
-    description: 'Professional support for SEBI Research Analyst Registration covering individual, company, LLP and research entity applications, NISM certification mapping, net worth documentation, Form A filing, research disclosure framework and post-registration compliance.'
+    description: 'Professional support for SEBI Research Analyst Registration covering individual, company, LLP and research entity applications, NISM certification mapping, net worth documentation, Form A filing, research disclosure framework and post-registration compliance.',
 };
 
 const breadcrumbSchema = {
@@ -47,11 +54,34 @@ const breadcrumbSchema = {
     itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://estabizz-site.vercel.app/' },
         { '@type': 'ListItem', position: 2, name: 'SEBI Services', item: 'https://estabizz-site.vercel.app/sebi' },
-        { '@type': 'ListItem', position: 3, name: 'Research Analyst Registration in India', item: 'https://estabizz-site.vercel.app/sebi/research-analyst-registration-in-india' }
-    ]
+        { '@type': 'ListItem', position: 3, name: 'Research Analyst Registration in India', item: 'https://estabizz-site.vercel.app/sebi/research-analyst-registration-in-india' },
+    ],
 };
 
-export default function Page() {
+export async function generateMetadata(): Promise<Metadata> {
+    const state = await getPublicContentPageRenderState(FULL_PATH);
+    if (state.mode === 'fallback') return FALLBACK_METADATA;
+    if (state.mode === 'blocked') {
+        return { title: 'Not Found', robots: { index: false, follow: false } };
+    }
+    const page = state.page;
+    const title = page.seoTitle?.trim() || page.title || String(FALLBACK_METADATA.title);
+    const description = page.seoDescription?.trim() || page.summary || String(FALLBACK_METADATA.description);
+    const canonical = page.canonicalUrl?.trim() || page.fullPath || FULL_PATH;
+    return {
+        title, description,
+        alternates: { canonical },
+        openGraph: {
+            title, description, type: 'article', url: canonical,
+            ...(page.ogImage?.trim() ? { images: [page.ogImage.trim()] } : {}),
+        },
+    };
+}
+
+export default async function Page() {
+    const state = await getPublicContentPageRenderState(FULL_PATH);
+    if (state.mode === 'blocked') notFound();
+    if (state.mode === 'published') return <PublicContentPageRenderer page={state.page} />;
     return (
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />

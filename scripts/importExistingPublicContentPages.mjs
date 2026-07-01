@@ -69,6 +69,17 @@ const APPROVED_IMPORT_PATHS = [
   '/ifsca/psp-license-ifsca',
   '/fema/compliance-under-fema',
   '/fema/fema-registration',
+  // Phase 4Q additions
+  '/services/transfer-pricing',
+  '/services/india-entry-strategy',
+  '/services/finance-accounting-outsourcing',
+  '/services/gst-appeal-services',
+  '/services/esg-consulting',
+  '/sebi/amfi-registration',
+  '/sebi/research-analyst-registration-in-india',
+  '/sebi/reit-registration',
+  '/irdai/corporate-agent-registration-in-india',
+  '/irdai/composite-insurance-broker-registration-in-india',
 ];
 const ONLY_FULL_PATH = parseOnlyArg();
 

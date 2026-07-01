@@ -28,6 +28,17 @@ export const PUBLIC_CONTENT_MANAGED_PATHS = [
   '/ifsca/psp-license-ifsca',
   '/fema/compliance-under-fema',
   '/fema/fema-registration',
+  // Phase 4Q additions
+  '/services/transfer-pricing',
+  '/services/india-entry-strategy',
+  '/services/finance-accounting-outsourcing',
+  '/services/gst-appeal-services',
+  '/services/esg-consulting',
+  '/sebi/amfi-registration',
+  '/sebi/research-analyst-registration-in-india',
+  '/sebi/reit-registration',
+  '/irdai/corporate-agent-registration-in-india',
+  '/irdai/composite-insurance-broker-registration-in-india',
 ] as const;
 
 export type PublicContentManagedPath = (typeof PUBLIC_CONTENT_MANAGED_PATHS)[number];
@@ -61,6 +72,17 @@ export const PUBLIC_CONTENT_EDITOR_SLUGS: Record<PublicContentManagedPath, strin
   '/ifsca/psp-license-ifsca': 'psp-license-ifsca',
   '/fema/compliance-under-fema': 'compliance-under-fema',
   '/fema/fema-registration': 'fema-registration',
+  // Phase 4Q
+  '/services/transfer-pricing': 'transfer-pricing',
+  '/services/india-entry-strategy': 'india-entry-strategy',
+  '/services/finance-accounting-outsourcing': 'finance-accounting-outsourcing',
+  '/services/gst-appeal-services': 'gst-appeal-services',
+  '/services/esg-consulting': 'esg-consulting',
+  '/sebi/amfi-registration': 'amfi-registration',
+  '/sebi/research-analyst-registration-in-india': 'research-analyst-registration-in-india',
+  '/sebi/reit-registration': 'reit-registration',
+  '/irdai/corporate-agent-registration-in-india': 'corporate-agent-registration-in-india',
+  '/irdai/composite-insurance-broker-registration-in-india': 'composite-insurance-broker-registration-in-india',
 };
 
 const PATH_BY_EDITOR_SLUG = Object.fromEntries(

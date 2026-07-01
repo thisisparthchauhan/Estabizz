@@ -2,18 +2,17 @@
  * Admin Layout — SERVER-SIDE auth guard.
  *
  * Runs in the Node.js runtime, so it can verify the JWT signature and check
- * the admin allowlist before any admin page renders. This is the real Layer-2
- * protection referenced by middleware.ts.
+ * admin access before any admin page renders.
  *
  * Flow:
  *   1. Read the `auth_token` cookie.
  *   2. Verify the JWT signature with JWT_SECRET.
- *   3. Confirm the email is an active admin (ADMIN_EMAIL_ALLOWLIST).
- *   4. If any check fails → redirect to /login (preserving destination).
+ *   3. Confirm the email is an active admin:
+ *      a. Fast path — static ADMIN_EMAIL_ALLOWLIST (seed / legacy accounts), or
+ *      b. DB fallback — active record in the `admin_users` MongoDB collection
+ *         (accounts created via the Users admin panel).
+ *   4. If any check fails → redirect to /login.
  *   5. Otherwise render the client admin shell.
- *
- * Edge middleware (middleware.ts) only checks cookie *presence* as a fast
- * first gate; this layout performs the authoritative verification.
  */
 
 import { cookies } from "next/headers";
@@ -37,14 +36,33 @@ async function getVerifiedAdminEmail(): Promise<string | null> {
   const secret = process.env.JWT_SECRET;
   if (!secret) return null;
 
+  let email = "";
   try {
     const decoded = jwt.verify(token, secret) as { email?: string };
-    const email = (decoded.email ?? "").toLowerCase().trim();
-    if (email && ADMIN_EMAIL_ALLOWLIST.has(email)) return email;
-    return null;
+    email = (decoded.email ?? "").toLowerCase().trim();
   } catch {
     return null;
   }
+
+  if (!email) return null;
+
+  // Fast path: static allowlist covers seed / legacy admin accounts.
+  if (ADMIN_EMAIL_ALLOWLIST.has(email)) return email;
+
+  // DB fallback: accept any active admin_users record created via the panel.
+  // This mirrors the requireAdmin API guard so page access and API access
+  // stay in sync for panel-created admin users.
+  try {
+    const { connectDB } = await import("@/lib/db");
+    const AdminUserModel = (await import("@/lib/models/AdminUser")).default;
+    await connectDB();
+    const doc = await AdminUserModel.findOne({ email, status: "active" }).lean();
+    if (doc) return email;
+  } catch {
+    // DB unavailable — deny rather than fall through
+  }
+
+  return null;
 }
 
 export default async function AdminLayout({
@@ -54,8 +72,7 @@ export default async function AdminLayout({
 }) {
   const email = await getVerifiedAdminEmail();
 
-  // Not a verified admin → bounce to login. A logged-in non-admin user
-  // also lands here (their token verifies but the email isn't allowlisted).
+  // Not a verified admin → bounce to login.
   if (!email) {
     redirect("/login?redirect=/admin");
   }

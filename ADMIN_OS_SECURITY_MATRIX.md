@@ -147,6 +147,22 @@ All content-page routes additionally enforce `isManagedPublicContentPath()` — 
 | `POST /api/admin/recycle-bin/purge` | POST | `requirePermission` | `purge_content` |
 
 Purge route hard-blocks `type === 'public_content_page'` before any DB operation: returns `400` with tombstone safety message.
+`purgeRecycleBinItem()` in the library also throws as a second independent guard for `public_content_page`.
+
+### Version Restore (Content Blocks)
+| Route | Method | Auth | Permission |
+|---|---|---|---|
+| `GET /api/admin/restore` | GET | `requirePermission` | `view_admin` |
+| `POST /api/admin/restore/action` | POST | `requirePermission` | `publish_content` *(fixed Phase 5B)* |
+
+`POST /api/admin/restore/action` previously required only `view_admin`. Fixed in Phase 5B to require `publish_content`, matching the library-level `canRestoreKey()` check. Restore publishes content directly to the live ContentBlock — it is a write/publish operation. The library enforces a secondary `canRestoreKey()` check independent of the route guard.
+
+### Change History
+| Route | Method | Auth | Permission |
+|---|---|---|---|
+| `GET /api/admin/change-history` | GET | `requirePermission` | `view_admin` |
+
+Read-only. `listChangeHistory()` further scopes returned items by the caller's role and permissions — users only see history for content types they are permitted to manage.
 
 ### Backups
 | Route | Method | Auth | Permission |
@@ -244,6 +260,10 @@ No admin page bypasses the layout guard. Individual pages may add further permis
 4. **`manage_roles` is not a separate permission.** Role management is covered by `manage_users`. This is intentional; a dedicated `manage_roles` permission was not introduced.
 
 5. **Blog `delete_blog` is permanent (not soft-delete).** Unlike content pages and regulatory updates, blog deletion goes directly to hard delete. This is pre-existing behavior.
+
+6. **Purge does not verify item status before hard-deleting.** `purgeRecycleBinItem` for media and content does not check `status === 'removed'`/`'deleted'` before calling `findByIdAndDelete`. Limited to `purge_content` users (super_admin, admin) — see `ADMIN_OS_DISASTER_RECOVERY.md` §9.
+
+7. **Recycle Bin restore does not verify item status.** `restoreRecycleBinItem` for media and content does not confirm the item is currently soft-deleted before restoring. Restoring a non-deleted content block to `draft` is a downgrade, so harm is limited — see `ADMIN_OS_DISASTER_RECOVERY.md` §9.
 
 ---
 

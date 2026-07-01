@@ -5,7 +5,7 @@ import { restoreContentVersion } from '@/lib/content/restore';
 
 export async function POST(req: NextRequest) {
   try {
-    const auth = await requirePermission(req, 'view_admin');
+    const auth = await requirePermission(req, 'publish_content');
     if (!auth.ok) return auth.response;
 
     const body = await req.json();

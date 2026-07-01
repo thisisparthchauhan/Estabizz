@@ -510,3 +510,39 @@ Run these tests within 30 minutes of any production deployment:
 - `/robots.txt` → 200 OK, `Disallow: /admin/` ✓, `Sitemap: https://www.estabizz.com/sitemap.xml` ✓
 
 Full SEO deployment checklist: **`ADMIN_OS_SEO_DEPLOYMENT_CHECKLIST.md`**
+
+---
+
+## 23. Phase 6B Release Package Addendum
+
+> Added: Phase 6B (2026-07-02 IST).
+
+Phase 6B created the complete staging release package. See **`ADMIN_OS_STAGING_RELEASE_PACKAGE.md`** for:
+- Full module inventory (§5)
+- Environment variable checklist with names only (§7)
+- MongoDB / Cloudinary / GitHub backup readiness checklists (§8–§10)
+- Vercel / domain / admin access checklists (§11–§13)
+- Pre-deployment checklist (§14)
+- Deployment commands — documented but NOT executed (§15)
+- Post-deployment smoke test: 66 checks across public routes, admin routes, API routes, SEO, and security (§16)
+- Rollback plan: 7 paths including Vercel rollback, git revert, content restore, secret rotation (§17)
+- Go / No-Go matrix: 15 Go criteria + 14 No-Go blockers (§18)
+- Known limitations (§19)
+
+### Phase 6B verification results
+
+| Check | Status |
+|---|---|
+| Git status clean | PASS |
+| Latest commit `1a473d8` | PASS |
+| `npm run build` → 137 pages | PASS |
+| `npx tsc --noEmit` | CLEAN |
+| managedPaths count | 46 (verified from source) |
+| PublicContentPage DB count | 46 published (verified at Phase 5C — Atlas remote not reachable during build, expected) |
+| Sitemap total URLs | 69 (verified at Phase 6A) |
+| Sitemap CMS URLs | 46 (verified at Phase 6A) |
+| No QA scripts / .env tracked / worktree artifacts | PASS |
+| public/tailwind.css build drift | Restored |
+| No push to GitHub | Confirmed |
+| No deployment | Confirmed |
+| Phase 6C not started | Confirmed |

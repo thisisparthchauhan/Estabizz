@@ -56,6 +56,12 @@ const APPROVED_IMPORT_PATHS = [
   '/rbi/nbfc-marketing-strategy',
   '/rbi/nbfc-takeover',
   '/rbi/rbi-services',
+  // Phase 4O additions
+  '/sebi/aif-registration-in-india',
+  '/sebi/pms-registration-in-india',
+  '/sebi/mutual-fund-registration',
+  '/sebi/ria-registration-in-india',
+  '/sebi/stock-broker-registration-in-india',
 ];
 const ONLY_FULL_PATH = parseOnlyArg();
 

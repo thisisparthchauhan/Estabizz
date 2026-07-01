@@ -15,6 +15,12 @@ export const PUBLIC_CONTENT_MANAGED_PATHS = [
   '/rbi/nbfc-marketing-strategy',
   '/rbi/nbfc-takeover',
   '/rbi/rbi-services',
+  // Phase 4O additions
+  '/sebi/aif-registration-in-india',
+  '/sebi/pms-registration-in-india',
+  '/sebi/mutual-fund-registration',
+  '/sebi/ria-registration-in-india',
+  '/sebi/stock-broker-registration-in-india',
 ] as const;
 
 export type PublicContentManagedPath = (typeof PUBLIC_CONTENT_MANAGED_PATHS)[number];
@@ -37,6 +43,11 @@ export const PUBLIC_CONTENT_EDITOR_SLUGS: Record<PublicContentManagedPath, strin
   '/rbi/nbfc-marketing-strategy': 'nbfc-marketing-strategy',
   '/rbi/nbfc-takeover': 'nbfc-takeover',
   '/rbi/rbi-services': 'rbi-services',
+  '/sebi/aif-registration-in-india': 'aif-registration-in-india',
+  '/sebi/pms-registration-in-india': 'pms-registration-in-india',
+  '/sebi/mutual-fund-registration': 'mutual-fund-registration',
+  '/sebi/ria-registration-in-india': 'ria-registration-in-india',
+  '/sebi/stock-broker-registration-in-india': 'stock-broker-registration-in-india',
 };
 
 const PATH_BY_EDITOR_SLUG = Object.fromEntries(

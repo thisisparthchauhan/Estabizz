@@ -623,7 +623,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
 
                     {/* Logo */}
                     <Link href="/" className="shrink-0 group">
-                        <Image src="/estabizz-logo.png" alt="Estabizz" width={747} height={314} priority className="h-9 w-auto transition-transform group-hover:scale-[1.03]" />
+                        <Image src="/estabizz-logo.png" alt="Estabizz" width={747} height={314} priority className="h-12 w-auto transition-transform group-hover:scale-[1.03]" />
                     </Link>
 
                     {/* Desktop Nav */}

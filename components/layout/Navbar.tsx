@@ -622,9 +622,8 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                 <div className="max-w-[1480px] mx-auto px-5 2xl:px-6 h-full flex items-center justify-between">
 
                     {/* Logo */}
-                    <Link href="/" className="flex flex-col items-center gap-[3px] group shrink-0">
-                        <Image src="/estabizz-logo.png" alt="Estabizz" width={747} height={314} priority className="h-8 w-auto transition-transform group-hover:scale-[1.03]" />
-                        <div className="text-[13px] font-semibold italic tracking-wide text-[#1677f2]">We Comply. We Simplify.</div>
+                    <Link href="/" className="shrink-0 group">
+                        <Image src="/estabizz-logo.png" alt="Estabizz" width={747} height={314} priority className="h-9 w-auto transition-transform group-hover:scale-[1.03]" />
                     </Link>
 
                     {/* Desktop Nav */}

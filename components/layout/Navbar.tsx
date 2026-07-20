@@ -271,19 +271,6 @@ const staticSearchLinks = [
 ];
 
 const menus: Record<string, MegaMenu> = {
-    Services: {
-        categories: [
-            { label: "RBI Regulatory Services", icon: "🏦", items: ["NBFC Registration", "NBFC Account Aggregator", "Payment Aggregator", "Prepaid Instrument", "Asset Reconstruction Company", "NBFC Compliance", "NBFC Business Plan", "AD Category II"] },
-            { label: "SEBI Regulatory Services", icon: "📈", items: ["Stock Broker Licence", "Investment Adviser", "Research Analyst", "Portfolio Manager", "AIF Registration", "Social Stock Exchange", "Mutual Fund Registration", "Underwriter Registration"] },
-            { label: "IRDAI Regulatory Services", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA Licence", "Micro Insurance"] },
-            { label: "IFSCA & GIFT City Services", icon: "🌐", items: ["Finance Company GIFT IFSC", "PSP License IFSCA", "ITFS Platform IFSC", "BATF Services IFSC", "IFSCA Aircraft Leasing", "IFSCA Factoring License", "FinTech Entity IFSC"] },
-            { label: "FIU / AML / PMLA Services", icon: "🔍", items: ["FIU-IND Registration", "PMLA Compliance Advisory", "AML Policy Drafting", "AML Risk Assessment", "CKYC Registration & Reporting"] },
-            { label: "Company Formation & Corporate Governance", icon: "🏛️", items: ["Company Incorporation", "MCA / ROC Compliance", "Annual ROC Compliance", "Corporate Governance", "GST Registration", "Transfer Pricing"] },
-            { label: "Sectoral & Operational Licences", icon: "⚙️", items: ["FSSAI Licence", "APEDA Registration", "AYUSH Licence", "Factory Licence", "Drug Licence", "BIS Certification"] },
-            { label: "Ongoing Regulatory Compliance", icon: "📋", items: ["Post-Registration Compliance", "RBI Compliance", "SEBI Compliance", "IRDAI Compliance", "IFSCA Compliance", "Compliance Calendar"] },
-        ],
-        viewAll: "/services", viewAllLabel: "View All Services →"
-    },
     Regulatory: {
         categories: [
             { label: "RBI", icon: "🏦", items: ["NBFC Registration", "Payment Aggregator", "Prepaid Instrument", "NBFC Account Aggregator", "Asset Reconstruction Company", "AD Category II"] },
@@ -308,19 +295,6 @@ const menus: Record<string, MegaMenu> = {
             { label: "Compliance Teams & CFOs", icon: "📋", items: ["Compliance Calendar", "Document Vault", "Policy Library", "Post-Registration Compliance"] },
         ],
         viewAll: "/services", viewAllLabel: "Explore All Solutions →"
-    },
-    Resources: {
-        categories: [
-            { label: "Regulatory Updates", icon: "📰", items: ["Regulatory Updates", "Circular Tracker", "Compliance Calendar"] },
-            { label: "Content Framework", icon: "📐", items: ["Service Page Content Framework", "Content Rebuild Command", "Proposal Templates"] },
-            { label: "Regulatory Insights", icon: "✍️", items: ["Regulatory Insights", "Guides & Insights"] },
-            { label: "Guides & Insights", icon: "📖", items: ["RBI Services", "SEBI Services", "IRDAI Services", "IFSCA Services"] },
-            { label: "FAQs", icon: "❓", items: ["FAQ Engine", "FAQs", "Compliance FAQs", "Contact Estabizz"] },
-            { label: "Case Highlights", icon: "📁", items: ["Case Highlights"] },
-            { label: "Compliance Calendar", icon: "📅", items: ["Compliance Calendar", "Post-Registration Compliance"] },
-            { label: "Circular Tracker", icon: "🔔", items: ["Circular Tracker", "Blogs"] },
-        ],
-        viewAll: "/resources", viewAllLabel: "View All Resources →"
     },
 };
 

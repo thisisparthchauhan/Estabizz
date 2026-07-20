@@ -44,15 +44,6 @@ export const blogCategories: BlogCategory[] = [
     color: '#0077B6',
   },
   {
-    id: 'cat_nbfc',
-    name: 'NBFC Registration',
-    slug: 'nbfc-registration',
-    description:
-      'NBFC licensing, registration requirements and ongoing RBI compliance for non-banking finance companies of all categories.',
-    icon: '🏛️',
-    color: '#0096D6',
-  },
-  {
     id: 'cat_payment',
     name: 'Payment Aggregator & Fintech',
     slug: 'payment-aggregator-fintech',
@@ -62,30 +53,12 @@ export const blogCategories: BlogCategory[] = [
     color: '#0077B6',
   },
   {
-    id: 'cat_insurance',
-    name: 'Insurance Broker Licensing',
-    slug: 'insurance-broker-licensing',
+    id: 'cat_income_tax',
+    name: 'Income Tax & Audit',
+    slug: 'income-tax-audit',
     description:
-      'IRDAI direct broker, reinsurance broker, composite broker and corporate agent registration processes and compliance.',
-    icon: '📋',
-    color: '#0096D6',
-  },
-  {
-    id: 'cat_aif',
-    name: 'AIF, PMS & RIA',
-    slug: 'aif-pms-ria',
-    description:
-      'SEBI registration for alternative investment funds, portfolio management services, registered investment advisers and research analysts.',
-    icon: '📊',
-    color: '#0077B6',
-  },
-  {
-    id: 'cat_fiu',
-    name: 'FIU-IND & PMLA',
-    slug: 'fiu-ind-pmla',
-    description:
-      'Anti-money laundering compliance, FIU-IND registration, PMLA reporting obligations and AML policy framework for regulated entities.',
-    icon: '🔍',
+      'Income tax filing, tax planning, statutory audit, tax audit and compliance advisory for individuals and businesses.',
+    icon: '📑',
     color: '#0096D6',
   },
   {

@@ -12,8 +12,6 @@
 
 import React, {
   useState,
-  useRef,
-  useCallback,
   useEffect,
   type ChangeEvent,
 } from "react";
@@ -21,6 +19,7 @@ import Link from "next/link";
 import type { Blog, BlogCategory, BlogStatus } from "@/lib/blog/types";
 import { blogCategories } from "@/lib/blog/categories";
 import { CloudinaryUploader } from "./CloudinaryUploader";
+import RichContentEditor from "./RichContentEditor";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -253,81 +252,7 @@ function Field({
   );
 }
 
-// ─── Content Editor ───────────────────────────────────────────────────────────
-
-const TOOLBAR: { title: string; before: string; after: string; placeholder: string }[] = [
-  { title: "H2",      before: "<h2>",                  after: "</h2>",       placeholder: "Heading 2" },
-  { title: "H3",      before: "<h3>",                  after: "</h3>",       placeholder: "Heading 3" },
-  { title: "Bullet",  before: "<ul>\n  <li>",          after: "</li>\n</ul>", placeholder: "List item" },
-  { title: "Table",   before: '<table>\n  <thead><tr><th>Column 1</th><th>Column 2</th></tr></thead>\n  <tbody><tr><td>', after: "</td><td>Cell 2</td></tr>\n  </tbody>\n</table>", placeholder: "Cell 1" },
-  { title: "Callout", before: '<div class="callout">\n  <p>', after: "</p>\n</div>", placeholder: "Callout text" },
-];
-
-function ContentEditor({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-}) {
-  const taRef = useRef<HTMLTextAreaElement>(null);
-
-  const insert = useCallback(
-    (before: string, after: string, placeholder: string) => {
-      const ta = taRef.current;
-      if (!ta) return;
-      const start = ta.selectionStart ?? 0;
-      const end   = ta.selectionEnd   ?? 0;
-      const sel   = value.substring(start, end) || placeholder;
-      const next  = value.substring(0, start) + before + sel + after + value.substring(end);
-      onChange(next);
-      requestAnimationFrame(() => {
-        ta.focus();
-        ta.selectionStart = start + before.length;
-        ta.selectionEnd   = start + before.length + sel.length;
-      });
-    },
-    [value, onChange]
-  );
-
-  const wordCount = value.replace(/<[^>]*>/g, "").trim().split(/\s+/).filter(Boolean).length;
-
-  return (
-    <div className="rounded-xl border border-[#dbe7f3] bg-white overflow-hidden focus-within:border-[#1677f2] focus-within:ring-2 focus-within:ring-[#1677f2]/12 transition-all">
-      {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-1 border-b border-[#e8f0f8] bg-[#f8fbff] p-2">
-        {TOOLBAR.map((btn) => (
-          <button
-            key={btn.title}
-            type="button"
-            onClick={() => insert(btn.before, btn.after, btn.placeholder)}
-            className="px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold text-[#334155] hover:bg-[#1677f2] hover:text-white transition-colors leading-none"
-          >
-            {btn.title}
-          </button>
-        ))}
-        <span className="ml-auto text-[10px] text-[#94a3b8] italic hidden sm:inline">HTML mode</span>
-      </div>
-
-      {/* Textarea */}
-      <textarea
-        ref={taRef}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        rows={20}
-        spellCheck
-        placeholder={"Start writing your article HTML here…\n\n<h2>Section heading</h2>\n<p>Paragraph text…</p>"}
-        className="w-full px-4 py-3 text-[13px] text-[#0a1628] leading-relaxed font-mono resize-y outline-none bg-white placeholder:text-[#b0bec5] placeholder:font-sans min-h-[400px]"
-      />
-
-      {/* Footer bar */}
-      <div className="flex items-center justify-between border-t border-[#e8f0f8] bg-[#f8fbff] px-3 py-1.5 text-[11px] text-[#94a3b8]">
-        <span>{wordCount} words · ~{Math.max(1, Math.ceil(wordCount / 238))} min read</span>
-        <span>{value.length} chars</span>
-      </div>
-    </div>
-  );
-}
+// ContentEditor replaced by RichContentEditor (TipTap) — imported above.
 
 // ─── FAQ Editor ───────────────────────────────────────────────────────────────
 
@@ -754,7 +679,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
 
         {/* ─── Section 3: Content ──────────────────────────────────────────── */}
         <SectionCard number={3} title="Content">
-          <ContentEditor
+          <RichContentEditor
             value={form.content}
             onChange={(v) => set("content", v)}
           />

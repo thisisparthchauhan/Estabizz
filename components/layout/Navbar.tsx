@@ -625,7 +625,6 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                     <Link href="/" className="flex items-center gap-2.5 group shrink-0">
                         <Image src="/estabizz-logo.png" alt="Estabizz" width={747} height={314} priority className="h-9 w-auto transition-transform group-hover:scale-[1.03]" />
                         <div className="leading-tight">
-                            <div className="font-black text-[#0a1628] text-[19px] leading-none tracking-tight">Fintech</div>
                             <div className="mt-1 text-[11px] font-bold tracking-tight text-[#1677f2]">We Comply. We Simplify.</div>
                         </div>
                     </Link>

@@ -65,14 +65,6 @@ export default function HeroSection({ content }: { content?: Partial<HeroContent
                     </a>
                 </div>
 
-                <div className="mx-auto mt-10 grid max-w-[980px] grid-cols-2 gap-3 md:grid-cols-4">
-                    {trustStats.map((stat) => (
-                        <div key={stat} className="rounded-2xl border border-blue-100 bg-white/78 px-4 py-4 text-[13px] font-black text-[#0a1628] shadow-[0_16px_38px_rgba(0,80,140,0.08)] backdrop-blur-xl">
-                            {stat}
-                        </div>
-                    ))}
-                </div>
-
                 <div className="relative mx-auto mt-12 max-w-[980px] overflow-hidden rounded-[28px] border border-blue-100 bg-white/70 px-5 py-4 shadow-[0_18px_60px_rgba(0,80,140,0.08)] backdrop-blur-xl">
                     <div className="absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent" />
                     <div className="absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent" />

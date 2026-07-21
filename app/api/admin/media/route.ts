@@ -69,6 +69,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Upload data is incomplete.' }, { status: 400 });
     }
 
+    // Only accept Cloudinary-hosted URLs — prevents recording of arbitrary external images
+    if (!String(secureUrl).startsWith('https://res.cloudinary.com/')) {
+      return NextResponse.json({ error: 'Upload data is incomplete.' }, { status: 400 });
+    }
+
     const safeFormat  = String(format ?? '').toLowerCase();
     const safeFile    = String(originalFilename ?? '');
     const safeTitle   = String(title ?? safeFile ?? '').trim() || safeFile;

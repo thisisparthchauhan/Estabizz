@@ -71,6 +71,25 @@ export async function POST(req: NextRequest) {
     const status: BlogStatus = body.status ?? 'draft';
     const isPublishing = status === 'published';
 
+    // Server-side image validation for publish requests
+    if (isPublishing) {
+      // Reject images with empty or placeholder alt text
+      const imgTagRe          = /<img\s[^>]*>/gi;
+      const altAttrRe         = /\balt="([^"]*)"/i;
+      const PLACEHOLDER_ALT   = /^Imported image \d+$/i;
+      const imgTags           = cleanContent.match(imgTagRe) ?? [];
+      for (const tag of imgTags) {
+        const altMatch = altAttrRe.exec(tag);
+        const alt      = altMatch ? altMatch[1].trim() : '';
+        if (!alt || PLACEHOLDER_ALT.test(alt)) {
+          return NextResponse.json(
+            { error: 'Please review the alt text for all imported images before publishing.' },
+            { status: 400 }
+          );
+        }
+      }
+    }
+
     // Resolve author
     const author = KNOWN_AUTHORS.find((a) => a.id === body.authorId) ?? KNOWN_AUTHORS[0];
 

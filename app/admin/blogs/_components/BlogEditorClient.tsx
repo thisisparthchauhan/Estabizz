@@ -19,7 +19,7 @@ import Link from "next/link";
 import type { Blog, BlogCategory, BlogStatus } from "@/lib/blog/types";
 import { blogCategories } from "@/lib/blog/categories";
 import { CloudinaryUploader } from "./CloudinaryUploader";
-import RichContentEditor from "./RichContentEditor";
+import RichContentEditor, { type ImageValidationState } from "./RichContentEditor";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -440,6 +440,11 @@ export default function BlogEditorClient({ blog, categories }: Props) {
   // Tracks the server-assigned id after first save so subsequent saves update the same record
   const [savedId, setSavedId] = useState<string | undefined>(blog?.id);
   const [imagePreview, setImagePreview] = useState(false);
+  // Tracks unresolved alt text and media sync failures reported by RichContentEditor
+  const [imageValidation, setImageValidation] = useState<ImageValidationState>({
+    unresolvedAltCount: 0,
+    mediaSyncFailures:  0,
+  });
 
   function set<K extends keyof BlogFormData>(key: K, value: BlogFormData[K]) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -493,6 +498,21 @@ export default function BlogEditorClient({ blog, categories }: Props) {
       setToast({ message: "Please fix the highlighted errors before saving.", type: "error" });
       return;
     }
+
+    // Block Publish (not Draft) when imported images have unresolved issues
+    if (targetStatus === "published") {
+      const { unresolvedAltCount, mediaSyncFailures } = imageValidation;
+      if (unresolvedAltCount > 0 || mediaSyncFailures > 0) {
+        const parts: string[] = [];
+        if (unresolvedAltCount > 0)
+          parts.push(`${unresolvedAltCount} image${unresolvedAltCount !== 1 ? "s" : ""} still need alt text review`);
+        if (mediaSyncFailures > 0)
+          parts.push(`${mediaSyncFailures} image${mediaSyncFailures !== 1 ? "s" : ""} need Media Library sync`);
+        setToast({ message: `Cannot publish: ${parts.join("; ")}. Save as Draft to continue later.`, type: "error" });
+        return;
+      }
+    }
+
     setSaving(true);
 
     try {
@@ -682,6 +702,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
           <RichContentEditor
             value={form.content}
             onChange={(v) => set("content", v)}
+            onImageValidationChange={setImageValidation}
           />
         </SectionCard>
 

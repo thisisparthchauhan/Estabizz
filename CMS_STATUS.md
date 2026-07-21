@@ -1,7 +1,18 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Documentation structure correction**
+> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor + Security Hardening** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Admin security: granular blog and lead permissions (TD-016)**
+
+---
+
+## 2026-07-22 — Admin security: granular blog and lead permissions (TD-016 resolution)
+
+**Task**: Replaced `requireAdmin` with granular `requirePermission` guards on all four previously under-protected admin API routes. `POST /api/admin/blogs/save` now requires `create_blog` (new blog) or `edit_blog` (existing blog); publishing additionally requires `publish_blog`. `DELETE /api/admin/blogs/[id]` requires `delete_blog`. `PATCH /api/admin/blogs/[id]/status` maps each target status to its specific permission (`edit_blog` → draft/pending_review; `approve_blog` → approved; `publish_blog` → published; `reject_blog` → rejected; `archive_blog` → archived). `PATCH /api/admin/leads/[id]` requires new `manage_leads` permission (added to `super_admin` and `admin` role defaults in `lib/admin/types.ts`). `manage_leads` human label added to admin Users UI (`UsersClient.tsx`). Zero `requireAdmin`-only route handlers remain in `app/api/admin/**`. `manage_leads` also added to the permission matrix tables in all security documentation.
+**Files changed**: `lib/admin/types.ts`, `app/api/admin/blogs/save/route.ts`, `app/api/admin/blogs/[id]/route.ts`, `app/api/admin/blogs/[id]/status/route.ts`, `app/api/admin/leads/[id]/route.ts`, `app/admin/users/UsersClient.tsx`, `CMS_STATUS.md`, `docs/security/ESTABIZZ_SECURITY_PERMISSION_MAP.md`, `docs/security/ADMIN_OS_SECURITY_MATRIX.md`, `docs/architecture/ESTABIZZ_API_DATABASE_MAP.md`, `docs/operations/ESTABIZZ_TECHNICAL_DEBT_REGISTER.md`, `docs/roadmap/ESTABIZZ_NEXT_20_TASKS.md`.
+**Commit**: pending (Admin Security: enforce granular blog and lead permissions)
+**TypeScript**: clean (`npx tsc --noEmit` passes).
+**Build**: clean (134 static pages, no errors).
+**Status**: Complete — QA (Antigravity) pending before deploy.
 
 ---
 

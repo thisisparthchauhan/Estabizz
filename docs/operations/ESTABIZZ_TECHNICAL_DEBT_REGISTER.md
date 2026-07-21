@@ -221,15 +221,13 @@
 
 ---
 
-## TD-016 — Blog and leads API routes use `requireAdmin` instead of `requirePermission`
+## TD-016 — Blog and leads API routes use `requireAdmin` instead of `requirePermission` — **RESOLVED 2026-07-22**
 
 | Field | Value |
 |-------|-------|
 | Module | Blog CMS, Leads |
 | Files | `app/api/admin/blogs/save/route.ts`, `app/api/admin/blogs/[id]/route.ts`, `app/api/admin/blogs/[id]/status/route.ts`, `app/api/admin/leads/[id]/route.ts` |
-| Severity | 🟠 Medium |
-| Description | These four state-changing routes are protected by `requireAdmin` (JWT verify + allowlist/DB check) rather than `requirePermission` (which additionally enforces granular role permissions). Any authenticated admin user — regardless of role — can save/delete/publish a blog or update a lead status. The blog role system (`create_blog`, `edit_blog`, `publish_blog`, etc.) is not enforced at the API level for these routes. |
-| Evidence | Verified by grepping `app/api/admin/**` on 2026-07-22. All other admin API categories (content pages, media, regulatory updates, users, backups, approval queue, recycle bin) use `requirePermission`. |
-| Recommended fix | Replace `requireAdmin` with `requirePermission(req, 'edit_blog')` (or the appropriate permission) in each of the four routes. Add a future audit task to verify all new `/api/admin/**` routes added after this correction. |
-| Effort | Small |
-| Agent | Claude Code |
+| Severity | 🟠 Medium → ✅ Resolved |
+| Resolution | All four routes now enforce granular `requirePermission` guards. `POST /api/admin/blogs/save` requires `create_blog` (new blog) or `edit_blog` (existing blog), plus `publish_blog` for any publish action. `DELETE /api/admin/blogs/[id]` requires `delete_blog`. `PATCH /api/admin/blogs/[id]/status` maps each target status to its specific permission (`edit_blog` for draft/pending_review, `approve_blog`, `publish_blog`, `reject_blog`, `archive_blog`). `PATCH /api/admin/leads/[id]` requires new `manage_leads` permission (added to `super_admin` and `admin` role defaults). `manage_leads` label added to admin Users UI. Zero `requireAdmin`-only handlers remain in `app/api/admin/**`. TypeScript clean. Production build clean (134 pages). |
+| Commit | pending (Admin Security: enforce granular blog and lead permissions) |
+| QA | Antigravity pending |

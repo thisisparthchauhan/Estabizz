@@ -8,18 +8,16 @@
 
 ## Priority 0 — Stabilisation (Tasks 1–6)
 
-### Task 1 — Fix blog and leads API permission gap (TD-016)
+### ~~Task 1 — Fix blog and leads API permission gap (TD-016)~~ ✅ COMPLETED 2026-07-22
 
 | Field | Value |
 |-------|-------|
-| Objective | Replace `requireAdmin` with `requirePermission` on four routes: `POST /api/admin/blogs/save`, `GET/PATCH/DELETE /api/admin/blogs/[id]`, `PATCH /api/admin/blogs/[id]/status`, `PATCH /api/admin/leads/[id]`. Use the correct granular permission for each (`edit_blog`, `delete_blog`, `publish_blog`, `manage_blogs`). |
-| Why now | Blog role system (`content_writer`, `compliance_reviewer`) is not enforced at the API level. Any authenticated admin can publish or delete any blog. Highest-priority permission gap on the current build. |
-| Files | `app/api/admin/blogs/save/route.ts`, `app/api/admin/blogs/[id]/route.ts`, `app/api/admin/blogs/[id]/status/route.ts`, `app/api/admin/leads/[id]/route.ts` |
-| Complexity | Small |
-| Agent | Claude Code |
-| QA | Antigravity |
-| Approval gate | Owner |
-| Deploy required | Yes |
+| Objective | Replace `requireAdmin` with `requirePermission` on four routes — completed. |
+| Resolution | `POST /api/admin/blogs/save`: `create_blog` (new) / `edit_blog` (existing) + `publish_blog` (publish). `DELETE /api/admin/blogs/[id]`: `delete_blog`. `PATCH /api/admin/blogs/[id]/status`: per-status mapping. `PATCH /api/admin/leads/[id]`: new `manage_leads` permission. `manage_leads` added to `super_admin`/`admin` role defaults and Users UI label map. All `requireAdmin`-only handlers eliminated from `app/api/admin/**`. TypeScript clean. Build clean (134 pages). |
+| Files changed | `lib/admin/types.ts`, `app/api/admin/blogs/save/route.ts`, `app/api/admin/blogs/[id]/route.ts`, `app/api/admin/blogs/[id]/status/route.ts`, `app/api/admin/leads/[id]/route.ts`, `app/admin/users/UsersClient.tsx` |
+| Commit | pending (Admin Security: enforce granular blog and lead permissions) |
+| QA | Antigravity pending |
+| Deploy required | Yes — after QA pass |
 
 ---
 

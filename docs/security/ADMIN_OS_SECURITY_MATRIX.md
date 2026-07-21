@@ -13,6 +13,7 @@ This document records the permission model, protected routes, and security invar
 ## 2. Current Phase
 
 - **Phase 5A** — Admin OS Security, Permission, and Route Protection Hardening
+- **Phase 6C Security Hardening (2026-07-22)** — Blog and leads API granular permission enforcement (TD-016 resolved). `manage_leads` permission added.
 - All work is **local**. Not pushed to production.
 - Public Content CMS: **46 managed pages** (c0188b2 → Phase 4R baseline)
 
@@ -71,6 +72,7 @@ This document records the permission model, protected routes, and security invar
 | `manage_media` | Upload and edit media assets | ✓ | ✓ (soft) | — | Medium |
 | `manage_users` | Create, edit, suspend admin users; reset passwords | ✓ | — | — | Critical |
 | `manage_backups` | Create and download CMS data backups | — | — | — | High |
+| `manage_leads` | View and update lead enquiries (CRM status) | — | — | — | Medium |
 | `manage_blogs` | View blog admin section | — | — | — | Low |
 | `create_blog` | Author new blog posts | ✓ | — | — | Low |
 | `edit_blog` | Edit any blog post | ✓ | — | — | Low |
@@ -97,6 +99,7 @@ This document records the permission model, protected routes, and security invar
 | `manage_media` | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | ✓ | — |
 | `manage_users` | ✓ | — | — | — | — | — | — | — | — |
 | `manage_backups` | ✓ | ✓ | — | — | — | — | — | — | — |
+| `manage_leads` | ✓ | ✓ | — | — | — | — | — | — | — |
 | `manage_blogs` | ✓ | ✓ | — | ✓ | ✓ | — | — | ✓ | ✓ |
 | `create_blog` | ✓ | ✓ | — | ✓ | — | — | — | ✓ | — |
 | `edit_blog` | ✓ | ✓ | — | ✓ | — | — | — | ✓ | — |
@@ -215,10 +218,23 @@ Protection invariants:
 | `POST .../[id]/move-to-draft` | POST | `requirePermission` | `manage_content` |
 | `POST .../[id]/delete` | POST | `requirePermission` | `delete_content` |
 
-### Leads
+### Blog Routes *(fixed Phase 6C security hardening, 2026-07-22)*
 | Route | Method | Auth | Permission |
 |---|---|---|---|
-| `PATCH /api/admin/leads/[id]` | PATCH | `requireAdmin` | Any authenticated admin |
+| `POST /api/admin/blogs/save` (new blog) | POST | `requirePermission` | `create_blog` |
+| `POST /api/admin/blogs/save` (existing blog) | POST | `requirePermission` | `edit_blog` + `publish_blog` if publishing |
+| `DELETE /api/admin/blogs/[id]` | DELETE | `requirePermission` | `delete_blog` |
+| `PATCH /api/admin/blogs/[id]/status` → `draft`/`pending_review` | PATCH | `requirePermission` | `edit_blog` |
+| `PATCH /api/admin/blogs/[id]/status` → `approved` | PATCH | `requirePermission` | `approve_blog` |
+| `PATCH /api/admin/blogs/[id]/status` → `published` | PATCH | `requirePermission` | `publish_blog` |
+| `PATCH /api/admin/blogs/[id]/status` → `rejected` | PATCH | `requirePermission` | `reject_blog` |
+| `PATCH /api/admin/blogs/[id]/status` → `archived` | PATCH | `requirePermission` | `archive_blog` |
+| `GET/PATCH /api/admin/blogs/featured` | GET/PATCH | `requirePermission` | `manage_blogs` |
+
+### Leads *(fixed Phase 6C security hardening, 2026-07-22)*
+| Route | Method | Auth | Permission |
+|---|---|---|---|
+| `PATCH /api/admin/leads/[id]` | PATCH | `requirePermission` | `manage_leads` (super_admin, admin) |
 
 ---
 

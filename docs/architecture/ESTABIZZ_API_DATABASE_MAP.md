@@ -20,11 +20,9 @@
 
 | Method | Route | Auth | Permission | Purpose | Notes |
 |--------|-------|------|------------|---------|-------|
-| POST | `/api/admin/blogs/save` | Admin | `requireAdmin` ⚠️ | Create/update blog, sanitize HTML, publish validation | htmlparser2 alt validation on publish. Uses `requireAdmin` NOT `requirePermission` — granular blog permissions not enforced. See TD-016. |
-| GET | `/api/admin/blogs/[id]` | Admin | `requireAdmin` ⚠️ | Get single blog by ID | Uses `requireAdmin` NOT `requirePermission`. See TD-016. |
-| PATCH | `/api/admin/blogs/[id]` | Admin | `requireAdmin` ⚠️ | Update blog fields | Uses `requireAdmin` NOT `requirePermission`. See TD-016. |
-| DELETE | `/api/admin/blogs/[id]` | Admin | `requireAdmin` ⚠️ | Delete blog | Uses `requireAdmin` NOT `requirePermission`. See TD-016. |
-| PATCH | `/api/admin/blogs/[id]/status` | Admin | `requireAdmin` ⚠️ | Change blog status | Uses `requireAdmin` NOT `requirePermission`. See TD-016. |
+| POST | `/api/admin/blogs/save` | Admin | `create_blog` (new) / `edit_blog` (existing) + `publish_blog` (if publishing) | Create/update blog, sanitize HTML, publish validation | htmlparser2 alt validation on publish. TD-016 resolved 2026-07-22. |
+| DELETE | `/api/admin/blogs/[id]` | Admin | `delete_blog` | Delete blog | TD-016 resolved 2026-07-22. Route has DELETE handler only (no GET/PATCH). |
+| PATCH | `/api/admin/blogs/[id]/status` | Admin | Status-mapped: `edit_blog` (draft/pending_review), `approve_blog`, `publish_blog`, `reject_blog`, `archive_blog` | Change blog status | TD-016 resolved 2026-07-22. |
 | GET/PATCH | `/api/admin/blogs/featured` | Admin | `manage_blogs` | Get/set featured blogs | — |
 | POST | `/api/submit-blog` | None | — | Public blog submission | User-submitted blogs |
 | GET | `/api/my-blogs/[id]` | Session | — | Get user's own blog | — |
@@ -114,7 +112,7 @@
 | Method | Route | Auth | Permission | Purpose | Notes |
 |--------|-------|------|------------|---------|-------|
 | POST | `/api/leads` | None | — | Capture lead from contact/get-started forms | — |
-| GET/PATCH/DELETE | `/api/admin/leads/[id]` | Admin | `requireAdmin` ⚠️ | Manage leads | Uses `requireAdmin` NOT `requirePermission`. See TD-016. |
+| PATCH | `/api/admin/leads/[id]` | Admin | `manage_leads` | Update lead status | TD-016 resolved 2026-07-22. Route has PATCH handler only (no GET/DELETE). `manage_leads` added to `super_admin` and `admin` roles. |
 | POST | `/api/recommend-services` | None | — | AI service recommendation | Uses Anthropic SDK — currently functional only if API key set |
 | POST | `/api/chat` | None | — | AI chat widget | Uses Anthropic SDK — dormant without API key |
 
@@ -210,4 +208,4 @@
 | No transaction protection | Multi-step operations (e.g. blog + media) | Medium | MongoDB transactions not used |
 | Public AI endpoints | `/api/chat`, `/api/recommend-services` | Medium | No auth, no rate limit — cost risk when API key is active |
 | Blog slug uniqueness | `/api/admin/blogs/save` | Low | Race condition possible on concurrent create |
-| Blog/leads permission gap ⚠️ | `/api/admin/blogs/*`, `/api/admin/leads/[id]` | Medium | `requireAdmin` used instead of `requirePermission` — blog role system not enforced at API level. **Future audit required**: verify all `/api/admin/**` routes added after 2026-07-22 use `requirePermission`. |
+| ~~Blog/leads permission gap~~ **RESOLVED** | `/api/admin/blogs/*`, `/api/admin/leads/[id]` | Resolved 2026-07-22 | All four routes now use `requirePermission` with granular permissions. `manage_leads` permission added. Zero `requireAdmin`-only routes remain in `app/api/admin/**`. **Future audit required**: verify all `/api/admin/**` routes added after 2026-07-22 use `requirePermission`. |

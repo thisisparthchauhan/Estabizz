@@ -88,6 +88,7 @@ const PERMISSION_LABELS: Record<string, string> = {
   archive_blog:     "Archive blog posts",
   delete_blog:      "Delete blog posts",
   manage_categories:"Manage blog categories",
+  manage_leads:     "Manage lead enquiries",
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

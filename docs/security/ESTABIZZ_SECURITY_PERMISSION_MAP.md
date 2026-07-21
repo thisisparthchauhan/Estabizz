@@ -1,6 +1,6 @@
 # Estabizz — Security and Permission Map
 
-> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
+> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7** · Security hardening commit: pending (admin blog/leads permission fix)
 > Contains: confirmed facts verified against the source tree on 2026-07-22.
 
 ---
@@ -90,6 +90,7 @@ Admin API call (e.g. POST /api/admin/media)
 | `purge_content` | ✓ | ✓ | — | — | — | — | — |
 | `manage_seo` | ✓ | ✓ | — | — | — | ✓ | — |
 | `manage_backups` | ✓ | ✓ | — | — | — | — | — |
+| `manage_leads` | ✓ | ✓ | — | — | — | — | — |
 
 ---
 
@@ -108,7 +109,7 @@ The two seed accounts (`estabizz@gmail.com` as `super_admin`, `info@estabizz.com
 | Route category | Protection layer | Notes |
 |----------------|-----------------|-------|
 | `/admin/*` (pages) | `app/admin/layout.tsx` JWT guard | Redirect to /login on failure |
-| `/api/admin/*` | `requireAdmin` or `requirePermission` — **see audit gap below** | 401/403 JSON response |
+| `/api/admin/*` | `requirePermission` (granular permission per route) | 401/403 JSON response. No `requireAdmin`-only routes remain. |
 | `/api/auth/*` | None | Login/logout are public endpoints |
 | `/api/leads` | None | Public contact form |
 | `/api/submit-blog` | None | Public blog submission |
@@ -131,7 +132,7 @@ The two seed accounts (`estabizz@gmail.com` as `super_admin`, `info@estabizz.com
 | S5 | No token refresh mechanism | Low | User must re-login after 7 days; acceptable for admin panel |
 | S6 | Cloudinary unsigned upload preset is public | Accepted | Unsigned preset limits what can be uploaded; Cloudinary access controls apply |
 | S7 | TipTap duplicate extension warning in dev | Dev only — undiagnosed | `immediatelyRender: false` was added to address Next.js SSR/hydration behaviour; whether it also removes the duplicate extension warning has not been confirmed. Inspect the final TipTap extension array before closing. |
-| S8 | Blog and leads API routes use `requireAdmin` not `requirePermission` | Medium — granular permission enforcement incomplete | `POST /api/admin/blogs/save`, `GET/PATCH/DELETE /api/admin/blogs/[id]`, `PATCH /api/admin/blogs/[id]/status`, `PATCH /api/admin/leads/[id]` all use `requireAdmin` — any authenticated admin can call them regardless of role. A full `/api/admin/**` permission audit is required before the platform scales to multiple admin roles. |
+| S8 | ~~Blog and leads API routes use `requireAdmin` not `requirePermission`~~ **RESOLVED 2026-07-22** | Medium → **Fixed** | `POST /api/admin/blogs/save` now requires `create_blog` (new) or `edit_blog` (existing) + `publish_blog` (if publishing). `DELETE /api/admin/blogs/[id]` requires `delete_blog`. `PATCH /api/admin/blogs/[id]/status` maps each target status to its specific permission (`edit_blog` / `approve_blog` / `publish_blog` / `reject_blog` / `archive_blog`). `PATCH /api/admin/leads/[id]` requires new `manage_leads` permission (added to `super_admin` and `admin` roles). No `requireAdmin` calls remain anywhere in `app/api/admin/**`. Full permission audit confirmed clean. |
 
 ---
 

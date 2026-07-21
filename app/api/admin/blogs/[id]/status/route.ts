@@ -18,8 +18,9 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { adminUpdateBlogStatus } from '@/lib/blog/repository';
-import { requireAdmin } from '@/lib/admin/requireAdmin';
+import { requirePermission } from '@/lib/admin/requirePermission';
 import type { BlogStatus } from '@/lib/blog/types';
+import type { AdminPermission } from '@/lib/admin/types';
 
 const VALID_STATUSES: BlogStatus[] = [
   'draft',
@@ -30,14 +31,21 @@ const VALID_STATUSES: BlogStatus[] = [
   'archived',
 ];
 
+// Each target status requires a specific granular permission.
+// draft / pending_review are editorial state changes → edit_blog.
+const STATUS_PERMISSION: Record<BlogStatus, AdminPermission> = {
+  draft:          'edit_blog',
+  pending_review: 'edit_blog',
+  approved:       'approve_blog',
+  published:      'publish_blog',
+  rejected:       'reject_blog',
+  archived:       'archive_blog',
+};
+
 type Params = { params: Promise<{ id: string }> };
 
 export async function PATCH(req: NextRequest, { params }: Params) {
   try {
-    // ── Admin auth guard ──────────────────────────────────────────────────────
-    const auth = await requireAdmin(req);
-    if (!auth.ok) return auth.response;
-
     const { id } = await params;
 
     const body = await req.json();
@@ -53,6 +61,10 @@ export async function PATCH(req: NextRequest, { params }: Params) {
         { status: 400 }
       );
     }
+
+    // ── Granular permission guard — enforced after status validation ──────────
+    const auth = await requirePermission(req, STATUS_PERMISSION[status]);
+    if (!auth.ok) return auth.response;
 
     const patch: Partial<import('@/lib/blog/types').Blog> = { status };
 

@@ -10,7 +10,7 @@ import { blogCategories } from '@/lib/blog/categories';
 import { addSubmission, updateSubmission, getSubmissionById } from '@/lib/blog/submissionStore';
 import { connectDB } from '@/lib/db';
 import BlogModel from '@/lib/models/Blog';
-import { requireAdmin } from '@/lib/admin/requireAdmin';
+import { requirePermission } from '@/lib/admin/requirePermission';
 import { sanitizeBlogHtml } from '@/lib/blog/sanitize';
 import { parseDocument } from 'htmlparser2';
 import { findAll, getAttributeValue } from 'domutils';
@@ -52,10 +52,6 @@ function estimateReadingTime(text: string): number {
 
 export async function POST(req: NextRequest) {
   try {
-    // ── Admin auth guard ──────────────────────────────────────────────────────
-    const auth = await requireAdmin(req);
-    if (!auth.ok) return auth.response;
-
     const body = await req.json();
 
     // ── Validation ────────────────────────────────────────────────────────────
@@ -66,13 +62,29 @@ export async function POST(req: NextRequest) {
     const category = blogCategories.find((c) => c.id === body.categoryId);
     if (!category) return NextResponse.json({ error: 'Invalid category.' }, { status: 400 });
 
+    const status: BlogStatus = body.status ?? 'draft';
+    const isPublishing = status === 'published';
+
+    // ── Granular permission guard ─────────────────────────────────────────────
+    // body.id present → editing an existing blog (requires edit_blog)
+    // body.id absent  → creating a new blog (requires create_blog)
+    const isEdit = Boolean(body.id);
+    const auth = await requirePermission(req, isEdit ? 'edit_blog' : 'create_blog');
+    if (!auth.ok) return auth.response;
+
+    // Publishing additionally requires publish_blog
+    if (isPublishing && !auth.admin.permissions.includes('publish_blog')) {
+      return NextResponse.json(
+        { error: 'You do not have permission to publish blog.' },
+        { status: 403 }
+      );
+    }
+
     // XSS defense: sanitize the article HTML before it is stored.
     const cleanContent = sanitizeBlogHtml(body.content.trim());
 
     const now    = new Date();
     const nowISO = now.toISOString();
-    const status: BlogStatus = body.status ?? 'draft';
-    const isPublishing = status === 'published';
 
     // Server-side image validation for publish requests
     if (isPublishing) {

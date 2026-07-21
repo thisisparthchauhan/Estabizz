@@ -1,6 +1,7 @@
 # Estabizz — Security and Permission Map
 
-> Last verified: 2026-07-22 · Commit: f182723
+> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
+> Contains: confirmed facts verified against the source tree on 2026-07-22.
 
 ---
 
@@ -107,7 +108,7 @@ The two seed accounts (`estabizz@gmail.com` as `super_admin`, `info@estabizz.com
 | Route category | Protection layer | Notes |
 |----------------|-----------------|-------|
 | `/admin/*` (pages) | `app/admin/layout.tsx` JWT guard | Redirect to /login on failure |
-| `/api/admin/*` | `requireAdmin` or `requirePermission` | 401/403 JSON response |
+| `/api/admin/*` | `requireAdmin` or `requirePermission` — **see audit gap below** | 401/403 JSON response |
 | `/api/auth/*` | None | Login/logout are public endpoints |
 | `/api/leads` | None | Public contact form |
 | `/api/submit-blog` | None | Public blog submission |
@@ -129,7 +130,8 @@ The two seed accounts (`estabizz@gmail.com` as `super_admin`, `info@estabizz.com
 | S4 | No CSRF protection on state-changing forms | Medium | SameSite=Lax cookie mitigates most cases; explicit CSRF token recommended |
 | S5 | No token refresh mechanism | Low | User must re-login after 7 days; acceptable for admin panel |
 | S6 | Cloudinary unsigned upload preset is public | Accepted | Unsigned preset limits what can be uploaded; Cloudinary access controls apply |
-| S7 | TipTap duplicate extension warning in dev | Dev only | React StrictMode artefact; no production impact |
+| S7 | TipTap duplicate extension warning in dev | Dev only — undiagnosed | `immediatelyRender: false` was added to address Next.js SSR/hydration behaviour; whether it also removes the duplicate extension warning has not been confirmed. Inspect the final TipTap extension array before closing. |
+| S8 | Blog and leads API routes use `requireAdmin` not `requirePermission` | Medium — granular permission enforcement incomplete | `POST /api/admin/blogs/save`, `GET/PATCH/DELETE /api/admin/blogs/[id]`, `PATCH /api/admin/blogs/[id]/status`, `PATCH /api/admin/leads/[id]` all use `requireAdmin` — any authenticated admin can call them regardless of role. A full `/api/admin/**` permission audit is required before the platform scales to multiple admin roles. |
 
 ---
 

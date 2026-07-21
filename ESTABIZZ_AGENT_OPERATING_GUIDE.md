@@ -1,6 +1,7 @@
 # Estabizz — Agent Operating Guide
 
-> Written: 2026-07-22 · For future AI agents working on this codebase
+> Written: 2026-07-22 · Corrections applied: 2026-07-22 · Branch: **main** (confirmed)
+> Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
 > **Read this file before doing any work.** It will save you from common mistakes.
 
 ---
@@ -94,7 +95,7 @@ Must produce zero errors before any commit.
 |-------|-----------|-------|
 | Framework | Next.js App Router | Turbopack in dev, standard webpack in build |
 | Language | TypeScript (strict) | `tsconfig.json` |
-| Styles | Tailwind CSS standalone CLI | NOT PostCSS plugin; compiled to `public/tailwind.css` |
+| Styles | Tailwind CSS — two active paths | (1) CLI compiles `app/globals.css` → `public/tailwind.css`, loaded via `<link>` in layout. (2) Next.js processes `import "@/app/globals.css"` via `postcss.config.js` which includes `tailwindcss` + `autoprefixer`. Both are active. See ESTABIZZ_TECHNICAL_ARCHITECTURE.md §3.5. |
 | DB | MongoDB via Mongoose | Connection pool in `lib/mongodb.ts` |
 | Auth (admin) | JWT, HS256, httpOnly cookie `auth_token`, 7-day expiry | `lib/admin/session.ts` |
 | Auth (user) | Same JWT flow, separate cookie | |
@@ -167,7 +168,7 @@ public/
 | `getAdminUserByEmail` only in `requirePermission` | Returns null for seed accounts without DB record → 403 | Also check `seedAdminUsers` fallback |
 | Gating UI scans behind `hasWordImagesRef` | Misses alt text issues on initial load and existing blogs | Always call `countUnresolvedAlts` on every editor update |
 | Reading `.env.local` to verify secrets | Exposes secrets in tool output | Trust env var names; never print values |
-| Adding `immediatelyRender: true` or omitting the flag | TipTap hydration warning in Next.js | Always use `immediatelyRender: false` |
+| Adding `immediatelyRender: true` or omitting the flag | TipTap hydration warning in Next.js | Always use `immediatelyRender: false`. Note: this addresses Next.js SSR/hydration behaviour; the duplicate-extension console warning (TD-005) is a separate issue that has not yet been fully diagnosed. |
 | Committing without TypeScript check | Type errors silently ship | Always run `npx tsc --noEmit` first |
 
 ---

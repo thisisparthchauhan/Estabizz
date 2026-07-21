@@ -1,6 +1,7 @@
 # Estabizz — Future Product Roadmap
 
-> Last verified: 2026-07-22 · Commit: f182723
+> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Documentation commit: **a60d5a7**
+> This file documents recommended future features, not current state. See ESTABIZZ_CURRENT_COMPLETION_STATUS.md for what is built.
 
 ---
 

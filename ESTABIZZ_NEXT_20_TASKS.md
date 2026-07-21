@@ -1,34 +1,50 @@
 # Estabizz — Next 20 Development Tasks
 
-> Last updated: 2026-07-22 · Commit: f182723
+> Last updated: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
 > All tasks are locally scoped. Do not push/deploy without owner approval.
+> Roadmap sequence corrected 2026-07-22 — tasks reordered to prioritise security and content integrity before new features.
 
 ---
 
 ## Priority 0 — Stabilisation (Tasks 1–6)
 
-### Task 1 — Commit pending changes from current session
+### Task 1 — Fix blog and leads API permission gap (TD-016)
 
 | Field | Value |
 |-------|-------|
-| Objective | Commit `lib/admin/requirePermission.ts` (seed-user fallback) and `app/admin/blogs/_components/RichContentEditor.tsx` (`immediatelyRender: false`) which are staged but not committed |
-| Why now | These fix the 403 on `POST /api/admin/media` and the TipTap console noise. They are complete and TypeScript-clean but uncommitted. |
-| Files | `lib/admin/requirePermission.ts`, `app/admin/blogs/_components/RichContentEditor.tsx`, `next-env.d.ts`, `public/tailwind.css` |
+| Objective | Replace `requireAdmin` with `requirePermission` on four routes: `POST /api/admin/blogs/save`, `GET/PATCH/DELETE /api/admin/blogs/[id]`, `PATCH /api/admin/blogs/[id]/status`, `PATCH /api/admin/leads/[id]`. Use the correct granular permission for each (`edit_blog`, `delete_blog`, `publish_blog`, `manage_blogs`). |
+| Why now | Blog role system (`content_writer`, `compliance_reviewer`) is not enforced at the API level. Any authenticated admin can publish or delete any blog. Highest-priority permission gap on the current build. |
+| Files | `app/api/admin/blogs/save/route.ts`, `app/api/admin/blogs/[id]/route.ts`, `app/api/admin/blogs/[id]/status/route.ts`, `app/api/admin/leads/[id]/route.ts` |
 | Complexity | Small |
 | Agent | Claude Code |
 | QA | Antigravity |
 | Approval gate | Owner |
-| Deploy required | No |
+| Deploy required | Yes |
 
 ---
 
-### Task 2 — Add login rate limiting
+### Task 2 — Protect internal resource pages (TD-009)
 
 | Field | Value |
 |-------|-------|
-| Objective | Protect `POST /api/auth/login` from brute-force and credential stuffing. Limit to 5 attempts per IP per 15 minutes. |
+| Objective | Add an admin-only guard to three internal pages: `/resources/content-rebuild-command`, `/resources/regulatory-update-email-template`, `/resources/service-page-content-framework`. A fix (`a59f095`) exists on branch `cms-admin-os-phase-1` but has not been merged to `main`. Merge or apply the fix. |
+| Why now | Internal tooling pages are publicly accessible on `main`. |
+| Files | `app/resources/content-rebuild-command/page.tsx`, `app/resources/regulatory-update-email-template/page.tsx`, `app/resources/service-page-content-framework/page.tsx` |
+| Complexity | Small |
+| Agent | Claude Code |
+| QA | Manual |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 3 — Add login and public AI endpoint rate limiting
+
+| Field | Value |
+|-------|-------|
+| Objective | Protect `POST /api/auth/login` from brute-force and credential stuffing. Limit to 5 attempts per IP per 15 minutes. Also rate-limit `/api/chat` and `/api/recommend-services` before enabling `ANTHROPIC_API_KEY`. |
 | Why now | Highest security risk on the platform; currently has zero protection. |
-| Files | `app/api/auth/login/route.ts`, `package.json` (add `rate-limiter-flexible`) |
+| Files | `app/api/auth/login/route.ts`, `app/api/chat/route.ts`, `app/api/recommend-services/route.ts`, `package.json` (add `rate-limiter-flexible`) |
 | Dependencies | Redis (recommended) or in-memory fallback for dev |
 | Complexity | Small |
 | Agent | Claude Code |
@@ -38,22 +54,22 @@
 
 ---
 
-### Task 3 — Protect internal resource pages
+### Task 4 — Correct legal pages and public content placeholders
 
 | Field | Value |
 |-------|-------|
-| Objective | Add admin-only guard to three internal pages: `/resources/content-rebuild-command`, `/resources/regulatory-update-email-template`, `/resources/service-page-content-framework`. Move them to `/admin/tools/` or add a redirect to login. |
-| Why now | Internal tooling pages are publicly accessible without auth. |
-| Files | `app/resources/content-rebuild-command/page.tsx`, `app/resources/regulatory-update-email-template/page.tsx`, `app/resources/service-page-content-framework/page.tsx` |
-| Complexity | Small |
-| Agent | Claude Code or Codex |
-| QA | Antigravity |
-| Approval gate | Owner |
+| Objective | Review and update Privacy Policy, Refund Policy, and Terms & Conditions to reflect Estabizz's actual services and legal obligations. Also replace placeholder testimonials in homepage defaults. |
+| Why now | Legal pages are required for production operation. Generic content creates legal and credibility risk. |
+| Files | `app/legal/*/PageClient.tsx`, `lib/content/testimonialsDefaults.ts` |
+| Complexity | Content task (not code) |
+| Agent | Content team + legal review |
+| QA | Manual |
+| Approval gate | Legal review |
 | Deploy required | Yes |
 
 ---
 
-### Task 4 — Blog categories: move from hardcoded to MongoDB
+### Task 5 — Blog categories: move from hardcoded to MongoDB
 
 | Field | Value |
 |-------|-------|
@@ -68,39 +84,22 @@
 
 ---
 
-### Task 5 — Legal pages content review and update
+### Task 6 — Extend CMS visual editor to all 46 managed pages
 
 | Field | Value |
 |-------|-------|
-| Objective | Review and update Privacy Policy, Refund Policy, and Terms & Conditions to reflect Estabizz's actual services and legal obligations. |
-| Why now | Legal pages are required for production operation. Generic content creates legal and credibility risk. |
-| Files | `app/legal/*/PageClient.tsx` |
-| Complexity | Content task (not code) |
-| Agent | Content team + legal review |
-| QA | Manual |
-| Approval gate | Legal review |
-| Deploy required | Yes |
-
----
-
-### Task 6 — Add Sentry (or equivalent) error monitoring
-
-| Field | Value |
-|-------|-------|
-| Objective | Install and configure Sentry for client-side and server-side error capture. Set up alerts for 5xx API errors and JS exceptions. |
-| Why now | No visibility into production errors currently. |
-| Files | `app/layout.tsx`, `next.config.js`, `package.json` |
-| Complexity | Small |
+| Objective | The full pending-changes / approve / publish lifecycle is only implemented for one page. Extend the existing `[slug]/edit` page to work for all 46 managed paths via the existing `by-path` API. |
+| Why now | Content editors cannot update 45 of 46 CMS pages without developer intervention. This is the biggest content ops gap. |
+| Files | `app/admin/content-pages/[slug]/edit/page.tsx`, `PublicContentVisualEditorClient.tsx` (make it generic) |
+| Complexity | Large |
 | Agent | Claude Code |
-| QA | Verify errors appear in Sentry dashboard |
+| QA | Antigravity |
 | Approval gate | Owner |
 | Deploy required | Yes |
 
 ---
 
-## Priority 1 — Immediate Growth (Tasks 7–12)
-
-### Task 7 — Website search (public full-text)
+### Task 7 — Add public website search
 
 | Field | Value |
 |-------|-------|
@@ -114,6 +113,8 @@
 | Deploy required | Yes |
 
 ---
+
+## Priority 1 — Growth (Tasks 8–14)
 
 ### Task 8 — Service eligibility wizard
 
@@ -130,7 +131,22 @@
 
 ---
 
-### Task 9 — Live consultation booking
+### Task 9 — Add Sentry (or equivalent) error monitoring
+
+| Field | Value |
+|-------|-------|
+| Objective | Install and configure Sentry for client-side and server-side error capture. Set up alerts for 5xx API errors and JS exceptions. |
+| Why now | No visibility into production errors currently. |
+| Files | `app/layout.tsx`, `next.config.js`, `package.json` |
+| Complexity | Small |
+| Agent | Claude Code |
+| QA | Verify errors appear in Sentry dashboard |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 10 — Live consultation booking
 
 | Field | Value |
 |-------|-------|
@@ -145,7 +161,7 @@
 
 ---
 
-### Task 10 — WhatsApp Chat integration
+### Task 11 — WhatsApp Chat integration
 
 | Field | Value |
 |-------|-------|
@@ -160,7 +176,7 @@
 
 ---
 
-### Task 11 — Transactional email (Resend integration)
+### Task 12 — Transactional email (Resend integration)
 
 | Field | Value |
 |-------|-------|
@@ -175,14 +191,14 @@
 
 ---
 
-### Task 12 — Extend CMS visual editor to all 46 managed pages
+### Task 13 — Extend CMS visual editor to all 46 managed pages
 
 | Field | Value |
 |-------|-------|
 | Objective | The full pending-changes / approve / publish lifecycle is only implemented for one page. Extend the existing `[slug]/edit` page to work for all 46 managed paths via the existing `by-path` API. |
 | Why now | Content editors cannot update 45 of 46 CMS pages without developer intervention. This is the biggest content ops gap. |
 | Files | `app/admin/content-pages/[slug]/edit/page.tsx`, `PublicContentVisualEditorClient.tsx` (make it generic) |
-| Dependencies | Task 1 committed |
+| Dependencies | None — pending fixes already committed in 49f7c81 |
 | Complexity | Large |
 | Agent | Claude Code |
 | QA | Antigravity |
@@ -191,9 +207,9 @@
 
 ---
 
-## Priority 2 — Productisation (Tasks 13–17)
+## Priority 2 — Productisation (Tasks 14–18)
 
-### Task 13 — Client Portal foundation
+### Task 14 — Client Portal foundation
 
 | Field | Value |
 |-------|-------|
@@ -208,14 +224,14 @@
 
 ---
 
-### Task 14 — Document vault (client document upload)
+### Task 15 — Document vault (client document upload)
 
 | Field | Value |
 |-------|-------|
 | Objective | Allow clients to upload required documents (KYC, incorporation docs, etc.) to their application in the Client Portal. Admin receives notification. Documents stored on Cloudinary or S3 with access control. |
 | Why now | Document collection is a manual WhatsApp-heavy process. |
 | Files | New: `lib/models/Document.ts`, upload flow in client portal |
-| Dependencies | Task 13 |
+| Dependencies | Task 14 |
 | Complexity | Medium |
 | Agent | Claude Code |
 | QA | Antigravity |
@@ -224,7 +240,7 @@
 
 ---
 
-### Task 15 — CRM integration (n8n + Zoho)
+### Task 16 — CRM integration (n8n + Zoho)
 
 | Field | Value |
 |-------|-------|
@@ -239,14 +255,14 @@
 
 ---
 
-### Task 16 — Compliance calendar (client-facing)
+### Task 17 — Compliance calendar (client-facing)
 
 | Field | Value |
 |-------|-------|
 | Objective | Build an admin-managed compliance calendar showing upcoming filing deadlines relevant to each client's registered entities. Visible in Client Portal. |
 | Why now | Compliance deadline reminders are a high-value service differentiator. |
 | Files | New: `lib/models/ComplianceEvent.ts`, admin calendar editor, client portal view |
-| Dependencies | Task 13 |
+| Dependencies | Task 14 |
 | Complexity | Medium |
 | Agent | Claude Code |
 | QA | Antigravity |
@@ -255,14 +271,14 @@
 
 ---
 
-### Task 17 — Management dashboard
+### Task 18 — Management dashboard
 
 | Field | Value |
 |-------|-------|
 | Objective | Build an internal `/admin/dashboard-v2` with charts showing: active clients, applications by regulator, lead pipeline, query ageing, pending documents, content performance. |
 | Why now | Leadership has no structured visibility into platform operations. |
 | Files | New: `app/admin/dashboard-v2/`, chart components |
-| Dependencies | Tasks 13, 15 for real data |
+| Dependencies | Tasks 14, 16 for real data |
 | Complexity | Medium |
 | Agent | Claude Code |
 | QA | Manual |
@@ -271,16 +287,16 @@
 
 ---
 
-## Priority 3 — AI and Scale (Tasks 18–20)
+## Priority 3 — AI and Scale (Tasks 19–21)
 
-### Task 18 — AI blog and SEO draft assistant
+### Task 19 — AI blog and SEO draft assistant
 
 | Field | Value |
 |-------|-------|
 | Objective | Add an AI draft button in the Blog Editor that generates a blog draft outline from a topic + keywords using Claude API. Output is a draft only — admin must review and publish via normal workflow. |
 | Why now | Blog content production is a bottleneck. AI drafts reduce time per article by ~60%. |
 | Files | `app/admin/blogs/_components/BlogEditorClient.tsx`, `app/api/admin/ai/draft-blog/route.ts` |
-| Dependencies | `ANTHROPIC_API_KEY` active, rate limiting on AI endpoint (Task 2 variant) |
+| Dependencies | `ANTHROPIC_API_KEY` active, rate limiting on AI endpoint (see Task 3) |
 | Complexity | Medium |
 | Agent | Claude Code |
 | QA | Antigravity |
@@ -289,7 +305,7 @@
 
 ---
 
-### Task 19 — Regulatory knowledge base (Phase 1)
+### Task 20 — Regulatory knowledge base (Phase 1)
 
 | Field | Value |
 |-------|-------|
@@ -304,7 +320,7 @@
 
 ---
 
-### Task 20 — Error monitoring, analytics, and deployment hardening
+### Task 21 — Error monitoring, analytics, and deployment hardening
 
 | Field | Value |
 |-------|-------|

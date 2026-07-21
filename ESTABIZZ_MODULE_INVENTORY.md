@@ -1,6 +1,6 @@
 # Estabizz — Module Inventory
 
-> Last verified: 2026-07-22 · Commit: f182723
+> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
 
 ---
 

@@ -1,6 +1,7 @@
 # Estabizz — API and Database Map
 
-> Last verified: 2026-07-22 · Commit: f182723
+> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
+> Contains: confirmed facts verified against the source tree on 2026-07-22.
 
 ---
 
@@ -19,11 +20,11 @@
 
 | Method | Route | Auth | Permission | Purpose | Notes |
 |--------|-------|------|------------|---------|-------|
-| POST | `/api/admin/blogs/save` | Admin | `requireAdmin` | Create/update blog, sanitize HTML, publish validation | htmlparser2 alt validation on publish |
-| GET | `/api/admin/blogs/[id]` | Admin | `view_admin` | Get single blog by ID | — |
-| PATCH | `/api/admin/blogs/[id]` | Admin | `edit_blog` | Update blog fields | — |
-| DELETE | `/api/admin/blogs/[id]` | Admin | `delete_blog` | Delete blog | — |
-| PATCH | `/api/admin/blogs/[id]/status` | Admin | `approve_blog`/`publish_blog` | Change blog status | — |
+| POST | `/api/admin/blogs/save` | Admin | `requireAdmin` ⚠️ | Create/update blog, sanitize HTML, publish validation | htmlparser2 alt validation on publish. Uses `requireAdmin` NOT `requirePermission` — granular blog permissions not enforced. See TD-016. |
+| GET | `/api/admin/blogs/[id]` | Admin | `requireAdmin` ⚠️ | Get single blog by ID | Uses `requireAdmin` NOT `requirePermission`. See TD-016. |
+| PATCH | `/api/admin/blogs/[id]` | Admin | `requireAdmin` ⚠️ | Update blog fields | Uses `requireAdmin` NOT `requirePermission`. See TD-016. |
+| DELETE | `/api/admin/blogs/[id]` | Admin | `requireAdmin` ⚠️ | Delete blog | Uses `requireAdmin` NOT `requirePermission`. See TD-016. |
+| PATCH | `/api/admin/blogs/[id]/status` | Admin | `requireAdmin` ⚠️ | Change blog status | Uses `requireAdmin` NOT `requirePermission`. See TD-016. |
 | GET/PATCH | `/api/admin/blogs/featured` | Admin | `manage_blogs` | Get/set featured blogs | — |
 | POST | `/api/submit-blog` | None | — | Public blog submission | User-submitted blogs |
 | GET | `/api/my-blogs/[id]` | Session | — | Get user's own blog | — |
@@ -113,7 +114,7 @@
 | Method | Route | Auth | Permission | Purpose | Notes |
 |--------|-------|------|------------|---------|-------|
 | POST | `/api/leads` | None | — | Capture lead from contact/get-started forms | — |
-| GET/PATCH/DELETE | `/api/admin/leads/[id]` | Admin | `view_admin` | Manage leads | — |
+| GET/PATCH/DELETE | `/api/admin/leads/[id]` | Admin | `requireAdmin` ⚠️ | Manage leads | Uses `requireAdmin` NOT `requirePermission`. See TD-016. |
 | POST | `/api/recommend-services` | None | — | AI service recommendation | Uses Anthropic SDK — currently functional only if API key set |
 | POST | `/api/chat` | None | — | AI chat widget | Uses Anthropic SDK — dormant without API key |
 
@@ -209,3 +210,4 @@
 | No transaction protection | Multi-step operations (e.g. blog + media) | Medium | MongoDB transactions not used |
 | Public AI endpoints | `/api/chat`, `/api/recommend-services` | Medium | No auth, no rate limit — cost risk when API key is active |
 | Blog slug uniqueness | `/api/admin/blogs/save` | Low | Race condition possible on concurrent create |
+| Blog/leads permission gap ⚠️ | `/api/admin/blogs/*`, `/api/admin/leads/[id]` | Medium | `requireAdmin` used instead of `requirePermission` — blog role system not enforced at API level. **Future audit required**: verify all `/api/admin/**` routes added after 2026-07-22 use `requirePermission`. |

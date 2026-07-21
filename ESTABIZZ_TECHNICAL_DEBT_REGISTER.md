@@ -1,7 +1,8 @@
 # Estabizz — Technical Debt and Known Issues Register
 
-> Last verified: 2026-07-22 · Commit: f182723
+> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
 > Severity: 🔴 High | 🟠 Medium | 🟡 Low
+> Contains: confirmed facts verified against the source tree on 2026-07-22.
 
 ---
 
@@ -65,16 +66,16 @@
 
 ---
 
-## TD-005 — TipTap duplicate extension warning in dev
+## TD-005 — TipTap duplicate extension warning in dev — UNRESOLVED
 
 | Field | Value |
 |-------|-------|
 | Module | Blog Editor |
 | File | `app/admin/blogs/_components/RichContentEditor.tsx` |
 | Severity | 🟡 Low |
-| Description | Console shows `[tiptap warn]: Duplicate extension names found: ['link', 'underline']` in development. This is a React StrictMode double-mount artefact in Next.js App Router. `immediatelyRender: false` has been added to suppress the Next.js hydration warning, but the duplicate extension warning may persist. |
-| Production impact | None confirmed — warning is dev-mode only |
-| Recommended fix | Monitor for functional issues; if needed, add a `key` prop to force full remount on value change |
+| Description | Console shows `[tiptap warn]: Duplicate extension names found: ['link', 'underline']` in development. The root cause has not been fully diagnosed. `immediatelyRender: false` was added to `useEditor` to address a Next.js SSR/hydration behaviour; it does not itself remove duplicated TipTap extension registration. Whether the duplicate-extension warning is produced by React Strict Mode double-mounting, by StarterKit including Link/Underline in addition to explicit extension registrations, or by another cause has not been confirmed. The final extension array passed to `useEditor` should be inspected before this issue is closed. |
+| Production impact | None confirmed — warning observed in dev mode only |
+| Recommended fix | (1) Log `editor.extensionManager.extensions.map(e => e.name)` to identify the actual duplicate. (2) If StarterKit registers Link/Underline, remove the separate imports. (3) If the cause is React Strict Mode re-mount, consider a stable `extensions` array defined outside the component. |
 | Effort | Small |
 | Agent | Claude Code |
 
@@ -122,15 +123,16 @@
 
 ---
 
-## TD-009 — Internal resource pages publicly accessible
+## TD-009 — Internal resource pages publicly accessible — STATUS: PARTIAL (NOT YET ON MAIN)
 
 | Field | Value |
 |-------|-------|
 | Module | Resources section |
 | Files | `app/resources/content-rebuild-command/`, `app/resources/regulatory-update-email-template/`, `app/resources/service-page-content-framework/` |
 | Severity | 🟠 Medium |
-| Description | Three internal tooling/template pages are publicly accessible. They are excluded from `robots.txt` and sitemap, but they can still be accessed by anyone with the URL. They are not behind any auth. |
-| Recommended fix | Either add auth guard (`requireAdmin` redirect) or remove these pages from the public route tree |
+| Description | Three internal tooling/template pages are publicly accessible. They are excluded from `robots.txt` and sitemap, but they can still be accessed by anyone with the URL. |
+| Branch status | A fix was committed as `a59f095 CMS Resources: protect internal resource pages` on branch `cms-admin-os-phase-1` but this commit is **not present on `main`**. Verify the fix and merge before closing this item. |
+| Recommended fix | Merge or cherry-pick `a59f095` into `main` after confirming the changes are correct |
 | Effort | Small |
 | Agent | Claude Code |
 
@@ -214,5 +216,20 @@
 | Severity | 🟡 Low |
 | Description | `dev` script uses `&` to background the Tailwind watcher: `npx tailwindcss --watch & next dev`. The `&` starts Tailwind asynchronously and the shell script does not wait for it. If Tailwind crashes, there is no automatic restart. If the dev server is started via Claude Code's preview_start, the Tailwind child process may not be properly terminated when the preview stops. |
 | Recommended fix | Use `concurrently` package for parallel processes, or verify that preview_stop correctly terminates all child processes. |
+| Effort | Small |
+| Agent | Claude Code |
+
+---
+
+## TD-016 — Blog and leads API routes use `requireAdmin` instead of `requirePermission`
+
+| Field | Value |
+|-------|-------|
+| Module | Blog CMS, Leads |
+| Files | `app/api/admin/blogs/save/route.ts`, `app/api/admin/blogs/[id]/route.ts`, `app/api/admin/blogs/[id]/status/route.ts`, `app/api/admin/leads/[id]/route.ts` |
+| Severity | 🟠 Medium |
+| Description | These four state-changing routes are protected by `requireAdmin` (JWT verify + allowlist/DB check) rather than `requirePermission` (which additionally enforces granular role permissions). Any authenticated admin user — regardless of role — can save/delete/publish a blog or update a lead status. The blog role system (`create_blog`, `edit_blog`, `publish_blog`, etc.) is not enforced at the API level for these routes. |
+| Evidence | Verified by grepping `app/api/admin/**` on 2026-07-22. All other admin API categories (content pages, media, regulatory updates, users, backups, approval queue, recycle bin) use `requirePermission`. |
+| Recommended fix | Replace `requireAdmin` with `requirePermission(req, 'edit_blog')` (or the appropriate permission) in each of the four routes. Add a future audit task to verify all new `/api/admin/**` routes added after this correction. |
 | Effort | Small |
 | Agent | Claude Code |

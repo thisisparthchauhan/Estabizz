@@ -1,7 +1,8 @@
 # Estabizz — Project Master Context
 
-> Created: 2026-07-22 · Commit: f182723
+> Created: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
 > **Start here.** This file is the single entry point for any agent or developer who is new to this project.
+> Corrections applied: 2026-07-22 — commit references, pending changes status, CSS pipeline, permission gaps, TipTap warning, completion percentages.
 
 ---
 
@@ -27,7 +28,7 @@ The platform is a **Next.js 16 website** with a full custom Admin OS for content
 | Media | Cloudinary (unsigned upload) |
 | Deploy | Vercel, auto on push to `main` |
 | Admin URL | `/admin` (requires JWT cookie) |
-| Current branch | `main` (active development) |
+| Current branch | `main` (confirmed by git on 2026-07-22) |
 | Owner email | `estabizz@gmail.com` |
 
 ---
@@ -99,11 +100,13 @@ Read these documents in the order that matches your task:
 - Media upsert idempotency (`findOneAndUpdate` + `$setOnInsert` + E11000 catch)
 - URL validation via `new URL()` parsing
 
-**Pending code changes (not yet in a commit)**:
-- `lib/admin/requirePermission.ts` — seed user fallback (fixes 403 for estabizz@gmail.com on media API)
-- `app/admin/blogs/_components/RichContentEditor.tsx` — `immediatelyRender: false`, always-on alt scan
+**Commit history (two separate commits)**:
+- `f182723` — functional hardening: media idempotency, URL validation, htmlparser2 server parser
+- `49f7c81` — post-screenshot fixes: requirePermission seed fallback, RichContentEditor always-on alt scan, immediatelyRender: false
 
-**Next recommended task**: See [Task 1 in ESTABIZZ_NEXT_20_TASKS.md](ESTABIZZ_NEXT_20_TASKS.md) — commit the pending changes.
+**Pending code changes on `main` as of 2026-07-22**: None. Both requirePermission.ts and RichContentEditor.tsx have zero uncommitted changes — confirmed by `git diff` returning empty for both files. All fixes from the current session are committed.
+
+**Next recommended task**: See [Task 1 in ESTABIZZ_NEXT_20_TASKS.md](ESTABIZZ_NEXT_20_TASKS.md) — fix blog and leads API permission gap (TD-016).
 
 ---
 

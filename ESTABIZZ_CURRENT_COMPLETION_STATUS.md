@@ -1,7 +1,8 @@
 # Estabizz — Current Completion Status
 
-> Last verified: 2026-07-22 · Commit: f182723
+> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
 > Status key: ✅ Complete | 🟡 Implemented — QA pending | 🟠 Partially implemented | 🔴 Not started | ⚪ Not applicable / deferred
+> Contains: confirmed facts verified against the source tree on 2026-07-22.
 
 ---
 
@@ -98,15 +99,31 @@
 
 ---
 
-## Overall Completion Estimate
+## Overall Completion Estimates
 
-| Area | Estimate |
-|------|---------|
-| Admin OS modules | ~88% |
-| Public website content | ~70% |
-| CMS coverage (46/~80 public pages) | ~58% |
-| Security hardening | ~55% |
-| SEO completeness | ~75% |
-| **Overall platform** | **~72%** |
+> Estimates are based on code review, not feature testing. QA has not been performed on every module.
 
-> Estimate is based on code review, not feature testing. QA has not been performed on every module.
+### Current website and Admin OS — what is actually built
+
+| Area | Estimate | Notes |
+|------|---------|-------|
+| Admin OS modules (all built phases) | ~88% | Users, media, blogs, regulatory updates, homepage CMS, approval queue, recycle bin, backups all functional |
+| Public website — service/guide pages | ~92% | 46 managed CMS paths + hardcoded fallbacks for remaining |
+| CMS visual editor (pending-changes lifecycle) | ~40% | Full lifecycle implemented only for `/rbi/nbfc-registration-in-india`; others have shell only |
+| Security hardening of current build | ~55% | Rate limiting, CSP, permission gaps on blog routes all outstanding |
+| SEO completeness | ~75% | Sitemap and robots complete; CSP and canonical URL gaps remain |
+| **Current website + Admin OS scope** | **~85–88%** | Measures only what is in scope for Phase 6C and earlier |
+
+### Full future Estabizz technology platform
+
+| Future area | Status |
+|------------|--------|
+| Client portal | 🔴 Not started |
+| CRM / n8n integration | 🔴 Not started |
+| AI compliance assistant | 🔴 Not started |
+| Transactional email | 🔴 Not started |
+| WhatsApp integration | 🔴 Not started |
+| Management dashboard | 🔴 Not started |
+| Public search | 🔴 Not started |
+| Regulatory knowledge engine | 🔴 Not started |
+| **Full future platform roadmap** | **~25–30%** complete (current build covers the public website + Admin OS layer only) |

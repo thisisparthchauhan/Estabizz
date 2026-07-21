@@ -1,6 +1,7 @@
 # Estabizz — Technical Architecture
 
-> Last verified: 2026-07-22 · Commit: f182723 · Branch: main
+> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
+> Contains: confirmed facts verified against the source tree on 2026-07-22.
 
 ---
 
@@ -11,7 +12,7 @@
 | Framework | Next.js (App Router, Turbopack) | ^16.2.4 | Core |
 | UI library | React | ^18.3.1 | Core |
 | Language | TypeScript | ^5.3.3 | Core |
-| Styling | Tailwind CSS (standalone CLI) | ^3.4.19 | Core |
+| Styling | Tailwind CSS (standalone CLI + PostCSS) | ^3.4.19 | Core |
 | Database | MongoDB via Mongoose | Mongoose ^9.4.1 | Core |
 | Auth | JWT (jsonwebtoken) | ^9.0.3 | Core |
 | Password hashing | bcryptjs | ^3.0.3 | Core |
@@ -122,7 +123,27 @@ Admin API call
 ```
 
 ### 3.5 Tailwind CSS Compilation
-Tailwind uses the **standalone CLI** (not PostCSS plugin), pre-compiled to `public/tailwind.css`. The dev script runs `tailwindcss --watch & next dev` in parallel. Build runs `tailwindcss && next build` sequentially. **Critical**: never run `npm run build` while dev server is active — they both write to `public/tailwind.css` and `.next/`.
+
+**Two CSS paths are active simultaneously** — both verified in source:
+
+| Path | Mechanism | How loaded |
+|------|-----------|-----------|
+| Tailwind CLI output | `npx tailwindcss -i app/globals.css -o public/tailwind.css` (run via `package.json` scripts) | `<link rel="stylesheet" href="/tailwind.css" />` in `app/layout.tsx` line 57 |
+| Next.js CSS pipeline | `import "@/app/globals.css"` in `app/layout.tsx` line 10, processed by Next.js through `postcss.config.js` | Bundled into Next.js CSS output |
+
+**`postcss.config.js` exists** (confirmed) and lists two plugins: `tailwindcss` and `autoprefixer`. This file is used by Next.js when processing the `import "@/app/globals.css"` statement. Autoprefixer therefore runs on the Next.js bundle path.
+
+**Tailwind CLI** is also run explicitly via package.json scripts (dev: `--watch`, build: sequential before `next build`). Its output goes to `public/tailwind.css` which is served as a static file and loaded via the `<link>` tag. The CLI does NOT use `postcss.config.js`; it processes Tailwind directives in `app/globals.css` directly.
+
+**Effect**: Tailwind utility classes are compiled in both paths. For future agents — do not describe this as "standalone CLI only, not PostCSS." Both mechanisms are present and active.
+
+**Critical**: Never run `npm run build` while the dev server is active — both write to `public/tailwind.css` and `.next/`, corrupting the Turbopack cache.
+
+**Generated files**: `public/tailwind.css` and `next-env.d.ts` are build/framework-generated files. They may drift from the committed version after a local build. Restore with:
+```bash
+git restore next-env.d.ts public/tailwind.css
+```
+Do not commit generated-file drift as an intentional change.
 
 ### 3.6 Media (Cloudinary Unsigned Upload)
 ```

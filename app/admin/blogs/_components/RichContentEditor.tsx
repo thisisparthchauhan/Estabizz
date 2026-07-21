@@ -21,35 +21,12 @@ import { useEditor, EditorContent, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import LinkExtension from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
-import ImageExtension from "@tiptap/extension-image";
 import { Table } from "@tiptap/extension-table";
 import TableRow from "@tiptap/extension-table-row";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import { DOMParser as ProseDOMParser } from "@tiptap/pm/model";
 import { cleanWordHtml, isWordHtml } from "./wordCleanup";
-
-const CLOUD  = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-const PRESET = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-
-// Converts ArrayBuffer to base64 string without spread (safe for large images)
-function bufferToBase64(buffer: ArrayBuffer): string {
-  let binary = "";
-  const bytes = new Uint8Array(buffer);
-  for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
-  return btoa(binary);
-}
-
-async function uploadToCloudinary(buffer: ArrayBuffer, contentType: string): Promise<string> {
-  const blob = new Blob([buffer], { type: contentType });
-  const fd = new FormData();
-  fd.append("file", blob);
-  fd.append("upload_preset", PRESET!);
-  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD}/image/upload`, { method: "POST", body: fd });
-  if (!res.ok) throw new Error(`Cloudinary upload failed: ${res.status}`);
-  const data = await res.json() as { secure_url: string };
-  return data.secure_url;
-}
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 
@@ -159,7 +136,6 @@ export default function RichContentEditor({ value, onChange }: Props) {
   const [showHtml, setShowHtml] = useState(false);
   const [linkOpen, setLinkOpen] = useState(false);
   const [wordPasteToast, setWordPasteToast] = useState(false);
-  const [importProgress, setImportProgress] = useState<string | null>(null);
   const wordPasteTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Keep a ref to avoid stale closures in handlePaste
@@ -177,10 +153,6 @@ export default function RichContentEditor({ value, onChange }: Props) {
       LinkExtension.configure({
         openOnClick: false,
         HTMLAttributes: { rel: "noopener noreferrer", target: "_blank" },
-      }),
-      ImageExtension.configure({
-        inline: false,
-        allowBase64: true,
       }),
       Table.configure({ resizable: false }),
       TableRow,
@@ -236,7 +208,7 @@ export default function RichContentEditor({ value, onChange }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor, value]);
 
-  // ── Import .docx via Mammoth (with Cloudinary image upload) ──────────────
+  // ── Import .docx via Mammoth ───────────────────────────────────────────────
   const handleWordFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
@@ -244,49 +216,15 @@ export default function RichContentEditor({ value, onChange }: Props) {
       e.target.value = "";
 
       try {
-        setImportProgress("Reading document…");
         const mammoth = await import("mammoth");
         const arrayBuffer = await file.arrayBuffer();
-        const useCloudinary = Boolean(CLOUD && PRESET);
-        let imgIdx = 0;
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const mammothAny = mammoth as any;
-        const result = await mammothAny.convertToHtml({
-          arrayBuffer,
-          convertImage: mammothAny.images.imgElement(
-            async (image: { read: () => Promise<ArrayBuffer>; contentType: string }) => {
-              imgIdx++;
-              setImportProgress(
-                useCloudinary
-                  ? `Uploading image ${imgIdx} to Cloudinary…`
-                  : `Embedding image ${imgIdx}…`
-              );
-              const buf = await image.read();
-              if (useCloudinary) {
-                try {
-                  const url = await uploadToCloudinary(buf, image.contentType);
-                  return { src: url, alt: "" };
-                } catch {
-                  // Cloudinary failed — fall back to base64 so image isn't lost
-                  return { src: `data:${image.contentType};base64,${bufferToBase64(buf)}`, alt: "" };
-                }
-              }
-              // No Cloudinary configured — embed as base64
-              return { src: `data:${image.contentType};base64,${bufferToBase64(buf)}`, alt: "" };
-            }
-          ),
-        });
-
-        setImportProgress("Formatting content…");
+        const result = await mammoth.convertToHtml({ arrayBuffer });
         const cleaned = cleanWordHtml(result.value);
         editor.commands.setContent(cleaned, { emitUpdate: true });
         onChangeRef.current(editor.getHTML());
       } catch (err) {
         console.error("[RichContentEditor] Mammoth import failed:", err);
         alert("Could not read the Word file. Please try copy-pasting instead.");
-      } finally {
-        setImportProgress(null);
       }
     },
     [editor]
@@ -425,17 +363,6 @@ export default function RichContentEditor({ value, onChange }: Props) {
           </div>
         )}
 
-        {/* ── Import progress banner ────────────────────────────────────────── */}
-        {importProgress && (
-          <div className="flex items-center gap-2.5 border-b border-blue-200 bg-blue-50 px-4 py-2.5 text-[12px] font-semibold text-[#1677f2]">
-            <svg className="h-3.5 w-3.5 animate-spin shrink-0" viewBox="0 0 24 24" fill="none">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/>
-            </svg>
-            <span>{importProgress}</span>
-          </div>
-        )}
-
         {/* ── Editor / HTML view ────────────────────────────────────────────── */}
         <div className="bg-white">
           {showHtml ? (
@@ -493,7 +420,6 @@ export default function RichContentEditor({ value, onChange }: Props) {
         .rich-editor-prose th { background: #0a1628; color: #fff; padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
         .rich-editor-prose td { padding: 8px 12px; border-bottom: 1px solid #e8f0fa; color: #334155; vertical-align: top; }
         .rich-editor-prose tr:nth-child(even) td { background: #f8faff; }
-        .rich-editor-prose img { max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0; display: block; }
         .rich-editor-prose strong, .rich-editor-prose b { font-weight: 700; color: #0a1628; }
         .rich-editor-prose em, .rich-editor-prose i { font-style: italic; }
         .rich-editor-prose u { text-decoration: underline; text-underline-offset: 2px; }

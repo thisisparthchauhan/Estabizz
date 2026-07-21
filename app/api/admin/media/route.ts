@@ -65,12 +65,19 @@ export async function POST(req: NextRequest) {
             width, height, originalFilename, mimeType,
             title, altText, caption, tags } = body;
 
-    if (!publicId || !secureUrl) {
+    const safePublicId = String(publicId ?? '').trim();
+    if (!safePublicId || !secureUrl) {
       return NextResponse.json({ error: 'Upload data is incomplete.' }, { status: 400 });
     }
 
-    // Only accept Cloudinary-hosted URLs — prevents recording of arbitrary external images
-    if (!String(secureUrl).startsWith('https://res.cloudinary.com/')) {
+    // Only accept Cloudinary-hosted HTTPS URLs — prevents recording of arbitrary external images
+    let parsedUrl: URL;
+    try {
+      parsedUrl = new URL(String(secureUrl));
+    } catch {
+      return NextResponse.json({ error: 'Upload data is incomplete.' }, { status: 400 });
+    }
+    if (parsedUrl.protocol !== 'https:' || parsedUrl.hostname !== 'res.cloudinary.com') {
       return NextResponse.json({ error: 'Upload data is incomplete.' }, { status: 400 });
     }
 
@@ -80,12 +87,16 @@ export async function POST(req: NextRequest) {
 
     await connectDB();
 
-    const asset = await MediaAsset.create({
+    // Idempotent upsert — safe to retry on network failure without E11000 errors.
+    // $setOnInsert: only writes fields when inserting a new document; existing records
+    // are returned unchanged. A catch for code 11000 handles the rare race where two
+    // simultaneous requests both attempt the insert.
+    const insertDoc = {
       title:          safeTitle,
       fileName:       safeFile,
       url:            String(url ?? secureUrl),
       secureUrl:      String(secureUrl),
-      publicId:       String(publicId),
+      publicId:       safePublicId,
       resourceType:   String(resourceType ?? 'image'),
       format:         safeFormat,
       mimeType:       String(mimeType ?? ''),
@@ -100,9 +111,29 @@ export async function POST(req: NextRequest) {
       uploadedByRole: auth.admin.role,
       usedIn:         [],
       status:         'active',
-    });
+    };
 
-    return NextResponse.json({ success: true, asset });
+    let asset;
+    let existing = false;
+    try {
+      asset = await MediaAsset.findOneAndUpdate(
+        { publicId: safePublicId },
+        { $setOnInsert: insertDoc },
+        { upsert: true, new: true, setDefaultsOnInsert: true }
+      );
+      existing = asset.createdAt < new Date(Date.now() - 1000);
+    } catch (upsertErr: unknown) {
+      const code = (upsertErr as { code?: number }).code;
+      if (code === 11000) {
+        // Race condition: another request inserted between our find and upsert
+        asset = await MediaAsset.findOne({ publicId: safePublicId });
+        existing = true;
+      } else {
+        throw upsertErr;
+      }
+    }
+
+    return NextResponse.json({ success: true, asset, existing });
   } catch (err) {
     console.error('[admin/media] POST error:', err);
     return NextResponse.json({ error: 'Unable to save media record.' }, { status: 500 });

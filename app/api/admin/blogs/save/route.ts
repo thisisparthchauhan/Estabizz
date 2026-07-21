@@ -12,6 +12,9 @@ import { connectDB } from '@/lib/db';
 import BlogModel from '@/lib/models/Blog';
 import { requireAdmin } from '@/lib/admin/requireAdmin';
 import { sanitizeBlogHtml } from '@/lib/blog/sanitize';
+import { parseDocument } from 'htmlparser2';
+import { findAll, getAttributeValue } from 'domutils';
+import type { Element, AnyNode } from 'domhandler';
 
 const KNOWN_AUTHORS = [
   {
@@ -73,14 +76,14 @@ export async function POST(req: NextRequest) {
 
     // Server-side image validation for publish requests
     if (isPublishing) {
-      // Reject images with empty or placeholder alt text
-      const imgTagRe          = /<img\s[^>]*>/gi;
-      const altAttrRe         = /\balt="([^"]*)"/i;
-      const PLACEHOLDER_ALT   = /^Imported image \d+$/i;
-      const imgTags           = cleanContent.match(imgTagRe) ?? [];
-      for (const tag of imgTags) {
-        const altMatch = altAttrRe.exec(tag);
-        const alt      = altMatch ? altMatch[1].trim() : '';
+      const PLACEHOLDER_ALT = /^Imported image \d+$/i;
+      const doc  = parseDocument(cleanContent, { lowerCaseAttributeNames: true });
+      const imgs = findAll(
+        (el: AnyNode): el is Element => el.type === 'tag' && (el as Element).name === 'img',
+        doc.children as AnyNode[]
+      );
+      for (const img of imgs) {
+        const alt = (getAttributeValue(img, 'alt') ?? '').trim();
         if (!alt || PLACEHOLDER_ALT.test(alt)) {
           return NextResponse.json(
             { error: 'Please review the alt text for all imported images before publishing.' },

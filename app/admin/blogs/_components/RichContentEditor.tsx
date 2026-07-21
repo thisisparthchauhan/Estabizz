@@ -182,8 +182,6 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
 
   // ── Alt text state ──────────────────────────────────────────────────────────
   const [unresolvedAltCount, setUnresolvedAltCount] = useState(0);
-  // True once a Word import has placed at least one image; activates alt scanning.
-  const hasWordImagesRef = useRef(false);
   // Prevents the alt panel from re-opening immediately after the user clicks Save.
   const altSavingRef = useRef(false);
 
@@ -257,10 +255,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
     onUpdate({ editor: e }) {
       const html = e.getHTML();
       onChangeRef.current(html);
-      // Re-scan for unresolved alt text on every content change (only when images are present)
-      if (hasWordImagesRef.current) {
-        setUnresolvedAltCount(countUnresolvedAlts(html));
-      }
+      setUnresolvedAltCount(countUnresolvedAlts(html));
     },
 
     onSelectionUpdate({ editor: e }) {
@@ -277,12 +272,20 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
     },
   });
 
+  // Initial alt-text scan when editor first becomes available (catches existing blogs)
+  useEffect(() => {
+    if (!editor) return;
+    setUnresolvedAltCount(countUnresolvedAlts(editor.getHTML()));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editor]);
+
   // Sync external value changes (e.g. loading an existing blog)
   useEffect(() => {
     if (!editor) return;
     const current = editor.getHTML();
     if (current !== value && value !== undefined) {
       editor.commands.setContent(value || "", { emitUpdate: false });
+      setUnresolvedAltCount(countUnresolvedAlts(value || ""));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor, value]);
@@ -430,13 +433,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
         editor.commands.setContent(cleaned, { emitUpdate: true });
         onChangeRef.current(editor.getHTML());
 
-        // Mark that word images are present, enabling alt-text scanning
         const totalCloudinaryOk = imageIndex - cloudinaryFailed;
-        if (totalCloudinaryOk > 0) {
-          hasWordImagesRef.current = true;
-          // Run initial alt scan
-          setUnresolvedAltCount(countUnresolvedAlts(editor.getHTML()));
-        }
 
         // Store failed media records for retry
         setFailedMediaRecords(mediaFailedNew);

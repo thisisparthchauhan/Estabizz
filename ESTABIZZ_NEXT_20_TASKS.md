@@ -1,0 +1,318 @@
+# Estabizz — Next 20 Development Tasks
+
+> Last updated: 2026-07-22 · Commit: f182723
+> All tasks are locally scoped. Do not push/deploy without owner approval.
+
+---
+
+## Priority 0 — Stabilisation (Tasks 1–6)
+
+### Task 1 — Commit pending changes from current session
+
+| Field | Value |
+|-------|-------|
+| Objective | Commit `lib/admin/requirePermission.ts` (seed-user fallback) and `app/admin/blogs/_components/RichContentEditor.tsx` (`immediatelyRender: false`) which are staged but not committed |
+| Why now | These fix the 403 on `POST /api/admin/media` and the TipTap console noise. They are complete and TypeScript-clean but uncommitted. |
+| Files | `lib/admin/requirePermission.ts`, `app/admin/blogs/_components/RichContentEditor.tsx`, `next-env.d.ts`, `public/tailwind.css` |
+| Complexity | Small |
+| Agent | Claude Code |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | No |
+
+---
+
+### Task 2 — Add login rate limiting
+
+| Field | Value |
+|-------|-------|
+| Objective | Protect `POST /api/auth/login` from brute-force and credential stuffing. Limit to 5 attempts per IP per 15 minutes. |
+| Why now | Highest security risk on the platform; currently has zero protection. |
+| Files | `app/api/auth/login/route.ts`, `package.json` (add `rate-limiter-flexible`) |
+| Dependencies | Redis (recommended) or in-memory fallback for dev |
+| Complexity | Small |
+| Agent | Claude Code |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 3 — Protect internal resource pages
+
+| Field | Value |
+|-------|-------|
+| Objective | Add admin-only guard to three internal pages: `/resources/content-rebuild-command`, `/resources/regulatory-update-email-template`, `/resources/service-page-content-framework`. Move them to `/admin/tools/` or add a redirect to login. |
+| Why now | Internal tooling pages are publicly accessible without auth. |
+| Files | `app/resources/content-rebuild-command/page.tsx`, `app/resources/regulatory-update-email-template/page.tsx`, `app/resources/service-page-content-framework/page.tsx` |
+| Complexity | Small |
+| Agent | Claude Code or Codex |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 4 — Blog categories: move from hardcoded to MongoDB
+
+| Field | Value |
+|-------|-------|
+| Objective | Create a `BlogCategory` MongoDB model, seed the 9 current categories, build CRUD in admin UI at `/admin/categories`. Update blog create/edit forms to fetch categories dynamically. |
+| Why now | Admin has a Categories link in the sidebar that goes to a non-functional placeholder. Categories cannot be updated without a code change. |
+| Files | New: `lib/models/BlogCategory.ts`, `app/api/admin/blog-categories/route.ts`. Update: `app/admin/categories/page.tsx`, `BlogEditorClient.tsx` |
+| Complexity | Medium |
+| Agent | Claude Code |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 5 — Legal pages content review and update
+
+| Field | Value |
+|-------|-------|
+| Objective | Review and update Privacy Policy, Refund Policy, and Terms & Conditions to reflect Estabizz's actual services and legal obligations. |
+| Why now | Legal pages are required for production operation. Generic content creates legal and credibility risk. |
+| Files | `app/legal/*/PageClient.tsx` |
+| Complexity | Content task (not code) |
+| Agent | Content team + legal review |
+| QA | Manual |
+| Approval gate | Legal review |
+| Deploy required | Yes |
+
+---
+
+### Task 6 — Add Sentry (or equivalent) error monitoring
+
+| Field | Value |
+|-------|-------|
+| Objective | Install and configure Sentry for client-side and server-side error capture. Set up alerts for 5xx API errors and JS exceptions. |
+| Why now | No visibility into production errors currently. |
+| Files | `app/layout.tsx`, `next.config.js`, `package.json` |
+| Complexity | Small |
+| Agent | Claude Code |
+| QA | Verify errors appear in Sentry dashboard |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+## Priority 1 — Immediate Growth (Tasks 7–12)
+
+### Task 7 — Website search (public full-text)
+
+| Field | Value |
+|-------|-------|
+| Objective | Add a search page at `/search` (or search widget in navbar). Search across blog articles, service pages, and regulatory updates using MongoDB Atlas full-text search or a simple client-side filter. |
+| Why now | Users cannot find content without navigation. Search is a top conversion driver. |
+| Files | New: `app/search/page.tsx`, `app/api/search/route.ts` |
+| Complexity | Medium |
+| Agent | Claude Code |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 8 — Service eligibility wizard
+
+| Field | Value |
+|-------|-------|
+| Objective | Build a multi-step questionnaire at `/get-started` (or new `/eligibility-check`) that helps visitors identify which regulatory registration they need based on their business type and activities. Result shows recommended service and links to detailed service page. |
+| Why now | Most visitors don't know which RBI/SEBI/IRDAI service applies to them. The wizard converts confused visitors into qualified leads. |
+| Files | New: `app/eligibility-check/`, UI components |
+| Complexity | Medium |
+| Agent | Claude Code |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 9 — Live consultation booking
+
+| Field | Value |
+|-------|-------|
+| Objective | Add a "Book a Free Consultation" button/modal that opens a Calendly embed (or custom booking form). Capture lead + appointment in MongoDB. Trigger WhatsApp/email confirmation. |
+| Why now | Currently no structured consultation booking flow. Leads drop off. |
+| Files | New: `components/ui/ConsultationBooking.tsx`, update contact/get-started pages |
+| Complexity | Small–Medium (Calendly embed is small; custom form is medium) |
+| Agent | Claude Code |
+| QA | Manual |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 10 — WhatsApp Chat integration
+
+| Field | Value |
+|-------|-------|
+| Objective | Replace or supplement the current ChatWidget with a WhatsApp click-to-chat button. On mobile: opens WhatsApp directly. On desktop: shows WhatsApp QR or web link. |
+| Why now | Indian clients overwhelmingly prefer WhatsApp. Conversion rates are higher than email. |
+| Files | `components/ui/ChatWidget.tsx` (update or replace) |
+| Complexity | Small |
+| Agent | Codex |
+| QA | Manual |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 11 — Transactional email (Resend integration)
+
+| Field | Value |
+|-------|-------|
+| Objective | Wire up `RESEND_API_KEY` for: lead acknowledgement email, blog submission confirmation, admin notification on new lead. Use Resend SDK with React Email templates. |
+| Why now | Currently no emails are sent after form submissions. |
+| Files | New: `lib/email/`, `lib/email/templates/`. Update: `app/api/leads/route.ts`, `app/api/submit-blog/route.ts` |
+| Complexity | Small–Medium |
+| Agent | Claude Code |
+| QA | Manual |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 12 — Extend CMS visual editor to all 46 managed pages
+
+| Field | Value |
+|-------|-------|
+| Objective | The full pending-changes / approve / publish lifecycle is only implemented for one page. Extend the existing `[slug]/edit` page to work for all 46 managed paths via the existing `by-path` API. |
+| Why now | Content editors cannot update 45 of 46 CMS pages without developer intervention. This is the biggest content ops gap. |
+| Files | `app/admin/content-pages/[slug]/edit/page.tsx`, `PublicContentVisualEditorClient.tsx` (make it generic) |
+| Dependencies | Task 1 committed |
+| Complexity | Large |
+| Agent | Claude Code |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+## Priority 2 — Productisation (Tasks 13–17)
+
+### Task 13 — Client Portal foundation
+
+| Field | Value |
+|-------|-------|
+| Objective | Build the initial client portal: `/client` login, dashboard, and application status view. Client model, auth, and basic data display. No payments or documents in phase 1. |
+| Why now | Clients currently receive status updates only via WhatsApp. A portal reduces manual overhead. |
+| Files | New: `app/client/`, `lib/models/Client.ts`, `lib/models/Application.ts`, `app/api/client/` |
+| Complexity | Large |
+| Agent | Claude Code |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 14 — Document vault (client document upload)
+
+| Field | Value |
+|-------|-------|
+| Objective | Allow clients to upload required documents (KYC, incorporation docs, etc.) to their application in the Client Portal. Admin receives notification. Documents stored on Cloudinary or S3 with access control. |
+| Why now | Document collection is a manual WhatsApp-heavy process. |
+| Files | New: `lib/models/Document.ts`, upload flow in client portal |
+| Dependencies | Task 13 |
+| Complexity | Medium |
+| Agent | Claude Code |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 15 — CRM integration (n8n + Zoho)
+
+| Field | Value |
+|-------|-------|
+| Objective | Connect new leads from `/api/leads` to Zoho CRM via n8n webhook. Send WhatsApp + email acknowledgement automatically. Set up assignment rules. |
+| Why now | Leads captured on website are currently managed manually. |
+| Files | `app/api/leads/route.ts` (add n8n webhook call), n8n workflow setup |
+| Complexity | Medium |
+| Agent | Claude Code + n8n configuration |
+| QA | Manual |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 16 — Compliance calendar (client-facing)
+
+| Field | Value |
+|-------|-------|
+| Objective | Build an admin-managed compliance calendar showing upcoming filing deadlines relevant to each client's registered entities. Visible in Client Portal. |
+| Why now | Compliance deadline reminders are a high-value service differentiator. |
+| Files | New: `lib/models/ComplianceEvent.ts`, admin calendar editor, client portal view |
+| Dependencies | Task 13 |
+| Complexity | Medium |
+| Agent | Claude Code |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 17 — Management dashboard
+
+| Field | Value |
+|-------|-------|
+| Objective | Build an internal `/admin/dashboard-v2` with charts showing: active clients, applications by regulator, lead pipeline, query ageing, pending documents, content performance. |
+| Why now | Leadership has no structured visibility into platform operations. |
+| Files | New: `app/admin/dashboard-v2/`, chart components |
+| Dependencies | Tasks 13, 15 for real data |
+| Complexity | Medium |
+| Agent | Claude Code |
+| QA | Manual |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+## Priority 3 — AI and Scale (Tasks 18–20)
+
+### Task 18 — AI blog and SEO draft assistant
+
+| Field | Value |
+|-------|-------|
+| Objective | Add an AI draft button in the Blog Editor that generates a blog draft outline from a topic + keywords using Claude API. Output is a draft only — admin must review and publish via normal workflow. |
+| Why now | Blog content production is a bottleneck. AI drafts reduce time per article by ~60%. |
+| Files | `app/admin/blogs/_components/BlogEditorClient.tsx`, `app/api/admin/ai/draft-blog/route.ts` |
+| Dependencies | `ANTHROPIC_API_KEY` active, rate limiting on AI endpoint (Task 2 variant) |
+| Complexity | Medium |
+| Agent | Claude Code |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 19 — Regulatory knowledge base (Phase 1)
+
+| Field | Value |
+|-------|-------|
+| Objective | Build a searchable database of key regulations and circulars. Admin can add/edit regulatory documents. Public can search and read. No AI extraction in Phase 1 — manual entry only. |
+| Why now | High SEO value. Positions Estabizz as an authority in regulatory compliance. |
+| Files | New: `lib/models/Regulation.ts`, `lib/models/Circular.ts`, admin editor, public `/resources/regulations/` |
+| Complexity | Large |
+| Agent | Claude Code |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | Yes |
+
+---
+
+### Task 20 — Error monitoring, analytics, and deployment hardening
+
+| Field | Value |
+|-------|-------|
+| Objective | Complete production hardening: (1) Sentry error monitoring with alerting (see Task 6), (2) Google Analytics 4 properly configured with conversion goals, (3) Vercel preview deployments on all PRs, (4) automated E2E tests (Playwright) on critical paths (homepage, blog, lead capture, admin login). |
+| Why now | Platform cannot scale to paying clients without production observability and automated regression testing. |
+| Files | `next.config.js`, `app/layout.tsx`, new `e2e/` test directory |
+| Complexity | Medium |
+| Agent | Claude Code |
+| QA | Antigravity |
+| Approval gate | Owner |
+| Deploy required | Yes |

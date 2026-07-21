@@ -85,6 +85,11 @@ Read these documents in the order that matches your task:
 | [ESTABIZZ_FUTURE_PRODUCT_ROADMAP.md](ESTABIZZ_FUTURE_PRODUCT_ROADMAP.md) | Before designing any new feature — check alignment with roadmap |
 | [ESTABIZZ_NEXT_20_TASKS.md](ESTABIZZ_NEXT_20_TASKS.md) | When deciding what to work on next |
 | [CMS_STATUS.md](CMS_STATUS.md) | Living log of completed work |
+| [ESTABIZZ_REPOSITORY_STRUCTURE_MAP.md](ESTABIZZ_REPOSITORY_STRUCTURE_MAP.md) | Full annotated directory tree, redirect routes, structural observations |
+| [ESTABIZZ_FILE_CLASSIFICATION_REGISTER.md](ESTABIZZ_FILE_CLASSIFICATION_REGISTER.md) | Classification of every notable file (active/legacy/generated/redirect-only/etc.) |
+| [ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md](ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md) | Unused, legacy, generated, and redirect-only files — audit findings |
+| [ESTABIZZ_RECOMMENDED_FOLDER_STRUCTURE.md](ESTABIZZ_RECOMMENDED_FOLDER_STRUCTURE.md) | Target folder structure after cleanup |
+| [ESTABIZZ_FOLDER_CLEANUP_PLAN.md](ESTABIZZ_FOLDER_CLEANUP_PLAN.md) | Phased, safe cleanup steps — start here for housekeeping tasks |
 
 ---
 

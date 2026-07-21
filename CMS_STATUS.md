@@ -1,7 +1,16 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Repository structure audited and cleanup plan created**
+> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Documentation structure correction**
+
+---
+
+## 2026-07-22 — Documentation structure correction
+
+**Task**: Corrected the documentation relocation performed in commit `82a3e19`. Restored three operational entry-point files to the repository root (`AGENTS.md`, `CMS_STATUS.md`, `ESTABIZZ_PROJECT_MASTER_CONTEXT.md`). Organized remaining 20 supporting documents into categorized subdirectories under `docs/` (`architecture/`, `security/`, `operations/`, `roadmap/`, `audits/`). Added `word-docs/README.md`. Updated all Markdown cross-references to use correct relative paths. Applied factual corrections to audit documents: `proxy.ts` reclassified as valid Next.js 16 framework convention (not misnamed); redirect routes reclassified as active compatibility routes; `scratch/` confirmed untracked (no cleanup commit needed); blanket `*.docx` ignore recommendation removed. Updated `AGENTS.md` with agent discovery order. Updated `ESTABIZZ_AGENT_OPERATING_GUIDE.md` §10 documentation index.
+**Files changed**: `AGENTS.md`, `CMS_STATUS.md`, `ESTABIZZ_PROJECT_MASTER_CONTEXT.md`, `word-docs/README.md`, `docs/operations/ESTABIZZ_AGENT_OPERATING_GUIDE.md`, `docs/operations/ESTABIZZ_FOLDER_CLEANUP_PLAN.md`, `docs/operations/ADMIN_OS_PRODUCTION_READINESS.md`, `docs/audits/ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md`, plus all 20 supporting docs moved into subdirectories.
+**Commit**: (pending)
+**Status**: Complete — documentation only. No source code modified. No routes changed. No APIs changed. No database access. TypeScript not affected.
 
 ---
 

@@ -1,8 +1,9 @@
 # Estabizz — Duplicate and Unused File Report
 
 > Created: 2026-07-22 · Branch: **main** (confirmed) · Audit commit: **73f04af**
+> Factual corrections applied: 2026-07-22 — proxy.ts classification, redirect route classification, scratch/ status, word document recommendation.
 > Discovery-only audit. No files were removed or modified during this audit.
-> See ESTABIZZ_FOLDER_CLEANUP_PLAN.md for actionable remediation steps.
+> See [ESTABIZZ_FOLDER_CLEANUP_PLAN.md](../operations/ESTABIZZ_FOLDER_CLEANUP_PLAN.md) for actionable remediation steps.
 
 ---
 
@@ -10,12 +11,12 @@
 
 | Category | Count | Impact |
 |----------|-------|--------|
-| Redirect-only route files (URL aliases) | 17 | Low risk — serve a purpose (301 redirects for SEO), but could be consolidated into `next.config.js` |
+| Redirect-only route files (URL aliases) | 17 | Active compatibility routes — safe to delete only after adding equivalent `next.config.js` redirects |
 | Legacy static data files (superseded) | 2 | `lib/regulatoryUpdates.ts`, `lib/blog/sampleBlogs.ts` |
 | Generated files tracked in git | 1 | `tsconfig.tsbuildinfo` |
-| Misnamed files (prevent purpose) | 1 | `proxy.ts` |
-| Empty directories | 1 | `scratch/` |
-| Untracked binary files | 1 | `Estabizz_Project_Documentation.docx` |
+| Framework convention file requiring dedicated audit | 1 | `proxy.ts` — valid Next.js 16 convention; do not rename or delete without a dedicated audit |
+| Empty untracked directories | 1 | `scratch/` — not tracked by Git; no cleanup commit required |
+| Word documents in word-docs/ | 2 | `Estabizz_Project_Documentation.docx`, `Estabizz_Audit_Documentation.docx` — intentionally tracked; see `word-docs/README.md` |
 | Placeholder UI files (no implementation) | 4 | `admin/authors`, `admin/categories`, `admin/settings`, generic content-page edit shell |
 | Legacy article content (not in CMS) | 3 | `app/regulatory/` article pages |
 | Internal pages publicly accessible without auth | 4+ | `resources/content-rebuild-command`, `resources/regulatory-update-email-template`, `resources/service-page-content-framework`, `proposal-template` |
@@ -24,7 +25,11 @@
 
 ## Category 1: Redirect-Only Route Files
 
-These 17 files each contain only a single `redirect()` call. They are functional (they serve valid 301 redirects for SEO and link preservation), but they could optionally be consolidated into `next.config.js` `redirects` config to reduce file count and simplify the route tree.
+These 17 files each contain only a single `redirect()` call. They are **active compatibility routes** that serve valid 301 redirects for SEO and link preservation.
+
+**Classification**: Active — safe to delete: No. Optional consolidation: Low priority.
+
+They could optionally be consolidated into `next.config.js` `redirects` config to reduce file count and simplify the route tree, but this is not urgent and carries no functional benefit beyond housekeeping.
 
 **SEBI aliases (8 files):**
 
@@ -108,47 +113,50 @@ export const sampleBlogs: Blog[] = [];
 
 ---
 
-## Category 4: Misnamed Files
+## Category 4: Framework Convention File Requiring Dedicated Audit
 
 ### `proxy.ts`
 
-**Status**: Misnamed — dormant.
+**Status**: Valid Next.js 16 framework convention. Do not rename or delete during routine cleanup.
 
-**What it contains**: Exports a `proxy` function (and possibly middleware-style logic) written in TypeScript.
+**What it contains**: Edge-runtime route middleware that checks for the `auth_token` cookie on `/admin/*` paths and redirects unauthenticated requests to `/login`. Exports a `proxy` function with a `config.matcher` targeting `/admin/:path*`.
 
-**Why it does not work as intended**: Next.js edge middleware must be in a file named exactly `middleware.ts` (or `middleware.js`) at the project root to be automatically picked up by the framework. A file named `proxy.ts` is never invoked by Next.js automatically. The code inside it currently has no effect on any requests.
+**Classification**: `proxy.ts` is a valid Next.js 16 framework convention. Its behaviour, matcher configuration, and ongoing necessity require a separate dedicated audit before any action is taken.
 
-**Options**:
-1. Rename to `middleware.ts` and verify the exported function matches the Next.js `middleware` export signature (`export function middleware(request: NextRequest) { ... }`).
-2. Delete the file if the middleware functionality is not needed or has been replaced.
+**Do not**:
+- Rename it to `middleware.ts` without a full behavioural audit
+- Delete it without confirming that all `/admin/*` route protection is handled elsewhere
+- Modify it as part of folder cleanup
 
-**Risk**: Do not rename without reviewing the file's contents first to confirm it is correct Next.js middleware code. The rename itself will immediately activate the middleware on all requests.
+**Deferred**: A dedicated proxy.ts audit is required to determine whether the edge cookie check is redundant with `app/admin/layout.tsx` (which performs full JWT verification), whether it should be kept, and whether it should be updated to use the standard `middleware` export name for Next.js 16.
 
 ---
 
-## Category 5: Empty Directories
+## Category 5: Empty Untracked Directories
 
 ### `scratch/`
 
-**Status**: Empty directory.
+**Status**: Untracked empty directory — Git does not track it.
 
-**What it was**: A scratch directory for temporary working files.
+**Verification**: `git ls-files scratch` returns no results. `find scratch -maxdepth 2 -type f` returns no results.
 
-**Current state**: No files. The directory itself is committed to git (git tracks directories via a `.gitkeep` or indirectly via contained files, but this directory appears empty).
+**Current state**: The directory has no files and is not committed to git. Git does not track empty directories; there is no `.gitkeep` or contained file.
 
-**Risk of removal**: None. It can be deleted or gitignored.
+**Action required**: None. Git does not track it, so no cleanup commit is required. The directory can be removed locally at any time without a git commit.
 
 ---
 
-## Category 6: Untracked Binary Files
+## Category 6: Word Documents in word-docs/
 
-### `Estabizz_Project_Documentation.docx`
+### `word-docs/Estabizz_Project_Documentation.docx` and `word-docs/Estabizz_Audit_Documentation.docx`
 
-**Status**: Untracked — not committed to git.
+**Status**: Intentionally version-controlled in `word-docs/`.
 
-**What it is**: A compiled Word document containing all 10 canonical documentation files, generated via python-docx for sharing with external AI agents (ChatGPT, etc.).
+**What they are**: Compiled Word document snapshots generated from canonical Markdown source files, kept in version control for sharing with external stakeholders and AI agents (ChatGPT, etc.) that cannot read Markdown.
 
-**Recommendation**: Add `*.docx` or specifically `Estabizz_Project_Documentation.docx` to `.gitignore`. The file can always be regenerated from the markdown source files.
+**Decision**: These files are intentionally tracked. Do not add a blanket `*.docx` rule to `.gitignore`, because legitimate Word templates may later be version-controlled. If specific generated files should be excluded in future, add targeted ignore rules (e.g., `word-docs/Estabizz_*_generated.docx`) rather than a blanket rule.
+
+See `word-docs/README.md` for the canonical description of these files and their regeneration process.
 
 ---
 

@@ -1,6 +1,7 @@
 # Estabizz — Folder Cleanup Plan
 
 > Created: 2026-07-22 · Branch: **main** (confirmed) · Audit commit: **73f04af**
+> Factual corrections applied: 2026-07-22 — proxy.ts classification, *.docx ignore recommendation, Phase 7 status updated.
 > Each action below is safe and reversible. No action here modifies routes, API behaviour, database data, or authentication. All code changes require a TypeScript check before committing.
 
 ---
@@ -30,15 +31,11 @@
 
 ---
 
-### Action 1.2 — Add generated/binary files to `.gitignore`
+### Action 1.2 — Word documents are intentionally tracked
 
-**Why**: `Estabizz_Project_Documentation.docx` is a generated Word file that should not be tracked in git.
+**Decision**: The Word files in `word-docs/` are intentionally version-controlled as compiled, shareable documentation snapshots. Do NOT add a blanket `*.docx` rule to `.gitignore` — legitimate Word templates may be version-controlled in future.
 
-**Steps**:
-1. Open `.gitignore`
-2. Add: `Estabizz_Project_Documentation.docx`
-3. Also consider: `*.docx` as a blanket rule for future generated Word files
-4. Commit: `Chore: gitignore generated Word documentation file`
+If specific generated Word files need to be excluded, add targeted ignore rules (e.g., `word-docs/Estabizz_*_generated.docx`) rather than a blanket rule. No action required here at this time.
 
 ---
 
@@ -91,35 +88,20 @@ This must return zero results (or only results pointing to this file itself) bef
 
 ---
 
-## Phase 3 — Resolve `proxy.ts` (Small Risk — Read Before Acting)
+## Phase 3 — proxy.ts (Requires Dedicated Audit — Do Not Act During Cleanup)
 
-### Action 3.1 — Investigate `proxy.ts`
+### Action 3.1 — Defer proxy.ts until a dedicated audit
 
-**Why**: The file is named `proxy.ts` but to function as Next.js edge middleware it must be named `middleware.ts`. It currently has no effect on any requests.
+**Classification**: `proxy.ts` is a valid Next.js 16 framework convention. Do not rename or delete it during routine folder cleanup.
 
-**Steps before any action**:
-1. Read the contents of `proxy.ts` in full
-2. Determine what it is trying to do:
-   - If it is valid Next.js middleware code (exports `export function middleware(request: NextRequest)`) → proceed to 3.2
-   - If it is unfinished, incorrect, or for a different purpose → delete it (3.3)
+**Why deferred**: The file contains edge-runtime route middleware for `/admin/*` paths. Its behaviour, matcher configuration, and relationship to the authoritative `app/admin/layout.tsx` JWT gate require a separate dedicated audit before any action is taken.
 
-### Action 3.2 — Rename `proxy.ts` to `middleware.ts` (if content is valid middleware)
+**Constraints**:
+- Do not rename `proxy.ts` to `middleware.ts` without a full behavioural audit and local dev-server verification
+- Do not delete it without confirming all `/admin/*` protection is handled elsewhere
+- Do not modify it as part of this cleanup plan
 
-**WARNING**: Renaming to `middleware.ts` will immediately activate the middleware on ALL Next.js requests in production on the next deploy. Test locally first.
-
-**Steps**:
-1. Rename: `git mv proxy.ts middleware.ts`
-2. Verify the file exports exactly: `export function middleware(request: NextRequest) { ... }` (or `export default`)
-3. Start the dev server and verify no unexpected redirects or errors occur
-4. Run `npx tsc --noEmit`
-5. Commit: `Fix: rename proxy.ts to middleware.ts so Next.js picks it up`
-
-### Action 3.3 — Delete `proxy.ts` (if content is not valid or not needed)
-
-**Steps**:
-1. Delete `proxy.ts`
-2. Run `npx tsc --noEmit`
-3. Commit: `Chore: remove dormant proxy.ts (was never invoked by Next.js)`
+**When to revisit**: Schedule a dedicated `proxy.ts` audit as a separate task. The audit should determine: (1) whether the edge cookie check provides meaningful protection or is redundant with the layout guard; (2) whether the export name matters for the Next.js 16 version in use; (3) what the correct action is.
 
 ---
 
@@ -198,49 +180,50 @@ grep -r "FAQAccordion" app components --include="*.ts" --include="*.tsx"
 
 ---
 
-## Phase 7 — Create `docs/` Directory and Move Markdown Files (Medium Effort)
+## Phase 7 — docs/ Directory Structure — DONE
 
-### Action 7.1 — Move all .md files to `docs/`
+### Action 7.1 — COMPLETED (commits 82a3e19 + current)
 
-**Why**: 19+ markdown files at the root make the project root cluttered and hard to navigate. A `docs/` directory is the standard convention.
+**Outcome**: All 23 Markdown files were moved into `docs/` in commit `82a3e19`. A subsequent documentation-structure correction commit restored root entry-point files and organized supporting documents into subdirectories.
 
-**Steps**:
-1. Create `docs/` directory
-2. Use `git mv` to move all `.md` files (list below)
-3. Update any cross-references in the docs that use relative paths to other `.md` files (e.g., `[CMS_STATUS.md](CMS_STATUS.md)` → `[CMS_STATUS.md](docs/CMS_STATUS.md)` if referenced from root, or keep relative if within `docs/`)
-4. Update `ESTABIZZ_AGENT_OPERATING_GUIDE.md` §10 documentation index to reference `docs/` paths
-5. Update `ESTABIZZ_PROJECT_MASTER_CONTEXT.md` document map
-6. Run `npx tsc --noEmit`
-7. Commit: `Docs: move all markdown documentation files into docs/ directory`
-
-**Files to move**:
+**Final structure**:
 ```
-CMS_STATUS.md → docs/CMS_STATUS.md
-AGENTS.md → docs/AGENTS.md
-ESTABIZZ_PROJECT_MASTER_CONTEXT.md → docs/ESTABIZZ_PROJECT_MASTER_CONTEXT.md
-ESTABIZZ_AGENT_OPERATING_GUIDE.md → docs/ESTABIZZ_AGENT_OPERATING_GUIDE.md
-ESTABIZZ_TECHNICAL_ARCHITECTURE.md → docs/ESTABIZZ_TECHNICAL_ARCHITECTURE.md
-ESTABIZZ_MODULE_INVENTORY.md → docs/ESTABIZZ_MODULE_INVENTORY.md
-ESTABIZZ_API_DATABASE_MAP.md → docs/ESTABIZZ_API_DATABASE_MAP.md
-ESTABIZZ_SECURITY_PERMISSION_MAP.md → docs/ESTABIZZ_SECURITY_PERMISSION_MAP.md
-ESTABIZZ_CURRENT_COMPLETION_STATUS.md → docs/ESTABIZZ_CURRENT_COMPLETION_STATUS.md
-ESTABIZZ_TECHNICAL_DEBT_REGISTER.md → docs/ESTABIZZ_TECHNICAL_DEBT_REGISTER.md
-ESTABIZZ_FUTURE_PRODUCT_ROADMAP.md → docs/ESTABIZZ_FUTURE_PRODUCT_ROADMAP.md
-ESTABIZZ_NEXT_20_TASKS.md → docs/ESTABIZZ_NEXT_20_TASKS.md
-ESTABIZZ_REPOSITORY_STRUCTURE_MAP.md → docs/ESTABIZZ_REPOSITORY_STRUCTURE_MAP.md
-ESTABIZZ_FILE_CLASSIFICATION_REGISTER.md → docs/ESTABIZZ_FILE_CLASSIFICATION_REGISTER.md
-ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md → docs/ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md
-ESTABIZZ_RECOMMENDED_FOLDER_STRUCTURE.md → docs/ESTABIZZ_RECOMMENDED_FOLDER_STRUCTURE.md
-ESTABIZZ_FOLDER_CLEANUP_PLAN.md → docs/ESTABIZZ_FOLDER_CLEANUP_PLAN.md
-ADMIN_OS_DISASTER_RECOVERY.md → docs/ADMIN_OS_DISASTER_RECOVERY.md
-ADMIN_OS_PRODUCTION_READINESS.md → docs/ADMIN_OS_PRODUCTION_READINESS.md
-ADMIN_OS_SECURITY_MATRIX.md → docs/ADMIN_OS_SECURITY_MATRIX.md
-ADMIN_OS_SEO_DEPLOYMENT_CHECKLIST.md → docs/ADMIN_OS_SEO_DEPLOYMENT_CHECKLIST.md
-ADMIN_OS_STAGING_RELEASE_PACKAGE.md → docs/ADMIN_OS_STAGING_RELEASE_PACKAGE.md
-SECURITY_INCIDENT_S2.md → docs/SECURITY_INCIDENT_S2.md
+AGENTS.md                        ← Root (agent discovery entry point)
+CMS_STATUS.md                    ← Root (living completion log)
+ESTABIZZ_PROJECT_MASTER_CONTEXT.md ← Root (canonical master index)
+word-docs/
+  README.md
+  Estabizz_Project_Documentation.docx
+  Estabizz_Audit_Documentation.docx
+docs/
+  architecture/
+    ESTABIZZ_TECHNICAL_ARCHITECTURE.md
+    ESTABIZZ_MODULE_INVENTORY.md
+    ESTABIZZ_API_DATABASE_MAP.md
+    ESTABIZZ_REPOSITORY_STRUCTURE_MAP.md
+    ESTABIZZ_FILE_CLASSIFICATION_REGISTER.md
+    ESTABIZZ_RECOMMENDED_FOLDER_STRUCTURE.md
+  security/
+    ESTABIZZ_SECURITY_PERMISSION_MAP.md
+    ADMIN_OS_SECURITY_MATRIX.md
+    SECURITY_INCIDENT_S2.md
+  operations/
+    ESTABIZZ_AGENT_OPERATING_GUIDE.md
+    ESTABIZZ_CURRENT_COMPLETION_STATUS.md
+    ESTABIZZ_TECHNICAL_DEBT_REGISTER.md
+    ESTABIZZ_FOLDER_CLEANUP_PLAN.md
+    ADMIN_OS_DISASTER_RECOVERY.md
+    ADMIN_OS_PRODUCTION_READINESS.md
+    ADMIN_OS_SEO_DEPLOYMENT_CHECKLIST.md
+    ADMIN_OS_STAGING_RELEASE_PACKAGE.md
+  roadmap/
+    ESTABIZZ_FUTURE_PRODUCT_ROADMAP.md
+    ESTABIZZ_NEXT_20_TASKS.md
+  audits/
+    ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md
 ```
 
-**Note**: AGENTS.md may need to remain at the root if external agent systems expect it there. Check before moving.
+All Markdown cross-references were updated to use correct relative paths. No source code changed.
 
 ---
 
@@ -250,10 +233,10 @@ SECURITY_INCIDENT_S2.md → docs/SECURITY_INCIDENT_S2.md
 |-------|---------|----------|--------|------|
 | 1 | `.gitignore` fixes (2 actions) | P0 | Trivial | None |
 | 2 | Delete empty/legacy files (3 actions) | P0–P1 | Small | None (verify imports first) |
-| 3 | Resolve `proxy.ts` | P1 | Small | Low (test locally before deploy) |
+| 3 | Dedicated `proxy.ts` audit (deferred — do not act during cleanup) | P2 | Small | Low |
 | 4 | Fix `RegulatorySevices.tsx` typo | P2 | Small | Low (update imports) |
 | 5 | Move `FAQAccordion.tsx` | P3 | Small | Low (update imports) |
 | 6 | Consolidate redirect routes | P3 | Medium | Low (test all redirects) |
-| 7 | Create `docs/` + move .md files | P3 | Medium | Low (update cross-references) |
+| 7 | Create `docs/` + move .md files | **DONE** | — | — |
 
 **Start with Phase 1 and Phase 2** — they are zero-risk and do not require import changes or testing.

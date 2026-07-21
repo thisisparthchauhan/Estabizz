@@ -2,6 +2,7 @@
 
 > Created: Phase 5C (2026-07-02 IST) · Do not include credentials in this file.
 > No push or deployment was performed in Phase 5C. This document is a readiness gate only.
+> Documentation structure correction: 2026-07-22 — proxy.ts classification corrected; file moved to docs/operations/.
 
 ---
 
@@ -319,7 +320,7 @@ Additional invariants:
 | JWT expiry | 7 days | Matches cookie maxAge |
 | JWT signing algorithm | HS256 (jsonwebtoken default) | Signed with `JWT_SECRET` |
 
-**No middleware.ts / edge pre-check:** There is no Next.js edge middleware for `/admin/**`. The `app/admin/layout.tsx` is the authoritative gate. AGENTS.md §7 references a non-existent `proxy.ts` edge gate — this comment is stale. The actual protection is the server-side layout guard (documented in `ADMIN_OS_SECURITY_MATRIX.md`).
+**proxy.ts edge check + server-side gate:** `proxy.ts` is a Next.js 16 framework convention containing an edge-runtime cookie presence check for `/admin/*`. `app/admin/layout.tsx` is the authoritative gate — it verifies the JWT and checks the admin allowlist/DB. A dedicated `proxy.ts` audit is required to determine whether the edge check provides meaningful layered protection or is redundant. See `docs/audits/ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md` Category 4. The full admin protection architecture is documented in `docs/security/ADMIN_OS_SECURITY_MATRIX.md`.
 
 **Session invalidation gap:** Active sessions are not invalidated when an admin's role or status changes. This is a known limitation documented in `ADMIN_OS_SECURITY_MATRIX.md` §10.
 
@@ -347,7 +348,7 @@ Additional invariants:
 
 9. **Purge doesn't verify item status** — As documented in `ADMIN_OS_DISASTER_RECOVERY.md` §9 — limited to super_admin/admin blast radius.
 
-10. **AGENTS.md §7 is stale** — References a non-existent `proxy.ts` edge gate. Actual admin protection is documented in `ADMIN_OS_SECURITY_MATRIX.md`.
+10. **proxy.ts dedicated audit pending** — `proxy.ts` is a valid Next.js 16 framework convention. A dedicated audit is required to assess whether the edge cookie check provides meaningful layered protection alongside `app/admin/layout.tsx`. Do not rename or delete without completing that audit. Tracked in `docs/audits/ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md` Category 4.
 
 11. **Blog `delete_blog` is permanent** — No soft-delete for blogs (pre-existing behavior).
 

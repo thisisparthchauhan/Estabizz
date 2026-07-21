@@ -2,6 +2,7 @@
 
 > Written: 2026-07-22 · Corrections applied: 2026-07-22 · Branch: **main** (confirmed)
 > Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
+> Documentation structure correction: 2026-07-22 — this file moved to docs/operations/; entry-point files at repository root.
 > **Read this file before doing any work.** It will save you from common mistakes.
 
 ---
@@ -228,18 +229,57 @@ These items have been noted but not yet resolved. Do not make assumptions about 
 
 ## 10. Documentation Index
 
-All canonical docs are in the project root:
+Three entry-point files are at the repository root:
+
+| File | Contents |
+|------|---------|
+| `AGENTS.md` | Agent discovery instructions — read first |
+| `ESTABIZZ_PROJECT_MASTER_CONTEXT.md` | Master index; read this first in a new session |
+| `CMS_STATUS.md` | Running log of what has been built and committed |
+
+Supporting documents are organized under `docs/`:
+
+**docs/operations/** (this directory):
+
+| File | Contents |
+|------|---------|
+| `ESTABIZZ_AGENT_OPERATING_GUIDE.md` | This file — rules and working conventions |
+| `ESTABIZZ_CURRENT_COMPLETION_STATUS.md` | What is complete vs. placeholder vs. not built |
+| `ESTABIZZ_TECHNICAL_DEBT_REGISTER.md` | Known issues with severity and recommended fix |
+| `ESTABIZZ_FOLDER_CLEANUP_PLAN.md` | Phased, safe cleanup steps |
+| `ADMIN_OS_PRODUCTION_READINESS.md` | Pre-deployment checklist and smoke test plan |
+| `ADMIN_OS_DISASTER_RECOVERY.md` | Backup scope, restore procedures, recovery runbook |
+| `ADMIN_OS_SEO_DEPLOYMENT_CHECKLIST.md` | SEO readiness for deployment |
+| `ADMIN_OS_STAGING_RELEASE_PACKAGE.md` | Staging release scope and deployment checklist |
+
+**docs/architecture/**:
 
 | File | Contents |
 |------|---------|
 | `ESTABIZZ_TECHNICAL_ARCHITECTURE.md` | Stack, patterns, env vars, build/deploy flow |
 | `ESTABIZZ_MODULE_INVENTORY.md` | All Admin OS + public site modules, components |
 | `ESTABIZZ_API_DATABASE_MAP.md` | Full API catalogue, DB models |
+| `ESTABIZZ_REPOSITORY_STRUCTURE_MAP.md` | Full annotated directory tree |
+| `ESTABIZZ_FILE_CLASSIFICATION_REGISTER.md` | Classification of every notable file |
+| `ESTABIZZ_RECOMMENDED_FOLDER_STRUCTURE.md` | Target folder structure after cleanup |
+
+**docs/security/**:
+
+| File | Contents |
+|------|---------|
 | `ESTABIZZ_SECURITY_PERMISSION_MAP.md` | Auth flow, roles, permissions matrix |
-| `ESTABIZZ_CURRENT_COMPLETION_STATUS.md` | What is complete vs. placeholder vs. not built |
-| `ESTABIZZ_TECHNICAL_DEBT_REGISTER.md` | 15 known issues with severity and fix |
+| `ADMIN_OS_SECURITY_MATRIX.md` | Full permission matrix and protected API summary |
+| `SECURITY_INCIDENT_S2.md` | Security incident record S2 |
+
+**docs/roadmap/**:
+
+| File | Contents |
+|------|---------|
 | `ESTABIZZ_FUTURE_PRODUCT_ROADMAP.md` | Full product vision: client portal, AI, CRM |
 | `ESTABIZZ_NEXT_20_TASKS.md` | Ordered task list — Priority 0 first |
-| `ESTABIZZ_AGENT_OPERATING_GUIDE.md` | This file — rules and working conventions |
-| `ESTABIZZ_PROJECT_MASTER_CONTEXT.md` | Master index; read this first in a new session |
-| `CMS_STATUS.md` | Running log of what has been built and committed |
+
+**docs/audits/**:
+
+| File | Contents |
+|------|---------|
+| `ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md` | Unused, legacy, generated, redirect-only files |

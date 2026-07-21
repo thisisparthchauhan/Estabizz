@@ -3,6 +3,7 @@
 > Created: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
 > **Start here.** This file is the single entry point for any agent or developer who is new to this project.
 > Corrections applied: 2026-07-22 — commit references, pending changes status, CSS pipeline, permission gaps, TipTap warning, completion percentages.
+> Documentation structure correction: 2026-07-22 — root entry points restored; supporting docs organized under docs/ subdirectories.
 
 ---
 
@@ -50,7 +51,7 @@ The `dev` script and `npm run build` both write to `.next/`. Running them simult
 Run `npx tsc --noEmit` before every commit. Fix all type errors before committing.
 
 ### 5. Do not touch secrets
-Do not read, print, or echo `.env.local`. Do not expose non-`NEXT_PUBLIC_` env vars to client code. See the Security rules in `ESTABIZZ_AGENT_OPERATING_GUIDE.md`.
+Do not read, print, or echo `.env.local`. Do not expose non-`NEXT_PUBLIC_` env vars to client code. See the Security rules in `docs/operations/ESTABIZZ_AGENT_OPERATING_GUIDE.md`.
 
 ### 6. Use the permission system correctly
 Every admin API that modifies data must call `requirePermission(request, 'permission_name')` — not just `requireAdmin`. The two-step pattern is: requirePermission calls requireAdmin internally. Only use `requireAdmin` for read-only admin routes.
@@ -71,25 +72,60 @@ Work only on what was explicitly asked. Do not refactor adjacent code, add featu
 
 ## Document Map
 
-Read these documents in the order that matches your task:
+Three entry-point files live at the repository root:
+
+| File | Purpose |
+|------|---------|
+| [AGENTS.md](AGENTS.md) | Agent discovery — read this first |
+| [ESTABIZZ_PROJECT_MASTER_CONTEXT.md](ESTABIZZ_PROJECT_MASTER_CONTEXT.md) | This file — single entry point |
+| [CMS_STATUS.md](CMS_STATUS.md) | Living log of completed work |
+
+Supporting documents are organized under `docs/`:
+
+### docs/operations/ — read before any work
 
 | Document | When to read |
 |----------|-------------|
-| [ESTABIZZ_AGENT_OPERATING_GUIDE.md](ESTABIZZ_AGENT_OPERATING_GUIDE.md) | Always — before any work |
-| [ESTABIZZ_CURRENT_COMPLETION_STATUS.md](ESTABIZZ_CURRENT_COMPLETION_STATUS.md) | To understand what is built vs. placeholder |
-| [ESTABIZZ_TECHNICAL_ARCHITECTURE.md](ESTABIZZ_TECHNICAL_ARCHITECTURE.md) | When working on infra, build, or auth |
-| [ESTABIZZ_MODULE_INVENTORY.md](ESTABIZZ_MODULE_INVENTORY.md) | When navigating the codebase |
-| [ESTABIZZ_API_DATABASE_MAP.md](ESTABIZZ_API_DATABASE_MAP.md) | When adding or modifying API routes or DB models |
-| [ESTABIZZ_SECURITY_PERMISSION_MAP.md](ESTABIZZ_SECURITY_PERMISSION_MAP.md) | When touching auth, permissions, or any security-sensitive code |
-| [ESTABIZZ_TECHNICAL_DEBT_REGISTER.md](ESTABIZZ_TECHNICAL_DEBT_REGISTER.md) | Before starting any bug fix — check if it is a known issue |
-| [ESTABIZZ_FUTURE_PRODUCT_ROADMAP.md](ESTABIZZ_FUTURE_PRODUCT_ROADMAP.md) | Before designing any new feature — check alignment with roadmap |
-| [ESTABIZZ_NEXT_20_TASKS.md](ESTABIZZ_NEXT_20_TASKS.md) | When deciding what to work on next |
-| [CMS_STATUS.md](CMS_STATUS.md) | Living log of completed work |
-| [ESTABIZZ_REPOSITORY_STRUCTURE_MAP.md](ESTABIZZ_REPOSITORY_STRUCTURE_MAP.md) | Full annotated directory tree, redirect routes, structural observations |
-| [ESTABIZZ_FILE_CLASSIFICATION_REGISTER.md](ESTABIZZ_FILE_CLASSIFICATION_REGISTER.md) | Classification of every notable file (active/legacy/generated/redirect-only/etc.) |
-| [ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md](ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md) | Unused, legacy, generated, and redirect-only files — audit findings |
-| [ESTABIZZ_RECOMMENDED_FOLDER_STRUCTURE.md](ESTABIZZ_RECOMMENDED_FOLDER_STRUCTURE.md) | Target folder structure after cleanup |
-| [ESTABIZZ_FOLDER_CLEANUP_PLAN.md](ESTABIZZ_FOLDER_CLEANUP_PLAN.md) | Phased, safe cleanup steps — start here for housekeeping tasks |
+| [ESTABIZZ_AGENT_OPERATING_GUIDE.md](docs/operations/ESTABIZZ_AGENT_OPERATING_GUIDE.md) | Always — before any work |
+| [ESTABIZZ_CURRENT_COMPLETION_STATUS.md](docs/operations/ESTABIZZ_CURRENT_COMPLETION_STATUS.md) | To understand what is built vs. placeholder |
+| [ESTABIZZ_TECHNICAL_DEBT_REGISTER.md](docs/operations/ESTABIZZ_TECHNICAL_DEBT_REGISTER.md) | Before starting any bug fix — check if it is a known issue |
+| [ESTABIZZ_FOLDER_CLEANUP_PLAN.md](docs/operations/ESTABIZZ_FOLDER_CLEANUP_PLAN.md) | Phased, safe cleanup steps — start here for housekeeping tasks |
+| [ADMIN_OS_PRODUCTION_READINESS.md](docs/operations/ADMIN_OS_PRODUCTION_READINESS.md) | Pre-deployment checklist and smoke test plan |
+| [ADMIN_OS_DISASTER_RECOVERY.md](docs/operations/ADMIN_OS_DISASTER_RECOVERY.md) | Backup scope, restore procedures, recovery runbook |
+| [ADMIN_OS_SEO_DEPLOYMENT_CHECKLIST.md](docs/operations/ADMIN_OS_SEO_DEPLOYMENT_CHECKLIST.md) | SEO readiness for deployment |
+| [ADMIN_OS_STAGING_RELEASE_PACKAGE.md](docs/operations/ADMIN_OS_STAGING_RELEASE_PACKAGE.md) | Staging release scope and deployment checklist |
+
+### docs/architecture/ — read when navigating the codebase
+
+| Document | When to read |
+|----------|-------------|
+| [ESTABIZZ_TECHNICAL_ARCHITECTURE.md](docs/architecture/ESTABIZZ_TECHNICAL_ARCHITECTURE.md) | When working on infra, build, or auth |
+| [ESTABIZZ_MODULE_INVENTORY.md](docs/architecture/ESTABIZZ_MODULE_INVENTORY.md) | When navigating the codebase |
+| [ESTABIZZ_API_DATABASE_MAP.md](docs/architecture/ESTABIZZ_API_DATABASE_MAP.md) | When adding or modifying API routes or DB models |
+| [ESTABIZZ_REPOSITORY_STRUCTURE_MAP.md](docs/architecture/ESTABIZZ_REPOSITORY_STRUCTURE_MAP.md) | Full annotated directory tree, redirect routes, structural observations |
+| [ESTABIZZ_FILE_CLASSIFICATION_REGISTER.md](docs/architecture/ESTABIZZ_FILE_CLASSIFICATION_REGISTER.md) | Classification of every notable file (active/legacy/generated/redirect-only/etc.) |
+| [ESTABIZZ_RECOMMENDED_FOLDER_STRUCTURE.md](docs/architecture/ESTABIZZ_RECOMMENDED_FOLDER_STRUCTURE.md) | Target folder structure after cleanup |
+
+### docs/security/ — read when touching auth or permissions
+
+| Document | When to read |
+|----------|-------------|
+| [ESTABIZZ_SECURITY_PERMISSION_MAP.md](docs/security/ESTABIZZ_SECURITY_PERMISSION_MAP.md) | When touching auth, permissions, or any security-sensitive code |
+| [ADMIN_OS_SECURITY_MATRIX.md](docs/security/ADMIN_OS_SECURITY_MATRIX.md) | Full permission matrix and protected API summary |
+| [SECURITY_INCIDENT_S2.md](docs/security/SECURITY_INCIDENT_S2.md) | Security incident record S2 |
+
+### docs/roadmap/ — read before designing new features
+
+| Document | When to read |
+|----------|-------------|
+| [ESTABIZZ_FUTURE_PRODUCT_ROADMAP.md](docs/roadmap/ESTABIZZ_FUTURE_PRODUCT_ROADMAP.md) | Before designing any new feature — check alignment with roadmap |
+| [ESTABIZZ_NEXT_20_TASKS.md](docs/roadmap/ESTABIZZ_NEXT_20_TASKS.md) | When deciding what to work on next |
+
+### docs/audits/ — repository audit findings
+
+| Document | When to read |
+|----------|-------------|
+| [ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md](docs/audits/ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md) | Unused, legacy, generated, and redirect-only files — audit findings |
 
 ---
 
@@ -111,7 +147,7 @@ Read these documents in the order that matches your task:
 
 **Pending code changes on `main` as of 2026-07-22**: None. Both requirePermission.ts and RichContentEditor.tsx have zero uncommitted changes — confirmed by `git diff` returning empty for both files. All fixes from the current session are committed.
 
-**Next recommended task**: See [Task 1 in ESTABIZZ_NEXT_20_TASKS.md](ESTABIZZ_NEXT_20_TASKS.md) — fix blog and leads API permission gap (TD-016).
+**Next recommended task**: See [Task 1 in ESTABIZZ_NEXT_20_TASKS.md](docs/roadmap/ESTABIZZ_NEXT_20_TASKS.md) — fix blog and leads API permission gap (TD-016).
 
 ---
 
@@ -157,7 +193,7 @@ Media
 - Login endpoint (`/api/auth/login`) has **no rate limiting** — highest priority security gap
 - Two public AI endpoints have no auth — **do not enable `ANTHROPIC_API_KEY`** in production until rate-limited
 - Internal resource pages (`/resources/content-rebuild-command`, etc.) are publicly accessible — no auth guard
-- Full security map: [ESTABIZZ_SECURITY_PERMISSION_MAP.md](ESTABIZZ_SECURITY_PERMISSION_MAP.md)
+- Full security map: [ESTABIZZ_SECURITY_PERMISSION_MAP.md](docs/security/ESTABIZZ_SECURITY_PERMISSION_MAP.md)
 
 ---
 

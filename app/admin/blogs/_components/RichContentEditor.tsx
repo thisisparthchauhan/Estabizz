@@ -267,11 +267,7 @@ export default function RichContentEditor({ value, onChange }: Props) {
       <div className="rounded-xl border border-[#dbe7f3] focus-within:border-[#1677f2] focus-within:ring-2 focus-within:ring-[#1677f2]/12 transition-all">
 
         {/* ── Toolbar (sticky) ─────────────────────────────────────────────── */}
-        {/*
-          top-[60px] = ActionBar height (py-3 wrapper ~60px) so toolbar sticks
-          directly below the ActionBar without overlap.
-          z-30 keeps it below the ActionBar (z-50) and the link dialog (z-[9999]).
-        */}
+        {/* Keep the 60px sticky offset aligned with the BlogEditorClient ActionBar height. */}
         <div className="sticky top-[60px] z-30 rounded-t-xl border-b border-[#e8f0f8] bg-[#f8fbff] shadow-[0_2px_6px_rgba(15,23,42,0.06)]">
           <div className="flex items-center gap-0 p-2">
 

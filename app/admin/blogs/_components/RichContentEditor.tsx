@@ -3,22 +3,28 @@
 /**
  * RichContentEditor — TipTap WYSIWYG editor for blog content.
  *
- * Replaces the plain textarea ContentEditor. Supports:
+ * Supports:
  * - Paste from Microsoft Word (auto-detected + cleaned via wordCleanup.ts)
- * - Import from .docx via Mammoth.js
+ * - Import from .docx via Mammoth.js — including embedded images uploaded to Cloudinary
  * - Heading (H2/H3/H4), Bold, Italic, Underline, Link
  * - Bullet list, Ordered list, Blockquote/Callout
  * - Tables
+ * - Images (via @tiptap/extension-image, src must be HTTPS)
  * - HTML source view toggle (read-only preview)
  * - Word count footer
  *
- * Outputs clean HTML saved to the existing blog `content` field.
- * Server-side re-sanitization via sanitize-html runs on every save (defense-in-depth).
+ * Word image import flow:
+ *   .docx → Mammoth convertImage callback → Cloudinary unsigned upload
+ *   → permanent HTTPS URL inserted at correct position in document
+ *   → Media Library recorded (best-effort)
+ *   → cleanWordHtml() strips any remaining unsafe image src values
+ *   → server-side sanitize-html runs on every save (defense-in-depth)
  */
 
 import React, { useCallback, useRef, useState, useEffect } from "react";
 import { useEditor, EditorContent, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import Image from "@tiptap/extension-image";
 import LinkExtension from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
 import { Table } from "@tiptap/extension-table";
@@ -27,6 +33,11 @@ import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import { DOMParser as ProseDOMParser } from "@tiptap/pm/model";
 import { cleanWordHtml, isWordHtml } from "./wordCleanup";
+
+// ── Cloudinary config (unsigned upload preset — no secret in browser) ─────────
+
+const CLOUDINARY_CLOUD  = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+const CLOUDINARY_PRESET = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 
@@ -129,6 +140,16 @@ function LinkDialog({
   );
 }
 
+// ── Allowed MIME types for Word-embedded images ───────────────────────────────
+
+const ALLOWED_IMAGE_MIMES = new Set([
+  "image/png",
+  "image/jpeg",
+  "image/jpg",
+  "image/gif",
+  "image/webp",
+]);
+
 // ── Main editor ───────────────────────────────────────────────────────────────
 
 export default function RichContentEditor({ value, onChange }: Props) {
@@ -137,6 +158,11 @@ export default function RichContentEditor({ value, onChange }: Props) {
   const [linkOpen, setLinkOpen] = useState(false);
   const [wordPasteToast, setWordPasteToast] = useState(false);
   const wordPasteTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Word import progress / result state
+  const [importStatus, setImportStatus] = useState<string | null>(null);
+  const [importWarning, setImportWarning] = useState<string | null>(null);
+  const [altReviewCount, setAltReviewCount] = useState(0);
 
   // Keep a ref to avoid stale closures in handlePaste
   const onChangeRef = useRef(onChange);
@@ -148,6 +174,12 @@ export default function RichContentEditor({ value, onChange }: Props) {
         heading: { levels: [2, 3, 4] },
         codeBlock: false,
         code: false,
+      }),
+      Image.configure({
+        inline: false,
+        allowBase64: false,
+        HTMLAttributes: { loading: "lazy", decoding: "async" },
+        resize: false,
       }),
       Underline,
       LinkExtension.configure({
@@ -204,27 +236,138 @@ export default function RichContentEditor({ value, onChange }: Props) {
     if (current !== value && value !== undefined) {
       editor.commands.setContent(value || "", { emitUpdate: false });
     }
-    // Only run when `value` prop changes from outside (not from typing)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor, value]);
 
-  // ── Import .docx via Mammoth ───────────────────────────────────────────────
+  // ── Import .docx via Mammoth with embedded image upload ───────────────────
   const handleWordFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (!file || !editor) return;
       e.target.value = "";
 
+      setImportStatus("Reading Word file…");
+      setImportWarning(null);
+      setAltReviewCount(0);
+
+      let imageIndex = 0;
+      let failedCount = 0;
+      let placeholderAltCount = 0;
+      const cloudinaryReady = Boolean(CLOUDINARY_CLOUD && CLOUDINARY_PRESET);
+
       try {
         const mammoth = await import("mammoth");
         const arrayBuffer = await file.arrayBuffer();
-        const result = await mammoth.convertToHtml({ arrayBuffer });
+
+        const result = await mammoth.convertToHtml(
+          { arrayBuffer },
+          {
+            convertImage: mammoth.images.imgElement(async (image) => {
+              imageIndex++;
+              setImportStatus(`Uploading image ${imageIndex}…`);
+
+              try {
+                const mimeType = (image.contentType || "image/png").toLowerCase();
+
+                if (!ALLOWED_IMAGE_MIMES.has(mimeType) || !cloudinaryReady) {
+                  failedCount++;
+                  return { src: "", alt: "Image could not be imported" };
+                }
+
+                const base64 = await image.readAsBase64String();
+
+                // base64 → Blob → File
+                const byteChars = atob(base64);
+                const byteArr = new Uint8Array(byteChars.length);
+                for (let i = 0; i < byteChars.length; i++) byteArr[i] = byteChars.charCodeAt(i);
+                const blob = new Blob([byteArr], { type: mimeType });
+
+                if (blob.size > 10 * 1024 * 1024) {
+                  failedCount++;
+                  return { src: "", alt: "Image could not be imported (exceeds 10 MB)" };
+                }
+
+                const ext = mimeType.split("/")[1].replace("jpeg", "jpg");
+                const uploadFile = new File([blob], `word-image-${imageIndex}.${ext}`, { type: mimeType });
+
+                // Upload to Cloudinary (unsigned preset — no API secret in browser)
+                const fd = new FormData();
+                fd.append("file", uploadFile);
+                fd.append("upload_preset", CLOUDINARY_PRESET as string);
+
+                const uploadRes = await fetch(
+                  `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`,
+                  { method: "POST", body: fd }
+                );
+                const uploadData = await uploadRes.json() as Record<string, unknown>;
+
+                if (!uploadRes.ok || typeof uploadData.secure_url !== "string") {
+                  failedCount++;
+                  return { src: "", alt: "Image could not be imported" };
+                }
+
+                const secureUrl = uploadData.secure_url as string;
+
+                // Alt text: use Word-provided value, otherwise a numbered placeholder
+                // Mammoth may expose altText as a runtime property not in its types
+                const imageAsAny = image as unknown as Record<string, unknown>;
+                const wordAlt = typeof imageAsAny.altText === "string"
+                  ? (imageAsAny.altText as string).trim()
+                  : "";
+                let alt: string;
+                if (wordAlt) {
+                  alt = wordAlt;
+                } else {
+                  placeholderAltCount++;
+                  alt = `Imported image ${imageIndex}`;
+                }
+
+                // Record in Media Library — best-effort, non-blocking
+                fetch("/api/admin/media", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    publicId:         uploadData.public_id,
+                    secureUrl,
+                    url:              uploadData.url ?? secureUrl,
+                    resourceType:     uploadData.resource_type ?? "image",
+                    format:           uploadData.format ?? ext,
+                    bytes:            uploadData.bytes,
+                    width:            uploadData.width,
+                    height:           uploadData.height,
+                    originalFilename: uploadFile.name,
+                    mimeType,
+                    altText:          alt,
+                    tags:             ["word_import"],
+                  }),
+                }).catch(() => { /* best-effort */ });
+
+                return { src: secureUrl, alt };
+              } catch {
+                failedCount++;
+                return { src: "", alt: "Image could not be imported" };
+              }
+            }),
+          }
+        );
+
         const cleaned = cleanWordHtml(result.value);
         editor.commands.setContent(cleaned, { emitUpdate: true });
         onChangeRef.current(editor.getHTML());
+
+        if (failedCount > 0) {
+          setImportWarning(
+            `${failedCount} image${failedCount > 1 ? "s" : ""} could not be imported — replace or remove them in the editor.`
+          );
+        }
+        if (placeholderAltCount > 0) {
+          setAltReviewCount(placeholderAltCount);
+        }
       } catch (err) {
         console.error("[RichContentEditor] Mammoth import failed:", err);
         alert("Could not read the Word file. Please try copy-pasting instead.");
+      } finally {
+        setImportStatus(null);
       }
     },
     [editor]
@@ -326,10 +469,11 @@ export default function RichContentEditor({ value, onChange }: Props) {
               <button
                 type="button"
                 title="Import from Word .docx file"
+                disabled={importStatus !== null}
                 onClick={() => wordFileRef.current?.click()}
-                className="px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold text-[#1677f2] border border-[#1677f2]/30 hover:bg-[#1677f2] hover:text-white hover:border-[#1677f2] transition-colors leading-none shrink-0"
+                className="px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold text-[#1677f2] border border-[#1677f2]/30 hover:bg-[#1677f2] hover:text-white hover:border-[#1677f2] transition-colors leading-none shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                📄 Import Word
+                {importStatus ? "Importing…" : "📄 Import Word"}
               </button>
             </div>
 
@@ -351,11 +495,52 @@ export default function RichContentEditor({ value, onChange }: Props) {
           </div>
         </div>
 
+        {/* ── Word import progress banner ───────────────────────────────────── */}
+        {importStatus && (
+          <div className="flex items-center gap-2 border-b border-blue-200 bg-blue-50 px-4 py-2 text-[12px] font-semibold text-blue-700">
+            <svg className="h-3.5 w-3.5 animate-spin shrink-0" viewBox="0 0 24 24" fill="none">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.4 0 0 5.4 0 12h4z" />
+            </svg>
+            <span>{importStatus}</span>
+          </div>
+        )}
+
         {/* ── Word paste banner ─────────────────────────────────────────────── */}
         {wordPasteToast && (
           <div className="flex items-center gap-2 border-b border-emerald-200 bg-emerald-50 px-4 py-2 text-[12px] font-semibold text-emerald-700">
             <span>✓</span>
             <span>Word content pasted and cleaned — mso- styles removed, headings mapped to H2/H3/H4.</span>
+          </div>
+        )}
+
+        {/* ── Import warning (failed images) ────────────────────────────────── */}
+        {importWarning && (
+          <div className="flex items-center justify-between gap-2 border-b border-amber-200 bg-amber-50 px-4 py-2 text-[12px] font-semibold text-amber-800">
+            <span>⚠ {importWarning}</span>
+            <button
+              type="button"
+              onClick={() => setImportWarning(null)}
+              className="shrink-0 text-amber-600 hover:text-amber-900 text-[14px] leading-none"
+            >
+              ×
+            </button>
+          </div>
+        )}
+
+        {/* ── Alt text review notice ────────────────────────────────────────── */}
+        {altReviewCount > 0 && (
+          <div className="flex items-center justify-between gap-2 border-b border-yellow-200 bg-yellow-50 px-4 py-2 text-[12px] font-semibold text-yellow-800">
+            <span>
+              ✎ {altReviewCount} image{altReviewCount > 1 ? "s have" : " has"} placeholder alt text — please update the alt text before publishing.
+            </span>
+            <button
+              type="button"
+              onClick={() => setAltReviewCount(0)}
+              className="shrink-0 text-yellow-600 hover:text-yellow-900 text-[14px] leading-none"
+            >
+              ×
+            </button>
           </div>
         )}
 
@@ -419,6 +604,8 @@ export default function RichContentEditor({ value, onChange }: Props) {
         .rich-editor-prose strong, .rich-editor-prose b { font-weight: 700; color: #0a1628; }
         .rich-editor-prose em, .rich-editor-prose i { font-style: italic; }
         .rich-editor-prose u { text-decoration: underline; text-underline-offset: 2px; }
+        .rich-editor-prose img { max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0; display: block; }
+        .rich-editor-prose img.ProseMirror-selectednode { outline: 2px solid #1677f2; outline-offset: 2px; border-radius: 8px; }
         .ProseMirror-focused { outline: none; }
         .ProseMirror .selectedCell { background: rgba(22,119,242,0.08); }
       `}</style>

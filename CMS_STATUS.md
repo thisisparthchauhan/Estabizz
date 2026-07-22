@@ -12,7 +12,7 @@
 **503 gate added**: AI routes now return controlled 503 when `ANTHROPIC_API_KEY` is absent (previously uncontrolled throw → 500). Body size guards added: login 8 KB, recommend 8 KB, chat 64 KB. Input size guards: recommend 3000 chars, chat 4000 chars/message.
 **New file**: `lib/security/rateLimit.ts` — server-only rate-limit utility (`limitRequest`, `getClientIp`, `hashIdentifier`, `rateLimitResponse`, `rateLimitHeaders`).
 **Modified**: `app/api/auth/login/route.ts`, `app/api/chat/route.ts`, `app/api/recommend-services/route.ts`, `package.json` (`@upstash/ratelimit`, `@upstash/redis` added).
-**Commit**: pending (Security: add login and public AI rate limiting).
+**Commit**: `664a08b` (Security: add login and public AI rate limiting).
 **TypeScript**: clean.
 
 ---

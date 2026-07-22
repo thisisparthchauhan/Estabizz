@@ -91,7 +91,7 @@
 | Admin route protection (pages) | ✅ Complete | layout.tsx guard |
 | Admin API protection | ✅ Complete | requirePermission on all routes |
 | No base64 image storage | ✅ Complete | allowBase64:false + sanitize-html |
-| Rate limiting | 🔴 Not started | Login and AI endpoints unprotected |
+| Rate limiting | ✅ Complete | Login: 5/IP/15 min + 10/hashedId/30 min. Chat: 10/IP/10 min. Recommend: 5/IP/10 min. Upstash Redis (prod) + in-memory fallback (dev). |
 | CSP headers | 🔴 Not started | Not configured |
 | CSRF protection | 🟡 Partial | SameSite:lax only |
 | Audit logging (blogs/media) | 🔴 Not started | ContentAudit only covers homepage CMS |

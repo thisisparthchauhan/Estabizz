@@ -336,9 +336,9 @@ Additional invariants:
 
 3. **No edge middleware pre-check** — `/admin/**` routes are protected only by the layout server-side check (no Vercel edge function pre-check). CDN may serve a loading frame before redirect fires. No admin data is exposed before the check completes.
 
-4. **No rate limiting on `POST /api/auth/login`** — Brute-force attacks are not rate-limited in code. Recommend Vercel rate limiting or a middleware-layer solution before production.
+4. ~~**No rate limiting on `POST /api/auth/login`**~~ — **RESOLVED 2026-07-22.** Upstash Redis sliding-window rate limiting implemented: 5/IP/15 min + 10/hashedId/30 min (fail-open). AI endpoints also rate-limited: 10/IP/10 min (chat), 5/IP/10 min (recommend), fail-closed. `lib/security/rateLimit.ts` added. Requires `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` env vars in production.
 
-5. **`ANTHROPIC_API_KEY` not set → 500 on AI routes** — `/api/recommend-services` and `/api/chat` return 500 without this key. These features are silently dormant until the key is set.
+5. ~~**`ANTHROPIC_API_KEY` not set → 500 on AI routes**~~ — **RESOLVED 2026-07-22.** `/api/recommend-services` and `/api/chat` now return a controlled 503 ("This service is temporarily unavailable.") when `ANTHROPIC_API_KEY` is absent, instead of propagating an unhandled throw as 500.
 
 6. **`RESEND_API_KEY` not set → lead emails disabled** — Lead email alerts are silently disabled until this key is set. The lead capture form still works.
 

@@ -11,7 +11,7 @@
 
 | Method | Route | Auth | Permission | Purpose | Notes |
 |--------|-------|------|------------|---------|-------|
-| POST | `/api/auth/login` | None | — | Validate credentials, issue JWT cookie | No rate limiting |
+| POST | `/api/auth/login` | None | — | Validate credentials, issue JWT cookie | Rate-limited: 5/IP/15 min + 10/hashedId/30 min, fail-open (`lib/security/rateLimit.ts`) |
 | POST | `/api/auth/logout` | None | — | Clear auth_token cookie | — |
 | GET | `/api/auth/me` | JWT | — | Return current user info | Used by admin layout |
 | POST | `/api/auth/signup` | None | — | Public user registration | Not admin-specific |
@@ -113,8 +113,8 @@
 |--------|-------|------|------------|---------|-------|
 | POST | `/api/leads` | None | — | Capture lead from contact/get-started forms | — |
 | PATCH | `/api/admin/leads/[id]` | Admin | `manage_leads` | Update lead status | TD-016 resolved 2026-07-22. Route has PATCH handler only (no GET/DELETE). `manage_leads` added to `super_admin` and `admin` roles. |
-| POST | `/api/recommend-services` | None | — | AI service recommendation | Uses Anthropic SDK — currently functional only if API key set |
-| POST | `/api/chat` | None | — | AI chat widget | Uses Anthropic SDK — dormant without API key |
+| POST | `/api/recommend-services` | None | — | AI service recommendation | Rate-limited: 5/IP/10 min, fail-closed. 503 when API key absent. Body ≤8 KB, input ≤3000 chars. |
+| POST | `/api/chat` | None | — | AI chat widget | Rate-limited: 10/IP/10 min, fail-closed. 503 when API key absent. Body ≤64 KB, 4000 chars/message, last 10 messages. |
 
 ---
 

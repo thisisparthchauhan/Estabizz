@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAnthropicClient } from "@/lib/anthropic";
+import {
+    limitRequest,
+    getClientIp,
+    rateLimitResponse,
+} from "@/lib/security/rateLimit";
+
+// Maximum body size and message length.
+const MAX_BODY_BYTES = 8_192;
+const MAX_MESSAGE_CHARS = 3_000;
 
 const ALL_SERVICES = [
     "NBFC Registration",
@@ -37,15 +46,68 @@ const ALL_SERVICES = [
 
 export async function POST(req: NextRequest) {
     try {
+        // ── Feature availability check ─────────────────────────────────────────
+        // Return 503 rather than letting the missing-key error propagate as 500.
+        // Does not reveal whether a specific secret is set.
+        if (!process.env.ANTHROPIC_API_KEY) {
+            return NextResponse.json(
+                { error: "This service is temporarily unavailable." },
+                { status: 503, headers: { "Cache-Control": "no-store" } }
+            );
+        }
+
+        // ── Rate limiting (fail-closed) ────────────────────────────────────────
+        // Checked before body parsing so blocked requests are rejected cheaply.
+        // Policy: fail-closed — when the limiter store is unreachable, block the
+        // request rather than risk uncontrolled AI spend.
+        const ip = getClientIp(req);
+        const limitResult = await limitRequest(
+            {
+                namespace: "recommend-services",
+                identifier: ip,
+                limit: 5,
+                windowSeconds: 600,
+            },
+            "fail-closed"
+        );
+
+        if (!limitResult.allowed) {
+            if (limitResult.storeError) {
+                return NextResponse.json(
+                    { error: "This service is temporarily unavailable." },
+                    { status: 503, headers: { "Cache-Control": "no-store" } }
+                );
+            }
+            return rateLimitResponse(limitResult);
+        }
+
+        // ── Body size guard ────────────────────────────────────────────────────
+        const contentLength = req.headers.get("content-length");
+        if (contentLength && parseInt(contentLength, 10) > MAX_BODY_BYTES) {
+            return NextResponse.json(
+                { error: "Request body too large." },
+                { status: 413 }
+            );
+        }
+
+        // ── Input validation ───────────────────────────────────────────────────
         const { message } = await req.json();
 
-        if (!message || message.trim().length < 5) {
+        if (!message || typeof message !== "string" || message.trim().length < 5) {
             return NextResponse.json(
                 { error: "Please provide a description of at least 5 characters." },
                 { status: 400 }
             );
         }
 
+        if (message.length > MAX_MESSAGE_CHARS) {
+            return NextResponse.json(
+                { error: `Description must be under ${MAX_MESSAGE_CHARS} characters.` },
+                { status: 400 }
+            );
+        }
+
+        // ── Anthropic call ─────────────────────────────────────────────────────
         const response = await getAnthropicClient().messages.create({
             model: "claude-haiku-4-5-20251001",
             max_tokens: 512,
@@ -63,14 +125,13 @@ Rules:
             messages: [
                 {
                     role: "user",
-                    content: `Client's requirement: "${message}"`,
+                    content: `Client's requirement: "${message.slice(0, MAX_MESSAGE_CHARS)}"`,
                 },
             ],
         });
 
         const text = response.content[0].type === "text" ? response.content[0].text : "";
 
-        // Parse Claude's JSON response
         const jsonMatch = text.match(/\{[\s\S]*\}/);
         if (!jsonMatch) {
             return NextResponse.json({ recommendations: [] });

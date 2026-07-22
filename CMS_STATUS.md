@@ -1,7 +1,19 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor + Security Hardening** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Admin Security: protect internal tools from public access**
+> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor + Security Hardening** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Security: add login and public AI rate limiting**
+
+---
+
+## 2026-07-22 — Security: add login and public AI rate limiting (TD-001 + TD-002 resolved)
+
+**Task**: Added production-appropriate rate limiting to three API routes. Login endpoint (`POST /api/auth/login`) uses dual-bucket sliding-window limiting: 5 attempts per IP per 15 min + 10 per hashed identifier per 30 min. AI endpoints (`POST /api/chat`, `POST /api/recommend-services`) use per-IP limiting: 10 req/IP/10 min (chat) and 5 req/IP/10 min (recommend). All limited routes return 429 with `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`, `Cache-Control: no-store`.
+**Architecture**: Production uses Upstash Redis sliding-window (`@upstash/ratelimit` + `@upstash/redis`). Development uses in-memory fallback (`global.__rl_store`, bounded to 1000 entries). Login policy: fail-open (store error allows request through). AI policy: fail-closed (store error returns 503). Identifiers hashed with SHA-256 before storage.
+**503 gate added**: AI routes now return controlled 503 when `ANTHROPIC_API_KEY` is absent (previously uncontrolled throw → 500). Body size guards added: login 8 KB, recommend 8 KB, chat 64 KB. Input size guards: recommend 3000 chars, chat 4000 chars/message.
+**New file**: `lib/security/rateLimit.ts` — server-only rate-limit utility (`limitRequest`, `getClientIp`, `hashIdentifier`, `rateLimitResponse`, `rateLimitHeaders`).
+**Modified**: `app/api/auth/login/route.ts`, `app/api/chat/route.ts`, `app/api/recommend-services/route.ts`, `package.json` (`@upstash/ratelimit`, `@upstash/redis` added).
+**Commit**: pending (Security: add login and public AI rate limiting).
+**TypeScript**: clean.
 
 ---
 

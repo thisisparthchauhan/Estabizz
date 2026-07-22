@@ -33,19 +33,17 @@
 
 ---
 
-### Task 3 — Add login and public AI endpoint rate limiting
+### ~~Task 3 — Add login and public AI endpoint rate limiting~~ — COMPLETED 2026-07-22
 
 | Field | Value |
 |-------|-------|
-| Objective | Protect `POST /api/auth/login` from brute-force and credential stuffing. Limit to 5 attempts per IP per 15 minutes. Also rate-limit `/api/chat` and `/api/recommend-services` before enabling `ANTHROPIC_API_KEY`. |
-| Why now | Highest security risk on the platform; currently has zero protection. |
-| Files | `app/api/auth/login/route.ts`, `app/api/chat/route.ts`, `app/api/recommend-services/route.ts`, `package.json` (add `rate-limiter-flexible`) |
-| Dependencies | Redis (recommended) or in-memory fallback for dev |
-| Complexity | Small |
+| Objective | ~~Protect `POST /api/auth/login` from brute-force and credential stuffing. Limit to 5 attempts per IP per 15 minutes. Also rate-limit `/api/chat` and `/api/recommend-services` before enabling `ANTHROPIC_API_KEY`.~~ |
+| Outcome | Login: 5/IP/15 min + 10/hashedId/30 min, fail-open. Chat: 10/IP/10 min, fail-closed. Recommend: 5/IP/10 min, fail-closed. Upstash Redis in prod, in-memory fallback in dev. 503 gate on AI routes when API key absent. `lib/security/rateLimit.ts` added. |
+| Files changed | `app/api/auth/login/route.ts`, `app/api/chat/route.ts`, `app/api/recommend-services/route.ts`, `lib/security/rateLimit.ts`, `package.json` |
+| Resolved TDs | TD-001, TD-002 |
+| Commit | Security: add login and public AI rate limiting |
 | Agent | Claude Code |
-| QA | Antigravity |
-| Approval gate | Owner |
-| Deploy required | Yes |
+| Status | ✅ Complete — local only, not deployed |
 
 ---
 

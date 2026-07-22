@@ -3,20 +3,37 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { connectDB } from '@/lib/db';
 import User from '@/lib/models/User';
+import {
+    limitRequest,
+    getClientIp,
+    rateLimitResponse,
+    hashIdentifier,
+} from '@/lib/security/rateLimit';
 
 function getJwtSecret() {
     const secret = process.env.JWT_SECRET;
-
     if (!secret) {
         throw new Error('JWT_SECRET environment variable is not defined.');
     }
-
     return secret;
 }
 
+// Maximum body size accepted (identifier + password, with overhead).
+const MAX_BODY_BYTES = 8_192;
+
 export async function POST(req: NextRequest) {
     try {
-        const { identifier, password } = await req.json();
+        // ── Body size guard ────────────────────────────────────────────────────
+        const contentLength = req.headers.get('content-length');
+        if (contentLength && parseInt(contentLength, 10) > MAX_BODY_BYTES) {
+            return NextResponse.json(
+                { error: 'Request body too large.' },
+                { status: 413 }
+            );
+        }
+
+        const body = await req.json();
+        const { identifier, password } = body;
 
         if (!identifier || !password) {
             return NextResponse.json(
@@ -25,9 +42,43 @@ export async function POST(req: NextRequest) {
             );
         }
 
+        // ── Rate limiting ──────────────────────────────────────────────────────
+        // Applied before DB queries to reject cheap-to-check requests early.
+        // Policy: fail-open — a temporary Upstash outage allows requests through
+        // rather than locking out all users. Store errors are logged server-side.
+        //
+        // Two buckets are checked in parallel:
+        //   1. Per-IP:         5 attempts per 15 minutes.
+        //   2. Per-identifier: 10 attempts per 30 minutes (hashed, not raw).
+        //
+        // All attempts are counted (not just failures). This avoids timing attacks
+        // that would otherwise distinguish success from failure.
+
+        const ip = getClientIp(req);
+        const idHash = hashIdentifier(String(identifier));
+
+        const [ipResult, idResult] = await Promise.all([
+            limitRequest(
+                { namespace: 'auth-login-ip', identifier: ip, limit: 5, windowSeconds: 900 },
+                'fail-open'
+            ),
+            limitRequest(
+                { namespace: 'auth-login-id', identifier: idHash, limit: 10, windowSeconds: 1800 },
+                'fail-open'
+            ),
+        ]);
+
+        if (!ipResult.allowed) {
+            return rateLimitResponse(ipResult, 'Too many login attempts. Please try again later.');
+        }
+        if (!idResult.allowed) {
+            return rateLimitResponse(idResult, 'Too many login attempts. Please try again later.');
+        }
+
+        // ── Authentication ─────────────────────────────────────────────────────
         await connectDB();
 
-        // Find by email or mobile
+        // Find by email or mobile — unchanged behaviour.
         const user = await User.findOne({
             $or: [
                 { email: identifier.toLowerCase().trim() },

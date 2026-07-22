@@ -114,8 +114,8 @@ The two seed accounts (`estabizz@gmail.com` as `super_admin`, `info@estabizz.com
 | `/api/leads` | None | Public contact form |
 | `/api/submit-blog` | None | Public blog submission |
 | `/api/regulatory-updates` | None | Public read-only list |
-| `/api/recommend-services` | None | AI endpoint — no auth |
-| `/api/chat` | None | AI endpoint — no auth |
+| `/api/recommend-services` | None | AI endpoint — no auth. Rate-limited: 5 req/IP/10 min (fail-closed). 503 when `ANTHROPIC_API_KEY` absent. |
+| `/api/chat` | None | AI endpoint — no auth. Rate-limited: 10 req/IP/10 min (fail-closed). 503 when `ANTHROPIC_API_KEY` absent. |
 | `/api/my-blogs/[id]` | Session cookie (user auth) | User-specific |
 | `/admin/tools`, `/admin/tools/content-rebuild-command`, `/admin/tools/regulatory-update-email-template`, `/admin/tools/service-page-content-framework`, `/admin/tools/proposal-template` | `app/admin/layout.tsx` JWT guard (inherited) | Redirect to `/login?redirect=/admin` on failure. `force-dynamic` and `robots: noindex` inherited from admin layout. |
 | Old public paths (`/resources/content-rebuild-command`, `/resources/regulatory-update-email-template`, `/resources/service-page-content-framework`, `/proposal-template`) | `notFound()` | Return 404 to all visitors — pages moved to `/admin/tools/**`. |
@@ -127,8 +127,8 @@ The two seed accounts (`estabizz@gmail.com` as `super_admin`, `info@estabizz.com
 
 | ID | Issue | Risk | Fix approach |
 |----|-------|------|-------------|
-| S1 | No rate limiting on `/api/auth/login` | High — brute-force | Add `rate-limiter-flexible` or Vercel Edge Rate Limiting |
-| S2 | No rate limiting on public AI endpoints (`/api/chat`, `/api/recommend-services`) | High — cost DoS when API key active | Auth gate or rate limit before enabling |
+| ~~S1~~ | ~~No rate limiting on `/api/auth/login`~~ | ~~High — brute-force~~ | **RESOLVED 2026-07-22** — `@upstash/ratelimit` sliding window: 5/IP/15 min + 10/hashedId/30 min, fail-open. `lib/security/rateLimit.ts`. |
+| ~~S2~~ | ~~No rate limiting on public AI endpoints (`/api/chat`, `/api/recommend-services`)~~ | ~~High — cost DoS when API key active~~ | **RESOLVED 2026-07-22** — 10/IP/10 min (chat) and 5/IP/10 min (recommend), fail-closed. 503 gate for missing API key. |
 | S3 | Lead personal data (name, email, phone) not encrypted at rest | Medium | Field-level encryption or MongoDB Atlas encryption |
 | S4 | No CSRF protection on state-changing forms | Medium | SameSite=Lax cookie mitigates most cases; explicit CSRF token recommended |
 | S5 | No token refresh mechanism | Low | User must re-login after 7 days; acceptable for admin panel |

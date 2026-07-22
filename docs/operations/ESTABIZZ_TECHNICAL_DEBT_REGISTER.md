@@ -6,34 +6,29 @@
 
 ---
 
-## TD-001 — No rate limiting on login endpoint
+## ~~TD-001 — No rate limiting on login endpoint~~ — RESOLVED 2026-07-22
 
 | Field | Value |
 |-------|-------|
 | Module | Authentication |
 | File | `app/api/auth/login/route.ts` |
-| Severity | 🔴 High |
-| Description | `POST /api/auth/login` has no rate limiting. An attacker can make unlimited login attempts. |
-| User impact | Admin accounts can be brute-forced |
-| Security impact | Critical — credential stuffing / brute-force |
-| Recommended fix | Add `rate-limiter-flexible` with Redis, or use Vercel Edge middleware rate limiting |
-| Effort | Small–Medium |
-| Agent | Claude Code |
+| Severity | ~~🔴 High~~ ✅ Resolved |
+| Description | ~~`POST /api/auth/login` has no rate limiting. An attacker can make unlimited login attempts.~~ |
+| Resolution | Sliding-window rate limiting via `@upstash/ratelimit`: 5 attempts/IP/15 min + 10 attempts/hashedIdentifier/30 min. Policy: fail-open (store error allows through; logs server-side). Identifiers hashed with SHA-256 before datastore writes. `lib/security/rateLimit.ts` added. |
+| Resolved by | Claude Code · 2026-07-22 |
 
 ---
 
-## TD-002 — Public AI endpoints have no auth or rate limit
+## ~~TD-002 — Public AI endpoints have no auth or rate limit~~ — RESOLVED 2026-07-22
 
 | Field | Value |
 |-------|-------|
 | Module | API — Chat, Recommend Services |
 | Files | `app/api/chat/route.ts`, `app/api/recommend-services/route.ts` |
-| Severity | 🔴 High (when API key is active) |
-| Description | Both endpoints are publicly accessible with no authentication and no rate limiting. When `ANTHROPIC_API_KEY` is set, any visitor can make unlimited AI calls, creating unbounded cost exposure. |
-| Current state | Dormant (API key not set in production) |
-| Recommended fix | Add per-IP rate limiting before enabling the API key, or require user authentication |
-| Effort | Small |
-| Agent | Claude Code |
+| Severity | ~~🔴 High (when API key is active)~~ ✅ Resolved |
+| Description | ~~Both endpoints are publicly accessible with no authentication and no rate limiting.~~ |
+| Resolution | Per-IP sliding-window rate limiting via `@upstash/ratelimit`: 10 req/IP/10 min (chat), 5 req/IP/10 min (recommend). Policy: fail-closed (store error returns 503). 503 availability gate added when `ANTHROPIC_API_KEY` absent. Body size and input length guards added. |
+| Resolved by | Claude Code · 2026-07-22 |
 
 ---
 

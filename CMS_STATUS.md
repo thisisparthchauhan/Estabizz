@@ -1,7 +1,32 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor + Security Hardening** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Security: harden production rate limiting and body limits**
+> Last updated: 2026-07-23 (IST) · Phase: **6D — SEO Canonical Host + Public Rate Limiting** · Status: **completed locally** · Next: **Phase 6E — not started** · Last batch: **SEO: enforce canonical domain and remove old public indexing**
+
+---
+
+## 2026-07-23 — SEO: enforce canonical domain, public rate limiting, structured data (Phase 6D)
+
+**Task**: Two-part Phase 6D batch. Part A: rate-limit the three remaining public database-write endpoints. Part B: canonical host enforcement, structured data cleanup, Old Site link removal.
+
+**Part A — Public endpoint rate limiting (Task 3B)**
+Applied distributed rate limiting, body-byte enforcement, and abuse controls to `POST /api/auth/signup`, `POST /api/leads`, and `POST /api/submit-blog`. All three use `isRateLimitConfigured()` guard (503 if Upstash absent in prod), `req.arrayBuffer()` byte limit, JSON parse error handling, unknown-IP guard in prod, dual-bucket rate limiting (per-IP + per-email, hashed), and `Cache-Control: no-store` on all error responses. Body limits: 8 KB (signup), 16 KB (leads), 128 KB (submit-blog). Policy: fail-open (temporary Redis outage allows requests through). Task 3B resolved.
+
+**Part B — SEO canonical host**
+- **Canonical hostname**: `https://www.estabizz.com`
+- **Host redirect**: `vercel.json` `redirects[]` with `has.type=host` matching `estabizz.com` → `https://www.estabizz.com/:path*`, `permanent: true`. Duplicate in `next.config.js` `redirects()` for non-Vercel environments. Query strings preserved.
+- **No redirect loop**: `www.estabizz.com` never matches the `has` condition.
+- **Noindex**: `/login` and `/signup` now receive `X-Robots-Tag: noindex, nofollow` header via `next.config.js` headers().
+- **Old Site link removed**: Removed `{ label: 'Old Site', href: 'https://old.estabizz.com/', ... }` from `NAVBAR_DEFAULTS.quickLinks` in `lib/content/navbarDefaults.ts`.
+- **Schema URLs**: Replaced `estabizz-site.vercel.app` → `www.estabizz.com` globally in 20 files (IRDAI, RBI, SEBI, IFSCA pages and homepage).
+- **Organization schema**: Added `logo: "https://www.estabizz.com/estabizz-logo.png"`. Removed non-functional `SearchAction` from WebSite schema. Eliminated duplicate schema emission — homepage now always emits exactly 1 Organization + 1 WebSite entity.
+- **Homepage title**: "Estabizz Fintech Private Limited | Regulatory Licensing & Compliance"
+- **Homepage description**: "Estabizz supports businesses with RBI, SEBI, IRDAI, IFSCA, FIU, MCA and sectoral licensing, regulatory documentation and ongoing compliance in India and global markets."
+- **Files changed**: `vercel.json`, `next.config.js`, `lib/content/navbarDefaults.ts`, `lib/content/seoDefaults.ts`, `app/layout.tsx`, `app/page.tsx`, `app/api/auth/signup/route.ts`, `app/api/leads/route.ts`, `app/api/submit-blog/route.ts`, 20 structured-data files.
+**Vercel dashboard action required**: Add `estabizz.com` as domain, set `www.estabizz.com` as Primary. See `ADMIN_OS_SEO_DEPLOYMENT_CHECKLIST.md §1A`.
+**Google Search Console action required**: Add `https://www.estabizz.com` property, submit sitemap, request removal of 4 old internal URLs.
+**Commit**: pending (SEO: enforce canonical domain and remove old public indexing).
+**TypeScript**: clean. **Build**: pending (see pre-deployment checklist).
 
 ---
 

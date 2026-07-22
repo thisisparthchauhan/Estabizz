@@ -41,7 +41,7 @@ const serviceSchema = {
     provider: {
         "@type": "Organization",
         name: "Estabizz Fintech Private Limited",
-        url: "https://estabizz-site.vercel.app/"
+        url: "https://www.estabizz.com/"
     },
     areaServed: "India",
     description: "Professional support for RBI PPI authorisation covering wallets, prepaid cards, gift instruments, semi-closed PPIs, KYC/AML, customer fund protection, technology documentation, business plan and post-authorisation compliance."
@@ -51,9 +51,9 @@ const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
-        { "@type": "ListItem", position: 2, name: "RBI Services", item: "https://estabizz-site.vercel.app/rbi" },
-        { "@type": "ListItem", position: 3, name: "PPI Registration in India", item: "https://estabizz-site.vercel.app/rbi/ppi-registration-in-india" }
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.estabizz.com/" },
+        { "@type": "ListItem", position: 2, name: "RBI Services", item: "https://www.estabizz.com/rbi" },
+        { "@type": "ListItem", position: 3, name: "PPI Registration in India", item: "https://www.estabizz.com/rbi/ppi-registration-in-india" }
     ]
 };
 

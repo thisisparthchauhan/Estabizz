@@ -42,7 +42,7 @@ const serviceSchema = {
     provider: {
         '@type': 'Organization',
         name: 'Estabizz Fintech Private Limited',
-        url: 'https://estabizz-site.vercel.app/',
+        url: 'https://www.estabizz.com/',
     },
     areaServed: 'India',
     description: 'Professional support for SEBI Research Analyst Registration covering individual, company, LLP and research entity applications, NISM certification mapping, net worth documentation, Form A filing, research disclosure framework and post-registration compliance.',
@@ -52,9 +52,9 @@ const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://estabizz-site.vercel.app/' },
-        { '@type': 'ListItem', position: 2, name: 'SEBI Services', item: 'https://estabizz-site.vercel.app/sebi' },
-        { '@type': 'ListItem', position: 3, name: 'Research Analyst Registration in India', item: 'https://estabizz-site.vercel.app/sebi/research-analyst-registration-in-india' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.estabizz.com/' },
+        { '@type': 'ListItem', position: 2, name: 'SEBI Services', item: 'https://www.estabizz.com/sebi' },
+        { '@type': 'ListItem', position: 3, name: 'Research Analyst Registration in India', item: 'https://www.estabizz.com/sebi/research-analyst-registration-in-india' },
     ],
 };
 

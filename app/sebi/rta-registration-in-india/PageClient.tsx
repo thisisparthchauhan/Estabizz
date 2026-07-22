@@ -812,12 +812,12 @@ SEBI may suspend or cancel registration and may impose monetary penalties depend
             provider: {
               "@type": "Organization",
               name: "Estabizz Fintech Private Limited",
-              url: "https://estabizz-site.vercel.app/",
+              url: "https://www.estabizz.com/",
             },
             areaServed: { "@type": "Country", name: "India" },
             description:
               "Professional regulatory consulting support for SEBI Registrar to an Issue and Share Transfer Agent (RTA) Registration covering body corporate eligibility, ₹50 lakh net worth, Form A filing, investor service portal, cyber security framework, grievance redressal, Master Circular 2026 compliance and post-registration advisory.",
-            url: "https://estabizz-site.vercel.app/sebi/rta-registration-in-india",
+            url: "https://www.estabizz.com/sebi/rta-registration-in-india",
           }),
         }}
       />
@@ -829,9 +829,9 @@ SEBI may suspend or cancel registration and may impose monetary penalties depend
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
-              { "@type": "ListItem", position: 2, name: "SEBI Services", item: "https://estabizz-site.vercel.app/sebi" },
-              { "@type": "ListItem", position: 3, name: "RTA Registration", item: "https://estabizz-site.vercel.app/sebi/rta-registration-in-india" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://www.estabizz.com/" },
+              { "@type": "ListItem", position: 2, name: "SEBI Services", item: "https://www.estabizz.com/sebi" },
+              { "@type": "ListItem", position: 3, name: "RTA Registration", item: "https://www.estabizz.com/sebi/rta-registration-in-india" },
             ],
           }),
         }}

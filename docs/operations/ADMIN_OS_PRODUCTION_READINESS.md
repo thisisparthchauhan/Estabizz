@@ -1,7 +1,8 @@
 # Estabizz Admin OS — Production Readiness Reference
 
 > Created: Phase 5C (2026-07-02 IST) · Do not include credentials in this file.
-> No push or deployment was performed in Phase 5C. This document is a readiness gate only.
+> Updated: 2026-07-23 — Phase 6D rate limiting (RL-003 resolved) + canonical host enforcement complete.
+> No push or deployment was performed. This document is a readiness gate only.
 > Documentation structure correction: 2026-07-22 — proxy.ts classification corrected; file moved to docs/operations/.
 
 ---

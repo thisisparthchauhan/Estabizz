@@ -41,7 +41,7 @@ const serviceSchema = {
     provider: {
         "@type": "Organization",
         name: "Estabizz Fintech Private Limited",
-        url: "https://estabizz-site.vercel.app/"
+        url: "https://www.estabizz.com/"
     },
     areaServed: "India",
     description: "Professional advisory support for Asset Reconstruction Company registration under RBI and SARFAESI framework, including ₹300 crore NOF readiness, business plan, governance documentation and post-registration compliance."
@@ -51,9 +51,9 @@ const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
-        { "@type": "ListItem", position: 2, name: "RBI Services", item: "https://estabizz-site.vercel.app/rbi" },
-        { "@type": "ListItem", position: 3, name: "ARC Registration in India", item: "https://estabizz-site.vercel.app/rbi/arc-registration-in-india" }
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.estabizz.com/" },
+        { "@type": "ListItem", position: 2, name: "RBI Services", item: "https://www.estabizz.com/rbi" },
+        { "@type": "ListItem", position: 3, name: "ARC Registration in India", item: "https://www.estabizz.com/rbi/arc-registration-in-india" }
     ]
 };
 

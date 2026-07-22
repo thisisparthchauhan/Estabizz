@@ -43,7 +43,8 @@ const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Estabizz Fintech Private Limited",
-    url: "https://estabizz-site.vercel.app/",
+    url: "https://www.estabizz.com/",
+    logo: "https://www.estabizz.com/estabizz-logo.png",
     email: "info@estabizz.com",
     telephone: "+91 98256 00907",
     address: {
@@ -61,36 +62,14 @@ const organizationSchema = {
     ]
 };
 
+// No SearchAction: the site does not expose a public search endpoint.
 const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Estabizz Fintech",
-    url: "https://estabizz-site.vercel.app/",
-    potentialAction: {
-        "@type": "SearchAction",
-        target: "https://estabizz-site.vercel.app/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-    }
+    name: "Estabizz Fintech Private Limited",
+    url: "https://www.estabizz.com/",
 };
 
-const allowedHomepageSchemaTypes = ["WebSite", "Organization", "ProfessionalService", "LocalBusiness"];
-
-function getHomepageSchemaType(seo: Partial<SeoContent>): string {
-    const schemaType = seo.schemaType?.trim();
-    return schemaType && allowedHomepageSchemaTypes.includes(schemaType)
-        ? schemaType
-        : SEO_HOMEPAGE_DEFAULTS.schemaType;
-}
-
-function buildHomepageSchema(seo: Partial<SeoContent>) {
-    const schemaType = getHomepageSchemaType(seo);
-    if (schemaType === "WebSite") return websiteSchema;
-
-    return {
-        ...organizationSchema,
-        "@type": schemaType,
-    };
-}
 
 export default async function Home() {
     const [
@@ -98,7 +77,6 @@ export default async function Home() {
         globalMarketsContent, whyChooseUsContent, finalCtaContent,
         regulatoryServicesContent, processContent, compliancePortalContent,
         caseStudiesContent, testimonialsContent, contentFrameworkContent, resourcesContent,
-        seoContent,
     ] = (await Promise.all([
         getContent("homepage.hero"),
         getContent("homepage.stats"),
@@ -114,13 +92,11 @@ export default async function Home() {
         getContent("homepage.testimonials"),
         getContent("homepage.contentFramework"),
         getContent("homepage.resources"),
-        getContent("seo.homepage"),
     ])) as [
         Partial<HeroContent>, Partial<StatsContent>, Partial<TrustedByContent>, Partial<SolutionsContent>,
         Partial<GlobalMarketsContent>, Partial<WhyEstabizzContent>, Partial<FinalCtaContent>,
         Partial<RegulatoryServicesContent>, Partial<ProcessContent>, Partial<CompliancePortalContent>,
         Partial<CaseStudiesContent>, Partial<TestimonialsContent>, Partial<ContentFrameworkContent>, Partial<ResourcesContent>,
-        Partial<SeoContent>,
     ];
 
     // Privacy: strip non-public items on the SERVER so confidential/internal
@@ -135,12 +111,10 @@ export default async function Home() {
         ...caseStudiesContent,
         cases: (caseStudiesContent.cases ?? []).filter((cs) => cs.visible !== false),
     };
-    const homepageSchema = buildHomepageSchema(seoContent);
-
     return (
         <div className="bg-transparent min-h-screen font-sans text-gray-800">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
 
             <main>
                 <HeroSection content={heroContent} />

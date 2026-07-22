@@ -1,13 +1,60 @@
 # Estabizz Admin OS — SEO & Sitemap Deployment Checklist
 
 > Created: Phase 6A (2026-07-02 IST) · Do not include credentials in this file.
-> No push or deployment was performed in Phase 6A. This is a readiness document only.
+> Updated: 2026-07-23 — Canonical host enforcement batch (Phase 6B SEO/Canonical audit)
 
 ---
 
 ## 1. Purpose
 
 This document records the SEO readiness strategy, sitemap behaviour, robots configuration, and canonical URL approach for the Estabizz website. It is the authoritative pre-deployment SEO checklist for Phase 6A+.
+
+---
+
+## 1A. Canonical Hostname (Phase 6B, 2026-07-23)
+
+**Canonical hostname: `https://www.estabizz.com`**
+
+### Host redirect implementation
+
+| Source | Destination | Status |
+|---|---|---|
+| `http://estabizz.com/*` | `https://www.estabizz.com/*` | `vercel.json` + Vercel domain config (see §1A action required) |
+| `https://estabizz.com/*` | `https://www.estabizz.com/*` | `vercel.json` + Next.js `redirects()` |
+| `http://www.estabizz.com/*` | `https://www.estabizz.com/*` | Vercel automatic HTTPS upgrade |
+
+**Redirect configuration:** `vercel.json` `redirects[]` with `has.type=host` matching `estabizz.com`. Duplicate guard in `next.config.js` `redirects()` for non-Vercel environments. `permanent: true` (308). Query strings preserved via `/:path*`.
+
+**No redirect loop:** `www.estabizz.com` never matches the `has.type=host` condition.
+
+### Action required in Vercel dashboard (post-deployment)
+
+1. Go to Project → Settings → Domains.
+2. Add `estabizz.com` (non-www) as an additional domain — Vercel will issue a TLS cert.
+3. Set `www.estabizz.com` as the **Primary Domain** (checked).
+4. Vercel will automatically redirect non-www to www at the edge in addition to the `vercel.json` rule.
+5. Verify both `http://estabizz.com` and `https://estabizz.com` redirect to `https://www.estabizz.com`.
+
+### Changes in this batch
+
+| File | Change |
+|---|---|
+| `vercel.json` | Added `redirects[]` — non-www → www, permanent |
+| `next.config.js` | Added `redirects()` (parity) + noindex headers for `/login`, `/signup` |
+| `app/layout.tsx` | Updated global title and description defaults |
+| `lib/content/seoDefaults.ts` | Updated `SEO_HOMEPAGE_DEFAULTS` title and description |
+| `lib/content/navbarDefaults.ts` | Removed "Old Site" → `old.estabizz.com` quickLink |
+| `app/page.tsx` | Fixed schemas: canonical URLs, removed `SearchAction`, added `logo`, deduplicated (1 Org + 1 WebSite) |
+| 20 `PageClient.tsx` / `page.tsx` files | Replaced `estabizz-site.vercel.app` → `www.estabizz.com` in all JSON-LD structured data |
+
+### Google Search Console actions required after deployment
+
+1. Add property `https://www.estabizz.com` (www-prefixed) as a new GSC property if not already present.
+2. Submit `https://www.estabizz.com/sitemap.xml`.
+3. Request re-indexing of the homepage via URL Inspection.
+4. If `https://estabizz.com` (non-www) was previously verified, add a redirect notice or remove it after confirming www is fully indexed.
+5. Monitor the Coverage report for 404 errors on the four removed internal pages (`/proposal-template`, `/resources/content-rebuild-command`, `/resources/regulatory-update-email-template`, `/resources/service-page-content-framework`) — submit removal requests if those URLs are in the index.
+6. Check Enhancements → Sitelinks searchbox — the `SearchAction` JSON-LD was removed since no public search endpoint exists; this change will disable the Sitelinks searchbox feature if it was previously awarded.
 
 ---
 
@@ -214,6 +261,31 @@ The sitemap never includes:
 
 Complete all items before production deployment:
 
+**Canonical host**
+- [x] `vercel.json` has `redirects[]` for `estabizz.com` → `www.estabizz.com` (permanent, 2026-07-23)
+- [x] `next.config.js` has matching `redirects()` for non-Vercel parity (2026-07-23)
+- [ ] Vercel dashboard: `estabizz.com` added as additional domain, `www.estabizz.com` set as Primary
+- [ ] Verify `curl -I https://estabizz.com` returns 308/301 to `https://www.estabizz.com`
+
+**Metadata and schema**
+- [x] `metadataBase` in `app/layout.tsx` = `https://www.estabizz.com` ✓
+- [x] `getSiteUrl()` fallback = `https://www.estabizz.com` ✓
+- [x] Homepage title updated: "Estabizz Fintech Private Limited | Regulatory Licensing & Compliance" (2026-07-23)
+- [x] Homepage description updated (2026-07-23)
+- [x] Organization schema `url` = `https://www.estabizz.com/` (2026-07-23, was `estabizz-site.vercel.app`)
+- [x] WebSite schema `url` = `https://www.estabizz.com/` (2026-07-23)
+- [x] `SearchAction` removed from WebSite schema (no public search endpoint) (2026-07-23)
+- [x] Organization schema `logo` added (2026-07-23)
+- [x] All JSON-LD in 20 service/regulatory page files updated from `estabizz-site.vercel.app` → `www.estabizz.com` (2026-07-23)
+- [x] Exactly one Organization entity + one WebSite entity on homepage (2026-07-23)
+
+**Navigation and discovery**
+- [x] "Old Site" → `old.estabizz.com` removed from `NAVBAR_DEFAULTS.quickLinks` (2026-07-23)
+- [x] `/proposal-template`, `/resources/content-rebuild-command`, etc. return `notFound()` (commit 43a5654)
+- [x] `/admin/tools/**` counterparts exist and are JWT-protected (commit 43a5654)
+- [x] `/login` and `/signup` have `X-Robots-Tag: noindex, nofollow` header (2026-07-23)
+
+**Sitemap and robots**
 - [ ] `NEXT_PUBLIC_SITE_URL` set in Vercel to `https://www.estabizz.com` (or omit to use default)
 - [ ] Run `npm run build` locally — confirm `/sitemap.xml` compiles as `○ (Static)`
 - [ ] Verify sitemap URL count: at least 46 CMS-managed pages + hub pages + blogs + regulatory
@@ -223,8 +295,6 @@ Complete all items before production deployment:
 - [ ] Confirm `robots.txt` sitemap pointer uses production URL
 - [ ] Confirm admin layout has `robots: { index: false, follow: false }`
 - [ ] Confirm CMS-managed blocked/deleted pages return 404 (not indexed)
-- [ ] Confirm `metadataBase` in `app/layout.tsx` matches production domain
-- [ ] Confirm `getSiteUrl()` returns production domain (not localhost) in production build
 - [ ] All 46 CMS-managed pages have `export const dynamic = 'force-dynamic'`
 - [ ] All 46 CMS-managed pages have correct `FALLBACK_METADATA` canonical paths
 - [ ] No internal/admin paths in any public page `<link rel="canonical">`

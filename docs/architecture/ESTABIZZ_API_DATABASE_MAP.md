@@ -1,7 +1,8 @@
 # Estabizz — API and Database Map
 
-> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
-> Contains: confirmed facts verified against the source tree on 2026-07-22.
+> Last verified: 2026-07-23 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
+> Contains: confirmed facts verified against the source tree on 2026-07-22; updated 2026-07-23 (rate limiting + canonical host batch).
+> **2026-07-23 update**: `POST /api/auth/signup`, `POST /api/leads`, `POST /api/submit-blog` now rate-limited (RL-003 resolved). All three have body-byte limits, dual-bucket rate limiting, and production isRateLimitConfigured() gate. Canonical host redirect added to vercel.json — all `estabizz.com` traffic redirects to `www.estabizz.com`. Structured data URLs in 20 files corrected from `estabizz-site.vercel.app` → `www.estabizz.com`.
 
 ---
 

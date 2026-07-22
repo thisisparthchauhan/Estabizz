@@ -1,6 +1,6 @@
 # Estabizz — Next 20 Development Tasks
 
-> Last updated: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
+> Last updated: 2026-07-23 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
 > All tasks are locally scoped. Do not push/deploy without owner approval.
 > Roadmap sequence corrected 2026-07-22 — tasks reordered to prioritise security and content integrity before new features.
 
@@ -47,20 +47,14 @@
 
 ---
 
-### Task 3B — Rate-limit remaining public mutation endpoints
+### ~~Task 3B — Rate-limit remaining public mutation endpoints~~ ✅ COMPLETED 2026-07-23
 
 | Field | Value |
 |-------|-------|
-| Objective | Apply per-IP rate limiting and actual body-size enforcement to `/api/auth/signup`, `/api/leads`, and `/api/submit-blog`. These endpoints accept user-supplied input with no rate limiting, creating signup spam, lead-form spam, and blog-submission spam vectors. |
-| Why now | Consistent rate-limiting posture across all public write endpoints before production. `lib/security/rateLimit.ts` is already in place — this is wiring it up to three remaining routes. |
-| Files | `app/api/auth/signup/route.ts`, `app/api/leads/route.ts`, `app/api/submit-blog/route.ts` |
-| Dependencies | `lib/security/rateLimit.ts` (in place), Upstash Redis provisioned |
-| Limits (proposed) | Signup: 3/IP/hour. Leads: 5/IP/hour. Submit-blog: 3/IP/hour. All fail-open. |
-| Complexity | Small |
-| Agent | Claude Code |
-| QA | Manual |
-| Approval gate | Owner |
-| Deploy required | Yes — after Upstash provisioned (RL-002) |
+| Outcome | `POST /api/auth/signup`: 8 KB body, signup 5/IP/15 min + 3/email/hr (hashed). `POST /api/leads`: 16 KB body, 5/IP/hr + 3/email/24 hr (hashed). `POST /api/submit-blog`: 128 KB body, 3/IP/hr + 2/email/12 hr (hashed). All fail-open. isRateLimitConfigured() gate (503 if unconfigured in prod). req.arrayBuffer() byte enforcement. Cache-Control: no-store on all error responses. |
+| Files changed | `app/api/auth/signup/route.ts`, `app/api/leads/route.ts`, `app/api/submit-blog/route.ts` |
+| Commit | pending (SEO: enforce canonical domain and remove old public indexing) |
+| Status | ✅ Complete — local only, not deployed |
 
 ---
 

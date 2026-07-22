@@ -2,16 +2,7 @@
  * POST /api/submit-blog
  *
  * Accepts a user blog submission, validates required fields, builds a
- * Blog object with status "pending_review" and stores it in the
- * in-memory submissionStore.
- *
- * TODO (backend wiring):
- *   1. Import your DB client (mongoose / prisma / supabase).
- *   2. Replace `addSubmission(blog)` with `await Blog.create(blog)` or equivalent.
- *   3. Send a confirmation email via Resend / Nodemailer:
- *        await sendEmail({ to: body.email, subject: "Submission received", ... })
- *   4. Optionally notify the admin team via Slack webhook or email.
- *   5. Add rate limiting (e.g. upstash/ratelimit) to prevent spam.
+ * Blog object with status "pending_review" and stores it in MongoDB.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -21,6 +12,18 @@ import { addSubmission } from '@/lib/blog/submissionStore';
 import { connectDB } from '@/lib/db';
 import BlogModel from '@/lib/models/Blog';
 import { sanitizeBlogHtml } from '@/lib/blog/sanitize';
+import {
+  limitRequest,
+  isRateLimitConfigured,
+  getClientIp,
+  rateLimitResponse,
+  hashIdentifier,
+} from '@/lib/security/rateLimit';
+
+export const dynamic = 'force-dynamic';
+
+// Maximum body size: content up to 50 000 chars + all other fields + JSON overhead.
+const MAX_BODY_BYTES = 131_072; // 128 KB
 
 // ─── Validation helpers ───────────────────────────────────────────────────────
 
@@ -64,10 +67,67 @@ function estimateReadingTime(text: string): number {
 // ─── POST handler ─────────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json();
+  // ── Production rate-limit config gate ────────────────────────────────────
+  // In production the in-memory fallback is not safe across serverless
+  // replicas. Return 503 immediately if Upstash is not configured.
+  if (!isRateLimitConfigured()) {
+    return NextResponse.json(
+      { error: 'This service is temporarily unavailable.' },
+      { status: 503, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
 
-    // ── Validate required fields ─────────────────────────────────────────────
+  // ── Client IP ────────────────────────────────────────────────────────────
+  // Unknown IP in production would share one bucket across all clients —
+  // a brute-force window and DoS vector. Return 503 to prevent that risk.
+  const ip = getClientIp(req);
+  if (ip === 'unknown' && process.env.NODE_ENV === 'production') {
+    return NextResponse.json(
+      { error: 'This service is temporarily unavailable.' },
+      { status: 503, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+
+  // ── IP rate limit (before body read — cheap rejection for bots) ──────────
+  // 3 blog submissions per IP per hour.
+  const ipResult = await limitRequest(
+    { namespace: 'submit-blog-ip', identifier: ip, limit: 3, windowSeconds: 3600 },
+    'fail-open'
+  );
+
+  if (ipResult.configMissing) {
+    return NextResponse.json(
+      { error: 'This service is temporarily unavailable.' },
+      { status: 503, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+  if (!ipResult.allowed) {
+    return rateLimitResponse(ipResult, 'Too many requests. Please try again later.');
+  }
+
+  // ── Body size enforcement (actual bytes) ──────────────────────────────────
+  // Read the raw body so byteLength is authoritative. Content-Length is
+  // untrusted: it can be missing or deliberately set to a false small value.
+  const bodyBuffer = await req.arrayBuffer();
+  if (bodyBuffer.byteLength > MAX_BODY_BYTES) {
+    return NextResponse.json(
+      { error: 'Request body too large.' },
+      { status: 413, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+
+  let body: Record<string, unknown>;
+  try {
+    body = JSON.parse(new TextDecoder().decode(bodyBuffer));
+  } catch {
+    return NextResponse.json(
+      { error: 'Invalid JSON.' },
+      { status: 400, headers: { 'Cache-Control': 'no-store' } }
+    );
+  }
+
+  try {
+    // ── Validate required fields ────────────────────────────────────────────
     const required: Record<string, string> = {
       firstName:  'Full name is required.',
       email:      'Email address is required.',
@@ -78,21 +138,45 @@ export async function POST(req: NextRequest) {
 
     for (const [key, message] of Object.entries(required)) {
       if (!body[key]?.toString().trim()) {
-        return NextResponse.json({ error: message, field: key }, { status: 400 });
+        return NextResponse.json(
+          { error: message, field: key },
+          { status: 400, headers: { 'Cache-Control': 'no-store' } }
+        );
       }
     }
 
     // Basic email format check
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRe.test(body.email)) {
-      return NextResponse.json({ error: 'Invalid email address.', field: 'email' }, { status: 400 });
+    if (!emailRe.test(String(body.email))) {
+      return NextResponse.json(
+        { error: 'Invalid email address.', field: 'email' },
+        { status: 400, headers: { 'Cache-Control': 'no-store' } }
+      );
     }
 
-    // ── Content length validation ─────────────────────────────────────────────
+    // ── Per-email rate limit (after email is validated) ─────────────────────
+    // 2 blog submissions per email address per 12 hours (hashed, not raw).
+    const emailHash = hashIdentifier(String(body.email).toLowerCase().trim());
+    const emailResult = await limitRequest(
+      { namespace: 'submit-blog-email', identifier: emailHash, limit: 2, windowSeconds: 43200 },
+      'fail-open'
+    );
+
+    if (emailResult.configMissing) {
+      return NextResponse.json(
+        { error: 'This service is temporarily unavailable.' },
+        { status: 503, headers: { 'Cache-Control': 'no-store' } }
+      );
+    }
+    if (!emailResult.allowed) {
+      return rateLimitResponse(emailResult, 'Too many requests. Please try again later.');
+    }
+
+    // ── Content length validation ───────────────────────────────────────────
     const lengthChecks: Array<[string, string, keyof typeof LIMITS]> = [
-      [body.title,     'Title',   'title'],
-      [body.content,   'Content', 'content'],
-      [body.firstName, 'Name',    'firstName'],
+      [String(body.title),     'Title',   'title'],
+      [String(body.content),   'Content', 'content'],
+      [String(body.firstName), 'Name',    'firstName'],
     ];
     for (const [val, label, key] of lengthChecks) {
       const trimmed = val?.toString().trim() ?? '';
@@ -100,22 +184,22 @@ export async function POST(req: NextRequest) {
       if (min > 0 && trimmed.length < min) {
         return NextResponse.json(
           { error: `${label} must be at least ${min} characters.`, field: key },
-          { status: 400 }
+          { status: 400, headers: { 'Cache-Control': 'no-store' } }
         );
       }
       if (trimmed.length > max) {
         return NextResponse.json(
           { error: `${label} must not exceed ${max} characters.`, field: key },
-          { status: 400 }
+          { status: 400, headers: { 'Cache-Control': 'no-store' } }
         );
       }
     }
 
-    // ── Image URL validation ──────────────────────────────────────────────────
-    if (body.featuredImageUrl && !isValidHttpUrl(body.featuredImageUrl)) {
+    // ── Image URL validation ────────────────────────────────────────────────
+    if (body.featuredImageUrl && !isValidHttpUrl(String(body.featuredImageUrl))) {
       return NextResponse.json(
         { error: 'Featured image URL must be a valid http/https URL.', field: 'featuredImageUrl' },
-        { status: 400 }
+        { status: 400, headers: { 'Cache-Control': 'no-store' } }
       );
     }
 
@@ -126,7 +210,7 @@ export async function POST(req: NextRequest) {
     if (supportingUrls.length > 6) {
       return NextResponse.json(
         { error: 'Maximum 6 supporting images allowed.', field: 'supportingImageUrls' },
-        { status: 400 }
+        { status: 400, headers: { 'Cache-Control': 'no-store' } }
       );
     }
 
@@ -134,40 +218,43 @@ export async function POST(req: NextRequest) {
       if (url?.trim() && !isValidHttpUrl(url)) {
         return NextResponse.json(
           { error: 'All supporting image URLs must be valid http/https URLs.', field: 'supportingImageUrls' },
-          { status: 400 }
+          { status: 400, headers: { 'Cache-Control': 'no-store' } }
         );
       }
     }
 
-    // ── Resolve category ──────────────────────────────────────────────────────
+    // ── Resolve category ────────────────────────────────────────────────────
     const category = blogCategories.find((c) => c.id === body.categoryId);
     if (!category) {
-      return NextResponse.json({ error: 'Invalid category.', field: 'categoryId' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Invalid category.', field: 'categoryId' },
+        { status: 400, headers: { 'Cache-Control': 'no-store' } }
+      );
     }
 
-    // ── Build Blog object ─────────────────────────────────────────────────────
+    // ── Build Blog object ───────────────────────────────────────────────────
     const id   = `user_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
     const now  = new Date().toISOString();
-    const slug = `${slugify(body.title)}-${Date.now()}`;
+    const slug = `${slugify(String(body.title))}-${Date.now()}`;
 
     const blog: Blog = {
       id,
-      title:   body.title.trim(),
+      title:   String(body.title).trim(),
       slug,
 
-      summary: body.summary?.trim() || '',
-      content: sanitizeBlogHtml(body.content.trim()),
+      summary: body.summary?.toString().trim() || '',
+      content: sanitizeBlogHtml(String(body.content).trim()),
 
       featuredImage: {
-        url:     body.featuredImageUrl?.trim() || '',
-        alt:     body.title.trim(),
+        url:     body.featuredImageUrl?.toString().trim() || '',
+        alt:     String(body.title).trim(),
         caption: '',
       },
-      images: (body.supportingImageUrls ?? [])
-        .filter((u: string) => u?.trim())
-        .map((url: string, i: number) => ({
+      images: supportingUrls
+        .filter((u) => u?.trim())
+        .map((url, i) => ({
           url:     url.trim(),
-          alt:     `Supporting image ${i + 1} for "${body.title}"`,
+          alt:     `Supporting image ${i + 1} for "${String(body.title)}"`,
           caption: '',
         })),
 
@@ -176,12 +263,12 @@ export async function POST(req: NextRequest) {
 
       author: {
         id:           `guest_${id}`,
-        firstName:    body.firstName.trim(),
-        lastName:     body.lastName?.trim() || '',
-        email:        body.email.trim().toLowerCase(),
+        firstName:    String(body.firstName).trim(),
+        lastName:     body.lastName?.toString().trim() || '',
+        email:        String(body.email).trim().toLowerCase(),
         bio:          '',
         role:         'guest',
-        designation:  body.designation?.trim() || 'Guest Contributor',
+        designation:  body.designation?.toString().trim() || 'Guest Contributor',
         profileImage: undefined,
       },
 
@@ -190,25 +277,25 @@ export async function POST(req: NextRequest) {
       isUserSubmitted: true,
 
       submittedBy: {
-        name:    `${body.firstName.trim()} ${body.lastName?.trim() || ''}`.trim(),
-        email:   body.email.trim().toLowerCase(),
-        company: body.company?.trim() || undefined,
-        message: body.coverNote?.trim() || undefined,
+        name:    `${String(body.firstName).trim()} ${body.lastName?.toString().trim() || ''}`.trim(),
+        email:   String(body.email).trim().toLowerCase(),
+        company: body.company?.toString().trim() || undefined,
+        message: body.coverNote?.toString().trim() || undefined,
       },
 
       reviewedBy:  undefined,
       adminNotes:  undefined,
 
       focusKeyword:    '',
-      seoTitle:        body.title.trim(),
-      metaDescription: body.summary?.trim() || '',
+      seoTitle:        String(body.title).trim(),
+      metaDescription: body.summary?.toString().trim() || '',
 
       faqs: [],
 
       disclaimer: undefined,
       ctaText:    undefined,
 
-      readingTime: estimateReadingTime(body.content),
+      readingTime: estimateReadingTime(String(body.content)),
       views:       0,
       likeCount:   0,
 
@@ -217,7 +304,7 @@ export async function POST(req: NextRequest) {
       updatedAt:   now,
     };
 
-    // ── Persist to MongoDB (with in-memory fallback) ──────────────────────────
+    // ── Persist to MongoDB (with in-memory fallback) ────────────────────────
     try {
       await connectDB();
       await BlogModel.create({
@@ -251,19 +338,13 @@ export async function POST(req: NextRequest) {
     // Always mirror to in-memory store for immediate visibility in the same process
     addSubmission(blog);
 
-    // TODO: send confirmation email to submitter
-    // await sendConfirmationEmail(body.email, body.firstName, body.title);
-
-    // TODO: notify admin team
-    // await notifyAdminSlack(`New submission: "${body.title}" by ${body.firstName} ${body.lastName}`);
-
     return NextResponse.json({ success: true, id, slug }, { status: 201 });
 
   } catch (err) {
     console.error('[submit-blog] Unexpected error:', err);
     return NextResponse.json(
       { error: 'An unexpected error occurred. Please try again.' },
-      { status: 500 }
+      { status: 500, headers: { 'Cache-Control': 'no-store' } }
     );
   }
 }

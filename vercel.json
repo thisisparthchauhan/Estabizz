@@ -1,4 +1,12 @@
 {
   "buildCommand": "npx tailwindcss -i ./app/globals.css -o ./public/tailwind.css && next build",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "estabizz.com" }],
+      "destination": "https://www.estabizz.com/:path*",
+      "permanent": true
+    }
+  ]
 }

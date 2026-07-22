@@ -15,10 +15,10 @@ import "@/app/globals.css"; // Assuming the user will have this
 export const metadata: Metadata = {
     metadataBase: new URL("https://www.estabizz.com"),
     title: {
-        default: "Estabizz Fintech | Compliance & Licensing",
+        default: "Estabizz Fintech Private Limited | Regulatory Licensing & Compliance",
         template: "%s | Estabizz Fintech",
     },
-    description: "Leading regulatory advisory firm for RBI, SEBI, IRDAI, and IFSCA.",
+    description: "Estabizz supports businesses with RBI, SEBI, IRDAI, IFSCA, FIU, MCA and sectoral licensing, regulatory documentation and ongoing compliance in India and global markets.",
     robots: {
         index: true,
         follow: true,

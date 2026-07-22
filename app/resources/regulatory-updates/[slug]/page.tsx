@@ -70,17 +70,17 @@ export default async function RegulatoryUpdateDetailPage({ params }: Props) {
         dateModified: update.lastReviewed,
         author: { "@type": "Organization", name: "Estabizz Fintech Private Limited" },
         publisher: { "@type": "Organization", name: "Estabizz Fintech Private Limited" },
-        mainEntityOfPage: `https://estabizz-site.vercel.app/resources/regulatory-updates/${update.slug}`
+        mainEntityOfPage: `https://www.estabizz.com/resources/regulatory-updates/${update.slug}`
     };
 
     const breadcrumbSchema = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
-            { "@type": "ListItem", position: 2, name: "Resources", item: "https://estabizz-site.vercel.app/resources" },
-            { "@type": "ListItem", position: 3, name: "Regulatory Updates", item: "https://estabizz-site.vercel.app/resources/regulatory-updates" },
-            { "@type": "ListItem", position: 4, name: update.title, item: `https://estabizz-site.vercel.app/resources/regulatory-updates/${update.slug}` }
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.estabizz.com/" },
+            { "@type": "ListItem", position: 2, name: "Resources", item: "https://www.estabizz.com/resources" },
+            { "@type": "ListItem", position: 3, name: "Regulatory Updates", item: "https://www.estabizz.com/resources/regulatory-updates" },
+            { "@type": "ListItem", position: 4, name: update.title, item: `https://www.estabizz.com/resources/regulatory-updates/${update.slug}` }
         ]
     };
 
@@ -225,7 +225,7 @@ function LiveUpdateDetail({ update }: { update: PublicRegulatoryUpdate }) {
         datePublished: update.publishedAt ?? update.publishedDate ?? undefined,
         author: { "@type": "Organization", name: "Estabizz Fintech Private Limited" },
         publisher: { "@type": "Organization", name: "Estabizz Fintech Private Limited" },
-        mainEntityOfPage: `https://estabizz-site.vercel.app/resources/regulatory-updates/${update.slug}`,
+        mainEntityOfPage: `https://www.estabizz.com/resources/regulatory-updates/${update.slug}`,
     };
 
     return (

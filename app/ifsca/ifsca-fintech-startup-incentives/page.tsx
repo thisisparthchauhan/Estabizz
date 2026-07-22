@@ -34,7 +34,7 @@ const serviceSchema = {
     provider: {
         '@type': 'Organization',
         name: 'Estabizz Fintech Private Limited',
-        url: 'https://estabizz-site.vercel.app/'
+        url: 'https://www.estabizz.com/'
     },
     areaServed: 'India',
     description: 'Professional support for IFSCA FinTech Entity Authorization, Limited Use Authorization, sandbox application, TechFin activity mapping, startup grants, PoC Grant, Green FinTech Grant, Accelerator Grant and GIFT IFSC setup.'
@@ -44,9 +44,9 @@ const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://estabizz-site.vercel.app/' },
-        { '@type': 'ListItem', position: 2, name: 'IFSCA Services', item: 'https://estabizz-site.vercel.app/ifsca' },
-        { '@type': 'ListItem', position: 3, name: 'IFSCA FinTech and Startup Incentives', item: 'https://estabizz-site.vercel.app/ifsca/ifsca-fintech-startup-incentives' }
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.estabizz.com/' },
+        { '@type': 'ListItem', position: 2, name: 'IFSCA Services', item: 'https://www.estabizz.com/ifsca' },
+        { '@type': 'ListItem', position: 3, name: 'IFSCA FinTech and Startup Incentives', item: 'https://www.estabizz.com/ifsca/ifsca-fintech-startup-incentives' }
     ]
 };
 

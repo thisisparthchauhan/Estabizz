@@ -14,7 +14,7 @@
 **Body size enforcement**: Replaced `Content-Length` header checks with actual `req.arrayBuffer()` byte reads. `byteLength > MAX_BODY_BYTES` → 413 regardless of what `Content-Length` claims. Malformed JSON → explicit 400 on all routes.
 **Documentation**: RL-001 (login) RESOLVED. RL-002 (AI endpoints) marked OPEN + deployment-blocking: AI features require Upstash provisioning before `ANTHROPIC_API_KEY` can be set. `SECURITY_INCIDENT_S2.md` unchanged.
 **New task**: Task 3B (rate-limit `/api/auth/signup`, `/api/leads`, `/api/submit-blog`) added to roadmap.
-**Commit**: pending (Security: harden production rate limiting and body limits).
+**Commit**: `1513752` (Security: harden production rate limiting and body limits).
 **TypeScript**: clean. **Build**: clean (134 routes).
 
 ---

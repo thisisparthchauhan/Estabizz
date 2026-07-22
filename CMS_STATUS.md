@@ -1,7 +1,20 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor + Security Hardening** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Admin security: granular blog and lead permissions (TD-016)**
+> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor + Security Hardening** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Blog status transition validation**
+
+---
+
+## 2026-07-22 — Blog status transition validation (QA correction to commit 22eee40)
+
+**Task**: Added explicit server-side workflow transition matrix to `PATCH /api/admin/blogs/[id]/status`. The route now rejects invalid transitions with `409 Conflict` before any database mutation. Added two-step auth: `requireAdmin` (step 1, auth only) then `requirePermission` (step 7, granular permission) around the transition check, so the blog's current status is loaded from MongoDB and never trusted from the client. Removed stale comment in `DELETE /api/admin/blogs/[id]` that incorrectly said the route was guarded only by `requireAdmin`. All granular permission guards from commit 22eee40 are preserved unchanged.
+**Transition matrix**: `draft → pending_review`; `pending_review → approved | published | rejected | archived | draft`; `approved → published | rejected`; `published → archived`; `rejected → draft`; `archived → draft`. Transitions that skip or reverse workflow steps are rejected: `draft → published`, `rejected → published`, `published → approved`, `published → pending_review`, `archived → published`, `archived → approved`.
+**Note**: Existing MongoDB `admin_users` with `super_admin` or `admin` roles still do not have `manage_leads` in their stored `permissions` array. The synchronization script has NOT been run. This must be done before production deployment.
+**Files changed**: `app/api/admin/blogs/[id]/status/route.ts`, `app/api/admin/blogs/[id]/route.ts`, `CMS_STATUS.md`, `docs/security/ESTABIZZ_SECURITY_PERMISSION_MAP.md`, `docs/security/ADMIN_OS_SECURITY_MATRIX.md`, `docs/architecture/ESTABIZZ_API_DATABASE_MAP.md`, `docs/operations/ESTABIZZ_TECHNICAL_DEBT_REGISTER.md`.
+**Commit**: pending (Admin Security: validate blog status transitions)
+**TypeScript**: clean (`npx tsc --noEmit` passes).
+**Build**: pending (run in Step 7 of this batch).
+**Status**: Complete locally — QA (Antigravity) pending before deploy.
 
 ---
 

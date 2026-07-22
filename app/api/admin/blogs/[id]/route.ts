@@ -2,7 +2,7 @@
  * DELETE /api/admin/blogs/[id]
  *
  * Permanently deletes any blog (admin-created or user-submitted).
- * Admin-only — guarded by requireAdmin.
+ * Requires delete_blog permission, enforced via requirePermission.
  */
 
 import { NextRequest, NextResponse } from 'next/server';

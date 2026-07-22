@@ -22,7 +22,7 @@
 |--------|-------|------|------------|---------|-------|
 | POST | `/api/admin/blogs/save` | Admin | `create_blog` (new) / `edit_blog` (existing) + `publish_blog` (if publishing) | Create/update blog, sanitize HTML, publish validation | htmlparser2 alt validation on publish. TD-016 resolved 2026-07-22. |
 | DELETE | `/api/admin/blogs/[id]` | Admin | `delete_blog` | Delete blog | TD-016 resolved 2026-07-22. Route has DELETE handler only (no GET/PATCH). |
-| PATCH | `/api/admin/blogs/[id]/status` | Admin | Status-mapped: `edit_blog` (draft/pending_review), `approve_blog`, `publish_blog`, `reject_blog`, `archive_blog` | Change blog status | TD-016 resolved 2026-07-22. |
+| PATCH | `/api/admin/blogs/[id]/status` | `requireAdmin` (auth) + `requirePermission` (granular) | Status-mapped: `edit_blog` (draft/pending_review), `approve_blog`, `publish_blog`, `reject_blog`, `archive_blog` | Change blog status with server-side transition validation | TD-016 resolved 2026-07-22. Transition matrix added 2026-07-22: invalid transitions → 409. Current status loaded from MongoDB (not trusted from client). |
 | GET/PATCH | `/api/admin/blogs/featured` | Admin | `manage_blogs` | Get/set featured blogs | — |
 | POST | `/api/submit-blog` | None | — | Public blog submission | User-submitted blogs |
 | GET | `/api/my-blogs/[id]` | Session | — | Get user's own blog | — |

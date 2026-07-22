@@ -14,6 +14,7 @@ This document records the permission model, protected routes, and security invar
 
 - **Phase 5A** — Admin OS Security, Permission, and Route Protection Hardening
 - **Phase 6C Security Hardening (2026-07-22)** — Blog and leads API granular permission enforcement (TD-016 resolved). `manage_leads` permission added.
+- **Phase 6C QA Correction (2026-07-22)** — Blog status route: server-side transition matrix added; two-step auth pattern (requireAdmin → load blog → validate transition → requirePermission) enforced; stale comment in DELETE route corrected.
 - All work is **local**. Not pushed to production.
 - Public Content CMS: **46 managed pages** (c0188b2 → Phase 4R baseline)
 
@@ -218,18 +219,31 @@ Protection invariants:
 | `POST .../[id]/move-to-draft` | POST | `requirePermission` | `manage_content` |
 | `POST .../[id]/delete` | POST | `requirePermission` | `delete_content` |
 
-### Blog Routes *(fixed Phase 6C security hardening, 2026-07-22)*
-| Route | Method | Auth | Permission |
-|---|---|---|---|
-| `POST /api/admin/blogs/save` (new blog) | POST | `requirePermission` | `create_blog` |
-| `POST /api/admin/blogs/save` (existing blog) | POST | `requirePermission` | `edit_blog` + `publish_blog` if publishing |
-| `DELETE /api/admin/blogs/[id]` | DELETE | `requirePermission` | `delete_blog` |
-| `PATCH /api/admin/blogs/[id]/status` → `draft`/`pending_review` | PATCH | `requirePermission` | `edit_blog` |
-| `PATCH /api/admin/blogs/[id]/status` → `approved` | PATCH | `requirePermission` | `approve_blog` |
-| `PATCH /api/admin/blogs/[id]/status` → `published` | PATCH | `requirePermission` | `publish_blog` |
-| `PATCH /api/admin/blogs/[id]/status` → `rejected` | PATCH | `requirePermission` | `reject_blog` |
-| `PATCH /api/admin/blogs/[id]/status` → `archived` | PATCH | `requirePermission` | `archive_blog` |
-| `GET/PATCH /api/admin/blogs/featured` | GET/PATCH | `requirePermission` | `manage_blogs` |
+### Blog Routes *(fixed Phase 6C security hardening 2026-07-22; transition matrix added Phase 6C QA correction 2026-07-22)*
+| Route | Method | Auth | Permission | Notes |
+|---|---|---|---|---|
+| `POST /api/admin/blogs/save` (new blog) | POST | `requirePermission` | `create_blog` | |
+| `POST /api/admin/blogs/save` (existing blog) | POST | `requirePermission` | `edit_blog` + `publish_blog` if publishing | |
+| `DELETE /api/admin/blogs/[id]` | DELETE | `requirePermission` | `delete_blog` | |
+| `PATCH /api/admin/blogs/[id]/status` → `draft`/`pending_review` | PATCH | `requireAdmin` + `requirePermission` | `edit_blog` | Transition validated server-side; invalid transitions → 409 |
+| `PATCH /api/admin/blogs/[id]/status` → `approved` | PATCH | `requireAdmin` + `requirePermission` | `approve_blog` | Only from `pending_review` or `approved` self |
+| `PATCH /api/admin/blogs/[id]/status` → `published` | PATCH | `requireAdmin` + `requirePermission` | `publish_blog` | Only from `pending_review` or `approved` |
+| `PATCH /api/admin/blogs/[id]/status` → `rejected` | PATCH | `requireAdmin` + `requirePermission` | `reject_blog` | Only from `pending_review` or `approved` |
+| `PATCH /api/admin/blogs/[id]/status` → `archived` | PATCH | `requireAdmin` + `requirePermission` | `archive_blog` | Only from `pending_review` or `published` |
+| `GET/PATCH /api/admin/blogs/featured` | GET/PATCH | `requirePermission` | `manage_blogs` | |
+
+**Blog status transition matrix** (enforced server-side, current status loaded from MongoDB):
+
+| From ↓ \ To → | draft | pending_review | approved | published | rejected | archived |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| `draft` | — | ✓ | — | — | — | — |
+| `pending_review` | ✓ | — | ✓ | ✓ | ✓ | ✓ |
+| `approved` | — | — | — | ✓ | ✓ | — |
+| `published` | — | — | — | — | — | ✓ |
+| `rejected` | ✓ | — | — | — | — | — |
+| `archived` | ✓ | — | — | — | — | — |
+
+Invalid transitions return `409 Conflict` with `{ error, currentStatus, requestedStatus }`. Auth check (`requireAdmin`) runs before the blog record is loaded — unauthenticated callers never see 404.
 
 ### Leads *(fixed Phase 6C security hardening, 2026-07-22)*
 | Route | Method | Auth | Permission |

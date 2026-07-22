@@ -229,5 +229,7 @@
 | Files | `app/api/admin/blogs/save/route.ts`, `app/api/admin/blogs/[id]/route.ts`, `app/api/admin/blogs/[id]/status/route.ts`, `app/api/admin/leads/[id]/route.ts` |
 | Severity | 🟠 Medium → ✅ Resolved |
 | Resolution | All four routes now enforce granular `requirePermission` guards. `POST /api/admin/blogs/save` requires `create_blog` (new blog) or `edit_blog` (existing blog), plus `publish_blog` for any publish action. `DELETE /api/admin/blogs/[id]` requires `delete_blog`. `PATCH /api/admin/blogs/[id]/status` maps each target status to its specific permission (`edit_blog` for draft/pending_review, `approve_blog`, `publish_blog`, `reject_blog`, `archive_blog`). `PATCH /api/admin/leads/[id]` requires new `manage_leads` permission (added to `super_admin` and `admin` role defaults). `manage_leads` label added to admin Users UI. Zero `requireAdmin`-only handlers remain in `app/api/admin/**`. TypeScript clean. Production build clean (134 pages). |
-| Commit | pending (Admin Security: enforce granular blog and lead permissions) |
+| Commit | 22eee40 (Admin Security: enforce granular blog and lead permissions) |
+| QA correction | `PATCH /api/admin/blogs/[id]/status` additionally received server-side transition matrix validation (commit: pending — Admin Security: validate blog status transitions, 2026-07-22). |
+| ⚠ Pre-deploy action | Existing `admin_users` MongoDB records for `super_admin` and `admin` roles do **not** automatically include `manage_leads` in their stored `permissions` array. Run `syncAdminRolePermissions.mjs` for all existing admins before production deployment. **This script has NOT been run.** |
 | QA | Antigravity pending |

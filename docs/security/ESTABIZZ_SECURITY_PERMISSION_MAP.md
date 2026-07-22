@@ -1,6 +1,6 @@
 # Estabizz — Security and Permission Map
 
-> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7** · Security hardening commit: pending (admin blog/leads permission fix)
+> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7** · Security hardening commits: 22eee40 (granular blog/leads permissions), pending (blog status transition validation)
 > Contains: confirmed facts verified against the source tree on 2026-07-22.
 
 ---
@@ -133,6 +133,7 @@ The two seed accounts (`estabizz@gmail.com` as `super_admin`, `info@estabizz.com
 | S6 | Cloudinary unsigned upload preset is public | Accepted | Unsigned preset limits what can be uploaded; Cloudinary access controls apply |
 | S7 | TipTap duplicate extension warning in dev | Dev only — undiagnosed | `immediatelyRender: false` was added to address Next.js SSR/hydration behaviour; whether it also removes the duplicate extension warning has not been confirmed. Inspect the final TipTap extension array before closing. |
 | S8 | ~~Blog and leads API routes use `requireAdmin` not `requirePermission`~~ **RESOLVED 2026-07-22** | Medium → **Fixed** | `POST /api/admin/blogs/save` now requires `create_blog` (new) or `edit_blog` (existing) + `publish_blog` (if publishing). `DELETE /api/admin/blogs/[id]` requires `delete_blog`. `PATCH /api/admin/blogs/[id]/status` maps each target status to its specific permission (`edit_blog` / `approve_blog` / `publish_blog` / `reject_blog` / `archive_blog`). `PATCH /api/admin/leads/[id]` requires new `manage_leads` permission (added to `super_admin` and `admin` roles). No `requireAdmin` calls remain anywhere in `app/api/admin/**`. Full permission audit confirmed clean. |
+| S9 | ~~`PATCH /api/admin/blogs/[id]/status` accepted any status → any status transition~~ **RESOLVED 2026-07-22** | Medium → **Fixed** | Route now enforces an explicit transition matrix. `requireAdmin` (auth) runs first so unauthenticated callers never see 404. Blog is loaded from MongoDB (status never trusted from client). Invalid transitions rejected `409`. Permitted transitions: `draft → pending_review`; `pending_review → approved \| published \| rejected \| archived \| draft`; `approved → published \| rejected`; `published → archived`; `rejected → draft`; `archived → draft`. Prohibited (step-skipping): `draft → published`, `rejected → published`, `published → approved / pending_review`, `archived → published / approved`. Granular permission (`requirePermission`) is enforced after the transition check, before mutation. |
 
 ---
 

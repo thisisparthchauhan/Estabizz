@@ -32,7 +32,8 @@ export interface RateLimitResult {
   limit: number;
   resetAt: number;      // Unix seconds
   retryAfter: number;   // seconds to wait before retrying (0 if allowed)
-  storeError?: boolean; // true when Upstash was unavailable (policy applied)
+  storeError?: boolean;   // true when Upstash was unavailable (policy applied)
+  configMissing?: boolean; // true when Upstash is not configured in production
 }
 
 export interface LimitOptions {
@@ -184,6 +185,24 @@ function hasUpstash(): boolean {
 }
 
 /**
+ * Returns true when rate limiting is correctly configured for the current
+ * environment.
+ *
+ * In production (NODE_ENV === 'production'), Upstash credentials must be
+ * present — the in-memory fallback is per-instance and cannot coordinate
+ * across serverless replicas, making it an unacceptable production substitute.
+ *
+ * Outside of production, the in-memory fallback is acceptable. Always returns
+ * true in development.
+ *
+ * Call at the top of a route handler before body reads to return 503
+ * immediately when the production rate-limit store is not configured.
+ */
+export function isRateLimitConfigured(): boolean {
+  return hasUpstash() || process.env.NODE_ENV !== 'production';
+}
+
+/**
  * Rate-limit a request by namespace + identifier within a sliding window.
  *
  * @param opts    - namespace, identifier, limit and windowSeconds
@@ -219,6 +238,21 @@ export async function limitRequest(
       };
     }
     return result;
+  }
+
+  if (process.env.NODE_ENV === 'production') {
+    // Upstash credentials are absent in a production environment.
+    // Signal callers to return 503 — the in-memory fallback is per-instance
+    // and cannot coordinate across serverless replicas.
+    const now = Date.now();
+    return {
+      allowed: false,
+      remaining: 0,
+      limit: opts.limit,
+      resetAt: Math.ceil(now / 1_000) + opts.windowSeconds,
+      retryAfter: 0,
+      configMissing: true,
+    };
   }
 
   // DEV-ONLY in-memory fallback.

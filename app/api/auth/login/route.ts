@@ -5,6 +5,7 @@ import { connectDB } from '@/lib/db';
 import User from '@/lib/models/User';
 import {
     limitRequest,
+    isRateLimitConfigured,
     getClientIp,
     rateLimitResponse,
     hashIdentifier,
@@ -23,16 +24,36 @@ const MAX_BODY_BYTES = 8_192;
 
 export async function POST(req: NextRequest) {
     try {
-        // ── Body size guard ────────────────────────────────────────────────────
-        const contentLength = req.headers.get('content-length');
-        if (contentLength && parseInt(contentLength, 10) > MAX_BODY_BYTES) {
+        // ── Production rate-limit config gate ──────────────────────────────────
+        // In production the in-memory fallback is not safe across serverless
+        // replicas. Return 503 immediately if Upstash is not configured.
+        // Fail-open applies only to runtime Upstash failures on a configured
+        // store — not to missing configuration.
+        if (!isRateLimitConfigured()) {
+            return NextResponse.json(
+                { error: 'This service is temporarily unavailable.' },
+                { status: 503, headers: { 'Cache-Control': 'no-store' } }
+            );
+        }
+
+        // ── Body size enforcement (actual bytes) ───────────────────────────────
+        // Read the raw body so byteLength is authoritative. Content-Length is
+        // untrusted: it can be missing or deliberately set to a false small value.
+        const bodyBuffer = await req.arrayBuffer();
+        if (bodyBuffer.byteLength > MAX_BODY_BYTES) {
             return NextResponse.json(
                 { error: 'Request body too large.' },
                 { status: 413 }
             );
         }
 
-        const body = await req.json();
+        let body;
+        try {
+            body = JSON.parse(new TextDecoder().decode(bodyBuffer));
+        } catch {
+            return NextResponse.json({ error: 'Invalid JSON.' }, { status: 400 });
+        }
+
         const { identifier, password } = body;
 
         if (!identifier || !password) {
@@ -43,18 +64,26 @@ export async function POST(req: NextRequest) {
         }
 
         // ── Rate limiting ──────────────────────────────────────────────────────
-        // Applied before DB queries to reject cheap-to-check requests early.
-        // Policy: fail-open — a temporary Upstash outage allows requests through
-        // rather than locking out all users. Store errors are logged server-side.
+        // Body must be read first so the identifier can be hashed for bucket 2.
+        // Fail-open applies only to runtime Upstash failures when the store is
+        // properly configured. Missing production config is gated above by
+        // isRateLimitConfigured() and never reaches here.
         //
-        // Two buckets are checked in parallel:
-        //   1. Per-IP:         5 attempts per 15 minutes.
-        //   2. Per-identifier: 10 attempts per 30 minutes (hashed, not raw).
+        // Bucket 1 — per-IP:         5 attempts per 15 minutes.
+        // Bucket 2 — per-identifier: 10 attempts per 30 minutes (hashed, not raw).
+        // Both buckets run in parallel; all attempts counted (not only failures)
+        // to prevent timing attacks that distinguish hit from miss.
         //
-        // All attempts are counted (not just failures). This avoids timing attacks
-        // that would otherwise distinguish success from failure.
-
+        // Unknown IP in production would share one bucket across all clients —
+        // a brute-force window and DoS vector. Return 503 to prevent that risk.
         const ip = getClientIp(req);
+        if (ip === 'unknown' && process.env.NODE_ENV === 'production') {
+            return NextResponse.json(
+                { error: 'This service is temporarily unavailable.' },
+                { status: 503, headers: { 'Cache-Control': 'no-store' } }
+            );
+        }
+
         const idHash = hashIdentifier(String(identifier));
 
         const [ipResult, idResult] = await Promise.all([

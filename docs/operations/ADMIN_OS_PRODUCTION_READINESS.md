@@ -336,9 +336,11 @@ Additional invariants:
 
 3. **No edge middleware pre-check** — `/admin/**` routes are protected only by the layout server-side check (no Vercel edge function pre-check). CDN may serve a loading frame before redirect fires. No admin data is exposed before the check completes.
 
-4. ~~**No rate limiting on `POST /api/auth/login`**~~ — **RESOLVED 2026-07-22.** Upstash Redis sliding-window rate limiting implemented: 5/IP/15 min + 10/hashedId/30 min (fail-open). AI endpoints also rate-limited: 10/IP/10 min (chat), 5/IP/10 min (recommend), fail-closed. `lib/security/rateLimit.ts` added. Requires `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` env vars in production.
+4. ~~**No rate limiting on `POST /api/auth/login`**~~ — **RESOLVED 2026-07-22 (hardened 2026-07-22).** Upstash Redis sliding-window: 5/IP/15 min + 10/hashedId/30 min. Production config gate: 503 when `UPSTASH_REDIS_*` absent (in-memory fallback disabled in production). Fail-open for runtime Upstash failures only. Unknown IP → 503 in production. Body enforced via `arrayBuffer().byteLength` — not `Content-Length` header. AI endpoints also rate-limited: 10/IP/10 min (chat), 5/IP/10 min (recommend), fail-closed + same production gate + unknown IP → 503. `lib/security/rateLimit.ts`.
 
-5. ~~**`ANTHROPIC_API_KEY` not set → 500 on AI routes**~~ — **RESOLVED 2026-07-22.** `/api/recommend-services` and `/api/chat` now return a controlled 503 ("This service is temporarily unavailable.") when `ANTHROPIC_API_KEY` is absent, instead of propagating an unhandled throw as 500.
+4a. **`UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` not provisioned in production** — **DEPLOYMENT-BLOCKING (RL-002).** All three rate-limited routes (`/api/auth/login`, `/api/chat`, `/api/recommend-services`) return 503 in production without these env vars. Login is broken. AI features are blocked. Must provision Upstash Redis and set both env vars before any production deploy.
+
+5. ~~**`ANTHROPIC_API_KEY` not set → 500 on AI routes**~~ — **RESOLVED 2026-07-22.** Controlled 503 returned when key absent. Note: with API key set but without Upstash, AI routes also return 503 — see item 4a above.
 
 6. **`RESEND_API_KEY` not set → lead emails disabled** — Lead email alerts are silently disabled until this key is set. The lead capture form still works.
 

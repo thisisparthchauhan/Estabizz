@@ -1,7 +1,21 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor + Security Hardening** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Security: add login and public AI rate limiting**
+> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor + Security Hardening** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Security: harden production rate limiting and body limits**
+
+---
+
+## 2026-07-22 — Security: harden production rate limiting and body limits (RL-001 resolved · RL-002 open)
+
+**Task**: Corrective hardening of the rate-limiting layer added in `664a08b`. Ten specific gaps fixed.
+**Production config gate**: `isRateLimitConfigured()` exported from `lib/security/rateLimit.ts`. In production, the in-memory fallback is disabled — if `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` are absent, all three protected routes return 503 immediately. In dev, in-memory fallback continues unchanged.
+**Fail-open scope narrowed**: Login fail-open now applies only to runtime Upstash failures on a configured store. Missing config → 503 (not allow-through). `storeError` and `configMissing` are distinct fields on `RateLimitResult`.
+**AI routes**: `configMissing` result treated same as `storeError` (→ 503) under fail-closed policy. IP unknown check added: `ip === 'unknown' && NODE_ENV === 'production'` → 503 on all three routes.
+**Body size enforcement**: Replaced `Content-Length` header checks with actual `req.arrayBuffer()` byte reads. `byteLength > MAX_BODY_BYTES` → 413 regardless of what `Content-Length` claims. Malformed JSON → explicit 400 on all routes.
+**Documentation**: RL-001 (login) RESOLVED. RL-002 (AI endpoints) marked OPEN + deployment-blocking: AI features require Upstash provisioning before `ANTHROPIC_API_KEY` can be set. `SECURITY_INCIDENT_S2.md` unchanged.
+**New task**: Task 3B (rate-limit `/api/auth/signup`, `/api/leads`, `/api/submit-blog`) added to roadmap.
+**Commit**: pending (Security: harden production rate limiting and body limits).
+**TypeScript**: clean. **Build**: clean (134 routes).
 
 ---
 

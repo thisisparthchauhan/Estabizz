@@ -47,6 +47,23 @@
 
 ---
 
+### Task 3B — Rate-limit remaining public mutation endpoints
+
+| Field | Value |
+|-------|-------|
+| Objective | Apply per-IP rate limiting and actual body-size enforcement to `/api/auth/signup`, `/api/leads`, and `/api/submit-blog`. These endpoints accept user-supplied input with no rate limiting, creating signup spam, lead-form spam, and blog-submission spam vectors. |
+| Why now | Consistent rate-limiting posture across all public write endpoints before production. `lib/security/rateLimit.ts` is already in place — this is wiring it up to three remaining routes. |
+| Files | `app/api/auth/signup/route.ts`, `app/api/leads/route.ts`, `app/api/submit-blog/route.ts` |
+| Dependencies | `lib/security/rateLimit.ts` (in place), Upstash Redis provisioned |
+| Limits (proposed) | Signup: 3/IP/hour. Leads: 5/IP/hour. Submit-blog: 3/IP/hour. All fail-open. |
+| Complexity | Small |
+| Agent | Claude Code |
+| QA | Manual |
+| Approval gate | Owner |
+| Deploy required | Yes — after Upstash provisioned (RL-002) |
+
+---
+
 ### Task 4 — Correct legal pages and public content placeholders
 
 | Field | Value |

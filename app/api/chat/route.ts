@@ -43,16 +43,25 @@ export async function POST(req: NextRequest) {
 
         // ── Rate limiting (fail-closed) ────────────────────────────────────────
         // Checked before body parsing so blocked requests are rejected cheaply.
-        // Policy: fail-closed — when the limiter store is unreachable, block the
-        // request rather than risk uncontrolled AI spend.
+        // Policy: fail-closed — store unreachable or not configured in production
+        // both return 503 (storeError or configMissing). Unknown IP in production
+        // would share one bucket across all clients; return 503 to prevent a
+        // shared-bucket DoS or rate-limit bypass.
         const ip = getClientIp(req);
+        if (ip === "unknown" && process.env.NODE_ENV === "production") {
+            return NextResponse.json(
+                { error: "This service is temporarily unavailable." },
+                { status: 503, headers: { "Cache-Control": "no-store" } }
+            );
+        }
+
         const limitResult = await limitRequest(
             { namespace: "chat", identifier: ip, limit: 10, windowSeconds: 600 },
             "fail-closed"
         );
 
         if (!limitResult.allowed) {
-            if (limitResult.storeError) {
+            if (limitResult.storeError || limitResult.configMissing) {
                 return NextResponse.json(
                     { error: "This service is temporarily unavailable." },
                     { status: 503, headers: { "Cache-Control": "no-store" } }
@@ -61,9 +70,11 @@ export async function POST(req: NextRequest) {
             return rateLimitResponse(limitResult);
         }
 
-        // ── Body size guard ────────────────────────────────────────────────────
-        const contentLength = req.headers.get("content-length");
-        if (contentLength && parseInt(contentLength, 10) > MAX_BODY_BYTES) {
+        // ── Body size enforcement (actual bytes) ───────────────────────────────
+        // Read the raw body so byteLength is authoritative. Content-Length is
+        // untrusted: it can be missing or deliberately set to a false small value.
+        const bodyBuffer = await req.arrayBuffer();
+        if (bodyBuffer.byteLength > MAX_BODY_BYTES) {
             return NextResponse.json(
                 { error: "Request body too large." },
                 { status: 413 }
@@ -71,7 +82,13 @@ export async function POST(req: NextRequest) {
         }
 
         // ── Input validation ───────────────────────────────────────────────────
-        const { messages } = await req.json();
+        let parsed;
+        try {
+            parsed = JSON.parse(new TextDecoder().decode(bodyBuffer));
+        } catch {
+            return NextResponse.json({ error: "Invalid JSON." }, { status: 400 });
+        }
+        const { messages } = parsed;
 
         if (!messages || !Array.isArray(messages) || messages.length === 0) {
             return NextResponse.json({ error: "Invalid messages" }, { status: 400 });

@@ -127,8 +127,8 @@ The two seed accounts (`estabizz@gmail.com` as `super_admin`, `info@estabizz.com
 
 | ID | Issue | Risk | Fix approach |
 |----|-------|------|-------------|
-| ~~S1~~ | ~~No rate limiting on `/api/auth/login`~~ | ~~High — brute-force~~ | **RESOLVED 2026-07-22** — `@upstash/ratelimit` sliding window: 5/IP/15 min + 10/hashedId/30 min, fail-open. `lib/security/rateLimit.ts`. |
-| ~~S2~~ | ~~No rate limiting on public AI endpoints (`/api/chat`, `/api/recommend-services`)~~ | ~~High — cost DoS when API key active~~ | **RESOLVED 2026-07-22** — 10/IP/10 min (chat) and 5/IP/10 min (recommend), fail-closed. 503 gate for missing API key. |
+| ~~RL-001~~ | ~~No rate limiting on `/api/auth/login`~~ | ~~High — brute-force~~ | **RESOLVED 2026-07-22** — Upstash sliding window: 5/IP/15 min + 10/hashedId/30 min. Production config gate: 503 when Upstash absent (in-memory fallback disabled in prod). Fail-open for runtime Upstash failures only. Unknown IP → 503 in production. Body enforced via `arrayBuffer().byteLength`. `lib/security/rateLimit.ts`. |
+| RL-002 | Public AI endpoints not safely deployable without Upstash Redis provisioned | **HIGH — deployment-blocking** | Rate limiting code complete: 10/IP/10 min (chat), 5/IP/10 min (recommend), fail-closed. In production without Upstash, endpoints return 503 — no unprotected access, but feature is non-functional. **Must provision `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` before setting `ANTHROPIC_API_KEY`.** Unknown IP → 503 in production. |
 | S3 | Lead personal data (name, email, phone) not encrypted at rest | Medium | Field-level encryption or MongoDB Atlas encryption |
 | S4 | No CSRF protection on state-changing forms | Medium | SameSite=Lax cookie mitigates most cases; explicit CSRF token recommended |
 | S5 | No token refresh mechanism | Low | User must re-login after 7 days; acceptable for admin panel |

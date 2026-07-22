@@ -299,7 +299,7 @@ No admin page bypasses the layout guard. Individual pages may add further permis
 
 ## 10. Recommended Next Hardening Steps (Phase 5B+)
 
-1. ~~**Rate-limit `/api/auth/login`** to mitigate brute-force attacks (e.g. 5 attempts per IP per minute).~~ **DONE 2026-07-22** — Upstash sliding window: 5/IP/15 min + 10/hashedId/30 min. AI endpoints also rate-limited. See `lib/security/rateLimit.ts`.
+1. ~~**Rate-limit `/api/auth/login`** to mitigate brute-force attacks.~~ **DONE 2026-07-22 (hardened 2026-07-22)** — Upstash sliding window: 5/IP/15 min (IP) + 10/hashedId/30 min. Production config gate: 503 when Upstash absent. Fail-open for runtime failures only. Unknown IP → 503 in production. Body via `arrayBuffer()` not `Content-Length`. AI endpoints: 10/IP/10 min (chat), 5/IP/10 min (recommend), fail-closed + same production gate. `lib/security/rateLimit.ts`. **Open: RL-002 — Upstash must be provisioned before AI endpoints can be enabled.**
 2. **Add edge middleware** for fast cookie-presence pre-check on `/admin/**` and `/api/admin/**`, reducing server-side layout redirect latency.
 3. **Implement purge password re-verification** for `purge_content` actions (the gap documented in Phase 3B).
 4. **Audit log for admin login attempts** (success and failure) — currently `recordAdminLogin` only logs successful logins.

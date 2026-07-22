@@ -14,21 +14,21 @@
 | File | `app/api/auth/login/route.ts` |
 | Severity | ~~🔴 High~~ ✅ Resolved |
 | Description | ~~`POST /api/auth/login` has no rate limiting. An attacker can make unlimited login attempts.~~ |
-| Resolution | Sliding-window rate limiting via `@upstash/ratelimit`: 5 attempts/IP/15 min + 10 attempts/hashedIdentifier/30 min. Policy: fail-open (store error allows through; logs server-side). Identifiers hashed with SHA-256 before datastore writes. `lib/security/rateLimit.ts` added. |
-| Resolved by | Claude Code · 2026-07-22 |
+| Resolution | Upstash sliding-window: 5/IP/15 min + 10/hashedIdentifier/30 min. Production config gate (`isRateLimitConfigured()`): returns 503 when Upstash absent — in-memory fallback disabled in production. Fail-open for runtime Upstash failures only (not for missing config). Unknown IP → 503 in production. Body enforced via `arrayBuffer().byteLength` (not `Content-Length` header). Identifiers hashed with SHA-256. |
+| Resolved by | Claude Code · 2026-07-22 (hardened 2026-07-22) |
 
 ---
 
-## ~~TD-002 — Public AI endpoints have no auth or rate limit~~ — RESOLVED 2026-07-22
+## TD-002 — Public AI endpoints require Upstash Redis before ANTHROPIC_API_KEY deployment — OPEN
 
 | Field | Value |
 |-------|-------|
 | Module | API — Chat, Recommend Services |
 | Files | `app/api/chat/route.ts`, `app/api/recommend-services/route.ts` |
-| Severity | ~~🔴 High (when API key is active)~~ ✅ Resolved |
-| Description | ~~Both endpoints are publicly accessible with no authentication and no rate limiting.~~ |
-| Resolution | Per-IP sliding-window rate limiting via `@upstash/ratelimit`: 10 req/IP/10 min (chat), 5 req/IP/10 min (recommend). Policy: fail-closed (store error returns 503). 503 availability gate added when `ANTHROPIC_API_KEY` absent. Body size and input length guards added. |
-| Resolved by | Claude Code · 2026-07-22 |
+| Severity | 🔴 High — **deployment-blocking** |
+| Code state | Rate limiting implemented: 10/IP/10 min (chat), 5/IP/10 min (recommend). Policy: fail-closed. Production config gate: returns 503 when Upstash absent. Unknown IP → 503 in production. Body enforced via `arrayBuffer().byteLength`. 503 gate when `ANTHROPIC_API_KEY` absent. |
+| Remaining condition | `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` must be provisioned before `ANTHROPIC_API_KEY` is set in production. Without Upstash, AI endpoints return 503 — no unprotected access, but the feature is non-functional. |
+| Tracked by | RL-002 in security gap register (`ESTABIZZ_SECURITY_PERMISSION_MAP.md`) |
 
 ---
 

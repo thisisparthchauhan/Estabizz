@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FrameworkTable, ProcessTimeline, ProposalCommercialsTable } from "@/components/content/FrameworkBlocks";
+import { requireAdminPage } from '@/lib/admin/requireAdminPage';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
     title: "Proposal Template – Regulatory Registration & Compliance Proposal | Estabizz",
     description: "Browser-style regulatory proposal template by Estabizz for licence registration, compliance scope, timelines, commercials, regulatory fees and post-registration support.",
     alternates: { canonical: "/proposal-template" },
+    robots: { index: false, follow: false },
 };
 
 const scopeRows = [
@@ -49,7 +53,8 @@ const processSteps = [
     "Ongoing Compliance & Reporting Support",
 ];
 
-export default function ProposalTemplatePage() {
+export default async function ProposalTemplatePage() {
+    await requireAdminPage('/proposal-template');
     return (
         <main className="min-h-screen bg-white pt-[64px]">
             {/* Hero — homepage-themed */}

@@ -1,7 +1,19 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor + Security Hardening** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Blog status transition validation**
+> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor + Security Hardening** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Security: protect internal resource pages with admin auth guard**
+
+---
+
+## 2026-07-22 — Security: protect internal resource pages with admin auth guard (TD-009 resolution)
+
+**Task**: Removed public access from four internal tooling/template pages while preserving full utility for authenticated administrators. Created `lib/admin/requireAdminPage.ts` — a new shared async utility that mirrors the JWT verification logic in `app/admin/layout.tsx` for use in server page components outside the `/admin/*` tree. The utility reads the `auth_token` cookie, verifies the JWT against `JWT_SECRET`, checks the email against `ADMIN_EMAIL_ALLOWLIST` (fast path), then falls back to an active `admin_users` MongoDB record. Unauthenticated visitors are redirected to `/login?redirect=<path>`; authenticated admins receive the page normally. Applied to all four target pages: `app/resources/content-rebuild-command/page.tsx`, `app/resources/regulatory-update-email-template/page.tsx`, `app/resources/service-page-content-framework/page.tsx`, `app/proposal-template/page.tsx`. Each page received: (1) import of `requireAdminPage`, (2) `export const dynamic = 'force-dynamic'` to prevent static pre-rendering, (3) `robots: { index: false, follow: false }` added to metadata, (4) default export made async, (5) `await requireAdminPage('<path>')` as the first statement in the component body.
+**Note**: `robots.txt` already disallows `/proposal-template` and the three `/resources/*` internal paths (added in Phase 6A). This task adds server-enforced auth so the pages are protected even if the URL is known.
+**Files changed**: `lib/admin/requireAdminPage.ts` (new), `app/resources/content-rebuild-command/page.tsx`, `app/resources/regulatory-update-email-template/page.tsx`, `app/resources/service-page-content-framework/page.tsx`, `app/proposal-template/page.tsx`, `CMS_STATUS.md`, `docs/security/ESTABIZZ_SECURITY_PERMISSION_MAP.md`, `docs/operations/ESTABIZZ_TECHNICAL_DEBT_REGISTER.md`, `docs/roadmap/ESTABIZZ_NEXT_20_TASKS.md`.
+**Commit**: pending (Security: protect internal resource pages with admin auth guard)
+**TypeScript**: clean (`npx tsc --noEmit` passes).
+**Build**: clean (130 static pages + dynamic; no errors).
+**Status**: Complete locally — QA (manual) pending before deploy.
 
 ---
 

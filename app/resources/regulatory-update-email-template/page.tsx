@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { requireAdminPage } from '@/lib/admin/requireAdminPage';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
     title: "Regulatory Update Email Template for RBI, SEBI, IRDAI & IFSCA Circulars",
     description: "Use Estabizz's structured regulatory update email template for circular interpretation, impact analysis, action checklist, implementation timeline and risk rating.",
-    alternates: { canonical: "/resources/regulatory-update-email-template" }
+    alternates: { canonical: "/resources/regulatory-update-email-template" },
+    robots: { index: false, follow: false },
 };
 
 const sections = [
@@ -26,7 +30,8 @@ const sections = [
     "PROFESSIONAL CLOSING"
 ];
 
-export default function RegulatoryEmailTemplatePage() {
+export default async function RegulatoryEmailTemplatePage() {
+    await requireAdminPage('/resources/regulatory-update-email-template');
     return (
         <main className="min-h-screen bg-white pt-[64px]">
             <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">

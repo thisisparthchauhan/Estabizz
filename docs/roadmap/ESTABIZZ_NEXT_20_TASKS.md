@@ -21,17 +21,14 @@
 
 ---
 
-### Task 2 — Protect internal resource pages (TD-009)
+### ~~Task 2 — Protect internal resource pages (TD-009)~~ ✅ COMPLETED 2026-07-22
 
 | Field | Value |
 |-------|-------|
-| Objective | Add an admin-only guard to three internal pages: `/resources/content-rebuild-command`, `/resources/regulatory-update-email-template`, `/resources/service-page-content-framework`. A fix (`a59f095`) exists on branch `cms-admin-os-phase-1` but has not been merged to `main`. Merge or apply the fix. |
-| Why now | Internal tooling pages are publicly accessible on `main`. |
-| Files | `app/resources/content-rebuild-command/page.tsx`, `app/resources/regulatory-update-email-template/page.tsx`, `app/resources/service-page-content-framework/page.tsx` |
-| Complexity | Small |
-| Agent | Claude Code |
+| Objective | Add admin-only auth guard to four internal pages — completed. |
+| Resolution | Created `lib/admin/requireAdminPage.ts` (JWT verify + ADMIN_EMAIL_ALLOWLIST + MongoDB fallback, mirrors `app/admin/layout.tsx`). Applied to `app/resources/content-rebuild-command/page.tsx`, `app/resources/regulatory-update-email-template/page.tsx`, `app/resources/service-page-content-framework/page.tsx`, `app/proposal-template/page.tsx`. Each page: async, `force-dynamic`, `robots: noindex/nofollow`, `await requireAdminPage('<path>')` as first statement. Unauthenticated visitors redirected to `/login?redirect=<path>`; authenticated admins receive the page. Previous `a59f095` fix (branch `cms-admin-os-phase-1`) used `notFound()` — rejected because it hides pages from admins too. Auth-redirect approach chosen instead. TypeScript clean. |
+| Commit | pending (Security: protect internal resource pages with admin auth guard) |
 | QA | Manual |
-| Approval gate | Owner |
 | Deploy required | Yes |
 
 ---

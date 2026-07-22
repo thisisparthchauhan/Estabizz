@@ -117,7 +117,8 @@ The two seed accounts (`estabizz@gmail.com` as `super_admin`, `info@estabizz.com
 | `/api/recommend-services` | None | AI endpoint — no auth |
 | `/api/chat` | None | AI endpoint — no auth |
 | `/api/my-blogs/[id]` | Session cookie (user auth) | User-specific |
-| All public `/`…pages | None | Publicly accessible |
+| Internal pages (`/resources/content-rebuild-command`, `/resources/regulatory-update-email-template`, `/resources/service-page-content-framework`, `/proposal-template`) | `requireAdminPage` JWT guard | Redirect to `/login?redirect=<path>` on failure. `force-dynamic`. `robots: noindex`. |
+| All other public `/`…pages | None | Publicly accessible |
 
 ---
 

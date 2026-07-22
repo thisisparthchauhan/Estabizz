@@ -123,18 +123,15 @@
 
 ---
 
-## TD-009 — Internal resource pages publicly accessible — STATUS: PARTIAL (NOT YET ON MAIN)
+## TD-009 — Internal resource pages publicly accessible — **RESOLVED 2026-07-22**
 
 | Field | Value |
 |-------|-------|
 | Module | Resources section |
-| Files | `app/resources/content-rebuild-command/`, `app/resources/regulatory-update-email-template/`, `app/resources/service-page-content-framework/` |
-| Severity | 🟠 Medium |
-| Description | Three internal tooling/template pages are publicly accessible. They are excluded from `robots.txt` and sitemap, but they can still be accessed by anyone with the URL. |
-| Branch status | A fix was committed as `a59f095 CMS Resources: protect internal resource pages` on branch `cms-admin-os-phase-1` but this commit is **not present on `main`**. Verify the fix and merge before closing this item. |
-| Recommended fix | Merge or cherry-pick `a59f095` into `main` after confirming the changes are correct |
-| Effort | Small |
-| Agent | Claude Code |
+| Files | `app/resources/content-rebuild-command/`, `app/resources/regulatory-update-email-template/`, `app/resources/service-page-content-framework/`, `app/proposal-template/` |
+| Severity | 🟠 Medium → ✅ Resolved |
+| Resolution | Four internal tooling/template pages now require admin authentication. A new shared utility `lib/admin/requireAdminPage.ts` mirrors the JWT verification logic in `app/admin/layout.tsx`. Unauthenticated visitors are redirected to `/login?redirect=<path>`; authenticated admins receive the page unchanged. Each page also exports `dynamic = 'force-dynamic'` and `robots: { index: false, follow: false }`. The previous `a59f095` fix on branch `cms-admin-os-phase-1` used `notFound()` which returned 404 to all users including admins; this resolution instead uses auth-redirect to preserve admin utility. |
+| Commit | pending (Security: protect internal resource pages with admin auth guard) |
 
 ---
 

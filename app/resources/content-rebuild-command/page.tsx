@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ExpertQuote, FrameworkTable } from "@/components/content/FrameworkBlocks";
+import { requireAdminPage } from '@/lib/admin/requireAdminPage';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
     title: "Content Rebuild Command – SEO, GEO & AEO Reference Content System | Estabizz",
     description: "Internal Estabizz command page for rebuilding reference or competitor regulatory content into original SEO, GEO and AEO optimised compliance pages.",
     alternates: { canonical: "/resources/content-rebuild-command" },
+    robots: { index: false, follow: false },
 };
 
 const rebuildRules = [
@@ -50,7 +54,8 @@ const complianceRows = [
     { Area: "Tone", Standard: "Professional Indian English, practical, humanised, slightly formal and regulator-respectful." },
 ];
 
-export default function ContentRebuildCommandPage() {
+export default async function ContentRebuildCommandPage() {
+    await requireAdminPage('/resources/content-rebuild-command');
     return (
         <main className="min-h-screen bg-white pt-[64px]">
             <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">

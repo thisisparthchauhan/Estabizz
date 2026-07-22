@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ExpertQuote, FrameworkTable, QuickAnswerBox } from "@/components/content/FrameworkBlocks";
+import { requireAdminPage } from '@/lib/admin/requireAdminPage';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
     title: "Service Page Content Framework – SEO, GEO & AEO Licence Page Standard | Estabizz",
     description: "Estabizz master service page framework for RBI, SEBI, IRDAI, IFSCA and government licence pages with SEO, GEO, AEO, FAQs, tables, CTAs and legally safe content rules.",
     alternates: { canonical: "/resources/service-page-content-framework" },
+    robots: { index: false, follow: false },
 };
 
 const frameworkSections = [
@@ -68,7 +72,8 @@ const qcItems = [
     "The page uses professional Indian English and regulator-respectful wording.",
 ];
 
-export default function ServicePageContentFrameworkPage() {
+export default async function ServicePageContentFrameworkPage() {
+    await requireAdminPage('/resources/service-page-content-framework');
     return (
         <main className="min-h-screen bg-white pt-[64px]">
             <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">

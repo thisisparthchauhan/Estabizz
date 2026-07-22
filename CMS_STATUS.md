@@ -1,7 +1,19 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor + Security Hardening** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Security: protect internal resource pages with admin auth guard**
+> Last updated: 2026-07-22 (IST) · Phase: **6C — Blog Rich Text Editor + Security Hardening** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **Admin Security: protect internal tools from public access**
+
+---
+
+## 2026-07-22 — Admin Security: protect internal tools from public access (TD-009 architecture migration)
+
+**Task**: Migrated four internal tooling/template pages from ad-hoc `requireAdminPage` guards on public routes into the Admin OS under `/admin/tools/**`, where they are protected by the existing `app/admin/layout.tsx` JWT guard via Next.js layout inheritance. Old public routes replaced with `notFound()`. All public navigation references (Navbar redirect map, Navbar search overlay, resources page cards, footer defaults, resourcesDefaults, regulatory-updates page link) removed. "Internal Tools" entry added to Admin OS sidebar with `IconTool` SVG. Index page (`/admin/tools`) created with 4 tool cards.
+**Pages created**: `app/admin/tools/page.tsx`, `app/admin/tools/content-rebuild-command/page.tsx`, `app/admin/tools/regulatory-update-email-template/page.tsx`, `app/admin/tools/service-page-content-framework/page.tsx`, `app/admin/tools/proposal-template/page.tsx`.
+**Pages killed (notFound)**: `app/resources/content-rebuild-command/page.tsx`, `app/resources/regulatory-update-email-template/page.tsx`, `app/resources/service-page-content-framework/page.tsx`, `app/proposal-template/page.tsx`.
+**Navigation cleaned**: `app/resources/page.tsx` (4 cards removed), `components/layout/Navbar.tsx` (5 redirect-map entries + 4 search-link entries removed), `lib/content/footerDefaults.ts` (2 links removed), `lib/content/resourcesDefaults.ts` (2 cards removed), `app/resources/regulatory-updates/page.tsx` (Email Format link removed).
+**Commit**: pending (Admin Security: protect internal tools from public access).
+**TypeScript**: clean.
+**Build**: clean (134 pages, 5 new `/admin/tools/**` routes as `ƒ Dynamic`, old public routes as `○ Static` returning 404).
 
 ---
 

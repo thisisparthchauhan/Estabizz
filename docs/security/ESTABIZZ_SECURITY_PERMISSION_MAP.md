@@ -117,7 +117,8 @@ The two seed accounts (`estabizz@gmail.com` as `super_admin`, `info@estabizz.com
 | `/api/recommend-services` | None | AI endpoint — no auth |
 | `/api/chat` | None | AI endpoint — no auth |
 | `/api/my-blogs/[id]` | Session cookie (user auth) | User-specific |
-| Internal pages (`/resources/content-rebuild-command`, `/resources/regulatory-update-email-template`, `/resources/service-page-content-framework`, `/proposal-template`) | `requireAdminPage` JWT guard | Redirect to `/login?redirect=<path>` on failure. `force-dynamic`. `robots: noindex`. |
+| `/admin/tools`, `/admin/tools/content-rebuild-command`, `/admin/tools/regulatory-update-email-template`, `/admin/tools/service-page-content-framework`, `/admin/tools/proposal-template` | `app/admin/layout.tsx` JWT guard (inherited) | Redirect to `/login?redirect=/admin` on failure. `force-dynamic` and `robots: noindex` inherited from admin layout. |
+| Old public paths (`/resources/content-rebuild-command`, `/resources/regulatory-update-email-template`, `/resources/service-page-content-framework`, `/proposal-template`) | `notFound()` | Return 404 to all visitors — pages moved to `/admin/tools/**`. |
 | All other public `/`…pages | None | Publicly accessible |
 
 ---

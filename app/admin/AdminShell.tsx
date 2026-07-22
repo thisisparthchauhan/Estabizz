@@ -162,6 +162,14 @@ function IconShield() {
   );
 }
 
+function IconTool() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+    </svg>
+  );
+}
+
 // ─── Nav config ───────────────────────────────────────────────────────────────
 
 interface NavItem {
@@ -190,6 +198,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Recycle Bin",    href: "/admin/recycle-bin",    icon: <IconTrash /> },
   { label: "Backups",        href: "/admin/backups",        icon: <IconArchive /> },
   { label: "Navigation",     href: "/admin/navigation",     icon: <IconLayout /> },
+  { label: "Internal Tools", href: "/admin/tools",           icon: <IconTool /> },
 ];
 
 // ─── Page title map ───────────────────────────────────────────────────────────
@@ -213,6 +222,7 @@ const PAGE_TITLES: Record<string, string> = {
   "/admin/recycle-bin":   "Recycle Bin",
   "/admin/backups":        "Backups",
   "/admin/navigation":     "Navigation",
+  "/admin/tools":          "Internal Tools",
 };
 
 function getPageTitle(pathname: string): string {
@@ -220,6 +230,7 @@ function getPageTitle(pathname: string): string {
   if (pathname.startsWith("/admin/blogs/edit")) return "Edit Blog";
   if (pathname.startsWith("/admin/content-pages")) return "Content Pages";
   if (pathname.startsWith("/admin/website")) return "Website Editor";
+  if (pathname.startsWith("/admin/tools")) return "Internal Tools";
   return "Admin";
 }
 

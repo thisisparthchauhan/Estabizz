@@ -92,8 +92,6 @@ export const FOOTER_DEFAULTS: FooterContent = {
       title: 'Knowledge & Resources',
       links: [
         { label: 'Regulatory Updates', href: '/resources/regulatory-updates' },
-        { label: 'Content Framework', href: '/resources/service-page-content-framework' },
-        { label: 'Proposal Templates', href: '/proposal-template' },
         { label: 'Case Highlights', href: '/' },
         { label: 'FAQs', href: '/resources/faqs' },
         { label: 'Guides & Insights', href: '/resources' },

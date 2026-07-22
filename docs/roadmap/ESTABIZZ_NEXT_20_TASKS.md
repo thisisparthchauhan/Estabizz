@@ -25,9 +25,9 @@
 
 | Field | Value |
 |-------|-------|
-| Objective | Add admin-only auth guard to four internal pages — completed. |
-| Resolution | Created `lib/admin/requireAdminPage.ts` (JWT verify + ADMIN_EMAIL_ALLOWLIST + MongoDB fallback, mirrors `app/admin/layout.tsx`). Applied to `app/resources/content-rebuild-command/page.tsx`, `app/resources/regulatory-update-email-template/page.tsx`, `app/resources/service-page-content-framework/page.tsx`, `app/proposal-template/page.tsx`. Each page: async, `force-dynamic`, `robots: noindex/nofollow`, `await requireAdminPage('<path>')` as first statement. Unauthenticated visitors redirected to `/login?redirect=<path>`; authenticated admins receive the page. Previous `a59f095` fix (branch `cms-admin-os-phase-1`) used `notFound()` — rejected because it hides pages from admins too. Auth-redirect approach chosen instead. TypeScript clean. |
-| Commit | pending (Security: protect internal resource pages with admin auth guard) |
+| Objective | Move four internal tooling pages to Admin OS and remove all public access — completed. |
+| Resolution | Pages moved to `/admin/tools/**` — protected by `app/admin/layout.tsx` JWT guard via layout inheritance. Old public routes (`/resources/content-rebuild-command`, `/resources/regulatory-update-email-template`, `/resources/service-page-content-framework`, `/proposal-template`) replaced with `notFound()`. All public navigation references removed (Navbar redirect map, Navbar search overlay, resources page cards, footer defaults, resourcesDefaults, regulatory-updates link). "Internal Tools" entry added to Admin OS sidebar (`AdminShell.tsx`). `app/admin/tools/page.tsx` index created with 4 tool cards. TypeScript clean. Build clean. |
+| Commits | `02d77f6` (interim auth-redirect guard), current commit (final architecture migration) |
 | QA | Manual |
 | Deploy required | Yes |
 

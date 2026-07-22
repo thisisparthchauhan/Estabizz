@@ -127,11 +127,12 @@
 
 | Field | Value |
 |-------|-------|
-| Module | Resources section |
-| Files | `app/resources/content-rebuild-command/`, `app/resources/regulatory-update-email-template/`, `app/resources/service-page-content-framework/`, `app/proposal-template/` |
+| Module | Resources section → Admin OS Internal Tools |
+| Files | `app/admin/tools/` (new), `app/resources/content-rebuild-command/`, `app/resources/regulatory-update-email-template/`, `app/resources/service-page-content-framework/`, `app/proposal-template/` |
 | Severity | 🟠 Medium → ✅ Resolved |
-| Resolution | Four internal tooling/template pages now require admin authentication. A new shared utility `lib/admin/requireAdminPage.ts` mirrors the JWT verification logic in `app/admin/layout.tsx`. Unauthenticated visitors are redirected to `/login?redirect=<path>`; authenticated admins receive the page unchanged. Each page also exports `dynamic = 'force-dynamic'` and `robots: { index: false, follow: false }`. The previous `a59f095` fix on branch `cms-admin-os-phase-1` used `notFound()` which returned 404 to all users including admins; this resolution instead uses auth-redirect to preserve admin utility. |
-| Commit | pending (Security: protect internal resource pages with admin auth guard) |
+| Resolution (initial, commit `02d77f6`) | Created `lib/admin/requireAdminPage.ts` and applied auth-redirect guard to four public pages. Superseded by architecture migration below. |
+| Resolution (final, this commit) | Pages moved to `/admin/tools/**` — now protected by `app/admin/layout.tsx` JWT guard via Next.js layout inheritance. Old public routes replaced with `notFound()`. All public navigation links (Navbar redirect map, Navbar search overlay, resources page cards, footer defaults, resourcesDefaults, regulatory-updates link) removed. "Internal Tools" section added to Admin OS sidebar. No duplicate auth code. `lib/admin/requireAdminPage.ts` retained for future use but no longer called by any page. |
+| Commit | pending (Admin Security: protect internal tools from public access) |
 
 ---
 

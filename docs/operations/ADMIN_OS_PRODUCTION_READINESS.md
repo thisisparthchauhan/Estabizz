@@ -1,7 +1,7 @@
 # Estabizz Admin OS — Production Readiness Reference
 
 > Created: Phase 5C (2026-07-02 IST) · Do not include credentials in this file.
-> Updated: 2026-07-23 — Phase 6D rate limiting (RL-003 resolved) + canonical host enforcement complete.
+> Updated: 2026-07-24 — Dark mode system complete (Phase 31 local commits). Public site + Admin OS fully themed.
 > No push or deployment was performed. This document is a readiness gate only.
 > Documentation structure correction: 2026-07-22 — proxy.ts classification corrected; file moved to docs/operations/.
 
@@ -27,8 +27,8 @@ This document records the results of the Phase 5C production readiness audit. It
 
 | Area | Status | Notes |
 |---|---|---|
-| Production build | PASS | 137 pages, no TypeScript errors, no fatal errors |
-| TypeScript | PASS | `npx tsc --noEmit` — clean |
+| Production build | PASS | 232 pages (post dark-mode batch), no TypeScript errors, no fatal errors |
+| TypeScript | PASS | `npx tsc --noEmit` — clean (verified post dark-mode) |
 | Environment variable checklist | READY | Names documented below; values confirmed in `.env.local` |
 | Secret handling | PASS | No secrets in tracked files; `.env.local` untracked |
 | Database readiness | PASS | 46 published pages, no duplicates, no QA users |

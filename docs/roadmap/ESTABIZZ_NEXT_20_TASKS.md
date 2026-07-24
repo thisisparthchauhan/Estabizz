@@ -1,6 +1,6 @@
 # Estabizz — Next 20 Development Tasks
 
-> Last updated: 2026-07-23 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
+> Last updated: 2026-07-24 · Branch: **feat/global-markets-v2** (local) · Functional baseline commit: **49f7c81** · Dark mode: **completed locally — Phase 31, 4 commits**
 > All tasks are locally scoped. Do not push/deploy without owner approval.
 > Roadmap sequence corrected 2026-07-22 — tasks reordered to prioritise security and content integrity before new features.
 
@@ -44,6 +44,18 @@
 | Commit | Security: add login and public AI rate limiting |
 | Agent | Claude Code |
 | Status | ✅ Complete — local only, not deployed |
+
+---
+
+### ~~Task 3C — Dark mode system~~ ✅ COMPLETED 2026-07-24
+
+| Field | Value |
+|-------|-------|
+| Outcome | Site-wide dark mode using `next-themes` v0.4.6. `ThemeProvider` + `ThemeToggle` (Light/Dark/System). CSS custom-property token system (17 semantic roles). Full coverage: Navbar, Footer, HeroSection, ServicePageLayout, Contact, Blog detail, EstabizzSelect, AdminShell, AdminDashboard, BlogEditor. Tailwind `darkMode: "class"`. SSR-safe (suppressHydrationWarning, mounted guard, disableTransitionOnChange). Browser integration (color-scheme, theme-color meta). Blog/article content overrides via globals.css for inline-styled elements. |
+| Files changed | `tailwind.config.js`, `app/globals.css`, `app/layout.tsx`, `components/theme/ThemeProvider.tsx` (new), `components/theme/ThemeToggle.tsx` (new), `components/layout/Navbar.tsx`, `components/layout/Footer.tsx`, `components/ui/EstabizzSelect.tsx`, `components/home/HeroSection.tsx`, `components/templates/ServicePageLayout.tsx`, `app/contact/ContactClient.tsx`, `app/blogs/[slug]/BlogDetailClient.tsx`, `app/admin/AdminShell.tsx`, `app/admin/AdminDashboardClient.tsx`, `app/admin/blogs/_components/BlogEditorClient.tsx` |
+| Build | 232 routes, `tsc --noEmit` clean, build clean |
+| Commits | 4 local commits (UI: theme system, UI: public dark mode, UI: Admin OS dark mode, Docs: dark mode) |
+| Status | ✅ Complete — local only, not pushed or deployed |
 
 ---
 

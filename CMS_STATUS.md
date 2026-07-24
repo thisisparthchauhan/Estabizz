@@ -1,7 +1,59 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-24 (IST) · Phase: **Global Markets V2** · Status: **completed locally** · Next: **CMS integration for country configs** · Last batch: **Global Markets: complete V2 redesign**
+> Last updated: 2026-07-24 (IST) · Phase: **Dark Mode** · Status: **completed locally** · Next: **CMS integration for country configs** · Last batch: **Site-wide dark mode system (next-themes, CSS tokens, full coverage)**
+
+---
+
+## 2026-07-24 — Dark Mode — Site-wide Theme System
+
+**Task**: Implement production-quality dark mode across the full public website and Admin OS (31-phase plan).
+
+**Architecture**:
+- **Library**: `next-themes` v0.4.6 — `ThemeProvider` with `attribute="class"`, `defaultTheme="system"`, `enableSystem`, `disableTransitionOnChange`
+- **Tailwind strategy**: `darkMode: "class"` in `tailwind.config.js`
+- **Token system**: 17 semantic CSS custom properties in `:root` (light) and `.dark` (dark) in `globals.css`
+- **Dark palette**: premium navy — `#06101f` (bg), `#0d1a2d` (surface), `#12223a` (elevated), `#f7f9fc` (foreground)
+- **Brand colour**: `#1677f2` unchanged in both themes
+- **SSR safety**: `suppressHydrationWarning` on `<html>`, mounted-state pattern in `ThemeToggle`
+- **Browser integration**: `color-scheme` CSS property, two `theme-color` meta tags (light + dark)
+- **Blog/article content**: dark overrides via `.dark .blog-content *` and `.dark .article-content *` in `globals.css` (handles inline-styled content)
+
+**New files**:
+- `components/theme/ThemeProvider.tsx` — thin wrapper re-exporting `next-themes` provider
+- `components/theme/ThemeToggle.tsx` — three-option control (Light / Dark / System) with two variants: `compact` pill group and `icon-only` cycling button; inline SVG icons, full accessibility (role, aria-pressed, focus-visible)
+
+**Components updated**:
+- `app/layout.tsx` — ThemeProvider wrap, `suppressHydrationWarning`, meta tags
+- `components/layout/Navbar.tsx` — full dark mode (nav, search, dropdowns, mega menu, mobile menu, ThemeToggle in desktop + mobile)
+- `components/layout/Footer.tsx` — `dark:bg-[#0a1e3a]` (footer already dark; subtle distinction)
+- `components/ui/EstabizzSelect.tsx` — dropdown trigger, list, options, error/hint states
+- `components/home/HeroSection.tsx` — badge, h1, paragraph, secondary button, service pills ticker
+- `components/templates/ServicePageLayout.tsx` — hero, breadcrumb, tags, CTA sidebar, TOC, main content area
+- `app/contact/ContactClient.tsx` — form cards, hero header, labels
+- `app/blogs/[slug]/BlogDetailClient.tsx` — FAQ, author card, share buttons, disclaimer, related articles
+- `app/admin/AdminShell.tsx` — sidebar, top bar, breadcrumb, ThemeToggle in header
+- `app/admin/AdminDashboardClient.tsx` — stat cards, quick action cards, recent blogs table
+- `app/admin/blogs/_components/BlogEditorClient.tsx` — inputs, editor card, action bars, save draft buttons
+
+**globals.css additions**:
+- Dark body gradient (subtle deep navy)
+- Dark `body::before` grid overlay (reduced opacity)
+- Browser autofill override for dark mode (eliminates blue flash)
+- `.dark .blog-content *` overrides (h2/h3, p, li, strong, a, blockquote, table, code, callouts)
+- `.dark .article-content *` overrides with `!important` (for ServicePageLayout inline styles)
+- Dark focus outline override
+- Dark premium utility class overrides
+
+**Build result**:
+- `npx tsc --noEmit` — ZERO errors
+- `npm run build` — 232 routes, compiled in 8.1s, all pages generated in 8.5s, no warnings
+
+**Commits (local, not pushed)**:
+- `UI: add site-wide theme system with next-themes`
+- `UI: apply dark mode across public website`
+- `UI: apply dark mode across Admin OS`
+- `Docs: record dark mode architecture and QA`
 
 ---
 

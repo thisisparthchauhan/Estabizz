@@ -1,6 +1,6 @@
 # Estabizz — Current Completion Status
 
-> Last verified: 2026-07-22 · Branch: **main** (confirmed) · Functional baseline commit: **49f7c81** · Documentation commit: **a60d5a7**
+> Last verified: 2026-07-24 · Branch: **feat/global-markets-v2** (local) · Functional baseline commit: **49f7c81** · Dark mode commit batch: **Phase 31 — 4 local commits**
 > Status key: ✅ Complete | 🟡 Implemented — QA pending | 🟠 Partially implemented | 🔴 Not started | ⚪ Not applicable / deferred
 > Contains: confirmed facts verified against the source tree on 2026-07-22.
 
@@ -38,6 +38,7 @@
 | Sitemap | ✅ Complete | 100% | Dynamic, includes CMS pages, blogs, regulatory updates |
 | Robots.txt | ✅ Complete | 100% | Correct disallow rules |
 | Canonical URLs | ✅ Complete | 100% | NEXT_PUBLIC_SITE_URL fallback to estabizz.com |
+| Dark Mode | ✅ Complete | 100% | next-themes, CSS token system, full coverage — public site + Admin OS |
 | Search (public) | 🔴 Not started | 0% | No search feature implemented |
 | Multilingual | 🔴 Not started | 0% | English only |
 | Client portal | 🔴 Not started | 0% | Major future feature |
@@ -98,6 +99,9 @@
 | CSP headers | 🔴 Not started | Not configured |
 | CSRF protection | 🟡 Partial | SameSite:lax only |
 | Audit logging (blogs/media) | 🔴 Not started | ContentAudit only covers homepage CMS |
+| Dark mode — theme system | ✅ Complete | next-themes v0.4.6, ThemeProvider/ThemeToggle, CSS token system |
+| Dark mode — public website | ✅ Complete | Navbar, Footer, Hero, ServicePageLayout, Contact, Blog detail |
+| Dark mode — Admin OS | ✅ Complete | AdminShell, Dashboard, BlogEditor |
 | Error monitoring | 🔴 Not started | No Sentry or equivalent |
 
 ---

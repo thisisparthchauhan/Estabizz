@@ -29,6 +29,8 @@
 | Blog categories | ✅ Complete | 100% | 9 categories hardcoded, category listing works |
 | Public regulatory updates | ✅ Complete | 100% | List + detail, published-only |
 | 19-5 landing pages | ✅ Complete | 100% | 19 static company registration pages |
+| Global Markets directory (/global) | ✅ Complete | 100% | Searchable/filterable country list, three-tier labels, India routes to / |
+| Global Markets country pages | ✅ Complete | 100% | Three-tier model (active/developing/planned), three page depths (full/standard/compact), correct noindex policy |
 | Contact / Get Started | ✅ Complete | 100% | Lead capture to MongoDB |
 | Login / Signup | ✅ Complete | 100% | JWT auth, user accounts |
 | Submit Blog | ✅ Complete | 100% | Public user blog submission |

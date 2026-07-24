@@ -51,6 +51,8 @@
 | 10 | Regulatory Updates (public) | `/resources/regulatory-updates`, `/resources/regulatory-updates/[slug]` | MongoDB RegulatoryUpdate | No | Complete |
 | 11 | Legal pages | `/legal/privacy-policy`, `/legal/refund-policy`, `/legal/terms-conditions` | Hardcoded | No | Content review needed |
 | 12 | 19-5 landing pages | `/19-5`, `/19-5/[slug]` | `lib/landing/` static data | No | Complete (static) |
+| 19 | Global Markets directory | `/global` | `lib/globalMarkets/countries.ts` static config | No (CMS migration planned) | Complete (V2) |
+| 20 | Global Markets country pages | `/global/[countrySlug]` | `lib/globalMarkets/countries.ts` | No (CMS migration planned) | Complete (three-tier V2) |
 | 13 | Regulatory article pages | `/regulatory/*` | Hardcoded | No | Legacy — 3 pages, partially maintained |
 | 14 | Contact / Get Started | `/contact`, `/get-started` | Lead capture → MongoDB | No | Complete |
 | 15 | Pricing | `/pricing` | Hardcoded | No | Content placeholder |

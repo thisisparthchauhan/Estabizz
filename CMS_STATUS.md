@@ -1,7 +1,53 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-23 (IST) · Phase: **6D — SEO Canonical Host + Public Rate Limiting** · Status: **completed locally** · Next: **Phase 6E — not started** · Last batch: **SEO: enforce canonical domain and remove old public indexing**
+> Last updated: 2026-07-24 (IST) · Phase: **Global Markets V2** · Status: **completed locally** · Next: **CMS integration for country configs** · Last batch: **Global Markets: complete V2 redesign**
+
+---
+
+## 2026-07-24 — Global Markets V2 — Complete Redesign
+
+**Task**: Full redesign of the Global Markets system (Phases 1–37 of specification).
+
+**Architecture**:
+- **Three-tier market model**: `active` | `developing` | `planned` (types in `lib/globalMarkets/types.ts`)
+- **Three page-depth levels**: `full` | `standard` | `compact` — renders different section sets
+- **Priority markets** with richer content architecture: UAE, Saudi Arabia, Singapore, UK, US, Canada, Australia, Hong Kong, Bangladesh, Nepal, Sri Lanka, Malaysia, Indonesia, Qatar, Bahrain, Oman, Mauritius, Kenya, South Africa
+- **India**: only `active`-tier market, routes to `/`
+- **SEO policy**: active = `index,follow` + sitemap; developing/planned = `noindex,follow` + excluded from sitemap
+- **Type file**: `lib/globalMarkets/types.ts` — `GlobalMarketConfig`, `GlobalSupportArea`, `GlobalProcessStep`, `GlobalRegulator`, `GlobalMarketFaq`
+
+**Components created**:
+- `components/globalMarkets/Icons.tsx` — inline SVG icon set (no external library dependency)
+- `components/globalMarkets/RegulatoryLandscape.tsx` — verified-regulator display with placeholder
+- `components/globalMarkets/CountryFAQ.tsx` — collapsible FAQ accordion
+- `app/global/GlobalMarketsClient.tsx` — searchable/filterable country directory
+- `app/global/page.tsx` — directory page with metadata + structured data
+
+**Pages updated**:
+- `app/global/[countrySlug]/CountryLandingClient.tsx` — full V2 three-tier layout
+- `app/global/[countrySlug]/page.tsx` — improved SEO, structured data, uppercase redirect
+
+**API / Model changes**:
+- `app/api/leads/route.ts` — server-side country slug resolution (client-supplied selectedCountry/region/tier NOT trusted); 8 new validated dropdown fields with allowlists; country validation gate for global-market-page source
+- `lib/models/Lead.ts` — 7 new fields: marketTier, businessActivity, expansionDirection, currentStage, supportRequired, preferredContactMethod, pageUrl
+
+**Navigation**:
+- `lib/content/navbarDefaults.ts` — added "Global Markets" link (`/global`); removed "19/5" placeholder from public nav
+
+**Sitemap**:
+- `app/sitemap.ts` — added `/global` directory; active-tier country pages only
+
+**Key design rules followed**:
+- No "Active planning 2026", "Office opening", "Now operating", "Licensed locally" language
+- Status notice shown on all developing/planned pages (cannot be hidden for appearance)
+- No fabricated regulator logos, offices, employees, statistics or approvals
+- India routes to `/`, never `/global/india`
+- All country pages noindex except India (homepage)
+- Source field server-controlled; client slug resolved server-side
+
+**TypeScript**: clean. **Build**: 249 pages, 0 errors.
+**Commit**: pending.
 
 ---
 

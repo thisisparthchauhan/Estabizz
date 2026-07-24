@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import type { RecycleBinItem, RecycleBinResult } from "@/lib/content/recycleBinTypes";
+import { EstabizzSelect } from "@/components/ui/EstabizzSelect";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -434,14 +435,18 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                 {/* Type filter */}
                 <div className="min-w-[140px]">
                   <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block">Item Type</label>
-                  <select value={typeFilter} onChange={e => setTypeFilter(e.target.value)}
-                    className="w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2 text-[12px] text-[#475569] focus:border-[#1677f2] focus:outline-none">
-                    <option value="all">All Types</option>
-                    <option value="media">Media</option>
-                    <option value="content">Website Content</option>
-                    <option value="regulatory">Regulatory Updates</option>
-                    <option value="public_content_page">Content Pages</option>
-                  </select>
+                  <EstabizzSelect
+                    variant="admin"
+                    value={typeFilter}
+                    onValueChange={(v) => setTypeFilter(v)}
+                    options={[
+                      { value: "all", label: "All Types" },
+                      { value: "media", label: "Media" },
+                      { value: "content", label: "Website Content" },
+                      { value: "regulatory", label: "Regulatory Updates" },
+                      { value: "public_content_page", label: "Content Pages" },
+                    ]}
+                  />
                 </div>
 
                 {/* Deleted by */}

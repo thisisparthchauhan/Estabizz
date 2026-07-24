@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { EstabizzSelect } from "@/components/ui/EstabizzSelect";
 import type { AdminContext } from "@/lib/admin/requirePermission";
 import {
   REGULATOR_OPTIONS, CATEGORY_OPTIONS, IMPACT_LEVEL_OPTIONS,
@@ -522,18 +523,22 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
 
                   <div className="grid grid-cols-2 gap-3">
                     <Field label="Regulator" required>
-                      <select value={form.regulator} disabled={!canManage}
-                        onChange={(e) => setForm({ ...form, regulator: e.target.value as RegulatorOption })}
-                        className={inputCls}>
-                        {REGULATOR_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
-                      </select>
+                      <EstabizzSelect
+                        variant="admin"
+                        value={form.regulator}
+                        disabled={!canManage}
+                        onValueChange={(v) => setForm({ ...form, regulator: v as RegulatorOption })}
+                        options={REGULATOR_OPTIONS.map((o) => ({ value: o, label: o }))}
+                      />
                     </Field>
                     <Field label="Category" required>
-                      <select value={form.category} disabled={!canManage}
-                        onChange={(e) => setForm({ ...form, category: e.target.value as CategoryOption })}
-                        className={inputCls}>
-                        {CATEGORY_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
-                      </select>
+                      <EstabizzSelect
+                        variant="admin"
+                        value={form.category}
+                        disabled={!canManage}
+                        onValueChange={(v) => setForm({ ...form, category: v as CategoryOption })}
+                        options={CATEGORY_OPTIONS.map((o) => ({ value: o, label: o }))}
+                      />
                     </Field>
                   </div>
 
@@ -551,11 +556,13 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
 
                   <div className="grid grid-cols-2 gap-3">
                     <Field label="Impact Level">
-                      <select value={form.impactLevel} disabled={!canManage}
-                        onChange={(e) => setForm({ ...form, impactLevel: e.target.value as ImpactLevel })}
-                        className={inputCls}>
-                        {IMPACT_LEVEL_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
-                      </select>
+                      <EstabizzSelect
+                        variant="admin"
+                        value={form.impactLevel}
+                        disabled={!canManage}
+                        onValueChange={(v) => setForm({ ...form, impactLevel: v as ImpactLevel })}
+                        options={IMPACT_LEVEL_OPTIONS.map((o) => ({ value: o, label: o }))}
+                      />
                     </Field>
                     <Field label="Applicable To" hint="Comma-separated">
                       <input value={form.applicableTo} disabled={!canManage}

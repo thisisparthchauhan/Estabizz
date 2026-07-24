@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { EstabizzSelect } from "@/components/ui/EstabizzSelect";
 
 const inputCls =
     "w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all";
@@ -68,15 +69,17 @@ export default function GetStartedForm({ services }: { services: string[] }) {
                     <input type="text" name="company" value={form.company} onChange={change} className={inputCls} />
                 </label>
             </div>
-            <label className="block">
+            <div className="block">
                 <span className="block text-sm font-semibold text-[#0a1628] mb-2">Service Required</span>
-                <select name="service" value={form.service} onChange={change} className={`${inputCls} bg-white`}>
-                    <option value="">Select a service...</option>
-                    {services.map((service) => (
-                        <option key={service} value={service}>{service}</option>
-                    ))}
-                </select>
-            </label>
+                <EstabizzSelect
+                    name="service"
+                    variant="public"
+                    value={form.service}
+                    onValueChange={(v) => setForm({ ...form, service: v })}
+                    placeholder="Select a service..."
+                    options={services.map((s) => ({ value: s, label: s }))}
+                />
+            </div>
             <label className="block">
                 <span className="block text-sm font-semibold text-[#0a1628] mb-2">Message</span>
                 <textarea name="message" value={form.message} onChange={change} rows={5} className={`${inputCls} resize-none`} />

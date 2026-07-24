@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
+import { EstabizzSelect } from "@/components/ui/EstabizzSelect";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -526,18 +527,19 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                 {/* Role */}
                 <div>
                   <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Role</label>
-                  <select
-                    value={editRole}
-                    onChange={e => setEditRole(e.target.value as AdminRole)}
-                    className="mt-1 w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#0a1628] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
-                  >
-                    {CREATABLE_ROLES.map(r => (
-                      <option key={r} value={r}>{ROLE_LABELS[r]}</option>
-                    ))}
-                    {(["admin", "editor", "reviewer"] as AdminRole[]).includes(editUser.role) && (
-                      <option value={editUser.role}>{ROLE_LABELS[editUser.role]} (legacy)</option>
-                    )}
-                  </select>
+                  <div className="mt-1">
+                    <EstabizzSelect
+                      variant="admin"
+                      value={editRole}
+                      onValueChange={(v) => setEditRole(v as AdminRole)}
+                      options={[
+                        ...CREATABLE_ROLES.map((r) => ({ value: r, label: ROLE_LABELS[r] })),
+                        ...(["admin", "editor", "reviewer"] as AdminRole[]).includes(editUser.role)
+                          ? [{ value: editUser.role, label: `${ROLE_LABELS[editUser.role]} (legacy)` }]
+                          : [],
+                      ]}
+                    />
+                  </div>
                   <div className="mt-1 text-[11px] text-[#64748b] italic">
                     {ROLE_DESCRIPTIONS[editRole]}
                   </div>
@@ -551,15 +553,18 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                 {/* Status */}
                 <div>
                   <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Status</label>
-                  <select
-                    value={editStatus}
-                    onChange={e => setEditStatus(e.target.value as AdminStatus)}
-                    className="mt-1 w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#0a1628] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
-                  >
-                    <option value="active">Active</option>
-                    <option value="suspended">Suspended</option>
-                    <option value="inactive">Inactive</option>
-                  </select>
+                  <div className="mt-1">
+                    <EstabizzSelect
+                      variant="admin"
+                      value={editStatus}
+                      onValueChange={(v) => setEditStatus(v as AdminStatus)}
+                      options={[
+                        { value: "active", label: "Active" },
+                        { value: "suspended", label: "Suspended" },
+                        { value: "inactive", label: "Inactive" },
+                      ]}
+                    />
+                  </div>
                 </div>
 
                 {editError && (
@@ -742,15 +747,14 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
               {/* Role */}
               <div>
                 <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Role</label>
-                <select
-                  value={addRole}
-                  onChange={e => setAddRole(e.target.value as AdminRole)}
-                  className="mt-1 w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#0a1628] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
-                >
-                  {CREATABLE_ROLES.map(r => (
-                    <option key={r} value={r}>{ROLE_LABELS[r]}</option>
-                  ))}
-                </select>
+                <div className="mt-1">
+                  <EstabizzSelect
+                    variant="admin"
+                    value={addRole}
+                    onValueChange={(v) => setAddRole(v as AdminRole)}
+                    options={CREATABLE_ROLES.map((r) => ({ value: r, label: ROLE_LABELS[r] }))}
+                  />
+                </div>
                 <div className="mt-1 text-[11px] text-[#64748b] italic">{ROLE_DESCRIPTIONS[addRole]}</div>
               </div>
 
@@ -890,27 +894,31 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                 )}
               </div>
 
-              <select
-                value={roleFilter}
-                onChange={e => setRoleFilter(e.target.value as AdminRole | "all")}
-                className="rounded-xl border border-[#dbe7f3] bg-white px-3 py-2 text-[12px] text-[#475569] focus:border-[#1677f2] focus:outline-none"
-              >
-                <option value="all">All Roles</option>
-                {(["super_admin", "website_editor", "content_writer", "compliance_reviewer", "seo_manager", "admin_viewer", "admin", "editor", "reviewer"] as AdminRole[]).map(r => (
-                  <option key={r} value={r}>{ROLE_LABELS[r]}</option>
-                ))}
-              </select>
+              <div className="min-w-[160px]">
+                <EstabizzSelect
+                  variant="admin"
+                  value={roleFilter}
+                  onValueChange={(v) => setRoleFilter(v as AdminRole | "all")}
+                  options={[
+                    { value: "all", label: "All Roles" },
+                    ...(["super_admin", "website_editor", "content_writer", "compliance_reviewer", "seo_manager", "admin_viewer", "admin", "editor", "reviewer"] as AdminRole[]).map((r) => ({ value: r, label: ROLE_LABELS[r] })),
+                  ]}
+                />
+              </div>
 
-              <select
-                value={statusFilter}
-                onChange={e => setStatusFilter(e.target.value as AdminStatus | "all")}
-                className="rounded-xl border border-[#dbe7f3] bg-white px-3 py-2 text-[12px] text-[#475569] focus:border-[#1677f2] focus:outline-none"
-              >
-                <option value="all">All Statuses</option>
-                <option value="active">Active</option>
-                <option value="suspended">Suspended</option>
-                <option value="inactive">Inactive</option>
-              </select>
+              <div className="min-w-[140px]">
+                <EstabizzSelect
+                  variant="admin"
+                  value={statusFilter}
+                  onValueChange={(v) => setStatusFilter(v as AdminStatus | "all")}
+                  options={[
+                    { value: "all", label: "All Statuses" },
+                    { value: "active", label: "Active" },
+                    { value: "suspended", label: "Suspended" },
+                    { value: "inactive", label: "Inactive" },
+                  ]}
+                />
+              </div>
             </div>
 
             {/* Users table */}

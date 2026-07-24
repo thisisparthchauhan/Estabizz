@@ -17,6 +17,7 @@ import React, {
 } from "react";
 import Link from "next/link";
 import type { Blog, BlogCategory, BlogStatus } from "@/lib/blog/types";
+import { EstabizzSelect } from "@/components/ui/EstabizzSelect";
 import { blogCategories } from "@/lib/blog/categories";
 import { CloudinaryUploader } from "./CloudinaryUploader";
 import RichContentEditor, { type ImageValidationState } from "./RichContentEditor";
@@ -53,6 +54,8 @@ const KNOWN_AUTHORS = [
     bio: "Senior editorial team member at Estabizz Fintech.",
   },
 ];
+
+const CUSTOM_AUTHOR_ID = "author_custom";
 
 const STATUS_OPTIONS: { value: BlogStatus; label: string }[] = [
   { value: "draft",          label: "Draft" },
@@ -92,6 +95,7 @@ interface BlogFormData {
   metaDescription: string;
   canonicalUrl: string;
   authorId: string;
+  customAuthorName: string;
   tags: string;
   faqs: FaqEntry[];
   ctaTitle: string;
@@ -142,6 +146,7 @@ function buildInitial(blog?: Blog | null): BlogFormData {
       metaDescription: "",
       canonicalUrl: "",
       authorId: KNOWN_AUTHORS[0].id,
+      customAuthorName: "",
       tags: "",
       faqs: [],
       ctaTitle: DEFAULT_CTA_TITLE,
@@ -165,7 +170,11 @@ function buildInitial(blog?: Blog | null): BlogFormData {
     metaDescription: blog.metaDescription,
     canonicalUrl: "",
     authorId:
-      KNOWN_AUTHORS.find((a) => a.id === blog.author.id)?.id ?? KNOWN_AUTHORS[0].id,
+      KNOWN_AUTHORS.find((a) => a.id === blog.author.id)?.id ?? CUSTOM_AUTHOR_ID,
+    customAuthorName:
+      KNOWN_AUTHORS.find((a) => a.id === blog.author.id)
+        ? ""
+        : `${blog.author.firstName} ${blog.author.lastName}`.trim(),
     tags: blog.tags.join(", "),
     faqs: blog.faqs.map((f) => ({ question: f.question, answer: f.answer, order: f.order })),
     ctaTitle: DEFAULT_CTA_TITLE,
@@ -531,6 +540,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
         metaDescription:     form.metaDescription,
         tags:                form.tags,
         authorId:            form.authorId,
+        customAuthorName:    form.customAuthorName,
         faqs:                form.faqs,
         ctaBody:             form.ctaBody,
         disclaimer:          form.disclaimer,
@@ -649,29 +659,24 @@ export default function BlogEditorClient({ blog, categories }: Props) {
             {/* Right: status + category */}
             <div className="space-y-5">
               <Field label="Status">
-                <select
+                <EstabizzSelect
+                  variant="admin"
                   value={form.status}
-                  onChange={(e) => set("status", e.target.value as BlogStatus)}
-                  className={inputCls}
-                >
-                  {STATUS_OPTIONS.map((s) => (
-                    <option key={s.value} value={s.value}>{s.label}</option>
-                  ))}
-                </select>
+                  onValueChange={(v) => set("status", v as BlogStatus)}
+                  options={STATUS_OPTIONS.map((s) => ({ value: s.value, label: s.label }))}
+                />
               </Field>
               <Field label="Category" required error={errors.categoryId}>
-                <select
+                <EstabizzSelect
+                  variant="admin"
                   value={form.categoryId}
-                  onChange={(e) => set("categoryId", e.target.value)}
-                  className={errors.categoryId ? errorInputCls : inputCls}
-                >
-                  <option value="">— Select —</option>
-                  {cats.map((cat) => (
-                    <option key={cat.id} value={cat.id}>
-                      {cat.name}
-                    </option>
-                  ))}
-                </select>
+                  onValueChange={(v) => set("categoryId", v)}
+                  placeholder="— Select —"
+                  error={errors.categoryId}
+                  options={[
+                    ...cats.map((cat) => ({ value: cat.id, label: cat.name })),
+                  ]}
+                />
               </Field>
             </div>
           </div>
@@ -891,15 +896,24 @@ export default function BlogEditorClient({ blog, categories }: Props) {
         <SectionCard number={6} title="Author &amp; Tags">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <Field label="Author">
-              <select
+              <EstabizzSelect
+                variant="admin"
                 value={form.authorId}
-                onChange={(e) => set("authorId", e.target.value)}
-                className={inputCls}
-              >
-                {KNOWN_AUTHORS.map((a) => (
-                  <option key={a.id} value={a.id}>{a.display}</option>
-                ))}
-              </select>
+                onValueChange={(v) => set("authorId", v)}
+                options={[
+                  ...KNOWN_AUTHORS.map((a) => ({ value: a.id, label: a.display })),
+                  { value: CUSTOM_AUTHOR_ID, label: "Custom…" },
+                ]}
+              />
+              {form.authorId === CUSTOM_AUTHOR_ID && (
+                <input
+                  type="text"
+                  value={form.customAuthorName ?? ""}
+                  onChange={(e) => set("customAuthorName", e.target.value)}
+                  placeholder="Enter author name (e.g. Parth Chauhan)"
+                  className={`${inputCls} mt-2`}
+                />
+              )}
             </Field>
             <Field label="Tags" hint="Comma-separated. e.g. NBFC, RBI, Fintech">
               <input

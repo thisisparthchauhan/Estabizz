@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { NAVBAR_DEFAULTS, type NavbarContent } from "@/lib/content/navbarDefaults";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 interface AuthUser {
     id: string;
@@ -289,6 +290,12 @@ const menus: Record<string, MegaMenu> = {
     },
 };
 
+function countryHref(name: string): string {
+    if (name === 'India') return '/';
+    const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    return `/global/${slug}`;
+}
+
 const globalMarketRegions = [
     {
         region: "India & South Asia",
@@ -323,7 +330,15 @@ const globalMarketRegions = [
 export default function Navbar({ content }: { content?: Partial<NavbarContent> }) {
     // Editable navbar content (quick links + CTA) from the CMS, with fallback.
     const nav: NavbarContent = { ...NAVBAR_DEFAULTS, ...content };
-    const quickLinks = nav.quickLinks?.length ? nav.quickLinks : NAVBAR_DEFAULTS.quickLinks;
+    const baseLinks = nav.quickLinks?.length ? nav.quickLinks : NAVBAR_DEFAULTS.quickLinks;
+    // Always inject Jobs after Insights, regardless of CMS state
+    const quickLinks = (() => {
+        if (baseLinks.some(l => l.href === '/jobs')) return baseLinks;
+        const idx = baseLinks.findIndex(l => l.href === '/blogs');
+        const result = [...baseLinks];
+        result.splice(idx >= 0 ? idx + 1 : 1, 0, { label: 'Jobs', href: '/jobs', icon: '💼', newTab: false });
+        return result;
+    })();
     const router = useRouter();
     const [scrolled, setScrolled] = useState(false);
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -470,70 +485,6 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
     const keepOpen = () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
 
     const currentMenu = activeMenu ? menus[activeMenu] : null;
-    const SearchBox = ({ mobile = false }: { mobile?: boolean }) => (
-        <div ref={mobile ? undefined : searchRef} className={`relative ${mobile ? "w-full" : "w-[200px] 2xl:w-[240px]"}`}>
-            <label className="sr-only" htmlFor={mobile ? "mobile-page-search" : "desktop-page-search"}>Search pages</label>
-            <div className="relative">
-                <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" />
-                </svg>
-                <input
-                    id={mobile ? "mobile-page-search" : "desktop-page-search"}
-                    type="search"
-                    value={searchQuery}
-                    onChange={(event) => {
-                        setSearchQuery(event.target.value);
-                        setSearchOpen(true);
-                    }}
-                    onFocus={() => {
-                        setActiveMenu(null);
-                        setSearchOpen(true);
-                    }}
-                    onKeyDown={handleSearchKeyDown}
-                    placeholder="Search pages..."
-                    className={`w-full rounded-lg border border-[#dbe7f3] bg-white pl-9 pr-3 text-[13.5px] font-medium text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10 ${mobile ? "h-11" : "h-10"}`}
-                    aria-expanded={searchOpen}
-                    aria-controls={mobile ? "mobile-page-search-results" : "desktop-page-search-results"}
-                />
-            </div>
-
-            {searchOpen && (
-                <div
-                    id={mobile ? "mobile-page-search-results" : "desktop-page-search-results"}
-                    className={`${mobile ? "mt-2 w-full" : "absolute right-0 top-[46px] w-[360px]"} overflow-hidden rounded-xl border border-[#dbe7f3] bg-white shadow-[0_18px_45px_rgba(15,23,42,0.14)]`}
-                >
-                    <div className="border-b border-gray-100 px-4 py-2 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">
-                        {searchQuery.trim() ? "Search Results" : "Popular Pages"}
-                    </div>
-                    {searchResults.length > 0 ? (
-                        <div className="max-h-[330px] overflow-y-auto py-1">
-                            {searchResults.map((item) => (
-                                <Link
-                                    key={`${item.label}-${item.href}`}
-                                    href={item.href}
-                                    onClick={() => {
-                                        closeSearch();
-                                        setMobileOpen(false);
-                                    }}
-                                    className="flex items-start justify-between gap-4 px-4 py-3 transition-colors hover:bg-[#f5fbff]"
-                                >
-                                    <span>
-                                        <span className="block text-[13.5px] font-bold text-[#0a1628]">{item.label}</span>
-                                        <span className="mt-0.5 block text-[11.5px] font-medium text-[#64748b]">{item.group}</span>
-                                    </span>
-                                    <span className="mt-0.5 shrink-0 text-[12px] font-bold text-[#1677f2]">Open</span>
-                                </Link>
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="px-4 py-5 text-[13px] font-medium text-[#64748b]">
-                            No page found. Try RBI, IFSCA, NBFC, payment, insurance or SEBI.
-                        </div>
-                    )}
-                </div>
-            )}
-        </div>
-    );
 
     const CountrySelector = ({ compact = false, selectorRef }: { compact?: boolean; selectorRef: React.MutableRefObject<HTMLDivElement | null> }) => (
         <div ref={(node) => { selectorRef.current = node; }} className="relative">
@@ -544,7 +495,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                     setSearchOpen(false);
                     setCountryOpen((open) => !open);
                 }}
-                className={`${compact ? "h-10 px-3" : "h-10 px-4"} inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white text-[13px] font-black text-[#0a1628] shadow-sm transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2]`}
+                className={`${compact ? "h-10 px-3" : "h-10 px-4"} inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-[13px] font-black text-[#0a1628] dark:text-[#f7f9fc] shadow-sm transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]`}
                 aria-expanded={countryOpen}
                 aria-label="Open country and global market selector"
             >
@@ -558,8 +509,8 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
             </button>
 
             {countryOpen && (
-                <div className={`${compact ? "right-[-54px] sm:right-0" : "right-0"} absolute top-[48px] w-[min(92vw,720px)] overflow-hidden rounded-[26px] border border-[#dbe7f3] bg-white shadow-[0_30px_90px_rgba(0,60,110,0.18)]`}>
-                    <div className="relative overflow-hidden border-b border-blue-100 bg-gradient-to-br from-[#071426] via-[#0a2947] to-[#006da8] p-5 text-white">
+                <div className={`${compact ? "right-[-54px] sm:right-0" : "right-0"} absolute top-[48px] w-[min(92vw,720px)] overflow-hidden rounded-[26px] border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_30px_90px_rgba(0,60,110,0.18)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.50)]`}>
+                    <div className="relative overflow-hidden border-b border-blue-100 dark:border-[#223550] bg-gradient-to-br from-[#071426] via-[#0a2947] to-[#006da8] p-5 text-white">
                         <div className="absolute right-[-40px] top-[-60px] h-40 w-40 rounded-full bg-[#1677f2]/25 blur-3xl" />
                         <div className="relative flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                             <div>
@@ -581,15 +532,15 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                     <div className="max-h-[470px] overflow-y-auto p-5">
                         <div className="grid gap-4 md:grid-cols-2">
                             {globalMarketRegions.map((group) => (
-                                <div key={group.region} className="rounded-2xl border border-blue-100 bg-[#f8fbff] p-4">
+                                <div key={group.region} className="rounded-2xl border border-blue-100 dark:border-[#223550] bg-[#f8fbff] dark:bg-[#12223a] p-4">
                                     <h3 className="text-[12px] font-black uppercase tracking-[0.16em] text-[#1677f2]">{group.region}</h3>
                                     <div className="mt-3 flex flex-wrap gap-2">
                                         {group.countries.map((country) => (
                                             <Link
                                                 key={country}
-                                                href="/contact"
+                                                href={countryHref(country)}
                                                 onClick={() => setCountryOpen(false)}
-                                                className="rounded-full border border-white bg-white px-3 py-1.5 text-[11.5px] font-bold text-[#334155] shadow-sm transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+                                                className="rounded-full border border-white dark:border-[#2d4a6b] bg-white dark:bg-[#0d1a2d] px-3 py-1.5 text-[11.5px] font-bold text-[#334155] dark:text-[#a9b6c9] shadow-sm transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
                                             >
                                                 {country}
                                             </Link>
@@ -598,7 +549,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                 </div>
                             ))}
                         </div>
-                        <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-[12px] font-semibold leading-relaxed text-[#7a5200]">
+                        <div className="mt-4 rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 px-4 py-3 text-[12px] font-semibold leading-relaxed text-[#7a5200] dark:text-amber-200">
                             Country-specific regulatory requirements may change from time to time. Estabizz reviews applicability, eligibility and documentation before any filing or market-entry action.
                         </div>
                     </div>
@@ -609,7 +560,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
 
     return (
         <>
-            <nav className={`fixed top-0 w-full z-[1000] border-b border-[#dbe7f3] bg-white transition-all duration-300 ${scrolled ? "shadow-[0_14px_42px_rgba(15,23,42,0.10)]" : "shadow-[0_6px_22px_rgba(15,23,42,0.06)]"}`} style={{ height: "64px" }}>
+            <nav className={`fixed top-0 w-full z-[1000] border-b border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0a1628] transition-all duration-300 ${scrolled ? "shadow-[0_14px_42px_rgba(15,23,42,0.10)] dark:shadow-[0_14px_42px_rgba(0,0,0,0.35)]" : "shadow-[0_6px_22px_rgba(15,23,42,0.06)] dark:shadow-[0_6px_22px_rgba(0,0,0,0.25)]"}`} style={{ height: "64px" }}>
                 <div className="max-w-[1480px] mx-auto px-5 2xl:px-6 h-full flex items-center justify-between">
 
                     {/* Logo */}
@@ -621,7 +572,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                     <div className="hidden xl:flex items-center gap-0.5 2xl:gap-1">
                         {Object.keys(menus).map((item) => (
                             <div key={item} onMouseEnter={() => openMenu(item)} onMouseLeave={closeMenu}
-                                className={`relative cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors ${activeMenu === item ? "text-[#1677f2]" : "text-[#334155] hover:text-[#1677f2]"}`}>
+                                className={`relative cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors ${activeMenu === item ? "text-[#1677f2]" : "text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"}`}>
                                 {item} <svg className={`w-3 h-3 transition-transform ${activeMenu === item ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </div>
                         ))}
@@ -632,7 +583,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     href={link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#1677f2] transition-colors cursor-pointer"
+                                    className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors cursor-pointer"
                                 >
                                     {link.label}
                                 </a>
@@ -640,7 +591,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                 <Link
                                     key={link.label}
                                     href={link.href}
-                                    className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] hover:text-[#1677f2] transition-colors"
+                                    className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
                                 >
                                     {link.label}
                                 </Link>
@@ -651,7 +602,49 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                     {/* Right */}
                     <div className="hidden xl:flex items-center gap-2 2xl:gap-3">
                         <div className="hidden min-[1440px]:block">
-                            <SearchBox />
+                            {/* Desktop search — inlined to avoid remount-on-rerender focus bug */}
+                            <div ref={searchRef} className="relative w-[200px] 2xl:w-[240px]">
+                                <label className="sr-only" htmlFor="desktop-page-search">Search pages</label>
+                                <div className="relative">
+                                    <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" />
+                                    </svg>
+                                    <input
+                                        id="desktop-page-search"
+                                        type="search"
+                                        value={searchQuery}
+                                        onChange={(event) => { setSearchQuery(event.target.value); setSearchOpen(true); }}
+                                        onFocus={() => { setActiveMenu(null); setSearchOpen(true); }}
+                                        onKeyDown={handleSearchKeyDown}
+                                        placeholder="Search pages..."
+                                        className="w-full rounded-lg border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] pl-9 pr-3 text-[13.5px] font-medium text-[#0a1628] dark:text-[#f7f9fc] outline-none transition-all placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10 h-10"
+                                        aria-expanded={searchOpen}
+                                        aria-controls="desktop-page-search-results"
+                                    />
+                                </div>
+                                {searchOpen && (
+                                    <div id="desktop-page-search-results" className="absolute right-0 top-[46px] w-[360px] overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_18px_45px_rgba(15,23,42,0.14)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.40)]">
+                                        <div className="border-b border-gray-100 dark:border-[#223550] px-4 py-2 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a9b6c9]">
+                                            {searchQuery.trim() ? "Search Results" : "Popular Pages"}
+                                        </div>
+                                        {searchResults.length > 0 ? (
+                                            <div className="max-h-[330px] overflow-y-auto py-1">
+                                                {searchResults.map((item) => (
+                                                    <Link key={`${item.label}-${item.href}`} href={item.href} onClick={() => { closeSearch(); setMobileOpen(false); }} className="flex items-start justify-between gap-4 px-4 py-3 transition-colors hover:bg-[#f5fbff] dark:hover:bg-[#12223a]">
+                                                        <span>
+                                                            <span className="block text-[13.5px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">{item.label}</span>
+                                                            <span className="mt-0.5 block text-[11.5px] font-medium text-[#64748b] dark:text-[#a9b6c9]">{item.group}</span>
+                                                        </span>
+                                                        <span className="mt-0.5 shrink-0 text-[12px] font-bold text-[#1677f2]">Open</span>
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <div className="px-4 py-5 text-[13px] font-medium text-[#64748b] dark:text-[#a9b6c9]">No page found. Try RBI, IFSCA, NBFC, payment, insurance or SEBI.</div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                         {/* Auth: logged-in user OR Login link */}
@@ -660,7 +653,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                 <button
                                     type="button"
                                     onClick={() => setUserMenuOpen((o) => !o)}
-                                    className="flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-3 py-2 text-[13.5px] font-semibold text-[#0a1628] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-all shadow-sm"
+                                    className="flex items-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2 text-[13.5px] font-semibold text-[#0a1628] dark:text-[#f7f9fc] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-all shadow-sm"
                                 >
                                     <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0077B6] text-[11px] font-black text-white uppercase">
                                         {authUser.firstName[0]}{authUser.lastName?.[0] ?? ""}
@@ -671,11 +664,11 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     </svg>
                                 </button>
                                 {userMenuOpen && (
-                                    <div className="absolute right-0 top-[48px] w-56 rounded-xl border border-[#dbe7f3] bg-white shadow-[0_18px_45px_rgba(15,23,42,0.14)] py-1 z-[1100]">
+                                    <div className="absolute right-0 top-[48px] w-56 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_18px_45px_rgba(15,23,42,0.14)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.40)] py-1 z-[1100]">
                                         {/* User info header */}
-                                        <div className="px-4 py-3 border-b border-gray-100">
-                                            <p className="text-[13px] font-bold text-[#0a1628]">{authUser.firstName} {authUser.lastName}</p>
-                                            <p className="text-[11px] text-[#64748b] truncate">{authUser.email}</p>
+                                        <div className="px-4 py-3 border-b border-gray-100 dark:border-[#223550]">
+                                            <p className="text-[13px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">{authUser.firstName} {authUser.lastName}</p>
+                                            <p className="text-[11px] text-[#64748b] dark:text-[#a9b6c9] truncate">{authUser.email}</p>
                                             {authUser.isAdmin && (
                                                 <span className="mt-1 inline-block rounded-full bg-[#1677f2]/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#1677f2]">
                                                     Admin Access
@@ -685,7 +678,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
 
                                         {/* Admin quick links */}
                                         {authUser.isAdmin && (
-                                            <div className="border-b border-gray-100 py-1">
+                                            <div className="border-b border-gray-100 dark:border-[#223550] py-1">
                                                 {[
                                                     { label: "Dashboard",       href: "/admin" },
                                                     { label: "New Blog",        href: "/admin/blogs/new" },
@@ -696,7 +689,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                         key={item.href}
                                                         href={item.href}
                                                         onClick={() => setUserMenuOpen(false)}
-                                                        className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] hover:bg-[#f5fbff] hover:text-[#1677f2] transition-colors"
+                                                        className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f5fbff] dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
                                                     >
                                                         {item.label}
                                                     </Link>
@@ -705,18 +698,18 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                         )}
 
                                         {/* My submissions (all logged-in users) */}
-                                        <div className="border-b border-gray-100 py-1">
+                                        <div className="border-b border-gray-100 dark:border-[#223550] py-1">
                                             <Link
                                                 href="/my-blogs"
                                                 onClick={() => setUserMenuOpen(false)}
-                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] hover:bg-[#f5fbff] hover:text-[#1677f2] transition-colors"
+                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f5fbff] dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
                                             >
                                                 My Submissions
                                             </Link>
                                             <Link
                                                 href="/submit-blog"
                                                 onClick={() => setUserMenuOpen(false)}
-                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] hover:bg-[#f5fbff] hover:text-[#1677f2] transition-colors"
+                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f5fbff] dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
                                             >
                                                 Submit an Article
                                             </Link>
@@ -736,15 +729,18 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                 )}
                             </div>
                         ) : (
-                            <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] hover:text-[#1677f2] transition-colors px-3 py-2">
+                            <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors px-3 py-2">
                                 Login
                             </Link>
                         )}
 
+                        <ThemeToggle variant="icon-only" />
                         <CountrySelector selectorRef={desktopCountryRef} />
-                        <Link href={nav.ctaHref} className="whitespace-nowrap text-[13px] 2xl:text-[13.5px] font-bold bg-[#1677f2] text-white rounded-xl px-4 2xl:px-6 py-2.5 hover:-translate-y-0.5 hover:bg-[#0866d9] transition-all shadow-[0_12px_28px_rgba(22,119,242,0.28)]">
-                            {nav.ctaLabel}
-                        </Link>
+                        {!authUser && (
+                            <Link href={nav.ctaHref} className="whitespace-nowrap text-[13px] 2xl:text-[13.5px] font-bold bg-[#1677f2] text-white rounded-xl px-4 2xl:px-6 py-2.5 hover:-translate-y-0.5 hover:bg-[#0866d9] transition-all shadow-[0_12px_28px_rgba(22,119,242,0.28)]">
+                                {nav.ctaLabel}
+                            </Link>
+                        )}
                     </div>
 
                     <div className="xl:hidden flex items-center gap-2">
@@ -761,20 +757,20 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
             {/* Mega Menu Dropdown */}
             {activeMenu && currentMenu && (
                 <div onMouseEnter={keepOpen} onMouseLeave={closeMenu}
-                    className="fixed left-0 top-[64px] z-[999] w-full border-b border-[#dbe7f3] bg-white shadow-[0_30px_90px_rgba(15,23,42,0.18)] animate-[fadeIn_0.15s_ease]">
-                    <div className="mx-auto flex max-w-[1480px] bg-white">
+                    className="fixed left-0 top-[64px] z-[999] w-full border-b border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_30px_90px_rgba(15,23,42,0.18)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.50)] animate-[fadeIn_0.15s_ease]">
+                    <div className="mx-auto flex max-w-[1480px] bg-white dark:bg-[#0d1a2d]">
                         {/* Left Categories */}
-                        <div className="w-[240px] shrink-0 border-r border-blue-100 py-4 bg-[#f8fbff]">
+                        <div className="w-[240px] shrink-0 border-r border-blue-100 dark:border-[#223550] py-4 bg-[#f8fbff] dark:bg-[#0a1628]">
                             {currentMenu.categories.map((cat, i) => (
                                 <button key={i} onMouseEnter={() => setActiveCategory(i)}
-                                    className={`w-full flex items-center gap-3 px-5 py-3 text-left text-[14px] transition-colors ${activeCategory === i ? "text-[#1677f2] font-bold bg-blue-50/50 border-l-[3px] border-[#1677f2] pl-[17px]" : "text-[#334155] hover:text-[#1677f2] hover:bg-gray-50 border-l-[3px] border-transparent pl-[17px]"}`}>
+                                    className={`w-full flex items-center gap-3 px-5 py-3 text-left text-[14px] transition-colors ${activeCategory === i ? "text-[#1677f2] font-bold bg-blue-50/50 dark:bg-[#1677f2]/10 border-l-[3px] border-[#1677f2] pl-[17px]" : "text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] hover:bg-gray-50 dark:hover:bg-[#12223a] border-l-[3px] border-transparent pl-[17px]"}`}>
                                     <span className="text-[16px]">{cat.icon}</span> {cat.label}
                                 </button>
                             ))}
                         </div>
                         {/* Right Content */}
-                        <div className="flex-1 bg-white p-6">
-                            <h3 className="text-[18px] font-bold text-[#0a1628] mb-5">{currentMenu.categories[activeCategory]?.label}</h3>
+                        <div className="flex-1 bg-white dark:bg-[#0d1a2d] p-6">
+                            <h3 className="text-[18px] font-bold text-[#0a1628] dark:text-[#f7f9fc] mb-5">{currentMenu.categories[activeCategory]?.label}</h3>
                             {currentMenu.categories[activeCategory]?.items.length > 0 ? (
                                 <div className="grid grid-cols-3 gap-x-8 gap-y-3">
                                     {currentMenu.categories[activeCategory].items.map((item, j) => {
@@ -797,9 +793,9 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                             ) : (
                                 <p className="text-[14px] text-[#94a3b8]">Upcoming content...</p>
                             )}
-                            <div className="flex items-center justify-between mt-8 pt-4 border-t border-gray-100">
+                            <div className="flex items-center justify-between mt-8 pt-4 border-t border-gray-100 dark:border-[#223550]">
                                 <Link href={currentMenu.viewAll} className="text-[14px] font-bold text-[#1677f2] hover:underline">{currentMenu.viewAllLabel}</Link>
-                                <span className="text-[13px] text-[#94a3b8]">Need help? <Link href="/contact" className="text-[#1677f2] underline">Talk to an expert</Link></span>
+                                <span className="text-[13px] text-[#94a3b8] dark:text-[#a9b6c9]">Need help? <Link href="/contact" className="text-[#1677f2] underline">Talk to an expert</Link></span>
                             </div>
                         </div>
                     </div>
@@ -808,14 +804,54 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
 
             {/* Mobile Menu */}
             {mobileOpen && (
-                <div className="fixed top-[64px] left-0 w-full h-[calc(100vh-64px)] bg-white z-[98] overflow-y-auto xl:hidden">
+                <div className="fixed top-[64px] left-0 w-full h-[calc(100vh-64px)] bg-white dark:bg-[#06101f] z-[98] overflow-y-auto xl:hidden">
                     <div className="p-6 space-y-4">
-                        <div ref={searchRef}>
-                            <SearchBox mobile />
+                        {/* Mobile search — inlined to avoid remount-on-rerender focus bug */}
+                        <div ref={searchRef} className="relative w-full">
+                            <label className="sr-only" htmlFor="mobile-page-search">Search pages</label>
+                            <div className="relative">
+                                <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" />
+                                </svg>
+                                <input
+                                    id="mobile-page-search"
+                                    type="search"
+                                    value={searchQuery}
+                                    onChange={(event) => { setSearchQuery(event.target.value); setSearchOpen(true); }}
+                                    onFocus={() => { setActiveMenu(null); setSearchOpen(true); }}
+                                    onKeyDown={handleSearchKeyDown}
+                                    placeholder="Search pages..."
+                                    className="w-full rounded-lg border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] pl-9 pr-3 text-[13.5px] font-medium text-[#0a1628] dark:text-[#f7f9fc] outline-none transition-all placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10 h-11"
+                                    aria-expanded={searchOpen}
+                                    aria-controls="mobile-page-search-results"
+                                />
+                            </div>
+                            {searchOpen && (
+                                <div id="mobile-page-search-results" className="mt-2 w-full overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_18px_45px_rgba(15,23,42,0.14)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.40)]">
+                                    <div className="border-b border-gray-100 dark:border-[#223550] px-4 py-2 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a9b6c9]">
+                                        {searchQuery.trim() ? "Search Results" : "Popular Pages"}
+                                    </div>
+                                    {searchResults.length > 0 ? (
+                                        <div className="max-h-[330px] overflow-y-auto py-1">
+                                            {searchResults.map((item) => (
+                                                <Link key={`${item.label}-${item.href}`} href={item.href} onClick={() => { closeSearch(); setMobileOpen(false); }} className="flex items-start justify-between gap-4 px-4 py-3 transition-colors hover:bg-[#f5fbff] dark:hover:bg-[#12223a]">
+                                                    <span>
+                                                        <span className="block text-[13.5px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">{item.label}</span>
+                                                        <span className="mt-0.5 block text-[11.5px] font-medium text-[#64748b] dark:text-[#a9b6c9]">{item.group}</span>
+                                                    </span>
+                                                    <span className="mt-0.5 shrink-0 text-[12px] font-bold text-[#1677f2]">Open</span>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="px-4 py-5 text-[13px] font-medium text-[#64748b] dark:text-[#a9b6c9]">No page found. Try RBI, IFSCA, NBFC, payment, insurance or SEBI.</div>
+                                    )}
+                                </div>
+                            )}
                         </div>
                         {Object.entries(menus).map(([name, menu]) => (
-                            <details key={name} className="rounded-xl border border-gray-100 bg-[#f8faff] px-4 py-2">
-                                <summary className="text-[15px] font-bold text-[#0a1628] cursor-pointer py-2">{name}</summary>
+                            <details key={name} className="rounded-xl border border-gray-100 dark:border-[#223550] bg-[#f8faff] dark:bg-[#0d1a2d] px-4 py-2">
+                                <summary className="text-[15px] font-bold text-[#0a1628] dark:text-[#f7f9fc] cursor-pointer py-2">{name}</summary>
                                 <div className="mt-2 space-y-4 pb-2">
                                     {menu.categories.map((cat, i) => (
                                         <div key={i}>
@@ -828,7 +864,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                             key={j}
                                                             href={linkMap[item] || "/get-started"}
                                                             onClick={() => setMobileOpen(false)}
-                                                            className={`block rounded-lg px-3 py-2 text-[13px] ${isLive ? 'text-[#0a1628] bg-white border border-gray-100' : 'text-[#64748b] hover:text-[#1677f2]'}`}
+                                                            className={`block rounded-lg px-3 py-2 text-[13px] ${isLive ? 'text-[#0a1628] dark:text-[#f7f9fc] bg-white dark:bg-[#12223a] border border-gray-100 dark:border-[#223550]' : 'text-[#64748b] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]'}`}
                                                         >
                                                             {item}
                                                         </Link>
@@ -847,7 +883,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     href={link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className={`${i === 0 ? "" : "mt-2 "}flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#1677f2] cursor-pointer`}
+                                    className={`${i === 0 ? "" : "mt-2 "}flex items-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-[#f0f9ff] dark:bg-[#0d1a2d] px-4 py-3 text-[14px] font-bold text-[#1677f2] cursor-pointer`}
                                 >
                                     {link.icon} {link.label}
                                 </a>
@@ -856,13 +892,13 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     key={link.label}
                                     href={link.href}
                                     onClick={() => setMobileOpen(false)}
-                                    className={`${i === 0 ? "" : "mt-2 "}flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-[#f0f9ff] px-4 py-3 text-[14px] font-bold text-[#1677f2]`}
+                                    className={`${i === 0 ? "" : "mt-2 "}flex items-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-[#f0f9ff] dark:bg-[#0d1a2d] px-4 py-3 text-[14px] font-bold text-[#1677f2]`}
                                 >
                                     {link.icon} {link.label}
                                 </Link>
                             )
                         )}
-                        <div className="border-t border-gray-100 pt-4 mt-4">
+                        <div className="border-t border-gray-100 dark:border-[#223550] pt-4 mt-4">
                             {authUser ? (
                                 <div className="mb-2">
                                     <div className="flex items-center gap-3 py-2">
@@ -870,19 +906,23 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                             {authUser.firstName[0]}{authUser.lastName?.[0] ?? ""}
                                         </span>
                                         <div>
-                                            <p className="text-[14px] font-bold text-[#0a1628]">{authUser.firstName} {authUser.lastName}</p>
-                                            <p className="text-[11px] text-[#64748b]">{authUser.email}</p>
+                                            <p className="text-[14px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">{authUser.firstName} {authUser.lastName}</p>
+                                            <p className="text-[11px] text-[#64748b] dark:text-[#a9b6c9]">{authUser.email}</p>
                                         </div>
                                     </div>
-                                    <button onClick={() => { setMobileOpen(false); handleLogout(); }} className="block w-full text-left text-[14px] font-semibold text-red-600 py-2">
+                                    <button onClick={() => { setMobileOpen(false); handleLogout(); }} className="block w-full text-left text-[14px] font-semibold text-red-600 dark:text-red-400 py-2">
                                         Sign Out
                                     </button>
                                 </div>
                             ) : (
-                                <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] py-2">Login</Link>
+                                <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] dark:text-[#f7f9fc] py-2">Login</Link>
                             )}
-                            <details className="rounded-xl border border-blue-100 bg-[#f8fbff] px-4 py-2">
-                                <summary className="cursor-pointer py-2 text-[15px] font-bold text-[#0a1628]">Country / Global Markets</summary>
+                            <div className="flex items-center justify-between py-2">
+                                <span className="text-[13px] font-semibold text-[#64748b] dark:text-[#a9b6c9]">Theme</span>
+                                <ThemeToggle variant="compact" />
+                            </div>
+                            <details className="rounded-xl border border-blue-100 dark:border-[#223550] bg-[#f8fbff] dark:bg-[#0d1a2d] px-4 py-2">
+                                <summary className="cursor-pointer py-2 text-[15px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">Country / Global Markets</summary>
                                 <div className="mt-3 space-y-3 pb-2">
                                     {globalMarketRegions.map((group) => (
                                         <div key={group.region}>
@@ -891,9 +931,9 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                 {group.countries.map((country) => (
                                                     <Link
                                                         key={country}
-                                                        href="/contact"
+                                                        href={countryHref(country)}
                                                         onClick={() => setMobileOpen(false)}
-                                                        className="rounded-full border border-blue-100 bg-white px-3 py-1.5 text-[11.5px] font-bold text-[#334155]"
+                                                        className="rounded-full border border-blue-100 dark:border-[#2d4a6b] bg-white dark:bg-[#12223a] px-3 py-1.5 text-[11.5px] font-bold text-[#334155] dark:text-[#a9b6c9]"
                                                     >
                                                         {country}
                                                     </Link>
@@ -904,7 +944,9 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                 </div>
                             </details>
                         </div>
-                        <Link href={nav.ctaHref} onClick={() => setMobileOpen(false)} className="block w-full text-center bg-[#0a1628] text-white font-bold text-[14px] rounded-lg py-3 mt-4">{nav.ctaLabel}</Link>
+                        {!authUser && (
+                            <Link href={nav.ctaHref} onClick={() => setMobileOpen(false)} className="block w-full text-center bg-[#1677f2] dark:bg-[#1677f2] text-white font-bold text-[14px] rounded-lg py-3 mt-4">{nav.ctaLabel}</Link>
+                        )}
                     </div>
                 </div>
             )}

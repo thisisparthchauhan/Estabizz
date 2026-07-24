@@ -65,6 +65,7 @@ export function EstabizzSelect({
   const [open, setOpen] = useState(false);
   const [focusedIdx, setFocusedIdx] = useState(-1);
   const [openUpward, setOpenUpward] = useState(false);
+  const [menuStyle, setMenuStyle] = useState<React.CSSProperties>({});
 
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -77,8 +78,6 @@ export function EstabizzSelect({
   // ── Derived ───────────────────────────────────────────────────────────────
   const selectedLabel =
     options.find((o) => o.value === value)?.label ?? "";
-
-  const enabledOptions = options.filter((o) => !o.disabled);
 
   // ── Click outside → close ─────────────────────────────────────────────────
   useEffect(() => {
@@ -103,23 +102,53 @@ export function EstabizzSelect({
     item?.scrollIntoView({ block: "nearest" });
   }, [focusedIdx, open]);
 
-  // ── Detect viewport overflow → open upward ────────────────────────────────
-  const computeDirection = useCallback(() => {
+  // ── Compute fixed position from trigger rect ──────────────────────────────
+  const computePosition = useCallback(() => {
     if (!triggerRef.current) return;
     const rect = triggerRef.current.getBoundingClientRect();
     const spaceBelow = window.innerHeight - rect.bottom;
-    setOpenUpward(spaceBelow < 300);
+    const upward = spaceBelow < 300;
+    setOpenUpward(upward);
+    setMenuStyle(
+      upward
+        ? {
+            position: "fixed",
+            left: rect.left,
+            width: rect.width,
+            bottom: window.innerHeight - rect.top + 6,
+            top: "auto",
+            zIndex: 9999,
+          }
+        : {
+            position: "fixed",
+            left: rect.left,
+            width: rect.width,
+            top: rect.bottom + 6,
+            zIndex: 9999,
+          },
+    );
   }, []);
+
+  // ── Reposition on scroll / resize while open ──────────────────────────────
+  useEffect(() => {
+    if (!open) return;
+    window.addEventListener("scroll", computePosition, true);
+    window.addEventListener("resize", computePosition);
+    return () => {
+      window.removeEventListener("scroll", computePosition, true);
+      window.removeEventListener("resize", computePosition);
+    };
+  }, [open, computePosition]);
 
   // ── Open / close helpers ──────────────────────────────────────────────────
   const openMenu = useCallback(() => {
     if (disabled) return;
-    computeDirection();
+    computePosition();
     setOpen(true);
     // Pre-focus the currently selected option
     const idx = options.findIndex((o) => o.value === value && !o.disabled);
     setFocusedIdx(idx >= 0 ? idx : 0);
-  }, [disabled, computeDirection, options, value]);
+  }, [disabled, computePosition, options, value]);
 
   const closeMenu = useCallback(() => {
     setOpen(false);
@@ -215,26 +244,22 @@ export function EstabizzSelect({
   const optionText = isPublic ? "text-[14px]" : "text-[13.5px]";
 
   const triggerBase = [
-    "flex w-full items-center justify-between rounded-xl border bg-white px-4 text-left outline-none",
+    "flex w-full items-center justify-between rounded-xl border bg-white dark:bg-[var(--input-background)] px-4 text-left outline-none",
     "transition-all",
     triggerHeight,
     triggerText,
     error
-      ? "border-red-300 focus:border-red-400 focus:ring-2 focus:ring-red-200/60"
+      ? "border-red-300 dark:border-red-700 focus:border-red-400 focus:ring-2 focus:ring-red-200/60 dark:focus:ring-red-800/40"
       : open
         ? "border-[#1677f2] ring-2 ring-[#1677f2]/20"
-        : "border-[#dbe7f3] hover:border-[#1677f2]/40 focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/20",
+        : "border-[#dbe7f3] dark:border-[var(--input-border)] hover:border-[#1677f2]/40 focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/20",
     disabled
-      ? "cursor-not-allowed bg-[#f8fafc] opacity-60"
+      ? "cursor-not-allowed bg-[#f8fafc] dark:bg-[#0a1628] opacity-60"
       : "cursor-pointer",
     className,
   ]
     .filter(Boolean)
     .join(" ");
-
-  const menuPosition = openUpward
-    ? "bottom-[calc(100%+6px)] top-auto"
-    : "top-[calc(100%+6px)]";
 
   return (
     <div ref={containerRef} className="relative w-full">
@@ -242,7 +267,7 @@ export function EstabizzSelect({
       {label && (
         <label
           htmlFor={triggerId}
-          className="mb-1.5 block text-[12px] font-bold text-[#334155]"
+          className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#f7f9fc]"
         >
           {label}
           {required && (
@@ -275,7 +300,7 @@ export function EstabizzSelect({
       >
         <span
           className={
-            selectedLabel ? "truncate text-[#0a1628]" : "text-[#94a3b8]"
+            selectedLabel ? "truncate text-[#0a1628] dark:text-[#f7f9fc]" : "text-[#94a3b8] dark:text-[#64748b]"
           }
         >
           {selectedLabel || placeholder}
@@ -283,7 +308,7 @@ export function EstabizzSelect({
 
         {/* Chevron */}
         <svg
-          className={`ml-2 h-4 w-4 shrink-0 text-[#64748b] transition-transform duration-150 ${open ? "rotate-180" : ""}`}
+          className={`ml-2 h-4 w-4 shrink-0 text-[#64748b] dark:text-[#a9b6c9] transition-transform duration-150 ${open ? "rotate-180" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -298,17 +323,15 @@ export function EstabizzSelect({
         </svg>
       </button>
 
-      {/* Dropdown menu */}
+      {/* Dropdown menu — position:fixed so it escapes overflow:hidden ancestors */}
       {open && (
         <ul
           ref={listboxRef}
           id={listboxId}
           role="listbox"
           aria-label={label ?? placeholder}
-          className={[
-            "absolute left-0 right-0 z-[9999] overflow-hidden rounded-xl border border-[#dbe7f3] bg-white shadow-[0_12px_40px_rgba(0,60,110,0.14)]",
-            menuPosition,
-          ].join(" ")}
+          style={menuStyle}
+          className="overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[var(--border)] bg-white dark:bg-[var(--popover-background)] shadow-[0_12px_40px_rgba(0,60,110,0.14)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.50)]"
         >
           <div className="max-h-[280px] overflow-y-auto py-1">
             {options.map((opt, idx) => {
@@ -334,11 +357,11 @@ export function EstabizzSelect({
                     isDisabled
                       ? "cursor-not-allowed opacity-40"
                       : isFocused || isSelected
-                        ? "bg-[#eaf3ff]"
-                        : "hover:bg-[#f0f7ff]",
+                        ? "bg-[#eaf3ff] dark:bg-[#1677f2]/10"
+                        : "hover:bg-[#f0f7ff] dark:hover:bg-[#12223a]",
                     isSelected
-                      ? "font-semibold text-[#1677f2]"
-                      : "text-[#334155]",
+                      ? "font-semibold text-[#1677f2] dark:text-[#60a5fa]"
+                      : "text-[#334155] dark:text-[#a9b6c9]",
                   ]
                     .filter(Boolean)
                     .join(" ")}
@@ -372,14 +395,14 @@ export function EstabizzSelect({
 
       {/* Error message */}
       {error && (
-        <p className="mt-1 text-[11px] font-semibold text-red-600" role="alert">
+        <p className="mt-1 text-[11px] font-semibold text-red-600 dark:text-[#f87171]" role="alert">
           {error}
         </p>
       )}
 
       {/* Hint */}
       {hint && !error && (
-        <p className="mt-1 text-[11px] text-[#94a3b8]">{hint}</p>
+        <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#a9b6c9]">{hint}</p>
       )}
     </div>
   );

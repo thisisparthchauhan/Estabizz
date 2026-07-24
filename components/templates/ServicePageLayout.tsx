@@ -89,7 +89,7 @@ export default function ServicePageLayout({
     const insightCards = quickFacts.slice(0, 4);
 
     return (
-        <div className="min-h-screen bg-[#f6f9ff] font-sans text-gray-800">
+        <div className="min-h-screen bg-[#f6f9ff] dark:bg-[#06101f] font-sans text-gray-800 dark:text-[#f7f9fc]">
             {/* Scroll Progress Bar */}
             <div
                 className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-[#1677f2] to-[#0866d9] z-[120] transition-all duration-150 ease-out"
@@ -98,7 +98,7 @@ export default function ServicePageLayout({
 
             {/* Hero Header */}
             <section
-                className="relative pt-24 pb-10 px-6 lg:px-8 border-b border-blue-100 overflow-hidden bg-white"
+                className="relative pt-24 pb-10 px-6 lg:px-8 border-b border-blue-100 dark:border-[#223550] overflow-hidden bg-white dark:bg-[#0d1a2d]"
             >
                 <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
                 <div className="absolute inset-x-0 bottom-0 pointer-events-none h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
@@ -107,7 +107,7 @@ export default function ServicePageLayout({
 
                 <div className="max-w-7xl mx-auto relative z-10">
                     {/* Breadcrumb */}
-                    <nav className="text-sm font-semibold text-gray-500 mb-8 flex items-center space-x-2 flex-wrap">
+                    <nav className="text-sm font-semibold text-gray-500 dark:text-[#a9b6c9] mb-8 flex items-center space-x-2 flex-wrap">
                         {breadcrumb.map((item, i) => (
                             <React.Fragment key={i}>
                                 {i > 0 && <span>&gt;</span>}
@@ -125,19 +125,19 @@ export default function ServicePageLayout({
                             {/* Tags */}
                             <div className="flex flex-wrap gap-3 mb-7">
                                 {tags.map((tag, i) => (
-                                    <span key={i} className="px-4 py-2 bg-white/80 text-[#1677f2] border border-blue-100 rounded-full text-xs font-bold shadow-sm backdrop-blur-sm">
+                                    <span key={i} className="px-4 py-2 bg-white/80 dark:bg-[#0a1628]/80 text-[#1677f2] border border-blue-100 dark:border-[#223550] rounded-full text-xs font-bold shadow-sm backdrop-blur-sm">
                                         {tag.emoji} {tag.label}
                                     </span>
                                 ))}
                             </div>
 
                             {/* Title */}
-                            <h1 className="text-[30px] md:text-[44px] font-black text-[#120b45] leading-[1.08] mb-5 tracking-[-0.03em] max-w-4xl">
+                            <h1 className="text-[30px] md:text-[44px] font-black text-[#120b45] dark:text-[#f7f9fc] leading-[1.08] mb-5 tracking-[-0.03em] max-w-4xl">
                                 {title}
                             </h1>
 
                             {heroDescription && (
-                                <div className="max-w-4xl text-[17px] leading-[1.85] text-[#475569] mb-7">
+                                <div className="max-w-4xl text-[17px] leading-[1.85] text-[#475569] dark:text-[#a9b6c9] mb-7">
                                     {heroDescription}
                                 </div>
                             )}
@@ -149,13 +149,13 @@ export default function ServicePageLayout({
                             )}
 
                             {trustLine && (
-                                <div className="max-w-4xl text-[14px] font-semibold text-[#0a1628] bg-white/78 border border-blue-100 rounded-2xl px-5 py-4 mb-7 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-md">
+                                <div className="max-w-4xl text-[14px] font-semibold text-[#0a1628] dark:text-[#f7f9fc] bg-white/78 dark:bg-[#12223a]/80 border border-blue-100 dark:border-[#223550] rounded-2xl px-5 py-4 mb-7 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-md">
                                     {trustLine}
                                 </div>
                             )}
 
                             {/* Meta */}
-                            <div className="flex flex-wrap items-center gap-4 text-[13.5px] text-[#64748b] font-semibold mb-6">
+                            <div className="flex flex-wrap items-center gap-4 text-[13.5px] text-[#64748b] dark:text-[#a9b6c9] font-semibold mb-6">
                                 <div className="flex items-center gap-1.5"><span>📅</span> {displayYear}</div>
                                 <span className="text-gray-300">|</span>
                                 <div className="flex items-center gap-1.5"><span>⏱️</span> {readTime}</div>
@@ -165,30 +165,30 @@ export default function ServicePageLayout({
                                 <div className="flex items-center gap-1.5"><span>✅</span> Expert Reviewed</div>
                             </div>
 
-                            <div className="inline-block px-5 py-3 border border-blue-200 bg-white/76 backdrop-blur-sm rounded-full text-sm text-[#0a1628] font-bold shadow-sm">
+                            <div className="inline-block px-5 py-3 border border-blue-200 dark:border-[#223550] bg-white/76 dark:bg-[#0d1a2d]/80 backdrop-blur-sm rounded-full text-sm text-[#0a1628] dark:text-[#f7f9fc] font-bold shadow-sm">
                                 Focus: <span className="text-[#1677f2]">{focusKeyword}</span>
                             </div>
                         </div>
 
                         <div className="hidden lg:block lg:sticky lg:top-[88px]">
-                            <div className="relative overflow-hidden rounded-[26px] border border-blue-100 bg-white p-6 shadow-[0_22px_60px_rgba(0,80,140,0.10)]">
+                            <div className="relative overflow-hidden rounded-[26px] border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-6 shadow-[0_22px_60px_rgba(0,80,140,0.10)] dark:shadow-[0_22px_60px_rgba(0,0,0,0.35)]">
                                 <div className="absolute right-[-80px] top-[-80px] h-44 w-44 rounded-full bg-[#dff2ff] blur-3xl" />
                                 <div className="relative">
                                     <div className="mb-5 flex items-start justify-between gap-4">
                                         <div>
                                             <div className="text-[10.5px] font-black uppercase tracking-[0.22em] text-[#1677f2]">Licence Snapshot</div>
-                                            <div className="mt-1.5 text-[20px] font-black leading-tight text-[#120b45]">{ctaTitle}</div>
+                                            <div className="mt-1.5 text-[20px] font-black leading-tight text-[#120b45] dark:text-[#f7f9fc]">{ctaTitle}</div>
                                         </div>
                                         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0a1628] text-base font-black text-white shadow-lg">E</div>
                                     </div>
 
-                                    <p className="mb-5 text-[13.5px] font-medium leading-6 text-[#64748b]">{ctaDescription}</p>
+                                    <p className="mb-5 text-[13.5px] font-medium leading-6 text-[#64748b] dark:text-[#a9b6c9]">{ctaDescription}</p>
 
                                     <div className="mb-5 grid grid-cols-2 gap-2.5">
                                         {quickFacts.slice(0, 4).map((fact, i) => (
-                                            <div key={`${fact.label}-${i}`} className="rounded-xl border border-blue-100 bg-[#f8fbff] p-3.5">
-                                                <div className="text-[9.5px] font-black uppercase tracking-[0.14em] text-[#64748b]">{fact.label}</div>
-                                                <div className="mt-1 text-[13.5px] font-black leading-snug text-[#0a1628]">{fact.value}</div>
+                                            <div key={`${fact.label}-${i}`} className="rounded-xl border border-blue-100 dark:border-[#223550] bg-[#f8fbff] dark:bg-[#12223a] p-3.5">
+                                                <div className="text-[9.5px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a9b6c9]">{fact.label}</div>
+                                                <div className="mt-1 text-[13.5px] font-black leading-snug text-[#0a1628] dark:text-[#f7f9fc]">{fact.value}</div>
                                             </div>
                                         ))}
                                     </div>
@@ -220,8 +220,8 @@ export default function ServicePageLayout({
             <div className="max-w-[1480px] mx-auto px-5 md:px-6 py-10 md:py-12 flex flex-col xl:flex-row gap-7 2xl:gap-10 items-start">
 
                 {/* Left TOC Sidebar */}
-                <aside className="hidden xl:block w-[286px] shrink-0 sticky top-[88px] bg-white/88 border border-[rgba(0,150,220,0.12)] rounded-[24px] p-5 shadow-[0_18px_46px_rgba(0,100,200,0.08)] backdrop-blur-xl z-10">
-                    <h4 className="text-[12px] font-black text-[#94a3b8] tracking-[0.18em] uppercase mb-5">Contents</h4>
+                <aside className="hidden xl:block w-[286px] shrink-0 sticky top-[88px] bg-white/88 dark:bg-[#0d1a2d]/90 border border-[rgba(0,150,220,0.12)] dark:border-[#223550] rounded-[24px] p-5 shadow-[0_18px_46px_rgba(0,100,200,0.08)] backdrop-blur-xl z-10">
+                    <h4 className="text-[12px] font-black text-[#94a3b8] dark:text-[#a9b6c9] tracking-[0.18em] uppercase mb-5">Contents</h4>
                     <nav className="flex flex-col gap-1 max-h-[calc(100vh-160px)] overflow-y-auto pr-2">
                         {sections.map((section) => (
                             <a
@@ -229,8 +229,8 @@ export default function ServicePageLayout({
                                 href={`#${section.id}`}
                                 onClick={(e) => scrollToSection(e, section.id)}
                                 className={`text-[13.5px] block py-3 pl-4 pr-3 rounded-xl border-l-[3px] leading-snug transition-all duration-200 ${activeSection === section.id
-                                    ? "border-l-[#1677f2] bg-[rgba(0,150,220,0.08)] text-[#1677f2] font-black shadow-sm"
-                                    : "border-l-transparent text-[#64748b] hover:text-[#1677f2] hover:bg-blue-50/70"}`}
+                                    ? "border-l-[#1677f2] bg-[rgba(0,150,220,0.08)] dark:bg-[#1677f2]/10 text-[#1677f2] font-black shadow-sm"
+                                    : "border-l-transparent text-[#64748b] dark:text-[#a9b6c9] hover:text-[#1677f2] hover:bg-blue-50/70 dark:hover:bg-[#12223a]"}`}
                             >
                                 {section.title}
                             </a>
@@ -239,7 +239,7 @@ export default function ServicePageLayout({
                 </aside>
 
                 {/* Mobile TOC */}
-                <div className="xl:hidden w-full bg-white/90 border border-[rgba(0,150,220,0.12)] rounded-[22px] p-5 mb-4 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-xl">
+                <div className="xl:hidden w-full bg-white/90 dark:bg-[#0d1a2d]/90 border border-[rgba(0,150,220,0.12)] dark:border-[#223550] rounded-[22px] p-5 mb-4 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-xl">
                     <details className="group">
                         <summary className="flex justify-between items-center font-bold cursor-pointer list-none text-[#1677f2]">
                             <span>Contents</span>
@@ -259,7 +259,7 @@ export default function ServicePageLayout({
                 </div>
 
                 {/* Main Content */}
-                <main className="flex-1 w-full max-w-[860px] bg-white border border-[rgba(0,150,220,0.10)] rounded-[28px] p-6 md:p-9 lg:p-12 shadow-[0_24px_70px_rgba(0,100,200,0.08)] article-content relative overflow-x-auto">
+                <main className="flex-1 w-full max-w-[860px] bg-white dark:bg-[#0d1a2d] border border-[rgba(0,150,220,0.10)] dark:border-[#223550] rounded-[28px] p-6 md:p-9 lg:p-12 shadow-[0_24px_70px_rgba(0,100,200,0.08)] dark:shadow-[0_24px_70px_rgba(0,0,0,0.35)] article-content relative overflow-x-auto">
                     <style dangerouslySetInnerHTML={{
                         __html: `
               .article-content{font-feature-settings:"kern";letter-spacing:0}
@@ -365,7 +365,7 @@ export default function ServicePageLayout({
                         <div className="text-[13.5px] text-gray-600 leading-relaxed">
                             Specialist in fintech regulatory compliance, government licenses and RBI, SEBI, IRDAI frameworks.
                         </div>
-                        <a href="mailto:contact@estabizz.com" className="mt-4 block text-center w-full py-2.5 bg-blue-50 text-[#0077B6] font-bold text-[13px] rounded-xl hover:bg-[#1677f2] hover:text-white transition-colors">
+                        <a href="mailto:support@estabizz.com" className="mt-4 block text-center w-full py-2.5 bg-blue-50 text-[#0077B6] font-bold text-[13px] rounded-xl hover:bg-[#1677f2] hover:text-white transition-colors">
                             Ask a Question
                         </a>
                     </div>

@@ -43,7 +43,7 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
     const phoneHref = `tel:${c.phone.replace(/[^\d+]/g, "")}`;
 
     return (
-        <footer className="relative overflow-hidden bg-[#070d1a] text-white">
+        <footer className="relative overflow-hidden bg-[#070d1a] dark:bg-[#0a1e3a] text-white">
 
             {/* Subtle ambient glows */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">

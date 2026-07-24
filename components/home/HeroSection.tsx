@@ -20,18 +20,18 @@ export default function HeroSection({ content }: { content?: Partial<HeroContent
     }, [rotatingServices.length]);
 
     return (
-        <section className="relative isolate overflow-hidden bg-white px-6 pb-20 pt-32 md:pt-36">
+        <section className="relative isolate overflow-hidden bg-white dark:bg-[#06101f] px-6 pb-20 pt-32 md:pt-36">
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_20%,rgba(0,150,214,0.16),transparent_34%),radial-gradient(circle_at_10%_80%,rgba(217,169,56,0.12),transparent_30%)]" />
             <div className="absolute inset-x-0 bottom-0 -z-10 h-[48%] bg-gradient-to-b from-transparent to-[#eaf6ff]" />
             <div className="absolute bottom-0 left-0 -z-10 h-[220px] w-[220px] rounded-full bg-[#d8ecff] blur-3xl" />
             <div className="absolute bottom-12 right-0 -z-10 h-[280px] w-[280px] rounded-full bg-[#bfe2ff] blur-3xl" />
 
             <div className="mx-auto max-w-[1180px] text-center">
-                <div className="mb-8 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-5 py-2 text-[12px] font-black uppercase tracking-[0.24em] text-[#0077B6] shadow-sm">
+                <div className="mb-8 inline-flex rounded-full border border-blue-100 dark:border-[#223550] bg-[#f5fbff] dark:bg-[#0d1a2d] px-5 py-2 text-[12px] font-black uppercase tracking-[0.24em] text-[#0077B6] dark:text-[#60a5fa] shadow-sm">
                     {c.welcomeLabel}
                 </div>
 
-                <h1 className="mx-auto max-w-[1050px] text-[clamp(42px,7vw,86px)] font-black leading-[1.02] tracking-[-0.045em] text-[#120b45]">
+                <h1 className="mx-auto max-w-[1050px] text-[clamp(42px,7vw,86px)] font-black leading-[1.02] tracking-[-0.045em] text-[#120b45] dark:text-[#f7f9fc]">
                     {c.headingPrefix}
                     <span className="relative mt-2 block min-h-[1.08em] text-[#1677f2]">
                         <span key={rotatingServices[activeWord]} className="inline-block animate-[heroWord_0.55s_ease]">
@@ -41,7 +41,7 @@ export default function HeroSection({ content }: { content?: Partial<HeroContent
                     </span>
                 </h1>
 
-                <p className="mx-auto mt-7 max-w-[840px] text-[18px] font-medium leading-[1.85] text-[#64748b]">
+                <p className="mx-auto mt-7 max-w-[840px] text-[18px] font-medium leading-[1.85] text-[#64748b] dark:text-[#a9b6c9]">
                     {c.subheading}
                 </p>
 
@@ -60,12 +60,12 @@ export default function HeroSection({ content }: { content?: Partial<HeroContent
                     <a href={c.primaryBtnLink} className="rounded-xl bg-[#1677f2] px-9 py-4 text-[16px] font-black text-white shadow-[0_18px_45px_rgba(22,119,242,0.28)] transition-all hover:-translate-y-1 hover:bg-[#0866d9]">
                         {c.primaryBtnText}
                     </a>
-                    <a href={c.secondaryBtnLink} className="rounded-xl border border-blue-100 bg-white px-9 py-4 text-[16px] font-black text-[#0a2b58] shadow-[0_14px_35px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-1 hover:border-[#1677f2] hover:text-[#1677f2]">
+                    <a href={c.secondaryBtnLink} className="rounded-xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-9 py-4 text-[16px] font-black text-[#0a2b58] dark:text-[#f7f9fc] shadow-[0_14px_35px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-1 hover:border-[#1677f2] hover:text-[#1677f2] dark:hover:text-[#60a5fa]">
                         {c.secondaryBtnText}
                     </a>
                 </div>
 
-                <div className="relative mx-auto mt-12 max-w-[980px] overflow-hidden rounded-[28px] border border-blue-100 bg-white/70 px-5 py-4 shadow-[0_18px_60px_rgba(0,80,140,0.08)] backdrop-blur-xl">
+                <div className="relative mx-auto mt-12 max-w-[980px] overflow-hidden rounded-[28px] border border-blue-100 dark:border-[#223550] bg-white/70 dark:bg-[#0d1a2d]/70 px-5 py-4 shadow-[0_18px_60px_rgba(0,80,140,0.08)] backdrop-blur-xl">
                     <div className="absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent" />
                     <div className="absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent" />
                     <div className="flex w-max animate-[heroTicker_26s_linear_infinite] gap-3">

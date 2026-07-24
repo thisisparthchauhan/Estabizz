@@ -390,7 +390,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
   const activeId = useActiveHeading(tocIds);
 
   return (
-    <main className="relative z-[1] min-h-screen bg-white pt-[64px]">
+    <main className="relative z-[1] min-h-screen bg-white dark:bg-[#06101f] pt-[64px]">
 
       {/* ── Breadcrumb ── */}
       <div className="border-b border-blue-100 bg-[#f5fbff]">
@@ -518,8 +518,8 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
 
             {/* FAQ section */}
             {blog.faqs && blog.faqs.length > 0 && (
-              <section className="mt-10 rounded-sm border border-[#e8e8e8] bg-[#f7f8fc] p-6 lg:p-8">
-                <h2 className="mb-6 text-[20px] font-black text-[#0a1628]">
+              <section className="mt-10 rounded-sm border border-[#e8e8e8] dark:border-[#223550] bg-[#f7f8fc] dark:bg-[#0d1a2d] p-6 lg:p-8">
+                <h2 className="mb-6 text-[20px] font-black text-[#0a1628] dark:text-[#f7f9fc]">
                   Frequently Asked Questions
                 </h2>
                 <div className="space-y-3">
@@ -528,9 +528,9 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
                     .map((faq, i) => (
                       <details
                         key={i}
-                        className="group overflow-hidden rounded-sm border border-[#e0e0e0] bg-white"
+                        className="group overflow-hidden rounded-sm border border-[#e0e0e0] dark:border-[#223550] bg-white dark:bg-[#0d1a2d]"
                       >
-                        <summary className="flex cursor-pointer items-start justify-between gap-4 px-5 py-4 text-[14px] font-bold text-[#0a1628] transition-colors hover:text-[#1677f2] [list-style:none] [&::-webkit-details-marker]:hidden">
+                        <summary className="flex cursor-pointer items-start justify-between gap-4 px-5 py-4 text-[14px] font-bold text-[#0a1628] dark:text-[#f7f9fc] transition-colors hover:text-[#1677f2] dark:hover:text-[#60a5fa] [list-style:none] [&::-webkit-details-marker]:hidden">
                           <span className="flex-1 leading-snug">{faq.question}</span>
                           <svg
                             className="mt-0.5 h-4 w-4 shrink-0 text-[#1677f2] transition-transform duration-200 group-open:rotate-180"
@@ -551,7 +551,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
             )}
 
             {/* Author box */}
-            <div className="mt-10 overflow-hidden rounded-sm border border-[#e8e8e8] bg-white">
+            <div className="mt-10 overflow-hidden rounded-sm border border-[#e8e8e8] dark:border-[#223550] bg-white dark:bg-[#0d1a2d]">
               <div className="flex flex-col gap-4 p-5 sm:flex-row sm:p-6">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[17px] font-black text-white">
                   {blog.author.firstName[0]}
@@ -560,7 +560,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
                   <p className="text-[10px] font-black uppercase tracking-wider text-[#9ca3af]">
                     Written by
                   </p>
-                  <p className="mt-0.5 text-[15px] font-black text-[#0a1628]">
+                  <p className="mt-0.5 text-[15px] font-black text-[#0a1628] dark:text-[#f7f9fc]">
                     {blog.author.firstName} {blog.author.lastName}
                   </p>
                   {blog.author.designation && (
@@ -584,7 +584,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
             </div>
 
             {/* Disclaimer */}
-            <div className="mt-8 rounded-sm border border-[#e8e8e8] bg-[#f7f8fc] p-4 sm:p-5">
+            <div className="mt-8 rounded-sm border border-[#e8e8e8] dark:border-[#223550] bg-[#f7f8fc] dark:bg-[#0d1a2d] p-4 sm:p-5">
               <div className="flex gap-3">
                 <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#9ca3af]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -658,7 +658,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
 
       {/* Related blogs section (below main content) */}
       {relatedBlogs.length > 0 && (
-        <section className="border-t border-[#e8e8e8] bg-[#f7f8fc] py-12">
+        <section className="border-t border-[#e8e8e8] dark:border-[#223550] bg-[#f7f8fc] dark:bg-[#0d1a2d] py-12">
           <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
             <div className="mb-6 flex items-center justify-between">
               <div>

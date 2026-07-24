@@ -195,7 +195,7 @@ function validate(form: BlogFormData): FormErrors {
 // ─── Shared styles ────────────────────────────────────────────────────────────
 
 const inputCls =
-  "w-full rounded-xl border border-[#dbe7f3] bg-white px-3.5 py-2.5 text-[13.5px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none transition-all focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/12";
+  "w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13.5px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#b0bec5] dark:placeholder:text-[#64748b] outline-none transition-all focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/12";
 
 const errorInputCls =
   "w-full rounded-xl border border-red-300 bg-red-50/30 px-3.5 py-2.5 text-[13.5px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none focus:border-red-400 focus:ring-2 focus:ring-red-300/20";
@@ -212,7 +212,7 @@ function SectionCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white rounded-2xl border border-[#e2e8f0] shadow-[0_2px_8px_rgba(10,22,40,0.04)] overflow-hidden">
+    <div className="bg-white dark:bg-[#0d1a2d] rounded-2xl border border-[#e2e8f0] dark:border-[#223550] shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
       <div className="flex items-center gap-3 border-b border-[#f0f4f8] px-6 py-4">
         <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0a1628] text-[11px] font-black text-white">
           {number}
@@ -386,7 +386,7 @@ function ActionBar({
   isBottom?: boolean;
 }) {
   return (
-    <div className={`${isBottom ? "" : "sticky top-0"} z-50 bg-white border-b border-[#e2e8f0] shadow-[0_2px_8px_rgba(15,23,42,0.06)]`}>
+    <div className={`${isBottom ? "" : "sticky top-0"} z-[10000] bg-white dark:bg-[#0d1a2d] border-b border-[#e2e8f0] dark:border-[#223550] shadow-[0_2px_8px_rgba(15,23,42,0.06)]`}>
       <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
         {/* Left */}
         <div className="flex items-center gap-3 min-w-0">
@@ -404,7 +404,7 @@ function ActionBar({
             type="button"
             onClick={onDraft}
             disabled={saving}
-            className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-semibold text-[#334155] hover:bg-[#f8fbff] transition-colors disabled:opacity-50"
+            className="px-4 py-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-[12.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f8fbff] dark:hover:bg-[#12223a] transition-colors disabled:opacity-50"
           >
             {saving ? "Saving…" : "Save as Draft"}
           </button>
@@ -584,7 +584,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
   const handleUpdate  = () => doSave(form.status);
 
   return (
-    <div className="min-h-full bg-[#f4f7fb]">
+    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#06101f]">
 
       {/* ── Top sticky bar ─────────────────────────────────────────────────── */}
       <ActionBar
@@ -970,13 +970,13 @@ export default function BlogEditorClient({ blog, categories }: Props) {
       </div>
 
       {/* ── Bottom sticky bar ──────────────────────────────────────────────── */}
-      <div className="sticky bottom-0 z-50 bg-white border-t border-[#e2e8f0] shadow-[0_-2px_8px_rgba(15,23,42,0.06)]">
+      <div className="sticky bottom-0 z-[10000] bg-white dark:bg-[#0d1a2d] border-t border-[#e2e8f0] dark:border-[#223550] shadow-[0_-2px_8px_rgba(15,23,42,0.06)]">
         <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-end gap-2">
           <button
             type="button"
             onClick={handleDraft}
             disabled={saving}
-            className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-semibold text-[#334155] hover:bg-[#f8fbff] transition-colors disabled:opacity-50"
+            className="px-4 py-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-[12.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f8fbff] dark:hover:bg-[#12223a] transition-colors disabled:opacity-50"
           >
             {saving ? "Saving…" : "Save as Draft"}
           </button>

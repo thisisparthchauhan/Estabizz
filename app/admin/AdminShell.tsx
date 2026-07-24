@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 // ─── SVG Icons ────────────────────────────────────────────────────────────────
 
@@ -326,7 +327,7 @@ export default function AdminShell({
       <aside
         className={`${
           collapsed ? "w-[60px]" : "w-[220px]"
-        } shrink-0 flex flex-col bg-[#071224] border-r border-white/[0.06] transition-all duration-200 overflow-hidden`}
+        } shrink-0 flex flex-col bg-[#071224] dark:bg-[var(--sidebar-background)] border-r border-white/[0.06] dark:border-[#2d4a6b] transition-all duration-200 overflow-hidden`}
       >
         {/* Brand bar */}
         <div
@@ -393,10 +394,10 @@ export default function AdminShell({
       </aside>
 
       {/* ── Main area ───────────────────────────────────────────────────────── */}
-      <div className="flex-1 flex flex-col overflow-hidden bg-[#f4f7fb]">
+      <div className="flex-1 flex flex-col overflow-hidden bg-[#f4f7fb] dark:bg-[#06101f]">
 
         {/* Top bar */}
-        <header className="h-[52px] shrink-0 flex items-center justify-between px-6 bg-white border-b border-[#e2e8f0] shadow-[0_1px_4px_rgba(15,23,42,0.05)]">
+        <header className="h-[52px] shrink-0 flex items-center justify-between px-6 bg-white dark:bg-[#0d1a2d] border-b border-[#e2e8f0] dark:border-[#223550] shadow-[0_1px_4px_rgba(15,23,42,0.05)]">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2">
             {breadcrumbs.map((crumb, i) => (
@@ -407,8 +408,8 @@ export default function AdminShell({
                 <span
                   className={
                     i === breadcrumbs.length - 1
-                      ? "text-[13px] font-black text-[#0a1628]"
-                      : "text-[12px] font-medium text-[#94a3b8] hidden sm:inline"
+                      ? "text-[13px] font-black text-[#0a1628] dark:text-[#f7f9fc]"
+                      : "text-[12px] font-medium text-[#94a3b8] dark:text-[#a9b6c9] hidden sm:inline"
                   }
                 >
                   {crumb}
@@ -419,6 +420,7 @@ export default function AdminShell({
 
           {/* Right side */}
           <div className="flex items-center gap-3">
+            <ThemeToggle variant="icon-only" />
             {pendingCount > 0 && (
               <Link
                 href="/admin/approval-queue"
@@ -429,7 +431,7 @@ export default function AdminShell({
               </Link>
             )}
 
-            <span className="text-[12px] font-medium text-[#94a3b8] hidden md:inline">
+            <span className="text-[12px] font-medium text-[#94a3b8] dark:text-[#a9b6c9] hidden md:inline">
               {adminEmail ?? "admin@estabizz.com"}
             </span>
 

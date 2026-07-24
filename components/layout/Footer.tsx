@@ -54,7 +54,7 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
             {/* Top accent line */}
             <div className="relative h-[1.5px] w-full bg-gradient-to-r from-transparent via-[#1677f2]/55 to-transparent" />
 
-            <div className="relative z-10 mx-auto max-w-[1400px] px-8">
+            <div className="relative z-10 mx-auto max-w-[1480px] px-5 2xl:px-6">
 
                 {/* ═══════════════════════════════════════════════════════════
                     Section 1 — Brand + Contact

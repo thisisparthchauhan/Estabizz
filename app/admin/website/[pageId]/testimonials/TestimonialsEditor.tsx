@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSection, EditorHeader, Card, Field, LoadingCard, SaveBar, StringList, inputCls } from "../../_kit";
+import { EstabizzSelect } from "@/components/ui/EstabizzSelect";
 
 type ConsentStatus = "consent_received" | "internal_only" | "do_not_publish";
 interface Testimonial { name: string; designation: string; company: string; feedback: string; category: string; rating: number; consent: ConsentStatus; visible: boolean }
@@ -101,9 +102,12 @@ export default function TestimonialsEditor() {
                     <div className="mt-3 flex flex-wrap items-end gap-4">
                       <div>
                         <label className="mb-1.5 block text-[12px] font-bold text-[#334155]">Consent status</label>
-                        <select value={t.consent} onChange={(e) => setItem(i, { consent: e.target.value as ConsentStatus })} className={inputCls + " w-auto"}>
-                          {CONSENT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-                        </select>
+                        <EstabizzSelect
+                          variant="admin"
+                          value={t.consent}
+                          onValueChange={(v) => setItem(i, { consent: v as ConsentStatus })}
+                          options={CONSENT_OPTIONS}
+                        />
                       </div>
                       <label className="flex items-center gap-2 pb-2 text-[13px] text-[#334155]">
                         <input type="checkbox" checked={t.visible} onChange={(e) => setItem(i, { visible: e.target.checked })} /> Show on website

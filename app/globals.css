@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  /* Brand tokens (unchanged) */
   --estabizz-navy: #071224;
   --estabizz-blue: #1677f2;
   --estabizz-blue-deep: #0068a8;
@@ -12,28 +13,131 @@
   --estabizz-muted: #64748b;
   --estabizz-glass: rgba(255, 255, 255, 0.72);
   --estabizz-ring: rgba(0, 150, 214, 0.18);
+
+  /* ── Semantic design tokens — Light mode ──────────────────────────────── */
+  /* Backgrounds */
+  --background: #ffffff;
+  --surface: #f8fbff;
+  --surface-muted: #f0f4f8;
+  --surface-elevated: #ffffff;
+
+  /* Text */
+  --foreground: #0a1628;
+  --muted-foreground: #64748b;
+
+  /* Borders */
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  /* Brand */
+  --primary: #1677f2;
+  --primary-foreground: #ffffff;
+  --accent: #d4a017;
+
+  /* Inputs */
+  --input-background: #ffffff;
+  --input-border: #dbe7f3;
+
+  /* Cards */
+  --card-background: #ffffff;
+  --popover-background: #ffffff;
+
+  /* Sidebar */
+  --sidebar-background: #0a1628;
+  --sidebar-foreground: #f7f9fc;
+}
+
+/* ── Dark mode semantic tokens ────────────────────────────────────────────── */
+.dark {
+  /* Backgrounds — premium navy, NOT pure black */
+  --background: #06101f;
+  --surface: #0d1a2d;
+  --surface-muted: #0a1628;
+  --surface-elevated: #12223a;
+
+  /* Text */
+  --foreground: #f7f9fc;
+  --muted-foreground: #a9b6c9;
+
+  /* Borders */
+  --border: #223550;
+  --border-strong: #2d4a6b;
+
+  /* Brand (keep primary blue) */
+  --primary: #1677f2;
+  --primary-foreground: #ffffff;
+  --accent: #d4a017;
+
+  /* Inputs */
+  --input-background: #0d1a2d;
+  --input-border: #223550;
+
+  /* Cards */
+  --card-background: #0d1a2d;
+  --popover-background: #12223a;
+
+  /* Sidebar — slightly lighter in dark mode to distinguish from page bg */
+  --sidebar-background: #0a1e3a;
+  --sidebar-foreground: #f7f9fc;
 }
 
 html {
   scroll-behavior: smooth;
-  background: #f8fbff;
+  background: var(--background);
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+  background: var(--background);
 }
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: var(--estabizz-ink);
+  color: var(--foreground);
+  background-color: var(--background);
+  overflow-x: hidden;
+}
+
+/* Light mode body gradient (decorative) */
+:root:not(.dark) body {
   background:
     radial-gradient(circle at 8% 8%, rgba(22, 119, 242, 0.10), transparent 30vw),
     radial-gradient(circle at 92% 12%, rgba(0, 150, 214, 0.10), transparent 26vw),
     linear-gradient(180deg, #f9fcff 0%, #eef7ff 45%, #f8fbff 100%);
-  overflow-x: hidden;
+}
+
+/* Dark mode body — subtle gradient */
+.dark body {
+  background:
+    radial-gradient(circle at 8% 8%, rgba(22, 119, 242, 0.06), transparent 30vw),
+    radial-gradient(circle at 92% 12%, rgba(0, 150, 214, 0.06), transparent 26vw),
+    linear-gradient(180deg, #06101f 0%, #0a1628 45%, #06101f 100%);
+}
+
+/* Browser autofill fix for dark mode */
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark textarea:-webkit-autofill,
+.dark select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #0d1a2d inset;
+  -webkit-text-fill-color: #f7f9fc;
+  caret-color: #f7f9fc;
 }
 
 ::selection {
   background-color: #1677f2;
   color: white;
+}
+
+/* ── Dark mode: body grid overlay ────────────────────────────────────────── */
+.dark body::before {
+  background-image:
+    linear-gradient(rgba(0, 150, 214, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 150, 214, 0.025) 1px, transparent 1px);
 }
 
 * {
@@ -470,4 +574,190 @@ body::before {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ── Content protection ───────────────────────────────────────────────────── */
+body {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* Re-enable selection in form fields so users can type/paste normally */
+input, textarea, select, [contenteditable="true"] {
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* ── Dark mode — blog content ─────────────────────────────────────────────── */
+
+.dark .blog-content h2 {
+  color: #f7f9fc;
+  border-bottom-color: #223550;
+}
+
+.dark .blog-content h3 {
+  color: #f7f9fc;
+}
+
+.dark .blog-content p {
+  color: #c8d6e5;
+}
+
+.dark .blog-content li {
+  color: #a9b6c9;
+}
+
+.dark .blog-content strong {
+  color: #f7f9fc;
+}
+
+.dark .blog-content a {
+  color: #60a5fa;
+}
+
+.dark .blog-content a:hover {
+  color: #93c5fd;
+}
+
+.dark .blog-content figcaption {
+  color: #64748b;
+}
+
+.dark .blog-content blockquote {
+  background: linear-gradient(135deg, #1a1200 0%, #1f1600 100%);
+  border-left-color: #d9a938;
+  color: #d4b46a;
+}
+
+.dark .blog-content blockquote p {
+  color: inherit;
+}
+
+.dark .blog-content thead tr {
+  background: #0a1628;
+}
+
+.dark .blog-content tbody tr {
+  border-bottom-color: #223550;
+}
+
+.dark .blog-content tbody tr:nth-child(even) {
+  background: #0d1a2d;
+}
+
+.dark .blog-content tbody tr:hover {
+  background: #12223a;
+}
+
+.dark .blog-content td {
+  color: #a9b6c9;
+}
+
+.dark .blog-content code {
+  background: #0a1628;
+  color: #60a5fa;
+  border-color: #223550;
+}
+
+/* ── Dark mode — callout boxes ───────────────────────────────────────────── */
+
+.dark .callout-info {
+  background: #001830;
+  border-color: #0369a1;
+}
+
+.dark .callout-info .callout-title {
+  color: #38bdf8;
+}
+
+.dark .callout-info .callout-body p,
+.dark .callout-info .callout-text {
+  color: #bae6fd;
+}
+
+.dark .callout-warning {
+  background: #1a1000;
+  border-color: #d9a938;
+  border-left-color: #d9a938;
+}
+
+.dark .callout-warning .callout-title {
+  color: #fbbf24;
+}
+
+.dark .callout-warning .callout-body p,
+.dark .callout-warning .callout-text {
+  color: #fde68a;
+}
+
+.dark .callout-success {
+  background: #001a0a;
+  border-color: #166534;
+}
+
+.dark .callout-success .callout-title {
+  color: #4ade80;
+}
+
+.dark .callout-success .callout-body p,
+.dark .callout-success .callout-text {
+  color: #bbf7d0;
+}
+
+/* ── Dark mode — premium utility classes ─────────────────────────────────── */
+
+.dark .premium-glass {
+  background: linear-gradient(145deg, rgba(18, 34, 58, 0.88), rgba(13, 26, 45, 0.72));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.dark .premium-mesh {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(22, 119, 242, 0.10), transparent 28%),
+    radial-gradient(circle at 85% 18%, rgba(22, 119, 242, 0.08), transparent 25%),
+    radial-gradient(circle at 60% 90%, rgba(22, 119, 242, 0.06), transparent 28%),
+    linear-gradient(135deg, rgba(13, 26, 45, 0.98), rgba(6, 16, 31, 0.92));
+}
+
+/* ── Dark mode — article-content (ServicePageLayout inline styles override) ── */
+
+.dark .article-content h2 {
+  color: #f7f9fc !important;
+}
+
+.dark .article-content h3 {
+  color: #60a5fa !important;
+}
+
+.dark .article-content h4 {
+  color: #f7f9fc !important;
+}
+
+.dark .article-content p {
+  color: #c8d6e5 !important;
+}
+
+.dark .article-content li {
+  color: #a9b6c9 !important;
+}
+
+.dark .article-content li strong {
+  color: #f7f9fc !important;
+}
+
+.dark .article-content a {
+  color: #60a5fa !important;
+}
+
+/* ── Dark mode — generic white cards pattern ──────────────────────────────── */
+
+.dark .bg-white {
+  --tw-bg-opacity: 1;
+}
+
+/* Focus outline for dark mode */
+.dark *:focus-visible {
+  outline-color: #1677f2;
 }

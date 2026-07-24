@@ -1,7 +1,222 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-20 (IST) · Phase: **6C — Blog Rich Text Editor** · Status: **completed locally** · Next: **Phase 6D — not started** · Last batch: **6C Word paste rich text editor**
+> Last updated: 2026-07-24 (IST) · Phase: **Dark Mode** · Status: **completed locally** · Next: **CMS integration for country configs** · Last batch: **Site-wide dark mode system (next-themes, CSS tokens, full coverage)**
+
+---
+
+## 2026-07-24 — Dark Mode — Site-wide Theme System
+
+**Task**: Implement production-quality dark mode across the full public website and Admin OS (31-phase plan).
+
+**Architecture**:
+- **Library**: `next-themes` v0.4.6 — `ThemeProvider` with `attribute="class"`, `defaultTheme="system"`, `enableSystem`, `disableTransitionOnChange`
+- **Tailwind strategy**: `darkMode: "class"` in `tailwind.config.js`
+- **Token system**: 17 semantic CSS custom properties in `:root` (light) and `.dark` (dark) in `globals.css`
+- **Dark palette**: premium navy — `#06101f` (bg), `#0d1a2d` (surface), `#12223a` (elevated), `#f7f9fc` (foreground)
+- **Brand colour**: `#1677f2` unchanged in both themes
+- **SSR safety**: `suppressHydrationWarning` on `<html>`, mounted-state pattern in `ThemeToggle`
+- **Browser integration**: `color-scheme` CSS property, two `theme-color` meta tags (light + dark)
+- **Blog/article content**: dark overrides via `.dark .blog-content *` and `.dark .article-content *` in `globals.css` (handles inline-styled content)
+
+**New files**:
+- `components/theme/ThemeProvider.tsx` — thin wrapper re-exporting `next-themes` provider
+- `components/theme/ThemeToggle.tsx` — three-option control (Light / Dark / System) with two variants: `compact` pill group and `icon-only` cycling button; inline SVG icons, full accessibility (role, aria-pressed, focus-visible)
+
+**Components updated**:
+- `app/layout.tsx` — ThemeProvider wrap, `suppressHydrationWarning`, meta tags
+- `components/layout/Navbar.tsx` — full dark mode (nav, search, dropdowns, mega menu, mobile menu, ThemeToggle in desktop + mobile)
+- `components/layout/Footer.tsx` — `dark:bg-[#0a1e3a]` (footer already dark; subtle distinction)
+- `components/ui/EstabizzSelect.tsx` — dropdown trigger, list, options, error/hint states
+- `components/home/HeroSection.tsx` — badge, h1, paragraph, secondary button, service pills ticker
+- `components/templates/ServicePageLayout.tsx` — hero, breadcrumb, tags, CTA sidebar, TOC, main content area
+- `app/contact/ContactClient.tsx` — form cards, hero header, labels
+- `app/blogs/[slug]/BlogDetailClient.tsx` — FAQ, author card, share buttons, disclaimer, related articles
+- `app/admin/AdminShell.tsx` — sidebar, top bar, breadcrumb, ThemeToggle in header
+- `app/admin/AdminDashboardClient.tsx` — stat cards, quick action cards, recent blogs table
+- `app/admin/blogs/_components/BlogEditorClient.tsx` — inputs, editor card, action bars, save draft buttons
+
+**globals.css additions**:
+- Dark body gradient (subtle deep navy)
+- Dark `body::before` grid overlay (reduced opacity)
+- Browser autofill override for dark mode (eliminates blue flash)
+- `.dark .blog-content *` overrides (h2/h3, p, li, strong, a, blockquote, table, code, callouts)
+- `.dark .article-content *` overrides with `!important` (for ServicePageLayout inline styles)
+- Dark focus outline override
+- Dark premium utility class overrides
+
+**Build result**:
+- `npx tsc --noEmit` — ZERO errors
+- `npm run build` — 232 routes, compiled in 8.1s, all pages generated in 8.5s, no warnings
+
+**Commits (local, not pushed)**:
+- `UI: add site-wide theme system with next-themes`
+- `UI: apply dark mode across public website`
+- `UI: apply dark mode across Admin OS`
+- `Docs: record dark mode architecture and QA`
+
+---
+
+## 2026-07-24 — Global Markets V2 — Complete Redesign
+
+**Task**: Full redesign of the Global Markets system (Phases 1–37 of specification).
+
+**Architecture**:
+- **Three-tier market model**: `active` | `developing` | `planned` (types in `lib/globalMarkets/types.ts`)
+- **Three page-depth levels**: `full` | `standard` | `compact` — renders different section sets
+- **Priority markets** with richer content architecture: UAE, Saudi Arabia, Singapore, UK, US, Canada, Australia, Hong Kong, Bangladesh, Nepal, Sri Lanka, Malaysia, Indonesia, Qatar, Bahrain, Oman, Mauritius, Kenya, South Africa
+- **India**: only `active`-tier market, routes to `/`
+- **SEO policy**: active = `index,follow` + sitemap; developing/planned = `noindex,follow` + excluded from sitemap
+- **Type file**: `lib/globalMarkets/types.ts` — `GlobalMarketConfig`, `GlobalSupportArea`, `GlobalProcessStep`, `GlobalRegulator`, `GlobalMarketFaq`
+
+**Components created**:
+- `components/globalMarkets/Icons.tsx` — inline SVG icon set (no external library dependency)
+- `components/globalMarkets/RegulatoryLandscape.tsx` — verified-regulator display with placeholder
+- `components/globalMarkets/CountryFAQ.tsx` — collapsible FAQ accordion
+- `app/global/GlobalMarketsClient.tsx` — searchable/filterable country directory
+- `app/global/page.tsx` — directory page with metadata + structured data
+
+**Pages updated**:
+- `app/global/[countrySlug]/CountryLandingClient.tsx` — full V2 three-tier layout
+- `app/global/[countrySlug]/page.tsx` — improved SEO, structured data, uppercase redirect
+
+**API / Model changes**:
+- `app/api/leads/route.ts` — server-side country slug resolution (client-supplied selectedCountry/region/tier NOT trusted); 8 new validated dropdown fields with allowlists; country validation gate for global-market-page source
+- `lib/models/Lead.ts` — 7 new fields: marketTier, businessActivity, expansionDirection, currentStage, supportRequired, preferredContactMethod, pageUrl
+
+**Navigation**:
+- `lib/content/navbarDefaults.ts` — added "Global Markets" link (`/global`); removed "19/5" placeholder from public nav
+
+**Sitemap**:
+- `app/sitemap.ts` — added `/global` directory; active-tier country pages only
+
+**Key design rules followed**:
+- No "Active planning 2026", "Office opening", "Now operating", "Licensed locally" language
+- Status notice shown on all developing/planned pages (cannot be hidden for appearance)
+- No fabricated regulator logos, offices, employees, statistics or approvals
+- India routes to `/`, never `/global/india`
+- All country pages noindex except India (homepage)
+- Source field server-controlled; client slug resolved server-side
+
+**TypeScript**: clean. **Build**: 249 pages, 0 errors.
+**Commit**: pending.
+
+---
+
+## 2026-07-23 — SEO: enforce canonical domain, public rate limiting, structured data (Phase 6D)
+
+**Task**: Two-part Phase 6D batch. Part A: rate-limit the three remaining public database-write endpoints. Part B: canonical host enforcement, structured data cleanup, Old Site link removal.
+
+**Part A — Public endpoint rate limiting (Task 3B)**
+Applied distributed rate limiting, body-byte enforcement, and abuse controls to `POST /api/auth/signup`, `POST /api/leads`, and `POST /api/submit-blog`. All three use `isRateLimitConfigured()` guard (503 if Upstash absent in prod), `req.arrayBuffer()` byte limit, JSON parse error handling, unknown-IP guard in prod, dual-bucket rate limiting (per-IP + per-email, hashed), and `Cache-Control: no-store` on all error responses. Body limits: 8 KB (signup), 16 KB (leads), 128 KB (submit-blog). Policy: fail-open (temporary Redis outage allows requests through). Task 3B resolved.
+
+**Part B — SEO canonical host**
+- **Canonical hostname**: `https://www.estabizz.com`
+- **Host redirect**: `vercel.json` `redirects[]` with `has.type=host` matching `estabizz.com` → `https://www.estabizz.com/:path*`, `permanent: true`. Duplicate in `next.config.js` `redirects()` for non-Vercel environments. Query strings preserved.
+- **No redirect loop**: `www.estabizz.com` never matches the `has` condition.
+- **Noindex**: `/login` and `/signup` now receive `X-Robots-Tag: noindex, nofollow` header via `next.config.js` headers().
+- **Old Site link removed**: Removed `{ label: 'Old Site', href: 'https://old.estabizz.com/', ... }` from `NAVBAR_DEFAULTS.quickLinks` in `lib/content/navbarDefaults.ts`.
+- **Schema URLs**: Replaced `estabizz-site.vercel.app` → `www.estabizz.com` globally in 20 files (IRDAI, RBI, SEBI, IFSCA pages and homepage).
+- **Organization schema**: Added `logo: "https://www.estabizz.com/estabizz-logo.png"`. Removed non-functional `SearchAction` from WebSite schema. Eliminated duplicate schema emission — homepage now always emits exactly 1 Organization + 1 WebSite entity.
+- **Homepage title**: "Estabizz Fintech Private Limited | Regulatory Licensing & Compliance"
+- **Homepage description**: "Estabizz supports businesses with RBI, SEBI, IRDAI, IFSCA, FIU, MCA and sectoral licensing, regulatory documentation and ongoing compliance in India and global markets."
+- **Files changed**: `vercel.json`, `next.config.js`, `lib/content/navbarDefaults.ts`, `lib/content/seoDefaults.ts`, `app/layout.tsx`, `app/page.tsx`, `app/api/auth/signup/route.ts`, `app/api/leads/route.ts`, `app/api/submit-blog/route.ts`, 20 structured-data files.
+**Vercel dashboard action required**: Add `estabizz.com` as domain, set `www.estabizz.com` as Primary. See `ADMIN_OS_SEO_DEPLOYMENT_CHECKLIST.md §1A`.
+**Google Search Console action required**: Add `https://www.estabizz.com` property, submit sitemap, request removal of 4 old internal URLs.
+**Commit**: pending (SEO: enforce canonical domain and remove old public indexing).
+**TypeScript**: clean. **Build**: pending (see pre-deployment checklist).
+
+---
+
+## 2026-07-22 — Security: harden production rate limiting and body limits (RL-001 resolved · RL-002 open)
+
+**Task**: Corrective hardening of the rate-limiting layer added in `664a08b`. Ten specific gaps fixed.
+**Production config gate**: `isRateLimitConfigured()` exported from `lib/security/rateLimit.ts`. In production, the in-memory fallback is disabled — if `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` are absent, all three protected routes return 503 immediately. In dev, in-memory fallback continues unchanged.
+**Fail-open scope narrowed**: Login fail-open now applies only to runtime Upstash failures on a configured store. Missing config → 503 (not allow-through). `storeError` and `configMissing` are distinct fields on `RateLimitResult`.
+**AI routes**: `configMissing` result treated same as `storeError` (→ 503) under fail-closed policy. IP unknown check added: `ip === 'unknown' && NODE_ENV === 'production'` → 503 on all three routes.
+**Body size enforcement**: Replaced `Content-Length` header checks with actual `req.arrayBuffer()` byte reads. `byteLength > MAX_BODY_BYTES` → 413 regardless of what `Content-Length` claims. Malformed JSON → explicit 400 on all routes.
+**Documentation**: RL-001 (login) RESOLVED. RL-002 (AI endpoints) marked OPEN + deployment-blocking: AI features require Upstash provisioning before `ANTHROPIC_API_KEY` can be set. `SECURITY_INCIDENT_S2.md` unchanged.
+**New task**: Task 3B (rate-limit `/api/auth/signup`, `/api/leads`, `/api/submit-blog`) added to roadmap.
+**Commit**: `1513752` (Security: harden production rate limiting and body limits).
+**TypeScript**: clean. **Build**: clean (134 routes).
+
+---
+
+## 2026-07-22 — Security: add login and public AI rate limiting (TD-001 + TD-002 resolved)
+
+**Task**: Added production-appropriate rate limiting to three API routes. Login endpoint (`POST /api/auth/login`) uses dual-bucket sliding-window limiting: 5 attempts per IP per 15 min + 10 per hashed identifier per 30 min. AI endpoints (`POST /api/chat`, `POST /api/recommend-services`) use per-IP limiting: 10 req/IP/10 min (chat) and 5 req/IP/10 min (recommend). All limited routes return 429 with `Retry-After`, `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`, `Cache-Control: no-store`.
+**Architecture**: Production uses Upstash Redis sliding-window (`@upstash/ratelimit` + `@upstash/redis`). Development uses in-memory fallback (`global.__rl_store`, bounded to 1000 entries). Login policy: fail-open (store error allows request through). AI policy: fail-closed (store error returns 503). Identifiers hashed with SHA-256 before storage.
+**503 gate added**: AI routes now return controlled 503 when `ANTHROPIC_API_KEY` is absent (previously uncontrolled throw → 500). Body size guards added: login 8 KB, recommend 8 KB, chat 64 KB. Input size guards: recommend 3000 chars, chat 4000 chars/message.
+**New file**: `lib/security/rateLimit.ts` — server-only rate-limit utility (`limitRequest`, `getClientIp`, `hashIdentifier`, `rateLimitResponse`, `rateLimitHeaders`).
+**Modified**: `app/api/auth/login/route.ts`, `app/api/chat/route.ts`, `app/api/recommend-services/route.ts`, `package.json` (`@upstash/ratelimit`, `@upstash/redis` added).
+**Commit**: `664a08b` (Security: add login and public AI rate limiting).
+**TypeScript**: clean.
+
+---
+
+## 2026-07-22 — Admin Security: protect internal tools from public access (TD-009 architecture migration)
+
+**Task**: Migrated four internal tooling/template pages from ad-hoc `requireAdminPage` guards on public routes into the Admin OS under `/admin/tools/**`, where they are protected by the existing `app/admin/layout.tsx` JWT guard via Next.js layout inheritance. Old public routes replaced with `notFound()`. All public navigation references (Navbar redirect map, Navbar search overlay, resources page cards, footer defaults, resourcesDefaults, regulatory-updates page link) removed. "Internal Tools" entry added to Admin OS sidebar with `IconTool` SVG. Index page (`/admin/tools`) created with 4 tool cards.
+**Pages created**: `app/admin/tools/page.tsx`, `app/admin/tools/content-rebuild-command/page.tsx`, `app/admin/tools/regulatory-update-email-template/page.tsx`, `app/admin/tools/service-page-content-framework/page.tsx`, `app/admin/tools/proposal-template/page.tsx`.
+**Pages killed (notFound)**: `app/resources/content-rebuild-command/page.tsx`, `app/resources/regulatory-update-email-template/page.tsx`, `app/resources/service-page-content-framework/page.tsx`, `app/proposal-template/page.tsx`.
+**Navigation cleaned**: `app/resources/page.tsx` (4 cards removed), `components/layout/Navbar.tsx` (5 redirect-map entries + 4 search-link entries removed), `lib/content/footerDefaults.ts` (2 links removed), `lib/content/resourcesDefaults.ts` (2 cards removed), `app/resources/regulatory-updates/page.tsx` (Email Format link removed).
+**Commit**: pending (Admin Security: protect internal tools from public access).
+**TypeScript**: clean.
+**Build**: clean (134 pages, 5 new `/admin/tools/**` routes as `ƒ Dynamic`, old public routes as `○ Static` returning 404).
+
+---
+
+## 2026-07-22 — Security: protect internal resource pages with admin auth guard (TD-009 resolution)
+
+**Task**: Removed public access from four internal tooling/template pages while preserving full utility for authenticated administrators. Created `lib/admin/requireAdminPage.ts` — a new shared async utility that mirrors the JWT verification logic in `app/admin/layout.tsx` for use in server page components outside the `/admin/*` tree. The utility reads the `auth_token` cookie, verifies the JWT against `JWT_SECRET`, checks the email against `ADMIN_EMAIL_ALLOWLIST` (fast path), then falls back to an active `admin_users` MongoDB record. Unauthenticated visitors are redirected to `/login?redirect=<path>`; authenticated admins receive the page normally. Applied to all four target pages: `app/resources/content-rebuild-command/page.tsx`, `app/resources/regulatory-update-email-template/page.tsx`, `app/resources/service-page-content-framework/page.tsx`, `app/proposal-template/page.tsx`. Each page received: (1) import of `requireAdminPage`, (2) `export const dynamic = 'force-dynamic'` to prevent static pre-rendering, (3) `robots: { index: false, follow: false }` added to metadata, (4) default export made async, (5) `await requireAdminPage('<path>')` as the first statement in the component body.
+**Note**: `robots.txt` already disallows `/proposal-template` and the three `/resources/*` internal paths (added in Phase 6A). This task adds server-enforced auth so the pages are protected even if the URL is known.
+**Files changed**: `lib/admin/requireAdminPage.ts` (new), `app/resources/content-rebuild-command/page.tsx`, `app/resources/regulatory-update-email-template/page.tsx`, `app/resources/service-page-content-framework/page.tsx`, `app/proposal-template/page.tsx`, `CMS_STATUS.md`, `docs/security/ESTABIZZ_SECURITY_PERMISSION_MAP.md`, `docs/operations/ESTABIZZ_TECHNICAL_DEBT_REGISTER.md`, `docs/roadmap/ESTABIZZ_NEXT_20_TASKS.md`.
+**Commit**: pending (Security: protect internal resource pages with admin auth guard)
+**TypeScript**: clean (`npx tsc --noEmit` passes).
+**Build**: clean (130 static pages + dynamic; no errors).
+**Status**: Complete locally — QA (manual) pending before deploy.
+
+---
+
+## 2026-07-22 — Blog status transition validation (QA correction to commit 22eee40)
+
+**Task**: Added explicit server-side workflow transition matrix to `PATCH /api/admin/blogs/[id]/status`. The route now rejects invalid transitions with `409 Conflict` before any database mutation. Added two-step auth: `requireAdmin` (step 1, auth only) then `requirePermission` (step 7, granular permission) around the transition check, so the blog's current status is loaded from MongoDB and never trusted from the client. Removed stale comment in `DELETE /api/admin/blogs/[id]` that incorrectly said the route was guarded only by `requireAdmin`. All granular permission guards from commit 22eee40 are preserved unchanged.
+**Transition matrix**: `draft → pending_review`; `pending_review → approved | published | rejected | archived | draft`; `approved → published | rejected`; `published → archived`; `rejected → draft`; `archived → draft`. Transitions that skip or reverse workflow steps are rejected: `draft → published`, `rejected → published`, `published → approved`, `published → pending_review`, `archived → published`, `archived → approved`.
+**Note**: Existing MongoDB `admin_users` with `super_admin` or `admin` roles still do not have `manage_leads` in their stored `permissions` array. The synchronization script has NOT been run. This must be done before production deployment.
+**Files changed**: `app/api/admin/blogs/[id]/status/route.ts`, `app/api/admin/blogs/[id]/route.ts`, `CMS_STATUS.md`, `docs/security/ESTABIZZ_SECURITY_PERMISSION_MAP.md`, `docs/security/ADMIN_OS_SECURITY_MATRIX.md`, `docs/architecture/ESTABIZZ_API_DATABASE_MAP.md`, `docs/operations/ESTABIZZ_TECHNICAL_DEBT_REGISTER.md`.
+**Commit**: pending (Admin Security: validate blog status transitions)
+**TypeScript**: clean (`npx tsc --noEmit` passes).
+**Build**: pending (run in Step 7 of this batch).
+**Status**: Complete locally — QA (Antigravity) pending before deploy.
+
+---
+
+## 2026-07-22 — Admin security: granular blog and lead permissions (TD-016 resolution)
+
+**Task**: Replaced `requireAdmin` with granular `requirePermission` guards on all four previously under-protected admin API routes. `POST /api/admin/blogs/save` now requires `create_blog` (new blog) or `edit_blog` (existing blog); publishing additionally requires `publish_blog`. `DELETE /api/admin/blogs/[id]` requires `delete_blog`. `PATCH /api/admin/blogs/[id]/status` maps each target status to its specific permission (`edit_blog` → draft/pending_review; `approve_blog` → approved; `publish_blog` → published; `reject_blog` → rejected; `archive_blog` → archived). `PATCH /api/admin/leads/[id]` requires new `manage_leads` permission (added to `super_admin` and `admin` role defaults in `lib/admin/types.ts`). `manage_leads` human label added to admin Users UI (`UsersClient.tsx`). Zero `requireAdmin`-only route handlers remain in `app/api/admin/**`. `manage_leads` also added to the permission matrix tables in all security documentation.
+**Files changed**: `lib/admin/types.ts`, `app/api/admin/blogs/save/route.ts`, `app/api/admin/blogs/[id]/route.ts`, `app/api/admin/blogs/[id]/status/route.ts`, `app/api/admin/leads/[id]/route.ts`, `app/admin/users/UsersClient.tsx`, `CMS_STATUS.md`, `docs/security/ESTABIZZ_SECURITY_PERMISSION_MAP.md`, `docs/security/ADMIN_OS_SECURITY_MATRIX.md`, `docs/architecture/ESTABIZZ_API_DATABASE_MAP.md`, `docs/operations/ESTABIZZ_TECHNICAL_DEBT_REGISTER.md`, `docs/roadmap/ESTABIZZ_NEXT_20_TASKS.md`.
+**Commit**: pending (Admin Security: enforce granular blog and lead permissions)
+**TypeScript**: clean (`npx tsc --noEmit` passes).
+**Build**: clean (134 static pages, no errors).
+**Status**: Complete — QA (Antigravity) pending before deploy.
+
+---
+
+## 2026-07-22 — Documentation structure correction
+
+**Task**: Corrected the documentation relocation performed in commit `82a3e19`. Restored three operational entry-point files to the repository root (`AGENTS.md`, `CMS_STATUS.md`, `ESTABIZZ_PROJECT_MASTER_CONTEXT.md`). Organized remaining 20 supporting documents into categorized subdirectories under `docs/` (`architecture/`, `security/`, `operations/`, `roadmap/`, `audits/`). Added `word-docs/README.md`. Updated all Markdown cross-references to use correct relative paths. Applied factual corrections to audit documents: `proxy.ts` reclassified as valid Next.js 16 framework convention (not misnamed); redirect routes reclassified as active compatibility routes; `scratch/` confirmed untracked (no cleanup commit needed); blanket `*.docx` ignore recommendation removed. Updated `AGENTS.md` with agent discovery order. Updated `ESTABIZZ_AGENT_OPERATING_GUIDE.md` §10 documentation index.
+**Files changed**: `AGENTS.md`, `CMS_STATUS.md`, `ESTABIZZ_PROJECT_MASTER_CONTEXT.md`, `word-docs/README.md`, `docs/operations/ESTABIZZ_AGENT_OPERATING_GUIDE.md`, `docs/operations/ESTABIZZ_FOLDER_CLEANUP_PLAN.md`, `docs/operations/ADMIN_OS_PRODUCTION_READINESS.md`, `docs/audits/ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md`, plus all 20 supporting docs moved into subdirectories.
+**Commit**: (pending)
+**Status**: Complete — documentation only. No source code modified. No routes changed. No APIs changed. No database access. TypeScript not affected.
+
+---
+
+## 2026-07-22 — Repository structure audit
+
+**Task**: Complete discovery-only audit of the entire repository. Created 5 new documentation files: ESTABIZZ_REPOSITORY_STRUCTURE_MAP.md, ESTABIZZ_FILE_CLASSIFICATION_REGISTER.md, ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md, ESTABIZZ_RECOMMENDED_FOLDER_STRUCTURE.md, ESTABIZZ_FOLDER_CLEANUP_PLAN.md. Updated ESTABIZZ_PROJECT_MASTER_CONTEXT.md with links to new audit docs.
+**Files changed**: `ESTABIZZ_REPOSITORY_STRUCTURE_MAP.md`, `ESTABIZZ_FILE_CLASSIFICATION_REGISTER.md`, `ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md`, `ESTABIZZ_RECOMMENDED_FOLDER_STRUCTURE.md`, `ESTABIZZ_FOLDER_CLEANUP_PLAN.md`, `ESTABIZZ_PROJECT_MASTER_CONTEXT.md`, `CMS_STATUS.md`
+**Commit**: (pending)
+**Status**: Complete — discovery only. No files moved, renamed, deleted, or modified.
 
 ---
 
@@ -43,6 +258,12 @@
 - **Public Content Pages Controlled IRDAI / IFSCA / FEMA Batch Expansion (Phase 4P):** exactly six pages added across three regulators: IRDAI — `/irdai/insurance-broker-registration-in-india`, `/irdai/reinsurance-broker-registration-in-india`; IFSCA — `/ifsca/aircraft-leasing-registration-in-ifsc`, `/ifsca/psp-license-ifsca`; FEMA — `/fema/compliance-under-fema`, `/fema/fema-registration` (all guide pages, menu group `regulatory`, rendered through `ServicePageLayout`). Together with the twenty paths from Phases 4L/4M/4N/4O, `public_content_pages` now contains exactly **twenty-six published CMS-managed records** (15 RBI + 5 SEBI + 2 IRDAI + 2 IFSCA + 2 FEMA). Each new path uses DB-first rendering (`force-dynamic`), whitelist-locked managed paths, Pending Changes save, shared Approval Queue review, controlled media/design presets, Recycle Bin soft delete/restore, and Backup coverage. Targeted imports ran one at a time (`--apply --only=<path>`); broad apply remains blocked. `phase4p` added to blocked source terms and image/design validation patterns. No other IRDAI, IFSCA, or FEMA pages were migrated. No navbar, mega menu, or homepage CMS was modified. QA passed. Phase 4Q was completed subsequently.
 - **Public Content Pages Remaining Public Service/Guide Pages Controlled Expansion (Phase 4Q):** exactly ten guide pages added across three regulators and services: Services — `/services/transfer-pricing`, `/services/india-entry-strategy`, `/services/finance-accounting-outsourcing`, `/services/gst-appeal-services`, `/services/esg-consulting`; SEBI — `/sebi/amfi-registration`, `/sebi/research-analyst-registration-in-india`, `/sebi/reit-registration`; IRDAI — `/irdai/corporate-agent-registration-in-india`, `/irdai/composite-insurance-broker-registration-in-india` (all guide pages rendered through `ServicePageLayout`). Together with the twenty-six paths from Phases 4L/4M/4N/4O/4P, `public_content_pages` now contains exactly **thirty-six published CMS-managed records** (15 RBI + 8 SEBI + 4 IRDAI + 2 IFSCA + 2 FEMA + 5 Services). Each new path uses DB-first rendering (`force-dynamic`), whitelist-locked managed paths, Pending Changes save, shared Approval Queue review, controlled media/design presets, Recycle Bin soft delete/restore, and Backup coverage. Targeted imports ran one at a time (`--apply --only=<path>`); broad apply remains blocked. `phase4q` added to blocked source terms and image/design validation patterns. Fallback descriptions improved for three services pages with poor original metadata (`india-entry-strategy`, `finance-accounting-outsourcing`, `gst-appeal-services`). JSON-LD schema scripts preserved in fallback render path for `research-analyst-registration-in-india`. No navbar, mega menu, or homepage CMS was modified. All 36 public routes return HTTP 200; workflow and validation QA passed. Phase 4R was completed subsequently.
 - **Admin OS Security, Permission, and Route Protection Hardening (Phase 5A):** full audit of all admin page routes, admin API routes, permission enforcement, and secret hygiene. Two gaps found and fixed: (1) `app/admin/layout.tsx` auth guard previously only checked the static `ADMIN_EMAIL_ALLOWLIST` (2 seed emails); it now also checks the MongoDB `admin_users` collection with `status: active` — matching the `requireAdmin` API guard logic, so panel-created admin users can access admin pages; (2) `GET /api/auth/me` `isAdmin` flag previously used the static allowlist only; it now also queries MongoDB, so panel-created admins see `isAdmin: true` in the client UI. All other routes confirmed fully protected: every write/delete/publish/approve/reject/purge/backup-download/user-management API uses `requirePermission` with the correct granular permission; non-managed public content paths are blocked at every write endpoint; PublicContentPage purge is hard-blocked at the API and Recycle Bin UI level; backup excludes all secrets; self-review guard is enforced; last super_admin is protected; no password hashes in API responses; role change resets permissions to role defaults (no escalation); no `.env` files tracked; no build artifacts committed. Artifact scan confirmed: no QA test scripts, no token/session files, no `.DS_Store`, no `launch.json` tracked. `ADMIN_OS_SECURITY_MATRIX.md` created with full permission matrix, protected API summary, critical hard-blocks, known limitations, and recommended next hardening steps. No new content pages migrated; public content CMS remains at 46 managed pages.
+- **Blog Editor UX Improvement — Sticky Toolbar:** Blog formatting toolbar remains visible while scrolling long blog content. Applies to new and existing blog editor screens through the shared RichContentEditor. Toolbar remains positioned below the sticky Blog ActionBar. Narrow screens use horizontal toolbar scrolling. Save, publish, sanitisation and Word import behaviour remain unchanged. `app/layout.tsx`, `package.json` and `package-lock.json` were restored to the `8bf334e` baseline after removal of unrelated changes. No new dependency remains from the sticky-toolbar task. No push or deployment performed.
+- **Blog Editor UX Improvement — Word Document Image Import (hardened):** Embedded images inside `.docx` files are now imported into the editor instead of being silently dropped. When an admin imports a Word file via the "📄 Import Word" button, each embedded image is extracted by Mammoth.js, uploaded directly from the browser to Cloudinary via the existing unsigned upload preset, and a permanent HTTPS URL is inserted at the correct position in the TipTap editor. Each uploaded image is also recorded in the Media Library (`POST /api/admin/media`, tagged `word_import`) as a best-effort non-blocking call. Alt text is taken from the Word document's own alt attribute when available; otherwise a numbered placeholder (`Imported image N`) is used and flagged for admin review. Images exceeding 10 MB, unsupported MIME types (only PNG/JPEG/GIF/WebP accepted), or uploads that fail Cloudinary are silently skipped and reported in a dismissible per-import warning banner. The editor shows a spinner banner during upload ("Uploading image N…") and a yellow alt-review notice after import if any images used placeholder alt text. New package added: `@tiptap/extension-image` (version `^3.28.0`, matching the existing TipTap suite) — required because ProseMirror drops unknown `<img>` nodes without an Image extension registered in the schema. `allowBase64: false` is enforced on the extension so no base64 data is ever stored in the editor or MongoDB. Defence-in-depth: (1) `wordCleanup.ts` now removes any `<img>` whose `src` is not `https://` before handing the cleaned HTML to TipTap (step 7 of the cleanup pipeline); (2) server-side `lib/blog/sanitize.ts` now allows only `https` (not `data:`) in `allowedSchemesByTag.img`, blocking any base64 or data-URI image from being stored. Public blog renderer already has responsive `.blog-content img` styles in `app/globals.css` — no new CSS needed. Base64 image data is never stored permanently in MongoDB. Local Word file paths are never stored. No push or deployment performed.
+- **Blog Editor UX Improvement — Word Image Media Sync Hardening:** Corrective follow-up to the Word Image Import feature. Media Library recording is now explicit and awaited (not best-effort). If a Cloudinary upload succeeds but the Media Library API call fails, the failure is surfaced immediately with an orange warning banner showing the image count and a "Retry Media Library Sync" button. Retrying re-posts each failed record to `/api/admin/media`; on full success, the warning clears and a green confirmation appears. Images are still inserted into the editor even when the media record fails (so content is not lost), but the orphan is flagged and tracked in component state until retried. The import status banner now shows distinct phases: "Uploading image N…" then "Saving image N to Media Library…". On full success (no Cloudinary or media failures), a green "Word import complete — N images uploaded and added to Media Library." banner appears (auto-dismissed). Cloudinary upload failures (e.g. unsupported MIME, oversized file) are counted separately and shown in an amber dismissible banner. **Alt-text inline editor:** clicking an image in TipTap opens a compact "Alt text" panel above the editor with the current alt prefilled. The admin can edit and click Save; `editor.commands.updateAttributes("image", { alt })` applies the change immediately. Blank alt text is rejected. Images with empty or `Imported image N` placeholder alt text are continuously counted by parsing the editor HTML on every content change; the count is shown in a persistent yellow banner. **Publish blocking:** `BlogEditorClient` receives `onImageValidationChange({ unresolvedAltCount, mediaSyncFailures })` from `RichContentEditor` and blocks the Publish button if either count is non-zero. Save as Draft is never blocked. **Server-side validation:** `POST /api/admin/blogs/save` now validates that all `<img>` tags in published content have non-empty, non-placeholder alt text (regex check on sanitized HTML); returns HTTP 400 with a clear message if any fail. **Media API security:** `POST /api/admin/media` now rejects `secureUrl` values that do not start with `https://res.cloudinary.com/` — prevents recording of arbitrary external image URLs via retry. Base64 and data: image data is never stored. No push or deployment performed.
+- **Architecture Documentation Corrections (2026-07-22):** corrected 10 factual issues in the canonical documentation created in commit `a60d5a7`. Corrections: (1) confirmed active branch is `main`; (2) distinguished functional baseline `f182723`/`49f7c81` from documentation commit `a60d5a7`; (3) confirmed no uncommitted changes in requirePermission.ts or RichContentEditor.tsx — both committed in `49f7c81`; (4) documented that next-env.d.ts and public/tailwind.css are generated files and should not be committed as intentional changes; (5) replaced definitive TipTap StrictMode claim with accurate undiagnosed wording (TD-005); (6) documented that blog/leads routes use requireAdmin not requirePermission (new TD-016, added future audit requirement); (7) corrected CSS pipeline claim — postcss.config.js exists and both Tailwind CLI and Next.js/PostCSS paths are active; (8) separated current website/Admin OS completion (~85–88%) from full future platform (~25–30%); (9) reordered Next 20 Tasks to prioritise security/permission fixes before growth features; (10) noted TD-009 fix exists on cms-admin-os-phase-1 but not merged to main. Source code unchanged.
+- **Architecture Documentation (2026-07-22):** created 9 canonical documentation files covering the full platform architecture, module inventory, API/DB map, security/permission map, completion status, technical debt register, future product roadmap, next 20 tasks, agent operating guide, and this master context file. No source code was modified. No new features were implemented. Files: `ESTABIZZ_TECHNICAL_ARCHITECTURE.md`, `ESTABIZZ_MODULE_INVENTORY.md`, `ESTABIZZ_API_DATABASE_MAP.md`, `ESTABIZZ_SECURITY_PERMISSION_MAP.md`, `ESTABIZZ_CURRENT_COMPLETION_STATUS.md`, `ESTABIZZ_TECHNICAL_DEBT_REGISTER.md`, `ESTABIZZ_FUTURE_PRODUCT_ROADMAP.md`, `ESTABIZZ_NEXT_20_TASKS.md`, `ESTABIZZ_AGENT_OPERATING_GUIDE.md`, `ESTABIZZ_PROJECT_MASTER_CONTEXT.md`.
+- **Blog Editor UX Improvement — Word Image Media Retry and Validation Fixes:** Final corrective pass on the Word image import hardening. (1) **Idempotent media API:** `POST /api/admin/media` now uses `MediaAsset.findOneAndUpdate` with `$setOnInsert` and `{ upsert: true }` instead of `MediaAsset.create()` — retrying the same `publicId` returns the existing record rather than throwing a MongoDB E11000 duplicate-key error that would permanently block publish. A catch for error code 11000 handles the rare simultaneous-request race. URL validation upgraded from `startsWith()` string check to `new URL()` parsing: checks `protocol === 'https:'` AND `hostname === 'res.cloudinary.com'`, wrapped in try/catch for malformed URLs. (2) **Always-on alt text scanning:** `RichContentEditor` previously gated alt-text scanning behind `hasWordImagesRef` which was only set during a Word import in the current session — existing blogs with unresolved image alt text loaded without warning. `hasWordImagesRef` is removed entirely. Alt scanning now runs on every `onUpdate` call unconditionally, on editor initialization (initial scan `useEffect`), and after every external `setContent` call (for loaded blogs). (3) **Robust server image parser:** `POST /api/admin/blogs/save` previously used `/\balt="([^"]*)"/i` regex to validate image alt text — this missed `alt='...'` (single quotes), `ALT="..."` (uppercase), and multiline attributes. Replaced with `htmlparser2` + `domutils` (already transitive deps of `sanitize-html`): `parseDocument(cleanContent, { lowerCaseAttributeNames: true })` + `findAll`/`getAttributeValue` — correctly handles all attribute quoting styles and case variants. TypeScript clean. Production build clean. No push or deployment performed.
 - **Blog Rich Text Editor with Word Paste Support (Phase 6C):** replaced the plain `<textarea>` content editor in `/admin/blogs/new` and `/admin/blogs/[id]/edit` with a full TipTap WYSIWYG rich text editor. New packages added: `@tiptap/react`, `@tiptap/pm`, `@tiptap/starter-kit`, `@tiptap/extension-link`, `@tiptap/extension-underline`, `@tiptap/extension-table` (+ row/cell/header), `mammoth`. New files: `app/admin/blogs/_components/RichContentEditor.tsx` (TipTap editor component), `app/admin/blogs/_components/wordCleanup.ts` (browser-side Word HTML sanitizer using DOMParser). Paste from Microsoft Word is auto-detected (`mso-` / `MsoNormal` / `w:WordDocument` markers); Word HTML is cleaned client-side (strips mso- styles, Office XML, event handlers, javascript: URLs; maps Word Heading 1–5 → H2/H3/H4; removes empty paragraphs and unsafe classes) before being inserted into the editor via ProseMirror's DOMParser. Import from `.docx` via "📄 Import Word" button uses Mammoth.js (lazy-loaded) to convert to HTML, then the same cleanup runs. Toolbar: Bold, Italic, Underline, H2/H3/H4, Bullet/Numbered list, Blockquote, Link (dialog), Table (with Add Col/Row, Delete controls), Import Word. HTML source view toggle (read-only) preserved for power users. Word count + char count footer preserved. On every save, server-side `sanitize-html` in `lib/blog/sanitize.ts` re-sanitizes the content as a second XSS defense layer — no raw Word HTML is ever stored. Existing blog edit page (`/admin/blogs/[id]/edit`) uses the same `BlogEditorClient` component and gets the rich editor automatically. Existing published blogs continue to render unchanged. TypeScript clean. No public-facing pages changed. No homepage CMS changed. No regulatory updates changed. No push to GitHub. No deployment to Vercel.
 - **Final Staging Deployment Preparation / Release Package (Phase 6B):** final staging deployment preparation completed. `ADMIN_OS_STAGING_RELEASE_PACKAGE.md` created with 20 sections: purpose, current phase/status, latest approved commit (`1a473d8`), release scope, modules included (homepage CMS, public content CMS 46 pages, SEO editor, media library, approval queue, recycle bin, backup/restore, regulatory updates, users/roles, sitemap/robots), modules excluded, environment variable checklist (names only: `MONGODB_URI`, `JWT_SECRET`, `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`, `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET`, optional GitHub backup vars, optional `NEXT_PUBLIC_SITE_URL`; `CLOUDINARY_API_KEY`/`CLOUDINARY_API_SECRET` confirmed not used — Cloudinary uses unsigned upload presets only), MongoDB readiness checklist, Cloudinary readiness checklist, GitHub backup readiness checklist, Vercel/staging configuration checklist, domain/DNS checklist, admin access checklist, pre-deployment checklist, deployment commands checklist (documented only — NOT executed), post-deployment smoke test checklist (66 checks across public routes, admin routes, API routes, SEO, and security), rollback plan (7 paths: Vercel instant rollback, git revert, CMS content restore, recycle bin restore, admin lockout recovery, secret rotation, re-smoke test), Go/No-Go matrix (15 Go criteria, 14 No-Go blockers), known limitations, and final confirmation of no push/deploy. `ADMIN_OS_PRODUCTION_READINESS.md` updated with Phase 6B addendum (§23). Local build verified: `npm run build` clean (137 pages), `npx tsc --noEmit` clean. Artifact scan clean. managedPaths count = 46. Sitemap 69 total / 46 CMS pages verified at Phase 6A. No new content pages migrated; public content CMS remains at 46 managed pages. No push to GitHub. No deployment to Vercel. Phase 6C not started.
 - **Sitemap / Robots / Deployment SEO Readiness (Phase 6A):** `app/sitemap.ts` rewritten — now includes all 46 CMS-managed published public content pages (queried live from MongoDB `public_content_pages`, `status: published`, scoped to `PUBLIC_CONTENT_MANAGED_PATHS`), 19 static hub/business/legal pages, homepage, published regulatory update detail pages (up to 200), and published blog articles. 69 total URLs verified via dev server smoke test. `app/robots.ts` rewritten using new `lib/seo/siteUrl.ts` helper (`getSiteUrl()`); disallows `/admin/`, `/api/`, `/login`, `/signup`, `/my-blogs`, `/proposal-template`, and three internal tool routes. `robots.txt` sitemap pointer confirmed pointing to production domain. New `lib/seo/siteUrl.ts` created: reads `NEXT_PUBLIC_SITE_URL` env var first, falls back to `https://www.estabizz.com` — canonical domain now centrally managed. TypeScript clean. Production build clean (137 pages, `/sitemap.xml` as `○ Static`). `ADMIN_OS_SEO_DEPLOYMENT_CHECKLIST.md` created with all 16 required sections: purpose, phase/status, sitemap behaviour, robots, canonical URL strategy, required env var names, included/excluded URL groups, CMS-managed page rules, deleted/pending page exclusion, admin/API exclusion, pre-deployment checklist, post-deployment smoke test, Google Search Console steps, known limitations, Phase 6B recommendations. `ADMIN_OS_PRODUCTION_READINESS.md` SEO row updated to PASS. No new content pages migrated; public content CMS remains at 46 managed pages. No push to GitHub. No deployment to Vercel. Phase 6B not started.

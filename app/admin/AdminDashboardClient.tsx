@@ -102,13 +102,13 @@ function StatCard({ label, value, icon, iconBg, iconColor, href }: StatCardProps
   return (
     <Link
       href={href}
-      className="flex flex-col justify-between rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_24px_rgba(10,22,40,0.09)] hover:-translate-y-0.5 hover:border-[#1677f2]/35 transition-all duration-200"
+      className="flex flex-col justify-between rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_24px_rgba(10,22,40,0.09)] hover:-translate-y-0.5 hover:border-[#1677f2]/35 transition-all duration-200"
     >
       <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${iconBg} ${iconColor} mb-4`}>
         {icon}
       </div>
       <div>
-        <div className="text-[30px] font-black text-[#0a1628] leading-none tabular-nums">
+        <div className="text-[30px] font-black text-[#0a1628] dark:text-[#f7f9fc] leading-none tabular-nums">
           {value}
         </div>
         <div className="mt-1.5 text-[12px] font-semibold text-[#64748b]">{label}</div>
@@ -135,10 +135,10 @@ function QuickCard({
   return (
     <Link
       href={href}
-      className="group flex flex-col justify-between rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_20px_rgba(10,22,40,0.08)] hover:-translate-y-0.5 hover:border-[#1677f2]/25 transition-all duration-200"
+      className="group flex flex-col justify-between rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_20px_rgba(10,22,40,0.08)] hover:-translate-y-0.5 hover:border-[#1677f2]/25 transition-all duration-200"
     >
       <div>
-        <h3 className="text-[13.5px] font-black text-[#0a1628] mb-1.5">{title}</h3>
+        <h3 className="text-[13.5px] font-black text-[#0a1628] dark:text-[#f7f9fc] mb-1.5">{title}</h3>
         <p className="text-[12px] text-[#64748b] leading-5">{desc}</p>
       </div>
       <div className="mt-4">
@@ -189,13 +189,13 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
   ];
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#06101f] p-6 lg:p-8">
 
       {/* ── Page header ──────────────────────────────────────────────────────── */}
       <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-[22px] font-black text-[#0a1628] leading-tight">Dashboard</h1>
-          <p className="mt-0.5 text-[13px] text-[#64748b]">Content overview</p>
+          <h1 className="text-[22px] font-black text-[#0a1628] dark:text-[#f7f9fc] leading-tight">Dashboard</h1>
+          <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a9b6c9]">Content overview</p>
         </div>
         <Link
           href="/admin/blogs/new"
@@ -216,11 +216,11 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
       </div>
 
       {/* ── Recent blogs table ────────────────────────────────────────────────── */}
-      <div className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_8px_rgba(10,22,40,0.04)] overflow-hidden mb-6">
-        <div className="flex items-center justify-between border-b border-[#f0f4f8] px-6 py-4">
+      <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_8px_rgba(10,22,40,0.04)] overflow-hidden mb-6">
+        <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#223550] px-6 py-4">
           <div>
-            <h2 className="text-[14px] font-black text-[#0a1628]">Recent Blogs</h2>
-            <p className="text-[11px] text-[#94a3b8] mt-0.5">Latest entries across all statuses</p>
+            <h2 className="text-[14px] font-black text-[#0a1628] dark:text-[#f7f9fc]">Recent Blogs</h2>
+            <p className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9] mt-0.5">Latest entries across all statuses</p>
           </div>
           <Link
             href="/admin/blogs"
@@ -251,27 +251,27 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-[#f0f4f8] bg-[#f8fafc]">
-                  <th className="px-6 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">Title</th>
-                  <th className="hidden md:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">Category</th>
-                  <th className="hidden sm:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">Status</th>
-                  <th className="hidden lg:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">Date</th>
-                  <th className="px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">Action</th>
+                <tr className="border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628]">
+                  <th className="px-6 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Title</th>
+                  <th className="hidden md:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Category</th>
+                  <th className="hidden sm:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Status</th>
+                  <th className="hidden lg:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Date</th>
+                  <th className="px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#f0f4f8]">
+              <tbody className="divide-y divide-[#f0f4f8] dark:divide-[#223550]">
                 {recentBlogs.map((blog) => (
-                  <tr key={blog.id} className="group hover:bg-[#f8fafc] transition-colors">
+                  <tr key={blog.id} className="group hover:bg-[#f8fafc] dark:hover:bg-[#12223a] transition-colors">
                     <td className="px-6 py-3.5 max-w-[240px]">
-                      <div className="text-[13px] font-bold text-[#0a1628] truncate group-hover:text-[#1677f2] transition-colors">
+                      <div className="text-[13px] font-bold text-[#0a1628] dark:text-[#f7f9fc] truncate group-hover:text-[#1677f2] transition-colors">
                         {blog.title}
                       </div>
-                      <div className="text-[11px] text-[#94a3b8] truncate mt-0.5">
+                      <div className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9] truncate mt-0.5">
                         {blog.author.firstName} {blog.author.lastName}
                       </div>
                     </td>
                     <td className="hidden md:table-cell px-4 py-3.5">
-                      <span className="text-[12px] text-[#475569]">
+                      <span className="text-[12px] text-[#475569] dark:text-[#a9b6c9]">
                         {blog.category.icon} {blog.category.name}
                       </span>
                     </td>

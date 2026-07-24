@@ -10,8 +10,11 @@ import { blogCategories } from '@/lib/blog/categories';
 import { addSubmission, updateSubmission, getSubmissionById } from '@/lib/blog/submissionStore';
 import { connectDB } from '@/lib/db';
 import BlogModel from '@/lib/models/Blog';
-import { requireAdmin } from '@/lib/admin/requireAdmin';
+import { requirePermission } from '@/lib/admin/requirePermission';
 import { sanitizeBlogHtml } from '@/lib/blog/sanitize';
+import { parseDocument } from 'htmlparser2';
+import { findAll, getAttributeValue } from 'domutils';
+import type { Element, AnyNode } from 'domhandler';
 
 const KNOWN_AUTHORS = [
   {
@@ -49,10 +52,6 @@ function estimateReadingTime(text: string): number {
 
 export async function POST(req: NextRequest) {
   try {
-    // ── Admin auth guard ──────────────────────────────────────────────────────
-    const auth = await requireAdmin(req);
-    if (!auth.ok) return auth.response;
-
     const body = await req.json();
 
     // ── Validation ────────────────────────────────────────────────────────────
@@ -63,16 +62,67 @@ export async function POST(req: NextRequest) {
     const category = blogCategories.find((c) => c.id === body.categoryId);
     if (!category) return NextResponse.json({ error: 'Invalid category.' }, { status: 400 });
 
+    const status: BlogStatus = body.status ?? 'draft';
+    const isPublishing = status === 'published';
+
+    // ── Granular permission guard ─────────────────────────────────────────────
+    // body.id present → editing an existing blog (requires edit_blog)
+    // body.id absent  → creating a new blog (requires create_blog)
+    const isEdit = Boolean(body.id);
+    const auth = await requirePermission(req, isEdit ? 'edit_blog' : 'create_blog');
+    if (!auth.ok) return auth.response;
+
+    // Publishing additionally requires publish_blog
+    if (isPublishing && !auth.admin.permissions.includes('publish_blog')) {
+      return NextResponse.json(
+        { error: 'You do not have permission to publish blog.' },
+        { status: 403 }
+      );
+    }
+
     // XSS defense: sanitize the article HTML before it is stored.
     const cleanContent = sanitizeBlogHtml(body.content.trim());
 
     const now    = new Date();
     const nowISO = now.toISOString();
-    const status: BlogStatus = body.status ?? 'draft';
-    const isPublishing = status === 'published';
 
-    // Resolve author
-    const author = KNOWN_AUTHORS.find((a) => a.id === body.authorId) ?? KNOWN_AUTHORS[0];
+    // Server-side image validation for publish requests
+    if (isPublishing) {
+      const PLACEHOLDER_ALT = /^Imported image \d+$/i;
+      const doc  = parseDocument(cleanContent, { lowerCaseAttributeNames: true });
+      const imgs = findAll(
+        (el: AnyNode): el is Element => el.type === 'tag' && (el as Element).name === 'img',
+        doc.children as AnyNode[]
+      );
+      for (const img of imgs) {
+        const alt = (getAttributeValue(img, 'alt') ?? '').trim();
+        if (!alt || PLACEHOLDER_ALT.test(alt)) {
+          return NextResponse.json(
+            { error: 'Please review the alt text for all imported images before publishing.' },
+            { status: 400 }
+          );
+        }
+      }
+    }
+
+    // Resolve author — custom name support
+    let author: typeof KNOWN_AUTHORS[0];
+    if (body.authorId === 'author_custom' && body.customAuthorName?.trim()) {
+      const parts = body.customAuthorName.trim().split(/\s+/);
+      const firstName = parts[0];
+      const lastName = parts.slice(1).join(' ') || '';
+      author = {
+        id: 'author_custom',
+        firstName,
+        lastName,
+        email: 'support@estabizz.com',
+        designation: 'Contributor, Estabizz Fintech',
+        role: 'admin' as const,
+        bio: '',
+      };
+    } else {
+      author = KNOWN_AUTHORS.find((a) => a.id === body.authorId) ?? KNOWN_AUTHORS[0];
+    }
 
     const tags: string[] = Array.isArray(body.tags)
       ? body.tags

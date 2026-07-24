@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPublicContentPageRenderState } from '@/lib/publicContent/rendering';
-import PublicContentPageRenderer from '@/components/publicContent/PublicContentPageRenderer';
 import PageClient from './PageClient';
 
 const FULL_PATH = '/services/enterprise-services';
@@ -38,6 +37,5 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page() {
     const state = await getPublicContentPageRenderState(FULL_PATH);
     if (state.mode === 'blocked') notFound();
-    if (state.mode === 'published') return <PublicContentPageRenderer page={state.page} />;
     return <PageClient />;
 }

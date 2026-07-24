@@ -99,7 +99,15 @@ export function cleanWordHtml(raw: string): string {
     }
   });
 
-  // 7. Remove class attributes that aren't our callout classes
+  // 7. Validate image sources — only HTTPS URLs are allowed; anything else is removed
+  doc.body.querySelectorAll("img").forEach((img) => {
+    const src = img.getAttribute("src") ?? "";
+    if (!/^https:\/\//i.test(src)) {
+      img.remove();
+    }
+  });
+
+  // 8. Remove class attributes that aren't our callout classes
   const ALLOWED_CLASSES = new Set([
     "callout", "callout-info", "callout-warning",
     "callout-important", "callout-success",

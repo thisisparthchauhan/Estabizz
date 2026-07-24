@@ -3,6 +3,20 @@ const nextConfig = {
     images: {
         unoptimized: true,
     },
+    // Non-www → www canonical host redirect.
+    // Production: Vercel edge redirects (vercel.json) are the primary mechanism.
+    // This Next.js layer ensures the redirect also runs in custom/non-Vercel
+    // environments and matches query strings transparently via Next.js defaults.
+    async redirects() {
+        return [
+            {
+                source: '/:path*',
+                has: [{ type: 'host', value: 'estabizz.com' }],
+                destination: 'https://www.estabizz.com/:path*',
+                permanent: true,
+            },
+        ];
+    },
     // Aggressive cache busting for HTML so visitors always get the latest deploy.
     // Static assets (JS/CSS) keep long cache via Next.js's hashed asset URLs.
     async headers() {
@@ -33,6 +47,21 @@ const nextConfig = {
                         key: "Cache-Control",
                         value: "no-store",
                     },
+                ],
+            },
+            // ── Auth routes: never index ──────────────────────────────────────
+            {
+                source: "/login",
+                headers: [
+                    { key: "X-Robots-Tag", value: "noindex, nofollow" },
+                    { key: "Cache-Control", value: "no-store" },
+                ],
+            },
+            {
+                source: "/signup",
+                headers: [
+                    { key: "X-Robots-Tag", value: "noindex, nofollow" },
+                    { key: "Cache-Control", value: "no-store" },
                 ],
             },
             // ── API routes: never index ───────────────────────────────────────

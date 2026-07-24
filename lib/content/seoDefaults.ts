@@ -27,19 +27,19 @@ export interface SeoContent {
 // ── Homepage ───────────────────────────────────────────────────────────────────
 
 export const SEO_HOMEPAGE_DEFAULTS: SeoContent = {
-  seoTitle: "Estabizz Fintech Private Limited | India's Fintech Compliance Platform",
+  seoTitle: "Estabizz Fintech Private Limited | Regulatory Licensing & Compliance",
   metaDescription:
-    "Premium regulatory advisory and compliance support for RBI, SEBI, IRDAI, IFSCA, FIU-IND, MCA and sectoral licences. Licensing, documentation, compliance portal and post-registration support.",
+    "Estabizz supports businesses with RBI, SEBI, IRDAI, IFSCA, FIU, MCA and sectoral licensing, regulatory documentation and ongoing compliance in India and global markets.",
   focusKeyword: "fintech compliance India",
   slug: "/",
   canonicalUrl: "/",
-  ogTitle: "Estabizz Fintech | India's Fintech Compliance Platform",
+  ogTitle: "Estabizz Fintech Private Limited | Regulatory Licensing & Compliance",
   ogDescription:
-    "We Secure Your Licence. You Secure Your Future. Regulatory advisory for RBI, SEBI, IRDAI, IFSCA and allied frameworks.",
+    "Estabizz supports businesses with RBI, SEBI, IRDAI, IFSCA, FIU, MCA and sectoral licensing, regulatory documentation and ongoing compliance in India and global markets.",
   ogImage: "",
-  twitterTitle: "Estabizz Fintech | India's Fintech Compliance Platform",
+  twitterTitle: "Estabizz Fintech Private Limited | Regulatory Licensing & Compliance",
   twitterDescription:
-    "Regulatory advisory and compliance support for RBI, SEBI, IRDAI, IFSCA and allied frameworks.",
+    "Estabizz supports businesses with RBI, SEBI, IRDAI, IFSCA, FIU, MCA and sectoral licensing, regulatory documentation and ongoing compliance in India and global markets.",
   robotsIndex: true,
   robotsFollow: true,
   schemaType: "WebSite",

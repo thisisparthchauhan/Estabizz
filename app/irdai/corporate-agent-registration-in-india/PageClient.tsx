@@ -961,12 +961,12 @@ Corporate Agent Registration in India should be treated as a regulated business 
             provider: {
               "@type": "Organization",
               name: "Estabizz Fintech Private Limited",
-              url: "https://estabizz-site.vercel.app/",
+              url: "https://www.estabizz.com/",
             },
             areaServed: { "@type": "Country", name: "India" },
             description:
               "Professional regulatory consulting support for IRDAI Corporate Agent Registration covering life, general, health and composite insurance distribution — eligibility review, capital readiness, Principal Officer documentation, Specified Persons training, business plan, application filing and post-registration compliance.",
-            url: "https://estabizz-site.vercel.app/irdai/corporate-agent-registration-in-india",
+            url: "https://www.estabizz.com/irdai/corporate-agent-registration-in-india",
           }),
         }}
       />
@@ -978,9 +978,9 @@ Corporate Agent Registration in India should be treated as a regulated business 
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
-              { "@type": "ListItem", position: 2, name: "IRDAI Services", item: "https://estabizz-site.vercel.app/irdai" },
-              { "@type": "ListItem", position: 3, name: "Corporate Agent Registration", item: "https://estabizz-site.vercel.app/irdai/corporate-agent-registration-in-india" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://www.estabizz.com/" },
+              { "@type": "ListItem", position: 2, name: "IRDAI Services", item: "https://www.estabizz.com/irdai" },
+              { "@type": "ListItem", position: 3, name: "Corporate Agent Registration", item: "https://www.estabizz.com/irdai/corporate-agent-registration-in-india" },
             ],
           }),
         }}

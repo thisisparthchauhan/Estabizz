@@ -9,6 +9,8 @@
  *   - All 46 CMS-managed public content pages (published only, from MongoDB)
  *   - Published regulatory update detail pages
  *   - Published blog article pages
+ *   - Global Markets directory (/global)
+ *   - Active-tier country pages only (/global/{slug} where indexable === true)
  *
  * Excludes (never included):
  *   - /admin/** — admin panel routes
@@ -18,6 +20,7 @@
  *   - Draft / pending / deleted CMS records
  *   - Non-managed CMS paths
  *   - Internal tooling routes (/proposal-template, /resources/content-rebuild-command, etc.)
+ *   - Developing and planned country pages (noindex — thin content without verified local data)
  */
 
 import type { MetadataRoute } from "next";
@@ -27,6 +30,7 @@ import { listPublishedUpdates } from "@/lib/regulatory/repository";
 import { connectDB } from "@/lib/db";
 import PublicContentPage from "@/lib/models/PublicContentPage";
 import { PUBLIC_CONTENT_MANAGED_PATHS } from "@/lib/publicContent/managedPaths";
+import { getSitemapCountries } from "@/lib/globalMarkets/countries";
 
 // ── CMS-managed page DB query ─────────────────────────────────────────────────
 
@@ -99,6 +103,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/get-started`, changeFrequency: "monthly", priority: 0.6 },
     // Blogs
     { url: `${BASE}/blogs`, changeFrequency: "daily", priority: 0.9 },
+    // Global Markets directory (indexable — premium market intelligence hub)
+    { url: `${BASE}/global`, changeFrequency: "weekly", priority: 0.7 },
     // 19-5 hub
     { url: `${BASE}/19-5`, changeFrequency: "weekly", priority: 0.6 },
     // Legal
@@ -131,11 +137,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: blog.featured ? 0.9 : 0.7,
   }));
 
+  // ── Active-tier Global Market country pages ───────────────────────────────
+  // Only countries where includeInSitemap === true (active tier only).
+  // Developing and planned markets are noindex and excluded from sitemap
+  // to prevent thin-content indexing.
+  const activeCountryPages: MetadataRoute.Sitemap = getSitemapCountries()
+    .filter(c => c.slug !== "india") // India is the homepage
+    .map(c => ({
+      url: `${BASE}/global/${c.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }));
+
   return [
     ...homePage,
     ...staticHubPages,
     ...cmsPageEntries,
     ...regulatoryPages,
     ...blogPages,
+    ...activeCountryPages,
   ];
 }

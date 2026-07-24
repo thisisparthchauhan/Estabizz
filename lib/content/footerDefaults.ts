@@ -40,7 +40,7 @@ export const FOOTER_DEFAULTS: FooterContent = {
   address:
     '15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421',
   phone: '+91 98256 00907',
-  email: 'info@estabizz.com',
+  email: 'support@estabizz.com',
   cin: 'U74999GJ2021PTC123384',
   instagramUrl: 'https://www.instagram.com/estabizzlegal/',
   linkedinUrl: 'https://www.linkedin.com/company/estabizz-fintech/',
@@ -92,8 +92,6 @@ export const FOOTER_DEFAULTS: FooterContent = {
       title: 'Knowledge & Resources',
       links: [
         { label: 'Regulatory Updates', href: '/resources/regulatory-updates' },
-        { label: 'Content Framework', href: '/resources/service-page-content-framework' },
-        { label: 'Proposal Templates', href: '/proposal-template' },
         { label: 'Case Highlights', href: '/' },
         { label: 'FAQs', href: '/resources/faqs' },
         { label: 'Guides & Insights', href: '/resources' },

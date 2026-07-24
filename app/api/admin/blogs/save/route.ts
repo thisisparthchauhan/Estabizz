@@ -105,8 +105,24 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Resolve author
-    const author = KNOWN_AUTHORS.find((a) => a.id === body.authorId) ?? KNOWN_AUTHORS[0];
+    // Resolve author — custom name support
+    let author: typeof KNOWN_AUTHORS[0];
+    if (body.authorId === 'author_custom' && body.customAuthorName?.trim()) {
+      const parts = body.customAuthorName.trim().split(/\s+/);
+      const firstName = parts[0];
+      const lastName = parts.slice(1).join(' ') || '';
+      author = {
+        id: 'author_custom',
+        firstName,
+        lastName,
+        email: 'support@estabizz.com',
+        designation: 'Contributor, Estabizz Fintech',
+        role: 'admin' as const,
+        bio: '',
+      };
+    } else {
+      author = KNOWN_AUTHORS.find((a) => a.id === body.authorId) ?? KNOWN_AUTHORS[0];
+    }
 
     const tags: string[] = Array.isArray(body.tags)
       ? body.tags

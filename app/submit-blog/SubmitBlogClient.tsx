@@ -166,7 +166,7 @@ function FormSection({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white rounded-2xl border border-[#e2eaf2] shadow-[0_2px_12px_rgba(10,22,40,0.06)] overflow-hidden">
+    <div className="bg-white rounded-2xl border border-[#e2eaf2] shadow-[0_2px_12px_rgba(10,22,40,0.06)]">
       <div className="flex items-start gap-3.5 px-6 py-4 border-b border-[#f0f6ff] bg-[#fafcff]">
         <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center text-white font-black text-[13px] shrink-0 mt-0.5">
           {step}

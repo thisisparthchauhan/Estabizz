@@ -45,7 +45,7 @@ const organizationSchema = {
     name: "Estabizz Fintech Private Limited",
     url: "https://www.estabizz.com/",
     logo: "https://www.estabizz.com/estabizz-logo.png",
-    email: "info@estabizz.com",
+    email: "support@estabizz.com",
     telephone: "+91 98256 00907",
     address: {
         "@type": "PostalAddress",

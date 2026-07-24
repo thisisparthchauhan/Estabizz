@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPublicContentPageRenderState } from '@/lib/publicContent/rendering';
 import PageClient from './PageClient';
-import PublicContentPageRenderer from './PublicContentPageRenderer';
 
 const FULL_PATH = '/rbi/nbfc-registration-in-india';
 
@@ -50,7 +49,6 @@ export default async function Page() {
     const state = await getPublicContentPageRenderState(FULL_PATH);
 
     if (state.mode === 'blocked') notFound();
-    if (state.mode === 'published') return <PublicContentPageRenderer page={state.page} />;
 
     return <PageClient />;
 }

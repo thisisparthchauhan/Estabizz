@@ -565,7 +565,10 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
 
                     {/* Logo */}
                     <Link href="/" className="shrink-0 group">
-                        <Image src="/estabizz-logo.png" alt="Estabizz" width={747} height={314} priority className="h-12 w-auto transition-transform group-hover:scale-[1.03]" />
+                        {/* Standard logo shown in light mode */}
+                        <Image src="/estabizz-logo.png" alt="Estabizz" width={747} height={314} priority className="block dark:hidden h-12 w-auto transition-transform group-hover:scale-[1.03]" />
+                        {/* Light logo shown in dark mode (same asset as Footer) */}
+                        <Image src="/estabizz-logo-light.png" alt="Estabizz" width={747} height={314} priority className="hidden dark:block h-12 w-auto transition-transform group-hover:scale-[1.03]" />
                     </Link>
 
                     {/* Desktop Nav */}
@@ -746,9 +749,9 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                     <div className="xl:hidden flex items-center gap-2">
                         <CountrySelector compact selectorRef={compactCountryRef} />
                         <button onClick={() => setMobileOpen(!mobileOpen)} className="flex flex-col gap-1.5 p-2" aria-label="Open navigation menu">
-                            <span className={`block w-6 h-0.5 bg-[#0a1628] transition-all ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
-                            <span className={`block w-6 h-0.5 bg-[#0a1628] transition-all ${mobileOpen ? "opacity-0" : ""}`} />
-                            <span className={`block w-6 h-0.5 bg-[#0a1628] transition-all ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+                            <span className={`block w-6 h-0.5 bg-[#0a1628] dark:bg-[#f7f9fc] transition-all ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
+                            <span className={`block w-6 h-0.5 bg-[#0a1628] dark:bg-[#f7f9fc] transition-all ${mobileOpen ? "opacity-0" : ""}`} />
+                            <span className={`block w-6 h-0.5 bg-[#0a1628] dark:bg-[#f7f9fc] transition-all ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
                         </button>
                     </div>
                 </div>

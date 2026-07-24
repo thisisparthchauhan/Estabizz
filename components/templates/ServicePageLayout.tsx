@@ -205,11 +205,11 @@ export default function ServicePageLayout({
 
             {insightCards.length > 0 && (
                 <section className="relative z-20 -mt-7 px-5 md:px-6 lg:hidden">
-                    <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 rounded-[28px] border border-blue-100 bg-white/92 p-3 shadow-[0_24px_70px_rgba(0,100,200,0.10)] backdrop-blur-xl sm:grid-cols-2 xl:grid-cols-4">
+                    <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 rounded-[28px] border border-blue-100 dark:border-[#223550] bg-white/92 dark:bg-[#0d1a2d]/92 p-3 shadow-[0_24px_70px_rgba(0,100,200,0.10)] backdrop-blur-xl sm:grid-cols-2 xl:grid-cols-4">
                         {insightCards.map((fact, i) => (
-                            <div key={`${fact.label}-${i}`} className="rounded-[22px] border border-blue-50 bg-gradient-to-br from-[#f8fbff] to-white p-5">
-                                <div className="mb-2 text-[11px] font-black uppercase tracking-[0.16em] text-[#64748b]">{fact.label}</div>
-                                <div className="text-[18px] font-black leading-tight text-[#0a1628]">{fact.value}</div>
+                            <div key={`${fact.label}-${i}`} className="rounded-[22px] border border-blue-50 dark:border-[#223550] bg-gradient-to-br from-[#f8fbff] to-white dark:from-[#12223a] dark:to-[#0d1a2d] p-5">
+                                <div className="mb-2 text-[11px] font-black uppercase tracking-[0.16em] text-[#64748b] dark:text-[#a9b6c9]">{fact.label}</div>
+                                <div className="text-[18px] font-black leading-tight text-[#0a1628] dark:text-[#f7f9fc]">{fact.value}</div>
                             </div>
                         ))}
                     </div>
@@ -250,7 +250,7 @@ export default function ServicePageLayout({
                         <nav className="flex flex-col gap-2 mt-4 max-h-[320px] overflow-y-auto">
                             {sections.map((section) => (
                                 <a key={section.id} href={`#${section.id}`} onClick={(e) => scrollToSection(e, section.id)}
-                                    className="text-[14px] text-gray-600 hover:text-[#1677f2] border-b border-gray-50 pb-2 leading-snug">
+                                    className="text-[14px] text-gray-600 dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] border-b border-gray-50 dark:border-[#223550] pb-2 leading-snug">
                                     {section.title}
                                 </a>
                             ))}
@@ -329,6 +329,42 @@ export default function ServicePageLayout({
                 .article-content p{font-size:15.5px;line-height:1.85}
                 .article-content li{font-size:15px}
               }
+              /* ── Dark mode overrides ───────────────────────────── */
+              .dark .article-content h2{color:#f7f9fc}
+              .dark .article-content h3{color:#60a5fa}
+              .dark .article-content h4{color:#f7f9fc}
+              .dark .article-content p{color:#a9b6c9}
+              .dark .article-content li{color:#a9b6c9}
+              .dark .article-content li strong{color:#f7f9fc}
+              .dark .article-content p strong{color:#f7f9fc}
+              .dark .article-content .clean-list li{background:linear-gradient(135deg,#12223a,#0d1a2d);border-color:rgba(34,53,80,0.8)}
+              .dark .article-content .numbered-list li{background:#0d1a2d;border-color:rgba(34,53,80,0.8)}
+              .dark .article-content .numbered-list li::before{background:#1e3050}
+              .dark .article-content .field-label{color:#f7f9fc}
+              .dark .article-content .process-card{background:linear-gradient(135deg,#12223a,#0d1a2d);border-color:rgba(34,53,80,0.8)}
+              .dark .article-content .process-card h3{color:#f7f9fc}
+              .dark .article-content .process-card p{color:#a9b6c9}
+              .dark .numbered-card{background:#0d1a2d;border-color:rgba(34,53,80,0.8)}
+              .dark .faq-item{background:#0d1a2d;border-color:#223550}
+              .dark .faq-item summary{color:#f7f9fc}
+              .dark .faq-item summary:hover{background:#12223a}
+              .dark .faq-item>div{color:#a9b6c9;border-top-color:#223550}
+              .dark .expert-quote{background:linear-gradient(135deg,#0d1a2d,#12223a)}
+              .dark .expert-quote blockquote{color:#f7f9fc}
+              .dark .expert-quote cite{color:#a9b6c9}
+              .dark .info-box{background:rgba(22,119,242,0.08);border-color:rgba(34,53,80,0.8)}
+              .dark .warning-box{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.3)}
+              .dark .success-box{background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3)}
+              .dark .data-table{border-color:#223550}
+              .dark .data-table tbody tr:nth-child(odd){background:#0d1a2d}
+              .dark .data-table tbody tr:nth-child(even){background:#12223a}
+              .dark .data-table tbody td{color:#a9b6c9;border-bottom-color:#223550}
+              .dark .step-timeline{border-left-color:#223550}
+              .dark .step-dot{box-shadow:0 0 0 4px #06101f}
+              .dark .step-card{background:#0d1a2d;border-color:#223550;border-left-color:#1677f2}
+              .dark .badge-yes{background:rgba(22,163,74,0.15);color:#4ade80}
+              .dark .badge-no{background:rgba(220,38,38,0.15);color:#f87171}
+              .dark .badge-optional{background:rgba(217,119,6,0.15);color:#fbbf24}
             `}} />
                     {children}
                 </main>
@@ -352,36 +388,36 @@ export default function ServicePageLayout({
                     </div>
 
                     {/* Expert Card */}
-                    <div className="bg-white border border-blue-100 rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)]">
+                    <div className="bg-white dark:bg-[#0d1a2d] border border-blue-100 dark:border-[#223550] rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] dark:shadow-[0_16px_42px_rgba(0,0,0,0.30)]">
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-100 to-teal-100 text-[#0077B6] flex items-center justify-center font-bold text-xl border-2 border-white shadow-sm ring-2 ring-blue-50 shrink-0">
+                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-100 to-teal-100 dark:from-[#1e3050] dark:to-[#12223a] text-[#0077B6] flex items-center justify-center font-bold text-xl border-2 border-white dark:border-[#223550] shadow-sm ring-2 ring-blue-50 dark:ring-[#223550] shrink-0">
                                 DK
                             </div>
                             <div>
-                                <h4 className="font-bold text-[15px] text-[#0a1628] leading-tight">CS Devyani Khambhati</h4>
+                                <h4 className="font-bold text-[15px] text-[#0a1628] dark:text-[#f7f9fc] leading-tight">CS Devyani Khambhati</h4>
                                 <div className="text-[12px] text-[#1677f2] font-medium">Compliance Expert</div>
                             </div>
                         </div>
-                        <div className="text-[13.5px] text-gray-600 leading-relaxed">
+                        <div className="text-[13.5px] text-gray-600 dark:text-[#a9b6c9] leading-relaxed">
                             Specialist in fintech regulatory compliance, government licenses and RBI, SEBI, IRDAI frameworks.
                         </div>
-                        <a href="mailto:support@estabizz.com" className="mt-4 block text-center w-full py-2.5 bg-blue-50 text-[#0077B6] font-bold text-[13px] rounded-xl hover:bg-[#1677f2] hover:text-white transition-colors">
+                        <a href="mailto:support@estabizz.com" className="mt-4 block text-center w-full py-2.5 bg-blue-50 dark:bg-[#12223a] text-[#0077B6] dark:text-[#60a5fa] font-bold text-[13px] rounded-xl hover:bg-[#1677f2] hover:text-white transition-colors">
                             Ask a Question
                         </a>
                     </div>
 
                     {/* Quick Facts */}
                     {quickFacts.length > 0 && (
-                        <div className="bg-white border border-[rgba(0,150,220,0.15)] rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] relative overflow-hidden">
+                        <div className="bg-white dark:bg-[#0d1a2d] border border-[rgba(0,150,220,0.15)] dark:border-[#223550] rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] dark:shadow-[0_16px_42px_rgba(0,0,0,0.30)] relative overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#1677f2] to-[#10b981]" />
-                            <h4 className="font-bold text-[#0a1628] flex items-center gap-2 mb-4">
+                            <h4 className="font-bold text-[#0a1628] dark:text-[#f7f9fc] flex items-center gap-2 mb-4">
                                 <span className="text-[#1677f2]">⚡</span> Quick Facts
                             </h4>
                             <div className="space-y-3">
                                 {quickFacts.map((fact, i) => (
-                                    <div key={i} className="flex justify-between items-center gap-4 text-[13px] border-b border-gray-50 pb-3 last:border-0 last:pb-0">
-                                        <span className="text-gray-500">{fact.label}</span>
-                                        <span className="font-semibold text-[#0a1628] text-right max-w-[120px]">{fact.value}</span>
+                                    <div key={i} className="flex justify-between items-center gap-4 text-[13px] border-b border-gray-50 dark:border-[#223550] pb-3 last:border-0 last:pb-0">
+                                        <span className="text-gray-500 dark:text-[#a9b6c9]">{fact.label}</span>
+                                        <span className="font-semibold text-[#0a1628] dark:text-[#f7f9fc] text-right max-w-[120px]">{fact.value}</span>
                                     </div>
                                 ))}
                             </div>
@@ -389,16 +425,16 @@ export default function ServicePageLayout({
                     )}
 
                     {/* Share */}
-                    <div className="bg-white border border-blue-100 rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] text-center">
-                        <h4 className="font-bold text-[13px] text-gray-500 uppercase tracking-wider mb-3">Share Guide</h4>
+                    <div className="bg-white dark:bg-[#0d1a2d] border border-blue-100 dark:border-[#223550] rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] dark:shadow-[0_16px_42px_rgba(0,0,0,0.30)] text-center">
+                        <h4 className="font-bold text-[13px] text-gray-500 dark:text-[#a9b6c9] uppercase tracking-wider mb-3">Share Guide</h4>
                         <div className="flex justify-center gap-2">
-                            <button onClick={() => handleShare("linkedin")} className="w-10 h-10 rounded-full bg-blue-50 text-[#0077B6] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Share on LinkedIn">
+                            <button onClick={() => handleShare("linkedin")} className="w-10 h-10 rounded-full bg-blue-50 dark:bg-[#12223a] text-[#0077B6] dark:text-[#60a5fa] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Share on LinkedIn">
                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
                             </button>
-                            <button onClick={() => handleShare("twitter")} className="w-10 h-10 rounded-full bg-blue-50 text-[#0077B6] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Share on X">
+                            <button onClick={() => handleShare("twitter")} className="w-10 h-10 rounded-full bg-blue-50 dark:bg-[#12223a] text-[#0077B6] dark:text-[#60a5fa] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Share on X">
                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                             </button>
-                            <button onClick={() => handleShare("copy")} className="w-10 h-10 rounded-full bg-blue-50 text-[#0077B6] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Copy Link">
+                            <button onClick={() => handleShare("copy")} className="w-10 h-10 rounded-full bg-blue-50 dark:bg-[#12223a] text-[#0077B6] dark:text-[#60a5fa] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Copy Link">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
                             </button>
                         </div>
@@ -409,16 +445,16 @@ export default function ServicePageLayout({
 
             {/* Related Articles */}
             {relatedArticles.length > 0 && (
-                <section className="border-t border-blue-100 bg-[#f8fbff] py-16">
+                <section className="border-t border-blue-100 dark:border-[#223550] bg-[#f8fbff] dark:bg-[#0a1628] py-16">
                     <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                        <h2 className="text-2xl font-bold text-[#0a1628] mb-8 text-center">Related Articles</h2>
+                        <h2 className="text-2xl font-bold text-[#0a1628] dark:text-[#f7f9fc] mb-8 text-center">Related Articles</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {relatedArticles.map((article, i) => (
                                 <Link key={i} href={article.href} className="block group">
-                                    <div className="bg-white border border-blue-100 rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(0,100,200,0.10)] hover:border-blue-200 transition-all h-full">
+                                    <div className="bg-white dark:bg-[#0d1a2d] border border-blue-100 dark:border-[#223550] rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(0,100,200,0.10)] dark:hover:shadow-[0_18px_42px_rgba(0,0,0,0.40)] hover:border-blue-200 dark:hover:border-[#1677f2]/40 transition-all h-full">
                                         <div className="text-[12px] font-bold text-[#1677f2] uppercase tracking-wider mb-2">{article.category}</div>
-                                        <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#1677f2] transition-colors mb-2">{article.title}</h3>
-                                        <p className="text-[13px] text-gray-500 line-clamp-2">{article.description}</p>
+                                        <h3 className="text-[16px] font-bold text-[#0a1628] dark:text-[#f7f9fc] group-hover:text-[#1677f2] transition-colors mb-2">{article.title}</h3>
+                                        <p className="text-[13px] text-gray-500 dark:text-[#a9b6c9] line-clamp-2">{article.description}</p>
                                     </div>
                                 </Link>
                             ))}

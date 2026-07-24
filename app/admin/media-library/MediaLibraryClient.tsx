@@ -450,7 +450,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
   ];
 
   return (
-    <div className="min-h-full bg-[#f4f7fb]">
+    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#06101f]">
 
       {/* ── Toast ─────────────────────────────────────────────────────────── */}
       {toast && (
@@ -466,7 +466,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
       {/* ── Upload progress overlay ───────────────────────────────────────── */}
       {uploading && (
         <div className="fixed inset-0 z-[8000] flex items-center justify-center bg-black/30 backdrop-blur-sm">
-          <div className="rounded-2xl border border-[#e2eaf2] bg-white p-8 shadow-2xl w-72 text-center">
+          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-8 shadow-2xl dark:shadow-[0_0_60px_rgba(0,0,0,0.6)] w-72 text-center">
             <div className="mb-4 text-[14px] font-black text-[#0a1628]">Uploading…</div>
             <div className="h-2 w-full rounded-full bg-[#e2eaf2] overflow-hidden">
               <div
@@ -484,7 +484,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
         <div className="fixed inset-0 z-[7000] flex items-start justify-end bg-black/30 backdrop-blur-sm"
              onClick={closeEdit}>
           <div
-            className="h-full w-full max-w-[420px] overflow-y-auto bg-white shadow-2xl flex flex-col"
+            className="h-full w-full max-w-[420px] overflow-y-auto bg-white dark:bg-[#0d1a2d] shadow-2xl dark:shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col"
             onClick={e => e.stopPropagation()}
           >
             {/* Modal header */}
@@ -493,13 +493,13 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                 <div className="text-[14px] font-black text-[#0a1628]">Edit Details</div>
                 <div className="text-[11px] text-[#94a3b8] truncate max-w-[260px]">{editItem.fileName}</div>
               </div>
-              <button onClick={closeEdit} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] hover:text-[#0a1628]">
+              <button onClick={closeEdit} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] hover:text-[#0a1628] dark:hover:text-[#f7f9fc]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               </button>
             </div>
 
             {/* Thumbnail preview */}
-            <div className="border-b border-[#f4f7fb] bg-[#f8fafc] px-6 py-4">
+            <div className="border-b border-[#f4f7fb] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-6 py-4">
               {getMediaType(editItem.format) === "image" ? (
                 <img
                   src={cloudinaryThumb(editItem.secureUrl, 380, 200)}
@@ -528,7 +528,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                   type="text"
                   value={editForm.title}
                   onChange={e => setEditForm(f => ({ ...f, title: e.target.value }))}
-                  className="mt-1 w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+                  className="mt-1 w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
                   placeholder="Descriptive file title"
                 />
               </div>
@@ -540,7 +540,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                   type="text"
                   value={editForm.altText}
                   onChange={e => setEditForm(f => ({ ...f, altText: e.target.value }))}
-                  className="mt-1 w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+                  className="mt-1 w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
                   placeholder="Describe the image for accessibility"
                 />
               </div>
@@ -552,7 +552,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                   value={editForm.caption}
                   onChange={e => setEditForm(f => ({ ...f, caption: e.target.value }))}
                   rows={2}
-                  className="mt-1 w-full resize-none rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+                  className="mt-1 w-full resize-none rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
                   placeholder="Optional caption for display"
                 />
               </div>
@@ -573,13 +573,13 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                     value={tagInput}
                     onChange={e => setTagInput(e.target.value)}
                     onKeyDown={e => { if (e.key === "Enter" || e.key === ",") { e.preventDefault(); addTag(); } }}
-                    className="flex-1 rounded-xl border border-[#dbe7f3] bg-white px-3 py-2 text-[12px] text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+                    className="flex-1 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2 text-[12px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
                     placeholder="Add tag, press Enter"
                   />
                   <button
                     type="button"
                     onClick={addTag}
-                    className="rounded-xl border border-[#dbe7f3] bg-white px-3 py-2 text-[12px] font-bold text-[#475569] hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+                    className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2 text-[12px] font-bold text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
                   >
                     Add
                   </button>
@@ -587,7 +587,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
               </div>
 
               {/* Info row */}
-              <div className="grid grid-cols-2 gap-3 rounded-2xl border border-[#f0f4f8] bg-[#f8fafc] p-4">
+              <div className="grid grid-cols-2 gap-3 rounded-2xl border border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] p-4">
                 <div>
                   <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">File Type</div>
                   <div className="mt-0.5 text-[12px] font-semibold text-[#475569]">
@@ -620,7 +620,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                   <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1">Used In</div>
                   <div className="flex flex-wrap gap-1.5">
                     {editItem.usedIn.map(u => (
-                      <span key={u} className="rounded-full bg-[#f4f7fb] border border-[#e2eaf2] px-2 py-0.5 text-[11px] text-[#475569]">{u}</span>
+                      <span key={u} className="rounded-full bg-[#f4f7fb] dark:bg-[#12223a] border border-[#e2eaf2] dark:border-[#223550] px-2 py-0.5 text-[11px] text-[#475569] dark:text-[#a9b6c9]">{u}</span>
                     ))}
                   </div>
                 </div>
@@ -630,7 +630,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
               <button
                 type="button"
                 onClick={() => copyUrl(editItem.secureUrl)}
-                className="w-full flex items-center justify-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[12px] font-bold text-[#475569] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors"
+                className="w-full flex items-center justify-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2.5 text-[12px] font-bold text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -652,7 +652,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                   Internal Details
                 </button>
                 {showInternal && (
-                  <div className="mt-2 rounded-xl border border-[#e2eaf2] bg-[#f8fafc] p-3 space-y-2">
+                  <div className="mt-2 rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] p-3 space-y-2">
                     <div>
                       <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Cloudinary ID</div>
                       <div className="mt-0.5 text-[11px] text-[#64748b] font-mono break-all">{editItem.publicId}</div>
@@ -684,7 +684,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
               </button>
               <button
                 onClick={closeEdit}
-                className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13px] font-bold text-[#475569] hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+                className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2.5 text-[13px] font-bold text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
               >
                 Cancel
               </button>
@@ -697,7 +697,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
       {removeId && (
         <div className="fixed inset-0 z-[7000] flex items-center justify-center bg-black/30 backdrop-blur-sm"
              onClick={() => setRemoveId(null)}>
-          <div className="rounded-2xl border border-[#e2eaf2] bg-white p-7 shadow-2xl max-w-sm w-full mx-4" onClick={e => e.stopPropagation()}>
+          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-7 shadow-2xl dark:shadow-[0_0_60px_rgba(0,0,0,0.6)] max-w-sm w-full mx-4" onClick={e => e.stopPropagation()}>
             <div className="text-[15px] font-black text-[#0a1628] mb-2">Remove from Library?</div>
             <p className="text-[13px] text-[#475569] leading-5 mb-5">
               The file will be hidden from the Media Library. It will not be permanently deleted from Cloudinary.
@@ -711,7 +711,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
               </button>
               <button
                 onClick={() => setRemoveId(null)}
-                className="flex-1 rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13px] font-bold text-[#475569] hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+                className="flex-1 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2.5 text-[13px] font-bold text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
               >
                 Cancel
               </button>
@@ -726,8 +726,8 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
         {/* Header */}
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-[21px] font-black text-[#0a1628]">Media Library</h1>
-            <p className="mt-0.5 text-[13px] text-[#64748b]">
+            <h1 className="text-[21px] font-black text-[#0a1628] dark:text-[#f7f9fc]">Media Library</h1>
+            <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a9b6c9]">
               Upload and manage images, icons and documents.
               {total > 0 && <span className="ml-1 font-semibold text-[#0a1628]">{total} file{total !== 1 ? "s" : ""}</span>}
             </p>
@@ -781,7 +781,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                 className={`rounded-xl border px-3.5 py-2 text-[12px] font-bold transition-colors ${
                   typeFilter === f.value
                     ? "border-[#1677f2] bg-[#1677f2] text-white"
-                    : "border-[#dbe7f3] bg-white text-[#475569] hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+                    : "border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
                 }`}
               >
                 {f.label}
@@ -799,7 +799,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search by file name, alt text or tag…"
-              className="w-full rounded-xl border border-[#dbe7f3] bg-white py-2 pl-8 pr-3 text-[12px] text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+              className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] py-2 pl-8 pr-3 text-[12px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
             />
             {search && (
               <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8] hover:text-[#475569]">×</button>
@@ -807,7 +807,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
           </div>
 
           {/* View toggle */}
-          <div className="flex rounded-xl border border-[#dbe7f3] bg-white overflow-hidden">
+          <div className="flex rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] overflow-hidden">
             {(["grid", "list"] as ViewMode[]).map(m => (
               <button
                 key={m}
@@ -949,7 +949,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
           </div>
         ) : (
           /* ── List view ── */
-          <div className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
             <table className="w-full text-[12px]">
               <thead>
                 <tr className="border-b border-[#f0f4f8] bg-[#f8fafc]">

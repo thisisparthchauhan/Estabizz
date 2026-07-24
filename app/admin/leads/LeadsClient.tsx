@@ -83,8 +83,8 @@ export default function LeadsClient({ leads }: { leads: Lead[] }) {
         <div className="p-6 md:p-8">
             <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
                 <div>
-                    <h1 className="text-[24px] font-black tracking-[-0.02em] text-[#120b45]">Lead Enquiries</h1>
-                    <p className="mt-1 text-[13px] text-[#64748b]">Submissions from the Contact and Get Started forms.</p>
+                    <h1 className="text-[24px] font-black tracking-[-0.02em] text-[#120b45] dark:text-[#f7f9fc]">Lead Enquiries</h1>
+                    <p className="mt-1 text-[13px] text-[#64748b] dark:text-[#a9b6c9]">Submissions from the Contact and Get Started forms.</p>
                 </div>
                 <button onClick={exportCsv} className="inline-flex items-center gap-2 rounded-xl bg-[#1677f2] px-4 py-2.5 text-[13px] font-black text-white shadow-[0_10px_24px_rgba(22,119,242,0.25)] transition-all hover:-translate-y-0.5 hover:bg-[#0866d9]">
                     ↓ Export CSV
@@ -96,14 +96,14 @@ export default function LeadsClient({ leads }: { leads: Lead[] }) {
                     value={q}
                     onChange={(e) => setQ(e.target.value)}
                     placeholder="Search name, email, company, service…"
-                    className="h-10 min-w-[260px] flex-1 rounded-xl border border-blue-100 bg-white px-4 text-[13.5px] text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50"
+                    className="h-10 min-w-[260px] flex-1 rounded-xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 text-[13.5px] text-[#0a1628] dark:text-[#f7f9fc] outline-none transition-all placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 dark:focus:ring-[#1677f2]/10"
                 />
                 <div className="flex flex-wrap gap-1.5">
                     {["all", "new", "contacted", "closed"].map((s) => (
                         <button
                             key={s}
                             onClick={() => setStatusFilter(s)}
-                            className={`rounded-full border px-3.5 py-1.5 text-[12px] font-bold transition-colors ${statusFilter === s ? "border-[#1677f2] bg-[#1677f2] text-white" : "border-blue-100 bg-white text-[#475569] hover:border-[#1677f2]"}`}
+                            className={`rounded-full border px-3.5 py-1.5 text-[12px] font-bold transition-colors ${statusFilter === s ? "border-[#1677f2] bg-[#1677f2] text-white" : "border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]"}`}
                         >
                             {s === "all" ? "All" : STATUS_META[s].label} <span className="opacity-70">({counts[s] || 0})</span>
                         </button>
@@ -112,11 +112,11 @@ export default function LeadsClient({ leads }: { leads: Lead[] }) {
             </div>
 
             {filtered.length === 0 ? (
-                <div className="rounded-2xl border border-blue-100 bg-[#f8fbff] p-8 text-center text-[14px] text-[#64748b]">
+                <div className="rounded-2xl border border-blue-100 dark:border-[#223550] bg-[#f8fbff] dark:bg-[#0d1a2d] p-8 text-center text-[14px] text-[#64748b] dark:text-[#a9b6c9]">
                     {rows.length === 0 ? "No enquiries yet. New submissions will appear here." : "No leads match your search."}
                 </div>
             ) : (
-                <div className="overflow-x-auto rounded-2xl border border-blue-100 bg-white shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
+                <div className="overflow-x-auto rounded-2xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.30)]">
                     <table className="min-w-[1000px] w-full text-left text-[13px]">
                         <thead className="bg-gradient-to-r from-[#0866d9] to-[#1677f2] text-white">
                             <tr>
@@ -127,14 +127,14 @@ export default function LeadsClient({ leads }: { leads: Lead[] }) {
                         </thead>
                         <tbody>
                             {filtered.map((l) => (
-                                <tr key={l.id} className="border-t border-gray-100 align-top hover:bg-[#f8fbff]">
-                                    <td className="whitespace-nowrap px-4 py-3 text-[#64748b]">{l.createdAt ? new Date(l.createdAt).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "2-digit" }) : "—"}</td>
-                                    <td className="whitespace-nowrap px-4 py-3 font-bold text-[#0a1628]">{l.name}</td>
+                                <tr key={l.id} className="border-t border-gray-100 dark:border-[#223550] align-top hover:bg-[#f8fbff] dark:hover:bg-[#12223a]">
+                                    <td className="whitespace-nowrap px-4 py-3 text-[#64748b] dark:text-[#a9b6c9]">{l.createdAt ? new Date(l.createdAt).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "2-digit" }) : "—"}</td>
+                                    <td className="whitespace-nowrap px-4 py-3 font-bold text-[#0a1628] dark:text-[#f7f9fc]">{l.name}</td>
                                     <td className="whitespace-nowrap px-4 py-3"><a href={`mailto:${l.email}`} className="font-semibold text-[#1677f2] hover:underline">{l.email}</a></td>
-                                    <td className="whitespace-nowrap px-4 py-3 text-[#475569]">{l.phone ? <a href={`tel:${l.phone}`} className="hover:text-[#1677f2]">{l.phone}</a> : "—"}</td>
-                                    <td className="whitespace-nowrap px-4 py-3 text-[#475569]">{l.company || "—"}</td>
-                                    <td className="px-4 py-3 text-[#475569]">{l.service || "—"}</td>
-                                    <td className="whitespace-nowrap px-4 py-3"><span className="rounded-full bg-[#f5fbff] px-2.5 py-0.5 text-[11px] font-bold text-[#0077B6]">{l.source || "contact"}</span></td>
+                                    <td className="whitespace-nowrap px-4 py-3 text-[#475569] dark:text-[#a9b6c9]">{l.phone ? <a href={`tel:${l.phone}`} className="hover:text-[#1677f2]">{l.phone}</a> : "—"}</td>
+                                    <td className="whitespace-nowrap px-4 py-3 text-[#475569] dark:text-[#a9b6c9]">{l.company || "—"}</td>
+                                    <td className="px-4 py-3 text-[#475569] dark:text-[#a9b6c9]">{l.service || "—"}</td>
+                                    <td className="whitespace-nowrap px-4 py-3"><span className="rounded-full bg-[#f5fbff] dark:bg-[#12223a] px-2.5 py-0.5 text-[11px] font-bold text-[#0077B6] dark:text-[#60a5fa]">{l.source || "contact"}</span></td>
                                     <td className="whitespace-nowrap px-4 py-3">
                                         <select
                                             value={l.status}
@@ -147,7 +147,7 @@ export default function LeadsClient({ leads }: { leads: Lead[] }) {
                                             <option value="closed">Closed</option>
                                         </select>
                                     </td>
-                                    <td className="px-4 py-3 text-[#64748b]"><div className="max-w-[280px] whitespace-pre-wrap">{l.message || "—"}</div></td>
+                                    <td className="px-4 py-3 text-[#64748b] dark:text-[#a9b6c9]"><div className="max-w-[280px] whitespace-pre-wrap">{l.message || "—"}</div></td>
                                 </tr>
                             ))}
                         </tbody>

@@ -77,7 +77,7 @@ function PillButton({
       className={`rounded-xl border px-3.5 py-2 text-[12px] font-bold transition-colors ${
         active
           ? "border-[#1677f2] bg-[#1677f2] text-white"
-          : "border-[#dbe7f3] bg-white text-[#475569] hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+          : "border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
       }`}
     >
       {children}
@@ -98,13 +98,13 @@ function DetailDrawer({
   return (
     <div className="fixed inset-0 z-[3100] flex items-stretch">
       <div className="flex-1 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <aside className="flex w-full max-w-[960px] flex-col bg-white shadow-[0_0_80px_rgba(0,0,0,0.30)]">
+      <aside className="flex w-full max-w-[960px] flex-col bg-white dark:bg-[#0d1a2d] shadow-[0_0_80px_rgba(0,0,0,0.30)] dark:shadow-[0_0_80px_rgba(0,0,0,0.60)]">
         <div className="shrink-0 border-b border-[#e2eaf2] bg-[#fbfdff] px-6 py-5">
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
               <div className="mb-2 flex flex-wrap items-center gap-2">
                 <span className={`rounded-full border px-2.5 py-0.5 text-[10px] font-bold ${meta.cls}`}>{meta.label}</span>
-                <span className="rounded-full border border-[#dbe7f3] bg-white px-2.5 py-0.5 text-[10px] font-bold text-[#64748b]">
+                <span className="rounded-full border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#12223a] px-2.5 py-0.5 text-[10px] font-bold text-[#64748b] dark:text-[#a9b6c9]">
                   {areaLabel(item)}
                 </span>
               </div>
@@ -145,8 +145,8 @@ function DetailDrawer({
             ))}
           </div>
 
-          <div className="mb-5 overflow-hidden rounded-2xl border border-[#e2eaf2] bg-white">
-            <div className="grid grid-cols-[160px_1fr_1fr] gap-3 border-b border-[#f0f4f8] bg-[#f8fafc] px-5 py-3 text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">
+          <div className="mb-5 overflow-hidden rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d]">
+            <div className="grid grid-cols-[160px_1fr_1fr] gap-3 border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-5 py-3 text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#a9b6c9]">
               <span>Field</span>
               <span>Before</span>
               <span>After</span>
@@ -173,8 +173,8 @@ function DetailDrawer({
               ["Published Snapshot", item.publishedSnapshot],
               ["Draft Snapshot", item.draftSnapshot],
             ].map(([label, fields]) => (
-              <div key={label as string} className="rounded-2xl border border-[#e2eaf2] bg-white">
-                <div className="border-b border-[#f0f4f8] bg-[#f8fafc] px-5 py-3">
+              <div key={label as string} className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d]">
+                <div className="border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-5 py-3">
                   <h3 className="text-[12px] font-black uppercase tracking-wide text-[#94a3b8]">{label as string}</h3>
                 </div>
                 <div className="divide-y divide-[#f4f7fb]">
@@ -255,14 +255,14 @@ export default function ChangeHistoryClient({ initialHistory, viewerEmail }: Pro
       <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h1 className="text-[22px] font-black text-[#0a1628]">Change History</h1>
-          <p className="mt-1 text-[13px] text-[#64748b]">View saved website changes, approvals, comments and before-after details.</p>
+          <p className="mt-1 text-[13px] text-[#64748b] dark:text-[#a9b6c9]">View saved website changes, approvals, comments and before-after details.</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-2xl border border-[#e2eaf2] bg-white px-5 py-3 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
+          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-5 py-3 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
             <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Total Changes</div>
             <div className="mt-1 text-[24px] font-black text-[#1677f2]">{history.total}</div>
           </div>
-          <div className="rounded-2xl border border-[#e2eaf2] bg-white px-5 py-3 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
+          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-5 py-3 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
             <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Viewing As</div>
             <div className="mt-1 max-w-[220px] truncate text-[13px] font-black text-[#0a1628]">{viewerEmail || "Admin"}</div>
           </div>
@@ -275,7 +275,7 @@ export default function ChangeHistoryClient({ initialHistory, viewerEmail }: Pro
         </div>
       )}
 
-      <div className="mb-5 rounded-2xl border border-[#e2eaf2] bg-white p-4 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
+      <div className="mb-5 rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-4 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
         <div className="mb-3 flex flex-wrap gap-2">
           {statusOptions.map((option) => (
             <PillButton
@@ -328,8 +328,8 @@ export default function ChangeHistoryClient({ initialHistory, viewerEmail }: Pro
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
-        <div className="hidden grid-cols-[1fr_1fr_0.8fr_1fr_1fr_110px] gap-4 border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3 text-[10px] font-black uppercase tracking-wider text-[#94a3b8] lg:grid">
+      <div className="overflow-hidden rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+        <div className="hidden grid-cols-[1fr_1fr_0.8fr_1fr_1fr_110px] gap-4 border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-6 py-3 text-[10px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9] lg:grid">
           <span>Page</span>
           <span>Section</span>
           <span>Status</span>
@@ -372,7 +372,7 @@ export default function ChangeHistoryClient({ initialHistory, viewerEmail }: Pro
                     <button
                       type="button"
                       onClick={() => setSelected(item)}
-                      className="rounded-lg border border-[#dbe7f3] bg-white px-3.5 py-1.5 text-[12px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+                      className="rounded-lg border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3.5 py-1.5 text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
                     >
                       View Details
                     </button>
@@ -399,7 +399,7 @@ export default function ChangeHistoryClient({ initialHistory, viewerEmail }: Pro
             type="button"
             onClick={() => setPage((current) => Math.max(1, current - 1))}
             disabled={history.page <= 1 || loading}
-            className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2 text-[12px] font-bold text-[#334155] disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2 text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9] disabled:cursor-not-allowed disabled:opacity-50"
           >
             Previous
           </button>
@@ -407,7 +407,7 @@ export default function ChangeHistoryClient({ initialHistory, viewerEmail }: Pro
             type="button"
             onClick={() => setPage((current) => Math.min(history.totalPages, current + 1))}
             disabled={history.page >= history.totalPages || loading}
-            className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2 text-[12px] font-bold text-[#334155] disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2 text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9] disabled:cursor-not-allowed disabled:opacity-50"
           >
             Next
           </button>

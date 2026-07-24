@@ -190,7 +190,7 @@ function PasswordField({
           value={value}
           onChange={e => onChange(e.target.value)}
           placeholder={placeholder ?? "Min. 8 characters"}
-          className="w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 pr-10 text-[13px] text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+          className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2.5 pr-10 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
         />
         <button
           type="button"
@@ -436,7 +436,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
   // ─────────────────────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-full bg-[#f4f7fb]">
+    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#06101f]">
 
       {/* ── Toast ─────────────────────────────────────────────────────────── */}
       {toast && (
@@ -451,7 +451,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
       {editUser && (
         <div className="fixed inset-0 z-[7000] flex items-start justify-end bg-black/30 backdrop-blur-sm"
              onClick={closeEdit}>
-          <div className="h-full w-full max-w-[440px] overflow-y-auto bg-white shadow-2xl flex flex-col"
+          <div className="h-full w-full max-w-[440px] overflow-y-auto bg-white dark:bg-[#0d1a2d] shadow-2xl dark:shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col"
                onClick={e => e.stopPropagation()}>
 
             {/* Header */}
@@ -460,7 +460,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                 <div className="text-[14px] font-black text-[#0a1628]">Edit User</div>
                 <div className="text-[11px] text-[#94a3b8] truncate max-w-[260px]">{editUser.email}</div>
               </div>
-              <button onClick={closeEdit} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] hover:text-[#0a1628]">
+              <button onClick={closeEdit} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] hover:text-[#0a1628] dark:hover:text-[#f7f9fc]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
@@ -468,7 +468,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
             </div>
 
             {/* Avatar + login status */}
-            <div className="border-b border-[#f4f7fb] bg-[#f8fafc] px-6 py-5 flex items-center gap-4">
+            <div className="border-b border-[#f4f7fb] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-6 py-5 flex items-center gap-4">
               <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-[#1677f2] to-[#b8860b] flex items-center justify-center text-[18px] font-black text-white shadow-sm">
                 {initials(editUser.fullName)}
               </div>
@@ -493,7 +493,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                   <button onClick={doSaveEdit} className="rounded-xl bg-amber-600 px-3 py-1.5 text-[12px] font-black text-white hover:bg-amber-700">
                     Yes, proceed
                   </button>
-                  <button onClick={() => setDemotionConfirm(false)} className="rounded-xl border border-amber-300 bg-white px-3 py-1.5 text-[12px] font-bold text-amber-700">
+                  <button onClick={() => setDemotionConfirm(false)} className="rounded-xl border border-amber-300 bg-white dark:bg-[#0d1a2d] px-3 py-1.5 text-[12px] font-bold text-amber-700">
                     Cancel
                   </button>
                 </div>
@@ -511,14 +511,14 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                     type="text"
                     value={editName}
                     onChange={e => setEditName(e.target.value)}
-                    className="mt-1 w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+                    className="mt-1 w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
                   />
                 </div>
 
                 {/* Email (read-only) */}
                 <div>
                   <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Email Address</label>
-                  <div className="mt-1 rounded-xl border border-[#e2eaf2] bg-[#f8fafc] px-3 py-2.5 text-[13px] text-[#94a3b8]">
+                  <div className="mt-1 rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] px-3 py-2.5 text-[13px] text-[#94a3b8] dark:text-[#a9b6c9]">
                     {editUser.email}
                   </div>
                   <div className="mt-1 text-[10px] text-[#94a3b8]">Email address cannot be changed.</div>
@@ -582,7 +582,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                   >
                     {savingEdit ? "Saving…" : "Save Changes"}
                   </button>
-                  <button onClick={closeEdit} className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13px] font-bold text-[#475569] hover:border-[#1677f2]/40 hover:text-[#1677f2]">
+                  <button onClick={closeEdit} className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2.5 text-[13px] font-bold text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]">
                     Cancel
                   </button>
                 </div>
@@ -668,13 +668,13 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
               </button>
 
               {showPerms && (
-                <div className="mt-2 rounded-xl border border-[#e2eaf2] bg-[#f8fafc] p-3">
+                <div className="mt-2 rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] p-3">
                   {editUser.permissions.length === 0 ? (
                     <div className="text-[12px] text-[#94a3b8]">No permissions assigned.</div>
                   ) : (
                     <div className="flex flex-wrap gap-1.5">
                       {editUser.permissions.map(p => (
-                        <span key={p} className="rounded-full bg-white border border-[#e2eaf2] px-2 py-0.5 text-[10.5px] text-[#475569] font-medium">
+                        <span key={p} className="rounded-full bg-white dark:bg-[#0d1a2d] border border-[#e2eaf2] dark:border-[#223550] px-2 py-0.5 text-[10.5px] text-[#475569] dark:text-[#a9b6c9] font-medium">
                           {PERMISSION_LABELS[p] ?? p}
                         </span>
                       ))}
@@ -685,7 +685,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
             </div>
 
             {/* Metadata */}
-            <div className="mx-5 mb-6 grid grid-cols-2 gap-3 rounded-2xl border border-[#f0f4f8] bg-[#f8fafc] p-4">
+            <div className="mx-5 mb-6 grid grid-cols-2 gap-3 rounded-2xl border border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] p-4">
               <div>
                 <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Created On</div>
                 <div className="mt-0.5 text-[11px] font-semibold text-[#475569]">{formatIST(editUser.createdAt)}</div>
@@ -707,12 +707,12 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
       {showAdd && (
         <div className="fixed inset-0 z-[7000] flex items-center justify-center bg-black/30 backdrop-blur-sm"
              onClick={() => setShowAdd(false)}>
-          <div className="rounded-2xl border border-[#e2eaf2] bg-white p-7 shadow-2xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto"
+          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-7 shadow-2xl dark:shadow-[0_0_60px_rgba(0,0,0,0.6)] max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto"
                onClick={e => e.stopPropagation()}>
 
             <div className="flex items-center justify-between mb-5">
               <div className="text-[16px] font-black text-[#0a1628]">Add User</div>
-              <button onClick={() => setShowAdd(false)} className="rounded-xl p-1.5 text-[#94a3b8] hover:bg-[#f4f7fb] hover:text-[#0a1628]">
+              <button onClick={() => setShowAdd(false)} className="rounded-xl p-1.5 text-[#94a3b8] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] hover:text-[#0a1628] dark:hover:text-[#f7f9fc]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
@@ -727,7 +727,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                   type="text"
                   value={addName}
                   onChange={e => setAddName(e.target.value)}
-                  className="mt-1 w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+                  className="mt-1 w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
                   placeholder="e.g. Priya Sharma"
                 />
               </div>
@@ -739,7 +739,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                   type="email"
                   value={addEmail}
                   onChange={e => setAddEmail(e.target.value)}
-                  className="mt-1 w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+                  className="mt-1 w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
                   placeholder="priya@estabizz.com"
                 />
               </div>
@@ -786,7 +786,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
 
               {/* Password fields (shown when login access checked) */}
               {addCreateLogin && (
-                <div className="space-y-3 rounded-xl border border-[#dbe7f3] bg-[#f8fafc] p-4">
+                <div className="space-y-3 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] p-4">
                   <PasswordField
                     label="Temporary Password"
                     value={addPassword}
@@ -806,7 +806,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
 
               {/* No login yet note */}
               {!addCreateLogin && (
-                <div className="rounded-xl border border-[#dbe7f3] bg-[#f8fafc] px-4 py-3 text-[11px] text-[#64748b] leading-5">
+                <div className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] px-4 py-3 text-[11px] text-[#64748b] dark:text-[#a9b6c9] leading-5">
                   <span className="font-bold text-[#475569]">Login setup later:</span> This user will be added but cannot sign in until you set a password from the Edit User panel.
                 </div>
               )}
@@ -826,7 +826,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
               >
                 {addSaving ? "Adding…" : "Add User"}
               </button>
-              <button onClick={() => setShowAdd(false)} className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13px] font-bold text-[#475569] hover:border-[#1677f2]/40 hover:text-[#1677f2]">
+              <button onClick={() => setShowAdd(false)} className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2.5 text-[13px] font-bold text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]">
                 Cancel
               </button>
             </div>
@@ -863,7 +863,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
 
         {/* No permission */}
         {!canManage && (
-          <div className="rounded-2xl border border-[#e2eaf2] bg-white p-8 text-center shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-8 text-center shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
             <svg className="mx-auto mb-3 text-[#cbd5e1]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
             </svg>
@@ -887,7 +887,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                   value={search}
                   onChange={e => setSearch(e.target.value)}
                   placeholder="Search by name, email or role…"
-                  className="w-full rounded-xl border border-[#dbe7f3] bg-white py-2 pl-8 pr-3 text-[12px] text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+                  className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] py-2 pl-8 pr-3 text-[12px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
                 />
                 {search && (
                   <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8] hover:text-[#475569]">×</button>
@@ -923,7 +923,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
 
             {/* Users table */}
             {filtered.length === 0 ? (
-              <div className="flex h-48 flex-col items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] bg-white text-center">
+              <div className="flex h-48 flex-col items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-center">
                 <svg className="mb-3 text-[#cbd5e1]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
                 </svg>
@@ -931,10 +931,10 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                 <div className="text-[12px] text-[#94a3b8]">Try a different search or filter.</div>
               </div>
             ) : (
-              <div className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+              <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
                 <table className="w-full text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#f0f4f8] bg-[#f8fafc]">
+                    <tr className="border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628]">
                       <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Name</th>
                       <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden sm:table-cell">Email</th>
                       <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Role</th>
@@ -974,7 +974,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                             <div className="flex items-center justify-end gap-1.5">
                               <button
                                 onClick={() => openEdit(u)}
-                                className="rounded-xl border border-[#e2eaf2] bg-white px-2.5 py-1.5 text-[11px] font-bold text-[#475569] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors"
+                                className="rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-2.5 py-1.5 text-[11px] font-bold text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
                               >
                                 Edit
                               </button>
@@ -1002,8 +1002,8 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                 </table>
 
                 {/* Footer row */}
-                <div className="border-t border-[#f0f4f8] bg-[#f8fafc] px-5 py-3 flex items-center justify-between">
-                  <span className="text-[11px] text-[#94a3b8]">{filtered.length} of {users.length} user{users.length !== 1 ? "s" : ""}</span>
+                <div className="border-t border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-5 py-3 flex items-center justify-between">
+                  <span className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9]">{filtered.length} of {users.length} user{users.length !== 1 ? "s" : ""}</span>
                   <div className="flex items-center gap-3 text-[11px] text-[#94a3b8]">
                     <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-emerald-400" /> Login Ready</span>
                     <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-amber-400" /> Setup Needed</span>

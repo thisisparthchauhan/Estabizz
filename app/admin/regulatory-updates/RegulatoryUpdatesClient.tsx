@@ -349,7 +349,7 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
       </div>
 
       {/* Filters */}
-      <div className="rounded-2xl border border-[#e2e8f0] bg-white p-4 shadow-sm mb-4">
+      <div className="rounded-2xl border border-[#e2e8f0] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-4 shadow-sm mb-4">
         <div className="flex flex-wrap items-center gap-3">
           <input
             value={search}
@@ -378,14 +378,14 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
       </div>
 
       {/* Table */}
-      <div className="rounded-2xl border border-[#e2e8f0] bg-white shadow-sm overflow-hidden">
+      <div className="rounded-2xl border border-[#e2e8f0] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-sm overflow-hidden">
         {loading ? (
-          <div className="p-10 text-center text-[13px] text-[#64748b]">Loading updates…</div>
+          <div className="p-10 text-center text-[13px] text-[#64748b] dark:text-[#a9b6c9]">Loading updates…</div>
         ) : loadError ? (
           <div className="p-10 text-center text-[13px] text-red-600">{loadError}</div>
         ) : items.length === 0 ? (
           <div className="p-12 text-center">
-            <p className="text-[14px] font-bold text-[#0a1628]">No regulatory updates yet</p>
+            <p className="text-[14px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">No regulatory updates yet</p>
             <p className="text-[13px] text-[#64748b] mt-1">
               {canManage ? "Use “Add Update” to create your first one." : "Nothing to show for this search."}
             </p>
@@ -393,7 +393,7 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-[13px]">
-              <thead className="bg-[#f8fafc] text-[#64748b] text-[11px] uppercase tracking-wide">
+              <thead className="bg-[#f8fafc] dark:bg-[#0a1628] text-[#64748b] dark:text-[#a9b6c9] text-[11px] uppercase tracking-wide">
                 <tr>
                   <th className="px-4 py-3 font-bold">Title</th>
                   <th className="px-4 py-3 font-bold">Regulator</th>
@@ -406,7 +406,7 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
               </thead>
               <tbody>
                 {items.map((it) => (
-                  <tr key={it.id} className="border-t border-[#eef2f7] hover:bg-[#f8fbff]">
+                  <tr key={it.id} className="border-t border-[#eef2f7] dark:border-[#223550] hover:bg-[#f8fbff] dark:hover:bg-[#12223a]">
                     <td className="px-4 py-3 max-w-[340px]">
                       <button onClick={() => openEdit(it)} className="text-left font-bold text-[#0a1628] hover:text-[#1677f2] line-clamp-2">
                         {it.title || "(untitled)"}
@@ -451,9 +451,9 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
       {drawerOpen && (
         <div className="fixed inset-0 z-[3000] flex">
           <div className="flex-1 bg-black/40" onClick={closeDrawer} />
-          <div className="w-full max-w-[640px] bg-white h-full overflow-y-auto shadow-2xl flex flex-col">
+          <div className="w-full max-w-[640px] bg-white dark:bg-[#0d1a2d] h-full overflow-y-auto shadow-2xl dark:shadow-[0_0_80px_rgba(0,0,0,0.6)] flex flex-col">
             {/* Drawer header */}
-            <div className="sticky top-0 z-10 bg-white border-b border-[#e2e8f0] px-6 py-4 flex items-center justify-between">
+            <div className="sticky top-0 z-10 bg-white dark:bg-[#0d1a2d] border-b border-[#e2e8f0] dark:border-[#223550] px-6 py-4 flex items-center justify-between">
               <div>
                 <h2 className="text-[16px] font-black text-[#0a1628]">
                   {mode === "create" ? "Add Update" : "Edit Update"}
@@ -468,7 +468,7 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
                         Pending Changes
                       </span>
                     )}
-                    <span className="text-[11px] text-[#94a3b8]">Last updated {fmtIST(editing.updatedAt)}</span>
+                    <span className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9]">Last updated {fmtIST(editing.updatedAt)}</span>
                   </div>
                 )}
               </div>
@@ -629,7 +629,7 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
                   </details>
 
                   {editing && (
-                    <p className="text-[11px] text-[#94a3b8]">
+                    <p className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9]">
                       Web address: <span className="font-mono text-[#64748b]">/resources/regulatory-updates/{editing.slug}</span>
                     </p>
                   )}
@@ -642,9 +642,9 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
             </div>
 
             {/* Drawer footer — lifecycle actions */}
-            <div className="sticky bottom-0 bg-white border-t border-[#e2e8f0] px-6 py-3 flex flex-wrap items-center gap-2">
+            <div className="sticky bottom-0 bg-white dark:bg-[#0d1a2d] border-t border-[#e2e8f0] dark:border-[#223550] px-6 py-3 flex flex-wrap items-center gap-2">
               {editing?.status === "deleted" ? (
-                <div className="text-[12px] text-[#64748b]">
+                <div className="text-[12px] text-[#64748b] dark:text-[#a9b6c9]">
                   This update is in the Recycle Bin. Restore it from the <b>Recycle Bin</b> to manage it again.
                 </div>
               ) : (
@@ -728,7 +728,7 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
       {/* Reject modal (status reject OR pending-changes reject) */}
       {rejectOpen && editing && (
         <div className="fixed inset-0 z-[3500] flex items-center justify-center bg-black/40 px-4">
-          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+          <div className="w-full max-w-md rounded-2xl bg-white dark:bg-[#0d1a2d] p-6 shadow-2xl dark:shadow-[0_0_80px_rgba(0,0,0,0.6)]">
             <h3 className="text-[16px] font-black text-[#0a1628] mb-1">
               {rejectMode === "changes" ? "Reject the pending changes?" : "Reject this update?"}
             </h3>
@@ -754,7 +754,7 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
       {/* Move to Recycle Bin confirmation */}
       {deleteOpen && editing && (
         <div className="fixed inset-0 z-[3500] flex items-center justify-center bg-black/40 px-4">
-          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+          <div className="w-full max-w-md rounded-2xl bg-white dark:bg-[#0d1a2d] p-6 shadow-2xl dark:shadow-[0_0_80px_rgba(0,0,0,0.6)]">
             <h3 className="text-[16px] font-black text-[#0a1628] mb-1">Move to Recycle Bin?</h3>
             <p className="text-[12px] text-[#64748b] mb-3">
               “{editing.title}” will be removed from the website and the desk list. You can restore it
@@ -784,7 +784,7 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
 // ─── Small UI helpers ─────────────────────────────────────────────────────────
 
 const inputCls =
-  "w-full rounded-lg border border-[#e2e8f0] px-3 py-2 text-[13px] text-[#0a1628] outline-none focus:border-[#1677f2] disabled:bg-[#f8fafc] disabled:text-[#94a3b8]";
+  "w-full rounded-lg border border-[#e2e8f0] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2] disabled:bg-[#f8fafc] dark:disabled:bg-[#0a1628] disabled:text-[#94a3b8] dark:placeholder:text-[#64748b]";
 
 function Field({ label, required, hint, children }: {
   label: string; required?: boolean; hint?: string; children: React.ReactNode;
@@ -892,7 +892,7 @@ function PendingChangesPanel({
 function PreviewPanel({ form, editing }: { form: FormState; editing: RegulatoryUpdateRecord | null }) {
   const impact = form.impactLevel;
   return (
-    <div className="rounded-2xl border border-blue-100 bg-white p-5 shadow-sm">
+    <div className="rounded-2xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-5 shadow-sm">
       <div className="mb-3 flex items-center justify-between gap-3">
         <span className="rounded-full bg-blue-50 px-3 py-1 text-[11px] font-black text-[#1677f2]">{form.regulator}</span>
         <span className={`rounded-full px-3 py-1 text-[11px] font-black ${IMPACT_STYLES[impact]}`}>{impact} Impact</span>
@@ -910,7 +910,7 @@ function PreviewPanel({ form, editing }: { form: FormState; editing: RegulatoryU
       )}
       <p className="mb-3 text-[14px] leading-7 text-gray-600">{form.summary || "Summary preview…"}</p>
       {form.detailedContent && (
-        <div className="mb-3 whitespace-pre-wrap rounded-lg bg-[#f8fafc] p-3 text-[13px] leading-6 text-[#475569]">
+        <div className="mb-3 whitespace-pre-wrap rounded-lg bg-[#f8fafc] dark:bg-[#12223a] p-3 text-[13px] leading-6 text-[#475569] dark:text-[#a9b6c9]">
           {form.detailedContent.replace(/<[^>]+>/g, " ").trim().slice(0, 600)}
           {form.detailedContent.length > 600 ? "…" : ""}
         </div>
@@ -918,7 +918,7 @@ function PreviewPanel({ form, editing }: { form: FormState; editing: RegulatoryU
       {form.tags && (
         <div className="flex flex-wrap gap-1.5">
           {form.tags.split(",").map((t) => t.trim()).filter(Boolean).map((t) => (
-            <span key={t} className="rounded-full border border-blue-100 bg-[#f5fbff] px-2.5 py-0.5 text-[11px] font-semibold text-[#0077B6]">{t}</span>
+            <span key={t} className="rounded-full border border-blue-100 dark:border-[#223550] bg-[#f5fbff] dark:bg-[#12223a] px-2.5 py-0.5 text-[11px] font-semibold text-[#0077B6] dark:text-[#60a5fa]">{t}</span>
           ))}
         </div>
       )}

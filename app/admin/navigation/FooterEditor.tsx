@@ -19,7 +19,7 @@ const FOOTER_FIELDS: { name: string; label: string; hint?: string; multiline?: b
 type Scalars = Record<string, string>;
 
 const inputCls =
-  "w-full rounded-lg border border-[#dbe7f3] bg-white px-3 py-2 text-[13px] text-[#0a1628] outline-none transition-colors focus:border-[#1677f2]";
+  "w-full rounded-lg border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none transition-colors focus:border-[#1677f2] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b]";
 
 function formatIST(iso: string | null): string {
   if (!iso) return "—";
@@ -102,25 +102,25 @@ export default function FooterEditor() {
   const removeReg = (ri: number) => { setRegulators((rs) => rs.filter((_, i) => i !== ri)); touched(); };
 
   if (loading) {
-    return <div className="rounded-2xl border border-[#e2eaf2] bg-white px-6 py-10 text-center text-[13px] text-[#94a3b8]">Loading footer…</div>;
+    return <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-6 py-10 text-center text-[13px] text-[#94a3b8] dark:text-[#a9b6c9]">Loading footer…</div>;
   }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-[15px] font-black text-[#0a1628]">Footer</h2>
-        <span className="text-[11px] text-[#94a3b8]">Last updated: {formatIST(updatedAt)}</span>
+        <h2 className="text-[15px] font-black text-[#0a1628] dark:text-[#f7f9fc]">Footer</h2>
+        <span className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9]">Last updated: {formatIST(updatedAt)}</span>
       </div>
 
       {/* Contact details */}
-      <section className="max-w-3xl rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
-        <div className="border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">Footer — Contact Details</span>
+      <section className="max-w-3xl rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+        <div className="border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-6 py-3">
+          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Footer — Contact Details</span>
         </div>
         <div className="grid gap-5 px-6 py-6 sm:grid-cols-2">
           {FOOTER_FIELDS.map((def) => (
             <div key={def.name} className={def.multiline ? "sm:col-span-2" : ""}>
-              <label className="mb-1.5 block text-[12px] font-bold text-[#334155]">{def.label}</label>
+              <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]">{def.label}</label>
               {def.multiline ? (
                 <textarea value={scalars[def.name] ?? ""} onChange={(e) => { setScalars((p) => ({ ...p, [def.name]: e.target.value })); touched(); }} rows={2} className={inputCls + " resize-y"} />
               ) : (
@@ -133,14 +133,14 @@ export default function FooterEditor() {
       </section>
 
       {/* Link columns */}
-      <section className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
-        <div className="flex items-center justify-between border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">Footer — Link Columns</span>
+      <section className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+        <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-6 py-3">
+          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Footer — Link Columns</span>
           <button onClick={addColumn} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add column</button>
         </div>
         <div className="grid gap-5 px-6 py-6 lg:grid-cols-2 xl:grid-cols-3">
           {columns.map((col, ci) => (
-            <div key={ci} className="rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-3.5">
+            <div key={ci} className="rounded-xl border border-[#e8eef5] dark:border-[#223550] bg-[#fbfdff] dark:bg-[#12223a] p-3.5">
               <div className="mb-2 flex items-center gap-2">
                 <input value={col.title} onChange={(e) => setColumn(ci, { title: e.target.value })} placeholder="Column title" className={inputCls + " font-bold"} />
                 <button onClick={() => removeColumn(ci)} title="Delete column" className="shrink-0 rounded-lg border border-red-200 px-2 py-2 text-[12px] text-red-500 hover:bg-red-50">✕</button>
@@ -161,9 +161,9 @@ export default function FooterEditor() {
       </section>
 
       {/* Regulators */}
-      <section className="max-w-3xl rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
-        <div className="flex items-center justify-between border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">Footer — Regulator Chips</span>
+      <section className="max-w-3xl rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+        <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-6 py-3">
+          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Footer — Regulator Chips</span>
           <button onClick={addReg} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add</button>
         </div>
         <div className="grid gap-2 px-6 py-6 sm:grid-cols-2">

@@ -206,7 +206,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
   // ─────────────────────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-full bg-[#f4f7fb]">
+    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#06101f]">
 
       {/* Toast */}
       {toast && (
@@ -221,7 +221,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
       {purgeTarget && (
         <div className="fixed inset-0 z-[8000] flex items-center justify-center bg-black/40 backdrop-blur-sm"
              onClick={closePurge}>
-          <div className="rounded-2xl border border-red-200 bg-white p-7 shadow-2xl max-w-sm w-full mx-4"
+          <div className="rounded-2xl border border-red-200 bg-white dark:bg-[#0d1a2d] p-7 shadow-2xl dark:shadow-[0_0_60px_rgba(0,0,0,0.6)] max-w-sm w-full mx-4"
                onClick={e => e.stopPropagation()}>
 
             <div className="flex items-center gap-3 mb-4">
@@ -232,14 +232,14 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
               </div>
               <div>
                 <div className="text-[14px] font-black text-[#0a1628]">Permanent Delete</div>
-                <div className="text-[11px] text-[#94a3b8]">This cannot be undone</div>
+                <div className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9]">This cannot be undone</div>
               </div>
             </div>
 
             <p className="text-[12px] text-[#475569] leading-5 mb-1">
               You are about to permanently delete:
             </p>
-            <div className="mb-4 rounded-xl border border-[#e2eaf2] bg-[#f8fafc] px-3 py-2.5 text-[12px] font-bold text-[#0a1628]">
+            <div className="mb-4 rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] px-3 py-2.5 text-[12px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">
               {purgeTarget.name}
             </div>
 
@@ -281,7 +281,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                   value={purgeText}
                   onChange={e => setPurgeText(e.target.value)}
                   placeholder="DELETE"
-                  className="mt-1 w-full rounded-xl border border-red-200 bg-white px-3 py-2.5 text-[13px] font-mono text-[#0a1628] uppercase placeholder:text-[#94a3b8] placeholder:normal-case placeholder:font-sans focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-200"
+                  className="mt-1 w-full rounded-xl border border-red-200 bg-white dark:bg-[#0d1a2d] px-3 py-2.5 text-[13px] font-mono text-[#0a1628] dark:text-[#f7f9fc] uppercase placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] placeholder:normal-case placeholder:font-sans focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-200"
                 />
 
                 {purgeError && (
@@ -298,7 +298,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                   >
                     {purging ? "Deleting…" : "Permanently Delete"}
                   </button>
-                  <button onClick={closePurge} className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[12px] font-bold text-[#475569] hover:text-[#0a1628]">
+                  <button onClick={closePurge} className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2.5 text-[12px] font-bold text-[#475569] dark:text-[#a9b6c9] hover:text-[#0a1628] dark:hover:text-[#f7f9fc]">
                     Cancel
                   </button>
                 </div>
@@ -312,13 +312,13 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
       {selected && (
         <div className="fixed inset-0 z-[7000] flex items-start justify-end bg-black/30 backdrop-blur-sm"
              onClick={() => setSelected(null)}>
-          <div className="h-full w-full max-w-[400px] overflow-y-auto bg-white shadow-2xl flex flex-col"
+          <div className="h-full w-full max-w-[400px] overflow-y-auto bg-white dark:bg-[#0d1a2d] shadow-2xl dark:shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col"
                onClick={e => e.stopPropagation()}>
 
             {/* Header */}
             <div className="flex items-center justify-between border-b border-[#e2eaf2] px-6 py-4">
               <div className="text-[14px] font-black text-[#0a1628]">Item Details</div>
-              <button onClick={() => setSelected(null)} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] hover:text-[#0a1628]">
+              <button onClick={() => setSelected(null)} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] hover:text-[#0a1628] dark:hover:text-[#f7f9fc]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
@@ -327,9 +327,9 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
 
             {/* Preview (media only) */}
             {selected.previewUrl && (
-              <div className="border-b border-[#f0f4f8] bg-[#f8fafc] p-4">
+              <div className="border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] p-4">
                 {selected.subType === "PDF" ? (
-                  <div className="flex items-center justify-center h-24 rounded-xl border border-[#e2eaf2] bg-white">
+                  <div className="flex items-center justify-center h-24 rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d]">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="1.5">
                       <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
                     </svg>
@@ -338,7 +338,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                   <img
                     src={selected.previewUrl}
                     alt={selected.name}
-                    className="h-40 w-full object-contain rounded-xl border border-[#e2eaf2] bg-white"
+                    className="h-40 w-full object-contain rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d]"
                   />
                 )}
               </div>
@@ -376,7 +376,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                 </button>
               )}
               {!canRestore && !canPurge && (
-                <div className="rounded-xl border border-[#e2eaf2] bg-[#f8fafc] px-4 py-3 text-[11px] text-[#94a3b8] text-center">
+                <div className="rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] px-4 py-3 text-[11px] text-[#94a3b8] dark:text-[#a9b6c9] text-center">
                   You do not have permission to restore or delete items.
                 </div>
               )}
@@ -391,8 +391,8 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
         {/* Header */}
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-[21px] font-black text-[#0a1628]">Recycle Bin</h1>
-            <p className="mt-0.5 text-[13px] text-[#64748b]">
+            <h1 className="text-[21px] font-black text-[#0a1628] dark:text-[#f7f9fc]">Recycle Bin</h1>
+            <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a9b6c9]">
               Removed items. Restore them or permanently delete.
               {result.total > 0 && (
                 <span className="ml-1 font-semibold text-[#0a1628]">{result.total} item{result.total !== 1 ? "s" : ""}</span>
@@ -403,7 +403,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
 
         {/* No permission */}
         {!canView && (
-          <div className="rounded-2xl border border-[#e2eaf2] bg-white p-8 text-center shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-8 text-center shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
             <div className="text-[15px] font-black text-[#0a1628] mb-1">Access Restricted</div>
             <p className="text-[13px] text-[#64748b] max-w-xs mx-auto leading-5">
               You do not have permission to view the Recycle Bin.
@@ -414,7 +414,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
         {canView && (
           <>
             {/* ── Filter bar ──────────────────────────────────────────────── */}
-            <div className="rounded-2xl border border-[#e2eaf2] bg-white p-4 shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+            <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-4 shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
               <div className="flex flex-wrap gap-3 items-end">
 
                 {/* Search */}
@@ -427,7 +427,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                     <input
                       type="text" value={search} onChange={e => setSearch(e.target.value)}
                       placeholder="Name or key…"
-                      className="w-full rounded-xl border border-[#dbe7f3] bg-white py-2 pl-8 pr-3 text-[12px] text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+                      className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] py-2 pl-8 pr-3 text-[12px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
                     />
                   </div>
                 </div>
@@ -455,7 +455,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                   <input
                     type="text" value={removedBy} onChange={e => setRemovedBy(e.target.value)}
                     placeholder="Email…"
-                    className="w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2 text-[12px] text-[#0a1628] placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+                    className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2 text-[12px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
                   />
                 </div>
 
@@ -463,14 +463,14 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                 <div className="min-w-[130px]">
                   <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block">From Date</label>
                   <input type="date" value={from} onChange={e => setFrom(e.target.value)}
-                    className="w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2 text-[12px] text-[#475569] focus:border-[#1677f2] focus:outline-none" />
+                    className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2 text-[12px] text-[#475569] dark:text-[#a9b6c9] focus:border-[#1677f2] focus:outline-none" />
                 </div>
 
                 {/* Date to */}
                 <div className="min-w-[130px]">
                   <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block">To Date</label>
                   <input type="date" value={to} onChange={e => setTo(e.target.value)}
-                    className="w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2 text-[12px] text-[#475569] focus:border-[#1677f2] focus:outline-none" />
+                    className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2 text-[12px] text-[#475569] dark:text-[#a9b6c9] focus:border-[#1677f2] focus:outline-none" />
                 </div>
 
                 {/* Buttons */}
@@ -480,7 +480,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                     {loading ? "Loading…" : "Apply"}
                   </button>
                   <button onClick={clearFilters}
-                    className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2 text-[12px] font-bold text-[#475569] hover:text-[#0a1628] transition-colors">
+                    className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2 text-[12px] font-bold text-[#475569] dark:text-[#a9b6c9] hover:text-[#0a1628] dark:hover:text-[#f7f9fc] transition-colors">
                     Clear
                   </button>
                 </div>
@@ -489,7 +489,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
 
             {/* ── Items table ──────────────────────────────────────────────── */}
             {result.items.length === 0 ? (
-              <div className="flex h-56 flex-col items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] bg-white text-center">
+              <div className="flex h-56 flex-col items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-center">
                 <svg className="mb-3 text-[#cbd5e1]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/>
                 </svg>
@@ -501,7 +501,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                 </div>
               </div>
             ) : (
-              <div className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+              <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
                 <table className="w-full text-[12px]">
                   <thead>
                     <tr className="border-b border-[#f0f4f8] bg-[#f8fafc]">
@@ -583,7 +583,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
 
                 {/* Footer */}
                 <div className="border-t border-[#f0f4f8] bg-[#f8fafc] px-5 py-3 flex items-center justify-between flex-wrap gap-2">
-                  <span className="text-[11px] text-[#94a3b8]">
+                  <span className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9]">
                     Showing {result.items.length} of {result.total} removed item{result.total !== 1 ? "s" : ""}
                   </span>
                   <div className="flex items-center gap-3 text-[11px] text-[#94a3b8]">

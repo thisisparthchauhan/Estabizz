@@ -82,7 +82,7 @@ function unique(items: InventoryItem[], key: keyof InventoryItem): string[] {
 
 function SummaryCard({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-xl border border-blue-100 bg-white p-4 shadow-[0_8px_24px_rgba(0,80,140,0.05)]">
+    <div className="rounded-xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-4 shadow-[0_8px_24px_rgba(0,80,140,0.05)]">
       <div className="text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">{label}</div>
       <div className="mt-2 text-[28px] font-black tracking-tight text-[#120b45]">{value}</div>
     </div>
@@ -162,7 +162,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
   if (!canView) {
     return (
       <div className="min-h-[60vh] bg-[#f6f9ff] p-6">
-        <div className="rounded-2xl border border-blue-100 bg-white p-8 shadow-sm">
+        <div className="rounded-2xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-8 shadow-sm">
           <h1 className="text-2xl font-black text-[#120b45]">Content Pages</h1>
           <p className="mt-2 text-sm font-medium text-[#64748b]">You do not have access to view this page.</p>
         </div>
@@ -180,7 +180,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
               Review existing public service, regulatory, resource, legal and 19/5 pages before CMS setup.
             </p>
           </div>
-          <div className="rounded-full border border-blue-100 bg-white px-4 py-2 text-xs font-bold text-[#1677f2] shadow-sm">
+          <div className="rounded-full border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2 text-xs font-bold text-[#1677f2] shadow-sm">
             Read-only inventory
           </div>
         </div>
@@ -194,7 +194,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
           <SummaryCard label="Existing in CMS" value={summary.existingDbMatches} />
         </div>
 
-        <div className="mb-5 rounded-2xl border border-blue-100 bg-white p-4 shadow-[0_10px_30px_rgba(0,80,140,0.05)]">
+        <div className="mb-5 rounded-2xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-4 shadow-[0_10px_30px_rgba(0,80,140,0.05)]">
           <div className="grid gap-3 lg:grid-cols-[minmax(260px,1.4fr)_repeat(4,minmax(150px,1fr))]">
             <label className="block">
               <span className="mb-1.5 block text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">Search</span>
@@ -232,7 +232,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-[0_14px_42px_rgba(0,80,140,0.07)]">
+        <div className="overflow-hidden rounded-2xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_14px_42px_rgba(0,80,140,0.07)]">
           <div className="flex items-center justify-between border-b border-blue-50 px-4 py-3">
             <div className="text-sm font-black text-[#0a1628]">{filtered.length} pages shown</div>
             {loading && <div className="text-xs font-bold text-[#64748b]">Loading pages...</div>}

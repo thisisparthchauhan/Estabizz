@@ -101,7 +101,8 @@
 | Audit logging (blogs/media) | 🔴 Not started | ContentAudit only covers homepage CMS |
 | Dark mode — theme system | ✅ Complete | next-themes v0.4.6, ThemeProvider/ThemeToggle, CSS token system |
 | Dark mode — public website | ✅ Complete | Navbar, Footer, Hero, ServicePageLayout, Contact, Blog detail |
-| Dark mode — Admin OS | ✅ Complete | AdminShell, Dashboard, BlogEditor |
+| Dark mode — Admin OS | 🟡 Partial | AdminShell shell + Dashboard + BlogEditor themed; LeadsClient, NavigationClient, CategoriesClient not yet themed — inherit shell bg but inner cards/tables are light-mode-only |
+| ContentProtection component | ✅ Committed | `components/ui/ContentProtection.tsx` was imported in layout.tsx but untracked; committed 2026-07-24 |
 | Error monitoring | 🔴 Not started | No Sentry or equivalent |
 
 ---

@@ -3,8 +3,10 @@ import LiveBackground from "@/components/ui/LiveBackground";
 import ReadingProgress from "@/components/ui/ReadingProgress";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import ChatWidget from "@/components/ui/ChatWidget";
+import ContentProtection from "@/components/ui/ContentProtection";
 import Navbar from "@/components/layout/Navbar";
 import Footer, { type FooterContent } from "@/components/layout/Footer";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import type { NavbarContent } from "@/lib/content/navbarDefaults";
 import { getContent } from "@/lib/content/getContent";
 import "@/app/globals.css"; // Assuming the user will have this
@@ -52,9 +54,13 @@ export default async function RootLayout({
         getContent("global.footer"),
     ])) as [Partial<NavbarContent>, Partial<FooterContent>];
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <head>
                 <link rel="stylesheet" href="/tailwind.css" />
+                {/* Theme color for browser chrome */}
+                <meta name="color-scheme" content="light dark" />
+                <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+                <meta name="theme-color" content="#06101f" media="(prefers-color-scheme: dark)" />
                 {/* Google Analytics — placed in <head> so it appears in server-rendered HTML, required for GTM tag detection */}
                 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HHLKJM5Q87" />
                 <script
@@ -69,15 +75,23 @@ export default async function RootLayout({
                 />
             </head>
             <body className="antialiased selection:bg-[#1677f2] selection:text-white relative bg-transparent">
-                <LiveBackground />
-                <ReadingProgress />
-                <div className="relative z-10 w-full min-h-screen bg-transparent">
-                    <Navbar content={navbarContent} />
-                    {children}
-                    <Footer content={footerContent} />
-                </div>
-                <ScrollToTop />
-                <ChatWidget />
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <LiveBackground />
+                    <ReadingProgress />
+                    <div className="relative z-10 w-full min-h-screen bg-transparent">
+                        <Navbar content={navbarContent} />
+                        {children}
+                        <Footer content={footerContent} />
+                    </div>
+                    <ScrollToTop />
+                    <ChatWidget />
+                    <ContentProtection />
+                </ThemeProvider>
             </body>
         </html>
     );

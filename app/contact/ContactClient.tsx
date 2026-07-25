@@ -269,6 +269,11 @@ const DIAL_CODES = [
     { flag: '🇿🇼', name: 'Zimbabwe',                     dial: '+263'   },
 ];
 
+const CONTACT_FORMSPREE_FORM_ID = process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_FORM_ID;
+const CONTACT_FORMSPREE_ENDPOINT = CONTACT_FORMSPREE_FORM_ID
+    ? `https://formspree.io/f/${CONTACT_FORMSPREE_FORM_ID}`
+    : null;
+
 export default function ContactClient() {
     const [form, setForm] = useState({
         name: "",
@@ -329,6 +334,29 @@ export default function ContactClient() {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
+    const sendFormspreeNotification = async (payload: Record<string, string>) => {
+        if (!CONTACT_FORMSPREE_ENDPOINT) return false;
+
+        try {
+            const response = await fetch(CONTACT_FORMSPREE_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok && process.env.NODE_ENV !== "production") {
+                console.warn("[contact enquiry] notification delivery failed");
+            }
+
+            return response.ok;
+        } catch {
+            if (process.env.NODE_ENV !== "production") {
+                console.warn("[contact enquiry] notification delivery failed");
+            }
+            return false;
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!form.service) {
@@ -338,6 +366,20 @@ export default function ContactClient() {
         setLoading(true);
         setSubmitError("");
         const fullPhone = `${DIAL_CODES[dialIdx].dial} ${form.phone}`.trim();
+        const formspreePayload = {
+            fullName:    form.name.trim(),
+            email:       form.email.trim(),
+            phone:       fullPhone,
+            countryCode: DIAL_CODES[dialIdx].dial,
+            company:     form.company.trim(),
+            service:     form.service,
+            message:     form.message.trim(),
+            pageUrl:     typeof window !== "undefined" ? window.location.href : "",
+            submittedAt: new Date().toISOString(),
+            _formSource: "contact-page",
+            _subject:    `New Contact Enquiry - ${form.service} - ${form.company.trim() || form.name.trim()}`,
+        };
+
         try {
             const res = await fetch("/api/leads", {
                 method: "POST",
@@ -346,25 +388,19 @@ export default function ContactClient() {
             });
             const data = await res.json();
             if (res.ok && data.ok) {
-                // Fire-and-forget to Formspree for email notification
-                fetch("https://formspree.io/f/xojgnbbk", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json", Accept: "application/json" },
-                    body: JSON.stringify({
-                        name:    form.name,
-                        email:   form.email,
-                        phone:   fullPhone,
-                        company: form.company,
-                        service: form.service,
-                        message: form.message,
-                    }),
-                }).catch(() => {/* best-effort — never block the user */});
+                await sendFormspreeNotification(formspreePayload);
+                setSubmitted(true);
+            } else if (res.status >= 500 && await sendFormspreeNotification(formspreePayload)) {
                 setSubmitted(true);
             } else {
                 setSubmitError(data.error || "Something went wrong. Please try again or call +91 98256 00907.");
             }
         } catch {
-            setSubmitError("Network error. Please try again or call +91 98256 00907.");
+            if (await sendFormspreeNotification(formspreePayload)) {
+                setSubmitted(true);
+            } else {
+                setSubmitError("Network error. Please try again or call +91 98256 00907.");
+            }
         } finally {
             setLoading(false);
         }

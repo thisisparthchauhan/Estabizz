@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { SEO_HOMEPAGE_DEFAULTS, type SeoContent } from "@/lib/content/seoDefaults";
 import { useSection, EditorHeader, Card, Field, LoadingCard, SaveBar, inputCls } from "../../_kit";
+import { EstabizzSelect } from "@/components/ui/EstabizzSelect";
 
 const SCHEMA_TYPES = ["WebSite", "Organization", "ProfessionalService", "LocalBusiness"];
 
@@ -144,9 +145,12 @@ export default function HomepageSeoEditor() {
                 Allow Links To Be Followed
               </label>
               <Field label="Schema Type">
-                <select value={seo.schemaType} onChange={(e) => setField("schemaType", e.target.value)} className={inputCls}>
-                  {SCHEMA_TYPES.map((type) => <option key={type} value={type}>{type}</option>)}
-                </select>
+                <EstabizzSelect
+                  variant="admin"
+                  value={seo.schemaType}
+                  onValueChange={(v) => setField("schemaType", v)}
+                  options={SCHEMA_TYPES.map((t) => ({ value: t, label: t }))}
+                />
               </Field>
             </div>
           </Card>

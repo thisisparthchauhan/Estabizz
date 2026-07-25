@@ -2,7 +2,7 @@
  * PATCH /api/admin/leads/[id] — update a lead's status (admin only).
  */
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/admin/requireAdmin';
+import { requirePermission } from '@/lib/admin/requirePermission';
 import { connectDB } from '@/lib/db';
 import LeadModel from '@/lib/models/Lead';
 
@@ -14,7 +14,7 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const auth = await requireAdmin(req);
+  const auth = await requirePermission(req, 'manage_leads');
   if (!auth.ok) return auth.response;
 
   const { id } = await params;

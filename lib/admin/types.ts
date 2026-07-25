@@ -64,6 +64,7 @@ export type AdminPermission =
   | 'purge_content'     // permanently delete from Recycle Bin (admin only, needs password)
   | 'manage_seo'        // edit SEO fields (title, meta, slug, OG, canonical, index)
   | 'manage_backups'    // create and download CMS data backups (super_admin + admin only)
+  | 'manage_leads'      // view and update lead enquiries (CRM)
   | 'view_admin';       // read-only access to the admin panel
 
 // ─── Role → default permission mapping ────────────────────────────────────────
@@ -88,6 +89,7 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     'purge_content',
     'manage_seo',
     'manage_backups',
+    'manage_leads',
     'view_admin',
   ],
 
@@ -144,6 +146,7 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     'purge_content',
     'manage_seo',
     'manage_backups',
+    'manage_leads',
     'view_admin',
     // manage_users intentionally excluded — only super_admin
   ],

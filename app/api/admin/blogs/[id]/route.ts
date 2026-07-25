@@ -2,18 +2,18 @@
  * DELETE /api/admin/blogs/[id]
  *
  * Permanently deletes any blog (admin-created or user-submitted).
- * Admin-only — guarded by requireAdmin.
+ * Requires delete_blog permission, enforced via requirePermission.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
 import { adminDeleteBlog } from '@/lib/blog/repository';
-import { requireAdmin } from '@/lib/admin/requireAdmin';
+import { requirePermission } from '@/lib/admin/requirePermission';
 
 type Params = { params: Promise<{ id: string }> };
 
 export async function DELETE(req: NextRequest, { params }: Params) {
   try {
-    const auth = await requireAdmin(req);
+    const auth = await requirePermission(req, 'delete_blog');
     if (!auth.ok) return auth.response;
 
     const { id } = await params;

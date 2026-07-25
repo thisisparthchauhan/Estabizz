@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 // ─── SVG Icons ────────────────────────────────────────────────────────────────
 
@@ -162,6 +163,14 @@ function IconShield() {
   );
 }
 
+function IconTool() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+    </svg>
+  );
+}
+
 // ─── Nav config ───────────────────────────────────────────────────────────────
 
 interface NavItem {
@@ -190,6 +199,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Recycle Bin",    href: "/admin/recycle-bin",    icon: <IconTrash /> },
   { label: "Backups",        href: "/admin/backups",        icon: <IconArchive /> },
   { label: "Navigation",     href: "/admin/navigation",     icon: <IconLayout /> },
+  { label: "Internal Tools", href: "/admin/tools",           icon: <IconTool /> },
 ];
 
 // ─── Page title map ───────────────────────────────────────────────────────────
@@ -213,6 +223,7 @@ const PAGE_TITLES: Record<string, string> = {
   "/admin/recycle-bin":   "Recycle Bin",
   "/admin/backups":        "Backups",
   "/admin/navigation":     "Navigation",
+  "/admin/tools":          "Internal Tools",
 };
 
 function getPageTitle(pathname: string): string {
@@ -220,6 +231,7 @@ function getPageTitle(pathname: string): string {
   if (pathname.startsWith("/admin/blogs/edit")) return "Edit Blog";
   if (pathname.startsWith("/admin/content-pages")) return "Content Pages";
   if (pathname.startsWith("/admin/website")) return "Website Editor";
+  if (pathname.startsWith("/admin/tools")) return "Internal Tools";
   return "Admin";
 }
 
@@ -315,7 +327,7 @@ export default function AdminShell({
       <aside
         className={`${
           collapsed ? "w-[60px]" : "w-[220px]"
-        } shrink-0 flex flex-col bg-[#071224] border-r border-white/[0.06] transition-all duration-200 overflow-hidden`}
+        } shrink-0 flex flex-col bg-[#071224] dark:bg-[var(--sidebar-background)] border-r border-white/[0.06] dark:border-[#2d4a6b] transition-all duration-200 overflow-hidden`}
       >
         {/* Brand bar */}
         <div
@@ -382,10 +394,10 @@ export default function AdminShell({
       </aside>
 
       {/* ── Main area ───────────────────────────────────────────────────────── */}
-      <div className="flex-1 flex flex-col overflow-hidden bg-[#f4f7fb]">
+      <div className="flex-1 flex flex-col overflow-hidden bg-[#f4f7fb] dark:bg-[#06101f]">
 
         {/* Top bar */}
-        <header className="h-[52px] shrink-0 flex items-center justify-between px-6 bg-white border-b border-[#e2e8f0] shadow-[0_1px_4px_rgba(15,23,42,0.05)]">
+        <header className="h-[52px] shrink-0 flex items-center justify-between px-6 bg-white dark:bg-[#0d1a2d] border-b border-[#e2e8f0] dark:border-[#223550] shadow-[0_1px_4px_rgba(15,23,42,0.05)]">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2">
             {breadcrumbs.map((crumb, i) => (
@@ -396,8 +408,8 @@ export default function AdminShell({
                 <span
                   className={
                     i === breadcrumbs.length - 1
-                      ? "text-[13px] font-black text-[#0a1628]"
-                      : "text-[12px] font-medium text-[#94a3b8] hidden sm:inline"
+                      ? "text-[13px] font-black text-[#0a1628] dark:text-[#f7f9fc]"
+                      : "text-[12px] font-medium text-[#94a3b8] dark:text-[#a9b6c9] hidden sm:inline"
                   }
                 >
                   {crumb}
@@ -408,6 +420,7 @@ export default function AdminShell({
 
           {/* Right side */}
           <div className="flex items-center gap-3">
+            <ThemeToggle variant="icon-only" />
             {pendingCount > 0 && (
               <Link
                 href="/admin/approval-queue"
@@ -418,7 +431,7 @@ export default function AdminShell({
               </Link>
             )}
 
-            <span className="text-[12px] font-medium text-[#94a3b8] hidden md:inline">
+            <span className="text-[12px] font-medium text-[#94a3b8] dark:text-[#a9b6c9] hidden md:inline">
               {adminEmail ?? "admin@estabizz.com"}
             </span>
 

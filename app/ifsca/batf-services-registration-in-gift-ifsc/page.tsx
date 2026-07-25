@@ -34,7 +34,7 @@ const serviceSchema = {
     provider: {
         '@type': 'Organization',
         name: 'Estabizz Fintech Private Limited',
-        url: 'https://estabizz-site.vercel.app/'
+        url: 'https://www.estabizz.com/'
     },
     areaServed: 'India',
     description: 'Professional support for setting up Book-keeping, Accounting, Taxation and Financial Crime Compliance Services in GIFT IFSC, including Company/LLP structuring, FATF jurisdiction review, safeguarding conditions, PO/CO documentation, application filing and post-registration compliance.'
@@ -44,9 +44,9 @@ const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://estabizz-site.vercel.app/' },
-        { '@type': 'ListItem', position: 2, name: 'IFSCA Services', item: 'https://estabizz-site.vercel.app/ifsca' },
-        { '@type': 'ListItem', position: 3, name: 'IFSCA BATF Services Registration', item: 'https://estabizz-site.vercel.app/ifsca/batf-services-registration-in-gift-ifsc' }
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.estabizz.com/' },
+        { '@type': 'ListItem', position: 2, name: 'IFSCA Services', item: 'https://www.estabizz.com/ifsca' },
+        { '@type': 'ListItem', position: 3, name: 'IFSCA BATF Services Registration', item: 'https://www.estabizz.com/ifsca/batf-services-registration-in-gift-ifsc' }
     ]
 };
 

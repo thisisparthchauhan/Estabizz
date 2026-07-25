@@ -17,9 +17,10 @@ import React, {
 } from "react";
 import Link from "next/link";
 import type { Blog, BlogCategory, BlogStatus } from "@/lib/blog/types";
+import { EstabizzSelect } from "@/components/ui/EstabizzSelect";
 import { blogCategories } from "@/lib/blog/categories";
 import { CloudinaryUploader } from "./CloudinaryUploader";
-import RichContentEditor from "./RichContentEditor";
+import RichContentEditor, { type ImageValidationState } from "./RichContentEditor";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -53,6 +54,8 @@ const KNOWN_AUTHORS = [
     bio: "Senior editorial team member at Estabizz Fintech.",
   },
 ];
+
+const CUSTOM_AUTHOR_ID = "author_custom";
 
 const STATUS_OPTIONS: { value: BlogStatus; label: string }[] = [
   { value: "draft",          label: "Draft" },
@@ -92,6 +95,7 @@ interface BlogFormData {
   metaDescription: string;
   canonicalUrl: string;
   authorId: string;
+  customAuthorName: string;
   tags: string;
   faqs: FaqEntry[];
   ctaTitle: string;
@@ -142,6 +146,7 @@ function buildInitial(blog?: Blog | null): BlogFormData {
       metaDescription: "",
       canonicalUrl: "",
       authorId: KNOWN_AUTHORS[0].id,
+      customAuthorName: "",
       tags: "",
       faqs: [],
       ctaTitle: DEFAULT_CTA_TITLE,
@@ -165,7 +170,11 @@ function buildInitial(blog?: Blog | null): BlogFormData {
     metaDescription: blog.metaDescription,
     canonicalUrl: "",
     authorId:
-      KNOWN_AUTHORS.find((a) => a.id === blog.author.id)?.id ?? KNOWN_AUTHORS[0].id,
+      KNOWN_AUTHORS.find((a) => a.id === blog.author.id)?.id ?? CUSTOM_AUTHOR_ID,
+    customAuthorName:
+      KNOWN_AUTHORS.find((a) => a.id === blog.author.id)
+        ? ""
+        : `${blog.author.firstName} ${blog.author.lastName}`.trim(),
     tags: blog.tags.join(", "),
     faqs: blog.faqs.map((f) => ({ question: f.question, answer: f.answer, order: f.order })),
     ctaTitle: DEFAULT_CTA_TITLE,
@@ -186,7 +195,7 @@ function validate(form: BlogFormData): FormErrors {
 // ─── Shared styles ────────────────────────────────────────────────────────────
 
 const inputCls =
-  "w-full rounded-xl border border-[#dbe7f3] bg-white px-3.5 py-2.5 text-[13.5px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none transition-all focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/12";
+  "w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13.5px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#b0bec5] dark:placeholder:text-[#64748b] outline-none transition-all focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/12";
 
 const errorInputCls =
   "w-full rounded-xl border border-red-300 bg-red-50/30 px-3.5 py-2.5 text-[13.5px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none focus:border-red-400 focus:ring-2 focus:ring-red-300/20";
@@ -203,7 +212,7 @@ function SectionCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white rounded-2xl border border-[#e2e8f0] shadow-[0_2px_8px_rgba(10,22,40,0.04)] overflow-hidden">
+    <div className="bg-white dark:bg-[#0d1a2d] rounded-2xl border border-[#e2e8f0] dark:border-[#223550] shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
       <div className="flex items-center gap-3 border-b border-[#f0f4f8] px-6 py-4">
         <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0a1628] text-[11px] font-black text-white">
           {number}
@@ -377,7 +386,7 @@ function ActionBar({
   isBottom?: boolean;
 }) {
   return (
-    <div className={`${isBottom ? "" : "sticky top-0"} z-50 bg-white border-b border-[#e2e8f0] shadow-[0_2px_8px_rgba(15,23,42,0.06)]`}>
+    <div className={`${isBottom ? "" : "sticky top-0"} z-[10000] bg-white dark:bg-[#0d1a2d] border-b border-[#e2e8f0] dark:border-[#223550] shadow-[0_2px_8px_rgba(15,23,42,0.06)]`}>
       <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
         {/* Left */}
         <div className="flex items-center gap-3 min-w-0">
@@ -395,7 +404,7 @@ function ActionBar({
             type="button"
             onClick={onDraft}
             disabled={saving}
-            className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-semibold text-[#334155] hover:bg-[#f8fbff] transition-colors disabled:opacity-50"
+            className="px-4 py-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-[12.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f8fbff] dark:hover:bg-[#12223a] transition-colors disabled:opacity-50"
           >
             {saving ? "Saving…" : "Save as Draft"}
           </button>
@@ -440,6 +449,11 @@ export default function BlogEditorClient({ blog, categories }: Props) {
   // Tracks the server-assigned id after first save so subsequent saves update the same record
   const [savedId, setSavedId] = useState<string | undefined>(blog?.id);
   const [imagePreview, setImagePreview] = useState(false);
+  // Tracks unresolved alt text and media sync failures reported by RichContentEditor
+  const [imageValidation, setImageValidation] = useState<ImageValidationState>({
+    unresolvedAltCount: 0,
+    mediaSyncFailures:  0,
+  });
 
   function set<K extends keyof BlogFormData>(key: K, value: BlogFormData[K]) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -493,6 +507,21 @@ export default function BlogEditorClient({ blog, categories }: Props) {
       setToast({ message: "Please fix the highlighted errors before saving.", type: "error" });
       return;
     }
+
+    // Block Publish (not Draft) when imported images have unresolved issues
+    if (targetStatus === "published") {
+      const { unresolvedAltCount, mediaSyncFailures } = imageValidation;
+      if (unresolvedAltCount > 0 || mediaSyncFailures > 0) {
+        const parts: string[] = [];
+        if (unresolvedAltCount > 0)
+          parts.push(`${unresolvedAltCount} image${unresolvedAltCount !== 1 ? "s" : ""} still need alt text review`);
+        if (mediaSyncFailures > 0)
+          parts.push(`${mediaSyncFailures} image${mediaSyncFailures !== 1 ? "s" : ""} need Media Library sync`);
+        setToast({ message: `Cannot publish: ${parts.join("; ")}. Save as Draft to continue later.`, type: "error" });
+        return;
+      }
+    }
+
     setSaving(true);
 
     try {
@@ -511,6 +540,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
         metaDescription:     form.metaDescription,
         tags:                form.tags,
         authorId:            form.authorId,
+        customAuthorName:    form.customAuthorName,
         faqs:                form.faqs,
         ctaBody:             form.ctaBody,
         disclaimer:          form.disclaimer,
@@ -554,7 +584,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
   const handleUpdate  = () => doSave(form.status);
 
   return (
-    <div className="min-h-full bg-[#f4f7fb]">
+    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#06101f]">
 
       {/* ── Top sticky bar ─────────────────────────────────────────────────── */}
       <ActionBar
@@ -629,29 +659,24 @@ export default function BlogEditorClient({ blog, categories }: Props) {
             {/* Right: status + category */}
             <div className="space-y-5">
               <Field label="Status">
-                <select
+                <EstabizzSelect
+                  variant="admin"
                   value={form.status}
-                  onChange={(e) => set("status", e.target.value as BlogStatus)}
-                  className={inputCls}
-                >
-                  {STATUS_OPTIONS.map((s) => (
-                    <option key={s.value} value={s.value}>{s.label}</option>
-                  ))}
-                </select>
+                  onValueChange={(v) => set("status", v as BlogStatus)}
+                  options={STATUS_OPTIONS.map((s) => ({ value: s.value, label: s.label }))}
+                />
               </Field>
               <Field label="Category" required error={errors.categoryId}>
-                <select
+                <EstabizzSelect
+                  variant="admin"
                   value={form.categoryId}
-                  onChange={(e) => set("categoryId", e.target.value)}
-                  className={errors.categoryId ? errorInputCls : inputCls}
-                >
-                  <option value="">— Select —</option>
-                  {cats.map((cat) => (
-                    <option key={cat.id} value={cat.id}>
-                      {cat.name}
-                    </option>
-                  ))}
-                </select>
+                  onValueChange={(v) => set("categoryId", v)}
+                  placeholder="— Select —"
+                  error={errors.categoryId}
+                  options={[
+                    ...cats.map((cat) => ({ value: cat.id, label: cat.name })),
+                  ]}
+                />
               </Field>
             </div>
           </div>
@@ -682,6 +707,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
           <RichContentEditor
             value={form.content}
             onChange={(v) => set("content", v)}
+            onImageValidationChange={setImageValidation}
           />
         </SectionCard>
 
@@ -870,15 +896,24 @@ export default function BlogEditorClient({ blog, categories }: Props) {
         <SectionCard number={6} title="Author &amp; Tags">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <Field label="Author">
-              <select
+              <EstabizzSelect
+                variant="admin"
                 value={form.authorId}
-                onChange={(e) => set("authorId", e.target.value)}
-                className={inputCls}
-              >
-                {KNOWN_AUTHORS.map((a) => (
-                  <option key={a.id} value={a.id}>{a.display}</option>
-                ))}
-              </select>
+                onValueChange={(v) => set("authorId", v)}
+                options={[
+                  ...KNOWN_AUTHORS.map((a) => ({ value: a.id, label: a.display })),
+                  { value: CUSTOM_AUTHOR_ID, label: "Custom…" },
+                ]}
+              />
+              {form.authorId === CUSTOM_AUTHOR_ID && (
+                <input
+                  type="text"
+                  value={form.customAuthorName ?? ""}
+                  onChange={(e) => set("customAuthorName", e.target.value)}
+                  placeholder="Enter author name (e.g. Parth Chauhan)"
+                  className={`${inputCls} mt-2`}
+                />
+              )}
             </Field>
             <Field label="Tags" hint="Comma-separated. e.g. NBFC, RBI, Fintech">
               <input
@@ -935,13 +970,13 @@ export default function BlogEditorClient({ blog, categories }: Props) {
       </div>
 
       {/* ── Bottom sticky bar ──────────────────────────────────────────────── */}
-      <div className="sticky bottom-0 z-50 bg-white border-t border-[#e2e8f0] shadow-[0_-2px_8px_rgba(15,23,42,0.06)]">
+      <div className="sticky bottom-0 z-[10000] bg-white dark:bg-[#0d1a2d] border-t border-[#e2e8f0] dark:border-[#223550] shadow-[0_-2px_8px_rgba(15,23,42,0.06)]">
         <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-end gap-2">
           <button
             type="button"
             onClick={handleDraft}
             disabled={saving}
-            className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-semibold text-[#334155] hover:bg-[#f8fbff] transition-colors disabled:opacity-50"
+            className="px-4 py-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-[12.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f8fbff] dark:hover:bg-[#12223a] transition-colors disabled:opacity-50"
           >
             {saving ? "Saving…" : "Save as Draft"}
           </button>

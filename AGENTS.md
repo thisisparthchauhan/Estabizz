@@ -5,6 +5,20 @@
 > breaking a live production site.
 > codex will review your output once you done
 
+## Start here (agent discovery order)
+
+1. Read `AGENTS.md` (this file)
+2. Read `ESTABIZZ_PROJECT_MASTER_CONTEXT.md`
+3. Read `CMS_STATUS.md`
+4. Open only the relevant supporting document under `docs/`
+
+Supporting documents are organized under `docs/`:
+- `docs/architecture/` — tech stack, module inventory, API/DB map, structure maps
+- `docs/security/` — permission map, security matrix, incident records
+- `docs/operations/` — agent guide, completion status, disaster recovery, production readiness, SEO checklist, staging package, cleanup plan, technical debt
+- `docs/roadmap/` — future product roadmap, next 20 tasks
+- `docs/audits/` — duplicate/unused file report
+
 ## 1. What this is
 
 Marketing + lead-generation website for **Estabizz Fintech Private Limited**, a
@@ -93,10 +107,13 @@ placeholder name, to be renamed**) · `/blogs` · `/contact` `/get-started`
 
 ## 7. Auth / admin
 
-- `proxy.ts` (Next 16 renamed `middleware`→`proxy`) — Edge gate: checks
-  `auth_token` cookie presence on `/admin/*`.
+- `proxy.ts` — Next.js 16 framework convention for route middleware. Contains an
+  edge-runtime cookie presence check for `/admin/*`. Its behaviour, matcher, and
+  ongoing necessity require a separate dedicated audit before any rename or removal.
+  Do not rename or delete it during routine cleanup.
 - `app/admin/layout.tsx` — server-side gate: verifies JWT + checks
-  `ADMIN_EMAIL_ALLOWLIST` (`lib/admin/seedData.ts`), renders `AdminShell`.
+  `ADMIN_EMAIL_ALLOWLIST` (`lib/admin/seedData.ts`) and the MongoDB `admin_users`
+  collection, renders `AdminShell`. This is the authoritative authentication layer.
 - API routes use `lib/admin/requireAdmin.ts` → `{ ok, email } | { ok, response }`.
 - Admin nav items live in `NAV_ITEMS` + `PAGE_TITLES` in `app/admin/AdminShell.tsx`
   (keep both in sync, or breadcrumbs duplicate-key).

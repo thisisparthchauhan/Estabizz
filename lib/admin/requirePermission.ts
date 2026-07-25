@@ -19,6 +19,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/admin/requireAdmin';
+import { seedAdminUsers } from '@/lib/admin/seedData';
 import { getAdminUserByEmail } from '@/lib/admin/repository';
 import type { AdminPermission, AdminRole } from '@/lib/admin/types';
 
@@ -40,9 +41,17 @@ export async function requirePermission(
   const base = await requireAdmin(req);
   if (!base.ok) return { ok: false, response: base.response };
 
-  // 2. Load role & permissions
+  // 2. Load role & permissions from MongoDB
   const admin = await getAdminUserByEmail(base.email);
-  if (!admin || admin.status !== 'active') {
+
+  // Seed/allowlist users may not have a MongoDB record — fall back to seedAdminUsers
+  // so that legacy accounts (estabizz@gmail.com, info@estabizz.com) can use all
+  // permission-gated routes without requiring a manual DB insert.
+  const resolved = (admin?.status === 'active')
+    ? admin
+    : seedAdminUsers.find((u) => u.email === base.email && u.status === 'active') ?? null;
+
+  if (!resolved) {
     return {
       ok: false,
       response: NextResponse.json(
@@ -53,7 +62,7 @@ export async function requirePermission(
   }
 
   // 3. Permission check
-  if (!admin.permissions.includes(permission)) {
+  if (!resolved.permissions.includes(permission)) {
     return {
       ok: false,
       response: NextResponse.json(
@@ -65,7 +74,7 @@ export async function requirePermission(
 
   return {
     ok: true,
-    admin: { email: admin.email, role: admin.role, permissions: admin.permissions },
+    admin: { email: resolved.email, role: resolved.role, permissions: resolved.permissions },
   };
 }
 

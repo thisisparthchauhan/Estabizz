@@ -13,6 +13,8 @@ This document records the permission model, protected routes, and security invar
 ## 2. Current Phase
 
 - **Phase 5A** — Admin OS Security, Permission, and Route Protection Hardening
+- **Phase 6C Security Hardening (2026-07-22)** — Blog and leads API granular permission enforcement (TD-016 resolved). `manage_leads` permission added.
+- **Phase 6C QA Correction (2026-07-22)** — Blog status route: server-side transition matrix added; two-step auth pattern (requireAdmin → load blog → validate transition → requirePermission) enforced; stale comment in DELETE route corrected.
 - All work is **local**. Not pushed to production.
 - Public Content CMS: **46 managed pages** (c0188b2 → Phase 4R baseline)
 
@@ -71,6 +73,7 @@ This document records the permission model, protected routes, and security invar
 | `manage_media` | Upload and edit media assets | ✓ | ✓ (soft) | — | Medium |
 | `manage_users` | Create, edit, suspend admin users; reset passwords | ✓ | — | — | Critical |
 | `manage_backups` | Create and download CMS data backups | — | — | — | High |
+| `manage_leads` | View and update lead enquiries (CRM status) | — | — | — | Medium |
 | `manage_blogs` | View blog admin section | — | — | — | Low |
 | `create_blog` | Author new blog posts | ✓ | — | — | Low |
 | `edit_blog` | Edit any blog post | ✓ | — | — | Low |
@@ -97,6 +100,7 @@ This document records the permission model, protected routes, and security invar
 | `manage_media` | ✓ | ✓ | ✓ | ✓ | — | ✓ | — | ✓ | — |
 | `manage_users` | ✓ | — | — | — | — | — | — | — | — |
 | `manage_backups` | ✓ | ✓ | — | — | — | — | — | — | — |
+| `manage_leads` | ✓ | ✓ | — | — | — | — | — | — | — |
 | `manage_blogs` | ✓ | ✓ | — | ✓ | ✓ | — | — | ✓ | ✓ |
 | `create_blog` | ✓ | ✓ | — | ✓ | — | — | — | ✓ | — |
 | `edit_blog` | ✓ | ✓ | — | ✓ | — | — | — | ✓ | — |
@@ -215,10 +219,36 @@ Protection invariants:
 | `POST .../[id]/move-to-draft` | POST | `requirePermission` | `manage_content` |
 | `POST .../[id]/delete` | POST | `requirePermission` | `delete_content` |
 
-### Leads
+### Blog Routes *(fixed Phase 6C security hardening 2026-07-22; transition matrix added Phase 6C QA correction 2026-07-22)*
+| Route | Method | Auth | Permission | Notes |
+|---|---|---|---|---|
+| `POST /api/admin/blogs/save` (new blog) | POST | `requirePermission` | `create_blog` | |
+| `POST /api/admin/blogs/save` (existing blog) | POST | `requirePermission` | `edit_blog` + `publish_blog` if publishing | |
+| `DELETE /api/admin/blogs/[id]` | DELETE | `requirePermission` | `delete_blog` | |
+| `PATCH /api/admin/blogs/[id]/status` → `draft`/`pending_review` | PATCH | `requireAdmin` + `requirePermission` | `edit_blog` | Transition validated server-side; invalid transitions → 409 |
+| `PATCH /api/admin/blogs/[id]/status` → `approved` | PATCH | `requireAdmin` + `requirePermission` | `approve_blog` | Only from `pending_review` or `approved` self |
+| `PATCH /api/admin/blogs/[id]/status` → `published` | PATCH | `requireAdmin` + `requirePermission` | `publish_blog` | Only from `pending_review` or `approved` |
+| `PATCH /api/admin/blogs/[id]/status` → `rejected` | PATCH | `requireAdmin` + `requirePermission` | `reject_blog` | Only from `pending_review` or `approved` |
+| `PATCH /api/admin/blogs/[id]/status` → `archived` | PATCH | `requireAdmin` + `requirePermission` | `archive_blog` | Only from `pending_review` or `published` |
+| `GET/PATCH /api/admin/blogs/featured` | GET/PATCH | `requirePermission` | `manage_blogs` | |
+
+**Blog status transition matrix** (enforced server-side, current status loaded from MongoDB):
+
+| From ↓ \ To → | draft | pending_review | approved | published | rejected | archived |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| `draft` | — | ✓ | — | — | — | — |
+| `pending_review` | ✓ | — | ✓ | ✓ | ✓ | ✓ |
+| `approved` | — | — | — | ✓ | ✓ | — |
+| `published` | — | — | — | — | — | ✓ |
+| `rejected` | ✓ | — | — | — | — | — |
+| `archived` | ✓ | — | — | — | — | — |
+
+Invalid transitions return `409 Conflict` with `{ error, currentStatus, requestedStatus }`. Auth check (`requireAdmin`) runs before the blog record is loaded — unauthenticated callers never see 404.
+
+### Leads *(fixed Phase 6C security hardening, 2026-07-22)*
 | Route | Method | Auth | Permission |
 |---|---|---|---|
-| `PATCH /api/admin/leads/[id]` | PATCH | `requireAdmin` | Any authenticated admin |
+| `PATCH /api/admin/leads/[id]` | PATCH | `requirePermission` | `manage_leads` (super_admin, admin) |
 
 ---
 
@@ -269,7 +299,7 @@ No admin page bypasses the layout guard. Individual pages may add further permis
 
 ## 10. Recommended Next Hardening Steps (Phase 5B+)
 
-1. **Rate-limit `/api/auth/login`** to mitigate brute-force attacks (e.g. 5 attempts per IP per minute).
+1. ~~**Rate-limit `/api/auth/login`** to mitigate brute-force attacks.~~ **DONE 2026-07-22 (hardened 2026-07-22)** — Upstash sliding window: 5/IP/15 min (IP) + 10/hashedId/30 min. Production config gate: 503 when Upstash absent. Fail-open for runtime failures only. Unknown IP → 503 in production. Body via `arrayBuffer()` not `Content-Length`. AI endpoints: 10/IP/10 min (chat), 5/IP/10 min (recommend), fail-closed + same production gate. `lib/security/rateLimit.ts`. **Open: RL-002 — Upstash must be provisioned before AI endpoints can be enabled.**
 2. **Add edge middleware** for fast cookie-presence pre-check on `/admin/**` and `/api/admin/**`, reducing server-side layout redirect latency.
 3. **Implement purge password re-verification** for `purge_content` actions (the gap documented in Phase 3B).
 4. **Audit log for admin login attempts** (success and failure) — currently `recordAdminLogin` only logs successful logins.

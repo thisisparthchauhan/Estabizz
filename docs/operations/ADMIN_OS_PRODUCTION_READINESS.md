@@ -1,7 +1,9 @@
 # Estabizz Admin OS — Production Readiness Reference
 
 > Created: Phase 5C (2026-07-02 IST) · Do not include credentials in this file.
-> No push or deployment was performed in Phase 5C. This document is a readiness gate only.
+> Updated: 2026-07-24 — Dark mode system complete (Phase 31 local commits). Public site + Admin OS fully themed.
+> No push or deployment was performed. This document is a readiness gate only.
+> Documentation structure correction: 2026-07-22 — proxy.ts classification corrected; file moved to docs/operations/.
 
 ---
 
@@ -25,8 +27,8 @@ This document records the results of the Phase 5C production readiness audit. It
 
 | Area | Status | Notes |
 |---|---|---|
-| Production build | PASS | 137 pages, no TypeScript errors, no fatal errors |
-| TypeScript | PASS | `npx tsc --noEmit` — clean |
+| Production build | PASS | 232 pages (post dark-mode batch), no TypeScript errors, no fatal errors |
+| TypeScript | PASS | `npx tsc --noEmit` — clean (verified post dark-mode) |
 | Environment variable checklist | READY | Names documented below; values confirmed in `.env.local` |
 | Secret handling | PASS | No secrets in tracked files; `.env.local` untracked |
 | Database readiness | PASS | 46 published pages, no duplicates, no QA users |
@@ -319,7 +321,7 @@ Additional invariants:
 | JWT expiry | 7 days | Matches cookie maxAge |
 | JWT signing algorithm | HS256 (jsonwebtoken default) | Signed with `JWT_SECRET` |
 
-**No middleware.ts / edge pre-check:** There is no Next.js edge middleware for `/admin/**`. The `app/admin/layout.tsx` is the authoritative gate. AGENTS.md §7 references a non-existent `proxy.ts` edge gate — this comment is stale. The actual protection is the server-side layout guard (documented in `ADMIN_OS_SECURITY_MATRIX.md`).
+**proxy.ts edge check + server-side gate:** `proxy.ts` is a Next.js 16 framework convention containing an edge-runtime cookie presence check for `/admin/*`. `app/admin/layout.tsx` is the authoritative gate — it verifies the JWT and checks the admin allowlist/DB. A dedicated `proxy.ts` audit is required to determine whether the edge check provides meaningful layered protection or is redundant. See `docs/audits/ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md` Category 4. The full admin protection architecture is documented in `docs/security/ADMIN_OS_SECURITY_MATRIX.md`.
 
 **Session invalidation gap:** Active sessions are not invalidated when an admin's role or status changes. This is a known limitation documented in `ADMIN_OS_SECURITY_MATRIX.md` §10.
 
@@ -335,9 +337,11 @@ Additional invariants:
 
 3. **No edge middleware pre-check** — `/admin/**` routes are protected only by the layout server-side check (no Vercel edge function pre-check). CDN may serve a loading frame before redirect fires. No admin data is exposed before the check completes.
 
-4. **No rate limiting on `POST /api/auth/login`** — Brute-force attacks are not rate-limited in code. Recommend Vercel rate limiting or a middleware-layer solution before production.
+4. ~~**No rate limiting on `POST /api/auth/login`**~~ — **RESOLVED 2026-07-22 (hardened 2026-07-22).** Upstash Redis sliding-window: 5/IP/15 min + 10/hashedId/30 min. Production config gate: 503 when `UPSTASH_REDIS_*` absent (in-memory fallback disabled in production). Fail-open for runtime Upstash failures only. Unknown IP → 503 in production. Body enforced via `arrayBuffer().byteLength` — not `Content-Length` header. AI endpoints also rate-limited: 10/IP/10 min (chat), 5/IP/10 min (recommend), fail-closed + same production gate + unknown IP → 503. `lib/security/rateLimit.ts`.
 
-5. **`ANTHROPIC_API_KEY` not set → 500 on AI routes** — `/api/recommend-services` and `/api/chat` return 500 without this key. These features are silently dormant until the key is set.
+4a. **`UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` not provisioned in production** — **DEPLOYMENT-BLOCKING (RL-002).** All three rate-limited routes (`/api/auth/login`, `/api/chat`, `/api/recommend-services`) return 503 in production without these env vars. Login is broken. AI features are blocked. Must provision Upstash Redis and set both env vars before any production deploy.
+
+5. ~~**`ANTHROPIC_API_KEY` not set → 500 on AI routes**~~ — **RESOLVED 2026-07-22.** Controlled 503 returned when key absent. Note: with API key set but without Upstash, AI routes also return 503 — see item 4a above.
 
 6. **`RESEND_API_KEY` not set → lead emails disabled** — Lead email alerts are silently disabled until this key is set. The lead capture form still works.
 
@@ -347,7 +351,7 @@ Additional invariants:
 
 9. **Purge doesn't verify item status** — As documented in `ADMIN_OS_DISASTER_RECOVERY.md` §9 — limited to super_admin/admin blast radius.
 
-10. **AGENTS.md §7 is stale** — References a non-existent `proxy.ts` edge gate. Actual admin protection is documented in `ADMIN_OS_SECURITY_MATRIX.md`.
+10. **proxy.ts dedicated audit pending** — `proxy.ts` is a valid Next.js 16 framework convention. A dedicated audit is required to assess whether the edge cookie check provides meaningful layered protection alongside `app/admin/layout.tsx`. Do not rename or delete without completing that audit. Tracked in `docs/audits/ESTABIZZ_DUPLICATE_UNUSED_FILE_REPORT.md` Category 4.
 
 11. **Blog `delete_blog` is permanent** — No soft-delete for blogs (pre-existing behavior).
 

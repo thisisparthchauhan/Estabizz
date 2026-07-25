@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPublicContentPageRenderState } from '@/lib/publicContent/rendering';
-import PublicContentPageRenderer from '@/components/publicContent/PublicContentPageRenderer';
 import PageClient from './PageClient';
 
 const FULL_PATH = '/rbi/payment-aggregator-license-in-india';
@@ -41,7 +40,7 @@ const serviceSchema = {
     provider: {
         "@type": "Organization",
         name: "Estabizz Fintech Private Limited",
-        url: "https://estabizz-site.vercel.app/"
+        url: "https://www.estabizz.com/"
     },
     areaServed: "India",
     description: "Professional support for RBI Payment Aggregator authorisation covering PA-O, PA-P and PA-CB models, Rs.15 crore net worth readiness, escrow framework, cyber compliance, merchant KYC, business plan and post-authorisation reporting."
@@ -51,9 +50,9 @@ const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
-        { "@type": "ListItem", position: 2, name: "RBI Services", item: "https://estabizz-site.vercel.app/rbi" },
-        { "@type": "ListItem", position: 3, name: "Payment Aggregator License in India", item: "https://estabizz-site.vercel.app/rbi/payment-aggregator-license-in-india" }
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.estabizz.com/" },
+        { "@type": "ListItem", position: 2, name: "RBI Services", item: "https://www.estabizz.com/rbi" },
+        { "@type": "ListItem", position: 3, name: "Payment Aggregator License in India", item: "https://www.estabizz.com/rbi/payment-aggregator-license-in-india" }
     ]
 };
 
@@ -92,7 +91,6 @@ export default async function Page() {
     const state = await getPublicContentPageRenderState(FULL_PATH);
 
     if (state.mode === 'blocked') notFound();
-    if (state.mode === 'published') return <PublicContentPageRenderer page={state.page} />;
 
     return (
         <>

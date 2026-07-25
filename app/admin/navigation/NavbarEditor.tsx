@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 interface NavQuickLink { label: string; href: string; icon: string; newTab: boolean }
 
 const inputCls =
-  "w-full rounded-lg border border-[#dbe7f3] bg-white px-3 py-2 text-[13px] text-[#0a1628] outline-none transition-colors focus:border-[#1677f2]";
+  "w-full rounded-lg border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none transition-colors focus:border-[#1677f2] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b]";
 
 function formatIST(iso: string | null): string {
   if (!iso) return "—";
@@ -77,17 +77,17 @@ export default function NavbarEditor() {
   }
 
   return (
-    <section className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
-      <div className="flex items-center justify-between border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3">
-        <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">Navbar — Quick Links & Button</span>
-        <span className="text-[11px] text-[#94a3b8]">Last updated: {formatIST(updatedAt)}</span>
+    <section className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+      <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-6 py-3">
+        <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Navbar — Quick Links & Button</span>
+        <span className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9]">Last updated: {formatIST(updatedAt)}</span>
       </div>
 
       {loading ? (
-        <div className="px-6 py-10 text-center text-[13px] text-[#94a3b8]">Loading…</div>
+        <div className="px-6 py-10 text-center text-[13px] text-[#94a3b8] dark:text-[#a9b6c9]">Loading…</div>
       ) : (
         <div className="px-6 py-6">
-          <p className="mb-3 text-[12px] font-bold text-[#334155]">Quick links (the standalone links beside the menus)</p>
+          <p className="mb-3 text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]">Quick links (the standalone links beside the menus)</p>
           <div className="space-y-2">
             {links.map((link, i) => (
               <div key={i} className="flex items-center gap-1.5">
@@ -103,13 +103,13 @@ export default function NavbarEditor() {
           </div>
           <button onClick={addLink} className="mt-2 text-[11px] font-bold text-[#1677f2] hover:underline">+ Add quick link</button>
 
-          <div className="mt-6 grid gap-4 border-t border-[#f0f4f8] pt-5 sm:grid-cols-2">
+          <div className="mt-6 grid gap-4 border-t border-[#f0f4f8] dark:border-[#223550] pt-5 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 block text-[12px] font-bold text-[#334155]">Button label</label>
+              <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]">Button label</label>
               <input value={ctaLabel} onChange={(e) => { setCtaLabel(e.target.value); setNotice(""); }} className={inputCls} />
             </div>
             <div>
-              <label className="mb-1.5 block text-[12px] font-bold text-[#334155]">Button link</label>
+              <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]">Button link</label>
               <input value={ctaHref} onChange={(e) => { setCtaHref(e.target.value); setNotice(""); }} className={inputCls + " font-mono text-[11px]"} />
             </div>
           </div>

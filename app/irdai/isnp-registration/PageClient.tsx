@@ -706,12 +706,12 @@ Event-Based Compliance:
             provider: {
               "@type": "Organization",
               name: "Estabizz Fintech Private Limited",
-              url: "https://estabizz-site.vercel.app/",
+              url: "https://www.estabizz.com/",
             },
             areaServed: { "@type": "Country", name: "India" },
             description:
               "Professional regulatory consulting support for IRDAI Insurance Self-Network Platform (ISNP) permission — eligibility review, platform scope mapping, web/mobile readiness, certification coordination, KYC/AML documentation, eIA facilitation, grievance redressal framework and post-permission compliance.",
-            url: "https://estabizz-site.vercel.app/irdai/isnp-registration",
+            url: "https://www.estabizz.com/irdai/isnp-registration",
           }),
         }}
       />
@@ -723,9 +723,9 @@ Event-Based Compliance:
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
-              { "@type": "ListItem", position: 2, name: "IRDAI Services", item: "https://estabizz-site.vercel.app/irdai" },
-              { "@type": "ListItem", position: 3, name: "ISNP Registration", item: "https://estabizz-site.vercel.app/irdai/isnp-registration" },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://www.estabizz.com/" },
+              { "@type": "ListItem", position: 2, name: "IRDAI Services", item: "https://www.estabizz.com/irdai" },
+              { "@type": "ListItem", position: 3, name: "ISNP Registration", item: "https://www.estabizz.com/irdai/isnp-registration" },
             ],
           }),
         }}

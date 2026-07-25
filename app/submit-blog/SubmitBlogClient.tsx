@@ -18,6 +18,7 @@ import React, {
 } from 'react';
 import Link from 'next/link';
 import type { BlogCategory } from '@/lib/blog/types';
+import { EstabizzSelect } from '@/components/ui/EstabizzSelect';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -165,7 +166,7 @@ function FormSection({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white rounded-2xl border border-[#e2eaf2] shadow-[0_2px_12px_rgba(10,22,40,0.06)] overflow-hidden">
+    <div className="bg-white rounded-2xl border border-[#e2eaf2] shadow-[0_2px_12px_rgba(10,22,40,0.06)]">
       <div className="flex items-start gap-3.5 px-6 py-4 border-b border-[#f0f6ff] bg-[#fafcff]">
         <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center text-white font-black text-[13px] shrink-0 mt-0.5">
           {step}
@@ -493,20 +494,20 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
                   error={errors.categoryId}
                   hint="Select the regulatory or compliance domain your article primarily covers."
                 >
-                  <select
-                    data-error={!!errors.categoryId || undefined}
+                  <EstabizzSelect
                     name="categoryId"
+                    variant="public"
                     value={form.categoryId}
-                    onChange={handleChange}
-                    className={errors.categoryId ? errorInputCls : inputCls}
-                  >
-                    <option value="">— Select a category —</option>
-                    {categories.map((cat) => (
-                      <option key={cat.id} value={cat.id}>
-                        {cat.icon} {cat.name}
-                      </option>
-                    ))}
-                  </select>
+                    onValueChange={(v) =>
+                      setForm((prev) => ({ ...prev, categoryId: v }))
+                    }
+                    placeholder="— Select a category —"
+                    error={errors.categoryId}
+                    options={categories.map((cat) => ({
+                      value: cat.id,
+                      label: `${cat.icon} ${cat.name}`,
+                    }))}
+                  />
                 </FieldGroup>
 
                 <FieldGroup

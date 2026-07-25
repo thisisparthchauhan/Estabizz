@@ -53,10 +53,10 @@ const OPTIONS: sanitizeHtml.IOptions = {
     // class + id needed for callout boxes and TOC anchors
     '*': ['class', 'id'],
   },
-  // Only http/https/mailto/tel links and data: images. Blocks javascript:.
+  // Only http/https/mailto/tel links. Blocks javascript: and data: URIs on images.
   allowedSchemes: ['http', 'https', 'mailto', 'tel'],
   allowedSchemesByTag: {
-    img: ['http', 'https', 'data'],
+    img: ['https'],
   },
   allowProtocolRelative: false,
   // Drop the entire element (and contents) for anything dangerous.

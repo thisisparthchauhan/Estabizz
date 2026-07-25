@@ -1394,12 +1394,12 @@ export default function PageClient() {
                         provider: {
                             "@type": "Organization",
                             name: "Estabizz Fintech Private Limited",
-                            url: "https://estabizz-site.vercel.app/",
+                            url: "https://www.estabizz.com/",
                         },
                         areaServed: { "@type": "Country", name: "India" },
                         description:
                             "Professional regulatory consulting support for IRDAI Composite Insurance Broker Registration covering life insurance broking, general insurance broking and reinsurance broking — ₹5 Crore capital readiness, Principal Officer documentation, business plan, application filing and post-registration compliance.",
-                        url: "https://estabizz-site.vercel.app/irdai/composite-insurance-broker-registration-in-india",
+                        url: "https://www.estabizz.com/irdai/composite-insurance-broker-registration-in-india",
                     }),
                 }}
             />
@@ -1411,9 +1411,9 @@ export default function PageClient() {
                         "@context": "https://schema.org",
                         "@type": "BreadcrumbList",
                         itemListElement: [
-                            { "@type": "ListItem", position: 1, name: "Home", item: "https://estabizz-site.vercel.app/" },
-                            { "@type": "ListItem", position: 2, name: "IRDAI Services", item: "https://estabizz-site.vercel.app/irdai" },
-                            { "@type": "ListItem", position: 3, name: "Composite Insurance Broker Registration", item: "https://estabizz-site.vercel.app/irdai/composite-insurance-broker-registration-in-india" },
+                            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.estabizz.com/" },
+                            { "@type": "ListItem", position: 2, name: "IRDAI Services", item: "https://www.estabizz.com/irdai" },
+                            { "@type": "ListItem", position: 3, name: "Composite Insurance Broker Registration", item: "https://www.estabizz.com/irdai/composite-insurance-broker-registration-in-india" },
                         ],
                     }),
                 }}

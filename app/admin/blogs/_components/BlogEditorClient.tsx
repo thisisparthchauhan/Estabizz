@@ -631,7 +631,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
               >
                 <div className="flex gap-2">
                   <div className="relative flex-1">
-                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[12px] text-[#94a3b8] font-mono pointer-events-none">
+                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[12px] text-[#94a3b8] font-mono pointer-events-none select-none">
                       /blogs/
                     </span>
                     <input
@@ -639,7 +639,8 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                       value={form.slug}
                       onChange={(e) => handleSlugChange(e.target.value)}
                       placeholder="your-slug-here"
-                      className={`${errors.slug ? errorInputCls : inputCls} pl-[52px] font-mono text-[13px]`}
+                      style={{ color: '#0a1628' }}
+                      className={`${errors.slug ? errorInputCls : inputCls} pl-[68px] font-mono text-[13px]`}
                     />
                   </div>
                   {form.slugManual && (

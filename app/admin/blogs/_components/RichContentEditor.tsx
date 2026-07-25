@@ -165,7 +165,8 @@ function LinkDialog({
 // ── Main editor ───────────────────────────────────────────────────────────────
 
 export default function RichContentEditor({ value, onChange, onImageValidationChange }: Props) {
-  const wordFileRef = useRef<HTMLInputElement>(null);
+  const wordFileRef  = useRef<HTMLInputElement>(null);
+  const imageFileRef = useRef<HTMLInputElement>(null);
   const [showHtml, setShowHtml]         = useState(false);
   const [linkOpen, setLinkOpen]         = useState(false);
   const [wordPasteToast, setWordPasteToast] = useState(false);
@@ -177,6 +178,9 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
   const [failedMediaRecords, setFailedMediaRecords] = useState<FailedMediaRecord[]>([]);
   const [isRetrying, setIsRetrying]             = useState(false);
   const [mediaSyncSucceeded, setMediaSyncSucceeded] = useState(false);
+
+  // ── Direct image upload state ───────────────────────────────────────────────
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [importSuccessMsg, setImportSuccessMsg] = useState<string | null>(null);
   const importSuccessTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -502,6 +506,77 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
     }
   }, [failedMediaRecords]);
 
+  // ── Direct image upload ─────────────────────────────────────────────────────
+  const handleImageFileChange = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (!file || !editor) return;
+      e.target.value = "";
+
+      if (!ALLOWED_IMAGE_MIMES.has(file.type as (typeof ALLOWED_IMAGE_MIMES extends Set<infer T> ? T : never))) {
+        alert("Unsupported file type. Please upload a PNG, JPG, GIF, or WebP image.");
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        alert("Image exceeds 10 MB. Please compress it before uploading.");
+        return;
+      }
+
+      setIsUploadingImage(true);
+      try {
+        const fd = new FormData();
+        fd.append("file", file);
+        fd.append("upload_preset", CLOUDINARY_PRESET as string);
+
+        const uploadRes  = await fetch(
+          `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`,
+          { method: "POST", body: fd }
+        );
+        const uploadData = await uploadRes.json() as Record<string, unknown>;
+
+        if (!uploadRes.ok || typeof uploadData.secure_url !== "string") {
+          alert("Image upload failed. Please try again.");
+          return;
+        }
+
+        const secureUrl = uploadData.secure_url as string;
+        const ext       = file.type.split("/")[1].replace("jpeg", "jpg");
+        const alt       = file.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
+
+        editor.chain().focus().setImage({ src: secureUrl, alt }).run();
+
+        // Save to Media Library (best-effort — failure is silent here)
+        try {
+          await fetch("/api/admin/media", {
+            method:  "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              publicId:         uploadData.public_id,
+              secureUrl,
+              url:              uploadData.url ?? secureUrl,
+              resourceType:     uploadData.resource_type ?? "image",
+              format:           uploadData.format ?? ext,
+              bytes:            uploadData.bytes,
+              width:            uploadData.width,
+              height:           uploadData.height,
+              originalFilename: file.name,
+              mimeType:         file.type,
+              altText:          alt,
+              tags:             ["direct_upload"],
+            }),
+          });
+        } catch {
+          // Upload succeeded; Media Library sync failure is non-blocking
+        }
+      } catch {
+        alert("Image upload failed. Check your connection and try again.");
+      } finally {
+        setIsUploadingImage(false);
+      }
+    },
+    [editor]
+  );
+
   // ── Link handling ────────────────────────────────────────────────────────────
   const handleLinkConfirm = useCallback(
     (url: string) => {
@@ -570,11 +645,21 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
                 </>
               )}
               <Divider />
+              {/* Upload Image */}
+              <button
+                type="button"
+                title="Upload an image (PNG, JPG, GIF, WebP — max 10 MB)"
+                disabled={isImporting || isUploadingImage}
+                onClick={() => imageFileRef.current?.click()}
+                className="px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold text-[#1677f2] border border-[#1677f2]/30 hover:bg-[#1677f2] hover:text-white hover:border-[#1677f2] transition-colors leading-none shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isUploadingImage ? "Uploading…" : "🖼 Image"}
+              </button>
               {/* Import Word */}
               <button
                 type="button"
                 title="Import from Word .docx file"
-                disabled={isImporting}
+                disabled={isImporting || isUploadingImage}
                 onClick={() => wordFileRef.current?.click()}
                 className="px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold text-[#1677f2] border border-[#1677f2]/30 hover:bg-[#1677f2] hover:text-white hover:border-[#1677f2] transition-colors leading-none shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
               >
@@ -653,41 +738,49 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
           </div>
         )}
 
+        {/* ── Image uploading progress ──────────────────────────────────────── */}
+        {isUploadingImage && (
+          <div className="flex items-center gap-2 border-b border-[#1677f2]/30 bg-[#1677f2] px-4 py-2.5 text-[12px] font-bold text-white">
+            <span className="animate-pulse">⬆</span>
+            <span>Uploading image to Cloudinary…</span>
+          </div>
+        )}
+
         {/* ── Media Library sync failure ────────────────────────────────────── */}
         {mediaSyncFailCount > 0 && (
-          <div className="flex items-center justify-between gap-2 border-b border-orange-200 bg-orange-50 px-4 py-2 text-[12px] font-semibold text-orange-800">
+          <div className="flex items-center justify-between gap-3 border-b border-orange-400 bg-orange-500 px-4 py-2.5 text-[12px] font-bold text-white">
             <span>
-              ⚠ {mediaSyncFailCount} image{mediaSyncFailCount > 1 ? "s were" : " was"} uploaded but could not be added to Media Library.
-              {" "}Images are in the editor but not tracked.
+              ⚠ {mediaSyncFailCount} image{mediaSyncFailCount > 1 ? "s were" : " was"} uploaded but could not be saved to Media Library.
+              {" "}The image{mediaSyncFailCount > 1 ? "s are" : " is"} in the editor but not tracked.
             </span>
             <button
               type="button"
               onClick={handleMediaRetry}
               disabled={isRetrying}
-              className="shrink-0 px-3 py-1 rounded-lg bg-orange-700 text-white text-[11px] font-bold hover:bg-orange-800 disabled:opacity-50 transition-colors"
+              className="shrink-0 px-3 py-1.5 rounded-lg bg-white text-orange-600 text-[11px] font-black hover:bg-orange-50 disabled:opacity-60 transition-colors"
             >
-              {isRetrying ? "Syncing…" : "Retry Media Library Sync"}
+              {isRetrying ? "Syncing…" : "Retry Sync"}
             </button>
           </div>
         )}
 
         {/* ── Media Library sync success (after retry) ──────────────────────── */}
         {mediaSyncSucceeded && mediaSyncFailCount === 0 && (
-          <div className="flex items-center gap-2 border-b border-emerald-200 bg-emerald-50 px-4 py-2 text-[12px] font-semibold text-emerald-700">
+          <div className="flex items-center gap-2 border-b border-emerald-500 bg-emerald-600 px-4 py-2.5 text-[12px] font-bold text-white">
             <span>✓ Media Library sync completed successfully.</span>
           </div>
         )}
 
         {/* ── Upload failures (Cloudinary) ──────────────────────────────────── */}
         {uploadFailCount > 0 && !isImporting && (
-          <div className="flex items-center justify-between gap-2 border-b border-amber-200 bg-amber-50 px-4 py-2 text-[12px] font-semibold text-amber-800">
+          <div className="flex items-center justify-between gap-3 border-b border-red-400 bg-red-500 px-4 py-2.5 text-[12px] font-bold text-white">
             <span>
-              ⚠ {uploadFailCount} image{uploadFailCount > 1 ? "s" : ""} could not be uploaded — check the editor and replace them manually.
+              ✕ {uploadFailCount} image{uploadFailCount > 1 ? "s" : ""} could not be uploaded — check the editor and replace them manually.
             </span>
             <button
               type="button"
               onClick={() => setUploadFailCount(0)}
-              className="shrink-0 text-amber-600 hover:text-amber-900 text-[14px] leading-none"
+              className="shrink-0 text-white/80 hover:text-white text-[16px] leading-none font-black"
             >
               ×
             </button>
@@ -696,12 +789,12 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
 
         {/* ── Import complete (all images succeeded) ────────────────────────── */}
         {importSuccessMsg && (
-          <div className="flex items-center justify-between gap-2 border-b border-emerald-200 bg-emerald-50 px-4 py-2 text-[12px] font-semibold text-emerald-700">
+          <div className="flex items-center justify-between gap-3 border-b border-emerald-500 bg-emerald-600 px-4 py-2.5 text-[12px] font-bold text-white">
             <span>✓ {importSuccessMsg}</span>
             <button
               type="button"
               onClick={() => setImportSuccessMsg(null)}
-              className="shrink-0 text-emerald-600 hover:text-emerald-900 text-[14px] leading-none"
+              className="shrink-0 text-white/80 hover:text-white text-[16px] leading-none font-black"
             >
               ×
             </button>
@@ -710,9 +803,9 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
 
         {/* ── Alt text review notice ────────────────────────────────────────── */}
         {unresolvedAltCount > 0 && (
-          <div className="flex items-center gap-2 border-b border-yellow-200 bg-yellow-50 px-4 py-2 text-[12px] font-semibold text-yellow-800">
+          <div className="flex items-center gap-2 border-b border-amber-400 bg-amber-500 px-4 py-2.5 text-[12px] font-bold text-white">
             <span>
-              ✎ {unresolvedAltCount} image{unresolvedAltCount > 1 ? "s have" : " has"} placeholder alt text — click the image to edit it before publishing.
+              ✎ {unresolvedAltCount} image{unresolvedAltCount > 1 ? "s have" : " has"} placeholder alt text — click each image to add a description before publishing.
             </span>
           </div>
         )}
@@ -739,6 +832,16 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
           <span>{charCount} chars HTML</span>
         </div>
       </div>
+
+      {/* ── Hidden image file input ──────────────────────────────────────── */}
+      <input
+        ref={imageFileRef}
+        type="file"
+        accept="image/png,image/jpeg,image/jpg,image/gif,image/webp"
+        onChange={handleImageFileChange}
+        className="hidden"
+        aria-hidden="true"
+      />
 
       {/* ── Hidden .docx file input ───────────────────────────────────────── */}
       <input

@@ -169,20 +169,27 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
   const imageFileRef = useRef<HTMLInputElement>(null);
   const [showHtml, setShowHtml]         = useState(false);
   const [linkOpen, setLinkOpen]         = useState(false);
-  const [wordPasteToast, setWordPasteToast] = useState(false);
-  const wordPasteTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   // ── Word import state ───────────────────────────────────────────────────────
   const [importStatus, setImportStatus]         = useState<string | null>(null);
-  const [uploadFailCount, setUploadFailCount]   = useState(0);
   const [failedMediaRecords, setFailedMediaRecords] = useState<FailedMediaRecord[]>([]);
   const [isRetrying, setIsRetrying]             = useState(false);
   const [mediaSyncSucceeded, setMediaSyncSucceeded] = useState(false);
 
   // ── Direct image upload state ───────────────────────────────────────────────
   const [isUploadingImage, setIsUploadingImage] = useState(false);
-  const [importSuccessMsg, setImportSuccessMsg] = useState<string | null>(null);
-  const importSuccessTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // ── Toast notifications (fixed-position, always visible regardless of scroll) ─
+  type ToastKind = "info" | "success" | "warning" | "error";
+  interface Toast { id: number; kind: ToastKind; message: string; }
+  const [toasts, setToasts] = useState<Toast[]>([]);
+  const toastId = useRef(0);
+  const addToast = useCallback((kind: ToastKind, message: string, durationMs = 5000) => {
+    const id = ++toastId.current;
+    setToasts(prev => [...prev, { id, kind, message }]);
+    if (durationMs > 0) setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id)), durationMs);
+    return id;
+  }, []);
+  const removeToast = useCallback((id: number) => setToasts(prev => prev.filter(t => t.id !== id)), []);
 
   // ── Alt text state ──────────────────────────────────────────────────────────
   const [unresolvedAltCount, setUnresolvedAltCount] = useState(0);
@@ -250,9 +257,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
         const parser = ProseDOMParser.fromSchema(view.state.schema);
         const slice  = parser.parseSlice(dom);
         view.dispatch(view.state.tr.replaceSelection(slice));
-        if (wordPasteTimer.current) clearTimeout(wordPasteTimer.current);
-        setWordPasteToast(true);
-        wordPasteTimer.current = setTimeout(() => setWordPasteToast(false), 3500);
+        addToast("info", "Word content detected and cleaned automatically.", 3500);
         return true;
       },
     },
@@ -320,11 +325,8 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
       e.target.value = "";
 
       setImportStatus("Reading Word file…");
-      setUploadFailCount(0);
       setFailedMediaRecords([]);
       setMediaSyncSucceeded(false);
-      if (importSuccessTimer.current) clearTimeout(importSuccessTimer.current);
-      setImportSuccessMsg(null);
 
       let imageIndex       = 0;
       let cloudinaryFailed = 0;
@@ -445,14 +447,11 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
 
         // Post-import UI summary
         if (cloudinaryFailed > 0) {
-          setUploadFailCount(cloudinaryFailed);
+          addToast("warning", `Word import: ${cloudinaryFailed} image${cloudinaryFailed !== 1 ? "s" : ""} failed to upload to Cloudinary.`);
         }
 
         if (mediaFailedNew.length === 0 && totalCloudinaryOk > 0) {
-          // All images succeeded end-to-end
-          const successMsg = `Word import complete — ${totalCloudinaryOk} image${totalCloudinaryOk !== 1 ? "s" : ""} uploaded and added to Media Library.`;
-          setImportSuccessMsg(successMsg);
-          importSuccessTimer.current = setTimeout(() => setImportSuccessMsg(null), 5000);
+          addToast("success", `Word import complete — ${totalCloudinaryOk} image${totalCloudinaryOk !== 1 ? "s" : ""} uploaded and added to Media Library.`, 5000);
         }
 
       } catch (err) {
@@ -513,16 +512,18 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
       if (!file || !editor) return;
       e.target.value = "";
 
-      if (!ALLOWED_IMAGE_MIMES.has(file.type as (typeof ALLOWED_IMAGE_MIMES extends Set<infer T> ? T : never))) {
-        alert("Unsupported file type. Please upload a PNG, JPG, GIF, or WebP image.");
+      const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif", "image/webp"];
+      if (!allowedTypes.includes(file.type)) {
+        addToast("error", "Unsupported file type. Please upload a PNG, JPG, GIF, or WebP image.");
         return;
       }
       if (file.size > 10 * 1024 * 1024) {
-        alert("Image exceeds 10 MB. Please compress it before uploading.");
+        addToast("error", "Image exceeds 10 MB. Please compress it before uploading.");
         return;
       }
 
       setIsUploadingImage(true);
+      const uploadingId = addToast("info", `⬆ Uploading ${file.name}…`, 0);
       try {
         const fd = new FormData();
         fd.append("file", file);
@@ -534,8 +535,10 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
         );
         const uploadData = await uploadRes.json() as Record<string, unknown>;
 
+        removeToast(uploadingId);
+
         if (!uploadRes.ok || typeof uploadData.secure_url !== "string") {
-          alert("Image upload failed. Please try again.");
+          addToast("error", `Image upload failed (${uploadRes.status}). Check Cloudinary credentials and try again.`);
           return;
         }
 
@@ -545,7 +548,15 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
 
         editor.chain().focus().setImage({ src: secureUrl, alt }).run();
 
-        // Save to Media Library (best-effort — failure is silent here)
+        // Scroll inserted image into view
+        setTimeout(() => {
+          const imgs = document.querySelectorAll(".rich-editor-prose img");
+          if (imgs.length) imgs[imgs.length - 1].scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 150);
+
+        addToast("success", `✓ Image "${file.name}" uploaded and inserted.`);
+
+        // Save to Media Library (best-effort)
         try {
           await fetch("/api/admin/media", {
             method:  "POST",
@@ -566,15 +577,17 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
             }),
           });
         } catch {
-          // Upload succeeded; Media Library sync failure is non-blocking
+          // Cloudinary upload succeeded; Media Library record is non-blocking
         }
-      } catch {
-        alert("Image upload failed. Check your connection and try again.");
+      } catch (err) {
+        removeToast(uploadingId);
+        addToast("error", "Image upload failed — check your connection and try again.");
+        console.error("[RichContentEditor] direct image upload failed:", err);
       } finally {
         setIsUploadingImage(false);
       }
     },
-    [editor]
+    [editor, addToast, removeToast]
   );
 
   // ── Link handling ────────────────────────────────────────────────────────────
@@ -719,9 +732,9 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
           </div>
         )}
 
-        {/* ── Word import progress (spinner) ────────────────────────────────── */}
+        {/* ── Word import progress (spinner — inline so it's in-context) ──────── */}
         {importStatus && (
-          <div className="flex items-center gap-2 border-b border-blue-200 bg-blue-50 px-4 py-2 text-[12px] font-semibold text-blue-700">
+          <div className="flex items-center gap-2 border-b border-[#1677f2]/20 bg-[#1677f2] px-4 py-2.5 text-[12px] font-bold text-white">
             <svg className="h-3.5 w-3.5 animate-spin shrink-0" viewBox="0 0 24 24" fill="none">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.4 0 0 5.4 0 12h4z" />
@@ -730,23 +743,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
           </div>
         )}
 
-        {/* ── Word paste toast ──────────────────────────────────────────────── */}
-        {wordPasteToast && (
-          <div className="flex items-center gap-2 border-b border-emerald-200 bg-emerald-50 px-4 py-2 text-[12px] font-semibold text-emerald-700">
-            <span>✓</span>
-            <span>Word content pasted and cleaned — mso- styles removed, headings mapped to H2/H3/H4.</span>
-          </div>
-        )}
-
-        {/* ── Image uploading progress ──────────────────────────────────────── */}
-        {isUploadingImage && (
-          <div className="flex items-center gap-2 border-b border-[#1677f2]/30 bg-[#1677f2] px-4 py-2.5 text-[12px] font-bold text-white">
-            <span className="animate-pulse">⬆</span>
-            <span>Uploading image to Cloudinary…</span>
-          </div>
-        )}
-
-        {/* ── Media Library sync failure ────────────────────────────────────── */}
+        {/* ── Media Library sync failure (inline — below toolbar, always rendered) ── */}
         {mediaSyncFailCount > 0 && (
           <div className="flex items-center justify-between gap-3 border-b border-orange-400 bg-orange-500 px-4 py-2.5 text-[12px] font-bold text-white">
             <span>
@@ -761,52 +758,6 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
             >
               {isRetrying ? "Syncing…" : "Retry Sync"}
             </button>
-          </div>
-        )}
-
-        {/* ── Media Library sync success (after retry) ──────────────────────── */}
-        {mediaSyncSucceeded && mediaSyncFailCount === 0 && (
-          <div className="flex items-center gap-2 border-b border-emerald-500 bg-emerald-600 px-4 py-2.5 text-[12px] font-bold text-white">
-            <span>✓ Media Library sync completed successfully.</span>
-          </div>
-        )}
-
-        {/* ── Upload failures (Cloudinary) ──────────────────────────────────── */}
-        {uploadFailCount > 0 && !isImporting && (
-          <div className="flex items-center justify-between gap-3 border-b border-red-400 bg-red-500 px-4 py-2.5 text-[12px] font-bold text-white">
-            <span>
-              ✕ {uploadFailCount} image{uploadFailCount > 1 ? "s" : ""} could not be uploaded — check the editor and replace them manually.
-            </span>
-            <button
-              type="button"
-              onClick={() => setUploadFailCount(0)}
-              className="shrink-0 text-white/80 hover:text-white text-[16px] leading-none font-black"
-            >
-              ×
-            </button>
-          </div>
-        )}
-
-        {/* ── Import complete (all images succeeded) ────────────────────────── */}
-        {importSuccessMsg && (
-          <div className="flex items-center justify-between gap-3 border-b border-emerald-500 bg-emerald-600 px-4 py-2.5 text-[12px] font-bold text-white">
-            <span>✓ {importSuccessMsg}</span>
-            <button
-              type="button"
-              onClick={() => setImportSuccessMsg(null)}
-              className="shrink-0 text-white/80 hover:text-white text-[16px] leading-none font-black"
-            >
-              ×
-            </button>
-          </div>
-        )}
-
-        {/* ── Alt text review notice ────────────────────────────────────────── */}
-        {unresolvedAltCount > 0 && (
-          <div className="flex items-center gap-2 border-b border-amber-400 bg-amber-500 px-4 py-2.5 text-[12px] font-bold text-white">
-            <span>
-              ✎ {unresolvedAltCount} image{unresolvedAltCount > 1 ? "s have" : " has"} placeholder alt text — click each image to add a description before publishing.
-            </span>
           </div>
         )}
 
@@ -860,6 +811,35 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
           onConfirm={handleLinkConfirm}
           onCancel={() => setLinkOpen(false)}
         />
+      )}
+
+      {/* ── Fixed-position toast notifications (always visible regardless of scroll) ── */}
+      {toasts.length > 0 && (
+        <div className="fixed top-20 right-4 z-[99999] flex flex-col gap-2 w-[340px] max-w-[calc(100vw-2rem)] pointer-events-none">
+          {toasts.map(toast => {
+            const colors: Record<string, string> = {
+              info:    "bg-[#1677f2] text-white",
+              success: "bg-emerald-600 text-white",
+              warning: "bg-amber-500 text-white",
+              error:   "bg-red-600 text-white",
+            };
+            return (
+              <div
+                key={toast.id}
+                className={`flex items-start justify-between gap-3 rounded-xl px-4 py-3 shadow-xl text-[12.5px] font-bold pointer-events-auto ${colors[toast.kind]}`}
+              >
+                <span className="flex-1 leading-snug">{toast.message}</span>
+                <button
+                  type="button"
+                  onClick={() => removeToast(toast.id)}
+                  className="shrink-0 text-white/70 hover:text-white text-[16px] leading-none"
+                >
+                  ×
+                </button>
+              </div>
+            );
+          })}
+        </div>
       )}
 
       {/* ── ProseMirror prose styles ──────────────────────────────────────── */}

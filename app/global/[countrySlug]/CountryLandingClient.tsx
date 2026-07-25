@@ -87,6 +87,24 @@ const CONTACT_METHODS = [
   "Video meeting",
 ].map(v => ({ value: v, label: v }));
 
+const COUNTRY_FORMSPREE_FORM_ID = process.env.NEXT_PUBLIC_FORMSPREE_COUNTRY_FORM_ID;
+const COUNTRY_FORMSPREE_ENDPOINT = COUNTRY_FORMSPREE_FORM_ID
+  ? `https://formspree.io/f/${COUNTRY_FORMSPREE_FORM_ID}`
+  : null;
+
+const optionValues = (options: Array<{ value: string }>) => new Set(options.map(option => option.value));
+
+const BUSINESS_ACTIVITY_VALUES = optionValues(BUSINESS_ACTIVITIES);
+const EXPANSION_DIRECTION_VALUES = new Set([
+  "India to market",
+  "Market to India",
+  "Other cross-border route",
+]);
+const STAGE_VALUES = optionValues(STAGES);
+const SUPPORT_VALUES = optionValues(SUPPORT_OPTIONS);
+const TIMELINE_VALUES = optionValues(TIMELINES);
+const CONTACT_METHOD_VALUES = optionValues(CONTACT_METHODS);
+
 // ─── Form state ───────────────────────────────────────────────────────────────
 
 interface FormState {
@@ -440,6 +458,7 @@ function DeliverablesSection({ country }: { country: GlobalMarketConfig }) {
 
 function LeadForm({ country }: { country: GlobalMarketConfig }) {
   const formRef = useRef<HTMLDivElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -460,6 +479,11 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
     if (errors[field]) setErrors(prev => ({ ...prev, [field]: undefined }));
   }
 
+  function showResult(nextResult: { ok: boolean; msg: string }) {
+    setResult(nextResult);
+    window.setTimeout(() => resultRef.current?.focus(), 0);
+  }
+
   function validate(): boolean {
     const newErrors: Partial<Record<keyof FormState, string>> = {};
     if (!form.name.trim() || form.name.trim().length < 2) {
@@ -468,14 +492,74 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
     if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       newErrors.email = "Please enter a valid work email address.";
     }
+    if (form.phoneNumber.trim() && form.phoneNumber.trim().length < 6) {
+      newErrors.phoneNumber = "Please enter a valid mobile number or leave this blank.";
+    }
+    if (!BUSINESS_ACTIVITY_VALUES.has(form.businessActivity)) {
+      newErrors.businessActivity = "Please select a business activity.";
+    }
+    if (!EXPANSION_DIRECTION_VALUES.has(form.expansionDirection)) {
+      newErrors.expansionDirection = "Please select an expansion direction.";
+    }
+    if (!STAGE_VALUES.has(form.currentStage)) {
+      newErrors.currentStage = "Please select your current stage.";
+    }
+    if (!SUPPORT_VALUES.has(form.supportRequired)) {
+      newErrors.supportRequired = "Please select the support required.";
+    }
+    if (!TIMELINE_VALUES.has(form.timeline)) {
+      newErrors.timeline = "Please select your target timeline.";
+    }
+    if (!CONTACT_METHOD_VALUES.has(form.preferredContactMethod)) {
+      newErrors.preferredContactMethod = "Please select a preferred contact method.";
+    }
+    if (form.message.trim().length > 2000) {
+      newErrors.message = "Please keep the additional context within 2,000 characters.";
+    }
     setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      showResult({
+        ok: false,
+        msg: "Please review the highlighted fields and try again.",
+      });
+    }
     return Object.keys(newErrors).length === 0;
+  }
+
+  async function sendFormspreeNotification(payload: Record<string, string>): Promise<boolean> {
+    if (!COUNTRY_FORMSPREE_ENDPOINT) return false;
+
+    try {
+      const response = await fetch(COUNTRY_FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok && process.env.NODE_ENV !== "production") {
+        console.warn("[country enquiry] notification delivery failed");
+      }
+
+      return response.ok;
+    } catch {
+      if (process.env.NODE_ENV !== "production") {
+        console.warn("[country enquiry] notification delivery failed");
+      }
+      return false;
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (submitting || submitted) return;
     if (!validate()) return;
+    if (!COUNTRY_FORMSPREE_ENDPOINT) {
+      showResult({
+        ok: false,
+        msg: "The market-entry enquiry service is temporarily unavailable. Please contact our Global Market Desk directly.",
+      });
+      return;
+    }
 
     setSubmitting(true);
     setResult(null);
@@ -483,6 +567,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
     const phone = form.phoneNumber.trim()
       ? `${country.callingCode} ${form.phoneNumber.trim()}`
       : "";
+    const pageUrl = typeof window !== "undefined" ? window.location.href : "";
 
     try {
       const res = await fetch("/api/leads", {
@@ -504,7 +589,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
           timeline:              form.timeline,
           preferredContactMethod: form.preferredContactMethod,
           message:               form.message.trim(),
-          pageUrl:               typeof window !== "undefined" ? window.location.href : "",
+          pageUrl,
           // Honeypot
           website:               form.website,
         }),
@@ -513,53 +598,55 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
       const json = await res.json().catch(() => ({ ok: false }));
 
       if (res.status === 429) {
-        setResult({
+        showResult({
           ok: false,
-          msg: "You have reached the submission limit. Please try again later or contact us at support@estabizz.com.",
+          msg: "Too many attempts were made. Please wait a few minutes and try again.",
         });
       } else if (res.status === 503) {
-        setResult({
+        showResult({
           ok: false,
           msg: "Our enquiry form is temporarily unavailable. Please email support@estabizz.com or call +91 98256 00907.",
         });
       } else if (!json.ok) {
-        setResult({
+        showResult({
           ok: false,
           msg: json.error || "Something went wrong. Please email support@estabizz.com.",
         });
       } else {
-        // Best-effort Formspree notification (fire-and-forget)
-        fetch("https://formspree.io/f/xpqvjney", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            name:               form.name.trim(),
-            email:              form.email.trim(),
-            phone,
-            company:            form.company.trim(),
-            country:            country.name,
-            region:             country.region,
-            businessActivity:   form.businessActivity,
-            expansionDirection: form.expansionDirection,
-            currentStage:       form.currentStage,
-            supportRequired:    form.supportRequired,
-            timeline:           form.timeline,
-            preferredContact:   form.preferredContactMethod,
-            message:            form.message.trim(),
-          }),
-        }).catch(() => { /* best-effort */ });
+        await sendFormspreeNotification({
+          fullName:               form.name.trim(),
+          email:                  form.email.trim(),
+          phone,
+          countryCode:            country.callingCode ?? "",
+          company:                form.company.trim(),
+          countryName:            country.name,
+          countrySlug:            country.slug,
+          marketStatus:           country.tier,
+          region:                 country.region,
+          businessActivity:       form.businessActivity,
+          expansionDirection:     form.expansionDirection,
+          currentStage:           form.currentStage,
+          supportRequired:        form.supportRequired,
+          targetTimeline:         form.timeline,
+          preferredContactMethod: form.preferredContactMethod,
+          message:                form.message.trim(),
+          pageUrl,
+          submittedAt:            new Date().toISOString(),
+          _formSource:            "global-market-country",
+          _subject:               `New Market-Entry Enquiry - ${country.name} - ${form.company.trim() || form.name.trim()}`,
+        });
 
         setSubmitted(true);
-        setResult({
+        showResult({
           ok: true,
-          msg: "Your enquiry has been received. Our Global Market Desk will review it and identify the appropriate next step.",
+          msg: "Thank you. Your market-entry enquiry has been submitted. Our Global Market Desk will contact you shortly.",
         });
         setForm(EMPTY_FORM);
       }
     } catch {
-      setResult({
+      showResult({
         ok: false,
-        msg: "Network error. Please email support@estabizz.com or call +91 98256 00907.",
+        msg: "We could not send your enquiry because of a connection issue. Please try again.",
       });
     } finally {
       setSubmitting(false);
@@ -678,9 +765,14 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
                   value={form.phoneNumber}
                   onChange={e => setField("phoneNumber", e.target.value)}
                   placeholder="Mobile number"
+                  aria-describedby={errors.phoneNumber ? "lead-phone-error" : undefined}
+                  aria-invalid={!!errors.phoneNumber}
                   className="min-w-0 flex-1 bg-transparent px-3 py-3 text-[14px] text-[#0a1628] outline-none placeholder:text-[#94a3b8]"
                 />
               </div>
+              {errors.phoneNumber && (
+                <p id="lead-phone-error" role="alert" className="mt-1 text-[11.5px] text-red-600">{errors.phoneNumber}</p>
+              )}
             </div>
             <div>
               <label htmlFor="lead-company" className="mb-1.5 block text-[12px] font-bold text-[#334155]">
@@ -712,6 +804,8 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
           <div className="grid gap-4 sm:grid-cols-2">
             <EstabizzSelect
               label="Business activity"
+              required
+              error={errors.businessActivity}
               options={BUSINESS_ACTIVITIES}
               value={form.businessActivity}
               onValueChange={v => setField("businessActivity", v)}
@@ -720,6 +814,8 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
             />
             <EstabizzSelect
               label="Expansion direction"
+              required
+              error={errors.expansionDirection}
               options={expansionDirections}
               value={form.expansionDirection}
               onValueChange={v => setField("expansionDirection", v)}
@@ -732,6 +828,8 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
           <div className="grid gap-4 sm:grid-cols-2">
             <EstabizzSelect
               label="Current stage"
+              required
+              error={errors.currentStage}
               options={STAGES}
               value={form.currentStage}
               onValueChange={v => setField("currentStage", v)}
@@ -740,6 +838,8 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
             />
             <EstabizzSelect
               label="Support required"
+              required
+              error={errors.supportRequired}
               options={SUPPORT_OPTIONS}
               value={form.supportRequired}
               onValueChange={v => setField("supportRequired", v)}
@@ -752,6 +852,8 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
           <div className="grid gap-4 sm:grid-cols-2">
             <EstabizzSelect
               label="Target timeline"
+              required
+              error={errors.timeline}
               options={TIMELINES}
               value={form.timeline}
               onValueChange={v => setField("timeline", v)}
@@ -760,6 +862,8 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
             />
             <EstabizzSelect
               label="Preferred contact method"
+              required
+              error={errors.preferredContactMethod}
               options={CONTACT_METHODS}
               value={form.preferredContactMethod}
               onValueChange={v => setField("preferredContactMethod", v)}
@@ -780,15 +884,22 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
               value={form.message}
               onChange={e => setField("message", e.target.value)}
               placeholder="Brief background on your expansion plans, entity structure, or specific regulatory questions…"
+              aria-describedby={errors.message ? "lead-message-error" : undefined}
+              aria-invalid={!!errors.message}
               className="w-full resize-none rounded-xl border border-[#dbe7f3] bg-white px-4 py-3 text-[14px] text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10"
             />
+            {errors.message && (
+              <p id="lead-message-error" role="alert" className="mt-1 text-[11.5px] text-red-600">{errors.message}</p>
+            )}
           </div>
 
           {/* Result message */}
           {result && (
             <div
+              ref={resultRef}
               role="status"
               aria-live="polite"
+              tabIndex={-1}
               className={`rounded-xl border px-4 py-3 text-[13.5px] font-semibold ${
                 result.ok
                   ? "border-green-200 bg-green-50 text-green-800"
@@ -806,7 +917,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
               disabled={submitting}
               className="w-full rounded-xl bg-[#0a1628] py-3.5 text-[14px] font-black text-white shadow-lg transition-all hover:bg-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {submitting ? "Submitting…" : "Submit Market-Entry Enquiry →"}
+              {submitting ? "Submitting Enquiry…" : "Submit Market-Entry Enquiry →"}
             </button>
           )}
 

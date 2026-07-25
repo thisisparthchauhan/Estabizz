@@ -77,7 +77,7 @@ export default async function RootLayout({
             <body className="antialiased selection:bg-[#1677f2] selection:text-white relative bg-transparent">
                 <ThemeProvider
                     attribute="class"
-                    defaultTheme="system"
+                    defaultTheme="light"
                     enableSystem
                     disableTransitionOnChange
                 >

@@ -516,14 +516,15 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
               dangerouslySetInnerHTML={{ __html: processedHtml }}
             />
 
-            {/* FAQ section */}
-            {blog.faqs && blog.faqs.length > 0 && (
+            {/* FAQ section — only rendered when at least one FAQ has a non-empty question */}
+            {blog.faqs && blog.faqs.filter(f => f.question?.trim()).length > 0 && (
               <section className="mt-10 rounded-sm border border-[#e8e8e8] dark:border-[#223550] bg-[#f7f8fc] dark:bg-[#0d1a2d] p-6 lg:p-8">
                 <h2 className="mb-6 text-[20px] font-black text-[#0a1628] dark:text-[#f7f9fc]">
                   Frequently Asked Questions
                 </h2>
                 <div className="space-y-3">
                   {[...blog.faqs]
+                    .filter(f => f.question?.trim())
                     .sort((a, b) => a.order - b.order)
                     .map((faq, i) => (
                       <details

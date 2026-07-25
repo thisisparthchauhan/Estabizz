@@ -20,7 +20,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Image from "@tiptap/extension-image";
 import LinkExtension from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
 import { Table } from "@tiptap/extension-table";
@@ -29,6 +28,8 @@ import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import { DOMParser as ProseDOMParser } from "@tiptap/pm/model";
 import { cleanWordHtml, isWordHtml } from "./wordCleanup";
+import { BlogImageExtension, type BlogImageAlignment, type BlogImageAttrs, type BlogImageSize } from "./BlogImageExtension";
+import { MediaPickerModal, type PickedMediaImage } from "./MediaPickerModal";
 
 // ── Cloudinary config (unsigned preset — no secret in browser) ────────────────
 
@@ -58,10 +59,23 @@ function countUnresolvedAlts(html: string): number {
 const ALLOWED_IMAGE_MIMES = new Set([
   "image/png",
   "image/jpeg",
-  "image/jpg",
-  "image/gif",
   "image/webp",
 ]);
+
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
+const IMAGE_SIZE_LABELS: Record<BlogImageSize, string> = {
+  small: "Small",
+  medium: "Medium",
+  large: "Large",
+  full: "Full",
+  custom: "Custom",
+};
+
+const IMAGE_ALIGNMENT_LABELS: Record<BlogImageAlignment, string> = {
+  left: "Left",
+  center: "Centre",
+  right: "Right",
+};
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -74,6 +88,17 @@ interface FailedMediaRecord {
   uploadData: Record<string, unknown>;
   mimeType: string;
   alt: string;
+}
+
+interface CloudinaryUploadResult {
+  secureUrl: string;
+  publicId: string;
+  url?: string;
+  resourceType: string;
+  format: string;
+  bytes: number;
+  width?: number;
+  height?: number;
 }
 
 export interface ImageValidationState {
@@ -120,6 +145,29 @@ function Divider() {
   return <span className="w-px h-5 bg-[#dbe7f3] mx-1 shrink-0" />;
 }
 
+function cleanImageUrl(value: string): string {
+  const url = value.trim();
+  if (!url) return "";
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" ? url : "";
+  } catch {
+    return "";
+  }
+}
+
+function cleanLinkUrl(value: string): string {
+  const url = value.trim();
+  if (!url) return "";
+  if (url.startsWith("/")) return url;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" ? url : "";
+  } catch {
+    return "";
+  }
+}
+
 // ── Link dialog ───────────────────────────────────────────────────────────────
 
 function LinkDialog({
@@ -162,6 +210,177 @@ function LinkDialog({
   );
 }
 
+function BlogImageDialog({
+  open,
+  uploading,
+  onUpload,
+  onPick,
+  onCancel,
+  onInsert,
+}: {
+  open: boolean;
+  uploading: boolean;
+  onUpload: (file: File) => Promise<Partial<BlogImageAttrs> & { src: string }>;
+  onPick: () => void;
+  onCancel: () => void;
+  onInsert: (attrs: Partial<BlogImageAttrs> & { src: string }) => void;
+}) {
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [attrs, setAttrs] = useState<Partial<BlogImageAttrs> & { src: string }>({
+    src: "",
+    alt: "",
+    caption: "",
+    size: "medium",
+    alignment: "center",
+  });
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!open) return;
+    setAttrs({ src: "", alt: "", caption: "", size: "medium", alignment: "center" });
+    setError("");
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onCancel();
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, onCancel]);
+
+  if (!open) return null;
+
+  const canInsert = Boolean(attrs.src && attrs.alt?.trim());
+
+  return (
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-[#06101f]/55 px-4 py-6" role="dialog" aria-modal="true" aria-label="Add image">
+      <div className="w-full max-w-xl rounded-2xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-5 shadow-[0_24px_70px_rgba(6,16,31,0.32)]">
+        <div className="mb-4 flex items-start justify-between gap-4">
+          <div>
+            <p className="text-[14px] font-black text-[#0a1628] dark:text-[#f7f9fc]">Add Image</p>
+            <p className="mt-1 text-[12px] text-[#64748b] dark:text-[#a9b6c9]">Images stay inside the article flow and remain responsive.</p>
+          </div>
+          <button type="button" onClick={onCancel} className="rounded-lg px-2 py-1 text-[12px] font-bold text-[#64748b] hover:text-[#1677f2]">Close</button>
+        </div>
+
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              e.target.value = "";
+              if (!file) return;
+              setError("");
+              onUpload(file)
+                .then((uploaded) => setAttrs((current) => ({
+                  ...current,
+                  ...uploaded,
+                  alt: current.alt?.trim() ? current.alt : uploaded.alt,
+                  caption: current.caption ?? uploaded.caption ?? "",
+                })))
+                .catch((err) => setError(err instanceof Error ? err.message : "Image upload failed."));
+            }}
+          />
+          <button
+            type="button"
+            disabled={uploading}
+            onClick={() => fileRef.current?.click()}
+            className="rounded-xl border border-[#1677f2]/40 bg-[#f0faff] px-4 py-3 text-[13px] font-bold text-[#1677f2] hover:border-[#1677f2] disabled:opacity-50"
+          >
+            {uploading ? "Uploading..." : "Upload New"}
+          </button>
+          <button
+            type="button"
+            onClick={onPick}
+            className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#12223a] px-4 py-3 text-[13px] font-bold text-[#334155] dark:text-[#dbeafe] hover:border-[#1677f2] hover:text-[#1677f2]"
+          >
+            Choose from Media Library
+          </button>
+        </div>
+
+        <div className="mt-4">
+          <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#dbeafe]">Image URL</label>
+          <input
+            type="url"
+            value={attrs.src}
+            onChange={(e) => setAttrs((current) => ({ ...current, src: e.target.value }))}
+            placeholder="Upload or choose an image"
+            className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+          />
+        </div>
+
+        {attrs.src && (
+          <div className="mt-3 overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-[#f8fbff] dark:bg-[#12223a]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={attrs.src} alt="" className="max-h-48 w-full object-contain" />
+          </div>
+        )}
+
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div>
+            <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#dbeafe]">Alt text</label>
+            <input
+              type="text"
+              value={attrs.alt ?? ""}
+              onChange={(e) => setAttrs((current) => ({ ...current, alt: e.target.value }))}
+              placeholder="Describe the image"
+              className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+            />
+          </div>
+          <div>
+            <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#dbeafe]">Caption</label>
+            <input
+              type="text"
+              value={attrs.caption ?? ""}
+              onChange={(e) => setAttrs((current) => ({ ...current, caption: e.target.value }))}
+              placeholder="Optional"
+              className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+            />
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#dbeafe]">Optional link</label>
+          <input
+            type="text"
+            value={attrs.linkUrl ?? ""}
+            onChange={(e) => setAttrs((current) => ({ ...current, linkUrl: e.target.value }))}
+            placeholder="/services or https://..."
+            className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+          />
+        </div>
+
+        {error && <p className="mt-3 text-[12px] font-semibold text-red-500">{error}</p>}
+
+        <div className="mt-5 flex justify-end gap-2">
+          <button type="button" onClick={onCancel} className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] px-4 py-2 text-[12px] font-bold text-[#64748b] dark:text-[#a9b6c9]">Cancel</button>
+          <button
+            type="button"
+            disabled={!canInsert}
+            onClick={() => {
+              const safeSrc = cleanImageUrl(attrs.src);
+              const safeLink = cleanLinkUrl(attrs.linkUrl ?? "");
+              if (!safeSrc) {
+                setError("Use a secure HTTPS image.");
+                return;
+              }
+              onInsert({ ...attrs, src: safeSrc, linkUrl: safeLink, openInNewTab: Boolean(safeLink && !safeLink.startsWith("/")) });
+            }}
+            className="rounded-xl bg-[#1677f2] px-5 py-2 text-[12px] font-black text-white hover:bg-[#0866d9] disabled:opacity-40"
+          >
+            Insert at Cursor
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Main editor ───────────────────────────────────────────────────────────────
 
 export default function RichContentEditor({ value, onChange, onImageValidationChange }: Props) {
@@ -169,6 +388,9 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
   const imageFileRef = useRef<HTMLInputElement>(null);
   const [showHtml, setShowHtml]         = useState(false);
   const [linkOpen, setLinkOpen]         = useState(false);
+  const [imageDialogOpen, setImageDialogOpen] = useState(false);
+  const [mediaPickerOpen, setMediaPickerOpen] = useState(false);
+  const [pendingImageInsertPos, setPendingImageInsertPos] = useState<number | null>(null);
   // ── Word import state ───────────────────────────────────────────────────────
   const [importStatus, setImportStatus]         = useState<string | null>(null);
   const [failedMediaRecords, setFailedMediaRecords] = useState<FailedMediaRecord[]>([]);
@@ -199,6 +421,9 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
   // ── Alt editor panel state ──────────────────────────────────────────────────
   const [altPanelOpen, setAltPanelOpen] = useState(false);
   const [altEditValue, setAltEditValue] = useState("");
+  const [captionEditValue, setCaptionEditValue] = useState("");
+  const [linkEditValue, setLinkEditValue] = useState("");
+  const [customWidthValue, setCustomWidthValue] = useState("640");
 
   // ── Stable refs ─────────────────────────────────────────────────────────────
   const onChangeRef               = useRef(onChange);
@@ -214,6 +439,79 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
     });
   }, [unresolvedAltCount, failedMediaRecords]);
 
+  const saveMediaRecord = useCallback(async (
+    uploadData: CloudinaryUploadResult,
+    fileName: string,
+    mimeType: string,
+    alt: string,
+    tags: string[]
+  ) => {
+    const mediaRes = await fetch("/api/admin/media", {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        publicId:         uploadData.publicId,
+        secureUrl:        uploadData.secureUrl,
+        url:              uploadData.url ?? uploadData.secureUrl,
+        resourceType:     uploadData.resourceType,
+        format:           uploadData.format,
+        bytes:            uploadData.bytes,
+        width:            uploadData.width,
+        height:           uploadData.height,
+        originalFilename: fileName,
+        mimeType,
+        altText:          alt,
+        tags,
+      }),
+    });
+    if (!mediaRes.ok) throw new Error(`Media Library save failed (${mediaRes.status})`);
+  }, []);
+
+  const uploadImageToCloudinary = useCallback(async (file: File): Promise<CloudinaryUploadResult> => {
+    const cloudinaryReady = Boolean(CLOUDINARY_CLOUD && CLOUDINARY_PRESET);
+    if (!cloudinaryReady) throw new Error("Cloudinary is not configured.");
+    if (!ALLOWED_IMAGE_MIMES.has(file.type)) throw new Error("Use a JPG, PNG or WebP image.");
+    if (file.size > MAX_IMAGE_BYTES) throw new Error("Image must be 10 MB or smaller.");
+
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("upload_preset", CLOUDINARY_PRESET as string);
+
+    const uploadRes  = await fetch(
+      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`,
+      { method: "POST", body: fd }
+    );
+    const uploadData = await uploadRes.json() as Record<string, unknown>;
+    if (!uploadRes.ok || typeof uploadData.secure_url !== "string") {
+      throw new Error(`Image upload failed (${uploadRes.status}).`);
+    }
+    return {
+      secureUrl: String(uploadData.secure_url),
+      publicId: String(uploadData.public_id ?? ""),
+      url: typeof uploadData.url === "string" ? uploadData.url : undefined,
+      resourceType: String(uploadData.resource_type ?? "image"),
+      format: String(uploadData.format ?? file.type.split("/")[1] ?? ""),
+      bytes: Number(uploadData.bytes ?? file.size),
+      width: uploadData.width != null ? Number(uploadData.width) : undefined,
+      height: uploadData.height != null ? Number(uploadData.height) : undefined,
+    };
+  }, []);
+
+  const buildAttrsFromUpload = useCallback(async (file: File, tags: string[]) => {
+    const uploadData = await uploadImageToCloudinary(file);
+    const alt = file.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ").trim() || "Blog image";
+    await saveMediaRecord(uploadData, file.name, file.type, alt, tags);
+    return {
+      src: uploadData.secureUrl,
+      publicId: uploadData.publicId,
+      alt,
+      widthOriginal: uploadData.width,
+      heightOriginal: uploadData.height,
+      size: "medium" as BlogImageSize,
+      alignment: "center" as BlogImageAlignment,
+    };
+  }, [saveMediaRecord, uploadImageToCloudinary]);
+
   // ── Editor ──────────────────────────────────────────────────────────────────
   const editor = useEditor({
     immediatelyRender: false,
@@ -223,12 +521,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
         codeBlock: false,
         code: false,
       }),
-      Image.configure({
-        inline: false,
-        allowBase64: false,
-        HTMLAttributes: { loading: "lazy", decoding: "async" },
-        resize: false,
-      }),
+      BlogImageExtension,
       Underline,
       LinkExtension.configure({
         openOnClick: false,
@@ -269,11 +562,14 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
     },
 
     onSelectionUpdate({ editor: e }) {
-      if (e.isActive("image")) {
+      if (e.isActive("blogImage")) {
         // Don't re-open immediately after the user saves an alt (brief cooldown)
         if (!altSavingRef.current) {
-          const attrs = e.getAttributes("image") as Record<string, unknown>;
+          const attrs = e.getAttributes("blogImage") as Record<string, unknown>;
           setAltEditValue(String(attrs.alt ?? ""));
+          setCaptionEditValue(String(attrs.caption ?? ""));
+          setLinkEditValue(String(attrs.linkUrl ?? ""));
+          setCustomWidthValue(String(attrs.width ?? "640"));
           setAltPanelOpen(true);
         }
       } else {
@@ -281,6 +577,43 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
       }
     },
   });
+
+  const insertBlogImage = useCallback((attrs: Partial<BlogImageAttrs> & { src: string }) => {
+    if (!editor) return;
+    const insertAt = pendingImageInsertPos;
+    const payload = {
+      ...attrs,
+      linkUrl: cleanLinkUrl(attrs.linkUrl ?? ""),
+      width: attrs.size === "custom" ? Math.min(960, Math.max(160, Number(attrs.width ?? 640))) : undefined,
+    };
+    if (insertAt != null) {
+      editor.chain().focus().insertContentAt(insertAt, { type: "blogImage", attrs: payload }).run();
+    } else {
+      editor.chain().focus().setBlogImage(payload).run();
+    }
+    setPendingImageInsertPos(null);
+    setImageDialogOpen(false);
+    setUnresolvedAltCount(countUnresolvedAlts(editor.getHTML()));
+  }, [editor, pendingImageInsertPos]);
+
+  const applyPickedMediaToDialog = useCallback((image: PickedMediaImage) => {
+    insertBlogImage({
+      src: image.secureUrl,
+      publicId: image.publicId,
+      alt: image.altText || image.title || image.fileName || "Blog image",
+      caption: image.caption || "",
+      widthOriginal: image.width,
+      heightOriginal: image.height,
+      size: "medium",
+      alignment: "center",
+    });
+  }, [insertBlogImage]);
+
+  const updateSelectedBlogImage = useCallback((attrs: Partial<BlogImageAttrs>) => {
+    if (!editor) return;
+    editor.chain().focus().updateBlogImage(attrs).run();
+    setUnresolvedAltCount(countUnresolvedAlts(editor.getHTML()));
+  }, [editor]);
 
   // Initial alt-text scan when editor first becomes available (catches existing blogs)
   useEffect(() => {
@@ -307,8 +640,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
     if (!newAlt) return;
     altSavingRef.current = true;
     setAltPanelOpen(false);
-    // Update the currently-selected image node, then blur to prevent re-open
-    editor.chain().updateAttributes("image", { alt: newAlt }).blur().run();
+    editor.chain().updateBlogImage({ alt: newAlt }).blur().run();
     setTimeout(() => { altSavingRef.current = false; }, 200);
   }, [editor, altEditValue]);
 
@@ -505,89 +837,35 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
     }
   }, [failedMediaRecords]);
 
-  // ── Direct image upload ─────────────────────────────────────────────────────
+  // ── Replace selected image from upload ──────────────────────────────────────
   const handleImageFileChange = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (!file || !editor) return;
       e.target.value = "";
 
-      const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif", "image/webp"];
-      if (!allowedTypes.includes(file.type)) {
-        addToast("error", "Unsupported file type. Please upload a PNG, JPG, GIF, or WebP image.");
-        return;
-      }
-      if (file.size > 10 * 1024 * 1024) {
-        addToast("error", "Image exceeds 10 MB. Please compress it before uploading.");
-        return;
-      }
-
       setIsUploadingImage(true);
-      const uploadingId = addToast("info", `⬆ Uploading ${file.name}…`, 0);
+      const uploadingId = addToast("info", `Uploading ${file.name}...`, 0);
       try {
-        const fd = new FormData();
-        fd.append("file", file);
-        fd.append("upload_preset", CLOUDINARY_PRESET as string);
-
-        const uploadRes  = await fetch(
-          `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`,
-          { method: "POST", body: fd }
-        );
-        const uploadData = await uploadRes.json() as Record<string, unknown>;
-
+        const attrs = await buildAttrsFromUpload(file, ["blog_inline", "direct_upload"]);
+        updateSelectedBlogImage({
+          src: attrs.src,
+          publicId: attrs.publicId,
+          alt: attrs.alt,
+          widthOriginal: attrs.widthOriginal,
+          heightOriginal: attrs.heightOriginal,
+        });
         removeToast(uploadingId);
-
-        if (!uploadRes.ok || typeof uploadData.secure_url !== "string") {
-          addToast("error", `Image upload failed (${uploadRes.status}). Check Cloudinary credentials and try again.`);
-          return;
-        }
-
-        const secureUrl = uploadData.secure_url as string;
-        const ext       = file.type.split("/")[1].replace("jpeg", "jpg");
-        const alt       = file.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
-
-        editor.chain().focus().setImage({ src: secureUrl, alt }).run();
-
-        // Scroll inserted image into view
-        setTimeout(() => {
-          const imgs = document.querySelectorAll(".rich-editor-prose img");
-          if (imgs.length) imgs[imgs.length - 1].scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 150);
-
-        addToast("success", `✓ Image "${file.name}" uploaded and inserted.`);
-
-        // Save to Media Library (best-effort)
-        try {
-          await fetch("/api/admin/media", {
-            method:  "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              publicId:         uploadData.public_id,
-              secureUrl,
-              url:              uploadData.url ?? secureUrl,
-              resourceType:     uploadData.resource_type ?? "image",
-              format:           uploadData.format ?? ext,
-              bytes:            uploadData.bytes,
-              width:            uploadData.width,
-              height:           uploadData.height,
-              originalFilename: file.name,
-              mimeType:         file.type,
-              altText:          alt,
-              tags:             ["direct_upload"],
-            }),
-          });
-        } catch {
-          // Cloudinary upload succeeded; Media Library record is non-blocking
-        }
+        addToast("success", `Image "${file.name}" uploaded and replaced.`);
       } catch (err) {
         removeToast(uploadingId);
-        addToast("error", "Image upload failed — check your connection and try again.");
+        addToast("error", err instanceof Error ? err.message : "Image upload failed.");
         console.error("[RichContentEditor] direct image upload failed:", err);
       } finally {
         setIsUploadingImage(false);
       }
     },
-    [editor, addToast, removeToast]
+    [editor, addToast, buildAttrsFromUpload, removeToast, updateSelectedBlogImage]
   );
 
   // ── Link handling ────────────────────────────────────────────────────────────
@@ -658,15 +936,18 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
                 </>
               )}
               <Divider />
-              {/* Upload Image */}
+              {/* Add Image */}
               <button
                 type="button"
-                title="Upload an image (PNG, JPG, GIF, WebP — max 10 MB)"
+                title="Add an image"
                 disabled={isImporting || isUploadingImage}
-                onClick={() => imageFileRef.current?.click()}
+                onClick={() => {
+                  setPendingImageInsertPos(editor.state.selection.from);
+                  setImageDialogOpen(true);
+                }}
                 className="px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold text-[#1677f2] border border-[#1677f2]/30 hover:bg-[#1677f2] hover:text-white hover:border-[#1677f2] transition-colors leading-none shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isUploadingImage ? "Uploading…" : "🖼 Image"}
+                Add Image
               </button>
               {/* Import Word */}
               <button
@@ -696,39 +977,100 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
           </div>
         </div>
 
-        {/* ── Image alt-text editor panel ───────────────────────────────────── */}
+        {/* ── Selected image controls ───────────────────────────────────────── */}
         {altPanelOpen && (
-          <div className="flex items-center gap-2 border-b border-[#c7d9f5] bg-[#f0f7ff] px-4 py-2">
-            <span className="text-[11px] font-black text-[#1677f2] shrink-0 uppercase tracking-wide">Alt text</span>
-            <input
-              type="text"
-              value={altEditValue}
-              onChange={(e) => setAltEditValue(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") { e.preventDefault(); handleAltSave(); }
-                if (e.key === "Escape") handleAltCancel();
-              }}
-              placeholder="Describe this image for screen readers…"
-              className="flex-1 min-w-0 rounded-lg border border-[#c7d9f5] bg-white px-2.5 py-1 text-[12px] text-[#0a1628] outline-none focus:border-[#1677f2]"
-            />
+          <div className="space-y-2 border-b border-[#c7d9f5] dark:border-[#223550] bg-[#f0f7ff] dark:bg-[#12223a] px-4 py-3">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="mr-1 text-[11px] font-black uppercase tracking-wide text-[#1677f2]">Image</span>
+              {(Object.keys(IMAGE_SIZE_LABELS) as BlogImageSize[]).map((size) => (
+                <button
+                  key={size}
+                  type="button"
+                  onClick={() => updateSelectedBlogImage({
+                    size,
+                    ...(size === "custom" ? { width: Math.min(960, Math.max(160, Number(customWidthValue) || 640)) } : { width: undefined }),
+                  })}
+                  className={`rounded-lg px-2.5 py-1 text-[11px] font-bold ${editor.isActive("blogImage", { size }) ? "bg-[#1677f2] text-white" : "bg-white dark:bg-[#0d1a2d] text-[#334155] dark:text-[#dbeafe] hover:text-[#1677f2]"}`}
+                >
+                  {IMAGE_SIZE_LABELS[size]}
+                </button>
+              ))}
+              {(Object.keys(IMAGE_ALIGNMENT_LABELS) as BlogImageAlignment[]).map((alignment) => (
+                <button
+                  key={alignment}
+                  type="button"
+                  onClick={() => updateSelectedBlogImage({ alignment })}
+                  className={`rounded-lg px-2.5 py-1 text-[11px] font-bold ${editor.isActive("blogImage", { alignment }) ? "bg-[#0a1628] text-white" : "bg-white dark:bg-[#0d1a2d] text-[#334155] dark:text-[#dbeafe] hover:text-[#1677f2]"}`}
+                >
+                  {IMAGE_ALIGNMENT_LABELS[alignment]}
+                </button>
+              ))}
+              <input
+                type="number"
+                min={160}
+                max={960}
+                value={customWidthValue}
+                onChange={(e) => setCustomWidthValue(e.target.value)}
+                onBlur={() => updateSelectedBlogImage({ size: "custom", width: Math.min(960, Math.max(160, Number(customWidthValue) || 640)) })}
+                aria-label="Custom image width"
+                className="h-7 w-20 rounded-lg border border-[#c7d9f5] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-2 text-[11px] text-[#0a1628] dark:text-[#f7f9fc]"
+              />
+              <button type="button" onClick={() => imageFileRef.current?.click()} className="rounded-lg bg-white dark:bg-[#0d1a2d] px-2.5 py-1 text-[11px] font-bold text-[#334155] dark:text-[#dbeafe] hover:text-[#1677f2]">Replace</button>
+              <button type="button" onClick={() => editor.chain().focus().deleteSelection().run()} className="rounded-lg bg-white px-2.5 py-1 text-[11px] font-bold text-red-500 hover:bg-red-50">Delete</button>
+            </div>
+            <div className="grid grid-cols-1 gap-2 lg:grid-cols-[1fr_1fr_1fr_auto_auto]">
+              <input
+                type="text"
+                value={altEditValue}
+                onChange={(e) => setAltEditValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") { e.preventDefault(); handleAltSave(); }
+                  if (e.key === "Escape") handleAltCancel();
+                }}
+                placeholder="Alt text"
+                aria-label="Image alt text"
+                className="min-w-0 rounded-lg border border-[#c7d9f5] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-2.5 py-1.5 text-[12px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+              />
+              <input
+                type="text"
+                value={captionEditValue}
+                onChange={(e) => setCaptionEditValue(e.target.value)}
+                placeholder="Caption"
+                aria-label="Image caption"
+                className="min-w-0 rounded-lg border border-[#c7d9f5] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-2.5 py-1.5 text-[12px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+              />
+              <input
+                type="text"
+                value={linkEditValue}
+                onChange={(e) => setLinkEditValue(e.target.value)}
+                placeholder="/services or https://..."
+                aria-label="Image link"
+                className="min-w-0 rounded-lg border border-[#c7d9f5] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-2.5 py-1.5 text-[12px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  const safeLink = cleanLinkUrl(linkEditValue);
+                  updateSelectedBlogImage({
+                    alt: altEditValue.trim(),
+                    caption: captionEditValue.trim(),
+                    linkUrl: safeLink,
+                    openInNewTab: Boolean(safeLink && !safeLink.startsWith("/")),
+                  });
+                  handleAltSave();
+                }}
+                disabled={!altEditValue.trim()}
+                className="rounded-lg bg-[#1677f2] px-3 py-1.5 text-[11.5px] font-bold text-white hover:bg-[#0866d9] disabled:opacity-40"
+              >
+                Save
+              </button>
+              <button type="button" onClick={handleAltCancel} className="rounded-lg px-2 py-1.5 text-[11.5px] font-semibold text-[#64748b] dark:text-[#a9b6c9] hover:text-[#0a1628] dark:hover:text-white">
+                Done
+              </button>
+            </div>
             {PLACEHOLDER_ALT_RE.test(altEditValue.trim()) && (
-              <span className="text-[11px] text-amber-600 font-semibold shrink-0 hidden sm:inline">Placeholder — please describe the image</span>
+              <p className="text-[11px] font-semibold text-amber-600">Placeholder alt text needs a clear description before publishing.</p>
             )}
-            <button
-              type="button"
-              onClick={handleAltSave}
-              disabled={!altEditValue.trim()}
-              className="shrink-0 px-3 py-1 rounded-lg bg-[#1677f2] text-white text-[11.5px] font-bold disabled:opacity-40 hover:bg-[#0077B6] transition-colors"
-            >
-              Save
-            </button>
-            <button
-              type="button"
-              onClick={handleAltCancel}
-              className="shrink-0 px-2 py-1 rounded-lg text-[11.5px] font-semibold text-[#64748b] hover:text-[#0a1628]"
-            >
-              Cancel
-            </button>
           </div>
         )}
 
@@ -762,7 +1104,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
         )}
 
         {/* ── Editor / HTML view ────────────────────────────────────────────── */}
-        <div className="bg-white">
+        <div className="bg-white dark:bg-[#0d1a2d]">
           {showHtml ? (
             <textarea
               readOnly
@@ -788,7 +1130,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
       <input
         ref={imageFileRef}
         type="file"
-        accept="image/png,image/jpeg,image/jpg,image/gif,image/webp"
+        accept="image/png,image/jpeg,image/webp"
         onChange={handleImageFileChange}
         className="hidden"
         aria-hidden="true"
@@ -812,6 +1154,31 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
           onCancel={() => setLinkOpen(false)}
         />
       )}
+
+      <BlogImageDialog
+        open={imageDialogOpen}
+        uploading={isUploadingImage}
+        onUpload={async (file) => {
+          setIsUploadingImage(true);
+          try {
+            return await buildAttrsFromUpload(file, ["blog_inline"]);
+          } finally {
+            setIsUploadingImage(false);
+          }
+        }}
+        onPick={() => setMediaPickerOpen(true)}
+        onCancel={() => {
+          setImageDialogOpen(false);
+          setPendingImageInsertPos(null);
+        }}
+        onInsert={insertBlogImage}
+      />
+
+      <MediaPickerModal
+        open={mediaPickerOpen}
+        onClose={() => setMediaPickerOpen(false)}
+        onSelect={applyPickedMediaToDialog}
+      />
 
       {/* ── Fixed-position toast notifications (always visible regardless of scroll) ── */}
       {toasts.length > 0 && (
@@ -860,6 +1227,19 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
         .rich-editor-prose strong, .rich-editor-prose b { font-weight: 700; color: #0a1628; }
         .rich-editor-prose em, .rich-editor-prose i { font-style: italic; }
         .rich-editor-prose u { text-decoration: underline; text-underline-offset: 2px; }
+        .rich-editor-prose .blog-image { clear: both; margin: 1.5rem auto; max-width: 100%; }
+        .rich-editor-prose .blog-image a { display: block; }
+        .rich-editor-prose .blog-image img { display: block; width: 100%; max-width: 100%; height: auto; border-radius: 10px; margin: 0; cursor: pointer; }
+        .rich-editor-prose .blog-image figcaption { margin-top: 0.45rem; text-align: center; font-size: 12px; line-height: 1.5; color: #64748b; font-style: italic; }
+        .rich-editor-prose .blog-image--small { width: min(380px, 100%); }
+        .rich-editor-prose .blog-image--medium { width: min(640px, 100%); }
+        .rich-editor-prose .blog-image--large { width: min(920px, 100%); }
+        .rich-editor-prose .blog-image--full { width: 100%; }
+        .rich-editor-prose .blog-image--custom { max-width: 100%; }
+        .rich-editor-prose .blog-image--left { margin-left: 0; margin-right: auto; }
+        .rich-editor-prose .blog-image--center { margin-left: auto; margin-right: auto; }
+        .rich-editor-prose .blog-image--right { margin-left: auto; margin-right: 0; }
+        .rich-editor-prose .blog-image.ProseMirror-selectednode { outline: 2px solid #1677f2; outline-offset: 3px; border-radius: 12px; }
         .rich-editor-prose img { max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0; display: block; cursor: pointer; }
         .rich-editor-prose img.ProseMirror-selectednode { outline: 2px solid #1677f2; outline-offset: 2px; border-radius: 8px; }
         .ProseMirror-focused { outline: none; }

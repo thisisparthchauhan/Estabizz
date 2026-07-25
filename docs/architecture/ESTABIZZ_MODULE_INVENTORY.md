@@ -67,9 +67,13 @@
 | Component / File | Purpose |
 |-----------------|---------|
 | `app/admin/blogs/_components/BlogEditorClient.tsx` | Outer shell: metadata form, publish blocking, save/publish |
-| `app/admin/blogs/_components/RichContentEditor.tsx` | TipTap editor: toolbar, Word import, alt-text panel, media sync |
+| `app/admin/blogs/_components/RichContentEditor.tsx` | TipTap editor: toolbar, Word import, controlled inline blog images, alt/caption/link panel, media sync |
+| `app/admin/blogs/_components/BlogImageExtension.ts` | TipTap `blogImage` node: article-flow figure/image storage with size, alignment, caption and link attrs |
+| `app/admin/blogs/_components/MediaPickerModal.tsx` | Shared image picker for Blog cover and inline images using existing `/api/admin/media` |
 | `app/admin/blogs/_components/wordCleanup.ts` | Client-side Word HTML sanitizer (DOM-based) |
-| `app/admin/blogs/_components/CloudinaryUploader.tsx` | Standalone Cloudinary upload helper (used in media library) |
+| `app/admin/blogs/_components/CloudinaryUploader.tsx` | Standalone Cloudinary upload helper; returns secure URL plus upload metadata for cover-image persistence |
+
+**Blog image architecture:** cover images use the existing `featuredImage` field and feed the blog hero, cards and social metadata. Inline article images are stored inside blog `content` HTML as controlled `<figure data-blog-image="true">` nodes, not in a separate page-builder system.
 
 ---
 

@@ -7,8 +7,8 @@ export interface IBlog extends Document {
   summary: string;
   content: string;
 
-  featuredImage: { url: string; alt: string; caption: string };
-  images: { url: string; alt: string; caption: string }[];
+  featuredImage: { url: string; publicId?: string; alt: string; caption: string; width?: number; height?: number };
+  images: { url: string; publicId?: string; alt: string; caption: string; width?: number; height?: number }[];
 
   category: { id: string; name: string; slug: string; description: string; icon: string; color: string };
   tags: string[];
@@ -58,11 +58,14 @@ const BlogSchema = new Schema<IBlog>(
     content:   { type: String, required: true },
 
     featuredImage: {
-      url:     { type: String, default: '' },
-      alt:     { type: String, default: '' },
-      caption: { type: String, default: '' },
+      url:      { type: String, default: '' },
+      publicId: { type: String, default: '' },
+      alt:      { type: String, default: '' },
+      caption:  { type: String, default: '' },
+      width:    { type: Number },
+      height:   { type: Number },
     },
-    images: [{ url: String, alt: String, caption: String }],
+    images: [{ url: String, publicId: String, alt: String, caption: String, width: Number, height: Number }],
 
     category: {
       id:          { type: String, required: true },

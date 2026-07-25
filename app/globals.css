@@ -339,6 +339,60 @@ body::before {
   margin: 1.75rem 0;
 }
 
+.blog-content .blog-image {
+  clear: both;
+  margin: 1.75rem auto;
+  max-width: 100%;
+}
+
+.blog-content .blog-image a {
+  display: block;
+}
+
+.blog-content .blog-image img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 12px;
+}
+
+.blog-content .blog-image--small {
+  width: min(380px, 100%);
+}
+
+.blog-content .blog-image--medium {
+  width: min(640px, 100%);
+}
+
+.blog-content .blog-image--large {
+  width: min(920px, 100%);
+}
+
+.blog-content .blog-image--full {
+  width: 100%;
+}
+
+.blog-content .blog-image--custom {
+  max-width: 100%;
+}
+
+.blog-content .blog-image--left {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.blog-content .blog-image--center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.blog-content .blog-image--right {
+  margin-left: auto;
+  margin-right: 0;
+}
+
 .blog-content figcaption {
   font-size: 12px;
   color: #94a3b8;
@@ -622,6 +676,10 @@ input, textarea, select, [contenteditable="true"] {
 
 .dark .blog-content figcaption {
   color: #64748b;
+}
+
+.dark .blog-content .blog-image figcaption {
+  color: #94a3b8;
 }
 
 .dark .blog-content blockquote {

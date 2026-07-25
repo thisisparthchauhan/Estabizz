@@ -22,7 +22,7 @@ export function CloudinaryUploader({
   onUploaded,
   size = "md",
 }: {
-  onUploaded: (url: string) => void;
+  onUploaded: (url: string, uploadData?: Record<string, unknown>) => void;
   size?: "sm" | "md";
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -63,7 +63,7 @@ export function CloudinaryUploader({
       if (!res.ok || !data.secure_url) {
         throw new Error(data?.error?.message || "Upload failed. Try again.");
       }
-      onUploaded(data.secure_url as string);
+      onUploaded(data.secure_url as string, data as Record<string, unknown>);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Upload failed.");
     } finally {

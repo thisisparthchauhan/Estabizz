@@ -1,6 +1,6 @@
 # Estabizz — Next 20 Development Tasks
 
-> Last updated: 2026-07-24 · Branch: **feat/global-markets-v2** (local) · Functional baseline commit: **49f7c81** · Dark mode: **completed locally — Phase 31, 4 commits**
+> Last updated: 2026-07-25 · Branch: **feat/global-markets-v2** (local) · Functional baseline commit: **49f7c81** · Blog image management: **completed locally**
 > All tasks are locally scoped. Do not push/deploy without owner approval.
 > Roadmap sequence corrected 2026-07-22 — tasks reordered to prioritise security and content integrity before new features.
 
@@ -55,6 +55,17 @@
 | Files changed | `tailwind.config.js`, `app/globals.css`, `app/layout.tsx`, `components/theme/ThemeProvider.tsx` (new), `components/theme/ThemeToggle.tsx` (new), `components/layout/Navbar.tsx`, `components/layout/Footer.tsx`, `components/ui/EstabizzSelect.tsx`, `components/home/HeroSection.tsx`, `components/templates/ServicePageLayout.tsx`, `app/contact/ContactClient.tsx`, `app/blogs/[slug]/BlogDetailClient.tsx`, `app/admin/AdminShell.tsx`, `app/admin/AdminDashboardClient.tsx`, `app/admin/blogs/_components/BlogEditorClient.tsx` |
 | Build | 232 routes, `tsc --noEmit` clean, build clean |
 | Commits | 4 local commits (UI: theme system, UI: public dark mode, UI: Admin OS dark mode, Docs: dark mode) |
+| Status | ✅ Complete — local only, not pushed or deployed |
+
+---
+
+### ~~Task 3D — Blog cover and inline image management~~ ✅ COMPLETED 2026-07-25
+
+| Field | Value |
+|-------|-------|
+| Outcome | Blog editor now has two image systems: the existing `featuredImage` cover field with upload, Media Library selection, preview, replace/remove, alt, caption and optional Cloudinary metadata; and controlled inline images inside TipTap article content with cursor-position insertion, Upload New / Choose from Media Library, Small/Medium/Large/Full/Custom width, Left/Centre/Right alignment, alt, caption, optional safe link, replace and delete. |
+| Storage | Cover image remains `featuredImage`; inline images remain in sanitized HTML as `<figure data-blog-image="true">` nodes. No blog content migration required. |
+| Security | Server sanitizer narrowly allows only approved blog-image attributes/classes, HTTPS image sources, safe links and controlled custom width. Publish-time alt validation remains enforced. |
 | Status | ✅ Complete — local only, not pushed or deployed |
 
 ---

@@ -154,6 +154,7 @@ Post-build TypeScript check: `npx tsc --noEmit` — **CLEAN**
 | Image saves validate HTTPS URL | Confirmed — returns 400 on non-HTTPS |
 | Image saves require alt text | Confirmed — returns 400 on missing alt text |
 | Blocked image URL patterns enforced | Confirmed — `BLOCKED_IMAGE_URL` regex array |
+| Blog cover and inline images reuse Media Library | Confirmed — cover picker and inline picker use existing `/api/admin/media`; inline image HTML is sanitized before storage |
 | Media purge does NOT delete Cloudinary assets | Confirmed — documented gap, manual cleanup required |
 
 ---

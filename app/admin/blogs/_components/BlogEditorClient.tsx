@@ -21,6 +21,7 @@ import { EstabizzSelect } from "@/components/ui/EstabizzSelect";
 import { blogCategories } from "@/lib/blog/categories";
 import { CloudinaryUploader } from "./CloudinaryUploader";
 import RichContentEditor, { type ImageValidationState } from "./RichContentEditor";
+import { MediaPickerModal, type PickedMediaImage } from "./MediaPickerModal";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -70,7 +71,11 @@ const STATUS_OPTIONS: { value: BlogStatus; label: string }[] = [
 
 interface ImageEntry {
   url: string;
+  publicId?: string;
   alt: string;
+  caption?: string;
+  width?: number;
+  height?: number;
 }
 
 interface FaqEntry {
@@ -88,7 +93,11 @@ interface BlogFormData {
   summary: string;
   content: string;
   featuredImageUrl: string;
+  featuredImagePublicId: string;
   featuredImageAlt: string;
+  featuredImageCaption: string;
+  featuredImageWidth: number | "";
+  featuredImageHeight: number | "";
   supportingImages: ImageEntry[];
   focusKeyword: string;
   seoTitle: string;
@@ -139,7 +148,11 @@ function buildInitial(blog?: Blog | null): BlogFormData {
       summary: "",
       content: "",
       featuredImageUrl: "",
+      featuredImagePublicId: "",
       featuredImageAlt: "",
+      featuredImageCaption: "",
+      featuredImageWidth: "",
+      featuredImageHeight: "",
       supportingImages: [],
       focusKeyword: "",
       seoTitle: "",
@@ -163,8 +176,12 @@ function buildInitial(blog?: Blog | null): BlogFormData {
     summary: blog.summary,
     content: blog.content,
     featuredImageUrl: blog.featuredImage.url,
+    featuredImagePublicId: blog.featuredImage.publicId ?? "",
     featuredImageAlt: blog.featuredImage.alt,
-    supportingImages: blog.images.map((img) => ({ url: img.url, alt: img.alt })),
+    featuredImageCaption: blog.featuredImage.caption ?? "",
+    featuredImageWidth: blog.featuredImage.width ?? "",
+    featuredImageHeight: blog.featuredImage.height ?? "",
+    supportingImages: blog.images.map((img) => ({ url: img.url, publicId: img.publicId, alt: img.alt, caption: img.caption, width: img.width, height: img.height })),
     focusKeyword: blog.focusKeyword,
     seoTitle: blog.seoTitle,
     metaDescription: blog.metaDescription,
@@ -449,6 +466,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
   // Tracks the server-assigned id after first save so subsequent saves update the same record
   const [savedId, setSavedId] = useState<string | undefined>(blog?.id);
   const [imagePreview, setImagePreview] = useState(false);
+  const [coverPickerOpen, setCoverPickerOpen] = useState(false);
   // Tracks unresolved alt text and media sync failures reported by RichContentEditor
   const [imageValidation, setImageValidation] = useState<ImageValidationState>({
     unresolvedAltCount: 0,
@@ -498,6 +516,19 @@ export default function BlogEditorClient({ blog, categories }: Props) {
     set("supportingImages", form.supportingImages.filter((_, idx) => idx !== i));
   }
 
+  function applyCoverImage(image: PickedMediaImage) {
+    setForm((f) => ({
+      ...f,
+      featuredImageUrl: image.secureUrl,
+      featuredImagePublicId: image.publicId ?? "",
+      featuredImageAlt: f.featuredImageAlt || image.altText || image.title || image.fileName || f.title,
+      featuredImageCaption: image.caption ?? f.featuredImageCaption,
+      featuredImageWidth: image.width ?? "",
+      featuredImageHeight: image.height ?? "",
+    }));
+    setImagePreview(true);
+  }
+
   // Save / Publish — calls real API
   async function doSave(targetStatus: BlogStatus) {
     setTouched(true);
@@ -534,7 +565,12 @@ export default function BlogEditorClient({ blog, categories }: Props) {
         categoryId:          form.categoryId,
         status:              targetStatus,
         featuredImageUrl:    form.featuredImageUrl,
+        featuredImagePublicId: form.featuredImagePublicId,
         featuredImageAlt:    form.featuredImageAlt,
+        featuredImageCaption: form.featuredImageCaption,
+        featuredImageWidth:  form.featuredImageWidth,
+        featuredImageHeight: form.featuredImageHeight,
+        supportingImages:    form.supportingImages,
         focusKeyword:        form.focusKeyword,
         seoTitle:            form.seoTitle,
         metaDescription:     form.metaDescription,
@@ -713,10 +749,35 @@ export default function BlogEditorClient({ blog, categories }: Props) {
         </SectionCard>
 
         {/* ─── Section 4: Images ───────────────────────────────────────────── */}
-        <SectionCard number={4} title="Images">
-          {/* Featured image */}
+        <SectionCard number={4} title="Cover Image & Supporting Images">
+          {/* Cover image */}
           <div className="mb-6">
-            <p className="text-[12px] font-bold text-[#334155] mb-3">Featured Image</p>
+            <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-[12px] font-bold text-[#334155] dark:text-[#dbeafe]">Cover Image</p>
+                <p className="text-[11px] text-[#94a3b8]">Recommended: 1600 x 900 px · Aspect ratio: 16:9 · Formats: JPG, PNG, WebP</p>
+              </div>
+              {form.featuredImageUrl && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setForm((f) => ({
+                      ...f,
+                      featuredImageUrl: "",
+                      featuredImagePublicId: "",
+                      featuredImageAlt: "",
+                      featuredImageCaption: "",
+                      featuredImageWidth: "",
+                      featuredImageHeight: "",
+                    }));
+                    setImagePreview(false);
+                  }}
+                  className="self-start rounded-xl border border-red-200 px-3 py-1.5 text-[11px] font-bold text-red-500 hover:bg-red-50"
+                >
+                  Remove Cover
+                </button>
+              )}
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
               <Field label="Image URL" hint="Upload an image or paste a URL / /images/… path">
                 <div className="flex gap-2">
@@ -731,11 +792,24 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                     className={inputCls}
                   />
                   <CloudinaryUploader
-                    onUploaded={(url) => {
-                      set("featuredImageUrl", url);
+                    onUploaded={(url, uploadData) => {
+                      setForm((f) => ({
+                        ...f,
+                        featuredImageUrl: url,
+                        featuredImagePublicId: String(uploadData?.public_id ?? ""),
+                        featuredImageWidth: uploadData?.width != null ? Number(uploadData.width) : "",
+                        featuredImageHeight: uploadData?.height != null ? Number(uploadData.height) : "",
+                      }));
                       setImagePreview(true);
                     }}
                   />
+                  <button
+                    type="button"
+                    onClick={() => setCoverPickerOpen(true)}
+                    className="shrink-0 px-3 py-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#12223a] text-[12px] font-semibold text-[#64748b] dark:text-[#dbeafe] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors"
+                  >
+                    Choose
+                  </button>
                   {form.featuredImageUrl && (
                     <button
                       type="button"
@@ -756,6 +830,37 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                   className={inputCls}
                 />
               </Field>
+              <Field label="Caption" hint="Optional. Shown under the cover image.">
+                <input
+                  type="text"
+                  value={form.featuredImageCaption}
+                  onChange={(e) => set("featuredImageCaption", e.target.value)}
+                  placeholder="Optional cover image caption"
+                  className={inputCls}
+                />
+              </Field>
+              <div className="grid grid-cols-2 gap-2">
+                <Field label="Width">
+                  <input
+                    type="number"
+                    min={1}
+                    value={form.featuredImageWidth}
+                    onChange={(e) => set("featuredImageWidth", e.target.value ? Number(e.target.value) : "")}
+                    placeholder="Auto"
+                    className={inputCls}
+                  />
+                </Field>
+                <Field label="Height">
+                  <input
+                    type="number"
+                    min={1}
+                    value={form.featuredImageHeight}
+                    onChange={(e) => set("featuredImageHeight", e.target.value ? Number(e.target.value) : "")}
+                    placeholder="Auto"
+                    className={inputCls}
+                  />
+                </Field>
+              </div>
             </div>
             {imagePreview && form.featuredImageUrl && (
               <div className="rounded-xl overflow-hidden border border-[#dbe7f3] bg-[#f8fbff]">
@@ -766,6 +871,9 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                   className="w-full h-40 object-cover"
                   onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
                 />
+                {form.featuredImageCaption && (
+                  <p className="px-3 py-2 text-center text-[12px] italic text-[#64748b] dark:text-[#94a3b8]">{form.featuredImageCaption}</p>
+                )}
               </div>
             )}
           </div>
@@ -800,9 +908,14 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                         placeholder="Image URL"
                         className={`${inputCls} text-[12.5px] py-2`}
                       />
-                      <CloudinaryUploader
-                        size="sm"
-                        onUploaded={(url) => updateSupportingImage(i, { url })}
+      <CloudinaryUploader
+        size="sm"
+                        onUploaded={(url, uploadData) => updateSupportingImage(i, {
+                          url,
+                          publicId: String(uploadData?.public_id ?? ""),
+                          width: uploadData?.width != null ? Number(uploadData.width) : undefined,
+                          height: uploadData?.height != null ? Number(uploadData.height) : undefined,
+                        })}
                       />
                     </div>
                     <input
@@ -811,6 +924,13 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                       onChange={(e) => updateSupportingImage(i, { alt: e.target.value })}
                       placeholder="Alt text"
                       className={`${inputCls} text-[12.5px] py-2`}
+                    />
+                    <input
+                      type="text"
+                      value={img.caption ?? ""}
+                      onChange={(e) => updateSupportingImage(i, { caption: e.target.value })}
+                      placeholder="Caption"
+                      className={`${inputCls} text-[12.5px] py-2 sm:col-span-2`}
                     />
                   </div>
                   {img.url && (
@@ -1006,6 +1126,12 @@ export default function BlogEditorClient({ blog, categories }: Props) {
 
       {/* Toast */}
       {toast && <Toast {...toast} onClose={() => setToast(null)} />}
+
+      <MediaPickerModal
+        open={coverPickerOpen}
+        onClose={() => setCoverPickerOpen(false)}
+        onSelect={applyCoverImage}
+      />
     </div>
   );
 }

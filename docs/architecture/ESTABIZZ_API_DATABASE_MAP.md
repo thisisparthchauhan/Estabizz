@@ -138,10 +138,11 @@
 ### Blog (`blogs`)
 - **Purpose**: Blog articles (admin-created and user-submitted)
 - **Key fields**: `blogId` (unique), `slug` (unique), `title`, `content`, `status`, `category`, `tags`, `author`, `featuredImage`, `publishedAt`
+- **Image fields**: `featuredImage` is the canonical cover image (`url`, optional `publicId`, `alt`, optional `caption`, `width`, `height`) used by public hero, cards and SEO/social metadata. Inline article images remain inside `content` HTML as controlled `<figure data-blog-image="true">` blocks with approved size/alignment/caption/link attributes.
 - **Unique indexes**: `blogId`, `slug`
 - **Status enum**: `draft` | `pending` | `approved` | `published` | `rejected` | `archived`
 - **Soft-delete**: No
-- **Notes**: Content is server-sanitized before storage (sanitize-html); alt text validated on publish
+- **Notes**: Content is server-sanitized before storage (sanitize-html); alt text validated on publish. Blog image sanitizer allows only approved blog-image classes/data attributes, HTTPS image sources, controlled custom width and safe links.
 
 ### MediaAsset (`media_assets`)
 - **Purpose**: Tracks Cloudinary uploads in the Media Library

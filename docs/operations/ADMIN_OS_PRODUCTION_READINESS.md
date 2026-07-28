@@ -550,4 +550,61 @@ Phase 6B created the complete staging release package. See **`ADMIN_OS_STAGING_R
 | public/tailwind.css build drift | Restored |
 | No push to GitHub | Confirmed |
 | No deployment | Confirmed |
+
+---
+
+## §24 — Urgent Production Audit — 2026-07-29
+
+**Conducted by:** AI agent (production-readiness audit pass)
+**Branch:** `feat/global-markets-v2` · **Starting HEAD:** `21314ba`
+**TypeScript baseline:** CLEAN · **Build baseline:** 250 routes, 0 errors
+
+### Issues found and fixed
+
+| Severity | Area | Issue | Fix |
+|---|---|---|---|
+| P1 | Country enquiry form | On server 5xx (incl. 503 when Upstash unconfigured), form showed error and discarded the lead without attempting Formspree fallback — unlike the main contact form which has this fallback | Added Formspree fallback to the 5xx and network-error branches in `app/global/[countrySlug]/CountryLandingClient.tsx`. Also refactored Formspree payload to be built once before the fetch call to avoid duplication. |
+| P2 | Build warning | Turbopack "multiple lockfiles detected" workspace-root warning on every build (a parent directory contains a `package-lock.json`) | Added `turbopack: { root: __dirname }` to `next.config.js` to explicitly declare the project root. Warning eliminated. |
+
+### Issues confirmed clean / not present
+
+- No TypeScript errors (baseline and final)
+- No build failures or fatal warnings (baseline and final)
+- `lib/db.ts` connection caching correct; MONGODB_URI missing throws descriptively
+- `getContent()` fallback to defaults is correct and silent on DB unavailability
+- Admin layout JWT + DB fallback auth is correct
+- Short-URL country redirect (proxy.ts) has no slug collisions with existing routes
+- Canonical non-www → www redirect in both `vercel.json` and `next.config.js`
+- `dangerouslySetInnerHTML` in public blog detail is server-sanitized before render
+- `dangerouslySetInnerHTML` in admin pending-blogs view renders pre-sanitized DB content (P3, admin-only)
+- All internal tool pages correctly return `notFound()`
+- Logo files (light + dark) present in `/public/`
+- `images: { unoptimized: true }` bypasses domain restrictions safely
+- Sitemap excludes admin, API, auth, developing/planned country pages
+- Robots.txt disallows all admin/API/auth routes
+- Security Gate S2: STILL OPEN — owner must rotate secrets before deployment
+
+### Owner-side actions required before deployment
+
+| Action | Priority |
+|---|---|
+| Complete Security Gate S2 — rotate MongoDB URI/password, JWT secret, Cloudinary API secret, GitHub backup token | DEPLOYMENT BLOCKER |
+| Provision `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` in Vercel — without these, `/api/leads`, `/api/auth/signup`, `/api/submit-blog` return 503 in production. Contact form falls back to Formspree; country form now also falls back (fixed). Signup and blog submission remain unavailable. | P1 |
+| Set `NEXT_PUBLIC_FORMSPREE_CONTACT_FORM_ID` in Vercel — contact Formspree fallback silently no-ops without this | P1 |
+| Set `NEXT_PUBLIC_FORMSPREE_COUNTRY_FORM_ID` in Vercel — country enquiry Formspree fallback silently no-ops without this | P1 |
+| Run `scripts/syncAdminRolePermissions.mjs --apply` against production DB to grant `manage_leads` to existing `super_admin` / `admin` users | P1 |
+| Set `ANTHROPIC_API_KEY` in Vercel (AI features) | P2 |
+| Set `RESEND_API_KEY` in Vercel (lead email alerts) | P2 |
+| Attach `www.estabizz.com` domain in Vercel | P2 |
+
+### Final build result
+
+| Check | Result |
+|---|---|
+| `npx tsc --noEmit` | CLEAN |
+| `npm run build` | PASS — 250 routes, 0 errors, 0 warnings |
+| Route count (post Global Markets V2 + blog image management) | 250 |
+| Build artifacts restored | `next-env.d.ts`, `public/tailwind.css` — restored |
+| No push to GitHub | Confirmed |
+| No deployment | Confirmed |
 | Phase 6C not started | Confirmed |

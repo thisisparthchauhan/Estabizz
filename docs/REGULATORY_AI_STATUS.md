@@ -1,24 +1,33 @@
-# Estabizz Regulatory AI — Development Status
+# Estabizz Anshika — Development Status
+
+## Product Identity
+
+**Chatbot name:** Estabizz Anshika
+
+**Initial role:** A source-grounded regulatory chatbot that answers questions relating to RBI, SEBI, IRDAI, IFSCA, MCA, FIU-IND and other approved government and regulatory sources.
+
+**Future expansion:** After the chatbot is stable, Estabizz Anshika will become the conversational layer of the wider Estabizz Regulatory Intelligence Platform.
 
 ## Objective
 
-Build a source-grounded regulatory chatbot for RBI, SEBI, IRDAI, IFSCA, MCA, FIU-IND and other approved government sources. The assistant must answer from approved knowledge, display citations, preserve effective-date context, and require account credits after three free questions.
+Build Estabizz Anshika as a reliable regulatory assistant that answers from approved knowledge, displays citations, preserves effective-date context, and requires account credits after three free questions.
 
 ## Branch
 
 `feat/regulatory-ai-foundation`
 
-## Phase 1 — Foundation
+## Phase 1 — Estabizz Anshika Foundation
 
 - [x] Create isolated development branch
+- [x] Confirm chatbot name as Estabizz Anshika
 - [x] Define product configuration and credit rules
 - [x] Define shared chatbot domain types
 - [ ] Confirm existing MongoDB connection helper and authentication conventions
 - [ ] Add conversation, message, usage and knowledge-document models
 - [ ] Add secure server-side AI provider adapter
-- [ ] Add `/api/regulatory-ai/chat` route
+- [ ] Add `/api/anshika/chat` route
 - [ ] Add anonymous three-question usage enforcement
-- [ ] Add chat user interface
+- [ ] Add Estabizz Anshika chat user interface
 - [ ] Add admin configuration page
 
 ## Phase 2 — Regulatory Knowledge Base
@@ -41,25 +50,34 @@ Build a source-grounded regulatory chatbot for RBI, SEBI, IRDAI, IFSCA, MCA, FIU
 - [ ] Admin credit adjustment with audit trail
 - [ ] Organisation/team plans
 
-## Phase 4 — Regulatory Updates
+## Phase 4 — Estabizz Regulatory Intelligence Platform
+
+This phase will begin after the Estabizz Anshika chatbot and its knowledge base are stable.
 
 - [ ] Approved official source registry
 - [ ] Scheduled source checks
-- [ ] Duplicate detection
+- [ ] Duplicate and amendment detection
 - [ ] Human review and approval workflow
 - [ ] Regulatory-news feed
 - [ ] Alerts for material amendments and deadlines
+- [ ] Circular comparison
+- [ ] Compliance-impact analysis
+- [ ] Entity-specific compliance dashboards
+- [ ] Regulatory calendar and action tracking
+- [ ] Estabizz Anshika conversational access to intelligence modules
 
 ## Initial Product Decisions
 
-1. Anonymous visitors receive three free completed answers.
-2. Failed requests and system errors do not consume credits.
-3. A logged-in paid question initially costs one credit.
-4. Every substantive regulatory answer must include retrievable supporting sources.
-5. Where no reliable source is available, the chatbot must clearly decline to provide a confirmed conclusion.
-6. News content is secondary; official circulars, regulations, directions and notifications are primary.
-7. Documents remain unavailable to the chatbot until approved through the CMS workflow.
-8. All credit changes, content approvals and administrative overrides require audit records.
+1. The customer-facing chatbot will be branded as **Estabizz Anshika**.
+2. Anonymous visitors receive three free completed answers.
+3. Failed requests and system errors do not consume credits.
+4. A logged-in paid question initially costs one credit.
+5. Every substantive regulatory answer must include retrievable supporting sources.
+6. Where no reliable source is available, Estabizz Anshika must clearly decline to provide a confirmed conclusion.
+7. News content is secondary; official circulars, regulations, directions and notifications are primary.
+8. Documents remain unavailable to the chatbot until approved through the CMS workflow.
+9. All credit changes, content approvals and administrative overrides require audit records.
+10. The Regulatory Intelligence Platform will be developed after the chatbot foundation, knowledge base and credit system are stable.
 
 ## Information Required from Estabizz
 

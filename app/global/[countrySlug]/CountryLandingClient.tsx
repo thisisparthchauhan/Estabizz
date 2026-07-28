@@ -569,6 +569,31 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
       : "";
     const pageUrl = typeof window !== "undefined" ? window.location.href : "";
 
+    // Build Formspree payload once so it can be reused in both the success
+    // path (notification) and the server-error fallback path.
+    const formspreePayload = {
+      fullName:               form.name.trim(),
+      email:                  form.email.trim(),
+      phone,
+      countryCode:            country.callingCode ?? "",
+      company:                form.company.trim(),
+      countryName:            country.name,
+      countrySlug:            country.slug,
+      marketStatus:           country.tier,
+      region:                 country.region,
+      businessActivity:       form.businessActivity,
+      expansionDirection:     form.expansionDirection,
+      currentStage:           form.currentStage,
+      supportRequired:        form.supportRequired,
+      targetTimeline:         form.timeline,
+      preferredContactMethod: form.preferredContactMethod,
+      message:                form.message.trim(),
+      pageUrl,
+      submittedAt:            new Date().toISOString(),
+      _formSource:            "global-market-country",
+      _subject:               `New Market-Entry Enquiry - ${country.name} - ${form.company.trim() || form.name.trim()}`,
+    };
+
     try {
       const res = await fetch("/api/leads", {
         method: "POST",
@@ -602,39 +627,31 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
           ok: false,
           msg: "Too many attempts were made. Please wait a few minutes and try again.",
         });
-      } else if (res.status === 503) {
-        showResult({
-          ok: false,
-          msg: "Our enquiry form is temporarily unavailable. Please email support@estabizz.com or call +91 98256 00907.",
-        });
+      } else if (res.status >= 500) {
+        // Server-side error (e.g. rate-limit store not configured, transient fault).
+        // Fall back to Formspree so the enquiry is not lost, matching the
+        // behaviour of the main contact form.
+        const formspreeOk = await sendFormspreeNotification(formspreePayload);
+        if (formspreeOk) {
+          setSubmitted(true);
+          showResult({
+            ok: true,
+            msg: "Thank you. Your market-entry enquiry has been submitted. Our Global Market Desk will contact you shortly.",
+          });
+          setForm(EMPTY_FORM);
+        } else {
+          showResult({
+            ok: false,
+            msg: "Our enquiry form is temporarily unavailable. Please email support@estabizz.com or call +91 98256 00907.",
+          });
+        }
       } else if (!json.ok) {
         showResult({
           ok: false,
           msg: json.error || "Something went wrong. Please email support@estabizz.com.",
         });
       } else {
-        await sendFormspreeNotification({
-          fullName:               form.name.trim(),
-          email:                  form.email.trim(),
-          phone,
-          countryCode:            country.callingCode ?? "",
-          company:                form.company.trim(),
-          countryName:            country.name,
-          countrySlug:            country.slug,
-          marketStatus:           country.tier,
-          region:                 country.region,
-          businessActivity:       form.businessActivity,
-          expansionDirection:     form.expansionDirection,
-          currentStage:           form.currentStage,
-          supportRequired:        form.supportRequired,
-          targetTimeline:         form.timeline,
-          preferredContactMethod: form.preferredContactMethod,
-          message:                form.message.trim(),
-          pageUrl,
-          submittedAt:            new Date().toISOString(),
-          _formSource:            "global-market-country",
-          _subject:               `New Market-Entry Enquiry - ${country.name} - ${form.company.trim() || form.name.trim()}`,
-        });
+        await sendFormspreeNotification(formspreePayload);
 
         setSubmitted(true);
         showResult({
@@ -644,10 +661,21 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
         setForm(EMPTY_FORM);
       }
     } catch {
-      showResult({
-        ok: false,
-        msg: "We could not send your enquiry because of a connection issue. Please try again.",
-      });
+      // Network-level error — attempt Formspree fallback before giving up.
+      const formspreeOk = await sendFormspreeNotification(formspreePayload);
+      if (formspreeOk) {
+        setSubmitted(true);
+        showResult({
+          ok: true,
+          msg: "Thank you. Your market-entry enquiry has been submitted. Our Global Market Desk will contact you shortly.",
+        });
+        setForm(EMPTY_FORM);
+      } else {
+        showResult({
+          ok: false,
+          msg: "We could not send your enquiry because of a connection issue. Please try again or email support@estabizz.com.",
+        });
+      }
     } finally {
       setSubmitting(false);
     }

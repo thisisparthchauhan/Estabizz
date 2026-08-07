@@ -421,6 +421,105 @@ body::before {
   font-size: inherit;
 }
 
+/* ─── Regulatory Table ───────────────────────────────────────────────────── */
+
+.reg-table-wrap {
+  overflow-x: auto;
+  margin: 1.25rem 0 1.75rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(10, 22, 40, 0.06);
+}
+
+.reg-table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  background: #fff;
+}
+
+.reg-table thead tr {
+  background: #0a1628;
+  color: #fff;
+}
+
+.reg-table thead th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.reg-table tbody tr {
+  border-bottom: 1px solid #e8f0fa;
+}
+
+.reg-table tbody tr:nth-child(even) {
+  background: #f8faff;
+}
+
+.reg-table tbody tr:hover {
+  background: #f0f7ff;
+  transition: background 0.1s;
+}
+
+.reg-table td {
+  padding: 10px 16px;
+  color: #334155;
+  line-height: 1.65;
+  vertical-align: top;
+}
+
+.reg-table td:first-child {
+  font-weight: 600;
+  color: #0a1628;
+  white-space: nowrap;
+}
+
+.reg-table-note {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 0.4rem;
+  margin-bottom: 0;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* ── Dark mode ── */
+.dark .reg-table {
+  background: #0d1a2d;
+}
+
+.dark .reg-table thead tr {
+  background: #04090f;
+}
+
+.dark .reg-table tbody tr {
+  border-bottom-color: #1e3a5f;
+}
+
+.dark .reg-table tbody tr:nth-child(even) {
+  background: #111e33;
+}
+
+.dark .reg-table tbody tr:hover {
+  background: #162440;
+}
+
+.dark .reg-table td {
+  color: #cbd5e1;
+}
+
+.dark .reg-table td:first-child {
+  color: #e2e8f0;
+}
+
+.dark .reg-table-note {
+  color: #94a3b8;
+}
+
 /* ─── Blog table ─────────────────────────────────────────────────────────── */
 
 .blog-content table {

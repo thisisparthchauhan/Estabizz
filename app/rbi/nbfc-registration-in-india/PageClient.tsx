@@ -2,6 +2,20 @@
 import React from 'react';
 import ServicePageLayout from '@/components/templates/ServicePageLayout';
 
+interface TableData {
+  caption?: string;
+  headers: string[];
+  rows: string[][];
+  note?: string;
+}
+
+interface Section {
+  id: string;
+  title: string;
+  content?: string;
+  table?: TableData;
+}
+
 export default function NBFCRegistrationPage() {
   const renderTextWithLinks = (text: string) => {
     const cosmosUrl = 'https://cosmos.rbi.org.in';
@@ -93,6 +107,23 @@ export default function NBFCRegistrationPage() {
     return <p key={index}>{renderTextWithLinks(block)}</p>;
   };
 
+  const renderTable = (table: TableData) => (
+    <div className="reg-table-wrap not-prose">
+      <table className="reg-table">
+        {table.caption && <caption className="sr-only">{table.caption}</caption>}
+        <thead>
+          <tr>{table.headers.map((h, i) => <th key={i} scope="col">{h}</th>)}</tr>
+        </thead>
+        <tbody>
+          {table.rows.map((row, ri) => (
+            <tr key={ri}>{row.map((cell, ci) => <td key={ci}>{cell}</td>)}</tr>
+          ))}
+        </tbody>
+      </table>
+      {table.note && <p className="reg-table-note">{table.note}</p>}
+    </div>
+  );
+
   const sections = [
     {
       id: 'introduction',
@@ -136,14 +167,18 @@ NBFC Registration in India is regulated entirely by RBI, and no state authority 
     {
       id: 'sbr-framework',
       title: 'RBI Scale-Based Regulatory (SBR) Framework',
-      content: `The Reserve Bank of India introduced the Scale-Based Regulation (SBR) framework through the Master Direction dated October 19, 2023. Under SBR, all NBFCs are classified into four regulatory layers based on asset size, nature of activity, systemic importance, and other risk-based parameters:
-
-• Base Layer (NBFC-BL) — Non-deposit-taking NBFCs in lower risk categories; NBFC-P2P, NBFC-AA, NOFHCs, NBFCs without public funds/customer interface always remain here. Below Rs. 100 Crore or per SBR criteria.
-• Middle Layer (NBFC-ML) — All deposit-taking NBFCs regardless of size; non-deposit-taking NBFCs with assets of Rs. 1,000 Crore and above; certain specialised categories.
-• Upper Layer (NBFC-UL) — Top 10 eligible NBFCs by asset size always placed here; others identified per RBI scoring methodology. Systemically significant; identified by RBI annually.
-• Top Layer (NBFC-TL) — Reserved for NBFCs posing extreme systemic risk; currently vacant. Regulatory escalation from Upper Layer.
-
-Most newly approved entities under NBFC Registration in India begin as Base Layer NBFCs unless RBI determines otherwise.`
+      content: 'The Reserve Bank of India introduced the Scale-Based Regulation (SBR) framework through the Master Direction dated October 19, 2023. Under SBR, all NBFCs are classified into four regulatory layers based on asset size, nature of activity, systemic importance, and other risk-based parameters:',
+      table: {
+        caption: 'RBI Scale-Based Regulatory (SBR) Framework — four layers',
+        headers: ['Layer', 'Eligible Entities / Threshold', 'Regulatory Intensity'],
+        rows: [
+          ['Base Layer (NBFC-BL)', 'Non-deposit-taking NBFCs in lower risk categories; NBFC-P2P, NBFC-AA, NOFHCs, NBFCs without public funds/customer interface always remain here. Assets below ₹100 Crore or per SBR criteria.', 'Simplified prudential norms'],
+          ['Middle Layer (NBFC-ML)', 'All deposit-taking NBFCs regardless of size; non-deposit-taking NBFCs with assets of ₹1,000 Crore and above; certain specialised categories.', 'Enhanced governance and reporting'],
+          ['Upper Layer (NBFC-UL)', 'Top 10 eligible NBFCs by asset size always placed here; others identified per RBI scoring methodology. Systemically significant; identified by RBI annually.', 'Bank-like supervision'],
+          ['Top Layer (NBFC-TL)', 'Reserved for NBFCs posing extreme systemic risk; currently vacant. Regulatory escalation from Upper Layer.', 'Intensive supervisory regime'],
+        ],
+        note: 'Most newly approved entities under NBFC Registration in India begin as Base Layer NBFCs unless RBI determines otherwise.',
+      },
     },
     {
       id: 'nbfc-icc-base',
@@ -165,78 +200,93 @@ If financial activity is central to the business model, NBFC Registration in Ind
     {
       id: 'who-cannot',
       title: 'Who Cannot Apply for NBFC Registration in India?',
-      content: `• Private Limited Company — Eligible
-• Public Limited Company — Eligible
-• LLP — Not Eligible
-• Partnership Firm — Not Eligible
-• Individual — Not Eligible
-• Nidhi Company — Separate regulatory framework
-
-Only companies incorporated under the Companies Act can seek NBFC Registration in India.`
+      table: {
+        caption: 'Entity type eligibility for NBFC Registration in India',
+        headers: ['Entity Type', 'Eligible?'],
+        rows: [
+          ['Private Limited Company', '✔ Eligible'],
+          ['Public Limited Company', '✔ Eligible'],
+          ['LLP (Limited Liability Partnership)', '✘ Not Eligible'],
+          ['Partnership Firm', '✘ Not Eligible'],
+          ['Individual', '✘ Not Eligible'],
+          ['Nidhi Company', 'Separate regulatory framework'],
+        ],
+        note: 'Only companies incorporated under the Companies Act can seek NBFC Registration in India.',
+      },
     },
     {
       id: 'eligibility',
       title: 'Eligibility Criteria for NBFC-BL Registration',
-      content: `The following eligibility criteria must be met by a company seeking registration as an NBFC-ICC in the Base Layer:
-
-1. Company Type — Must be a company registered under the Companies Act, 2013. Individual, partnership, LLP, trusts cannot register as NBFC.
-2. Principal Business — 50-50 Rule — Financial assets > 50% of total assets AND income from financial assets > 50% of gross income.
-3. Minimum Net Owned Fund — NBFC-ICC: Rs. 10 Crore (full compliance by March 31, 2027). Glide path: Rs. 5 Crore by March 31, 2025 and Rs. 10 Crore by March 31, 2027.
-4. Minimum NOF — NBFC-P2P, NBFC-AA, No Customer Interface: Rs. 2 Crore.
-5. Minimum NOF — NBFC-IFC / IDF-NBFC: Rs. 300 Crore.
-6. Board Director — Financial Sector Experience — At least one director must have relevant experience of working in a bank or NBFC (Para 38).
-7. Director — Fit and Proper Criteria — All directors must satisfy RBI's Fit and Proper criteria (Annex XXIII).
-8. FATF Non-Compliant Jurisdiction Restriction — New investors from FATF non-compliant jurisdictions must hold less than 20% of voting power.
-9. Leverage Ratio — Post Registration — Total outside liabilities must not exceed 7 times owned fund at any point.
-10. Inter-Group Investment Deduction in NOF — Investments in subsidiaries, group companies, and other NBFCs exceeding 10% of (paid-up equity + free reserves) must be deducted from NOF.`
+      content: 'The following eligibility criteria must be met by a company seeking registration as an NBFC-ICC in the Base Layer:',
+      table: {
+        caption: 'Eligibility criteria for NBFC-BL Registration',
+        headers: ['Criterion', 'Requirement', 'Reference / Note'],
+        rows: [
+          ['Company Type', 'Must be a company registered under the Companies Act, 2013. Individual, partnership, LLP, and trusts cannot register as NBFC.', '—'],
+          ['Principal Business — 50-50 Rule', 'Financial assets > 50% of total assets AND income from financial assets > 50% of gross income', 'RBI Press Release 1998-99/1269 dated April 08, 1999'],
+          ['Minimum NOF — NBFC-ICC', '₹10 Crore by March 31, 2027. Glide path: ₹5 Crore by March 31, 2025 → ₹10 Crore by March 31, 2027', 'Para 6, SBR Master Direction 2023'],
+          ['Minimum NOF — NBFC-P2P, NBFC-AA, No Customer Interface', '₹2 Crore (immediate)', 'Para 6, SBR Master Direction 2023'],
+          ['Minimum NOF — NBFC-IFC / IDF-NBFC', '₹300 Crore (immediate)', 'Para 6, SBR Master Direction 2023'],
+          ['Board Director — Financial Sector Experience', 'At least one director must have relevant experience of working in a bank or NBFC', 'Para 38'],
+          ['Director — Fit and Proper Criteria', 'All directors must satisfy RBI\'s Fit and Proper criteria', 'Annex XXIII'],
+          ['FATF Non-Compliant Jurisdiction', 'New investors from FATF non-compliant jurisdictions must hold less than 20% of voting power', 'Para 8'],
+          ['Leverage Ratio (post-registration)', 'Total outside liabilities must not exceed 7 times owned fund at any point', 'Para 9.1'],
+          ['Inter-Group Investment Deduction in NOF', 'Investments in subsidiaries, group companies, and other NBFCs exceeding 10% of (paid-up equity + free reserves) must be deducted from NOF', 'Para 6'],
+        ],
+      },
     },
     {
       id: 'capital-nof',
       title: 'Minimum Capital Requirement – Net Owned Fund (NOF)',
-      content: `The minimum Net Owned Fund (NOF) requirement for various NBFC categories, as specified in Para 6 of the RBI SBR Master Direction 2023:
-
-• NBFC-ICC (Investment and Credit Company) — Rs. 10 Crore (by March 31, 2027)
-• NBFC-MFI (Micro Finance Institution) — Rs. 10 Crore (by March 31, 2027 with glide path)
-• NBFC-Factor — Rs. 10 Crore (by March 31, 2027 with glide path)
-• NBFC-P2P (Peer-to-Peer Lending Platform) — Rs. 2 Crore (Immediate)
-• NBFC-AA (Account Aggregator) — Rs. 2 Crore (Immediate)
-• NBFC without public funds and without customer interface — Rs. 2 Crore (Immediate)
-• NBFC-IFC (Infrastructure Finance Company) — Rs. 300 Crore (Immediate)
-• IDF-NBFC (Infrastructure Debt Fund) — Rs. 300 Crore (Immediate)
-
-NBFC Registration in India will not be processed unless the minimum Net Owned Fund (NOF) is fully infused and certified.`
+      content: 'The minimum Net Owned Fund (NOF) requirement for various NBFC categories, as specified in Para 6 of the RBI SBR Master Direction 2023:',
+      table: {
+        caption: 'Minimum NOF requirement by NBFC category — Para 6, RBI SBR Master Direction 2023',
+        headers: ['NBFC Category', 'Minimum NOF', 'Timing / Note'],
+        rows: [
+          ['NBFC-ICC (Investment and Credit Company)', '₹10 Crore', 'By March 31, 2027 (glide path applies)'],
+          ['NBFC-MFI (Micro Finance Institution)', '₹10 Crore', 'By March 31, 2027 (glide path applies)'],
+          ['NBFC-Factor', '₹10 Crore', 'By March 31, 2027 (glide path applies)'],
+          ['NBFC-P2P (Peer-to-Peer Lending Platform)', '₹2 Crore', 'Immediate'],
+          ['NBFC-AA (Account Aggregator)', '₹2 Crore', 'Immediate'],
+          ['NBFC without public funds and without customer interface', '₹2 Crore', 'Immediate'],
+          ['NBFC-IFC (Infrastructure Finance Company)', '₹300 Crore', 'Immediate'],
+          ['IDF-NBFC (Infrastructure Debt Fund)', '₹300 Crore', 'Immediate'],
+        ],
+        note: 'NBFC Registration in India will not be processed unless the minimum Net Owned Fund (NOF) is fully infused and certified.',
+      },
     },
     {
       id: 'nof-glide-path',
       title: 'Glide Path for Existing NBFCs',
-      content: `For NBFC-ICC (current Rs. 2 Crore): Rs. 5 Crore by March 31, 2025 → Rs. 10 Crore by March 31, 2027
-For NBFC-ICC (current Rs. 5 Crore): Rs. 7 Crore by March 31, 2025 → Rs. 10 Crore by March 31, 2027
-For NBFC-MFI (Rs. 2 Crore in NE Region): Rs. 5 Crore by March 31, 2025 → Rs. 10 Crore by March 31, 2027
-For NBFC-Factor (Rs. 5 Crore): Rs. 7 Crore by March 31, 2025 → Rs. 10 Crore by March 31, 2027
-
-Note: NBFCs failing to achieve the prescribed NOF level within the stipulated period shall not be eligible to hold the Certificate of Registration (CoR) — Para 6.3, RBI SBR Master Direction 2023.
-
-There shall be no distinction in the NOF requirement for NBFCs registered in the North East Region.`
+      table: {
+        caption: 'NOF glide path for existing NBFCs — Para 6, RBI SBR Master Direction 2023',
+        headers: ['Category / Current NOF', 'Interim Requirement', 'Final Requirement'],
+        rows: [
+          ['NBFC-ICC (currently ₹2 Crore)', '₹5 Crore by March 31, 2025', '₹10 Crore by March 31, 2027'],
+          ['NBFC-ICC (currently ₹5 Crore)', '₹7 Crore by March 31, 2025', '₹10 Crore by March 31, 2027'],
+          ['NBFC-MFI (₹2 Crore in NE Region)', '₹5 Crore by March 31, 2025', '₹10 Crore by March 31, 2027'],
+          ['NBFC-Factor (₹5 Crore)', '₹7 Crore by March 31, 2025', '₹10 Crore by March 31, 2027'],
+        ],
+        note: 'NBFCs failing to achieve the prescribed NOF level within the stipulated period shall not be eligible to hold the Certificate of Registration (CoR) — Para 6.3, RBI SBR Master Direction 2023. No distinction in the NOF requirement for NBFCs registered in the North East Region.',
+      },
     },
     {
       id: 'nof-computation',
       title: 'Net Owned Fund – Computation Method',
-      content: `Net Owned Fund is the most critical financial threshold for NBFC registration. It is defined and computed as follows:
-
-Add (+):
-• Paid-up Equity Capital
-• Free Reserves (as per last audited balance sheet)
-• Share Premium
-
-Deduct (-):
-• Intangible Assets
-• Accumulated Losses
-• Investments in subsidiaries, companies in same group, and other NBFCs — to the extent exceeding 10% of (paid-up equity capital + free reserves)
-• AIF-routed indirect investments in group entities — where NBFC holds 50%+ of AIF or is beneficial owner of trust form AIF with 50%+ funds
-• Revaluation reserves
-• Deferred revenue expenditure
-
-NOF must be certified by the Statutory Chartered Accountant in the prescribed RBI format. Errors in NOF computation are the single most common cause of NBFC application rejection.`
+      content: 'Net Owned Fund is the most critical financial threshold for NBFC registration. It is defined and computed as follows:',
+      table: {
+        caption: 'Net Owned Fund computation — items added and deducted',
+        headers: ['Add (+)', 'Deduct (−)'],
+        rows: [
+          ['Paid-up Equity Capital', 'Intangible Assets'],
+          ['Free Reserves (as per last audited balance sheet)', 'Accumulated Losses'],
+          ['Share Premium', 'Investments in subsidiaries, companies in same group, and other NBFCs — to the extent exceeding 10% of (paid-up equity capital + free reserves)'],
+          ['—', 'AIF-routed indirect investments in group entities — where NBFC holds 50%+ of AIF or is beneficial owner of trust form AIF with 50%+ funds'],
+          ['—', 'Revaluation reserves'],
+          ['—', 'Deferred revenue expenditure'],
+        ],
+        note: 'NOF must be certified by the Statutory Chartered Accountant in the prescribed RBI format. Errors in NOF computation are the single most common cause of NBFC application rejection.',
+      },
     },
     {
       id: 'leverage-ratio',
@@ -296,21 +346,33 @@ RBI independently verifies background before granting NBFC Registration in India
     {
       id: 'documents-company',
       title: 'Documents Required – Company & Incorporation',
-      content: `1. Certificate of Incorporation (CoI) — MCA / ROC issued — Proof of company's legal existence
-2. Memorandum of Association (MoA) — Including all amendments — Must include NBFC-permissible financial activity objects
-3. Articles of Association (AoA) — Including all amendments — Corporate governance and share structure
-4. PAN Card of the Company — Income Tax Department — Tax identification
-5. Certificate of Commencement of Business (if applicable) — MCA21 — Required for public companies
-6. Board Resolution authorising NBFC application — Company letterhead, signed by all directors`
+      table: {
+        caption: 'Company and incorporation documents required for NBFC Registration',
+        headers: ['Document', 'Issuer / Source', 'Purpose / Note'],
+        rows: [
+          ['Certificate of Incorporation (CoI)', 'MCA / ROC', 'Proof of company\'s legal existence'],
+          ['Memorandum of Association (MoA)', 'Including all amendments', 'Must include NBFC-permissible financial activity objects'],
+          ['Articles of Association (AoA)', 'Including all amendments', 'Corporate governance and share structure'],
+          ['PAN Card of the Company', 'Income Tax Department', 'Tax identification'],
+          ['Certificate of Commencement of Business (if applicable)', 'MCA21', 'Required for public companies'],
+          ['Board Resolution authorising NBFC application', 'Company letterhead, signed by all directors', '—'],
+        ],
+      },
     },
     {
       id: 'documents-financial',
       title: 'Documents Required – Financial',
-      content: `1. Audited Financial Statements — Last 3 Years (if available) — Signed by Statutory Auditor
-2. NOF Certificate from Statutory Chartered Accountant — RBI prescribed format (per Section 45-IA)
-3. Source of Funds Declaration (for capital infused) — Signed by promoter(s) and certified by CA
-4. Bank Statements evidencing capital infusion / NOF — Certified bank statement
-5. Statutory Auditor Certificate — Principal Business Test — On CA letterhead with UDIN, certifying 50-50 rule`
+      table: {
+        caption: 'Financial documents required for NBFC Registration',
+        headers: ['Document', 'Requirement / Certification', 'Purpose'],
+        rows: [
+          ['Audited Financial Statements — Last 3 Years (if available)', 'Signed by Statutory Auditor', 'Financial history and principal business verification'],
+          ['NOF Certificate from Statutory Chartered Accountant', 'RBI prescribed format (per Section 45-IA)', 'Certifies minimum NOF threshold is met'],
+          ['Source of Funds Declaration (for capital infused)', 'Signed by promoter(s) and certified by CA', 'AML compliance and capital trail verification'],
+          ['Bank Statements evidencing capital infusion / NOF', 'Certified bank statement', 'Evidences actual capital infusion'],
+          ['Statutory Auditor Certificate — Principal Business Test', 'On CA letterhead with UDIN', 'Certifies 50-50 principal business rule is satisfied'],
+        ],
+      },
     },
     {
       id: 'documents-director',
@@ -346,16 +408,20 @@ Plus: KYC of each director, Declarations (no association with deposit-accepting 
     {
       id: 'business-plan-docs',
       title: 'Business Plan and Policy Documents',
-      content: `1. Business Plan (5-Year Financial Projections) — Revenue model, capital deployment, loan book growth, risk framework
-2. Fair Practices Code (Board Approved) — Mandatory for NBFCs with customer interface — Para 45
-3. AML / KYC Policy (Board Approved) — Aligned to RBI KYC Master Direction 2016
-4. Interest Rate Policy (Board Approved) — Mandatory; Board must adopt interest rate model — Para 45.11
-5. Risk Management Framework (Board Approved) — RMC charter and risk appetite statement — Para 39
-6. Policy on Loans to Directors / Senior Officers / Relatives — Mandatory — Para 40
-
-FATF and Investment-Related:
-• FATF Non-Compliant Jurisdiction Declaration — Confirming no new investor holds 20%+ from FATF non-compliant jurisdiction (Para 8)
-• FDI/Foreign Investment Disclosure (if applicable)`
+      table: {
+        caption: 'Business plan and policy documents required for NBFC Registration',
+        headers: ['Document / Policy', 'Requirement', 'Regulatory Note'],
+        rows: [
+          ['Business Plan (5-Year Financial Projections)', 'Revenue model, capital deployment, loan book growth, risk framework', 'Mandatory for all NBFC applications'],
+          ['Fair Practices Code (Board Approved)', 'Mandatory for NBFCs with customer interface', 'Para 45'],
+          ['AML / KYC Policy (Board Approved)', 'Aligned to RBI KYC Master Direction 2016', 'Mandatory'],
+          ['Interest Rate Policy (Board Approved)', 'Board must adopt interest rate model; disclose annualised rate', 'Para 45.11'],
+          ['Risk Management Framework (Board Approved)', 'RMC charter and risk appetite statement', 'Para 39'],
+          ['Policy on Loans to Directors / Senior Officers / Relatives', 'Board-approved with threshold for Board-level reporting', 'Para 40'],
+          ['FATF Non-Compliant Jurisdiction Declaration', 'Confirms no new investor holds 20%+ from FATF non-compliant jurisdiction', 'Para 8'],
+          ['FDI / Foreign Investment Disclosure (if applicable)', '—', 'Where applicable'],
+        ],
+      },
     },
     {
       id: 'process',
@@ -430,14 +496,18 @@ Action Required: The applicable RBI fee at the time of application must be verif
     {
       id: 'sbr-layers',
       title: 'Layer-Wise Regulatory Framework Under SBR',
-      content: `The SBR framework introduced by RBI has fundamentally changed how NBFC Registration in India operates. Regulation is now proportionate to size, risk and systemic importance.
-
-• Base Layer (NBFC-BL) — Majority of NBFCs — Simplified prudential norms
-• Middle Layer (NBFC-ML) — Larger and deposit-taking NBFCs — Enhanced governance & reporting
-• Upper Layer (NBFC-UL) — Systemically significant NBFCs — Bank-like supervision
-• Top Layer — Rare cases identified by RBI — Intensive supervisory regime
-
-Most newly approved entities under NBFC Registration in India begin as Base Layer NBFCs unless RBI determines otherwise.`
+      content: 'The SBR framework introduced by RBI has fundamentally changed how NBFC Registration in India operates. Regulation is now proportionate to size, risk and systemic importance.',
+      table: {
+        caption: 'Layer-wise regulatory framework under SBR',
+        headers: ['Layer', 'Scope', 'Regulatory Approach'],
+        rows: [
+          ['Base Layer (NBFC-BL)', 'Majority of NBFCs', 'Simplified prudential norms'],
+          ['Middle Layer (NBFC-ML)', 'Larger and deposit-taking NBFCs', 'Enhanced governance and reporting'],
+          ['Upper Layer (NBFC-UL)', 'Systemically significant NBFCs', 'Bank-like supervision'],
+          ['Top Layer (NBFC-TL)', 'Rare cases identified by RBI', 'Intensive supervisory regime'],
+        ],
+        note: 'Most newly approved entities under NBFC Registration in India begin as Base Layer NBFCs unless RBI determines otherwise.',
+      },
     },
     {
       id: 'capital-adequacy',
@@ -660,21 +730,18 @@ Non-compliance risk increases significantly for systemically important NBFCs.`
     {
       id: 'deposit-taking',
       title: 'Deposit-Taking vs Non-Deposit Taking NBFC',
-      content: `Not all NBFCs are permitted to accept public deposits.
-
-NBFC-ND (Non-Deposit Taking):
-• Accept Public Deposits — No
-• Regulatory Intensity — Moderate
-• Prudential Monitoring — Applicable
-• Liquidity Norms — Applicable
-
-NBFC-D (Deposit-Taking):
-• Accept Public Deposits — Yes (subject to RBI approval)
-• Regulatory Intensity — Higher
-• Prudential Monitoring — More stringent
-• Liquidity Norms — Strict
-
-Most newly granted NBFC Registration in India approvals are Non-Deposit Taking NBFCs.`
+      content: 'Not all NBFCs are permitted to accept public deposits.',
+      table: {
+        caption: 'Deposit-Taking NBFC vs Non-Deposit Taking NBFC — feature comparison',
+        headers: ['Feature', 'NBFC-D (Deposit-Taking)', 'NBFC-ND (Non-Deposit Taking)'],
+        rows: [
+          ['Accept Public Deposits', 'Yes (subject to RBI approval)', 'No'],
+          ['Regulatory Intensity', 'Higher', 'Moderate'],
+          ['Prudential Monitoring', 'More stringent', 'Applicable'],
+          ['Liquidity Norms', 'Strict', 'Applicable'],
+        ],
+        note: 'Most newly granted NBFC Registration in India approvals are Non-Deposit Taking NBFCs.',
+      },
     },
     {
       id: 'outsourcing',
@@ -715,13 +782,18 @@ Strategic expansion must align with regulatory approvals.`
     {
       id: 'nbfc-vs-fintech',
       title: 'NBFC vs Fintech Model – Regulatory Distinction',
-      content: `• Lending: NBFC — On own balance sheet | Fintech — Partner NBFC model
-• RBI Supervision: NBFC — Direct | Fintech — Indirect
-• Capital Requirement: NBFC — Mandatory NOF | Fintech — Not applicable
-• Prudential Norms: NBFC — Applicable | Fintech — Not applicable directly
-• Regulatory Risk: NBFC — Structured | Fintech — Dependency risk
-
-NBFC Registration in India provides institutional credibility but increases compliance obligations.`
+      table: {
+        caption: 'NBFC vs Fintech — regulatory comparison',
+        headers: ['Feature', 'NBFC', 'Fintech (Partner Model)'],
+        rows: [
+          ['Lending', 'On own balance sheet', 'Partner NBFC model'],
+          ['RBI Supervision', 'Direct', 'Indirect'],
+          ['Capital Requirement', 'Mandatory NOF', 'Not applicable'],
+          ['Prudential Norms', 'Applicable', 'Not applicable directly'],
+          ['Regulatory Risk', 'Structured', 'Dependency risk'],
+        ],
+        note: 'NBFC Registration in India provides institutional credibility but increases compliance obligations.',
+      },
     },
     {
       id: 'strategic-models',
@@ -927,7 +999,7 @@ When designed with regulatory foresight, NBFC Registration in India provides ins
     }
   ];
 
-  const tocSections = [...sections.map(({ id, title }) => ({ id, title })), { id: 'faq', title: 'Frequently Asked Questions' }];
+  const tocSections = [...(sections as Section[]).map(({ id, title }) => ({ id, title })), { id: 'faq', title: 'Frequently Asked Questions' }];
 
   return (
     <ServicePageLayout
@@ -976,11 +1048,12 @@ When designed with regulatory foresight, NBFC Registration in India provides ins
       finalCtaTitle="Need Expert Support for NBFC Registration?"
       finalCtaDescription="Our compliance specialists provide end-to-end NBFC registration support — pre-filing audit, NOF computation, COSMOS portal filing, Annex XII documentation, business plan, all Board-approved policies, query handling, and ongoing post-registration compliance."
     >
-      {sections.map((section) => (
+      {(sections as Section[]).map((section) => (
         <section key={section.id} className="mb-12">
           <h2 id={section.id}>{section.title}</h2>
           <div className="prose max-w-none">
-            {section.content.split('\n\n').map(renderContentBlock)}
+            {section.content && section.content.split('\n\n').filter(Boolean).map(renderContentBlock)}
+            {section.table && renderTable(section.table)}
           </div>
         </section>
       ))}

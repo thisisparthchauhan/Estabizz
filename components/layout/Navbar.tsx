@@ -383,12 +383,12 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
     // Editable navbar content (quick links + CTA) from the CMS, with fallback.
     const nav: NavbarContent = { ...NAVBAR_DEFAULTS, ...content };
     const baseLinks = nav.quickLinks?.length ? nav.quickLinks : NAVBAR_DEFAULTS.quickLinks;
-    // Always inject Jobs after Blogs, regardless of CMS state
+    // Always inject Jobs before Blogs (Blogs stays last), regardless of CMS state
     const quickLinks = (() => {
         if (baseLinks.some(l => l.href === '/jobs')) return baseLinks;
         const idx = baseLinks.findIndex(l => l.href === '/blogs');
         const result = [...baseLinks];
-        result.splice(idx >= 0 ? idx + 1 : 1, 0, { label: 'Jobs', href: '/jobs', icon: '💼', newTab: false });
+        result.splice(idx >= 0 ? idx : result.length, 0, { label: 'Jobs', href: '/jobs', icon: '💼', newTab: false });
         return result;
     })();
     const router = useRouter();

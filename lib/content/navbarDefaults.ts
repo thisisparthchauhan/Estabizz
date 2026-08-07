@@ -28,8 +28,8 @@ export interface NavbarContent {
 export const NAVBAR_DEFAULTS: NavbarContent = {
   quickLinks: [
     { label: 'Global Markets', href: '/global',  icon: '🌐', newTab: false },
-    { label: 'Blogs',          href: '/blogs',   icon: '✍️', newTab: false },
     { label: 'Jobs',           href: '/jobs',    icon: '💼', newTab: false },
+    { label: 'Blogs',          href: '/blogs',   icon: '✍️', newTab: false },
   ],
   ctaLabel: 'Get Started',
   ctaHref: '/get-started',

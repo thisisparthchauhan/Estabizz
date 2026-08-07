@@ -42,6 +42,7 @@ export interface BlogAuthor {
 
 export interface BlogImage {
   url: string;
+  publicId?: string;
   alt: string;
   caption?: string;
   width?: number;

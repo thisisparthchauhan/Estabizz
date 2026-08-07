@@ -350,7 +350,7 @@ function fmt(iso?: string): string {
 
 // ─── Hero image ───────────────────────────────────────────────────────────────
 
-function HeroImage({ src, alt, icon }: { src: string; alt: string; icon: string }) {
+function HeroImage({ src, alt, icon, width, height }: { src: string; alt: string; icon: string; width?: number; height?: number }) {
   return (
     <div className="relative h-64 w-full overflow-hidden bg-gradient-to-br from-[#eef4fb] via-[#f7f8fc] to-[#eaf2fb] md:h-[400px] lg:h-[460px]">
       <span className="absolute inset-0 flex items-center justify-center text-[100px] opacity-[0.10] select-none pointer-events-none">
@@ -362,6 +362,8 @@ function HeroImage({ src, alt, icon }: { src: string; alt: string; icon: string 
           <img
             src={src}
             alt={alt}
+            width={width}
+            height={height}
             className="absolute inset-0 h-full w-full object-cover"
             loading="eager"
             fetchPriority="high"
@@ -486,6 +488,8 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
           src={blog.featuredImage.url}
           alt={blog.featuredImage.alt}
           icon={blog.category.icon}
+          width={blog.featuredImage.width}
+          height={blog.featuredImage.height}
         />
         {blog.featuredImage.caption && (
           <p className="mt-2 text-center text-[12px] italic text-[#9ca3af]">

@@ -50,6 +50,66 @@ function estimateReadingTime(text: string): number {
   return Math.max(1, Math.ceil(words / 238));
 }
 
+function cleanText(value: unknown, max = 300): string {
+  return String(value ?? '').trim().slice(0, max);
+}
+
+function cleanNumber(value: unknown): number | undefined {
+  if (value === undefined || value === null || value === '') return undefined;
+  const n = Number(value);
+  if (!Number.isFinite(n) || n <= 0 || n > 10000) return undefined;
+  return Math.round(n);
+}
+
+function isSafeBlogImageUrl(value: string): boolean {
+  if (!value) return true;
+  if (value.startsWith('/images/') || value.startsWith('/estabizz-')) return true;
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
+function cleanPublicId(value: unknown): string {
+  return String(value ?? '').trim().replace(/[^a-zA-Z0-9_\-/.]/g, '').slice(0, 180);
+}
+
+function buildBlogImage(input: {
+  url?: unknown;
+  publicId?: unknown;
+  alt?: unknown;
+  caption?: unknown;
+  width?: unknown;
+  height?: unknown;
+}, fallbackAlt: string) {
+  const url = cleanText(input.url, 1000);
+  return {
+    url,
+    publicId: cleanPublicId(input.publicId),
+    alt: cleanText(input.alt, 180) || fallbackAlt,
+    caption: cleanText(input.caption, 240),
+    width: cleanNumber(input.width),
+    height: cleanNumber(input.height),
+  };
+}
+
+function cleanSupportingImages(value: unknown, fallbackAlt: string) {
+  if (!Array.isArray(value)) return [];
+  return value.slice(0, 12).map((item) => {
+    const raw = item as Record<string, unknown>;
+    return buildBlogImage({
+      url: raw.url,
+      publicId: raw.publicId,
+      alt: raw.alt,
+      caption: raw.caption,
+      width: raw.width,
+      height: raw.height,
+    }, fallbackAlt);
+  }).filter((img) => img.url && isSafeBlogImageUrl(img.url));
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -82,6 +142,20 @@ export async function POST(req: NextRequest) {
 
     // XSS defense: sanitize the article HTML before it is stored.
     const cleanContent = sanitizeBlogHtml(body.content.trim());
+    const featuredImage = buildBlogImage({
+      url: body.featuredImageUrl,
+      publicId: body.featuredImagePublicId,
+      alt: body.featuredImageAlt,
+      caption: body.featuredImageCaption,
+      width: body.featuredImageWidth,
+      height: body.featuredImageHeight,
+    }, body.title.trim());
+
+    if (featuredImage.url && !isSafeBlogImageUrl(featuredImage.url)) {
+      return NextResponse.json({ error: 'Cover image must use a secure image URL.' }, { status: 400 });
+    }
+
+    const supportingImages = cleanSupportingImages(body.supportingImages, body.title.trim());
 
     const now    = new Date();
     const nowISO = now.toISOString();
@@ -115,7 +189,7 @@ export async function POST(req: NextRequest) {
         id: 'author_custom',
         firstName,
         lastName,
-        email: 'support@estabizz.com',
+        email: 'info@estabizz.com',
         designation: 'Contributor, Estabizz Fintech',
         role: 'admin' as const,
         bio: '',
@@ -146,7 +220,8 @@ export async function POST(req: NextRequest) {
         existing.status          = status;
         existing.category        = category;
         existing.tags            = tags;
-        existing.featuredImage   = { url: body.featuredImageUrl?.trim() ?? '', alt: body.featuredImageAlt?.trim() || body.title.trim(), caption: '' };
+        existing.featuredImage   = featuredImage;
+        existing.images          = supportingImages;
         existing.seoTitle        = body.seoTitle?.trim()        || body.title.trim();
         existing.metaDescription = body.metaDescription?.trim() ?? '';
         existing.focusKeyword    = body.focusKeyword?.trim()    ?? '';
@@ -171,8 +246,8 @@ export async function POST(req: NextRequest) {
         slug,
         summary:         body.summary?.trim() ?? '',
         content:         cleanContent,
-        featuredImage:   { url: body.featuredImageUrl?.trim() ?? '', alt: body.featuredImageAlt?.trim() || body.title.trim(), caption: '' },
-        images:          [],
+        featuredImage,
+        images:          supportingImages,
         category,
         tags,
         author:          { id: author.id, firstName: author.firstName, lastName: author.lastName, email: author.email, bio: author.bio, role: author.role, designation: author.designation },
@@ -211,7 +286,8 @@ export async function POST(req: NextRequest) {
         status,
         category,
         tags,
-        featuredImage:   { url: body.featuredImageUrl?.trim() ?? '', alt: body.featuredImageAlt?.trim() || body.title.trim(), caption: '' },
+        featuredImage,
+        images:          supportingImages,
         seoTitle:        body.seoTitle?.trim()        || body.title.trim(),
         metaDescription: body.metaDescription?.trim() ?? '',
         focusKeyword:    body.focusKeyword?.trim()    ?? '',
@@ -234,8 +310,8 @@ export async function POST(req: NextRequest) {
       id, title: body.title.trim(), slug,
       summary:   body.summary?.trim() ?? '',
       content:   cleanContent,
-      featuredImage: { url: body.featuredImageUrl?.trim() ?? '', alt: body.featuredImageAlt?.trim() || body.title.trim(), caption: '' },
-      images:    [],
+      featuredImage,
+      images:    supportingImages,
       category,  tags,
       author:    { id: author.id, firstName: author.firstName, lastName: author.lastName, email: author.email, bio: author.bio, role: author.role, designation: author.designation },
       status,    featured: false, isUserSubmitted: false,

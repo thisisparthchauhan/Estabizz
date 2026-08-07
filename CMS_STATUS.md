@@ -1,7 +1,25 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-24 (IST) · Phase: **Dark Mode** · Status: **completed locally** · Next: **CMS integration for country configs** · Last batch: **Site-wide dark mode system (next-themes, CSS tokens, full coverage)**
+> Last updated: 2026-07-25 (IST) · Phase: **Blog image management** · Status: **completed locally** · Next: **CMS integration for country configs** · Last batch: **Blog cover image management + controlled inline article images**
+
+---
+
+## 2026-07-25 — Blog Image Management — Cover + Inline Article Images
+
+**Task**: Add two separate blog image workflows without replacing the existing blog editor: richer cover-image management through the existing `featuredImage` field, and controlled inline images inside TipTap article content.
+
+**Architecture**:
+- **Cover image**: existing `featuredImage` remains the canonical cover field for blog hero, cards, Open Graph, Twitter/X and Article structured data. It now supports optional `publicId`, `caption`, `width` and `height` while preserving old `url`/`alt` records.
+- **Inline images**: new TipTap `blogImage` node stores semantic HTML as `<figure data-blog-image="true">` with an `<img>`, optional `<figcaption>` and optional safe link. Storage remains HTML; no TipTap JSON migration and no existing blog migration required.
+- **Controls**: Add Image opens Upload New / Choose from Media Library, inserts at cursor, and selected images can be set to Small, Medium, Large, Full or Custom width; aligned Left, Centre or Right; edited for alt text, caption and link; replaced or deleted. Images stay in article flow, not absolute-positioned.
+- **Security**: server-side sanitizer narrowly allows only approved blog-image classes/data attributes and controlled pixel width; image `src` remains HTTPS-only; links allow relative paths or HTTPS; arbitrary CSS/classes/scripts/data URIs remain blocked. Publish still blocks empty or placeholder alt text.
+- **Media**: Cloudinary unsigned uploads continue using `NEXT_PUBLIC_CLOUDINARY_*`; uploaded cover/inline images are recorded in the existing Media Library through `/api/admin/media`. No second media library or upload provider was added.
+- **Responsive/dark mode**: public `.blog-content` and editor styles cover size presets, custom width cap, left/centre/right alignment, captions, linked images and dark-mode caption readability.
+
+**Files changed**: `app/admin/blogs/_components/BlogEditorClient.tsx`, `RichContentEditor.tsx`, `BlogImageExtension.ts`, `MediaPickerModal.tsx`, `CloudinaryUploader.tsx`, `app/api/admin/blogs/save/route.ts`, `app/blogs/[slug]/BlogDetailClient.tsx`, `app/globals.css`, `lib/models/Blog.ts`, `lib/blog/types.ts`, `lib/blog/repository.ts`, `lib/blog/sanitize.ts`.
+
+**Status**: Complete locally. TypeScript clean. Production deployment still pending owner approval.
 
 ---
 

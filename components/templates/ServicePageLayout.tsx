@@ -401,7 +401,7 @@ export default function ServicePageLayout({
                         <div className="text-[13.5px] text-gray-600 dark:text-[#a9b6c9] leading-relaxed">
                             Specialist in fintech regulatory compliance, government licenses and RBI, SEBI, IRDAI frameworks.
                         </div>
-                        <a href="mailto:support@estabizz.com" className="mt-4 block text-center w-full py-2.5 bg-blue-50 dark:bg-[#12223a] text-[#0077B6] dark:text-[#60a5fa] font-bold text-[13px] rounded-xl hover:bg-[#1677f2] hover:text-white transition-colors">
+                        <a href="mailto:info@estabizz.com" className="mt-4 block text-center w-full py-2.5 bg-blue-50 dark:bg-[#12223a] text-[#0077B6] dark:text-[#60a5fa] font-bold text-[13px] rounded-xl hover:bg-[#1677f2] hover:text-white transition-colors">
                             Ask a Question
                         </a>
                     </div>

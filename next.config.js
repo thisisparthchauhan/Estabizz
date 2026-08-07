@@ -3,6 +3,13 @@ const nextConfig = {
     images: {
         unoptimized: true,
     },
+    // Turbopack root: silences the "multiple lockfiles detected" warning that
+    // occurs because a parent directory (/Users/utc) also contains a
+    // package-lock.json. Setting this explicitly tells Turbopack which
+    // directory is the actual project root.
+    turbopack: {
+        root: __dirname,
+    },
     // Non-www → www canonical host redirect.
     // Production: Vercel edge redirects (vercel.json) are the primary mechanism.
     // This Next.js layer ensures the redirect also runs in custom/non-Vercel
@@ -13,6 +20,17 @@ const nextConfig = {
                 source: '/:path*',
                 has: [{ type: 'host', value: 'estabizz.com' }],
                 destination: 'https://www.estabizz.com/:path*',
+                permanent: true,
+            },
+            // Legacy /19-5 → canonical /mca-roc
+            {
+                source: '/19-5',
+                destination: '/mca-roc',
+                permanent: true,
+            },
+            {
+                source: '/19-5/:slug*',
+                destination: '/mca-roc/:slug*',
                 permanent: true,
             },
         ];

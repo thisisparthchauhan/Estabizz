@@ -16,7 +16,7 @@ const EXCLUDED_LINK_LABELS = new Set(['Content Framework', 'Proposal Templates']
 
 export default function Footer({ content }: { content?: Partial<FooterContent> }) {
     const c: FooterContent = { ...FOOTER_DEFAULTS, ...content };
-    if (c.email === 'info@estabizz.com') c.email = 'support@estabizz.com';
+
 
     const rawColumns = c.columns?.length ? c.columns : FOOTER_DEFAULTS.columns;
     const contactOwnerTitle = rawColumns.find(col =>

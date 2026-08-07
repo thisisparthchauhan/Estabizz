@@ -14,7 +14,8 @@ interface AuthUser {
     isAdmin: boolean;
 }
 
-interface MenuCategory { label: string; icon: string; items: string[]; }
+interface MenuGroup { heading: string; items: string[]; }
+interface MenuCategory { label: string; icon: string; items: string[]; groups?: MenuGroup[]; viewAll?: string; viewAllLabel?: string; }
 interface MegaMenu { categories: MenuCategory[]; viewAll: string; viewAllLabel: string; }
 
 const linkMap: Record<string, string> = {
@@ -195,27 +196,27 @@ const linkMap: Record<string, string> = {
     "Document Vault": "/login",
     "Policy Library": "/login",
     // Other regulators
-    "PFRDA Registration": "/services/enterprise-services",
+    "PFRDA Registration": "/gov-lic/pfrda-registration",
     "NHB Registration": "/services/enterprise-services",
     "CERSAI Registration": "/services/enterprise-services",
     "DGFT IE Code": "/fema/fema-registration",
-    "FIU-IND Registration": "/services/enterprise-services",
-    "PMLA Compliance Advisory": "/services/legal-due-diligence",
-    "AML Policy Drafting": "/services/enterprise-services",
-    "AML Risk Assessment": "/services/legal-due-diligence",
-    "CKYC Registration & Reporting": "/services/enterprise-services",
+    "FIU-IND Registration": "/fiu-ind-aml/fiu-ind-registration",
+    "PMLA Compliance Advisory": "/fiu-ind-aml/pmla-compliance-advisory",
+    "AML Policy Drafting": "/fiu-ind-aml/aml-policy-drafting",
+    "AML Risk Assessment": "/fiu-ind-aml/aml-risk-assessment",
+    "CKYC Registration & Reporting": "/fiu-ind-aml/ckyc-registration-reporting",
     "MCA / ROC Compliance": "/services/enterprise-services",
     "Company Incorporation": "/services/enterprise-services",
     "Annual ROC Compliance": "/services/enterprise-services",
     "Corporate Governance": "/services/enterprise-services",
     "Post-Registration Compliance": "/services",
     "Sectoral Licences": "/services",
-    "FSSAI Licence": "/services/enterprise-services",
-    "APEDA Registration": "/services/enterprise-services",
-    "AYUSH Licence": "/services/enterprise-services",
-    "Factory Licence": "/services/enterprise-services",
-    "Drug Licence": "/services/enterprise-services",
-    "BIS Certification": "/services/enterprise-services",
+    "FSSAI Licence": "/gov-lic/fssai-licence",
+    "APEDA Registration": "/gov-lic/apeda-registration",
+    "AYUSH Licence": "/gov-lic/ayush-licence",
+    "Factory Licence": "/gov-lic/factory-licence",
+    "Drug Licence": "/gov-lic/drug-licence",
+    "BIS Certification": "/gov-lic/bis-certification",
     "Compliance Calendar": "/resources/compliance-calendar",
     "Regulatory Updates": "/resources/regulatory-updates",
     "Circular Tracker": "/resources/circular-explainers",
@@ -239,6 +240,48 @@ const linkMap: Record<string, string> = {
     "Zero Coupon Zero Principal Instruments": "/sebi/social-stock-exchange-license-india",
     "ZCZP Instruments": "/sebi/social-stock-exchange-license-india",
     "Underwriter Registration": "/sebi/underwriter-registration",
+    // SEBI – additional pages
+    "AMFI Registration": "/sebi/amfi-registration",
+    "REIT Registration": "/sebi/reit-registration",
+    "Credit Rating Agency": "/sebi/credit-rating-agency",
+    "Depository Participant": "/sebi/depository-participant-sebi-registration",
+    "RTA Registration": "/sebi/rta-registration-in-india",
+    "Collective Investment Schemes": "/sebi/collective-investment-schemes",
+    // RBI – additional pages
+    "LendTech Services": "/rbi/lendtech-services",
+    // IRDAI – additional pages
+    "Reinsurance Broker": "/irdai/reinsurance-broker-registration-in-india",
+    "Composite Insurance Broker": "/irdai/composite-insurance-broker-registration-in-india",
+    "Insurance Marketing Firm": "/irdai/insurance-marketing-firm-license",
+    "IRDAI Regulatory Sandbox": "/irdai/irdai-regulatory-sandbox",
+    // IFSCA – additional pages
+    "TechFin Entity IFSC": "/ifsca/techfin",
+    // FEMA
+    "FEMA Registration": "/fema/fema-registration",
+    // MCA / ROC — 19 corporate service pages (canonical: /mca-roc/[slug])
+    "Company Registration in India": "/mca-roc/company-registration-in-india",
+    "Public Limited Company": "/mca-roc/public-limited-company-registration-in-india",
+    "Indian Subsidiary": "/mca-roc/indian-subsidiary-registration",
+    "One Person Company (OPC)": "/mca-roc/one-person-company-registration-india",
+    "LLP Registration": "/mca-roc/llp-registration-india",
+    "Nidhi Company": "/mca-roc/nidhi-company-registration",
+    "NGO Registration": "/mca-roc/ngo-registration-in-india",
+    "Change Company Name": "/mca-roc/change-company-name",
+    "Increase Authorised Capital": "/mca-roc/increase-authorised-capital",
+    "Registered Office Change": "/mca-roc/registered-office-change",
+    "OPC to Pvt Ltd Conversion": "/mca-roc/opc-to-private-limited-conversion",
+    "Appointment of Directors": "/mca-roc/appointment-of-directors",
+    "Removal of Director": "/mca-roc/removal-of-director",
+    "Directors DIN e-KYC": "/mca-roc/directors-din-ekyc-update",
+    "MOA – Private Ltd": "/mca-roc/moa-amendment-private-limited-company",
+    "MOA – Public Ltd": "/mca-roc/moa-amendment-public-limited-company",
+    "MOA – Section 8": "/mca-roc/moa-amendment-section-8-company",
+    "Private Ltd Winding Up": "/mca-roc/private-limited-company-winding-up",
+    "LLP Winding Up & Closure": "/mca-roc/llp-winding-up-closure",
+    // FIU-IND & AML hub
+    "FIU-IND & AML Hub": "/fiu-ind-aml",
+    // Government Licences hub
+    "Gov Licences Hub": "/gov-lic",
 };
 
 const staticSearchLinks = [
@@ -265,13 +308,20 @@ const staticSearchLinks = [
 const menus: Record<string, MegaMenu> = {
     Regulatory: {
         categories: [
-            { label: "RBI", icon: "🏦", items: ["NBFC Registration", "Payment Aggregator", "Prepaid Instrument", "NBFC Account Aggregator", "Asset Reconstruction Company", "AD Category II"] },
-            { label: "SEBI", icon: "📈", items: ["Stock Broker Licence", "AIF Registration", "Portfolio Manager", "Investment Adviser", "Research Analyst", "Social Stock Exchange"] },
-            { label: "IRDAI", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA Licence", "Micro Insurance"] },
-            { label: "IFSCA", icon: "🌐", items: ["Finance Company GIFT IFSC", "PSP License IFSCA", "ITFS Platform IFSC", "BATF Services IFSC", "IFSCA Aircraft Leasing", "FinTech Entity IFSC"] },
-            { label: "FIU-IND", icon: "🔍", items: ["FIU-IND Registration", "PMLA Compliance Advisory", "AML Policy Drafting", "CKYC Registration & Reporting"] },
-            { label: "MCA / ROC", icon: "🏛️", items: ["Company Incorporation", "MCA / ROC Compliance", "Annual ROC Compliance", "Corporate Governance"] },
-            { label: "Government Licences", icon: "⚖️", items: ["FSSAI Licence", "APEDA Registration", "AYUSH Licence", "Factory Licence", "Drug Licence", "BIS Certification"] },
+            { label: "RBI", icon: "🏦", items: ["NBFC Registration", "Payment Aggregator", "Prepaid Instrument", "NBFC Account Aggregator", "Asset Reconstruction Company", "AD Category II", "LendTech Services", "NBFC SRO Registration", "NBFC Business Plan"] },
+            { label: "SEBI", icon: "📈", items: ["Stock Broker Licence", "AIF Registration", "Portfolio Manager", "Investment Adviser", "Research Analyst", "Social Stock Exchange", "Mutual Fund Registration", "AMFI Registration", "REIT Registration", "Credit Rating Agency", "Depository Participant", "RTA Registration", "Underwriter Registration", "Collective Investment Schemes"] },
+            { label: "IRDAI", icon: "🛡️", items: ["Insurance Broker", "Reinsurance Broker", "Corporate Agent", "Composite Insurance Broker", "Web Aggregator", "Insurance Marketing Firm", "Insurance Surveyor", "TPA Licence", "IRDAI Regulatory Sandbox"] },
+            { label: "IFSCA", icon: "🌐", items: ["Finance Company GIFT IFSC", "PSP License IFSCA", "ITFS Platform IFSC", "BATF Services IFSC", "IFSCA Aircraft Leasing", "FinTech Entity IFSC", "TechFin Entity IFSC", "IFSCA Factoring License"] },
+            { label: "FEMA", icon: "📋", items: ["FEMA Compliance", "FEMA Registration", "DGFT IE Code"] },
+            { label: "FIU-IND & AML", icon: "🔍", items: ["FIU-IND Registration", "PMLA Compliance Advisory", "AML Policy Drafting", "AML Risk Assessment", "CKYC Registration & Reporting"] },
+            { label: "MCA / ROC", icon: "🏛️", items: [],
+              viewAll: "/mca-roc", viewAllLabel: "View All MCA / ROC Services →",
+              groups: [
+                { heading: "Company & Entity Registration", items: ["Company Registration in India", "Public Limited Company", "Indian Subsidiary", "One Person Company (OPC)", "LLP Registration", "Nidhi Company", "NGO Registration", "Company Incorporation"] },
+                { heading: "Company Changes & Capital", items: ["Change Company Name", "Increase Authorised Capital", "Registered Office Change", "OPC to Pvt Ltd Conversion", "MCA / ROC Compliance", "Annual ROC Compliance"] },
+                { heading: "Event Based Compliance", items: ["Appointment of Directors", "Removal of Director", "Directors DIN e-KYC", "Corporate Governance", "MOA – Private Ltd", "MOA – Public Ltd", "MOA – Section 8", "Private Ltd Winding Up", "LLP Winding Up & Closure"] },
+              ]},
+            { label: "Government Licences", icon: "⚖️", items: ["FSSAI Licence", "APEDA Registration", "AYUSH Licence", "Factory Licence", "Drug Licence", "BIS Certification", "PFRDA Registration"] },
         ],
         viewAll: "/regulatory", viewAllLabel: "View All Regulatory →"
     },
@@ -331,12 +381,12 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
     // Editable navbar content (quick links + CTA) from the CMS, with fallback.
     const nav: NavbarContent = { ...NAVBAR_DEFAULTS, ...content };
     const baseLinks = nav.quickLinks?.length ? nav.quickLinks : NAVBAR_DEFAULTS.quickLinks;
-    // Always inject Jobs after Insights, regardless of CMS state
+    // Always inject Jobs before Blogs (Blogs stays last), regardless of CMS state
     const quickLinks = (() => {
         if (baseLinks.some(l => l.href === '/jobs')) return baseLinks;
         const idx = baseLinks.findIndex(l => l.href === '/blogs');
         const result = [...baseLinks];
-        result.splice(idx >= 0 ? idx + 1 : 1, 0, { label: 'Jobs', href: '/jobs', icon: '💼', newTab: false });
+        result.splice(idx >= 0 ? idx : result.length, 0, { label: 'Jobs', href: '/jobs', icon: '💼', newTab: false });
         return result;
     })();
     const router = useRouter();
@@ -412,7 +462,10 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
             const groups = Object.entries(menus)
                 .flatMap(([menuName, menu]) =>
                     menu.categories
-                        .filter((category) => category.items.includes(label))
+                        .filter((category) =>
+                            category.items.includes(label) ||
+                            category.groups?.some((g) => g.items.includes(label))
+                        )
                         .map((category) => `${menuName} ${category.label}`)
                 );
             const key = `${label}-${href}`;
@@ -774,7 +827,30 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                         {/* Right Content */}
                         <div className="flex-1 bg-white dark:bg-[#0d1a2d] p-6">
                             <h3 className="text-[18px] font-bold text-[#0a1628] dark:text-[#f7f9fc] mb-5">{currentMenu.categories[activeCategory]?.label}</h3>
-                            {currentMenu.categories[activeCategory]?.items.length > 0 ? (
+                            {currentMenu.categories[activeCategory]?.groups ? (
+                                <div className="space-y-4 overflow-y-auto max-h-[420px] pr-1">
+                                    {currentMenu.categories[activeCategory].groups!.map((group, gi) => (
+                                        <div key={gi}>
+                                            <h4 className="text-[10px] font-black uppercase tracking-[0.15em] text-[#64748b] dark:text-[#a9b6c9] mb-2 pb-1 border-b border-gray-100 dark:border-[#223550]">{group.heading}</h4>
+                                            <div className="grid grid-cols-3 gap-x-8 gap-y-3">
+                                                {group.items.map((item, j) => {
+                                                    const isLive = !!linkMap[item];
+                                                    return (
+                                                        <Link key={j} href={linkMap[item] || "#"}
+                                                            className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}>
+                                                            <span className={`${isLive ? 'text-[#1677f2]' : 'text-[#cbd5e1]'} text-[8px] shrink-0`}>›</span>
+                                                            {item}
+                                                            {isLive && (
+                                                                <span className="ml-1 px-1.5 py-0.5 rounded-[4px] bg-[#10b981]/10 text-[#10b981] text-[9px] font-bold tracking-wider uppercase">Live</span>
+                                                            )}
+                                                        </Link>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : currentMenu.categories[activeCategory]?.items.length > 0 ? (
                                 <div className="grid grid-cols-3 gap-x-8 gap-y-3">
                                     {currentMenu.categories[activeCategory].items.map((item, j) => {
                                         const isLive = !!linkMap[item];
@@ -797,7 +873,9 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                 <p className="text-[14px] text-[#94a3b8]">Upcoming content...</p>
                             )}
                             <div className="flex items-center justify-between mt-8 pt-4 border-t border-gray-100 dark:border-[#223550]">
-                                <Link href={currentMenu.viewAll} className="text-[14px] font-bold text-[#1677f2] hover:underline">{currentMenu.viewAllLabel}</Link>
+                                <Link href={currentMenu.categories[activeCategory]?.viewAll ?? currentMenu.viewAll} className="text-[14px] font-bold text-[#1677f2] hover:underline">
+                                    {currentMenu.categories[activeCategory]?.viewAllLabel ?? currentMenu.viewAllLabel}
+                                </Link>
                                 <span className="text-[13px] text-[#94a3b8] dark:text-[#a9b6c9]">Need help? <Link href="/contact" className="text-[#1677f2] underline">Talk to an expert</Link></span>
                             </div>
                         </div>
@@ -859,21 +937,42 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     {menu.categories.map((cat, i) => (
                                         <div key={i}>
                                             <h4 className="text-[12px] font-black text-[#1677f2] uppercase tracking-wide mb-2">{cat.icon} {cat.label}</h4>
-                                            <div className="grid grid-cols-1 gap-1">
-                                                {cat.items.slice(0, 4).map((item, j) => {
-                                                    const isLive = !!linkMap[item];
-                                                    return (
-                                                        <Link
-                                                            key={j}
-                                                            href={linkMap[item] || "/get-started"}
-                                                            onClick={() => setMobileOpen(false)}
-                                                            className={`block rounded-lg px-3 py-2 text-[13px] ${isLive ? 'text-[#0a1628] dark:text-[#f7f9fc] bg-white dark:bg-[#12223a] border border-gray-100 dark:border-[#223550]' : 'text-[#64748b] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]'}`}
-                                                        >
-                                                            {item}
-                                                        </Link>
-                                                    );
-                                                })}
-                                            </div>
+                                            {cat.groups ? (
+                                                <div className="space-y-2">
+                                                    {cat.groups.map((group, gi) => (
+                                                        <details key={gi} className="rounded-lg border border-gray-100 dark:border-[#223550] bg-white dark:bg-[#12223a]">
+                                                            <summary className="cursor-pointer px-3 py-2 text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]" aria-expanded="false">
+                                                                {group.heading}
+                                                            </summary>
+                                                            <div className="px-3 pb-2 space-y-1">
+                                                                {group.items.map((item, j) => {
+                                                                    const isLive = !!linkMap[item];
+                                                                    return (
+                                                                        <Link key={j} href={linkMap[item] || "/get-started"}
+                                                                            onClick={() => setMobileOpen(false)}
+                                                                            className={`block py-1.5 text-[12.5px] ${isLive ? 'text-[#1677f2] font-medium' : 'text-[#64748b] dark:text-[#a9b6c9]'}`}>
+                                                                            › {item}
+                                                                        </Link>
+                                                                    );
+                                                                })}
+                                                            </div>
+                                                        </details>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                <div className="grid grid-cols-1 gap-1">
+                                                    {cat.items.slice(0, 4).map((item, j) => {
+                                                        const isLive = !!linkMap[item];
+                                                        return (
+                                                            <Link key={j} href={linkMap[item] || "/get-started"}
+                                                                onClick={() => setMobileOpen(false)}
+                                                                className={`block rounded-lg px-3 py-2 text-[13px] ${isLive ? 'text-[#0a1628] dark:text-[#f7f9fc] bg-white dark:bg-[#12223a] border border-gray-100 dark:border-[#223550]' : 'text-[#64748b] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]'}`}>
+                                                                {item}
+                                                            </Link>
+                                                        );
+                                                    })}
+                                                </div>
+                                            )}
                                         </div>
                                     ))}
                                 </div>

@@ -60,6 +60,8 @@
 | Blog word paste | ✅ Complete | 100% | Auto-detected, cleaned on paste |
 | Blog Word .docx import | ✅ Complete | 100% | Mammoth, Cloudinary, media record |
 | Word image import | ✅ Complete | 100% | Upload to Cloudinary, record in media, retry, idempotent |
+| Blog cover image management | ✅ Complete | 100% | Existing `featuredImage` cover supports upload, Media Library selection, alt, caption and dimensions |
+| Blog inline image controls | ✅ Complete | 100% | TipTap article-flow image node with size, alignment, custom width, caption, alt, link, replace and delete |
 | Sticky toolbar | ✅ Complete | 100% | Sticky below ActionBar |
 | Alt text inline editor | ✅ Complete | 100% | Click image → edit alt → save |
 | Alt text validation (client) | ✅ Complete | 100% | Always-on, scans all images including existing blogs |

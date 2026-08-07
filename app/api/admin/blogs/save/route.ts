@@ -189,7 +189,7 @@ export async function POST(req: NextRequest) {
         id: 'author_custom',
         firstName,
         lastName,
-        email: 'support@estabizz.com',
+        email: 'info@estabizz.com',
         designation: 'Contributor, Estabizz Fintech',
         role: 'admin' as const,
         bio: '',

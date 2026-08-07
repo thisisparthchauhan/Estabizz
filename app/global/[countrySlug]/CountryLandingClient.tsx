@@ -642,13 +642,13 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
         } else {
           showResult({
             ok: false,
-            msg: "Our enquiry form is temporarily unavailable. Please email support@estabizz.com or call +91 98256 00907.",
+            msg: "Our enquiry form is temporarily unavailable. Please email info@estabizz.com or call +91 98256 00907.",
           });
         }
       } else if (!json.ok) {
         showResult({
           ok: false,
-          msg: json.error || "Something went wrong. Please email support@estabizz.com.",
+          msg: json.error || "Something went wrong. Please email info@estabizz.com.",
         });
       } else {
         await sendFormspreeNotification(formspreePayload);
@@ -673,7 +673,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
       } else {
         showResult({
           ok: false,
-          msg: "We could not send your enquiry because of a connection issue. Please try again or email support@estabizz.com.",
+          msg: "We could not send your enquiry because of a connection issue. Please try again or email info@estabizz.com.",
         });
       }
     } finally {

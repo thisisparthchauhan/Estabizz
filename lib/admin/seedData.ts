@@ -44,14 +44,28 @@ export const seedAdminUsers: Omit<AdminUser, 'passwordHash'>[] = [
     updatedAt: now,
   },
 
-  // ── Secondary admin ────────────────────────────────────────────────────────
+  // ── Secondary super-admin ──────────────────────────────────────────────────
   {
     id: 'admin_002',
     fullName: 'Estabizz Info Admin',
     email: 'info@estabizz.com',     // normalised lowercase
-    role: 'admin',
+    role: 'super_admin',
     status: 'active',
-    permissions: ROLE_DEFAULT_PERMISSIONS['admin'],
+    permissions: ROLE_DEFAULT_PERMISSIONS['super_admin'],
+    emailVerified: true,
+    lastLoginAt: undefined,
+    createdAt: now,
+    updatedAt: now,
+  },
+
+  // ── Universe TC super-admin ────────────────────────────────────────────────
+  {
+    id: 'admin_003',
+    fullName: 'Universe TC Admin',
+    email: 'universetcenter@gmail.com',
+    role: 'super_admin',
+    status: 'active',
+    permissions: ROLE_DEFAULT_PERMISSIONS['super_admin'],
     emailVerified: true,
     lastLoginAt: undefined,
     createdAt: now,

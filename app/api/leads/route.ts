@@ -141,7 +141,7 @@ async function notifyNewLead(lead: LeadPayload): Promise<void> {
   const key = process.env.RESEND_API_KEY;
   if (!key) return;
 
-  const to   = process.env.LEAD_NOTIFY_EMAIL  || 'support@estabizz.com';
+  const to   = process.env.LEAD_NOTIFY_EMAIL  || 'info@estabizz.com';
   const from = process.env.LEAD_FROM_EMAIL    || 'Estabizz Leads <onboarding@resend.dev>';
 
   const rows = (
@@ -372,7 +372,7 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error('[leads] failed to save lead:', err);
     return NextResponse.json(
-      { ok: false, error: 'We could not save your enquiry. Please call +91 98256 00907 or email support@estabizz.com.' },
+      { ok: false, error: 'We could not save your enquiry. Please call +91 98256 00907 or email info@estabizz.com.' },
       { status: 500, headers: { 'Cache-Control': 'no-store' } }
     );
   }

@@ -684,7 +684,7 @@ export default function ContactClient() {
                                     </div>
                                     <div>
                                         <p className="text-xs text-gray-400 font-medium">Email</p>
-                                        <a href="mailto:support@estabizz.com" className="text-sm font-semibold text-[#0a1628] hover:text-[#1677f2]">support@estabizz.com</a>
+                                        <a href="mailto:info@estabizz.com" className="text-sm font-semibold text-[#0a1628] hover:text-[#1677f2]">info@estabizz.com</a>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">

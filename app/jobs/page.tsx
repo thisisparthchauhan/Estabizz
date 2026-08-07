@@ -26,7 +26,7 @@ export default function JobsPage() {
                 </p>
                 <div className="mt-8 flex flex-wrap justify-center gap-3">
                     <a
-                        href="mailto:support@estabizz.com?subject=Career%20Enquiry%20-%20Estabizz"
+                        href="mailto:info@estabizz.com?subject=Career%20Enquiry%20-%20Estabizz"
                         className="inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-6 py-3 text-[14px] font-black text-white transition-all hover:bg-[#1677f2]"
                     >
                         Send Your CV

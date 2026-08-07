@@ -239,6 +239,24 @@ const linkMap: Record<string, string> = {
     "Zero Coupon Zero Principal Instruments": "/sebi/social-stock-exchange-license-india",
     "ZCZP Instruments": "/sebi/social-stock-exchange-license-india",
     "Underwriter Registration": "/sebi/underwriter-registration",
+    // SEBI – additional pages
+    "AMFI Registration": "/sebi/amfi-registration",
+    "REIT Registration": "/sebi/reit-registration",
+    "Credit Rating Agency": "/sebi/credit-rating-agency",
+    "Depository Participant": "/sebi/depository-participant-sebi-registration",
+    "RTA Registration": "/sebi/rta-registration-in-india",
+    "Collective Investment Schemes": "/sebi/collective-investment-schemes",
+    // RBI – additional pages
+    "LendTech Services": "/rbi/lendtech-services",
+    // IRDAI – additional pages
+    "Reinsurance Broker": "/irdai/reinsurance-broker-registration-in-india",
+    "Composite Insurance Broker": "/irdai/composite-insurance-broker-registration-in-india",
+    "Insurance Marketing Firm": "/irdai/insurance-marketing-firm-license",
+    "IRDAI Regulatory Sandbox": "/irdai/irdai-regulatory-sandbox",
+    // IFSCA – additional pages
+    "TechFin Entity IFSC": "/ifsca/techfin",
+    // FEMA
+    "FEMA Registration": "/fema/fema-registration",
 };
 
 const staticSearchLinks = [
@@ -265,13 +283,14 @@ const staticSearchLinks = [
 const menus: Record<string, MegaMenu> = {
     Regulatory: {
         categories: [
-            { label: "RBI", icon: "🏦", items: ["NBFC Registration", "Payment Aggregator", "Prepaid Instrument", "NBFC Account Aggregator", "Asset Reconstruction Company", "AD Category II"] },
-            { label: "SEBI", icon: "📈", items: ["Stock Broker Licence", "AIF Registration", "Portfolio Manager", "Investment Adviser", "Research Analyst", "Social Stock Exchange"] },
-            { label: "IRDAI", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA Licence", "Micro Insurance"] },
-            { label: "IFSCA", icon: "🌐", items: ["Finance Company GIFT IFSC", "PSP License IFSCA", "ITFS Platform IFSC", "BATF Services IFSC", "IFSCA Aircraft Leasing", "FinTech Entity IFSC"] },
-            { label: "FIU-IND", icon: "🔍", items: ["FIU-IND Registration", "PMLA Compliance Advisory", "AML Policy Drafting", "CKYC Registration & Reporting"] },
+            { label: "RBI", icon: "🏦", items: ["NBFC Registration", "Payment Aggregator", "Prepaid Instrument", "NBFC Account Aggregator", "Asset Reconstruction Company", "AD Category II", "LendTech Services", "NBFC SRO Registration", "NBFC Business Plan"] },
+            { label: "SEBI", icon: "📈", items: ["Stock Broker Licence", "AIF Registration", "Portfolio Manager", "Investment Adviser", "Research Analyst", "Social Stock Exchange", "Mutual Fund Registration", "AMFI Registration", "REIT Registration", "Credit Rating Agency", "Depository Participant", "RTA Registration", "Underwriter Registration", "Collective Investment Schemes"] },
+            { label: "IRDAI", icon: "🛡️", items: ["Insurance Broker", "Reinsurance Broker", "Corporate Agent", "Composite Insurance Broker", "Web Aggregator", "Insurance Marketing Firm", "Insurance Surveyor", "TPA Licence", "IRDAI Regulatory Sandbox"] },
+            { label: "IFSCA", icon: "🌐", items: ["Finance Company GIFT IFSC", "PSP License IFSCA", "ITFS Platform IFSC", "BATF Services IFSC", "IFSCA Aircraft Leasing", "FinTech Entity IFSC", "TechFin Entity IFSC", "IFSCA Factoring License"] },
+            { label: "FEMA", icon: "📋", items: ["FEMA Compliance", "FEMA Registration", "DGFT IE Code"] },
+            { label: "FIU-IND & AML", icon: "🔍", items: ["FIU-IND Registration", "PMLA Compliance Advisory", "AML Policy Drafting", "AML Risk Assessment", "CKYC Registration & Reporting"] },
             { label: "MCA / ROC", icon: "🏛️", items: ["Company Incorporation", "MCA / ROC Compliance", "Annual ROC Compliance", "Corporate Governance"] },
-            { label: "Government Licences", icon: "⚖️", items: ["FSSAI Licence", "APEDA Registration", "AYUSH Licence", "Factory Licence", "Drug Licence", "BIS Certification"] },
+            { label: "Government Licences", icon: "⚖️", items: ["FSSAI Licence", "APEDA Registration", "AYUSH Licence", "Factory Licence", "Drug Licence", "BIS Certification", "PFRDA Registration"] },
         ],
         viewAll: "/regulatory", viewAllLabel: "View All Regulatory →"
     },
@@ -331,7 +350,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
     // Editable navbar content (quick links + CTA) from the CMS, with fallback.
     const nav: NavbarContent = { ...NAVBAR_DEFAULTS, ...content };
     const baseLinks = nav.quickLinks?.length ? nav.quickLinks : NAVBAR_DEFAULTS.quickLinks;
-    // Always inject Jobs after Insights, regardless of CMS state
+    // Always inject Jobs after Blogs, regardless of CMS state
     const quickLinks = (() => {
         if (baseLinks.some(l => l.href === '/jobs')) return baseLinks;
         const idx = baseLinks.findIndex(l => l.href === '/blogs');

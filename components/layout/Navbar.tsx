@@ -319,9 +319,7 @@ const menus: Record<string, MegaMenu> = {
               groups: [
                 { heading: "Company & Entity Registration", items: ["Company Registration in India", "Public Limited Company", "Indian Subsidiary", "One Person Company (OPC)", "LLP Registration", "Nidhi Company", "NGO Registration", "Company Incorporation"] },
                 { heading: "Company Changes & Capital", items: ["Change Company Name", "Increase Authorised Capital", "Registered Office Change", "OPC to Pvt Ltd Conversion", "MCA / ROC Compliance", "Annual ROC Compliance"] },
-                { heading: "Directors & Governance", items: ["Appointment of Directors", "Removal of Director", "Directors DIN e-KYC", "Corporate Governance"] },
-                { heading: "MOA Amendments", items: ["MOA – Private Ltd", "MOA – Public Ltd", "MOA – Section 8"] },
-                { heading: "Winding Up & Closure", items: ["Private Ltd Winding Up", "LLP Winding Up & Closure"] },
+                { heading: "Event Based Compliance", items: ["Appointment of Directors", "Removal of Director", "Directors DIN e-KYC", "Corporate Governance", "MOA – Private Ltd", "MOA – Public Ltd", "MOA – Section 8", "Private Ltd Winding Up", "LLP Winding Up & Closure"] },
               ]},
             { label: "Government Licences", icon: "⚖️", items: ["FSSAI Licence", "APEDA Registration", "AYUSH Licence", "Factory Licence", "Drug Licence", "BIS Certification", "PFRDA Registration"] },
         ],

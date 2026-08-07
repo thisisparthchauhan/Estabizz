@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FIU_IND_SERVICES } from "@/lib/fiu-ind-aml";
 
 export const metadata: Metadata = {
   title: "FIU-IND Registration & AML Compliance Services | Estabizz Fintech",
@@ -8,39 +9,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/fiu-ind-aml" },
   robots: { index: true, follow: true },
 };
-
-const services = [
-  {
-    title: "FIU-IND Registration",
-    description:
-      "End-to-end support for registration with India's Financial Intelligence Unit under the Prevention of Money Laundering Act (PMLA), including documentation, filing and regulatory liaison.",
-    tag: "Registration",
-  },
-  {
-    title: "PMLA Compliance Advisory",
-    description:
-      "Comprehensive PMLA compliance framework design — KYC/AML policies, customer due diligence procedures, STR/CTR reporting and Board-level compliance governance.",
-    tag: "Compliance",
-  },
-  {
-    title: "AML Policy Drafting",
-    description:
-      "Drafting and review of AML/CFT policies tailored to your business model — NBFCs, payment aggregators, insurance entities, fintechs and capital market intermediaries.",
-    tag: "Policy",
-  },
-  {
-    title: "AML Risk Assessment",
-    description:
-      "Institutional AML risk assessments covering customer risk profiling, product/service risk, geographic risk and transactional monitoring framework design.",
-    tag: "Risk",
-  },
-  {
-    title: "CKYC Registration & Reporting",
-    description:
-      "Assistance with Central KYC Registry (CKYC) enrolment, data submission, record updates and ongoing reporting obligations for regulated entities.",
-    tag: "KYC",
-  },
-];
 
 export default function FiuIndAmlPage() {
   return (
@@ -86,29 +54,28 @@ export default function FiuIndAmlPage() {
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
         <h2 className="mb-8 text-[22px] font-black text-[#0a1628]">Our FIU-IND & AML Services</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((svc) => (
-            <div
-              key={svc.title}
-              className="flex flex-col justify-between rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)]"
+          {FIU_IND_SERVICES.map((svc) => (
+            <Link
+              key={svc.slug}
+              href={`/fiu-ind-aml/${svc.slug}`}
+              className="group flex flex-col justify-between rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-all hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_16px_44px_rgba(0,80,140,0.12)]"
             >
               <div>
                 <span className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-3 py-1 text-[10.5px] font-black uppercase tracking-wider text-[#0077B6]">
-                  {svc.tag}
+                  {svc.category}
                 </span>
-                <h3 className="mt-4 text-[17px] font-black leading-snug text-[#0a1628]">
+                <h3 className="mt-4 text-[17px] font-black leading-snug text-[#0a1628] group-hover:text-[#1677f2] transition-colors">
                   {svc.title}
                 </h3>
-                <p className="mt-2 text-[13.5px] leading-[1.7] text-[#64748b]">
+                <p className="mt-2 text-[13.5px] leading-[1.7] text-[#64748b] line-clamp-3">
                   {svc.description}
                 </p>
               </div>
-              <Link
-                href="/contact"
-                className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-black text-[#1677f2] hover:text-[#0077B6] transition-colors"
-              >
-                Enquire now →
-              </Link>
-            </div>
+              <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-black text-[#1677f2]">
+                Learn more
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </span>
+            </Link>
           ))}
         </div>
       </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GOV_LIC_SERVICES } from "@/lib/gov-lic";
 
 export const metadata: Metadata = {
   title: "Government Licences & Regulatory Registrations | Estabizz Fintech",
@@ -8,51 +9,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/gov-lic" },
   robots: { index: true, follow: true },
 };
-
-const services = [
-  {
-    title: "FSSAI Licence",
-    description:
-      "Food Safety and Standards Authority of India (FSSAI) registration and licensing for food manufacturers, traders, restaurants and importers — Central, State or Basic licence as applicable.",
-    tag: "Food Safety",
-  },
-  {
-    title: "APEDA Registration",
-    description:
-      "Agricultural & Processed Food Products Export Development Authority (APEDA) registration for exporters of scheduled agricultural and processed food products to international markets.",
-    tag: "Exports",
-  },
-  {
-    title: "AYUSH Licence",
-    description:
-      "Licensing and regulatory compliance support for manufacturers and marketers of Ayurvedic, Unani, Siddha, and Homeopathic products under the Drugs & Cosmetics Act.",
-    tag: "AYUSH",
-  },
-  {
-    title: "Factory Licence",
-    description:
-      "Assistance with factory licence applications, plan approvals and renewals under the Factories Act, 1948, across all Indian states — including CLRA and BOCW compliances.",
-    tag: "Labour",
-  },
-  {
-    title: "Drug Licence",
-    description:
-      "End-to-end support for retail, wholesale and manufacturing drug licences under Schedule M and G, including site inspection preparation and state authority liaison.",
-    tag: "Pharma",
-  },
-  {
-    title: "BIS Certification",
-    description:
-      "Bureau of Indian Standards (BIS) product certification (ISI Mark), Hallmarking, and CRS (Compulsory Registration Scheme) filings for electronic and other notified products.",
-    tag: "Standards",
-  },
-  {
-    title: "PFRDA Registration",
-    description:
-      "Registration and ongoing compliance support for intermediaries regulated by the Pension Fund Regulatory & Development Authority — Points of Presence, pension fund managers and aggregators.",
-    tag: "Pension",
-  },
-];
 
 export default function GovLicPage() {
   return (
@@ -98,29 +54,28 @@ export default function GovLicPage() {
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
         <h2 className="mb-8 text-[22px] font-black text-[#0a1628]">Our Government Licensing Services</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((svc) => (
-            <div
-              key={svc.title}
-              className="flex flex-col justify-between rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)]"
+          {GOV_LIC_SERVICES.map((svc) => (
+            <Link
+              key={svc.slug}
+              href={`/gov-lic/${svc.slug}`}
+              className="group flex flex-col justify-between rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-all hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_16px_44px_rgba(0,80,140,0.12)]"
             >
               <div>
                 <span className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-3 py-1 text-[10.5px] font-black uppercase tracking-wider text-[#0077B6]">
-                  {svc.tag}
+                  {svc.category}
                 </span>
-                <h3 className="mt-4 text-[17px] font-black leading-snug text-[#0a1628]">
+                <h3 className="mt-4 text-[17px] font-black leading-snug text-[#0a1628] group-hover:text-[#1677f2] transition-colors">
                   {svc.title}
                 </h3>
-                <p className="mt-2 text-[13.5px] leading-[1.7] text-[#64748b]">
+                <p className="mt-2 text-[13.5px] leading-[1.7] text-[#64748b] line-clamp-3">
                   {svc.description}
                 </p>
               </div>
-              <Link
-                href="/contact"
-                className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-black text-[#1677f2] hover:text-[#0077B6] transition-colors"
-              >
-                Enquire now →
-              </Link>
-            </div>
+              <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-black text-[#1677f2]">
+                Learn more
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </span>
+            </Link>
           ))}
         </div>
       </div>

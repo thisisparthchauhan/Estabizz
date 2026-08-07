@@ -19,7 +19,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import jwt from "jsonwebtoken";
 import type { Metadata } from "next";
-import { ADMIN_EMAIL_ALLOWLIST } from "@/lib/admin/seedData";
+import type { AdminRole } from "@/lib/admin/types";
 import AdminShell from "./AdminShell";
 
 export const metadata: Metadata = {
@@ -29,7 +29,12 @@ export const metadata: Metadata = {
 // Admin pages are user-specific and must never be cached/prerendered.
 export const dynamic = "force-dynamic";
 
-async function getVerifiedAdminEmail(): Promise<string | null> {
+interface AdminInfo {
+  email: string;
+  role: AdminRole;
+}
+
+async function getVerifiedAdmin(): Promise<AdminInfo | null> {
   const token = (await cookies()).get("auth_token")?.value;
   if (!token) return null;
 
@@ -46,18 +51,21 @@ async function getVerifiedAdminEmail(): Promise<string | null> {
 
   if (!email) return null;
 
-  // Fast path: static allowlist covers seed / legacy admin accounts.
-  if (ADMIN_EMAIL_ALLOWLIST.has(email)) return email;
+  // Fast path: seed users (covers allowlist accounts + their roles).
+  const { seedAdminUsers, ADMIN_EMAIL_ALLOWLIST } = await import("@/lib/admin/seedData");
+  const seedUser = seedAdminUsers.find((u) => u.email === email && u.status === "active");
+  if (seedUser) return { email, role: seedUser.role };
+
+  // Allowlist but no seed record → treat as super_admin.
+  if (ADMIN_EMAIL_ALLOWLIST.has(email)) return { email, role: "super_admin" };
 
   // DB fallback: accept any active admin_users record created via the panel.
-  // This mirrors the requireAdmin API guard so page access and API access
-  // stay in sync for panel-created admin users.
   try {
     const { connectDB } = await import("@/lib/db");
     const AdminUserModel = (await import("@/lib/models/AdminUser")).default;
     await connectDB();
-    const doc = await AdminUserModel.findOne({ email, status: "active" }).lean();
-    if (doc) return email;
+    const doc = await AdminUserModel.findOne({ email, status: "active" }).lean() as { role?: AdminRole } | null;
+    if (doc) return { email, role: doc.role ?? "admin_viewer" };
   } catch {
     // DB unavailable — deny rather than fall through
   }
@@ -70,12 +78,12 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const email = await getVerifiedAdminEmail();
+  const admin = await getVerifiedAdmin();
 
   // Not a verified admin → bounce to login.
-  if (!email) {
+  if (!admin) {
     redirect("/login?redirect=/admin");
   }
 
-  return <AdminShell adminEmail={email}>{children}</AdminShell>;
+  return <AdminShell adminEmail={admin.email} adminRole={admin.role}>{children}</AdminShell>;
 }

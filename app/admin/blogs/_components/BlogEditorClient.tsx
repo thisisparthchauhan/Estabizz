@@ -6,6 +6,7 @@ import React, {
   useRef,
   type ChangeEvent,
 } from "react";
+import { useAdminRole } from "@/app/admin/AdminContext";
 import Link from "next/link";
 import type { Blog, BlogCategory, BlogStatus } from "@/lib/blog/types";
 import { EstabizzSelect } from "@/components/ui/EstabizzSelect";
@@ -59,6 +60,12 @@ const STATUS_OPTIONS: { value: BlogStatus; label: string }[] = [
   { value: "published",      label: "Published" },
   { value: "rejected",       label: "Rejected" },
   { value: "archived",       label: "Archived" },
+];
+
+const WRITER_STATUS_OPTIONS: { value: BlogStatus; label: string }[] = [
+  { value: "draft",      label: "Draft" },
+  { value: "published",  label: "Published" },
+  { value: "rejected",   label: "Rejected" },
 ];
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -419,6 +426,9 @@ function ActionBar({ title, isEditing, saving, onDraft, onPublish, onUpdate }: {
 
 export default function BlogEditorClient({ blog, categories }: Props) {
   const cats = categories.length > 0 ? categories : blogCategories;
+  const adminRole = useAdminRole();
+  const isWriter = adminRole === "content_writer";
+  const statusOptions = isWriter ? WRITER_STATUS_OPTIONS : STATUS_OPTIONS;
 
   const isEditing = blog != null;
   const [form, setForm] = useState<BlogFormData>(() => buildInitial(blog));
@@ -636,7 +646,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
           {/* Status + Category row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <Field label="Status">
-              <EstabizzSelect variant="admin" value={form.status} onValueChange={(v) => set("status", v as BlogStatus)} options={STATUS_OPTIONS.map((s) => ({ value: s.value, label: s.label }))} />
+              <EstabizzSelect variant="admin" value={form.status} onValueChange={(v) => set("status", v as BlogStatus)} options={statusOptions.map((s) => ({ value: s.value, label: s.label }))} />
             </Field>
             <div>
               <Field label="Category" required error={errors.categoryId}>

@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import type { AdminRole } from "@/lib/admin/types";
+import { AdminRoleContext } from "./AdminContext";
 
 // ─── SVG Icons ────────────────────────────────────────────────────────────────
 
@@ -285,18 +287,35 @@ function SidebarLink({
   );
 }
 
+// ─── Role-based nav visibility ────────────────────────────────────────────────
+
+const WRITER_NAV_HREFS = new Set([
+  "/admin/blogs",
+  "/admin/blogs/new",
+  "/admin/blogs/pending",
+  "/admin/categories",
+  "/admin/media-library",
+]);
+
 // ─── Main layout ─────────────────────────────────────────────────────────────
 
 export default function AdminShell({
   children,
   adminEmail,
+  adminRole,
 }: {
   children: React.ReactNode;
   adminEmail?: string;
+  adminRole?: AdminRole;
 }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [pendingCount, setPendingCount] = useState(0);
+
+  const isWriter = adminRole === "content_writer";
+  const visibleNavItems = isWriter
+    ? NAV_ITEMS.filter((item) => WRITER_NAV_HREFS.has(item.href))
+    : NAV_ITEMS;
 
   // Fetch pending count once on mount
   useEffect(() => {
@@ -321,6 +340,7 @@ export default function AdminShell({
   const breadcrumbs = getBreadcrumbs(pathname);
 
   return (
+    <AdminRoleContext.Provider value={adminRole ?? null}>
     <div className="fixed inset-0 z-[2000] flex overflow-hidden font-sans">
 
       {/* ── Sidebar ─────────────────────────────────────────────────────────── */}
@@ -353,7 +373,7 @@ export default function AdminShell({
         {/* Nav items */}
         <nav className="flex-1 overflow-y-auto py-3 [&::-webkit-scrollbar]:hidden">
           <div className="space-y-0.5 px-2">
-            {NAV_ITEMS.map((item) => (
+            {visibleNavItems.map((item) => (
               <SidebarLink
                 key={item.href}
                 item={item}
@@ -447,5 +467,6 @@ export default function AdminShell({
         </main>
       </div>
     </div>
+    </AdminRoleContext.Provider>
   );
 }

@@ -22,6 +22,17 @@ const nextConfig = {
                 destination: 'https://www.estabizz.com/:path*',
                 permanent: true,
             },
+            // Legacy /19-5 → canonical /mca-roc
+            {
+                source: '/19-5',
+                destination: '/mca-roc',
+                permanent: true,
+            },
+            {
+                source: '/19-5/:slug*',
+                destination: '/mca-roc/:slug*',
+                permanent: true,
+            },
         ];
     },
     // Aggressive cache busting for HTML so visitors always get the latest deploy.

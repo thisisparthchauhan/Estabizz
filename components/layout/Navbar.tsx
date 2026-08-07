@@ -196,27 +196,27 @@ const linkMap: Record<string, string> = {
     "Document Vault": "/login",
     "Policy Library": "/login",
     // Other regulators
-    "PFRDA Registration": "/services/enterprise-services",
+    "PFRDA Registration": "/gov-lic",
     "NHB Registration": "/services/enterprise-services",
     "CERSAI Registration": "/services/enterprise-services",
     "DGFT IE Code": "/fema/fema-registration",
-    "FIU-IND Registration": "/services/enterprise-services",
-    "PMLA Compliance Advisory": "/services/legal-due-diligence",
-    "AML Policy Drafting": "/services/enterprise-services",
-    "AML Risk Assessment": "/services/legal-due-diligence",
-    "CKYC Registration & Reporting": "/services/enterprise-services",
+    "FIU-IND Registration": "/fiu-ind-aml",
+    "PMLA Compliance Advisory": "/fiu-ind-aml",
+    "AML Policy Drafting": "/fiu-ind-aml",
+    "AML Risk Assessment": "/fiu-ind-aml",
+    "CKYC Registration & Reporting": "/fiu-ind-aml",
     "MCA / ROC Compliance": "/services/enterprise-services",
     "Company Incorporation": "/services/enterprise-services",
     "Annual ROC Compliance": "/services/enterprise-services",
     "Corporate Governance": "/services/enterprise-services",
     "Post-Registration Compliance": "/services",
     "Sectoral Licences": "/services",
-    "FSSAI Licence": "/services/enterprise-services",
-    "APEDA Registration": "/services/enterprise-services",
-    "AYUSH Licence": "/services/enterprise-services",
-    "Factory Licence": "/services/enterprise-services",
-    "Drug Licence": "/services/enterprise-services",
-    "BIS Certification": "/services/enterprise-services",
+    "FSSAI Licence": "/gov-lic",
+    "APEDA Registration": "/gov-lic",
+    "AYUSH Licence": "/gov-lic",
+    "Factory Licence": "/gov-lic",
+    "Drug Licence": "/gov-lic",
+    "BIS Certification": "/gov-lic",
     "Compliance Calendar": "/resources/compliance-calendar",
     "Regulatory Updates": "/resources/regulatory-updates",
     "Circular Tracker": "/resources/circular-explainers",
@@ -258,26 +258,30 @@ const linkMap: Record<string, string> = {
     "TechFin Entity IFSC": "/ifsca/techfin",
     // FEMA
     "FEMA Registration": "/fema/fema-registration",
-    // MCA / ROC — 19 corporate service pages (under /19-5/[slug])
-    "Company Registration in India": "/19-5/company-registration-in-india",
-    "Public Limited Company": "/19-5/public-limited-company-registration-in-india",
-    "Indian Subsidiary": "/19-5/indian-subsidiary-registration",
-    "One Person Company (OPC)": "/19-5/one-person-company-registration-india",
-    "LLP Registration": "/19-5/llp-registration-india",
-    "Nidhi Company": "/19-5/nidhi-company-registration",
-    "NGO Registration": "/19-5/ngo-registration-in-india",
-    "Change Company Name": "/19-5/change-company-name",
-    "Increase Authorised Capital": "/19-5/increase-authorised-capital",
-    "Registered Office Change": "/19-5/registered-office-change",
-    "OPC to Pvt Ltd Conversion": "/19-5/opc-to-private-limited-conversion",
-    "Appointment of Directors": "/19-5/appointment-of-directors",
-    "Removal of Director": "/19-5/removal-of-director",
-    "Directors DIN e-KYC": "/19-5/directors-din-ekyc-update",
-    "MOA – Private Ltd": "/19-5/moa-amendment-private-limited-company",
-    "MOA – Public Ltd": "/19-5/moa-amendment-public-limited-company",
-    "MOA – Section 8": "/19-5/moa-amendment-section-8-company",
-    "Private Ltd Winding Up": "/19-5/private-limited-company-winding-up",
-    "LLP Winding Up & Closure": "/19-5/llp-winding-up-closure",
+    // MCA / ROC — 19 corporate service pages (canonical: /mca-roc/[slug])
+    "Company Registration in India": "/mca-roc/company-registration-in-india",
+    "Public Limited Company": "/mca-roc/public-limited-company-registration-in-india",
+    "Indian Subsidiary": "/mca-roc/indian-subsidiary-registration",
+    "One Person Company (OPC)": "/mca-roc/one-person-company-registration-india",
+    "LLP Registration": "/mca-roc/llp-registration-india",
+    "Nidhi Company": "/mca-roc/nidhi-company-registration",
+    "NGO Registration": "/mca-roc/ngo-registration-in-india",
+    "Change Company Name": "/mca-roc/change-company-name",
+    "Increase Authorised Capital": "/mca-roc/increase-authorised-capital",
+    "Registered Office Change": "/mca-roc/registered-office-change",
+    "OPC to Pvt Ltd Conversion": "/mca-roc/opc-to-private-limited-conversion",
+    "Appointment of Directors": "/mca-roc/appointment-of-directors",
+    "Removal of Director": "/mca-roc/removal-of-director",
+    "Directors DIN e-KYC": "/mca-roc/directors-din-ekyc-update",
+    "MOA – Private Ltd": "/mca-roc/moa-amendment-private-limited-company",
+    "MOA – Public Ltd": "/mca-roc/moa-amendment-public-limited-company",
+    "MOA – Section 8": "/mca-roc/moa-amendment-section-8-company",
+    "Private Ltd Winding Up": "/mca-roc/private-limited-company-winding-up",
+    "LLP Winding Up & Closure": "/mca-roc/llp-winding-up-closure",
+    // FIU-IND & AML hub
+    "FIU-IND & AML Hub": "/fiu-ind-aml",
+    // Government Licences hub
+    "Gov Licences Hub": "/gov-lic",
 };
 
 const staticSearchLinks = [
@@ -311,7 +315,7 @@ const menus: Record<string, MegaMenu> = {
             { label: "FEMA", icon: "📋", items: ["FEMA Compliance", "FEMA Registration", "DGFT IE Code"] },
             { label: "FIU-IND & AML", icon: "🔍", items: ["FIU-IND Registration", "PMLA Compliance Advisory", "AML Policy Drafting", "AML Risk Assessment", "CKYC Registration & Reporting"] },
             { label: "MCA / ROC", icon: "🏛️", items: [],
-              viewAll: "/19-5", viewAllLabel: "View All MCA / ROC Services →",
+              viewAll: "/mca-roc", viewAllLabel: "View All MCA / ROC Services →",
               groups: [
                 { heading: "Company & Entity Registration", items: ["Company Registration in India", "Public Limited Company", "Indian Subsidiary", "One Person Company (OPC)", "LLP Registration", "Nidhi Company", "NGO Registration", "Company Incorporation"] },
                 { heading: "Company Changes & Capital", items: ["Change Company Name", "Increase Authorised Capital", "Registered Office Change", "OPC to Pvt Ltd Conversion", "MCA / ROC Compliance", "Annual ROC Compliance"] },
@@ -830,14 +834,17 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     {currentMenu.categories[activeCategory].groups!.map((group, gi) => (
                                         <div key={gi}>
                                             <h4 className="text-[10px] font-black uppercase tracking-[0.15em] text-[#64748b] dark:text-[#a9b6c9] mb-2 pb-1 border-b border-gray-100 dark:border-[#223550]">{group.heading}</h4>
-                                            <div className="grid grid-cols-3 gap-x-6 gap-y-1.5">
+                                            <div className="grid grid-cols-3 gap-x-8 gap-y-3">
                                                 {group.items.map((item, j) => {
                                                     const isLive = !!linkMap[item];
                                                     return (
                                                         <Link key={j} href={linkMap[item] || "#"}
-                                                            className={`flex items-center gap-1.5 text-[13px] transition-colors py-0.5 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}>
+                                                            className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}>
                                                             <span className={`${isLive ? 'text-[#1677f2]' : 'text-[#cbd5e1]'} text-[8px] shrink-0`}>›</span>
                                                             {item}
+                                                            {isLive && (
+                                                                <span className="ml-1 px-1.5 py-0.5 rounded-[4px] bg-[#10b981]/10 text-[#10b981] text-[9px] font-bold tracking-wider uppercase">Live</span>
+                                                            )}
                                                         </Link>
                                                     );
                                                 })}

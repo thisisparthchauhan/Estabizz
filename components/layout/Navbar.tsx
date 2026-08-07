@@ -14,7 +14,8 @@ interface AuthUser {
     isAdmin: boolean;
 }
 
-interface MenuCategory { label: string; icon: string; items: string[]; }
+interface MenuGroup { heading: string; items: string[]; }
+interface MenuCategory { label: string; icon: string; items: string[]; groups?: MenuGroup[]; viewAll?: string; viewAllLabel?: string; }
 interface MegaMenu { categories: MenuCategory[]; viewAll: string; viewAllLabel: string; }
 
 const linkMap: Record<string, string> = {
@@ -257,6 +258,26 @@ const linkMap: Record<string, string> = {
     "TechFin Entity IFSC": "/ifsca/techfin",
     // FEMA
     "FEMA Registration": "/fema/fema-registration",
+    // MCA / ROC — 19 corporate service pages (under /19-5/[slug])
+    "Company Registration in India": "/19-5/company-registration-in-india",
+    "Public Limited Company": "/19-5/public-limited-company-registration-in-india",
+    "Indian Subsidiary": "/19-5/indian-subsidiary-registration",
+    "One Person Company (OPC)": "/19-5/one-person-company-registration-india",
+    "LLP Registration": "/19-5/llp-registration-india",
+    "Nidhi Company": "/19-5/nidhi-company-registration",
+    "NGO Registration": "/19-5/ngo-registration-in-india",
+    "Change Company Name": "/19-5/change-company-name",
+    "Increase Authorised Capital": "/19-5/increase-authorised-capital",
+    "Registered Office Change": "/19-5/registered-office-change",
+    "OPC to Pvt Ltd Conversion": "/19-5/opc-to-private-limited-conversion",
+    "Appointment of Directors": "/19-5/appointment-of-directors",
+    "Removal of Director": "/19-5/removal-of-director",
+    "Directors DIN e-KYC": "/19-5/directors-din-ekyc-update",
+    "MOA – Private Ltd": "/19-5/moa-amendment-private-limited-company",
+    "MOA – Public Ltd": "/19-5/moa-amendment-public-limited-company",
+    "MOA – Section 8": "/19-5/moa-amendment-section-8-company",
+    "Private Ltd Winding Up": "/19-5/private-limited-company-winding-up",
+    "LLP Winding Up & Closure": "/19-5/llp-winding-up-closure",
 };
 
 const staticSearchLinks = [
@@ -289,7 +310,15 @@ const menus: Record<string, MegaMenu> = {
             { label: "IFSCA", icon: "🌐", items: ["Finance Company GIFT IFSC", "PSP License IFSCA", "ITFS Platform IFSC", "BATF Services IFSC", "IFSCA Aircraft Leasing", "FinTech Entity IFSC", "TechFin Entity IFSC", "IFSCA Factoring License"] },
             { label: "FEMA", icon: "📋", items: ["FEMA Compliance", "FEMA Registration", "DGFT IE Code"] },
             { label: "FIU-IND & AML", icon: "🔍", items: ["FIU-IND Registration", "PMLA Compliance Advisory", "AML Policy Drafting", "AML Risk Assessment", "CKYC Registration & Reporting"] },
-            { label: "MCA / ROC", icon: "🏛️", items: ["Company Incorporation", "MCA / ROC Compliance", "Annual ROC Compliance", "Corporate Governance"] },
+            { label: "MCA / ROC", icon: "🏛️", items: [],
+              viewAll: "/19-5", viewAllLabel: "View All MCA / ROC Services →",
+              groups: [
+                { heading: "Company & Entity Registration", items: ["Company Registration in India", "Public Limited Company", "Indian Subsidiary", "One Person Company (OPC)", "LLP Registration", "Nidhi Company", "NGO Registration", "Company Incorporation"] },
+                { heading: "Company Changes & Capital", items: ["Change Company Name", "Increase Authorised Capital", "Registered Office Change", "OPC to Pvt Ltd Conversion", "MCA / ROC Compliance", "Annual ROC Compliance"] },
+                { heading: "Directors & Governance", items: ["Appointment of Directors", "Removal of Director", "Directors DIN e-KYC", "Corporate Governance"] },
+                { heading: "MOA Amendments", items: ["MOA – Private Ltd", "MOA – Public Ltd", "MOA – Section 8"] },
+                { heading: "Winding Up & Closure", items: ["Private Ltd Winding Up", "LLP Winding Up & Closure"] },
+              ]},
             { label: "Government Licences", icon: "⚖️", items: ["FSSAI Licence", "APEDA Registration", "AYUSH Licence", "Factory Licence", "Drug Licence", "BIS Certification", "PFRDA Registration"] },
         ],
         viewAll: "/regulatory", viewAllLabel: "View All Regulatory →"
@@ -431,7 +460,10 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
             const groups = Object.entries(menus)
                 .flatMap(([menuName, menu]) =>
                     menu.categories
-                        .filter((category) => category.items.includes(label))
+                        .filter((category) =>
+                            category.items.includes(label) ||
+                            category.groups?.some((g) => g.items.includes(label))
+                        )
                         .map((category) => `${menuName} ${category.label}`)
                 );
             const key = `${label}-${href}`;
@@ -793,7 +825,27 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                         {/* Right Content */}
                         <div className="flex-1 bg-white dark:bg-[#0d1a2d] p-6">
                             <h3 className="text-[18px] font-bold text-[#0a1628] dark:text-[#f7f9fc] mb-5">{currentMenu.categories[activeCategory]?.label}</h3>
-                            {currentMenu.categories[activeCategory]?.items.length > 0 ? (
+                            {currentMenu.categories[activeCategory]?.groups ? (
+                                <div className="space-y-4 overflow-y-auto max-h-[420px] pr-1">
+                                    {currentMenu.categories[activeCategory].groups!.map((group, gi) => (
+                                        <div key={gi}>
+                                            <h4 className="text-[10px] font-black uppercase tracking-[0.15em] text-[#64748b] dark:text-[#a9b6c9] mb-2 pb-1 border-b border-gray-100 dark:border-[#223550]">{group.heading}</h4>
+                                            <div className="grid grid-cols-3 gap-x-6 gap-y-1.5">
+                                                {group.items.map((item, j) => {
+                                                    const isLive = !!linkMap[item];
+                                                    return (
+                                                        <Link key={j} href={linkMap[item] || "#"}
+                                                            className={`flex items-center gap-1.5 text-[13px] transition-colors py-0.5 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}>
+                                                            <span className={`${isLive ? 'text-[#1677f2]' : 'text-[#cbd5e1]'} text-[8px] shrink-0`}>›</span>
+                                                            {item}
+                                                        </Link>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : currentMenu.categories[activeCategory]?.items.length > 0 ? (
                                 <div className="grid grid-cols-3 gap-x-8 gap-y-3">
                                     {currentMenu.categories[activeCategory].items.map((item, j) => {
                                         const isLive = !!linkMap[item];
@@ -816,7 +868,9 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                 <p className="text-[14px] text-[#94a3b8]">Upcoming content...</p>
                             )}
                             <div className="flex items-center justify-between mt-8 pt-4 border-t border-gray-100 dark:border-[#223550]">
-                                <Link href={currentMenu.viewAll} className="text-[14px] font-bold text-[#1677f2] hover:underline">{currentMenu.viewAllLabel}</Link>
+                                <Link href={currentMenu.categories[activeCategory]?.viewAll ?? currentMenu.viewAll} className="text-[14px] font-bold text-[#1677f2] hover:underline">
+                                    {currentMenu.categories[activeCategory]?.viewAllLabel ?? currentMenu.viewAllLabel}
+                                </Link>
                                 <span className="text-[13px] text-[#94a3b8] dark:text-[#a9b6c9]">Need help? <Link href="/contact" className="text-[#1677f2] underline">Talk to an expert</Link></span>
                             </div>
                         </div>
@@ -878,21 +932,42 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     {menu.categories.map((cat, i) => (
                                         <div key={i}>
                                             <h4 className="text-[12px] font-black text-[#1677f2] uppercase tracking-wide mb-2">{cat.icon} {cat.label}</h4>
-                                            <div className="grid grid-cols-1 gap-1">
-                                                {cat.items.slice(0, 4).map((item, j) => {
-                                                    const isLive = !!linkMap[item];
-                                                    return (
-                                                        <Link
-                                                            key={j}
-                                                            href={linkMap[item] || "/get-started"}
-                                                            onClick={() => setMobileOpen(false)}
-                                                            className={`block rounded-lg px-3 py-2 text-[13px] ${isLive ? 'text-[#0a1628] dark:text-[#f7f9fc] bg-white dark:bg-[#12223a] border border-gray-100 dark:border-[#223550]' : 'text-[#64748b] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]'}`}
-                                                        >
-                                                            {item}
-                                                        </Link>
-                                                    );
-                                                })}
-                                            </div>
+                                            {cat.groups ? (
+                                                <div className="space-y-2">
+                                                    {cat.groups.map((group, gi) => (
+                                                        <details key={gi} className="rounded-lg border border-gray-100 dark:border-[#223550] bg-white dark:bg-[#12223a]">
+                                                            <summary className="cursor-pointer px-3 py-2 text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]" aria-expanded="false">
+                                                                {group.heading}
+                                                            </summary>
+                                                            <div className="px-3 pb-2 space-y-1">
+                                                                {group.items.map((item, j) => {
+                                                                    const isLive = !!linkMap[item];
+                                                                    return (
+                                                                        <Link key={j} href={linkMap[item] || "/get-started"}
+                                                                            onClick={() => setMobileOpen(false)}
+                                                                            className={`block py-1.5 text-[12.5px] ${isLive ? 'text-[#1677f2] font-medium' : 'text-[#64748b] dark:text-[#a9b6c9]'}`}>
+                                                                            › {item}
+                                                                        </Link>
+                                                                    );
+                                                                })}
+                                                            </div>
+                                                        </details>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                <div className="grid grid-cols-1 gap-1">
+                                                    {cat.items.slice(0, 4).map((item, j) => {
+                                                        const isLive = !!linkMap[item];
+                                                        return (
+                                                            <Link key={j} href={linkMap[item] || "/get-started"}
+                                                                onClick={() => setMobileOpen(false)}
+                                                                className={`block rounded-lg px-3 py-2 text-[13px] ${isLive ? 'text-[#0a1628] dark:text-[#f7f9fc] bg-white dark:bg-[#12223a] border border-gray-100 dark:border-[#223550]' : 'text-[#64748b] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]'}`}>
+                                                                {item}
+                                                            </Link>
+                                                        );
+                                                    })}
+                                                </div>
+                                            )}
                                         </div>
                                     ))}
                                 </div>

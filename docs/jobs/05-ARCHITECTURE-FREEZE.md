@@ -68,7 +68,7 @@ These 23 decisions are the authoritative resolution of the Codex "APPROVE WITH C
 
 ## C. V1 Physical ERD — Final Entity Set
 
-**38 V1 physical tables** (post-merge, post-defer, post-add):
+**45 V1 physical tables** (post-merge, post-defer, post-add):
 
 ```
 Identity (2)
@@ -245,6 +245,8 @@ Each directed edge is a row in `ApplicationStageTransition` with:
 - `requires_reason` — written reason mandatory
 - `requires_interview_record` — Interview row must exist before transition allowed
 - `is_terminal` — no further transitions from `to_stage`
+
+Initial application-stage assignment is performed when the `Application` is created by setting `Application.current_stage_id`. It is not represented as an `ApplicationStageTransition`; this table only represents movement from one existing stage to another, so `from_stage_id` is always required.
 
 Key constraints:
 - The `Placed` stage may only be reached from `Offer Accepted`

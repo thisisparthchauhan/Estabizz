@@ -929,12 +929,14 @@ Rejected → Withdrawn
 
 ### 10.3 Entity: ApplicationStageTransition (New — State Machine Config)
 
-Defines the allowed directed edges in the application stage state machine. Seeded at deployment; not user-editable in V1. Every permitted stage change must have a row here — transitions without a matching row are rejected by the API.
+Defines the allowed directed edges in the application stage state machine. Seeded at deployment; not user-editable in V1. Every permitted movement from one existing stage to another must have a row here — transitions without a matching row are rejected by the API.
+
+Initial application-stage assignment happens when the `Application` is created by setting `Application.current_stage_id`. It is not represented as an `ApplicationStageTransition` row, so no initial-stage transition row is required.
 
 | Column | Type | Constraints | Notes |
 |---|---|---|---|
 | `id` | UUID | PK | |
-| `from_stage_id` | UUID | FK → ApplicationStage, NOT NULL | NULL in from means "any initial stage" |
+| `from_stage_id` | UUID | FK → ApplicationStage, NOT NULL | Existing stage before the movement |
 | `to_stage_id` | UUID | FK → ApplicationStage, NOT NULL | |
 | `required_permission` | VARCHAR(100) | NOT NULL | e.g. `applications.change_stage` |
 | `requires_reason` | BOOLEAN | NOT NULL, default FALSE | Written reason mandatory |
@@ -1022,7 +1024,7 @@ Candidate's answers to job screening questions.
 
 ### 10.8 Entity: ApplicationStageHistory
 
-Immutable. One row per stage transition.
+Immutable. One row per initial stage assignment or later stage movement. Initial assignment may use `previous_stage_id = NULL`; configured transitions still require a non-null `ApplicationStageTransition.from_stage_id`.
 
 | Column | Type | Constraints | Notes |
 |---|---|---|---|

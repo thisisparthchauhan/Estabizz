@@ -1,0 +1,1571 @@
+// Estabizz Jobs Prisma schema foundation.
+// Source of truth: docs/jobs/05-ARCHITECTURE-FREEZE.md, with logical fields from
+// docs/jobs/03-DATABASE-ERD.md.
+//
+// Migration 001 has intentionally NOT been created. Review this schema against
+// the frozen ERD before generating or applying any database migration.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// -----------------------------------------------------------------------------
+// Enums
+// -----------------------------------------------------------------------------
+
+enum IdentityType {
+  candidate_user
+  admin_user
+  system
+}
+
+enum CandidateStatus {
+  active
+  passive
+  placed
+  on_notice
+  do_not_contact
+  blacklisted
+  archived
+}
+
+enum CandidateSource {
+  portal_registration
+  recruiter_sourced
+  referral
+  linkedin
+  job_board
+  career_fair
+  other
+}
+
+enum WorkPreference {
+  remote
+  hybrid
+  on_site
+  flexible
+}
+
+enum CandidateDedupStatus {
+  unique
+  suspected_duplicate
+  confirmed_duplicate
+  merged_into
+}
+
+enum CandidateContactType {
+  email
+  phone_mobile
+  phone_work
+  linkedin
+  github
+  portfolio
+  other
+}
+
+enum ConsentType {
+  data_processing
+  marketing_email
+  data_retention_extended
+  profile_sharing_with_clients
+  ai_processing
+}
+
+enum ConsentEvent {
+  granted
+  withdrawn
+}
+
+enum EmploymentType {
+  full_time
+  part_time
+  contract
+  consulting
+  internship
+}
+
+enum SkillProficiency {
+  beginner
+  intermediate
+  advanced
+  expert
+}
+
+enum DomainProficiency {
+  aware
+  working
+  practitioner
+  expert
+}
+
+enum ParseStatus {
+  pending
+  processing
+  completed
+  failed
+}
+
+enum DocumentType {
+  id_proof
+  certificate
+  offer_letter
+  reference_letter
+  other
+}
+
+enum TagType {
+  candidate
+  job
+  system
+}
+
+enum CandidateActivityType {
+  profile_created
+  resume_uploaded
+  application_submitted
+  stage_changed
+  note_added
+  email_sent
+  call_logged
+  interview_scheduled
+  offer_extended
+  placed
+  contacted
+}
+
+enum OrganizationSizeRange {
+  one_to_ten                  @map("1_10")
+  eleven_to_fifty             @map("11_50")
+  fifty_one_to_two_hundred    @map("51_200")
+  two_hundred_one_to_thousand @map("201_1000")
+  thousand_plus               @map("1000_plus")
+}
+
+enum OrganizationStatus {
+  active
+  inactive
+  do_not_approach
+}
+
+enum RelationshipType {
+  retained
+  contingency
+  exclusive
+  preferred_supplier
+}
+
+enum RelationshipStatus {
+  active
+  on_hold
+  closed
+}
+
+enum FeeType {
+  percentage_ctc
+  fixed_fee
+  retainer_plus_success
+  milestone
+}
+
+enum JobStatus {
+  draft
+  open
+  on_hold
+  closed
+  filled
+  cancelled
+}
+
+enum JobEmploymentType {
+  permanent
+  contract
+  consulting
+  fixed_term
+}
+
+enum SeniorityLevel {
+  junior
+  mid
+  senior
+  lead
+  director
+  vp
+  c_suite
+}
+
+enum RemotePolicy {
+  remote
+  hybrid
+  on_site
+}
+
+enum Priority {
+  low
+  normal
+  high
+  urgent
+}
+
+enum TaskPriority {
+  low
+  normal
+  high
+}
+
+enum JobQuestionType {
+  text
+  yes_no
+  multiple_choice
+  scale
+}
+
+enum JobAssignmentRole {
+  lead_recruiter
+  supporting_recruiter
+  coordinator
+}
+
+enum ApplicationSource {
+  candidate_portal
+  recruiter_assigned
+  referral
+  imported
+}
+
+enum RejectionReason {
+  not_suitable
+  candidate_withdrew
+  client_declined
+  role_cancelled
+  duplicate
+}
+
+enum InterviewType {
+  phone_screen
+  video_call
+  in_person
+  panel
+  technical
+  hr
+  final
+}
+
+enum InterviewStatus {
+  scheduled
+  completed
+  cancelled
+  no_show
+}
+
+enum InterviewFormat {
+  in_person
+  video
+  phone
+}
+
+enum InterviewParticipantType {
+  candidate
+  estabizz_recruiter
+  client_interviewer
+}
+
+enum InterviewOutcome {
+  advance
+  reject
+  hold
+  offer
+}
+
+enum FeedbackRecommendation {
+  advance
+  reject
+  consider_another_role
+}
+
+enum OfferStatus {
+  draft
+  extended
+  accepted
+  declined
+  rescinded
+  expired
+}
+
+enum PlacementStatus {
+  active
+  joined
+  resigned_in_guarantee
+  cancelled
+}
+
+enum PaymentStatus {
+  pending_invoice
+  invoice_sent
+  partially_paid
+  paid
+  disputed
+  written_off
+}
+
+enum JobsEntityType {
+  candidate
+  application
+  job
+  organization
+  interview
+}
+
+enum NoteVisibility {
+  private
+  team
+  all_staff
+}
+
+enum TaskType {
+  follow_up
+  call
+  email
+  document_request
+  reference_check
+  internal
+  other
+}
+
+enum TaskStatus {
+  open
+  completed
+  cancelled
+  snoozed
+}
+
+enum CommunicationType {
+  email
+  phone_call
+  video_call
+  in_person
+  sms
+  whatsapp
+}
+
+enum CommunicationDirection {
+  outbound
+  inbound
+}
+
+enum CommunicationEntityType {
+  candidate
+  organization
+  client_contact
+}
+
+enum AIRunType {
+  resume_parse
+  candidate_embed
+  job_embed
+  match_score
+  search
+}
+
+enum AIProcessingStatus {
+  pending
+  running
+  completed
+  failed
+}
+
+enum EmbeddingEntityType {
+  candidate
+  job
+}
+
+enum AuditActorType {
+  candidate_user
+  admin_user
+  system
+  ai_service
+}
+
+// -----------------------------------------------------------------------------
+// Group 1 - Identity
+// -----------------------------------------------------------------------------
+
+model IdentityReference {
+  id                  String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  external_id         String       @db.VarChar(24)
+  external_collection String       @db.VarChar(50)
+  identity_type       IdentityType
+  display_name_cache  String?      @db.VarChar(200)
+  email_cache         String?      @db.VarChar(255)
+  is_active_cache     Boolean      @default(true)
+  last_synced_at      DateTime?    @db.Timestamptz(6)
+  created_at          DateTime     @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime     @updatedAt @db.Timestamptz(6)
+
+  staff_capability                  StaffJobsCapability?      @relation("StaffCapabilityIdentity")
+  granted_staff_capabilities        StaffJobsCapability[]     @relation("StaffCapabilityGrantedBy")
+  candidate_identity                Candidate?                @relation("CandidateIdentity")
+  candidates_primary_recruiter      Candidate[]               @relation("CandidatePrimaryRecruiter")
+  candidates_assigned_recruiter     Candidate[]               @relation("CandidateAssignedRecruiter")
+  candidates_created                Candidate[]               @relation("CandidateCreatedBy")
+  candidates_last_contacted         Candidate[]               @relation("CandidateLastContactedBy")
+  candidates_active_process_owner   Candidate[]               @relation("CandidateActiveProcessOwner")
+  candidates_placement_credit       Candidate[]               @relation("CandidatePlacementCredit")
+  candidates_deleted                Candidate[]               @relation("CandidateDeletedBy")
+  resume_versions_uploaded          ResumeVersion[]           @relation("ResumeVersionUploadedBy")
+  candidate_documents_uploaded      CandidateDocument[]       @relation("CandidateDocumentUploadedBy")
+  tags_created                      Tag[]                     @relation("TagCreatedBy")
+  candidate_tags_tagged             CandidateTag[]            @relation("CandidateTagTaggedBy")
+  candidate_activities_actor        CandidateActivity[]       @relation("CandidateActivityActor")
+  organizations_account_owner       Organization[]            @relation("OrganizationAccountOwner")
+  organizations_account_manager     Organization[]            @relation("OrganizationAccountManager")
+  organizations_created             Organization[]            @relation("OrganizationCreatedBy")
+  client_contacts_created           ClientContact[]           @relation("ClientContactCreatedBy")
+  commercial_terms_created          CommercialTerms[]         @relation("CommercialTermsCreatedBy")
+  jobs_created                      Job[]                     @relation("JobCreatedBy")
+  jobs_approved                     Job[]                     @relation("JobApprovedBy")
+  job_assignments_recruiter         JobAssignment[]           @relation("JobAssignmentRecruiter")
+  job_assignments_assigned_by       JobAssignment[]           @relation("JobAssignmentAssignedBy")
+  job_status_histories_changed      JobStatusHistory[]        @relation("JobStatusChangedBy")
+  applications_assigned_recruiter   Application[]             @relation("ApplicationAssignedRecruiter")
+  applications_created              Application[]             @relation("ApplicationCreatedBy")
+  applications_rejected             Application[]             @relation("ApplicationRejectedBy")
+  application_stage_histories       ApplicationStageHistory[] @relation("ApplicationStageChangedBy")
+  interviews_created                Interview[]               @relation("InterviewCreatedBy")
+  interviews_feedback_submitted     Interview[]               @relation("InterviewFeedbackSubmittedBy")
+  interview_participants_identity   InterviewParticipant[]    @relation("InterviewParticipantIdentity")
+  offers_created                    Offer[]                   @relation("OfferCreatedBy")
+  placements_credit                 Placement[]               @relation("PlacementCredit")
+  placements_secondary_credit       Placement[]               @relation("PlacementSecondaryCredit")
+  placements_fee_approved           Placement[]               @relation("PlacementFeeApprovedBy")
+  placements_created                Placement[]               @relation("PlacementCreatedBy")
+  recruitment_notes_authored        RecruitmentNote[]         @relation("RecruitmentNoteAuthor")
+  tasks_assigned                    Task[]                    @relation("TaskAssignedTo")
+  tasks_created                     Task[]                    @relation("TaskCreatedBy")
+  tasks_completed                   Task[]                    @relation("TaskCompletedBy")
+  communications_logged             Communication[]           @relation("CommunicationLoggedBy")
+  ai_runs_triggered                 AIProcessingRun[]         @relation("AIProcessingRunTriggeredBy")
+  ai_extractions_applied            AIExtraction[]            @relation("AIExtractionAppliedBy")
+  ai_extractions_recruiter_verified AIExtraction[]            @relation("AIExtractionRecruiterVerifiedBy")
+  audit_events_actor                AuditEvent[]              @relation("AuditEventActor")
+
+  @@unique([external_collection, external_id])
+  @@map("identity_references")
+}
+
+model StaffJobsCapability {
+  id                String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  identity_ref_id   String    @unique @db.Uuid
+  role_template     String?   @db.VarChar(50)
+  grants            Json      @default("[]")
+  granted_by_ref_id String?   @db.Uuid
+  granted_at        DateTime? @db.Timestamptz(6)
+  created_at        DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime  @updatedAt @db.Timestamptz(6)
+
+  identity   IdentityReference  @relation("StaffCapabilityIdentity", fields: [identity_ref_id], references: [id], onDelete: NoAction)
+  granted_by IdentityReference? @relation("StaffCapabilityGrantedBy", fields: [granted_by_ref_id], references: [id], onDelete: NoAction)
+
+  @@map("staff_jobs_capabilities")
+}
+
+// -----------------------------------------------------------------------------
+// Group 2 - Candidate Core
+// -----------------------------------------------------------------------------
+
+model Candidate {
+  id                          String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  identity_ref_id             String?              @unique @db.Uuid
+  candidate_code              String               @unique @db.VarChar(20)
+  status                      CandidateStatus
+  source                      CandidateSource
+  source_detail               String?
+  first_name                  String               @db.VarChar(100)
+  last_name                   String               @db.VarChar(100)
+  preferred_name              String?              @db.VarChar(100)
+  date_of_birth               DateTime?            @db.Date
+  gender                      String?              @db.VarChar(50)
+  nationality                 String?              @db.VarChar(2)
+  current_country             String?              @db.VarChar(2)
+  current_state               String?              @db.VarChar(100)
+  current_city                String?              @db.VarChar(100)
+  current_postal_code         String?              @db.VarChar(20)
+  current_title               String?              @db.VarChar(200)
+  current_employer            String?              @db.VarChar(200)
+  years_of_experience         Int?
+  current_salary_amount       Decimal?             @db.Decimal(15, 4)
+  current_salary_currency     String?              @db.VarChar(3)
+  current_total_comp_amount   Decimal?             @db.Decimal(15, 4)
+  current_total_comp_currency String?              @db.VarChar(3)
+  notice_period_days          Int?
+  available_from              DateTime?            @db.Date
+  work_authorization          String?              @db.VarChar(50)
+  remote_preference           WorkPreference?
+  current_resume_version_id   String?              @db.Uuid
+  portal_registered           Boolean              @default(false)
+  profile_completeness_pct    Int                  @default(0) @db.SmallInt
+  primary_recruiter_ref_id    String?              @db.Uuid
+  assigned_recruiter_ref_id   String?              @db.Uuid
+  assigned_team_id            String?              @db.Uuid
+  created_by_ref_id           String               @db.Uuid
+  last_contacted_by_ref_id    String?              @db.Uuid
+  last_contacted_at           DateTime?            @db.Timestamptz(6)
+  active_process_owner_ref_id String?              @db.Uuid
+  placement_credit_ref_id     String?              @db.Uuid
+  dedup_status                CandidateDedupStatus @default(unique)
+  is_duplicate_of_id          String?              @db.Uuid
+  internal_rating             Int?                 @db.SmallInt
+  pref_job_types              String[]             @default([])
+  pref_remote                 WorkPreference?
+  pref_countries              String[]             @default([])
+  pref_cities                 String[]             @default([])
+  expected_salary_min         Decimal?             @db.Decimal(15, 4)
+  expected_salary_max         Decimal?             @db.Decimal(15, 4)
+  expected_salary_currency    String?              @db.VarChar(3)
+  open_to_relocation          Boolean?
+  open_to_international       Boolean?
+  target_industries           String[]             @default([])
+  target_seniority            String[]             @default([])
+  preference_notes            String?
+  deleted_at                  DateTime?            @db.Timestamptz(6)
+  deleted_by_ref_id           String?              @db.Uuid
+  deleted_reason              String?
+  created_at                  DateTime             @default(now()) @db.Timestamptz(6)
+  updated_at                  DateTime             @updatedAt @db.Timestamptz(6)
+
+  identity_ref         IdentityReference? @relation("CandidateIdentity", fields: [identity_ref_id], references: [id], onDelete: NoAction)
+  current_resume       ResumeVersion?     @relation("CandidateCurrentResume", fields: [current_resume_version_id], references: [id], onDelete: NoAction)
+  primary_recruiter    IdentityReference? @relation("CandidatePrimaryRecruiter", fields: [primary_recruiter_ref_id], references: [id], onDelete: NoAction)
+  assigned_recruiter   IdentityReference? @relation("CandidateAssignedRecruiter", fields: [assigned_recruiter_ref_id], references: [id], onDelete: NoAction)
+  created_by           IdentityReference  @relation("CandidateCreatedBy", fields: [created_by_ref_id], references: [id], onDelete: NoAction)
+  last_contacted_by    IdentityReference? @relation("CandidateLastContactedBy", fields: [last_contacted_by_ref_id], references: [id], onDelete: NoAction)
+  active_process_owner IdentityReference? @relation("CandidateActiveProcessOwner", fields: [active_process_owner_ref_id], references: [id], onDelete: NoAction)
+  placement_credit     IdentityReference? @relation("CandidatePlacementCredit", fields: [placement_credit_ref_id], references: [id], onDelete: NoAction)
+  duplicate_of         Candidate?         @relation("CandidateDuplicate", fields: [is_duplicate_of_id], references: [id], onDelete: NoAction)
+  deleted_by           IdentityReference? @relation("CandidateDeletedBy", fields: [deleted_by_ref_id], references: [id], onDelete: NoAction)
+
+  duplicates         Candidate[]                 @relation("CandidateDuplicate")
+  contacts           CandidateContact[]
+  consents           CandidateConsent[]
+  employments        CandidateEmployment[]
+  educations         CandidateEducation[]
+  certifications     CandidateCertification[]
+  skills             CandidateSkill[]
+  domain_experiences CandidateDomainExperience[]
+  resume_versions    ResumeVersion[]             @relation("CandidateResumeVersions")
+  documents          CandidateDocument[]
+  tags               CandidateTag[]
+  activities         CandidateActivity[]
+  applications       Application[]
+  placements         Placement[]
+  ai_extractions     AIExtraction[]
+  ai_scores          AIScore[]
+
+  @@index([status, created_at])
+  @@index([current_country, current_city])
+  @@index([primary_recruiter_ref_id])
+  @@index([dedup_status])
+  @@map("candidates")
+}
+
+model CandidateContact {
+  id                 String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  candidate_id       String               @db.Uuid
+  contact_type       CandidateContactType
+  value              String               @db.VarChar(500)
+  phone_country_code String?              @db.VarChar(5)
+  is_primary         Boolean              @default(false)
+  is_verified        Boolean              @default(false)
+  verified_at        DateTime?            @db.Timestamptz(6)
+  opt_out            Boolean              @default(false)
+  created_at         DateTime             @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime             @updatedAt @db.Timestamptz(6)
+
+  candidate Candidate @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+
+  @@unique([candidate_id, contact_type, value])
+  @@map("candidate_contacts")
+}
+
+model CandidateConsent {
+  id           String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  candidate_id String       @db.Uuid
+  consent_type ConsentType
+  event        ConsentEvent
+  ip_address   String?      @db.Inet
+  user_agent   String?
+  source       String?      @db.VarChar(100)
+  created_at   DateTime     @default(now()) @db.Timestamptz(6)
+
+  candidate Candidate @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+
+  @@index([candidate_id, consent_type, created_at])
+  @@map("candidate_consents")
+}
+
+// -----------------------------------------------------------------------------
+// Group 3 - Candidate Profile
+// -----------------------------------------------------------------------------
+
+model CandidateEmployment {
+  id               String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  candidate_id     String          @db.Uuid
+  employer_name    String          @db.VarChar(300)
+  employer_country String?         @db.VarChar(2)
+  title            String          @db.VarChar(200)
+  employment_type  EmploymentType?
+  start_date       DateTime        @db.Date
+  end_date         DateTime?       @db.Date
+  is_current       Boolean         @default(false)
+  description      String?
+  location_city    String?         @db.VarChar(100)
+  location_country String?         @db.VarChar(2)
+  salary_amount    Decimal?        @db.Decimal(15, 4)
+  salary_currency  String?         @db.VarChar(3)
+  ai_extracted     Boolean         @default(false)
+  sort_order       Int             @default(0)
+  created_at       DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime        @updatedAt @db.Timestamptz(6)
+
+  candidate Candidate @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+
+  @@map("candidate_employments")
+}
+
+model CandidateEducation {
+  id                  String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  candidate_id        String   @db.Uuid
+  institution_name    String   @db.VarChar(300)
+  institution_country String?  @db.VarChar(2)
+  degree              String?  @db.VarChar(200)
+  field_of_study      String?  @db.VarChar(200)
+  start_year          Int?     @db.SmallInt
+  end_year            Int?     @db.SmallInt
+  grade               String?  @db.VarChar(50)
+  ai_extracted        Boolean  @default(false)
+  created_at          DateTime @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime @updatedAt @db.Timestamptz(6)
+
+  candidate Candidate @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+
+  @@map("candidate_educations")
+}
+
+model CandidateCertification {
+  id                 String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  candidate_id       String    @db.Uuid
+  certification_name String    @db.VarChar(200)
+  issuing_body       String?   @db.VarChar(200)
+  issued_date        DateTime? @db.Date
+  expiry_date        DateTime? @db.Date
+  license_number     String?   @db.VarChar(100)
+  is_active          Boolean   @default(true)
+  country            String?   @db.VarChar(2)
+  ai_extracted       Boolean   @default(false)
+  created_at         DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime  @updatedAt @db.Timestamptz(6)
+
+  candidate Candidate @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+
+  @@map("candidate_certifications")
+}
+
+model Skill {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String   @unique @db.VarChar(200)
+  slug       String   @unique @db.VarChar(200)
+  category   String?  @db.VarChar(100)
+  aliases    String[] @default([])
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @updatedAt @db.Timestamptz(6)
+
+  candidate_skills CandidateSkill[]
+  job_skills       JobSkill[]
+
+  @@map("skills")
+}
+
+model CandidateSkill {
+  id               String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  candidate_id     String            @db.Uuid
+  skill_id         String            @db.Uuid
+  proficiency      SkillProficiency?
+  years_experience Decimal?          @db.Decimal(4, 1)
+  is_primary       Boolean           @default(false)
+  ai_extracted     Boolean           @default(false)
+  created_at       DateTime          @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime          @updatedAt @db.Timestamptz(6)
+
+  candidate Candidate @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+  skill     Skill     @relation(fields: [skill_id], references: [id], onDelete: NoAction)
+
+  @@unique([candidate_id, skill_id])
+  @@map("candidate_skills")
+}
+
+model Domain {
+  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name             String   @unique @db.VarChar(200)
+  slug             String   @unique @db.VarChar(200)
+  regulator        String?  @db.VarChar(100)
+  sector           String?  @db.VarChar(100)
+  parent_domain_id String?  @db.Uuid
+  description      String?
+  created_at       DateTime @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime @updatedAt @db.Timestamptz(6)
+
+  parent_domain     Domain?                     @relation("DomainHierarchy", fields: [parent_domain_id], references: [id], onDelete: NoAction)
+  child_domains     Domain[]                    @relation("DomainHierarchy")
+  candidate_domains CandidateDomainExperience[]
+  job_domains       JobDomain[]
+
+  @@map("domains")
+}
+
+model CandidateDomainExperience {
+  id               String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  candidate_id     String             @db.Uuid
+  domain_id        String             @db.Uuid
+  years_experience Decimal?           @db.Decimal(4, 1)
+  proficiency      DomainProficiency?
+  notes            String?
+  ai_extracted     Boolean            @default(false)
+  created_at       DateTime           @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime           @updatedAt @db.Timestamptz(6)
+
+  candidate Candidate @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+  domain    Domain    @relation(fields: [domain_id], references: [id], onDelete: NoAction)
+
+  @@unique([candidate_id, domain_id])
+  @@map("candidate_domain_experiences")
+}
+
+// -----------------------------------------------------------------------------
+// Group 4 - Resume & Documents
+// -----------------------------------------------------------------------------
+
+model ResumeVersion {
+  id                   String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  candidate_id         String      @db.Uuid
+  version_number       Int
+  is_current           Boolean     @default(true)
+  file_storage_key     String
+  file_name_original   String      @db.VarChar(500)
+  file_type            String      @db.VarChar(50)
+  file_size_bytes      Int
+  uploaded_by_ref_id   String      @db.Uuid
+  uploaded_on_behalf   Boolean     @default(false)
+  parse_status         ParseStatus @default(pending)
+  parse_completed_at   DateTime?   @db.Timestamptz(6)
+  ai_processing_run_id String?     @db.Uuid
+  deleted_at           DateTime?   @db.Timestamptz(6)
+  created_at           DateTime    @default(now()) @db.Timestamptz(6)
+  updated_at           DateTime    @updatedAt @db.Timestamptz(6)
+
+  candidate              Candidate         @relation("CandidateResumeVersions", fields: [candidate_id], references: [id], onDelete: NoAction)
+  current_for_candidates Candidate[]       @relation("CandidateCurrentResume")
+  uploaded_by            IdentityReference @relation("ResumeVersionUploadedBy", fields: [uploaded_by_ref_id], references: [id], onDelete: NoAction)
+  ai_processing_run      AIProcessingRun?  @relation("ResumeVersionAIProcessingRun", fields: [ai_processing_run_id], references: [id], onDelete: NoAction)
+  applications           Application[]
+  ai_extractions         AIExtraction[]
+
+  // Migration 001 review: add partial unique index
+  // UNIQUE (candidate_id) WHERE is_current = true
+  @@unique([candidate_id, version_number])
+  @@map("resume_versions")
+}
+
+model CandidateDocument {
+  id                 String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  candidate_id       String       @db.Uuid
+  document_type      DocumentType
+  label              String       @db.VarChar(200)
+  file_storage_key   String
+  file_name_original String       @db.VarChar(500)
+  file_type          String       @db.VarChar(50)
+  file_size_bytes    Int
+  uploaded_by_ref_id String       @db.Uuid
+  expires_at         DateTime?    @db.Date
+  deleted_at         DateTime?    @db.Timestamptz(6)
+  created_at         DateTime     @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime     @updatedAt @db.Timestamptz(6)
+
+  candidate   Candidate         @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+  uploaded_by IdentityReference @relation("CandidateDocumentUploadedBy", fields: [uploaded_by_ref_id], references: [id], onDelete: NoAction)
+
+  @@map("candidate_documents")
+}
+
+// -----------------------------------------------------------------------------
+// Group 5 - Tags & Activity
+// -----------------------------------------------------------------------------
+
+model Tag {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name              String   @unique @db.VarChar(100)
+  slug              String   @unique @db.VarChar(100)
+  tag_type          TagType
+  colour_hex        String?  @db.VarChar(7)
+  created_by_ref_id String   @db.Uuid
+  created_at        DateTime @default(now()) @db.Timestamptz(6)
+
+  created_by     IdentityReference @relation("TagCreatedBy", fields: [created_by_ref_id], references: [id], onDelete: NoAction)
+  candidate_tags CandidateTag[]
+
+  @@map("tags")
+}
+
+model CandidateTag {
+  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  candidate_id     String   @db.Uuid
+  tag_id           String   @db.Uuid
+  tagged_by_ref_id String   @db.Uuid
+  created_at       DateTime @default(now()) @db.Timestamptz(6)
+
+  candidate Candidate         @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+  tag       Tag               @relation(fields: [tag_id], references: [id], onDelete: NoAction)
+  tagged_by IdentityReference @relation("CandidateTagTaggedBy", fields: [tagged_by_ref_id], references: [id], onDelete: NoAction)
+
+  @@unique([candidate_id, tag_id])
+  @@map("candidate_tags")
+}
+
+model CandidateActivity {
+  id                  String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  candidate_id        String                @db.Uuid
+  activity_type       CandidateActivityType
+  description         String?
+  actor_ref_id        String                @db.Uuid
+  related_entity_type String?               @db.VarChar(50)
+  related_entity_id   String?               @db.Uuid
+  created_at          DateTime              @default(now()) @db.Timestamptz(6)
+
+  candidate Candidate         @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+  actor     IdentityReference @relation("CandidateActivityActor", fields: [actor_ref_id], references: [id], onDelete: NoAction)
+
+  @@map("candidate_activities")
+}
+
+// -----------------------------------------------------------------------------
+// Group 6 - Organization & Client
+// -----------------------------------------------------------------------------
+
+model Organization {
+  id                      String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  legal_name              String                 @db.VarChar(300)
+  display_name            String?                @db.VarChar(300)
+  website                 String?                @db.VarChar(500)
+  industry                String?                @db.VarChar(100)
+  size_range              OrganizationSizeRange?
+  hq_country              String?                @db.VarChar(2)
+  hq_city                 String?                @db.VarChar(100)
+  description             String?
+  logo_url                String?
+  status                  OrganizationStatus     @default(active)
+  relationship_type       RelationshipType?
+  relationship_status     RelationshipStatus     @default(active)
+  relationship_start_date DateTime?              @db.Date
+  account_owner_ref_id    String?                @db.Uuid
+  account_manager_ref_id  String?                @db.Uuid
+  relationship_notes      String?
+  created_by_ref_id       String                 @db.Uuid
+  deleted_at              DateTime?              @db.Timestamptz(6)
+  created_at              DateTime               @default(now()) @db.Timestamptz(6)
+  updated_at              DateTime               @updatedAt @db.Timestamptz(6)
+
+  account_owner    IdentityReference? @relation("OrganizationAccountOwner", fields: [account_owner_ref_id], references: [id], onDelete: NoAction)
+  account_manager  IdentityReference? @relation("OrganizationAccountManager", fields: [account_manager_ref_id], references: [id], onDelete: NoAction)
+  created_by       IdentityReference  @relation("OrganizationCreatedBy", fields: [created_by_ref_id], references: [id], onDelete: NoAction)
+  client_contacts  ClientContact[]
+  commercial_terms CommercialTerms[]
+  jobs             Job[]
+  placements       Placement[]
+
+  @@map("organizations")
+}
+
+model ClientContact {
+  id                 String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organization_id    String   @db.Uuid
+  first_name         String   @db.VarChar(100)
+  last_name          String   @db.VarChar(100)
+  title              String?  @db.VarChar(200)
+  email              String?  @db.VarChar(255)
+  phone              String?  @db.VarChar(50)
+  phone_country_code String?  @db.VarChar(5)
+  linkedin           String?  @db.VarChar(500)
+  is_primary         Boolean  @default(false)
+  is_active          Boolean  @default(true)
+  notes              String?
+  created_by_ref_id  String   @db.Uuid
+  created_at         DateTime @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime @updatedAt @db.Timestamptz(6)
+
+  organization           Organization           @relation(fields: [organization_id], references: [id], onDelete: NoAction)
+  created_by             IdentityReference      @relation("ClientContactCreatedBy", fields: [created_by_ref_id], references: [id], onDelete: NoAction)
+  jobs                   Job[]
+  interview_participants InterviewParticipant[]
+
+  @@map("client_contacts")
+}
+
+model CommercialTerms {
+  id                         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organization_id            String    @db.Uuid
+  fee_type                   FeeType
+  fee_percentage             Decimal?  @db.Decimal(5, 2)
+  fee_fixed_amount           Decimal?  @db.Decimal(15, 4)
+  fee_currency               String?   @db.VarChar(3)
+  retainer_amount            Decimal?  @db.Decimal(15, 4)
+  payment_terms_days         Int?
+  replacement_guarantee_days Int?
+  notes                      String?
+  effective_from             DateTime  @db.Date
+  effective_to               DateTime? @db.Date
+  created_by_ref_id          String    @db.Uuid
+  created_at                 DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at                 DateTime  @updatedAt @db.Timestamptz(6)
+
+  organization Organization      @relation(fields: [organization_id], references: [id], onDelete: NoAction)
+  created_by   IdentityReference @relation("CommercialTermsCreatedBy", fields: [created_by_ref_id], references: [id], onDelete: NoAction)
+  placements   Placement[]
+
+  @@map("commercial_terms")
+}
+
+// -----------------------------------------------------------------------------
+// Group 7 - Jobs
+// -----------------------------------------------------------------------------
+
+model Job {
+  id                      String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  job_code                String             @unique @db.VarChar(20)
+  title                   String             @db.VarChar(300)
+  slug                    String             @unique @db.VarChar(300)
+  organization_id         String?            @db.Uuid
+  client_contact_id       String?            @db.Uuid
+  description             String
+  internal_notes          String?
+  status                  JobStatus          @default(draft)
+  is_public               Boolean            @default(false)
+  employment_type         JobEmploymentType?
+  seniority_level         SeniorityLevel?
+  min_years_experience    Int?
+  max_years_experience    Int?
+  salary_min              Decimal?           @db.Decimal(15, 4)
+  salary_max              Decimal?           @db.Decimal(15, 4)
+  salary_currency         String?            @db.VarChar(3)
+  salary_disclosed        Boolean            @default(false)
+  remote_policy           RemotePolicy?
+  published_at            DateTime?          @db.Timestamptz(6)
+  closes_at               DateTime?          @db.Date
+  positions_count         Int                @default(1) @db.SmallInt
+  positions_filled        Int                @default(0) @db.SmallInt
+  priority                Priority           @default(normal)
+  created_by_ref_id       String             @db.Uuid
+  structured_requirements Json?
+  approved_by_ref_id      String?            @db.Uuid
+  approved_at             DateTime?          @db.Timestamptz(6)
+  deleted_at              DateTime?          @db.Timestamptz(6)
+  created_at              DateTime           @default(now()) @db.Timestamptz(6)
+  updated_at              DateTime           @updatedAt @db.Timestamptz(6)
+
+  organization     Organization?      @relation(fields: [organization_id], references: [id], onDelete: NoAction)
+  client_contact   ClientContact?     @relation(fields: [client_contact_id], references: [id], onDelete: NoAction)
+  created_by       IdentityReference  @relation("JobCreatedBy", fields: [created_by_ref_id], references: [id], onDelete: NoAction)
+  approved_by      IdentityReference? @relation("JobApprovedBy", fields: [approved_by_ref_id], references: [id], onDelete: NoAction)
+  skills           JobSkill[]
+  domains          JobDomain[]
+  locations        JobLocation[]
+  questions        JobQuestion[]
+  assignments      JobAssignment[]
+  status_histories JobStatusHistory[]
+  applications     Application[]
+  placements       Placement[]
+  ai_scores        AIScore[]
+
+  @@index([status, is_public])
+  @@index([organization_id, status])
+  @@map("jobs")
+}
+
+model JobSkill {
+  id          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  job_id      String            @db.Uuid
+  skill_id    String            @db.Uuid
+  is_required Boolean           @default(true)
+  proficiency SkillProficiency?
+  created_at  DateTime          @default(now()) @db.Timestamptz(6)
+
+  job   Job   @relation(fields: [job_id], references: [id], onDelete: NoAction)
+  skill Skill @relation(fields: [skill_id], references: [id], onDelete: NoAction)
+
+  @@unique([job_id, skill_id])
+  @@map("job_skills")
+}
+
+model JobDomain {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  job_id      String   @db.Uuid
+  domain_id   String   @db.Uuid
+  is_required Boolean  @default(true)
+  min_years   Decimal? @db.Decimal(4, 1)
+  created_at  DateTime @default(now()) @db.Timestamptz(6)
+
+  job    Job    @relation(fields: [job_id], references: [id], onDelete: NoAction)
+  domain Domain @relation(fields: [domain_id], references: [id], onDelete: NoAction)
+
+  @@unique([job_id, domain_id])
+  @@map("job_domains")
+}
+
+model JobLocation {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  job_id     String   @db.Uuid
+  country    String   @db.VarChar(2)
+  state      String?  @db.VarChar(100)
+  city       String?  @db.VarChar(100)
+  is_primary Boolean  @default(false)
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+
+  job Job @relation(fields: [job_id], references: [id], onDelete: NoAction)
+
+  @@map("job_locations")
+}
+
+model JobQuestion {
+  id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  job_id        String          @db.Uuid
+  question_text String
+  question_type JobQuestionType
+  options       String[]        @default([])
+  is_required   Boolean         @default(true)
+  sort_order    Int             @default(0)
+  created_at    DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime        @updatedAt @db.Timestamptz(6)
+
+  job     Job                 @relation(fields: [job_id], references: [id], onDelete: NoAction)
+  answers ApplicationAnswer[]
+
+  @@map("job_questions")
+}
+
+model JobAssignment {
+  id                 String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  job_id             String            @db.Uuid
+  recruiter_ref_id   String            @db.Uuid
+  role               JobAssignmentRole
+  assigned_by_ref_id String            @db.Uuid
+  assigned_at        DateTime          @db.Timestamptz(6)
+  removed_at         DateTime?         @db.Timestamptz(6)
+
+  job         Job               @relation(fields: [job_id], references: [id], onDelete: NoAction)
+  recruiter   IdentityReference @relation("JobAssignmentRecruiter", fields: [recruiter_ref_id], references: [id], onDelete: NoAction)
+  assigned_by IdentityReference @relation("JobAssignmentAssignedBy", fields: [assigned_by_ref_id], references: [id], onDelete: NoAction)
+
+  // Migration 001 review: replace broad uniqueness with partial unique index
+  // UNIQUE (job_id, recruiter_ref_id) WHERE removed_at IS NULL
+  @@index([job_id, recruiter_ref_id])
+  @@map("job_assignments")
+}
+
+model JobStatusHistory {
+  id                String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  job_id            String     @db.Uuid
+  previous_status   JobStatus?
+  new_status        JobStatus
+  changed_by_ref_id String     @db.Uuid
+  reason            String?
+  created_at        DateTime   @default(now()) @db.Timestamptz(6)
+
+  job        Job               @relation(fields: [job_id], references: [id], onDelete: NoAction)
+  changed_by IdentityReference @relation("JobStatusChangedBy", fields: [changed_by_ref_id], references: [id], onDelete: NoAction)
+
+  @@map("job_status_histories")
+}
+
+// -----------------------------------------------------------------------------
+// Group 8 - Applications
+// -----------------------------------------------------------------------------
+
+model ApplicationStage {
+  id                   String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                 String   @unique @db.VarChar(100)
+  slug                 String   @unique @db.VarChar(100)
+  sort_order           Int
+  is_terminal          Boolean  @default(false)
+  is_positive_terminal Boolean  @default(false)
+  is_active            Boolean  @default(true)
+  colour_hex           String?  @db.VarChar(7)
+  created_at           DateTime @default(now()) @db.Timestamptz(6)
+
+  from_transitions   ApplicationStageTransition[] @relation("TransitionFromStage")
+  to_transitions     ApplicationStageTransition[] @relation("TransitionToStage")
+  applications       Application[]
+  previous_histories ApplicationStageHistory[]    @relation("ApplicationPreviousStage")
+  new_histories      ApplicationStageHistory[]    @relation("ApplicationNewStage")
+
+  @@map("application_stages")
+}
+
+model ApplicationStageTransition {
+  id                        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  from_stage_id             String   @db.Uuid
+  to_stage_id               String   @db.Uuid
+  required_permission       String   @db.VarChar(100)
+  requires_reason           Boolean  @default(false)
+  requires_interview_record Boolean  @default(false)
+  is_terminal               Boolean  @default(false)
+  created_at                DateTime @default(now()) @db.Timestamptz(6)
+
+  from_stage ApplicationStage @relation("TransitionFromStage", fields: [from_stage_id], references: [id], onDelete: NoAction)
+  to_stage   ApplicationStage @relation("TransitionToStage", fields: [to_stage_id], references: [id], onDelete: NoAction)
+
+  @@unique([from_stage_id, to_stage_id])
+  @@map("application_stage_transitions")
+}
+
+model Application {
+  id                        String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  job_id                    String            @db.Uuid
+  candidate_id              String            @db.Uuid
+  snapshot_id               String?           @db.Uuid
+  current_stage_id          String            @db.Uuid
+  source                    ApplicationSource
+  resume_version_id         String?           @db.Uuid
+  assigned_recruiter_ref_id String?           @db.Uuid
+  recruiter_notes           String?
+  rejection_reason          RejectionReason?
+  rejection_detail          String?
+  rejected_by_ref_id        String?           @db.Uuid
+  rejected_at               DateTime?         @db.Timestamptz(6)
+  created_by_ref_id         String            @db.Uuid
+  deleted_at                DateTime?         @db.Timestamptz(6)
+  created_at                DateTime          @default(now()) @db.Timestamptz(6)
+  updated_at                DateTime          @updatedAt @db.Timestamptz(6)
+
+  job                Job                       @relation(fields: [job_id], references: [id], onDelete: NoAction)
+  candidate          Candidate                 @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+  snapshot           ApplicationSnapshot?      @relation("ApplicationSelectedSnapshot", fields: [snapshot_id], references: [id], onDelete: NoAction)
+  owned_snapshot     ApplicationSnapshot?      @relation("ApplicationSnapshotOwner")
+  current_stage      ApplicationStage          @relation(fields: [current_stage_id], references: [id], onDelete: NoAction)
+  resume_version     ResumeVersion?            @relation(fields: [resume_version_id], references: [id], onDelete: NoAction)
+  assigned_recruiter IdentityReference?        @relation("ApplicationAssignedRecruiter", fields: [assigned_recruiter_ref_id], references: [id], onDelete: NoAction)
+  rejected_by        IdentityReference?        @relation("ApplicationRejectedBy", fields: [rejected_by_ref_id], references: [id], onDelete: NoAction)
+  created_by         IdentityReference         @relation("ApplicationCreatedBy", fields: [created_by_ref_id], references: [id], onDelete: NoAction)
+  answers            ApplicationAnswer[]
+  stage_histories    ApplicationStageHistory[]
+  interviews         Interview[]
+  offers             Offer[]
+  placements         Placement[]
+  ai_scores          AIScore[]
+
+  // Migration 001 review: replace broad index with partial unique index
+  // UNIQUE (job_id, candidate_id) WHERE deleted_at IS NULL
+  @@index([job_id, candidate_id])
+  @@map("applications")
+}
+
+model ApplicationSnapshot {
+  id                      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  application_id          String   @unique @db.Uuid
+  candidate_id            String   @db.Uuid
+  captured_at             DateTime @db.Timestamptz(6)
+  first_name              String   @db.VarChar(100)
+  last_name               String   @db.VarChar(100)
+  current_title           String?  @db.VarChar(200)
+  current_employer        String?  @db.VarChar(200)
+  years_of_experience     Int?
+  current_salary_amount   Decimal? @db.Decimal(15, 4)
+  current_salary_currency String?  @db.VarChar(3)
+  notice_period_days      Int?
+  resume_version_id       String?  @db.Uuid
+  profile_data            Json
+
+  application Application   @relation("ApplicationSnapshotOwner", fields: [application_id], references: [id], onDelete: NoAction)
+  selected_by Application[] @relation("ApplicationSelectedSnapshot")
+
+  @@map("application_snapshots")
+}
+
+model ApplicationAnswer {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  application_id  String   @db.Uuid
+  question_id     String   @db.Uuid
+  answer_text     String?
+  answer_boolean  Boolean?
+  answer_selected String[] @default([])
+  answer_scale    Int?     @db.SmallInt
+  created_at      DateTime @default(now()) @db.Timestamptz(6)
+
+  application Application @relation(fields: [application_id], references: [id], onDelete: NoAction)
+  question    JobQuestion @relation(fields: [question_id], references: [id], onDelete: NoAction)
+
+  @@unique([application_id, question_id])
+  @@map("application_answers")
+}
+
+model ApplicationStageHistory {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  application_id    String   @db.Uuid
+  previous_stage_id String?  @db.Uuid
+  new_stage_id      String   @db.Uuid
+  changed_by_ref_id String   @db.Uuid
+  changed_at        DateTime @db.Timestamptz(6)
+  reason            String?
+  notes             String?
+
+  application    Application       @relation(fields: [application_id], references: [id], onDelete: NoAction)
+  previous_stage ApplicationStage? @relation("ApplicationPreviousStage", fields: [previous_stage_id], references: [id], onDelete: NoAction)
+  new_stage      ApplicationStage  @relation("ApplicationNewStage", fields: [new_stage_id], references: [id], onDelete: NoAction)
+  changed_by     IdentityReference @relation("ApplicationStageChangedBy", fields: [changed_by_ref_id], references: [id], onDelete: NoAction)
+
+  @@map("application_stage_histories")
+}
+
+// -----------------------------------------------------------------------------
+// Group 9 - Interview, Offer, Placement
+// -----------------------------------------------------------------------------
+
+model Interview {
+  id                            String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  application_id                String                  @db.Uuid
+  interview_type                InterviewType
+  round_number                  Int                     @default(1) @db.SmallInt
+  status                        InterviewStatus         @default(scheduled)
+  scheduled_at                  DateTime?               @db.Timestamptz(6)
+  duration_minutes              Int?                    @db.SmallInt
+  location_or_link              String?
+  format                        InterviewFormat?
+  notes                         String?
+  outcome                       InterviewOutcome?
+  outcome_notes                 String?
+  feedback_overall_rating       Int?                    @db.SmallInt
+  feedback_technical_rating     Int?                    @db.SmallInt
+  feedback_communication_rating Int?                    @db.SmallInt
+  feedback_culture_fit_rating   Int?                    @db.SmallInt
+  feedback_strengths            String?
+  feedback_concerns             String?
+  feedback_recommendation       FeedbackRecommendation?
+  feedback_submitted_by_ref_id  String?                 @db.Uuid
+  feedback_submitted_at         DateTime?               @db.Timestamptz(6)
+  created_by_ref_id             String                  @db.Uuid
+  deleted_at                    DateTime?               @db.Timestamptz(6)
+  created_at                    DateTime                @default(now()) @db.Timestamptz(6)
+  updated_at                    DateTime                @updatedAt @db.Timestamptz(6)
+
+  application           Application            @relation(fields: [application_id], references: [id], onDelete: NoAction)
+  feedback_submitted_by IdentityReference?     @relation("InterviewFeedbackSubmittedBy", fields: [feedback_submitted_by_ref_id], references: [id], onDelete: NoAction)
+  created_by            IdentityReference      @relation("InterviewCreatedBy", fields: [created_by_ref_id], references: [id], onDelete: NoAction)
+  participants          InterviewParticipant[]
+
+  @@map("interviews")
+}
+
+model InterviewParticipant {
+  id                String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  interview_id      String                   @db.Uuid
+  participant_type  InterviewParticipantType
+  identity_ref_id   String?                  @db.Uuid
+  client_contact_id String?                  @db.Uuid
+  external_name     String?                  @db.VarChar(200)
+  external_email    String?                  @db.VarChar(255)
+  confirmed         Boolean                  @default(false)
+  created_at        DateTime                 @default(now()) @db.Timestamptz(6)
+
+  interview      Interview          @relation(fields: [interview_id], references: [id], onDelete: NoAction)
+  identity_ref   IdentityReference? @relation("InterviewParticipantIdentity", fields: [identity_ref_id], references: [id], onDelete: NoAction)
+  client_contact ClientContact?     @relation(fields: [client_contact_id], references: [id], onDelete: NoAction)
+
+  @@map("interview_participants")
+}
+
+model Offer {
+  id                        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  application_id            String      @db.Uuid
+  status                    OfferStatus @default(draft)
+  offered_salary_amount     Decimal?    @db.Decimal(15, 4)
+  offered_salary_currency   String?     @db.VarChar(3)
+  offered_total_comp_amount Decimal?    @db.Decimal(15, 4)
+  joining_date              DateTime?   @db.Date
+  offer_extended_at         DateTime?   @db.Timestamptz(6)
+  offer_expires_at          DateTime?   @db.Timestamptz(6)
+  accepted_at               DateTime?   @db.Timestamptz(6)
+  declined_at               DateTime?   @db.Timestamptz(6)
+  decline_reason            String?
+  notes                     String?
+  created_by_ref_id         String      @db.Uuid
+  created_at                DateTime    @default(now()) @db.Timestamptz(6)
+  updated_at                DateTime    @updatedAt @db.Timestamptz(6)
+
+  application Application       @relation(fields: [application_id], references: [id], onDelete: NoAction)
+  created_by  IdentityReference @relation("OfferCreatedBy", fields: [created_by_ref_id], references: [id], onDelete: NoAction)
+  placement   Placement?
+
+  @@map("offers")
+}
+
+model Placement {
+  id                      String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  offer_id                String          @unique @db.Uuid
+  application_id          String          @db.Uuid
+  candidate_id            String          @db.Uuid
+  job_id                  String          @db.Uuid
+  organization_id         String          @db.Uuid
+  joining_date            DateTime        @db.Date
+  placed_title            String?         @db.VarChar(200)
+  placed_salary_amount    Decimal?        @db.Decimal(15, 4)
+  placed_salary_currency  String?         @db.VarChar(3)
+  placement_credit_ref_id String?         @db.Uuid
+  secondary_credit_ref_id String?         @db.Uuid
+  credit_split_pct        Decimal?        @db.Decimal(5, 2)
+  status                  PlacementStatus @default(active)
+  guarantee_days          Int?
+  guarantee_end_date      DateTime?       @db.Date
+  commercial_terms_id     String?         @db.Uuid
+  fee_type                FeeType?
+  fee_percentage          Decimal?        @db.Decimal(5, 2)
+  calculated_fee_amount   Decimal?        @db.Decimal(15, 4)
+  gst_rate                Decimal?        @db.Decimal(5, 2)
+  gst_amount              Decimal?        @db.Decimal(15, 4)
+  invoice_amount          Decimal?        @db.Decimal(15, 4)
+  fee_currency            String?         @db.VarChar(3)
+  fee_calculation_basis   String?
+  fee_approved_by_ref_id  String?         @db.Uuid
+  fee_approved_at         DateTime?       @db.Timestamptz(6)
+  payment_status          PaymentStatus   @default(pending_invoice)
+  invoice_number          String?         @db.VarChar(100)
+  invoice_sent_at         DateTime?       @db.Date
+  invoice_due_at          DateTime?       @db.Date
+  paid_amount             Decimal         @default(0) @db.Decimal(15, 4)
+  paid_at                 DateTime?       @db.Date
+  dispute_reason          String?
+  notes                   String?
+  created_by_ref_id       String          @db.Uuid
+  deleted_at              DateTime?       @db.Timestamptz(6)
+  created_at              DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at              DateTime        @updatedAt @db.Timestamptz(6)
+
+  offer            Offer              @relation(fields: [offer_id], references: [id], onDelete: NoAction)
+  application      Application        @relation(fields: [application_id], references: [id], onDelete: NoAction)
+  candidate        Candidate          @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+  job              Job                @relation(fields: [job_id], references: [id], onDelete: NoAction)
+  organization     Organization       @relation(fields: [organization_id], references: [id], onDelete: NoAction)
+  placement_credit IdentityReference? @relation("PlacementCredit", fields: [placement_credit_ref_id], references: [id], onDelete: NoAction)
+  secondary_credit IdentityReference? @relation("PlacementSecondaryCredit", fields: [secondary_credit_ref_id], references: [id], onDelete: NoAction)
+  commercial_terms CommercialTerms?   @relation(fields: [commercial_terms_id], references: [id], onDelete: NoAction)
+  fee_approved_by  IdentityReference? @relation("PlacementFeeApprovedBy", fields: [fee_approved_by_ref_id], references: [id], onDelete: NoAction)
+  created_by       IdentityReference  @relation("PlacementCreatedBy", fields: [created_by_ref_id], references: [id], onDelete: NoAction)
+
+  @@map("placements")
+}
+
+// -----------------------------------------------------------------------------
+// Group 10 - Operational CRM
+// -----------------------------------------------------------------------------
+
+model RecruitmentNote {
+  id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  entity_type   JobsEntityType
+  entity_id     String         @db.Uuid
+  content       String
+  is_pinned     Boolean        @default(false)
+  visibility    NoteVisibility @default(team)
+  author_ref_id String         @db.Uuid
+  deleted_at    DateTime?      @db.Timestamptz(6)
+  created_at    DateTime       @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime       @updatedAt @db.Timestamptz(6)
+
+  author IdentityReference @relation("RecruitmentNoteAuthor", fields: [author_ref_id], references: [id], onDelete: NoAction)
+
+  @@index([entity_type, entity_id])
+  @@map("recruitment_notes")
+}
+
+model Task {
+  id                  String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  task_type           TaskType
+  title               String          @db.VarChar(300)
+  description         String?
+  entity_type         JobsEntityType?
+  entity_id           String?         @db.Uuid
+  assigned_to_ref_id  String          @db.Uuid
+  created_by_ref_id   String          @db.Uuid
+  due_at              DateTime?       @db.Timestamptz(6)
+  status              TaskStatus      @default(open)
+  completed_at        DateTime?       @db.Timestamptz(6)
+  completed_by_ref_id String?         @db.Uuid
+  snoozed_until       DateTime?       @db.Timestamptz(6)
+  priority            TaskPriority    @default(normal)
+  deleted_at          DateTime?       @db.Timestamptz(6)
+  created_at          DateTime        @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime        @updatedAt @db.Timestamptz(6)
+
+  assigned_to  IdentityReference  @relation("TaskAssignedTo", fields: [assigned_to_ref_id], references: [id], onDelete: NoAction)
+  created_by   IdentityReference  @relation("TaskCreatedBy", fields: [created_by_ref_id], references: [id], onDelete: NoAction)
+  completed_by IdentityReference? @relation("TaskCompletedBy", fields: [completed_by_ref_id], references: [id], onDelete: NoAction)
+
+  @@index([entity_type, entity_id])
+  @@map("tasks")
+}
+
+model Communication {
+  id                 String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  communication_type CommunicationType
+  direction          CommunicationDirection
+  entity_type        CommunicationEntityType
+  entity_id          String                  @db.Uuid
+  subject            String?                 @db.VarChar(500)
+  summary            String?
+  logged_by_ref_id   String                  @db.Uuid
+  occurred_at        DateTime                @db.Timestamptz(6)
+  duration_minutes   Int?                    @db.SmallInt
+  outcome            String?
+  created_at         DateTime                @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime                @updatedAt @db.Timestamptz(6)
+
+  logged_by IdentityReference @relation("CommunicationLoggedBy", fields: [logged_by_ref_id], references: [id], onDelete: NoAction)
+
+  @@index([entity_type, entity_id])
+  @@map("communications")
+}
+
+// -----------------------------------------------------------------------------
+// Group 11 - AI
+// -----------------------------------------------------------------------------
+
+model AIProcessingRun {
+  id                  String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  run_type            AIRunType
+  entity_type         String             @db.VarChar(50)
+  entity_id           String             @db.Uuid
+  model_provider      String             @db.VarChar(100)
+  model_name          String             @db.VarChar(100)
+  model_version       String             @db.VarChar(100)
+  status              AIProcessingStatus @default(pending)
+  started_at          DateTime?          @db.Timestamptz(6)
+  completed_at        DateTime?          @db.Timestamptz(6)
+  duration_ms         Int?
+  input_tokens        Int?
+  output_tokens       Int?
+  error_detail        String?
+  triggered_by_ref_id String?            @db.Uuid
+  created_at          DateTime           @default(now()) @db.Timestamptz(6)
+
+  triggered_by    IdentityReference? @relation("AIProcessingRunTriggeredBy", fields: [triggered_by_ref_id], references: [id], onDelete: NoAction)
+  resume_versions ResumeVersion[]    @relation("ResumeVersionAIProcessingRun")
+  extractions     AIExtraction[]
+  scores          AIScore[]
+  embeddings      EntityEmbedding[]
+
+  @@index([entity_type, entity_id])
+  @@map("ai_processing_runs")
+}
+
+model AIExtraction {
+  id                           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  ai_processing_run_id         String    @db.Uuid
+  resume_version_id            String    @db.Uuid
+  candidate_id                 String    @db.Uuid
+  field_path                   String    @db.VarChar(200)
+  extracted_value              Json
+  confidence_score             Decimal?  @db.Decimal(4, 3)
+  is_applied                   Boolean   @default(false)
+  applied_at                   DateTime? @db.Timestamptz(6)
+  applied_by_ref_id            String?   @db.Uuid
+  candidate_verified           Boolean   @default(false)
+  candidate_verified_at        DateTime? @db.Timestamptz(6)
+  recruiter_verified           Boolean   @default(false)
+  recruiter_verified_at        DateTime? @db.Timestamptz(6)
+  recruiter_verified_by_ref_id String?   @db.Uuid
+  superseded_by_id             String?   @db.Uuid
+  created_at                   DateTime  @default(now()) @db.Timestamptz(6)
+
+  ai_processing_run     AIProcessingRun    @relation(fields: [ai_processing_run_id], references: [id], onDelete: NoAction)
+  resume_version        ResumeVersion      @relation(fields: [resume_version_id], references: [id], onDelete: NoAction)
+  candidate             Candidate          @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+  applied_by            IdentityReference? @relation("AIExtractionAppliedBy", fields: [applied_by_ref_id], references: [id], onDelete: NoAction)
+  recruiter_verified_by IdentityReference? @relation("AIExtractionRecruiterVerifiedBy", fields: [recruiter_verified_by_ref_id], references: [id], onDelete: NoAction)
+  superseded_by         AIExtraction?      @relation("AIExtractionSupersession", fields: [superseded_by_id], references: [id], onDelete: NoAction)
+  supersedes            AIExtraction[]     @relation("AIExtractionSupersession")
+
+  @@map("ai_extractions")
+}
+
+model AIScore {
+  id                        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  ai_processing_run_id      String   @db.Uuid
+  job_id                    String   @db.Uuid
+  candidate_id              String   @db.Uuid
+  application_id            String?  @db.Uuid
+  overall_score             Decimal  @db.Decimal(5, 4)
+  skill_match_score         Decimal? @db.Decimal(5, 4)
+  domain_match_score        Decimal? @db.Decimal(5, 4)
+  experience_match_score    Decimal? @db.Decimal(5, 4)
+  semantic_similarity_score Decimal? @db.Decimal(5, 4)
+  rank_in_job               Int?
+  explanation_payload       Json?
+  model_version             String   @db.VarChar(100)
+  scored_at                 DateTime @db.Timestamptz(6)
+  is_current                Boolean  @default(true)
+  created_at                DateTime @default(now()) @db.Timestamptz(6)
+
+  ai_processing_run AIProcessingRun @relation(fields: [ai_processing_run_id], references: [id], onDelete: NoAction)
+  job               Job             @relation(fields: [job_id], references: [id], onDelete: NoAction)
+  candidate         Candidate       @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
+  application       Application?    @relation(fields: [application_id], references: [id], onDelete: NoAction)
+
+  // Migration 001 review: add partial unique index
+  // UNIQUE (job_id, candidate_id) WHERE is_current = true
+  @@index([job_id, candidate_id])
+  @@map("ai_scores")
+}
+
+model EntityEmbedding {
+  id                   String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  entity_type          EmbeddingEntityType
+  entity_id            String                @db.Uuid
+  embedding            Unsupported("vector")
+  model_provider       String                @db.VarChar(100)
+  model_name           String                @db.VarChar(200)
+  model_version        String                @db.VarChar(100)
+  dimension            Int
+  ai_processing_run_id String?               @db.Uuid
+  created_at           DateTime              @default(now()) @db.Timestamptz(6)
+
+  ai_processing_run AIProcessingRun? @relation(fields: [ai_processing_run_id], references: [id], onDelete: NoAction)
+
+  // Migration 001 review: add pgvector HNSW index manually after provider setup.
+  @@unique([entity_type, entity_id, model_name, model_version])
+  @@map("entity_embeddings")
+}
+
+// -----------------------------------------------------------------------------
+// Group 12 - Audit
+// -----------------------------------------------------------------------------
+
+model AuditEvent {
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  entity_type     String         @db.VarChar(50)
+  entity_id       String         @db.Uuid
+  action          String         @db.VarChar(100)
+  actor_ref_id    String?        @db.Uuid
+  actor_type      AuditActorType
+  changed_fields  String[]       @default([])
+  previous_values Json?
+  new_values      Json?
+  context         Json?
+  ip_address      String?        @db.Inet
+  user_agent      String?
+  created_at      DateTime       @default(now()) @db.Timestamptz(6)
+
+  actor IdentityReference? @relation("AuditEventActor", fields: [actor_ref_id], references: [id], onDelete: NoAction)
+
+  @@index([entity_type, entity_id, created_at])
+  @@index([actor_ref_id, created_at])
+  @@index([action, created_at])
+  @@map("audit_events")
+}

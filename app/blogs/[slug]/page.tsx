@@ -247,7 +247,6 @@ export default async function BlogDetailPage({ params }: Props) {
   // Related blogs — same category, excluding current article
   const relatedFull = await getRelatedBlogs(blog.id, blog.category.id, 3);
   const relatedBlogs: BlogSummary[] = relatedFull.map(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     ({ content: _c, faqs: _f, images: _i, ...rest }) => rest
   );
 

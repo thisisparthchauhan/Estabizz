@@ -5,7 +5,12 @@ from fastapi import APIRouter, Depends, File, Form, UploadFile
 from app.core.config import get_settings
 from app.core.security import require_service_secret
 from app.schemas.resume_extraction import ResumeTextExtractionResponse
+from app.schemas.structured_resume import (
+    ResumeStructuredExtractionRequest,
+    ResumeStructuredExtractionResponse,
+)
 from app.services.document_text_extractor import extract_document_text
+from app.services.structured_resume_extractor import extract_structured_resume
 
 router = APIRouter(prefix="/internal/resumes", dependencies=[Depends(require_service_secret)])
 
@@ -52,3 +57,10 @@ async def extract_resume_text(
             warnings=["Resume text extraction timed out."],
             requiresOcr=False,
         )
+
+
+@router.post("/structured-extraction", response_model=ResumeStructuredExtractionResponse)
+async def structured_resume_extraction(
+    request: ResumeStructuredExtractionRequest,
+) -> ResumeStructuredExtractionResponse:
+    return await extract_structured_resume(request)

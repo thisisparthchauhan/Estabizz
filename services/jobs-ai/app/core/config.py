@@ -10,6 +10,7 @@ class Settings:
     database_url: str
     jobs_ai_provider: str
     jobs_ai_model: str
+    openai_api_key: str
     max_resume_file_bytes: int
     extraction_timeout_seconds: int
 
@@ -26,6 +27,7 @@ def get_settings() -> Settings:
         database_url=os.getenv("DATABASE_URL", "").strip(),
         jobs_ai_provider=os.getenv("JOBS_AI_PROVIDER", "disabled").strip() or "disabled",
         jobs_ai_model=os.getenv("JOBS_AI_MODEL", "").strip(),
+        openai_api_key=os.getenv("OPENAI_API_KEY", "").strip(),
         max_resume_file_bytes=parse_positive_int(
             os.getenv("JOBS_DOCUMENT_MAX_UPLOAD_MB"),
             10,

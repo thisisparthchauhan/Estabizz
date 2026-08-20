@@ -25,3 +25,50 @@ def test_health_endpoint_returns_service_status(monkeypatch):
     }
 
     get_settings.cache_clear()
+
+
+def test_internal_health_without_authentication_fails(monkeypatch):
+    monkeypatch.setenv("AI_SERVICE_SECRET", "test-service-secret")
+    get_settings.cache_clear()
+
+    client = TestClient(app)
+    response = client.get("/internal/health")
+
+    assert response.status_code == 401
+
+    get_settings.cache_clear()
+
+
+def test_internal_health_with_bad_secret_fails(monkeypatch):
+    monkeypatch.setenv("AI_SERVICE_SECRET", "test-service-secret")
+    get_settings.cache_clear()
+
+    client = TestClient(app)
+    response = client.get(
+        "/internal/health",
+        headers={"x-estabizz-service-secret": "wrong-secret"},
+    )
+
+    assert response.status_code == 401
+
+    get_settings.cache_clear()
+
+
+def test_internal_health_with_correct_secret_succeeds(monkeypatch):
+    monkeypatch.setenv("APP_ENV", "staging")
+    monkeypatch.setenv("AI_SERVICE_SECRET", "test-service-secret")
+    monkeypatch.setenv("JOBS_AI_PROVIDER", "disabled")
+    get_settings.cache_clear()
+
+    client = TestClient(app)
+    response = client.get(
+        "/internal/health",
+        headers={"x-estabizz-service-secret": "test-service-secret"},
+    )
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "ok"
+    assert response.json()["service"] == "estabizz-jobs-ai"
+    assert response.json()["environment"] == "staging"
+
+    get_settings.cache_clear()

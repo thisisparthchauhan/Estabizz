@@ -61,7 +61,7 @@ The AI service must not be exposed directly to candidates.
 Future internal calls from Next.js to FastAPI should use:
 
 ```text
-X-Estabizz-AI-Secret: <AI_SERVICE_SECRET>
+x-estabizz-service-secret: <AI_SERVICE_SECRET>
 ```
 
 The foundation includes an authentication helper for protected future routes. `GET /health` is intentionally open for infrastructure health checks and does not expose secrets.

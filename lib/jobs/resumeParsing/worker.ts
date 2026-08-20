@@ -9,6 +9,10 @@ import { createJobsAiClient } from "@/lib/jobs/ai";
 import { getJobsPrismaClient } from "@/lib/jobs/prisma";
 
 import { isResumeParsePermanentStatus } from "./contract";
+import {
+  buildSafeResumeExtractionMetadata,
+  sanitizeResumeProcessingMessage,
+} from "./sensitiveData";
 import type { ResumeParseJobEnvelope, ResumeParseWorkerResult } from "./types";
 
 const TEXT_EXTRACTION_MODEL_PROVIDER = "none";
@@ -150,13 +154,15 @@ export async function processResumeParseJob(
       });
     }
 
-    if (extraction.data.status !== "text_extracted") {
+    const extractionMetadata = buildSafeResumeExtractionMetadata(extraction.data);
+
+    if (extractionMetadata.status !== "text_extracted") {
       return await markFailed({
         aiRunId: aiRun.id,
         resumeVersionId: resumeVersion.id,
         startedAt,
-        retryable: !isResumeParsePermanentStatus(extraction.data.status),
-        errorMessage: `Resume text extraction returned ${extraction.data.status}.`,
+        retryable: !isResumeParsePermanentStatus(extractionMetadata.status),
+        errorMessage: `Resume text extraction returned ${extractionMetadata.status}.`,
       });
     }
 
@@ -167,7 +173,7 @@ export async function processResumeParseJob(
           status: "completed",
           completed_at: new Date(),
           duration_ms: Date.now() - startedAt,
-          output_tokens: extraction.data.characterCount,
+          output_tokens: extractionMetadata.characterCount,
           error_detail: null,
         },
       }),
@@ -241,5 +247,5 @@ async function markFailed({
 }
 
 function sanitizeErrorDetail(errorMessage: string): string {
-  return errorMessage.slice(0, 500);
+  return sanitizeResumeProcessingMessage(errorMessage);
 }

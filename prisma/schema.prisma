@@ -1066,9 +1066,6 @@ model JobAssignment {
   recruiter   IdentityReference @relation("JobAssignmentRecruiter", fields: [recruiter_ref_id], references: [id], onDelete: NoAction)
   assigned_by IdentityReference @relation("JobAssignmentAssignedBy", fields: [assigned_by_ref_id], references: [id], onDelete: NoAction)
 
-  // Migration 001 review: replace broad uniqueness with partial unique index
-  // UNIQUE (job_id, recruiter_ref_id) WHERE removed_at IS NULL
-  @@index([job_id, recruiter_ref_id])
   @@map("job_assignments")
 }
 
@@ -1163,9 +1160,6 @@ model Application {
   placements         Placement[]
   ai_scores          AIScore[]
 
-  // Migration 001 review: replace broad index with partial unique index
-  // UNIQUE (job_id, candidate_id) WHERE deleted_at IS NULL
-  @@index([job_id, candidate_id])
   @@map("applications")
 }
 
@@ -1518,9 +1512,6 @@ model AIScore {
   candidate         Candidate       @relation(fields: [candidate_id], references: [id], onDelete: NoAction)
   application       Application?    @relation(fields: [application_id], references: [id], onDelete: NoAction)
 
-  // Migration 001 review: add partial unique index
-  // UNIQUE (job_id, candidate_id) WHERE is_current = true
-  @@index([job_id, candidate_id])
   @@map("ai_scores")
 }
 

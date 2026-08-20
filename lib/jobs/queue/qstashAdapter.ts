@@ -67,13 +67,10 @@ export class QStashJobsQueue implements JobQueue {
           : undefined,
         flowControl: buildFlowControl(normalizedOptions),
         label: ["estabizz-jobs", envelope.jobType.toLowerCase(), this.config.environment],
-        headers: {
-          "X-Estabizz-Jobs-Job-Type": envelope.jobType,
-          "X-Estabizz-Jobs-Correlation-Id": envelope.correlationId,
-        },
+        headers: buildDestinationHeaders(this.config, envelope),
         redact: {
           body: true,
-          header: ["Authorization", "Upstash-Authorization"],
+          header: ["Authorization", "Upstash-Authorization", "x-vercel-protection-bypass"],
         },
       });
 
@@ -164,4 +161,17 @@ function buildFlowControl(options: JobsQueueDispatchOptions): FlowControl | unde
 function readPublishMessageId(response: unknown): string | undefined {
   const maybeResponse = response as Partial<PublishToUrlResponse>;
   return typeof maybeResponse.messageId === "string" ? maybeResponse.messageId : undefined;
+}
+
+function buildDestinationHeaders(
+  config: JobsQueueConfig,
+  envelope: JobsQueueEnvelope,
+): Record<string, string> {
+  return {
+    "X-Estabizz-Jobs-Job-Type": envelope.jobType,
+    "X-Estabizz-Jobs-Correlation-Id": envelope.correlationId,
+    ...(config.vercelAutomationBypassSecret
+      ? { "x-vercel-protection-bypass": config.vercelAutomationBypassSecret }
+      : {}),
+  };
 }

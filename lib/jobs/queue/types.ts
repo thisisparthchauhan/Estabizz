@@ -26,6 +26,7 @@ export interface JobsQueueConfig {
   qstashToken: string;
   currentSigningKey: string;
   nextSigningKey: string;
+  vercelAutomationBypassSecret: string;
   defaultRetries: number;
   retryDelayExpression: string;
   maxPayloadBytes: number;

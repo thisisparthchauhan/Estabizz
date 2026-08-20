@@ -27,6 +27,7 @@ export function getJobsQueueConfig(env: NodeJS.ProcessEnv = process.env): JobsQu
     qstashToken: env.QSTASH_TOKEN || "",
     currentSigningKey: env.QSTASH_CURRENT_SIGNING_KEY || "",
     nextSigningKey: env.QSTASH_NEXT_SIGNING_KEY || "",
+    vercelAutomationBypassSecret: env.VERCEL_AUTOMATION_BYPASS_SECRET?.trim() || "",
     defaultRetries: parsePositiveInteger(env.JOBS_QUEUE_DEFAULT_RETRIES, DEFAULT_RETRIES),
     retryDelayExpression: env.JOBS_QUEUE_RETRY_DELAY_EXPRESSION || DEFAULT_RETRY_DELAY_EXPRESSION,
     maxPayloadBytes: parsePositiveInteger(

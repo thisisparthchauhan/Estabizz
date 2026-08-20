@@ -10,6 +10,8 @@ class Settings:
     database_url: str
     jobs_ai_provider: str
     jobs_ai_model: str
+    max_resume_file_bytes: int
+    extraction_timeout_seconds: int
 
     @property
     def is_production(self) -> bool:
@@ -24,4 +26,23 @@ def get_settings() -> Settings:
         database_url=os.getenv("DATABASE_URL", "").strip(),
         jobs_ai_provider=os.getenv("JOBS_AI_PROVIDER", "disabled").strip() or "disabled",
         jobs_ai_model=os.getenv("JOBS_AI_MODEL", "").strip(),
+        max_resume_file_bytes=parse_positive_int(
+            os.getenv("JOBS_DOCUMENT_MAX_UPLOAD_MB"),
+            10,
+        )
+        * 1024
+        * 1024,
+        extraction_timeout_seconds=parse_positive_int(
+            os.getenv("JOBS_AI_EXTRACTION_TIMEOUT_SECONDS"),
+            15,
+        ),
     )
+
+
+def parse_positive_int(value: str | None, fallback: int) -> int:
+    try:
+        parsed = int(value or "")
+    except ValueError:
+        return fallback
+
+    return parsed if parsed > 0 else fallback

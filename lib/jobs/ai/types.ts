@@ -20,6 +20,26 @@ export interface JobsAiHealthResponse {
   database_configured: boolean;
 }
 
+export interface JobsAiResumeTextExtractionRequest {
+  resumeVersionId: string;
+  candidateId: string;
+  correlationId: string;
+  fileName: string;
+  mimeType: string;
+  content: Uint8Array;
+}
+
+export interface JobsAiResumeTextExtractionResponse {
+  status: string;
+  text: string;
+  pageCount: number | null;
+  detectedMimeType: string;
+  characterCount: number;
+  extractionMethod: string;
+  warnings: string[];
+  requiresOcr: boolean;
+}
+
 export interface JobsAiClientResult<TData> {
   ok: boolean;
   status: number | null;

@@ -49,5 +49,7 @@ export function createJobsQueueIdempotencyKey(parts: {
   entityId?: string;
   correlationId: string;
 }): string {
-  return [parts.jobType, parts.entityId || "none", parts.correlationId].join(":");
+  return [parts.jobType, parts.entityId || "none", parts.correlationId]
+    .map((part) => part.replace(/[^A-Za-z0-9_.-]/g, "-"))
+    .join("-");
 }

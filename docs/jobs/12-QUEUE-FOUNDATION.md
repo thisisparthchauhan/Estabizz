@@ -94,7 +94,7 @@ The QStash adapter sends this key as the QStash `deduplicationId`, which prevent
 Recommended idempotency format:
 
 ```text
-{jobType}:{entityId}:{correlationId}
+{jobType}-{entityId}-{correlationId}
 ```
 
 Business workers added later must also enforce idempotency at the application layer for side effects such as email delivery, AI result writes, or status updates.

@@ -11,6 +11,8 @@ import type {
   JobsAiResumeTextExtractionRequest,
   JobsAiResumeTextExtractionResponse,
   JobsAiServiceConfig,
+  JobsAiStructuredExtractionRequest,
+  JobsAiStructuredExtractionResponse,
 } from "./types";
 
 export class JobsAiFastApiClient {
@@ -138,6 +140,74 @@ export class JobsAiFastApiClient {
           error instanceof Error && error.name === "AbortError"
             ? "Jobs AI resume text extraction timed out."
             : "Jobs AI resume text extraction failed.",
+      };
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
+  async extractStructuredResume(
+    request: JobsAiStructuredExtractionRequest,
+  ): Promise<JobsAiClientResult<JobsAiStructuredExtractionResponse>> {
+    const validation = validateJobsAiServiceConfig(this.config);
+
+    if (!validation.ok || !this.config.configured) {
+      return {
+        ok: false,
+        status: null,
+        errorMessage: `Jobs AI service is not configured: ${validation.errors.join(" ")}`,
+      };
+    }
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), this.config.timeoutMs);
+
+    try {
+      const response = await fetch(
+        buildJobsAiServiceUrl(this.config, "/internal/resumes/structured-extraction"),
+        {
+          method: "POST",
+          headers: {
+            "x-estabizz-service-secret": this.config.serviceSecret,
+            "content-type": "application/json",
+            accept: "application/json",
+          },
+          body: JSON.stringify({
+            resume_version_id: request.resumeVersionId,
+            candidate_id: request.candidateId,
+            correlation_id: request.correlationId,
+            extracted_text: request.extractedText,
+            extraction_method: request.extractionMethod ?? null,
+            page_count: request.pageCount ?? null,
+          }),
+          cache: "no-store",
+          signal: controller.signal,
+        },
+      );
+
+      const data = await readJsonSafely<JobsAiStructuredExtractionResponse>(response);
+
+      if (!response.ok) {
+        return {
+          ok: false,
+          status: response.status,
+          errorMessage: `Jobs AI structured extraction failed with HTTP ${response.status}.`,
+        };
+      }
+
+      return {
+        ok: true,
+        status: response.status,
+        data,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        status: null,
+        errorMessage:
+          error instanceof Error && error.name === "AbortError"
+            ? "Jobs AI structured extraction timed out."
+            : "Jobs AI structured extraction failed.",
       };
     } finally {
       clearTimeout(timeout);

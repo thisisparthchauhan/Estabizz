@@ -123,6 +123,16 @@ function buildResumeState(input: CandidateAccountDashboardInput["resume"]) {
     };
   }
 
+  if (state === "ocr_required") {
+    return {
+      state,
+      label: "Scan Required",
+      description: "Your resume could not be read automatically. Please upload a text-based PDF or DOCX.",
+      ctaLabel: "Update Resume",
+      ctaHref: "/jobs/account/profile" as const,
+    };
+  }
+
   if (state === "failed") {
     return {
       state,
@@ -144,6 +154,7 @@ function buildResumeState(input: CandidateAccountDashboardInput["resume"]) {
 
 function getResumeState(input: CandidateAccountDashboardInput["resume"]): ResumeDashboardState {
   if (!input.hasResume) return "no_resume";
+  if (input.parseStatus === "ocr_required") return "ocr_required";
   if (input.parseStatus === "failed") return "failed";
   if (input.hasOpenProfileSuggestions) return "review_required";
   if (input.parseStatus === "completed") return "profile_ready";

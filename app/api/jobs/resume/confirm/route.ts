@@ -9,6 +9,7 @@ import {
   ResumeUploadStorageError,
   ResumeUploadValidationError,
 } from "@/lib/jobs/resumeUpload";
+import { dispatchResumeParse } from "@/lib/jobs/resumeParsing/dispatch";
 import {
   getClientIp,
   hashIdentifier,
@@ -53,6 +54,23 @@ export async function POST(request: NextRequest) {
       parseResumeUploadConfirmBody(body),
       getResumeUploadDependencies(),
     );
+
+    // Dispatch RESUME_PARSE job. If queue is not configured (blocked), return success — the
+    // upload succeeded and processing will be triggered when the queue is configured.
+    // If dispatch fails with an actual error, return 503 so the browser can retry the
+    // confirm endpoint (which is idempotent) until dispatch succeeds.
+    const dispatch = await dispatchResumeParse({
+      resumeVersionId: result.resumeVersionId,
+      candidateId: session.candidateId,
+      actorRefId: session.actorRefId,
+    });
+
+    if (!dispatch.dispatched && !dispatch.blocked) {
+      return NextResponse.json(
+        { error: "Resume upload was saved but could not be queued for processing. Please try again." },
+        { status: 503, headers: { "Cache-Control": "no-store" } },
+      );
+    }
 
     return NextResponse.json(result, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {

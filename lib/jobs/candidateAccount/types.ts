@@ -11,7 +11,8 @@ export type ResumeDashboardState =
   | "processing"
   | "review_required"
   | "profile_ready"
-  | "failed";
+  | "failed"
+  | "ocr_required";
 
 export type CandidateFacingApplicationStatus =
   | "under_review"
@@ -66,7 +67,7 @@ export interface CandidateAccountDashboardInput {
   candidate: CandidateAccountProfileInput;
   resume: {
     hasResume: boolean;
-    parseStatus?: "pending" | "processing" | "completed" | "failed" | null;
+    parseStatus?: "pending" | "processing" | "completed" | "failed" | "ocr_required" | null;
     hasOpenProfileSuggestions: boolean;
   };
   applications: CandidateAccountApplicationInput[];

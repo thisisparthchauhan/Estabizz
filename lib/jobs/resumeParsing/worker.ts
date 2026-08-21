@@ -7,17 +7,26 @@ import {
 } from "@/lib/jobs/documentStorage";
 import { createJobsAiClient } from "@/lib/jobs/ai";
 import { getJobsPrismaClient } from "@/lib/jobs/prisma";
+import { PrismaProfileProposalRepository } from "@/lib/jobs/profileReview/prismaRepository";
+import { persistAiProfileProposals } from "@/lib/jobs/profileReview/service";
 
 import { isResumeParsePermanentStatus } from "./contract";
+import { checkResumeProcessingGate } from "./processingGate";
 import {
   buildSafeResumeExtractionMetadata,
   sanitizeResumeProcessingMessage,
 } from "./sensitiveData";
+import type { ProposedResumeStructuredExtraction } from "./structuredExtraction";
 import type { ResumeParseJobEnvelope, ResumeParseWorkerResult } from "./types";
 
 const TEXT_EXTRACTION_MODEL_PROVIDER = "none";
 const TEXT_EXTRACTION_MODEL_NAME = "document-text-extraction";
 const TEXT_EXTRACTION_MODEL_VERSION = "v1-foundation";
+
+const STRUCTURED_EXTRACTION_PERMANENT_STATUSES = new Set([
+  "provider_not_configured",
+  "invalid_provider_output",
+]);
 
 export async function processResumeParseJob(
   envelope: ResumeParseJobEnvelope,
@@ -115,6 +124,19 @@ export async function processResumeParseJob(
       });
     }
 
+    // Security gate: check malware scan status before processing
+    const gate = checkResumeProcessingGate(metadata, storageConfig);
+
+    if (!gate.eligible) {
+      return await markFailed({
+        aiRunId: aiRun.id,
+        resumeVersionId: resumeVersion.id,
+        startedAt,
+        retryable: gate.retryable,
+        errorMessage: gate.reason,
+      });
+    }
+
     const download = await storage.createPresignedDownload({
       objectKey: resumeVersion.file_storage_key,
       candidateId: resumeVersion.candidate_id,
@@ -166,6 +188,56 @@ export async function processResumeParseJob(
       });
     }
 
+    // Structured extraction: call AI service with extracted text
+    const structuredResult = await aiClient.extractStructuredResume({
+      resumeVersionId: resumeVersion.id,
+      candidateId: resumeVersion.candidate_id,
+      correlationId: envelope.correlationId,
+      extractedText: extraction.data.text,
+      extractionMethod: extraction.data.extractionMethod ?? null,
+      pageCount: extraction.data.pageCount ?? null,
+    });
+
+    if (!structuredResult.ok || !structuredResult.data) {
+      return await markFailed({
+        aiRunId: aiRun.id,
+        resumeVersionId: resumeVersion.id,
+        startedAt,
+        retryable: true,
+        errorMessage: structuredResult.errorMessage || "AI structured extraction failed.",
+      });
+    }
+
+    const structured = structuredResult.data;
+    const isPermanent = STRUCTURED_EXTRACTION_PERMANENT_STATUSES.has(structured.status);
+
+    if (structured.status !== "structured_extracted") {
+      return await markFailed({
+        aiRunId: aiRun.id,
+        resumeVersionId: resumeVersion.id,
+        startedAt,
+        retryable: !isPermanent,
+        errorMessage: `Structured extraction returned ${structured.status}.`,
+      });
+    }
+
+    // Persist AI profile proposals
+    const repository = new PrismaProfileProposalRepository(prisma);
+    await persistAiProfileProposals(
+      {
+        candidateId: resumeVersion.candidate_id,
+        resumeVersionId: resumeVersion.id,
+        aiProcessingRunId: aiRun.id,
+        provider: structured.provider ?? "unknown",
+        model: structured.model ?? "unknown",
+        modelVersion: TEXT_EXTRACTION_MODEL_VERSION,
+        extractionTimestamp: new Date(),
+        extraction: structured.data as ProposedResumeStructuredExtraction,
+      },
+      repository,
+    );
+
+    // Update AI run with structured extraction model info and mark completed
     await prisma.$transaction([
       prisma.aIProcessingRun.update({
         where: { id: aiRun.id },
@@ -173,7 +245,10 @@ export async function processResumeParseJob(
           status: "completed",
           completed_at: new Date(),
           duration_ms: Date.now() - startedAt,
-          output_tokens: extractionMetadata.characterCount,
+          model_provider: structured.provider ?? TEXT_EXTRACTION_MODEL_PROVIDER,
+          model_name: structured.model ?? TEXT_EXTRACTION_MODEL_NAME,
+          input_tokens: structured.usage?.inputTokens ?? null,
+          output_tokens: structured.usage?.outputTokens ?? extractionMetadata.characterCount,
           error_detail: null,
         },
       }),

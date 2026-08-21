@@ -40,6 +40,29 @@ export interface JobsAiResumeTextExtractionResponse {
   requiresOcr: boolean;
 }
 
+export interface JobsAiStructuredExtractionRequest {
+  resumeVersionId: string;
+  candidateId: string;
+  correlationId: string;
+  extractedText: string;
+  extractionMethod?: string | null;
+  pageCount?: number | null;
+}
+
+export interface JobsAiStructuredExtractionUsage {
+  inputTokens: number | null;
+  outputTokens: number | null;
+}
+
+export interface JobsAiStructuredExtractionResponse {
+  status: string;
+  provider: string | null;
+  model: string | null;
+  data: unknown;
+  warnings: string[];
+  usage: JobsAiStructuredExtractionUsage | null;
+}
+
 export interface JobsAiClientResult<TData> {
   ok: boolean;
   status: number | null;

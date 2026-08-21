@@ -21,7 +21,7 @@ interface CandidateProfileData {
   candidateId: string;
   profile: CandidateCanonicalProfileSnapshot;
   contacts: Array<{ type: "email" | "phone_mobile"; value: string }>;
-  resumeStatus: "none" | "pending" | "processing" | "completed" | "failed";
+  resumeStatus: "none" | "pending" | "processing" | "completed" | "failed" | "ocr_required";
   resume: {
     hasResume: boolean;
     fileName: string | null;
@@ -62,6 +62,27 @@ export async function loadCandidateProfileReviewState(
     canonicalProfile: data.profile,
     contacts: data.contacts,
   });
+}
+
+function deriveProfileResumeStatus(
+  rawStatus: string | null,
+  errorDetail: string | null,
+): CandidateProfileData["resumeStatus"] {
+  if (!rawStatus) return "none";
+  if (rawStatus === "failed" && errorDetail && errorDetail.toLowerCase().includes("ocr_required")) {
+    return "ocr_required";
+  }
+
+  if (
+    rawStatus === "pending" ||
+    rawStatus === "processing" ||
+    rawStatus === "completed" ||
+    rawStatus === "failed"
+  ) {
+    return rawStatus;
+  }
+
+  return "none";
 }
 
 async function loadCandidateProfileData(
@@ -119,6 +140,9 @@ async function loadCandidateProfileData(
           file_type: true,
           file_size_bytes: true,
           created_at: true,
+          ai_processing_run: {
+            select: { error_detail: true },
+          },
         },
       },
       resume_versions: {
@@ -131,6 +155,9 @@ async function loadCandidateProfileData(
           file_type: true,
           file_size_bytes: true,
           created_at: true,
+          ai_processing_run: {
+            select: { error_detail: true },
+          },
         },
         orderBy: [{ is_current: "desc" }, { version_number: "desc" }],
         take: 1,
@@ -157,12 +184,14 @@ async function loadCandidateProfileData(
 
   const repository = new PrismaProfileProposalRepository(prisma);
   const proposals = await repository.listProposalsForCandidate(candidate.id);
-  const currentResumeStatus = candidate.current_resume?.deleted_at
-    ? undefined
-    : candidate.current_resume?.parse_status;
-  const currentResume = candidate.current_resume?.deleted_at ? undefined : candidate.current_resume;
+  const currentResumeRaw = candidate.current_resume?.deleted_at ? undefined : candidate.current_resume;
   const fallbackResume = candidate.resume_versions[0];
-  const resume = currentResume ?? fallbackResume;
+  const resume = currentResumeRaw ?? fallbackResume;
+  const rawStatus = currentResumeRaw?.parse_status ?? fallbackResume?.parse_status ?? null;
+  const errorDetail = currentResumeRaw
+    ? currentResumeRaw.ai_processing_run?.error_detail ?? null
+    : fallbackResume?.ai_processing_run?.error_detail ?? null;
+  const resumeStatus = deriveProfileResumeStatus(rawStatus, errorDetail);
 
   return {
     candidateId: candidate.id,
@@ -181,7 +210,7 @@ async function loadCandidateProfileData(
         type: contact.contact_type === "email" ? "email" : "phone_mobile",
         value: contact.value,
       })),
-    resumeStatus: currentResumeStatus ?? fallbackResume?.parse_status ?? "none",
+    resumeStatus,
     resume: {
       hasResume: Boolean(resume),
       fileName: resume?.file_name_original ?? null,

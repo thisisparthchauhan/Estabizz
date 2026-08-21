@@ -64,6 +64,9 @@ async function loadCandidateAccountDashboardInput(
         select: {
           parse_status: true,
           deleted_at: true,
+          ai_processing_run: {
+            select: { error_detail: true },
+          },
         },
       },
       resume_versions: {
@@ -72,6 +75,9 @@ async function loadCandidateAccountDashboardInput(
         },
         select: {
           parse_status: true,
+          ai_processing_run: {
+            select: { error_detail: true },
+          },
         },
         orderBy: [{ is_current: "desc" }, { version_number: "desc" }],
         take: 1,
@@ -160,10 +166,12 @@ async function loadCandidateAccountDashboardInput(
     return emptyDashboardInput(session.email);
   }
 
-  const currentResumeStatus = candidate.current_resume?.deleted_at
-    ? undefined
-    : candidate.current_resume?.parse_status;
-  const fallbackResumeStatus = candidate.resume_versions[0]?.parse_status;
+  const currentResumeRaw = candidate.current_resume?.deleted_at ? undefined : candidate.current_resume;
+  const currentResumeStatus = currentResumeRaw?.parse_status;
+  const currentResumeErrorDetail = currentResumeRaw?.ai_processing_run?.error_detail ?? null;
+  const fallbackResumeVersion = candidate.resume_versions[0];
+  const fallbackResumeStatus = fallbackResumeVersion?.parse_status;
+  const fallbackResumeErrorDetail = fallbackResumeVersion?.ai_processing_run?.error_detail ?? null;
   const applications = candidate.applications.map((application) => ({
     id: application.id,
     jobTitle: application.job.title,
@@ -192,11 +200,16 @@ async function loadCandidateAccountDashboardInput(
       educationCount: candidate._count.educations,
       skillCount: candidate._count.skills,
       domainCount: candidate._count.domain_experiences,
-      hasResume: Boolean(candidate.current_resume && !candidate.current_resume.deleted_at) || candidate.resume_versions.length > 0,
+      hasResume: Boolean(currentResumeRaw) || candidate.resume_versions.length > 0,
     },
     resume: {
-      hasResume: Boolean(candidate.current_resume && !candidate.current_resume.deleted_at) || candidate.resume_versions.length > 0,
-      parseStatus: currentResumeStatus ?? fallbackResumeStatus ?? null,
+      hasResume: Boolean(currentResumeRaw) || candidate.resume_versions.length > 0,
+      parseStatus: deriveResumeParseStatus(
+        currentResumeStatus ?? null,
+        currentResumeErrorDetail,
+        fallbackResumeStatus ?? null,
+        fallbackResumeErrorDetail,
+      ),
       hasOpenProfileSuggestions: candidate.ai_extractions.some(hasOpenProfileSuggestion),
     },
     applications,
@@ -232,6 +245,31 @@ function hasOpenProfileSuggestion(extraction: { extracted_value: unknown }): boo
 
   return (value as { reviewStatus?: unknown }).reviewStatus === "ai_proposed" ||
     (value as { reviewStatus?: unknown }).reviewStatus === "candidate_edited";
+}
+
+function deriveResumeParseStatus(
+  primaryStatus: string | null,
+  primaryErrorDetail: string | null,
+  fallbackStatus: string | null,
+  fallbackErrorDetail: string | null,
+): "pending" | "processing" | "completed" | "failed" | "ocr_required" | null {
+  const status = primaryStatus ?? fallbackStatus;
+  const errorDetail = primaryStatus !== null ? primaryErrorDetail : fallbackErrorDetail;
+
+  if (status === "failed" && errorDetail && errorDetail.toLowerCase().includes("ocr_required")) {
+    return "ocr_required";
+  }
+
+  if (
+    status === "pending" ||
+    status === "processing" ||
+    status === "completed" ||
+    status === "failed"
+  ) {
+    return status;
+  }
+
+  return null;
 }
 
 function emptyDashboardInput(email: string): CandidateAccountDashboardInput {

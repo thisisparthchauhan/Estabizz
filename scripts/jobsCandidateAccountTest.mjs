@@ -98,7 +98,7 @@ function runTests(service, navItems) {
   assert.equal(empty.upcomingInterviews.length, 0);
   assert.equal(empty.nextAction.title, "Upload your resume");
 
-  const processing = service.buildCandidateAccountDashboardViewModel({
+  const uploaded = service.buildCandidateAccountDashboardViewModel({
     ...syntheticDashboardInput(),
     resume: {
       hasResume: true,
@@ -106,7 +106,8 @@ function runTests(service, navItems) {
       hasOpenProfileSuggestions: false,
     },
   });
-  assert.equal(processing.resumeState.state, "processing");
+  assert.equal(uploaded.resumeState.state, "uploaded");
+  assert.equal(uploaded.resumeState.label, "Resume Uploaded");
 
   const profileCompleteness = service.calculateProfileCompleteness({
     firstName: "Aarav",

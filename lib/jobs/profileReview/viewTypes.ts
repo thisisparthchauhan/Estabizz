@@ -53,6 +53,15 @@ export interface CandidateProfileReviewCanonicalView {
   totalExperience: string | null;
 }
 
+export interface CandidateProfileResumeView {
+  hasResume: boolean;
+  fileName: string | null;
+  fileType: string | null;
+  fileSizeBytes: number | null;
+  uploadedAt: string | null;
+  statusLabel: string;
+}
+
 export interface CandidateProfileReviewState {
   status: CandidateProfileReviewStatus;
   heading: string;
@@ -68,5 +77,10 @@ export interface CandidateProfileReviewState {
   showUploadCta: boolean;
   showManualProfileCta: boolean;
   showRetryCta: boolean;
+  resume: CandidateProfileResumeView;
+  resumeUploadPolicy: {
+    maxUploadBytes: number;
+    allowedExtensions: string[];
+    allowedMimeTypes: string[];
+  };
 }
-

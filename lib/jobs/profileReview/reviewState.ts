@@ -18,6 +18,18 @@ export interface CandidateProfileReviewStateInput {
   proposals: ProfileProposalRecord[];
   canonicalProfile?: CandidateCanonicalProfileSnapshot;
   contacts?: Array<{ type: "email" | "phone_mobile"; value: string }>;
+  resume?: {
+    hasResume: boolean;
+    fileName?: string | null;
+    fileType?: string | null;
+    fileSizeBytes?: number | null;
+    uploadedAt?: Date | string | null;
+  };
+  resumeUploadPolicy?: {
+    maxUploadBytes: number;
+    allowedExtensions: string[];
+    allowedMimeTypes: string[];
+  };
 }
 
 const SECTION_META: Record<CandidateProfileReviewSectionId, { title: string; description: string }> = {
@@ -89,6 +101,15 @@ export function buildCandidateProfileReviewState(
   const percentage = totalCount ? Math.round((reviewedCount / totalCount) * 100) : 0;
   const confirmedProfile = buildConfirmedProfile(input.canonicalProfile, input.contacts);
   const progress = { reviewedCount, totalCount, percentage };
+  const resume = buildResumeView(input.resumeStatus, input.resume);
+  const resumeUploadPolicy = input.resumeUploadPolicy ?? {
+    maxUploadBytes: 10 * 1024 * 1024,
+    allowedExtensions: ["pdf", "docx"],
+    allowedMimeTypes: [
+      "application/pdf",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ],
+  };
 
   if (input.resumeStatus === "none") {
     return {
@@ -102,14 +123,16 @@ export function buildCandidateProfileReviewState(
       showUploadCta: true,
       showManualProfileCta: true,
       showRetryCta: false,
+      resume,
+      resumeUploadPolicy,
     };
   }
 
   if (input.resumeStatus === "pending" || input.resumeStatus === "processing" || (input.resumeStatus === "completed" && fields.length === 0)) {
     return {
       status: "processing",
-      heading: "We're preparing your profile.",
-      message: "We will show suggested details here once your resume review is ready.",
+      heading: "Resume uploaded",
+      message: "Your resume is stored privately. Profile preparation will start in a later approved step.",
       progress,
       sections,
       confirmedProfile,
@@ -117,6 +140,8 @@ export function buildCandidateProfileReviewState(
       showUploadCta: false,
       showManualProfileCta: true,
       showRetryCta: false,
+      resume,
+      resumeUploadPolicy,
     };
   }
 
@@ -132,6 +157,8 @@ export function buildCandidateProfileReviewState(
       showUploadCta: true,
       showManualProfileCta: true,
       showRetryCta: true,
+      resume,
+      resumeUploadPolicy,
     };
   }
 
@@ -150,7 +177,43 @@ export function buildCandidateProfileReviewState(
     showUploadCta: false,
     showManualProfileCta: false,
     showRetryCta: false,
+    resume,
+    resumeUploadPolicy,
   };
+}
+
+function buildResumeView(
+  status: CandidateProfileReviewStateInput["resumeStatus"],
+  resume: CandidateProfileReviewStateInput["resume"],
+) {
+  if (!resume?.hasResume) {
+    return {
+      hasResume: false,
+      fileName: null,
+      fileType: null,
+      fileSizeBytes: null,
+      uploadedAt: null,
+      statusLabel: "No resume uploaded",
+    };
+  }
+
+  return {
+    hasResume: true,
+    fileName: resume.fileName ?? null,
+    fileType: resume.fileType ?? null,
+    fileSizeBytes: resume.fileSizeBytes ?? null,
+    uploadedAt: resume.uploadedAt ? toIso(resume.uploadedAt) : null,
+    statusLabel: getResumeStatusLabel(status),
+  };
+}
+
+function getResumeStatusLabel(status: CandidateProfileReviewStateInput["resumeStatus"]): string {
+  if (status === "failed" || status === "ocr_required") return "Needs attention";
+  return status === "none" ? "No resume uploaded" : "Resume uploaded";
+}
+
+function toIso(value: Date | string): string {
+  return value instanceof Date ? value.toISOString() : value;
 }
 
 function buildSection(

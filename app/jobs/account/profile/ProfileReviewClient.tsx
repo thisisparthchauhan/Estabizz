@@ -25,6 +25,8 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
   const [state, setState] = useState(initialState);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [uploadStatus, setUploadStatus] = useState<"idle" | "requesting" | "uploading" | "verifying" | "success">("idle");
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [editingProposalId, setEditingProposalId] = useState<string | null>(null);
   const [editValue, setEditValue] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -112,6 +114,49 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
           </div>
         </section>
 
+        <ResumeUploadPanel
+          state={state}
+          uploadStatus={uploadStatus}
+          uploadProgress={uploadProgress}
+          onError={setError}
+          onUpload={async (file) => {
+            setError("");
+            setSuccess("");
+            setUploadProgress(0);
+            try {
+              setUploadStatus("requesting");
+              const uploadIntent = await requestResumeUploadIntent(file);
+              setUploadStatus("uploading");
+              await uploadToPrivateStorage(file, uploadIntent, setUploadProgress);
+              setUploadStatus("verifying");
+              const confirmed = await confirmResumeUpload(uploadIntent.uploadRef);
+
+              setState((current) => ({
+                ...current,
+                status: "processing",
+                heading: "Resume uploaded",
+                message: "Your resume is stored privately. Profile preparation will start in a later approved step.",
+                showUploadCta: false,
+                showRetryCta: false,
+                resume: {
+                  hasResume: true,
+                  fileName: confirmed.fileName,
+                  fileType: confirmed.fileType,
+                  fileSizeBytes: confirmed.fileSizeBytes,
+                  uploadedAt: confirmed.uploadedAt,
+                  statusLabel: "Resume uploaded",
+                },
+              }));
+              setUploadStatus("success");
+              setSuccess("Resume uploaded successfully.");
+            } catch (uploadError) {
+              setUploadStatus("idle");
+              setUploadProgress(0);
+              setError(uploadError instanceof Error ? uploadError.message : "We could not upload your resume.");
+            }
+          }}
+        />
+
         {(state.status === "no_resume" || state.status === "processing" || state.status === "recovery") && (
           <ProfileStatePanel state={state} onSave={() => runAction({ action: "save_progress" }, "Progress saved.")} />
         )}
@@ -194,6 +239,226 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
       </div>
     </main>
   );
+}
+
+interface ResumeUploadIntentPayload {
+  uploadRef: string;
+  uploadUrl: string;
+  requiredHeaders: Record<string, string>;
+  maxUploadBytes: number;
+}
+
+interface ResumeConfirmPayload {
+  ok: true;
+  fileName: string;
+  fileType: string;
+  fileSizeBytes: number;
+  uploadedAt: string;
+}
+
+function ResumeUploadPanel({
+  state,
+  uploadStatus,
+  uploadProgress,
+  onError,
+  onUpload,
+}: {
+  state: CandidateProfileReviewState;
+  uploadStatus: "idle" | "requesting" | "uploading" | "verifying" | "success";
+  uploadProgress: number;
+  onError: (message: string) => void;
+  onUpload: (file: File) => Promise<void>;
+}) {
+  const disabled = uploadStatus !== "idle" && uploadStatus !== "success";
+  const statusLabel =
+    uploadStatus === "requesting"
+      ? "Preparing private upload..."
+      : uploadStatus === "uploading"
+        ? "Uploading..."
+        : uploadStatus === "verifying"
+          ? "Verifying resume..."
+          : uploadStatus === "success"
+            ? "Resume uploaded"
+            : state.resume.statusLabel;
+
+  async function handleFile(file: File | null) {
+    if (!file) return;
+
+    const allowedTypes = new Set(state.resumeUploadPolicy.allowedMimeTypes);
+    const extension = file.name.split(".").pop()?.toLowerCase() ?? "";
+
+    if (!allowedTypes.has(file.type) || !state.resumeUploadPolicy.allowedExtensions.includes(extension)) {
+      onError("Please choose a PDF or DOCX resume.");
+      return;
+    }
+
+    if (file.size <= 0) {
+      onError("Please choose a non-empty resume file.");
+      return;
+    }
+
+    if (file.size > state.resumeUploadPolicy.maxUploadBytes) {
+      onError(`Resume must be ${formatBytes(state.resumeUploadPolicy.maxUploadBytes)} or smaller.`);
+      return;
+    }
+
+    await onUpload(file);
+  }
+
+  return (
+    <section
+      id="upload-resume"
+      className="mb-8 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)]"
+    >
+      <div className="grid gap-5 lg:grid-cols-[1fr_0.8fr] lg:items-start">
+        <div>
+          <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1677f2]">Resume</p>
+          <h2 className="mt-3 text-2xl font-black text-[#120b45]">
+            {state.resume.hasResume ? "Replace or upload a new resume" : "Upload your resume"}
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-[#64748b]">
+            Upload a PDF or DOCX resume. Your file is stored privately and is not given a public URL.
+          </p>
+          <p className="mt-2 text-xs font-bold text-[#64748b]">
+            Maximum size: {formatBytes(state.resumeUploadPolicy.maxUploadBytes)}
+          </p>
+        </div>
+
+        <div className="rounded-lg border border-[#dce9f8] bg-[#f8fbff] p-4">
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#1677f2]">{statusLabel}</p>
+          {state.resume.hasResume ? (
+            <div className="mt-3 text-sm text-[#475569]">
+              <p className="font-black text-[#0f172a]">{state.resume.fileName || "Resume file"}</p>
+              <p className="mt-1">
+                {[state.resume.fileType, state.resume.fileSizeBytes ? formatBytes(state.resume.fileSizeBytes) : null]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </p>
+              {state.resume.uploadedAt && <p className="mt-1">Uploaded {formatDate(state.resume.uploadedAt)}</p>}
+            </div>
+          ) : (
+            <p className="mt-3 text-sm text-[#64748b]">No resume uploaded yet.</p>
+          )}
+
+          {uploadStatus === "uploading" && (
+            <div className="mt-4">
+              <div className="h-2 overflow-hidden rounded-full bg-[#e5eef8]">
+                <div
+                  className="h-full rounded-full bg-[#1677f2] transition-all"
+                  style={{ width: `${uploadProgress}%` }}
+                />
+              </div>
+              <p className="mt-2 text-right text-xs font-black text-[#1677f2]">{uploadProgress}%</p>
+            </div>
+          )}
+
+          <label className="mt-5 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-blue-200 bg-white px-4 py-6 text-center transition hover:border-[#1677f2]/50">
+            <span className="text-sm font-black text-[#0f172a]">
+              {disabled ? "Upload in progress" : "Choose PDF or DOCX"}
+            </span>
+            <span className="mt-1 text-xs text-[#64748b]">Drag and drop is supported by your browser file picker.</span>
+            <input
+              type="file"
+              className="sr-only"
+              accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              disabled={disabled}
+              onChange={(event) => {
+                handleFile(event.currentTarget.files?.[0] ?? null).catch((uploadError) => {
+                  onError(uploadError instanceof Error ? uploadError.message : "We could not upload your resume.");
+                });
+                event.currentTarget.value = "";
+              }}
+            />
+          </label>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+async function requestResumeUploadIntent(file: File): Promise<ResumeUploadIntentPayload> {
+  const response = await fetch("/api/jobs/resume/upload-intent", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      fileName: file.name,
+      contentType: file.type,
+      contentLengthBytes: file.size,
+    }),
+  });
+  const payload = await response.json();
+
+  if (!response.ok || !payload.ok) {
+    throw new Error(payload.error || "We could not prepare your resume upload.");
+  }
+
+  return payload.uploadIntent;
+}
+
+function uploadToPrivateStorage(
+  file: File,
+  uploadIntent: ResumeUploadIntentPayload,
+  onProgress: (progress: number) => void,
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.open("PUT", uploadIntent.uploadUrl);
+
+    for (const [header, value] of Object.entries(uploadIntent.requiredHeaders)) {
+      request.setRequestHeader(header, value);
+    }
+
+    request.upload.onprogress = (event) => {
+      if (event.lengthComputable) {
+        onProgress(Math.min(100, Math.round((event.loaded / event.total) * 100)));
+      }
+    };
+    request.onload = () => {
+      if (request.status >= 200 && request.status < 300) {
+        onProgress(100);
+        resolve();
+      } else {
+        reject(new Error("Private resume upload failed. Please try again."));
+      }
+    };
+    request.onerror = () => reject(new Error("Private resume upload failed. Please try again."));
+    request.send(file);
+  });
+}
+
+async function confirmResumeUpload(uploadRef: string): Promise<ResumeConfirmPayload> {
+  const response = await fetch("/api/jobs/resume/confirm", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ uploadRef }),
+  });
+  const payload = await response.json();
+
+  if (!response.ok || !payload.ok) {
+    throw new Error(payload.error || "We could not verify your resume upload.");
+  }
+
+  return payload;
+}
+
+function formatBytes(value: number): string {
+  if (value >= 1024 * 1024) {
+    return `${(value / (1024 * 1024)).toFixed(value % (1024 * 1024) === 0 ? 0 : 1)} MB`;
+  }
+
+  if (value >= 1024) {
+    return `${Math.round(value / 1024)} KB`;
+  }
+
+  return `${value} bytes`;
+}
+
+function formatDate(value: string): string {
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(value));
 }
 
 function ProfileStatePanel({

@@ -113,16 +113,6 @@ function buildResumeState(input: CandidateAccountDashboardInput["resume"]) {
     };
   }
 
-  if (state === "processing") {
-    return {
-      state,
-      label: "Processing",
-      description: "We're preparing your profile from your resume.",
-      ctaLabel: "View Profile",
-      ctaHref: "/jobs/account/profile" as const,
-    };
-  }
-
   if (state === "review_required") {
     return {
       state,
@@ -155,7 +145,6 @@ function buildResumeState(input: CandidateAccountDashboardInput["resume"]) {
 function getResumeState(input: CandidateAccountDashboardInput["resume"]): ResumeDashboardState {
   if (!input.hasResume) return "no_resume";
   if (input.parseStatus === "failed") return "failed";
-  if (input.parseStatus === "pending" || input.parseStatus === "processing") return "processing";
   if (input.hasOpenProfileSuggestions) return "review_required";
   if (input.parseStatus === "completed") return "profile_ready";
   return "uploaded";
@@ -270,4 +259,3 @@ function humanize(value: string): string {
     .trim()
     .replace(/^./, (item) => item.toUpperCase());
 }
-

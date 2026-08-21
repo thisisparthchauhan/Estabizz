@@ -3,6 +3,8 @@ import "server-only";
 import type { PrismaClient } from "@prisma/client";
 
 import { getJobsPrismaClient } from "@/lib/jobs/prisma";
+import { getDocumentStorageConfig } from "@/lib/jobs/documentStorage";
+import { RESUME_UPLOAD_EXTENSIONS, RESUME_UPLOAD_MIME_TYPES } from "@/lib/jobs/resumeUpload/types";
 import {
   requireCandidateAccountSessionForPage,
   requireCandidateAccountSessionFromRequest,
@@ -20,6 +22,13 @@ interface CandidateProfileData {
   profile: CandidateCanonicalProfileSnapshot;
   contacts: Array<{ type: "email" | "phone_mobile"; value: string }>;
   resumeStatus: "none" | "pending" | "processing" | "completed" | "failed";
+  resume: {
+    hasResume: boolean;
+    fileName: string | null;
+    fileType: string | null;
+    fileSizeBytes: number | null;
+    uploadedAt: Date | null;
+  };
   proposals: ProfileProposalRecord[];
 }
 
@@ -43,6 +52,12 @@ export async function loadCandidateProfileReviewState(
   const data = await loadCandidateProfileData(session.candidateId, prisma);
   return buildCandidateProfileReviewState({
     resumeStatus: data.resumeStatus,
+    resume: data.resume,
+    resumeUploadPolicy: {
+      maxUploadBytes: getDocumentStorageConfig().maxUploadBytes,
+      allowedExtensions: [...RESUME_UPLOAD_EXTENSIONS],
+      allowedMimeTypes: [...RESUME_UPLOAD_MIME_TYPES],
+    },
     proposals: data.proposals,
     canonicalProfile: data.profile,
     contacts: data.contacts,
@@ -59,6 +74,13 @@ async function loadCandidateProfileData(
       profile: {},
       contacts: [],
       resumeStatus: "none",
+      resume: {
+        hasResume: false,
+        fileName: null,
+        fileType: null,
+        fileSizeBytes: null,
+        uploadedAt: null,
+      },
       proposals: [],
     };
   }
@@ -93,6 +115,10 @@ async function loadCandidateProfileData(
         select: {
           parse_status: true,
           deleted_at: true,
+          file_name_original: true,
+          file_type: true,
+          file_size_bytes: true,
+          created_at: true,
         },
       },
       resume_versions: {
@@ -101,6 +127,10 @@ async function loadCandidateProfileData(
         },
         select: {
           parse_status: true,
+          file_name_original: true,
+          file_type: true,
+          file_size_bytes: true,
+          created_at: true,
         },
         orderBy: [{ is_current: "desc" }, { version_number: "desc" }],
         take: 1,
@@ -114,6 +144,13 @@ async function loadCandidateProfileData(
       profile: {},
       contacts: [],
       resumeStatus: "none",
+      resume: {
+        hasResume: false,
+        fileName: null,
+        fileType: null,
+        fileSizeBytes: null,
+        uploadedAt: null,
+      },
       proposals: [],
     };
   }
@@ -123,7 +160,9 @@ async function loadCandidateProfileData(
   const currentResumeStatus = candidate.current_resume?.deleted_at
     ? undefined
     : candidate.current_resume?.parse_status;
-  const fallbackResumeStatus = candidate.resume_versions[0]?.parse_status;
+  const currentResume = candidate.current_resume?.deleted_at ? undefined : candidate.current_resume;
+  const fallbackResume = candidate.resume_versions[0];
+  const resume = currentResume ?? fallbackResume;
 
   return {
     candidateId: candidate.id,
@@ -142,7 +181,14 @@ async function loadCandidateProfileData(
         type: contact.contact_type === "email" ? "email" : "phone_mobile",
         value: contact.value,
       })),
-    resumeStatus: currentResumeStatus ?? fallbackResumeStatus ?? "none",
+    resumeStatus: currentResumeStatus ?? fallbackResume?.parse_status ?? "none",
+    resume: {
+      hasResume: Boolean(resume),
+      fileName: resume?.file_name_original ?? null,
+      fileType: resume?.file_type ?? null,
+      fileSizeBytes: resume?.file_size_bytes ?? null,
+      uploadedAt: resume?.created_at ?? null,
+    },
     proposals,
   };
 }

@@ -70,7 +70,7 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
   }
 
   return (
-    <main className="min-h-screen bg-[#f8fbff] px-4 py-10 pt-[96px] text-[#0a1628] sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>

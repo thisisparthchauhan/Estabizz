@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
+import { buildLoginHref } from "@/lib/jobs/candidateIdentity/redirects";
 import {
   loadCandidateProfileReviewState,
   requireCandidateProfileSessionForPage,
@@ -19,7 +20,7 @@ export default async function CandidateProfileReviewPage() {
   const session = await requireCandidateProfileSessionForPage();
 
   if (!session) {
-    redirect("/login");
+    redirect(buildLoginHref("/jobs/account/profile"));
   }
 
   const state = await loadCandidateProfileReviewState(session);

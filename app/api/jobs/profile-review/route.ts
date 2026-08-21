@@ -5,6 +5,10 @@ import {
   requireCandidateProfileSessionFromRequest,
 } from "@/lib/jobs/profileReview/candidateAccess";
 import {
+  CandidateIdentityAuthorizationError,
+  CandidateIdentityUnavailableError,
+} from "@/lib/jobs/candidateIdentity/types";
+import {
   parseCandidateProfileReviewActionBody,
   runCandidateProfileReviewAction,
 } from "@/lib/jobs/profileReview/reviewActions";
@@ -27,7 +31,15 @@ export async function GET(request: NextRequest) {
       ok: true,
       state: await loadCandidateProfileReviewState(session),
     });
-  } catch {
+  } catch (error) {
+    if (error instanceof CandidateIdentityAuthorizationError) {
+      return NextResponse.json({ error: "Please log in to review your profile." }, { status: 401 });
+    }
+
+    if (error instanceof CandidateIdentityUnavailableError) {
+      return NextResponse.json({ error: "Your Jobs account is not available right now." }, { status: 403 });
+    }
+
     return NextResponse.json(
       { error: "We could not load your profile review right now." },
       { status: 500 },
@@ -49,6 +61,14 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(result);
   } catch (error) {
+    if (error instanceof CandidateIdentityAuthorizationError) {
+      return NextResponse.json({ error: "Please log in to review your profile." }, { status: 401 });
+    }
+
+    if (error instanceof CandidateIdentityUnavailableError) {
+      return NextResponse.json({ error: "Your Jobs account is not available right now." }, { status: 403 });
+    }
+
     if (error instanceof ProfileReviewAuthorizationError) {
       return NextResponse.json({ error: "You can only review your own profile." }, { status: 403 });
     }

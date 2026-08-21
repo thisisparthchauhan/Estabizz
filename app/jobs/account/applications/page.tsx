@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { loadCandidateAccountDashboard } from "@/lib/jobs/candidateAccount/data";
+import { buildLoginHref } from "@/lib/jobs/candidateIdentity/redirects";
 import { requireCandidateProfileSessionForPage } from "@/lib/jobs/profileReview/candidateAccess";
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export default async function CandidateApplicationsPage() {
   const session = await requireCandidateProfileSessionForPage();
 
   if (!session) {
-    redirect("/login");
+    redirect(buildLoginHref("/jobs/account/applications"));
   }
 
   const dashboard = await loadCandidateAccountDashboard(session);
@@ -103,4 +104,3 @@ function formatDate(value: string): string {
     year: "numeric",
   }).format(new Date(value));
 }
-

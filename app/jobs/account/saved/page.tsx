@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { loadCandidateAccountDashboard } from "@/lib/jobs/candidateAccount/data";
+import { buildLoginHref } from "@/lib/jobs/candidateIdentity/redirects";
 import { requireCandidateProfileSessionForPage } from "@/lib/jobs/profileReview/candidateAccess";
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export default async function CandidateSavedJobsPage() {
   const session = await requireCandidateProfileSessionForPage();
 
   if (!session) {
-    redirect("/login");
+    redirect(buildLoginHref("/jobs/account/saved"));
   }
 
   const dashboard = await loadCandidateAccountDashboard(session);
@@ -66,4 +67,3 @@ export default async function CandidateSavedJobsPage() {
     </main>
   );
 }
-

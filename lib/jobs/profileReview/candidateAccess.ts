@@ -1,20 +1,19 @@
 import "server-only";
 
-import type { NextRequest } from "next/server";
 import type { PrismaClient } from "@prisma/client";
 
-import { getSessionEmail, getSessionEmailFromRequest } from "@/lib/auth/session";
 import { getJobsPrismaClient } from "@/lib/jobs/prisma";
+import {
+  requireCandidateAccountSessionForPage,
+  requireCandidateAccountSessionFromRequest,
+  type CandidateAccountSession,
+} from "@/lib/jobs/candidateIdentity/access";
 import type { CandidateCanonicalProfileSnapshot, ProfileProposalRecord } from "./types";
 import { PrismaProfileProposalRepository } from "./prismaRepository";
 import { buildCandidateProfileReviewState } from "./reviewState";
 import type { CandidateProfileReviewState } from "./viewTypes";
 
-export interface CandidateProfileSession {
-  candidateId: string;
-  actorRefId?: string;
-  email: string;
-}
+export type CandidateProfileSession = CandidateAccountSession;
 
 interface CandidateProfileData {
   candidateId: string;
@@ -25,20 +24,16 @@ interface CandidateProfileData {
 }
 
 export async function requireCandidateProfileSessionFromRequest(
-  request: NextRequest,
+  request: Parameters<typeof requireCandidateAccountSessionFromRequest>[0],
   prisma: PrismaClient = getJobsPrismaClient(),
 ): Promise<CandidateProfileSession | null> {
-  const email = getSessionEmailFromRequest(request);
-  if (!email) return null;
-  return resolveCandidateProfileSession(email, prisma);
+  return requireCandidateAccountSessionFromRequest(request, prisma);
 }
 
 export async function requireCandidateProfileSessionForPage(
   prisma: PrismaClient = getJobsPrismaClient(),
 ): Promise<CandidateProfileSession | null> {
-  const email = await getSessionEmail();
-  if (!email) return null;
-  return resolveCandidateProfileSession(email, prisma);
+  return requireCandidateAccountSessionForPage(prisma);
 }
 
 export async function loadCandidateProfileReviewState(
@@ -52,34 +47,6 @@ export async function loadCandidateProfileReviewState(
     canonicalProfile: data.profile,
     contacts: data.contacts,
   });
-}
-
-async function resolveCandidateProfileSession(
-  email: string,
-  prisma: PrismaClient,
-): Promise<CandidateProfileSession> {
-  const candidate = await prisma.candidate.findFirst({
-    where: {
-      deleted_at: null,
-      contacts: {
-        some: {
-          contact_type: "email",
-          value: email,
-          opt_out: false,
-        },
-      },
-    },
-    select: {
-      id: true,
-      identity_ref_id: true,
-    },
-  });
-
-  return {
-    candidateId: candidate?.id ?? "",
-    actorRefId: candidate?.identity_ref_id ?? undefined,
-    email,
-  };
 }
 
 async function loadCandidateProfileData(

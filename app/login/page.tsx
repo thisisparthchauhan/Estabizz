@@ -1,16 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+
+import { buildSignupHref, getSafeInternalReturnPath } from "@/lib/jobs/candidateIdentity/redirects";
 
 export default function LoginPage() {
-    const router = useRouter();
     const [tab, setTab] = useState<"email" | "phone">("email");
     const [form, setForm] = useState({ identifier: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [returnPath, setReturnPath] = useState("/");
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        setReturnPath(getSafeInternalReturnPath(params.get("redirect")));
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -32,7 +38,7 @@ export default function LoginPage() {
                 setError(data.error || "Invalid credentials.");
             } else {
                 // Full reload so Navbar re-mounts and re-fetches auth state
-                window.location.href = "/";
+                window.location.href = returnPath;
             }
         } catch {
             setError("Network error. Please try again.");
@@ -220,7 +226,7 @@ export default function LoginPage() {
 
                     <p className="text-center text-gray-500 text-sm mt-6">
                         Don&apos;t have an account?{" "}
-                        <Link href="/signup" className="text-[#1677f2] font-semibold hover:underline">Sign up</Link>
+                        <Link href={buildSignupHref(returnPath)} className="text-[#1677f2] font-semibold hover:underline">Sign up</Link>
                     </p>
                 </div>
             </div>

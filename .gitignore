@@ -14,3 +14,6 @@ tsconfig.tsbuildinfo
 # Claude Code local tooling state (worktrees, launch config, etc.)
 .claude/launch.json
 .claude/worktrees/
+
+# Local real-candidate CVs; never commit or process in AI smoke tests.
+Jobs CV/

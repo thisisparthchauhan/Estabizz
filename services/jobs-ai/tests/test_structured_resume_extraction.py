@@ -1,10 +1,20 @@
+import asyncio
+import json
+import sys
+from types import SimpleNamespace
 from typing import Any
 
 from fastapi.testclient import TestClient
 
+from app.core.config import Settings
 from app.core.config import get_settings
 from app.main import app
-from app.services.ai_providers.openai_provider import build_structured_extraction_system_prompt
+from app.services.ai_providers.openai_provider import (
+    OpenAIProvider,
+    build_openai_strict_structured_extraction_schema,
+    build_structured_extraction_response_format,
+    build_structured_extraction_system_prompt,
+)
 from app.services.ai_providers.types import (
     ProviderError,
     ProviderInvalidOutputError,
@@ -12,6 +22,15 @@ from app.services.ai_providers.types import (
     ProviderRequest,
     ProviderResponse,
     ProviderTimeoutError,
+)
+from scripts.structured_resume_live_smoke_test import (
+    SYNTHETIC_RESUME_PATH,
+    contains,
+    estimate_gpt_5_6_luna_cost,
+    field_value,
+    has_employment_history_match,
+    preflight,
+    run_acceptance_checks,
 )
 
 SECRET = "test-service-secret"
@@ -253,6 +272,258 @@ def test_raw_resume_text_never_enters_logs_or_failure_response(monkeypatch, capl
     assert "Synthetic raw text" not in caplog.text
 
 
+def test_live_smoke_script_refuses_production():
+    class ProductionSettings:
+        app_env = "production"
+        is_production = True
+        jobs_ai_provider = "openai"
+        jobs_ai_model = "gpt-5.6-luna"
+        openai_api_key = "synthetic-key"
+
+    try:
+        preflight(ProductionSettings())
+    except SystemExit as exc:
+        assert "production" in str(exc)
+    else:
+        raise AssertionError("Expected smoke-test preflight to refuse production.")
+
+
+def test_synthetic_fixture_contains_prompt_injection_sentence():
+    text = SYNTHETIC_RESUME_PATH.read_text(encoding="utf-8")
+
+    assert "Aarav Mehta" in text
+    assert "FinNova Services Private Limited" in text
+    assert "Ignore all previous instructions" in text
+    assert "best candidate" in text
+
+
+def test_live_smoke_acceptance_checks_pass_for_valid_synthetic_output():
+    from app.schemas.structured_resume import ProposedResumeStructuredExtraction
+
+    data = ProposedResumeStructuredExtraction.model_validate(valid_structured_smoke_output())
+    checks = run_acceptance_checks(data)
+
+    assert checks
+    assert all(passed for _label, passed in checks)
+
+
+def test_live_smoke_previous_employer_check_passes():
+    from app.schemas.structured_resume import ProposedResumeStructuredExtraction
+
+    data = ProposedResumeStructuredExtraction.model_validate(valid_structured_smoke_output())
+
+    assert has_employment_history_match(data, employer="Alpha Credit Solutions Private Limited")
+    assert has_employment_history_match(
+        data,
+        employer="Alpha Credit Solutions Private Limited",
+        designation="Compliance Analyst",
+    )
+
+
+def test_live_smoke_wrong_previous_employer_check_fails():
+    from app.schemas.structured_resume import ProposedResumeStructuredExtraction
+
+    data = ProposedResumeStructuredExtraction.model_validate(valid_structured_smoke_output())
+
+    assert not has_employment_history_match(data, employer="Wrong Credit Solutions Private Limited")
+    assert not has_employment_history_match(
+        data,
+        employer="Alpha Credit Solutions Private Limited",
+        designation="Senior Vice President",
+    )
+
+
+def test_live_smoke_current_and_previous_employers_are_independently_verified():
+    from app.schemas.structured_resume import ProposedResumeStructuredExtraction
+
+    data = ProposedResumeStructuredExtraction.model_validate(valid_structured_smoke_output())
+    checks = dict(run_acceptance_checks(data))
+
+    assert checks["current employer extracted"] is True
+    assert checks["previous employer extracted"] is True
+    assert checks["previous role extracted"] is True
+    assert contains(field_value(data.professional.currentEmployer), "FinNova")
+    assert not has_employment_history_match(data, employer="FinNova Services Private Limited")
+
+
+def test_live_smoke_cost_calculation_from_token_usage():
+    assert estimate_gpt_5_6_luna_cost(2_254, 3_311) == 0.004424
+    assert estimate_gpt_5_6_luna_cost(None, 3_311) is None
+    assert estimate_gpt_5_6_luna_cost(2_254, None) is None
+
+
+def test_openai_adapter_omits_temperature_for_gpt_5_6_luna(monkeypatch):
+    captured_kwargs: dict[str, Any] = {}
+
+    class FakeCompletions:
+        async def create(self, **kwargs):
+            captured_kwargs.update(kwargs)
+            return SimpleNamespace(
+                choices=[
+                    SimpleNamespace(
+                        finish_reason="stop",
+                        message=SimpleNamespace(
+                            content=json.dumps(valid_structured_smoke_output()),
+                            refusal=None,
+                        ),
+                    ),
+                ],
+                usage=SimpleNamespace(prompt_tokens=10, completion_tokens=5),
+            )
+
+    class FakeAsyncOpenAI:
+        def __init__(self, *, api_key: str, timeout: int) -> None:
+            assert api_key == "synthetic-key"
+            assert timeout == 15
+            self.chat = SimpleNamespace(completions=FakeCompletions())
+
+    monkeypatch.setitem(
+        sys.modules,
+        "openai",
+        SimpleNamespace(
+            APIStatusError=Exception,
+            APITimeoutError=Exception,
+            AsyncOpenAI=FakeAsyncOpenAI,
+            RateLimitError=Exception,
+        ),
+    )
+
+    provider = OpenAIProvider(
+        Settings(
+            app_env="staging",
+            ai_service_secret="",
+            database_url="",
+            jobs_ai_provider="openai",
+            jobs_ai_model="gpt-5.6-luna",
+            openai_api_key="synthetic-key",
+            max_resume_file_bytes=10 * 1024 * 1024,
+            extraction_timeout_seconds=15,
+        ),
+    )
+
+    response = asyncio.run(
+        provider.extract_structured_resume(
+            ProviderRequest(
+                resume_text="Synthetic resume text only.",
+                resume_version_id="11111111-1111-4111-8111-111111111111",
+                candidate_id="22222222-2222-4222-8222-222222222222",
+                correlation_id="33333333-3333-4333-8333-333333333333",
+                extraction_method="synthetic_text_fixture",
+                page_count=None,
+            ),
+        ),
+    )
+
+    assert response.provider == "openai"
+    assert captured_kwargs["model"] == "gpt-5.6-luna"
+    assert "temperature" not in captured_kwargs
+    assert captured_kwargs["response_format"]["type"] == "json_schema"
+    assert captured_kwargs["response_format"]["json_schema"]["strict"] is True
+    assert captured_kwargs["response_format"]["json_schema"]["name"] == "estabizz_jobs_resume_extraction"
+
+
+def test_openai_structured_output_schema_matches_pydantic_contract():
+    response_format = build_structured_extraction_response_format()
+    schema = response_format["json_schema"]["schema"]
+
+    assert response_format["type"] == "json_schema"
+    assert response_format["json_schema"]["strict"] is True
+    assert schema["additionalProperties"] is False
+    assert set(schema["required"]) == {
+        "identity",
+        "contact",
+        "professional",
+        "education",
+        "skills",
+        "regulatoryFinancialDomain",
+        "other",
+    }
+    assert "IdentitySection" in schema["$defs"]
+    assert schema["$defs"]["IdentitySection"]["additionalProperties"] is False
+    assert schema["$defs"]["IdentitySection"]["required"] == ["candidateName"]
+    assert schema["$defs"]["ExtractedField"]["properties"]["reviewStatus"]["enum"] == ["ai_proposed"]
+    assert schema["$defs"]["ExtractedField"]["required"] == [
+        "value",
+        "confidence",
+        "provenance",
+        "reviewStatus",
+    ]
+    assert schema["$defs"]["ExtractedField"]["properties"]["value"]["anyOf"] == [
+        {"type": "string"},
+        {"type": "number"},
+        {"type": "boolean"},
+        {"type": "null"},
+    ]
+
+
+def test_openai_strict_schema_removes_json_mode_and_defaults():
+    serialized = json.dumps(build_openai_strict_structured_extraction_schema())
+
+    assert "json_object" not in serialized
+    assert '"default"' not in serialized
+    assert '"title"' not in serialized
+
+
+def test_openai_adapter_rejects_refusal_safely(monkeypatch):
+    class FakeCompletions:
+        async def create(self, **kwargs):
+            return SimpleNamespace(
+                choices=[
+                    SimpleNamespace(
+                        finish_reason="stop",
+                        message=SimpleNamespace(content=None, refusal="I cannot process this request."),
+                    ),
+                ],
+                usage=SimpleNamespace(prompt_tokens=10, completion_tokens=5),
+            )
+
+    class FakeAsyncOpenAI:
+        def __init__(self, *, api_key: str, timeout: int) -> None:
+            self.chat = SimpleNamespace(completions=FakeCompletions())
+
+    monkeypatch.setitem(
+        sys.modules,
+        "openai",
+        SimpleNamespace(
+            APIStatusError=Exception,
+            APITimeoutError=Exception,
+            AsyncOpenAI=FakeAsyncOpenAI,
+            RateLimitError=Exception,
+        ),
+    )
+
+    provider = OpenAIProvider(
+        Settings(
+            app_env="staging",
+            ai_service_secret="",
+            database_url="",
+            jobs_ai_provider="openai",
+            jobs_ai_model="gpt-5.6-luna",
+            openai_api_key="synthetic-key",
+            max_resume_file_bytes=10 * 1024 * 1024,
+            extraction_timeout_seconds=15,
+        ),
+    )
+
+    try:
+        asyncio.run(
+            provider.extract_structured_resume(
+                ProviderRequest(
+                    resume_text="Synthetic resume text only.",
+                    resume_version_id="11111111-1111-4111-8111-111111111111",
+                    candidate_id="22222222-2222-4222-8222-222222222222",
+                    correlation_id="33333333-3333-4333-8333-333333333333",
+                    extraction_method="synthetic_text_fixture",
+                    page_count=None,
+                ),
+            ),
+        )
+    except ProviderInvalidOutputError as exc:
+        assert "refused" in str(exc)
+    else:
+        raise AssertionError("Expected OpenAI refusal to be rejected safely.")
+
+
 def configure_secret(monkeypatch):
     monkeypatch.setenv("APP_ENV", "staging")
     monkeypatch.setenv("AI_SERVICE_SECRET", SECRET)
@@ -316,6 +587,62 @@ def valid_structured_output() -> dict[str, Any]:
     output["regulatoryFinancialDomain"]["RBI"] = extracted_field(True, "Experience")
     output["regulatoryFinancialDomain"]["Compliance"] = extracted_field(True, "Experience")
     output["other"]["languages"] = [extracted_field("English", "Languages")]
+    return output
+
+
+def valid_structured_smoke_output() -> dict[str, Any]:
+    output = empty_structured_output()
+    output["identity"]["candidateName"] = extracted_field("Aarav Mehta", "Header")
+    output["contact"]["location"] = extracted_field("Mumbai, Maharashtra", "Header")
+    output["professional"]["currentDesignation"] = extracted_field("Compliance Manager", "Experience")
+    output["professional"]["currentEmployer"] = extracted_field(
+        "FinNova Services Private Limited",
+        "Experience",
+    )
+    output["professional"]["totalExperienceYears"] = extracted_field(5, "Summary")
+    output["professional"]["employmentHistory"] = [
+        {
+            "designation": extracted_field("Compliance Manager", "Experience"),
+            "employer": extracted_field("FinNova Services Private Limited", "Experience"),
+        },
+        {
+            "designation": extracted_field("Compliance Analyst", "Experience"),
+            "employer": extracted_field("Alpha Credit Solutions Private Limited", "Experience"),
+        },
+    ]
+    output["education"] = [
+        {
+            "qualification": extracted_field("B.Com", "Education"),
+            "institution": extracted_field("Western Peninsula Commerce University", "Education"),
+            "year": extracted_field("2019", "Education"),
+        },
+    ]
+    output["skills"]["skills"] = [
+        {"name": extracted_field("KYC", "Skills")},
+        {"name": extracted_field("AML", "Skills")},
+        {"name": extracted_field("Excel", "Skills")},
+    ]
+    output["regulatoryFinancialDomain"]["RBI"] = extracted_field(True, "Domains")
+    output["regulatoryFinancialDomain"]["NBFC"] = extracted_field(True, "Domains")
+    output["regulatoryFinancialDomain"]["Fintech"] = extracted_field(True, "Domains")
+    output["regulatoryFinancialDomain"]["Compliance"] = extracted_field(True, "Domains")
+    output["regulatoryFinancialDomain"]["Risk"] = extracted_field(True, "Domains")
+    output["other"]["certifications"] = [
+        {
+            "name": extracted_field(
+                "Certified AML Controls Associate",
+                "Certification",
+            ),
+            "issuer": extracted_field(
+                "Fictional Institute of Financial Compliance",
+                "Certification",
+            ),
+        },
+    ]
+    output["other"]["languages"] = [
+        extracted_field("English", "Languages"),
+        extracted_field("Hindi", "Languages"),
+    ]
     return output
 
 

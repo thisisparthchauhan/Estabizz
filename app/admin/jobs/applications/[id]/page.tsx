@@ -7,6 +7,7 @@ import { listNotes } from "@/lib/jobs/recruitmentOps/notesRepository";
 import { listTasksForEntity } from "@/lib/jobs/recruitmentOps/tasksRepository";
 import { listInterviewsForApplication } from "@/lib/jobs/recruitmentOps/interviewsRepository";
 import AdminApplicationDetailClient from "./AdminApplicationDetailClient";
+import AdminPageContainer from "@/app/admin/_components/AdminPageContainer";
 
 export const metadata: Metadata = {
   title: "Application Detail — Estabizz Admin",
@@ -27,5 +28,9 @@ export default async function AdminApplicationDetailPage({ params }: Props) {
   ]);
   if (!application) notFound();
 
-  return <AdminApplicationDetailClient application={application} notes={notes} tasks={tasks} interviews={interviews} />;
+  return (
+    <AdminPageContainer>
+      <AdminApplicationDetailClient application={application} notes={notes} tasks={tasks} interviews={interviews} />
+    </AdminPageContainer>
+  );
 }

@@ -5,6 +5,7 @@ import { getCandidateForAdmin } from "@/lib/jobs/candidateManagement/repository"
 import { listNotes } from "@/lib/jobs/recruitmentOps/notesRepository";
 import { listTasksForEntity } from "@/lib/jobs/recruitmentOps/tasksRepository";
 import AdminCandidateDetailClient from "./AdminCandidateDetailClient";
+import AdminPageContainer from "@/app/admin/_components/AdminPageContainer";
 
 export const dynamic = "force-dynamic";
 
@@ -31,5 +32,9 @@ export default async function AdminCandidateDetailPage({ params }: Props) {
 
   if (!candidate) notFound();
 
-  return <AdminCandidateDetailClient candidate={candidate} notes={notes} tasks={tasks} />;
+  return (
+    <AdminPageContainer>
+      <AdminCandidateDetailClient candidate={candidate} notes={notes} tasks={tasks} />
+    </AdminPageContainer>
+  );
 }

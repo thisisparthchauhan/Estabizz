@@ -965,6 +965,8 @@ model Job {
   positions_count         Int                @default(1) @db.SmallInt
   positions_filled        Int                @default(0) @db.SmallInt
   priority                Priority           @default(normal)
+  department              String?            @db.VarChar(100)
+  location_text           String?            @db.VarChar(300)
   created_by_ref_id       String             @db.Uuid
   structured_requirements Json?
   approved_by_ref_id      String?            @db.Uuid

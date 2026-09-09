@@ -65,6 +65,7 @@ export type AdminPermission =
   | 'manage_seo'        // edit SEO fields (title, meta, slug, OG, canonical, index)
   | 'manage_backups'    // create and download CMS data backups (super_admin + admin only)
   | 'manage_leads'      // view and update lead enquiries (CRM)
+  | 'manage_jobs'       // create, edit, publish and close job postings
   | 'view_admin';       // read-only access to the admin panel
 
 // ─── Role → default permission mapping ────────────────────────────────────────
@@ -90,6 +91,7 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     'manage_seo',
     'manage_backups',
     'manage_leads',
+    'manage_jobs',
     'view_admin',
   ],
 
@@ -147,6 +149,7 @@ export const ROLE_DEFAULT_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
     'manage_seo',
     'manage_backups',
     'manage_leads',
+    'manage_jobs',
     'view_admin',
     // manage_users intentionally excluded — only super_admin
   ],

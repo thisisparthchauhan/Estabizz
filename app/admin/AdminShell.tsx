@@ -193,6 +193,9 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Page SEO",       href: "/admin/seo",            icon: <IconSearch /> },
   { label: "Regulatory Updates", href: "/admin/regulatory-updates", icon: <IconShield /> },
   { label: "Leads",          href: "/admin/leads",          icon: <IconList /> },
+  { label: "All Jobs",       href: "/admin/jobs",                    icon: <IconList /> },
+  { label: "New Job",        href: "/admin/jobs/new",               icon: <IconPlus /> },
+  { label: "Applications",   href: "/admin/jobs/applications",      icon: <IconList /> },
   { label: "All Blogs",      href: "/admin/blogs",          icon: <IconList /> },
   { label: "New Blog",       href: "/admin/blogs/new",      icon: <IconPlus /> },
   { label: "Pending Review", href: "/admin/blogs/pending",  icon: <IconClock /> },
@@ -217,6 +220,9 @@ const PAGE_TITLES: Record<string, string> = {
   "/admin/seo":            "Page SEO",
   "/admin/regulatory-updates": "Regulatory Update Desk",
   "/admin/leads":          "Leads",
+  "/admin/jobs":                 "Job Postings",
+  "/admin/jobs/new":            "New Job",
+  "/admin/jobs/applications":   "Applications",
   "/admin/blogs":          "All Blogs",
   "/admin/blogs/new":      "New Blog",
   "/admin/blogs/pending":  "Pending Review",
@@ -234,6 +240,8 @@ function getPageTitle(pathname: string): string {
   if (pathname.startsWith("/admin/content-pages")) return "Content Pages";
   if (pathname.startsWith("/admin/website")) return "Website Editor";
   if (pathname.startsWith("/admin/tools")) return "Internal Tools";
+  if (pathname.startsWith("/admin/jobs/applications")) return "Applications";
+  if (pathname.startsWith("/admin/jobs/") && pathname.includes("/edit")) return "Edit Job";
   return "Admin";
 }
 

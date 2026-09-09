@@ -3,6 +3,9 @@ import "server-only";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getApplicationForAdmin } from "@/lib/jobs/applicationManagement/repository";
+import { listNotes } from "@/lib/jobs/recruitmentOps/notesRepository";
+import { listTasksForEntity } from "@/lib/jobs/recruitmentOps/tasksRepository";
+import { listInterviewsForApplication } from "@/lib/jobs/recruitmentOps/interviewsRepository";
 import AdminApplicationDetailClient from "./AdminApplicationDetailClient";
 
 export const metadata: Metadata = {
@@ -16,8 +19,13 @@ type Props = { params: Promise<{ id: string }> };
 
 export default async function AdminApplicationDetailPage({ params }: Props) {
   const { id } = await params;
-  const application = await getApplicationForAdmin(id);
+  const [application, notes, tasks, interviews] = await Promise.all([
+    getApplicationForAdmin(id),
+    listNotes("application", id),
+    listTasksForEntity("application", id),
+    listInterviewsForApplication(id),
+  ]);
   if (!application) notFound();
 
-  return <AdminApplicationDetailClient application={application} />;
+  return <AdminApplicationDetailClient application={application} notes={notes} tasks={tasks} interviews={interviews} />;
 }

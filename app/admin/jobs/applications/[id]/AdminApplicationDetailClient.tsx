@@ -4,6 +4,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { ApplicationAdminDetail } from "@/lib/jobs/applicationManagement/repository";
+import NotesPanel from "../../_components/NotesPanel";
+import TasksPanel from "../../_components/TasksPanel";
+import InterviewPanel from "../../_components/InterviewPanel";
+
+interface NoteRow { id: string; content: string; isPinned: boolean; visibility: string; authorRefId: string; authorName: string; createdAt: Date; updatedAt: Date; }
+interface TaskRow { id: string; taskType: string; title: string; description: string | null; entityType: string | null; entityId: string | null; assignedToRefId: string; assignedToName: string; createdByRefId: string; dueAt: Date | null; status: string; priority: string; completedAt: Date | null; createdAt: Date; updatedAt: Date; }
+interface InterviewRow { id: string; applicationId: string; jobTitle: string; candidateName: string; interviewType: string; roundNumber: number; status: string; scheduledAt: Date | null; durationMinutes: number | null; locationOrLink: string | null; format: string | null; notes: string | null; createdAt: Date; }
 
 function fmt(d: Date | string) {
   return new Intl.DateTimeFormat("en-IN", {
@@ -24,9 +31,12 @@ const SOURCE_LABELS: Record<string, string> = {
 
 interface Props {
   application: ApplicationAdminDetail;
+  notes: NoteRow[];
+  tasks: TaskRow[];
+  interviews: InterviewRow[];
 }
 
-export default function AdminApplicationDetailClient({ application }: Props) {
+export default function AdminApplicationDetailClient({ application, notes, tasks, interviews }: Props) {
   const router = useRouter();
   const [selectedStageId, setSelectedStageId] = useState(application.currentStageId);
   const [saving, setSaving] = useState(false);
@@ -150,6 +160,21 @@ export default function AdminApplicationDetailClient({ application }: Props) {
                 ))}
               </ol>
             )}
+          </div>
+
+          {/* Interviews */}
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
+            <InterviewPanel applicationId={application.id} initialInterviews={interviews} />
+          </div>
+
+          {/* Notes */}
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
+            <NotesPanel entityType="application" entityId={application.id} initialNotes={notes} />
+          </div>
+
+          {/* Tasks */}
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
+            <TasksPanel entityType="application" entityId={application.id} initialTasks={tasks} />
           </div>
         </div>
 

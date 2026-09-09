@@ -193,9 +193,13 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Page SEO",       href: "/admin/seo",            icon: <IconSearch /> },
   { label: "Regulatory Updates", href: "/admin/regulatory-updates", icon: <IconShield /> },
   { label: "Leads",          href: "/admin/leads",          icon: <IconList /> },
+  { label: "Jobs Dashboard", href: "/admin/jobs/dashboard",          icon: <IconGrid /> },
   { label: "All Jobs",       href: "/admin/jobs",                    icon: <IconList /> },
   { label: "New Job",        href: "/admin/jobs/new",               icon: <IconPlus /> },
   { label: "Applications",   href: "/admin/jobs/applications",      icon: <IconList /> },
+  { label: "Candidates",     href: "/admin/jobs/candidates",        icon: <IconUsers /> },
+  { label: "Interviews",     href: "/admin/jobs/interviews",        icon: <IconClock /> },
+  { label: "Tasks",          href: "/admin/jobs/tasks",             icon: <IconList /> },
   { label: "All Blogs",      href: "/admin/blogs",          icon: <IconList /> },
   { label: "New Blog",       href: "/admin/blogs/new",      icon: <IconPlus /> },
   { label: "Pending Review", href: "/admin/blogs/pending",  icon: <IconClock /> },
@@ -221,8 +225,12 @@ const PAGE_TITLES: Record<string, string> = {
   "/admin/regulatory-updates": "Regulatory Update Desk",
   "/admin/leads":          "Leads",
   "/admin/jobs":                 "Job Postings",
+  "/admin/jobs/dashboard":      "Jobs Dashboard",
   "/admin/jobs/new":            "New Job",
   "/admin/jobs/applications":   "Applications",
+  "/admin/jobs/candidates":     "Candidates",
+  "/admin/jobs/interviews":     "Interviews",
+  "/admin/jobs/tasks":          "Tasks",
   "/admin/blogs":          "All Blogs",
   "/admin/blogs/new":      "New Blog",
   "/admin/blogs/pending":  "Pending Review",
@@ -241,6 +249,9 @@ function getPageTitle(pathname: string): string {
   if (pathname.startsWith("/admin/website")) return "Website Editor";
   if (pathname.startsWith("/admin/tools")) return "Internal Tools";
   if (pathname.startsWith("/admin/jobs/applications")) return "Applications";
+  if (pathname.startsWith("/admin/jobs/candidates")) return "Candidates";
+  if (pathname.startsWith("/admin/jobs/interviews")) return "Interviews";
+  if (pathname.startsWith("/admin/jobs/tasks")) return "Tasks";
   if (pathname.startsWith("/admin/jobs/") && pathname.includes("/edit")) return "Edit Job";
   return "Admin";
 }
@@ -333,13 +344,19 @@ export default function AdminShell({
       .catch(() => setPendingCount(0));
   }, []);
 
+  const JOBS_NAMED = [
+    "/admin/jobs/dashboard", "/admin/jobs/new", "/admin/jobs/applications",
+    "/admin/jobs/candidates", "/admin/jobs/interviews", "/admin/jobs/tasks",
+  ];
+
   function isActive(href: string) {
     if (href === "/admin") return pathname === "/admin";
     if (href === "/admin/blogs") {
-      return (
-        pathname === "/admin/blogs" ||
-        pathname.startsWith("/admin/blogs/edit")
-      );
+      return pathname === "/admin/blogs" || pathname.startsWith("/admin/blogs/edit");
+    }
+    if (href === "/admin/jobs") {
+      return pathname === "/admin/jobs" ||
+        (pathname.startsWith("/admin/jobs/") && !JOBS_NAMED.some((p) => pathname.startsWith(p)));
     }
     return pathname.startsWith(href);
   }

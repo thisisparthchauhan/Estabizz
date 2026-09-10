@@ -184,6 +184,48 @@ The service never opens a connection. `DATABASE_URL` is deliberately absent from
 
 ---
 
+## 9a. Resume lifecycle audit coverage (Phase 5.1)
+
+The deployed Phase 5 test found that the planned `resume.*` audit events had
+never been implemented. They now exist, using the project's existing
+`recordJobsAuditEvent` helper — no second audit framework was introduced, and
+the proposal lifecycle events (`ai_profile_proposal_created`,
+`candidate_profile_proposal_confirmed`, …) are untouched because they already
+cover AI proposal creation and application.
+
+| Action | Entity | Actor | Emitted at |
+|---|---|---|---|
+| `resume.uploaded` | `resume_version` | `candidate_user` | confirm, **only when a version is created** — a retried confirm adds no second row |
+| `resume.upload_rejected` | `candidate` | `candidate_user` | confirm, when the file-security gate rejects the bytes |
+| `resume.processing_started` | `resume_version` | `system` | worker, only by the delivery that won the atomic claim |
+| `resume.processing_completed` | `resume_version` | `system` | worker, on success |
+| `resume.processing_failed` | `resume_version` | `system` | worker, on any terminal failure |
+
+A duplicate queue delivery that loses the claim (`already_completed` /
+`already_processing`) emits nothing — it did no work, and auditing it would add
+one row per redelivery while saying nothing about the resume.
+
+### Metadata safety
+
+Every payload is built in `lib/jobs/resumeParsing/auditMetadata.ts` so the rule
+lives in one place rather than being restated at each call site. Metadata is
+scalar-only and limited to identifiers, correlation ids and enum-valued status.
+
+It never carries raw resume text, document bytes, AI prompts or responses, API
+keys or tokens, presigned URLs, private storage object keys, authorization
+headers, or extracted candidate PII. The candidate-supplied **filename is
+deliberately excluded** — it routinely contains the candidate's own name.
+Failure reasons pass through `sanitizeResumeProcessingMessage` before being
+recorded.
+
+Audit writes remain non-blocking: `recordJobsAuditEvent` is awaited but never
+throws, so a failed audit write cannot turn a successful upload or a completed
+parse into an error.
+
+Verified against real rows: 19 synthetic tests in
+`scripts/jobsResumeAuditTest.mjs`, plus a live run producing all five events
+with a leak scan over the emitted `context` payloads.
+
 ## 10. Owner runbook (remaining manual steps)
 
 1. **Vercel Preview environment** — could not be inspected from this machine; the stored Vercel CLI session is expired. Run:

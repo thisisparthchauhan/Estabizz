@@ -11,6 +11,12 @@ import {
   ResumeUploadValidationError,
 } from "@/lib/jobs/resumeUpload";
 import { dispatchResumeParse } from "@/lib/jobs/resumeParsing/dispatch";
+import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
+import {
+  buildResumeUploadedMetadata,
+  buildResumeUploadRejectedMetadata,
+  RESUME_AUDIT_ACTIONS,
+} from "@/lib/jobs/resumeParsing/auditMetadata";
 import {
   getClientIp,
   hashIdentifier,
@@ -21,8 +27,13 @@ import {
 export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
+  // Held outside the try so the file-security rejection handler can attribute
+  // its audit event without resolving the identity a second time.
+  let auditSession: Awaited<ReturnType<typeof requireCandidateAccountSessionFromRequest>> = null;
+
   try {
     const session = await requireCandidateAccountSessionFromRequest(request);
+    auditSession = session;
 
     if (!session) {
       return NextResponse.json({ error: "Please log in to confirm your resume upload." }, { status: 401 });
@@ -56,6 +67,27 @@ export async function POST(request: NextRequest) {
       getResumeUploadDependencies(),
     );
 
+    // Only on first creation: a retried confirm returns the same version and
+    // must not add a second upload event. Metadata is deliberately limited to
+    // identifiers and file shape -- no filename (candidate-supplied and often
+    // contains their name), no storage key, no upload reference.
+    if (result.created) {
+      await recordJobsAuditEvent({
+        entityType: "resume_version",
+        entityId: result.resumeVersionId,
+        action: RESUME_AUDIT_ACTIONS.uploaded,
+        actorType: "candidate_user",
+        actorRefId: session.actorRefId,
+        metadata: buildResumeUploadedMetadata({
+          candidateId: session.candidateId,
+          versionNumber: result.versionNumber,
+          fileType: result.fileType,
+          fileSizeBytes: result.fileSizeBytes,
+          parseStatus: result.parseStatus,
+        }),
+      });
+    }
+
     // Dispatch RESUME_PARSE job. If queue is not configured (blocked), return success — the
     // upload succeeded and processing will be triggered when the queue is configured.
     // If dispatch fails with an actual error, return 503 so the browser can retry the
@@ -73,7 +105,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    return NextResponse.json(result, { headers: { "Cache-Control": "no-store" } });
+    const { created: _created, ...responseBody } = result;
+
+    return NextResponse.json(responseBody, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     if (error instanceof ResumeUploadValidationError) {
       return NextResponse.json(
@@ -83,6 +117,22 @@ export async function POST(request: NextRequest) {
     }
 
     if (error instanceof ResumeUploadFileSecurityError) {
+      // A rejected upload is security-relevant, so it is recorded even though no
+      // ResumeVersion exists. securityStatus is a fixed enum value, never a
+      // filename or any document content.
+      if (auditSession) {
+        await recordJobsAuditEvent({
+          entityType: "candidate",
+          entityId: auditSession.candidateId,
+          action: RESUME_AUDIT_ACTIONS.uploadRejected,
+          actorType: "candidate_user",
+          actorRefId: auditSession.actorRefId,
+          metadata: buildResumeUploadRejectedMetadata({
+            securityStatus: error.securityStatus,
+          }),
+        });
+      }
+
       // candidateMessage is a fixed phrase from a lookup table; it carries no
       // storage key, filename or document content.
       return NextResponse.json(

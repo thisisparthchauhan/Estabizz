@@ -138,6 +138,7 @@ export async function confirmResumeUpload(
     fileSizeBytes: result.fileSizeBytes,
     uploadedAt: result.uploadedAt.toISOString(),
     parseStatus: "pending",
+    created: result.created,
   };
 }
 

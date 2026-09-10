@@ -19,4 +19,6 @@ export interface ResumeParseWorkerResult {
   status: "completed" | "already_completed" | "already_processing" | "failed" | "retryable_failed";
   retryable: boolean;
   errorMessage?: string;
+  /** Present once a run exists, so the outcome audit event can reference it. */
+  aiProcessingRunId?: string;
 }

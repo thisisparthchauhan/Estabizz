@@ -8,9 +8,15 @@ import {
 import { createJobsAiClient } from "@/lib/jobs/ai";
 import { validateResumeFileBytes } from "@/lib/jobs/fileSecurity";
 import { getJobsPrismaClient } from "@/lib/jobs/prisma";
+import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
 import { PrismaProfileProposalRepository } from "@/lib/jobs/profileReview/prismaRepository";
 import { persistAiProfileProposals } from "@/lib/jobs/profileReview/service";
 
+import {
+  buildResumeProcessingOutcomeMetadata,
+  buildResumeProcessingStartedMetadata,
+  RESUME_AUDIT_ACTIONS,
+} from "./auditMetadata";
 import { isResumeParsePermanentStatus } from "./contract";
 import { checkResumeProcessingGate } from "./processingGate";
 import {
@@ -111,7 +117,54 @@ async function closeAbandonedRun(
   });
 }
 
+/**
+ * Records the terminal outcome of one delivery.
+ *
+ * Metadata is restricted to identifiers, status and the already-sanitised
+ * failure reason. It never carries resume text, document bytes, provider
+ * prompts or responses, storage keys, presigned URLs or credentials.
+ */
+async function recordResumeProcessingOutcome(
+  envelope: ResumeParseJobEnvelope,
+  result: ResumeParseWorkerResult,
+): Promise<void> {
+  // A duplicate delivery that lost the claim did no work; auditing it would add
+  // one row per redelivery and say nothing about the resume's lifecycle.
+  if (result.status === "already_completed" || result.status === "already_processing") {
+    return;
+  }
+
+  const completed = result.status === "completed";
+
+  await recordJobsAuditEvent({
+    entityType: "resume_version",
+    entityId: envelope.payload.resumeVersionId,
+    action: completed
+      ? RESUME_AUDIT_ACTIONS.processingCompleted
+      : RESUME_AUDIT_ACTIONS.processingFailed,
+    actorType: "system",
+    metadata: buildResumeProcessingOutcomeMetadata({
+      candidateId: envelope.payload.candidateId,
+      correlationId: envelope.correlationId,
+      aiProcessingRunId: result.aiProcessingRunId ?? null,
+      status: result.status,
+      completed,
+      retryable: result.retryable,
+      reason: result.errorMessage ?? null,
+    }),
+  });
+}
+
 export async function processResumeParseJob(
+  envelope: ResumeParseJobEnvelope,
+): Promise<ResumeParseWorkerResult> {
+  const result = await runResumeParseJob(envelope);
+  await recordResumeProcessingOutcome(envelope, result);
+
+  return result;
+}
+
+async function runResumeParseJob(
   envelope: ResumeParseJobEnvelope,
 ): Promise<ResumeParseWorkerResult> {
   const prisma = getJobsPrismaClient();
@@ -161,6 +214,22 @@ export async function processResumeParseJob(
   await prisma.resumeVersion.update({
     where: { id: resumeVersion.id },
     data: { ai_processing_run_id: aiRun.id },
+  });
+
+  // Emitted only by the delivery that won the claim, so one processing attempt
+  // produces exactly one start event.
+  await recordJobsAuditEvent({
+    entityType: "resume_version",
+    entityId: resumeVersion.id,
+    action: RESUME_AUDIT_ACTIONS.processingStarted,
+    actorType: "system",
+    metadata: buildResumeProcessingStartedMetadata({
+      candidateId: resumeVersion.candidate_id,
+      correlationId: envelope.correlationId,
+      aiProcessingRunId: aiRun.id,
+      attempt: envelope.attempt?.attempt ?? null,
+      reclaimedStaleRun: Boolean(claim.reclaimedRunId),
+    }),
   });
 
   try {
@@ -363,6 +432,7 @@ export async function processResumeParseJob(
       ok: true,
       status: "completed",
       retryable: false,
+      aiProcessingRunId: aiRun.id,
     };
   } catch {
     return await markFailed({
@@ -415,6 +485,7 @@ async function markFailed({
     status: retryable ? "retryable_failed" : "failed",
     retryable,
     errorMessage: sanitizeErrorDetail(errorMessage),
+    aiProcessingRunId: aiRunId,
   };
 }
 

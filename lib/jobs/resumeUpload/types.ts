@@ -44,6 +44,12 @@ export interface ResumeUploadConfirmResult {
   fileSizeBytes: number;
   uploadedAt: string;
   parseStatus: "pending";
+  /**
+   * False when an idempotent retry returned the existing version. Server-side
+   * only -- it is stripped before the response is serialised, and exists so the
+   * route does not record a duplicate `resume.uploaded` audit event for a retry.
+   */
+  created: boolean;
 }
 
 export interface ResumeUploadTokenPayload {

@@ -276,6 +276,26 @@ async function main() {
     assert.ok(!/\bBearer\s+\S/i.test(cleaned), `authorization header survived: ${cleaned}`);
   });
 
+  console.log("\nQueue dispatch failures are sanitised before logging:");
+  check("a dispatch error quoting the destination URL is redacted", () => {
+    // Shape of a real QStash SDK failure: it echoes the destination it tried.
+    const raw =
+      "Failed to publish to https://estabizz-git-staging-example.vercel.app/api/jobs/queue/resume-parse: 401 Unauthorized";
+    const cleaned = sensitive.sanitizeResumeProcessingMessage(raw);
+    assert.ok(!/https?:\/\//.test(cleaned), `URL survived: ${cleaned}`);
+    assert.ok(cleaned.includes("401") || cleaned.includes("Failed to publish"), "diagnostic value lost");
+  });
+  check("a dispatch error carrying a credential is redacted", () => {
+    const raw = `QStash request rejected: ${FORBIDDEN.bearerHeader}`;
+    const cleaned = sensitive.sanitizeResumeProcessingMessage(raw);
+    assert.ok(!cleaned.includes(FORBIDDEN.bearerHeader), `credential survived: ${cleaned}`);
+    assert.ok(!/\bBearer\s+\S/i.test(cleaned), `authorization header survived: ${cleaned}`);
+  });
+  check("a dispatch error is length-capped so logs cannot be flooded", () => {
+    const cleaned = sensitive.sanitizeResumeProcessingMessage("x".repeat(5000));
+    assert.ok(cleaned.length <= 500, `not capped: ${cleaned.length}`);
+  });
+
   console.log("\nCross-cutting guarantee:");
   check("no builder output contains any forbidden sample under any input", () => {
     const payloads = [

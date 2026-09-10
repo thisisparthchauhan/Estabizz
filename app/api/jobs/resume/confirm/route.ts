@@ -11,6 +11,7 @@ import {
   ResumeUploadValidationError,
 } from "@/lib/jobs/resumeUpload";
 import { dispatchResumeParse } from "@/lib/jobs/resumeParsing/dispatch";
+import { sanitizeResumeProcessingMessage } from "@/lib/jobs/resumeParsing/sensitiveData";
 import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
 import {
   buildResumeUploadedMetadata,
@@ -99,6 +100,16 @@ export async function POST(request: NextRequest) {
     });
 
     if (!dispatch.dispatched && !dispatch.blocked) {
+      // The queue error was previously produced, returned twice and discarded,
+      // which made a dispatch failure in a deployed environment impossible to
+      // diagnose from logs. Log it server-side, sanitised: a queue error can
+      // quote the destination URL or credential fragments, and none of it may
+      // reach the client, which keeps the generic message below.
+      console.error(
+        `[resume/confirm] RESUME_PARSE dispatch failed for resumeVersion ${result.resumeVersionId} —`,
+        sanitizeResumeProcessingMessage(dispatch.errorMessage ?? "Resume parse dispatch failed."),
+      );
+
       return NextResponse.json(
         { error: "Resume upload was saved but could not be queued for processing. Please try again." },
         { status: 503, headers: { "Cache-Control": "no-store" } },

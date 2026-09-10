@@ -5,6 +5,7 @@ import {
   createJob,
   ensureAdminIdentityRef,
 } from "@/lib/jobs/jobManagement/repository";
+import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
 import type { JobStatus, RemotePolicy, JobEmploymentType } from "@prisma/client";
 
 export async function GET(req: NextRequest) {
@@ -77,6 +78,15 @@ export async function POST(req: NextRequest) {
       structured_requirements,
       internal_notes: internal_notes?.trim() || undefined,
       created_by_ref_id,
+    });
+
+    await recordJobsAuditEvent({
+      entityType: "job",
+      entityId: job.id,
+      action: "job.created",
+      actorType: "admin_user",
+      actorRefId: created_by_ref_id ?? undefined,
+      metadata: { title: job.title, slug: job.slug, status: job.status },
     });
 
     return NextResponse.json({ job }, { status: 201 });

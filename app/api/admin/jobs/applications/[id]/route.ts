@@ -5,6 +5,7 @@ import {
   getApplicationForAdmin,
   updateApplicationStage,
 } from "@/lib/jobs/applicationManagement/repository";
+import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -47,6 +48,16 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     const adminRefId = await ensureAdminIdentityRef(auth.admin.email, auth.admin.email);
     const updated = await updateApplicationStage(id, stageId, adminRefId);
     if (!updated) return NextResponse.json({ error: "Application not found." }, { status: 404 });
+
+    await recordJobsAuditEvent({
+      entityType: "application",
+      entityId: id,
+      action: "application.stage_changed",
+      actorType: "admin_user",
+      actorRefId: adminRefId ?? undefined,
+      changedFields: ["stage_id"],
+      metadata: { stageId },
+    });
 
     return NextResponse.json({ ok: true });
   } catch (err) {

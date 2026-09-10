@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requirePermission } from "@/lib/admin/requirePermission";
+import { ensureAdminIdentityRef } from "@/lib/jobs/jobManagement/repository";
 import { updateInterview } from "@/lib/jobs/recruitmentOps/interviewsRepository";
+import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
 import type { InterviewStatus, InterviewFormat } from "@prisma/client";
 
 type Params = { params: Promise<{ id: string }> };
@@ -39,6 +41,17 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     });
 
     if (!updated) return NextResponse.json({ error: "Interview not found." }, { status: 404 });
+
+    const adminRefId = await ensureAdminIdentityRef(auth.admin.email, auth.admin.email);
+    await recordJobsAuditEvent({
+      entityType: "interview",
+      entityId: id,
+      action: "interview.updated",
+      actorType: "admin_user",
+      actorRefId: adminRefId ?? undefined,
+      changedFields: Object.keys(body),
+    });
+
     return NextResponse.json({ interview: updated });
   } catch (err) {
     console.error("[admin/interviews/[id] PATCH]", err);

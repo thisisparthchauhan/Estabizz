@@ -1,7 +1,7 @@
 import "server-only";
 
 import { getJobsPrismaClient } from "@/lib/jobs/prisma";
-import type { ApplicationSource } from "@prisma/client";
+import type { ApplicationSource, Prisma } from "@prisma/client";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -290,4 +290,119 @@ export async function updateApplicationStage(
   ]);
 
   return true;
+}
+
+// ─── Paginated list (server-side search + filter) ─────────────────────────────
+
+export interface StageOption {
+  id: string;
+  name: string;
+  slug: string;
+  colourHex: string | null;
+}
+
+export interface PaginatedResult<T> {
+  items: T[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}
+
+export async function listApplicationStages(): Promise<StageOption[]> {
+  const prisma = getJobsPrismaClient();
+  const stages = await prisma.applicationStage.findMany({
+    where: { is_active: true },
+    select: { id: true, name: true, slug: true, colour_hex: true },
+    orderBy: { sort_order: "asc" },
+  });
+  return stages.map((s) => ({ id: s.id, name: s.name, slug: s.slug, colourHex: s.colour_hex }));
+}
+
+export async function listApplicationsForAdminPaginated(opts: {
+  page?: number;
+  pageSize?: number;
+  search?: string;
+  stageId?: string;
+}): Promise<PaginatedResult<ApplicationAdminRow>> {
+  const page = Math.max(1, opts.page ?? 1);
+  const pageSize = Math.min(100, Math.max(1, opts.pageSize ?? 25));
+  const skip = (page - 1) * pageSize;
+  const prisma = getJobsPrismaClient();
+
+  const where: Prisma.ApplicationWhereInput = { deleted_at: null };
+  if (opts.stageId) where.current_stage_id = opts.stageId;
+  if (opts.search?.trim()) {
+    const q = opts.search.trim();
+    where.OR = [
+      { job: { title: { contains: q, mode: "insensitive" } } },
+      { candidate: { first_name: { contains: q, mode: "insensitive" } } },
+      { candidate: { last_name: { contains: q, mode: "insensitive" } } },
+      {
+        candidate: {
+          contacts: {
+            some: {
+              contact_type: "email",
+              value: { contains: q, mode: "insensitive" },
+              opt_out: false,
+            },
+          },
+        },
+      },
+    ];
+  }
+
+  const [total, apps] = await Promise.all([
+    prisma.application.count({ where }),
+    prisma.application.findMany({
+      where,
+      select: {
+        id: true,
+        job_id: true,
+        candidate_id: true,
+        source: true,
+        created_at: true,
+        updated_at: true,
+        job: { select: { title: true, slug: true } },
+        candidate: {
+          select: {
+            first_name: true,
+            last_name: true,
+            contacts: {
+              where: { contact_type: "email", opt_out: false, is_primary: true },
+              select: { value: true },
+              take: 1,
+            },
+          },
+        },
+        current_stage: {
+          select: { id: true, name: true, slug: true, is_terminal: true, colour_hex: true },
+        },
+      },
+      orderBy: { created_at: "desc" },
+      skip,
+      take: pageSize,
+    }),
+  ]);
+
+  const items: ApplicationAdminRow[] = apps.map((app) => ({
+    id: app.id,
+    jobId: app.job_id,
+    jobTitle: app.job.title,
+    jobSlug: app.job.slug,
+    candidateId: app.candidate_id,
+    candidateName:
+      [app.candidate.first_name, app.candidate.last_name].filter(Boolean).join(" ") || "Unknown",
+    candidateEmail: app.candidate.contacts[0]?.value ?? null,
+    currentStageId: app.current_stage.id,
+    currentStageName: app.current_stage.name,
+    currentStageSlug: app.current_stage.slug,
+    stageColour: app.current_stage.colour_hex,
+    isTerminal: app.current_stage.is_terminal,
+    source: app.source,
+    createdAt: app.created_at,
+    updatedAt: app.updated_at,
+  }));
+
+  return { items, total, page, pageSize, totalPages: Math.max(1, Math.ceil(total / pageSize)) };
 }

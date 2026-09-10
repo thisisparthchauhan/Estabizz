@@ -568,6 +568,8 @@ model Candidate {
   @@index([current_country, current_city])
   @@index([primary_recruiter_ref_id])
   @@index([dedup_status])
+  @@index([created_at])
+  @@index([current_city, created_at])
   @@map("candidates")
 }
 
@@ -1162,6 +1164,9 @@ model Application {
   placements         Placement[]
   ai_scores          AIScore[]
 
+  @@index([created_at])
+  @@index([current_stage_id, created_at])
+  @@index([candidate_id, created_at])
   @@map("applications")
 }
 
@@ -1219,6 +1224,7 @@ model ApplicationStageHistory {
   new_stage      ApplicationStage  @relation("ApplicationNewStage", fields: [new_stage_id], references: [id], onDelete: NoAction)
   changed_by     IdentityReference @relation("ApplicationStageChangedBy", fields: [changed_by_ref_id], references: [id], onDelete: NoAction)
 
+  @@index([application_id, changed_at])
   @@map("application_stage_histories")
 }
 
@@ -1258,6 +1264,9 @@ model Interview {
   created_by            IdentityReference      @relation("InterviewCreatedBy", fields: [created_by_ref_id], references: [id], onDelete: NoAction)
   participants          InterviewParticipant[]
 
+  @@index([application_id, scheduled_at])
+  @@index([status, scheduled_at])
+  @@index([scheduled_at])
   @@map("interviews")
 }
 
@@ -1405,6 +1414,7 @@ model Task {
   completed_by IdentityReference? @relation("TaskCompletedBy", fields: [completed_by_ref_id], references: [id], onDelete: NoAction)
 
   @@index([entity_type, entity_id])
+  @@index([status, due_at])
   @@map("tasks")
 }
 

@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { CandidateAdminRow } from "@/lib/jobs/candidateManagement/repository";
+import type { PaginatedResult } from "@/lib/jobs/applicationManagement/repository";
 
 function fmt(d: Date | string) {
   return new Intl.DateTimeFormat("en-IN", { day: "2-digit", month: "short", year: "numeric" }).format(new Date(d));
@@ -16,42 +18,47 @@ const EXP_FILTERS = [
   { label: "10+", value: "10+" },
 ];
 
-function matchExp(filter: string, yrs: number | null): boolean {
-  if (!filter) return true;
-  const y = yrs ?? 0;
-  if (filter === "10+") return y >= 10;
-  const [lo, hi] = filter.split("-").map(Number);
-  return y >= lo && y <= hi;
+interface Props {
+  result: PaginatedResult<CandidateAdminRow>;
+  cities: string[];
+  initialSearch: string;
+  initialCity: string;
+  initialExpFilter: string;
 }
 
-interface Props { candidates: CandidateAdminRow[] }
+export default function AdminCandidatesClient({
+  result,
+  cities,
+  initialSearch,
+  initialCity,
+  initialExpFilter,
+}: Props) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [search, setSearch] = useState(initialSearch);
 
-export default function AdminCandidatesClient({ candidates }: Props) {
-  const [search, setSearch] = useState("");
-  const [cityFilter, setCityFilter] = useState("");
-  const [expFilter, setExpFilter] = useState("");
+  function navigate(params: Record<string, string>) {
+    const sp = new URLSearchParams(params);
+    startTransition(() => router.push(`?${sp.toString()}`));
+  }
 
-  const cities = useMemo(() => {
-    const s = new Set(candidates.map((c) => c.currentCity).filter(Boolean) as string[]);
-    return Array.from(s).sort();
-  }, [candidates]);
+  function handleSearchSubmit() {
+    navigate({ search, city: initialCity, expFilter: initialExpFilter, page: "1" });
+  }
 
-  const filtered = useMemo(() => {
-    let list = candidates;
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      list = list.filter(
-        (c) =>
-          `${c.firstName} ${c.lastName}`.toLowerCase().includes(q) ||
-          (c.email ?? "").toLowerCase().includes(q) ||
-          (c.phone ?? "").includes(q),
-      );
-    }
-    if (cityFilter) list = list.filter((c) => c.currentCity === cityFilter);
-    if (expFilter) list = list.filter((c) => matchExp(expFilter, c.yearsOfExperience));
-    return list;
-  }, [candidates, search, cityFilter, expFilter]);
+  function handleCityChange(city: string) {
+    navigate({ search, city, expFilter: initialExpFilter, page: "1" });
+  }
 
+  function handleExpChange(expFilter: string) {
+    navigate({ search, city: initialCity, expFilter, page: "1" });
+  }
+
+  function handlePage(p: number) {
+    navigate({ search, city: initialCity, expFilter: initialExpFilter, page: String(p) });
+  }
+
+  const { items: candidates, total, page, totalPages } = result;
   const selectCls = "rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#334155] focus:border-[#1677f2] focus:outline-none";
 
   return (
@@ -59,7 +66,7 @@ export default function AdminCandidatesClient({ candidates }: Props) {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-[24px] font-black text-[#0a1628]">Candidates</h1>
-          <p className="mt-0.5 text-[13px] text-[#64748b]">{candidates.length} total</p>
+          <p className="mt-0.5 text-[13px] text-[#64748b]">{total} total</p>
         </div>
       </div>
 
@@ -70,25 +77,28 @@ export default function AdminCandidatesClient({ candidates }: Props) {
           placeholder="Search name, email, phone…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSearchSubmit()}
+          onBlur={handleSearchSubmit}
         />
-        <select className={selectCls} value={cityFilter} onChange={(e) => setCityFilter(e.target.value)}>
+        <select className={selectCls} value={initialCity} onChange={(e) => handleCityChange(e.target.value)}>
           <option value="">All Cities</option>
           {cities.map((c) => <option key={c} value={c}>{c}</option>)}
         </select>
-        <select className={selectCls} value={expFilter} onChange={(e) => setExpFilter(e.target.value)}>
+        <select className={selectCls} value={initialExpFilter} onChange={(e) => handleExpChange(e.target.value)}>
           {EXP_FILTERS.map((f) => <option key={f.value} value={f.value}>{f.label}</option>)}
         </select>
-        {(search || cityFilter || expFilter) && (
-          <button type="button" onClick={() => { setSearch(""); setCityFilter(""); setExpFilter(""); }}
+        {(search || initialCity || initialExpFilter) && (
+          <button type="button" onClick={() => { setSearch(""); navigate({ search: "", city: "", expFilter: "", page: "1" }); }}
             className="self-center text-[12px] font-bold text-[#1677f2] hover:underline">
             Clear
           </button>
         )}
+        {isPending && <span className="self-center text-[12px] text-[#94a3b8]">Loading…</span>}
       </div>
 
-      {filtered.length === 0 ? (
+      {candidates.length === 0 ? (
         <div className="rounded-2xl border border-dashed border-[#dbe7f3] bg-white py-16 text-center text-[14px] text-[#94a3b8]">
-          {candidates.length === 0 ? "No candidates yet." : "No results."}
+          {total === 0 ? "No candidates yet." : "No results."}
         </div>
       ) : (
         <div className="overflow-x-auto rounded-2xl border border-[#dbe7f3] bg-white">
@@ -108,7 +118,7 @@ export default function AdminCandidatesClient({ candidates }: Props) {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((c) => (
+              {candidates.map((c) => (
                 <tr key={c.id} className="border-b border-[#f1f5f9] last:border-0 hover:bg-[#f8fbff] transition-colors">
                   <td className="px-4 py-3">
                     <p className="font-bold text-[#0a1628]">{c.firstName} {c.lastName}</p>
@@ -160,6 +170,31 @@ export default function AdminCandidatesClient({ candidates }: Props) {
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between text-[13px]">
+          <span className="text-[#64748b]">Page {page} of {totalPages}</span>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              disabled={page <= 1}
+              onClick={() => handlePage(page - 1)}
+              className="rounded-xl border border-[#dbe7f3] px-4 py-2 font-bold text-[#334155] hover:bg-[#f8fbff] disabled:opacity-40"
+            >
+              ← Prev
+            </button>
+            <button
+              type="button"
+              disabled={page >= totalPages}
+              onClick={() => handlePage(page + 1)}
+              className="rounded-xl border border-[#dbe7f3] px-4 py-2 font-bold text-[#334155] hover:bg-[#f8fbff] disabled:opacity-40"
+            >
+              Next →
+            </button>
+          </div>
         </div>
       )}
     </div>

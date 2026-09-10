@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { requirePermission } from "@/lib/admin/requirePermission";
 import { ensureAdminIdentityRef } from "@/lib/jobs/jobManagement/repository";
 import { listAllTasks, createTask } from "@/lib/jobs/recruitmentOps/tasksRepository";
+import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
 import type { JobsEntityType, TaskType, TaskPriority } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
@@ -41,6 +42,16 @@ export async function POST(req: NextRequest) {
       dueAt: dueAt ? new Date(dueAt) : undefined,
       priority: (priority as TaskPriority) ?? "normal",
     });
+
+    await recordJobsAuditEvent({
+      entityType: "task",
+      entityId: task.id,
+      action: "task.created",
+      actorType: "admin_user",
+      actorRefId: adminRefId ?? undefined,
+      metadata: { title: task.title, taskType: task.taskType },
+    });
+
     return NextResponse.json({ task }, { status: 201 });
   } catch (err) {
     console.error("[admin/tasks POST]", err);

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requirePermission } from "@/lib/admin/requirePermission";
-import { listApplicationsForAdmin } from "@/lib/jobs/applicationManagement/repository";
+import { listApplicationsForAdminPaginated } from "@/lib/jobs/applicationManagement/repository";
 
 export const dynamic = "force-dynamic";
 
@@ -9,8 +9,14 @@ export async function GET(req: NextRequest) {
     const auth = await requirePermission(req, "manage_jobs");
     if (!auth.ok) return auth.response;
 
-    const applications = await listApplicationsForAdmin();
-    return NextResponse.json({ applications });
+    const { searchParams } = new URL(req.url);
+    const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10) || 1);
+    const pageSize = Math.min(100, Math.max(1, parseInt(searchParams.get("pageSize") ?? "25", 10) || 25));
+    const search = searchParams.get("search") ?? "";
+    const stageId = searchParams.get("stageId") ?? "";
+
+    const result = await listApplicationsForAdminPaginated({ page, pageSize, search, stageId });
+    return NextResponse.json(result);
   } catch (err) {
     console.error("[admin/applications GET]", err);
     return NextResponse.json({ error: "Failed to load applications." }, { status: 500 });

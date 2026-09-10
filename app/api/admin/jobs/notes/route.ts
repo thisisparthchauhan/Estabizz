@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { requirePermission } from "@/lib/admin/requirePermission";
 import { ensureAdminIdentityRef } from "@/lib/jobs/jobManagement/repository";
 import { listNotes, createNote } from "@/lib/jobs/recruitmentOps/notesRepository";
+import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
 import type { JobsEntityType } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
@@ -47,6 +48,16 @@ export async function POST(req: NextRequest) {
 
     const authorRefId = await ensureAdminIdentityRef(auth.admin.email, auth.admin.email);
     const note = await createNote(entityType as JobsEntityType, entityId, content.trim(), authorRefId);
+
+    await recordJobsAuditEvent({
+      entityType: "note",
+      entityId: note.id,
+      action: "note.created",
+      actorType: "admin_user",
+      actorRefId: authorRefId ?? undefined,
+      metadata: { parentEntityType: entityType, parentEntityId: entityId },
+    });
+
     return NextResponse.json({ note }, { status: 201 });
   } catch (err) {
     console.error("[admin/notes POST]", err);

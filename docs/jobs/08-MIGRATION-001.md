@@ -85,6 +85,14 @@ Created:
 
 No HNSW index was created yet. See deferred items.
 
+> **⚠ These 12 indexes are invisible to Prisma and are routinely proposed for deletion.**
+> Prisma's schema language cannot express GIN or `pg_trgm` index types, so
+> `prisma migrate dev` reads them as drift and emits `DROP INDEX` for all 12 — this was
+> observed on 2026-09-10 while generating the Phase 4B index migration. Dropping them
+> silently degrades candidate/application/interview search to sequential scans with no
+> error and no failing test. **Review every generated migration before applying it:**
+> see [24-MIGRATION-SAFETY.md](24-MIGRATION-SAFETY.md).
+
 ### CHECK Constraints
 
 Created CHECK constraints for:

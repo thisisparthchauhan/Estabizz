@@ -1,7 +1,8 @@
 import "server-only";
 
 import { getJobsPrismaClient } from "@/lib/jobs/prisma";
-import type { InterviewType, InterviewStatus, InterviewFormat } from "@prisma/client";
+import type { InterviewType, InterviewStatus, InterviewFormat, Prisma } from "@prisma/client";
+import type { PaginatedResult } from "@/lib/jobs/applicationManagement/repository";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -134,6 +135,52 @@ export async function createInterview(input: CreateInterviewInput): Promise<Inte
     select: INTERVIEW_SELECT,
   });
   return mapInterview(interview);
+}
+
+// ─── Paginated list ───────────────────────────────────────────────────────────
+
+export async function listAllInterviewsPaginated(opts: {
+  page?: number;
+  pageSize?: number;
+  search?: string;
+  status?: string;
+}): Promise<PaginatedResult<InterviewRow>> {
+  const page = Math.max(1, opts.page ?? 1);
+  const pageSize = Math.min(100, Math.max(1, opts.pageSize ?? 25));
+  const skip = (page - 1) * pageSize;
+  const prisma = getJobsPrismaClient();
+
+  const where: Prisma.InterviewWhereInput = { deleted_at: null };
+  if (opts.status && opts.status !== "all") {
+    where.status = opts.status as InterviewStatus;
+  }
+  if (opts.search?.trim()) {
+    const q = opts.search.trim();
+    where.OR = [
+      { application: { job: { title: { contains: q, mode: "insensitive" } } } },
+      { application: { candidate: { first_name: { contains: q, mode: "insensitive" } } } },
+      { application: { candidate: { last_name: { contains: q, mode: "insensitive" } } } },
+    ];
+  }
+
+  const [total, interviews] = await Promise.all([
+    prisma.interview.count({ where }),
+    prisma.interview.findMany({
+      where,
+      select: INTERVIEW_SELECT,
+      orderBy: { scheduled_at: "desc" },
+      skip,
+      take: pageSize,
+    }),
+  ]);
+
+  return {
+    items: interviews.map(mapInterview),
+    total,
+    page,
+    pageSize,
+    totalPages: Math.max(1, Math.ceil(total / pageSize)),
+  };
 }
 
 export async function updateInterview(

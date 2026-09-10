@@ -97,6 +97,7 @@ interface Props {
     today: TaskRow[];
     upcoming: TaskRow[];
     completed: TaskRow[];
+    totals: { overdue: number; today: number; upcoming: number; completed: number };
   };
 }
 
@@ -105,6 +106,7 @@ export default function AdminTasksClient({ tasks: initial }: Props) {
   const [today, setToday] = useState(initial.today);
   const [upcoming, setUpcoming] = useState(initial.upcoming);
   const [completed, setCompleted] = useState(initial.completed);
+  const totals = initial.totals;
 
   async function handleComplete(id: string) {
     await fetch(`/api/admin/jobs/tasks/${id}`, {
@@ -135,13 +137,14 @@ export default function AdminTasksClient({ tasks: initial }: Props) {
     }
   }
 
-  const totalOpen = overdue.length + today.length + upcoming.length;
+  const totalOpen = totals.overdue + totals.today + totals.upcoming;
+  const totalCompleted = totals.completed;
 
   return (
     <div className="space-y-8">
       <div>
         <h1 className="text-[26px] font-black text-[#0a1628]">Tasks</h1>
-        <p className="mt-0.5 text-[13px] text-[#64748b]">{totalOpen} open · {completed.length} completed</p>
+        <p className="mt-0.5 text-[13px] text-[#64748b]">{totalOpen} open · {totalCompleted} completed</p>
       </div>
 
       <TaskSection
@@ -165,7 +168,7 @@ export default function AdminTasksClient({ tasks: initial }: Props) {
       {completed.length > 0 && (
         <details className="rounded-2xl border border-[#dbe7f3] bg-white">
           <summary className="cursor-pointer px-5 py-4 text-[12px] font-black uppercase tracking-widest text-[#64748b]">
-            Completed ({completed.length})
+            Completed ({totalCompleted > completed.length ? `${completed.length} of ${totalCompleted}` : completed.length})
           </summary>
           <div className="border-t border-[#dbe7f3] p-4 space-y-2">
             {completed.map((t) => (

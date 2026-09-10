@@ -5,6 +5,8 @@ import {
   findApplicationByJobAndCandidate,
   createApplication,
 } from "@/lib/jobs/applicationManagement/repository";
+import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
+import { limitRequest, rateLimitResponse, hashIdentifier, getClientIp } from "@/lib/security/rateLimit";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -23,6 +25,24 @@ export async function GET(req: NextRequest, { params }: Params) {
 export async function POST(req: NextRequest, { params }: Params) {
   const session = await requireCandidateAccountSessionFromRequest(req);
   if (!session) return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
+
+  // Rate limit: per-candidate (10/24h) and per-IP (30/24h) — both fail-open
+  const [candidateResult, ipResult] = await Promise.all([
+    limitRequest(
+      { namespace: "jobs:apply:candidate", identifier: hashIdentifier(session.candidateId), limit: 10, windowSeconds: 86400 },
+      "fail-open"
+    ),
+    limitRequest(
+      { namespace: "jobs:apply:ip", identifier: hashIdentifier(getClientIp(req)), limit: 30, windowSeconds: 86400 },
+      "fail-open"
+    ),
+  ]);
+  if (!candidateResult.allowed) {
+    return rateLimitResponse(candidateResult, "Application limit reached. Please wait before applying again.");
+  }
+  if (!ipResult.allowed) {
+    return rateLimitResponse(ipResult, "Too many applications from this IP. Please try again later.");
+  }
 
   const { slug } = await params;
   const job = await getPublicJobBySlug(slug);
@@ -53,6 +73,15 @@ export async function POST(req: NextRequest, { params }: Params) {
     candidateId: session.candidateId,
     actorRefId: session.actorRefId,
     coverNote,
+  });
+
+  await recordJobsAuditEvent({
+    entityType: "application",
+    entityId: application.id,
+    action: "application.submitted",
+    actorType: "candidate_user",
+    actorRefId: session.actorRefId,
+    metadata: { jobId: job.id, jobSlug: slug },
   });
 
   return NextResponse.json({ applicationId: application.id }, { status: 201 });

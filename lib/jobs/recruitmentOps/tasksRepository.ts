@@ -91,40 +91,66 @@ const TASK_SELECT = {
   updated_at: true,
 } as const;
 
-export async function listAllTasks(): Promise<{
+// Row caps per group — prevents unbounded loads at scale.
+const TASK_CAP_OVERDUE = 50;
+const TASK_CAP_TODAY = 50;
+const TASK_CAP_UPCOMING = 100;
+const TASK_CAP_COMPLETED = 50;
+
+export interface TaskGroups {
   overdue: TaskRow[];
   today: TaskRow[];
   upcoming: TaskRow[];
   completed: TaskRow[];
-}> {
+  // True DB counts for each group — may exceed the capped arrays above.
+  totals: {
+    overdue: number;
+    today: number;
+    upcoming: number;
+    completed: number;
+  };
+}
+
+export async function listAllTasks(): Promise<TaskGroups> {
   const prisma = getJobsPrismaClient();
   const now = new Date();
   const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const endOfToday = new Date(startOfToday.getTime() + 86400000);
 
-  const [open, completed] = await Promise.all([
-    prisma.task.findMany({
-      where: { status: "open", deleted_at: null },
-      select: TASK_SELECT,
-      orderBy: { due_at: "asc" },
-    }),
-    prisma.task.findMany({
-      where: { status: "completed", deleted_at: null },
-      select: TASK_SELECT,
-      orderBy: { completed_at: "desc" },
-      take: 50,
-    }),
+  const baseOpen = { deleted_at: null, status: "open" as const };
+  const overdueWhere = { ...baseOpen, due_at: { lt: startOfToday } };
+  const todayWhere = { ...baseOpen, due_at: { gte: startOfToday, lt: endOfToday } };
+  const upcomingWhere = { ...baseOpen, OR: [{ due_at: { gte: endOfToday } }, { due_at: null }] };
+  const completedWhere = { deleted_at: null, status: "completed" as const };
+
+  const [
+    overdueRows, overdueCount,
+    todayRows, todayCount,
+    upcomingRows, upcomingCount,
+    completedRows, completedCount,
+  ] = await Promise.all([
+    prisma.task.findMany({ where: overdueWhere, select: TASK_SELECT, orderBy: { due_at: "asc" }, take: TASK_CAP_OVERDUE }),
+    prisma.task.count({ where: overdueWhere }),
+    prisma.task.findMany({ where: todayWhere, select: TASK_SELECT, orderBy: { due_at: "asc" }, take: TASK_CAP_TODAY }),
+    prisma.task.count({ where: todayWhere }),
+    prisma.task.findMany({ where: upcomingWhere, select: TASK_SELECT, orderBy: [{ due_at: "asc" }, { created_at: "asc" }], take: TASK_CAP_UPCOMING }),
+    prisma.task.count({ where: upcomingWhere }),
+    prisma.task.findMany({ where: completedWhere, select: TASK_SELECT, orderBy: { completed_at: "desc" }, take: TASK_CAP_COMPLETED }),
+    prisma.task.count({ where: completedWhere }),
   ]);
 
-  const overdue = open.filter((t) => t.due_at && t.due_at < startOfToday).map(mapTask);
-  const today = open
-    .filter((t) => t.due_at && t.due_at >= startOfToday && t.due_at < endOfToday)
-    .map(mapTask);
-  const upcoming = open
-    .filter((t) => !t.due_at || t.due_at >= endOfToday)
-    .map(mapTask);
-
-  return { overdue, today, upcoming, completed: completed.map(mapTask) };
+  return {
+    overdue: overdueRows.map(mapTask),
+    today: todayRows.map(mapTask),
+    upcoming: upcomingRows.map(mapTask),
+    completed: completedRows.map(mapTask),
+    totals: {
+      overdue: overdueCount,
+      today: todayCount,
+      upcoming: upcomingCount,
+      completed: completedCount,
+    },
+  };
 }
 
 export async function listTasksForEntity(

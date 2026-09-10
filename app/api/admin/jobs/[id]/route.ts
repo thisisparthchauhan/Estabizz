@@ -4,7 +4,9 @@ import {
   getJobForAdmin,
   updateJob,
   softDeleteJob,
+  ensureAdminIdentityRef,
 } from "@/lib/jobs/jobManagement/repository";
+import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
 import type { JobStatus, RemotePolicy, JobEmploymentType } from "@prisma/client";
 
 type Params = { params: Promise<{ id: string }> };
@@ -80,6 +82,18 @@ export async function PUT(req: NextRequest, { params }: Params) {
     });
 
     if (!job) return NextResponse.json({ error: "Job not found." }, { status: 404 });
+
+    const adminRefId = await ensureAdminIdentityRef(auth.admin.email, auth.admin.email);
+    const auditAction = status === "open" && is_public ? "job.published" : "job.edited";
+    await recordJobsAuditEvent({
+      entityType: "job",
+      entityId: id,
+      action: auditAction,
+      actorType: "admin_user",
+      actorRefId: adminRefId ?? undefined,
+      metadata: { title: job.title, status: job.status },
+    });
+
     return NextResponse.json({ job });
   } catch (err: unknown) {
     console.error("[admin/jobs/[id] PUT]", err);
@@ -99,6 +113,15 @@ export async function DELETE(req: NextRequest, { params }: Params) {
     const { id } = await params;
     const removed = await softDeleteJob(id);
     if (!removed) return NextResponse.json({ error: "Job not found." }, { status: 404 });
+
+    const adminRefId = await ensureAdminIdentityRef(auth.admin.email, auth.admin.email);
+    await recordJobsAuditEvent({
+      entityType: "job",
+      entityId: id,
+      action: "job.deleted",
+      actorType: "admin_user",
+      actorRefId: adminRefId ?? undefined,
+    });
 
     return NextResponse.json({ success: true, id });
   } catch (err) {

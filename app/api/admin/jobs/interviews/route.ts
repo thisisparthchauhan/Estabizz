@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requirePermission } from "@/lib/admin/requirePermission";
 import { ensureAdminIdentityRef } from "@/lib/jobs/jobManagement/repository";
-import { listAllInterviews, createInterview } from "@/lib/jobs/recruitmentOps/interviewsRepository";
+import { createInterview } from "@/lib/jobs/recruitmentOps/interviewsRepository";
+import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
 import type { InterviewType, InterviewFormat } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
@@ -11,8 +12,15 @@ export async function GET(req: NextRequest) {
     const auth = await requirePermission(req, "manage_jobs");
     if (!auth.ok) return auth.response;
 
-    const interviews = await listAllInterviews();
-    return NextResponse.json({ interviews });
+    const { searchParams } = new URL(req.url);
+    const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10) || 1);
+    const pageSize = Math.min(100, Math.max(1, parseInt(searchParams.get("pageSize") ?? "25", 10) || 25));
+    const search = searchParams.get("search") ?? "";
+    const status = searchParams.get("status") ?? "all";
+
+    const { listAllInterviewsPaginated } = await import("@/lib/jobs/recruitmentOps/interviewsRepository");
+    const result = await listAllInterviewsPaginated({ page, pageSize, search, status });
+    return NextResponse.json(result);
   } catch (err) {
     console.error("[admin/interviews GET]", err);
     return NextResponse.json({ error: "Failed to load interviews." }, { status: 500 });
@@ -44,6 +52,15 @@ export async function POST(req: NextRequest) {
       format: format as InterviewFormat | undefined,
       notes: notes?.trim() || undefined,
       createdByRefId: adminRefId,
+    });
+
+    await recordJobsAuditEvent({
+      entityType: "interview",
+      entityId: interview.id,
+      action: "interview.scheduled",
+      actorType: "admin_user",
+      actorRefId: adminRefId ?? undefined,
+      metadata: { applicationId, interviewType, roundNumber: roundNumber ?? 1 },
     });
 
     return NextResponse.json({ interview }, { status: 201 });

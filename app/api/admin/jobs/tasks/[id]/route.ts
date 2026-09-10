@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { requirePermission } from "@/lib/admin/requirePermission";
 import { ensureAdminIdentityRef } from "@/lib/jobs/jobManagement/repository";
 import { completeTask, reopenTask } from "@/lib/jobs/recruitmentOps/tasksRepository";
+import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -26,6 +27,15 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     }
 
     if (!ok) return NextResponse.json({ error: "Task not found." }, { status: 404 });
+
+    await recordJobsAuditEvent({
+      entityType: "task",
+      entityId: id,
+      action: action === "complete" ? "task.completed" : "task.reopened",
+      actorType: "admin_user",
+      actorRefId: adminRefId ?? undefined,
+    });
+
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("[admin/tasks/[id] PATCH]", err);

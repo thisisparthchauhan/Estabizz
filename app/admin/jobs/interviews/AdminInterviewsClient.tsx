@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
-interface InterviewRow { id: string; applicationId: string; jobTitle: string; candidateName: string; interviewType: string; roundNumber: number; status: string; scheduledAt: Date | null; durationMinutes: number | null; locationOrLink: string | null; format: string | null; notes: string | null; createdAt: Date; }
+import { useRouter } from "next/navigation";
+import type { InterviewRow } from "@/lib/jobs/recruitmentOps/interviewsRepository";
+import type { PaginatedResult } from "@/lib/jobs/applicationManagement/repository";
 
 function fmt(d: Date | string | null) {
   if (!d) return "TBD";
@@ -29,36 +31,43 @@ const STATUS_COLOURS: Record<string, string> = {
   no_show: "bg-orange-50 text-orange-700 border border-orange-200",
 };
 
-interface Props {
-  interviews: InterviewRow[];
-}
-
 const STATUSES = ["all", "scheduled", "completed", "cancelled", "no_show"];
 
-export default function AdminInterviewsClient({ interviews }: Props) {
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [search, setSearch] = useState("");
+interface Props {
+  result: PaginatedResult<InterviewRow>;
+  initialSearch: string;
+  initialStatus: string;
+}
 
-  const filtered = useMemo(() => {
-    let list = interviews;
-    if (statusFilter !== "all") list = list.filter((i) => i.status === statusFilter);
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      list = list.filter(
-        (i) =>
-          i.candidateName.toLowerCase().includes(q) ||
-          i.jobTitle.toLowerCase().includes(q) ||
-          i.interviewType.toLowerCase().includes(q),
-      );
-    }
-    return list;
-  }, [interviews, statusFilter, search]);
+export default function AdminInterviewsClient({ result, initialSearch, initialStatus }: Props) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [search, setSearch] = useState(initialSearch);
+
+  function navigate(params: Record<string, string>) {
+    const sp = new URLSearchParams(params);
+    startTransition(() => router.push(`?${sp.toString()}`));
+  }
+
+  function handleSearchSubmit() {
+    navigate({ search, status: initialStatus, page: "1" });
+  }
+
+  function handleStatusChange(status: string) {
+    navigate({ search, status, page: "1" });
+  }
+
+  function handlePage(p: number) {
+    navigate({ search, status: initialStatus, page: String(p) });
+  }
+
+  const { items: interviews, total, page, totalPages } = result;
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-[26px] font-black text-[#0a1628]">Interviews</h1>
-        <p className="mt-0.5 text-[13px] text-[#64748b]">{interviews.length} total</p>
+        <p className="mt-0.5 text-[13px] text-[#64748b]">{total} total</p>
       </div>
 
       {/* Filters */}
@@ -68,19 +77,22 @@ export default function AdminInterviewsClient({ interviews }: Props) {
           placeholder="Search candidate or job…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSearchSubmit()}
+          onBlur={handleSearchSubmit}
         />
         <select
           className="rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#334155] focus:border-[#1677f2] focus:outline-none"
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
+          value={initialStatus}
+          onChange={(e) => handleStatusChange(e.target.value)}
         >
           {STATUSES.map((s) => (
             <option key={s} value={s}>{s === "all" ? "All Statuses" : s.replace("_", " ")}</option>
           ))}
         </select>
+        {isPending && <span className="self-center text-[12px] text-[#94a3b8]">Loading…</span>}
       </div>
 
-      {filtered.length === 0 ? (
+      {interviews.length === 0 ? (
         <p className="text-[13px] text-[#94a3b8]">No interviews found.</p>
       ) : (
         <div className="overflow-x-auto rounded-2xl border border-[#dbe7f3] bg-white">
@@ -97,7 +109,7 @@ export default function AdminInterviewsClient({ interviews }: Props) {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((iv) => (
+              {interviews.map((iv) => (
                 <tr key={iv.id} className="border-b border-[#dbe7f3] last:border-0 hover:bg-[#f8fbff] transition-colors">
                   <td className="px-4 py-3 font-bold text-[#0a1628]">
                     <Link href={`/admin/jobs/applications/${iv.applicationId}`}
@@ -121,6 +133,31 @@ export default function AdminInterviewsClient({ interviews }: Props) {
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between text-[13px]">
+          <span className="text-[#64748b]">Page {page} of {totalPages}</span>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              disabled={page <= 1}
+              onClick={() => handlePage(page - 1)}
+              className="rounded-xl border border-[#dbe7f3] px-4 py-2 font-bold text-[#334155] hover:bg-[#f8fbff] disabled:opacity-40"
+            >
+              ← Prev
+            </button>
+            <button
+              type="button"
+              disabled={page >= totalPages}
+              onClick={() => handlePage(page + 1)}
+              className="rounded-xl border border-[#dbe7f3] px-4 py-2 font-bold text-[#334155] hover:bg-[#f8fbff] disabled:opacity-40"
+            >
+              Next →
+            </button>
+          </div>
         </div>
       )}
     </div>

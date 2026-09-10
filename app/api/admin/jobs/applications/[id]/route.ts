@@ -32,7 +32,17 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     const { id } = await params;
     const body = await req.json();
     const { stageId } = body;
-    if (!stageId) return NextResponse.json({ error: "stageId is required." }, { status: 400 });
+    if (!stageId || typeof stageId !== "string") {
+      return NextResponse.json({ error: "stageId is required." }, { status: 400 });
+    }
+
+    // Verify the stage exists before updating
+    const { getJobsPrismaClient } = await import("@/lib/jobs/prisma");
+    const stage = await getJobsPrismaClient().applicationStage.findFirst({
+      where: { id: stageId, is_active: true },
+      select: { id: true },
+    });
+    if (!stage) return NextResponse.json({ error: "Invalid stage." }, { status: 422 });
 
     const adminRefId = await ensureAdminIdentityRef(auth.admin.email, auth.admin.email);
     const updated = await updateApplicationStage(id, stageId, adminRefId);

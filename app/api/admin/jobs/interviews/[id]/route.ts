@@ -5,6 +5,9 @@ import type { InterviewStatus, InterviewFormat } from "@prisma/client";
 
 type Params = { params: Promise<{ id: string }> };
 
+const VALID_STATUSES: InterviewStatus[] = ["scheduled", "completed", "cancelled", "no_show"];
+const VALID_FORMATS: InterviewFormat[] = ["in_person", "video", "phone"];
+
 export async function PATCH(req: NextRequest, { params }: Params) {
   try {
     const auth = await requirePermission(req, "manage_jobs");
@@ -12,6 +15,13 @@ export async function PATCH(req: NextRequest, { params }: Params) {
 
     const { id } = await params;
     const body = await req.json();
+
+    if (body.status !== undefined && !VALID_STATUSES.includes(body.status)) {
+      return NextResponse.json({ error: "Invalid status value." }, { status: 422 });
+    }
+    if (body.format !== undefined && body.format !== null && !VALID_FORMATS.includes(body.format)) {
+      return NextResponse.json({ error: "Invalid format value." }, { status: 422 });
+    }
 
     const updated = await updateInterview(id, {
       status: body.status as InterviewStatus | undefined,

@@ -199,23 +199,40 @@ const NAV_ENTRIES: NavEntry[] = [
   { kind: "item", label: "Internal Tools",  href: "/admin/tools",              icon: <IconTool /> },
 ];
 
-// ─── Writer role filtering ────────────────────────────────────────────────────
+// ─── Role-based nav filtering ─────────────────────────────────────────────────
 
 const WRITER_NAV_HREFS = new Set([
   "/admin/blogs", "/admin/blogs/new", "/admin/blogs/pending",
   "/admin/categories", "/admin/media-library",
 ]);
 
-function getVisibleEntries(entries: NavEntry[], isWriter: boolean): NavEntry[] {
-  if (!isWriter) return entries;
+const RECRUITMENT_NAV_HREFS = new Set([
+  "/admin/jobs/dashboard", "/admin/jobs", "/admin/jobs/new",
+  "/admin/jobs/applications", "/admin/jobs/candidates",
+  "/admin/jobs/interviews", "/admin/jobs/tasks",
+]);
+
+const ROLES_WITH_MANAGE_JOBS = new Set<AdminRole>(["super_admin", "admin"]);
+
+function getVisibleEntries(entries: NavEntry[], adminRole: AdminRole | undefined): NavEntry[] {
+  const isWriter = adminRole === "content_writer";
+  const hasManageJobs = adminRole ? ROLES_WITH_MANAGE_JOBS.has(adminRole) : false;
+
+  if (!isWriter && hasManageJobs) return entries;
+
   const result: NavEntry[] = [];
   let pendingSection: NavSection | null = null;
   for (const e of entries) {
     if (e.kind === "section") {
       pendingSection = e;
-    } else if (WRITER_NAV_HREFS.has(e.href)) {
-      if (pendingSection) { result.push(pendingSection); pendingSection = null; }
-      result.push(e);
+    } else {
+      const allowed = isWriter
+        ? WRITER_NAV_HREFS.has(e.href)
+        : !RECRUITMENT_NAV_HREFS.has(e.href);
+      if (allowed) {
+        if (pendingSection) { result.push(pendingSection); pendingSection = null; }
+        result.push(e);
+      }
     }
   }
   return result;
@@ -396,8 +413,7 @@ export default function AdminShell({
       .catch(() => setPendingCount(0));
   }, []);
 
-  const isWriter = adminRole === "content_writer";
-  const visibleEntries = getVisibleEntries(NAV_ENTRIES, isWriter);
+  const visibleEntries = getVisibleEntries(NAV_ENTRIES, adminRole);
 
   const JOBS_NAMED = [
     "/admin/jobs/dashboard", "/admin/jobs/new", "/admin/jobs/applications",

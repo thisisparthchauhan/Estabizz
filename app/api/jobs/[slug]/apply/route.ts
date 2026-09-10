@@ -33,10 +33,17 @@ export async function POST(req: NextRequest, { params }: Params) {
     return NextResponse.json({ error: "Already applied", applicationId: existing.id }, { status: 409 });
   }
 
+  const COVER_NOTE_MAX = 5000;
   let coverNote: string | undefined;
   try {
     const body = await req.json().catch(() => ({}));
-    coverNote = typeof body.coverNote === "string" ? body.coverNote.trim() || undefined : undefined;
+    if (typeof body.coverNote === "string") {
+      const trimmed = body.coverNote.trim();
+      if (trimmed.length > COVER_NOTE_MAX) {
+        return NextResponse.json({ error: `Cover note must be ${COVER_NOTE_MAX} characters or fewer.` }, { status: 422 });
+      }
+      coverNote = trimmed || undefined;
+    }
   } catch {
     // no body
   }

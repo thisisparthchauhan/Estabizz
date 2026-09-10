@@ -268,9 +268,19 @@ class FakeStorage {
           contentType: object.contentType,
           contentLengthBytes: object.contentLengthBytes,
           uploadedAt: new Date(),
-          malwareScanStatus: "pending",
+          malwareScanStatus: "not_scanned",
         }
       : null;
+  }
+
+  async getObjectRange(objectKey, start, endInclusive) {
+    const object = this.objects.get(objectKey);
+
+    if (!object) {
+      return null;
+    }
+
+    return object.content.slice(start, endInclusive + 1);
   }
 
   async deleteObject(objectKey) {
@@ -278,8 +288,96 @@ class FakeStorage {
   }
 
   markUploaded(objectKey, metadata) {
-    this.objects.set(objectKey, metadata);
+    // The confirm path now structurally validates the stored bytes, so a
+    // synthetic object needs real content of the declared type.
+    this.objects.set(objectKey, {
+      ...metadata,
+      content: metadata.content ?? syntheticContentFor(metadata.contentType, metadata.contentLengthBytes),
+    });
   }
+}
+
+/** Minimal but structurally real PDF / DOCX bytes for the synthetic storage. */
+function syntheticContentFor(contentType, contentLengthBytes) {
+  const body =
+    contentType === "application/pdf" ? syntheticPdfBytes() : syntheticDocxBytes();
+  const padded = new Uint8Array(Math.max(contentLengthBytes, body.length));
+  padded.set(body, 0);
+
+  // A DOCX is validated from its trailer, so padding must not follow it.
+  return contentType === "application/pdf" ? padded.slice(0, contentLengthBytes || body.length) : body;
+}
+
+function syntheticPdfBytes() {
+  return new Uint8Array(Buffer.from("%PDF-1.4\n1 0 obj<</Type/Catalog>>endobj\ntrailer\n%%EOF\n", "latin1"));
+}
+
+function syntheticDocxBytes() {
+  return buildStoreOnlyZip([
+    ["[Content_Types].xml", "<Types/>"],
+    ["word/document.xml", "<document><body>synthetic</body></document>"],
+  ]);
+}
+
+function buildStoreOnlyZip(entries) {
+  const chunks = [];
+  const files = [];
+  let offset = 0;
+
+  for (const [name, content] of entries) {
+    const nameBytes = Buffer.from(name, "utf8");
+    const data = Buffer.from(content, "utf8");
+    const crc = crc32(data);
+    const local = Buffer.alloc(30);
+    local.writeUInt32LE(0x04034b50, 0);
+    local.writeUInt16LE(20, 4);
+    local.writeUInt32LE(crc, 14);
+    local.writeUInt32LE(data.length, 18);
+    local.writeUInt32LE(data.length, 22);
+    local.writeUInt16LE(nameBytes.length, 26);
+    chunks.push(local, nameBytes, data);
+    files.push({ nameBytes, crc, size: data.length, offset });
+    offset += local.length + nameBytes.length + data.length;
+  }
+
+  const centralStart = offset;
+
+  for (const file of files) {
+    const central = Buffer.alloc(46);
+    central.writeUInt32LE(0x02014b50, 0);
+    central.writeUInt16LE(20, 4);
+    central.writeUInt16LE(20, 6);
+    central.writeUInt32LE(file.crc, 16);
+    central.writeUInt32LE(file.size, 20);
+    central.writeUInt32LE(file.size, 24);
+    central.writeUInt16LE(file.nameBytes.length, 28);
+    central.writeUInt32LE(file.offset, 42);
+    chunks.push(central, file.nameBytes);
+    offset += central.length + file.nameBytes.length;
+  }
+
+  const eocd = Buffer.alloc(22);
+  eocd.writeUInt32LE(0x06054b50, 0);
+  eocd.writeUInt16LE(files.length, 8);
+  eocd.writeUInt16LE(files.length, 10);
+  eocd.writeUInt32LE(offset - centralStart, 12);
+  eocd.writeUInt32LE(centralStart, 16);
+  chunks.push(eocd);
+
+  return new Uint8Array(Buffer.concat(chunks));
+}
+
+function crc32(buffer) {
+  let crc = 0xffffffff;
+
+  for (const byte of buffer) {
+    crc ^= byte;
+    for (let i = 0; i < 8; i += 1) {
+      crc = crc & 1 ? (crc >>> 1) ^ 0xedb88320 : crc >>> 1;
+    }
+  }
+
+  return (crc ^ 0xffffffff) >>> 0;
 }
 
 class FakeResumeRepository {

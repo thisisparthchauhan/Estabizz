@@ -131,8 +131,9 @@ export function buildCandidateProfileReviewState(
   if (input.resumeStatus === "pending" || input.resumeStatus === "processing" || (input.resumeStatus === "completed" && fields.length === 0)) {
     return {
       status: "processing",
-      heading: "Resume uploaded",
-      message: "Your resume is stored privately. Profile preparation will start in a later approved step.",
+      heading: "Reading your resume",
+      message:
+        "Your resume is stored privately and we are extracting the details now. This page updates on its own when it is ready.",
       progress,
       sections,
       confirmedProfile,
@@ -146,10 +147,18 @@ export function buildCandidateProfileReviewState(
   }
 
   if (input.resumeStatus === "failed" || input.resumeStatus === "ocr_required") {
+    const scannedDocument = input.resumeStatus === "ocr_required";
+
     return {
       status: "recovery",
-      heading: "We couldn't prepare your profile from this resume.",
-      message: "You can upload another CV or complete your profile manually.",
+      heading: scannedDocument
+        ? "This resume looks like a scanned image."
+        : "We couldn't prepare your profile from this resume.",
+      // A scanned PDF is a fixable situation with a specific remedy, so it gets
+      // its own instruction rather than the generic failure copy.
+      message: scannedDocument
+        ? "We could not find any readable text in this file. Please upload a text-based PDF or a DOCX file, or complete your profile manually."
+        : "You can upload another CV or complete your profile manually.",
       progress,
       sections,
       confirmedProfile,

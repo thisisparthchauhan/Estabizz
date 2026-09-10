@@ -3,7 +3,14 @@ export interface JobsAiServiceConfig {
   environment: "development" | "staging" | "production";
   serviceUrl: string;
   serviceSecret: string;
-  timeoutMs: number;
+  /**
+   * Per-call caller timeouts. Each must exceed the AI service's own ceiling for
+   * that operation plus network overhead, otherwise the caller aborts work the
+   * service is still performing and the job fails for no real reason.
+   */
+  healthTimeoutMs: number;
+  textExtractionTimeoutMs: number;
+  structuredExtractionTimeoutMs: number;
 }
 
 export interface JobsAiServiceConfigValidationResult {

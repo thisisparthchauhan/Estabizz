@@ -1,6 +1,22 @@
 import type { JobsAiServiceConfig, JobsAiServiceConfigValidationResult } from "./types";
 
-const DEFAULT_TIMEOUT_MS = 5000;
+/**
+ * Timeout budget for the resume pipeline, outermost to innermost:
+ *
+ *   QStash delivery timeout   plan maximum (deliberately not shortened)
+ *   Vercel maxDuration        300s on /api/jobs/queue/resume-parse
+ *   -> text extraction call   45s  (this file)      service ceiling 30s + overhead
+ *   -> structured call        75s  (this file)      service ceiling 60s + overhead
+ *
+ * Each caller timeout must stay ABOVE the AI service's own ceiling for the same
+ * operation. The service ceilings live in services/jobs-ai (JOBS_AI_TEXT_
+ * EXTRACTION_TIMEOUT_SECONDS and JOBS_AI_EXTRACTION_TIMEOUT_SECONDS); changing
+ * one side without the other reintroduces the mismatch this replaced.
+ */
+const DEFAULT_HEALTH_TIMEOUT_MS = 10_000;
+const DEFAULT_TEXT_EXTRACTION_TIMEOUT_MS = 45_000;
+const DEFAULT_STRUCTURED_EXTRACTION_TIMEOUT_MS = 75_000;
+const MAX_TIMEOUT_MS = 120_000;
 
 export function getJobsAiServiceConfig(
   env: NodeJS.ProcessEnv = process.env,
@@ -14,7 +30,18 @@ export function getJobsAiServiceConfig(
     environment,
     serviceUrl,
     serviceSecret,
-    timeoutMs: parsePositiveInteger(env.JOBS_AI_REQUEST_TIMEOUT_MS, DEFAULT_TIMEOUT_MS),
+    healthTimeoutMs: parsePositiveInteger(
+      env.JOBS_AI_HEALTH_TIMEOUT_MS,
+      DEFAULT_HEALTH_TIMEOUT_MS,
+    ),
+    textExtractionTimeoutMs: parsePositiveInteger(
+      env.JOBS_AI_TEXT_EXTRACTION_TIMEOUT_MS,
+      DEFAULT_TEXT_EXTRACTION_TIMEOUT_MS,
+    ),
+    structuredExtractionTimeoutMs: parsePositiveInteger(
+      env.JOBS_AI_STRUCTURED_EXTRACTION_TIMEOUT_MS,
+      DEFAULT_STRUCTURED_EXTRACTION_TIMEOUT_MS,
+    ),
   };
 }
 
@@ -45,8 +72,22 @@ export function validateJobsAiServiceConfig(
     errors.push("Non-production AI service configuration must not point at production URLs.");
   }
 
-  if (config.timeoutMs <= 0 || config.timeoutMs > 30000) {
-    errors.push("JOBS_AI_REQUEST_TIMEOUT_MS must be between 1 and 30000.");
+  for (const [name, value] of [
+    ["JOBS_AI_HEALTH_TIMEOUT_MS", config.healthTimeoutMs],
+    ["JOBS_AI_TEXT_EXTRACTION_TIMEOUT_MS", config.textExtractionTimeoutMs],
+    ["JOBS_AI_STRUCTURED_EXTRACTION_TIMEOUT_MS", config.structuredExtractionTimeoutMs],
+  ] as const) {
+    if (value <= 0 || value > MAX_TIMEOUT_MS) {
+      errors.push(`${name} must be between 1 and ${MAX_TIMEOUT_MS}.`);
+    }
+  }
+
+  // A structured extraction calls an LLM; text extraction only parses bytes.
+  // Inverting these means the LLM call is cut off before the cheap one.
+  if (config.structuredExtractionTimeoutMs < config.textExtractionTimeoutMs) {
+    errors.push(
+      "JOBS_AI_STRUCTURED_EXTRACTION_TIMEOUT_MS must not be shorter than JOBS_AI_TEXT_EXTRACTION_TIMEOUT_MS.",
+    );
   }
 
   return {

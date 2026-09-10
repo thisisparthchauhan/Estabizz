@@ -374,7 +374,8 @@ def test_openai_adapter_omits_temperature_for_gpt_5_6_luna(monkeypatch):
     class FakeAsyncOpenAI:
         def __init__(self, *, api_key: str, timeout: int) -> None:
             assert api_key == "synthetic-key"
-            assert timeout == 15
+            # The OpenAI client timeout tracks extraction_timeout_seconds.
+            assert timeout == 60
             self.chat = SimpleNamespace(completions=FakeCompletions())
 
     monkeypatch.setitem(
@@ -397,7 +398,8 @@ def test_openai_adapter_omits_temperature_for_gpt_5_6_luna(monkeypatch):
             jobs_ai_model="gpt-5.6-luna",
             openai_api_key="synthetic-key",
             max_resume_file_bytes=10 * 1024 * 1024,
-            extraction_timeout_seconds=15,
+            text_extraction_timeout_seconds=30,
+            extraction_timeout_seconds=60,
         ),
     )
 
@@ -501,7 +503,8 @@ def test_openai_adapter_rejects_refusal_safely(monkeypatch):
             jobs_ai_model="gpt-5.6-luna",
             openai_api_key="synthetic-key",
             max_resume_file_bytes=10 * 1024 * 1024,
-            extraction_timeout_seconds=15,
+            text_extraction_timeout_seconds=30,
+            extraction_timeout_seconds=60,
         ),
     )
 
@@ -699,3 +702,52 @@ def extracted_field(value: Any, section_label: str = "Synthetic Section") -> dic
         ],
         "reviewStatus": "ai_proposed",
     }
+
+
+def test_structured_extraction_wire_contract_matches_the_nextjs_client(monkeypatch):
+    """Pins the exact JSON key casing lib/jobs/ai/fastApiClient.ts sends.
+
+    The request model forbids extra fields, so a casing drift on either side is
+    a 422 at runtime rather than a type error at build time. This test is the
+    only thing that catches that.
+    """
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+
+    monkeypatch.setenv("AI_SERVICE_SECRET", "test-service-secret")
+    monkeypatch.setenv("JOBS_AI_PROVIDER", "disabled")
+    get_settings.cache_clear()
+
+    client = TestClient(app)
+    response = client.post(
+        "/internal/resumes/structured-extraction",
+        headers={"x-estabizz-service-secret": "test-service-secret"},
+        json={
+            "resumeVersionId": "11111111-1111-4111-8111-111111111111",
+            "candidateId": "22222222-2222-4222-8222-222222222222",
+            "correlationId": "resume-parse-11111111-1111-4111-8111-111111111111",
+            "extractedText": "Synthetic resume text.",
+            "extractionMethod": "pypdf",
+            "pageCount": 1,
+        },
+    )
+
+    # The body is accepted (no 422); the provider being disabled is a separate,
+    # in-band failure status rather than a schema rejection.
+    assert response.status_code == 200, response.text
+    assert response.json()["status"] == "provider_not_configured"
+
+    snake_case = client.post(
+        "/internal/resumes/structured-extraction",
+        headers={"x-estabizz-service-secret": "test-service-secret"},
+        json={
+            "resume_version_id": "11111111-1111-4111-8111-111111111111",
+            "candidate_id": "22222222-2222-4222-8222-222222222222",
+            "correlation_id": "c",
+            "extracted_text": "Synthetic resume text.",
+        },
+    )
+    assert snake_case.status_code == 422
+
+    get_settings.cache_clear()

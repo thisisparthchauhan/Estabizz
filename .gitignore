@@ -17,3 +17,17 @@ tsconfig.tsbuildinfo
 
 # Local real-candidate CVs; never commit or process in AI smoke tests.
 Jobs CV/
+Estabizz Jobs CV/
+
+# Python service local state
+services/jobs-ai/.venv/
+services/jobs-ai/**/__pycache__/
+services/jobs-ai/.pytest_cache/
+
+# Local build/diff scratch output
+build.log
+new_build.log
+old_build*.log
+full_diff.txt
+new_*.txt
+old_*.txt

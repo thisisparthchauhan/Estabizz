@@ -44,7 +44,7 @@ async def extract_resume_text(
     try:
         return await asyncio.wait_for(
             asyncio.to_thread(extract_document_text, content, detected_mime_type),
-            timeout=settings.extraction_timeout_seconds,
+            timeout=settings.text_extraction_timeout_seconds,
         )
     except TimeoutError:
         return ResumeTextExtractionResponse(

@@ -105,6 +105,20 @@ export class ResumeUploadAuthorizationError extends Error {
   }
 }
 
+/**
+ * Raised when the uploaded bytes are not the document type the upload claimed.
+ * Structural validation only -- this is not a malware-scan verdict.
+ */
+export class ResumeUploadFileSecurityError extends Error {
+  constructor(
+    readonly candidateMessage: string,
+    readonly securityStatus: string,
+  ) {
+    super(`Resume file validation rejected the upload: ${securityStatus}`);
+    this.name = "ResumeUploadFileSecurityError";
+  }
+}
+
 export class ResumeUploadStorageError extends Error {
   constructor(message = "We could not verify the uploaded resume.") {
     super(message);

@@ -84,7 +84,8 @@ export class S3CompatibleDocumentStorage implements PrivateDocumentStorage {
       "upload-kind": request.uploadKind,
       "requested-by-ref-id": request.requestedByRefId,
       "safe-filename": normalizedFilename.safeName,
-      "malware-scan-status": "pending",
+      // No scanner exists. Do not imply one ran.
+      "malware-scan-status": "not_scanned",
       ...(request.sha256Hex ? { sha256: request.sha256Hex.toLowerCase() } : {}),
     };
     const command = new PutObjectCommand({
@@ -166,6 +167,38 @@ export class S3CompatibleDocumentStorage implements PrivateDocumentStorage {
     }
   }
 
+  async getObjectRange(
+    objectKey: string,
+    start: number,
+    endInclusive: number,
+  ): Promise<Uint8Array | null> {
+    if (!Number.isInteger(start) || !Number.isInteger(endInclusive) || start < 0 || endInclusive < start) {
+      throw new Error("Object byte range is invalid.");
+    }
+
+    try {
+      const response = await this.client.send(
+        new GetObjectCommand({
+          Bucket: this.config.bucket,
+          Key: objectKey,
+          Range: `bytes=${start}-${endInclusive}`,
+        }),
+      );
+
+      if (!response.Body) {
+        return null;
+      }
+
+      return await response.Body.transformToByteArray();
+    } catch (error) {
+      if (isNotFoundError(error)) {
+        return null;
+      }
+
+      throw error;
+    }
+  }
+
   async deleteObject(objectKey: string): Promise<void> {
     await this.client.send(
       new DeleteObjectCommand({
@@ -208,6 +241,7 @@ function normalizeSha256Metadata(value: string | undefined): string | undefined 
 
 function normalizeMalwareScanStatus(value: string | undefined): MalwareScanStatus {
   if (
+    value === "not_scanned" ||
     value === "pending" ||
     value === "clean" ||
     value === "infected" ||
@@ -217,7 +251,8 @@ function normalizeMalwareScanStatus(value: string | undefined): MalwareScanStatu
     return value;
   }
 
-  return "pending";
+  // Unknown or absent metadata means nobody scanned this object.
+  return "not_scanned";
 }
 
 function isNotFoundError(error: unknown): boolean {

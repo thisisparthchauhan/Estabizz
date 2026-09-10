@@ -11,6 +11,16 @@ import {
 } from "@/lib/jobs/resumeParsing";
 import { processResumeParseJob } from "@/lib/jobs/resumeParsing/worker";
 
+/**
+ * Worst-case budget for one delivery: 45s text extraction + 75s structured
+ * extraction (lib/jobs/ai/config.ts) plus storage and database time. The
+ * platform default would abort the call mid-AI-request and QStash would retry
+ * work that had in fact started.
+ *
+ * Requires a Vercel plan permitting 300s functions.
+ */
+export const maxDuration = 300;
+
 export async function POST(request: Request) {
   const config = getJobsQueueConfig();
   const rawBody = await request.text();

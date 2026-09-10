@@ -34,7 +34,7 @@ export class JobsAiFastApiClient {
     }
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), this.config.timeoutMs);
+    const timeout = setTimeout(() => controller.abort(), this.config.healthTimeoutMs);
 
     try {
       const response = await fetch(buildJobsAiServiceUrl(this.config, "/internal/health"), {
@@ -100,7 +100,7 @@ export class JobsAiFastApiClient {
     );
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), this.config.timeoutMs);
+    const timeout = setTimeout(() => controller.abort(), this.config.textExtractionTimeoutMs);
 
     try {
       const response = await fetch(
@@ -160,7 +160,10 @@ export class JobsAiFastApiClient {
     }
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), this.config.timeoutMs);
+    const timeout = setTimeout(
+      () => controller.abort(),
+      this.config.structuredExtractionTimeoutMs,
+    );
 
     try {
       const response = await fetch(
@@ -172,13 +175,16 @@ export class JobsAiFastApiClient {
             "content-type": "application/json",
             accept: "application/json",
           },
+          // Keys must match ResumeStructuredExtractionRequest in
+          // services/jobs-ai/app/schemas/structured_resume.py exactly: it is a
+          // strict model (extra="forbid"), so a snake_case body is a 422.
           body: JSON.stringify({
-            resume_version_id: request.resumeVersionId,
-            candidate_id: request.candidateId,
-            correlation_id: request.correlationId,
-            extracted_text: request.extractedText,
-            extraction_method: request.extractionMethod ?? null,
-            page_count: request.pageCount ?? null,
+            resumeVersionId: request.resumeVersionId,
+            candidateId: request.candidateId,
+            correlationId: request.correlationId,
+            extractedText: request.extractedText,
+            extractionMethod: request.extractionMethod ?? null,
+            pageCount: request.pageCount ?? null,
           }),
           cache: "no-store",
           signal: controller.signal,

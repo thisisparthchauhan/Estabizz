@@ -17,7 +17,14 @@ export type StoredDocumentKind = "resume_version" | "candidate_document";
 
 export type TemporaryUploadKind = "resume" | "candidate_document";
 
+/**
+ * `not_scanned` is the honest state for an object that no scanner has ever
+ * looked at. It is NOT a pass. `pending` means a scan was requested and has not
+ * finished; no code path currently produces it, but it is retained so objects
+ * uploaded before this change keep their meaning.
+ */
 export type MalwareScanStatus =
+  | "not_scanned"
   | "pending"
   | "clean"
   | "infected"
@@ -150,5 +157,15 @@ export interface PrivateDocumentStorage {
     _request: PresignedDownloadRequest,
   ): Promise<PresignedDownloadTarget>;
   getObjectMetadata(_objectKey: string): Promise<PrivateObjectMetadata | null>;
+  /**
+   * Reads a byte range from a private object. Used by the file-security gate so
+   * a header/trailer check does not have to pull a whole 10 MB document into a
+   * serverless function. `endInclusive` follows HTTP Range semantics.
+   */
+  getObjectRange(
+    _objectKey: string,
+    _start: number,
+    _endInclusive: number,
+  ): Promise<Uint8Array | null>;
   deleteObject(_objectKey: string): Promise<void>;
 }

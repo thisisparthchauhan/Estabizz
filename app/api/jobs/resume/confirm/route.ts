@@ -6,6 +6,7 @@ import {
   confirmResumeUpload,
   parseResumeUploadConfirmBody,
   ResumeUploadAuthorizationError,
+  ResumeUploadFileSecurityError,
   ResumeUploadStorageError,
   ResumeUploadValidationError,
 } from "@/lib/jobs/resumeUpload";
@@ -77,6 +78,15 @@ export async function POST(request: NextRequest) {
     if (error instanceof ResumeUploadValidationError) {
       return NextResponse.json(
         { error: "Resume upload reference is invalid or expired." },
+        { status: 400, headers: { "Cache-Control": "no-store" } },
+      );
+    }
+
+    if (error instanceof ResumeUploadFileSecurityError) {
+      // candidateMessage is a fixed phrase from a lookup table; it carries no
+      // storage key, filename or document content.
+      return NextResponse.json(
+        { error: error.candidateMessage },
         { status: 400, headers: { "Cache-Control": "no-store" } },
       );
     }

@@ -8,6 +8,16 @@ import {
   getJobsQueueConfig,
 } from "@/lib/jobs/queue";
 
+/**
+ * The processing identity of a resume is the resume version itself, not the
+ * dispatch attempt. A random correlation id per call produced a fresh QStash
+ * deduplicationId on every retry of the (idempotent) confirm endpoint, so one
+ * upload could be delivered to the worker several times over.
+ */
+export function buildResumeParseCorrelationId(resumeVersionId: string): string {
+  return `resume-parse-${resumeVersionId}`;
+}
+
 export interface DispatchResumeParseInput {
   resumeVersionId: string;
   candidateId: string;
@@ -32,7 +42,7 @@ export async function dispatchResumeParse(
     return { dispatched: false, blocked: true };
   }
 
-  const correlationId = input.correlationId ?? randomUUID();
+  const correlationId = input.correlationId ?? buildResumeParseCorrelationId(input.resumeVersionId);
   const jobId = randomUUID();
   const idempotencyKey = createJobsQueueIdempotencyKey({
     jobType: "RESUME_PARSE",

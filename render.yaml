@@ -1,0 +1,96 @@
+# Render Blueprint for the Estabizz Jobs AI service.
+#
+# STAGING ONLY. This describes one service: services/jobs-ai, the FastAPI
+# resume text-extraction and structured-extraction worker that Vercel calls
+# from the RESUME_PARSE queue handler. It deploys nothing else in this repo --
+# the Next.js application stays on Vercel.
+#
+# Verified against the service before writing:
+#   ASGI app object      app.main:app          (services/jobs-ai/app/main.py)
+#   dependency file      requirements.txt      (pinned)
+#   health endpoint      GET /health           (unauthenticated, no config disclosed)
+#   protected endpoints  /internal/*           (x-estabizz-service-secret)
+
+services:
+  - type: web
+    name: estabizz-jobs-ai-staging
+    runtime: python
+    region: singapore
+
+    # FREE PLAN -- chosen deliberately for staging.
+    #
+    # Operational consequence: a free instance spins down after a period of
+    # inactivity and cold-starts on the next request, which can take longer
+    # than the caller's 45s text-extraction timeout
+    # (JOBS_AI_TEXT_EXTRACTION_TIMEOUT_MS in lib/jobs/ai/config.ts).
+    #
+    # This degrades safely rather than losing work: an AI timeout is classified
+    # retryable, the callback route returns 503, QStash re-delivers, and the
+    # worker's atomic claim plus stale-processing reclaim make the retry safe.
+    # The second delivery lands on a warm instance. Expect the first resume
+    # after an idle period to take one extra retry cycle.
+    #
+    # Move to `starter` if that first-parse latency becomes unacceptable.
+    plan: free
+
+    branch: staging
+    rootDir: services/jobs-ai
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+
+    envVars:
+      # Python floor is 3.11, not 3.9/3.10: app/api/resumes.py catches the
+      # builtin TimeoutError from asyncio.wait_for, which only aliases
+      # asyncio.TimeoutError from 3.11 onwards, and app/core/config.py uses
+      # PEP 604 unions at runtime.
+      #
+      # This exact version was verified locally: a clean 3.13.15 venv built from
+      # the pinned requirements.txt installs cleanly, imports app.main, and
+      # passes all 39 tests. Any 3.13.x satisfies the floor, so if Render does
+      # not offer this patch release, move to another 3.13.x -- no code change
+      # is needed. Do not fall back to Render's default runtime.
+      - key: PYTHON_VERSION
+        value: 3.13.15
+
+      # Drives the fail-closed docs switch in app/main.py. Anything other than
+      # the literal "development" keeps /docs and /openapi.json hidden.
+      - key: APP_ENV
+        value: staging
+
+      # Shared secret for x-estabizz-service-secret. Must be byte-identical to
+      # AI_SERVICE_SECRET in the Vercel Preview environment. Set in the Render
+      # dashboard; never committed.
+      - key: AI_SERVICE_SECRET
+        sync: false
+
+      - key: OPENAI_API_KEY
+        sync: false
+
+      - key: JOBS_AI_PROVIDER
+        value: openai
+      - key: JOBS_AI_MODEL
+        value: gpt-5.6-luna
+
+      # Service-side ceilings. The Next.js caller allows each of these plus
+      # network overhead -- see lib/jobs/ai/config.ts. Changing one side alone
+      # reintroduces the caller-aborts-live-work mismatch.
+      - key: JOBS_AI_TEXT_EXTRACTION_TIMEOUT_SECONDS
+        value: "30"
+      - key: JOBS_AI_EXTRACTION_TIMEOUT_SECONDS
+        value: "60"
+
+      # Must match JOBS_DOCUMENT_MAX_UPLOAD_MB on the Vercel side, otherwise the
+      # two ends disagree about which uploads are too large.
+      - key: JOBS_DOCUMENT_MAX_UPLOAD_MB
+        value: "10"
+
+      # DATABASE_URL is deliberately ABSENT and must stay absent.
+      #
+      # Confirmed by inspection: requirements.txt contains no database driver,
+      # nothing under app/ imports psycopg / asyncpg / SQLAlchemy / Prisma, and
+      # the only read of the value is bool(settings.database_url) for a boolean
+      # on the authenticated /internal/health response. The service never opens
+      # a connection. Giving a public AI worker Neon credentials it cannot use
+      # would be pure exposure. All database access stays in Next.js on Vercel.

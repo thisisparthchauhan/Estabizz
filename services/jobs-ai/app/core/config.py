@@ -12,6 +12,11 @@ class Settings:
     jobs_ai_model: str
     openai_api_key: str
     max_resume_file_bytes: int
+    # Ceiling for the pypdf / python-docx parse. Cheap work; a low ceiling here
+    # only catches pathological documents.
+    text_extraction_timeout_seconds: int
+    # Ceiling for the LLM structured-extraction call. The Next.js caller allows
+    # this plus network overhead -- see lib/jobs/ai/config.ts.
     extraction_timeout_seconds: int
 
     @property
@@ -34,9 +39,13 @@ def get_settings() -> Settings:
         )
         * 1024
         * 1024,
+        text_extraction_timeout_seconds=parse_positive_int(
+            os.getenv("JOBS_AI_TEXT_EXTRACTION_TIMEOUT_SECONDS"),
+            30,
+        ),
         extraction_timeout_seconds=parse_positive_int(
             os.getenv("JOBS_AI_EXTRACTION_TIMEOUT_SECONDS"),
-            15,
+            60,
         ),
     )
 

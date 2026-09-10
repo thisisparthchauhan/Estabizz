@@ -4,12 +4,15 @@ import {
   assertDocumentWithinLimit,
   normalizeDocumentFilename,
 } from "../documentStorage/policy";
+import { validateResumeFileRanges } from "../fileSecurity";
 import type { CandidateAccountSession } from "../candidateIdentity/types";
+import type { PrivateObjectMetadata } from "../documentStorage/types";
 import { signResumeUploadToken, verifyResumeUploadToken } from "./token";
 import {
   RESUME_UPLOAD_EXTENSIONS,
   RESUME_UPLOAD_MIME_TYPES,
   ResumeUploadAuthorizationError,
+  ResumeUploadFileSecurityError,
   ResumeUploadStorageError,
   ResumeUploadValidationError,
   type ResumeUploadConfirmRequest,
@@ -118,6 +121,7 @@ export async function confirmResumeUpload(
   }
 
   validateUploadedObject(token, metadata, dependencies.maxUploadBytes);
+  await assertUploadedObjectIsRealDocument(token, metadata, dependencies);
 
   const result = await dependencies.repository.confirmUploadedResume({
     session,
@@ -177,6 +181,56 @@ export function validateResumeUploadIntent(
     contentType,
     contentLengthBytes: request.contentLengthBytes,
   };
+}
+
+/**
+ * Structural gate. Runs before any database row exists, so a payload that is
+ * not really a PDF/DOCX never becomes a ResumeVersion. Reads only the header
+ * and the ZIP trailer rather than pulling the whole document into the function.
+ *
+ * NOT a malware scan -- see lib/jobs/fileSecurity.
+ */
+async function assertUploadedObjectIsRealDocument(
+  token: ResumeUploadTokenPayload,
+  metadata: PrivateObjectMetadata,
+  dependencies: ResumeUploadDependencies,
+): Promise<void> {
+  const verdict = await validateResumeFileRanges(
+    {
+      declaredMimeType: metadata.contentType,
+      declaredSizeBytes: metadata.contentLengthBytes,
+      maxUploadBytes: dependencies.maxUploadBytes,
+    },
+    async (start, length) => {
+      if (length <= 0) {
+        return new Uint8Array(0);
+      }
+
+      const bytes = await dependencies.storage.getObjectRange(
+        token.objectKey,
+        start,
+        start + length - 1,
+      );
+
+      return bytes ?? new Uint8Array(0);
+    },
+  );
+
+  if (verdict.ok) {
+    return;
+  }
+
+  // The object is unreferenced garbage in the temporary prefix. Best-effort
+  // removal; a failure here must not mask the rejection.
+  if (verdict.status !== "unavailable") {
+    try {
+      await dependencies.storage.deleteObject(token.objectKey);
+    } catch {
+      // Intentionally ignored.
+    }
+  }
+
+  throw new ResumeUploadFileSecurityError(verdict.candidateMessage, verdict.status);
 }
 
 function validateUploadedObject(

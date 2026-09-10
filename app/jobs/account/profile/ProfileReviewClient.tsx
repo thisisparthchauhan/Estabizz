@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 
 import type {
   CandidateProfileReviewFieldView,
@@ -31,6 +31,18 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
   const [editValue, setEditValue] = useState("");
   const [isPending, startTransition] = useTransition();
   const reviewRemaining = Math.max(0, state.progress.totalCount - state.progress.reviewedCount);
+  const isProcessing = state.status === "processing";
+
+  const refreshReviewState = useCallback(async () => {
+    const response = await fetch("/api/jobs/profile-review", { cache: "no-store" });
+    const payload = await response.json();
+
+    if (response.ok && payload.ok) {
+      setState(payload.state);
+    }
+  }, []);
+
+  useResumeProcessingPoll(isProcessing, refreshReviewState);
 
   const statusTone = useMemo(() => {
     if (state.status === "confirmed") return "border-emerald-200 bg-emerald-50 text-emerald-700";
@@ -134,8 +146,9 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
               setState((current) => ({
                 ...current,
                 status: "processing",
-                heading: "Resume uploaded",
-                message: "Your resume is stored privately. Profile preparation will start in a later approved step.",
+                heading: "Reading your resume",
+                message:
+                  "Your resume is stored privately and we are extracting the details now. This page updates on its own when it is ready.",
                 showUploadCta: false,
                 showRetryCta: false,
                 resume: {
@@ -144,7 +157,7 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
                   fileType: confirmed.fileType,
                   fileSizeBytes: confirmed.fileSizeBytes,
                   uploadedAt: confirmed.uploadedAt,
-                  statusLabel: "Resume uploaded",
+                  statusLabel: "Processing",
                 },
               }));
               setUploadStatus("success");
@@ -239,6 +252,57 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
       </div>
     </main>
   );
+}
+
+/**
+ * Polls the candidate's own resume status while processing is in flight and
+ * pulls the full review state once it finishes.
+ *
+ * Backs off from 2s to 15s: extraction usually completes in seconds, but a
+ * queue retry can stretch it, and a page left open must not hammer the API.
+ */
+function useResumeProcessingPoll(active: boolean, onFinished: () => Promise<void>): void {
+  const onFinishedRef = useRef(onFinished);
+  onFinishedRef.current = onFinished;
+
+  useEffect(() => {
+    if (!active) {
+      return;
+    }
+
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout>;
+    let delayMs = 2000;
+
+    async function tick() {
+      try {
+        const response = await fetch("/api/jobs/resume/status", { cache: "no-store" });
+
+        if (!cancelled && response.ok) {
+          const payload = await response.json();
+
+          if (payload.ok && !payload.inProgress) {
+            await onFinishedRef.current();
+            return;
+          }
+        }
+      } catch {
+        // Transient network failure: keep polling on the backed-off schedule.
+      }
+
+      if (!cancelled) {
+        delayMs = Math.min(15000, Math.round(delayMs * 1.5));
+        timer = setTimeout(tick, delayMs);
+      }
+    }
+
+    timer = setTimeout(tick, delayMs);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [active]);
 }
 
 interface ResumeUploadIntentPayload {

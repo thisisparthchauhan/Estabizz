@@ -6,6 +6,7 @@ import {
   isAllowedDocumentMimeType,
 } from "@/lib/jobs/documentStorage";
 import { createJobsAiClient } from "@/lib/jobs/ai";
+import { validateResumeFileBytes } from "@/lib/jobs/fileSecurity";
 import { getJobsPrismaClient } from "@/lib/jobs/prisma";
 import { PrismaProfileProposalRepository } from "@/lib/jobs/profileReview/prismaRepository";
 import { persistAiProfileProposals } from "@/lib/jobs/profileReview/service";
@@ -28,43 +29,118 @@ const STRUCTURED_EXTRACTION_PERMANENT_STATUSES = new Set([
   "invalid_provider_output",
 ]);
 
+/**
+ * A resume left in `processing` by a worker that died mid-flight (function
+ * timeout, instance eviction) used to block that resume forever: every retry
+ * saw `processing` and returned success without doing anything.
+ *
+ * `updated_at` is `@updatedAt`, so claiming a row stamps it. A row still in
+ * `processing` after this long has no live worker and may be reclaimed. It must
+ * comfortably exceed the callback route's maxDuration (300s).
+ */
+const STALE_PROCESSING_RECLAIM_MS = 15 * 60 * 1000;
+
+type ResumeParseClaim =
+  | { claimed: true; reclaimedRunId: string | null }
+  | { claimed: false; reason: "already_completed" | "already_processing" | "not_found" };
+
+/**
+ * Takes exclusive ownership of a resume version for parsing.
+ *
+ * This is a single conditional UPDATE, so two concurrent deliveries of the same
+ * job cannot both win: Postgres serialises them and the loser matches zero
+ * rows. `completed` is absent from the predicate, so a duplicate delivery after
+ * success can never reprocess.
+ */
+async function claimResumeVersionForParsing(
+  prisma: ReturnType<typeof getJobsPrismaClient>,
+  resumeVersionId: string,
+  candidateId: string,
+): Promise<ResumeParseClaim> {
+  const staleBefore = new Date(Date.now() - STALE_PROCESSING_RECLAIM_MS);
+  const previous = await prisma.resumeVersion.findFirst({
+    where: { id: resumeVersionId, candidate_id: candidateId, deleted_at: null },
+    select: { parse_status: true, ai_processing_run_id: true, updated_at: true },
+  });
+
+  if (!previous) {
+    return { claimed: false, reason: "not_found" };
+  }
+
+  const isStaleReclaim =
+    previous.parse_status === "processing" && previous.updated_at < staleBefore;
+
+  const claim = await prisma.resumeVersion.updateMany({
+    where: {
+      id: resumeVersionId,
+      candidate_id: candidateId,
+      deleted_at: null,
+      OR: [
+        { parse_status: { in: ["pending", "failed"] } },
+        { parse_status: "processing", updated_at: { lt: staleBefore } },
+      ],
+    },
+    data: { parse_status: "processing" },
+  });
+
+  if (claim.count === 0) {
+    return {
+      claimed: false,
+      reason: previous.parse_status === "completed" ? "already_completed" : "already_processing",
+    };
+  }
+
+  return {
+    claimed: true,
+    reclaimedRunId: isStaleReclaim ? previous.ai_processing_run_id : null,
+  };
+}
+
+/** Closes out the abandoned run of a reclaimed resume so it is not left running forever. */
+async function closeAbandonedRun(
+  prisma: ReturnType<typeof getJobsPrismaClient>,
+  aiProcessingRunId: string,
+): Promise<void> {
+  await prisma.aIProcessingRun.updateMany({
+    where: { id: aiProcessingRunId, status: "running" },
+    data: {
+      status: "failed",
+      completed_at: new Date(),
+      error_detail: "Superseded after the previous run was abandoned mid-processing.",
+    },
+  });
+}
+
 export async function processResumeParseJob(
   envelope: ResumeParseJobEnvelope,
 ): Promise<ResumeParseWorkerResult> {
   const prisma = getJobsPrismaClient();
   const { resumeVersionId, candidateId } = envelope.payload;
-  const resumeVersion = await prisma.resumeVersion.findFirst({
-    where: {
-      id: resumeVersionId,
-      candidate_id: candidateId,
-      deleted_at: null,
-    },
+
+  // Claim before doing anything else. Duplicate deliveries lose here and become
+  // safe no-ops instead of each starting their own paid AI run.
+  const claim = await claimResumeVersionForParsing(prisma, resumeVersionId, candidateId);
+
+  if (!claim.claimed) {
+    if (claim.reason === "not_found") {
+      return {
+        ok: false,
+        status: "failed",
+        retryable: false,
+        errorMessage: "Resume version was not found.",
+      };
+    }
+
+    return { ok: true, status: claim.reason, retryable: false };
+  }
+
+  if (claim.reclaimedRunId) {
+    await closeAbandonedRun(prisma, claim.reclaimedRunId);
+  }
+
+  const resumeVersion = await prisma.resumeVersion.findFirstOrThrow({
+    where: { id: resumeVersionId, candidate_id: candidateId, deleted_at: null },
   });
-
-  if (!resumeVersion) {
-    return {
-      ok: false,
-      status: "failed",
-      retryable: false,
-      errorMessage: "Resume version was not found.",
-    };
-  }
-
-  if (resumeVersion.parse_status === "completed") {
-    return {
-      ok: true,
-      status: "already_completed",
-      retryable: false,
-    };
-  }
-
-  if (resumeVersion.parse_status === "processing" && resumeVersion.ai_processing_run_id) {
-    return {
-      ok: true,
-      status: "already_processing",
-      retryable: false,
-    };
-  }
 
   const aiRun = await prisma.aIProcessingRun.create({
     data: {
@@ -81,12 +157,10 @@ export async function processResumeParseJob(
   });
   const startedAt = Date.now();
 
+  // parse_status was already set to processing by the claim above.
   await prisma.resumeVersion.update({
     where: { id: resumeVersion.id },
-    data: {
-      parse_status: "processing",
-      ai_processing_run_id: aiRun.id,
-    },
+    data: { ai_processing_run_id: aiRun.id },
   });
 
   try {
@@ -156,6 +230,29 @@ export async function processResumeParseJob(
     }
 
     const content = new Uint8Array(await response.arrayBuffer());
+
+    // Structural re-validation on the exact bytes about to be parsed. Confirm
+    // already checked this object, but the presigned PUT stays usable until it
+    // expires, so the validated bytes and these bytes are not guaranteed to be
+    // the same. This is NOT a malware scan -- see lib/jobs/fileSecurity.
+    const fileSecurity = await validateResumeFileBytes(
+      {
+        declaredMimeType: metadata.contentType,
+        maxUploadBytes: storageConfig.maxUploadBytes,
+      },
+      content,
+    );
+
+    if (!fileSecurity.ok) {
+      return await markFailed({
+        aiRunId: aiRun.id,
+        resumeVersionId: resumeVersion.id,
+        startedAt,
+        retryable: fileSecurity.status === "unavailable",
+        errorMessage: `Resume file validation failed: ${fileSecurity.status} (${fileSecurity.detail}).`,
+      });
+    }
+
     const aiClient = createJobsAiClient();
     const extraction = await aiClient.extractResumeText({
       resumeVersionId: resumeVersion.id,

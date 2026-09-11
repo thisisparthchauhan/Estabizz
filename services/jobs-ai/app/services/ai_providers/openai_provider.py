@@ -47,9 +47,19 @@ class OpenAIProvider(AIProvider):
         except ImportError as exc:
             raise ProviderConfigError("OpenAI SDK is not installed.") from exc
 
+        # max_retries=0 is deliberate. The SDK default is 2, so a timeout would
+        # be retried internally up to three times -- turning a 60s budget into
+        # ~180s of wall clock. That silently overran the caller's ceiling in
+        # lib/jobs/ai/config.ts, which then aborted mid-flight and reported a
+        # generic timeout, while each attempt was still a billable call.
+        #
+        # Retries belong to the queue, which has backoff, idempotency and an
+        # attempt cap. Keeping them here made one resume cost up to twelve
+        # OpenAI calls (4 QStash deliveries x 3 SDK attempts).
         client = AsyncOpenAI(
             api_key=self.settings.openai_api_key,
             timeout=self.settings.extraction_timeout_seconds,
+            max_retries=0,
         )
 
         try:

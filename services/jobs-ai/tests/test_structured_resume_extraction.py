@@ -372,10 +372,12 @@ def test_openai_adapter_omits_temperature_for_gpt_5_6_luna(monkeypatch):
             )
 
     class FakeAsyncOpenAI:
-        def __init__(self, *, api_key: str, timeout: int) -> None:
+        def __init__(self, *, api_key: str, timeout: int, max_retries: int) -> None:
             assert api_key == "synthetic-key"
             # The OpenAI client timeout tracks extraction_timeout_seconds.
             assert timeout == 60
+            # Retries belong to the queue, not the SDK -- see openai_provider.py.
+            assert max_retries == 0
             self.chat = SimpleNamespace(completions=FakeCompletions())
 
     monkeypatch.setitem(
@@ -480,7 +482,7 @@ def test_openai_adapter_rejects_refusal_safely(monkeypatch):
             )
 
     class FakeAsyncOpenAI:
-        def __init__(self, *, api_key: str, timeout: int) -> None:
+        def __init__(self, *, api_key: str, timeout: int, max_retries: int) -> None:
             self.chat = SimpleNamespace(completions=FakeCompletions())
 
     monkeypatch.setitem(
@@ -751,3 +753,23 @@ def test_structured_extraction_wire_contract_matches_the_nextjs_client(monkeypat
     assert snake_case.status_code == 422
 
     get_settings.cache_clear()
+
+
+def test_openai_client_disables_sdk_level_retries():
+    """The SDK default (2) silently triples the timeout budget.
+
+    A 60s per-request timeout with two internal retries is ~180s of wall clock,
+    which overruns the caller ceiling in lib/jobs/ai/config.ts and bills every
+    attempt. Retries belong to the queue, which has backoff and an attempt cap.
+    """
+    import inspect
+
+    import openai
+
+    from app.services.ai_providers import openai_provider
+
+    # The SDK default is what makes this worth pinning.
+    assert inspect.signature(openai.AsyncOpenAI.__init__).parameters["max_retries"].default == 2
+
+    source = inspect.getsource(openai_provider.OpenAIProvider.extract_structured_resume)
+    assert "max_retries=0" in source, "AsyncOpenAI must be constructed with max_retries=0"

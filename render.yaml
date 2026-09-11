@@ -94,3 +94,43 @@ services:
       # on the authenticated /internal/health response. The service never opens
       # a connection. Giving a public AI worker Neon credentials it cannot use
       # would be pure exposure. All database access stays in Next.js on Vercel.
+
+  # ---------------------------------------------------------------------------
+  # Private ClamAV scanner (STAGING).
+  #
+  # type: pserv -- a Private Service is reachable only from other services in
+  # this Render account, never from the public internet. Candidate documents
+  # must not traverse a public endpoint, and the scanner has no reason to be
+  # addressable from outside.
+  #
+  # No production scanner is defined here. Production needs its own service and
+  # its own secret, created deliberately rather than inherited from staging.
+  # ---------------------------------------------------------------------------
+  - type: pserv
+    name: estabizz-clamav-staging
+    runtime: docker
+    region: singapore
+    # ClamAV loads its full signature database into memory; below ~1 GB clamd
+    # is killed on startup. This is the floor, not a performance preference.
+    plan: standard
+    branch: staging
+    rootDir: services/jobs-clamav
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      # Same name and value as the application side, so there is one secret to
+      # rotate rather than two that can drift apart.
+      - key: JOBS_MALWARE_SCANNER_SECRET
+        sync: false
+
+      # Must match JOBS_DOCUMENT_MAX_UPLOAD_MB on the Vercel side, or the two
+      # ends disagree about which documents are too large.
+      - key: JOBS_DOCUMENT_MAX_UPLOAD_MB
+        value: "10"
+
+      # clamd runs beside the wrapper in the same container.
+      - key: CLAMD_SOCKET
+        value: /tmp/clamd.sock
+      - key: CLAMD_TIMEOUT_SECONDS
+        value: "60"

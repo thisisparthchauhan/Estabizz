@@ -189,7 +189,30 @@ None of the index creation uses `CONCURRENTLY`, so index builds take locks. On a
 
 **Verified:** raw resume text is **not persisted** anywhere. `sourceEvidence` is stripped by `normalizeProvenance`. The longest stored string observed was 298 characters — an `EmploymentHistoryItem.description`, a declared structured field the candidate reviews.
 
-**Gap for production:** there is no candidate account-deletion workflow. A deletion request today would need manual work like the Phase 5 purges. Recommended shape: hard-delete resume objects and `ResumeVersion` rows; anonymise `Candidate` and contacts; retain `AuditEvent` rows with PII minimised (they already exclude filenames and resume text). This is **not implemented** and is a pre-launch legal requirement, not just an engineering one.
+### Candidate deletion (implemented, Phase 6.1)
+
+`POST /api/jobs/account/delete` — candidate self-service. The candidate id comes from the server-resolved session and is never read from the request body, so there is no addressable way to erase someone else. Rate limited 3/hour, fail-closed. The session cookie is cleared on success.
+
+**Ordering is the safety property.** Storage objects are deleted **first**, while the rows naming their keys still exist. If any object fails to delete, the whole operation aborts *before* touching the database — so a retry can still find it. Deleting rows first would strand bytes nobody can locate, which is exactly the orphan failure Phase 5 found.
+
+| Treatment | Data |
+|---|---|
+| **Hard delete** | Resume + document objects in B2; `ResumeVersion`; `AIExtraction`; `AIProcessingRun` for those resumes; `AIScore`; `CandidateContact`; `CandidateEmployment`; `CandidateEducation`; `CandidateCertification`; `CandidateSkill`; `CandidateDomainExperience`; `CandidateDocument`; `CandidateTag`; `CandidateActivity` |
+| **Anonymise in place** | `Candidate` (name → tombstone; DOB, gender, nationality, location, title, employer, salary, preferences → null; identity unlinked; `portal_registered` false; status `archived`; `deleted_at` stamped). `ApplicationSnapshot` (name → tombstone, `profile_data` → `{}`). `ApplicationAnswer.answer_text` → null. `CandidateConsent` IP and user-agent → null |
+| **Retained, PII minimised** | `AuditEvent` — action, actor and timestamp survive; `new_values`/`previous_values` replaced with `{redacted: "candidate_deleted"}`, `changed_fields` emptied |
+| **Retained unchanged** | `Application`, `Placement` — business and commercial records |
+
+**Why the Candidate row is anonymised, not deleted.** `Application`, `Placement` and `AIScore` carry recruitment and commercial history Estabizz has a legitimate basis to retain, and every one of those relations is `onDelete: NoAction`. Deleting the row would either be blocked outright or destroy that history. Anonymising removes the person and keeps the record.
+
+**Why consent records survive.** A consent event is the proof of lawful basis. The event, type and timestamp are kept; the IP address and user agent — which are not needed for that proof — are nulled.
+
+**Idempotent.** A repeat request returns `already_deleted` and re-runs only the storage sweep, so any object left by an earlier partial failure is still collected.
+
+**Staff safety.** Deletion resolves a `Candidate` by id. Staff and admin identities are not candidates and cannot be reached by this path. A candidate may only target themselves; admin-initiated deletion is a separate, permission-checked reason code.
+
+**Verified:** 15 synthetic tests plus a 22-check integration run against the real staging database and bucket — object removed, rows deleted, records anonymised, audit minimised, repeat run a no-op, zero orphans left.
+
+**Out of scope / still manual:** the MongoDB website `User` record is a separate system and is not removed by this workflow; deleting it is a separate step in the account-closure runbook.
 
 ---
 

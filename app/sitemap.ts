@@ -25,6 +25,7 @@
 
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/seo/siteUrl";
+import { listPublicJobs, type PublicJobListing } from "@/lib/jobs/jobManagement/repository";
 import { getPublishedBlogSummaries } from "@/lib/blog/repository";
 import { listPublishedUpdates } from "@/lib/regulatory/repository";
 import { connectDB } from "@/lib/db";
@@ -63,13 +64,29 @@ function bestDate(doc: SitemapPageDoc): Date {
 
 // ── Sitemap ───────────────────────────────────────────────────────────────────
 
+/**
+ * Published job listings for the sitemap.
+ *
+ * Fail-soft on purpose: jobs live in PostgreSQL while the rest of the sitemap
+ * comes from MongoDB, and a Jobs database hiccup must not take down the whole
+ * sitemap for the marketing site.
+ */
+async function getPublishedJobs(): Promise<PublicJobListing[]> {
+  try {
+    return await listPublicJobs();
+  } catch {
+    return [];
+  }
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const BASE = getSiteUrl();
 
-  const [cmsPages, regulatoryUpdates, blogs] = await Promise.all([
+  const [cmsPages, regulatoryUpdates, blogs, jobs] = await Promise.all([
     getPublishedCmsPages(),
     listPublishedUpdates(),
     getPublishedBlogSummaries(),
+    getPublishedJobs(),
   ]);
 
   // ── Homepage ─────────────────────────────────────────────────────────────
@@ -149,6 +166,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }));
 
+  // ── Public jobs board ─────────────────────────────────────────────────────
+  // The hub plus each open, public listing. Candidate account pages are
+  // deliberately absent: they are noindex and behind authentication.
+  const jobPages: MetadataRoute.Sitemap = [
+    { url: `${BASE}/jobs`, changeFrequency: "daily" as const, priority: 0.9 },
+    ...jobs.map((job) => ({
+      url: `${BASE}/jobs/${job.slug}`,
+      lastModified: job.published_at ?? new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+  ];
+
   return [
     ...homePage,
     ...staticHubPages,
@@ -156,5 +186,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...regulatoryPages,
     ...blogPages,
     ...activeCountryPages,
+    ...jobPages,
   ];
 }

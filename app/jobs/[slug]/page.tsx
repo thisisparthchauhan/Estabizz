@@ -40,6 +40,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${job.title} — Careers at Estabizz`,
     description: job.description.slice(0, 160),
+    // Public job pages are indexable and need a stable canonical; without one,
+    // query-string variants compete with each other in search results.
+    alternates: { canonical: `/jobs/${job.slug}` },
   };
 }
 

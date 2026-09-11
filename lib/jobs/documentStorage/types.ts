@@ -119,6 +119,19 @@ export interface TemporaryDocumentObjectKeyParts {
   extension: AllowedDocumentExtension;
 }
 
+/** Minimal listing entry. Deliberately carries no content and no URL. */
+export interface TemporaryObjectSummary {
+  objectKey: string;
+  sizeBytes: number;
+  lastModified: Date;
+}
+
+export interface TemporaryObjectPage {
+  objects: TemporaryObjectSummary[];
+  /** Opaque continuation token; absent when the listing is complete. */
+  cursor?: string;
+}
+
 export interface PrivateObjectMetadata {
   objectKey: string;
   contentType: AllowedDocumentMimeType;
@@ -157,6 +170,16 @@ export interface PrivateDocumentStorage {
     _request: PresignedDownloadRequest,
   ): Promise<PresignedDownloadTarget>;
   getObjectMetadata(_objectKey: string): Promise<PrivateObjectMetadata | null>;
+  /**
+   * Lists objects under the temporary-upload prefix, oldest-first is NOT
+   * guaranteed. Used only by the orphan reaper; returns keys and timestamps,
+   * never content.
+   */
+  listTemporaryObjects(_input: {
+    prefix: string;
+    limit: number;
+    cursor?: string;
+  }): Promise<TemporaryObjectPage>;
   /**
    * Reads a byte range from a private object. Used by the file-security gate so
    * a header/trailer check does not have to pull a whole 10 MB document into a

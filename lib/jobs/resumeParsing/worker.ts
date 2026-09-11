@@ -7,6 +7,11 @@ import {
 } from "@/lib/jobs/documentStorage";
 import { createJobsAiClient } from "@/lib/jobs/ai";
 import { validateResumeFileBytes } from "@/lib/jobs/fileSecurity";
+import {
+  createMalwareScanner,
+  getMalwareScanningConfig,
+  isProcessingPermitted,
+} from "@/lib/jobs/malwareScanning";
 import { getJobsPrismaClient } from "@/lib/jobs/prisma";
 import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
 import { PrismaProfileProposalRepository } from "@/lib/jobs/profileReview/prismaRepository";
@@ -319,6 +324,31 @@ async function runResumeParseJob(
         startedAt,
         retryable: fileSecurity.status === "unavailable",
         errorMessage: `Resume file validation failed: ${fileSecurity.status} (${fileSecurity.detail}).`,
+      });
+    }
+
+    // Malware scan on the exact bytes, AFTER structural validation and BEFORE
+    // anything is sent to the AI service. Structural validation proves the file
+    // is a PDF/DOCX; it says nothing about whether it is malicious.
+    //
+    // Fail-closed: only a real `clean` verdict from a scanner that inspected
+    // these bytes permits processing. No scanner, an unreachable scanner or a
+    // timeout all block when scanning is required.
+    const malwareConfig = getMalwareScanningConfig();
+    const malwareOutcome = await createMalwareScanner(malwareConfig).scan({
+      content,
+      declaredMimeType: metadata.contentType,
+      correlationId: envelope.correlationId,
+    });
+    const malwareGate = isProcessingPermitted(malwareOutcome, malwareConfig);
+
+    if (!malwareGate.permitted) {
+      return await markFailed({
+        aiRunId: aiRun.id,
+        resumeVersionId: resumeVersion.id,
+        startedAt,
+        retryable: malwareGate.retryable,
+        errorMessage: `${malwareGate.reason} (${malwareOutcome.verdict}/${malwareOutcome.detail})`,
       });
     }
 

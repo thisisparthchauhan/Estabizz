@@ -3,6 +3,7 @@ import {
   GetObjectCommand,
   HeadBucketCommand,
   HeadObjectCommand,
+  ListObjectsV2Command,
   PutObjectCommand,
   S3Client,
 } from "@aws-sdk/client-s3";
@@ -28,9 +29,12 @@ import type {
   PrivateDocumentStorage,
   PrivateObjectMetadata,
   TemporaryDocumentUploadRequest,
+  TemporaryObjectPage,
 } from "./types";
 
 const MAX_UPLOAD_TTL_SECONDS = 600;
+/** Every temporary upload key is built under this prefix. */
+export const TEMPORARY_PREFIX = "tmp/";
 const MAX_DOWNLOAD_TTL_SECONDS = 300;
 
 export class S3CompatibleDocumentStorage implements PrivateDocumentStorage {
@@ -197,6 +201,38 @@ export class S3CompatibleDocumentStorage implements PrivateDocumentStorage {
 
       throw error;
     }
+  }
+
+  async listTemporaryObjects(input: {
+    prefix: string;
+    limit: number;
+    cursor?: string;
+  }): Promise<TemporaryObjectPage> {
+    if (!input.prefix.startsWith(TEMPORARY_PREFIX)) {
+      // Hard stop: this method exists only to sweep the temporary prefix, and
+      // must never be usable to enumerate stored candidate documents.
+      throw new Error("Temporary object listing is restricted to the temporary upload prefix.");
+    }
+
+    const response = await this.client.send(
+      new ListObjectsV2Command({
+        Bucket: this.config.bucket,
+        Prefix: input.prefix,
+        MaxKeys: Math.min(Math.max(input.limit, 1), 1000),
+        ContinuationToken: input.cursor,
+      }),
+    );
+
+    return {
+      objects: (response.Contents ?? [])
+        .filter((item) => typeof item.Key === "string")
+        .map((item) => ({
+          objectKey: item.Key as string,
+          sizeBytes: item.Size ?? 0,
+          lastModified: item.LastModified ?? new Date(0),
+        })),
+      cursor: response.IsTruncated ? response.NextContinuationToken : undefined,
+    };
   }
 
   async deleteObject(objectKey: string): Promise<void> {

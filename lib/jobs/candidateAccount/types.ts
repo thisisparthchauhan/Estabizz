@@ -3,7 +3,8 @@ export type CandidateAccountRoute =
   | "/jobs/account/profile"
   | "/jobs/account/applications"
   | "/jobs/account/saved"
-  | "/jobs/account/alerts";
+  | "/jobs/account/alerts"
+  | "/jobs/account/privacy";
 
 export type ResumeDashboardState =
   | "no_resume"

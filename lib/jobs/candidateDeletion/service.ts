@@ -1,3 +1,4 @@
+import type { WebsiteAccountEraser } from "./websiteAccount";
 import {
   CandidateDeletionAuthorizationError,
   CandidateDeletionNotFoundError,
@@ -11,6 +12,7 @@ import {
 export interface CandidateDeletionDependencies {
   repository: CandidateDeletionRepository;
   storage: CandidateDeletionStorage;
+  websiteAccount: WebsiteAccountEraser;
 }
 
 /**
@@ -57,8 +59,16 @@ export async function deleteCandidateData(
     throw new CandidateDeletionStorageError(storageObjectsFailed);
   }
 
-  // 2. A repeat request is a safe no-op beyond the storage sweep above.
+  // 2. A repeat request re-runs the sweeps that converge rather than mutate:
+  //    storage above, and the website side below. An interrupted deletion that
+  //    erased PostgreSQL but failed on MongoDB is finished by retrying, instead
+  //    of leaving a working login to erased data.
   if (candidate.deletedAt) {
+    const website = await dependencies.websiteAccount.eraseWebsiteAccount({
+      websiteUserId: request.websiteUserId,
+      email: request.websiteEmail,
+    });
+
     return {
       status: "already_deleted",
       storageObjectsDeleted,
@@ -66,6 +76,8 @@ export async function deleteCandidateData(
       rowsDeleted: {},
       rowsAnonymised: {},
       auditEventsMinimised: 0,
+      websiteUserDeleted: website.userDeleted,
+      blogsAnonymised: website.blogsAnonymised,
     };
   }
 
@@ -82,6 +94,15 @@ export async function deleteCandidateData(
   // 5. Keep the audit trail, strip the personal data out of it.
   const auditEventsMinimised = await dependencies.repository.minimiseAuditEvents(request.candidateId);
 
+  // 6. Website account last. If it throws, the sensitive candidate data is
+  //    already gone -- the worst remaining state is a login that still works,
+  //    which a retry resolves. Doing this first would risk the opposite: an
+  //    unusable login over resume data that survived.
+  const website = await dependencies.websiteAccount.eraseWebsiteAccount({
+    websiteUserId: request.websiteUserId,
+    email: request.websiteEmail,
+  });
+
   return {
     status: "deleted",
     storageObjectsDeleted,
@@ -89,6 +110,8 @@ export async function deleteCandidateData(
     rowsDeleted,
     rowsAnonymised,
     auditEventsMinimised,
+    websiteUserDeleted: website.userDeleted,
+    blogsAnonymised: website.blogsAnonymised,
   };
 }
 

@@ -51,6 +51,7 @@ function runTests(service, navItems) {
       "/jobs/account/applications",
       "/jobs/account/saved",
       "/jobs/account/alerts",
+      "/jobs/account/privacy",
     ],
     "candidate navigation must use frozen account routes",
   );

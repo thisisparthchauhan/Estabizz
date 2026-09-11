@@ -49,6 +49,19 @@ function fakeRepo({ deletedAt = null, keys = ["tmp/candidates/x/a.pdf", "candida
   };
 }
 
+function fakeWebsite({ fail = false, userDeleted = true, blogs = 2 } = {}) {
+  const calls = [];
+  return {
+    calls,
+    async verifyPassword() { return true; },
+    async eraseWebsiteAccount() {
+      calls.push("eraseWebsite");
+      if (fail) throw new Error("mongo unavailable");
+      return { userDeleted, blogsAnonymised: blogs };
+    },
+  };
+}
+
 function fakeStorage({ failKeys = [] } = {}) {
   const deleted = [];
   return {
@@ -62,6 +75,7 @@ function fakeStorage({ failKeys = [] } = {}) {
 
 const request = (over = {}) => ({
   candidateId: CANDIDATE, actorCandidateId: CANDIDATE, actorRefId: ACTOR_REF,
+  websiteUserId: "6aa0000000000000000000aa", websiteEmail: "synthetic@example.invalid",
   reason: "candidate_request", ...over,
 });
 
@@ -90,27 +104,27 @@ async function main() {
   console.log("\nAuthorization:");
   await check("a candidate cannot erase another candidate", async () => {
     await assert.rejects(
-      deleteCandidateData(request({ candidateId: OTHER }), { repository: fakeRepo(), storage: fakeStorage() }),
+      deleteCandidateData(request({ candidateId: OTHER }), { repository: fakeRepo(), storage: fakeStorage(), websiteAccount: fakeWebsite() }),
       (e) => e.name === "CandidateDeletionAuthorizationError",
     );
   });
   await check("nothing is touched when authorization fails", async () => {
     const repo = fakeRepo(); const storage = fakeStorage();
-    await deleteCandidateData(request({ candidateId: OTHER }), { repository: repo, storage }).catch(() => {});
+    await deleteCandidateData(request({ candidateId: OTHER }), { repository: repo, storage, websiteAccount: fakeWebsite() }).catch(() => {});
     assert.deepEqual(repo.calls, [], "repository was touched");
     assert.deepEqual(storage.deleted, [], "storage was touched");
   });
   await check("an admin-initiated deletion may target another candidate", async () => {
     const r = await deleteCandidateData(
       request({ candidateId: OTHER, reason: "admin_request" }),
-      { repository: fakeRepo(), storage: fakeStorage() },
+      { repository: fakeRepo(), storage: fakeStorage(), websiteAccount: fakeWebsite() },
     );
     assert.equal(r.status, "deleted");
   });
   await check("a non-candidate (staff) target is not found, never deleted", async () => {
     const repo = fakeRepo({ missing: true });
     await assert.rejects(
-      deleteCandidateData(request(), { repository: repo, storage: fakeStorage() }),
+      deleteCandidateData(request(), { repository: repo, storage: fakeStorage(), websiteAccount: fakeWebsite() }),
       (e) => e.name === "CandidateDeletionNotFoundError",
     );
     assert.ok(!repo.calls.includes("purge"), "purge ran against a missing candidate");
@@ -119,13 +133,13 @@ async function main() {
   console.log("\nOrdering — storage before rows:");
   await check("objects are deleted before any row is removed", async () => {
     const repo = fakeRepo(); const storage = fakeStorage();
-    await deleteCandidateData(request(), { repository: repo, storage });
+    await deleteCandidateData(request(), { repository: repo, storage, websiteAccount: fakeWebsite() });
     assert.ok(repo.calls.indexOf("listKeys") < repo.calls.indexOf("purge"), "rows purged before keys were listed");
     assert.deepEqual(repo.calls, ["load:" + CANDIDATE, "listKeys", "purge", "anonymise", "minimiseAudit"]);
   });
   await check("both resume and document objects are removed", async () => {
     const storage = fakeStorage();
-    const r = await deleteCandidateData(request(), { repository: fakeRepo(), storage });
+    const r = await deleteCandidateData(request(), { repository: fakeRepo(), storage, websiteAccount: fakeWebsite() });
     assert.equal(r.storageObjectsDeleted, 2);
     assert.equal(storage.deleted.length, 2);
   });
@@ -135,7 +149,7 @@ async function main() {
     const repo = fakeRepo();
     const storage = fakeStorage({ failKeys: ["candidates/x/b.pdf"] });
     await assert.rejects(
-      deleteCandidateData(request(), { repository: repo, storage }),
+      deleteCandidateData(request(), { repository: repo, storage, websiteAccount: fakeWebsite() }),
       (e) => e.name === "CandidateDeletionStorageError",
     );
     assert.ok(!repo.calls.includes("purge"), "rows were deleted despite a stranded object");
@@ -143,14 +157,14 @@ async function main() {
   });
   await check("the rows that name a stranded object survive, so a retry finds it", async () => {
     const repo = fakeRepo();
-    await deleteCandidateData(request(), { repository: repo, storage: fakeStorage({ failKeys: ["tmp/candidates/x/a.pdf"] }) }).catch(() => {});
+    await deleteCandidateData(request(), { repository: repo, storage: fakeStorage({ failKeys: ["tmp/candidates/x/a.pdf"] }), websiteAccount: fakeWebsite() }).catch(() => {});
     assert.ok(!repo.calls.includes("purge"));
   });
 
   console.log("\nIdempotency:");
   await check("a repeat request is a safe no-op", async () => {
     const repo = fakeRepo({ deletedAt: new Date() });
-    const r = await deleteCandidateData(request(), { repository: repo, storage: fakeStorage() });
+    const r = await deleteCandidateData(request(), { repository: repo, storage: fakeStorage(), websiteAccount: fakeWebsite() });
     assert.equal(r.status, "already_deleted");
     assert.ok(!repo.calls.includes("purge"), "purge re-ran on an already-deleted candidate");
     assert.ok(!repo.calls.includes("anonymise"), "anonymise re-ran");
@@ -158,32 +172,80 @@ async function main() {
   await check("a repeat request still sweeps objects left by a partial failure", async () => {
     const storage = fakeStorage();
     const r = await deleteCandidateData(
-      request(), { repository: fakeRepo({ deletedAt: new Date(), keys: ["tmp/candidates/x/left.pdf"] }), storage },
+      request(), { repository: fakeRepo({ deletedAt: new Date(), keys: ["tmp/candidates/x/left.pdf"] }), storage, websiteAccount: fakeWebsite() },
     );
     assert.equal(r.status, "already_deleted");
     assert.equal(r.storageObjectsDeleted, 1, "a leftover object must still be swept");
     assert.deepEqual(storage.deleted, ["tmp/candidates/x/left.pdf"]);
   });
   await check("deleting a candidate with no objects at all succeeds", async () => {
-    const r = await deleteCandidateData(request(), { repository: fakeRepo({ keys: [] }), storage: fakeStorage() });
+    const r = await deleteCandidateData(request(), { repository: fakeRepo({ keys: [] }), storage: fakeStorage(), websiteAccount: fakeWebsite() });
     assert.equal(r.status, "deleted");
     assert.equal(r.storageObjectsDeleted, 0);
   });
 
   console.log("\nReported outcome:");
   await check("counts are reported for deleted, anonymised and minimised records", async () => {
-    const r = await deleteCandidateData(request(), { repository: fakeRepo(), storage: fakeStorage() });
+    const r = await deleteCandidateData(request(), { repository: fakeRepo(), storage: fakeStorage(), websiteAccount: fakeWebsite() });
     assert.equal(r.rowsDeleted.resumeVersions, 2);
     assert.equal(r.rowsAnonymised.candidate, 1);
     assert.equal(r.auditEventsMinimised, 7);
     assert.equal(r.storageObjectsFailed, 0);
   });
   await check("the result carries no candidate personal data", async () => {
-    const r = await deleteCandidateData(request(), { repository: fakeRepo(), storage: fakeStorage() });
+    const r = await deleteCandidateData(request(), { repository: fakeRepo(), storage: fakeStorage(), websiteAccount: fakeWebsite() });
     const blob = JSON.stringify(r);
     for (const leak of ["tmp/", ".pdf", "candidates/", CANDIDATE]) {
       assert.ok(!blob.includes(leak), `result leaked ${leak}`);
     }
+  });
+
+  console.log("\nCross-system erasure:");
+  await check("the website account is erased after the Jobs data", async () => {
+    const repo = fakeRepo(); const website = fakeWebsite();
+    await deleteCandidateData(request(), { repository: repo, storage: fakeStorage(), websiteAccount: website });
+    assert.equal(website.calls.length, 1, "website erasure did not run");
+    assert.ok(repo.calls.includes("minimiseAudit"), "Jobs erasure did not complete");
+  });
+  await check("website results are reported", async () => {
+    const r = await deleteCandidateData(request(), {
+      repository: fakeRepo(), storage: fakeStorage(), websiteAccount: fakeWebsite({ blogs: 3 }),
+    });
+    assert.equal(r.websiteUserDeleted, true);
+    assert.equal(r.blogsAnonymised, 3);
+  });
+  await check("a website failure surfaces after the sensitive data is already gone", async () => {
+    const repo = fakeRepo();
+    await assert.rejects(
+      deleteCandidateData(request(), { repository: repo, storage: fakeStorage(), websiteAccount: fakeWebsite({ fail: true }) }),
+    );
+    // The Jobs erasure completed first, so the irrecoverable data is gone and
+    // only the login remains -- which a retry resolves.
+    assert.ok(repo.calls.includes("purge"), "Jobs data should already be erased");
+    assert.ok(repo.calls.includes("minimiseAudit"));
+  });
+  await check("a retry after a website failure still erases the website account", async () => {
+    const website = fakeWebsite();
+    const r = await deleteCandidateData(request(), {
+      repository: fakeRepo({ deletedAt: new Date() }), storage: fakeStorage(), websiteAccount: website,
+    });
+    assert.equal(r.status, "already_deleted");
+    assert.equal(website.calls.length, 1, "retry must converge the website side");
+    assert.equal(r.websiteUserDeleted, true);
+  });
+  await check("an already-erased website account reports false, not an error", async () => {
+    const r = await deleteCandidateData(request(), {
+      repository: fakeRepo({ deletedAt: new Date() }), storage: fakeStorage(),
+      websiteAccount: fakeWebsite({ userDeleted: false, blogs: 0 }),
+    });
+    assert.equal(r.websiteUserDeleted, false);
+  });
+  await check("an unauthorized request never reaches the website eraser", async () => {
+    const website = fakeWebsite();
+    await deleteCandidateData(request({ candidateId: OTHER }), {
+      repository: fakeRepo(), storage: fakeStorage(), websiteAccount: website,
+    }).catch(() => {});
+    assert.deepEqual(website.calls, []);
   });
 
   console.log("\nAnonymisation constants:");

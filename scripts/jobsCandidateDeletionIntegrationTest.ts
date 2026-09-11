@@ -18,6 +18,13 @@ import { PrismaCandidateDeletionRepository } from "../lib/jobs/candidateDeletion
 loadEnv({ path: ".env.local", quiet: true });
 
 const SYNTHETIC_EMAIL = "phase61.deletion.subject@estabizz-test.invalid";
+/** The Postgres+storage path is what this test exercises; the website side
+ *  has its own integration coverage. */
+const noopWebsiteEraser = {
+  async verifyPassword() { return true; },
+  async eraseWebsiteAccount() { return { userDeleted: false, blogsAnonymised: 0 }; },
+};
+
 let pass = 0;
 let fail = 0;
 
@@ -143,8 +150,9 @@ async function main() {
     {
       candidateId: candidate.id, actorCandidateId: candidate.id,
       actorRefId: identity.id, reason: "candidate_request",
+      websiteUserId: "", websiteEmail: SYNTHETIC_EMAIL,
     },
-    { repository: new PrismaCandidateDeletionRepository(prisma), storage },
+    { repository: new PrismaCandidateDeletionRepository(prisma), storage, websiteAccount: noopWebsiteEraser },
   );
   console.log("deletion result:", JSON.stringify(result), "\n");
 
@@ -197,8 +205,8 @@ async function main() {
 
   console.log("\nIdempotency:");
   const second = await deleteCandidateData(
-    { candidateId: candidate.id, actorCandidateId: candidate.id, actorRefId: identity.id, reason: "candidate_request" },
-    { repository: new PrismaCandidateDeletionRepository(prisma), storage },
+    { candidateId: candidate.id, actorCandidateId: candidate.id, actorRefId: identity.id, reason: "candidate_request", websiteUserId: "", websiteEmail: SYNTHETIC_EMAIL },
+    { repository: new PrismaCandidateDeletionRepository(prisma), storage, websiteAccount: noopWebsiteEraser },
   );
   check("a repeat deletion is a safe no-op", second.status === "already_deleted");
   check("the candidate row survived the repeat", (await prisma.candidate.count({ where: { id: candidate.id } })) === 1);

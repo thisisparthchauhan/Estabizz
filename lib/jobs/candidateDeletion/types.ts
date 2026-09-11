@@ -14,6 +14,9 @@
 
 export interface CandidateDeletionRequest {
   candidateId: string;
+  /** Website (MongoDB) user id for the same person. */
+  websiteUserId: string;
+  websiteEmail: string;
   /** Server-resolved. Never accepted from a request body. */
   actorCandidateId: string;
   actorRefId: string;
@@ -31,6 +34,9 @@ export interface CandidateDeletionResult {
   rowsDeleted: Record<string, number>;
   rowsAnonymised: Record<string, number>;
   auditEventsMinimised: number;
+  /** Website-side erasure. False when the account was already gone. */
+  websiteUserDeleted: boolean;
+  blogsAnonymised: number;
 }
 
 export class CandidateDeletionAuthorizationError extends Error {

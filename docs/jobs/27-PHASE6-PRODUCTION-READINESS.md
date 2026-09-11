@@ -212,7 +212,31 @@ None of the index creation uses `CONCURRENTLY`, so index builds take locks. On a
 
 **Verified:** 15 synthetic tests plus a 22-check integration run against the real staging database and bucket — object removed, rows deleted, records anonymised, audit minimised, repeat run a no-op, zero orphans left.
 
-**Out of scope / still manual:** the MongoDB website `User` record is a separate system and is not removed by this workflow; deleting it is a separate step in the account-closure runbook.
+### Cross-system erasure (Phase 6.1B)
+
+Erasure now spans all three systems in one request.
+
+**MongoDB dependency audit, which shaped the design.** No Mongo model references `User` by ObjectId — there are no hard dependencies to break, so the auth record itself can be deleted. Blogs are linked to a person by **email**, not user id, and both `author` and `submittedBy` hold denormalised copies of their name and email, so deleting the User alone would have left personal data behind in public content. `AdminUser` lives in a separate `admin_users` collection and is never touched.
+
+**Order, and why.**
+
+1. **Backblaze objects** — first, while the rows naming their keys still exist. A failure aborts before any database change, so a retry can still find them.
+2. **PostgreSQL** — hard delete then anonymise, each in a transaction.
+3. **MongoDB** — last. If it fails, the irrecoverable data is already gone and the worst remaining state is a login that still works, which a retry resolves. Doing Mongo first risks the opposite: an unusable login over resume data that survived.
+
+**What happens on the website side:** the `User` record is deleted, and submitted-article attribution is anonymised — `author` name, email and bio cleared to a tombstone, `submittedBy` removed. The article itself is retained public content.
+
+**`Lead` records are deliberately not touched.** Contact-form enquiries are keyed by email, not by account; they are a separate commercial record with their own erasure path.
+
+**Retry converges.** A repeat request re-runs the storage sweep and the website erasure — the two steps that converge rather than mutate — so an interrupted deletion is finished by retrying rather than leaving a working login to erased data.
+
+**Session invalidation.** Deleting the `User` means the identity lookup fails on the next request, so the JWT no longer resolves to anyone even though it still verifies cryptographically. The cookie is additionally cleared on success.
+
+**Re-authentication.** The endpoint requires the current password, verified through the existing bcrypt login mechanism — no new auth system, and the hash never leaves the server. A live session alone is not enough: an unattended device must not be able to destroy an account. The UI also requires an explicit acknowledgement checkbox.
+
+**Backup residue.** Deleted data persists in Neon PITR and any Backblaze version history until those windows expire. This is normal and defensible, and the privacy policy should state the window.
+
+**Retention schedule for candidates who never request deletion remains an open policy decision** — no period is assumed here.
 
 ---
 

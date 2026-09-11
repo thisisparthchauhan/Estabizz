@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { getAuthSessionFromRequest } from "@/lib/auth/session";
 import { requireCandidateAccountSessionFromRequest } from "@/lib/jobs/candidateIdentity/access";
 import {
   createS3CompatibleDocumentStorage,
@@ -11,6 +12,7 @@ import {
   CandidateDeletionNotFoundError,
   CandidateDeletionStorageError,
   deleteCandidateData,
+  MongoWebsiteAccountEraser,
   PrismaCandidateDeletionRepository,
 } from "@/lib/jobs/candidateDeletion";
 import {
@@ -65,16 +67,56 @@ export async function POST(request: NextRequest) {
       return rateLimitResponse(rateLimit, "Too many deletion requests. Please try again later.");
     }
 
+    const authSession = getAuthSessionFromRequest(request);
+
+    if (!authSession) {
+      return NextResponse.json(
+        { error: "Please log in to delete your account." },
+        { status: 401, headers: { "Cache-Control": "no-store" } },
+      );
+    }
+
+    // Re-authentication. Erasure is irreversible, so a live session alone is
+    // not enough -- an unattended device must not be able to destroy an
+    // account. This reuses the existing bcrypt login mechanism; no new auth
+    // system, and the hash never leaves the server.
+    const body = (await request.json().catch(() => ({}))) as { password?: unknown; confirm?: unknown };
+    const password = typeof body.password === "string" ? body.password : "";
+
+    if (body.confirm !== "DELETE") {
+      return NextResponse.json(
+        { error: "Please confirm that you want to permanently delete your account." },
+        { status: 400, headers: { "Cache-Control": "no-store" } },
+      );
+    }
+
+    const websiteAccount = new MongoWebsiteAccountEraser();
+    const passwordValid = await websiteAccount.verifyPassword({
+      websiteUserId: authSession.userId,
+      password,
+    });
+
+    if (!passwordValid) {
+      // Deliberately identical whether the password was wrong or absent.
+      return NextResponse.json(
+        { error: "That password is not correct." },
+        { status: 401, headers: { "Cache-Control": "no-store" } },
+      );
+    }
+
     const result = await deleteCandidateData(
       {
         candidateId: session.candidateId,
         actorCandidateId: session.candidateId,
         actorRefId: session.actorRefId,
+        websiteUserId: authSession.userId,
+        websiteEmail: session.email,
         reason: "candidate_request",
       },
       {
         repository: new PrismaCandidateDeletionRepository(),
         storage: createS3CompatibleDocumentStorage(getDocumentStorageConfig()),
+        websiteAccount,
       },
     );
 
@@ -92,6 +134,8 @@ export async function POST(request: NextRequest) {
         rowsDeletedTotal: Object.values(result.rowsDeleted).reduce((sum, n) => sum + n, 0),
         rowsAnonymisedTotal: Object.values(result.rowsAnonymised).reduce((sum, n) => sum + n, 0),
         auditEventsMinimised: result.auditEventsMinimised,
+        websiteUserDeleted: result.websiteUserDeleted,
+        blogsAnonymised: result.blogsAnonymised,
       },
     });
 

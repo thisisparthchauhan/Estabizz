@@ -9,5 +9,6 @@ export const CANDIDATE_ACCOUNT_NAV_ITEMS: Array<{
   { href: "/jobs/account/applications", label: "My Applications" },
   { href: "/jobs/account/saved", label: "Saved Jobs" },
   { href: "/jobs/account/alerts", label: "Job Alerts" },
+  { href: "/jobs/account/privacy", label: "Privacy" },
 ];
 

@@ -86,6 +86,27 @@ services:
       - key: JOBS_DOCUMENT_MAX_UPLOAD_MB
         value: "10"
 
+      # --- malware scanning bridge --------------------------------------------
+      # ClamAV is a PRIVATE service with no public URL, so Vercel cannot reach
+      # it. jobs-ai is on Render's internal network and already authenticated,
+      # so it forwards scans and returns only a verdict.
+      #
+      # fromService resolves the private address at deploy time, so the
+      # hostname is never written down here and never leaves Render.
+      - key: CLAMAV_INTERNAL_URL
+        fromService:
+          type: pserv
+          name: estabizz-clamav-staging
+          property: hostport
+
+      # The scanner's own secret. Distinct from AI_SERVICE_SECRET, which guards
+      # the bridge. Must match the value on estabizz-clamav-staging.
+      - key: JOBS_MALWARE_SCANNER_SECRET
+        sync: false
+
+      - key: JOBS_MALWARE_SCAN_TIMEOUT_SECONDS
+        value: "60"
+
       # DATABASE_URL is deliberately ABSENT and must stay absent.
       #
       # Confirmed by inspection: requirements.txt contains no database driver,

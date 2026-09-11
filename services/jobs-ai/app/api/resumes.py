@@ -4,12 +4,14 @@ from fastapi import APIRouter, Depends, File, Form, UploadFile
 
 from app.core.config import get_settings
 from app.core.security import require_service_secret
+from app.schemas.malware_scan import MalwareScanResponse
 from app.schemas.resume_extraction import ResumeTextExtractionResponse
 from app.schemas.structured_resume import (
     ResumeStructuredExtractionRequest,
     ResumeStructuredExtractionResponse,
 )
 from app.services.document_text_extractor import extract_document_text
+from app.services.malware_scanner import scan_for_malware
 from app.services.structured_resume_extractor import extract_structured_resume
 
 router = APIRouter(prefix="/internal/resumes", dependencies=[Depends(require_service_secret)])
@@ -64,3 +66,25 @@ async def structured_resume_extraction(
     request: ResumeStructuredExtractionRequest,
 ) -> ResumeStructuredExtractionResponse:
     return await extract_structured_resume(request)
+
+
+@router.post("/scan-malware", response_model=MalwareScanResponse)
+async def scan_resume_for_malware(file: UploadFile = File(...)) -> MalwareScanResponse:
+    """Bridges Vercel to the private ClamAV service.
+
+    The scanner has no public URL; jobs-ai is already on Render's private
+    network and already authenticated by x-estabizz-service-secret (enforced on
+    the router), so it forwards the bytes and returns only a verdict.
+
+    Never returns `clean` unless ClamAV said so.
+    """
+    settings = get_settings()
+    content = await file.read(settings.max_resume_file_bytes + 1)
+
+    if not content:
+        return MalwareScanResponse(status="unavailable", detail="empty_document")
+
+    if len(content) > settings.max_resume_file_bytes:
+        return MalwareScanResponse(status="unavailable", detail="document_too_large")
+
+    return await scan_for_malware(content, settings)

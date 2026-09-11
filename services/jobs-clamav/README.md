@@ -71,13 +71,27 @@ Names only. Set values in the Render dashboard; never commit them.
 | `CLAMD_TIMEOUT_SECONDS` | No (default 60) | Per-scan ceiling |
 | `PORT` | Set by Render | |
 
-The application side must be configured with:
+## How the application reaches this service
+
+This is a **Private Service with no public URL**, so Vercel cannot call it
+directly. Scans are routed through `jobs-ai`, which is already on Render's
+private network and already authenticated:
 
 ```
-JOBS_MALWARE_SCANNER_PROVIDER=clamav
-JOBS_MALWARE_SCANNER_URL=<this service's internal Render URL>
-JOBS_MALWARE_SCANNER_SECRET=<same secret>
+Vercel worker
+  -> jobs-ai  POST /internal/resumes/scan-malware   (x-estabizz-service-secret)
+  -> THIS service  POST /scan                       (x-estabizz-scanner-secret)
+  -> verdict returned; only "clean" allows AI extraction to proceed
 ```
+
+Vercel therefore never needs this service's private hostname, and never holds
+its secret.
+
+| Side | Variables |
+|---|---|
+| **Vercel** | `JOBS_MALWARE_SCANNER_PROVIDER=clamav`, plus the existing `JOBS_AI_SERVICE_URL` and `AI_SERVICE_SECRET` |
+| **jobs-ai (Render)** | `CLAMAV_INTERNAL_URL` (set from a Blueprint `fromService` reference), `JOBS_MALWARE_SCANNER_SECRET` |
+| **this service** | `JOBS_MALWARE_SCANNER_SECRET` (same value as jobs-ai holds) |
 
 ## Render deployment
 

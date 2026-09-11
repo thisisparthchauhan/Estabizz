@@ -137,7 +137,10 @@ services:
     branch: staging
     rootDir: services/jobs-clamav
     dockerfilePath: ./Dockerfile
-    healthCheckPath: /health
+    # No healthCheckPath: Render Private Services do not accept that field and
+    # the Blueprint is rejected if it is present. The service still serves
+    # GET /health -- it is used to confirm clamd is ready before pointing
+    # jobs-ai at it, just not by the platform.
     autoDeployTrigger: commit
     envVars:
       # Same name and value as the application side, so there is one secret to

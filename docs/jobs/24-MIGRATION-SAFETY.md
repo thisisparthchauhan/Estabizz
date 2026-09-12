@@ -15,21 +15,28 @@ configuration only.
 
 ## 2. The Raw-Index Drift Trap
 
+> **Status: RESOLVED 2026-09-10.** All 12 indexes below are now declared in
+> `prisma/schema.prisma` and `migrate dev --create-only` generates an empty
+> migration. See [§7](#7-permanent-fix-resolved-2026-09-10). This section is kept
+> because §3 and §4 still govern every migration, and because the trap returns the
+> moment one of those declarations is deleted.
+
 Migration 001 (`prisma/migrations/20260820124028_init_jobs_schema/migration.sql`)
-creates PostgreSQL indexes through hand-written SQL because **Prisma's schema
-language cannot express GIN or `pg_trgm` index types**. See
+creates PostgreSQL indexes through hand-written SQL. This was originally believed to
+be because Prisma's schema language could not express GIN or `pg_trgm` index types;
+that is **not** correct for Prisma 7 — see §7. See
 [08-MIGRATION-001.md](08-MIGRATION-001.md) §5 and
 [07-POSTGRES-PRISMA-FOUNDATION.md](07-POSTGRES-PRISMA-FOUNDATION.md) §6.
 
-Because these indexes are absent from `prisma/schema.prisma`, Prisma compares the
-schema against the live database, concludes the indexes are **drift**, and emits
+While these indexes were absent from `prisma/schema.prisma`, Prisma compared the
+schema against the live database, concluded the indexes were **drift**, and emitted
 `DROP INDEX` statements for all of them.
 
 **This is not hypothetical.** On 2026-09-10, generating the Phase 4B performance
 index migration with `npx prisma migrate dev --create-only` produced a migration
 whose first 12 statements were `DROP INDEX` for every protected search index. They
-were removed by hand before the migration was applied. **The same thing will happen
-on every future migration until the drift is resolved.**
+were removed by hand before the migration was applied. That hand-stripping step is
+no longer required as of the fix in §7, but §4 step 4 remains mandatory.
 
 ### Why it matters
 
@@ -51,7 +58,9 @@ tables grow.
 
 ### 3.1 Search indexes (GIN / pg_trgm) — 12 protected
 
-These are the indexes Prisma has been observed proposing to drop:
+These are the indexes Prisma was observed proposing to drop before the §7 fix.
+They are now declared in `prisma/schema.prisma`; **do not delete those
+`@@index(..., type: Gin)` lines** — removing one reintroduces its `DROP INDEX`:
 
 1. `jobs_structured_requirements_gin_idx`
 2. `candidates_first_name_trgm_idx`
@@ -146,13 +155,77 @@ Two traps encountered while running the Phase 4B migration:
   tooling artifact, not a code defect. Run `npm run build` without injecting
   `.env.local` into the process environment.
 
-## 7. Permanent Fix (Open)
+## 7. Permanent Fix (Resolved 2026-09-10)
 
-The drift is a standing hazard rather than a one-off. The durable fix is to make the
-raw indexes visible to Prisma — enabling the `postgresqlExtensions` preview feature,
-declaring `pg_trgm`, and adding `@@index(..., type: Gin)` declarations mapped to the
-existing index names — so that `prisma migrate dev --create-only` generates an
-**empty** migration.
+The drift is fixed. All 12 raw GIN / `pg_trgm` indexes are now declared in
+`prisma/schema.prisma` on `Candidate`, `Job` and `Skill`, each mapped to its existing
+index name so Migrate reads them as already present rather than as new:
 
-Until that lands, §4 step 4 is the only thing preventing the search indexes from
-being dropped.
+```prisma
+@@index([first_name(ops: raw("gin_trgm_ops"))], type: Gin, map: "candidates_first_name_trgm_idx")
+@@index([pref_job_types(ops: ArrayOps)],        type: Gin, map: "candidates_pref_job_types_gin_idx")
+@@index([structured_requirements(ops: JsonbOps)], type: Gin, map: "jobs_structured_requirements_gin_idx")
+```
+
+Operator classes used: `raw("gin_trgm_ops")` for the five `String` trgm indexes,
+`ArrayOps` (= `array_ops`) for the six `String[]` indexes, and `JsonbOps`
+(= `jsonb_ops`) for `jobs.structured_requirements`.
+
+### Two corrections to earlier assumptions
+
+- **Prisma 7 *can* express GIN and `pg_trgm` indexes.** Index type configuration
+  (`type: Gin`, `ops:`) is stable — not a preview feature. The original premise in §2
+  was wrong.
+- **The `postgresqlExtensions` preview feature is not required and was deliberately
+  not enabled.** It governs `CREATE EXTENSION` management, not operator classes;
+  `ops: raw("gin_trgm_ops")` emits the opclass regardless. `pg_trgm` is already
+  created by Migration 001 (`CREATE EXTENSION IF NOT EXISTS pg_trgm`). Enabling it
+  was tested against the live schema and also produced an empty diff, so it is
+  harmless — but it is unnecessary surface, so it stays off.
+
+### Verification performed
+
+Against `estabizz_jobs_staging`, before and after:
+
+| Check | Before | After |
+|---|---|---|
+| `migrate diff --from-config-datasource --to-schema` | 12 × `DROP INDEX` | empty |
+| `migrate dev --create-only` | 12 × `DROP INDEX` | `-- This is an empty migration.` |
+| GIN / trgm indexes in `pg_indexes` | 12 | 12 (unchanged) |
+| Partial unique `%_uidx` indexes | 4 | 4 (unchanged) |
+| `migrate status` | up to date | up to date, 4 migrations |
+
+`prisma generate`, `tsc --noEmit` and `npm run build` all pass. No index was dropped
+or recreated; the change is schema-declaration-only and a no-op against the database.
+The throwaway verification migration was deleted and never applied.
+
+### Re-verified at commit time (2026-09-12)
+
+The declarations sat uncommitted in the working tree until 2026-09-12 — the
+committed `schema.prisma` had none of them, while §5 of the Phase 6 readiness
+document already told operators they were there. Re-verified against
+`estabizz_jobs_staging` immediately before committing:
+
+| Check | Result |
+|---|---|
+| All 12 indexes matched individually (name, table, column, method, opclass) | **12 / 12** |
+| GIN indexes in `public` | 12 — no extras, none missing |
+| Partial unique `%_uidx` indexes | 4 — unchanged |
+| `pg_extension` | `pg_trgm`, `vector` present |
+| Applied migrations | 4, all applied |
+| `migrate diff --from-config-datasource --to-schema prisma/schema.prisma` | **empty** (exit 0) |
+| Same diff against the *committed* schema, as a control | **12 × `DROP INDEX`** (exit 2) |
+
+The control diff is the point: the only difference between an empty diff and 12
+drops is these declarations.
+
+`migrate dev --create-only` was **not** re-run — it writes a migration file, and
+generating one was explicitly out of scope. `migrate diff` against the live
+datasource is the read-only equivalent and is what was used.
+
+### Still not represented
+
+The 4 partial unique indexes in §3.2 remain undeclared. Prisma cannot express partial
+indexes, and — unlike the GIN indexes — it does not see them at all, so it does not
+propose dropping them. They are safe from Migrate but invisible to it: §3.2 and §4
+step 8 remain the only guard.

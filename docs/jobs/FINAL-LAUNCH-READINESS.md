@@ -20,7 +20,7 @@ Last verified against `staging` on **2026-09-12**.
 | Question | Answer |
 |---|---|
 | **Can internal/management users use staging now?** | **YES** — for jobs, applications, ATS, candidates and recruitment operations. |
-| **Is the system ready for production?** | **NO** — 3 blockers and 2 paid dependencies remain. |
+| **Is the system ready for production?** | **NO** — 2 blockers and 2 paid dependencies remain. |
 | Does anything block internal staging use? | No. |
 
 ---
@@ -62,27 +62,27 @@ Last verified against `staging` on **2026-09-12**.
 
 ## 3. 🛑 PRODUCTION BLOCKERS
 
-### 3.1 The Prisma GIN drift guard is not committed
+### 3.1 ~~The Prisma GIN drift guard is not committed~~ — **CLOSED 2026-09-12**
 
-**This one is easy to miss and expensive to hit.**
+Resolved. The 12 `@@index(..., type: Gin, map: "...")` declarations are now
+committed in `prisma/schema.prisma`, so the runbook in
+`27-PHASE6-PRODUCTION-READINESS.md` §5 is accurate and its step 6 will pass from
+a clean clone.
 
-`docs/jobs/27-PHASE6-PRODUCTION-READINESS.md` §5 tells whoever runs the
-production migration that the 12 raw GIN / `pg_trgm` indexes "are declared in
-`schema.prisma`", and that step 6 (`migrate diff` must be empty) will pass.
+Verified against the live `estabizz_jobs_staging` database before committing:
+all **12 / 12** indexes matched individually on name, table, column, access
+method and operator class; `migrate diff` against the live datasource returned
+an **empty migration (exit 0)**; the same diff against the pre-fix committed
+schema returned **12 × `DROP INDEX` (exit 2)**, confirming the declarations are
+exactly what closes the gap.
 
-Verified on 2026-09-12: **the committed `prisma/schema.prisma` contains zero
-`type: Gin` declarations.** They exist only in an uncommitted working-tree
-change (12 declarations, exactly matching the 12 `USING gin` indexes in
-migration 001).
+No migration was created and no database change was made — 4 migrations before
+and after, 12 GIN indexes before and after. Detail in
+[24-MIGRATION-SAFETY.md](24-MIGRATION-SAFETY.md) §7.
 
-Consequence of following the committed runbook from a clean clone: `migrate
-diff` reports 12 × `DROP INDEX`, and generating a migration from it silently
-degrades candidate / application / interview search to sequential scans.
-
-**Not committed here, deliberately** — there is a standing instruction to report
-Prisma schema changes rather than act on them. The change is additive, creates
-no migration, and was previously verified to produce an empty diff. It needs an
-explicit decision, then a commit.
+**Still unrepresented:** the 4 partial unique `%_uidx` indexes. Prisma cannot
+express partial indexes and does not see them at all, so it does not propose
+dropping them — safe from Migrate, but invisible to it.
 
 ### 3.2 Hosted malware scanner
 No production resume may be processed without one. See §4.1. Production forces
@@ -149,7 +149,7 @@ Full matrix with formats and failure modes: **27 §3**. Checklist form:
 
 **Order matters — each step assumes the one above.**
 
-1. [ ] Commit the Prisma drift guard (§3.1) — *before any migration is generated or run*
+1. [x] ~~Commit the Prisma drift guard (§3.1)~~ — **done 2026-09-12**
 2. [ ] Provision production infrastructure (27 §4)
 3. [ ] Set every production environment variable (§5.2)
 4. [ ] Host a malware scanner (§4.1) and a paid `jobs-ai` (§4.2)

@@ -5,6 +5,26 @@
 // Migration 001 has intentionally NOT been created. Review this schema against
 // the frozen ERD before generating or applying any database migration.
 
+// -----------------------------------------------------------------------------
+// GIN / pg_trgm index drift guard  (added 2026-09-10)
+// -----------------------------------------------------------------------------
+// 20260820124028_init_jobs_schema creates 12 GIN / pg_trgm indexes via raw SQL.
+// Until they were declared here, every `prisma migrate dev` run read them as
+// drift and emitted DROP INDEX for all 12 -- which, if ever applied, silently
+// degrades the `contains` + mode: "insensitive" search filters on the
+// candidates / applications / interviews admin lists to sequential scans.
+//
+// All 12 are now declared on Candidate, Job and Skill as
+// `@@index([...], type: Gin, map: "<original index name>")`, so Migrate treats
+// them as already present. There is NO residual drift: `prisma migrate diff
+// --from-config-datasource --to-schema prisma/schema.prisma` is empty.
+//
+// DO NOT delete those @@index lines -- removing one reintroduces the DROP.
+// The `postgresqlExtensions` preview feature is deliberately NOT enabled: it is
+// not needed for `ops: raw("gin_trgm_ops")`, and the extension itself is created
+// by the init migration (`CREATE EXTENSION IF NOT EXISTS pg_trgm`).
+// -----------------------------------------------------------------------------
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -570,6 +590,17 @@ model Candidate {
   @@index([dedup_status])
   @@index([created_at])
   @@index([current_city, created_at])
+  // GIN / pg_trgm indexes created by raw SQL in 20260820124028_init_jobs_schema.
+  // Declared here so Migrate sees them as present instead of proposing DROP INDEX.
+  @@index([first_name(ops: raw("gin_trgm_ops"))], type: Gin, map: "candidates_first_name_trgm_idx")
+  @@index([last_name(ops: raw("gin_trgm_ops"))], type: Gin, map: "candidates_last_name_trgm_idx")
+  @@index([current_title(ops: raw("gin_trgm_ops"))], type: Gin, map: "candidates_current_title_trgm_idx")
+  @@index([current_employer(ops: raw("gin_trgm_ops"))], type: Gin, map: "candidates_current_employer_trgm_idx")
+  @@index([pref_job_types(ops: ArrayOps)], type: Gin, map: "candidates_pref_job_types_gin_idx")
+  @@index([pref_countries(ops: ArrayOps)], type: Gin, map: "candidates_pref_countries_gin_idx")
+  @@index([pref_cities(ops: ArrayOps)], type: Gin, map: "candidates_pref_cities_gin_idx")
+  @@index([target_industries(ops: ArrayOps)], type: Gin, map: "candidates_target_industries_gin_idx")
+  @@index([target_seniority(ops: ArrayOps)], type: Gin, map: "candidates_target_seniority_gin_idx")
   @@map("candidates")
 }
 
@@ -687,6 +718,8 @@ model Skill {
   candidate_skills CandidateSkill[]
   job_skills       JobSkill[]
 
+  // GIN index created by raw SQL in 20260820124028_init_jobs_schema.
+  @@index([aliases(ops: ArrayOps)], type: Gin, map: "skills_aliases_gin_idx")
   @@map("skills")
 }
 
@@ -993,6 +1026,9 @@ model Job {
 
   @@index([status, is_public])
   @@index([organization_id, status])
+  // GIN / pg_trgm indexes created by raw SQL in 20260820124028_init_jobs_schema.
+  @@index([structured_requirements(ops: JsonbOps)], type: Gin, map: "jobs_structured_requirements_gin_idx")
+  @@index([title(ops: raw("gin_trgm_ops"))], type: Gin, map: "jobs_title_trgm_idx")
   @@map("jobs")
 }
 

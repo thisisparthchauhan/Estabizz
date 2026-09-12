@@ -271,6 +271,15 @@ async function main() {
   check("the service query param is validated against the known list, not trusted directly", () => {
     assert.ok(contactSrc.includes("ALL_SERVICE_ITEMS.has(requested)"));
   });
+  check("the in-form service search matches on group name, not just item text", () => {
+    // Found live: typing "recruit" into the existing service search returned
+    // "No service found", because the new item's own text ("Hire Talent /
+    // Submit a Hiring Requirement") doesn't contain the word "recruitment" --
+    // only its group name does. Fixed to match the group name too, which also
+    // helps every pre-existing group the same way.
+    assert.ok(contactSrc.includes("g.group.toLowerCase().includes(q)"),
+      "group-name search fix missing -- 'recruit' would 404 in the service picker again");
+  });
   const hireTalentSrc = read("app/jobs/hire-talent/page.tsx");
   check("Hire Talent page CTA deep-links into the validated service option", () => {
     assert.ok(hireTalentSrc.includes("Hire Talent / Submit a Hiring Requirement"));

@@ -353,10 +353,22 @@ export default function ContactClient() {
     );
 
     const filteredServiceGroups = serviceSearch
-        ? SERVICES_GROUPED.map(g => ({
-            ...g,
-            items: g.items.filter(s => s.toLowerCase().includes(serviceSearch.toLowerCase())),
-          })).filter(g => g.items.length > 0)
+        ? SERVICES_GROUPED.map(g => {
+            const q = serviceSearch.toLowerCase();
+            // Match the group name too, not just each item's own text. Without
+            // this, typing "recruitment" found nothing for the new Recruitment
+            // & Talent Acquisition group -- its one item is literally named
+            // "Hire Talent / Submit a Hiring Requirement" and doesn't contain
+            // the word. A group-name match keeps that discoverable, and helps
+            // every other group the same way (e.g. "IRDAI" already matched
+            // coincidentally because item names repeat it; this makes that
+            // reliable rather than accidental).
+            const groupMatches = g.group.toLowerCase().includes(q);
+            return {
+              ...g,
+              items: groupMatches ? g.items : g.items.filter(s => s.toLowerCase().includes(q)),
+            };
+          }).filter(g => g.items.length > 0)
         : SERVICES_GROUPED;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

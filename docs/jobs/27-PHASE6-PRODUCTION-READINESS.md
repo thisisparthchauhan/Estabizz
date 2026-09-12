@@ -62,6 +62,28 @@ Placement in the worker: **structural validation → malware scan → AI**. A ma
 
 **Remaining external dependency:** a running ClamAV service. Until one is configured, **production resume processing is blocked** — by design, and verified above.
 
+### Status: hosting DEFERRED (Phase 6.3)
+
+The scanner is **built, tested and unhosted**. Render Private Services have no
+free tier, so deployment waits on a payment method. Nothing about it failed:
+the container, the wire contract and the EICAR detection chain were all
+validated against a real clamd with a real signature database.
+
+The `pserv` in `render.yaml` is disabled in place (`#|` marker per line, one
+`sed` to restore) rather than deleted, because a Blueprint declaring a service
+it cannot create fails to sync and would block every unrelated setting in that
+file.
+
+**The deferral is not a weakening**, and that is now asserted rather than
+asserted-in-prose: `scripts/jobsMalwareScanningTest.mjs` covers production with
+nothing configured, production with every plausible "just get it working"
+environment variable set, and a reachable bridge with no scanner behind it. All
+block. Both assertions were mutation-tested.
+
+Provider-neutral deployment — Docker on any host with ≥1 GB RAM, plus
+`services/jobs-clamav/docker-compose.yml` — is specified in
+[28-PHASE6.3-DEPLOYMENT-CONTINGENCY.md](28-PHASE6.3-DEPLOYMENT-CONTINGENCY.md).
+
 ---
 
 ## 3. Production environment matrix
@@ -96,8 +118,15 @@ Format and behaviour only. No values.
 | `JOBS_DOCUMENT_CLEANUP_ENABLED` | Yes | No | `true` to delete | Reaper stays dry-run; orphans accumulate |
 | `JOBS_DOCUMENT_MALWARE_SCAN_REQUIRED` | — | No | ignored in production | Production forces `true` |
 | `JOBS_MALWARE_SCANNER_PROVIDER` | **Yes** | No | `clamav` | **Resume processing blocked** |
-| `JOBS_MALWARE_SCANNER_URL` | **Yes** | No | `https://…` (not localhost) | Blocked |
-| `JOBS_MALWARE_SCANNER_SECRET` | **Yes** | **Yes** | ≥32-char random | Blocked |
+| `JOBS_MALWARE_SCANNER_TIMEOUT_MS` | No | No | ≤`120000` | Defaults to 30000 |
+
+**Corrected in Phase 6.2A:** Vercel no longer holds a scanner URL or the scanner
+secret. ClamAV is private and unreachable from Vercel, so scans are routed
+through the jobs-ai bridge using the `JOBS_AI_SERVICE_URL` / `AI_SERVICE_SECRET`
+pair that already exists. `JOBS_MALWARE_SCANNER_URL` no longer exists on the
+application side; `JOBS_MALWARE_SCANNER_SECRET` lives on jobs-ai and the scanner
+only. An earlier revision of this table listed both as Vercel-side production
+requirements — that was stale, and setting them on Vercel would do nothing.
 
 ### Queue, cache, AI, email
 | Variable | Prod? | Secret | Expected form | Missing → |

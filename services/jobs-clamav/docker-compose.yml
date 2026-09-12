@@ -1,0 +1,119 @@
+# Provider-neutral deployment for the Estabizz Jobs ClamAV scanner.
+#
+# WHY THIS FILE EXISTS
+# Render Private Services have no free tier, so the hosted staging scanner is
+# DEFERRED pending a payment method (docs/jobs/28-PHASE6.3-DEPLOYMENT-
+# CONTINGENCY.md). This file makes the same container runnable on any Docker
+# host -- a VPS, a container platform, or a developer machine -- with no Render
+# dependency at all.
+#
+# IT CHANGES NOTHING ABOUT THE APPLICATION CONTRACT. Same image, same
+# entrypoint, same `POST /scan` and `GET /health`, same
+# `x-estabizz-scanner-secret` header. Only the host differs. Nothing in
+# lib/jobs/malwareScanning/ or services/jobs-ai/ needs to change to point at a
+# scanner started this way.
+#
+#   cp .env.example .env      # then put a real secret in it -- .env is gitignored
+#   docker compose up -d --build
+#   curl -fsS http://127.0.0.1:8080/health    # 503 while signatures download
+#
+# First boot downloads ~120 MB of signatures and /health reports 503 until that
+# finishes. That is correct behaviour, not a fault.
+
+services:
+  scanner:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: estabizz-jobs-clamav:local
+    container_name: estabizz-jobs-clamav
+
+    # AMD64 ONLY, AND DELIBERATELY PINNED.
+    #
+    # The Dockerfile's base (clamav/clamav:1.4) is the Alpine variant, which
+    # ClamAV publishes for amd64 only -- the multi-arch builds are the `-debian`
+    # tags. Without this line, `docker compose up --build` on an ARM host
+    # (Apple Silicon included) fails to resolve the base image at all.
+    #
+    # On amd64 this is a no-op. On ARM it selects emulation: it works, but clamd
+    # under QEMU is slow enough that the signature load can look like a hang.
+    # Give it several minutes before concluding anything is wrong.
+    #
+    # For a real ARM deployment, change the base image rather than emulating --
+    # see "Architecture constraint" in
+    # docs/jobs/28-PHASE6.3-DEPLOYMENT-CONTINGENCY.md, which also covers the
+    # su-exec/gosu privilege-drop regression that change brings with it.
+    platform: linux/amd64
+
+    # LOOPBACK ONLY, DELIBERATELY.
+    #
+    # "127.0.0.1:" is the whole point of this line. Dropping it to "8080:10000"
+    # publishes the scanner on every interface, which on most VPS providers
+    # means the public internet -- an unauthenticated-by-default port away from
+    # a shared secret being the only thing between a stranger and the scanner.
+    #
+    # Reach it from another host over a private network or WireGuard/Tailscale
+    # interface instead, by binding that interface's address here explicitly.
+    # See "Private networking" in README.md.
+    ports:
+      - "127.0.0.1:8080:10000"
+
+    env_file:
+      - .env
+
+    environment:
+      # clamd and the HTTP wrapper share the container, so the socket is local.
+      CLAMD_SOCKET: /tmp/clamd.sock
+      CLAMD_TIMEOUT_SECONDS: "60"
+      PORT: "10000"
+
+    volumes:
+      # Persist the signature database across restarts. Without this, every
+      # `docker compose up` re-downloads ~120 MB and the scanner is unusable
+      # (correctly reporting 503) for minutes each time.
+      - clamav-signatures:/var/lib/clamav
+
+    # MEMORY IS A HARD REQUIREMENT, NOT A TUNING KNOB.
+    # clamd loads the full signature database into memory; below ~1 GB it is
+    # killed during startup and the service never becomes healthy. 1 GB is the
+    # floor and 2 GB is comfortable. This ceiling is above the floor on purpose
+    # -- lowering it to "1g" leaves no headroom for a scan in flight.
+    mem_limit: 2g
+
+    # Uses python3 rather than curl/wget: python3 is installed by the Dockerfile
+    # and therefore guaranteed present, whereas the base image's shell utilities
+    # are not part of any contract we control.
+    healthcheck:
+      test:
+        - CMD
+        - python3
+        - -c
+        - |
+          import urllib.request, sys
+          try:
+              sys.exit(0 if urllib.request.urlopen("http://127.0.0.1:10000/health", timeout=5).status == 200 else 1)
+          except Exception:
+              # A 503 while signatures load raises HTTPError; unhealthy is the
+              # right answer, but exit cleanly rather than dumping a traceback
+              # into the container log every 30s during a normal cold start.
+              sys.exit(1)
+      interval: 30s
+      timeout: 10s
+      # Signature bootstrap on a cold volume can take several minutes; a short
+      # start_period would restart-loop the container before it ever finishes.
+      start_period: 10m
+      retries: 3
+
+    restart: unless-stopped
+
+    # Give clamd time to close cleanly rather than being killed mid-scan.
+    stop_grace_period: 30s
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  clamav-signatures:

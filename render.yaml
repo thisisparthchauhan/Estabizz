@@ -93,11 +93,21 @@ services:
       #
       # fromService resolves the private address at deploy time, so the
       # hostname is never written down here and never leaves Render.
-      - key: CLAMAV_INTERNAL_URL
-        fromService:
-          type: pserv
-          name: estabizz-clamav-staging
-          property: hostport
+      #
+      # DISABLED WHILE THE SCANNER IS DEFERRED (see the block at the end of this
+      # file). A `fromService` reference to a service that does not exist fails
+      # Blueprint validation, which would block every unrelated setting in this
+      # file from being applied too.
+      #
+      # Leaving it unset is SAFE, not a weakening: services/jobs-ai/app/services/
+      # malware_scanner.py returns `unavailable` / `scanner_not_configured` for
+      # an empty value, and `unavailable` blocks. The bridge cannot report
+      # `clean` without a scanner having actually inspected the bytes.
+#|      - key: CLAMAV_INTERNAL_URL
+#|        fromService:
+#|          type: pserv
+#|          name: estabizz-clamav-staging
+#|          property: hostport
 
       # The scanner's own secret. Distinct from AI_SERVICE_SECRET, which guards
       # the bridge. Must match the value on estabizz-clamav-staging.
@@ -116,45 +126,79 @@ services:
       # a connection. Giving a public AI worker Neon credentials it cannot use
       # would be pure exposure. All database access stays in Next.js on Vercel.
 
-  # ---------------------------------------------------------------------------
-  # Private ClamAV scanner (STAGING).
+  # ===========================================================================
+  # Private ClamAV scanner (STAGING) -- DEFERRED, NOT CANCELLED, NOT FAILED.
   #
-  # type: pserv -- a Private Service is reachable only from other services in
-  # this Render account, never from the public internet. Candidate documents
-  # must not traverse a public endpoint, and the scanner has no reason to be
-  # addressable from outside.
+  # Render Private Services have NO FREE TIER: every `pserv`, at every plan
+  # size, requires a payment method on the account. None is available right
+  # now, so the service cannot be created -- and a Blueprint that declares a
+  # service it cannot create fails to sync, taking every other setting in this
+  # file down with it.
   #
-  # No production scanner is defined here. Production needs its own service and
-  # its own secret, created deliberately rather than inherited from staging.
-  # ---------------------------------------------------------------------------
-  - type: pserv
-    name: estabizz-clamav-staging
-    runtime: docker
-    region: singapore
-    # ClamAV loads its full signature database into memory; below ~1 GB clamd
-    # is killed on startup. This is the floor, not a performance preference.
-    plan: standard
-    branch: staging
-    rootDir: services/jobs-clamav
-    dockerfilePath: ./Dockerfile
-    # No healthCheckPath: Render Private Services do not accept that field and
-    # the Blueprint is rejected if it is present. The service still serves
-    # GET /health -- it is used to confirm clamd is ready before pointing
-    # jobs-ai at it, just not by the platform.
-    autoDeployTrigger: commit
-    envVars:
-      # Same name and value as the application side, so there is one secret to
-      # rotate rather than two that can drift apart.
-      - key: JOBS_MALWARE_SCANNER_SECRET
-        sync: false
-
-      # Must match JOBS_DOCUMENT_MAX_UPLOAD_MB on the Vercel side, or the two
-      # ends disagree about which documents are too large.
-      - key: JOBS_DOCUMENT_MAX_UPLOAD_MB
-        value: "10"
-
-      # clamd runs beside the wrapper in the same container.
-      - key: CLAMD_SOCKET
-        value: /tmp/clamd.sock
-      - key: CLAMD_TIMEOUT_SECONDS
-        value: "60"
+  # It is therefore DISABLED IN PLACE rather than deleted. The service code,
+  # Dockerfile, tests and wire contract are unchanged and still pass. Only the
+  # hosting is waiting on billing.
+  #
+  # THIS DOES NOT WEAKEN ANY SECURITY CONTROL. With no scanner reachable the
+  # verdict is `not_configured` / `unavailable`, and both block. Production
+  # forces `required = true` regardless of any environment variable
+  # (resolveRequired in lib/jobs/malwareScanning/config.ts), so production
+  # resume processing stays blocked until a real scanner is hosted. That is the
+  # intent, and scripts/jobsMalwareScanningTest.mjs asserts it.
+  #
+  # TO RESTORE once a payment method exists, strip the `#|` marker from every
+  # line that carries it -- here and on CLAMAV_INTERNAL_URL above:
+  #
+  #     sed -i '' 's/^#|//' render.yaml        # macOS; drop the '' on Linux
+  #
+  # The marker prefixes the original lines verbatim, so removing it reproduces
+  # the working Blueprint byte for byte. Then sync: Render creates the scanner
+  # first and resolves the `fromService` reference from it. Set
+  # JOBS_MALWARE_SCANNER_SECRET to the same value on both services.
+  #
+  # Render is not the only option. services/jobs-clamav/docker-compose.yml runs
+  # the identical container on any Docker host with >=1 GB RAM -- see
+  # docs/jobs/28-PHASE6.3-DEPLOYMENT-CONTINGENCY.md.
+  # ===========================================================================
+#|  # ---------------------------------------------------------------------------
+#|  # Private ClamAV scanner (STAGING).
+#|  #
+#|  # type: pserv -- a Private Service is reachable only from other services in
+#|  # this Render account, never from the public internet. Candidate documents
+#|  # must not traverse a public endpoint, and the scanner has no reason to be
+#|  # addressable from outside.
+#|  #
+#|  # No production scanner is defined here. Production needs its own service and
+#|  # its own secret, created deliberately rather than inherited from staging.
+#|  # ---------------------------------------------------------------------------
+#|  - type: pserv
+#|    name: estabizz-clamav-staging
+#|    runtime: docker
+#|    region: singapore
+#|    # ClamAV loads its full signature database into memory; below ~1 GB clamd
+#|    # is killed on startup. This is the floor, not a performance preference.
+#|    plan: standard
+#|    branch: staging
+#|    rootDir: services/jobs-clamav
+#|    dockerfilePath: ./Dockerfile
+#|    # No healthCheckPath: Render Private Services do not accept that field and
+#|    # the Blueprint is rejected if it is present. The service still serves
+#|    # GET /health -- it is used to confirm clamd is ready before pointing
+#|    # jobs-ai at it, just not by the platform.
+#|    autoDeployTrigger: commit
+#|    envVars:
+#|      # Same name and value as the application side, so there is one secret to
+#|      # rotate rather than two that can drift apart.
+#|      - key: JOBS_MALWARE_SCANNER_SECRET
+#|        sync: false
+#|
+#|      # Must match JOBS_DOCUMENT_MAX_UPLOAD_MB on the Vercel side, or the two
+#|      # ends disagree about which documents are too large.
+#|      - key: JOBS_DOCUMENT_MAX_UPLOAD_MB
+#|        value: "10"
+#|
+#|      # clamd runs beside the wrapper in the same container.
+#|      - key: CLAMD_SOCKET
+#|        value: /tmp/clamd.sock
+#|      - key: CLAMD_TIMEOUT_SECONDS
+#|        value: "60"

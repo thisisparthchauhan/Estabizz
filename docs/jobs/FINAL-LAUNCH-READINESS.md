@@ -43,8 +43,8 @@ Last verified against `staging` on **2026-09-12**.
 - Candidate account deletion including cross-system erasure, with re-authentication — 21 tests.
 
 ### Launch preparation completed in this phase
-- **`JobPosting` structured data** on `/jobs/[slug]` — Google Jobs eligible markup, emitted only when valid, never carrying the internal UUID or an undisclosed salary, and **not escapable** (see §6). 19 tests.
-- **Preview/staging deployments are no longer crawlable** (`lib/seo/crawlPolicy.ts`) — 6 tests.
+- **`JobPosting` structured data** on `/jobs/[slug]` — Google Jobs eligible markup, emitted only when valid, never carrying the internal UUID or any salary (§6.1), and **not escapable**. 17 tests.
+- **Preview/staging deployments are no longer crawlable** (`lib/seo/crawlPolicy.ts`) — 6 tests. Verified live: staging now serves `Disallow: /`.
 - `/jobs` and every open listing in `sitemap.ts` (fail-soft); canonical on `/jobs/[slug]`.
 - Temporary-upload orphan reaper, dry-run by default, with a 30-minute floor no config can lower.
 
@@ -193,8 +193,29 @@ restore** in every case short of an unusable schema.
 
 ## 6. 💡 OPTIONAL POST-LAUNCH
 
+### 6.1 Salary is stored without a unit — found in this phase
+
+`jobs.salary_min` / `salary_max` are bare numbers with **no unit column**, and
+the job detail page hard-codes the suffix **"LPA"** when rendering them. A
+stored `8` therefore means 8 lakh per annum, not 8 rupees.
+
+Observed on deployed staging: a listing storing `8`–`16` with `currency = INR`
+renders as "8–16 INR LPA". The first version of the `JobPosting` markup emitted
+that as `{ minValue: 8, currency: "INR", unitText: "YEAR" }` — a public,
+machine-readable claim that the job pays **eight rupees a year**.
+
+`baseSalary` is now **not published at all**. Scaling by 100,000 for INR was
+rejected: it bakes a presentation assumption into a data layer and is already
+meaningless for any other currency. `baseSalary` is *recommended*, not required,
+so omitting it costs no Google Jobs eligibility.
+
+**To publish salary later**, the model needs an unambiguous amount — either
+absolute units, or an explicit unit column beside the figure. The rendered page
+is not affected; it still shows the range with its "LPA" label.
+
 | Item | Note |
 |---|---|
+| **Store salary with an explicit unit** | Prerequisite for publishing `baseSalary` in structured data (§6.1). The rendered page is unaffected either way. |
 | **Populate `JobLocation`** | The model already has structured `country` / `state` / `city` columns and is **never written to**. Until it is, `JobPosting` markup carries `addressLocality` only — Google wants `addressCountry` for full Google Jobs eligibility. Free-text `location_text` on staging is city-only ("Mumbai", "Surat"), so no country can honestly be derived. This is a data-entry change, not a code change. |
 | `/careers` route | **Decision: not building it.** It appears only in planning docs (01, 02, 04, 05) from before `/jobs` was chosen. There are zero code references — no links, no redirects, nothing broken. The planning docs are kept as a record; no route is needed. |
 | `applicantLocationRequirements` for remote roles | Depends on the same structured country data. |

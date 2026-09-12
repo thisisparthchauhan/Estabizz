@@ -29,10 +29,9 @@ export interface JobPostingSource {
   employment_type: JobEmploymentType | null;
   remote_policy: RemotePolicy | null;
   min_years_experience: number | null;
-  salary_min: string | null;
-  salary_max: string | null;
-  salary_currency: string | null;
-  salary_disclosed: boolean;
+  // salary_* are deliberately absent: see "BASE SALARY IS DELIBERATELY NOT
+  // PUBLISHED" below. Callers pass the full job object; the extra fields are
+  // simply not consumed.
   closes_at: Date | null;
   published_at: Date | null;
 }
@@ -118,11 +117,25 @@ export function buildJobPostingJsonLd(
     };
   }
 
-  // Only when the recruiter published a range AND a currency to denominate it.
-  const salary = buildSalary(job);
-  if (salary) {
-    posting.baseSalary = salary;
-  }
+  // BASE SALARY IS DELIBERATELY NOT PUBLISHED.
+  //
+  // `salary_min` / `salary_max` are bare numbers with NO UNIT, and the job
+  // detail page hard-codes the suffix "LPA" when rendering them. A stored 8
+  // means 8 lakh per annum, not 8 rupees -- a factor of 100,000.
+  //
+  // Confirmed on deployed staging: a real listing stores 8-16 with currency INR
+  // and renders "8-16 INR LPA". Emitted as a schema.org MonetaryAmount that
+  // became `minValue: 8, currency: "INR", unitText: "YEAR"` -- a public,
+  // machine-readable claim that the job pays eight rupees a year.
+  //
+  // Scaling by 100,000 for INR was rejected: it bakes a presentation assumption
+  // into a data layer and is already meaningless for any other currency.
+  //
+  // A wrong salary in structured data is worse than none -- aggregators read it
+  // as fact, and unlike the page it carries no "LPA" label to hint at the unit.
+  // `baseSalary` is RECOMMENDED, not required, so omitting it costs no Google
+  // Jobs eligibility. Publishing it needs the model to store an unambiguous
+  // amount: absolute units, or an explicit unit column beside the figure.
 
   if (typeof job.min_years_experience === "number" && job.min_years_experience > 0) {
     posting.experienceRequirements = {
@@ -132,48 +145,6 @@ export function buildJobPostingJsonLd(
   }
 
   return posting;
-}
-
-function buildSalary(job: JobPostingSource): Record<string, unknown> | null {
-  if (!job.salary_disclosed || !job.salary_currency) {
-    return null;
-  }
-
-  const min = toNumber(job.salary_min);
-  const max = toNumber(job.salary_max);
-
-  if (min === null && max === null) {
-    return null;
-  }
-
-  const value: Record<string, unknown> = {
-    "@type": "QuantitativeValue",
-    // Stored as an annual figure; saying so is required for the range to mean
-    // anything to a consumer.
-    unitText: "YEAR",
-  };
-
-  if (min !== null && max !== null && min !== max) {
-    value.minValue = min;
-    value.maxValue = max;
-  } else {
-    value.value = min ?? max;
-  }
-
-  return {
-    "@type": "MonetaryAmount",
-    currency: job.salary_currency,
-    value,
-  };
-}
-
-function toNumber(value: string | null): number | null {
-  if (value === null || value.trim() === "") {
-    return null;
-  }
-
-  const parsed = Number(value);
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
 }
 
 /**
@@ -187,8 +158,8 @@ function toNumber(value: string | null): number | null {
  *
  * Escaping `<` to \u003c is the standard fix: JSON unescapes it back to `<`
  * for any consumer, so the payload is unchanged, but the HTML parser can no
- * longer see a closing tag. `&` and line separators are escaped for the same
- * class of reason.
+ * longer see a closing tag. `&` and the line separators are escaped for the
+ * same class of reason.
  */
 export function serializeJsonLd(value: Record<string, unknown>): string {
   return JSON.stringify(value)

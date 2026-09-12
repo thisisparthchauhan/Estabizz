@@ -98,7 +98,7 @@ function main() {
     assert.equal(future.validThrough, "2026-12-31");
   });
 
-  console.log("\nDiscloses nothing the page withholds:");
+  console.log("\nSalary is never published:");
   check("an undisclosed salary never reaches the markup", () => {
     const o = buildJobPostingJsonLd(baseJob({
       salary_disclosed: false, salary_min: "1200000", salary_max: "1800000", salary_currency: "INR",
@@ -106,27 +106,19 @@ function main() {
     assert.ok(!("baseSalary" in o), "withheld salary leaked into structured data");
     assert.ok(!JSON.stringify(o).includes("1200000"), "salary figure leaked");
   });
-  check("a disclosed range with no currency is not guessed at", () => {
+  check("a DISCLOSED salary is not published either", () => {
+    // Deliberate. salary_min/max are stored WITHOUT A UNIT and the page renders
+    // them with a hard-coded "LPA" suffix, so a stored 8 means 8 lakh per annum.
+    // Publishing that as a MonetaryAmount claimed the job paid 8 rupees a year
+    // -- observed on deployed staging before this was removed. A wrong salary
+    // in machine-readable markup is worse than none.
     const o = buildJobPostingJsonLd(baseJob({
-      salary_disclosed: true, salary_min: "1200000", salary_max: "1800000", salary_currency: null,
+      salary_disclosed: true, salary_min: "8", salary_max: "16", salary_currency: "INR",
     }), SITE, NOW);
-    assert.ok(!("baseSalary" in o));
-  });
-  check("a disclosed range is published as a range", () => {
-    const o = buildJobPostingJsonLd(baseJob({
-      salary_disclosed: true, salary_min: "1200000", salary_max: "1800000", salary_currency: "INR",
-    }), SITE, NOW);
-    assert.equal(o.baseSalary.currency, "INR");
-    assert.equal(o.baseSalary.value.minValue, 1200000);
-    assert.equal(o.baseSalary.value.maxValue, 1800000);
-    assert.equal(o.baseSalary.value.unitText, "YEAR");
-  });
-  check("a single disclosed figure is a value, not a degenerate range", () => {
-    const o = buildJobPostingJsonLd(baseJob({
-      salary_disclosed: true, salary_min: "1500000", salary_max: "1500000", salary_currency: "INR",
-    }), SITE, NOW);
-    assert.equal(o.baseSalary.value.value, 1500000);
-    assert.ok(!("minValue" in o.baseSalary.value));
+    assert.ok(!("baseSalary" in o), "unit-less salary was published as a currency amount");
+    const blob = JSON.stringify(o);
+    assert.ok(!blob.includes("MonetaryAmount"), "a MonetaryAmount was emitted");
+    assert.ok(!blob.includes("INR"), "a currency was emitted without a trustworthy amount");
   });
   check("the internal UUID is never published; identifier is the slug", () => {
     const o = buildJobPostingJsonLd(baseJob(), SITE, NOW);

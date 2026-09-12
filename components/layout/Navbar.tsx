@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { NAVBAR_DEFAULTS, type NavbarContent } from "@/lib/content/navbarDefaults";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { JOBS_MENU_ITEMS, HIRE_TALENT_ITEM, getCandidateUserMenuItems } from "@/lib/jobs/navigation/jobsMenu";
+import { JOBS_SEARCH_ENTRIES } from "@/lib/jobs/navigation/searchEntries";
 
 interface AuthUser {
     id: string;
@@ -13,6 +15,13 @@ interface AuthUser {
     lastName: string;
     isAdmin: boolean;
 }
+
+// Jobs / Candidate / Recruitment navigation content (JOBS_MENU_ITEMS,
+// HIRE_TALENT_ITEM, the candidate account menu, and JOBS_SEARCH_ENTRIES) lives
+// in lib/jobs/navigation/ — see those files for the reasoning. Kept out of
+// this component so it is plain data, testable without rendering JSX, and
+// shared with nothing else that would otherwise drift out of sync.
+const CANDIDATE_USER_MENU_ITEMS = getCandidateUserMenuItems();
 
 interface MenuGroup { heading: string; items: string[]; }
 interface MenuCategory { label: string; icon: string; items: string[]; groups?: MenuGroup[]; viewAll?: string; viewAllLabel?: string; }
@@ -303,6 +312,9 @@ const staticSearchLinks = [
     { label: "Book Consultation", href: "/contact", group: "Site" },
     { label: "Get Started", href: "/get-started", group: "Site" },
     { label: "Login", href: "/login", group: "Site" },
+    // Jobs / Candidate / Recruitment — see lib/jobs/navigation/searchEntries.ts.
+    // Route discovery only: no candidate data ever enters this list.
+    ...JOBS_SEARCH_ENTRIES,
 ];
 
 const menus: Record<string, MegaMenu> = {
@@ -381,14 +393,11 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
     // Editable navbar content (quick links + CTA) from the CMS, with fallback.
     const nav: NavbarContent = { ...NAVBAR_DEFAULTS, ...content };
     const baseLinks = nav.quickLinks?.length ? nav.quickLinks : NAVBAR_DEFAULTS.quickLinks;
-    // Always inject Jobs before Blogs (Blogs stays last), regardless of CMS state
-    const quickLinks = (() => {
-        if (baseLinks.some(l => l.href === '/jobs')) return baseLinks;
-        const idx = baseLinks.findIndex(l => l.href === '/blogs');
-        const result = [...baseLinks];
-        result.splice(idx >= 0 ? idx : result.length, 0, { label: 'Jobs', href: '/jobs', icon: '💼', newTab: false });
-        return result;
-    })();
+    // Jobs is its own dropdown now (JOBS_MENU_ITEMS below), not a flat quickLink.
+    // Filter defensively rather than assuming: a CMS edit made before this
+    // change could still have a plain "/jobs" quickLink saved, which would
+    // otherwise render Jobs twice.
+    const quickLinks = baseLinks.filter((l) => l.href !== '/jobs');
     const router = useRouter();
     const [scrolled, setScrolled] = useState(false);
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -632,6 +641,41 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                 {item} <svg className={`w-3 h-3 transition-transform ${activeMenu === item ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </div>
                         ))}
+
+                        {/* Jobs dropdown — deliberately its own compact panel, not the
+                            full-width mega menu used for Regulatory/Solutions. Reuses
+                            the same activeMenu/openMenu/closeMenu state machine so hover
+                            behaviour (single menu open at a time, delayed close) matches
+                            the rest of the nav for free. */}
+                        <div onMouseEnter={() => openMenu("Jobs")} onMouseLeave={closeMenu}
+                            className="relative flex items-center">
+                            <div className={`cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors ${activeMenu === "Jobs" ? "text-[#1677f2]" : "text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"}`}>
+                                Jobs <svg className={`w-3 h-3 transition-transform ${activeMenu === "Jobs" ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                            </div>
+                            {activeMenu === "Jobs" && (
+                                <div className="absolute left-0 top-[52px] w-72 overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] py-2 shadow-[0_18px_45px_rgba(15,23,42,0.14)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.40)] z-[1100] animate-[fadeIn_0.15s_ease]">
+                                    {JOBS_MENU_ITEMS.map((item) => (
+                                        <Link
+                                            key={item.href}
+                                            href={item.href}
+                                            className="block px-4 py-2.5 transition-colors hover:bg-[#f5fbff] dark:hover:bg-[#12223a]"
+                                        >
+                                            <span className="block text-[13.5px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">{item.label}</span>
+                                            <span className="block text-[11.5px] font-medium text-[#64748b] dark:text-[#a9b6c9]">{item.description}</span>
+                                        </Link>
+                                    ))}
+                                    <div className="my-2 border-t border-gray-100 dark:border-[#223550]" />
+                                    <Link
+                                        href={HIRE_TALENT_ITEM.href}
+                                        className="block px-4 py-2.5 transition-colors hover:bg-[#f5fbff] dark:hover:bg-[#12223a]"
+                                    >
+                                        <span className="block text-[13.5px] font-bold text-[#1677f2]">{HIRE_TALENT_ITEM.label}</span>
+                                        <span className="block text-[11.5px] font-medium text-[#64748b] dark:text-[#a9b6c9]">{HIRE_TALENT_ITEM.description}</span>
+                                    </Link>
+                                </div>
+                            )}
+                        </div>
+
                         {quickLinks.map((link) =>
                             link.newTab ? (
                                 <a
@@ -753,6 +797,25 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                             </div>
                                         )}
 
+                                        {/* Candidate / Jobs account (all logged-in users — a candidate is
+                                            just a logged-in user who has an Estabizz Jobs profile; see
+                                            CANDIDATE_USER_MENU_ITEMS above). */}
+                                        <div className="border-b border-gray-100 dark:border-[#223550] py-1">
+                                            <p className="px-4 pb-1 pt-1.5 text-[10.5px] font-black uppercase tracking-[0.14em] text-[#94a3b8] dark:text-[#64748b]">
+                                                Estabizz Jobs
+                                            </p>
+                                            {CANDIDATE_USER_MENU_ITEMS.map((item) => (
+                                                <Link
+                                                    key={item.href}
+                                                    href={item.href}
+                                                    onClick={() => setUserMenuOpen(false)}
+                                                    className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f5fbff] dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
+                                                >
+                                                    {item.label}
+                                                </Link>
+                                            ))}
+                                        </div>
+
                                         {/* My submissions (all logged-in users) */}
                                         <div className="border-b border-gray-100 dark:border-[#223550] py-1">
                                             <Link
@@ -786,7 +849,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                             </div>
                         ) : (
                             <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors px-3 py-2">
-                                Login
+                                Sign In
                             </Link>
                         )}
 
@@ -978,6 +1041,26 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                 </div>
                             </details>
                         ))}
+
+                        {/* Jobs — mobile equivalent of the desktop Jobs dropdown. Flat list,
+                            same four links, always shown regardless of auth state (candidate
+                            account pages redirect through login safely on their own). */}
+                        <details className="rounded-xl border border-gray-100 dark:border-[#223550] bg-[#f8faff] dark:bg-[#0d1a2d] px-4 py-2">
+                            <summary className="text-[15px] font-bold text-[#0a1628] dark:text-[#f7f9fc] cursor-pointer py-2">Jobs</summary>
+                            <div className="mt-1 space-y-1 pb-2">
+                                {[...JOBS_MENU_ITEMS, HIRE_TALENT_ITEM].map((item) => (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        onClick={() => setMobileOpen(false)}
+                                        className="block rounded-lg px-3 py-2.5 text-[13.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-white dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
+                                    >
+                                        {item.label}
+                                    </Link>
+                                ))}
+                            </div>
+                        </details>
+
                         {quickLinks.map((link, i) =>
                             link.newTab ? (
                                 <a
@@ -1012,12 +1095,30 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                             <p className="text-[11px] text-[#64748b] dark:text-[#a9b6c9]">{authUser.email}</p>
                                         </div>
                                     </div>
+                                    {/* Candidate account — mobile equivalent of the desktop user
+                                        dropdown's Estabizz Jobs section. No functionality may be
+                                        desktop-only. */}
+                                    <div className="mb-2 mt-1 rounded-lg border border-gray-100 dark:border-[#223550] py-1">
+                                        <p className="px-1 pb-1 pt-1 text-[10.5px] font-black uppercase tracking-[0.14em] text-[#94a3b8] dark:text-[#64748b]">
+                                            Estabizz Jobs
+                                        </p>
+                                        {CANDIDATE_USER_MENU_ITEMS.map((item) => (
+                                            <Link
+                                                key={item.href}
+                                                href={item.href}
+                                                onClick={() => setMobileOpen(false)}
+                                                className="block px-1 py-2 text-[13.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
+                                            >
+                                                {item.label}
+                                            </Link>
+                                        ))}
+                                    </div>
                                     <button onClick={() => { setMobileOpen(false); handleLogout(); }} className="block w-full text-left text-[14px] font-semibold text-red-600 dark:text-red-400 py-2">
                                         Sign Out
                                     </button>
                                 </div>
                             ) : (
-                                <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] dark:text-[#f7f9fc] py-2">Login</Link>
+                                <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] dark:text-[#f7f9fc] py-2">Sign In</Link>
                             )}
                             <div className="flex items-center justify-between py-2">
                                 <span className="text-[13px] font-semibold text-[#64748b] dark:text-[#a9b6c9]">Theme</span>

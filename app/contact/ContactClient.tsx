@@ -65,7 +65,25 @@ const SERVICES_GROUPED = [
             'Other / Not Listed',
         ],
     },
+    {
+        // Phase 7A: there was previously no way for an employer to identify a
+        // hiring enquiry through this form at all -- "Other / Not Listed" was
+        // the closest match. This is a lightweight enquiry entry point using
+        // the existing contact/Formspree pipeline, not a new CRM or backend.
+        group: 'Recruitment & Talent Acquisition',
+        color: '#0f766e',
+        items: [
+            'Hire Talent / Submit a Hiring Requirement',
+        ],
+    },
 ];
+
+// Deep-link support for `/contact?service=...` — lets a page like
+// /jobs/hire-talent send an employer straight into the right form state
+// instead of a generic contact form. Falls back to no pre-selection for any
+// value that isn't one of the known services, so an arbitrary query string
+// can't be reflected into the form.
+const ALL_SERVICE_ITEMS = new Set(SERVICES_GROUPED.flatMap((g) => g.items));
 
 const DIAL_CODES = [
     { flag: '🇮🇳', name: 'India',                        dial: '+91'    },
@@ -283,6 +301,17 @@ export default function ContactClient() {
         service: "",
         message: "",
     });
+
+    // Deep-link pre-selection: /contact?service=<one of ALL_SERVICE_ITEMS>.
+    // Validated against the known list rather than trusted directly, so an
+    // arbitrary query string can't inject text into the form or the eventual
+    // Formspree subject line.
+    useEffect(() => {
+        const requested = new URLSearchParams(window.location.search).get('service');
+        if (requested && ALL_SERVICE_ITEMS.has(requested)) {
+            setForm((prev) => ({ ...prev, service: requested }));
+        }
+    }, []);
 
     // Country dial code picker
     const [dialIdx, setDialIdx] = useState(0);

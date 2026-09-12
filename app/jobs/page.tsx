@@ -3,9 +3,9 @@ import { listPublicJobs } from "@/lib/jobs/jobManagement/repository";
 import PublicJobsClient from "./PublicJobsClient";
 
 export const metadata: Metadata = {
-  title: "Jobs — Careers at Estabizz Fintech",
+  title: "Estabizz Jobs — Regulated Finance, Fintech & Technology Roles",
   description:
-    "Explore open positions at Estabizz Fintech. We are hiring regulatory advisors, compliance strategists, legal researchers and operations talent.",
+    "Find opportunities across regulated financial services, fintech, technology and growing businesses. Search roles managed by the Estabizz recruitment team, or join our talent network.",
   robots: { index: true, follow: true },
 };
 

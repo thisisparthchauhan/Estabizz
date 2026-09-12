@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Application Submitted — Estabizz Careers",
+  title: "Application Submitted — Estabizz Jobs",
   robots: { index: false, follow: false },
 };
 

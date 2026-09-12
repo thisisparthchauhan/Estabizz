@@ -98,6 +98,21 @@ export const FOOTER_DEFAULTS: FooterContent = {
       ],
     },
     {
+      // Phase 7A: Jobs previously had no public footer presence at all — the
+      // only "Careers" link in this file lived in the excluded "Company &
+      // Network" column above and pointed at /contact, not the Jobs system.
+      title: 'Jobs & Careers',
+      links: [
+        { label: 'Find Jobs', href: '/jobs' },
+        { label: 'Candidate Account', href: '/jobs/account' },
+        { label: 'My Profile', href: '/jobs/account/profile' },
+        { label: 'My Applications', href: '/jobs/account/applications' },
+        { label: 'Job Alerts', href: '/jobs/account/alerts' },
+        { label: 'Join Estabizz', href: '/jobs/join' },
+        { label: 'Hire Talent', href: '/jobs/hire-talent' },
+      ],
+    },
+    {
       title: 'Legal & Transparency',
       links: [
         { label: 'Privacy Policy', href: '/legal/privacy-policy' },
@@ -111,7 +126,7 @@ export const FOOTER_DEFAULTS: FooterContent = {
       title: 'Company & Network',
       links: [
         { label: 'Associate Professional Partner', href: '/contact' },
-        { label: 'Careers', href: '/contact' },
+        { label: 'Careers', href: '/jobs' },
         { label: 'Team Estabizz', href: '/contact' },
         { label: 'Pricing', href: '/contact' },
         { label: 'Estabizz Compliance Network', href: '/contact' },

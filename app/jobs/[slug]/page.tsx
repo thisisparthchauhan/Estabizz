@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const job = await getPublicJobBySlug(slug);
   if (!job) return { title: "Job Not Found" };
   return {
-    title: `${job.title} — Careers at Estabizz`,
+    title: `${job.title} — Estabizz Jobs`,
     description: job.description.slice(0, 160),
     // Public job pages are indexable and need a stable canonical; without one,
     // query-string variants compete with each other in search results.

@@ -167,7 +167,7 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
                 {/* ═══════════════════════════════════════════════════════════
                     Section 2 — Navigation link columns
                 ═══════════════════════════════════════════════════════════ */}
-                <div className="grid grid-cols-2 gap-x-6 gap-y-7 border-b border-white/[0.06] py-7 sm:grid-cols-3 xl:grid-cols-5">
+                <div className="grid grid-cols-2 gap-x-6 gap-y-7 border-b border-white/[0.06] py-7 sm:grid-cols-3 xl:grid-cols-6">
                     {columns.map((col) => (
                         <div key={col.title}>
                             <h4 className="mb-3 text-[10.5px] font-black uppercase tracking-[0.1em] text-[#4f9dfb]">

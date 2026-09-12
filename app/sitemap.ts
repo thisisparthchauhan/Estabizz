@@ -167,10 +167,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
   // ── Public jobs board ─────────────────────────────────────────────────────
-  // The hub plus each open, public listing. Candidate account pages are
-  // deliberately absent: they are noindex and behind authentication.
+  // The hub plus each open, public listing, plus the two Phase 7A entry points
+  // (Join Estabizz, Hire Talent) -- both public and indexable. Candidate
+  // account pages are deliberately absent: they are noindex and behind
+  // authentication.
   const jobPages: MetadataRoute.Sitemap = [
     { url: `${BASE}/jobs`, changeFrequency: "daily" as const, priority: 0.9 },
+    { url: `${BASE}/jobs/join`, changeFrequency: "monthly" as const, priority: 0.6 },
+    { url: `${BASE}/jobs/hire-talent`, changeFrequency: "monthly" as const, priority: 0.6 },
     ...jobs.map((job) => ({
       url: `${BASE}/jobs/${job.slug}`,
       lastModified: job.published_at ?? new Date(),

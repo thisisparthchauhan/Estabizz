@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const job = await getPublicJobBySlug(slug);
   if (!job) return { title: "Job Not Found" };
   return {
-    title: `Apply — ${job.title} — Estabizz Careers`,
+    title: `Apply — ${job.title} — Estabizz Jobs`,
     robots: { index: false, follow: false },
   };
 }

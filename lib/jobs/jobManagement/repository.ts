@@ -271,11 +271,16 @@ export interface PublicJobListing {
   max_years_experience: number | null;
   closes_at: Date | null;
   published_at: Date | null;
+  // Only the skills list is surfaced to the public listing (for the "search by
+  // title, skill, department or location" filter on /jobs) -- narrowed from the
+  // full StructuredRequirements shape used on the detail page so a listing
+  // response never carries requirements_text / qualification prose per row.
+  skills_list: string[];
 }
 
 export async function listPublicJobs(): Promise<PublicJobListing[]> {
   const prisma = getJobsPrismaClient();
-  return prisma.job.findMany({
+  const jobs = await prisma.job.findMany({
     where: {
       status: "open",
       is_public: true,
@@ -293,9 +298,21 @@ export async function listPublicJobs(): Promise<PublicJobListing[]> {
       max_years_experience: true,
       closes_at: true,
       published_at: true,
+      structured_requirements: true,
     },
     orderBy: { published_at: "desc" },
   });
+
+  return jobs.map(({ structured_requirements, ...job }) => ({
+    ...job,
+    skills_list: extractSkillsList(structured_requirements),
+  }));
+}
+
+function extractSkillsList(value: unknown): string[] {
+  if (!value || typeof value !== "object") return [];
+  const skills = (value as { skills_list?: unknown }).skills_list;
+  return Array.isArray(skills) ? skills.filter((s): s is string => typeof s === "string") : [];
 }
 
 export interface PublicJobDetail {

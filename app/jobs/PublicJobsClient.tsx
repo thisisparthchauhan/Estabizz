@@ -82,7 +82,8 @@ export default function PublicJobsClient({ jobs }: Props) {
         (j) =>
           j.title.toLowerCase().includes(q) ||
           (j.department ?? "").toLowerCase().includes(q) ||
-          (j.location_text ?? "").toLowerCase().includes(q)
+          (j.location_text ?? "").toLowerCase().includes(q) ||
+          j.skills_list.some((s) => s.toLowerCase().includes(q))
       );
     }
     if (location) list = list.filter((j) => j.location_text === location);
@@ -117,25 +118,33 @@ export default function PublicJobsClient({ jobs }: Props) {
       {/* Hero */}
       <div className="bg-[#0a1628] px-6 py-14 text-center">
         <div className="mb-3 inline-block rounded-full bg-[#1677f2]/20 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#60a5fa]">
-          Careers at Estabizz
+          Estabizz Jobs
         </div>
         <h1 className="mt-3 text-[36px] font-black leading-tight tracking-tight text-white sm:text-[44px]">
-          Build India&apos;s Regulatory Future
+          Find opportunities across regulated financial services, fintech, technology and growing businesses
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8]">
-          We&apos;re hiring regulatory advisors, compliance strategists, legal researchers and operations professionals.
+          Search roles managed by the Estabizz recruitment team.
         </p>
         <p className="mt-3 text-[14px] font-bold text-[#60a5fa]">
           {jobs.length} open position{jobs.length !== 1 ? "s" : ""}
+        </p>
+        <p className="mt-5 text-[13px] text-[#94a3b8]">
+          Don&apos;t see the right role yet?{" "}
+          <Link href="/jobs/join" className="font-bold text-white underline decoration-[#60a5fa] underline-offset-4 hover:text-[#60a5fa]">
+            Join Estabizz&apos;s talent network →
+          </Link>
         </p>
       </div>
 
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         {/* Filters */}
         <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <label className="sr-only" htmlFor="jobs-search">Search jobs by title, skill, department or location</label>
           <input
+            id="jobs-search"
             className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13.5px] text-[#0a1628] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
-            placeholder="Search job title or keyword…"
+            placeholder="Search by title, skill, department or location…"
             value={search}
             onChange={(e) => changeFilter(setSearch)(e.target.value)}
           />
@@ -196,14 +205,14 @@ export default function PublicJobsClient({ jobs }: Props) {
             <div className="text-[48px]">💼</div>
             <p className="mt-4 text-[15px] font-bold text-[#0a1628]">No openings right now</p>
             <p className="mt-2 text-[13px] text-[#64748b]">
-              We&apos;re growing. Check back soon or reach out directly.
+              We&apos;re growing. Join our talent network and we&apos;ll reach out when a matching role opens.
             </p>
-            <a
-              href="mailto:info@estabizz.com?subject=Career%20Enquiry"
+            <Link
+              href="/jobs/join"
               className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-6 py-3 text-[14px] font-black text-white hover:bg-[#1677f2] transition-colors"
             >
-              Send Your CV
-            </a>
+              Join Estabizz&apos;s Talent Network
+            </Link>
           </div>
         ) : filtered.length === 0 ? (
           <div className="flex h-40 items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] bg-white text-[14px] text-[#94a3b8]">
@@ -298,14 +307,21 @@ export default function PublicJobsClient({ jobs }: Props) {
         <div className="mt-12 rounded-2xl border border-[#dbe7f3] bg-white p-8 text-center">
           <p className="text-[15px] font-bold text-[#0a1628]">Don&apos;t see a role that fits?</p>
           <p className="mt-2 text-[13px] text-[#64748b]">
-            We&apos;re always looking for great people. Send us your CV.
+            Join Estabizz&apos;s talent network — create a profile once and be considered as new roles open.
           </p>
-          <a
-            href="mailto:info@estabizz.com?subject=Career%20Enquiry%20-%20Estabizz"
+          <Link
+            href="/jobs/join"
             className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-6 py-3 text-[14px] font-black text-white hover:bg-[#1677f2] transition-colors"
           >
-            Get in Touch
-          </a>
+            Join Estabizz
+          </Link>
+          <p className="mt-4 text-[12px] text-[#94a3b8]">
+            Prefer not to create a profile?{" "}
+            <a href="mailto:info@estabizz.com?subject=Career%20Enquiry%20-%20Estabizz" className="font-bold text-[#1677f2] hover:underline">
+              Email our recruitment team
+            </a>
+            .
+          </p>
         </div>
       </div>
     </div>

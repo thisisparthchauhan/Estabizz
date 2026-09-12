@@ -7,7 +7,10 @@
 //
 // The mega-menus (Services / Regulatory / Solutions / Resources) remain defined
 // in Navbar.tsx — they are a large structured service taxonomy, not day-to-day
-// editable marketing content.
+// editable marketing content. The Jobs dropdown (Find Jobs / Candidate Account /
+// Join Estabizz / Hire Talent) is also defined in Navbar.tsx, for the same
+// reason "Jobs" is no longer a flat quickLink here — Navbar.tsx renders it as
+// its own compact dropdown instead (see JOBS_MENU_ITEMS).
 // ─────────────────────────────────────────────────────────────────────────────
 
 export interface NavQuickLink {
@@ -28,7 +31,6 @@ export interface NavbarContent {
 export const NAVBAR_DEFAULTS: NavbarContent = {
   quickLinks: [
     { label: 'Global Markets', href: '/global',  icon: '🌐', newTab: false },
-    { label: 'Jobs',           href: '/jobs',    icon: '💼', newTab: false },
     { label: 'Blogs',          href: '/blogs',   icon: '✍️', newTab: false },
   ],
   ctaLabel: 'Get Started',

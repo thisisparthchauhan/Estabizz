@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getPublicJobBySlug } from "@/lib/jobs/jobManagement/repository";
+import { buildJobPostingJsonLd, serializeJsonLd } from "@/lib/jobs/structuredData/jobPosting";
+import { getSiteUrl } from "@/lib/seo/siteUrl";
 import { requireCandidateAccountSessionForPage } from "@/lib/jobs/candidateIdentity/access";
 import { findApplicationByJobAndCandidate } from "@/lib/jobs/applicationManagement/repository";
 import type { JobEmploymentType, RemotePolicy } from "@prisma/client";
@@ -72,8 +74,21 @@ export default async function JobDetailPage({ params }: Props) {
   const skills = sr.skills_list ?? [];
   const exp = expLabel(job.min_years_experience, job.max_years_experience);
 
+  // JobPosting markup for Google Jobs. Null when a required field is missing --
+  // an incomplete posting is penalised, so nothing is emitted rather than
+  // something invalid.
+  const jobPostingJsonLd = buildJobPostingJsonLd(job, getSiteUrl());
+
   return (
     <div className="min-h-screen bg-[#f8fbff] pt-[64px]">
+      {jobPostingJsonLd && (
+        <script
+          type="application/ld+json"
+          // serializeJsonLd, not JSON.stringify: escapes `<` so a description
+          // containing `</script>` cannot break out of this block.
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(jobPostingJsonLd) }}
+        />
+      )}
       {/* Header */}
       <div className="bg-[#0a1628] px-6 py-14">
         <div className="mx-auto max-w-4xl">

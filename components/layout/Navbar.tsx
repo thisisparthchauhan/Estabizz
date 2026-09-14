@@ -68,8 +68,20 @@ const linkMap: Record<string, string> = {
     "NBFC Annual Return Filing": "/rbi/nbfc-marketing-strategy",
     "Payment Aggregator": "/rbi/payment-aggregator-license-in-india",
     "Payment Aggregator License": "/rbi/payment-aggregator-license-in-india",
-    "AD Category II": "/rbi/full-fledged-money-changers",
-    "Credit Information Company": "/rbi/lendtech-services",
+    // Phase 7B: was "/rbi/full-fledged-money-changers". FFMC and AD Category II
+    // are related RBI forex licenses (an FFMC can upgrade to AD Cat II), but
+    // the FFMC page never mentions "AD Category" and a visitor searching for
+    // one would see no confirmation they're in the right place. Routed to the
+    // RBI hub rather than a page that doesn't acknowledge the term at all.
+    "AD Category II": "/rbi",
+    // Phase 7B: was "/rbi/lendtech-services" -- a Credit Information Company
+    // (CIBIL, Experian, Equifax...) is licensed under the Credit Information
+    // Companies (Regulation) Act 2005, an entirely different RBI regime from
+    // digital-lending "LendTech" compliance. Verified: the LendTech page never
+    // mentions Credit Information Companies, and no dedicated page exists for
+    // this topic -- routed to the RBI hub rather than an unrelated specific
+    // page. See docs/30-WHOLE-SITE-NAVIGATION-AUDIT.md §8.
+    "Credit Information Company": "/rbi",
     "NBFC License": "/rbi/nbfc-account-aggregator-license",
     "Prepaid Instrument": "/rbi/ppi-registration-in-india",
     "PPI Registration": "/rbi/ppi-registration-in-india",
@@ -147,11 +159,26 @@ const linkMap: Record<string, string> = {
     // IRDAI
     "Insurance Broker": "/irdai/insurance-broker-registration-in-india",
     "Corporate Agent": "/irdai/corporate-agent-registration-in-india",
-    "Web Aggregator": "/irdai/insurance-marketing-firm-license",
-    "Insurance Surveyor": "/irdai/insurance-repository-registration",
-    "TPA License": "/irdai/isnp-registration",
-    "TPA Licence": "/irdai/isnp-registration",
-    "Micro Insurance": "/irdai/ifsca-insurance-intermediary",
+    // Phase 7B: four confirmed wrong-destination mismatches below, all in the
+    // IRDAI cluster. Each destination page was read in full: none mentions the
+    // labelled concept, and no dedicated page exists for any of them. Routed
+    // to the IRDAI hub instead of an unrelated specific page. See
+    // docs/30-WHOLE-SITE-NAVIGATION-AUDIT.md §8 for the full evidence table.
+    //   "Web Aggregator"    was /irdai/insurance-marketing-firm-license
+    //   "Insurance Surveyor" was /irdai/insurance-repository-registration
+    //     (surveyors assess claims; a repository holds policies electronically
+    //      -- unrelated functions under unrelated regulations)
+    //   "TPA License/Licence" was /irdai/isnp-registration
+    //     (a Third Party Administrator processes claims; ISNP is an
+    //      e-commerce platform permission -- unrelated)
+    //   "Micro Insurance"   was /irdai/ifsca-insurance-intermediary
+    //     (a domestic low-income insurance product category, not a GIFT City
+    //      international intermediary licence)
+    "Web Aggregator": "/irdai",
+    "Insurance Surveyor": "/irdai",
+    "TPA License": "/irdai",
+    "TPA Licence": "/irdai",
+    "Micro Insurance": "/irdai",
     // Fintech
     "Prepaid Instrument License": "/rbi/ppi-registration-in-india",
     "Prepaid Instrument Licence": "/rbi/ppi-registration-in-india",
@@ -233,8 +260,15 @@ const linkMap: Record<string, string> = {
     "FAQ Engine": "/resources/faqs",
     "Compliance FAQs": "/resources/faqs",
     "Guides & Insights": "/resources",
-    "Case Highlights": "/",
-    "FAQs": "/services",
+    // Phase 7B fixes:
+    //   "Case Highlights" was "/" -- a dead-end to the homepage top, not the
+    //     Case Studies section (which had no id to land on; now #case-highlights).
+    //   "FAQs" was "/services" -- the generic services hub, while "Compliance
+    //     FAQs" and "FAQ Engine" two lines above already correctly point to
+    //     the real FAQ page. Same label, wrong destination, no reason for it
+    //     to differ from its synonyms.
+    "Case Highlights": "/#case-highlights",
+    "FAQs": "/resources/faqs",
     "Blogs": "/blogs",
     "Regulatory Insights": "/blogs",
     // Hidden pages — now accessible
@@ -546,6 +580,25 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
     };
     const keepOpen = () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
 
+    // Phase 7B: the Regulatory/Solutions/Jobs dropdown triggers are plain
+    // <div>s with hover handlers -- unreachable by keyboard at all before this.
+    // Converting them to real <button> elements is a bigger change (resets
+    // existing layout/styling, needs a click-to-toggle model since hover
+    // doesn't apply on keyboard) than fits a low-risk fix, so this instead
+    // makes the existing divs keyboard-operable in place: tabIndex + role
+    // already added in JSX below, this handles Enter/Space to toggle and
+    // Escape to close, matching the behaviour a <button> would have given.
+    const handleMenuTriggerKeyDown = (menu: string) => (event: React.KeyboardEvent) => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            keepOpen();
+            setActiveMenu((current) => (current === menu ? null : menu));
+            setActiveCategory(0);
+        } else if (event.key === "Escape" && activeMenu === menu) {
+            setActiveMenu(null);
+        }
+    };
+
     const currentMenu = activeMenu ? menus[activeMenu] : null;
 
     const CountrySelector = ({ compact = false, selectorRef }: { compact?: boolean; selectorRef: React.MutableRefObject<HTMLDivElement | null> }) => (
@@ -637,7 +690,9 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                     <div className="hidden xl:flex items-center gap-0.5 2xl:gap-1">
                         {Object.keys(menus).map((item) => (
                             <div key={item} onMouseEnter={() => openMenu(item)} onMouseLeave={closeMenu}
-                                className={`relative cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors ${activeMenu === item ? "text-[#1677f2]" : "text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"}`}>
+                                onKeyDown={handleMenuTriggerKeyDown(item)}
+                                role="button" tabIndex={0} aria-haspopup="true" aria-expanded={activeMenu === item}
+                                className={`relative cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1677f2] focus-visible:outline-offset-[-2px] ${activeMenu === item ? "text-[#1677f2]" : "text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"}`}>
                                 {item} <svg className={`w-3 h-3 transition-transform ${activeMenu === item ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </div>
                         ))}
@@ -649,7 +704,9 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                             the rest of the nav for free. */}
                         <div onMouseEnter={() => openMenu("Jobs")} onMouseLeave={closeMenu}
                             className="relative flex items-center">
-                            <div className={`cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors ${activeMenu === "Jobs" ? "text-[#1677f2]" : "text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"}`}>
+                            <div onKeyDown={handleMenuTriggerKeyDown("Jobs")}
+                                role="button" tabIndex={0} aria-haspopup="true" aria-expanded={activeMenu === "Jobs"}
+                                className={`cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1677f2] focus-visible:outline-offset-[-2px] ${activeMenu === "Jobs" ? "text-[#1677f2]" : "text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"}`}>
                                 Jobs <svg className={`w-3 h-3 transition-transform ${activeMenu === "Jobs" ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </div>
                             {activeMenu === "Jobs" && (
@@ -1004,7 +1061,14 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                 <div className="space-y-2">
                                                     {cat.groups.map((group, gi) => (
                                                         <details key={gi} className="rounded-lg border border-gray-100 dark:border-[#223550] bg-white dark:bg-[#12223a]">
-                                                            <summary className="cursor-pointer px-3 py-2 text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]" aria-expanded="false">
+                                                            {/* No aria-expanded here (Phase 7B fix): <details>/<summary>
+                                                                already expose their open/closed state natively to
+                                                                assistive tech via the `open` attribute. The removed
+                                                                value was hardcoded to "false" always, so it told a
+                                                                screen reader the group was still collapsed even after
+                                                                a sighted user had opened it -- actively wrong, not
+                                                                just redundant. */}
+                                                            <summary className="cursor-pointer px-3 py-2 text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]">
                                                                 {group.heading}
                                                             </summary>
                                                             <div className="px-3 pb-2 space-y-1">

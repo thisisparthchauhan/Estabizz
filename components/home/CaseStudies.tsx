@@ -26,7 +26,12 @@ export default function CaseStudies({ content }: { content?: Partial<CaseStudies
     }, []);
 
     return (
-    <section ref={sectionRef} className="py-24 bg-transparent relative overflow-hidden">
+    // id added Phase 7B: the footer and navbar-search "Case Highlights" links
+    // pointed at "/" with no anchor, landing a visitor at the homepage top
+    // rather than this section -- a dead-end click, not a broken link (200,
+    // just not where the label promised). scroll-mt accounts for the fixed
+    // 64px navbar so the anchor doesn't land the section under it.
+    <section id="case-highlights" ref={sectionRef} className="py-24 bg-transparent relative overflow-hidden scroll-mt-20">
       <div className="max-w-[1240px] mx-auto px-6 relative z-10">
         
         <div className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>

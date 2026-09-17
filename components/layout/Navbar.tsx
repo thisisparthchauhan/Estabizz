@@ -224,6 +224,18 @@ const linkMap: Record<string, string> = {
     // Enterprise / Solutions
     "FEMA Compliance": "/fema/compliance-under-fema",
     "Transfer Pricing": "/services/transfer-pricing",
+    "Copyright Website": "/solutions/ipr/copyright-website",
+    "Copyright Registration": "/solutions/ipr/copyright-registration",
+    "Design Registration": "/solutions/ipr/design-registration",
+    "Patent Registration": "/solutions/ipr/patent-registration",
+    "Trademark Assignment": "/solutions/ipr/trademark-assignment",
+    "Trademark Registration": "/solutions/ipr/trademark-registration",
+    "Trademark Classes": "/solutions/ipr/trademark-classes",
+    "Trademark Objection Reply": "/solutions/ipr/trademark-objection",
+    "Trademark Opposition": "/solutions/ipr/trademark-opposition",
+    "Legal Due Diligence": "/services/legal-due-diligence",
+    "Legal Process Outsourcing": "/services/legal-process-outsourcing",
+    "Finance & Accounting Outsourcing": "/services/finance-accounting-outsourcing",
     "ESG Compliance": "/services/esg-consulting",
     // Startup
     "GST Registration": "/services/gst-appeal-services",
@@ -342,6 +354,10 @@ const staticSearchLinks = [
     { label: "IRDAI Services", href: "/irdai", group: "IRDAI" },
     { label: "IFSCA Services", href: "/ifsca", group: "IFSCA" },
     { label: "FEMA Services", href: "/fema", group: "FEMA" },
+    { label: "Solutions", href: "/solutions", group: "Solutions" },
+    { label: "IPR Services", href: "/solutions/ipr", group: "Solutions" },
+    { label: "Legal Services", href: "/solutions/legal", group: "Solutions" },
+    { label: "CFO Services", href: "/solutions/cfo", group: "Solutions" },
     { label: "Contact Estabizz", href: "/contact", group: "Site" },
     { label: "Book Consultation", href: "/contact", group: "Site" },
     { label: "Get Started", href: "/get-started", group: "Site" },
@@ -371,18 +387,36 @@ const menus: Record<string, MegaMenu> = {
         ],
         viewAll: "/regulatory", viewAllLabel: "View All Regulatory →"
     },
+    // Solutions is the PRACTICE-AREA menu; Regulatory is the LICENCE menu.
+    //
+    // It used to carry six regulated-vertical categories -- NBFCs & Lending,
+    // Fintech Platforms, Insurance Intermediaries, Capital Market
+    // Intermediaries, Foreign / GIFT City Entities -- whose items were the
+    // same labels, pointing at the same pages, as the RBI / SEBI / IRDAI /
+    // IFSCA categories one menu across. Two routes to one page in two
+    // dropdowns is not more discoverable, it is just a second place to keep
+    // in sync. Those verticals now live only under Regulatory, and Solutions
+    // holds what Regulatory has no home for: the non-licence advisory work.
+    //
+    // Nothing was orphaned by the removal: every dropped label is still in
+    // linkMap, and searchItems builds the global search index from linkMap
+    // (falling back to the group name "Service" when no category claims a
+    // label), so all of them remain findable in "Search pages...".
     Solutions: {
         categories: [
             { label: "Startups & New Businesses", icon: "🚀", items: ["Company Incorporation", "GST Registration", "Trademark Search", "FSSAI Licence"] },
-            { label: "NBFCs & Lending Businesses", icon: "🏦", items: ["NBFC Registration", "NBFC Compliance", "NBFC Account Aggregator", "Digital Lending Compliance", "NBFC Business Plan"] },
-            { label: "Fintech Platforms", icon: "💳", items: ["Payment Aggregator", "Prepaid Instrument Licence", "PSP License IFSCA", "UPI Third Party App", "FIU-IND Registration"] },
-            { label: "Insurance Intermediaries", icon: "🛡️", items: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "Insurance Surveyor", "TPA Licence"] },
-            { label: "Capital Market Intermediaries", icon: "📈", items: ["Stock Broker Licence", "AIF Registration", "Portfolio Manager", "Investment Adviser", "Research Analyst"] },
-            { label: "SMEs & Growing Enterprises", icon: "🏗️", items: ["Annual ROC Compliance", "Tax & Audit", "Transfer Pricing", "Sectoral Licences", "Corporate Governance"] },
-            { label: "Foreign / GIFT City Entities", icon: "🌐", items: ["Finance Company GIFT IFSC", "PSP License IFSCA", "ITFS Platform IFSC", "IFSCA Aircraft Leasing", "BATF Services IFSC"] },
-            { label: "Compliance Teams & CFOs", icon: "📋", items: ["Compliance Calendar", "Document Vault", "Policy Library", "Post-Registration Compliance"] },
+            { label: "IPR", icon: "⚖️", items: ["Copyright Website", "Copyright Registration", "Design Registration", "Patent Registration",
+                      "Trademark Registration", "Trademark Classes", "Trademark Objection Reply", "Trademark Opposition",
+                      "Trademark Assignment", "Trademark Search"],
+              viewAll: "/solutions/ipr", viewAllLabel: "View All IPR Services →" },
+            { label: "Legal", icon: "📜", items: ["Legal Due Diligence", "Legal Process Outsourcing"],
+              viewAll: "/solutions/legal", viewAllLabel: "View All Legal Services →" },
+            { label: "Compliance Calendar", icon: "📅", items: ["Compliance Calendar", "Regulatory Updates", "Circular Explainers", "Compliance FAQs"],
+              viewAll: "/solutions/compliance-calendar", viewAllLabel: "View All Compliance Tools →" },
+            { label: "CFO Service", icon: "💼", items: ["Finance & Accounting Outsourcing", "Transfer Pricing", "Annual ROC Compliance", "Corporate Governance"],
+              viewAll: "/solutions/cfo", viewAllLabel: "View All CFO Services →" },
         ],
-        viewAll: "/services", viewAllLabel: "Explore All Solutions →"
+        viewAll: "/solutions", viewAllLabel: "Explore All Solutions →"
     },
 };
 

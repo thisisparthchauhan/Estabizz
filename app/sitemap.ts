@@ -38,6 +38,7 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/seo/siteUrl";
 import { listPublicJobs, type PublicJobListing } from "@/lib/jobs/jobManagement/repository";
+import { SOLUTION_CATEGORIES, allServicePages } from "@/lib/content/services/registry";
 import { getPublishedBlogSummaries } from "@/lib/blog/repository";
 import { listPublishedUpdates } from "@/lib/regulatory/repository";
 import { connectDB } from "@/lib/db";
@@ -270,9 +271,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
+  // ── Solutions practice areas ──────────────────────────────────────────────
+  // The hub, each category index, and each long-form service page. Built from
+  // the same registry the routes and the navbar read, so a new service page
+  // cannot be published and then quietly left out of the sitemap.
+  const solutionPages: MetadataRoute.Sitemap = [
+    { url: `${BASE}/solutions`, changeFrequency: "monthly" as const, priority: 0.8 },
+    ...SOLUTION_CATEGORIES.map((category) => ({
+      url: `${BASE}/solutions/${category.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...allServicePages().map(({ category, page }) => ({
+      url: `${BASE}/solutions/${category}/${page.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+  ];
+
   return [
     ...homePage,
     ...staticHubPages,
+    ...solutionPages,
     ...mcaRocPages,
     ...fiuIndAmlPages,
     ...govLicPages,

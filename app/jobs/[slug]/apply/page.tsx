@@ -5,6 +5,8 @@ import { requireCandidateAccountSessionForPage } from "@/lib/jobs/candidateIdent
 import { buildLoginHref } from "@/lib/jobs/candidateIdentity/redirects";
 import { getPublicJobBySlug } from "@/lib/jobs/jobManagement/repository";
 import { findApplicationByJobAndCandidate } from "@/lib/jobs/applicationManagement/repository";
+import { areCandidateApplicationsEnabled } from "@/lib/jobs/launchFlags";
+import { CandidateApplicationsGate } from "@/components/jobs/CandidateApplicationsGate";
 import ApplyJobClient from "./ApplyJobClient";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -12,6 +14,9 @@ type Props = { params: Promise<{ slug: string }> };
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  if (!areCandidateApplicationsEnabled()) {
+    return { title: "Applications Opening Shortly — Estabizz Jobs", robots: { index: false, follow: false } };
+  }
   const { slug } = await params;
   const job = await getPublicJobBySlug(slug);
   if (!job) return { title: "Job Not Found" };
@@ -22,6 +27,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ApplyPage({ params }: Props) {
+  // Checked first, before any candidate session or Postgres lookup: someone
+  // who bookmarks or is shared this exact URL must see the same gate as
+  // everyone else, not a login prompt for a feature that isn't live yet.
+  if (!areCandidateApplicationsEnabled()) {
+    return <CandidateApplicationsGate />;
+  }
+
   const { slug } = await params;
 
   const session = await requireCandidateAccountSessionForPage();

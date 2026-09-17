@@ -35,3 +35,4 @@ old_*.txt
 # Local secrets for containerised services (compose env_file).
 .env
 !.env.example
+.env*

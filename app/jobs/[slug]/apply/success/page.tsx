@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { areCandidateApplicationsEnabled } from "@/lib/jobs/launchFlags";
+import { CandidateApplicationsGate } from "@/components/jobs/CandidateApplicationsGate";
 
 export const metadata: Metadata = {
   title: "Application Submitted — Estabizz Jobs",
@@ -9,6 +11,15 @@ export const metadata: Metadata = {
 type Props = { params: Promise<{ slug: string }> };
 
 export default async function ApplySuccessPage({ params }: Props) {
+  // No application can genuinely exist while gated (the POST that would have
+  // created one is gated too), so showing "Application Submitted!" to anyone
+  // who navigates here directly -- an old bookmark, a guessed URL -- would be
+  // false. This route carries no session/Postgres lookup of its own to prove
+  // otherwise, so the safe default while disabled is the same gate as apply.
+  if (!areCandidateApplicationsEnabled()) {
+    return <CandidateApplicationsGate />;
+  }
+
   const { slug } = await params;
 
   return (

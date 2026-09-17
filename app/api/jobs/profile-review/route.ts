@@ -16,10 +16,14 @@ import {
   ProfileReviewAuthorizationError,
   ProfileReviewNotFoundError,
 } from "@/lib/jobs/profileReview/types";
+import { areCandidateApplicationsEnabled, CANDIDATE_APPLICATIONS_DISABLED_RESPONSE } from "@/lib/jobs/launchFlags";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
+  if (!areCandidateApplicationsEnabled()) {
+    return NextResponse.json(CANDIDATE_APPLICATIONS_DISABLED_RESPONSE.body, { status: CANDIDATE_APPLICATIONS_DISABLED_RESPONSE.status });
+  }
   try {
     const session = await requireCandidateProfileSessionFromRequest(request);
 
@@ -48,6 +52,9 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  if (!areCandidateApplicationsEnabled()) {
+    return NextResponse.json(CANDIDATE_APPLICATIONS_DISABLED_RESPONSE.body, { status: CANDIDATE_APPLICATIONS_DISABLED_RESPONSE.status });
+  }
   try {
     const session = await requireCandidateProfileSessionFromRequest(request);
 

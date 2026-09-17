@@ -6,6 +6,8 @@ import { buildJobPostingJsonLd, serializeJsonLd } from "@/lib/jobs/structuredDat
 import { getSiteUrl } from "@/lib/seo/siteUrl";
 import { requireCandidateAccountSessionForPage } from "@/lib/jobs/candidateIdentity/access";
 import { findApplicationByJobAndCandidate } from "@/lib/jobs/applicationManagement/repository";
+import { isJobsDatabaseConfigured, areCandidateApplicationsEnabled } from "@/lib/jobs/launchFlags";
+import { JobListingsUnavailable } from "@/components/jobs/JobListingsUnavailable";
 import type { JobEmploymentType, RemotePolicy } from "@prisma/client";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -36,6 +38,9 @@ function fmt(d?: Date | null): string {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  if (!isJobsDatabaseConfigured()) {
+    return { title: "Estabizz Jobs", robots: { index: false, follow: true } };
+  }
   const { slug } = await params;
   const job = await getPublicJobBySlug(slug);
   if (!job) return { title: "Job Not Found" };
@@ -60,11 +65,22 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 }
 
 export default async function JobDetailPage({ params }: Props) {
+  // Same reasoning as app/jobs/page.tsx: checked before the throwing call,
+  // not caught after, so a real future connection failure still surfaces.
+  if (!isJobsDatabaseConfigured()) {
+    return <JobListingsUnavailable />;
+  }
+
   const { slug } = await params;
   const job = await getPublicJobBySlug(slug);
   if (!job) notFound();
 
-  const session = await requireCandidateAccountSessionForPage();
+  // Candidate session/application lookups only run once candidate PII
+  // collection is actually enabled -- otherwise every visitor is treated as
+  // logged out, which is what makes the "Apply Now" CTA below fall through to
+  // the disabled state rather than a real apply link.
+  const candidateFeaturesEnabled = areCandidateApplicationsEnabled();
+  const session = candidateFeaturesEnabled ? await requireCandidateAccountSessionForPage() : null;
   const existingApplication =
     session
       ? await findApplicationByJobAndCandidate(job.id, session.candidateId)
@@ -124,13 +140,25 @@ export default async function JobDetailPage({ params }: Props) {
               <span className="inline-flex items-center gap-2 rounded-xl bg-emerald-600/20 border border-emerald-400/30 px-7 py-3.5 text-[15px] font-black text-emerald-300">
                 ✓ Already Applied — {existingApplication.stageName}
               </span>
-            ) : (
+            ) : candidateFeaturesEnabled ? (
               <Link
                 href={`/jobs/${slug}/apply`}
                 className="inline-flex items-center gap-2 rounded-xl bg-[#1677f2] px-7 py-3.5 text-[15px] font-black text-white hover:bg-[#1260d4] transition-colors shadow-lg shadow-[#1677f2]/30"
               >
                 Apply Now →
               </Link>
+            ) : (
+              // Disabled cleanly, not a dead link: candidate applications are
+              // gated off (see lib/jobs/launchFlags.ts) until production
+              // storage and malware scanning exist. A plain <span>, not a
+              // <button disabled>, since there is no click handler to disable.
+              <span
+                aria-disabled="true"
+                title="Applications open shortly"
+                className="inline-flex cursor-not-allowed items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-7 py-3.5 text-[15px] font-black text-white/50"
+              >
+                Applications Opening Soon
+              </span>
             )}
             <Link
               href="/jobs"
@@ -252,7 +280,7 @@ export default async function JobDetailPage({ params }: Props) {
                     View My Applications
                   </Link>
                 </>
-              ) : (
+              ) : candidateFeaturesEnabled ? (
                 <>
                   <p className="text-[14px] font-black text-[#0a1628]">Ready to apply?</p>
                   <p className="mt-1 text-[12px] text-[#64748b]">
@@ -264,6 +292,19 @@ export default async function JobDetailPage({ params }: Props) {
                   >
                     Apply Now →
                   </Link>
+                </>
+              ) : (
+                <>
+                  <p className="text-[14px] font-black text-[#0a1628]">Applications opening shortly</p>
+                  <p className="mt-1 text-[12px] text-[#64748b]">
+                    We&apos;re finishing the secure infrastructure for online applications.
+                  </p>
+                  <a
+                    href="mailto:info@estabizz.com?subject=Career%20Enquiry%20-%20Estabizz"
+                    className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-5 py-3 text-[14px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors"
+                  >
+                    Email Our Recruitment Team
+                  </a>
                 </>
               )}
               <Link

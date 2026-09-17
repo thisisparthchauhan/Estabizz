@@ -21,6 +21,7 @@ import {
   limitRequest,
   rateLimitResponse,
 } from "@/lib/security/rateLimit";
+import { areCandidateApplicationsEnabled, CANDIDATE_APPLICATIONS_DISABLED_RESPONSE } from "@/lib/jobs/launchFlags";
 
 /**
  * Candidate self-service account deletion.
@@ -32,6 +33,10 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 300;
 
 export async function POST(request: NextRequest) {
+  if (!areCandidateApplicationsEnabled()) {
+    return NextResponse.json(CANDIDATE_APPLICATIONS_DISABLED_RESPONSE.body, { status: CANDIDATE_APPLICATIONS_DISABLED_RESPONSE.status });
+  }
+
   let session: Awaited<ReturnType<typeof requireCandidateAccountSessionFromRequest>> = null;
 
   try {

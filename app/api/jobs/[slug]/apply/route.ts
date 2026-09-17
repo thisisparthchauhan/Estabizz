@@ -7,10 +7,14 @@ import {
 } from "@/lib/jobs/applicationManagement/repository";
 import { recordJobsAuditEvent } from "@/lib/jobs/recruitmentOps/auditRepository";
 import { limitRequest, rateLimitResponse, hashIdentifier, getClientIp } from "@/lib/security/rateLimit";
+import { areCandidateApplicationsEnabled, CANDIDATE_APPLICATIONS_DISABLED_RESPONSE } from "@/lib/jobs/launchFlags";
 
 type Params = { params: Promise<{ slug: string }> };
 
 export async function GET(req: NextRequest, { params }: Params) {
+  if (!areCandidateApplicationsEnabled()) {
+    return NextResponse.json(CANDIDATE_APPLICATIONS_DISABLED_RESPONSE.body, { status: CANDIDATE_APPLICATIONS_DISABLED_RESPONSE.status });
+  }
   const session = await requireCandidateAccountSessionFromRequest(req);
   if (!session) return NextResponse.json({ authenticated: false }, { status: 401 });
 
@@ -23,6 +27,9 @@ export async function GET(req: NextRequest, { params }: Params) {
 }
 
 export async function POST(req: NextRequest, { params }: Params) {
+  if (!areCandidateApplicationsEnabled()) {
+    return NextResponse.json(CANDIDATE_APPLICATIONS_DISABLED_RESPONSE.body, { status: CANDIDATE_APPLICATIONS_DISABLED_RESPONSE.status });
+  }
   const session = await requireCandidateAccountSessionFromRequest(req);
   if (!session) return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
 

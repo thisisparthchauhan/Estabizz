@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import { getAuthSession } from "@/lib/auth/session";
 import { buildSignupHref } from "@/lib/jobs/candidateIdentity/redirects";
+import { areCandidateApplicationsEnabled } from "@/lib/jobs/launchFlags";
+import { CandidateApplicationsGate } from "@/components/jobs/CandidateApplicationsGate";
 
 // "Join Estabizz" — Phase 7A.
 //
@@ -36,6 +38,14 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function JoinEstabizzPage() {
+  // This entire page exists to funnel a visitor into candidate signup and
+  // profile/resume creation -- exactly the candidate-PII collection this
+  // launch keeps gated. Checked before getAuthSession() so a visitor never
+  // sees "Create Your Profile" only to be told at signup that it isn't open.
+  if (!areCandidateApplicationsEnabled()) {
+    return <CandidateApplicationsGate heading="Talent Network Opening Shortly" />;
+  }
+
   // A peek, not an enforced gate -- this page is public. getAuthSession()
   // returns null rather than redirecting, so a logged-out visitor still sees
   // the page and gets routed to signup (with a safe return path back to

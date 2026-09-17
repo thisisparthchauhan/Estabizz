@@ -24,10 +24,15 @@ import {
   limitRequest,
   rateLimitResponse,
 } from "@/lib/security/rateLimit";
+import { areCandidateApplicationsEnabled, CANDIDATE_APPLICATIONS_DISABLED_RESPONSE } from "@/lib/jobs/launchFlags";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
+  if (!areCandidateApplicationsEnabled()) {
+    return NextResponse.json(CANDIDATE_APPLICATIONS_DISABLED_RESPONSE.body, { status: CANDIDATE_APPLICATIONS_DISABLED_RESPONSE.status });
+  }
+
   // Held outside the try so the file-security rejection handler can attribute
   // its audit event without resolving the identity a second time.
   let auditSession: Awaited<ReturnType<typeof requireCandidateAccountSessionFromRequest>> = null;

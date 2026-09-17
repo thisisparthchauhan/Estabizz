@@ -405,10 +405,21 @@ const menus: Record<string, MegaMenu> = {
     Solutions: {
         categories: [
             { label: "Startups & New Businesses", icon: "🚀", items: ["Company Incorporation", "GST Registration", "Trademark Search", "FSSAI Licence"] },
-            { label: "IPR", icon: "⚖️", items: ["Copyright Website", "Copyright Registration", "Design Registration", "Patent Registration",
-                      "Trademark Registration", "Trademark Classes", "Trademark Objection Reply", "Trademark Opposition",
-                      "Trademark Assignment", "Trademark Search"],
-              viewAll: "/solutions/ipr", viewAllLabel: "View All IPR Services →" },
+            // Grouped rather than a flat list: at ten entries IPR is the
+            // largest category in this menu, and "Trademark Objection Reply"
+            // next to "Design Registration" in one undifferentiated column
+            // makes the reader do the sorting. Groups render as headed columns
+            // on desktop and nested disclosures on mobile, exactly as MCA / ROC
+            // does under Regulatory. Grouped items are still indexed by the
+            // global search -- searchItems checks category.groups as well as
+            // category.items.
+            { label: "IPR", icon: "⚖️", items: [],
+              viewAll: "/solutions/ipr", viewAllLabel: "View All IPR Services →",
+              groups: [
+                { heading: "Trademark", items: ["Trademark Registration", "Trademark Classes", "Trademark Objection Reply", "Trademark Opposition", "Trademark Assignment", "Trademark Search"] },
+                { heading: "Copyright", items: ["Copyright Registration", "Copyright Website"] },
+                { heading: "Design & Patent", items: ["Design Registration", "Patent Registration"] },
+              ]},
             { label: "Legal", icon: "📜", items: ["Legal Due Diligence", "Legal Process Outsourcing"],
               viewAll: "/solutions/legal", viewAllLabel: "View All Legal Services →" },
             { label: "Compliance Calendar", icon: "📅", items: ["Compliance Calendar", "Regulatory Updates", "Circular Explainers", "Compliance FAQs"],

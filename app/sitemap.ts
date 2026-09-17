@@ -6,6 +6,13 @@
  * Includes:
  *   - Homepage and key static public pages
  *   - Regulatory/service hub pages (rbi, sebi, irdai, ifsca, fema, services)
+ *   - MCA/ROC, FIU-IND/AML and Government Licences hub + dynamic-slug pages
+ *     (app/{mca-roc,fiu-ind-aml,gov-lic}/[slug] — added Phase 7B; these three
+ *     hubs had zero sitemap coverage despite being live, indexable and linked
+ *     from the Regulatory mega-menu)
+ *   - Static (non-CMS) regulator pages never migrated into
+ *     PUBLIC_CONTENT_MANAGED_PATHS (added Phase 7B — see that list's own
+ *     comment; these predate it and were never backfilled)
  *   - All 46 CMS-managed public content pages (published only, from MongoDB)
  *   - Published regulatory update detail pages
  *   - Published blog article pages
@@ -21,16 +28,25 @@
  *   - Non-managed CMS paths
  *   - Internal tooling routes (/proposal-template, /resources/content-rebuild-command, etc.)
  *   - Developing and planned country pages (noindex — thin content without verified local data)
+ *   - /19-5 and its children (Phase 7B) — next.config.js permanently redirects
+ *     the entire prefix to /mca-roc, so listing it would only add a crawl hop
+ *     to a URL already listed under its real name
+ *   - The 17 one-line legacy-alias redirect pages under /sebi, /ifsca and
+ *     /regulatory (Phase 7B) — same reasoning, one per alias
  */
 
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/seo/siteUrl";
+import { listPublicJobs, type PublicJobListing } from "@/lib/jobs/jobManagement/repository";
 import { getPublishedBlogSummaries } from "@/lib/blog/repository";
 import { listPublishedUpdates } from "@/lib/regulatory/repository";
 import { connectDB } from "@/lib/db";
 import PublicContentPage from "@/lib/models/PublicContentPage";
 import { PUBLIC_CONTENT_MANAGED_PATHS } from "@/lib/publicContent/managedPaths";
 import { getSitemapCountries } from "@/lib/globalMarkets/countries";
+import { getAllLandingSlugs } from "@/lib/landing";
+import { getAllFiuIndSlugs } from "@/lib/fiu-ind-aml";
+import { getAllGovLicSlugs } from "@/lib/gov-lic";
 
 // ── CMS-managed page DB query ─────────────────────────────────────────────────
 
@@ -63,13 +79,29 @@ function bestDate(doc: SitemapPageDoc): Date {
 
 // ── Sitemap ───────────────────────────────────────────────────────────────────
 
+/**
+ * Published job listings for the sitemap.
+ *
+ * Fail-soft on purpose: jobs live in PostgreSQL while the rest of the sitemap
+ * comes from MongoDB, and a Jobs database hiccup must not take down the whole
+ * sitemap for the marketing site.
+ */
+async function getPublishedJobs(): Promise<PublicJobListing[]> {
+  try {
+    return await listPublicJobs();
+  } catch {
+    return [];
+  }
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const BASE = getSiteUrl();
 
-  const [cmsPages, regulatoryUpdates, blogs] = await Promise.all([
+  const [cmsPages, regulatoryUpdates, blogs, jobs] = await Promise.all([
     getPublishedCmsPages(),
     listPublishedUpdates(),
     getPublishedBlogSummaries(),
+    getPublishedJobs(),
   ]);
 
   // ── Homepage ─────────────────────────────────────────────────────────────
@@ -105,13 +137,85 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/blogs`, changeFrequency: "daily", priority: 0.9 },
     // Global Markets directory (indexable — premium market intelligence hub)
     { url: `${BASE}/global`, changeFrequency: "weekly", priority: 0.7 },
-    // 19-5 hub
-    { url: `${BASE}/19-5`, changeFrequency: "weekly", priority: 0.6 },
+    // NOTE: /19-5 is deliberately absent. It is a legacy URL prefix that
+    // next.config.js permanently (308) redirects to /mca-roc -- verified live
+    // on 2026-09-12. Listing a redirecting URL in the sitemap only sends
+    // crawlers through an extra hop to the canonical page already listed
+    // below; the /mca-roc/[slug] source files under app/19-5/ are unreachable
+    // dead code (see docs/30-WHOLE-SITE-NAVIGATION-AUDIT.md §16).
     // Legal
     { url: `${BASE}/legal/privacy-policy`,   changeFrequency: "yearly",  priority: 0.3 },
     { url: `${BASE}/legal/refund-policy`,    changeFrequency: "yearly",  priority: 0.3 },
     { url: `${BASE}/legal/terms-conditions`, changeFrequency: "yearly",  priority: 0.3 },
   ];
+
+  // ── MCA/ROC corporate-service pages (the /19-5 redirect's real destination) ─
+  // Rendered by the shared lib/landing registry; the hub + all of its
+  // generateStaticParams() slugs are indexable and link-reachable from the
+  // Regulatory mega-menu, so they belong in the sitemap under their own
+  // canonical URL.
+  const mcaRocPages: MetadataRoute.Sitemap = [
+    { url: `${BASE}/mca-roc`, changeFrequency: "weekly" as const, priority: 0.8 },
+    ...getAllLandingSlugs().map((slug) => ({
+      url: `${BASE}/mca-roc/${slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  ];
+
+  // ── FIU-IND/AML and Government Licences hub pages ────────────────────────
+  // Same dynamic-slug pattern as MCA/ROC (app/fiu-ind-aml/[slug],
+  // app/gov-lic/[slug]); previously absent from the sitemap entirely.
+  const fiuIndAmlPages: MetadataRoute.Sitemap = [
+    { url: `${BASE}/fiu-ind-aml`, changeFrequency: "weekly" as const, priority: 0.7 },
+    ...getAllFiuIndSlugs().map((slug) => ({
+      url: `${BASE}/fiu-ind-aml/${slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+  ];
+  const govLicPages: MetadataRoute.Sitemap = [
+    { url: `${BASE}/gov-lic`, changeFrequency: "weekly" as const, priority: 0.7 },
+    ...getAllGovLicSlugs().map((slug) => ({
+      url: `${BASE}/gov-lic/${slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+  ];
+
+  // ── Static regulator service pages never migrated to the CMS ─────────────
+  // Real, live, `index:true` pages under app/rbi|sebi|irdai|ifsca -- linked
+  // from the Regulatory mega-menu and/or global search -- that predate
+  // PUBLIC_CONTENT_MANAGED_PATHS and were never added to it, so the CMS-page
+  // sitemap query above never picks them up. Confirmed each is not noindex
+  // before listing (see docs/31-SITE-LINK-INVENTORY.md). Excludes the 17
+  // one-line legacy-alias redirect pages (app/sebi/stock-broker-registration
+  // etc.), which correctly stay out of the sitemap since they 308 elsewhere.
+  const unmigratedStaticRegulatorPages: MetadataRoute.Sitemap = [
+    "/rbi/nbfc-business-plan",
+    "/sebi/aif-compliance-test-report",
+    "/sebi/alternative-asset-portfolio-valuation",
+    "/sebi/collective-investment-schemes",
+    "/sebi/rta-registration-in-india",
+    "/sebi/social-stock-exchange-license-india",
+    "/sebi/underwriter-registration",
+    "/irdai/ifsca-insurance-intermediary",
+    "/irdai/insurance-marketing-firm-license",
+    "/irdai/insurance-marketing-firm-registration-in-india",
+    "/irdai/insurance-repository-registration",
+    "/irdai/irda-insurance-broker-license",
+    "/irdai/irdai-regulatory-sandbox",
+    "/irdai/isnp-registration",
+    "/ifsca/batf-services-registration-in-gift-ifsc",
+    "/ifsca/finance-company-in-gift-ifsc",
+    "/ifsca/ifsca-fintech-startup-incentives",
+    "/ifsca/itfs-registration-in-gift-ifsc",
+    "/ifsca/techfin",
+  ].map((path) => ({
+    url: `${BASE}${path}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
 
   // ── 46 CMS-managed public content pages ──────────────────────────────────
   const cmsPageEntries: MetadataRoute.Sitemap = cmsPages.map((doc) => ({
@@ -149,12 +253,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }));
 
+  // ── Public jobs board ─────────────────────────────────────────────────────
+  // The hub plus each open, public listing, plus the two Phase 7A entry points
+  // (Join Estabizz, Hire Talent) -- both public and indexable. Candidate
+  // account pages are deliberately absent: they are noindex and behind
+  // authentication.
+  const jobPages: MetadataRoute.Sitemap = [
+    { url: `${BASE}/jobs`, changeFrequency: "daily" as const, priority: 0.9 },
+    { url: `${BASE}/jobs/join`, changeFrequency: "monthly" as const, priority: 0.6 },
+    { url: `${BASE}/jobs/hire-talent`, changeFrequency: "monthly" as const, priority: 0.6 },
+    ...jobs.map((job) => ({
+      url: `${BASE}/jobs/${job.slug}`,
+      lastModified: job.published_at ?? new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+  ];
+
   return [
     ...homePage,
     ...staticHubPages,
+    ...mcaRocPages,
+    ...fiuIndAmlPages,
+    ...govLicPages,
+    ...unmigratedStaticRegulatorPages,
     ...cmsPageEntries,
     ...regulatoryPages,
     ...blogPages,
     ...activeCountryPages,
+    ...jobPages,
   ];
 }

@@ -14,3 +14,25 @@ tsconfig.tsbuildinfo
 # Claude Code local tooling state (worktrees, launch config, etc.)
 .claude/launch.json
 .claude/worktrees/
+
+# Local real-candidate CVs; never commit or process in AI smoke tests.
+Jobs CV/
+Estabizz Jobs CV/
+
+# Python service local state (all services, not just jobs-ai)
+services/**/.venv/
+services/**/__pycache__/
+services/**/.pytest_cache/
+
+# Local build/diff scratch output
+build.log
+new_build.log
+old_build*.log
+full_diff.txt
+new_*.txt
+old_*.txt
+
+# Local secrets for containerised services (compose env_file).
+.env
+!.env.example
+.env*

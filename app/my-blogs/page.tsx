@@ -30,7 +30,6 @@ export default async function MyBlogsPage() {
 
   // Strip heavy fields for the list view
   const summaries: BlogSummary[] = blogs.map(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     ({ content: _c, faqs: _f, images: _i, ...rest }) => rest
   );
 

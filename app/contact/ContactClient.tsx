@@ -65,7 +65,25 @@ const SERVICES_GROUPED = [
             'Other / Not Listed',
         ],
     },
+    {
+        // Phase 7A: there was previously no way for an employer to identify a
+        // hiring enquiry through this form at all -- "Other / Not Listed" was
+        // the closest match. This is a lightweight enquiry entry point using
+        // the existing contact/Formspree pipeline, not a new CRM or backend.
+        group: 'Recruitment & Talent Acquisition',
+        color: '#0f766e',
+        items: [
+            'Hire Talent / Submit a Hiring Requirement',
+        ],
+    },
 ];
+
+// Deep-link support for `/contact?service=...` — lets a page like
+// /jobs/hire-talent send an employer straight into the right form state
+// instead of a generic contact form. Falls back to no pre-selection for any
+// value that isn't one of the known services, so an arbitrary query string
+// can't be reflected into the form.
+const ALL_SERVICE_ITEMS = new Set(SERVICES_GROUPED.flatMap((g) => g.items));
 
 const DIAL_CODES = [
     { flag: '🇮🇳', name: 'India',                        dial: '+91'    },
@@ -284,6 +302,17 @@ export default function ContactClient() {
         message: "",
     });
 
+    // Deep-link pre-selection: /contact?service=<one of ALL_SERVICE_ITEMS>.
+    // Validated against the known list rather than trusted directly, so an
+    // arbitrary query string can't inject text into the form or the eventual
+    // Formspree subject line.
+    useEffect(() => {
+        const requested = new URLSearchParams(window.location.search).get('service');
+        if (requested && ALL_SERVICE_ITEMS.has(requested)) {
+            setForm((prev) => ({ ...prev, service: requested }));
+        }
+    }, []);
+
     // Country dial code picker
     const [dialIdx, setDialIdx] = useState(0);
     const [dialOpen, setDialOpen] = useState(false);
@@ -324,10 +353,22 @@ export default function ContactClient() {
     );
 
     const filteredServiceGroups = serviceSearch
-        ? SERVICES_GROUPED.map(g => ({
-            ...g,
-            items: g.items.filter(s => s.toLowerCase().includes(serviceSearch.toLowerCase())),
-          })).filter(g => g.items.length > 0)
+        ? SERVICES_GROUPED.map(g => {
+            const q = serviceSearch.toLowerCase();
+            // Match the group name too, not just each item's own text. Without
+            // this, typing "recruitment" found nothing for the new Recruitment
+            // & Talent Acquisition group -- its one item is literally named
+            // "Hire Talent / Submit a Hiring Requirement" and doesn't contain
+            // the word. A group-name match keeps that discoverable, and helps
+            // every other group the same way (e.g. "IRDAI" already matched
+            // coincidentally because item names repeat it; this makes that
+            // reliable rather than accidental).
+            const groupMatches = g.group.toLowerCase().includes(q);
+            return {
+              ...g,
+              items: groupMatches ? g.items : g.items.filter(s => s.toLowerCase().includes(q)),
+            };
+          }).filter(g => g.items.length > 0)
         : SERVICES_GROUPED;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

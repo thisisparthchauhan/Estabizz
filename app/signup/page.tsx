@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+
+import { buildLoginHref, getSafeInternalReturnPath } from "@/lib/jobs/candidateIdentity/redirects";
 
 export default function SignupPage() {
     const router = useRouter();
@@ -19,6 +21,12 @@ export default function SignupPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [returnPath, setReturnPath] = useState("/");
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        setReturnPath(getSafeInternalReturnPath(params.get("redirect")));
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -46,7 +54,7 @@ export default function SignupPage() {
             });
             const data = await res.json();
             if (!res.ok) { setError(data.error || "Something went wrong."); }
-            else { setSuccess("Account created! Redirecting…"); setTimeout(() => router.push("/login"), 1500); }
+            else { setSuccess("Account created! Redirecting…"); setTimeout(() => router.push(buildLoginHref(returnPath)), 1500); }
         } catch { setError("Network error. Please try again."); }
         finally { setLoading(false); }
     };
@@ -199,7 +207,7 @@ export default function SignupPage() {
 
                     <p className="text-center text-gray-500 text-sm mt-6">
                         Already have an account?{" "}
-                        <Link href="/login" className="text-[#1677f2] font-semibold hover:underline">Log in</Link>
+                        <Link href={buildLoginHref(returnPath)} className="text-[#1677f2] font-semibold hover:underline">Log in</Link>
                     </p>
 
                     <p className="text-center text-gray-400 text-xs mt-4">

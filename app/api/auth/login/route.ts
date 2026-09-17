@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
                 { email: identifier.toLowerCase().trim() },
                 { mobile: identifier.trim() },
             ],
-        });
+        }).select('+password');
 
         if (!user) {
             return NextResponse.json(

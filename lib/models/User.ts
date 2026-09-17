@@ -21,7 +21,7 @@ const UserSchema = new Schema<IUser>(
             trim: true,
         },
         mobile: { type: String, trim: true },
-        password: { type: String, required: true },
+        password: { type: String, required: true, select: false },
     },
     { timestamps: true }
 );

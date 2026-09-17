@@ -5,6 +5,31 @@
 
 ---
 
+## 2026-09-16 — Production Release Audit — Blocked by Configuration
+
+**Release branch**: `staging`. The audited release was 43 commits ahead of `origin/main`, with no divergence.
+
+**Security fix**: Pin Next.js to `16.3.3` and update its lockfile dependencies. The previous `16.2.4` release is affected by published Next.js security advisories, including GHSA-8h8q-6873-q5fj. No application features or UI were changed.
+
+**Production configuration blockers** (verified against the Vercel `estabizz` project):
+- `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` exist only for staging preview. Their absence in production makes login, signup and lead submission return HTTP 503. Separate production Redis credentials are required.
+- `DATABASE_URL` exists only for staging preview. The current publicly linked `/jobs` page has an unconditional PostgreSQL dependency and returns HTTP 500 without it. A production Jobs database with the reviewed migrations is required before releasing the current Jobs surface.
+- Private Jobs storage configuration is preview-only; the publicly exposed resume-upload flow also requires its own production private bucket and credentials. Do not copy staging credentials or candidate data into production.
+
+**Configuration fix**: Added production-scoped `APP_ENV=production`, `NEXT_PUBLIC_APP_ENV=production`, and `NEXT_PUBLIC_SITE_URL=https://www.estabizz.com` in Vercel. These non-secret settings were previously absent; several Jobs guards otherwise default to development. They take effect on the next deployment. No staging credentials were promoted.
+
+**Existing configuration**: Production MongoDB, JWT, public Cloudinary and Formspree variables are registered. Vercel masks sensitive values, so registration alone is not proof that their credentials work. No secret values were printed or committed.
+
+**Optional integrations**: Resend lead notifications, GitHub backups and public Anthropic helpers are optional for the main marketing website. Jobs AI, QStash and malware scanning need not block a marketing-only release, but the current candidate resume-processing feature must remain unavailable until its documented production dependencies and malware gate are ready. No security gate was weakened.
+
+**Smoke-test observations**: Public marketing routes, canonical URLs, sitemap, robots, admin redirects, desktop mega menu and mobile navigation were checked. No homepage broken images, horizontal mobile overflow or browser runtime errors were found. The existing `/about` URL returns 404; the site's About navigation points to `/services`. The navigation integrity suite passed 33/33 checks. Local production-mode tests reproduced the missing-Redis HTTP 503 responses and missing-PostgreSQL `/jobs` HTTP 500 without submitting real form data. Production HTTP and apex HTTPS redirects reach `https://www.estabizz.com`.
+
+**Release decision**: Do not merge or deploy until the configuration blockers are resolved. The existing production deployment remains unchanged. Pre-existing generated Next.js/Tailwind changes were preserved in the local Git stash named `Pre-release generated Next.js and Tailwind artifacts`.
+
+**Validation after the security update**: `npm ci`, `npx tsc --noEmit`, `npm run lint` (0 errors; existing warnings), and `npm run build` passed under Node 22. Navigation integrity tests passed 33/33. Browser regression checks passed for desktop/mobile menus with no runtime errors. A 31-link homepage crawl under the verified production dependency gaps found five Jobs destinations returning HTTP 500; other destinations resolved. `npm audit --omit=dev` no longer reports Next.js advisories or critical vulnerabilities; other dependency advisories remain and this is not a claim that the entire dependency tree is vulnerability-free.
+
+---
+
 ## 2026-07-25 — Blog Image Management — Cover + Inline Article Images
 
 **Task**: Add two separate blog image workflows without replacing the existing blog editor: richer cover-image management through the existing `featuredImage` field, and controlled inline images inside TipTap article content.

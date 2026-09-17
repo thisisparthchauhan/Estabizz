@@ -5,6 +5,18 @@ import Link from "next/link";
 import type { PublicJobListing } from "@/lib/jobs/jobManagement/repository";
 import type { JobEmploymentType, RemotePolicy } from "@prisma/client";
 
+// The live job board on /jobs.
+//
+// This used to own the whole route, hero and all. It is now ONE SECTION of the
+// /jobs landing page (see app/jobs/page.tsx): the page's hero, taxonomy and FAQ
+// are static server-rendered sections around it, and this component keeps
+// exactly what needs client state -- search, filters and pagination.
+//
+// Every taxonomy link on that page deep-links here as /jobs?q=<term>#openings.
+// The server reads that param and passes it in as `initialSearch` rather than
+// this component calling useSearchParams(), which would force the whole board
+// into a Suspense boundary for a value that is already available on the server.
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 const EMPLOYMENT_LABELS: Record<JobEmploymentType, string> = {
@@ -54,10 +66,12 @@ const PAGE_SIZE = 10;
 
 interface Props {
   jobs: PublicJobListing[];
+  /** Seeded from ?q= so licence / designation / city links land pre-filtered. */
+  initialSearch?: string;
 }
 
-export default function PublicJobsClient({ jobs }: Props) {
-  const [search, setSearch]   = useState("");
+export default function PublicJobsClient({ jobs, initialSearch = "" }: Props) {
+  const [search, setSearch]   = useState(initialSearch);
   const [location, setLocation] = useState("");
   const [dept, setDept]       = useState("");
   const [exp, setExp]         = useState("");
@@ -95,6 +109,7 @@ export default function PublicJobsClient({ jobs }: Props) {
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
   const pageJobs = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const hasFilters = Boolean(search || location || dept || exp);
 
   function resetFilters() {
     setSearch("");
@@ -111,218 +126,234 @@ export default function PublicJobsClient({ jobs }: Props) {
     };
   }
 
-  const selectCls = "rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13.5px] text-[#334155] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20";
+  const selectCls = "rounded-xl border border-blue-100 bg-white px-4 py-3 text-[14px] font-medium text-[#475569] shadow-[0_8px_32px_rgba(0,100,200,0.05)] focus:border-[#1677f2] focus:outline-none focus:ring-4 focus:ring-[#1677f2]/10";
 
   return (
-    <div className="min-h-screen bg-[#f8fbff] pt-[64px]">
-      {/* Hero */}
-      <div className="bg-[#0a1628] px-6 py-14 text-center">
-        <div className="mb-3 inline-block rounded-full bg-[#1677f2]/20 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#60a5fa]">
-          Estabizz Jobs
+    <div className="mx-auto w-full max-w-[1180px] px-6">
+      <div className="mx-auto max-w-[760px] text-center">
+        <div className="text-[13px] font-black uppercase tracking-[0.24em] text-[#1677f2]">
+          Open positions
         </div>
-        <h1 className="mt-3 text-[36px] font-black leading-tight tracking-tight text-white sm:text-[44px]">
-          Find opportunities across regulated financial services, fintech, technology and growing businesses
-        </h1>
-        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8]">
-          Search roles managed by the Estabizz recruitment team.
-        </p>
-        <p className="mt-3 text-[14px] font-bold text-[#60a5fa]">
-          {jobs.length} open position{jobs.length !== 1 ? "s" : ""}
-        </p>
-        <p className="mt-5 text-[13px] text-[#94a3b8]">
-          Don&apos;t see the right role yet?{" "}
-          <Link href="/jobs/join" className="font-bold text-white underline decoration-[#60a5fa] underline-offset-4 hover:text-[#60a5fa]">
-            Join Estabizz&apos;s talent network →
-          </Link>
+        <h2 className="mt-4 text-[clamp(30px,3.4vw,48px)] font-black leading-[1.06] tracking-[-0.04em] text-[#071426]">
+          {jobs.length} live role{jobs.length !== 1 ? "s" : ""} on the Estabizz board
+        </h2>
+        <p className="mx-auto mt-6 text-[16px] font-medium leading-[1.9] text-[#475569]">
+          Search by role, skill, department or city. Every listing is managed by the Estabizz
+          recruitment team and links straight through to an application.
         </p>
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-        {/* Filters */}
-        <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <label className="sr-only" htmlFor="jobs-search">Search jobs by title, skill, department or location</label>
-          <input
-            id="jobs-search"
-            className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13.5px] text-[#0a1628] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
-            placeholder="Search by title, skill, department or location…"
-            value={search}
-            onChange={(e) => changeFilter(setSearch)(e.target.value)}
-          />
+      {/* Filters */}
+      <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <label className="sr-only" htmlFor="jobs-search">Search jobs by title, skill, department or location</label>
+        <input
+          id="jobs-search"
+          className="rounded-xl border border-blue-100 bg-white px-4 py-3 text-[14px] font-medium text-[#071426] placeholder-[#94a3b8] shadow-[0_8px_32px_rgba(0,100,200,0.05)] focus:border-[#1677f2] focus:outline-none focus:ring-4 focus:ring-[#1677f2]/10"
+          placeholder="Search by title, skill, department or location…"
+          value={search}
+          onChange={(e) => changeFilter(setSearch)(e.target.value)}
+        />
 
-          <select
-            className={selectCls}
-            value={location}
-            onChange={(e) => changeFilter(setLocation)(e.target.value)}
+        <select
+          className={selectCls}
+          aria-label="Filter by location"
+          value={location}
+          onChange={(e) => changeFilter(setLocation)(e.target.value)}
+        >
+          <option value="">All Locations</option>
+          {locations.map((l) => (
+            <option key={l} value={l}>{l}</option>
+          ))}
+        </select>
+
+        <select
+          className={selectCls}
+          aria-label="Filter by department"
+          value={dept}
+          onChange={(e) => changeFilter(setDept)(e.target.value)}
+        >
+          <option value="">All Departments</option>
+          {departments.map((d) => (
+            <option key={d} value={d}>{d}</option>
+          ))}
+        </select>
+
+        <select
+          className={selectCls}
+          aria-label="Filter by years of experience"
+          value={exp}
+          onChange={(e) => changeFilter(setExp)(e.target.value)}
+        >
+          {EXP_FILTERS.map((f) => (
+            <option key={f.value} value={f.value}>{f.label}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Results count / reset */}
+      <div className="mb-4 flex items-center justify-between">
+        <p className="text-[13px] text-[#64748b]">
+          {filtered.length} result{filtered.length !== 1 ? "s" : ""}
+          {hasFilters && " (filtered)"}
+        </p>
+        {hasFilters && (
+          <button
+            type="button"
+            onClick={resetFilters}
+            className="text-[13px] font-bold text-[#1677f2] hover:underline"
           >
-            <option value="">All Locations</option>
-            {locations.map((l) => (
-              <option key={l} value={l}>{l}</option>
-            ))}
-          </select>
-
-          <select
-            className={selectCls}
-            value={dept}
-            onChange={(e) => changeFilter(setDept)(e.target.value)}
-          >
-            <option value="">All Departments</option>
-            {departments.map((d) => (
-              <option key={d} value={d}>{d}</option>
-            ))}
-          </select>
-
-          <select
-            className={selectCls}
-            value={exp}
-            onChange={(e) => changeFilter(setExp)(e.target.value)}
-          >
-            {EXP_FILTERS.map((f) => (
-              <option key={f.value} value={f.value}>{f.label}</option>
-            ))}
-          </select>
-        </div>
-
-        {/* Results count / reset */}
-        <div className="mb-4 flex items-center justify-between">
-          <p className="text-[13px] text-[#64748b]">
-            {filtered.length} result{filtered.length !== 1 ? "s" : ""}
-            {(search || location || dept || exp) && " (filtered)"}
-          </p>
-          {(search || location || dept || exp) && (
-            <button
-              type="button"
-              onClick={resetFilters}
-              className="text-[12px] font-bold text-[#1677f2] hover:underline"
-            >
-              Clear filters
-            </button>
-          )}
-        </div>
-
-        {/* Job cards */}
-        {jobs.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] bg-white py-20 text-center">
-            <div className="text-[48px]">💼</div>
-            <p className="mt-4 text-[15px] font-bold text-[#0a1628]">No openings right now</p>
-            <p className="mt-2 text-[13px] text-[#64748b]">
-              We&apos;re growing. Join our talent network and we&apos;ll reach out when a matching role opens.
-            </p>
-            <Link
-              href="/jobs/join"
-              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-6 py-3 text-[14px] font-black text-white hover:bg-[#1677f2] transition-colors"
-            >
-              Join Estabizz&apos;s Talent Network
-            </Link>
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="flex h-40 items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] bg-white text-[14px] text-[#94a3b8]">
-            No jobs match your filters.
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {pageJobs.map((job) => (
-              <Link
-                key={job.id}
-                href={`/jobs/${job.slug}`}
-                className="group block rounded-2xl border border-[#dbe7f3] bg-white p-5 transition-all hover:border-[#1677f2]/50 hover:shadow-md"
-              >
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <div className="flex-1">
-                    <h2 className="text-[17px] font-black leading-tight text-[#0a1628] group-hover:text-[#1677f2] transition-colors">
-                      {job.title}
-                    </h2>
-                    <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-[#64748b]">
-                      {job.department && (
-                        <span className="font-bold text-[#334155]">{job.department}</span>
-                      )}
-                      {job.location_text && (
-                        <>
-                          <span className="text-[#cbd5e1]">·</span>
-                          <span>📍 {job.location_text}</span>
-                        </>
-                      )}
-                      {job.remote_policy && (
-                        <>
-                          <span className="text-[#cbd5e1]">·</span>
-                          <span>{REMOTE_LABELS[job.remote_policy]}</span>
-                        </>
-                      )}
-                      {job.employment_type && (
-                        <>
-                          <span className="text-[#cbd5e1]">·</span>
-                          <span>{EMPLOYMENT_LABELS[job.employment_type]}</span>
-                        </>
-                      )}
-                      {expLabel(job.min_years_experience, job.max_years_experience) && (
-                        <>
-                          <span className="text-[#cbd5e1]">·</span>
-                          <span>{expLabel(job.min_years_experience, job.max_years_experience)} exp</span>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-end gap-2">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-emerald-700">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                      Open
-                    </span>
-                    {job.closes_at && (
-                      <span className="text-[11px] text-[#94a3b8]">
-                        Closes {fmt(job.closes_at)}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+            Clear filters
+          </button>
         )}
+      </div>
 
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="mt-8 flex items-center justify-center gap-2">
-            <button
-              type="button"
-              disabled={currentPage === 1}
-              onClick={() => setPage((p) => p - 1)}
-              className="rounded-xl border border-[#dbe7f3] px-4 py-2 text-[13px] font-bold text-[#64748b] disabled:opacity-40 hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors"
-            >
-              Previous
-            </button>
-            <span className="text-[13px] text-[#64748b]">
-              Page {currentPage} of {totalPages}
-            </span>
-            <button
-              type="button"
-              disabled={currentPage === totalPages}
-              onClick={() => setPage((p) => p + 1)}
-              className="rounded-xl border border-[#dbe7f3] px-4 py-2 text-[13px] font-bold text-[#64748b] disabled:opacity-40 hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors"
-            >
-              Next
-            </button>
-          </div>
-        )}
-
-        {/* Footer CTA */}
-        <div className="mt-12 rounded-2xl border border-[#dbe7f3] bg-white p-8 text-center">
-          <p className="text-[15px] font-bold text-[#0a1628]">Don&apos;t see a role that fits?</p>
-          <p className="mt-2 text-[13px] text-[#64748b]">
-            Join Estabizz&apos;s talent network — create a profile once and be considered as new roles open.
+      {/* Job cards */}
+      {jobs.length === 0 ? (
+        <div className="flex flex-col items-center justify-center rounded-[28px] border border-dashed border-blue-100 bg-white py-20 text-center">
+          <div className="text-[48px]" aria-hidden="true">💼</div>
+          <p className="mt-5 text-[20px] font-black text-[#071426]">No openings right now</p>
+          <p className="mt-3 max-w-md text-[14.5px] font-medium leading-[1.8] text-[#64748b]">
+            We&apos;re growing. Join our talent network and we&apos;ll reach out when a matching role opens.
           </p>
           <Link
             href="/jobs/join"
-            className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-6 py-3 text-[14px] font-black text-white hover:bg-[#1677f2] transition-colors"
+            className="mt-7 inline-flex items-center justify-center gap-2 rounded-xl bg-[#1677f2] px-8 py-3.5 text-[15px] font-bold text-white shadow-[0_14px_35px_rgba(22,119,242,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0866d9]"
           >
-            Join Estabizz
+            Join Estabizz&apos;s Talent Network
           </Link>
-          <p className="mt-4 text-[12px] text-[#94a3b8]">
-            Prefer not to create a profile?{" "}
-            <a href="mailto:info@estabizz.com?subject=Career%20Enquiry%20-%20Estabizz" className="font-bold text-[#1677f2] hover:underline">
-              Email our recruitment team
-            </a>
-            .
-          </p>
         </div>
+      ) : filtered.length === 0 ? (
+        // A taxonomy link that currently has no matching opening lands here, so
+        // this is a routine state on this page rather than an edge case -- it
+        // gets a real next step, not just "nothing found".
+        <div className="flex flex-col items-center justify-center rounded-[28px] border border-dashed border-blue-100 bg-white px-6 py-16 text-center">
+          <p className="text-[20px] font-black text-[#071426]">
+            No open role matches {search.trim() ? `“${search.trim()}”` : "these filters"} today
+          </p>
+          <p className="mt-3 max-w-md text-[14.5px] font-medium leading-[1.8] text-[#64748b]">
+            Roles in this domain open regularly. Add your profile to the talent network and the
+            recruitment team will consider you as soon as one does.
+          </p>
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3.5">
+            <Link
+              href="/jobs/join"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#1677f2] px-8 py-3.5 text-[15px] font-bold text-white shadow-[0_14px_35px_rgba(22,119,242,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0866d9]"
+            >
+              Join Estabizz&apos;s Talent Network
+            </Link>
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-100 bg-white px-8 py-3.5 text-[15px] font-bold text-[#0a2b58] shadow-[0_10px_28px_rgba(0,70,130,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#1677f2] hover:text-[#1677f2]"
+            >
+              Show all roles
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {pageJobs.map((job) => (
+            <Link
+              key={job.id}
+              href={`/jobs/${job.slug}`}
+              className="group block rounded-[22px] border border-blue-100 bg-white p-6 shadow-[0_8px_32px_rgba(0,100,200,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#1677f2]/40 hover:shadow-[0_18px_50px_rgba(0,80,140,0.09)]"
+            >
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div className="flex-1">
+                  <h3 className="text-[19px] font-black leading-tight tracking-[-0.01em] text-[#071426] transition-colors group-hover:text-[#1677f2]">
+                    {job.title}
+                  </h3>
+                  <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-medium text-[#64748b]">
+                    {job.department && (
+                      <span className="font-bold text-[#475569]">{job.department}</span>
+                    )}
+                    {job.location_text && (
+                      <>
+                        <span className="text-[#cbd5e1]">·</span>
+                        <span>📍 {job.location_text}</span>
+                      </>
+                    )}
+                    {job.remote_policy && (
+                      <>
+                        <span className="text-[#cbd5e1]">·</span>
+                        <span>{REMOTE_LABELS[job.remote_policy]}</span>
+                      </>
+                    )}
+                    {job.employment_type && (
+                      <>
+                        <span className="text-[#cbd5e1]">·</span>
+                        <span>{EMPLOYMENT_LABELS[job.employment_type]}</span>
+                      </>
+                    )}
+                    {expLabel(job.min_years_experience, job.max_years_experience) && (
+                      <>
+                        <span className="text-[#cbd5e1]">·</span>
+                        <span>{expLabel(job.min_years_experience, job.max_years_experience)} exp</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-col items-end gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-emerald-700">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    Open
+                  </span>
+                  {job.closes_at && (
+                    <span className="text-[11px] text-[#94a3b8]">
+                      Closes {fmt(job.closes_at)}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="mt-8 flex items-center justify-center gap-2">
+          <button
+            type="button"
+            disabled={currentPage === 1}
+            onClick={() => setPage((p) => p - 1)}
+            className="rounded-xl border border-blue-100 bg-white px-5 py-2.5 text-[13.5px] font-bold text-[#64748b] transition-colors hover:border-[#1677f2]/40 hover:text-[#1677f2] disabled:opacity-40"
+          >
+            Previous
+          </button>
+          <span className="px-2 text-[13.5px] font-medium text-[#64748b]">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            type="button"
+            disabled={currentPage === totalPages}
+            onClick={() => setPage((p) => p + 1)}
+            className="rounded-xl border border-blue-100 bg-white px-5 py-2.5 text-[13.5px] font-bold text-[#64748b] transition-colors hover:border-[#1677f2]/40 hover:text-[#1677f2] disabled:opacity-40"
+          >
+            Next
+          </button>
+        </div>
+      )}
+
+      {/* Footer CTA */}
+      <div className="mt-14 rounded-[28px] border border-blue-100 bg-white p-10 text-center shadow-[0_18px_50px_rgba(0,80,140,0.07)]">
+        <p className="text-[20px] font-black text-[#071426]">Don&apos;t see a role that fits?</p>
+        <p className="mx-auto mt-3 max-w-md text-[14.5px] font-medium leading-[1.8] text-[#64748b]">
+          Join Estabizz&apos;s talent network — create a profile once and be considered as new roles open.
+        </p>
+        <Link
+          href="/jobs/join"
+          className="mt-7 inline-flex items-center justify-center gap-2 rounded-xl bg-[#1677f2] px-8 py-3.5 text-[15px] font-bold text-white shadow-[0_14px_35px_rgba(22,119,242,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0866d9]"
+        >
+          Join Estabizz
+        </Link>
+        <p className="mt-5 text-[13px] font-medium text-[#94a3b8]">
+          Prefer not to create a profile?{" "}
+          <a href="mailto:info@estabizz.com?subject=Career%20Enquiry%20-%20Estabizz" className="font-bold text-[#1677f2] hover:underline">
+            Email our recruitment team
+          </a>
+          .
+        </p>
       </div>
     </div>
   );

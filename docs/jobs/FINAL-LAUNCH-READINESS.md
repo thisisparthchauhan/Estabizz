@@ -4,7 +4,75 @@
 detail; this is the single page that says what is done, what is waiting, and
 what must not be skipped.
 
-Last verified against `staging` on **2026-09-12**.
+Last verified against `staging` on **2026-09-12**. See §12 for the **2026-09-17
+production launch** of public job discovery.
+
+## 12. Production status (2026-09-17) — public job discovery live, candidate PII gated
+
+`main` @ `3962777`, live at `https://www.estabizz.com`. Rollback reference:
+git tag `pre-jobs-launch-backup-20260917-1645` = `origin/main` before this merge.
+
+**What went live:** `/jobs`, `/jobs/[slug]` (browse, search, filter, share —
+public data only, `status:"open"` + `is_public:true` jobs), the Jobs entry
+point in the global navbar, and `/jobs/hire-talent` (employer contact, no
+candidate PII, routes to the existing Formspree pipeline). Verified with
+fresh (non-cached, `x-vercel-cache: PRERENDER`) requests directly against
+`www.estabizz.com`, not staging.
+
+**What stayed off, deliberately:** every candidate-PII surface — apply,
+resume upload, the candidate account/dashboard, "Join Estabizz" — behind a
+new `JOBS_CANDIDATE_APPLICATIONS_ENABLED` flag (`lib/jobs/launchFlags.ts`),
+unset in Production, set to `true` in Preview only (so staging's existing
+end-to-end candidate testing is unaffected). Confirmed live: `POST
+/api/jobs/resume/upload-intent` returns a clean `503
+candidate_applications_not_enabled`, not a 500; `/jobs/[slug]/apply` and
+`/jobs/account` render a professional "Opening Shortly" page, not a crash or
+a silent PII-collecting form.
+
+**Production database:** `DATABASE_URL` is still not set in Production
+(confirmed via `vercel env ls production` — no Postgres, no Redis, no B2
+storage variables exist there). `/jobs` therefore currently shows a
+"Job Listings Coming Shortly" placeholder rather than real postings — this is
+the same graceful-degradation path as the candidate gate, not a bug. Add
+`DATABASE_URL` and run the migration (§5 of `docs/jobs/27-PHASE6-PRODUCTION-
+READINESS.md`) and the identical deployed code starts serving real jobs with
+no further deploy.
+
+**🛑 Found in production, not caused by this launch — pre-existing
+production CMS data blocks the new footer:** a published `global.footer`
+content block already existed in Production's MongoDB *before* this launch,
+predating Phase 7A/7B entirely, and its saved `columns` array silently
+overrides `FOOTER_DEFAULTS.columns` (the merge in `getContent()` is
+`{...defaults, ...block.fields}` — a saved `columns` field replaces the whole
+array, not per-item). Confirmed on a fresh, non-cached production request: the
+Navbar's "Jobs" dropdown renders correctly (it's a hardcoded structural
+element, not a CMS-editable field, so it's unaffected), but the footer still
+shows the pre-Phase-7A "Careers" → `/contact` and "Pricing" → `/contact`
+links, with no "Jobs & Careers" column at all. The same stale record also
+still carries a `global.navbar` quickLink to `https://old.estabizz.com/`
+("Old Site") that `CMS_STATUS.md` records as removed from code back on
+2026-07-23 — so this override has been silently active in production since
+before any Jobs work began; it is not something this launch introduced, only
+something this launch's footer improvement ran into.
+
+**Not fixed by this launch, and not fixable from here:** this requires a
+write to Production's MongoDB (unpublishing or re-saving the stale
+`global.navbar` / `global.footer` content blocks), which this session has no
+credentials for and would not perform without explicit authorization even
+with them — "do not modify the production database" has been a standing rule
+throughout this engagement. **Action needed:** in the admin panel, open
+Admin → Navigation → Footer (and → Navbar), and either re-save each block so
+it picks up the current code defaults, or unpublish the stale record so
+`getContent()` falls back to `FOOTER_DEFAULTS` / `NAVBAR_DEFAULTS` directly.
+Until then, the Jobs footer links exist in code and work correctly once
+someone lands on them by other means (navbar, direct URL), but are not
+discoverable from the footer.
+
+**Everything else in this section's own re-verification:** existing site
+pages (`/`, `/rbi`, `/sebi`, `/irdai`, `/services`, `/blogs`, `/get-started`)
+all 200. Admin Jobs API still 401 without auth. `tsc`, `next build`, `eslint`
+(0 errors), and all 15 test suites (394 tests across Jobs + navigation +
+launch-gating) passed on `main` before this push.
 
 | Status | Meaning |
 |---|---|

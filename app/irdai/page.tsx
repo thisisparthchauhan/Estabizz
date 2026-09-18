@@ -11,16 +11,15 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const services = [
     { href: "/regulatory/insurance", title: "Insurance Guides", desc: "Insurance marketing firm, insurance repository and TPA licensing guides.", tag: "Insurance", emoji: "📋" },
-    { href: "/irdai/irda-insurance-broker-license", title: "IRDA Insurance Broker License", desc: "Complete guide to obtaining IRDAI insurance broker license with eligibility, process & compliance.", tag: "IRDAI", emoji: "🛡️" },
+    { href: "/irdai/insurance-broker-registration-in-india", title: "IRDA Insurance Broker License", desc: "Complete guide to obtaining IRDAI insurance broker license with eligibility, process & compliance.", tag: "IRDAI", emoji: "🛡️" },
     { href: "/irdai/composite-insurance-broker-registration-in-india", title: "Composite Insurance Broker Registration", desc: "IRDAI registration guide for composite insurance brokers with capital requirements, eligibility and compliance calendar.", tag: "IRDAI", emoji: "🏢" },
     { href: "/irdai/corporate-agent-registration-in-india", title: "Corporate Agent Registration", desc: "IRDAI registration guide for corporate agents with eligibility, capital, process, and compliance requirements.", tag: "IRDAI", emoji: "👔" },
     { href: "/irdai/insurance-broker-registration-in-india", title: "Insurance Broker Registration", desc: "Complete IRDAI licensing guide for insurance brokers under IRDAI (Insurance Brokers) Regulations, 2018 with capital, fees, and compliance.", tag: "IRDAI", emoji: "🤝" },
     { href: "/irdai/reinsurance-broker-registration-in-india", title: "Reinsurance Broker Registration", desc: "IRDAI registration guide for reinsurance brokers with ₹4 Crore capital, ₹50 Crore PI insurance, treaty placement and compliance framework.", tag: "IRDAI", emoji: "🔄" },
     { href: "/irdai/irdai-regulatory-sandbox", title: "IRDAI Regulatory Sandbox", desc: "Framework and process for participating in IRDAI's regulatory sandbox for insurance innovation.", tag: "IRDAI", emoji: "🧪" },
-    { href: "/irdai/insurance-marketing-firm-license", title: "Insurance Marketing Firm License", desc: "IRDAI registration guide for insurance marketing firms with eligibility and compliance requirements.", tag: "IRDAI", emoji: "📋" },
-    { href: "/irdai/insurance-marketing-firm-registration-in-india", title: "Insurance Marketing Firm Registration", desc: "Complete IRDAI compliance guide for IMFs under Insurance Marketing Firm Regulations, 2015 with net worth, ISP framework, and district-based licensing.", tag: "IRDAI", emoji: "📣" },
-    { href: "/irdai/insurance-repository-registration", title: "Insurance Repository Registration", desc: "IRDAI registration process for insurance repositories managing electronic insurance accounts.", tag: "IRDAI", emoji: "🗂️" },
-    { href: "/irdai/isnp-registration", title: "ISNP Registration", desc: "Complete guide to Insurance Self-Network Platform registration under IRDAI regulations.", tag: "IRDAI", emoji: "🌐" },
+    { href: "/regulatory/insurance/insurance-marketing-firm-license-in-india", title: "Insurance Marketing Firm License", desc: "Complete IRDAI compliance guide for IMFs under Insurance Marketing Firm Regulations, 2015 with net worth, ISP framework, and district-based licensing.", tag: "IRDAI", emoji: "📣" },
+    { href: "/regulatory/insurance/insurance-repository-registration-in-india", title: "Insurance Repository Registration", desc: "IRDAI registration process for insurance repositories managing electronic insurance accounts.", tag: "IRDAI", emoji: "🗂️" },
+    { href: "/regulatory/insurance/isnp-certification-in-india", title: "ISNP Registration", desc: "Complete guide to Insurance Self-Network Platform registration under IRDAI regulations.", tag: "IRDAI", emoji: "🌐" },
     { href: "/irdai/ifsca-insurance-intermediary", title: "IFSCA Insurance Intermediary", desc: "IFSCA registration and compliance guide for insurance intermediaries operating in GIFT City.", tag: "IRDAI", emoji: "🏙️" },
 ];
 

@@ -1,13 +1,9 @@
-import type { Metadata } from 'next';
-import PageClient from './PageClient';
-
-export const metadata: Metadata = {
-    title: "Insurance Marketing Firm License in India: 2026 Complete Guide with Eligibility, Process & Compliance",
-    description: "Insurance Marketing Firm License in India – Complete 2026 guide covering eligibility, IRDAI rules, registration process, fees, compliance, and practical insights.",
-    keywords: "Insurance Marketing Firm License in India",
-    alternates: { canonical: "/irdai/insurance-marketing-firm-license" }
-};
+// Legacy URL alias -- permanently consolidated into the canonical page below.
+// permanentRedirect (308), not redirect (307): this mapping is not temporary,
+// so search engines should transfer ranking signal immediately rather than
+// treating the old URL as still potentially canonical.
+import { permanentRedirect } from 'next/navigation';
 
 export default function Page() {
-    return <PageClient />;
+    permanentRedirect('/regulatory/insurance/insurance-marketing-firm-license-in-india');
 }

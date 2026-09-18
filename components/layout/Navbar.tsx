@@ -192,7 +192,7 @@ const linkMap: Record<string, string> = {
     "SEBI Compliance": "/sebi/aif-compliance-test-report",
     "Compliance Test Report for AIF": "/sebi/aif-compliance-test-report",
     "GST Appeal Services": "/services/gst-appeal-services",
-    "IRDAI Compliance": "/irdai/irda-insurance-broker-license",
+    "IRDAI Compliance": "/irdai/insurance-broker-registration-in-india",
     "IFSCA Compliance": "/ifsca",
     "Aircraft Leasing IFSC": "/ifsca/aircraft-leasing-registration-in-ifsc",
     "IFSCA Aircraft Leasing": "/ifsca/aircraft-leasing-registration-in-ifsc",
@@ -311,7 +311,7 @@ const linkMap: Record<string, string> = {
     // IRDAI – additional pages
     "Reinsurance Broker": "/irdai/reinsurance-broker-registration-in-india",
     "Composite Insurance Broker": "/irdai/composite-insurance-broker-registration-in-india",
-    "Insurance Marketing Firm": "/irdai/insurance-marketing-firm-license",
+    "Insurance Marketing Firm": "/regulatory/insurance/insurance-marketing-firm-license-in-india",
     "IRDAI Regulatory Sandbox": "/irdai/irdai-regulatory-sandbox",
     // IFSCA – additional pages
     "TechFin Entity IFSC": "/ifsca/techfin",

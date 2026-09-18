@@ -86,7 +86,7 @@ const categories = [
         description: "Complete IRDAI licensing lifecycle support — from feasibility assessment and capital planning to regulatory approval and compliance.",
         tags: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "TPA"],
         services: [
-            { name: "Insurance Broker License", href: "/irdai/irda-insurance-broker-license" },
+            { name: "Insurance Broker License", href: "/irdai/insurance-broker-registration-in-india" },
             { name: "IFSCA Insurance Intermediary", href: "/irdai/ifsca-insurance-intermediary" },
             { name: "Insurance Guides", href: "/regulatory/insurance" },
             { name: "TPA Licence", href: "/regulatory/insurance/tpa-license-india" },

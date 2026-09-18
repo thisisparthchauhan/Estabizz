@@ -187,7 +187,7 @@ async function main() {
   check("sitemap.ts backfills the 19 static regulator pages missing from PUBLIC_CONTENT_MANAGED_PATHS", () => {
     const managed = read("lib/publicContent/managedPaths.ts");
     const backfilled = [
-      "/rbi/nbfc-business-plan", "/irdai/isnp-registration", "/ifsca/finance-company-in-gift-ifsc",
+      "/rbi/nbfc-business-plan", "/irdai/irdai-regulatory-sandbox", "/ifsca/finance-company-in-gift-ifsc",
     ];
     for (const p of backfilled) {
       assert.ok(sitemapSrc.includes(`"${p}"`), `sitemap.ts missing backfilled path: ${p}`);

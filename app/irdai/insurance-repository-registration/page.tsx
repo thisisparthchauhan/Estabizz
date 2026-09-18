@@ -1,13 +1,9 @@
-import type { Metadata } from 'next';
-import PageClient from './PageClient';
-
-export const metadata: Metadata = {
-    title: "Insurance Repository Registration in India – Complete 2026 Guide with Critical Compliance Insights",
-    description: "Complete guide and compliance information.",
-    keywords: "Insurance Repository Registration in India",
-    alternates: { canonical: "/irdai/insurance-repository-registration" }
-};
+// Legacy URL alias -- permanently consolidated into the canonical page below.
+// permanentRedirect (308), not redirect (307): this mapping is not temporary,
+// so search engines should transfer ranking signal immediately rather than
+// treating the old URL as still potentially canonical.
+import { permanentRedirect } from 'next/navigation';
 
 export default function Page() {
-    return <PageClient />;
+    permanentRedirect('/regulatory/insurance/insurance-repository-registration-in-india');
 }

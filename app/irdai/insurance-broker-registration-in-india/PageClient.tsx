@@ -858,10 +858,10 @@ Crossing these regulatory boundaries — even unintentionally — may invite ins
         { label: 'PI Insurance', value: 'Mandatory at all times' }
       ]}
       relatedArticles={[
-        { title: 'IRDA Insurance Broker License', href: '/irdai/irda-insurance-broker-license', category: 'IRDAI', description: 'IRDA Insurance Broker License — complete regulatory guide.' },
+        { title: 'IRDA Insurance Broker License', href: '/irdai/insurance-broker-registration-in-india', category: 'IRDAI', description: 'IRDA Insurance Broker License — complete regulatory guide.' },
         { title: 'Composite Insurance Broker Registration', href: '/irdai/composite-insurance-broker-registration-in-india', category: 'IRDAI', description: 'Composite Insurance Broker Registration — complete regulatory guide.' },
         { title: 'Corporate Agent Registration', href: '/irdai/corporate-agent-registration-in-india', category: 'IRDAI', description: 'Corporate Agent Registration — complete regulatory guide.' },
-        { title: 'Insurance Marketing Firm License', href: '/irdai/insurance-marketing-firm-license', category: 'IRDAI', description: 'Insurance Marketing Firm License — complete regulatory guide.' }
+        { title: 'Insurance Marketing Firm License', href: '/regulatory/insurance/insurance-marketing-firm-license-in-india', category: 'IRDAI', description: 'Insurance Marketing Firm License — complete regulatory guide.' }
       ]}
       finalCtaTitle="Need Expert Support for Insurance Broker Registration?"
       finalCtaDescription="Our compliance specialists provide end-to-end support for IRDAI registration, capital structuring, Principal Officer onboarding, and ongoing compliance."

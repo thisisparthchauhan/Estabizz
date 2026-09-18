@@ -261,7 +261,7 @@ export default function PageClient() {
       ctaDescription="Discuss object clause, IT architecture, cybersecurity framework, insurer integration roadmap and audit readiness."
       quickFacts={[{ label: 'Regulator', value: 'IRDAI' }, { label: 'Entity Type', value: 'Company only' }, { label: 'Core Product', value: 'e-Insurance Account' }, { label: 'Deciding Factor', value: 'Cybersecurity' }, { label: 'Timeline', value: '3-6 months' }]}
       relatedArticles={[
-        { title: 'ISNP Registration', href: '/irdai/isnp-registration', category: 'IRDAI', description: 'IRDAI permission for insurance self-network platforms and digital distribution.' },
+        { title: 'ISNP Registration', href: '/regulatory/insurance/isnp-certification-in-india', category: 'IRDAI', description: 'IRDAI permission for insurance self-network platforms and digital distribution.' },
         { title: 'Insurance Broker Registration in India', href: '/irdai/insurance-broker-registration-in-india', category: 'IRDAI', description: 'The intermediary route, contrasted with the repository infrastructure role.' },
         { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license', category: 'RBI', description: 'The parallel consent-based data infrastructure framework under RBI.' }
       ]}

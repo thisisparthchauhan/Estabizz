@@ -471,13 +471,13 @@ const faqGroups = [
       {
         "number": 64,
         "q": "What is ARF filing under FEMA?",
-        "a": "Advance Reporting Form is filed within 30 days of receiving funds.",
+        "a": "The Advance Reporting Form was discontinued with effect from 1 September 2018. Inward FDI remittance and share allotment are now reported together in Form FC-GPR under the Single Master Form on the RBI FIRMS portal, within 30 days of allotment.",
         "points": []
       },
       {
         "number": 65,
-        "q": "What happens after ARF filing?",
-        "a": "Shares must be allotted within 60 days. Then FC-GPR filing is required.",
+        "q": "What happens after foreign funds are received?",
+        "a": "Shares must be allotted within 60 days of receipt of the consideration, and Form FC-GPR must then be filed within 30 days of allotment. If shares are not allotted in time, the funds must be refunded within 15 days.",
         "points": []
       },
       {
@@ -563,8 +563,8 @@ const faqGroups = [
     "items": [
       {
         "number": 77,
-        "q": "What is the timeline for ARF filing?",
-        "a": "Within 30 days of receiving foreign funds.",
+        "q": "What is the timeline for reporting inward FDI?",
+        "a": "Form FC-GPR is filed within 30 days of allotment of shares. The separate Advance Reporting Form stage no longer applies, having been subsumed into the Single Master Form in 2018.",
         "points": []
       },
       {
@@ -1176,11 +1176,11 @@ export default function PageClient() {
       <Section id="advanced-fema-compliance-risks-regulatory-red-flags" title={"Advanced FEMA Compliance Risks & Regulatory Red Flags"}>
         <p>{"From a practical compliance perspective, most FEMA issues do not arise due to lack of intent — they arise due to "}<strong>{"misinterpretation and delay"}</strong>{"."}</p>
         <h3>{"High-Risk Areas (Observed in Practice)"}</h3>
-        <ul><li><strong>{"Delay in FC-GPR filing beyond 30 days"}</strong>{""}<br />{""}{"→"}{" Mandatory reporting timeline as per RBI is strict "}</li><li><strong>{"Incorrect classification of transaction (FDI vs ECB vs ODI)"}</strong>{""}<br />{""}{"→"}{" Leads to wrong form filing and regulatory mismatch"}</li><li><strong>{"Failure to file Advance Reporting "}</strong><strong>{"Form"}</strong><strong>{" (ARF)"}</strong>{""}<br />{""}{"→"}{" Required within 30 days of receipt of foreign funds "}</li><li><strong>{"Non-filing of FLA Return (even NIL cases)"}</strong>{""}<br />{""}{"→"}{" Mandatory annual filing for companies with foreign exposure "}</li><li><strong>{"Improper valuation of shares"}</strong>{""}<br />{""}{"→"}{" Violates pricing guidelines under FEMA"}</li><li><strong>{"Missed FC-TRS timelines (60 days)"}</strong>{""}<br />{""}{"→"}{" Required for share transfers between "}{"resident"}{" and non-"}{"resident"}{" "}</li></ul>
+        <ul><li><strong>{"Delay in FC-GPR filing beyond 30 days"}</strong>{""}<br />{""}{"→"}{" Mandatory reporting timeline as per RBI is strict "}</li><li><strong>{"Incorrect classification of transaction (FDI vs ECB vs ODI)"}</strong>{""}<br />{""}{"→"}{" Leads to wrong form filing and regulatory mismatch"}</li><li><strong>{"Failure to file FC-GPR after allotment"}</strong>{""}<br />{""}{"→"}{" Required within 30 days of allotment under the Single Master Form; the separate Advance Reporting Form stage was withdrawn in 2018 "}</li><li><strong>{"Non-filing of FLA Return (even NIL cases)"}</strong>{""}<br />{""}{"→"}{" Mandatory annual filing for companies with foreign exposure "}</li><li><strong>{"Improper valuation of shares"}</strong>{""}<br />{""}{"→"}{" Violates pricing guidelines under FEMA"}</li><li><strong>{"Missed FC-TRS timelines (60 days)"}</strong>{""}<br />{""}{"→"}{" Required for share transfers between "}{"resident"}{" and non-"}{"resident"}{" "}</li></ul>
       </Section>
 
       <Section id="fema-compliance-checklist-practical-view" title={"FEMA Compliance Checklist (Practical View)"}>
-        <DataTable headers={["Compliance Area", "Requirement", "Frequency"]} rows={[["Advance Reporting Form (ARF)", "Report inward remittance", "Within 30 days"], ["FC-GPR", "Share allotment reporting", "Within 30 days"], ["FC-TRS", "Share transfer reporting", "Within 60 days"], ["FLA Return", "Foreign liabilities/assets", "Annual (15 July)"], ["ODI / APR", "Overseas investment reporting", "Annual"], ["ECB-2 Return", "Borrowing reporting", "Monthly"]]} />
+        <DataTable headers={["Compliance Area", "Requirement", "Frequency"]} rows={[["FC-GPR", "Share allotment reporting", "Within 30 days"], ["FC-TRS", "Share transfer reporting", "Within 60 days"], ["FLA Return", "Foreign liabilities/assets", "Annual (15 July)"], ["ODI / APR", "Overseas investment reporting", "Annual"], ["ECB-2 Return", "Borrowing reporting", "Monthly"]]} />
       </Section>
 
       <Section id="practical-interpretation-of-fema-real-world-view" title={"Practical Interpretation of FEMA (Real-World View)"}>
@@ -1211,13 +1211,13 @@ export default function PageClient() {
       <Section id="fema-forms-explained-practical-understanding" title={"FEMA Forms Explained (Practical Understanding)"}>
         <p>{"From a compliance standpoint, FEMA revolves heavily around "}<strong>{"correct form filing within strict timelines"}</strong>{"."}</p>
         <h3>{"Key FEMA Forms and Their Applicability"}</h3>
-        <DataTable headers={["Form Name", "Purpose", "When Applicable"]} rows={[["ARF (Advance Reporting Form)", "Reporting inward remittance", "Within 30 days of receiving funds"], ["FC-GPR", "Allotment of shares to foreign investor", "Within 30 days of allotment"], ["FC-TRS", "Transfer of shares (Resident ↔ Non-Resident)", "Within 60 days"], ["FLA Return", "Annual foreign liabilities/assets reporting", "By 15 July every year"], ["ODI Forms (FC / APR)", "Overseas investment reporting", "At time + annually"], ["ECB-2 Return", "External borrowing reporting", "Monthly"], ["LLP-I / LLP-II", "Investment in LLP", "As applicable"]]} />
+        <DataTable headers={["Form Name", "Purpose", "When Applicable"]} rows={[["FC-GPR", "Allotment of shares to foreign investor", "Within 30 days of allotment"], ["FC-TRS", "Transfer of shares (Resident ↔ Non-Resident)", "Within 60 days"], ["FLA Return", "Annual foreign liabilities/assets reporting", "By 15 July every year"], ["ODI Forms (FC / APR)", "Overseas investment reporting", "At time + annually"], ["ECB-2 Return", "External borrowing reporting", "Monthly"], ["LLP-I / LLP-II", "Investment in LLP", "As applicable"]]} />
       </Section>
 
       <Section id="fema-lifecycle-end-to-end-transaction-flow" title={"FEMA Lifecycle – End-to-End Transaction Flow"}>
         <p><strong>{"From a real-world execution perspective"}</strong>{", a typical FEMA transaction follows this lifecycle:"}</p>
         <h3>{"Step-wise Flow:"}</h3>
-        <ol><li><strong>{"Foreign Investment Received"}</strong>{""}<br />{""}{"→"}{" Funds credited through AD Bank"}</li><li><strong>{"KYC & FIRC Issuance"}</strong>{""}<br />{""}{"→"}{" Bank verifies investor and issues FIRC"}</li><li><strong>{"ARF Filing"}</strong>{""}<br />{""}{"→"}{" Within 30 days"}</li><li><strong>{"Board Approval & Share Allotment"}</strong>{""}<br />{""}{"→"}{" Within 60 days"}</li><li><strong>{"Valuation Compliance"}</strong>{""}<br />{""}{"→"}{" As per pricing guidelines"}</li><li><strong>{"FC-GPR Filing"}</strong>{""}<br />{""}{"→"}{" Within 30 days of allotment"}</li><li><strong>{"Annual Compliance (FLA Return)"}</strong>{""}<br />{""}{"→"}{" Every year"}</li></ol>
+        <ol><li><strong>{"Foreign Investment Received"}</strong>{""}<br />{""}{"→"}{" Funds credited through AD Bank"}</li><li><strong>{"KYC & FIRC Issuance"}</strong>{""}<br />{""}{"→"}{" Bank verifies investor and issues FIRC"}</li><li><strong>{"Reporting under the Single Master Form"}</strong>{""}<br />{""}{"→"}{" On the RBI FIRMS portal; no separate Advance Reporting Form since 2018"}</li><li><strong>{"Board Approval & Share Allotment"}</strong>{""}<br />{""}{"→"}{" Within 60 days"}</li><li><strong>{"Valuation Compliance"}</strong>{""}<br />{""}{"→"}{" As per pricing guidelines"}</li><li><strong>{"FC-GPR Filing"}</strong>{""}<br />{""}{"→"}{" Within 30 days of allotment"}</li><li><strong>{"Annual Compliance (FLA Return)"}</strong>{""}<br />{""}{"→"}{" Every year"}</li></ol>
       </Section>
 
       <Section id="fema-compliance-for-startups-funded-companies" title={"FEMA Compliance for Startups & Funded Companies"}>

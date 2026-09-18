@@ -11,8 +11,9 @@
  * No network, no database, no browser.
  */
 import assert from "node:assert/strict";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import path from "node:path";
+import { routeExists } from './lib/publicRoutes.mjs';
 
 const repoRoot = process.cwd();
 let passed = 0;
@@ -32,20 +33,6 @@ function check(name, fn) {
 
 function read(relPath) {
   return readFileSync(path.join(repoRoot, relPath), "utf8");
-}
-
-/** True if `route` resolves to a real app/ page.tsx, either directly or as a
- *  known dynamic-slug hub ( /mca-roc, /fiu-ind-aml, /gov-lic, /19-5, /global,
- *  /jobs/[slug], /blogs/[slug] all accept an arbitrary trailing segment). */
-function routeExists(route) {
-  const clean = route.split("?")[0].split("#")[0];
-  if (clean === "/") return existsSync(path.join(repoRoot, "app/page.tsx"));
-
-  const dynamicHubs = ["/mca-roc/", "/fiu-ind-aml/", "/gov-lic/", "/19-5/", "/global/", "/jobs/", "/blogs/"];
-  if (dynamicHubs.some((h) => clean.startsWith(h) && clean !== h)) return true;
-
-  const fp = path.join(repoRoot, "app", clean.replace(/^\//, ""), "page.tsx");
-  return existsSync(fp);
 }
 
 function extractLinkMap(navbarSrc) {
@@ -77,8 +64,8 @@ async function main() {
 
   console.log("\nConfirmed wrong-destination mismatches, fixed (Part 8):");
   const fixedMismatches = {
-    "TPA License": "/irdai",
-    "TPA Licence": "/irdai",
+    "TPA License": "/regulatory/insurance/tpa-license-india",
+    "TPA Licence": "/regulatory/insurance/tpa-license-india",
     "Insurance Surveyor": "/irdai",
     "Micro Insurance": "/irdai",
     "Web Aggregator": "/irdai",

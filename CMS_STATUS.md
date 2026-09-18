@@ -5,6 +5,38 @@
 
 ---
 
+## 2026-09-18 — Regulatory Compliance Category — Local Content Review
+
+### Follow-up: Dedicated Compliance Hub, Finance and GST Guides
+
+Created `/regulatory/compliance` as the category page requested by the owner. Desktop/mobile Regulatory menus, site search, directory links and all four article breadcrumbs now use that URL. The earlier `/regulatory#compliance` anchor remains functional for old links. The new hub is registered in the static sitemap; the existing article URLs and CMS publication/tombstone guards remain unchanged.
+
+**Document audit and rebuild**: `/services/finance-accounting-outsourcing` was a short generic build with 25 FAQs; `/services/gst-appeal-services` had substantive but incomplete content with only 15 FAQs. Rebuilt from `Finance-and-Accounting-Outsourcing_OK.docx` and `Gst-appeal-services_OK.docx`, preserving all 150 numbered FAQs per file, list structure, process timelines and all source tables (11 finance; 8 GST). Reused ServicePageLayout and its existing styles. No new CSS, dependency, route rename, CMS import or database write.
+
+**Editorial exceptions requiring owner review**: Finance internal instructions from “Lead Conversion Section” through “Common Sales Mistakes” are excluded from the public guide, including sales scripts, upselling/revenue strategy and internal team setup. The commercial instruction directly below the service-packaging heading is also excluded. Public package details, SOW, responsibility matrix, milestones and the final public conclusion remain. Presentation headings are “Service Packages” and “How Estabizz Supports” instead of their internal sales/conversion labels. No client logos, testimonials or performance claims were invented. The finance source's headline promises seven benefits but lists six; retained six and used a non-numeric page title. Its indicative prices, timelines and delivery commitments need engagement-specific approval.
+
+**GST content conflict**: The supplied pre-deposit table retains “Additional 20%” and “₹25 Crore” as source text, but a visible notice flags it for correction before release. The [55th GST Council agenda, section 3.3](https://gstcouncil.gov.in/sites/default/files/Agenda/55th_meeting_agenda_compressed_1.pdf) confirms the implemented 2024 amendments: 10% Tribunal pre-deposit and reduced ₹20 crore central-tax caps. The guide's deadline wording, penalty-only claims and certified-copy/recovery statements also need a professional review. No silent legal-content rewrite or publication approval is implied. Both new guides use the existing `reviewPending` label.
+
+**Verification**: The extended `scripts/compliancePagesTest.mjs` passes for all four routes (600 contiguous FAQs, 39 tables), contents anchors, canonical routes, navigation, CMS guards and sitemap coverage. Source-to-render checks match 750 body/table fragments and all 300 new questions, answers and answer bullets, excluding the editorial items disclosed above. Browser checks pass at 1440px and 390px for all four articles and the dedicated hub, desktop keyboard/menu navigation, mobile navigation, FAQ expansion, HTTP 200, internal links, duplicate IDs, dead anchors, entity leaks, overflow and runtime errors. Type-check, lint (0 errors, 176 existing warnings) and production build (286 generated pages) passed under Node 22.
+
+**Scope**: Local implementation only. No commit, push or deployment. Pre-existing `AGENTS.md` changes are preserved.
+
+### Original Two-Guide Batch
+
+**Task**: Added a Compliance category to the shared desktop/mobile Regulatory menu and the `/regulatory#compliance` directory section. Its two links retain the existing canonical URLs: `/sebi/aif-compliance-test-report` and `/fema/compliance-under-fema`. No duplicate routes, slug renames, CMS imports or database writes were introduced. Both URLs already have sitemap coverage (static backfill for AIF; managed-path coverage for FEMA).
+
+**Source audit**: The existing AIF and FEMA pages contained only 15 and 20 FAQs respectively, rather than the 150 questions supplied in each document. Rebuilt those article bodies from `Compliance-Test-Report-For-Aif_Pending.docx` and `Compliance-Under-FEMA_ok (1).docx`, retaining all 150 numbered questions per page, all answers, nested lists, inline FAQ bullets, process steps and all 10 tables per page. Word SEO/slug labels were treated as source metadata, not instructions to rename routes. Existing ServicePageLayout styling is reused without new CSS. The FEMA route retains its CMS publication/tombstone guard and metadata behavior.
+
+**Content approval required before release**: Source wording is preserved, not represented as newly verified legal advice. Visible review notices and an optional `reviewPending` template label distinguish these pages from reviewed guides; other pages keep their existing default label. The AIF file's independent CA/CS certification assertions, statement that no prescribed format exists, and late-year calendar conflict with [SEBI's AIF Master Circular section 21.2](https://www.sebi.gov.in/sebi_data/attachdocs/jun-2026/1780484971370.pdf), which specifies preparation by the manager, Annexure 14 and submission to trustee/sponsor within 30 days of financial year-end. The FEMA file's standalone ARF requirements conflict with [RBI's Single Master Form guidance](https://systemhealth.rbi.org.in/Scripts/femaview.aspx_femaid%3D65.html), which merges ARF and FC-GPR from September 2018. These are identified examples, not an exhaustive legal review. Owner/content-expert approval is required to correct the source wording before publication.
+
+**Files**: Both existing `PageClient.tsx` files, AIF `page.tsx` (complete previously truncated description), `app/regulatory/page.tsx`, `components/layout/Navbar.tsx`, `components/templates/ServicePageLayout.tsx`, `scripts/compliancePagesTest.mjs`, this status entry. Pre-existing `AGENTS.md` changes are not part of this task.
+
+**Validation**: Source-to-render comparison verified every FAQ question/answer/bullet and 816 body/table text fragments across the two documents. Targeted content tests verify 150 contiguous FAQs and 10 tables per route, contents anchors, canonical paths, menu links, preserved CMS guard and sitemap registration. Browser checks cover 1440px desktop and 390px mobile, both navigation menus, keyboard category selection, FAQs, HTTP 200, dead anchors, entity leaks, duplicate IDs, overflow and runtime errors. Type-check, lint (0 errors, 176 existing warnings) and production build (285 generated pages) passed under Node 22. The broader existing navigation suite reports 32/33 passing: its static route checker does not recognize nine pre-existing `/solutions/ipr/*` destinations handled by `/solutions/[category]/[slug]`. The production build confirms those pages exist. That unrelated checker and those links were not changed.
+
+**Status**: Implemented locally; regulatory-content approval pending. No commit, push or deployment.
+
+---
+
 ## 2026-09-16 — Production Release Audit — Blocked by Configuration
 
 **Release branch**: `staging`. The audited release was 43 commits ahead of `origin/main`, with no divergence.

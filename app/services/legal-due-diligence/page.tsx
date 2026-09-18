@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 
 const FALLBACK_METADATA: Metadata = {
     title: 'Legal Due Diligence Services in India: Critical Checks for Smart & Secure Business Deals',
-    description: 'Legal Due Diligence services in India explained – process, scope, key checks, and compliance requirements for M&A, investments, and business transactions.',
+    description: 'Legal Due Diligence Services in India explained with process, documents, risks, and compliance checks to ensure secure and informed business decisions.',
     keywords: 'Legal Due Diligence Services in India',
     alternates: { canonical: FULL_PATH },
 };

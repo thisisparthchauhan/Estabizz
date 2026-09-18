@@ -24,7 +24,7 @@ interface AuthUser {
 const CANDIDATE_USER_MENU_ITEMS = getCandidateUserMenuItems();
 
 interface MenuGroup { heading: string; items: string[]; }
-interface MenuCategory { label: string; icon: string; items: string[]; groups?: MenuGroup[]; viewAll?: string; viewAllLabel?: string; }
+interface MenuCategory { label: string; icon: string; items: string[]; groups?: MenuGroup[]; viewAll: string; viewAllLabel: string; }
 interface MegaMenu { categories: MenuCategory[]; viewAll: string; viewAllLabel: string; }
 
 const linkMap: Record<string, string> = {
@@ -63,9 +63,9 @@ const linkMap: Record<string, string> = {
     "SRO for NBFCs": "/rbi/nbfc-sro-registration",
     "NBFC Business Plan": "/rbi/nbfc-business-plan",
     "NBFC Compliance": "/rbi/nbfc-legal-support",
-    "NBFC-P2P License": "/rbi/nbfc-for-sale",
-    "NBFC-MFI License": "/rbi/nbfc-takeover",
-    "NBFC Annual Return Filing": "/rbi/nbfc-marketing-strategy",
+    "NBFC-P2P License": "/rbi",
+    "NBFC-MFI License": "/rbi",
+    "NBFC Annual Return Filing": "/rbi/rbi-services",
     "Payment Aggregator": "/rbi/payment-aggregator-license-in-india",
     "Payment Aggregator License": "/rbi/payment-aggregator-license-in-india",
     // Phase 7B: was "/rbi/full-fledged-money-changers". FFMC and AD Category II
@@ -82,7 +82,7 @@ const linkMap: Record<string, string> = {
     // this topic -- routed to the RBI hub rather than an unrelated specific
     // page. See docs/30-WHOLE-SITE-NAVIGATION-AUDIT.md §8.
     "Credit Information Company": "/rbi",
-    "NBFC License": "/rbi/nbfc-account-aggregator-license",
+    "NBFC License": "/rbi/nbfc-registration-in-india",
     "Prepaid Instrument": "/rbi/ppi-registration-in-india",
     "PPI Registration": "/rbi/ppi-registration-in-india",
     "Prepaid Payment Instrument": "/rbi/ppi-registration-in-india",
@@ -155,7 +155,7 @@ const linkMap: Record<string, string> = {
     "Hedge Fund Registration": "/sebi/aif-registration-in-india",
     "AIF PPM Filing": "/sebi/aif-registration-in-india",
     "SEBI Alternative Investment Fund": "/sebi/aif-registration-in-india",
-    "Fund Management Entity": "/sebi/reit-registration",
+    "Fund Management Entity": "/ifsca",
     // IRDAI
     "Insurance Broker": "/irdai/insurance-broker-registration-in-india",
     "Corporate Agent": "/irdai/corporate-agent-registration-in-india",
@@ -176,8 +176,10 @@ const linkMap: Record<string, string> = {
     //      international intermediary licence)
     "Web Aggregator": "/irdai",
     "Insurance Surveyor": "/irdai",
-    "TPA License": "/irdai",
-    "TPA Licence": "/irdai",
+    "TPA License": "/regulatory/insurance/tpa-license-india",
+    "TPA Licence": "/regulatory/insurance/tpa-license-india",
+    "Insurance Guides": "/regulatory/insurance",
+    "Insurance Repository": "/regulatory/insurance/insurance-repository-registration-in-india",
     "Micro Insurance": "/irdai",
     // Fintech
     "Prepaid Instrument License": "/rbi/ppi-registration-in-india",
@@ -188,6 +190,8 @@ const linkMap: Record<string, string> = {
     // Compliance
     "RBI Compliance": "/rbi/rbi-services",
     "SEBI Compliance": "/sebi/aif-compliance-test-report",
+    "Compliance Test Report for AIF": "/sebi/aif-compliance-test-report",
+    "GST Appeal Services": "/services/gst-appeal-services",
     "IRDAI Compliance": "/irdai/irda-insurance-broker-license",
     "IFSCA Compliance": "/ifsca",
     "Aircraft Leasing IFSC": "/ifsca/aircraft-leasing-registration-in-ifsc",
@@ -238,7 +242,7 @@ const linkMap: Record<string, string> = {
     "Finance & Accounting Outsourcing": "/services/finance-accounting-outsourcing",
     "ESG Compliance": "/services/esg-consulting",
     // Startup
-    "GST Registration": "/services/gst-appeal-services",
+    "GST Registration Enquiry": "/contact?service=GST%20Registration",
     "Trademark Search": "/services/trademark-search",
     "Tax & Audit": "/services/finance-accounting-outsourcing",
     "Document Vault": "/login",
@@ -254,11 +258,11 @@ const linkMap: Record<string, string> = {
     "AML Risk Assessment": "/fiu-ind-aml/aml-risk-assessment",
     "CKYC Registration & Reporting": "/fiu-ind-aml/ckyc-registration-reporting",
     "MCA / ROC Compliance": "/services/enterprise-services",
-    "Company Incorporation": "/services/enterprise-services",
+    "Company Incorporation": "/mca-roc/company-registration-in-india",
     "Annual ROC Compliance": "/services/enterprise-services",
     "Corporate Governance": "/services/enterprise-services",
     "Post-Registration Compliance": "/services",
-    "Sectoral Licences": "/services",
+    "Sectoral Licences": "/gov-lic",
     "FSSAI Licence": "/gov-lic/fssai-licence",
     "APEDA Registration": "/gov-lic/apeda-registration",
     "AYUSH Licence": "/gov-lic/ayush-licence",
@@ -343,6 +347,12 @@ const staticSearchLinks = [
     { label: "Home", href: "/", group: "Site" },
     { label: "All Services", href: "/services", group: "Site" },
     { label: "Regulatory Services", href: "/regulatory", group: "Site" },
+    { label: "Compliance Services", href: "/regulatory/compliance", group: "Regulatory" },
+    { label: "Insurance Guides", href: "/regulatory/insurance", group: "Regulatory" },
+    { label: "FIU-IND & AML", href: "/fiu-ind-aml", group: "Regulatory" },
+    { label: "MCA / ROC Services", href: "/mca-roc", group: "Regulatory" },
+    { label: "Government Licences", href: "/gov-lic", group: "Regulatory" },
+    { label: "Startups & New Businesses", href: "/solutions/startups", group: "Solutions" },
     { label: "Resources", href: "/resources", group: "Site" },
     { label: "Regulatory Updates", href: "/resources/regulatory-updates", group: "Resources" },
     { label: "Circular Explainers", href: "/resources/circular-explainers", group: "Resources" },
@@ -370,12 +380,13 @@ const staticSearchLinks = [
 const menus: Record<string, MegaMenu> = {
     Regulatory: {
         categories: [
-            { label: "RBI", icon: "🏦", items: ["NBFC Registration", "Payment Aggregator", "Prepaid Instrument", "NBFC Account Aggregator", "Asset Reconstruction Company", "AD Category II", "LendTech Services", "NBFC SRO Registration", "NBFC Business Plan"] },
-            { label: "SEBI", icon: "📈", items: ["Stock Broker Licence", "AIF Registration", "Portfolio Manager", "Investment Adviser", "Research Analyst", "Social Stock Exchange", "Mutual Fund Registration", "AMFI Registration", "REIT Registration", "Credit Rating Agency", "Depository Participant", "RTA Registration", "Underwriter Registration", "Collective Investment Schemes"] },
-            { label: "IRDAI", icon: "🛡️", items: ["Insurance Broker", "Reinsurance Broker", "Corporate Agent", "Composite Insurance Broker", "Web Aggregator", "Insurance Marketing Firm", "Insurance Surveyor", "TPA Licence", "IRDAI Regulatory Sandbox"] },
-            { label: "IFSCA", icon: "🌐", items: ["Finance Company GIFT IFSC", "PSP License IFSCA", "ITFS Platform IFSC", "BATF Services IFSC", "IFSCA Aircraft Leasing", "FinTech Entity IFSC", "TechFin Entity IFSC", "IFSCA Factoring License"] },
-            { label: "FEMA", icon: "📋", items: ["FEMA Compliance", "FEMA Registration", "DGFT IE Code"] },
-            { label: "FIU-IND & AML", icon: "🔍", items: ["FIU-IND Registration", "PMLA Compliance Advisory", "AML Policy Drafting", "AML Risk Assessment", "CKYC Registration & Reporting"] },
+            { label: "RBI", icon: "🏦", items: ["NBFC Registration", "Payment Aggregator", "Prepaid Instrument", "NBFC Account Aggregator", "Asset Reconstruction Company", "AD Category II", "LendTech Services", "NBFC SRO Registration", "NBFC Business Plan"], viewAll: "/rbi", viewAllLabel: "View All RBI Services →" },
+            { label: "SEBI", icon: "📈", items: ["Stock Broker Licence", "AIF Registration", "Portfolio Manager", "Investment Adviser", "Research Analyst", "Social Stock Exchange", "Mutual Fund Registration", "AMFI Registration", "REIT Registration", "Credit Rating Agency", "Depository Participant", "RTA Registration", "Underwriter Registration", "Collective Investment Schemes"], viewAll: "/sebi", viewAllLabel: "View All SEBI Services →" },
+            { label: "IRDAI", icon: "🛡️", items: ["Insurance Broker", "Reinsurance Broker", "Corporate Agent", "Composite Insurance Broker", "Web Aggregator", "Insurance Marketing Firm", "Insurance Surveyor", "TPA Licence", "Insurance Repository", "Insurance Guides", "IRDAI Regulatory Sandbox"], viewAll: "/irdai", viewAllLabel: "View All IRDAI Services →" },
+            { label: "IFSCA", icon: "🌐", items: ["Finance Company GIFT IFSC", "PSP License IFSCA", "ITFS Platform IFSC", "BATF Services IFSC", "IFSCA Aircraft Leasing", "FinTech Entity IFSC", "TechFin Entity IFSC", "IFSCA Factoring License"], viewAll: "/ifsca", viewAllLabel: "View All IFSCA Services →" },
+            { label: "FEMA", icon: "📋", items: ["FEMA Compliance", "FEMA Registration", "DGFT IE Code"], viewAll: "/fema", viewAllLabel: "View All FEMA Services →" },
+            { label: "Compliance", icon: "📋", items: ["Compliance Test Report for AIF", "FEMA Compliance", "Finance & Accounting Outsourcing", "GST Appeal Services", "Legal Process Outsourcing", "Legal Due Diligence"], viewAll: "/regulatory/compliance", viewAllLabel: "View Compliance Services →" },
+            { label: "FIU-IND & AML", icon: "🔍", items: ["FIU-IND Registration", "PMLA Compliance Advisory", "AML Policy Drafting", "AML Risk Assessment", "CKYC Registration & Reporting"], viewAll: "/fiu-ind-aml", viewAllLabel: "View All FIU & AML Services →" },
             { label: "MCA / ROC", icon: "🏛️", items: [],
               viewAll: "/mca-roc", viewAllLabel: "View All MCA / ROC Services →",
               groups: [
@@ -383,7 +394,7 @@ const menus: Record<string, MegaMenu> = {
                 { heading: "Company Changes & Capital", items: ["Change Company Name", "Increase Authorised Capital", "Registered Office Change", "OPC to Pvt Ltd Conversion", "MCA / ROC Compliance", "Annual ROC Compliance"] },
                 { heading: "Event Based Compliance", items: ["Appointment of Directors", "Removal of Director", "Directors DIN e-KYC", "Corporate Governance", "MOA – Private Ltd", "MOA – Public Ltd", "MOA – Section 8", "Private Ltd Winding Up", "LLP Winding Up & Closure"] },
               ]},
-            { label: "Government Licences", icon: "⚖️", items: ["FSSAI Licence", "APEDA Registration", "AYUSH Licence", "Factory Licence", "Drug Licence", "BIS Certification", "PFRDA Registration"] },
+            { label: "Government Licences", icon: "⚖️", items: ["FSSAI Licence", "APEDA Registration", "AYUSH Licence", "Factory Licence", "Drug Licence", "BIS Certification", "PFRDA Registration"], viewAll: "/gov-lic", viewAllLabel: "View All Government Licences →" },
         ],
         viewAll: "/regulatory", viewAllLabel: "View All Regulatory →"
     },
@@ -404,7 +415,7 @@ const menus: Record<string, MegaMenu> = {
     // label), so all of them remain findable in "Search pages...".
     Solutions: {
         categories: [
-            { label: "Startups & New Businesses", icon: "🚀", items: ["Company Incorporation", "GST Registration", "Trademark Search", "FSSAI Licence"] },
+            { label: "Startups & New Businesses", icon: "🚀", items: ["Company Incorporation", "GST Registration Enquiry", "Trademark Search", "FSSAI Licence"], viewAll: "/solutions/startups", viewAllLabel: "View All Startup Services →" },
             // Grouped rather than a flat list: at ten entries IPR is the
             // largest category in this menu, and "Trademark Objection Reply"
             // next to "Design Registration" in one undifferentiated column
@@ -983,7 +994,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                         {/* Left Categories */}
                         <div className="w-[240px] shrink-0 border-r border-blue-100 dark:border-[#223550] py-4 bg-[#f8fbff] dark:bg-[#0a1628]">
                             {currentMenu.categories.map((cat, i) => (
-                                <button key={i} onMouseEnter={() => setActiveCategory(i)}
+                                <button key={i} onMouseEnter={() => setActiveCategory(i)} onFocus={() => setActiveCategory(i)} onClick={() => setActiveCategory(i)}
                                     className={`w-full flex items-center gap-3 px-5 py-3 text-left text-[14px] transition-colors ${activeCategory === i ? "text-[#1677f2] font-bold bg-blue-50/50 dark:bg-[#1677f2]/10 border-l-[3px] border-[#1677f2] pl-[17px]" : "text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] hover:bg-gray-50 dark:hover:bg-[#12223a] border-l-[3px] border-transparent pl-[17px]"}`}>
                                     <span className="text-[16px]">{cat.icon}</span> {cat.label}
                                 </button>

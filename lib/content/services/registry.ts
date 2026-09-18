@@ -44,6 +44,19 @@ export interface SolutionCategory {
 
 export const SOLUTION_CATEGORIES: SolutionCategory[] = [
   {
+    slug: "startups",
+    label: "Startups & New Businesses",
+    icon: "🚀",
+    tagline: "Company formation, tax enquiries, brand protection and business licensing support.",
+    pages: [],
+    externalServices: [
+      { title: "Company Incorporation", description: "Explore company registration, documentation and the incorporation process.", href: "/mca-roc/company-registration-in-india" },
+      { title: "GST Registration Enquiry", description: "Discuss your GST registration requirements with the team.", href: "/contact?service=GST%20Registration" },
+      { title: "Trademark Search", description: "Check trademark availability before filing.", href: "/services/trademark-search" },
+      { title: "FSSAI Licence", description: "Registration and licensing support for food businesses.", href: "/gov-lic/fssai-licence" },
+    ],
+  },
+  {
     slug: "ipr",
     label: "IPR",
     icon: "⚖️",

@@ -118,6 +118,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // ── Key static hub and business pages ────────────────────────────────────
   const staticHubPages: MetadataRoute.Sitemap = [
     // Regulatory service hub pages
+    { url: `${BASE}/regulatory`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE}/regulatory/insurance`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE}/regulatory/compliance`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/rbi`,      changeFrequency: "weekly",  priority: 0.8 },
     { url: `${BASE}/sebi`,     changeFrequency: "weekly",  priority: 0.8 },
     { url: `${BASE}/irdai`,    changeFrequency: "weekly",  priority: 0.8 },

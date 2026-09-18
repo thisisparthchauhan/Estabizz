@@ -57,6 +57,7 @@ const SERVICES_GROUPED = [
         group: 'Corporate & Legal',
         color: '#d97706',
         items: [
+            'GST Registration',
             'GST Appeal Services',
             'Legal Due Diligence',
             'Transfer Pricing',

@@ -1,836 +1,1313 @@
-"use client";
-import ServicePageLayout from "@/components/templates/ServicePageLayout";
+'use client';
+
+import Link from 'next/link';
+import type { ReactNode } from 'react';
+import ServicePageLayout from '@/components/templates/ServicePageLayout';
+
+const sections = [{"id": "introduction", "title": "Introduction"}, {"id": "what-is-fema-compliance-in-india", "title": "What is FEMA Compliance in India?"}, {"id": "regulatory-framework", "title": "Regulatory Framework"}, {"id": "who-needs-fema-compliance", "title": "Who Needs FEMA Compliance?"}, {"id": "eligibility-criteria", "title": "Eligibility Criteria"}, {"id": "documents-required", "title": "Documents Required"}, {"id": "step-by-step-fema-compliance-process", "title": "Step-by-Step FEMA Compliance Process"}, {"id": "fees-structure", "title": "Fees Structure"}, {"id": "timeline", "title": "Timeline"}, {"id": "post-registration-compliance", "title": "Post-Registration Compliance"}, {"id": "practical-compliance-risks", "title": "Practical Compliance Risks"}, {"id": "why-professional-support-matters", "title": "Why Professional Support Matters"}, {"id": "advanced-fema-compliance-risks-regulatory-red-flags", "title": "Advanced FEMA Compliance Risks & Regulatory Red Flags"}, {"id": "fema-compliance-checklist-practical-view", "title": "FEMA Compliance Checklist (Practical View)"}, {"id": "practical-interpretation-of-fema-real-world-view", "title": "Practical Interpretation of FEMA (Real-World View)"}, {"id": "common-fema-mistakes-made-by-founders-cfos", "title": "Common FEMA Mistakes Made by Founders & CFOs"}, {"id": "why-fema-compliance-is-strategically-important", "title": "Why FEMA Compliance is Strategically Important"}, {"id": "fema-forms-explained-practical-understanding", "title": "FEMA Forms Explained (Practical Understanding)"}, {"id": "fema-lifecycle-end-to-end-transaction-flow", "title": "FEMA Lifecycle – End-to-End Transaction Flow"}, {"id": "fema-compliance-for-startups-funded-companies", "title": "FEMA Compliance for Startups & Funded Companies"}, {"id": "fema-vs-fera-practical-distinction", "title": "FEMA vs FERA – Practical Distinction"}, {"id": "compounding-of-fema-offences", "title": "Compounding of FEMA Offences"}, {"id": "fema-penalties-detailed-understanding", "title": "FEMA Penalties – Detailed Understanding"}, {"id": "fema-compliance-impact-on-fundraising-due-diligence", "title": "FEMA Compliance Impact on Fundraising & Due Diligence"}, {"id": "fema-compliance-for-nris-special-section", "title": "FEMA Compliance for NRIs (Special Section)"}, {"id": "advanced-compliance-insight-expert-level-understanding", "title": "Advanced Compliance Insight (Expert-Level Understanding)"}, {"id": "fema-due-diligence-checklist-investor-view", "title": "FEMA Due Diligence Checklist (Investor View)"}, {"id": "fema-compliance-risk-mitigation-strategy", "title": "FEMA Compliance Risk Mitigation Strategy"}, {"id": "conversion-section-client-oriented", "title": "Conversion Section (Client-Oriented)"}, {"id": "expert-insight", "title": "Expert Insight"}, {"id": "faqs", "title": "Frequently Asked Questions"}, {"id": "disclaimer", "title": "Disclaimer"}];
+
+const faqGroups = [
+  {
+    "title": "Section 1: Basic Understanding",
+    "items": [
+      {
+        "number": 1,
+        "q": "What is FEMA compliance in India?",
+        "a": "FEMA compliance refers to adherence to foreign exchange regulations. It includes:",
+        "points": [
+          "Cross-border transactions",
+          "Foreign investments",
+          "Reporting to RBI"
+        ]
+      },
+      {
+        "number": 2,
+        "q": "What is FEMA and why is it important?",
+        "a": "FEMA is a law regulating foreign exchange transactions. It ensures:",
+        "points": [
+          "External trade stability",
+          "Proper foreign currency management"
+        ]
+      },
+      {
+        "number": 3,
+        "q": "Who regulates FEMA compliance in India?",
+        "a": "FEMA is regulated by the Reserve Bank of India (RBI). The Government of India also issues rules and notifications.",
+        "points": []
+      },
+      {
+        "number": 4,
+        "q": "What types of transactions are covered under FEMA?",
+        "a": "FEMA covers all cross-border transactions. Key areas include:",
+        "points": [
+          "Imports and exports",
+          "Foreign investments",
+          "Remittances"
+        ]
+      },
+      {
+        "number": 5,
+        "q": "Is FEMA applicable to individuals or only companies?",
+        "a": "FEMA applies to both individuals and entities. This includes residents, NRIs, companies, and LLPs.",
+        "points": []
+      },
+      {
+        "number": 6,
+        "q": "What is the difference between FEMA and FERA?",
+        "a": "FEMA is a management-based law, while FERA was restrictive. FEMA focuses on ease of business and compliance.",
+        "points": []
+      },
+      {
+        "number": 7,
+        "q": "What is a current account transaction under FEMA?",
+        "a": "It refers to routine transactions like payments for trade and services. These are generally permitted.",
+        "points": []
+      },
+      {
+        "number": 8,
+        "q": "What is a capital account transaction under FEMA?",
+        "a": "It involves changes in assets or liabilities across borders. Examples include investments and loans.",
+        "points": []
+      },
+      {
+        "number": 9,
+        "q": "What is the objective of FEMA?",
+        "a": "FEMA aims to facilitate external trade and maintain forex stability. It also ensures orderly foreign exchange markets.",
+        "points": []
+      },
+      {
+        "number": 10,
+        "q": "What is an authorised dealer under FEMA?",
+        "a": "An authorised dealer is a bank approved by RBI. It facilitates foreign exchange transactions.",
+        "points": []
+      },
+      {
+        "number": 11,
+        "q": "What is meant by resident under FEMA?",
+        "a": "A resident is a person staying in India for more than 182 days. Determination depends on intention and duration.",
+        "points": []
+      },
+      {
+        "number": 12,
+        "q": "What is an NRI under FEMA?",
+        "a": "A Non-Resident Indian is a citizen residing outside India. FEMA rules differ for NRIs.",
+        "points": []
+      },
+      {
+        "number": 13,
+        "q": "What is ODI under FEMA?",
+        "a": "ODI means Overseas Direct Investment. It allows Indian entities to invest abroad under RBI guidelines.",
+        "points": []
+      },
+      {
+        "number": 14,
+        "q": "What is FDI under FEMA?",
+        "a": "FDI refers to foreign investment into India. It is governed by sectoral caps and entry routes.",
+        "points": []
+      },
+      {
+        "number": 15,
+        "q": "What is ECB under FEMA?",
+        "a": "ECB stands for External Commercial Borrowing. It allows companies to borrow from foreign lenders.",
+        "points": []
+      },
+      {
+        "number": 16,
+        "q": "Is FEMA applicable to startups?",
+        "a": "Yes, startups receiving foreign investment must comply with FEMA. This includes reporting and pricing norms.",
+        "points": []
+      },
+      {
+        "number": 17,
+        "q": "What is the role of RBI in FEMA compliance?",
+        "a": "RBI issues directions, approvals, and monitors compliance. It also imposes penalties.",
+        "points": []
+      },
+      {
+        "number": 18,
+        "q": "What is the difference between automatic and approval route?",
+        "a": "Automatic route requires no prior approval, while approval route needs government consent.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 2: Eligibility & Applicability",
+    "items": [
+      {
+        "number": 19,
+        "q": "Who needs to comply with FEMA regulations?",
+        "a": "Any person dealing in foreign exchange must comply. This includes:",
+        "points": [
+          "Individuals",
+          "Companies",
+          "NRIs"
+        ]
+      },
+      {
+        "number": 20,
+        "q": "Is FEMA compliance mandatory for foreign investors?",
+        "a": "Yes, foreign investors must comply with FEMA rules. Reporting and sectoral restrictions apply.",
+        "points": []
+      },
+      {
+        "number": 21,
+        "q": "Can an Indian resident invest abroad?",
+        "a": "Yes, under Liberalised Remittance Scheme (LRS). Limits and conditions apply.",
+        "points": []
+      },
+      {
+        "number": 22,
+        "q": "Can NRIs invest in Indian companies?",
+        "a": "Yes, NRIs can invest subject to FEMA guidelines. Sectoral caps may apply.",
+        "points": []
+      },
+      {
+        "number": 23,
+        "q": "Is FEMA applicable to LLPs?",
+        "a": "Yes, LLPs receiving foreign investment must comply. Conditions differ from companies.",
+        "points": []
+      },
+      {
+        "number": 24,
+        "q": "Can foreign companies open offices in India?",
+        "a": "Yes, through Liaison, Branch, or Project Office. RBI approval is required.",
+        "points": []
+      },
+      {
+        "number": 25,
+        "q": "Is FEMA applicable to freelancers receiving foreign income?",
+        "a": "Yes, foreign receipts must be routed through authorised channels. Proper documentation is required.",
+        "points": []
+      },
+      {
+        "number": 26,
+        "q": "Can a startup raise foreign funding without FEMA compliance?",
+        "a": "No, FEMA compliance is mandatory for foreign funding. Non-compliance leads to penalties.",
+        "points": []
+      },
+      {
+        "number": 27,
+        "q": "Are NGOs covered under FEMA?",
+        "a": "Yes, NGOs receiving foreign funds must comply with FEMA and FCRA.",
+        "points": []
+      },
+      {
+        "number": 28,
+        "q": "Can Indian companies acquire foreign companies?",
+        "a": "Yes, under ODI guidelines issued by RBI.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 3: Registration Process",
+    "items": [
+      {
+        "number": 29,
+        "q": "Is there a separate FEMA registration required?",
+        "a": "No, FEMA does not require a separate license. Compliance is transaction-based.",
+        "points": []
+      },
+      {
+        "number": 30,
+        "q": "What is the first step in FEMA compliance?",
+        "a": "Identify the nature of transaction (FDI, ODI, ECB). Then follow applicable rules.",
+        "points": []
+      },
+      {
+        "number": 31,
+        "q": "How is FDI reported under FEMA?",
+        "a": "Through RBI FIRMS portal. Key forms include:",
+        "points": [
+          "FC-GPR",
+          "FC-TRS"
+        ]
+      },
+      {
+        "number": 32,
+        "q": "What is FC-GPR form?",
+        "a": "It is used for reporting allotment of shares to foreign investors.",
+        "points": []
+      },
+      {
+        "number": 33,
+        "q": "What is FC-TRS form?",
+        "a": "It is used for transfer of shares between resident and non-resident.",
+        "points": []
+      },
+      {
+        "number": 34,
+        "q": "Is RBI approval required for all FEMA transactions?",
+        "a": "No, only for approval route transactions.",
+        "points": []
+      },
+      {
+        "number": 35,
+        "q": "What is FIRMS portal?",
+        "a": "It is RBI’s online reporting system for foreign investment.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 4: Documents & Requirements",
+    "items": [
+      {
+        "number": 36,
+        "q": "What documents are required for FEMA compliance?",
+        "a": "Common documents include:",
+        "points": [
+          "KYC of investor",
+          "Board resolution",
+          "Valuation report"
+        ]
+      },
+      {
+        "number": 37,
+        "q": "Is valuation mandatory under FEMA?",
+        "a": "Yes, valuation is required for share issuance and transfer.",
+        "points": []
+      },
+      {
+        "number": 38,
+        "q": "Who can issue valuation certificate?",
+        "a": "A Chartered Accountant or SEBI-registered Merchant Banker.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 5: Fees & Cost",
+    "items": [
+      {
+        "number": 39,
+        "q": "What is the cost of FEMA compliance?",
+        "a": "Costs vary based on transaction complexity. Professional fees may apply.",
+        "points": []
+      },
+      {
+        "number": 40,
+        "q": "Are there government fees under FEMA?",
+        "a": "Generally, no direct fees. However, penalties apply for non-compliance.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 6: Timeline & Approval",
+    "items": [
+      {
+        "number": 41,
+        "q": "What is the timeline for FC-GPR filing?",
+        "a": "Within 30 days of allotment of shares.",
+        "points": []
+      },
+      {
+        "number": 42,
+        "q": "What is the timeline for FC-TRS filing?",
+        "a": "Within 60 days of transfer of shares.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 7: Compliance & Post-Registration",
+    "items": [
+      {
+        "number": 43,
+        "q": "What are post-investment FEMA compliances?",
+        "a": "Key compliances include:",
+        "points": [
+          "Annual return on foreign liabilities (FLA)",
+          "Reporting of changes"
+        ]
+      },
+      {
+        "number": 44,
+        "q": "What is FLA return?",
+        "a": "It is an annual return filed with RBI.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 8: Penalties & Risks",
+    "items": [
+      {
+        "number": 45,
+        "q": "What happens if FEMA compliance is not followed?",
+        "a": "Penalties can be imposed under FEMA. This includes monetary fines.",
+        "points": []
+      },
+      {
+        "number": 46,
+        "q": "Can FEMA violations be compounded?",
+        "a": "Yes, RBI allows compounding of offences.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 9: Practical Scenarios",
+    "items": [
+      {
+        "number": 47,
+        "q": "Can shares be issued to foreign investors without valuation?",
+        "a": "No, valuation is mandatory as per regulatory guidelines.",
+        "points": []
+      },
+      {
+        "number": 48,
+        "q": "Can funds be received before company incorporation?",
+        "a": "No, funds must be received post incorporation.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 10: Advanced / Expert-Level Questions",
+    "items": [
+      {
+        "number": 49,
+        "q": "What is downstream investment under FEMA?",
+        "a": "Investment by an Indian entity having foreign investment into another Indian entity.",
+        "points": []
+      },
+      {
+        "number": 50,
+        "q": "What are pricing guidelines under FEMA?",
+        "a": "Shares must be issued at fair value. Undervaluation is not permitted.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 2: Eligibility & Applicability (Continued)",
+    "items": [
+      {
+        "number": 51,
+        "q": "Can a foreign national become a director in an Indian company under FEMA?",
+        "a": "Yes, subject to sectoral conditions and visa norms. FEMA compliance applies for remuneration and shareholding.",
+        "points": []
+      },
+      {
+        "number": 52,
+        "q": "Is FEMA applicable to partnership firms?",
+        "a": "Yes, but foreign investment in partnership firms requires approval. Conditions are stricter compared to companies.",
+        "points": []
+      },
+      {
+        "number": 53,
+        "q": "Can foreign investment be made in agriculture sector?",
+        "a": "Generally, no under automatic route. Certain activities like horticulture are permitted.",
+        "points": []
+      },
+      {
+        "number": 54,
+        "q": "Can Indian residents hold foreign bank accounts?",
+        "a": "Yes, under LRS or permitted transactions. Compliance with RBI guidelines is mandatory.",
+        "points": []
+      },
+      {
+        "number": 55,
+        "q": "Are ESOPs covered under FEMA?",
+        "a": "Yes, ESOPs issued to non-residents must comply with FEMA. Reporting and pricing norms apply.",
+        "points": []
+      },
+      {
+        "number": 56,
+        "q": "Can foreign investors invest in debt instruments?",
+        "a": "Yes, subject to FEMA and RBI debt regulations. Limits and eligibility apply.",
+        "points": []
+      },
+      {
+        "number": 57,
+        "q": "Is FEMA applicable to cryptocurrency transactions?",
+        "a": "Currently, it depends on transaction nature. Cross-border crypto may attract FEMA scrutiny.",
+        "points": []
+      },
+      {
+        "number": 58,
+        "q": "Can Indian companies receive foreign donations?",
+        "a": "Yes, but subject to FEMA and FCRA compliance.",
+        "points": []
+      },
+      {
+        "number": 59,
+        "q": "Are export proceeds governed under FEMA?",
+        "a": "Yes, export proceeds must be realised within prescribed timelines.",
+        "points": []
+      },
+      {
+        "number": 60,
+        "q": "Can NRIs purchase property in India?",
+        "a": "Yes, except agricultural land, plantation property, and farmhouses.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 3: Registration Process (Continued)",
+    "items": [
+      {
+        "number": 61,
+        "q": "What is Entity Master Form under FEMA?",
+        "a": "It is a mandatory registration for entities receiving foreign investment. Filed on FIRMS portal.",
+        "points": []
+      },
+      {
+        "number": 62,
+        "q": "Is UBO disclosure required under FEMA?",
+        "a": "Yes, ultimate beneficial ownership details must be disclosed.",
+        "points": []
+      },
+      {
+        "number": 63,
+        "q": "Can FEMA reporting be done without AD Bank?",
+        "a": "No, authorised dealer bank involvement is mandatory.",
+        "points": []
+      },
+      {
+        "number": 64,
+        "q": "What is ARF filing under FEMA?",
+        "a": "Advance Reporting Form is filed within 30 days of receiving funds.",
+        "points": []
+      },
+      {
+        "number": 65,
+        "q": "What happens after ARF filing?",
+        "a": "Shares must be allotted within 60 days. Then FC-GPR filing is required.",
+        "points": []
+      },
+      {
+        "number": 66,
+        "q": "Can delayed filings be regularised?",
+        "a": "Yes, through Late Submission Fees (LSF).",
+        "points": []
+      },
+      {
+        "number": 67,
+        "q": "What is LSF under FEMA?",
+        "a": "It is a penalty for delayed filings. Calculated based on delay period.",
+        "points": []
+      },
+      {
+        "number": 68,
+        "q": "Can FEMA filings be revised?",
+        "a": "Yes, with RBI approval and proper justification.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 4: Documents & Requirements (Continued)",
+    "items": [
+      {
+        "number": 69,
+        "q": "Is KYC of foreign investor mandatory?",
+        "a": "Yes, KYC from overseas bank is required.",
+        "points": []
+      },
+      {
+        "number": 70,
+        "q": "Is FIRC required for FEMA compliance?",
+        "a": "Yes, Foreign Inward Remittance Certificate is mandatory proof.",
+        "points": []
+      },
+      {
+        "number": 71,
+        "q": "Is board approval required for FDI?",
+        "a": "Yes, board resolution approving allotment is required.",
+        "points": []
+      },
+      {
+        "number": 72,
+        "q": "Is shareholders’ approval required?",
+        "a": "Yes, in case of preferential allotment or private placement.",
+        "points": []
+      },
+      {
+        "number": 73,
+        "q": "Are share certificates required for FEMA filings?",
+        "a": "Yes, proof of allotment is necessary.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 5: Fees & Cost (Continued)",
+    "items": [
+      {
+        "number": 74,
+        "q": "What is Late Submission Fee (LSF) amount?",
+        "a": "It depends on delay and transaction value. RBI provides a calculation matrix.",
+        "points": []
+      },
+      {
+        "number": 75,
+        "q": "Is compounding fee applicable under FEMA?",
+        "a": "Yes, for violations, compounding fees are payable.",
+        "points": []
+      },
+      {
+        "number": 76,
+        "q": "What is professional cost for FEMA advisory?",
+        "a": "It varies based on transaction complexity. Typically ranges from Rs.25,000 onwards.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 6: Timeline & Approval (Continued)",
+    "items": [
+      {
+        "number": 77,
+        "q": "What is the timeline for ARF filing?",
+        "a": "Within 30 days of receiving foreign funds.",
+        "points": []
+      },
+      {
+        "number": 78,
+        "q": "What is time limit for share allotment?",
+        "a": "Within 60 days from receipt of funds.",
+        "points": []
+      },
+      {
+        "number": 79,
+        "q": "What happens if shares are not allotted within 60 days?",
+        "a": "Funds must be refunded within 15 days.",
+        "points": []
+      },
+      {
+        "number": 80,
+        "q": "How long does RBI approval take?",
+        "a": "Typically 4–8 weeks, depending on case complexity.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 7: Compliance & Post-Registration (Continued)",
+    "items": [
+      {
+        "number": 81,
+        "q": "Is annual reporting mandatory under FEMA?",
+        "a": "Yes, FLA return must be filed annually.",
+        "points": []
+      },
+      {
+        "number": 82,
+        "q": "What is APR under FEMA?",
+        "a": "Annual Performance Report for overseas investments.",
+        "points": []
+      },
+      {
+        "number": 83,
+        "q": "Is ECB reporting required monthly?",
+        "a": "Yes, ECB-2 return must be filed monthly.",
+        "points": []
+      },
+      {
+        "number": 84,
+        "q": "What is downstream reporting timeline?",
+        "a": "Within 30 days of investment.",
+        "points": []
+      },
+      {
+        "number": 85,
+        "q": "Can FEMA compliance be outsourced?",
+        "a": "Yes, professionals like CS/CA firms can handle it.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 8: Penalties & Risks (Continued)",
+    "items": [
+      {
+        "number": 86,
+        "q": "What is penalty for FEMA violation?",
+        "a": "Up to 3 times the amount involved. Or Rs.2 lakh if amount not quantifiable.",
+        "points": []
+      },
+      {
+        "number": 87,
+        "q": "Can directors be held liable under FEMA?",
+        "a": "Yes, responsible officers may face penalties.",
+        "points": []
+      },
+      {
+        "number": 88,
+        "q": "What happens if FLA return is not filed?",
+        "a": "Penalty and compliance notices from RBI may arise.",
+        "points": []
+      },
+      {
+        "number": 89,
+        "q": "Can bank accounts be frozen for FEMA violations?",
+        "a": "Yes, in serious cases. Enforcement actions may be taken.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 9: Practical Scenarios (Continued)",
+    "items": [
+      {
+        "number": 90,
+        "q": "Can startup issue shares at face value to foreign investor?",
+        "a": "No, pricing guidelines must be followed.",
+        "points": []
+      },
+      {
+        "number": 91,
+        "q": "Can foreign funds be used before reporting?",
+        "a": "Yes, but reporting timelines must be strictly followed.",
+        "points": []
+      },
+      {
+        "number": 92,
+        "q": "Can shares be transferred without FEMA filing?",
+        "a": "No, FC-TRS filing is mandatory.",
+        "points": []
+      },
+      {
+        "number": 93,
+        "q": "Can investment come in personal account?",
+        "a": "No, it must come into company bank account.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 10: Advanced / Expert-Level Questions (Continued)",
+    "items": [
+      {
+        "number": 94,
+        "q": "What is round tripping under FEMA?",
+        "a": "It refers to routing Indian funds abroad and reinvesting back. Generally restricted.",
+        "points": []
+      },
+      {
+        "number": 95,
+        "q": "What is sectoral cap under FEMA?",
+        "a": "Maximum foreign investment allowed in a sector.",
+        "points": []
+      },
+      {
+        "number": 96,
+        "q": "Can convertible notes be issued to foreign investors?",
+        "a": "Yes, by startups under FEMA guidelines.",
+        "points": []
+      },
+      {
+        "number": 97,
+        "q": "What is swap transaction under FEMA?",
+        "a": "Share exchange between Indian and foreign entities. Requires valuation.",
+        "points": []
+      },
+      {
+        "number": 98,
+        "q": "What is ODI restructuring compliance?",
+        "a": "Changes in overseas investment must be reported to RBI.",
+        "points": []
+      },
+      {
+        "number": 99,
+        "q": "Can guarantees be issued to foreign entities?",
+        "a": "Yes, under ODI rules with conditions.",
+        "points": []
+      },
+      {
+        "number": 100,
+        "q": "What is compounding process under FEMA?",
+        "a": "It is a settlement mechanism for violations. RBI reviews and imposes penalty.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 1: Basic Understanding (Additional Depth)",
+    "items": [
+      {
+        "number": 101,
+        "q": "What happens if a transaction is not classified correctly under FEMA?",
+        "a": "Misclassification can lead to non-compliance and penalties. It may result in:",
+        "points": [
+          "Wrong reporting",
+          "Regulatory scrutiny"
+        ]
+      },
+      {
+        "number": 102,
+        "q": "Is FEMA applicable to digital services exports?",
+        "a": "Yes, export of services is covered under FEMA. Export proceeds must be realised as per guidelines.",
+        "points": []
+      },
+      {
+        "number": 103,
+        "q": "Can foreign currency be held in India?",
+        "a": "Yes, but only under permitted limits and accounts. As per RBI guidelines, holding beyond limits is restricted.",
+        "points": []
+      },
+      {
+        "number": 104,
+        "q": "What is Liberalised Remittance Scheme (LRS)?",
+        "a": "LRS allows individuals to remit funds abroad up to prescribed limits. Currently up to USD 250,000 per financial year.",
+        "points": []
+      },
+      {
+        "number": 105,
+        "q": "Can residents gift money abroad under FEMA?",
+        "a": "Yes, within LRS limits. Proper documentation and purpose declaration are required.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 2: Eligibility & Applicability (Advanced)",
+    "items": [
+      {
+        "number": 106,
+        "q": "Can a foreign subsidiary invest back into its Indian parent?",
+        "a": "No, this is treated as round tripping and is generally restricted.",
+        "points": []
+      },
+      {
+        "number": 107,
+        "q": "Is FEMA applicable to ESOP buyback from non-residents?",
+        "a": "Yes, buyback must comply with pricing and reporting norms.",
+        "points": []
+      },
+      {
+        "number": 108,
+        "q": "Can foreign investors invest in convertible debentures?",
+        "a": "Yes, if instruments are compliant with FEMA and RBI norms.",
+        "points": []
+      },
+      {
+        "number": 109,
+        "q": "Is FEMA applicable to joint ventures abroad?",
+        "a": "Yes, Indian entities must comply with ODI guidelines.",
+        "points": []
+      },
+      {
+        "number": 110,
+        "q": "Can a resident act as guarantor for foreign loans?",
+        "a": "Yes, but only under permitted frameworks. RBI conditions apply.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 3: Registration Process (Advanced)",
+    "items": [
+      {
+        "number": 111,
+        "q": "What is SMF (Single Master Form) under FEMA?",
+        "a": "It is a consolidated reporting platform on FIRMS portal. Used for all foreign investment filings.",
+        "points": []
+      },
+      {
+        "number": 112,
+        "q": "Is digital signature mandatory for FEMA filings?",
+        "a": "Yes, filings on FIRMS portal require DSC authentication.",
+        "points": []
+      },
+      {
+        "number": 113,
+        "q": "Can multiple filings be done in one SMF?",
+        "a": "No, each transaction requires separate reporting.",
+        "points": []
+      },
+      {
+        "number": 114,
+        "q": "What is acknowledgment process after FEMA filing?",
+        "a": "RBI provides acknowledgment through FIRMS portal. AD Bank also verifies filings.",
+        "points": []
+      },
+      {
+        "number": 115,
+        "q": "Can rejected filings be re-submitted?",
+        "a": "Yes, after correcting errors and revalidation by AD Bank.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 4: Documents & Requirements (Advanced)",
+    "items": [
+      {
+        "number": 116,
+        "q": "Is share valuation required for rights issue involving non-residents?",
+        "a": "Yes, valuation norms must be followed even in rights issue.",
+        "points": []
+      },
+      {
+        "number": 117,
+        "q": "Is Form 15CA/15CB linked with FEMA compliance?",
+        "a": "Yes, for outward remittances, these forms are required under tax laws.",
+        "points": []
+      },
+      {
+        "number": 118,
+        "q": "Is auditor certificate required for FEMA filings?",
+        "a": "Yes, in certain filings like FLA and ODI.",
+        "points": []
+      },
+      {
+        "number": 119,
+        "q": "Is KYC required for each transaction?",
+        "a": "Initial KYC is mandatory; updates may be required if details change.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 5: Fees & Cost (Advanced)",
+    "items": [
+      {
+        "number": 120,
+        "q": "How is compounding fee calculated under FEMA?",
+        "a": "It depends on:",
+        "points": [
+          "Amount involved",
+          "Nature of violation",
+          "Duration of default"
+        ]
+      },
+      {
+        "number": 121,
+        "q": "Is Late Submission Fee (LSF) avoidable?",
+        "a": "Yes, by filing within prescribed timelines. Delays automatically attract LSF.",
+        "points": []
+      },
+      {
+        "number": 122,
+        "q": "Can penalties be waived under FEMA?",
+        "a": "No direct waiver, but compounding reduces severity.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 6: Timeline & Approval (Advanced)",
+    "items": [
+      {
+        "number": 123,
+        "q": "What is timeline for ODI reporting?",
+        "a": "ODI reporting must be done at time of investment and annually.",
+        "points": []
+      },
+      {
+        "number": 124,
+        "q": "Is there any grace period under FEMA?",
+        "a": "No formal grace period; LSF applies for delays.",
+        "points": []
+      },
+      {
+        "number": 125,
+        "q": "How frequently are FEMA rules updated?",
+        "a": "Frequently through RBI circulars and notifications. Continuous monitoring is required.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 7: Compliance & Post-Registration (Advanced)",
+    "items": [
+      {
+        "number": 126,
+        "q": "What is downstream investment reporting?",
+        "a": "It is reporting of indirect foreign investment in Indian entities.",
+        "points": []
+      },
+      {
+        "number": 127,
+        "q": "Is compliance required after exit of foreign investor?",
+        "a": "Yes, exit transactions must be reported under FEMA.",
+        "points": []
+      },
+      {
+        "number": 128,
+        "q": "What is reporting for share buyback from non-residents?",
+        "a": "Buyback must comply with pricing and FC-TRS filing.",
+        "points": []
+      },
+      {
+        "number": 129,
+        "q": "Is FEMA compliance required for liquidation?",
+        "a": "Yes, repatriation of funds must follow FEMA guidelines.",
+        "points": []
+      },
+      {
+        "number": 130,
+        "q": "Can FEMA compliance impact statutory audit?",
+        "a": "Yes, auditors verify FEMA compliance in financial statements.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 8: Penalties & Risks (Advanced)",
+    "items": [
+      {
+        "number": 131,
+        "q": "What happens if foreign investment is received in prohibited sector?",
+        "a": "It is treated as violation and may require reversal or penalty.",
+        "points": []
+      },
+      {
+        "number": 132,
+        "q": "Can prosecution happen under FEMA?",
+        "a": "FEMA is civil law, but serious violations may attract enforcement actions.",
+        "points": []
+      },
+      {
+        "number": 133,
+        "q": "Can RBI blacklist companies for non-compliance?",
+        "a": "Yes, repeated violations may lead to strict regulatory action.",
+        "points": []
+      },
+      {
+        "number": 134,
+        "q": "What is adjudication process under FEMA?",
+        "a": "Authorities review violation and impose penalties.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 9: Practical Scenarios (Advanced)",
+    "items": [
+      {
+        "number": 135,
+        "q": "Can shares be issued before receiving funds?",
+        "a": "No, funds must be received before allotment.",
+        "points": []
+      },
+      {
+        "number": 136,
+        "q": "Can valuation be backdated for FEMA compliance?",
+        "a": "No, valuation must be as on relevant date.",
+        "points": []
+      },
+      {
+        "number": 137,
+        "q": "Can foreign investor exit at any price?",
+        "a": "No, pricing guidelines must be followed.",
+        "points": []
+      },
+      {
+        "number": 138,
+        "q": "Can funds be routed through multiple banks?",
+        "a": "Yes, but proper reporting and tracking is required.",
+        "points": []
+      },
+      {
+        "number": 139,
+        "q": "Can company delay FEMA filings intentionally?",
+        "a": "No, delays attract penalties and scrutiny.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 10: Advanced / Expert-Level Questions (High GEO Focus)",
+    "items": [
+      {
+        "number": 140,
+        "q": "What happens if FC-GPR is not filed within 30 days?",
+        "a": "Delay attracts Late Submission Fee (LSF). Regularisation is required.",
+        "points": []
+      },
+      {
+        "number": 141,
+        "q": "Can FEMA violations impact funding rounds?",
+        "a": "Yes, investors conduct compliance due diligence. Non-compliance may block funding.",
+        "points": []
+      },
+      {
+        "number": 142,
+        "q": "Is FEMA compliance required for SAFE notes?",
+        "a": "Yes, if treated as convertible instruments. RBI guidelines apply.",
+        "points": []
+      },
+      {
+        "number": 143,
+        "q": "Can Indian startups receive foreign funds in tranches?",
+        "a": "Yes, but each tranche must be reported separately.",
+        "points": []
+      },
+      {
+        "number": 144,
+        "q": "What is shadow investment under FEMA?",
+        "a": "Indirect or undisclosed foreign investment. It is non-compliant and risky.",
+        "points": []
+      },
+      {
+        "number": 145,
+        "q": "Can FEMA compliance affect valuation negotiations?",
+        "a": "Yes, pricing guidelines restrict flexibility.",
+        "points": []
+      },
+      {
+        "number": 146,
+        "q": "Is FEMA compliance checked during due diligence?",
+        "a": "Yes, investors and auditors verify compliance records.",
+        "points": []
+      },
+      {
+        "number": 147,
+        "q": "Can FEMA non-compliance delay IPO plans?",
+        "a": "Yes, regulatory issues must be resolved before listing.",
+        "points": []
+      },
+      {
+        "number": 148,
+        "q": "What is the biggest risk in FEMA non-compliance?",
+        "a": "Financial penalties and reputational damage. It may impact future investments.",
+        "points": []
+      },
+      {
+        "number": 149,
+        "q": "Can FEMA compliance be automated?",
+        "a": "Partially, through compliance tools. However, expert review is essential.",
+        "points": []
+      },
+      {
+        "number": 150,
+        "q": "Why should companies take FEMA compliance seriously?",
+        "a": "It directly impacts funding, valuation, and regulatory standing. As per regulatory guidelines, strict compliance is critical.",
+        "points": []
+      }
+    ]
+  }
+];
+
+function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+  return <section className="mb-12"><h2 id={id} className="visible">{title}</h2>{children}</section>;
+}
+
+function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((header) => <th scope="col" key={header}>{header}</th>)}</tr></thead><tbody>{rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex}>{cell}</td>)}</tr>)}</tbody></table></div>;
+}
+
+function Timeline({ steps }: { steps: string[] }) {
+  return <div className="step-timeline">{steps.map((step, index) => <div className="step-item" key={step}><div className="step-dot" /><div className="step-card"><div className="step-label">Step {index + 1}</div><p>{step}</p></div></div>)}</div>;
+}
 
 export default function PageClient() {
-    const sections = [
-        { id: "introduction", title: "Introduction" },
-        { id: "what-is-fema-compliance", title: "What Is FEMA Compliance" },
-        { id: "regulatory-framework", title: "Regulatory Framework" },
-        { id: "who-needs", title: "Who Needs FEMA Compliance" },
-        { id: "key-transaction-categories", title: "Key Transaction Categories" },
-        { id: "fema-forms-filings", title: "FEMA Forms & Filings" },
-        { id: "compliance-process", title: "Compliance Process" },
-        { id: "compliance-checklist", title: "Compliance Checklist" },
-        { id: "fees", title: "Fees & Charges" },
-        { id: "timeline", title: "Timeline Summary" },
-        { id: "common-mistakes", title: "Common Mistakes" },
-        { id: "consequences", title: "Consequences of Non-Compliance" },
-        { id: "fema-vs-fera", title: "FEMA vs FERA" },
-        { id: "post-compliance", title: "Post-Compliance Requirements" },
-        { id: "faqs", title: "FAQs" },
-    ];
+  return (
+    <ServicePageLayout
+      tags={[{"emoji": "", "label": "Compliance"}, {"emoji": "", "label": "FEMA / RBI"}]}
+      breadcrumb={[{"label": "Home", "href": "/"}, {"label": "Regulatory", "href": "/regulatory"}, {"label": "Compliance", "href": "/regulatory/compliance"}, {"label": "FEMA Compliance in India"}]}
+      title={"FEMA Compliance in India"}
+      readTime={"30 min read"}
+      focusKeyword={"FEMA Compliance in India"}
+      ctaTitle={"Discuss Your Compliance Requirements"}
+      ctaDescription={"Speak to the Estabizz team about documentation, reporting and ongoing compliance support."}
+      quickFacts={[{"label": "Framework", "value": "FEMA, 1999"}, {"label": "Regulator", "value": "RBI"}, {"label": "Coverage", "value": "FDI / ODI / ECB"}, {"label": "FAQs", "value": "150"}]}
+      relatedArticles={[{"title": "Compliance Test Report for AIF", "href": "/sebi/aif-compliance-test-report", "category": "Compliance", "description": "Compliance Test Report for AIF is a critical regulatory requirement under SEBI that ensures Alternative Investment Funds operate strictly within prescribed guidelines, investment limits, and governance standards."}, {"title": "FEMA Registration", "href": "/fema/fema-registration", "category": "FEMA / RBI", "description": "Explore the related registration and regulatory framework."}]}
+      finalCtaTitle={"Speak to Our Compliance Team"}
+      finalCtaDescription={"Discuss your regulatory obligations, documentation and reporting requirements with Estabizz."}
+      sections={sections}
+      hideReviewBadge
+      heroDescription={<p>{"FEMA Compliance in India is a critical regulatory requirement for any individual or business dealing with foreign exchange, cross-border transactions, or foreign investments."}</p>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Discuss Compliance</Link><a href="https://wa.me/919825600907" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+    >
+      <Section id="introduction" title={"Introduction"}>
+        <p>{"FEMA Compliance in India is a critical regulatory requirement for any individual or business dealing with foreign exchange, cross-border transactions, or foreign investments."}</p>
+      </Section>
 
-    const faqs: { q: string; a: string }[] = [
-        {
-            q: "Is FEMA applicable to all companies in India?",
-            a: "FEMA applies to any person resident in India who undertakes a foreign exchange transaction. If a company has no foreign investment, no foreign borrowings, and no cross-border transactions, FEMA compliance obligations do not arise. Once any foreign element is introduced, FEMA obligations begin."
-        },
-        {
-            q: "What is the difference between Automatic Route and Approval Route under FDI?",
-            a: "Under the Automatic Route, a foreign investor can invest in an Indian company without prior approval from RBI or the Government. The Indian company only needs to comply with post-investment reporting (ARF, FC-GPR). Under the Approval Route, prior government approval is required before the investment is received. Once approved, the same reporting obligations apply."
-        },
-        {
-            q: "What happens if I miss the ARF or FC-GPR deadline?",
-            a: "Missing the ARF (30 days from remittance) or FC-GPR (30 days from allotment) deadline attracts a Late Submission Fee (LSF). The LSF is calculated as a percentage of the outstanding amount based on the delay period. For delays up to 3 years, LSF can be self-reported and paid through the AD Bank — no formal compounding needed. Beyond 3 years, a compounding application to RBI is required."
-        },
-        {
-            q: "Is there any penalty for not filing the FLA Return?",
-            a: "Yes. Non-filing of the FLA Return triggers a compounding proceeding by RBI. Companies that have outstanding FDI or ODI as of 31st March each year are mandatorily required to file the FLA Return by 15th July. There is no LSF option for FLA — it goes directly to compounding if not filed."
-        },
-        {
-            q: "Can a startup receive angel funding from NRI friends or family without FEMA compliance?",
-            a: "No. Any investment received from an NRI or foreign national into an Indian startup is an FDI transaction under FEMA — regardless of the amount or the relationship between investor and founder. ARF, FC-GPR, and FLA Return are mandatory even for small amounts received from an NRI."
-        },
-        {
-            q: "What is the FLA Return and who must file it?",
-            a: "The Foreign Liabilities & Assets (FLA) Return is an annual RBI survey that collects data on outstanding foreign investment in Indian companies and overseas investment by Indian companies. It is mandatory for all Indian companies/LLPs that have received FDI or made ODI and have such investment outstanding as of 31st March. Filing deadline is 15th July every year on RBI's FLAIR portal."
-        },
-        {
-            q: "Can FEMA violations be regularised after the fact?",
-            a: "Yes. RBI's Compounding mechanism allows past FEMA violations to be voluntarily regularised by paying a compounding fee. The process involves filing a compounding application with RBI, disclosing the violation, and paying the determined fee. Once compounded, the violation is settled and cannot be reopened."
-        },
-        {
-            q: "What is an External Commercial Borrowing (ECB) and what are its FEMA obligations?",
-            a: "An ECB is a loan raised by an Indian entity from a foreign lender. ECB compliance under FEMA requires: (1) Loan Registration before first drawdown via Form ECB on FIRMS, (2) Compliance with minimum average maturity, eligible end-use, and all-in-cost ceilings, (3) Monthly ECB-2 return within 7 working days of month end, and (4) Reporting any changes within 7 days."
-        },
-        {
-            q: "Is there a minimum investment amount below which FEMA does not apply?",
-            a: "No. FEMA has no de minimis threshold. The obligation to comply with FEMA reporting arises from the nature of the transaction, not the amount. Even USD 100 of FDI requires ARF and FC-GPR filing. However, the Late Submission Fee is calculated as a percentage of the outstanding amount, so small amounts have proportionally smaller fees if delayed."
-        },
-        {
-            q: "What documents are needed for FC-GPR filing?",
-            a: "FC-GPR filing requires: (1) Copy of FIRC / bank credit advice for the remittance, (2) KYC of foreign investor from AD Bank, (3) FMV valuation certificate from SEBI-registered Merchant Banker or CA, (4) Board resolution for share allotment, (5) Certificate from CS/director on compliance with sectoral caps and pricing guidelines, (6) CA Certificate for FDI calculation, (7) MOA & AOA if first FDI, and (8) Foreign investor's entity documents."
-        },
-        {
-            q: "What is compounding under FEMA and how does it work?",
-            a: "Compounding is RBI's voluntary regularisation mechanism for FEMA violations. The process: (1) Identify the violation and compute the amount, (2) File compounding application with Compounding Authority at RBI, (3) Submit all relevant documents and disclose the full facts, (4) RBI issues a show-cause notice and holds a hearing, (5) RBI passes a compounding order with a fee, (6) Pay the fee — violation is settled. Compounding is one-time; the same violation cannot be compounded again."
-        },
-        {
-            q: "Do remittances for import payments require FEMA compliance?",
-            a: "Import payments are current account transactions — generally freely permitted. However, if advance remittance exceeds USD 2,00,000, a bank guarantee from the foreign supplier may be required. Additionally, if imports are not realised within 6 months (180 days), the period must be extended or action taken. GR/SDF forms for export declarations are handled by the AD Bank."
-        },
-        {
-            q: "Can an Indian company accept convertible notes from foreign investors?",
-            a: "Yes. FEMA permits Convertible Notes (CNs) issued by DPIIT-recognised Indian startups to foreign investors for amounts of INR 25 lakh or more. CNs must convert into equity or be repaid within 5 years. CN issuance requires specific reporting on FIRMS within 30 days. The same FLA Return obligation applies once CNs are converted to equity."
-        },
-        {
-            q: "What is the role of the Authorised Dealer (AD) Bank in FEMA compliance?",
-            a: "The AD Bank (Authorised Dealer Category I — typically commercial banks) acts as the intermediary between the company and RBI for all FEMA filings. The company cannot file directly on FIRMS in most cases — filings are submitted by the AD Bank on the company's behalf. The AD Bank also issues the FIRC and provides the KYC of the foreign investor, both required for FIRMS filings."
-        },
-        {
-            q: "Is ODI (Overseas Direct Investment) allowed for all Indian companies?",
-            a: "ODI is permitted for Indian companies under the ODI Rules 2022 within prescribed financial commitment limits (generally 400% of net worth under automatic route). ODI is not permitted in countries identified as high-risk by FATF. All ODI must be reported on FIRMS, and an Annual Performance Report (APR) must be filed for each overseas investment every year by 31st December."
-        },
-        {
-            q: "What is the Liberalised Remittance Scheme (LRS) and who can use it?",
-            a: "LRS allows resident individuals (not companies) to remit up to USD 2,50,000 per financial year for any permissible current or capital account transaction — including overseas investment, education, travel, and maintenance of dependents. LRS remittances are subject to 20% TCS above certain thresholds — a key compliance point for individuals."
-        },
-        {
-            q: "How does FEMA apply to ESOP grants to foreign employees?",
-            a: "When an Indian company grants ESOPs to employees of its foreign subsidiary or to foreign nationals, it constitutes a reportable FEMA transaction. The company must report the ESOP issuance to non-residents within 30 days on FIRMS and ensure pricing is at FMV. Exercise price can be below FMV only if the scheme complies with specific FEMA circular provisions."
-        },
-        {
-            q: "Can FEMA violations lead to criminal prosecution?",
-            a: "Pure FEMA violations are civil in nature — they lead to monetary penalties, not criminal prosecution. However, if FEMA violations are linked to money laundering, hawala transactions, or predicate offences under PMLA, the Enforcement Directorate (ED) can initiate criminal proceedings under PMLA — a separate and much more serious proceeding. FEMA itself does not contemplate criminal prosecution for routine compliance failures."
-        },
-        {
-            q: "Are there FEMA restrictions on NRI investment in India?",
-            a: "NRIs can invest in India through multiple routes: NRE/NRO accounts for direct investment, FDI route for equity investment in companies, and NRI-specific portfolios on stock exchanges. NRI investments on non-repatriation basis (NRO funds) are generally treated as domestic investment, not FDI. NRI investments on repatriation basis (NRE funds) are treated as FDI and require full FEMA reporting."
-        },
-        {
-            q: "When should I engage a professional for FEMA compliance?",
-            a: "Engage a FEMA professional (CS or CA with FEMA specialisation) when: (1) You are receiving your first foreign investment, (2) You have missed a deadline and are unsure of LSF vs. compounding route, (3) You are considering an ODI or outward remittance above small amounts, (4) You have received a notice from RBI, or (5) You are undertaking a secondary share transfer (FC-TRS) which has complex pricing and documentation requirements. Proactive engagement is far cheaper than post-facto regularisation."
-        },
-    ];
+      <Section id="what-is-fema-compliance-in-india" title={"What is FEMA Compliance in India?"}>
+        <p><strong>{"In simple terms"}</strong>{", FEMA Compliance ensures that all foreign exchange dealings are conducted within India’s legal framework."}</p>
+        <p><strong>{"From a compliance perspective"}</strong>{", it includes:"}</p>
+        <ul><li>{"Reporting foreign transactions to RBI"}</li><li>{"Following FDI/ODI/ECB guidelines"}</li><li>{"Maintaining documentation and audit trail"}</li><li>{"Ensuring adherence to sectoral caps and pricing norms"}</li></ul>
+        <p><strong>{"Legally"}</strong>{", FEMA governs:"}</p>
+        <ul><li>{"External trade and payments"}</li><li>{"Foreign investments"}</li><li>{"Capital and current account transactions"}</li></ul>
+      </Section>
 
-    return (
-        <ServicePageLayout
-            tags={[
-                { emoji: "🌐", label: "FEMA" },
-                { emoji: "🏦", label: "RBI" },
-                { emoji: "✅", label: "Expert Reviewed" },
-            ]}
-            breadcrumb={[
-                { label: "Home", href: "/" },
-                { label: "FEMA Services", href: "/fema" },
-                { label: "Compliance Under FEMA", href: "/fema/compliance-under-fema" },
-            ]}
-            title="Compliance Under FEMA: Complete Guide to FDI, ODI & ECB Reporting Obligations in India"
-            readTime="18 min read"
-            focusKeyword="Compliance Under FEMA"
-            sections={sections}
-            ctaTitle="FEMA Compliance Support"
-            ctaDescription="Our FEMA specialists handle the complete lifecycle of foreign exchange compliance — from ARF and FC-GPR filings to FLA Returns, compounding applications, and ongoing ECB reporting — ensuring zero regulatory gaps."
-            quickFacts={[
-                { label: "Governing Law", value: "FEMA 1999" },
-                { label: "Regulator", value: "RBI" },
-                { label: "Nature", value: "Civil (not criminal)" },
-                { label: "Key Forms", value: "ARF, FC-GPR, FC-TRS, FLA" },
-                { label: "ARF Deadline", value: "30 days from receipt" },
-                { label: "FC-GPR Deadline", value: "30 days from allotment" },
-                { label: "FLA Return", value: "15th July annually" },
-                { label: "Expert Review", value: "✓ Verified" },
-            ]}
-            relatedArticles={[
-                { title: "AIF Compliance Test Report", href: "/sebi/aif-compliance-test-report", category: "SEBI", description: "Annual compliance certification for Alternative Investment Funds." },
-                { title: "Alternative Asset Portfolio Valuation", href: "/sebi/alternative-asset-portfolio-valuation", category: "SEBI", description: "Valuation framework for AIFs and alternative assets under SEBI." },
-                { title: "AMFI Registration & Distribution", href: "/sebi/amfi-registration", category: "SEBI", description: "ARN registration and mutual fund distribution compliance guide." },
-                { title: "Credit Rating Agency Registration", href: "/sebi/credit-rating-agency", category: "SEBI", description: "SEBI registration and compliance for Credit Rating Agencies." },
-            ]}
-            finalCtaTitle="Need Expert Support for FEMA Compliance?"
-            finalCtaDescription="Our team manages the full FEMA compliance cycle — ARF, FC-GPR, FC-TRS, FLA Return, ECB reporting, and compounding applications — so you stay compliant at every stage of your foreign investment journey."
-        >
-            {/* Introduction */}
-            <section id="introduction">
-                <h2>Introduction</h2>
-                <p>
-                    The <strong>Foreign Exchange Management Act, 1999 (FEMA)</strong> governs all foreign exchange transactions in India. Administered by the <strong>Reserve Bank of India (RBI)</strong>, FEMA regulates capital account transactions, current account transactions, and the movement of foreign currency across India&apos;s borders.
-                </p>
-                <p>
-                    Unlike its predecessor FERA (Foreign Exchange Regulation Act, 1973), FEMA is a <strong>civil law</strong> — violations attract monetary penalties rather than criminal prosecution (except in cases of money laundering). This shift made India more investment-friendly while maintaining robust compliance obligations.
-                </p>
-                <div className="info-box">
-                    <strong>Key Principle:</strong> Under FEMA, all current account transactions are generally permissible unless explicitly prohibited, whereas capital account transactions are permissible only if specifically allowed by RBI regulations or general permission.
-                </div>
-                <p>
-                    Compliance under FEMA is not a one-time event — it is an ongoing obligation that triggers with every foreign exchange inflow, outflow, investment, or borrowing involving cross-border elements. Startups, corporates, NRIs, and exporters must track their FEMA obligations continuously.
-                </p>
-            </section>
+      <Section id="regulatory-framework" title={"Regulatory Framework"}>
+        <DataTable headers={["Particular", "Details"]} rows={[["Governing Law", "Foreign Exchange Management Act, 1999"], ["Regulator", "Reserve Bank of India (RBI)"], ["Supporting Authority", "Central Government"], ["Key Rules", "NDI Rules, ODI Rules, ECB Guidelines"], ["Nature of Offence", "Civil (not criminal)"]]} />
+        <p>{"As per applicable regulatory provisions, FEMA aims to facilitate trade while ensuring controlled capital flow management."}</p>
+      </Section>
 
-            {/* What Is FEMA Compliance */}
-            <section id="what-is-fema-compliance">
-                <h2>What Is FEMA Compliance</h2>
-                <p>
-                    FEMA Compliance refers to the set of <strong>reporting, filing, and documentation obligations</strong> that Indian residents (including companies, LLPs, and individuals) must fulfil when engaging in transactions involving foreign exchange or foreign investment.
-                </p>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Dimension</th>
-                            <th>Description</th>
-                            <th>Examples</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Transactional Compliance</strong></td>
-                            <td>Structuring transactions within permitted limits and routes</td>
-                            <td>FDI under automatic route; correct pricing; sectoral cap checks</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Reporting Compliance</strong></td>
-                            <td>Filing prescribed forms within stipulated deadlines</td>
-                            <td>ARF within 30 days; FC-GPR within 30 days; FC-TRS within 60 days</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Ongoing Annual Compliance</strong></td>
-                            <td>Submitting annual reports on outstanding foreign liabilities and assets</td>
-                            <td>FLA Return by 15th July; ECB-2 monthly returns; ODI APR annually</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div className="info-box">
-                    <strong>Who is a &ldquo;Person Resident in India&rdquo; under FEMA?</strong> A person who has been residing in India for more than 182 days in the preceding financial year, or a company/entity incorporated in India, is considered &ldquo;resident in India&rdquo; for FEMA purposes — regardless of citizenship or nationality.
-                </div>
-            </section>
+      <Section id="who-needs-fema-compliance" title={"Who Needs FEMA Compliance?"}>
+        <p>{"FEMA Compliance applies to:"}</p>
+        <ul><li>{"Companies receiving "}<strong>{"Foreign Direct Investment (FDI)"}</strong></li><li>{"Businesses making "}<strong>{"Overseas Direct Investment (ODI)"}</strong></li><li>{"Entities raising "}<strong>{"External Commercial Borrowings (ECB)"}</strong></li><li>{"Exporters and importers"}</li><li>{"Startups with foreign funding"}</li><li>{"NRIs dealing with property, investments, or remittances"}</li><li>{"Indian entities with foreign subsidiaries"}</li></ul>
+      </Section>
 
-            {/* Regulatory Framework */}
-            <section id="regulatory-framework">
-                <h2>Regulatory Framework</h2>
-                <p>
-                    FEMA compliance is governed by a multi-layered regulatory architecture with the principal legislation supported by specific rules, regulations, and master directions:
-                </p>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Regulation / Rule</th>
-                            <th>Subject Matter</th>
-                            <th>Key Provision</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>FEMA 1999 (Act)</td>
-                            <td>Parent Legislation</td>
-                            <td>Defines transactions, roles, penalties, and powers of RBI</td>
-                        </tr>
-                        <tr>
-                            <td>NDI Rules 2019 (Non-Debt Instruments)</td>
-                            <td>FDI / Foreign Equity Investment</td>
-                            <td>Sectors, caps, conditions for FDI; replaces FEMA 20/2017</td>
-                        </tr>
-                        <tr>
-                            <td>ODI Rules 2022 (Overseas Direct Investment)</td>
-                            <td>Indian Outward Investment</td>
-                            <td>Framework for Indian entities investing abroad</td>
-                        </tr>
-                        <tr>
-                            <td>FEMA (Debt Instruments) Regulations 2019</td>
-                            <td>FPI / Debt Securities</td>
-                            <td>FPI investment in debt instruments</td>
-                        </tr>
-                        <tr>
-                            <td>ECB Guidelines (Master Direction)</td>
-                            <td>External Commercial Borrowings</td>
-                            <td>Eligible borrowers, lenders, limits, end-use, reporting</td>
-                        </tr>
-                        <tr>
-                            <td>FEMA (Current Account Transactions) Rules 2000</td>
-                            <td>Current Account</td>
-                            <td>Remittances, trade payments, travel</td>
-                        </tr>
-                        <tr>
-                            <td>LRS — Liberalised Remittance Scheme</td>
-                            <td>Resident Individuals</td>
-                            <td>USD 2,50,000 per year for individuals</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p>
-                    The <strong>Authorised Dealer (AD) Bank</strong> plays a critical role — most FEMA filings are submitted through the AD Bank (the company&apos;s banker), which then reports to RBI&apos;s <strong>FIRMS portal</strong> (Foreign Investment Reporting &amp; Management System).
-                </p>
-            </section>
+      <Section id="eligibility-criteria" title={"Eligibility Criteria"}>
+        <DataTable headers={["Criteria", "Requirement", "Practical Interpretation"]} rows={[["Business Activity", "Foreign exchange involvement", "Even one foreign transaction triggers compliance"], ["Entity Type", "Company / LLP / Individual", "Applies across structures"], ["Investment", "FDI / ODI / ECB", "Requires RBI reporting"], ["Banking Channel", "AD Bank mandatory", "All forex routed through authorised dealer"]]} />
+      </Section>
 
-            {/* Who Needs FEMA Compliance */}
-            <section id="who-needs">
-                <h2>Who Needs FEMA Compliance</h2>
-                <p>
-                    FEMA compliance obligations arise for any person resident in India who is involved in foreign exchange transactions:
-                </p>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Entity / Person</th>
-                            <th>Transaction Type</th>
-                            <th>Compliance Required</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Indian Company (Private / Public)</td>
-                            <td>Receives FDI / Foreign Investment</td>
-                            <td>ARF, FC-GPR, FLA Return, FC-TRS (on transfer)</td>
-                        </tr>
-                        <tr>
-                            <td>Indian LLP</td>
-                            <td>Receives FDI from NRI / Foreign National</td>
-                            <td>LLP-I (inflow), LLP-II (profit repatriation)</td>
-                        </tr>
-                        <tr>
-                            <td>Indian Company / LLP</td>
-                            <td>Invests Overseas (ODI)</td>
-                            <td>ODI Filing, APR (Annual Performance Report)</td>
-                        </tr>
-                        <tr>
-                            <td>Indian Borrower</td>
-                            <td>Raises External Commercial Borrowing</td>
-                            <td>Loan Registration, ECB-2 monthly return</td>
-                        </tr>
-                        <tr>
-                            <td>Exporter / Importer</td>
-                            <td>Trade transactions in forex</td>
-                            <td>GR/SDF forms, advance remittance declarations</td>
-                        </tr>
-                        <tr>
-                            <td>NRI / PIO</td>
-                            <td>Investments in India (NRE/NRO accounts, property)</td>
-                            <td>Applicable FEMA regulations on repatriation, investment</td>
-                        </tr>
-                        <tr>
-                            <td>Startups with Foreign Funding</td>
-                            <td>Angel / VC / PE from foreign investors</td>
-                            <td>ARF, FC-GPR, FLA Return mandatory from first year</td>
-                        </tr>
-                        <tr>
-                            <td>Foreign Company&apos;s Indian Branch / Liaison Office</td>
-                            <td>Cross-border remittances, expenses</td>
-                            <td>Annual Activity Certificate (AAC), RBI filings</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div className="warning-box">
-                    <strong>Important:</strong> FEMA compliance applies to the <em>Indian entity</em> receiving foreign investment — not the foreign investor. The obligation to file ARF, FC-GPR, and FLA Return rests entirely on the Indian investee company.
-                </div>
-            </section>
+      <Section id="documents-required" title={"Documents Required"}>
+        <DataTable headers={["Document", "Purpose", "Remarks"]} rows={[["KYC Documents", "Identity verification", "Mandatory for all transactions"], ["FIRC", "Proof of inward remittance", "Issued by AD Bank"], ["Board Resolution", "Approval for transactions", "Required for companies"], ["Valuation Report", "Pricing compliance", "For share issuance"], ["RBI Forms (FC-GPR, FC-TRS, etc.)", "Reporting compliance", "Filed through FIRMS portal"], ["Agreements", "Transaction clarity", "Investment or loan agreements"]]} />
+      </Section>
 
-            {/* Key Transaction Categories */}
-            <section id="key-transaction-categories">
-                <h2>Key Transaction Categories</h2>
-                <p>
-                    FEMA divides all foreign exchange transactions into two broad categories, each with distinct compliance requirements:
-                </p>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Default Treatment</th>
-                            <th>Examples</th>
-                            <th>Compliance Trigger</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Current Account Transactions</strong></td>
-                            <td>Generally freely permissible unless specifically restricted</td>
-                            <td>Trade payments, service payments, travel, education remittances, dividends to foreign investors</td>
-                            <td>Procedural documentation; AD Bank certifications</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Capital Account Transactions</strong></td>
-                            <td>Permissible only if specifically allowed by RBI/FEMA rules</td>
-                            <td>FDI in India, ODI by Indians, ECB, FPI, immovable property abroad</td>
-                            <td>Full reporting (ARF, FC-GPR, FC-TRS, FLA, ECB-2); prior approval where required</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p>
-                    The most common compliance obligations arise from <strong>FDI (inward)</strong>, <strong>ODI (outward)</strong>, and <strong>ECB (borrowings)</strong>. Each has a distinct set of filing requirements, timelines, and ongoing reporting obligations.
-                </p>
-            </section>
+      <Section id="step-by-step-fema-compliance-process" title={"Step-by-Step FEMA Compliance Process"}>
+        <Timeline steps={["Identify foreign exchange transaction\n", "Check applicable FEMA regulation\n", "Route transaction via AD Bank\n", "Ensure pricing and sector compliance\n", "File RBI forms within timelines\n", "Maintain records and audit trail"]} />
+      </Section>
 
-            {/* FEMA Forms & Filings */}
-            <section id="fema-forms-filings">
-                <h2>FEMA Forms &amp; Filings</h2>
-                <p>
-                    Every category of foreign exchange transaction has one or more prescribed reporting forms to be filed with RBI (through the AD Bank or FIRMS portal):
-                </p>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Form / Return</th>
-                            <th>Transaction Type</th>
-                            <th>Filed By</th>
-                            <th>Deadline</th>
-                            <th>Platform</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>ARF</strong> (Advance Remittance Form)</td>
-                            <td>Receipt of FDI remittance (before share allotment)</td>
-                            <td>Indian Company via AD Bank</td>
-                            <td>Within 30 days of receiving funds</td>
-                            <td>FIRMS Portal / AD Bank</td>
-                        </tr>
-                        <tr>
-                            <td><strong>FC-GPR</strong> (Foreign Currency — Gross Provisional Return)</td>
-                            <td>Issue of shares to foreign investor</td>
-                            <td>Indian Company via AD Bank</td>
-                            <td>Within 30 days of share allotment</td>
-                            <td>FIRMS Portal</td>
-                        </tr>
-                        <tr>
-                            <td><strong>FC-TRS</strong> (Transfer of Shares)</td>
-                            <td>Transfer of shares between resident and non-resident</td>
-                            <td>Resident transferor/transferee via AD Bank</td>
-                            <td>Within 60 days of receipt/payment of consideration</td>
-                            <td>FIRMS Portal</td>
-                        </tr>
-                        <tr>
-                            <td><strong>FLA Return</strong> (Foreign Liabilities &amp; Assets)</td>
-                            <td>Annual survey of outstanding FDI/ODI</td>
-                            <td>Indian Company with FDI/ODI outstanding</td>
-                            <td>By 15th July every year</td>
-                            <td>RBI FLAIR Portal</td>
-                        </tr>
-                        <tr>
-                            <td><strong>ODI Form / APR</strong></td>
-                            <td>Overseas direct investment by Indian entity</td>
-                            <td>Indian Investor Company via AD Bank</td>
-                            <td>APR annually by 31 December; ODI on investment</td>
-                            <td>FIRMS Portal</td>
-                        </tr>
-                        <tr>
-                            <td><strong>ECB-2 Return</strong></td>
-                            <td>External Commercial Borrowing outstanding</td>
-                            <td>ECB Borrower via AD Bank</td>
-                            <td>Monthly (within 7 working days of month end)</td>
-                            <td>FIRMS / AD Bank</td>
-                        </tr>
-                        <tr>
-                            <td><strong>LLP-I</strong></td>
-                            <td>Receipt of FDI by LLP</td>
-                            <td>Indian LLP via AD Bank</td>
-                            <td>Within 30 days of receiving funds</td>
-                            <td>FIRMS Portal</td>
-                        </tr>
-                        <tr>
-                            <td><strong>LLP-II</strong></td>
-                            <td>Disinvestment / profit repatriation from LLP</td>
-                            <td>Indian LLP via AD Bank</td>
-                            <td>Within 60 days of disinvestment/repatriation</td>
-                            <td>FIRMS Portal</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Form ECB</strong> (Loan Registration)</td>
-                            <td>Raising new ECB (loan from foreign lender)</td>
-                            <td>Borrower via AD Bank</td>
-                            <td>Before first drawdown</td>
-                            <td>FIRMS Portal</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div className="info-box">
-                    <strong>FIRMS Portal:</strong> RBI&apos;s unified digital platform handles all FDI-related reporting (ARF, FC-GPR, FC-TRS, FLA). Authorized Dealers (banks) submit on behalf of the company using the company&apos;s registered credentials.
-                </div>
-            </section>
+      <Section id="fees-structure" title={"Fees Structure"}>
+        <DataTable headers={["Type", "Amount"]} rows={[["Government Fees", "Generally NIL"], ["Late Submission Fee (LSF)", "As per RBI delay slabs"], ["Professional Fees", "Rs.25,000 – Rs.2,00,000 (depending on complexity)"], ["Penalty (if non-compliant)", "Up to 3x amount involved"]]} />
+      </Section>
 
-            {/* Compliance Process */}
-            <section id="compliance-process">
-                <h2>Compliance Process</h2>
-                <p>
-                    The standard FEMA compliance process for a company receiving FDI follows six sequential steps:
-                </p>
-                <ol className="step-timeline">
-                    <li>
-                        <strong>Step 1: Transaction Structuring &amp; Route Determination</strong>
-                        <p>Identify whether the proposed investment/transaction is under the <strong>Automatic Route</strong> (no prior RBI/Government approval needed) or the <strong>Approval Route</strong> (requires government approval). Verify sectoral caps, prohibited sectors, and entry conditions under NDI Rules 2019.</p>
-                    </li>
-                    <li>
-                        <strong>Step 2: Receive Foreign Remittance &amp; Obtain FIRC</strong>
-                        <p>Once the foreign investor remits funds, obtain the <strong>inward remittance certificate (FIRC)</strong> and <strong>KYC of the foreign investor</strong> from the AD Bank — these are mandatory attachments for FIRMS filing. FIRC issuance typically takes 3-7 working days.</p>
-                    </li>
-                    <li>
-                        <strong>Step 3: File ARF (Advance Remittance Form)</strong>
-                        <p>Report the receipt of foreign funds to RBI via the AD Bank using the ARF on FIRMS portal. This must be done <strong>within 30 days</strong> of receipt of remittance and before allotment of shares. Attach FIRC, KYC, and declaration of compliance.</p>
-                    </li>
-                    <li>
-                        <strong>Step 4: Board Resolution &amp; Share Allotment</strong>
-                        <p>Hold Board meeting to allot shares to the foreign investor at a price not less than the Fair Market Value (FMV) determined by a SEBI-registered Merchant Banker or CA as per DCF/NAV method. Shares must be allotted <strong>within 60 days</strong> of receiving funds.</p>
-                    </li>
-                    <li>
-                        <strong>Step 5: File FC-GPR (Foreign Currency Gross Provisional Return)</strong>
-                        <p>After allotment, file FC-GPR on FIRMS portal through AD Bank, attaching the allotment letter, FMV certificate, MOA/AOA, and CA Certificate. Deadline: <strong>within 30 days of allotment</strong>. Failure attracts Late Submission Fee (LSF).</p>
-                    </li>
-                    <li>
-                        <strong>Step 6: Annual FLA Return Filing</strong>
-                        <p>File the <strong>FLA Return</strong> on RBI&apos;s FLAIR portal every year by <strong>15th July</strong>, disclosing outstanding FDI liabilities and ODI assets as of 31st March. This is mandatory every year until the foreign investment is fully repatriated.</p>
-                    </li>
-                </ol>
-                <div className="warning-box">
-                    <strong>Critical:</strong> Share allotment cannot be delayed beyond 60 days from the date of receipt of foreign funds. If allotment is delayed, the funds must be refunded to the foreign investor through normal banking channels — this is non-negotiable under FEMA.
-                </div>
-            </section>
+      <Section id="timeline" title={"Timeline"}>
+        <DataTable headers={["Stage", "Timeline"]} rows={[["Share Allotment (FDI)", "Within 60 days"], ["FC-GPR Filing", "Within 30 days"], ["FLA Return", "By 15 July annually (aracs.in)"], ["ODI Reporting", "As per RBI timelines"]]} />
+      </Section>
 
-            {/* Compliance Checklist */}
-            <section id="compliance-checklist">
-                <h2>Compliance Checklist</h2>
-                <p>
-                    Use this checklist to track ongoing FEMA compliance status across different transaction types:
-                </p>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Compliance Item</th>
-                            <th>Trigger Event</th>
-                            <th>Deadline</th>
-                            <th>Form / Action</th>
-                            <th>Penalty for Delay</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>ARF Filing</td>
-                            <td>Receipt of FDI remittance</td>
-                            <td>30 days from receipt</td>
-                            <td>ARF on FIRMS</td>
-                            <td>LSF applicable</td>
-                        </tr>
-                        <tr>
-                            <td>Share Allotment</td>
-                            <td>After ARF filing</td>
-                            <td>60 days from remittance</td>
-                            <td>Board Resolution + ROC filings</td>
-                            <td>Refund of funds mandatory</td>
-                        </tr>
-                        <tr>
-                            <td>FC-GPR Filing</td>
-                            <td>After share allotment</td>
-                            <td>30 days from allotment</td>
-                            <td>FC-GPR on FIRMS</td>
-                            <td>LSF applicable</td>
-                        </tr>
-                        <tr>
-                            <td>FC-TRS Filing</td>
-                            <td>Transfer of shares between resident &amp; NR</td>
-                            <td>60 days from consideration</td>
-                            <td>FC-TRS on FIRMS</td>
-                            <td>LSF applicable</td>
-                        </tr>
-                        <tr>
-                            <td>FLA Return</td>
-                            <td>Annual (if FDI/ODI outstanding)</td>
-                            <td>15th July every year</td>
-                            <td>RBI FLAIR portal</td>
-                            <td>Compounding proceeding</td>
-                        </tr>
-                        <tr>
-                            <td>ODI Filing &amp; APR</td>
-                            <td>On making overseas investment</td>
-                            <td>ODI: before investment; APR: 31 Dec annually</td>
-                            <td>FIRMS Portal via AD Bank</td>
-                            <td>LSF + compounding</td>
-                        </tr>
-                        <tr>
-                            <td>ECB-2 Return</td>
-                            <td>Monthly (if ECB outstanding)</td>
-                            <td>Within 7 working days of month end</td>
-                            <td>FIRMS via AD Bank</td>
-                            <td>LSF applicable</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+      <Section id="post-registration-compliance" title={"Post-Registration Compliance"}>
+        <ul><li>{"Annual FLA return filing"}</li><li>{"Continuous RBI reporting"}</li><li>{"Adherence to pricing guidelines"}</li><li>{"Maintenance of transaction records"}</li><li>{"Audit readiness for regulatory scrutiny"}</li></ul>
+        <p>{"As per RBI Master Directions, timely reporting of FDI, ODI, ECB, and LRS transactions is mandatory."}</p>
+      </Section>
 
-            {/* Fees & Charges */}
-            <section id="fees">
-                <h2>Fees &amp; Charges</h2>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Fee Type</th>
-                            <th>Amount</th>
-                            <th>Remarks</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Government Filing Fee (ARF / FC-GPR / FC-TRS)</td>
-                            <td><strong>NIL</strong></td>
-                            <td>No statutory fee for FEMA filings with RBI/FIRMS</td>
-                        </tr>
-                        <tr>
-                            <td>FLA Return Filing Fee</td>
-                            <td><strong>NIL</strong></td>
-                            <td>Free filing on RBI FLAIR portal</td>
-                        </tr>
-                        <tr>
-                            <td>Late Submission Fee (LSF) — ARF / FC-GPR</td>
-                            <td>0.05% – 0.15% per year on outstanding amount</td>
-                            <td>Slabs based on delay period; capped at 300% of principal</td>
-                        </tr>
-                        <tr>
-                            <td>Late Submission Fee (LSF) — ECB-2</td>
-                            <td>INR 5,000 – INR 50,000 per return</td>
-                            <td>As per RBI Master Directions on ECB</td>
-                        </tr>
-                        <tr>
-                            <td>Compounding Fee (Voluntary Regularisation)</td>
-                            <td>Variable — based on violation amount and duration</td>
-                            <td>Filed with RBI Compounding Authority; one-time settlement</td>
-                        </tr>
-                        <tr>
-                            <td>FEMA Penalty (Adjudication)</td>
-                            <td>Up to 3 times the amount of contravention</td>
-                            <td>Can continue at INR 5,000/day for continuing violations</td>
-                        </tr>
-                        <tr>
-                            <td>Professional / CS Fees</td>
-                            <td>INR 25,000 – INR 2,00,000</td>
-                            <td>Depends on complexity, number of filings, compounding needs</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div className="info-box">
-                    <strong>Late Submission Fee (LSF):</strong> RBI introduced LSF as an alternative to compounding for minor procedural delays. LSF can be paid to regularise late filings without going through the formal compounding process — significantly faster and cheaper for smaller violations.
-                </div>
-            </section>
+      <Section id="practical-compliance-risks" title={"Practical Compliance Risks"}>
+        <ul><li>{"Delayed RBI filings (most common issue)"}</li><li>{"Incorrect valuation of shares"}</li><li>{"Non-compliance with sectoral caps"}</li><li>{"Using non-authorised banking channels"}</li><li>{"Misclassification of transactions"}</li></ul>
+        <p><strong>{"Real risk:"}</strong>{" Late filings attract heavy penalties and regulatory scrutiny."}</p>
+      </Section>
 
-            {/* Timeline Summary */}
-            <section id="timeline">
-                <h2>Timeline Summary</h2>
-                <p>
-                    Key FEMA deadlines to track from the date of a foreign investment transaction:
-                </p>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Milestone</th>
-                            <th>Deadline</th>
-                            <th>Consequence of Breach</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>FIRC &amp; KYC Documents from AD Bank</td>
-                            <td>Within 1–2 weeks of remittance</td>
-                            <td>Delays ARF filing; cascading LSF risk</td>
-                        </tr>
-                        <tr>
-                            <td>ARF Filing on FIRMS</td>
-                            <td>Within 30 days of remittance</td>
-                            <td>LSF on outstanding amount</td>
-                        </tr>
-                        <tr>
-                            <td>FMV Valuation Certificate (FDI)</td>
-                            <td>Before Board Meeting for allotment</td>
-                            <td>Invalid allotment; FEMA violation</td>
-                        </tr>
-                        <tr>
-                            <td>Share Allotment</td>
-                            <td>Within 60 days of remittance</td>
-                            <td>Refund mandatory; FEMA violation</td>
-                        </tr>
-                        <tr>
-                            <td>FC-GPR Filing</td>
-                            <td>Within 30 days of allotment</td>
-                            <td>LSF on outstanding amount</td>
-                        </tr>
-                        <tr>
-                            <td>FC-TRS Filing (share transfer)</td>
-                            <td>Within 60 days of consideration receipt/payment</td>
-                            <td>LSF on transaction value</td>
-                        </tr>
-                        <tr>
-                            <td>FLA Return (annual)</td>
-                            <td>15th July (for period ending 31st March)</td>
-                            <td>Compounding; notice from RBI</td>
-                        </tr>
-                        <tr>
-                            <td>ECB-2 Monthly Return</td>
-                            <td>Within 7 working days of month end</td>
-                            <td>LSF per delayed return</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+      <Section id="why-professional-support-matters" title={"Why Professional Support Matters"}>
+        <ul><li>{"Avoid costly penalties"}</li><li>{"Ensure correct filings"}</li><li>{"Handle RBI scrutiny"}</li><li>{"Maintain proper documentation"}</li><li>{"Save time and regulatory risk"}</li></ul>
+      </Section>
 
-            {/* Common Mistakes */}
-            <section id="common-mistakes">
-                <h2>Common Mistakes</h2>
-                <p>
-                    These are the most frequently encountered FEMA compliance errors:
-                </p>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Common Misconception / Mistake</th>
-                            <th>Correct Position</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>&ldquo;FDI is under automatic route so no compliance needed&rdquo;</td>
-                            <td>Automatic route only means no <em>prior</em> approval. Post-investment reporting (ARF, FC-GPR, FLA Return) is still mandatory. Automatic route ≠ no compliance.</td>
-                        </tr>
-                        <tr>
-                            <td>&ldquo;The amount is small so FEMA doesn&apos;t apply&rdquo;</td>
-                            <td>FEMA has no de minimis threshold. Even USD 100 of foreign investment triggers full reporting requirements. Amount is irrelevant to the obligation to file.</td>
-                        </tr>
-                        <tr>
-                            <td>Allotting shares first, filing ARF later</td>
-                            <td>ARF must be filed <em>before</em> share allotment. The correct sequence is: Receive funds → File ARF → Allot shares → File FC-GPR.</td>
-                        </tr>
-                        <tr>
-                            <td>Issuing shares at face value / below FMV</td>
-                            <td>For FDI, shares must be issued at or above FMV as per DCF/NAV method. Issuance below FMV is a FEMA violation — the difference is treated as a deemed remittance without compliance.</td>
-                        </tr>
-                        <tr>
-                            <td>&ldquo;No new FDI this year, so no FLA Return needed&rdquo;</td>
-                            <td>FLA Return is required every year as long as FDI or ODI is <em>outstanding</em>. If foreign shares are still held, the FLA Return must be filed annually regardless of whether new investment was received.</td>
-                        </tr>
-                        <tr>
-                            <td>Ignoring downstream investment notifications</td>
-                            <td>If a company with FDI makes downstream investments in other Indian companies, additional FEMA compliance is triggered for foreign-owned Indian companies investing in subsidiaries.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+      <Section id="advanced-fema-compliance-risks-regulatory-red-flags" title={"Advanced FEMA Compliance Risks & Regulatory Red Flags"}>
+        <p>{"From a practical compliance perspective, most FEMA issues do not arise due to lack of intent — they arise due to "}<strong>{"misinterpretation and delay"}</strong>{"."}</p>
+        <h3>{"High-Risk Areas (Observed in Practice)"}</h3>
+        <ul><li><strong>{"Delay in FC-GPR filing beyond 30 days"}</strong>{""}<br />{""}{"→"}{" Mandatory reporting timeline as per RBI is strict "}</li><li><strong>{"Incorrect classification of transaction (FDI vs ECB vs ODI)"}</strong>{""}<br />{""}{"→"}{" Leads to wrong form filing and regulatory mismatch"}</li><li><strong>{"Failure to file Advance Reporting "}</strong><strong>{"Form"}</strong><strong>{" (ARF)"}</strong>{""}<br />{""}{"→"}{" Required within 30 days of receipt of foreign funds "}</li><li><strong>{"Non-filing of FLA Return (even NIL cases)"}</strong>{""}<br />{""}{"→"}{" Mandatory annual filing for companies with foreign exposure "}</li><li><strong>{"Improper valuation of shares"}</strong>{""}<br />{""}{"→"}{" Violates pricing guidelines under FEMA"}</li><li><strong>{"Missed FC-TRS timelines (60 days)"}</strong>{""}<br />{""}{"→"}{" Required for share transfers between "}{"resident"}{" and non-"}{"resident"}{" "}</li></ul>
+      </Section>
 
-            {/* Consequences of Non-Compliance */}
-            <section id="consequences">
-                <h2>Consequences of Non-Compliance</h2>
-                <p>
-                    FEMA enforcement operates on an escalating scale — from administrative fees for minor delays to formal penalties and prosecution for deliberate violations:
-                </p>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Stage</th>
-                            <th>Violation Type</th>
-                            <th>Consequence</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Level 1</strong></td>
-                            <td>Minor procedural delay (ARF, FC-GPR late)</td>
-                            <td>Late Submission Fee (LSF) — self-certification, paid via AD Bank</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Level 2</strong></td>
-                            <td>Significant delay or non-filing</td>
-                            <td>Compounding with RBI — file application, pay compounding fee, receive order</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Level 3</strong></td>
-                            <td>Substantial contravention (wrong route, excess investment, etc.)</td>
-                            <td>Penalty up to <strong>3 times</strong> the amount involved under FEMA Section 13</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Level 4</strong></td>
-                            <td>Continuing violation</td>
-                            <td>Additional penalty of INR 5,000 per day for each day of violation</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Level 5</strong></td>
-                            <td>Money laundering / wilful non-compliance</td>
-                            <td>PMLA proceedings + Enforcement Directorate (ED) investigation</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div className="warning-box">
-                    <strong>Enforcement Directorate (ED):</strong> FEMA violations (civil) are adjudicated by RBI/FEMA Adjudicating Authority. However, if the violation is connected to money laundering, the ED under PMLA takes over — which is a criminal proceeding. This is the key distinction from the &ldquo;FEMA is civil, not criminal&rdquo; principle.
-                </div>
-            </section>
+      <Section id="fema-compliance-checklist-practical-view" title={"FEMA Compliance Checklist (Practical View)"}>
+        <DataTable headers={["Compliance Area", "Requirement", "Frequency"]} rows={[["Advance Reporting Form (ARF)", "Report inward remittance", "Within 30 days"], ["FC-GPR", "Share allotment reporting", "Within 30 days"], ["FC-TRS", "Share transfer reporting", "Within 60 days"], ["FLA Return", "Foreign liabilities/assets", "Annual (15 July)"], ["ODI / APR", "Overseas investment reporting", "Annual"], ["ECB-2 Return", "Borrowing reporting", "Monthly"]]} />
+      </Section>
 
-            {/* FEMA vs FERA */}
-            <section id="fema-vs-fera">
-                <h2>FEMA vs FERA</h2>
-                <p>
-                    Understanding the shift from FERA to FEMA helps appreciate why compliance is structured the way it is today:
-                </p>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Parameter</th>
-                            <th>FERA 1973 (Repealed)</th>
-                            <th>FEMA 1999 (Current)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Nature of Law</td>
-                            <td>Criminal</td>
-                            <td>Civil</td>
-                        </tr>
-                        <tr>
-                            <td>Burden of Proof</td>
-                            <td>On accused (reverse burden)</td>
-                            <td>On enforcement authority</td>
-                        </tr>
-                        <tr>
-                            <td>Approach to FX Transactions</td>
-                            <td>Prohibitory — all restricted unless allowed</td>
-                            <td>Facilitative — current account free, capital account regulated</td>
-                        </tr>
-                        <tr>
-                            <td>Arrest / Custody</td>
-                            <td>Yes — arrest without warrant possible</td>
-                            <td>No — arrest only under PMLA by ED</td>
-                        </tr>
-                        <tr>
-                            <td>Penalty</td>
-                            <td>Imprisonment up to 7 years</td>
-                            <td>Monetary penalty up to 3x contravention amount</td>
-                        </tr>
-                        <tr>
-                            <td>Capital Controls</td>
-                            <td>Strict — foreign exchange treated as scarce resource</td>
-                            <td>Liberal — free movement permitted within rules</td>
-                        </tr>
-                        <tr>
-                            <td>Investment Climate</td>
-                            <td>Restrictive, deterred foreign investment</td>
-                            <td>Open, investment-friendly, aligned with liberalisation</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+      <Section id="practical-interpretation-of-fema-real-world-view" title={"Practical Interpretation of FEMA (Real-World View)"}>
+        <p><strong>{"In simple terms"}</strong>{", FEMA is not just a law — it is a "}<strong>{"transaction monitoring system"}</strong>{"."}</p>
+        <ul><li>{"Every inflow → Must be reported"}</li><li>{"Every outflow → Must be justified"}</li><li>{"Every structure → Must be compliant"}</li></ul>
+        <p><strong>{"As per governing regulations"}</strong>{", even a single foreign transaction triggers a chain of compliance obligations across:"}</p>
+        <ul><li>{"RBI"}</li><li>{"AD Bank"}</li><li>{"Company records"}</li><li>{"Audit trail"}</li></ul>
+      </Section>
 
-            {/* Post-Compliance Requirements */}
-            <section id="post-compliance">
-                <h2>Post-Compliance Requirements</h2>
-                <p>
-                    FEMA compliance is not limited to initial filings — the following ongoing obligations must be tracked throughout the life of the foreign investment:
-                </p>
-                <ul>
-                    <li><strong>Annual FLA Return:</strong> File every year by 15th July as long as FDI or ODI is outstanding. Non-filing triggers compounding proceedings.</li>
-                    <li><strong>FC-TRS on Share Transfers:</strong> Any subsequent transfer of shares between a resident and non-resident must be reported within 60 days.</li>
-                    <li><strong>Valuation for Exit:</strong> When a foreign investor sells back shares to a resident, the price must not be less than FMV (floor price for non-resident seller). Incorrect exit pricing is a violation.</li>
-                    <li><strong>Downstream Investment Notifications:</strong> If the Indian investee company makes further investments in other Indian companies, those downstream investments must comply with FEMA rules.</li>
-                    <li><strong>Dividend/Royalty Repatriation Compliance:</strong> Repatriation of dividends, royalties, or technical fees to foreign investors must be through AD Bank with prescribed tax clearances.</li>
-                    <li><strong>FC-GPR on Bonus/Rights Issues:</strong> If new shares are issued to the foreign investor via rights or bonus, a fresh FC-GPR must be filed.</li>
-                    <li><strong>ECB Monitoring:</strong> For active ECBs, monthly ECB-2 returns and compliance with end-use restrictions, parking norms, and reporting of drawdowns must be maintained throughout the loan period.</li>
-                </ul>
-                <blockquote className="expert-quote">
-                    <p>&ldquo;FEMA compliance is invisible when done correctly and catastrophic when ignored. The most expensive FEMA violations we see are not wilful breaches — they are missed deadlines by founders who assumed that automatic route meant no compliance.&rdquo;</p>
-                    <footer>— <strong>CS Devyani Khambhati</strong>, FEMA &amp; Cross-Border Transactions Specialist</footer>
-                </blockquote>
-            </section>
+      <Section id="common-fema-mistakes-made-by-founders-cfos" title={"Common FEMA Mistakes Made by Founders & CFOs"}>
+        <h3>{"1. “We received funds, compliance can be done later”"}</h3>
+        <p>{"→"}{" Incorrect "}{"—"}{" FEMA is "}<strong>{"timeline-driven"}</strong></p>
+        <h3>{"2. “FDI is under automatic route, so no compliance needed”"}</h3>
+        <p>{"→"}{" Wrong "}{"—"}{" "}<strong>{"reporting is still mandatory"}</strong></p>
+        <h3>{"3. “Small amount, so not applicable”"}</h3>
+        <p>{"→"}{" FEMA applies "}<strong>{"irrespective of amount"}</strong></p>
+        <h3>{"4. “CA will handle everything”"}</h3>
+        <p>{"→"}{" FEMA requires "}<strong>{"multi-layer coordination (CS + CA + Bank)"}</strong></p>
+      </Section>
 
-            {/* FAQs */}
-            <section id="faqs">
-                <h2>Frequently Asked Questions</h2>
-                <div className="faq-accordion">
-                    {faqs.map((faq, i) => (
-                        <details key={i} className="faq-item">
-                            <summary>{faq.q}</summary>
-                            <p>{faq.a}</p>
-                        </details>
-                    ))}
-                </div>
-            </section>
-        </ServicePageLayout>
-    );
+      <Section id="why-fema-compliance-is-strategically-important" title={"Why FEMA Compliance is Strategically Important"}>
+        <p>{"Beyond compliance, FEMA plays a "}<strong>{"business-critical role"}</strong>{":"}</p>
+        <ul><li>{"Enables "}<strong>{"smooth fund inflow and repatriation"}</strong></li><li>{"Builds "}<strong>{"investor confidence"}</strong></li><li>{"Avoids"}{" "}<strong>{"deal delays during funding rounds"}</strong></li><li>{"Ensures "}<strong>{"audit readiness"}</strong></li></ul>
+        <p>{"As per industry practice, non-compliance often impacts:"}</p>
+        <ul><li>{"Due diligence"}</li><li>{"Valuation"}</li><li>{"Exit transactions"}</li></ul>
+      </Section>
+
+      <Section id="fema-forms-explained-practical-understanding" title={"FEMA Forms Explained (Practical Understanding)"}>
+        <p>{"From a compliance standpoint, FEMA revolves heavily around "}<strong>{"correct form filing within strict timelines"}</strong>{"."}</p>
+        <h3>{"Key FEMA Forms and Their Applicability"}</h3>
+        <DataTable headers={["Form Name", "Purpose", "When Applicable"]} rows={[["ARF (Advance Reporting Form)", "Reporting inward remittance", "Within 30 days of receiving funds"], ["FC-GPR", "Allotment of shares to foreign investor", "Within 30 days of allotment"], ["FC-TRS", "Transfer of shares (Resident ↔ Non-Resident)", "Within 60 days"], ["FLA Return", "Annual foreign liabilities/assets reporting", "By 15 July every year"], ["ODI Forms (FC / APR)", "Overseas investment reporting", "At time + annually"], ["ECB-2 Return", "External borrowing reporting", "Monthly"], ["LLP-I / LLP-II", "Investment in LLP", "As applicable"]]} />
+      </Section>
+
+      <Section id="fema-lifecycle-end-to-end-transaction-flow" title={"FEMA Lifecycle – End-to-End Transaction Flow"}>
+        <p><strong>{"From a real-world execution perspective"}</strong>{", a typical FEMA transaction follows this lifecycle:"}</p>
+        <h3>{"Step-wise Flow:"}</h3>
+        <ol><li><strong>{"Foreign Investment Received"}</strong>{""}<br />{""}{"→"}{" Funds credited through AD Bank"}</li><li><strong>{"KYC & FIRC Issuance"}</strong>{""}<br />{""}{"→"}{" Bank verifies investor and issues FIRC"}</li><li><strong>{"ARF Filing"}</strong>{""}<br />{""}{"→"}{" Within 30 days"}</li><li><strong>{"Board Approval & Share Allotment"}</strong>{""}<br />{""}{"→"}{" Within 60 days"}</li><li><strong>{"Valuation Compliance"}</strong>{""}<br />{""}{"→"}{" As per pricing guidelines"}</li><li><strong>{"FC-GPR Filing"}</strong>{""}<br />{""}{"→"}{" Within 30 days of allotment"}</li><li><strong>{"Annual Compliance (FLA Return)"}</strong>{""}<br />{""}{"→"}{" Every year"}</li></ol>
+      </Section>
+
+      <Section id="fema-compliance-for-startups-funded-companies" title={"FEMA Compliance for Startups & Funded Companies"}>
+        <h3>{"Why startups need to be extra careful:"}</h3>
+        <ul><li>{"Most funding rounds involve "}<strong>{"foreign investors (FDI)"}</strong></li><li>{"Due diligence by investors includes "}<strong>{"FEMA compliance checks"}</strong></li><li>{"Any delay or default can:"}<ul><li>{"Delay funding"}</li><li>{"Reduce valuation"}</li><li>{"Trigger legal restructuring"}</li></ul></li></ul>
+        <h3>{"Key compliance areas for startups:"}</h3>
+        <ul><li>{"ESOP issuance to foreign employees"}</li><li>{"Convertible instruments (CCPS / CCD)"}</li><li>{"Downstream investment structures"}</li><li>{"Share transfer (secondary deals)"}</li></ul>
+      </Section>
+
+      <Section id="fema-vs-fera-practical-distinction" title={"FEMA vs FERA – Practical Distinction"}>
+        <DataTable headers={["Basis", "FEMA", "FERA"]} rows={[["Nature", "Civil law", "Criminal law"], ["Objective", "Facilitate trade", "Restrict foreign exchange"], ["Penalty", "Monetary", "Criminal prosecution"], ["Approach", "Liberal", "Restrictive"]]} />
+        <p><strong>{"Legally speaking"}</strong>{", FEMA replaced FERA to create a "}<strong>{"business-friendly foreign exchange regime"}</strong>{"."}</p>
+      </Section>
+
+      <Section id="compounding-of-fema-offences" title={"Compounding of FEMA Offences"}>
+        <p>{"When a violation occurs, it can be "}{"regularised"}{" through "}<strong>{"compounding"}</strong>{"."}</p>
+        <h3>{"Key points:"}</h3>
+        <ul><li>{"Application filed with RBI"}</li><li>{"Applicable for contraventions like:"}<ul><li>{"Delay in filings"}</li><li>{"Non-reporting"}</li><li>{"Procedural lapses"}</li></ul></li></ul>
+        <h3>{"Outcome:"}</h3>
+        <ul><li>{"Payment of penalty"}</li><li>{"Matter gets closed"}</li><li>{"No further litigation"}</li></ul>
+      </Section>
+
+      <Section id="fema-penalties-detailed-understanding" title={"FEMA Penalties – Detailed Understanding"}>
+        <DataTable headers={["Nature of Default", "Penalty"]} rows={[["Quantifiable amount", "Up to 3× amount involved"], ["Non-quantifiable", "Up to Rs.2,00,000"], ["Continuing default", "Rs.5,000 per day"]]} />
+        <p><strong>{"As per governing provisions"}</strong>{", penalties can escalate quickly if ignored."}</p>
+      </Section>
+
+      <Section id="fema-compliance-impact-on-fundraising-due-diligence" title={"FEMA Compliance Impact on Fundraising & Due Diligence"}>
+        <h3>{"During funding rounds, investors check:"}</h3>
+        <ul><li>{"Whether FC-GPR filings are done"}</li><li>{"Whether valuation reports are valid"}</li><li>{"Whether shareholding structure complies with FEMA"}</li><li>{"Whether past transactions are clean"}</li></ul>
+        <h3>{"If non-compliance exists:"}</h3>
+        <ul><li>{"Investor may:"}<ul><li>{"Ask for rectification"}</li><li>{"Reduce valuation"}</li><li>{"Delay deal closure"}</li></ul></li></ul>
+      </Section>
+
+      <Section id="fema-compliance-for-nris-special-section" title={"FEMA Compliance for NRIs (Special Section)"}>
+        <h3>{"Common NRI transactions under FEMA:"}</h3>
+        <ul><li>{"Property purchase in India"}</li><li>{"Investment in shares / mutual funds"}</li><li>{"Repatriation of funds"}</li><li>{"Gift transactions"}</li></ul>
+        <h3>{"Key restrictions:"}</h3>
+        <ul><li>{"Agricultural land purchase restricted"}</li><li>{"Certain sectors restricted for investment"}</li><li>{"Repatriation subject to limits"}</li></ul>
+      </Section>
+
+      <Section id="advanced-compliance-insight-expert-level-understanding" title={"Advanced Compliance Insight (Expert-Level Understanding)"}>
+        <p><strong>{"From a compliance perspective"}</strong>{", FEMA is interconnected with:"}</p>
+        <ul><li>{"Companies Act, 2013"}</li><li>{"Income Tax Act"}</li><li>{"SEBI Regulations (in case of listed entities)"}</li><li>{"Startup funding frameworks"}</li></ul>
+        <p>{"A transaction may be valid under one law but "}<strong>{"non-compliant under FEMA"}</strong>{"."}</p>
+      </Section>
+
+      <Section id="fema-due-diligence-checklist-investor-view" title={"FEMA Due Diligence Checklist (Investor View)"}>
+        <p>{"Before investing, investors evaluate:"}</p>
+        <ul><li>{"FEMA filing history"}</li><li>{"RBI approvals (if required)"}</li><li>{"Pricing compliance"}</li><li>{"Shareholding pattern"}</li><li>{"Pending violations"}</li></ul>
+      </Section>
+
+      <Section id="fema-compliance-risk-mitigation-strategy" title={"FEMA Compliance Risk Mitigation Strategy"}>
+        <DataTable headers={["Risk Area", "Mitigation Strategy"]} rows={[["Delay in filing", "Maintain compliance calendar"], ["Incorrect valuation", "Use registered valuer"], ["Wrong classification", "Seek expert opinion"], ["Documentation gaps", "Maintain structured records"], ["RBI queries", "Respond through professionals"]]} />
+      </Section>
+
+      <Section id="conversion-section-client-oriented" title={"Conversion Section (Client-Oriented)"}>
+        <h3>{"If you are:"}</h3>
+        <ul><li>{"Raising foreign investment"}</li><li>{"Planning overseas expansion"}</li><li>{"Structuring cross-border transactions"}</li></ul>
+        <p>{"Then FEMA compliance must be handled "}<strong>{"strategically, not casually"}</strong>{"."}</p>
+      </Section>
+
+      <Section id="expert-insight" title={"Expert Insight"}>
+        <p>{"“FEMA compliance is not just about filing forms — it is about ensuring that every cross-border transaction stands regulatory scrutiny. A small delay or misinterpretation can result in significant financial exposure.”"}{""}<br />{""}<strong>{"– CS Devyani Khambhati, Compliance Expert"}</strong></p>
+        <p>{"FEMA Compliance in India is a foundational requirement for businesses operating globally. Whether you are raising foreign funds, expanding overseas, or dealing with international transactions, compliance is not optional — it is strategic."}</p>
+        <p>{"A structured, timely, and well-documented FEMA approach ensures:"}</p>
+        <ul><li>{"Smooth operations"}</li><li>{"Regulatory confidence"}</li><li>{"Long-term credibility"}</li></ul>
+      </Section>
+
+      <Section id="faqs" title="Frequently Asked Questions">
+        {faqGroups.map((group, groupIndex) => (
+          <div key={group.title} className="mb-8">
+            <h3 id={`faq-group-${groupIndex + 1}`}>{group.title}</h3>
+            <div className="faq-accordion">
+              {group.items.map((faq) => (
+                <details key={faq.number} id={`faq-${faq.number}`} className="faq-item">
+                  <summary>{faq.number}. {faq.q}</summary>
+                  <div className="faq-answer">
+                    <p>{faq.a}</p>
+                    {faq.points.length > 0 && <ul>{faq.points.map((point) => <li key={point}>{point}</li>)}</ul>}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </Section>
+      <Section id="disclaimer" title="Disclaimer">
+        <p>This guide is general information, not transaction-specific legal advice. Requirements depend on the applicable regulations, current circulars and the facts of each case. Confirm the current position with the relevant authority and your professional adviser before acting.</p>
+      </Section>
+    </ServicePageLayout>
+  );
 }

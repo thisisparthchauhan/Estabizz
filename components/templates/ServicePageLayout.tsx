@@ -18,6 +18,8 @@ interface ServicePageLayoutProps {
     trustLine?: string;
     readTime?: string;
     displayYear?: string;
+    reviewPending?: boolean;
+    hideReviewBadge?: boolean;
     focusKeyword: string;
     // TOC
     sections: TocSection[];
@@ -36,7 +38,7 @@ interface ServicePageLayoutProps {
 }
 
 export default function ServicePageLayout({
-    tags, breadcrumb, title, heroDescription, heroActions, trustLine, readTime = "12 min read", displayYear = "2026", focusKeyword,
+    tags, breadcrumb, title, heroDescription, heroActions, trustLine, readTime = "12 min read", displayYear = "2026", reviewPending = false, hideReviewBadge = false, focusKeyword,
     sections, ctaTitle, ctaDescription, quickFacts,
     relatedArticles, finalCtaTitle, finalCtaDescription, finalCtaActions, children
 }: ServicePageLayoutProps) {
@@ -161,8 +163,8 @@ export default function ServicePageLayout({
                                 <div className="flex items-center gap-1.5"><span>⏱️</span> {readTime}</div>
                                 <span className="text-gray-300">|</span>
                                 <div className="flex items-center gap-1.5"><span>👁️</span> Regulatory Guide</div>
-                                <span className="text-gray-300">|</span>
-                                <div className="flex items-center gap-1.5"><span>✅</span> Expert Reviewed</div>
+                                {!hideReviewBadge && <><span className="text-gray-300">|</span>
+                                <div className="flex items-center gap-1.5"><span>{reviewPending ? '📋' : '✅'}</span> {reviewPending ? 'Content Review Pending' : 'Expert Reviewed'}</div></>}
                             </div>
 
                             <div className="inline-block px-5 py-3 border border-blue-200 dark:border-[#223550] bg-white/76 dark:bg-[#0d1a2d]/80 backdrop-blur-sm rounded-full text-sm text-[#0a1628] dark:text-[#f7f9fc] font-bold shadow-sm">

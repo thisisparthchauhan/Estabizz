@@ -612,10 +612,6 @@ video {
   visibility: visible;
 }
 
-.invisible {
-  visibility: hidden;
-}
-
 .collapse {
   visibility: collapse;
 }
@@ -1749,6 +1745,10 @@ video {
 
 .max-h-\[calc\(100vh-200px\)\] {
   max-height: calc(100vh - 200px);
+}
+
+.min-h-12 {
+  min-height: 3rem;
 }
 
 .min-h-48 {
@@ -4937,6 +4937,10 @@ video {
 .py-\[7px\] {
   padding-top: 7px;
   padding-bottom: 7px;
+}
+
+.\!pl-0 {
+  padding-left: 0px !important;
 }
 
 .\!pt-0 {
@@ -9133,6 +9137,10 @@ input, textarea, select, [contenteditable="true"] {
 
 .focus-visible\:outline-2:focus-visible {
   outline-width: 2px;
+}
+
+.focus-visible\:outline-offset-4:focus-visible {
+  outline-offset: 4px;
 }
 
 .focus-visible\:outline-offset-\[-2px\]:focus-visible {

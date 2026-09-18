@@ -10,6 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const services = [
+    { href: "/regulatory/insurance", title: "Insurance Guides", desc: "Insurance marketing firm, insurance repository and TPA licensing guides.", tag: "Insurance", emoji: "📋" },
     { href: "/irdai/irda-insurance-broker-license", title: "IRDA Insurance Broker License", desc: "Complete guide to obtaining IRDAI insurance broker license with eligibility, process & compliance.", tag: "IRDAI", emoji: "🛡️" },
     { href: "/irdai/composite-insurance-broker-registration-in-india", title: "Composite Insurance Broker Registration", desc: "IRDAI registration guide for composite insurance brokers with capital requirements, eligibility and compliance calendar.", tag: "IRDAI", emoji: "🏢" },
     { href: "/irdai/corporate-agent-registration-in-india", title: "Corporate Agent Registration", desc: "IRDAI registration guide for corporate agents with eligibility, capital, process, and compliance requirements.", tag: "IRDAI", emoji: "👔" },

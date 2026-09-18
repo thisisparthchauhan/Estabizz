@@ -1,628 +1,1216 @@
-"use client";
-import ServicePageLayout from "@/components/templates/ServicePageLayout";
+'use client';
+
+import Link from 'next/link';
+import type { ReactNode } from 'react';
+import ServicePageLayout from '@/components/templates/ServicePageLayout';
+
+const sections = [{"id": "introduction", "title": "Introduction"}, {"id": "what-is-gst-appeal-services", "title": "What is GST Appeal Services"}, {"id": "regulatory-framework-for-gst-appeals", "title": "Regulatory Framework for GST Appeals"}, {"id": "who-needs-gst-appeal-services", "title": "Who Needs GST Appeal Services"}, {"id": "eligibility-criteria-for-filing-gst-appeal", "title": "Eligibility Criteria for Filing GST Appeal"}, {"id": "documents-required-for-gst-appeal", "title": "Documents Required for GST Appeal"}, {"id": "step-by-step-gst-appeal-process", "title": "Step-by-Step GST Appeal Process"}, {"id": "gst-appeal-fees-pre-deposit", "title": "GST Appeal Fees & Pre-Deposit"}, {"id": "timeline-for-gst-appeal", "title": "Timeline for GST Appeal"}, {"id": "post-registration-post-appeal-compliance", "title": "Post-Registration (Post-Appeal) Compliance"}, {"id": "common-mistakes-in-gst-appeals", "title": "Common Mistakes in GST Appeals"}, {"id": "why-professional-gst-appeal-services-matter", "title": "Why Professional GST Appeal Services Matter"}, {"id": "advanced-gst-appeal-structure-in-india-beyond-first-appeal", "title": "Advanced GST Appeal Structure in India (Beyond First Appeal)"}, {"id": "when-should-you-file-gst-appeal-practical-triggers", "title": "When Should You File GST Appeal – Practical Triggers"}, {"id": "strategic-approach-for-strong-gst-appeal", "title": "Strategic Approach for Strong GST Appeal"}, {"id": "drafting-structure-of-gst-appeal-professional-format", "title": "Drafting Structure of GST Appeal (Professional Format)"}, {"id": "pre-deposit-calculation-practical-understanding", "title": "Pre-Deposit Calculation – Practical Understanding"}, {"id": "situations-where-gst-appeal-can-be-avoided", "title": "Situations Where GST Appeal Can Be Avoided"}, {"id": "gst-appeal-vs-rectification-key-difference", "title": "GST Appeal vs Rectification – Key Difference"}, {"id": "common-grounds-used-in-gst-appeals", "title": "Common Grounds Used in GST Appeals"}, {"id": "department-s-perspective-in-gst-appeals", "title": "Department’s Perspective in GST Appeals"}, {"id": "practical-compliance-risks-real-world-observations", "title": "Practical Compliance Risks (Real-World Observations)"}, {"id": "why-estabizz-approach-makes-a-difference", "title": "Why Estabizz Approach Makes a Difference"}, {"id": "advanced-gst-appeal-strategy", "title": "Advanced GST Appeal Strategy"}, {"id": "when-gst-appeal-gets-rejected-real-reasons", "title": "When GST Appeal Gets Rejected – Real Reasons"}, {"id": "industry-wise-gst-appeal-scenarios", "title": "Industry-Wise GST Appeal Scenarios"}, {"id": "legal-interpretation-areas-in-gst-appeals", "title": "Legal Interpretation Areas in GST Appeals"}, {"id": "drafting-mistakes-that-cost-cases", "title": "Drafting Mistakes That Cost Cases"}, {"id": "how-estabizz-supports", "title": "How Estabizz Supports"}, {"id": "final-takeaway", "title": "Final Takeaway"}, {"id": "expert-insight", "title": "Expert Insight"}, {"id": "faqs", "title": "Frequently Asked Questions"}, {"id": "disclaimer", "title": "Disclaimer"}];
+
+const faqGroups = [
+  {
+    "title": "Section 1: Basic Understanding",
+    "items": [
+      {
+        "number": 1,
+        "q": "What is GST appeal service in India?",
+        "a": "GST appeal service refers to professional assistance in challenging GST orders before appellate authorities. It ensures proper legal representation and compliance with GST provisions.",
+        "points": []
+      },
+      {
+        "number": 2,
+        "q": "When should I file a GST appeal?",
+        "a": "You should file a GST appeal when you disagree with a GST order. This includes tax demand, penalty, or refund rejection.",
+        "points": []
+      },
+      {
+        "number": 3,
+        "q": "What are GST disputes commonly related to?",
+        "a": "GST disputes generally arise due to:",
+        "points": [
+          "Tax demand notices",
+          "ITC disallowance",
+          "Refund rejection",
+          "Classification issues"
+        ]
+      },
+      {
+        "number": 4,
+        "q": "Is GST appeal a legal process?",
+        "a": "Yes, it is a quasi-judicial legal process governed under GST laws and appellate procedures.",
+        "points": []
+      },
+      {
+        "number": 5,
+        "q": "What is the first level of GST appeal?",
+        "a": "The first level is the Appellate Authority, usually the Commissioner (Appeals).",
+        "points": []
+      },
+      {
+        "number": 6,
+        "q": "What is GST litigation?",
+        "a": "GST litigation refers to legal proceedings arising from GST disputes at different appellate levels.",
+        "points": []
+      },
+      {
+        "number": 7,
+        "q": "Can GST appeal correct wrong tax demand?",
+        "a": "Yes, GST appeal is the proper legal route to challenge incorrect tax demands.",
+        "points": []
+      },
+      {
+        "number": 8,
+        "q": "Is GST appeal mandatory for dispute resolution?",
+        "a": "Yes, appeals are the prescribed mechanism under GST to resolve disputes.",
+        "points": []
+      },
+      {
+        "number": 9,
+        "q": "What is Form GST APL-01?",
+        "a": "It is the official form used to file an appeal before the Appellate Authority.",
+        "points": []
+      },
+      {
+        "number": 10,
+        "q": "Can GST appeal be filed online?",
+        "a": "Yes, appeals are filed online through the GST portal.",
+        "points": []
+      },
+      {
+        "number": 11,
+        "q": "What types of orders can be appealed under GST?",
+        "a": "Orders related to:",
+        "points": [
+          "Tax demand",
+          "Penalty",
+          "Registration cancellation",
+          "Refund rejection"
+        ]
+      },
+      {
+        "number": 12,
+        "q": "What is the role of GST consultant in appeal?",
+        "a": "A consultant helps in drafting grounds, preparing documents, and representing before authorities.",
+        "points": []
+      },
+      {
+        "number": 13,
+        "q": "Is GST appeal different from GST reply?",
+        "a": "Yes, reply is filed before order, while appeal is filed after order is passed.",
+        "points": []
+      },
+      {
+        "number": 14,
+        "q": "What is adjudication under GST?",
+        "a": "Adjudication is the process where authorities decide on tax disputes before appeal stage.",
+        "points": []
+      },
+      {
+        "number": 15,
+        "q": "What is GST Appellate Tribunal?",
+        "a": "It is the second level authority for GST disputes after the Appellate Authority.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 2: Eligibility & Applicability",
+    "items": [
+      {
+        "number": 16,
+        "q": "Who can file GST appeal in India?",
+        "a": "Any person aggrieved by a GST order can file an appeal.",
+        "points": []
+      },
+      {
+        "number": 17,
+        "q": "Can a business owner file GST appeal?",
+        "a": "Yes, any registered taxpayer can file appeal.",
+        "points": []
+      },
+      {
+        "number": 18,
+        "q": "Can unregistered persons file GST appeal?",
+        "a": "Yes, if they are impacted by the GST order.",
+        "points": []
+      },
+      {
+        "number": 19,
+        "q": "Can GST appeal be filed for ITC mismatch?",
+        "a": "Yes, ITC-related disputes can be appealed.",
+        "points": []
+      },
+      {
+        "number": 20,
+        "q": "Is GST appeal applicable for refund rejection?",
+        "a": "Yes, refund rejections are commonly appealed.",
+        "points": []
+      },
+      {
+        "number": 21,
+        "q": "Can appeal be filed against GST cancellation?",
+        "a": "Yes, cancellation of registration can be challenged.",
+        "points": []
+      },
+      {
+        "number": 22,
+        "q": "Can composition dealers file appeal?",
+        "a": "Yes, composition taxpayers are eligible.",
+        "points": []
+      },
+      {
+        "number": 23,
+        "q": "Is appeal allowed for interest disputes?",
+        "a": "Yes, disputes relating to interest can be appealed.",
+        "points": []
+      },
+      {
+        "number": 24,
+        "q": "Can GST appeal be filed for classification issues?",
+        "a": "Yes, classification disputes are a common reason for appeal.",
+        "points": []
+      },
+      {
+        "number": 25,
+        "q": "Can GST officer also file appeal?",
+        "a": "Yes, departmental appeals can be filed under governing provisions.",
+        "points": []
+      },
+      {
+        "number": 26,
+        "q": "Can appeal be filed without GST registration?",
+        "a": "Yes, if the person is affected by the order.",
+        "points": []
+      },
+      {
+        "number": 27,
+        "q": "Is appeal applicable for audit findings?",
+        "a": "Only if a formal order is issued.",
+        "points": []
+      },
+      {
+        "number": 28,
+        "q": "Can appeal be filed for penalty-only orders?",
+        "a": "Yes, penalty orders can be appealed.",
+        "points": []
+      },
+      {
+        "number": 29,
+        "q": "Can appeal be filed for export-related GST issues?",
+        "a": "Yes, export refund disputes can be appealed.",
+        "points": []
+      },
+      {
+        "number": 30,
+        "q": "Is GST appeal applicable for e-commerce sellers?",
+        "a": "Yes, all categories of taxpayers can file appeal.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 3: Registration Process",
+    "items": [
+      {
+        "number": 31,
+        "q": "What is the process to file GST appeal?",
+        "a": "The process includes:",
+        "points": [
+          "Login to GST portal",
+          "Fill Form APL-01",
+          "Upload documents",
+          "Pay pre-deposit",
+          "Submit"
+        ]
+      },
+      {
+        "number": 32,
+        "q": "Is physical submission required after filing?",
+        "a": "In some cases, submission of certified documents may be required.",
+        "points": []
+      },
+      {
+        "number": 33,
+        "q": "What is ARN in GST appeal?",
+        "a": "ARN is the acknowledgment number generated after filing.",
+        "points": []
+      },
+      {
+        "number": 34,
+        "q": "Can GST appeal be filed by CA or CS?",
+        "a": "Yes, authorised representatives can file appeal.",
+        "points": []
+      },
+      {
+        "number": 35,
+        "q": "Is digital signature mandatory?",
+        "a": "Yes, DSC or EVC is required.",
+        "points": []
+      },
+      {
+        "number": 36,
+        "q": "Can appeal be filed offline?",
+        "a": "No, primary filing is online.",
+        "points": []
+      },
+      {
+        "number": 37,
+        "q": "Can multiple appeals be filed together?",
+        "a": "No, separate appeals are required for each order.",
+        "points": []
+      },
+      {
+        "number": 38,
+        "q": "Can appeal be modified after submission?",
+        "a": "Limited changes may be allowed with approval.",
+        "points": []
+      },
+      {
+        "number": 39,
+        "q": "Can appeal be withdrawn?",
+        "a": "Yes, before final order.",
+        "points": []
+      },
+      {
+        "number": 40,
+        "q": "Is hearing mandatory in GST appeal?",
+        "a": "Yes, opportunity of hearing is provided.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 4: Documents & Requirements",
+    "items": [
+      {
+        "number": 41,
+        "q": "What documents are required for GST appeal?",
+        "a": "Required documents include:",
+        "points": [
+          "Copy of order",
+          "Grounds of appeal",
+          "Supporting documents"
+        ]
+      },
+      {
+        "number": 42,
+        "q": "Is certified copy mandatory?",
+        "a": "Yes, as per regulatory guidelines.",
+        "points": []
+      },
+      {
+        "number": 43,
+        "q": "Are invoices required in appeal?",
+        "a": "Yes, especially in ITC disputes.",
+        "points": []
+      },
+      {
+        "number": 44,
+        "q": "Is bank statement required?",
+        "a": "If relevant to case, yes.",
+        "points": []
+      },
+      {
+        "number": 45,
+        "q": "What is statement of facts?",
+        "a": "It explains background and case details.",
+        "points": []
+      },
+      {
+        "number": 46,
+        "q": "What are grounds of appeal?",
+        "a": "Legal arguments challenging the order.",
+        "points": []
+      },
+      {
+        "number": 47,
+        "q": "Can additional documents be submitted later?",
+        "a": "Yes, with permission of authority.",
+        "points": []
+      },
+      {
+        "number": 48,
+        "q": "Is affidavit required?",
+        "a": "In certain cases, yes.",
+        "points": []
+      },
+      {
+        "number": 49,
+        "q": "Are GST returns required?",
+        "a": "Yes, for verification.",
+        "points": []
+      },
+      {
+        "number": 50,
+        "q": "Can documents be uploaded online?",
+        "a": "Yes, through GST portal.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 5: Fees & Cost",
+    "items": [
+      {
+        "number": 51,
+        "q": "What is cost of GST appeal in India?",
+        "a": "Cost includes:",
+        "points": [
+          "Government fees",
+          "Pre-deposit",
+          "Professional fees"
+        ]
+      },
+      {
+        "number": 52,
+        "q": "What is pre-deposit for GST appeal?",
+        "a": "10% of disputed tax is required.",
+        "points": []
+      },
+      {
+        "number": 53,
+        "q": "Is pre-deposit mandatory?",
+        "a": "Yes, for admission of appeal.",
+        "points": []
+      },
+      {
+        "number": 54,
+        "q": "Is pre-deposit refundable?",
+        "a": "Yes, if appeal is successful.",
+        "points": []
+      },
+      {
+        "number": 55,
+        "q": "What is maximum pre-deposit limit?",
+        "a": "It is capped under GST provisions.",
+        "points": []
+      },
+      {
+        "number": 56,
+        "q": "Are professional fees fixed?",
+        "a": "No, they vary case-wise.",
+        "points": []
+      },
+      {
+        "number": 57,
+        "q": "Is GST applicable on professional fees?",
+        "a": "Yes, GST is applicable.",
+        "points": []
+      },
+      {
+        "number": 58,
+        "q": "Can pre-deposit be paid in instalments?",
+        "a": "No, it must be paid upfront.",
+        "points": []
+      },
+      {
+        "number": 59,
+        "q": "Is appeal expensive?",
+        "a": "Depends on complexity and dispute amount.",
+        "points": []
+      },
+      {
+        "number": 60,
+        "q": "Are additional costs involved?",
+        "a": "Yes, including documentation and representation costs.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 6: Timeline & Approval",
+    "items": [
+      {
+        "number": 61,
+        "q": "What is time limit for GST appeal?",
+        "a": "3 months from order date.",
+        "points": []
+      },
+      {
+        "number": 62,
+        "q": "Can delay be condoned?",
+        "a": "Yes, up to 1 month.",
+        "points": []
+      },
+      {
+        "number": 63,
+        "q": "How long does GST appeal take?",
+        "a": "Typically 3–12 months.",
+        "points": []
+      },
+      {
+        "number": 64,
+        "q": "Is hearing scheduled automatically?",
+        "a": "Yes, by the authority.",
+        "points": []
+      },
+      {
+        "number": 65,
+        "q": "Can timeline vary?",
+        "a": "Yes, based on case complexity.",
+        "points": []
+      },
+      {
+        "number": 66,
+        "q": "Is interim relief available?",
+        "a": "Yes, in certain cases.",
+        "points": []
+      },
+      {
+        "number": 67,
+        "q": "What happens after filing appeal?",
+        "a": "Case review and hearing process begins.",
+        "points": []
+      },
+      {
+        "number": 68,
+        "q": "Can appeal be fast-tracked?",
+        "a": "Generally no.",
+        "points": []
+      },
+      {
+        "number": 69,
+        "q": "How is order communicated?",
+        "a": "Through GST portal.",
+        "points": []
+      },
+      {
+        "number": 70,
+        "q": "What if authority delays order?",
+        "a": "Further legal remedy may be available.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 7: Compliance & Post-Registration",
+    "items": [
+      {
+        "number": 71,
+        "q": "Do I need to continue GST compliance during appeal?",
+        "a": "Yes, compliance must continue.",
+        "points": []
+      },
+      {
+        "number": 72,
+        "q": "Can business continue during appeal?",
+        "a": "Yes, unless restricted.",
+        "points": []
+      },
+      {
+        "number": 73,
+        "q": "Can appeal status be tracked?",
+        "a": "Yes, on GST portal.",
+        "points": []
+      },
+      {
+        "number": 74,
+        "q": "Can additional submissions be made?",
+        "a": "Yes, during hearing.",
+        "points": []
+      },
+      {
+        "number": 75,
+        "q": "Is record maintenance required?",
+        "a": "Yes, proper records are essential.",
+        "points": []
+      },
+      {
+        "number": 76,
+        "q": "Can appeal decision be challenged further?",
+        "a": "Yes, at higher levels.",
+        "points": []
+      },
+      {
+        "number": 77,
+        "q": "What happens after favorable order?",
+        "a": "Relief is granted and implemented.",
+        "points": []
+      },
+      {
+        "number": 78,
+        "q": "What if appeal is rejected?",
+        "a": "Further appeal can be filed.",
+        "points": []
+      },
+      {
+        "number": 79,
+        "q": "Does appeal affect GST returns?",
+        "a": "No, returns must be filed regularly.",
+        "points": []
+      },
+      {
+        "number": 80,
+        "q": "Can appeal impact registration status?",
+        "a": "Yes, depending on case.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 8: Penalties & Risks",
+    "items": [
+      {
+        "number": 81,
+        "q": "What happens if GST appeal is not filed?",
+        "a": "Order becomes final and recoverable.",
+        "points": []
+      },
+      {
+        "number": 82,
+        "q": "Can recovery proceedings start?",
+        "a": "Yes, immediately after order.",
+        "points": []
+      },
+      {
+        "number": 83,
+        "q": "Is penalty imposed for delay?",
+        "a": "Delay may lead to rejection.",
+        "points": []
+      },
+      {
+        "number": 84,
+        "q": "Can bank account be attached?",
+        "a": "Yes, under recovery provisions.",
+        "points": []
+      },
+      {
+        "number": 85,
+        "q": "Is prosecution possible?",
+        "a": "Yes, in serious cases.",
+        "points": []
+      },
+      {
+        "number": 86,
+        "q": "Can appeal be rejected for errors?",
+        "a": "Yes, if improperly filed.",
+        "points": []
+      },
+      {
+        "number": 87,
+        "q": "Is legal risk high?",
+        "a": "Yes, especially in high-value disputes.",
+        "points": []
+      },
+      {
+        "number": 88,
+        "q": "Can penalty increase during appeal?",
+        "a": "Generally no.",
+        "points": []
+      },
+      {
+        "number": 89,
+        "q": "Is interest payable during dispute?",
+        "a": "Yes, as per law.",
+        "points": []
+      },
+      {
+        "number": 90,
+        "q": "What is risk of weak documentation?",
+        "a": "Appeal may fail.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 9: Practical Scenarios",
+    "items": [
+      {
+        "number": 91,
+        "q": "Can I operate without filing appeal?",
+        "a": "Yes, but order will apply.",
+        "points": []
+      },
+      {
+        "number": 92,
+        "q": "Should I file appeal for small amount?",
+        "a": "Depends on cost vs benefit.",
+        "points": []
+      },
+      {
+        "number": 93,
+        "q": "Can dispute be settled without appeal?",
+        "a": "Yes, by payment or scheme.",
+        "points": []
+      },
+      {
+        "number": 94,
+        "q": "What if documents are missing?",
+        "a": "Case becomes weak.",
+        "points": []
+      },
+      {
+        "number": 95,
+        "q": "Can appeal be filed for partial dispute?",
+        "a": "Yes, only disputed portion.",
+        "points": []
+      },
+      {
+        "number": 96,
+        "q": "Is consultant necessary?",
+        "a": "Not mandatory but recommended.",
+        "points": []
+      },
+      {
+        "number": 97,
+        "q": "Can appeal reduce tax liability?",
+        "a": "Yes, if successful.",
+        "points": []
+      },
+      {
+        "number": 98,
+        "q": "Can appeal increase scrutiny?",
+        "a": "Yes, detailed review occurs.",
+        "points": []
+      },
+      {
+        "number": 99,
+        "q": "Can appeal be filed multiple times?",
+        "a": "Yes, at different levels.",
+        "points": []
+      },
+      {
+        "number": 100,
+        "q": "What if appeal is withdrawn?",
+        "a": "Order becomes final.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Section 10: Advanced / Expert-Level Questions",
+    "items": [
+      {
+        "number": 101,
+        "q": "Can appeal be filed against advance ruling?",
+        "a": "Yes, before Appellate Authority for Advance Ruling.",
+        "points": []
+      },
+      {
+        "number": 102,
+        "q": "What is cross-objection in GST appeal?",
+        "a": "It is response filed by opposite party.",
+        "points": []
+      },
+      {
+        "number": 103,
+        "q": "Can new grounds be added later?",
+        "a": "Yes, with approval.",
+        "points": []
+      },
+      {
+        "number": 104,
+        "q": "Is precedent important in GST appeal?",
+        "a": "Yes, prior rulings matter.",
+        "points": []
+      },
+      {
+        "number": 105,
+        "q": "Can GST appeal go to High Court?",
+        "a": "Yes, after tribunal stage.",
+        "points": []
+      },
+      {
+        "number": 106,
+        "q": "What is writ petition in GST?",
+        "a": "It is direct court remedy in special cases.",
+        "points": []
+      },
+      {
+        "number": 107,
+        "q": "Can constitutional issues arise in GST appeal?",
+        "a": "Yes, especially at higher courts.",
+        "points": []
+      },
+      {
+        "number": 108,
+        "q": "Can GST appeal involve multiple laws?",
+        "a": "Yes, in complex disputes.",
+        "points": []
+      },
+      {
+        "number": 109,
+        "q": "What is appellate hierarchy in GST?",
+        "a": "Appellate Authority → Tribunal → High Court → Supreme Court.",
+        "points": []
+      },
+      {
+        "number": 110,
+        "q": "Can GST appeal be reopened?",
+        "a": "Only under specific provisions.",
+        "points": []
+      }
+    ]
+  },
+  {
+    "title": "Extended Expert & GEO-Level Questions",
+    "items": [
+      {
+        "number": 111,
+        "q": "What happens if GST appeal is filed late?",
+        "a": "It may be rejected unless delay is condoned.",
+        "points": []
+      },
+      {
+        "number": 112,
+        "q": "Can GST appeal be filed without pre-deposit?",
+        "a": "No, it is mandatory for admission.",
+        "points": []
+      },
+      {
+        "number": 113,
+        "q": "What happens if pre-deposit is not paid?",
+        "a": "Appeal will not be accepted.",
+        "points": []
+      },
+      {
+        "number": 114,
+        "q": "Can GST appeal be filed against provisional attachment?",
+        "a": "Yes, legal remedies are available.",
+        "points": []
+      },
+      {
+        "number": 115,
+        "q": "Can appeal be filed for show cause notice?",
+        "a": "No, only after final order.",
+        "points": []
+      },
+      {
+        "number": 116,
+        "q": "Can GST appeal be filed for demand under Section 73/74?",
+        "a": "Yes, such orders are appealable.",
+        "points": []
+      },
+      {
+        "number": 117,
+        "q": "Can GST appeal reduce penalty?",
+        "a": "Yes, if justified.",
+        "points": []
+      },
+      {
+        "number": 118,
+        "q": "Is appeal advisable in every case?",
+        "a": "No, depends on facts.",
+        "points": []
+      },
+      {
+        "number": 119,
+        "q": "Can GST appeal be filed for export refunds?",
+        "a": "Yes, commonly done.",
+        "points": []
+      },
+      {
+        "number": 120,
+        "q": "Can appeal be filed against GST audit order?",
+        "a": "Yes, if formal order issued.",
+        "points": []
+      },
+      {
+        "number": 121,
+        "q": "Can GST appeal involve legal interpretation?",
+        "a": "Yes, especially classification issues.",
+        "points": []
+      },
+      {
+        "number": 122,
+        "q": "Can appeal be filed against anti-profiteering order?",
+        "a": "Yes, through proper channels.",
+        "points": []
+      },
+      {
+        "number": 123,
+        "q": "What is role of evidence in GST appeal?",
+        "a": "Strong evidence improves success chances.",
+        "points": []
+      },
+      {
+        "number": 124,
+        "q": "Can GST appeal be filed for e-invoice issues?",
+        "a": "Yes, if order is passed.",
+        "points": []
+      },
+      {
+        "number": 125,
+        "q": "Can appeal be filed against blocked ITC?",
+        "a": "Yes, ITC disputes are appealable.",
+        "points": []
+      },
+      {
+        "number": 126,
+        "q": "Can GST appeal be handled internally?",
+        "a": "Yes, but expertise is required.",
+        "points": []
+      },
+      {
+        "number": 127,
+        "q": "Can GST appeal affect future assessments?",
+        "a": "Yes, precedent impact exists.",
+        "points": []
+      },
+      {
+        "number": 128,
+        "q": "Can appeal lead to refund?",
+        "a": "Yes, if taxpayer succeeds.",
+        "points": []
+      },
+      {
+        "number": 129,
+        "q": "Can GST appeal be filed for wrong HSN classification?",
+        "a": "Yes, classification disputes are valid.",
+        "points": []
+      },
+      {
+        "number": 130,
+        "q": "Can GST appeal be filed against interest demand only?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 131,
+        "q": "Can GST appeal be filed for reverse charge disputes?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 132,
+        "q": "Can GST appeal be filed for place of supply issues?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 133,
+        "q": "Can GST appeal be filed against seizure orders?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 134,
+        "q": "Can GST appeal be filed for valuation disputes?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 135,
+        "q": "Can GST appeal be filed against cancellation of refund?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 136,
+        "q": "Can GST appeal be filed for compliance rating issues?",
+        "a": "Yes, if order is passed.",
+        "points": []
+      },
+      {
+        "number": 137,
+        "q": "Can GST appeal be filed for mismatch in GSTR-2B?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 138,
+        "q": "Can GST appeal be filed for blocked credits under Section 17(5)?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 139,
+        "q": "Can GST appeal be filed for job work disputes?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 140,
+        "q": "Can GST appeal be filed for stock transfer issues?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 141,
+        "q": "Can GST appeal be filed for input service distributor issues?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 142,
+        "q": "Can GST appeal be filed for refund of accumulated ITC?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 143,
+        "q": "Can GST appeal be filed for zero-rated supplies?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 144,
+        "q": "Can GST appeal be filed for wrong tax rate applied?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 145,
+        "q": "Can GST appeal be filed for transitional credit disputes?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 146,
+        "q": "Can GST appeal be filed for anti-evasion cases?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 147,
+        "q": "Can GST appeal be filed for compliance notice errors?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 148,
+        "q": "Can GST appeal be filed for cancellation of LUT?",
+        "a": "Yes.",
+        "points": []
+      },
+      {
+        "number": 149,
+        "q": "Can GST appeal be filed for export duty disputes?",
+        "a": "Yes, if related to GST.",
+        "points": []
+      },
+      {
+        "number": 150,
+        "q": "Is GST appeal worth filing?",
+        "a": "Yes, if legal grounds and financial impact justify it.",
+        "points": []
+      }
+    ]
+  }
+];
+
+function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+  return <section className="mb-12"><h2 id={id} className="visible">{title}</h2>{children}</section>;
+}
+
+function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((header) => <th scope="col" key={header}>{header}</th>)}</tr></thead><tbody>{rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex}>{cell}</td>)}</tr>)}</tbody></table></div>;
+}
+
+function Timeline({ steps }: { steps: string[] }) {
+  return <div className="step-timeline">{steps.map((step, index) => <div className="step-item" key={step}><div className="step-dot" /><div className="step-card"><div className="step-label">Step {index + 1}</div><p>{step}</p></div></div>)}</div>;
+}
+
+function CheckList({ items }: { items: string[] }) {
+  return <ul className="clean-list">{items.map((item) => <li key={item}>{item}</li>)}</ul>;
+}
 
 export default function PageClient() {
-    const sections = [
-        { id: "introduction", title: "1. Introduction" },
-        { id: "what-is", title: "2. What Are GST Appeal Services" },
-        { id: "appellate-hierarchy", title: "3. GST Appellate Hierarchy" },
-        { id: "who-can-appeal", title: "4. Who Can File a GST Appeal" },
-        { id: "time-limits", title: "5. Time Limits for GST Appeals" },
-        { id: "pre-deposit", title: "6. Pre-Deposit Requirements" },
-        { id: "grounds", title: "7. Common Grounds for GST Appeal" },
-        { id: "forms", title: "8. GST Appeal Forms" },
-        { id: "process", title: "9. Step-by-Step Appeal Filing Process" },
-        { id: "documents", title: "10. Documents Required" },
-        { id: "fees", title: "11. Fees &amp; Professional Charges" },
-        { id: "timeline", title: "12. GST Appeal Timeline" },
-        { id: "common-mistakes", title: "13. Common Mistakes to Avoid" },
-        { id: "appeal-vs-revision", title: "14. GST Appeal vs GST Revision" },
-        { id: "post-appeal", title: "15. Post-Appeal Compliance" },
-        { id: "faq", title: "16. Frequently Asked Questions" },
-    ];
+  return (
+    <ServicePageLayout
+      tags={[{"emoji": "", "label": "Compliance"}, {"emoji": "", "label": "GST"}]}
+      breadcrumb={[{"label": "Home", "href": "/"}, {"label": "Regulatory", "href": "/regulatory"}, {"label": "Compliance", "href": "/regulatory/compliance"}, {"label": "GST Appeal Services India"}]}
+      title={"GST Appeal Services India"}
+      readTime={"30 min read"}
+      focusKeyword={"GST Appeal Services India"}
+      ctaTitle={"Discuss Your Compliance Requirements"}
+      ctaDescription={"Speak to the Estabizz team about documentation, reporting and ongoing compliance support."}
+      quickFacts={[{"label": "Framework", "value": "CGST Act, 2017"}, {"label": "Service", "value": "GST appeals"}, {"label": "Scope", "value": "Case-specific"}, {"label": "FAQs", "value": "150"}]}
+      relatedArticles={[{"title": "Finance and Accounting Outsourcing Services", "href": "/services/finance-accounting-outsourcing", "category": "Compliance", "description": "Finance and Accounting Outsourcing Services help businesses manage bookkeeping, GST, taxation, and compliance efficiently. Explore benefits, process, fees, and expert insights."}, {"title": "Transfer Pricing", "href": "/services/transfer-pricing", "category": "GST", "description": "Explore the related registration and regulatory framework."}]}
+      finalCtaTitle={"Speak to Our Compliance Team"}
+      finalCtaDescription={"Discuss your regulatory obligations, documentation and reporting requirements with Estabizz."}
+      hideReviewBadge
+      sections={sections}
+      heroDescription={<p>{"GST Appeal Services India explained with process, fees, timeline and expert strategy. Learn how to file GST appeal and avoid costly tax errors."}</p>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Discuss Compliance</Link><a href="https://wa.me/919825600907" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+    >
+      <Section id="introduction" title={"Introduction"}>
+        <p>{"GST Appeal Services play a critical role for businesses that wish to challenge an order passed under GST laws. Whether it is a demand notice, penalty, or rejection of refund, the GST law provides a structured appellate mechanism to ensure fairness and legal recourse."}</p>
+        <p>{"In India’s evolving tax environment, understanding the appeal process is not just important—it is essential for protecting business interests."}</p>
+      </Section>
 
-    const faqs: { q: string; a: string }[] = [
-        { q: "What is a GST appeal and when should I file one?", a: "A GST appeal is the statutory legal remedy available under the CGST Act 2017 to challenge an order passed by a GST adjudicating authority. You should file an appeal when you disagree with a tax demand, penalty, interest charge, refund rejection, or registration cancellation order. The appeal must be filed within 3 months of receiving the order." },
-        { q: "What is the pre-deposit requirement for a GST appeal?", a: "To file an appeal before the Appellate Authority (Commissioner Appeals), you must deposit 10% of the disputed tax amount as pre-deposit. For appeals to the GST Appellate Tribunal (GSTAT), pre-deposit is 20% of the disputed tax (in addition to the Appellate Authority's pre-deposit). The pre-deposit is adjusted against the final order — refunded if you win, adjusted if you lose." },
-        { q: "Can I get a stay on a GST demand during the appeal?", a: "Yes. On filing an appeal and paying the mandatory pre-deposit, the recovery of the remaining disputed amount is stayed automatically until the appeal is decided. The appellate authority may also grant a stay on specific grounds. However, the pre-deposit amount cannot be stayed — it must be paid upfront before filing." },
-        { q: "What is Form GST APL-01 and who files it?", a: "Form GST APL-01 is filed by a taxpayer (aggrieved person) to appeal against an order passed by the adjudicating authority to the Appellate Authority (Commissioner Appeals) under Section 107 of the CGST Act. It must be filed online through the GST portal. After filing, Form GST APL-02 is the Acknowledgement issued by the Appellate Authority." },
-        { q: "What happens if I miss the 3-month appeal deadline?", a: "If you miss the 3-month limit, you can still file an appeal with a condonation of delay application under Section 107(4) of CGST Act. The Appellate Authority can condone delay up to 1 month (total 4 months) if sufficient cause is shown. Beyond 4 months, no appeal can be filed before the Appellate Authority — however, you may explore a writ petition before the High Court in exceptional circumstances." },
-        { q: "Can the GST Department also file an appeal?", a: "Yes. The GST Department can file a departmental appeal against orders it considers erroneous or favourable to the taxpayer. The Proper Officer files the appeal within 6 months of the order using Form GST APL-03. Departmental appeals can be filed at any appellate level including the GST Appellate Tribunal, High Court, and Supreme Court." },
-        { q: "What is the GST Appellate Tribunal (GSTAT) and is it operational?", a: "GSTAT is the second tier of GST appeal established under Section 109 of the CGST Act. It handles appeals against orders of the Appellate Authority (Commissioner Appeals). As of 2026, GSTAT is in the process of being constituted following the GST (Amendment) Act 2023. Principal Bench is at New Delhi and State Benches are being established. Until GSTAT is operational, petitions against AA orders are being heard by High Courts through writ jurisdiction." },
-        { q: "Can I file a GST appeal for an ITC (Input Tax Credit) disallowance?", a: "Yes. ITC disallowance is one of the most common grounds for GST appeals. Grounds include: ITC denied due to GSTR-2A / 2B mismatch, ITC availed on exempt supplies, ITC reversal demands under Rule 42/43, ITC denied due to supplier non-compliance, and ITC blocked under Section 17(5). The appeal process is identical to any other tax demand — APL-01, pre-deposit 10%, and submission of supporting invoices and reconciliation data." },
-        { q: "What is the difference between a GST Show Cause Notice (SCN), Adjudication Order, and Appeal Order?", a: "SCN (Show Cause Notice) is the starting point — the department alleges a violation and gives the taxpayer an opportunity to respond. The Adjudication Order is the order passed after hearing the taxpayer's reply to the SCN. If the taxpayer disagrees with the Adjudication Order, they file an Appeal, which results in an Appeal Order. Each stage must be exhausted in sequence before moving to the next level." },
-        { q: "Can I settle a GST dispute without going through the full appeal process?", a: "Yes. The GST Amnesty Scheme and GST Settlement provisions under the CGST Act allow settlement in certain cases. Section 54 provides for refunds, and the Finance Act 2024 introduced the Vivad Se Vishwas-II scheme for settling pending GST demands by paying the principal demand with reduced interest and waiver of penalties. Consult a GST professional to evaluate settlement vs. appeal based on the merits of your case." },
-        { q: "How do I prepare grounds of appeal for a GST case?", a: "Grounds of appeal must clearly state: (1) the specific error in the order being challenged — factual or legal, (2) applicable provisions of CGST Act / Rules being misapplied, (3) precedents / judicial decisions supporting your position, (4) specific relief sought. Grounds should be drafted with precision — vague or generic grounds are not entertained. Professional assistance from a GST lawyer or CS is strongly recommended." },
-        { q: "What documents are most important for a GST appeal?", a: "Critical documents include: copy of the impugned order, SCN and reply filed, GSTR-1, GSTR-3B, and GSTR-2A/2B reconciliation for the period, all invoices and purchase records, e-way bills, payment challans, bank statements showing payment of tax, any prior communications with the GST department, and legal brief with grounds of appeal. Missing documents can significantly weaken your appeal." },
-        { q: "Is GST appeal different from GST revision?", a: "Yes. GST Appeal (Section 107) is filed by a taxpayer or the department against an order of the adjudicating authority to the Appellate Authority. GST Revision (Section 108) is invoked by the Revisional Authority (Commissioner or Principal Commissioner) suo motu or on application, to revise any order which is erroneous and prejudicial to the interests of revenue. Revision can be invoked even when no appeal is pending." },
-        { q: "What is the monetary threshold for departmental appeals at different levels?", a: "The GST Council has prescribed monetary thresholds below which the department should NOT file appeals: ₹20 lakh for Appellate Authority; ₹1 crore for GSTAT; ₹2 crore for High Court; ₹2 crore for Supreme Court. These thresholds are to reduce frivolous departmental appeals but do not apply to taxpayer-initiated appeals, which can be filed for any amount." },
-        { q: "Can a GST appeal be filed for a refund rejection?", a: "Yes. Refund rejection orders under Section 54 of the CGST Act are appealable. The taxpayer files Form GST APL-01 against the rejection order within 3 months. Pre-deposit is not required for refund appeals since there is no tax demand. Common grounds include: wrong rejection of zero-rated supply refunds, ITC refund rejections, excess tax payment refunds, and export refund rejections." },
-        { q: "What is the difference between an ex-parte order and a contested order in GST?", a: "An ex-parte order is passed without the taxpayer appearing or responding to the SCN. A contested order is passed after the taxpayer has participated in the hearing. Both are appealable. For ex-parte orders, the taxpayer can also file a recall application to the same adjudicating authority if they can show sufficient cause for non-appearance, which may be faster than going through the full appeal process." },
-        { q: "How much does professional GST appeal assistance cost?", a: "Professional fees for GST appeal services range widely: for simple appeals below ₹5 lakh disputed amount: ₹10,000–₹25,000; for complex matters from ₹5 lakh to ₹50 lakh: ₹25,000–₹1,00,000; for large disputes above ₹50 lakh: ₹1,00,000–₹5,00,000+. Representation before GSTAT or High Court by a lawyer involves significantly higher retainer fees. Choose professionals with a track record in GST appellate proceedings." },
-        { q: "Can I appeal against a GST registration cancellation order?", a: "Yes. Cancellation of GST registration is an appealable order. File Form GST APL-01 within 3 months before the Appellate Authority. You can also apply for revocation of cancellation under Section 30 of CGST Act within 90 days if the cancellation was on account of non-filing of returns (which is a separate and faster route than appeal). Both options should be evaluated based on the grounds for cancellation." },
-        { q: "What is the role of a GST consultant or CS in an appeal?", a: "A GST consultant or Company Secretary (CS) plays a critical role: (1) analysing the impugned order and identifying appealable errors, (2) drafting grounds of appeal with legal precision and supporting case laws, (3) collecting and organising documentary evidence, (4) representing the taxpayer before the Appellate Authority (authorised representatives can appear), (5) monitoring appeal status on GST portal, and (6) advising on pre-deposit strategy and recovery stay." },
-        { q: "Is interest on delayed tax payment waived if I win a GST appeal?", a: "If you win the appeal fully and the demand is set aside, the pre-deposit is refunded with interest at 6% per annum under Section 115 of the CGST Act if not refunded within 90 days of the appeal order. If the demand is partially upheld, interest is payable only on the confirmed demand amount. Interest waiver on the entire demand applies if the demand itself is set aside." },
-        { q: "What is the penalty relief available in GST appeals?", a: "Under Section 74A inserted by Finance Act 2024 (effective FY 2024-25 onwards), penalties are capped at 10% of the tax for cases not involving fraud, suppression, or wilful misstatement. The Demand Limitation Period is also restructured. For pre-GST periods, the Vivad Se Vishwas scheme offers penalty waiver on settlement of principal demand. In appeal proceedings, authorities have discretion to reduce penalties on merits — penalty reduction is a common relief sought in GST appeals." },
-    ];
+      <Section id="what-is-gst-appeal-services" title={"What is GST Appeal Services"}>
+        <p><strong>{"In simple terms…"}</strong>{" GST Appeal Services involve professional assistance in preparing, filing, and representing cases before appellate authorities under GST law."}</p>
+        <p><strong>{"From a compliance perspective…"}</strong>{" it is a structured legal process governed under the GST Act to ensure that incorrect or unjust orders can be reviewed."}</p>
+        <p><strong>{"Legally speaking…"}</strong>{" GST appeals are governed under Sections 107 to 121 of the CGST Act, 2017."}</p>
+      </Section>
 
-    return (
-        <ServicePageLayout
-            tags={[
-                { emoji: "⚖️", label: "GST Appeal Services" },
-                { emoji: "📋", label: "CGST Act 2017" },
-                { emoji: "🏛️", label: "Appellate Authority" },
-                { emoji: "🔍", label: "ITC Disputes" },
-                { emoji: "✅", label: "Expert Reviewed" },
-            ]}
-            breadcrumb={[
-                { label: "Home", href: "/" },
-                { label: "Services", href: "/services" },
-                { label: "GST Appeal Services" },
-            ]}
-            title="GST Appeal Services India: Complete Guide to Filing GST Appeals, Pre-Deposit &amp; Winning Tax Disputes"
-            readTime="18 min read"
-            focusKeyword="GST Appeal Services India"
-            sections={sections}
-            ctaTitle="Fight Your GST Dispute with Expert Representation"
-            ctaDescription="Our GST compliance team and legal experts have successfully handled 200+ GST appeals across Appellate Authority, High Court, and amnesty scheme settlements. From ITC disallowance to refund rejection to demand notices — we build strong, evidence-backed cases."
-            quickFacts={[
-                { label: "Governing Act", value: "CGST Act 2017 — Section 107" },
-                { label: "Appellate Authority", value: "Commissioner (Appeals)" },
-                { label: "Appeal Deadline", value: "3 months from order" },
-                { label: "Pre-Deposit (AA)", value: "10% of disputed tax" },
-                { label: "Pre-Deposit (GSTAT)", value: "20% of disputed tax" },
-                { label: "Filing Form", value: "GST APL-01 (online)" },
-                { label: "Expert Review", value: "✓ Verified" },
-            ]}
-            relatedArticles={[
-                { title: "Enterprise Services", href: "/services/enterprise-services", category: "Services", description: "End-to-end enterprise compliance including GST registration, ROC filings, and regulatory setup." },
-                { title: "Legal Due Diligence", href: "/services/legal-due-diligence", category: "Services", description: "Comprehensive legal due diligence for transactions and regulatory compliance assessments." },
-                { title: "FEMA Compliance", href: "/fema/compliance-under-fema", category: "FEMA", description: "Complete guide to FEMA compliance for businesses dealing with foreign exchange." },
-                { title: "Legal Process Outsourcing", href: "/services/legal-process-outsourcing", category: "Services", description: "Outsource legal drafting, compliance support, and document review to qualified professionals." },
-            ]}
-            finalCtaTitle="Don&apos;t Let a GST Order Go Unchallenged — Act Within 3 Months"
-            finalCtaDescription="GST appeal deadlines are strict and pre-deposits are non-negotiable. Our team will evaluate your case, build your grounds of appeal, file within the deadline, and represent you before the Appellate Authority. Every rupee of wrongful demand deserves a proper legal challenge."
-        >
-            <section id="introduction">
-                <h2>Introduction to GST Appeal Services</h2>
-                <p>
-                    GST (Goods and Services Tax), governed by the Central Goods and Services Tax Act 2017, is one of India&apos;s most complex tax regimes — spanning multiple transaction types, input tax credit conditions, reverse charge mechanisms, and cross-jurisdictional issues. When the GST department issues a demand notice, denies input tax credit, rejects a refund, or cancels a registration, businesses have a statutory right to challenge these orders through the GST appellate mechanism.
-                </p>
-                <p>
-                    GST Appeal Services involve professional assistance in challenging GST orders before the appropriate appellate authority — preparing grounds of appeal, collecting evidence, computing pre-deposit obligations, filing the appeal form online, and representing the business before adjudicating and appellate authorities.
-                </p>
-                <div className="info-box">
-                    <strong>Key Statistic:</strong> According to the GST Council data, over ₹1.6 lakh crore of GST demand is currently under litigation at various appellate levels. Approximately 65–70% of first-level appeals at the Appellate Authority level result in full or partial relief to taxpayers — making a well-prepared appeal one of the most effective tools for dispute resolution.
-                </div>
-                <p>
-                    This guide covers the complete GST appellate framework — from understanding the hierarchy of appeals to filing timelines, pre-deposit requirements, and post-appeal compliance.
-                </p>
-            </section>
+      <Section id="regulatory-framework-for-gst-appeals" title={"Regulatory Framework for GST Appeals"}>
+        <DataTable headers={["Particulars", "Details"]} rows={[["Governing Law", "CGST Act, 2017"], ["Relevant Sections", "Section 107 to 121"], ["First Appellate Authority", "Commissioner (Appeals)"], ["Higher Authorities", "GST Appellate Tribunal, High Court, Supreme Court"], ["Rules Applicable", "CGST Rules"]]} />
+        <p><strong>{"As per applicable regulatory guidelines"}</strong>{", the appeal process follows a hierarchical structure ensuring multiple levels of review."}</p>
+      </Section>
 
-            <section id="what-is">
-                <h2>What Are GST Appeal Services?</h2>
-                <p>
-                    GST Appeal Services refer to the end-to-end professional assistance provided to businesses and individuals who want to challenge orders passed under the CGST Act, SGST Act, IGST Act, or UTGST Act. These services cover:
-                </p>
-                <ul>
-                    <li><strong>Order analysis:</strong> Reviewing the impugned order to identify factual errors, legal mistakes, and procedural irregularities</li>
-                    <li><strong>Grounds drafting:</strong> Preparing precise, legally sound grounds of appeal supported by relevant case law and CGST provisions</li>
-                    <li><strong>Pre-deposit calculation:</strong> Computing the mandatory pre-deposit amount and advising on payment strategy</li>
-                    <li><strong>Online filing:</strong> Filing Form GST APL-01 through the GST portal within the prescribed 3-month deadline</li>
-                    <li><strong>Documentary evidence:</strong> Compiling GSTR reconciliations, invoices, e-way bills, and payment records</li>
-                    <li><strong>Representation:</strong> Appearing before the Appellate Authority on scheduled hearing dates</li>
-                    <li><strong>Post-appeal compliance:</strong> Implementing appeal order, refund applications, and compliance setup</li>
-                </ul>
-            </section>
+      <Section id="who-needs-gst-appeal-services" title={"Who Needs GST Appeal Services"}>
+        <p>{"Businesses and individuals typically require GST appeal services in the following situations:"}</p>
+        <ul><li>{"Demand orders issued by GST department"}</li><li>{"Penalty imposed for non-compliance"}</li><li>{"Input Tax Credit (ITC) disallowance"}</li><li>{"Refund rejection cases"}</li><li>{"Cancellation of GST registration"}</li><li>{"Assessment orders with discrepancies"}</li></ul>
+      </Section>
 
-            <section id="appellate-hierarchy">
-                <h2>GST Appellate Hierarchy</h2>
-                <p>
-                    The GST appellate structure is a multi-tiered quasi-judicial system. Each level must generally be exhausted before moving to the next:
-                </p>
-                <div className="step-timeline">
-                    <div className="step-item">
-                        <div className="step-dot"></div>
-                        <div className="step-card">
-                            <div className="step-label">Level 1</div>
-                            <h4>Adjudicating Authority (Original Order)</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">The original GST officer — Deputy / Assistant / Joint Commissioner — who passes the demand order, penalty order, or refund rejection. This is not an appellate level but the starting point of the dispute.</p>
-                        </div>
-                    </div>
-                    <div className="step-item">
-                        <div className="step-dot"></div>
-                        <div className="step-card">
-                            <div className="step-label">Level 2</div>
-                            <h4>Appellate Authority — Commissioner (Appeals) [Section 107]</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">First appellate forum. Form GST APL-01. Deadline: 3 months (extendable by 1 month). Pre-deposit: 10% of disputed tax. Decision timeline: ideally 1 year.</p>
-                        </div>
-                    </div>
-                    <div className="step-item">
-                        <div className="step-dot"></div>
-                        <div className="step-card">
-                            <div className="step-label">Level 3</div>
-                            <h4>GST Appellate Tribunal (GSTAT) [Section 112]</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Second appellate forum for both factual and legal questions. Form GST APL-05. Pre-deposit: 20% of disputed tax (capped at ₹50 crore for CGST + ₹50 crore for SGST). Currently being constituted — HC writ petitions available in interim.</p>
-                        </div>
-                    </div>
-                    <div className="step-item">
-                        <div className="step-dot"></div>
-                        <div className="step-card">
-                            <div className="step-label">Level 4</div>
-                            <h4>High Court [Section 117]</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Only on a substantial question of law (not pure factual disputes). No pre-deposit for HC appeals. Government has threshold of ₹2 crore for departmental appeals to HC.</p>
-                        </div>
-                    </div>
-                    <div className="step-item">
-                        <div className="step-dot"></div>
-                        <div className="step-card">
-                            <div className="step-label">Level 5</div>
-                            <h4>Supreme Court [Section 118]</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Ultimate appellate authority for GST matters involving substantial questions of law. Government threshold for departmental SLP: ₹2 crore.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+      <Section id="eligibility-criteria-for-filing-gst-appeal" title={"Eligibility Criteria for Filing GST Appeal"}>
+        <DataTable headers={["Criteria", "Requirement"]} rows={[["Applicant", "Aggrieved taxpayer or authorised person"], ["Order Type", "Any order passed by GST officer"], ["Time Limit", "Within 3 months"], ["Pre-deposit", "Mandatory deposit required"], ["Documentation", "Valid supporting documents"]]} />
+      </Section>
 
-            <section id="who-can-appeal">
-                <h2>Who Can File a GST Appeal?</h2>
-                <p>The following parties can file a GST appeal under the CGST Act:</p>
-                <ul>
-                    <li><strong>Registered Taxpayers</strong> — Any GST-registered person aggrieved by an order of the adjudicating authority</li>
-                    <li><strong>Unregistered Persons</strong> — Persons not required to be registered but impacted by a GST demand can also appeal</li>
-                    <li><strong>Composition Scheme Dealers</strong> — Eligible to appeal against any order affecting their tax liability</li>
-                    <li><strong>GST Department (Revenue)</strong> — Can file departmental appeals against orders it considers erroneous or revenue-unfavourable</li>
-                    <li><strong>E-Commerce Operators</strong> — For TCS-related or supply-related orders</li>
-                    <li><strong>Input Service Distributors (ISD)</strong> — Against ITC distribution orders</li>
-                </ul>
-                <div className="info-box">
-                    <strong>Authorised Representatives:</strong> Taxpayers need not appear personally. An authorised representative — a GST practitioner, Chartered Accountant, Company Secretary, Cost Accountant, Advocate, or employee of the taxpayer — can appear and argue the appeal on behalf of the taxpayer.
-                </div>
-            </section>
+      <Section id="documents-required-for-gst-appeal" title={"Documents Required for GST Appeal"}>
+        <DataTable headers={["Document", "Purpose"]} rows={[["GST Order Copy", "Base document for appeal"], ["Grounds of Appeal", "Legal justification"], ["Statement of Facts", "Explanation of case"], ["Supporting Evidence", "Proof for claims"], ["GST Returns", "Compliance verification"], ["Authorisation Letter", "If filed through professional"]]} />
+      </Section>
 
-            <section id="time-limits">
-                <h2>Time Limits for Filing GST Appeals</h2>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Appellate Level</th>
-                            <th>Taxpayer Deadline</th>
-                            <th>Department Deadline</th>
-                            <th>Condonation Possible?</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Appellate Authority (Commissioner Appeals)</td>
-                            <td>3 months from order date</td>
-                            <td>6 months from order date</td>
-                            <td>Yes — up to 1 additional month</td>
-                        </tr>
-                        <tr>
-                            <td>GST Appellate Tribunal (GSTAT)</td>
-                            <td>3 months from AA order</td>
-                            <td>6 months from AA order</td>
-                            <td>Yes — at Tribunal&apos;s discretion</td>
-                        </tr>
-                        <tr>
-                            <td>High Court</td>
-                            <td>180 days from GSTAT order</td>
-                            <td>180 days from GSTAT order</td>
-                            <td>Yes — under Limitation Act</td>
-                        </tr>
-                        <tr>
-                            <td>Supreme Court (SLP)</td>
-                            <td>90 days from HC order</td>
-                            <td>90 days from HC order</td>
-                            <td>Yes — at SC&apos;s discretion</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div className="warning-box">
-                    <strong>Critical Warning:</strong> Missing the 3-month appeal deadline (or 4-month maximum with condonation) at the Appellate Authority level means you permanently lose the right to appeal that order through the statutory route. Once time-barred, the only option is a writ petition before the High Court, which is more difficult and expensive. Always file the appeal well within the deadline.
-                </div>
-            </section>
+      <Section id="step-by-step-gst-appeal-process" title={"Step-by-Step GST Appeal Process"}>
+        <Timeline steps={["Review the GST order and identify grounds for appeal\n", "Prepare statement of facts and legal arguments\n", "Calculate and deposit pre-deposit amount\n", "File appeal in prescribed form (GST APL-01)\n", "Submit supporting documents\n", "Attend hearings and represent the case"]} />
+      </Section>
 
-            <section id="pre-deposit">
-                <h2>Pre-Deposit Requirements</h2>
-                <p>
-                    Under Section 107(6) and 112(8) of the CGST Act, a mandatory pre-deposit must be paid before an appeal can be entertained:
-                </p>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Appellate Level</th>
-                            <th>Pre-Deposit Required</th>
-                            <th>Cap</th>
-                            <th>Recovery Stay on Balance?</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Appellate Authority (AA)</td>
-                            <td>10% of disputed tax (CGST + SGST / IGST)</td>
-                            <td>₹25 crore CGST + ₹25 crore SGST</td>
-                            <td>Yes — balance stayed during appeal</td>
-                        </tr>
-                        <tr>
-                            <td>GST Appellate Tribunal (GSTAT)</td>
-                            <td>20% of disputed tax (in addition to AA&apos;s)</td>
-                            <td>₹50 crore CGST + ₹50 crore SGST</td>
-                            <td>Yes — balance stayed during appeal</td>
-                        </tr>
-                        <tr>
-                            <td>High Court</td>
-                            <td>No mandatory pre-deposit</td>
-                            <td>—</td>
-                            <td>At HC discretion (interim stay)</td>
-                        </tr>
-                        <tr>
-                            <td>Supreme Court</td>
-                            <td>No mandatory pre-deposit</td>
-                            <td>—</td>
-                            <td>At SC discretion</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p>
-                    Pre-deposit is paid using Form GST DRC-03 on the GST portal. If the appeal is decided in the taxpayer&apos;s favour, the pre-deposit is refunded with interest at 6% p.a. under Section 115 if not refunded within 90 days of the appeal order.
-                </p>
-            </section>
+      <Section id="gst-appeal-fees-pre-deposit" title={"GST Appeal Fees & Pre-Deposit"}>
+        <DataTable headers={["Component", "Requirement"]} rows={[["Pre-deposit (Tax)", "10% of disputed tax (first appeal)"], ["Additional deposit", "Required for further appeals"], ["Professional Fees", "Depends on complexity"]]} />
+        <p><strong>{"Under the relevant provisions"}</strong>{", failure to deposit the required amount may lead to rejection of appeal."}</p>
+      </Section>
 
-            <section id="grounds">
-                <h2>Common Grounds for GST Appeal</h2>
-                <p>Well-drafted grounds of appeal are the backbone of a successful GST case. Common legally valid grounds include:</p>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Common Grounds</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>ITC Disputes</td>
-                            <td>ITC denied solely on GSTR-2A/2B mismatch without examining supplier compliance; ITC wrongly blocked under Section 17(5); ITC reversal under Rule 42/43 incorrectly computed</td>
-                        </tr>
-                        <tr>
-                            <td>Classification &amp; Rate</td>
-                            <td>Wrong HSN classification leading to higher tax rate; misclassification of exempt supply as taxable supply; wrong determination of place of supply</td>
-                        </tr>
-                        <tr>
-                            <td>Demand &amp; Penalty</td>
-                            <td>Demand without SCN or with defective SCN; penalty imposed without finding of fraud, suppression, or wilful misstatement; limitation period for raising demand violated</td>
-                        </tr>
-                        <tr>
-                            <td>Refund Rejection</td>
-                            <td>Wrongful rejection of zero-rated supply refund; export refund rejected due to technical GSTR-1 errors; IGST refund on imports rejected without valid reason</td>
-                        </tr>
-                        <tr>
-                            <td>Procedural</td>
-                            <td>Order passed without adequate hearing opportunity (natural justice); ex-parte order without valid service of SCN; rejection of written submissions without reasons</td>
-                        </tr>
-                        <tr>
-                            <td>Interest</td>
-                            <td>Interest charged on gross tax liability instead of net (post-ITC) — Supreme Court in Refex Industries; interest computed from wrong date</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+      <Section id="timeline-for-gst-appeal" title={"Timeline for GST Appeal"}>
+        <DataTable headers={["Stage", "Timeline"]} rows={[["Filing Appeal", "Within 3 months"], ["Delay Condonation", "Additional 1 month"], ["Hearing & Decision", "Varies (3–12 months)"]]} />
+      </Section>
 
-            <section id="forms">
-                <h2>GST Appeal Forms</h2>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Form</th>
-                            <th>Filed By</th>
-                            <th>Purpose</th>
-                            <th>Authority</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>GST APL-01</td>
-                            <td>Taxpayer</td>
-                            <td>Appeal against order to Appellate Authority</td>
-                            <td>Commissioner (Appeals)</td>
-                        </tr>
-                        <tr>
-                            <td>GST APL-02</td>
-                            <td>Appellate Authority</td>
-                            <td>Acknowledgement of appeal receipt</td>
-                            <td>Commissioner (Appeals)</td>
-                        </tr>
-                        <tr>
-                            <td>GST APL-03</td>
-                            <td>Department / Tax Officer</td>
-                            <td>Departmental appeal against favourable order</td>
-                            <td>Commissioner (Appeals)</td>
-                        </tr>
-                        <tr>
-                            <td>GST APL-04</td>
-                            <td>Appellate Authority</td>
-                            <td>Summary of appeal order</td>
-                            <td>Commissioner (Appeals)</td>
-                        </tr>
-                        <tr>
-                            <td>GST APL-05</td>
-                            <td>Taxpayer / Department</td>
-                            <td>Appeal to GST Appellate Tribunal</td>
-                            <td>GSTAT</td>
-                        </tr>
-                        <tr>
-                            <td>GST DRC-03</td>
-                            <td>Taxpayer</td>
-                            <td>Payment of pre-deposit / voluntary tax payment</td>
-                            <td>GST Portal</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+      <Section id="post-registration-post-appeal-compliance" title={"Post-Registration (Post-Appeal) Compliance"}>
+        <p>{"Once appeal is filed:"}</p>
+        <ul><li>{"Attend hearings regularly"}</li><li>{"Submit additional documents if required"}</li><li>{"Track appeal status"}</li><li>{"Ensure continued GST compliance"}</li></ul>
+      </Section>
 
-            <section id="process">
-                <h2>Step-by-Step GST Appeal Filing Process</h2>
-                <div className="step-timeline">
-                    <div className="step-item">
-                        <div className="step-dot"></div>
-                        <div className="step-card">
-                            <div className="step-label">Step 1</div>
-                            <h4>Receive &amp; Analyse the Impugned Order</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Obtain a certified copy of the GST demand / penalty / refund rejection order. Carefully analyse the order to identify factual errors, legal mistakes, and procedural lapses. Note the order date — the 3-month clock starts from this date.</p>
-                        </div>
-                    </div>
-                    <div className="step-item">
-                        <div className="step-dot"></div>
-                        <div className="step-card">
-                            <div className="step-label">Step 2</div>
-                            <h4>Evaluate Merits &amp; Prepare Grounds</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Engage a GST consultant or CS to evaluate merits. Prepare precise grounds of appeal — citing specific CGST sections, rules, and supporting case laws (AAR / AAAR / HC / SC precedents).</p>
-                        </div>
-                    </div>
-                    <div className="step-item">
-                        <div className="step-dot"></div>
-                        <div className="step-card">
-                            <div className="step-label">Step 3</div>
-                            <h4>Compute &amp; Pay Pre-Deposit (DRC-03)</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Calculate 10% of the admitted disputed tax. Pay using Form GST DRC-03 on the GST portal against the specific demand. Save the DRC-03 ARN number — required for attaching proof with APL-01.</p>
-                        </div>
-                    </div>
-                    <div className="step-item">
-                        <div className="step-dot"></div>
-                        <div className="step-card">
-                            <div className="step-label">Step 4</div>
-                            <h4>File Form GST APL-01 Online</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Log in to GST portal → Services → User Services → Appeal to Appellate Authority. Fill APL-01 with: order details, grounds of appeal, relief sought, pre-deposit details, and attach supporting documents. Submit within 3 months of order date.</p>
-                        </div>
-                    </div>
-                    <div className="step-item">
-                        <div className="step-dot"></div>
-                        <div className="step-card">
-                            <div className="step-label">Step 5</div>
-                            <h4>Acknowledgement &amp; Hearing Notice</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Appellate Authority issues GST APL-02 acknowledging the appeal. A personal hearing notice will be issued — appear on the scheduled date with all documents. Additional submissions can be made in writing.</p>
-                        </div>
-                    </div>
-                    <div className="step-item">
-                        <div className="step-dot"></div>
-                        <div className="step-card">
-                            <div className="step-label">Step 6</div>
-                            <h4>Hearing &amp; Arguments</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Present arguments supported by documents, reconciliation data, and case laws. Respond to department&apos;s counter-arguments. The authority may ask for additional information or conduct multiple hearings.</p>
-                        </div>
-                    </div>
-                    <div className="step-item">
-                        <div className="step-dot"></div>
-                        <div className="step-card">
-                            <div className="step-label">Step 7</div>
-                            <h4>Appeal Order &amp; Implementation</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">The AA passes the appeal order — fully allowing, partially allowing, or dismissing the appeal. If allowed, pre-deposit is refunded. If dismissed, evaluate GSTAT / HC options. GST APL-04 is issued as summary of order.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+      <Section id="common-mistakes-in-gst-appeals" title={"Common Mistakes in GST Appeals"}>
+        <ul><li>{"Missing appeal deadline"}</li><li>{"Incorrect calculation of pre-deposit"}</li><li>{"Weak documentation"}</li><li>{"Lack of legal grounds"}</li><li>{"Filing incomplete forms"}</li></ul>
+        <p><strong>{"According to governing regulations"}</strong>{", procedural errors can result in outright rejection."}</p>
+      </Section>
 
-            <section id="documents">
-                <h2>Documents Required for GST Appeal</h2>
-                <ul>
-                    <li>Certified copy of the impugned GST order</li>
-                    <li>Original Show Cause Notice (SCN) and the taxpayer&apos;s reply filed</li>
-                    <li>GSTR-1, GSTR-3B, and GSTR-9 for the relevant tax period</li>
-                    <li>GSTR-2A / GSTR-2B reconciliation with purchase register</li>
-                    <li>All tax invoices, purchase orders, and e-way bills in dispute</li>
-                    <li>Import/export documentation (for IGST / zero-rated supply disputes)</li>
-                    <li>Bank statements showing tax payments and DRC-03 payment challans</li>
-                    <li>Books of accounts (ledger / purchase register / sales register)</li>
-                    <li>Form GST DRC-03 ARN for pre-deposit payment</li>
-                    <li>Authorisation letter / power of attorney for representative</li>
-                    <li>Written grounds of appeal (legal brief with case laws)</li>
-                    <li>Previous hearing correspondence / written submissions filed earlier</li>
-                </ul>
-            </section>
+      <Section id="why-professional-gst-appeal-services-matter" title={"Why Professional GST Appeal Services Matter"}>
+        <p>{"GST appeals involve:"}</p>
+        <ul><li>{"Legal interpretation"}</li><li>{"Documentation accuracy"}</li><li>{"Strategic argument building"}</li></ul>
+        <p>{"Without expert support, chances of rejection increase significantly."}</p>
+      </Section>
 
-            <section id="fees">
-                <h2>Fees &amp; Professional Charges</h2>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Activity</th>
-                            <th>Government Fee</th>
-                            <th>Professional Advisory Fees</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Filing APL-01 (Appellate Authority)</td>
-                            <td>₹1,000 (disputes up to ₹10L) / ₹2,000 (above ₹10L)</td>
-                            <td>₹10,000–₹50,000 (simple cases)</td>
-                        </tr>
-                        <tr>
-                            <td>Filing APL-05 (GSTAT)</td>
-                            <td>₹2,000 (disputes up to ₹10L) / ₹5,000 (above ₹10L)</td>
-                            <td>₹50,000–₹2,00,000</td>
-                        </tr>
-                        <tr>
-                            <td>Representation per hearing (AA)</td>
-                            <td>Nil</td>
-                            <td>₹5,000–₹25,000 per hearing</td>
-                        </tr>
-                        <tr>
-                            <td>High Court Writ / Appeal</td>
-                            <td>Court fees (state-specific)</td>
-                            <td>₹1,00,000–₹10,00,000+ (advocate retainer)</td>
-                        </tr>
-                        <tr>
-                            <td>Pre-deposit (10% of disputed tax)</td>
-                            <td>Mandatory — credited to government</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>Comprehensive appeal management</td>
-                            <td>—</td>
-                            <td>₹25,000–₹5,00,000 (dispute-size dependent)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+      <Section id="advanced-gst-appeal-structure-in-india-beyond-first-appeal" title={"Advanced GST Appeal Structure in India (Beyond First Appeal)"}>
+        <p><strong>{"From a legal hierarchy perspective…"}</strong>{" GST law provides multiple levels of appeal to ensure justice at every stage."}</p>
+        <h3>{"Appellate Structure under GST"}</h3>
+        <DataTable headers={["Level", "Authority", "When Applicable"]} rows={[["First Appeal", "Commissioner (Appeals)", "Against GST officer order"], ["Second Appeal", "GST Appellate Tribunal (GSTAT)", "Against appellate order"], ["Third Level", "High Court", "Substantial question of law"], ["Final Level", "Supreme Court", "Constitutional/legal issues"]]} />
+        <p><strong>{"As per applicable regulatory guidelines"}</strong>{", each level has specific jurisdiction and procedural requirements."}</p>
+      </Section>
 
-            <section id="timeline">
-                <h2>GST Appeal Timeline</h2>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Stage</th>
-                            <th>Statutory Timeline</th>
-                            <th>Practical Timeline</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>File APL-01</td>
-                            <td>Within 3 months of order</td>
-                            <td>3–7 days after retaining professional</td>
-                        </tr>
-                        <tr>
-                            <td>APL-02 Acknowledgement</td>
-                            <td>Immediate (online)</td>
-                            <td>Same day</td>
-                        </tr>
-                        <tr>
-                            <td>First Hearing Notice</td>
-                            <td>No fixed period</td>
-                            <td>2–8 weeks</td>
-                        </tr>
-                        <tr>
-                            <td>Final Order — AA</td>
-                            <td>1 year (Section 107)</td>
-                            <td>6 months–2 years (practical)</td>
-                        </tr>
-                        <tr>
-                            <td>GSTAT Decision</td>
-                            <td>3 months (Section 112)</td>
-                            <td>6 months–3 years (practical)</td>
-                        </tr>
-                        <tr>
-                            <td>High Court</td>
-                            <td>No fixed statutory limit</td>
-                            <td>1–5 years</td>
-                        </tr>
-                        <tr>
-                            <td>Pre-deposit refund (if appeal won)</td>
-                            <td>Within 90 days of appeal order</td>
-                            <td>2–6 months practical</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+      <Section id="when-should-you-file-gst-appeal-practical-triggers" title={"When Should You File GST Appeal – Practical Triggers"}>
+        <p>{"From real industry experience, GST appeals are typically filed when:"}</p>
+        <ul><li>{"Tax demand is "}<strong>{"legally incorrect or excessive"}</strong></li><li>{"ITC is denied despite valid documentation"}</li><li>{"Penalty is imposed without proper reasoning"}</li><li>{"Order is passed "}<strong>{"without giving proper hearing"}</strong></li><li>{"GST registration is cancelled abruptly"}</li><li>{"Refund claims are rejected without justification"}</li></ul>
+      </Section>
 
-            <section id="common-mistakes">
-                <h2>Common Mistakes to Avoid in GST Appeals</h2>
-                <ul>
-                    <li><strong>Missing the 3-month deadline</strong> — The most common and most damaging mistake; once time-barred, the appeal cannot be filed without HC intervention</li>
-                    <li><strong>Insufficient pre-deposit</strong> — Paying less than 10% of the full disputed amount causes the appeal to be rejected at the threshold; compute the exact figure carefully</li>
-                    <li><strong>Vague grounds of appeal</strong> — Generic statements like &quot;demand is wrong&quot; without specific legal grounds are rejected; each ground must cite the specific CGST section violated</li>
-                    <li><strong>Missing documents</strong> — GSTR-2A/2B reconciliation data, e-way bills, and invoices not submitted weaken ITC-related appeals significantly</li>
-                    <li><strong>Not attending hearings</strong> — Ex-parte hearing orders from the Appellate Authority are common when taxpayers don&apos;t appear; always confirm and attend scheduled dates</li>
-                    <li><strong>Ignoring interest computation errors</strong> — Many demands include wrongly computed interest (charged on gross tax vs. net-of-ITC basis); raise this specifically as a ground</li>
-                    <li><strong>Not tracking the appeal status</strong> — Portal-based appeals require regular monitoring; missed hearing dates can result in ex-parte orders against the taxpayer</li>
-                    <li><strong>Settling too early without evaluating merits</strong> — Paying under the GST amnesty scheme is appropriate only when the demand has merit; for clearly wrong demands, full appeal is more cost-effective</li>
-                </ul>
-            </section>
+      <Section id="strategic-approach-for-strong-gst-appeal" title={"Strategic Approach for Strong GST Appeal"}>
+        <p><strong>{"From a compliance advisory perspective…"}</strong>{" filing an appeal is not just form submission—it is a legal strategy."}</p>
+        <h3>{"Key Elements of a Strong Appeal"}</h3>
+        <ul><li>{"Clear identification of "}<strong>{"legal errors in order"}</strong></li><li>{"Strong documentation backing"}</li><li>{"Proper classification of issues (fact vs law)"}</li><li>{"Reference to relevant sections and circulars"}</li><li>{"Logical and structured argument drafting"}</li></ul>
+      </Section>
 
-            <section id="appeal-vs-revision">
-                <h2>GST Appeal vs GST Revision</h2>
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>GST Appeal (Section 107)</th>
-                            <th>GST Revision (Section 108)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Initiated by</td>
-                            <td>Taxpayer or Department</td>
-                            <td>Revisional Authority (suo motu or on application)</td>
-                        </tr>
-                        <tr>
-                            <td>Authority</td>
-                            <td>Commissioner (Appeals)</td>
-                            <td>Commissioner / Principal Commissioner</td>
-                        </tr>
-                        <tr>
-                            <td>Pre-deposit</td>
-                            <td>10% of disputed tax mandatory</td>
-                            <td>Not applicable</td>
-                        </tr>
-                        <tr>
-                            <td>Scope</td>
-                            <td>Challenge to any order</td>
-                            <td>Revise orders erroneous &amp; prejudicial to revenue</td>
-                        </tr>
-                        <tr>
-                            <td>Time limit</td>
-                            <td>3 months (taxpayer)</td>
-                            <td>3 years from order date</td>
-                        </tr>
-                        <tr>
-                            <td>When used</td>
-                            <td>Taxpayer disagrees with demand/order</td>
-                            <td>Department finds own officer&apos;s order was too favourable to taxpayer</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div className="expert-quote">
-                    <blockquote>
-                        &ldquo;A well-prepared GST appeal is not just a legal document — it is a financial instrument. The difference between a correctly argued appeal and a poorly drafted one can be crores of rupees in saved tax liability. Every business deserves expert representation when challenging a GST demand.&rdquo;
-                    </blockquote>
-                    <cite>— CS Devyani Khambhati, Founder, Estabizz Fintech Consultants</cite>
-                </div>
-            </section>
+      <Section id="drafting-structure-of-gst-appeal-professional-format" title={"Drafting Structure of GST Appeal (Professional Format)"}>
+        <p>{"A well-drafted appeal generally includes:"}</p>
+        <ol><li>{"Introduction of the Case"}</li><li>{"Statement of Facts"}</li><li>{"Grounds of Appeal (Legal Points)"}</li><li>{"Relief Sought"}</li><li>{"Supporting Documents Annexure"}</li></ol>
+        <p><strong>{"According to governing regulations"}</strong>{", weak drafting is one of the primary reasons for rejection."}</p>
+      </Section>
 
-            <section id="post-appeal">
-                <h2>Post-Appeal Compliance Obligations</h2>
-                <p>After the Appellate Authority passes its order, several follow-up actions are required:</p>
-                <ul>
-                    <li><strong>If appeal is fully allowed:</strong> Apply for pre-deposit refund through Form GST RFD-01 / Form GST DRC-03 credit; update books of accounts to reverse the demand provision; obtain refund within 90 days (interest payable on delay)</li>
-                    <li><strong>If appeal is partially allowed:</strong> Pay the confirmed demand portion with interest; apply for refund of excess pre-deposit; evaluate further appeal to GSTAT on the upheld portion</li>
-                    <li><strong>If appeal is dismissed:</strong> Decide on GSTAT appeal (pre-deposit 20%); assess merits of going to High Court; consider Vivad Se Vishwas settlement if demand is large and merits are weak</li>
-                    <li><strong>Internal compliance fix:</strong> Regardless of outcome, review and fix the underlying compliance process that gave rise to the dispute — reconcile GSTR-1 and GSTR-3B monthly, match GSTR-2B before claiming ITC, maintain proper e-way bills</li>
-                    <li><strong>Document retention:</strong> Retain all appeal records, hearing transcripts, and correspondence for at least 7 years — further proceedings at GSTAT or HC may require this history</li>
-                </ul>
-            </section>
+      <Section id="pre-deposit-calculation-practical-understanding" title={"Pre-Deposit Calculation – Practical Understanding"}>
+        <DataTable headers={["Scenario", "Pre-Deposit Requirement"]} rows={[["First Appeal", "10% of disputed tax"], ["Second Appeal", "Additional 20%"], ["Maximum Cap", "₹25 Crore (as applicable)"]]} />
+        <p><strong>{"Important Note:"}</strong>{""}<br />{"Pre-deposit is calculated only on "}<strong>{"tax amount"}</strong>{", not penalty or interest."}</p>
+      </Section>
 
-            <section id="faq">
-                <h2>Frequently Asked Questions (FAQs)</h2>
-                <div className="faq-accordion">
-                    {faqs.map((item, i) => (
-                        <details key={i} className="faq-item">
-                            <summary>{item.q}</summary>
-                            <div>{item.a}</div>
-                        </details>
-                    ))}
-                </div>
-            </section>
-        </ServicePageLayout>
-    );
+      <Section id="situations-where-gst-appeal-can-be-avoided" title={"Situations Where GST Appeal Can Be Avoided"}>
+        <p>{"Sometimes, appeal may not be the best option. Instead:"}</p>
+        <ul><li>{"Rectification application may be filed"}</li><li>{"Clarification submission can resolve issue"}</li><li>{"Departmental review may correct error"}</li></ul>
+      </Section>
+
+      <Section id="gst-appeal-vs-rectification-key-difference" title={"GST Appeal vs Rectification – Key Difference"}>
+        <DataTable headers={["Particular", "GST Appeal", "Rectification"]} rows={[["Nature", "Legal challenge", "Correction of error"], ["Timeline", "3 months", "Within prescribed time"], ["Complexity", "High", "Low"], ["Authority", "Appellate authority", "Same officer"]]} />
+      </Section>
+
+      <Section id="common-grounds-used-in-gst-appeals" title={"Common Grounds Used in GST Appeals"}>
+        <ul><li>{"Violation of natural justice"}</li><li>{"Incorrect interpretation of GST law"}</li><li>{"Lack of evidence by department"}</li><li>{"Technical errors in assessment"}</li><li>{"Non-consideration of submissions"}</li></ul>
+      </Section>
+
+      <Section id="department-s-perspective-in-gst-appeals" title={"Department’s Perspective in GST Appeals"}>
+        <p><strong>{"From regulatory experience…"}</strong>{" authorities evaluate:"}</p>
+        <ul><li>{"Whether taxpayer followed compliance properly"}</li><li>{"Whether documentation supports claim"}</li><li>{"Whether law is correctly interpreted"}</li><li>{"Whether appeal is filed within time"}</li></ul>
+      </Section>
+
+      <Section id="practical-compliance-risks-real-world-observations" title={"Practical Compliance Risks (Real-World Observations)"}>
+        <p>{"Based on industry experience:"}</p>
+        <ul><li>{"Businesses ignore appeal timelines"}</li><li>{"Incorrect legal grounds weaken case"}</li><li>{"Over-reliance on accountant instead of legal expert"}</li><li>{"Lack of documentation leads to rejection"}</li><li>{"Improper classification of ITC claims"}</li></ul>
+      </Section>
+
+      <Section id="why-estabizz-approach-makes-a-difference" title={"Why Estabizz Approach Makes a Difference"}>
+        <p>{"At a professional advisory level, GST appeal is handled with:"}</p>
+        <CheckList items={["Legal drafting precision", "Regulatory interpretation", "Strategic positioning before authority", "End-to-end representation"]} />
+      </Section>
+
+      <Section id="advanced-gst-appeal-strategy" title={"Advanced GST Appeal Strategy"}>
+        <p><strong>{"From a professional litigation standpoint…"}</strong>{" the following strategies significantly improve outcomes:"}</p>
+        <h3>{"Case Positioning Strategy"}</h3>
+        <ul><li>{"Identify whether issue is "}<strong>{"factual or legal"}</strong></li><li>{"Prioritise strongest grounds first"}</li><li>{"Avoid unnecessary arguments"}</li></ul>
+        <h3>{"Documentation Strategy"}</h3>
+        <ul><li>{"Use "}<strong>{"invoice-level evidence"}</strong></li><li>{"Match returns with financials"}</li><li>{"Reconcile ITC claims properly"}</li></ul>
+        <h3>{"Representation Strategy"}</h3>
+        <ul><li>{"Prepare for departmental objections"}</li><li>{"Anticipate questions during hearing"}</li><li>{"Maintain consistency in submissions"}</li></ul>
+      </Section>
+
+      <Section id="when-gst-appeal-gets-rejected-real-reasons" title={"When GST Appeal Gets Rejected – Real Reasons"}>
+        <ul><li>{"Appeal filed beyond limitation period"}</li><li>{"Incorrect or insufficient pre-deposit"}</li><li>{"Weak or generic grounds of appeal"}</li><li>{"Missing supporting documents"}</li><li>{"Non-attendance during hearing"}</li></ul>
+        <p><strong>{"As per regulatory practice"}</strong>{", even a valid case can fail due to procedural lapses."}</p>
+      </Section>
+
+      <Section id="industry-wise-gst-appeal-scenarios" title={"Industry-Wise GST Appeal Scenarios"}>
+        <h3>{"Manufacturing Sector"}</h3>
+        <ul><li>{"ITC disputes on raw materials"}</li><li>{"Classification-related tax demands"}</li></ul>
+        <h3>{"Trading Businesses"}</h3>
+        <ul><li>{"Mismatch in GSTR-2A / 2B"}</li><li>{"E-way bill related penalties"}</li></ul>
+        <h3>{"Service Industry"}</h3>
+        <ul><li>{"Place of supply disputes"}</li><li>{"GST rate interpretation issues"}</li></ul>
+        <h3>{"Infrastructure & Real Estate"}</h3>
+        <ul><li>{"Input tax credit restrictions"}</li><li>{"Contract classification disputes"}</li></ul>
+      </Section>
+
+      <Section id="legal-interpretation-areas-in-gst-appeals" title={"Legal Interpretation Areas in GST Appeals"}>
+        <ul><li>{"Definition of “supply”"}</li><li>{"Time of supply disputes"}</li><li>{"Eligibility of Input Tax Credit"}</li><li>{"Valuation of taxable supply"}</li><li>{"Classification under GST rate schedule"}</li></ul>
+      </Section>
+
+      <Section id="drafting-mistakes-that-cost-cases" title={"Drafting Mistakes That Cost Cases"}>
+        <ul><li>{"Copy-paste grounds from internet"}</li><li>{"Lack of section references"}</li><li>{"Emotional arguments instead of legal reasoning"}</li><li>{"Ignoring department’s findings"}</li><li>{"Poor structuring of facts"}</li></ul>
+      </Section>
+
+      <Section id="how-estabizz-supports" title={"How Estabizz Supports"}>
+        <p>{"From a client advisory standpoint, GST appeal requires:"}</p>
+        <CheckList items={["Legal drafting expertise", "Understanding of GST law", "Strategic representation", "Continuous follow-up"]} />
+        <p>{"Our approach includes:"}</p>
+        <ul><li>{"Case analysis and viability check"}</li><li>{"Drafting of appeal documents"}</li><li>{"Filing and compliance management"}</li><li>{"Representation before authorities"}</li><li>{"End-to-end support"}</li></ul>
+      </Section>
+
+      <Section id="final-takeaway" title={"Final Takeaway"}>
+        <p>{"GST Appeal Services are a powerful tool for businesses to correct unjust tax positions. However, strict timelines, financial implications, and legal complexity make it essential to approach the process with clarity and expertise."}</p>
+        <p>{"A properly drafted and strategically presented appeal significantly increases the chances of a favourable outcome."}</p>
+      </Section>
+
+      <Section id="expert-insight" title={"Expert Insight"}>
+        <p>{"“GST appeals are not merely procedural filings—they are strategic representations where clarity of facts and strength of legal interpretation determine the outcome. A well-prepared appeal often decides the case even before the first hearing.”"}{""}<br />{"— "}<strong>{"CS Devyani Khambhati, Compliance Expert"}</strong></p>
+        <p>{"GST Appeal Services provide a crucial legal pathway for businesses to safeguard their financial and compliance position. With strict timelines, mandatory deposits, and procedural requirements, it is always advisable to approach the process with proper planning and professional guidance."}</p>
+        <p>{"In today’s regulatory landscape, a well-structured appeal is not just an option—it is a necessity for protecting your business interests."}</p>
+      </Section>
+
+      <Section id="faqs" title="Frequently Asked Questions">
+        {faqGroups.map((group, groupIndex) => (
+          <div key={group.title} className="mb-8">
+            <h3 id={`faq-group-${groupIndex + 1}`}>{group.title}</h3>
+            <div className="faq-accordion">
+              {group.items.map((faq) => (
+                <details className="faq-item" key={faq.number} id={`faq-${faq.number}`}>
+                  <summary>{faq.number}. {faq.q}</summary>
+                  <div className="faq-answer">
+                    <p>{faq.a}</p>
+                    {faq.points.length > 0 && <ul>{faq.points.map((point) => <li key={point}>{point}</li>)}</ul>}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </Section>
+      <Section id="disclaimer" title="Disclaimer">
+        <p>This guide is general information, not transaction-specific legal advice. Requirements depend on the applicable regulations, current circulars and the facts of each case. Confirm the current position with the relevant authority and your professional adviser before acting.</p>
+      </Section>
+    </ServicePageLayout>
+  );
 }

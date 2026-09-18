@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { FIU_IND_SERVICES } from '@/lib/fiu-ind-aml';
+import { GOV_LIC_SERVICES } from '@/lib/gov-lic';
+import { LANDING_PAGES } from '@/lib/landing';
 
 export const metadata: Metadata = {
     title: "Our Regulatory Services - RBI, SEBI, IFSCA, IRDAI & FEMA Compliance | Estabizz Fintech",
@@ -10,12 +13,28 @@ export const metadata: Metadata = {
 
 const categories = [
     {
+        title: "Compliance",
+        href: "/regulatory/compliance",
+        icon: "📋",
+        description: "Regulatory reporting, cross-border compliance, finance and accounting support, GST appeals, legal outsourcing and transaction due diligence.",
+        tags: ["AIF", "FEMA", "Accounting", "GST", "LPO", "Due Diligence"],
+        services: [
+            { name: "Compliance Test Report for AIF", href: "/sebi/aif-compliance-test-report" },
+            { name: "Compliance Under FEMA", href: "/fema/compliance-under-fema" },
+            { name: "Finance & Accounting Outsourcing", href: "/services/finance-accounting-outsourcing" },
+            { name: "GST Appeal Services", href: "/services/gst-appeal-services" },
+            { name: "Legal Process Outsourcing", href: "/services/legal-process-outsourcing" },
+            { name: "Legal Due Diligence", href: "/services/legal-due-diligence" },
+        ],
+    },
+    {
         title: "RBI Regulatory Services",
+        href: "/rbi",
         icon: "🏛️",
         description: "End-to-end RBI licensing and compliance management — including capital structuring, policy drafting, application filing, and post-approval reporting.",
         tags: ["NBFC", "Payment Aggregator", "PPI", "Account Aggregator"],
         services: [
-            { name: "NBFC Registration", href: "/rbi/nbfc-account-aggregator-license" },
+            { name: "NBFC Registration", href: "/rbi/nbfc-registration-in-india" },
             { name: "NBFC Account Aggregator", href: "/rbi/nbfc-account-aggregator-license" },
             { name: "NBFC Business Plan", href: "/rbi/nbfc-business-plan" },
             { name: "NBFC Legal Support", href: "/rbi/nbfc-legal-support" },
@@ -28,12 +47,12 @@ const categories = [
     },
     {
         title: "SEBI Regulatory Services",
+        href: "/sebi",
         icon: "📈",
         description: "Structured SEBI registration and governance support covering documentation, eligibility assessment, net worth compliance, and monitoring.",
         tags: ["Stock Broker", "RIA", "PMS", "AIF", "Research Analyst"],
         services: [
             { name: "Stock Broker License", href: "/sebi/stock-broker-registration-in-india" },
-            { name: "Merchant Banker", href: "/sebi/merchant-banker-registration" },
             { name: "Portfolio Manager", href: "/sebi/pms-registration-in-india" },
             { name: "Investment Adviser", href: "/sebi/ria-registration-in-india" },
             { name: "Research Analyst", href: "/sebi/research-analyst-registration-in-india" },
@@ -45,6 +64,7 @@ const categories = [
     },
     {
         title: "IFSCA & GIFT City Services",
+        href: "/ifsca",
         icon: "🌐",
         description: "Regulatory structuring and operational compliance support for entities operating within India's International Financial Services Centre ecosystem.",
         tags: ["Finance Company", "Factoring", "PSP License", "BATF", "Aircraft Leasing", "FinTech"],
@@ -54,23 +74,27 @@ const categories = [
             { name: "Aircraft Leasing IFSC", href: "/ifsca/aircraft-leasing-registration-in-ifsc" },
             { name: "FinTech Entity & Incentives", href: "/ifsca/ifsca-fintech-startup-incentives" },
             { name: "ITFS Platform", href: "/ifsca/itfs-registration-in-gift-ifsc" },
-            { name: "IFSCA Factoring License", href: "/ifsca/factoring-license" },
+            { name: "IFSCA Factoring License", href: "/regulatory/ifsca-factoring-license-gift-city" },
             { name: "TechFin Authorization", href: "/ifsca/techfin" },
             { name: "PSP License IFSCA", href: "/ifsca/psp-license-ifsca" },
         ],
     },
     {
         title: "IRDAI Regulatory Services",
+        href: "/irdai",
         icon: "🛡️",
         description: "Complete IRDAI licensing lifecycle support — from feasibility assessment and capital planning to regulatory approval and compliance.",
         tags: ["Insurance Broker", "Corporate Agent", "Web Aggregator", "TPA"],
         services: [
             { name: "Insurance Broker License", href: "/irdai/irda-insurance-broker-license" },
             { name: "IFSCA Insurance Intermediary", href: "/irdai/ifsca-insurance-intermediary" },
+            { name: "Insurance Guides", href: "/regulatory/insurance" },
+            { name: "TPA Licence", href: "/regulatory/insurance/tpa-license-india" },
         ],
     },
     {
         title: "FEMA & Other Compliance",
+        href: "/fema",
         icon: "⚖️",
         description: "Cross-border regulatory compliance including FEMA, transfer pricing, GST and other government licensing requirements.",
         tags: ["FEMA", "Transfer Pricing", "GST", "DGFT"],
@@ -85,6 +109,7 @@ const categories = [
     },
     {
         title: "Enterprise & Specialized Services",
+        href: "/services",
         icon: "🏗️",
         description: "Industry-specific regulatory approvals and ongoing compliance support for specialized financial and corporate operations.",
         tags: ["ESG", "Trademark", "PAP License", "Sustainable Finance"],
@@ -96,6 +121,30 @@ const categories = [
             { name: "PAP License", href: "/services/pap-license" },
             { name: "Sustainable Finance", href: "/services/sustainable-finance" },
         ],
+    },
+    {
+        title: "FIU-IND & AML",
+        href: "/fiu-ind-aml",
+        icon: "🔍",
+        description: "Anti-money laundering, KYC and financial intelligence reporting support.",
+        tags: ["FIU-IND", "PMLA", "AML", "CKYC"],
+        services: FIU_IND_SERVICES.map(service => ({ name: service.title, href: `/fiu-ind-aml/${service.slug}` })),
+    },
+    {
+        title: "MCA / ROC Corporate Services",
+        href: "/mca-roc",
+        icon: "🏛️",
+        description: "Company formation, corporate changes and governance documentation.",
+        tags: ["Company", "LLP", "OPC", "ROC"],
+        services: LANDING_PAGES.slice(0, 6).map(page => ({ name: page.title, href: `/mca-roc/${page.slug}` })),
+    },
+    {
+        title: "Government Licences",
+        href: "/gov-lic",
+        icon: "⚖️",
+        description: "Licensing and registration support for food, manufacturing, healthcare and export businesses.",
+        tags: ["FSSAI", "APEDA", "AYUSH", "BIS"],
+        services: GOV_LIC_SERVICES.map(service => ({ name: service.title, href: `/gov-lic/${service.slug}` })),
     },
 ];
 
@@ -135,7 +184,7 @@ export default function RegulatoryPage() {
             {/* Categories */}
             <section className="mx-auto max-w-7xl px-6 py-14">
                 <div className="mb-8">
-                    <h2 className="text-[26px] font-black tracking-[-0.02em] text-[#120b45]">Explore by Regulator</h2>
+                    <h2 className="text-[26px] font-black tracking-[-0.02em] text-[#120b45]">Explore Regulatory Categories</h2>
                     <div className="mt-2 h-[3px] w-12 rounded-full bg-[#1677f2]" />
                     <p className="mt-3 text-[14px] text-[#64748b]">Select a framework to access the complete suite of registration, licensing and compliance services.</p>
                 </div>
@@ -143,11 +192,12 @@ export default function RegulatoryPage() {
                     {categories.map((cat, idx) => (
                         <div
                             key={idx}
-                            className="flex h-full flex-col rounded-2xl border border-blue-100 bg-white p-8 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-all hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_16px_44px_rgba(0,80,140,0.12)]"
+                            id={cat.title === "Compliance" ? "compliance" : undefined}
+                            className="flex h-full scroll-mt-24 flex-col rounded-2xl border border-blue-100 bg-white p-8 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-all hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_16px_44px_rgba(0,80,140,0.12)]"
                         >
                             <div className="mb-4 flex items-center gap-3">
                                 <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5fbff] text-2xl">{cat.icon}</span>
-                                <h3 className="text-[18px] font-bold tracking-[-0.01em] text-[#120b45]">{cat.title}</h3>
+                                <h3 className="text-[18px] font-bold tracking-[-0.01em] text-[#120b45]">{cat.href ? <Link href={cat.href} className="hover:text-[#1677f2]">{cat.title}</Link> : cat.title}</h3>
                             </div>
                             <p className="mb-5 text-[13px] leading-relaxed text-[#64748b]">{cat.description}</p>
                             <div className="mb-6 flex flex-wrap gap-2">
@@ -158,6 +208,7 @@ export default function RegulatoryPage() {
                                 ))}
                             </div>
                             <div className="mt-auto space-y-1">
+                                <Link href={cat.href} className="block px-3 py-2 text-sm font-bold text-[#1677f2]">View all {cat.title} →</Link>
                                 {cat.services.map((svc, i) => (
                                     <Link
                                         key={i}

@@ -22,7 +22,7 @@ export const SOLUTIONS_DEFAULTS: SolutionsContent = {
   description:
     "Whether you are starting, scaling or entering a regulated financial market, Estabizz structures the licensing and compliance path with practical clarity.",
   cards: [
-    { num: "01", icon: "🚀", title: "Startups & New Businesses", subtitle: "Build Right. From Day One.", body: "Incorporation, GST, banking readiness and early compliance foundations before scale.", tags: ["Private Limited", "LLP", "OPC", "Section 8"], href: "/services" },
+    { num: "01", icon: "🚀", title: "Startups & New Businesses", subtitle: "Build Right. From Day One.", body: "Incorporation, GST, banking readiness and early compliance foundations before scale.", tags: ["Private Limited", "LLP", "OPC", "Section 8"], href: "/solutions/startups" },
     { num: "02", icon: "🏦", title: "NBFCs & Lending Businesses", subtitle: "Regulated Lending. Managed with Precision.", body: "NBFC licence, RBI policy stack, returns, audits, governance and post-registration compliance.", tags: ["RBI Licensing", "NBFC Compliance", "DNBS Reporting"], href: "/rbi" },
     { num: "03", icon: "💳", title: "Fintech Platforms", subtitle: "Compliance Architecture for Digital Finance.", body: "Payment Aggregator, PPI, PSP, Account Aggregator and IFSCA route evaluation.", tags: ["PA Licence", "PPI", "PSP", "IFSCA"], href: "/ifsca" },
     { num: "04", icon: "📊", title: "SMEs & Growing Enterprises", subtitle: "Structured Compliance. Sustainable Growth.", body: "ROC, tax, audit, secretarial, governance and sectoral licence support.", tags: ["Audit", "ROC", "Tax", "Governance"], href: "/services/enterprise-services" },

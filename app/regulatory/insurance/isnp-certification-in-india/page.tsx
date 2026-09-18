@@ -4,13 +4,13 @@ import PageClient from './PageClient';
 const FULL_PATH = '/regulatory/insurance/isnp-certification-in-india';
 
 export const metadata: Metadata = {
-    title: "ISNP Certification in India – Complete Guide, Eligibility, Process & Compliance Insights (2026)",
-    description: "ISNP Certification in India explained in detail. Check eligibility, process, documents, fees, compliance and practical regulatory insights.",
-    keywords: "ISNP Certification in India, Network Security Certification, Cybersecurity Certification India, CERT-In Compliance, IT Act 2000 Cybersecurity, DPDP Act Compliance, Vendor Risk Management, Cyber Audit Readiness",
+    title: "ISNP Security Audit for IRDAI Compliance: Scope, Auditor, Process and Timeline",
+    description: "The independent security audit an Insurance Self-Network Platform needs before it goes live and annually after — CERT-In empanelled auditor, audit scope, deliverables, timeline and how it differs from ISNP registration.",
+    keywords: "ISNP Security Audit, ISNP Certification, Insurance Self-Network Platform audit, IRDAI cyber security audit, CERT-In empanelled auditor, ISNP VAPT, IRDAI Insurance e-Commerce Guidelines 2017, ISNP annual audit, insurance platform penetration testing",
     alternates: { canonical: FULL_PATH },
     openGraph: {
-        title: "ISNP Certification in India – Complete Cybersecurity Compliance Guide",
-        description: "ISNP Certification — scope, eligibility, documents, audit expectations, internal controls, gap analysis, renewal, regulator linkages and 150 FAQs by Estabizz.",
+        title: "ISNP Security Audit for IRDAI Compliance",
+        description: "What the ISNP security audit covers, who may perform it, what is delivered, and how it sits alongside ISNP registration under the IRDAI Guidelines on Insurance e-Commerce.",
         url: FULL_PATH,
         type: "article",
     },

@@ -10,35 +10,25 @@ type Card = { title: string; body: ReactNode };
 const whatsappUrl = 'https://wa.me/919825600907';
 
 const sections = [
-  { id: 'quick-overview', title: 'ISNP Certification: Quick Overview' },
-  { id: 'what-is', title: 'What is ISNP Certification?' },
-  { id: 'scope', title: 'What ISNP Certification Covers in Detail' },
-  { id: 'regulatory-framework', title: 'Regulatory Framework Around ISNP' },
-  { id: 'regulatory-linkages', title: 'Sector Regulator Linkages' },
-  { id: 'who-needs', title: 'Who Needs ISNP Certification?' },
-  { id: 'eligibility', title: 'Eligibility Criteria' },
-  { id: 'documents', title: 'Documents Required' },
-  { id: 'evaluation-areas', title: 'Core Components Evaluated' },
-  { id: 'process', title: 'Step-by-Step Certification Process' },
-  { id: 'fees', title: 'Certification Fees' },
+  { id: 'quick-overview', title: 'ISNP Security Audit: Quick Overview' },
+  { id: 'what-is', title: 'What the ISNP Security Audit Is' },
+  { id: 'terminology', title: 'A Note on the Term “ISNP Certification”' },
+  { id: 'regulatory-basis', title: 'Regulatory Basis' },
+  { id: 'who-needs', title: 'Who Needs an ISNP Security Audit' },
+  { id: 'auditor-qualification', title: 'Who Can Perform the Audit' },
+  { id: 'scope', title: 'What the Audit Covers' },
+  { id: 'application-security', title: 'Application Security and VAPT' },
+  { id: 'payment-flows', title: 'Payment and Premium Flows' },
+  { id: 'data-protection', title: 'Policyholder Data Protection' },
+  { id: 'monitoring', title: 'Logging, Monitoring and Audit Trail' },
+  { id: 'network-isms', title: 'Network, Infrastructure and ISMS' },
+  { id: 'deliverables', title: 'What You Receive' },
+  { id: 'process', title: 'Step-by-Step Audit Process' },
   { id: 'timeline', title: 'Timeline' },
-  { id: 'governance', title: 'Internal Governance Requirements' },
-  { id: 'internal-controls', title: 'Internal Control Systems Expected' },
-  { id: 'gap-analysis', title: 'Real Compliance Gap Analysis' },
-  { id: 'regulator-evaluation', title: 'How Regulators Indirectly Evaluate It' },
-  { id: 'vendor-risk', title: 'Vendor and Third-Party Risk Management' },
-  { id: 'risk-classification', title: 'Risk-Based Classification' },
-  { id: 'data-protection-laws', title: 'Integration with Data Protection Laws' },
-  { id: 'consequences', title: 'Consequences of Weak Cyber Compliance' },
-  { id: 'vs-other-certifications', title: 'ISNP vs Other Cybersecurity Certifications' },
-  { id: 'business-impact', title: 'How ISNP Certification Impacts Operations' },
-  { id: 'post-certification', title: 'Post-Certification Compliance' },
-  { id: 'renewal', title: 'Renewal and Continuous Compliance' },
-  { id: 'compliance-risks', title: 'Practical Compliance Risks' },
-  { id: 'red-flags', title: 'Red Flags That Lead to Rejection' },
-  { id: 'common-mistakes', title: 'Common Mistakes to Avoid' },
-  { id: 'strategic-advantage', title: 'Strategic Advantage of ISNP Certification' },
-  { id: 'future-outlook', title: 'Future Outlook' },
+  { id: 'annual', title: 'Annual Re-Audit and Continuing Obligations' },
+  { id: 'fits-with-registration', title: 'How This Fits With ISNP Registration' },
+  { id: 'common-findings', title: 'Findings That Commonly Delay Launch' },
+  { id: 'preparation', title: 'How to Prepare Before Scoping' },
   { id: 'how-estabizz-helps', title: 'How Estabizz Helps' },
   { id: 'faqs', title: 'FAQs' },
   { id: 'expert-review', title: 'Reviewer and Disclaimer' },
@@ -46,156 +36,36 @@ const sections = [
 ];
 
 const faqs = ([
-  ["What is ISNP Certification in India?", "ISNP Certification validates that an organisation follows structured network security and cybersecurity protocols. It demonstrates system-level compliance and data protection readiness."],
-  ["Why is ISNP Certification important?", "It is important because it ensures data security, builds client trust, and supports regulatory compliance. It also reduces cyber risk exposure."],
-  ["Is ISNP Certification mandatory in India?", "No, it is not universally mandatory. However, it becomes essential in regulated sectors and high-risk digital operations."],
-  ["Who issues ISNP Certification?", "It is issued by authorised certification bodies or recognised agencies based on cybersecurity frameworks and audit standards."],
-  ["What does ISNP Certification cover?", "It covers:", ["Network security", "Data protection", "Access control", "Incident response systems"]],
-  ["Is ISNP Certification similar to ISO 27001?", "No, both are different. ISO 27001 focuses on overall information security, while ISNP focuses more on network-level controls."],
-  ["Can startups apply for ISNP Certification?", "Yes, startups can apply if they have proper IT infrastructure and compliance readiness."],
-  ["Does ISNP Certification improve credibility?", "Yes, it significantly enhances credibility with clients, investors, and regulators."],
-  ["Is ISNP Certification required for fintech companies?", "It is highly recommended for fintech companies due to strict regulatory scrutiny."],
-  ["How long is ISNP Certification valid?", "Typically, it is valid for 1–3 years depending on the issuing authority."],
-  ["What is the main objective of ISNP Certification?", "The objective is to ensure secure handling of digital infrastructure and sensitive data."],
-  ["Does ISNP Certification include cybersecurity testing?", "Yes, it usually includes vulnerability assessment and system testing."],
-  ["Is ISNP Certification recognised internationally?", "Recognition depends on the issuing body and framework used."],
-  ["Can small businesses apply for ISNP Certification?", "Yes, provided they meet basic compliance and infrastructure requirements."],
-  ["Does ISNP Certification cover cloud systems?", "Yes, if cloud infrastructure is part of operations."],
-  ["Is training required for ISNP Certification?", "Yes, employee awareness and training are essential components."],
-  ["What industries benefit most from ISNP Certification?", "Key industries include:", ["Fintech", "SaaS", "IT services", "Insurance"]],
-  ["Is ISNP Certification a one-time process?", "No, it requires continuous compliance and periodic renewal."],
-  ["Who needs ISNP Certification in India?", "Entities handling sensitive data or digital systems, especially in fintech, IT, and SaaS sectors."],
-  ["Is ISNP Certification required for NBFCs?", "It is not mandatory but strongly recommended under RBI cybersecurity expectations."],
-  ["Can LLPs apply for ISNP Certification?", "Yes, LLPs with proper IT systems can apply."],
-  ["Is there a minimum turnover requirement?", "No, there is no fixed turnover requirement."],
-  ["Do freelancers need ISNP Certification?", "Generally no, unless handling high-risk or enterprise data."],
-  ["Is ISNP Certification required for government tenders?", "In many cases, yes, especially for IT or digital service vendors."],
-  ["Can foreign companies operating in India apply?", "Yes, if they have operations or systems within India."],
-  ["Is prior ISO certification required?", "No, but it strengthens your application."],
-  ["Do SaaS platforms need ISNP Certification?", "Yes, especially if they manage client data."],
-  ["Is it applicable to payment aggregators?", "Yes, due to data sensitivity and regulatory expectations."],
-  ["Can early-stage startups apply?", "Yes, but they must meet compliance readiness."],
-  ["Is IT infrastructure mandatory?", "Yes, a secure IT setup is essential."],
-  ["Do insurance brokers need ISNP Certification?", "It is recommended under IRDAI cybersecurity guidelines."],
-  ["Is ISNP Certification applicable to outsourcing companies?", "Yes, especially if they process client data."],
-  ["Can a company apply without a dedicated IT team?", "No, technical expertise is required."],
-  ["Is it applicable to cloud-based businesses?", "Yes, cloud systems must comply with security standards."],
-  ["Does business size affect eligibility?", "No, compliance readiness matters more than size."],
-  ["Can a company apply during operations or only at startup stage?", "It can apply at any stage."],
-  ["What is the process for ISNP Certification?", "The process includes:", ["Gap analysis", "Documentation", "Implementation", "Audit", "Certification"]],
-  ["Is gap analysis mandatory?", "Yes, it helps identify compliance deficiencies."],
-  ["Can the process be done online?", "Partially, but audits may require verification."],
-  ["How is the audit conducted?", "Through technical evaluation and system testing."],
-  ["Is third-party audit required?", "Yes, certification requires independent audit."],
-  ["Can the process be fast-tracked?", "Yes, if systems are already compliant."],
-  ["What happens during certification audit?", "Systems, policies, and controls are verified."],
-  ["Is physical inspection required?", "Sometimes, depending on the authority."],
-  ["Can consultants assist in the process?", "Yes, professional support simplifies certification."],
-  ["Is application rejection possible?", "Yes, if compliance gaps are found."],
-  ["Can rejected applications be refiled?", "Yes, after correcting deficiencies."],
-  ["Are multiple audits required?", "Sometimes, depending on complexity."],
-  ["Can documentation be standardised?", "No, it must match actual systems."],
-  ["Is implementation mandatory before audit?", "Yes, systems must be operational."],
-  ["Can certification be obtained without audit?", "No, audit is mandatory."],
-  ["What is the role of management in certification?", "Management must approve and support compliance."],
-  ["Is internal audit required before application?", "Yes, it improves success chances."],
-  ["Can certification be cancelled after approval?", "Yes, if compliance is not maintained."],
-  ["What documents are required for ISNP Certification?", "Key documents include:", ["Incorporation certificate", "IT architecture", "Security policies"]],
-  ["Is cybersecurity policy mandatory?", "Yes, it is a core requirement."],
-  ["Do we need data protection policy?", "Yes, especially for data-driven businesses."],
-  ["Are audit reports required?", "Yes, if available, they support the application."],
-  ["Is employee data required?", "Yes, to validate technical capability."],
-  ["Do we need network diagrams?", "Yes, for system validation."],
-  ["Is access control documentation required?", "Yes, it is critical for compliance."],
-  ["Are logs and reports required?", "Yes, for audit verification."],
-  ["Is incident response plan mandatory?", "Yes, it is a key compliance requirement."],
-  ["Do we need vendor agreements?", "Yes, for third-party risk management."],
-  ["Is board approval required?", "In structured organisations, yes."],
-  ["Is system documentation required?", "Yes, it must align with operations."],
-  ["Do we need backup policies?", "Yes, for data recovery assurance."],
-  ["Are SOPs required?", "Yes, standard operating procedures are essential."],
-  ["What is the cost of ISNP Certification?", "It varies based on system size and audit scope."],
-  ["Is government fee fixed?", "No, it depends on certification authority."],
-  ["What are audit charges?", "Charges depend on complexity and infrastructure."],
-  ["Is renewal charge applicable?", "Yes, periodic renewal fees apply."],
-  ["Are consultancy fees involved?", "Yes, if professional assistance is taken."],
-  ["Is certification expensive?", "It is moderate but offers high value."],
-  ["Can cost be reduced?", "Yes, by preparing systems internally."],
-  ["Are hidden costs involved?", "No, but additional audits may increase cost."],
-  ["Does cost depend on company size?", "Yes, larger systems require higher audit effort."],
-  ["Is there a penalty fee?", "Only if non-compliance is detected."],
-  ["Is certification a one-time cost?", "No, maintenance and renewal costs apply."],
-  ["Is cost justified?", "Yes, due to risk reduction and credibility."],
-  ["How long does ISNP Certification take?", "Typically 4–8 weeks."],
-  ["Can it be completed in 1 month?", "Yes, if systems are ready."],
-  ["What delays certification?", "", ["Poor documentation", "System gaps", "Audit failures"]],
-  ["Is approval guaranteed?", "No, it depends on compliance."],
-  ["How long is audit duration?", "Usually 1–2 weeks."],
-  ["Can approval be delayed?", "Yes, due to compliance issues."],
-  ["Is fast-track approval possible?", "Yes, with strong preparation."],
-  ["What is the longest timeline?", "Up to 3 months in complex cases."],
-  ["Does audit timing affect approval?", "Yes, incomplete audits delay approval."],
-  ["Can certification be revoked later?", "Yes, if compliance lapses."],
-  ["Is timeline fixed?", "No, it varies case by case."],
-  ["Can re-audit delay approval?", "Yes, significantly."],
-  ["Is internal audit helpful?", "Yes, it reduces delays."],
-  ["When does certification become effective?", "After final approval."],
-  ["What are post-certification compliances?", "", ["Periodic audits", "Policy updates", "Monitoring systems"]],
-  ["Is renewal mandatory?", "Yes, after validity period."],
-  ["Are audits required after certification?", "Yes, periodic audits are expected."],
-  ["Is employee training required?", "Yes, ongoing awareness is necessary."],
-  ["Do policies need updates?", "Yes, as per regulatory changes."],
-  ["Is incident reporting mandatory?", "Yes, under applicable guidelines."],
-  ["Can certification be suspended?", "Yes, for non-compliance."],
-  ["Is data protection ongoing responsibility?", "Yes, continuously."],
-  ["Are logs required to be maintained?", "Yes, for audit purposes."],
-  ["Is vendor monitoring required?", "Yes, under risk management."],
-  ["Is system upgrade required?", "Yes, periodically."],
-  ["Does certification require governance structure?", "Yes, defined roles are needed."],
-  ["Is compliance officer required?", "Recommended for structured entities."],
-  ["Can compliance be outsourced?", "Yes, but responsibility remains internal."],
-  ["Is continuous monitoring required?", "Yes, it is critical."],
-  ["Are internal audits compulsory?", "Yes, for long-term compliance."],
-  ["Is documentation required post-certification?", "Yes, it must be maintained."],
-  ["Can certification lapse?", "Yes, if renewal is not done."],
-  ["What happens if ISNP Certification is not obtained?", "Increased risk and loss of credibility."],
-  ["Are there penalties for non-compliance?", "Yes, under applicable regulations."],
-  ["Can regulators take action?", "Yes, especially in regulated sectors."],
-  ["Is data breach a risk?", "Yes, without proper controls."],
-  ["Can license be affected?", "Yes, indirectly."],
-  ["Is reputational risk involved?", "Yes, significantly."],
-  ["Can certification be revoked?", "Yes, for serious violations."],
-  ["Are cyber attacks more likely without certification?", "Yes, due to weak controls."],
-  ["Can clients reject uncertified companies?", "Yes, especially enterprise clients."],
-  ["Is non-compliance a legal issue?", "Yes, in certain sectors."],
-  ["Can penalties be financial?", "Yes, depending on laws."],
-  ["Does it impact investor confidence?", "Yes, negatively."],
-  ["Can business operations be restricted?", "Yes, in regulated environments."],
-  ["Is risk high without certification?", "Yes, especially for digital businesses."],
-  ["Can I operate without ISNP Certification?", "Yes, but it increases compliance risk."],
-  ["Can I get certification without IT infrastructure?", "No, infrastructure is mandatory."],
-  ["Can I outsource cybersecurity?", "Yes, but accountability remains with you."],
-  ["Can one certification cover all branches?", "Yes, if systems are integrated."],
-  ["Can I apply during scaling stage?", "Yes, it is recommended."],
-  ["Can certification help in funding?", "Yes, it improves investor trust."],
-  ["Can I use templates for policies?", "No, they must be customised."],
-  ["Can I skip internal audit?", "No, it increases rejection risk."],
-  ["Can small SaaS companies apply?", "Yes, if compliant."],
-  ["Can certification help in tenders?", "Yes, it improves eligibility."],
-  ["Can I operate globally with ISNP?", "Yes, depending on recognition."],
-  ["Can certification improve valuation?", "Yes, indirectly."],
-  ["How does ISNP Certification align with RBI cybersecurity framework?", "It supports system security, data protection, and risk management expectations under RBI guidelines."],
-  ["Can ISNP Certification replace regulatory compliance?", "No, it complements but does not replace regulatory requirements."],
-  ["Is ISNP Certification useful for DPDP compliance?", "Yes, it supports data protection practices."],
-  ["Does ISNP Certification cover vendor risk management?", "Yes, it includes third-party controls."],
-  ["Is penetration testing mandatory?", "Yes, in most cases."],
-  ["Can ISNP Certification help in global expansion?", "Yes, it improves credibility."],
-  ["How does certification impact due diligence?", "It improves compliance perception and reduces risk."],
-  ["Is continuous compliance required?", "Yes, it is mandatory."],
-  ["Can certification reduce regulatory scrutiny?", "Yes, it demonstrates preparedness."],
-  ["What is the biggest compliance risk in ISNP?", "Mismatch between policy and implementation."],
-  ["Is ISNP Certification future-proof?", "It supports evolving compliance frameworks."],
-  ["What is the key success factor for ISNP Certification?", "Strong implementation with real system controls."]
+  ['What is an ISNP security audit?', 'It is the independent security review of an Insurance Self-Network Platform that IRDAI expects before the platform is used to sell or service insurance, and on a recurring basis afterwards. It examines the platform as an operating system end to end rather than as a generic web application.'],
+  ['Is the audit mandatory?', 'For an entity operating an ISNP, an independent security review is part of the compliance expectation rather than an optional assurance exercise. Confirm the current requirement and its exact wording against the applicable IRDAI guidance for your category of applicant.'],
+  ['Who can carry out the audit?', 'IRDAI expects an external, independent and suitably qualified auditor. In practice this means a CERT-In empanelled organisation, or an equivalently qualified professional such as a CISA or DISA (ICAI) holder.'],
+  ['What is CERT-In empanelment?', 'It is a status granted to an auditing firm by the Indian Computer Emergency Response Team. It is the auditor qualification recognised across Indian financial-sector supervision, which is why it is the usual benchmark for ISNP work.'],
+  ['When does the audit have to happen?', 'Before the platform goes live, and then on a recurring annual cycle. A platform that has changed materially since its last review is usually re-scoped rather than carried forward on the old report.'],
+  ['How long does an audit take?', 'Typically three to six weeks from scoping to final report. Engagements that uncover substantial remediation work run longer, because critical and high findings are normally retested before the report is closed.'],
+  ['What does the audit cover?', 'Five areas in the usual scoping:', ['Application security and VAPT across the web portal, mobile apps and APIs', 'Payment gateway integration, premium collection, refunds and settlement paths', 'Policyholder data protection across proposal, KYC, medical, financial and policy data', 'Logging, alerting and audit trail', 'Network architecture, server and cloud configuration, and ISMS alignment']],
+  ['Does it include penetration testing?', 'Yes. Application security work is normally vulnerability assessment and penetration testing against the OWASP Top 10, covering the web portal, mobile applications and the APIs behind them.'],
+  ['Why are payment flows scoped separately?', 'Because the issuance and payment path is where regulatory harm concentrates. The scope usually follows that path end to end, including the integrations on either side of it, rather than testing the payment page in isolation.'],
+  ['What is delivered at the end?', 'The usual deliverable set is:', ['An audit report setting out scope, methodology and findings', 'Risk-rated findings with severity and remediation guidance', 'An executive summary written for the board', 'Independent retesting of critical and high findings', 'A signed audit certificate from the empanelled firm']],
+  ['Is the report filed with IRDAI?', 'The report is prepared in a form suitable for filing, covering scope, methodology, control status, findings, evidence references and attestation. Confirm the filing route and timing that applies to your entity before submission.'],
+  ['What happens if findings are severe?', 'Findings capable of harming policyholders are escalated rather than simply logged. Severe findings ordinarily have to be remediated and retested before the platform is treated as ready.'],
+  ['Does this replace ISNP registration?', 'No. Registration is the IRDAI permission to set up the platform. The security audit is the assurance step that sits inside that compliance picture and recurs after approval.'],
+  ['Is this the same as ISO 27001?', 'No. ISO 27001 certifies an information security management system against an international standard. The ISNP audit is a sector-specific review of one platform against IRDAI’s expectations. ISMS alignment often forms part of the audit scope, but the two are not interchangeable.'],
+  ['Do we need ISO 27001 as well?', 'It is not a substitute for the ISNP audit. Many insurers and intermediaries hold it because it makes the network and ISMS portion of the audit considerably easier to evidence.'],
+  ['Can our internal security team do the audit?', 'No. The review has to be external and independent. Internal testing is useful preparation but does not satisfy the independence expectation.'],
+  ['What if we use a third-party platform vendor?', 'The obligation sits with the regulated entity operating the ISNP, not the vendor. Vendor and third-party risk is itself an area the audit looks at, so a shared or white-labelled platform tends to widen scope rather than narrow it.'],
+  ['Does the audit cover our cloud environment?', 'Yes, where the platform runs on it. Server and cloud configuration review is part of the infrastructure portion of the scope.'],
+  ['How does the DPDP Act affect this?', 'The Digital Personal Data Protection Act, 2023 applies to the personal data an ISNP processes, alongside the IT Act, 2000. Data protection controls examined in the audit should be read against both, not against the IT Act alone.'],
+  ['What is retesting?', 'After remediation, the auditor independently re-examines the critical and high findings to confirm they are actually closed, rather than accepting a written assurance that the fix has been applied.'],
+  ['How much does it cost?', 'It is scoped work, so cost depends on the number of applications and APIs, the complexity of the payment path, the hosting model and how much remediation is expected. We quote after scoping rather than from a rate card.'],
+  ['What delays audits most often?', 'Incomplete environment access, a test environment that does not mirror production, undocumented APIs, and remediation cycles that need more than one round of retesting.'],
+  ['Do we need a separate audit for the mobile app?', 'Not a separate engagement, but the mobile application is its own scope item within the audit, alongside the web portal and the APIs.'],
+  ['What if the platform changes after the audit?', 'A material change to the platform, its payment path or its hosting usually warrants re-scoping rather than relying on the previous report.'],
+  ['Who signs the audit certificate?', 'The CERT-In empanelled firm that performed the work. The certificate is issued by the auditor, not by IRDAI, and not by the entity being audited.'],
+  ['Can a startup intermediary get through this?', 'Yes. The scope follows the platform, so a smaller, simpler platform is a smaller engagement. The independence and qualification expectations are the same regardless of size.'],
+  ['What should we do before scoping?', 'Have the architecture and data-flow documentation current, the API inventory complete, a test environment that mirrors production, and named owners for remediation. These four things move the timeline more than anything else.'],
+  ['Is an annual audit really required every year?', 'The framework expects the platform’s controls to be independently reviewed on a recurring basis, with the report available to the regulator. Treat it as an annual cycle and confirm the current position for your category.'],
+  ['Does the audit look at KYC and AML controls?', 'Yes, where they are implemented in the platform. KYC and AML controls form part of the integrated review of the issuance path.'],
+  ['Where can I read the underlying framework?', 'ISNP itself sits under the IRDAI Guidelines on Insurance e-Commerce dated 9 March 2017. The security expectations are read together with IRDAI’s information and cyber security guidance, which has been revised since. Confirm the current versions before relying on either.']
 ] as [string, string, string[]?][]).map(([q, a, points]) => ({ q, a, points }));
 
 function DataTable({ headers, rows }: { headers: string[]; rows: TableRow[] }) {
@@ -220,10 +90,9 @@ function CheckList({ items }: { items: string[] }) {
 
 function FaqList({ items }: { items: { q: string; a: string; points?: string[] }[] }) {
   return <div className="space-y-3">{items.map((faq) => (
-    <details key={faq.q} className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm">
-      <summary className="cursor-pointer font-semibold text-[#0a1628]">{faq.q}</summary>
-      <p className="mt-3 text-sm leading-7 text-gray-600">{faq.a}</p>
-      {faq.points && faq.points.length > 0 ? <ul className="mt-2 text-sm leading-7 text-gray-600">{faq.points.map((point) => <li key={point}>{point}</li>)}</ul> : null}
+    <details className="faq-item" key={faq.q}>
+      <summary>{faq.q}</summary>
+      <div className="faq-answer"><p>{faq.a}</p>{faq.points && faq.points.length > 0 && <ul>{faq.points.map((point) => <li key={point}>{point}</li>)}</ul>}</div>
     </details>
   ))}</div>;
 }
@@ -231,276 +100,175 @@ function FaqList({ items }: { items: { q: string; a: string; points?: string[] }
 export default function PageClient() {
   return (
     <ServicePageLayout
-      tags={[{ emoji: '🔐', label: 'Cybersecurity Certification' }, { emoji: '🧪', label: 'Audit & Evidence Driven' }, { emoji: '📋', label: 'Gap Analysis & Documentation' }]}
-      breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Regulatory Services', href: '/regulatory' }, { label: 'Insurance', href: '/regulatory/insurance' }, { label: 'ISNP Certification' }]}
-      title="ISNP Certification in India - Complete Guide, Eligibility, Process and Compliance Insights"
-      heroDescription={<><p><strong>ISNP Certification in India</strong> is a specialised recognition framework for organisations dealing with network security protocols, particularly in regulated or sensitive digital environments. It reflects compliance with structured security standards and operational integrity expectations, and is increasingly essential not just for regulatory alignment but for building credibility with clients, investors and government bodies.</p><div className="flex flex-wrap gap-2 mt-5">{['Network Security Architecture', 'Data Protection Mechanisms', 'Cyber Risk Mitigation', 'Access Control Systems', 'Incident Response', 'Vulnerability Assessment', 'Periodic Audits', 'DPDP Alignment'].map((badge) => <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm">{badge}</span>)}</div></>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Start a Gap Assessment</Link><Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors">Check Certification Readiness</Link><a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a></>}
+      tags={[{ emoji: '🔐', label: 'IRDAI Cyber Compliance' }, { emoji: '🧪', label: 'CERT-In Empanelled Audit' }, { emoji: '📋', label: 'Pre-Launch and Annual' }]}
+      breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Regulatory Services', href: '/regulatory' }, { label: 'Insurance', href: '/regulatory/insurance' }, { label: 'ISNP Security Audit' }]}
+      title="ISNP Security Audit for IRDAI Compliance"
+      heroDescription={<><p>Before an <strong>Insurance Self-Network Platform</strong> is used to sell or service insurance, IRDAI expects its security controls to be independently reviewed by a suitably qualified external auditor — in practice a CERT-In empanelled firm — and reviewed again on a recurring basis afterwards. This guide sets out what that audit covers, who can perform it, what is delivered and how to prepare for it.</p><div className="flex flex-wrap gap-2 mt-5">{['CERT-In Empanelled Auditor', 'Application Security and VAPT', 'Payment and Premium Flows', 'Policyholder Data Protection', 'Logging and Audit Trail', 'Network and ISMS', 'Annual Re-Audit', 'DPDP Alignment'].map((badge) => <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm">{badge}</span>)}</div></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Scope an ISNP Audit</Link><Link href="/irdai/isnp-registration" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors">ISNP Registration Guide</Link><a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a></>}
       trustLine="Trusted support for RBI, SEBI, IRDAI, IFSCA and financial regulatory advisory across India and global markets."
-      readTime="30 min read"
+      readTime="14 min read"
       displayYear="2026"
-      focusKeyword="ISNP Certification in India"
+      hideReviewBadge
+      focusKeyword="ISNP Security Audit"
       sections={sections}
-      ctaTitle="Get Certification Ready"
-      ctaDescription="Discuss gap assessment, policy documentation, security controls, audit coordination and renewal planning."
-      quickFacts={[{ label: 'Nature', value: 'Certification' }, { label: 'Mandatory', value: 'Not universally' }, { label: 'Focus', value: 'Network controls' }, { label: 'Validity', value: '1-3 years' }, { label: 'Timeline', value: '4-8 weeks' }]}
+      ctaTitle="Get Audit Ready"
+      ctaDescription="Discuss scoping, documentation, remediation planning, auditor coordination and the annual review cycle."
+      quickFacts={[{ label: 'Applies to', value: 'IRDAI ISNP platforms' }, { label: 'Auditor', value: 'CERT-In empanelled' }, { label: 'When', value: 'Pre-launch, then annual' }, { label: 'Typical duration', value: '3–6 weeks' }, { label: 'Framework', value: 'Insurance e-Commerce, 2017' }]}
       relatedArticles={[
-        { title: 'Insurance Repository Registration in India', href: '/regulatory/insurance/insurance-repository-registration-in-india', category: 'IRDAI', description: 'An IRDAI framework where cybersecurity readiness is the deciding approval factor.' },
-        { title: 'LendTech Services India', href: '/rbi/lendtech-services', category: 'RBI', description: 'Digital lending data protection, localisation and audit-trail requirements.' },
-        { title: 'NBFC Account Aggregator License', href: '/rbi/nbfc-account-aggregator-license', category: 'RBI', description: 'Consent-based data sharing under the RBI Account Aggregator framework.' }
+        { title: 'ISNP Registration in India', href: '/irdai/isnp-registration', category: 'IRDAI', description: 'The IRDAI permission to set up an Insurance Self-Network Platform — eligibility, Form ISNP-1 and process.' },
+        { title: 'Insurance Repository Registration in India', href: '/regulatory/insurance/insurance-repository-registration-in-india', category: 'IRDAI', description: 'An IRDAI framework where cybersecurity readiness is a deciding approval factor.' },
+        { title: 'LendTech Services India', href: '/rbi/lendtech-services', category: 'RBI', description: 'Digital lending data protection, localisation and audit-trail requirements.' }
       ]}
-      finalCtaTitle="Build Certification Readiness That Survives an Audit"
-      finalCtaDescription="Estabizz helps identify compliance gaps, structure cybersecurity and data protection documentation, implement the control environment, coordinate audits and maintain the certification through its renewal cycle."
-      finalCtaActions={<><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to a Compliance Expert</Link><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20">Start a Gap Assessment</Link><Link href="/get-started" className="w-full sm:w-auto px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl">Check Certification Readiness</Link><a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a></>}
+      finalCtaTitle="Build an ISNP That Survives the Audit"
+      finalCtaDescription="Estabizz helps scope the review, close documentation gaps before testing starts, coordinate the empanelled auditor, track remediation through retesting and keep the platform ready for its next annual cycle."
+      finalCtaActions={<><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to a Compliance Expert</Link><Link href="/irdai/isnp-registration" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20">ISNP Registration Guide</Link><a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a></>}
     >
-      <Section id="quick-overview" title="ISNP Certification in India: Quick Overview">
-        <div className="info-box"><strong>Terminology note:</strong> in the insurance sector the abbreviation ISNP is also used for the IRDAI Insurance Self-Network Platform, which is a different framework covering online insurance sales. This page covers ISNP Certification as a network-security and cybersecurity credential. For the IRDAI e-commerce platform permission, see <Link href="/irdai/isnp-registration">ISNP Registration</Link>.</div>
+      <Section id="quick-overview" title="ISNP Security Audit: Quick Overview">
         <CardGrid columns="md:grid-cols-2" cards={[
-          { title: 'Nature of the Credential', body: 'A certification confirming that an organisation follows strong cybersecurity and network protection standards' },
-          { title: 'Issued By', body: 'Authorised certification bodies or recognised agencies, based on cybersecurity frameworks and audit standards' },
-          { title: 'Mandatory?', body: 'Not universally mandatory, but it becomes essential in regulated sectors and high-risk digital operations' },
-          { title: 'Primary Focus', body: 'Network-level controls, as distinct from ISO 27001, which focuses on overall information security' },
-          { title: 'Governing Context', body: 'Not always governed by a single statute. Relevance connects to the IT Act, 2000, CERT-In guidelines and sector regulator frameworks' },
-          { title: 'Typical Validity', body: '1 to 3 years, depending on the issuing authority' },
-          { title: 'Indicative Timeline', body: 'Approximately 4 to 8 weeks end to end' },
-          { title: 'Evaluation Basis', body: 'Evidence-based, system-driven validation rather than policy documents alone' }
-        ]} />
-        <div className="warning-box">These details are indicative and vary by issuing body and framework. Requirements should be confirmed with the chosen certification authority, and against the sector regulator norms that apply to the organisation, before committing to an implementation plan.</div>
-      </Section>
-
-      <Section id="what-is" title="What is ISNP Certification?">
-        <DataTable headers={['Lens', 'What It Means']} rows={[
-          ['In simple terms', 'ISNP Certification confirms that your organisation follows strong cybersecurity and network protection standards'],
-          ['From a compliance perspective', 'It demonstrates adherence to structured digital security protocols and risk management systems'],
-          ['Legally speaking', 'It acts as a supporting compliance credential aligned with data protection and cybersecurity expectations under applicable laws']
+          { title: 'What it is', body: 'An independent security review of an Insurance Self-Network Platform, examined as an operating system end to end rather than as a generic web application.' },
+          { title: 'Who performs it', body: 'An external, independent and suitably qualified auditor — in practice a CERT-In empanelled organisation, or an equivalently qualified CISA or DISA (ICAI) professional.' },
+          { title: 'When', body: 'Before the platform goes live, and again on a recurring annual cycle. A materially changed platform is re-scoped rather than carried forward.' },
+          { title: 'What comes out of it', body: 'A report suitable for filing, risk-rated findings with remediation guidance, retesting of critical and high findings, and a signed certificate from the empanelled firm.' }
         ]} />
       </Section>
 
-      <Section id="scope" title="What ISNP Certification Covers in Detail">
-        <CheckList items={['Network security architecture', 'Data protection mechanisms', 'Cyber risk mitigation', 'System monitoring and control']} />
-        <p>Unlike generic IT certifications, ISNP is more aligned with compliance-driven security frameworks, where organisations must demonstrate:</p>
-        <CheckList items={['Documented policies', 'Incident response mechanisms', 'Access control systems', 'Periodic audits']} />
+      <Section id="what-is" title="What the ISNP Security Audit Is">
+        <p>An Insurance Self-Network Platform is the electronic platform — a website or mobile application — through which an insurer or a registered intermediary sells and services insurance policies online. Because that platform carries proposal data, KYC and medical records, premium payments and policy issuance, IRDAI does not treat it as ordinary technology. Its controls have to be independently reviewed before it is put in front of policyholders.</p>
+        <p>The audit is that review. It is scoped around the platform itself: the issuance and payment path end to end, the applications and APIs that sit on it, the infrastructure underneath, and the integrations on either side. It is an assurance exercise against the regulator’s expectations, not a badge the platform displays.</p>
       </Section>
 
-      <Section id="regulatory-framework" title="Regulatory Framework Around ISNP Certification">
-        <p>While ISNP itself may not always be governed under a single statute, its relevance is strongly connected with:</p>
-        <DataTable headers={['Framework', 'Relevance']} rows={[
-          ['Information Technology Act, 2000', 'Baseline statutory obligations for digital systems'],
-          ['CERT-In Guidelines', 'Incident reporting and cybersecurity directions'],
-          ['Data protection and privacy frameworks, India and global', 'Handling, storage and sharing of personal data'],
-          ['Sector-specific regulations: RBI, SEBI, IRDAI, IFSCA', 'Cybersecurity expectations imposed on regulated entities']
+      <Section id="terminology" title="A Note on the Term “ISNP Certification”">
+        <div className="info-box"><strong>ISNP stands for Insurance Self-Network Platform.</strong> It is an IRDAI framework, not a cybersecurity qualification. The phrase “ISNP certification” is widely used in the market, and it refers either to IRDAI’s permission to set up the platform or to the auditor’s certificate issued at the end of the security review described here. There is no standalone network-security credential called ISNP, and no certification body issues one. If you were looking for the IRDAI permission itself, see the <Link href="/irdai/isnp-registration">ISNP Registration guide</Link>.</div>
+      </Section>
+
+      <Section id="regulatory-basis" title="Regulatory Basis">
+        <DataTable headers={['Element', 'Position']} rows={[
+          ['Framework for ISNP itself', 'IRDAI Guidelines on Insurance e-Commerce dated 9 March 2017'],
+          ['Permission to operate a platform', 'Granted by IRDAI on application in Form ISNP-1'],
+          ['Security expectation', 'Independent review of the platform’s controls by an external, suitably qualified auditor'],
+          ['Auditor qualification', 'CERT-In empanelled organisation, or equivalently qualified CISA or DISA (ICAI) professional'],
+          ['Data protection overlay', 'Digital Personal Data Protection Act, 2023 alongside the Information Technology Act, 2000']
         ]} />
-        <div className="warning-box">Under the relevant provisions, failure to maintain adequate cybersecurity systems may expose entities to penalties, data breaches and reputational risks.</div>
+        <p>IRDAI’s information and cyber security guidance has been revised since the 2017 e-commerce guidelines were issued, and it names ISNPs as a category with their own audit scope. Confirm the current version of both before relying on any specific wording.</p>
       </Section>
 
-      <Section id="regulatory-linkages" title="Sector Regulator Linkages">
-        <CardGrid columns="md:grid-cols-2" cards={[
-          { title: 'RBI, for NBFCs and fintechs', body: <ul className="!mb-0"><li>Cyber Security Framework for NBFCs</li><li>IT Governance and Risk Management Directions</li></ul> },
-          { title: 'SEBI, for intermediaries', body: <ul className="!mb-0"><li>Cybersecurity and Cyber Resilience Framework</li><li>System audit requirements</li></ul> },
-          { title: 'IRDAI, for insurers and brokers', body: <ul className="!mb-0"><li>Information and Cyber Security Guidelines</li></ul> },
-          { title: 'IFSCA, for IFSC entities', body: <ul className="!mb-0"><li>Technology Governance and Cyber Risk norms</li></ul> }
-        ]} />
-        <p>All these frameworks emphasise data confidentiality, system integrity, availability of infrastructure and incident reporting. ISNP Certification acts as a supporting compliance layer, helping organisations demonstrate readiness across these regulatory expectations.</p>
+      <Section id="who-needs" title="Who Needs an ISNP Security Audit">
+        <p>The obligation follows whoever operates the platform:</p>
+        <CheckList items={['Insurers running their own online sale and servicing platform', 'Insurance brokers operating an ISNP', 'Corporate agents operating an ISNP', 'Insurance web aggregators selling through their own platform', 'Any regulated entity whose ISNP has materially changed since its last review']} />
+        <p>A tied individual agent cannot set up an independent ISNP and so does not commission this audit; they transact on the insurer’s platform, which the insurer has had reviewed.</p>
       </Section>
 
-      <Section id="who-needs" title="Who Needs ISNP Certification?">
-        <CheckList items={['Fintech companies', 'NBFCs and digital lenders', 'Insurance platforms', 'Payment aggregators', 'IT service providers', 'SaaS companies handling client data', 'Government vendors dealing with digital infrastructure']} />
-        <p>Practically, if the business involves data, systems or digital transactions, this certification strengthens its compliance posture.</p>
+      <Section id="auditor-qualification" title="Who Can Perform the Audit">
+        <p>Two things matter, and they are separate. The auditor must be <strong>external and independent</strong> of the entity being reviewed, and must be <strong>suitably qualified</strong>. Internal security testing is useful preparation but does not meet the first condition, however competent the team.</p>
+        <p>In practice the recognised qualification is CERT-In empanelment — a status granted to an auditing firm by the Indian Computer Emergency Response Team, and the benchmark used across Indian financial-sector supervision. An equivalently qualified professional, such as a CISA or DISA (ICAI) holder, is the stated alternative.</p>
       </Section>
 
-      <Section id="eligibility" title="Eligibility Criteria">
-        <DataTable headers={['Criteria', 'Requirement']} rows={[
-          ['Business Entity', 'Registered company, LLP or organisation'],
-          ['Infrastructure', 'Secure IT systems and network architecture'],
-          ['Policies', 'Documented cybersecurity and data protection policies'],
-          ['Personnel', 'Qualified IT and cybersecurity team'],
-          ['Compliance Readiness', 'Ability to undergo audit and verification']
-        ]} />
-      </Section>
-
-      <Section id="documents" title="Documents Required">
-        <DataTable headers={['Document', 'Purpose']} rows={[
-          ['Certificate of Incorporation', 'Entity verification'],
-          ['IT Infrastructure Details', 'System architecture validation'],
-          ['Cybersecurity Policy', 'Compliance demonstration'],
-          ['Data Protection Policy', 'Privacy alignment'],
-          ['Audit Reports, if any', 'Existing compliance record'],
-          ['Employee Details', 'Technical competency validation']
+      <Section id="scope" title="What the Audit Covers">
+        <p>Scoping normally settles on five areas. The distinguishing feature is that they are examined as one connected path rather than as separate tests.</p>
+        <DataTable headers={['Area', 'What is examined']} rows={[
+          ['Application security and VAPT', 'Web portal, mobile applications and APIs, tested against the OWASP Top 10'],
+          ['Payment and premium flows', 'Payment gateway integration, premium collection, refunds and settlement paths'],
+          ['Policyholder data protection', 'Proposal, KYC, medical, financial and policy data — encryption and access controls'],
+          ['Logging, monitoring and audit trail', 'Evidence of continuous visibility over data processing'],
+          ['Network, infrastructure and ISMS', 'Network architecture hardening, server and cloud configuration, ISMS alignment']
         ]} />
       </Section>
 
-      <Section id="evaluation-areas" title="Core Components Evaluated">
-        <p>From an auditor&rsquo;s perspective, certification is not checklist-based. It is system-driven validation, and testing covers:</p>
-        <CheckList items={['Multi-factor authentication enabled', 'Vulnerability assessment conducted', 'Internal audit performed', 'Gaps identified and rectified']} />
-        <div className="warning-box">Audit readiness is evaluated on evidence, not declarations. Organisations are expected to demonstrate evidence-based compliance, not just policy documents.</div>
+      <Section id="application-security" title="Application Security and VAPT">
+        <p>Vulnerability assessment and penetration testing across every interface a policyholder or an insurer touches: the web portal, the mobile applications, and the APIs behind both. Testing is normally framed against the OWASP Top 10, with findings rated by severity rather than listed flat.</p>
+        <p>Undocumented APIs are the usual source of scope creep here. An API inventory that is complete before scoping starts is the single most useful thing a platform team can prepare.</p>
       </Section>
 
-      <Section id="internal-controls" title="Internal Control Systems Expected by Certification Authorities">
-        <CardGrid columns="md:grid-cols-3" cards={[
-          { title: '1. Preventive Controls', body: <ul className="!mb-0"><li>Access restrictions</li><li>Encryption protocols</li><li>Secure configurations</li></ul> },
-          { title: '2. Detective Controls', body: <ul className="!mb-0"><li>Log monitoring</li><li>Intrusion detection</li><li>Alert systems</li></ul> },
-          { title: '3. Corrective Controls', body: <ul className="!mb-0"><li>Incident response actions</li><li>Recovery systems</li><li>Root cause analysis</li></ul> }
-        ]} />
-        <p>Organisations must demonstrate a balanced control environment, not just isolated measures.</p>
+      <Section id="payment-flows" title="Payment and Premium Flows">
+        <p>The issuance and payment path is scoped end to end, including the integrations on either side of it, because that is where regulatory harm concentrates. A payment page tested in isolation tells the regulator very little about whether a premium can be collected, reconciled and refunded correctly under failure conditions.</p>
+        <p>Refunds and settlement are part of this, not an afterthought — a platform that collects reliably but cannot evidence a clean refund path has a finding.</p>
       </Section>
 
-      <Section id="gap-analysis" title="Real Compliance Gap Analysis (What We See in Practice)">
-        <DataTable headers={['Area', 'Typical Gap', 'Impact']} rows={[
-          ['Policies', 'Generic templates used', 'Rejection risk'],
-          ['Systems', 'No real-time monitoring', 'Audit failure'],
-          ['Access Control', 'Shared credentials', 'High risk'],
-          ['Documentation', 'Not aligned with systems', 'Compliance mismatch'],
-          ['Incident Response', 'No defined process', 'Major red flag']
-        ]} />
+      <Section id="data-protection" title="Policyholder Data Protection">
+        <p>An ISNP holds some of the most sensitive categories of personal data a financial platform handles: proposal details, KYC documents, medical reports, financial information and the policy record itself. The audit examines how that data is encrypted at rest and in transit, and who can reach it.</p>
+        <p>Read the controls against the <strong>Digital Personal Data Protection Act, 2023</strong> as well as the Information Technology Act, 2000. Access control, retention and breach handling are where the two frameworks meet in practice.</p>
       </Section>
 
-      <Section id="regulator-evaluation" title="How Regulators Indirectly Evaluate ISNP-Type Compliance">
-        <p>Even where ISNP is not explicitly required, regulators assess similar controls during RBI inspections, SEBI system audits, IRDAI technology audits and IFSCA supervisory reviews.</p>
-        <CheckList items={['System logs', 'Access controls', 'Data handling processes', 'Vendor integrations', 'Incident reporting']} />
-        <div className="info-box">This means the certification effort helps an organisation stay inspection-ready at all times, regardless of which regulator arrives first.</div>
+      <Section id="monitoring" title="Logging, Monitoring and Audit Trail">
+        <p>The expectation is evidence of continuous visibility over data processing, not a log file that exists somewhere. That means logging that captures the events that matter, alerting that fires on them, and an audit trail that can reconstruct what happened to a given proposal or policy after the fact.</p>
+        <p>A trail that cannot be reconstructed is treated as absent, however much data is being written.</p>
       </Section>
 
-      <Section id="vendor-risk" title="Vendor and Third-Party Risk Management (Critical Area)">
-        <p>One of the most overlooked compliance aspects.</p>
-        <CheckList items={['Vendor due diligence', 'Data sharing agreements', 'Security clauses in contracts', 'Periodic vendor audits']} />
+      <Section id="network-isms" title="Network, Infrastructure and ISMS">
+        <p>Network architecture hardening and configuration review of the servers or cloud environment the platform runs on, together with alignment to a recognised information security management system. Entities already holding ISO 27001 generally find this portion straightforward to evidence — but it is not a substitute for the audit, because ISO certifies a management system while this reviews one platform against IRDAI’s expectations.</p>
+        <p>Where a third-party vendor supplies or hosts the platform, vendor and third-party risk widens the scope rather than narrowing it. The obligation stays with the regulated entity.</p>
       </Section>
 
-      <Section id="risk-classification" title="Risk-Based Classification for ISNP Implementation">
-        <DataTable headers={['Category', 'Example Entities', 'Compliance Intensity']} rows={[
-          ['Low Risk', 'Small IT firms', 'Basic controls'],
-          ['Medium Risk', 'SaaS platforms', 'Moderate controls'],
-          ['High Risk', 'Fintech, NBFCs', 'Advanced controls']
-        ]} />
-        <p>The higher the risk category, the stricter the certification expectations.</p>
+      <Section id="deliverables" title="What You Receive">
+        <CheckList items={['Audit report setting out scope, methodology and findings', 'Risk-rated findings with severity and remediation guidance', 'Executive summary written for the board', 'Independent retesting of critical and high findings', 'Signed audit certificate from the empanelled firm', 'Report structured for filing, with evidence references and attestation']} />
+        <p>The certificate is issued by the auditor, not by IRDAI and not by the entity being audited. Findings capable of harming policyholders are escalated rather than simply recorded.</p>
       </Section>
 
-      <Section id="data-protection-laws" title="Integration with Data Protection Laws">
-        <p>With evolving frameworks such as the Digital Personal Data Protection (DPDP) Act and global GDPR-like standards, ISNP Certification supports:</p>
-        <CheckList items={['Data minimisation', 'Secure storage', 'Breach prevention', 'Accountability mechanisms']} />
-        <p>Certification strengthens the organisation&rsquo;s data governance posture, which is now a regulatory priority.</p>
-      </Section>
-
-      <Section id="process" title="Step-by-Step Process for ISNP Certification">
+      <Section id="process" title="Step-by-Step Audit Process">
         <Timeline steps={[
-          { title: 'Initial assessment of IT systems and compliance gaps', body: 'Establish where actual system behaviour diverges from documented policy before anything is submitted.' },
-          { title: 'Preparation of cybersecurity policies and documentation', body: 'Policies must reflect the real environment. Generic templates are a rejection risk.' },
-          { title: 'Implementation of required security controls', body: 'Preventive, detective and corrective controls implemented as a balanced environment.' },
-          { title: 'Application submission to the certification authority', body: 'File with the supporting infrastructure, policy and personnel documentation.' },
-          { title: 'Technical audit and evaluation', body: 'Vulnerability assessment and system testing, evaluated on evidence rather than declarations.' },
-          { title: 'Certification approval and issuance', body: 'On approval, move into the continuous compliance and renewal cycle.' }
+          { title: 'Scoping', body: 'Applications, APIs, payment path, hosting model and integrations are inventoried, and the boundary of the review is agreed.' },
+          { title: 'Documentation review', body: 'Architecture, data-flow, access-control and vendor documentation are examined before testing begins.' },
+          { title: 'Testing', body: 'Vulnerability assessment and penetration testing across the portal, mobile applications and APIs, plus configuration and network review.' },
+          { title: 'Findings and rating', body: 'Findings are rated by severity with remediation guidance, and escalated where policyholders could be harmed.' },
+          { title: 'Remediation', body: 'The platform team closes findings, with critical and high items prioritised because they gate the report.' },
+          { title: 'Retesting', body: 'The auditor independently re-examines critical and high findings to confirm they are actually closed.' },
+          { title: 'Report and certificate', body: 'The final report is issued in filing-ready form, with the signed certificate from the empanelled firm.' }
         ]} />
       </Section>
 
-      <Section id="fees" title="Certification Fees">
-        <DataTable headers={['Component', 'Amount']} rows={[
-          ['Application Fee', 'Varies by authority'],
-          ['Audit Charges', 'Based on system complexity'],
-          ['Certification Fee', 'Case-specific'],
-          ['Renewal Fee', 'Periodic, if applicable']
+      <Section id="timeline" title="Timeline">
+        <DataTable headers={['Stage', 'Indicative duration']} rows={[
+          ['Scoping and documentation review', 'Roughly 1 week'],
+          ['Testing', 'Roughly 1–2 weeks, depending on the number of applications and APIs'],
+          ['Remediation', 'Driven by findings, not by the auditor'],
+          ['Retesting and final report', 'Roughly 1 week'],
+          ['Total, scoping to final report', 'Typically 3–6 weeks']
         ]} />
+        <p>Engagements needing substantial remediation run longer, because critical and high findings are normally retested before the report closes. The remediation row is the one that moves — plan launch dates around it rather than around the testing window.</p>
       </Section>
 
-      <Section id="timeline" title="Timeline for ISNP Certification">
-        <DataTable headers={['Stage', 'Time Required']} rows={[
-          ['Documentation Preparation', '1-2 weeks'],
-          ['System Implementation', '2-4 weeks'],
-          ['Audit and Review', '2-3 weeks'],
-          ['Certification Approval', '1-2 weeks'],
-          [<strong key="t">Overall</strong>, <strong key="tv">4 to 8 weeks approximately</strong>]
+      <Section id="annual" title="Annual Re-Audit and Continuing Obligations">
+        <p>The review is not a one-off clearance. The framework expects the platform’s controls to be independently reviewed before it is operated and on a recurring annual basis thereafter, with the report available to the regulator.</p>
+        <p>Between cycles, a material change to the platform, its payment path or its hosting normally warrants re-scoping rather than relying on the previous report. Treat the audit as a standing annual obligation and confirm the current position for your category of applicant.</p>
+      </Section>
+
+      <Section id="fits-with-registration" title="How This Fits With ISNP Registration">
+        <p>These are two distinct steps and they are easy to conflate.</p>
+        <DataTable headers={['', 'ISNP Registration', 'ISNP Security Audit']} rows={[
+          ['What it is', 'IRDAI permission to set up the platform', 'Independent review of the platform’s security controls'],
+          ['Who grants or issues it', 'IRDAI', 'The CERT-In empanelled auditor'],
+          ['How it is applied for', 'Form ISNP-1, with the prescribed fee', 'Commissioned directly from a qualified auditor'],
+          ['When', 'Before the platform is set up', 'Before it goes live, and annually thereafter'],
+          ['Recurs?', 'Permission, subject to continuing conditions', 'Yes, on an annual cycle']
         ]} />
+        <p>For the permission itself — eligibility, who may apply, Form ISNP-1 and the application process — see the <Link href="/irdai/isnp-registration">ISNP Registration guide</Link>.</p>
       </Section>
 
-      <Section id="governance" title="Internal Governance Requirements">
-        <p>According to governing regulations, governance structure plays a critical role in certification success. Organisations must establish a defined governance structure and a documented internal policy set covering security, data protection, access control and incident response.</p>
+      <Section id="common-findings" title="Findings That Commonly Delay Launch">
+        <CheckList items={['Undocumented or undiscovered APIs surfacing mid-test', 'A test environment that does not mirror production', 'Access controls that are role-based on paper but permissive in practice', 'Audit trails that record events but cannot reconstruct a transaction', 'Refund and settlement paths untested under failure conditions', 'Third-party or white-labelled components with no vendor assurance', 'Remediation without named owners, producing repeated retest cycles']} />
       </Section>
 
-      <Section id="vs-other-certifications" title="ISNP vs Other Cybersecurity Certifications">
-        <DataTable headers={['Aspect', 'ISNP Certification', 'ISO 27001']} rows={[
-          ['Primary Focus', 'Network-level controls', 'Overall information security management'],
-          ['Orientation', 'Compliance-driven security framework', 'Management system standard'],
-          ['Typical Use', 'Demonstrating network and system-level readiness', 'Demonstrating an organisation-wide ISMS']
-        ]} />
-        <div className="info-box">Practically, many organisations combine ISNP and ISO 27001 for stronger compliance positioning, since the two address different layers.</div>
+      <Section id="preparation" title="How to Prepare Before Scoping">
+        <p>Four things move the timeline more than anything else, and all four are within the platform team’s control before the auditor is engaged:</p>
+        <CheckList items={['Current architecture and data-flow documentation', 'A complete API inventory, including internal and partner APIs', 'A test environment that genuinely mirrors production', 'Named owners for remediation, with authority to ship fixes']} />
+        <p>Closing documentation gaps before testing starts is considerably cheaper than discovering them as findings.</p>
       </Section>
 
-      <Section id="business-impact" title="How ISNP Certification Impacts Business Operations">
-        <CardGrid columns="md:grid-cols-3" cards={[
-          { title: "From a Founder's Perspective", body: 'Stronger credibility with clients, investors and government bodies, and fewer blockers in enterprise procurement.' },
-          { title: "From a Compliance Officer's Perspective", body: 'A documented, auditable control environment that maps onto multiple sector regulator expectations at once.' },
-          { title: 'From a Regulatory Perspective', body: 'Demonstrable readiness across confidentiality, integrity, availability and incident reporting obligations.' }
-        ]} />
+      <Section id="how-estabizz-helps" title="How Estabizz Helps">
+        <p>We work on the compliance side of the engagement rather than replacing the auditor:</p>
+        <CheckList items={['Scoping support and readiness assessment before testing begins', 'Documentation and policy gap closure', 'Coordination with the CERT-In empanelled auditor', 'Remediation tracking through to retesting', 'Preparing the report for filing', 'Planning the annual review cycle']} />
       </Section>
 
-      <Section id="post-certification" title="Post-Certification Compliance">
-        <p>According to governing regulations, cybersecurity is not a one-time compliance but an ongoing responsibility.</p>
-        <CheckList items={['Maintain cybersecurity standards', 'Conduct periodic internal audits', 'Update policies as per regulatory changes', 'Report security incidents where required', 'Renew certification periodically']} />
-      </Section>
-
-      <Section id="renewal" title="Renewal and Continuous Compliance">
-        <p>ISNP Certification is not a one-time activity. Failure to maintain standards may lead to loss of certification standing, and to the regulatory consequences described below.</p>
-      </Section>
-
-      <Section id="compliance-risks" title="Practical Compliance Risks (Real-World View)">
-        <p>Many businesses assume certification ensures full compliance. In reality, regulators increasingly evaluate actual system behaviour, not just documentation.</p>
-      </Section>
-
-      <Section id="red-flags" title="Red Flags That Lead to Certification Rejection">
-        <DataTable headers={['Red Flag', 'Why It Fails']} rows={[
-          ['Generic policy templates', 'Do not reflect the real system environment'],
-          ['No real-time monitoring', 'Detective controls cannot be evidenced'],
-          ['Shared credentials', 'Access control cannot be attributed or audited'],
-          ['Documentation not aligned with systems', 'Creates a visible compliance mismatch'],
-          ['No defined incident response process', 'Treated as a major red flag by auditors']
-        ]} />
-      </Section>
-
-      <Section id="common-mistakes" title="Common Mistakes to Avoid">
-        <CheckList items={['Ignoring documentation quality', 'Weak internal cybersecurity controls', 'Treating certification as a one-time activity', 'Lack of trained personnel', 'Failure to conduct periodic audits']} />
-        <div className="warning-box">Regulators and auditors primarily focus on implementation, not just documentation.</div>
-      </Section>
-
-      <Section id="consequences" title="Regulatory Consequences of Weak Cyber Compliance">
-        <CheckList items={['Financial penalties', 'Business restrictions', 'Licence suspension in regulated sectors', 'Legal liability', 'Loss of client trust']} />
-        <div className="warning-box">Cybersecurity is no longer an IT issue. It is a board-level responsibility.</div>
-      </Section>
-
-      <Section id="strategic-advantage" title="Strategic Advantage of ISNP Certification">
-        <p>Beyond compliance, the certification improves the organisation&rsquo;s standing with clients, investors and regulators, and reduces cyber risk exposure across the business.</p>
-      </Section>
-
-      <Section id="future-outlook" title="Future Outlook: Why ISNP-Type Certifications Will Become Critical">
-        <p>As sector regulators deepen their technology supervision and data protection obligations come progressively into force, evidence-based security certification moves from a differentiator to a baseline expectation for any business handling data, systems or digital transactions.</p>
-      </Section>
-
-      <Section id="how-estabizz-helps" title="How Estabizz Helps with ISNP Certification">
-        <p>From a practical standpoint, ISNP Certification is not just documentation. It is about real implementation.</p>
-        <CheckList items={['Identifying compliance gaps', 'Structuring documentation properly', 'Coordinating audits', 'Ensuring regulatory alignment', 'Avoiding delays and rejection']} />
-      </Section>
-
-      <Section id="faqs" title="FAQs on ISNP Certification in India">
-        <p>{faqs.length} questions covering scope, applicability, eligibility, process, audit expectations, fees, timeline, renewal, sector linkages and practical scenarios.</p>
+      <Section id="faqs" title="FAQs">
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-review" title="Reviewer and Legal Disclaimer">
-        <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
-          <h3>Reviewed by Estabizz Compliance Expert</h3>
-          <p><strong>CS Devyani Khambhati</strong></p>
-          <p>Compliance Expert | Estabizz Fintech Private Limited</p>
-          <p>Expertise: RBI, SEBI, IRDAI and IFSCA frameworks, technology governance and cyber risk documentation, data protection compliance, vendor risk management and audit readiness.</p>
-          <p>This content has been prepared from a regulatory advisory perspective to help fintechs, NBFCs, insurance platforms, payment aggregators, IT service providers and SaaS businesses understand certification expectations around network security and cybersecurity controls.</p>
-        </div>
-        <div className="warning-box mt-6">This content is for general informational purposes only and should not be treated as legal, regulatory or technical advice. ISNP Certification is not governed by a single statute, and requirements, fees, validity periods and audit standards vary by issuing body and framework. The abbreviation ISNP is also used in the insurance sector for the IRDAI Insurance Self-Network Platform, which is a separate framework. Organisations should confirm requirements with their chosen certification authority and verify the cybersecurity obligations imposed by their own sector regulator before acting on this page.</div>
+      <Section id="expert-review" title="Reviewer and Disclaimer">
+        <p>This guide is general information, not engagement-specific advice. ISNP requirements, audit expectations and the applicable IRDAI guidance change, and the scope of any particular review depends on the platform. Confirm the current position with IRDAI, your auditor and your professional adviser before acting.</p>
       </Section>
 
       <Section id="speak-to-expert" title="Speak to Our Compliance Expert">
-        <p>Close the gap between what the policies say and what the systems actually do, with a structured gap assessment, documentation that matches the environment, and audit coordination through to issuance.</p>
-        <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-6">
-          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl text-center">Speak to a Compliance Expert</Link>
-          <Link href="/contact" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 text-center">Start a Gap Assessment</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-blue-50 text-[#0a1628] font-bold rounded-xl text-center">Check Certification Readiness</Link>
-          <a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl text-center">WhatsApp Estabizz Team</a>
-        </div>
+        <p>If you are preparing an Insurance Self-Network Platform for launch, or the annual review is due, <Link href="/contact">get in touch</Link> and we will help you scope it.</p>
       </Section>
     </ServicePageLayout>
   );

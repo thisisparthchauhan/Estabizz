@@ -11,6 +11,7 @@ const guides = [
   { title: 'Insurance Marketing Firm Licence', href: '/regulatory/insurance/insurance-marketing-firm-license-in-india', description: 'Explore insurance marketing firm registration, documentation and ongoing compliance.' },
   { title: 'Insurance Repository Registration', href: '/regulatory/insurance/insurance-repository-registration-in-india', description: 'Registration and operating requirements for electronic insurance repositories.' },
   { title: 'TPA Licence', href: '/regulatory/insurance/tpa-license-india', description: 'Licensing, application preparation and compliance for third-party administrators.' },
+  { title: 'ISNP Security Audit', href: '/regulatory/insurance/isnp-certification-in-india', description: 'The independent CERT-In empanelled security audit an Insurance Self-Network Platform needs before launch and annually after.' },
   { title: 'All IRDAI Services', href: '/irdai', description: 'Explore insurance broker, corporate agent, reinsurance and other insurance regulatory services.' },
 ];
 

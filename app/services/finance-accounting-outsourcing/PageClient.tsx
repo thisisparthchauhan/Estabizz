@@ -306,7 +306,7 @@ const faqGroups = [
       {
         "number": 43,
         "q": "Are there hidden costs in outsourcing?",
-        "a": "No, if agreement is clear. Always define scope upfront.",
+        "a": "That depends on how tightly the engagement is scoped. Costs most often surface from out-of-scope work, catch-up on prior-period books, and statutory fees billed as pass-throughs. Define scope, exclusions and pass-throughs in the agreement upfront.",
         "points": []
       },
       {
@@ -495,7 +495,7 @@ const faqGroups = [
       {
         "number": 69,
         "q": "Does outsourcing impact statutory audit?",
-        "a": "No, but it improves audit readiness.",
+        "a": "It changes how the audit is run rather than removing it. The auditor still needs access to records and to understand the controls at the service provider, so responsiveness and documentation quality matter. Well-run outsourcing usually improves audit readiness.",
         "points": []
       },
       {
@@ -837,7 +837,7 @@ const faqGroups = [
       {
         "number": 112,
         "q": "Is physical presence required?",
-        "a": "No, services are mostly online.",
+        "a": "Not of the service provider \u2014 delivery is largely online. The company's own obligation is separate: under Section 128 of the Companies Act, 2013 books of account are kept at the registered office, or elsewhere in India by board resolution with notice to the ROC, and if kept electronically must remain accessible in India.",
         "points": []
       }
     ]
@@ -1426,7 +1426,7 @@ export default function PageClient() {
         ))}
       </Section>
       <Section id="disclaimer" title="Disclaimer">
-        <p>This guide is general information, not transaction-specific legal advice. Requirements depend on the applicable regulations, current circulars and the facts of each case. Confirm the current position with the relevant authority and your professional adviser before acting.</p>
+        <p>This guide is general information, not transaction-specific legal advice. Requirements depend on the applicable regulations, current circulars and the facts of each case, and parts of this guide are still undergoing professional review. Confirm the current position with the relevant authority and your professional adviser before acting or relying on any figure, deadline or threshold stated here.</p>
       </Section>
     </ServicePageLayout>
   );

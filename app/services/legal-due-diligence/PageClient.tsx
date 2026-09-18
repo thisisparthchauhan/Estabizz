@@ -171,8 +171,8 @@ const faqGroups = [
       },
       {
         "number": 25,
-        "q": "Can individuals conduct due diligence?",
-        "a": "No, it should be conducted by qualified professionals.",
+        "q": "Can anyone conduct due diligence?",
+        "a": "It should be conducted by a qualified professional \u2014 typically a Company Secretary, lawyer or Chartered Accountant. The point is qualification and independence, not whether the reviewer is an individual or a firm.",
         "points": []
       },
       {
@@ -485,7 +485,7 @@ const faqGroups = [
       {
         "number": 73,
         "q": "Are government fees involved?",
-        "a": "No, it is a professional service fee.",
+        "a": "There is no government fee for the exercise itself. Out-of-pocket charges normally arise and are passed through \u2014 MCA document downloads, ROC and index searches, litigation and IP record searches.",
         "points": []
       },
       {
@@ -1284,7 +1284,7 @@ export default function PageClient() {
         ))}
       </Section>
       <Section id="disclaimer" title="Disclaimer">
-        <p>This guide is general information, not transaction-specific legal advice. Requirements depend on the applicable regulations, current circulars and the facts of each case. Confirm the current position with the relevant authority and your professional adviser before acting.</p>
+        <p>This guide is general information, not transaction-specific legal advice. Requirements depend on the applicable regulations, current circulars and the facts of each case, and parts of this guide are still undergoing professional review. Confirm the current position with the relevant authority and your professional adviser before acting or relying on any figure, deadline or threshold stated here.</p>
       </Section>
     </ServicePageLayout>
   );

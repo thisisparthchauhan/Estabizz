@@ -1526,7 +1526,7 @@ export default function PageClient() {
         ))}
       </Section>
       <Section id="disclaimer" title="Disclaimer">
-        <p>This guide is general information, not transaction-specific legal advice. Requirements depend on the applicable regulations, current circulars and the facts of each case. Confirm the current position with the relevant authority and your professional adviser before acting.</p>
+        <p>This guide is general information, not transaction-specific legal advice. Requirements depend on the applicable regulations, current circulars and the facts of each case, and parts of this guide are still undergoing professional review. Confirm the current position with the relevant authority and your professional adviser before acting or relying on any figure, deadline or threshold stated here.</p>
       </Section>
     </ServicePageLayout>
   );

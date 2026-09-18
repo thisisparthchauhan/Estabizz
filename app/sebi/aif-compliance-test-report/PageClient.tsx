@@ -13,7 +13,7 @@ const faqGroups = [
       {
         "number": 1,
         "q": "What is Compliance Test Report for AIF?",
-        "a": "It is an annual certification confirming that an Alternative Investment Fund complies with SEBI AIF Regulations and its PPM conditions.",
+        "a": "It is an annual report prepared by the Manager of an Alternative Investment Fund confirming compliance with the SEBI AIF Regulations, the Master Circular and the fund's PPM conditions, and submitted to the Trustee and Sponsor.",
         "points": []
       },
       {
@@ -55,7 +55,7 @@ const faqGroups = [
       {
         "number": 8,
         "q": "Who prepares the Compliance Test Report?",
-        "a": "It is prepared and certified by a CA, CS, or qualified compliance professional.",
+        "a": "The Manager of the AIF. The SEBI Master Circular refers throughout to the Compliance Test Report prepared by the manager, and the obligation is regulatory in nature \u2014 it cannot be delegated away to a service provider. Professionals are commonly engaged to assist with preparation, but responsibility stays with the Manager.",
         "points": []
       },
       {
@@ -96,8 +96,8 @@ const faqGroups = [
       },
       {
         "number": 15,
-        "q": "What is CTR certification?",
-        "a": "It is a professional confirmation that the fund complies with regulations.",
+        "q": "Does the CTR carry a professional certification?",
+        "a": "SEBI does not prescribe certification by an external CA or CS. The Manager prepares and signs off the report; the Trustee or Sponsor then reviews it and records any observations.",
         "points": []
       }
     ]
@@ -203,7 +203,7 @@ const faqGroups = [
       {
         "number": 31,
         "q": "How to prepare Compliance Test Report for AIF?",
-        "a": "It involves data collection, compliance review, and professional certification.",
+        "a": "It involves data collection, compliance review against each chapter of the Master Circular, and sign-off by the Manager before submission to the Trustee and Sponsor.",
         "points": []
       },
       {
@@ -233,7 +233,7 @@ const faqGroups = [
       {
         "number": 36,
         "q": "Who signs the CTR?",
-        "a": "A CA or CS certifies the report.",
+        "a": "The Manager of the AIF. Where a professional has assisted with preparation they may be named, but the report is the Manager's.",
         "points": []
       },
       {
@@ -405,7 +405,7 @@ const faqGroups = [
       {
         "number": 63,
         "q": "Can CTR be done internally to save cost?",
-        "a": "No, independent certification is required.",
+        "a": "Yes. The Compliance Test Report is prepared by the Manager, and SEBI does not require external certification. Many Managers engage professional support for the compliance review, but that is a resourcing decision rather than a regulatory requirement.",
         "points": []
       },
       {
@@ -439,8 +439,8 @@ const faqGroups = [
       },
       {
         "number": 68,
-        "q": "How long does certification take?",
-        "a": "Usually 5–7 days.",
+        "q": "How long does the sign-off stage take?",
+        "a": "Usually 5–7 days once the compliance review is complete.",
         "points": []
       },
       {
@@ -778,14 +778,14 @@ const faqGroups = [
       },
       {
         "number": 119,
-        "q": "Can a CTR include qualifications by the certifying professional?",
-        "a": "Yes, qualifications can be added where compliance gaps exist, ensuring transparency.",
+        "q": "Can a CTR record qualifications or exceptions?",
+        "a": "Yes. Where compliance gaps exist they should be recorded in the report rather than omitted, along with the corrective action taken.",
         "points": []
       },
       {
         "number": 120,
         "q": "Is it acceptable to rely only on internal data for CTR preparation?",
-        "a": "No, independent verification is essential to ensure credibility and regulatory acceptance.",
+        "a": "The report is built from the fund's own records, so internal data is the basis. Independent review adds credibility and catches gaps, but it is a governance choice rather than a SEBI condition.",
         "points": []
       },
       {
@@ -1057,7 +1057,7 @@ export default function PageClient() {
         <p><strong>{"Regulatory deadline."}</strong>{" The Compliance Test Report is prepared by the Manager and submitted to the Trustee and Sponsor within 30 days of the end of the financial year — that is, by 30 April for a year ending 31 March. Where the Trustee or Sponsor records observations on the report, those are intimated to the Manager within 30 days of receiving it."}</p>
         <DataTable headers={["Stage", "Timing"]} rows={[["CTR submitted to Trustee and Sponsor", "Within 30 days of financial year end (by 30 April)"], ["Trustee or Sponsor observations to the Manager", "Within 30 days of receiving the CTR"]]} />
         <p><strong>{"Preparation turnaround."}</strong>{" The figures below are our own working estimates for preparing the report, not a regulatory timeline, and should be planned so that the 30-day statutory deadline is met."}</p>
-        <DataTable headers={["Activity", "Estimated effort"]} rows={[["Data Compilation", "7–10 days"], ["Review & Analysis", "10–15 days"], ["Certification", "5–7 days"], ["Total Time", "20–30 days"]]} />
+        <DataTable headers={["Activity", "Estimated effort"]} rows={[["Data Compilation", "7–10 days"], ["Review & Analysis", "10–15 days"], ["Sign-off", "5–7 days"], ["Total Time", "20–30 days"]]} />
       </Section>
 
       <Section id="certification-requirements" title={"Certification Requirements for the Manager’s Personnel"}>
@@ -1100,7 +1100,7 @@ export default function PageClient() {
       <Section id="format-structure-of-compliance-test-report-for-aif" title={"Format & Structure of Compliance Test Report for AIF"}>
         <p>{"While SEBI does not prescribe a single rigid format, the report generally follows a structured compliance checklist approach."}</p>
         <h3>{"Typical Structure:"}</h3>
-        <ul><li>{"Basic Fund Details"}<ul><li>{"Name of AIF"}</li><li>{"Category"}</li><li>{"Registration number"}</li></ul></li><li>{"Compliance Checklist"}<ul><li>{"Regulation-wise verification"}</li><li>{"Clause-by-clause analysis"}</li></ul></li><li>{"Deviation Reporting"}<ul><li>{"Nature of deviation"}</li><li>{"Impact"}</li><li>{"Corrective action"}</li></ul></li><li>{"Certification"}<ul><li>{"Signed by CA / CS"}</li><li>{"Professional declaration"}</li></ul></li></ul>
+        <ul><li>{"Basic Fund Details"}<ul><li>{"Name of AIF"}</li><li>{"Category"}</li><li>{"Registration number"}</li></ul></li><li>{"Compliance Checklist"}<ul><li>{"Regulation-wise verification"}</li><li>{"Clause-by-clause analysis"}</li></ul></li><li>{"Deviation Reporting"}<ul><li>{"Nature of deviation"}</li><li>{"Impact"}</li><li>{"Corrective action"}</li></ul></li><li>{"Sign-off"}<ul><li>{"Signed for the Manager"}</li><li>{"Submitted to the Trustee and Sponsor"}</li></ul></li></ul>
       </Section>
 
       <Section id="role-of-key-stakeholders-in-ctr" title={"Role of Key Stakeholders in CTR"}>
@@ -1111,7 +1111,7 @@ export default function PageClient() {
         <ul><li>{"Oversees governance"}</li><li>{"Reviews compliance report"}</li></ul>
         <h3>{"3. Compliance Officer"}</h3>
         <ul><li>{"Tracks regulatory adherence"}</li><li>{"Coordinates documentation"}</li></ul>
-        <h3>{"4. Certifying Professional (CA / CS)"}</h3>
+        <h3>{"4. Sign-Off by the Manager"}</h3>
         <ul><li>{"Verifies compliance independently"}</li><li>{"Issues certification"}</li></ul>
       </Section>
 
@@ -1129,7 +1129,7 @@ export default function PageClient() {
       </Section>
 
       <Section id="difference-between-audit-report-and-compliance-test-report" title={"Difference Between Audit Report and Compliance Test Report"}>
-        <DataTable headers={["Particulars", "Audit Report", "Compliance Test Report"]} rows={[["Objective", "Financial accuracy", "Regulatory compliance"], ["Prepared by", "Auditor", "CA / CS / Compliance Professional"], ["Focus Area", "Accounts & statements", "SEBI regulations"], ["Frequency", "Annual", "Annual (or as required)"], ["Nature", "Financial", "Regulatory"]]} />
+        <DataTable headers={["Particulars", "Audit Report", "Compliance Test Report"]} rows={[["Objective", "Financial accuracy", "Regulatory compliance"], ["Prepared by", "Auditor", "The Manager of the AIF"], ["Focus Area", "Accounts & statements", "SEBI regulations"], ["Frequency", "Annual", "Annual (or as required)"], ["Nature", "Financial", "Regulatory"]]} />
       </Section>
 
       <Section id="real-world-compliance-challenges-faced-by-aifs" title={"Real-World Compliance Challenges Faced by AIFs"}>
@@ -1233,7 +1233,7 @@ export default function PageClient() {
         <h3>{"5. Observations & Recommendations"}</h3>
         <ul><li>{"Suggestions for improving compliance"}</li><li>{"Strengthening internal controls"}</li><li>{"Preventive measures"}</li></ul>
         <h3>{"6. Final Certification"}</h3>
-        <ul><li>{"Name of Certifying Professional (CA / CS)"}</li><li>{"Membership Number"}</li><li>{"Signature & Seal"}</li><li>{"Date"}</li></ul>
+        <ul><li>{"Name and designation of the authorised signatory for the Manager"}</li><li>{"Compliance Officer of the Manager"}</li><li>{"Signature"}</li><li>{"Date"}</li><li>{"Name of any professional who assisted with preparation, where applicable"}</li></ul>
       </Section>
 
       <Section id="important-regulatory-references-to-track" title={"Important Regulatory References to Track"}>
@@ -1307,7 +1307,7 @@ export default function PageClient() {
         ))}
       </Section>
       <Section id="disclaimer" title="Disclaimer">
-        <p>This guide is general information, not transaction-specific legal advice. Requirements depend on the applicable regulations, current circulars and the facts of each case. Confirm the current position with the relevant authority and your professional adviser before acting.</p>
+        <p>This guide is general information, not transaction-specific legal advice. Requirements depend on the applicable regulations, current circulars and the facts of each case, and parts of this guide are still undergoing professional review. Confirm the current position with the relevant authority and your professional adviser before acting or relying on any figure, deadline or threshold stated here.</p>
       </Section>
     </ServicePageLayout>
   );

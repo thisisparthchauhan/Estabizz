@@ -16,6 +16,7 @@ const sections = [
   { id: 'regulatory-framework', title: 'Regulatory Framework' },
   { id: 'who-needs', title: 'Who Needs an IMF License?' },
   { id: 'scope-of-activities', title: 'Scope of Activities Allowed' },
+  { id: 'area-of-operation', title: 'Area of Operation: District-Based Licensing' },
   { id: 'restrictions', title: 'Regulatory Restrictions' },
   { id: 'eligibility', title: 'Eligibility Criteria' },
   { id: 'principal-officer', title: 'Principal Officer: Critical Role' },
@@ -302,13 +303,27 @@ export default function PageClient() {
         ]} />
       </Section>
 
+      <Section id="area-of-operation" title="Area of Operation: District-Based Licensing">
+        <p>An IMF licence is granted for a specified geographical area, not for the country at large. The applicant nominates the district it wants to operate in, and that area must be approved by IRDAI. This is one of the defining features of the IMF model and the main structural difference from a broker licence.</p>
+        <DataTable headers={['Aspect', 'Position under the 2015 Regulations']} rows={[
+          ['Area at initial registration', 'Offices in one district of the applicant’s choice'],
+          ['Maximum area', 'Up to three districts, within a single state'],
+          ['Aspirational district condition', 'Where more than one district is sought, at least one must be an aspirational district notified by NITI Aayog'],
+          ['Adding districts later', 'Additional areas may be applied for at the time of renewal'],
+          ['ISP domicile', 'Insurance Sales Persons employed must be domiciled in the approved area'],
+          ['Business from outside the area', 'An IMF may solicit business anywhere in India, but it must be logged at the insurer’s office within its area of operation']
+        ]} />
+        <p>Because the area is fixed at registration and widened only at renewal, the district chosen in the application has a direct bearing on the business plan, the ISP recruitment plan and the realistic growth path for the first licence term.</p>
+      </Section>
+
       <Section id="restrictions" title="Regulatory Restrictions (Very Important)">
         <p>An IMF operates within a defined boundary, and exceeding it may lead to regulatory action.</p>
         <DataTable headers={['An IMF Cannot', 'Why It Matters']} rows={[
           ['Act as a full-fledged insurance broker', 'Broking requires separate registration with higher net worth and compliance'],
           ['Provide unrestricted advisory services', 'Advisory scope is limited by design under the IMF framework'],
           ['Handle large-scale corporate risk placements', 'Corporate risk placement sits with brokers, not IMFs'],
-          ['Deviate from product caps prescribed by IRDAI', 'Product caps are a core condition of the registration']
+          ['Deviate from product caps prescribed by IRDAI', 'Product caps are a core condition of the registration'],
+          ['Operate outside its approved districts', 'The licence is area-specific, and business must be logged within the approved area of operation']
         ]} />
       </Section>
 

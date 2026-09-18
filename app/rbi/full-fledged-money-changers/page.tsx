@@ -8,9 +8,9 @@ const FULL_PATH = '/rbi/full-fledged-money-changers';
 export const dynamic = 'force-dynamic';
 
 const FALLBACK_METADATA: Metadata = {
-    title: "Full Fledged Money Changer License: Complete Guide to FFMC Registration in India",
+    title: "Full Fledged Money Changer License: Complete Guide to FFMC Registration in India (2026)",
     description: "Full Fledged Money Changer License in India – understand RBI approval process, eligibility, documents, compliance, fees, and step-by-step FFMC registration guide.",
-    keywords: "Full Fledged Money Changer License",
+    keywords: "Full Fledged Money Changer License, FFMC Registration India, FFMC License RBI, Money Changer License India, Forex License India, Category II Authorised Dealer, FEMA Money Changing Activities, Net Owned Fund FFMC",
     alternates: { canonical: FULL_PATH },
 };
 

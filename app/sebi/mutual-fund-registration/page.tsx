@@ -8,9 +8,9 @@ const FULL_PATH = '/sebi/mutual-fund-registration';
 export const dynamic = 'force-dynamic';
 
 const FALLBACK_METADATA: Metadata = {
-    title: 'SEBI Mutual Fund Registration India: Complete Guide with Eligibility, Process & Compliance',
+    title: 'SEBI Mutual Fund Registration India – Complete Guide with Eligibility, Process & Compliance (2026)',
     description: 'SEBI Mutual Fund Registration India – detailed guide on eligibility, process, documents, fees, and compliance for launching a mutual fund in India.',
-    keywords: 'Regulatory Compliance',
+    keywords: 'SEBI Mutual Fund Registration India, Mutual Fund Registration with SEBI, AMC Registration India, Asset Management Company License, Mutual Fund Trust Registration, SEBI Mutual Funds Regulations 1996, Mutual Fund Sponsor Eligibility, Start a Mutual Fund in India',
     alternates: { canonical: FULL_PATH },
 };
 

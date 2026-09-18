@@ -40,7 +40,7 @@ export default function PageClient() {
     ];
 
     const relatedArticles = [
-        { href: "/rbi/nbfc-registration", category: "RBI", title: "NBFC Registration in India", description: "Complete guide to obtain RBI Certificate of Registration for your NBFC." },
+        { href: "/rbi/nbfc-registration-in-india", category: "RBI", title: "NBFC Registration in India", description: "Complete guide to obtain RBI Certificate of Registration for your NBFC." },
         { href: "/rbi/nbfc-for-sale", category: "RBI", title: "NBFC for Sale in India", description: "Buy an existing RBI-registered NBFC safely with expert guidance." },
         { href: "/rbi/nbfc-financial-modeling", category: "RBI", title: "NBFC Financial Modelling", description: "Build RBI-ready financial models for your NBFC with compliance and risk planning." },
         { href: "/rbi/nbfc-account-aggregator-license", category: "RBI", title: "NBFC Account Aggregator License", description: "Apply for RBI Account Aggregator licence under the AA framework." },

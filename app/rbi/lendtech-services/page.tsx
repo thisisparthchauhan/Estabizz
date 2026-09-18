@@ -8,9 +8,9 @@ const FULL_PATH = '/rbi/lendtech-services';
 export const dynamic = 'force-dynamic';
 
 const FALLBACK_METADATA: Metadata = {
-    title: "LendTech Services India: Compliance Guide for Digital Lending Success",
-    description: "Complete guide and compliance information.",
-    keywords: "LendTech Services India",
+    title: "LendTech Services India: Build a Powerful and Compliant Digital Lending Business",
+    description: "LendTech Services India by Estabizz helps fintechs and NBFCs structure compliant digital lending models, LSP partnerships, technology, documentation and post-launch governance.",
+    keywords: "LendTech Services India, Digital Lending India, Lending Service Provider, LSP Agreement, Digital Lending Application, RBI Digital Lending Guidelines, Default Loss Guarantee, NBFC Fintech Partnership, Co-Lending Model, Embedded Finance India",
     alternates: { canonical: FULL_PATH }
 };
 

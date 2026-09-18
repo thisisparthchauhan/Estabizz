@@ -8,9 +8,9 @@ const FULL_PATH = '/rbi/nbfc-marketing-strategy';
 export const dynamic = 'force-dynamic';
 
 const FALLBACK_METADATA: Metadata = {
-    title: "NBFC Marketing Strategy in India: 15 Proven Ways to Grow Faster",
-    description: "Complete guide and compliance information for NBFC Marketing Strategy in India covering RBI-compliant growth approaches for non-banking financial companies.",
-    keywords: "NBFC Marketing Strategy in India",
+    title: "NBFC Marketing Strategy in India: 15 Powerful & Proven Ways to Grow Faster (2026 Guide)",
+    description: "NBFC Marketing Strategy in India explained with RBI compliance, digital growth tactics, and proven lead generation methods for sustainable business expansion.",
+    keywords: "NBFC Marketing Strategy in India, NBFC Lead Generation, NBFC Digital Marketing, Fair Practices Code Marketing, RBI Digital Lending Guidelines, DSA Compliance NBFC, NBFC Customer Acquisition, NBFC Marketing Policy",
     alternates: { canonical: FULL_PATH },
 };
 

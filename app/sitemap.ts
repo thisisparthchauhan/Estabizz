@@ -212,6 +212,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/ifsca/ifsca-fintech-startup-incentives",
     "/ifsca/itfs-registration-in-gift-ifsc",
     "/ifsca/techfin",
+    // Insurance guides under /regulatory/insurance (added 2026-09-18) -- new
+    // static pages, not CMS-managed, so the CMS query above never sees them.
+    "/regulatory/insurance/insurance-marketing-firm-license-in-india",
+    "/regulatory/insurance/insurance-repository-registration-in-india",
+    "/regulatory/insurance/tpa-license-india",
+    "/regulatory/insurance/isnp-certification-in-india",
   ].map((path) => ({
     url: `${BASE}${path}`,
     changeFrequency: "monthly" as const,

@@ -8,9 +8,9 @@ const FULL_PATH = '/rbi/nbfc-takeover';
 export const dynamic = 'force-dynamic';
 
 const FALLBACK_METADATA: Metadata = {
-    title: "NBFC Takeover in India: Ultimate Guide to RBI Approval, Process & Compliance Risks",
-    description: "Complete guide and compliance information for NBFC Takeover in India covering RBI approval requirements, share transfer limits, change of management and due diligence.",
-    keywords: "NBFC Takeover in India",
+    title: "NBFC Takeover in India: 2026 Ultimate Guide to RBI Approval, Process & Critical Compliance Risks",
+    description: "NBFC Takeover in India explained with RBI approval process, documents, eligibility, and compliance risks. Complete 2026 guide for promoters.",
+    keywords: "NBFC Takeover in India, NBFC Change in Control, RBI Approval NBFC Takeover, NBFC Acquisition India, Fit and Proper Criteria NBFC, NBFC Share Transfer 26 Percent, NBFC Due Diligence, Buy NBFC India",
     alternates: { canonical: FULL_PATH },
 };
 

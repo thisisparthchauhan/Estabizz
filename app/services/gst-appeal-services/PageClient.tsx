@@ -363,7 +363,7 @@ const faqGroups = [
       {
         "number": 52,
         "q": "What is pre-deposit for GST appeal?",
-        "a": "10% of disputed tax is required.",
+        "a": "10% of the disputed tax for a first appeal, capped at ₹20 crore CGST and an equal amount under SGST.",
         "points": []
       },
       {
@@ -381,7 +381,7 @@ const faqGroups = [
       {
         "number": 55,
         "q": "What is maximum pre-deposit limit?",
-        "a": "It is capped under GST provisions.",
+        "a": "₹20 crore CGST, and an equal amount under SGST, at each appellate stage following the Finance (No. 2) Act, 2024 amendments in force from 1 November 2024.",
         "points": []
       },
       {
@@ -1057,7 +1057,7 @@ export default function PageClient() {
       </Section>
 
       <Section id="gst-appeal-fees-pre-deposit" title={"GST Appeal Fees & Pre-Deposit"}>
-        <DataTable headers={["Component", "Requirement"]} rows={[["Pre-deposit (Tax)", "10% of disputed tax (first appeal)"], ["Additional deposit", "Required for further appeals"], ["Professional Fees", "Depends on complexity"]]} />
+        <DataTable headers={["Component", "Requirement"]} rows={[["Pre-deposit (tax) — first appeal", "10% of disputed tax, capped at ₹20 crore CGST (and an equal amount under SGST)"], ["Additional deposit — Tribunal", "A further 10% of the remaining disputed tax, capped at ₹20 crore CGST (and an equal amount under SGST)"], ["Penalty-only demands", "10% of the penalty, for appeals under the Finance Act, 2025 position effective 1 April 2025"], ["Professional Fees", "Depends on complexity"]]} />
         <p><strong>{"Under the relevant provisions"}</strong>{", failure to deposit the required amount may lead to rejection of appeal."}</p>
       </Section>
 
@@ -1106,8 +1106,9 @@ export default function PageClient() {
       </Section>
 
       <Section id="pre-deposit-calculation-practical-understanding" title={"Pre-Deposit Calculation – Practical Understanding"}>
-        <DataTable headers={["Scenario", "Pre-Deposit Requirement"]} rows={[["First Appeal", "10% of disputed tax"], ["Second Appeal", "Additional 20%"], ["Maximum Cap", "₹25 Crore (as applicable)"]]} />
+        <DataTable headers={["Scenario", "Pre-Deposit Requirement"]} rows={[["First appeal — Commissioner (Appeals)", "10% of disputed tax"], ["Second appeal — GST Appellate Tribunal", "A further 10% of the remaining disputed tax"], ["Maximum cap (each stage)", "₹20 crore CGST, and an equal amount under SGST"]]} />
         <p><strong>{"Important Note:"}</strong>{""}<br />{"Pre-deposit is calculated only on "}<strong>{"tax amount"}</strong>{", not penalty or interest."}</p>
+        <p>{"These figures reflect the Finance (No. 2) Act, 2024 amendments to Sections 107(6) and 112(8) of the CGST Act, in force from 1 November 2024, which cut the Tribunal-stage deposit from 20% to 10% and reduced the caps. Appeals against penalty-only demands carry a separate 10%-of-penalty deposit under the Finance Act, 2025 position effective 1 April 2025. Confirm the current position for your case before making any deposit."}</p>
       </Section>
 
       <Section id="situations-where-gst-appeal-can-be-avoided" title={"Situations Where GST Appeal Can Be Avoided"}>

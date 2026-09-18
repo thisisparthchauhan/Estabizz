@@ -443,7 +443,7 @@ const faqGroups = [
       {
         "number": 66,
         "q": "What is the cost of legal due diligence in India?",
-        "a": "It varies from ₹50,000 to ₹10,00,000 depending on scope.",
+        "a": "It varies with scope — broadly ₹50,000–₹2,00,000 for startup due diligence, ₹2,00,000–₹5,00,000 for SME transactions and ₹5,00,000 upwards for large transactions. Figures are indicative only.",
         "points": []
       },
       {
@@ -1031,7 +1031,7 @@ export default function PageClient() {
 
       <Section id="regulatory-framework" title={"Regulatory Framework"}>
         <p>{"Legal Due Diligence in India is not governed by a single law but derives its importance from multiple regulatory frameworks:"}</p>
-        <DataTable headers={["Framework", "Relevance to Legal Due Diligence"]} rows={[["Companies Act, 2013", "Corporate records, filings and statutory registers"], ["SEBI Regulations", "Listed entities and registered intermediaries"], ["RBI Guidelines", "NBFCs and financial transactions"], ["FEMA Regulations", "Cross-border investments"], ["Indian Contract Act, 1872", "Validity and enforceability of agreements"], ["Insolvency and Bankruptcy Code", "Distress, insolvency and creditor exposure"]]} />
+        <DataTable headers={["Framework", "Relevance to Legal Due Diligence"]} rows={[["Companies Act, 2013", "Corporate records, filings and statutory registers"], ["SEBI Regulations", "Listed entities and registered intermediaries"], ["RBI Guidelines", "NBFCs and financial transactions"], ["FEMA Regulations", "Cross-border investments"], ["Indian Contract Act, 1872", "Validity and enforceability of agreements"], ["Insolvency and Bankruptcy Code", "Distress, insolvency and creditor exposure"], ["Digital Personal Data Protection Act, 2023", "Personal data held by the target and shared through the data room"]]} />
         <p>{"As per applicable regulatory provisions, due diligence is considered a key governance and risk management practice, especially in investment and acquisition scenarios."}</p>
       </Section>
 

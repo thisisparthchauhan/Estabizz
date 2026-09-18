@@ -298,7 +298,7 @@ const faqGroups = [
       {
         "number": 35,
         "q": "Do LPO firms require IEC code?",
-        "a": "Yes, if exporting services.",
+        "a": "Not in the ordinary course. For exports of services an Importer Exporter Code is required only where the provider claims benefits under the Foreign Trade Policy, or where the service falls within a specified category. Confirm against current DGFT notifications.",
         "points": []
       },
       {
@@ -324,10 +324,11 @@ const faqGroups = [
       {
         "number": 38,
         "q": "Do LPO firms need data protection policies?",
-        "a": "Yes, as per regulatory guidelines:",
+        "a": "Yes. Under the Digital Personal Data Protection Act, 2023 and the IT Act, 2000 these should cover:",
         "points": [
           "Data privacy policy",
-          "Information security framework"
+          "Information security framework",
+          "Breach notification and retention rules"
         ]
       },
       {
@@ -679,9 +680,11 @@ const faqGroups = [
       {
         "number": 77,
         "q": "Is data protection compliance mandatory?",
-        "a": "Yes, as per applicable regulations:",
+        "a": "Yes. The applicable framework includes:",
         "points": [
-          "Data privacy laws must be followed"
+          "Digital Personal Data Protection Act, 2023, for personal data",
+          "Information Technology Act, 2000, for security practices",
+          "Contractual and cross-border transfer obligations"
         ]
       },
       {
@@ -1386,7 +1389,7 @@ export default function PageClient() {
 
       <Section id="regulatory-framework" title={"Regulatory Framework"}>
         <p>{"Legal Process Outsourcing in India is not governed by a single dedicated law but operates under multiple frameworks:"}</p>
-        <DataTable headers={["Framework", "Relevance to Legal Process Outsourcing"]} rows={[["Advocates Act, 1961", "Governs legal practice and professional conduct"], ["Bar Council of India Rules", "Restricts certain activities for non-advocates"], ["Information Technology Act, 2000", "Data protection and cybersecurity"], ["Indian Contract Act, 1872", "Governs outsourcing agreements"], ["Data privacy guidelines", "Especially relevant for cross-border outsourcing"]]} />
+        <DataTable headers={["Framework", "Relevance to Legal Process Outsourcing"]} rows={[["Advocates Act, 1961", "Governs legal practice and professional conduct"], ["Bar Council of India Rules", "Restrict legal practice by non-advocates; the 2022 rules on foreign lawyers and foreign law firms, as amended in 2023, govern foreign-firm participation"], ["Information Technology Act, 2000", "Cybersecurity and reasonable security practices"], ["Digital Personal Data Protection Act, 2023", "Processing of personal data, including personal data handled on a client’s behalf"], ["Indian Contract Act, 1872", "Governs outsourcing agreements"], ["Cross-border data transfer rules", "Especially relevant for offshore outsourcing"]]} />
         <p>{"As per applicable regulatory guidelines, confidentiality and client privilege must be strictly maintained in all LPO engagements."}</p>
       </Section>
 

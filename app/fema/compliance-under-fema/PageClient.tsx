@@ -628,7 +628,7 @@ const faqGroups = [
       {
         "number": 86,
         "q": "What is penalty for FEMA violation?",
-        "a": "Up to 3 times the amount involved. Or Rs.2 lakh if amount not quantifiable.",
+        "a": "Under Section 13(1), up to three times the sum involved where that amount is quantifiable, or up to ₹2 lakh where it is not. Section 13(1A) adds up to ₹5,000 per day for a continuing contravention.",
         "points": []
       },
       {

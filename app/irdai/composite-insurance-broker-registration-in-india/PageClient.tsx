@@ -339,7 +339,7 @@ export default function PageClient() {
                 { title: "IRDA Insurance Broker License", href: "/irdai/insurance-broker-registration-in-india", category: "IRDAI", description: "Complete guide to obtaining an IRDAI insurance broker licence in India." },
                 { title: "IRDAI Regulatory Sandbox", href: "/irdai/irdai-regulatory-sandbox", category: "IRDAI", description: "Framework and process for participating in IRDAI's regulatory sandbox." },
                 { title: "Insurance Marketing Firm License", href: "/regulatory/insurance/insurance-marketing-firm-license-in-india", category: "IRDAI", description: "IRDAI registration guide for insurance marketing firms." },
-                { title: "ISNP Registration", href: "/regulatory/insurance/isnp-certification-in-india", category: "IRDAI", description: "Complete guide to Insurance Self-Network Platform registration." },
+                { title: "ISNP Registration", href: "/irdai/isnp-registration", category: "IRDAI", description: "Complete guide to Insurance Self-Network Platform registration." },
             ]}
             finalCtaTitle="Start Your Composite Insurance Broker Registration"
             finalCtaDescription="Building a full-scale life + general + reinsurance broking house demands precision in capital planning, governance and documentation. Our team handles the entire journey — from entity structuring to final IRDAI certificate."

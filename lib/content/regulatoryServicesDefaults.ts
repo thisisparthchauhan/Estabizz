@@ -49,7 +49,7 @@ export const REGULATORY_SERVICES_DEFAULTS: RegulatoryServicesContent = {
       { name: "Composite Broker", href: "/irdai/composite-insurance-broker-registration-in-india" },
       { name: "Corporate Agent", href: "/irdai/corporate-agent-registration-in-india" },
       { name: "IMF", href: "/regulatory/insurance/insurance-marketing-firm-license-in-india" },
-      { name: "ISNP", href: "/regulatory/insurance/isnp-certification-in-india" },
+      { name: "ISNP", href: "/irdai/isnp-registration" },
       { name: "Reinsurance Broker", href: "/irdai/reinsurance-broker-registration-in-india" },
     ] },
     { id: "ifsca", icon: "🌐", title: "IFSCA & GIFT City Services", href: "/ifsca", forText: "Global Financial Services & IFSC Entities", desc: "Regulatory structuring and operational compliance support for entities operating within India's International Financial Services Centre ecosystem.", tags: [

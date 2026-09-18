@@ -242,7 +242,7 @@ export default function PageClient() {
       relatedArticles={[
         { title: 'Insurance Broker Registration in India', href: '/irdai/insurance-broker-registration-in-india', category: 'IRDAI', description: 'The full-advisory broker route, for comparison against the IMF model.' },
         { title: 'Corporate Agent Registration in India', href: '/irdai/corporate-agent-registration-in-india', category: 'IRDAI', description: 'IRDAI corporate agency registration and its distribution limits.' },
-        { title: 'ISNP Registration', href: '/regulatory/insurance/isnp-certification-in-india', category: 'IRDAI', description: 'IRDAI permission for selling insurance through a self-network platform.' }
+        { title: 'ISNP Registration', href: '/irdai/isnp-registration', category: 'IRDAI', description: 'IRDAI permission for selling insurance through a self-network platform.' }
       ]}
       finalCtaTitle="Start Your Insurance Marketing Firm Registration with Estabizz"
       finalCtaDescription="Structure the entity, qualify the Principal Officer, build the ISP training framework, draft a regulator-aligned business plan and file with IRDAI, with query handling and post-registration compliance support."
@@ -414,7 +414,7 @@ export default function PageClient() {
 
       <Section id="technology" title="Technology Integration (Modern IMF Model)">
         <CheckList items={['CRM systems', 'Online policy issuance tools', 'Digital onboarding', 'WhatsApp-based servicing', 'API integrations with insurers']} />
-        <div className="info-box"><strong>Practical insight:</strong> digital IMFs scale faster than traditional ones. Businesses building an online sales journey should also review <Link href="/regulatory/insurance/isnp-certification-in-india">ISNP registration</Link>.</div>
+        <div className="info-box"><strong>Practical insight:</strong> digital IMFs scale faster than traditional ones. Businesses building an online sales journey should also review <Link href="/irdai/isnp-registration">ISNP registration</Link>.</div>
       </Section>
 
       <Section id="growth-potential" title="Growth Potential of IMF in India">

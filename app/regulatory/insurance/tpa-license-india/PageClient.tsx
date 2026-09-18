@@ -257,7 +257,7 @@ export default function PageClient() {
       relatedArticles={[
         { title: 'Insurance Broker Registration in India', href: '/irdai/insurance-broker-registration-in-india', category: 'IRDAI', description: 'The intermediary route, contrasted with the TPA service-provider role.' },
         { title: 'Corporate Agent Registration in India', href: '/irdai/corporate-agent-registration-in-india', category: 'IRDAI', description: 'IRDAI corporate agency registration for insurance distribution.' },
-        { title: 'ISNP Registration', href: '/regulatory/insurance/isnp-certification-in-india', category: 'IRDAI', description: 'IRDAI permission for selling insurance through a self-network platform.' }
+        { title: 'ISNP Registration', href: '/irdai/isnp-registration', category: 'IRDAI', description: 'IRDAI permission for selling insurance through a self-network platform.' }
       ]}
       finalCtaTitle="Build an Approval-Ready TPA Application"
       finalCtaDescription="Estabizz supports the full TPA licensing journey: object clause and capital structuring, Principal Officer and team planning, IT and claims-system readiness, business plan drafting, IRDAI filing, query handling and post-approval compliance."

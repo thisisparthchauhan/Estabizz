@@ -19,7 +19,7 @@ const services = [
     { href: "/irdai/irdai-regulatory-sandbox", title: "IRDAI Regulatory Sandbox", desc: "Framework and process for participating in IRDAI's regulatory sandbox for insurance innovation.", tag: "IRDAI", emoji: "🧪" },
     { href: "/regulatory/insurance/insurance-marketing-firm-license-in-india", title: "Insurance Marketing Firm License", desc: "Complete IRDAI compliance guide for IMFs under Insurance Marketing Firm Regulations, 2015 with net worth, ISP framework, and district-based licensing.", tag: "IRDAI", emoji: "📣" },
     { href: "/regulatory/insurance/insurance-repository-registration-in-india", title: "Insurance Repository Registration", desc: "IRDAI registration process for insurance repositories managing electronic insurance accounts.", tag: "IRDAI", emoji: "🗂️" },
-    { href: "/regulatory/insurance/isnp-certification-in-india", title: "ISNP Registration", desc: "Complete guide to Insurance Self-Network Platform registration under IRDAI regulations.", tag: "IRDAI", emoji: "🌐" },
+    { href: "/irdai/isnp-registration", title: "ISNP Registration", desc: "Complete guide to Insurance Self-Network Platform registration under IRDAI regulations.", tag: "IRDAI", emoji: "🌐" },
     { href: "/irdai/ifsca-insurance-intermediary", title: "IFSCA Insurance Intermediary", desc: "IFSCA registration and compliance guide for insurance intermediaries operating in GIFT City.", tag: "IRDAI", emoji: "🏙️" },
 ];
 

@@ -756,7 +756,7 @@ Corporate Agent Registration in India should be treated as a regulated business 
         { title: 'IRDA Insurance Broker License', href: '/irdai/insurance-broker-registration-in-india', category: 'IRDAI', description: 'IRDA Insurance Broker License — complete regulatory guide.' },
         { title: 'Composite Insurance Broker Registration', href: '/irdai/composite-insurance-broker-registration-in-india', category: 'IRDAI', description: 'Composite Insurance Broker Registration — complete regulatory guide.' },
         { title: 'Insurance Marketing Firm License', href: '/regulatory/insurance/insurance-marketing-firm-license-in-india', category: 'IRDAI', description: 'Insurance Marketing Firm License — complete regulatory guide.' },
-        { title: 'ISNP Registration', href: '/regulatory/insurance/isnp-certification-in-india', category: 'IRDAI', description: 'ISNP Registration — complete regulatory guide.' }
+        { title: 'ISNP Registration', href: '/irdai/isnp-registration', category: 'IRDAI', description: 'ISNP Registration — complete regulatory guide.' }
       ]}
       finalCtaTitle="Need Expert Support for Corporate Agent Registration?"
       finalCtaDescription="Our compliance specialists provide end-to-end support for registration, operational setup, and ongoing compliance."

@@ -205,6 +205,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/sebi/underwriter-registration",
     "/irdai/ifsca-insurance-intermediary",
     "/irdai/irdai-regulatory-sandbox",
+    "/irdai/isnp-registration",
     "/ifsca/batf-services-registration-in-gift-ifsc",
     "/ifsca/finance-company-in-gift-ifsc",
     "/ifsca/ifsca-fintech-startup-incentives",

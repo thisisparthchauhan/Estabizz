@@ -1063,7 +1063,7 @@ export default function PageClient() {
       <Section id="certification-requirements" title={"Certification Requirements for the Manager’s Personnel"}>
         <p>{"SEBI has introduced NISM certification requirements that bear directly on who may sign off on and support the Compliance Test Report."}</p>
         <DataTable headers={["Who", "Certification", "Position"]} rows={[["Compliance Officer of the Manager", "NISM Series-III-C: Securities Intermediaries Compliance (Fund)", "With effect from 1 January 2027, only certified individuals may be appointed or continue to act as Compliance Officer"], ["Key investment team of the Manager", "At least one key person to hold NISM Series-XIX-C or XIX-D for Category I and II AIFs, or Series-XIX-C or XIX-E for Category III", "Timeline for compliance ran to 31 July 2025"]]} />
-        <p>{"Because the Compliance Test Report is a self-assessment signed off within the Manager, these requirements should be confirmed as part of CTR preparation rather than treated as a separate exercise. Verify the current position against the applicable SEBI circular before relying on the dates above."}</p>
+        <p>{"The obligation to prepare and submit the Compliance Test Report sits with the Manager, so these certification requirements bear directly on the people responsible for it and should be confirmed as part of CTR preparation rather than treated as a separate exercise. Verify the current position against the applicable SEBI circular before relying on the dates above."}</p>
       </Section>
 
       <Section id="post-registration-compliance" title={"Post-Registration Compliance"}>

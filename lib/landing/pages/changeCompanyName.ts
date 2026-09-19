@@ -99,6 +99,96 @@ export const changeCompanyName: LandingPage = {
       ],
     },
     {
+      heading: "Statutory Provisions Behind a Name Change",
+      blocks: [
+        { type: "p", text: "A company name change is an alteration of the memorandum, and the Companies Act sets out both what a name may be and how the alteration takes effect. The provisions below are the ones that actually govern the filing." },
+        { type: "table", head: ["Provision", "Practical relevance"], rows: [
+          ["Companies Act s. 4", "The name must not be identical, too similar or undesirable"],
+          ["s. 12", "The name must be displayed and printed on official records, letters, notices and publications"],
+          ["s. 13", "Alteration of the memorandum, including the name clause"],
+          ["s. 13(2)", "Name change requires Central Government or ROC approval, except in specified conversion cases"],
+          ["s. 13(3)", "The Registrar enters the new name and issues a fresh certificate of incorporation"],
+          ["s. 13(7)", "The alteration takes effect only on registration by the Registrar"],
+          ["s. 14", "Alteration of articles, where the AOA requires a change"],
+          ["s. 15", "The altered MOA and AOA must be noted in every copy"],
+          ["s. 16", "Rectification of name where it is identical or too similar, or a direction is issued"],
+          ["s. 117", "Filing of the special resolution with the ROC in Form MGT-14"],
+          ["Incorporation Rules, Rule 8", "Name availability and undesirable name principles"],
+          ["Incorporation Rules, Rule 9", "Reservation of name through the MCA web service"]
+        ] },
+        { type: "callout", text: "Section 13(7) is the one that catches people out. Until the Registrar registers the alteration, the old name remains the legal name — so rebranding should not run ahead of the filing." }
+      ]
+    },
+    {
+      heading: "MCA Forms Involved",
+      blocks: [
+        { type: "table", head: ["Form or service", "Purpose"], rows: [
+          ["RUN", "Reservation of the proposed new company name"],
+          ["MGT-14", "Filing of the special resolution with the ROC"],
+          ["INC-24", "Application for approval of the change of name"],
+          ["INC-25", "Fresh certificate of incorporation issued after approval"],
+          ["DIR-12, if applicable", "Only where the name change is linked with director changes"],
+          ["SH-7, if applicable", "Only where a simultaneous capital alteration is involved"],
+          ["INC-22, if applicable", "Only where a registered office change is also involved"],
+          ["GNL-2 or other, if applicable", "Case-specific regulatory or attachment filing"]
+        ] }
+      ]
+    },
+    {
+      heading: "Name Availability Checklist Before Filing RUN",
+      blocks: [
+        { type: "p", text: "Most rejections are avoidable and happen at the RUN stage. Working through these before filing costs an hour and saves a resubmission cycle." },
+        { type: "table", head: ["Checkpoint", "Why it matters"], rows: [
+          ["Existing MCA company names", "Avoid an identical or too-similar name"],
+          ["LLP names", "A similar LLP name may create an objection"],
+          ["Trademark database", "Avoid infringement and later objection"],
+          ["Business object alignment", "The name should match the company's actual activity"],
+          ["Regulated words", "Finance, bank, insurance, stock, exchange and similar words need care"],
+          ["Government words", "Words implying government patronage can be restricted"],
+          ["Abbreviations", "Unclear abbreviations may face objection"],
+          ["Generic words", "Weak or purely descriptive names may be rejected"],
+          ["Phonetic similarity", "Similar pronunciation can cause rejection even where spelling differs"],
+          ["Group-company NOC", "Required where the brand belongs to a holding or group entity"],
+          ["Domain availability", "Supports the digital identity that follows the name"]
+        ] }
+      ]
+    },
+    {
+      heading: "Common Reasons MCA Rejects a Name",
+      blocks: [
+        { type: "table", head: ["Reason", "Practical risk"], rows: [
+          ["Resembles an existing company", "RUN rejection"],
+          ["Resembles a registered trademark", "Objection or NOC requirement"],
+          ["Too generic", "MCA may ask for resubmission"],
+          ["Does not match the objects", "Activity mismatch query"],
+          ["Regulated words used casually", "Sectoral objection"],
+          ["Implies a government connection", "Restricted usage issue"],
+          ["Annual filings pending", "The process may be blocked"],
+          ["Existing compliance default", "Rule-based objection risk"],
+          ["Wrong attachment uploaded", "Resubmission or rejection"],
+          ["Weak justification in RUN or INC-24", "Approval delay"],
+          ["MOA and AOA not aligned", "ROC query"],
+          ["MGT-14 not filed properly", "INC-24 approval issue"]
+        ] },
+        { type: "callout", text: "Where the company operates in a regulated sector, the name may be reviewed by both the MCA and the sector regulator. Plan for both rather than discovering the second one after approval." }
+      ]
+    },
+    {
+      heading: "Name Change, Brand Change and Object Change Are Not the Same Thing",
+      blocks: [
+        { type: "table", head: ["Point", "Company name change", "Brand name change"], rows: [
+          ["Meaning", "The legal registered name changes in MCA records", "A marketing or trade name changes"],
+          ["Regulator", "MCA and ROC", "No direct MCA approval unless the legal name changes"],
+          ["Forms", "RUN, MGT-14, INC-24", "Usually no MCA form"],
+          ["Certificate", "Fresh certificate of incorporation issued", "No ROC certificate"],
+          ["Legal documents", "MOA, AOA and statutory records change", "Brand documents may change"],
+          ["Bank, GST and PAN", "Updates required", "Usually not required"],
+          ["Main risk", "ROC rejection and compliance impact", "Trademark and branding risk"]
+        ] },
+        { type: "p", text: "An object change is different again. Changing what the company does is an alteration of the objects clause and follows its own route; it is only combined with a name change where the new name has to match new objects." }
+      ]
+    },
+    {
       heading: "Practical Issues That Can Delay Company Name Change",
       blocks: [
         { type: "p", text: "In our practical experience, most delays do not happen because the law is complicated. Delays usually occur because the proposed name is not properly planned, the company’s records are not updated, the object clause does not support the proposed name, or the MCA forms are filed without proper sequencing." },

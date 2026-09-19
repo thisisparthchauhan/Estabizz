@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 
 const routes = ['/sebi/aif-compliance-test-report', '/fema/compliance-under-fema', '/services/finance-accounting-outsourcing', '/services/gst-appeal-services', '/services/legal-process-outsourcing', '/services/legal-due-diligence'];
-const tableCounts = [12, 10, 11, 8, 5, 9];
+const tableCounts = [12, 10, 11, 12, 5, 9];
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
 
 for (const route of routes) {

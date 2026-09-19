@@ -22,6 +22,8 @@ for (const [label, expected] of Object.entries({
   'NBFC License': '/rbi/nbfc-registration-in-india',
   'Fund Management Entity': '/ifsca',
   'TPA Licence': '/regulatory/insurance/tpa-license-india',
+  'Legal Services': '/solutions/legal',
+  'Appeal Before High Court': '/solutions/legal/appeal-before-high-court',
   'GST Registration Enquiry': '/contact?service=GST%20Registration',
   'Company Incorporation': '/mca-roc/company-registration-in-india',
 })) assert.equal(links[label], expected);
@@ -39,6 +41,9 @@ for (const file of ['app/regulatory/page.tsx', 'app/regulatory/insurance/page.ts
 const contact = readData('app/contact/ContactClient.tsx', 'SERVICES_GROUPED');
 assert.ok(contact.some(group => group.items.includes('GST Registration')));
 const sitemap = readFileSync('app/sitemap.ts', 'utf8');
+const navbarSource = readFileSync('components/layout/Navbar.tsx', 'utf8');
+assert.ok(navbarSource.includes('href={cat.viewAll}'));
+assert.ok(navbarSource.includes('{cat.viewAllLabel}'));
 assert.ok(sitemap.includes('${BASE}/regulatory/insurance'));
 assert.ok(sitemap.includes('SOLUTION_CATEGORIES.map'));
 assert.ok(!readFileSync('components/landing/LandingRenderer.tsx', 'utf8').includes('href="/19-5"'));

@@ -25,7 +25,7 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import Module, { createRequire } from "node:module";
-import { mkdtempSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
@@ -251,14 +251,20 @@ function main() {
       "app/sitemap.ts does not enumerate SOLUTION_CATEGORIES");
   });
 
-  check("every navbar linkMap /solutions URL resolves to a registered page", () => {
+  check("every navbar linkMap /solutions URL resolves to a real page", () => {
+    // A /solutions URL is served either by the registry, through
+    // app/solutions/[category]/[slug], or by a static route file that takes
+    // precedence over it. Both are live; neither may be a dead nav link.
     const nav = read("components/layout/Navbar.tsx");
     const hrefs = [...nav.matchAll(/"([^"]*)":\s*"(\/solutions\/[^"]+)"/g)].map((m) => m[2]);
     assert.ok(hrefs.length > 0, "no /solutions entries found in linkMap at all");
     for (const href of hrefs) {
       const [, , category, slug] = href.split("/");
-      assert.ok(getServicePage(category, slug),
-        `linkMap points at ${href}, which is not a registered page -- dead nav link`);
+      const registered = slug ? Boolean(getServicePage(category, slug)) : false;
+      const staticRoute = existsSync(new URL(`../app${href}/page.tsx`, import.meta.url));
+      const categoryPage = !slug && SOLUTION_CATEGORIES.some((c) => c.slug === category);
+      assert.ok(registered || staticRoute || categoryPage,
+        `linkMap points at ${href}, which is neither a registered page, a static route, nor a category -- dead nav link`);
     }
   });
 

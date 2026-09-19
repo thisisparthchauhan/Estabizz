@@ -237,6 +237,21 @@ const linkMap: Record<string, string> = {
     "Trademark Classes": "/solutions/ipr/trademark-classes",
     "Trademark Objection Reply": "/solutions/ipr/trademark-objection",
     "Trademark Opposition": "/solutions/ipr/trademark-opposition",
+    "Legal Services": "/solutions/legal",
+    "Adulteration of Drugs": "/solutions/legal/adulteration-of-drugs-legal-services",
+    "Appeal Before High Court": "/solutions/legal/appeal-before-high-court",
+    "Appeal Before ITAT": "/solutions/legal/appeal-before-itat",
+    "Appeal Before NCLT": "/solutions/legal/appeal-before-nclt",
+    "Bail Application": "/solutions/legal/bail-application",
+    "Cheque Bounce": "/solutions/legal/cheque-bounce-in-india",
+    "Caveat Filing": "/solutions/legal/caveat-filing",
+    "Consumer Court Complaints": "/solutions/legal/complaints-before-consumer-court",
+    "Contested Divorce": "/solutions/legal/contested-divorce",
+    "Court Marriage": "/solutions/legal/court-marriage",
+    "Court Proceedings": "/solutions/legal/court-proceedings",
+    "Criminal Misappropriation of Property": "/solutions/legal/criminal-misappropriation-of-property",
+    "Cyber Crime Complaint": "/solutions/legal/cyber-crime-complaint",
+    "Cyber Security Advisory": "/solutions/legal/cyber-security-advisory",
     "Legal Due Diligence": "/services/legal-due-diligence",
     "Legal Process Outsourcing": "/services/legal-process-outsourcing",
     "Finance & Accounting Outsourcing": "/services/finance-accounting-outsourcing",
@@ -431,7 +446,7 @@ const menus: Record<string, MegaMenu> = {
                 { heading: "Copyright", items: ["Copyright Registration", "Copyright Website"] },
                 { heading: "Design & Patent", items: ["Design Registration", "Patent Registration"] },
               ]},
-            { label: "Legal", icon: "📜", items: ["Legal Due Diligence", "Legal Process Outsourcing"],
+            { label: "Legal", icon: "📜", items: ["Adulteration of Drugs", "Appeal Before High Court", "Appeal Before ITAT", "Appeal Before NCLT", "Bail Application", "Cheque Bounce", "Caveat Filing", "Consumer Court Complaints", "Contested Divorce", "Court Marriage", "Court Proceedings", "Criminal Misappropriation of Property", "Cyber Crime Complaint", "Cyber Security Advisory", "Legal Due Diligence", "Legal Process Outsourcing"],
               viewAll: "/solutions/legal", viewAllLabel: "View All Legal Services →" },
             { label: "Compliance Calendar", icon: "📅", items: ["Compliance Calendar", "Regulatory Updates", "Circular Explainers", "Compliance FAQs"],
               viewAll: "/solutions/compliance-calendar", viewAllLabel: "View All Compliance Tools →" },
@@ -1156,6 +1171,13 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                     })}
                                                 </div>
                                             )}
+                                            <Link
+                                                href={cat.viewAll}
+                                                onClick={() => setMobileOpen(false)}
+                                                className="mt-2 inline-flex min-h-10 items-center px-3 text-[12.5px] font-bold text-[#1677f2]"
+                                            >
+                                                {cat.viewAllLabel}
+                                            </Link>
                                         </div>
                                     ))}
                                 </div>

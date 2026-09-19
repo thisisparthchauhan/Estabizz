@@ -85,9 +85,93 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     slug: "legal",
     label: "Legal",
     icon: "📜",
-    tagline: "Transaction diligence, legal process support and contractual documentation.",
+    tagline: "Litigation support, regulatory defence, tribunal filings and transaction diligence.",
     pages: [],
     externalServices: [
+      {
+        title: "Adulteration of Drugs",
+        description:
+          "CDSCO and State Drug Control notices, drug sample failure, seizure, recall strategy, licence risk and prosecution defence.",
+        href: "/solutions/legal/adulteration-of-drugs-legal-services",
+      },
+      {
+        title: "Appeal Before High Court",
+        description:
+          "Conviction and acquittal appeals, sentence matters, suspension of sentence and bail pending appeal under BNS, BNSS and BSA.",
+        href: "/solutions/legal/appeal-before-high-court",
+      },
+      {
+        title: "Appeal Before ITAT",
+        description:
+          "Income-tax appeals before the Tribunal — appealability, limitation, the correct appeal form, stay of demand and paper book preparation.",
+        href: "/solutions/legal/appeal-before-itat",
+      },
+      {
+        title: "Appeal Before NCLT",
+        description:
+          "Company petitions, struck-off company restoration, oppression and mismanagement, IBC applications, schemes and NCLAT appeals.",
+        href: "/solutions/legal/appeal-before-nclt",
+      },
+      {
+        title: "Bail Application",
+        description:
+          "Regular, anticipatory, interim and default bail under the BNSS framework — forum, grounds, conditions, bonds and cancellation defence.",
+        href: "/solutions/legal/bail-application",
+      },
+      {
+        title: "Cheque Bounce in India",
+        description:
+          "Section 138 notice and complaint deadlines, company and director liability, interim compensation, settlement and civil recovery.",
+        href: "/solutions/legal/cheque-bounce-in-india",
+      },
+      {
+        title: "Caveat Filing",
+        description:
+          "Preventive filing under CPC Section 148A so no ex-parte stay or injunction passes without you being heard.",
+        href: "/solutions/legal/caveat-filing",
+      },
+      {
+        title: "Complaints Before Consumer Court",
+        description:
+          "Consumer Protection Act, 2019 complaints — correct Commission, limitation, evidence, relief calculation and e-Jagriti filing support.",
+        href: "/solutions/legal/complaints-before-consumer-court",
+      },
+      {
+        title: "Contested Divorce",
+        description:
+          "Grounds, interim maintenance and custody, evidence strategy, NRI matters and Family Court procedure for contested matrimonial disputes.",
+        href: "/solutions/legal/contested-divorce",
+      },
+      {
+        title: "Court Marriage",
+        description:
+          "Civil marriage under the Special Marriage Act, 1954 — eligibility, notice period, objections, witnesses and the marriage certificate.",
+        href: "/solutions/legal/court-marriage",
+      },
+      {
+        title: "Court Proceedings",
+        description:
+          "Forum, limitation, pleadings, interim relief, evidence, hearings, orders, appeal routes and execution across civil, criminal and tribunal matters.",
+        href: "/solutions/legal/court-proceedings",
+      },
+      {
+        title: "Criminal Misappropriation of Property",
+        description:
+          "BNS Section 314 — dishonest conversion of movable property, the civil-criminal line, the Magistrate complaint route and defence against false allegations.",
+        href: "/solutions/legal/criminal-misappropriation-of-property",
+      },
+      {
+        title: "Cyber Crime Complaint",
+        description:
+          "Online fraud reporting through 1930 and the cyber portal, digital evidence preservation, bank liability, account freeze support and FIR strategy.",
+        href: "/solutions/legal/cyber-crime-complaint",
+      },
+      {
+        title: "Cyber Security Advisory",
+        description:
+          "IT Act and SPDI compliance, CERT-In six-hour incident reporting and log retention, DPDP readiness ahead of 2027, VAPT coordination and vendor risk.",
+        href: "/solutions/legal/cyber-security-advisory",
+      },
       {
         title: "Legal Due Diligence",
         description:

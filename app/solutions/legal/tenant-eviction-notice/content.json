@@ -1,0 +1,1752 @@
+{
+  "title": "Tenant Eviction Notice",
+  "focusKeyword": "Tenant Eviction Notice",
+  "tags": [
+    "Legal",
+    "Property and Tenancy"
+  ],
+  "breadcrumbLabel": "Tenant Eviction Notice",
+  "readTime": "20 min read",
+  "trustLine": "Legally drafted notice. Clear timeline. Possession recovery strategy.",
+  "reviewPending": true,
+  "heroParagraphs": [
+    "A tenant refusing to pay rent, overstaying after lease expiry, misusing the property, subletting without consent or refusing to vacate can create serious financial and legal stress for the landlord. But eviction cannot be done by force, lock change or threat. It must be handled through a legally valid notice and proper court or authority process.",
+    "At Estabizz Fintech, we assist landlords, property owners, lessors, companies, family offices, NRIs, commercial property owners, housing societies and businesses with Tenant Eviction Notice, including lease review, default assessment, notice drafting, Section 106 termination notice, rent recovery demand, arrears calculation, evidence compilation, tenant communication, advocate coordination, eviction suit readiness and post-notice legal strategy."
+  ],
+  "quickFacts": [
+    {
+      "label": "General notice framework",
+      "value": "Transfer of Property Act Section 106"
+    },
+    {
+      "label": "Local variation",
+      "value": "State rent and tenancy law"
+    },
+    {
+      "label": "Core controls",
+      "value": "Lease, arrears, grounds and service"
+    },
+    {
+      "label": "Important rule",
+      "value": "No forceful self-help eviction"
+    }
+  ],
+  "relatedArticles": [
+    {
+      "title": "Lease Agreement Drafting",
+      "href": "/solutions/legal/lease-agreement-drafting",
+      "category": "Legal",
+      "description": "Lease term, registration, notice periods, lock-in, deposit, repairs and termination."
+    },
+    {
+      "title": "General Legal Notice",
+      "href": "/solutions/legal/general-legal-notice",
+      "category": "Legal",
+      "description": "Notice drafting, mandatory periods, service proof, limitation and response strategy."
+    },
+    {
+      "title": "Property Verification",
+      "href": "/solutions/legal/property-verification",
+      "category": "Legal",
+      "description": "Title, encumbrance, succession, litigation and occupation-risk review before a transaction."
+    }
+  ],
+  "finalCtaTitle": "Recover Possession Through Notice and Due Process",
+  "finalCtaDescription": "Before you proceed, speak with our experts. Tenant Eviction Notice can directly impact your property possession, rent recovery, future litigation, tenant defence, security deposit adjustment and legal risk. Do not use force, change locks or send a weak notice without checking the law. A short discussion today can help you protect your property and move toward lawful possession recovery with confidence.",
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Tenant Eviction Notice is a formal legal notice issued by a landlord or property owner to a tenant requiring the tenant to vacate the premises, pay rent arrears, stop breach of lease terms or hand over peaceful possession."
+        },
+        {
+          "type": "paragraph",
+          "text": "It matters because tenancy disputes are highly document-driven. If the notice is vague, wrongly addressed, served improperly or issued without checking the lease agreement and State rent law, the eviction case can get delayed or challenged."
+        },
+        {
+          "type": "paragraph",
+          "text": "This service is relevant for landlords, flat owners, commercial property owners, office owners, warehouse owners, shop owners, NRIs, companies, builders, trustees, family property holders and lessors whose tenants are not paying rent, not vacating, damaging property, creating nuisance, subletting, misusing premises or overstaying after termination."
+        }
+      ]
+    },
+    {
+      "id": "quick-answer",
+      "title": "Quick Answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Tenant Eviction Notice is not a licence. It is a legal notice used to terminate tenancy, demand rent arrears or ask the tenant to vacate the premises."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is governed by the Transfer of Property Act, 1882, State Rent Control / Tenancy Acts, lease agreement terms, Registration Act, court procedure and applicable local law."
+        },
+        {
+          "type": "paragraph",
+          "text": "It becomes necessary where the landlord wants to lawfully terminate tenancy or create a proper legal record before filing eviction, possession or rent recovery proceedings."
+        }
+      ]
+    },
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In simple terms…"
+        },
+        {
+          "type": "paragraph",
+          "text": "Tenant Eviction Notice is the landlord’s formal written communication asking the tenant to vacate the property for valid legal reasons."
+        },
+        {
+          "type": "paragraph",
+          "text": "It may be issued for rent default, lease expiry, breach of agreement, illegal use, nuisance, unauthorised subletting, property damage, owner’s bona fide requirement or continued occupation after termination."
+        },
+        {
+          "type": "paragraph",
+          "text": "From a compliance perspective…"
+        },
+        {
+          "type": "paragraph",
+          "text": "Tenant Eviction Notice requires review of the lease agreement, rent payment records, notice period, lock-in period, termination clause, rent-control applicability, tenant address, arrears, security deposit, property condition, proof of breach, notice service and future eviction suit strategy."
+        },
+        {
+          "type": "paragraph",
+          "text": "From a risk perspective, the landlord should avoid forceful eviction. Changing locks, disconnecting electricity, removing belongings, threatening the tenant or using pressure tactics can create legal complications. Lawful eviction should proceed through notice and due process."
+        }
+      ]
+    },
+    {
+      "id": "regulatory-framework",
+      "title": "Regulatory Framework",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Particular",
+            "Applicable Legal Framework"
+          ],
+          "rows": [
+            [
+              "Main Property Law",
+              "Transfer of Property Act, 1882"
+            ],
+            [
+              "Lease Definition",
+              "Section 105"
+            ],
+            [
+              "Notice to Terminate Lease",
+              "Section 106"
+            ],
+            [
+              "Registered Lease Requirement",
+              "Section 107 and Registration Act, 1908"
+            ],
+            [
+              "Rights and Liabilities",
+              "Section 108"
+            ],
+            [
+              "Determination of Lease",
+              "Section 111"
+            ],
+            [
+              "Waiver / Forfeiture Issues",
+              "Sections 112, 113 and 114"
+            ],
+            [
+              "Holding Over",
+              "Section 116"
+            ],
+            [
+              "Rent Control / Tenancy Law",
+              "State-specific Rent Act / Tenancy Act"
+            ],
+            [
+              "Model Tenancy Law",
+              "Model Tenancy Act, 2021, where adopted by State/UT"
+            ],
+            [
+              "Public Premises",
+              "Public Premises (Eviction of Unauthorised Occupants) Act, 1971, where property is public premises"
+            ],
+            [
+              "Civil Court Procedure",
+              "Code of Civil Procedure, 1908"
+            ],
+            [
+              "Injunction / Possession",
+              "Specific Relief Act, 1963"
+            ],
+            [
+              "Evidence",
+              "Bharatiya Sakshya Adhiniyam, 2023"
+            ],
+            [
+              "Contractual Terms",
+              "Indian Contract Act, 1872 and lease agreement"
+            ],
+            [
+              "Stamp / Registration",
+              "Indian Stamp Act and State stamp laws"
+            ],
+            [
+              "Circular / Master Direction",
+              "No single master direction; Tenant Eviction Notice is governed by property law, State tenancy law, lease contract, court procedure and local rent-control framework"
+            ],
+            [
+              "Main Authority / Forum",
+              "Civil Court, Rent Controller, Rent Authority, Rent Court, Estate Officer or other State-specific forum depending on property and law"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applicable-act-and-important-sections",
+      "title": "Applicable Act and Important Sections",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Law / Framework",
+            "Important Provision",
+            "Practical Relevance"
+          ],
+          "rows": [
+            [
+              "Transfer of Property Act, 1882",
+              "Section 105",
+              "Defines lease, lessor, lessee, premium and rent"
+            ],
+            [
+              "Transfer of Property Act, 1882",
+              "Section 106",
+              "Notice period for termination where contract/local law does not provide otherwise"
+            ],
+            [
+              "Transfer of Property Act, 1882",
+              "Section 107",
+              "How leases are made; registered instrument requirement for certain leases"
+            ],
+            [
+              "Transfer of Property Act, 1882",
+              "Section 108",
+              "Rights and liabilities of lessor and lessee"
+            ],
+            [
+              "Transfer of Property Act, 1882",
+              "Section 109",
+              "Rights of lessor’s transferee"
+            ],
+            [
+              "Transfer of Property Act, 1882",
+              "Section 111",
+              "Determination of lease by expiry, notice, forfeiture, surrender and other modes"
+            ],
+            [
+              "Transfer of Property Act, 1882",
+              "Section 112",
+              "Waiver of forfeiture"
+            ],
+            [
+              "Transfer of Property Act, 1882",
+              "Section 113",
+              "Waiver of notice to quit"
+            ],
+            [
+              "Transfer of Property Act, 1882",
+              "Section 114",
+              "Relief against forfeiture for non-payment of rent"
+            ],
+            [
+              "Transfer of Property Act, 1882",
+              "Section 114A",
+              "Relief against forfeiture in certain other cases"
+            ],
+            [
+              "Transfer of Property Act, 1882",
+              "Section 116",
+              "Effect of holding over after lease expiry"
+            ],
+            [
+              "Registration Act, 1908",
+              "Section 17",
+              "Compulsory registration of leases exceeding one year or yearly rent"
+            ],
+            [
+              "Registration Act, 1908",
+              "Section 49",
+              "Effect of non-registration of required documents"
+            ],
+            [
+              "Indian Stamp Act / State Stamp Law",
+              "State-specific provisions",
+              "Stamp duty on rent/lease agreement and admissibility concerns"
+            ],
+            [
+              "State Rent Control / Tenancy Act",
+              "State-specific eviction provisions",
+              "Grounds and procedure for eviction may differ by State"
+            ],
+            [
+              "Model Tenancy Act, 2021",
+              "State adoption-based framework",
+              "Rent Authority/Rent Court mechanism where adopted"
+            ],
+            [
+              "Public Premises Act, 1971",
+              "Sections 4 and 5",
+              "Notice and eviction order for unauthorised occupation of public premises"
+            ],
+            [
+              "Specific Relief Act, 1963",
+              "Sections 5 and 6",
+              "Recovery of possession and protection against unlawful dispossession"
+            ],
+            [
+              "Specific Relief Act, 1963",
+              "Sections 38 and 39",
+              "Permanent and mandatory injunction, where relevant"
+            ],
+            [
+              "Code of Civil Procedure, 1908",
+              "Order V",
+              "Service of summons and procedural notice relevance"
+            ],
+            [
+              "Code of Civil Procedure, 1908",
+              "Order XX Rule 12",
+              "Mesne profits / use and occupation charges in suitable cases"
+            ],
+            [
+              "Code of Civil Procedure, 1908",
+              "Order XXXIX Rules 1 and 2",
+              "Temporary injunction in urgent property disputes"
+            ],
+            [
+              "Indian Contract Act, 1872",
+              "Sections 10 and 23",
+              "Valid contract and lawful object of lease terms"
+            ],
+            [
+              "Indian Contract Act, 1872",
+              "Sections 73 and 74",
+              "Compensation / liquidated damages in contractual breach"
+            ],
+            [
+              "Bharatiya Sakshya Adhiniyam, 2023",
+              "Electronic evidence provisions",
+              "WhatsApp, email, CCTV, rent transfer records and digital proof"
+            ],
+            [
+              "Limitation Act, 1963",
+              "Possession / arrears limitation principles",
+              "Time-bar and recovery period assessment"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "what-is-tenant-eviction-notice",
+      "title": "What Is Tenant Eviction Notice?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Tenant Eviction Notice is a written legal notice asking the tenant to vacate the property or cure a breach within the permitted time."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Practical Meaning"
+          ],
+          "rows": [
+            [
+              "Landlord / Lessor",
+              "Property owner or person entitled to receive rent"
+            ],
+            [
+              "Tenant / Lessee",
+              "Person occupying property under lease/rent arrangement"
+            ],
+            [
+              "Premises",
+              "Flat, house, shop, office, warehouse, factory, land or commercial unit"
+            ],
+            [
+              "Notice",
+              "Formal demand to vacate, pay arrears or stop breach"
+            ],
+            [
+              "Notice Period",
+              "Based on lease agreement, TPA or State law"
+            ],
+            [
+              "Arrears",
+              "Unpaid rent, maintenance, utilities or charges"
+            ],
+            [
+              "Termination",
+              "Ending tenancy legally"
+            ],
+            [
+              "Possession",
+              "Peaceful handover of property"
+            ],
+            [
+              "Eviction Suit",
+              "Court/authority case if tenant does not vacate"
+            ],
+            [
+              "Mesne Profits",
+              "Compensation for wrongful occupation after termination"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "when-can-a-tenant-eviction-notice-be-issued",
+      "title": "When Can a Tenant Eviction Notice Be Issued?",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Ground",
+            "Practical Explanation"
+          ],
+          "rows": [
+            [
+              "Rent default",
+              "Tenant has not paid rent or charges"
+            ],
+            [
+              "Lease expiry",
+              "Tenant continues after agreement period ends"
+            ],
+            [
+              "Breach of lease terms",
+              "Tenant violates agreed conditions"
+            ],
+            [
+              "Unauthorised subletting",
+              "Tenant gives property to another person without permission"
+            ],
+            [
+              "Misuse of property",
+              "Residential premises used commercially or illegally"
+            ],
+            [
+              "Property damage",
+              "Tenant damages premises beyond normal wear and tear"
+            ],
+            [
+              "Nuisance",
+              "Tenant disturbs neighbours, society or property owner"
+            ],
+            [
+              "Illegal activity",
+              "Premises used for unlawful purpose"
+            ],
+            [
+              "Owner’s bona fide requirement",
+              "Landlord genuinely needs property for own use"
+            ],
+            [
+              "Reconstruction / repair",
+              "Property requires major repair or redevelopment"
+            ],
+            [
+              "Change of ownership",
+              "New owner wants possession, subject to law and contract"
+            ],
+            [
+              "Non-renewal of agreement",
+              "Landlord does not wish to extend tenancy"
+            ],
+            [
+              "Security concerns",
+              "Tenant violates safety or society rules"
+            ],
+            [
+              "Holding over",
+              "Tenant remains after termination and rent acceptance issues need review"
+            ],
+            [
+              "Commercial default",
+              "Tenant breaches business lease obligations"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tenant-eviction-notice-process",
+      "title": "Tenant Eviction Notice Process",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Step",
+            "Activity",
+            "Output"
+          ],
+          "rows": [
+            [
+              "Step 1",
+              "Initial consultation",
+              "Tenant issue and property status review"
+            ],
+            [
+              "Step 2",
+              "Lease agreement review",
+              "Notice period, lock-in, termination clause and renewal clause checked"
+            ],
+            [
+              "Step 3",
+              "Legal framework mapping",
+              "TPA, State Rent Act, Model Tenancy Act or Public Premises route identified"
+            ],
+            [
+              "Step 4",
+              "Rent and arrears calculation",
+              "Outstanding rent, maintenance and charges computed"
+            ],
+            [
+              "Step 5",
+              "Evidence collection",
+              "Rent records, messages, photos, breach proof and notices compiled"
+            ],
+            [
+              "Step 6",
+              "Notice drafting",
+              "Tenant Eviction Notice prepared with clear grounds"
+            ],
+            [
+              "Step 7",
+              "Address verification",
+              "Tenant address, property address and alternate address checked"
+            ],
+            [
+              "Step 8",
+              "Notice dispatch",
+              "Speed post, courier, email and hand delivery strategy planned"
+            ],
+            [
+              "Step 9",
+              "Delivery tracking",
+              "Service proof preserved"
+            ],
+            [
+              "Step 10",
+              "Waiting period",
+              "Tenant response, payment or vacating timeline monitored"
+            ],
+            [
+              "Step 11",
+              "Settlement attempt",
+              "Handover date, arrears and deposit adjustment discussed"
+            ],
+            [
+              "Step 12",
+              "Eviction suit readiness",
+              "Advocate coordination for possession/recovery case"
+            ],
+            [
+              "Step 13",
+              "Court/authority filing",
+              "Eviction, rent recovery, injunction or mesne profit claim filed"
+            ],
+            [
+              "Step 14",
+              "Order and execution",
+              "Possession and recovery process followed through legal route"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "documents-required-for-tenant-eviction-notice",
+      "title": "Documents Required for Tenant Eviction Notice",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Document / Information",
+            "Purpose"
+          ],
+          "rows": [
+            [
+              "Ownership document",
+              "Proof of landlord’s title or authority"
+            ],
+            [
+              "Lease / rent agreement",
+              "Tenancy terms and notice period"
+            ],
+            [
+              "Registered lease, if any",
+              "Stronger evidentiary support"
+            ],
+            [
+              "Rent receipts",
+              "Rent payment history"
+            ],
+            [
+              "Bank statements",
+              "Proof of rent transfer/default"
+            ],
+            [
+              "Security deposit proof",
+              "Adjustment and refund calculation"
+            ],
+            [
+              "Tenant KYC",
+              "Identity and address details"
+            ],
+            [
+              "Police verification, if any",
+              "Tenant verification record"
+            ],
+            [
+              "Society NOC / rules",
+              "Society breach support"
+            ],
+            [
+              "Electricity / water bills",
+              "Utility default evidence"
+            ],
+            [
+              "Maintenance bills",
+              "Society/maintenance arrears"
+            ],
+            [
+              "WhatsApp / email communication",
+              "Notice, admission or default proof"
+            ],
+            [
+              "Photos / videos of damage",
+              "Property damage evidence"
+            ],
+            [
+              "Complaint from neighbours",
+              "Nuisance support"
+            ],
+            [
+              "FIR / police complaint, if any",
+              "Illegal activity or safety issue"
+            ],
+            [
+              "Previous reminders",
+              "Demand and default history"
+            ],
+            [
+              "Property tax record",
+              "Ownership support"
+            ],
+            [
+              "Power of attorney",
+              "If owner acts through representative"
+            ],
+            [
+              "NRI authorisation",
+              "If owner is outside India"
+            ],
+            [
+              "Commercial licence documents",
+              "Commercial property use review"
+            ],
+            [
+              "Renewal correspondence",
+              "Non-renewal or holding-over issue"
+            ],
+            [
+              "Tenant reply, if any",
+              "Dispute and defence review"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tenant-eviction-notice-drafting-what-it-should-include",
+      "title": "Tenant Eviction Notice Drafting – What It Should Include",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Clause / Detail",
+            "Why It Matters"
+          ],
+          "rows": [
+            [
+              "Landlord details",
+              "Identifies person issuing notice"
+            ],
+            [
+              "Tenant details",
+              "Identifies person liable to vacate"
+            ],
+            [
+              "Property description",
+              "Avoids ambiguity"
+            ],
+            [
+              "Lease agreement date",
+              "Connects notice to tenancy"
+            ],
+            [
+              "Rent amount",
+              "Shows agreed financial terms"
+            ],
+            [
+              "Default / breach",
+              "Explains reason for eviction"
+            ],
+            [
+              "Arrears calculation",
+              "Creates payment demand record"
+            ],
+            [
+              "Termination clause",
+              "Links notice with contract"
+            ],
+            [
+              "Legal provision",
+              "TPA / State law basis"
+            ],
+            [
+              "Vacating timeline",
+              "Clear deadline for possession"
+            ],
+            [
+              "Demand for peaceful possession",
+              "Main relief required"
+            ],
+            [
+              "Utility and maintenance dues",
+              "Prevents later dispute"
+            ],
+            [
+              "Security deposit adjustment",
+              "Practical settlement clarity"
+            ],
+            [
+              "Warning of legal action",
+              "Eviction suit and cost consequences"
+            ],
+            [
+              "Mode of handover",
+              "Keys, inventory and inspection"
+            ],
+            [
+              "Without prejudice clause",
+              "Settlement safety where suitable"
+            ],
+            [
+              "Notice dispatch details",
+              "Service proof support"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A strong notice should be clear, lawful, fact-specific and future-litigation ready."
+        }
+      ]
+    },
+    {
+      "id": "tenant-eviction-notice-timeline",
+      "title": "Tenant Eviction Notice Timeline",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Situation",
+            "Typical Timeline Review"
+          ],
+          "rows": [
+            [
+              "Lease has notice clause",
+              "Follow contractual notice period"
+            ],
+            [
+              "Month-to-month lease",
+              "Section 106 notice period may apply if no contrary law/contract"
+            ],
+            [
+              "Agricultural/manufacturing lease",
+              "Longer notice period may apply"
+            ],
+            [
+              "Fixed-term lease expired",
+              "Termination and holding-over conduct must be reviewed"
+            ],
+            [
+              "State Rent Act applies",
+              "State-specific grounds and timelines apply"
+            ],
+            [
+              "Model Tenancy Act adopted",
+              "Rent Authority/Rent Court route may apply"
+            ],
+            [
+              "Public premises",
+              "Estate Officer notice process applies"
+            ],
+            [
+              "Urgent misuse/damage",
+              "Injunction or urgent court relief may be needed"
+            ],
+            [
+              "Rent default",
+              "Notice and arrears demand should be issued promptly"
+            ],
+            [
+              "Tenant reply received",
+              "Reply should be reviewed before filing case"
+            ],
+            [
+              "No response",
+              "Eviction suit/authority proceeding may be prepared"
+            ],
+            [
+              "Settlement possible",
+              "Written handover settlement should be executed"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tenant-eviction-notice-vs-lease-termination-notice",
+      "title": "Tenant Eviction Notice vs Lease Termination Notice",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Tenant Eviction Notice",
+            "Lease Termination Notice"
+          ],
+          "rows": [
+            [
+              "Purpose",
+              "Demand vacation due to breach/default/expiry",
+              "Formally ends lease"
+            ],
+            [
+              "Scope",
+              "Often includes breach, rent arrears and possession demand",
+              "Focuses on termination"
+            ],
+            [
+              "Used When",
+              "Tenant refuses to comply or vacate",
+              "Landlord wants to end tenancy"
+            ],
+            [
+              "Legal Basis",
+              "Lease, TPA, Rent Act, State law",
+              "Lease and TPA/State law"
+            ],
+            [
+              "Next Step",
+              "Eviction suit or rent authority proceeding",
+              "Possession demand / further action"
+            ],
+            [
+              "Evidence Needed",
+              "Default, breach and arrears proof",
+              "Lease and notice period proof"
+            ],
+            [
+              "Tone",
+              "Stronger and dispute-ready",
+              "Formal termination"
+            ],
+            [
+              "Best Practice",
+              "Combine termination and possession demand where legally suitable",
+              "Use when tenancy must first be ended"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tenant-eviction-notice-vs-legal-notice-for-rent-recovery",
+      "title": "Tenant Eviction Notice vs Legal Notice for Rent Recovery",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Tenant Eviction Notice",
+            "Rent Recovery Notice"
+          ],
+          "rows": [
+            [
+              "Main Relief",
+              "Vacate premises and hand over possession",
+              "Pay unpaid rent"
+            ],
+            [
+              "Additional Relief",
+              "Rent arrears, damages, mesne profits",
+              "Interest, charges, costs"
+            ],
+            [
+              "Used When",
+              "Tenant’s possession must end",
+              "Landlord wants payment"
+            ],
+            [
+              "Court Route",
+              "Eviction/possession suit or rent forum",
+              "Money recovery suit / combined claim"
+            ],
+            [
+              "Evidence",
+              "Lease, breach, default, notice service",
+              "Ledger, bank record and bills"
+            ],
+            [
+              "Can Be Combined",
+              "Yes, if facts require",
+              "Yes, with possession demand"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "In many cases, the notice should demand both possession and arrears."
+        }
+      ]
+    },
+    {
+      "id": "state-rent-control-and-tenancy-law",
+      "title": "State Rent Control and Tenancy Law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Tenant eviction law in India is not exactly the same in every State."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Practical Meaning"
+          ],
+          "rows": [
+            [
+              "State-specific law",
+              "Maharashtra, Delhi, Gujarat, Karnataka, Tamil Nadu, Telangana, UP and other States may have different rent laws"
+            ],
+            [
+              "Protected tenant",
+              "Some tenants may get protection under rent-control law"
+            ],
+            [
+              "Standard rent",
+              "Rent-control concepts may apply in older tenancies"
+            ],
+            [
+              "Grounds required",
+              "Eviction may need specific statutory ground"
+            ],
+            [
+              "Rent Controller",
+              "Some States use Rent Controller / Rent Court"
+            ],
+            [
+              "Civil Court",
+              "Some matters go to civil court"
+            ],
+            [
+              "Model Tenancy Act",
+              "Applies only where State/UT adopts or legislates accordingly"
+            ],
+            [
+              "Commercial vs residential",
+              "Rules may differ"
+            ],
+            [
+              "Old tenancy",
+              "Older tenancies may have additional protection"
+            ],
+            [
+              "New written tenancy",
+              "Modern tenancy laws may require written agreement and intimation"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Before issuing notice, the applicable State law and property location must be checked."
+        }
+      ]
+    },
+    {
+      "id": "tenant-eviction-for-rent-default",
+      "title": "Tenant Eviction for Rent Default",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Issue",
+            "Practical Review"
+          ],
+          "rows": [
+            [
+              "Rent due date",
+              "Agreement and payment history checked"
+            ],
+            [
+              "Amount unpaid",
+              "Rent, maintenance, GST, utility and charges calculated"
+            ],
+            [
+              "Grace period",
+              "Agreement terms reviewed"
+            ],
+            [
+              "Prior reminders",
+              "WhatsApp/email/letter records checked"
+            ],
+            [
+              "Part payment",
+              "Ledger updated"
+            ],
+            [
+              "Security deposit",
+              "Adjustment cannot be assumed without lease review"
+            ],
+            [
+              "Interest / penalty",
+              "Contractual clause checked"
+            ],
+            [
+              "State law protection",
+              "Tenant may get opportunity to deposit rent in some laws"
+            ],
+            [
+              "Notice demand",
+              "Clear arrears and possession demand"
+            ],
+            [
+              "Suit claim",
+              "Rent recovery + eviction + mesne profits strategy"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tenant-eviction-after-lease-expiry",
+      "title": "Tenant Eviction After Lease Expiry",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Issue",
+            "Practical Review"
+          ],
+          "rows": [
+            [
+              "Agreement end date",
+              "Lease expiry confirmed"
+            ],
+            [
+              "Renewal clause",
+              "Auto-renewal or written renewal checked"
+            ],
+            [
+              "Rent accepted after expiry",
+              "Holding-over risk reviewed"
+            ],
+            [
+              "Tenant continued possession",
+              "Unauthorised occupation assessed"
+            ],
+            [
+              "Notice required",
+              "TPA/lease/State law checked"
+            ],
+            [
+              "Increased rent demand",
+              "Evidence and communication reviewed"
+            ],
+            [
+              "Security deposit",
+              "Adjustment and handover terms checked"
+            ],
+            [
+              "Possession demand",
+              "Notice must clearly demand vacation"
+            ],
+            [
+              "Mesne profits",
+              "Use and occupation charges may be claimed"
+            ],
+            [
+              "Court route",
+              "Eviction/possession proceeding planned"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tenant-eviction-for-misuse-subletting-or-damage",
+      "title": "Tenant Eviction for Misuse, Subletting or Damage",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Ground",
+            "Evidence Required"
+          ],
+          "rows": [
+            [
+              "Unauthorised subletting",
+              "Photos, witness, neighbour/society record, rent receipts"
+            ],
+            [
+              "Commercial misuse",
+              "Shop signboard, business listing, GST address, customer activity"
+            ],
+            [
+              "Illegal activity",
+              "Police complaint, society complaint, CCTV, witness"
+            ],
+            [
+              "Property damage",
+              "Inspection photos, repair estimate, video record"
+            ],
+            [
+              "Structural changes",
+              "Before/after photos and contractor report"
+            ],
+            [
+              "Nuisance",
+              "Society notices and neighbour complaints"
+            ],
+            [
+              "Overcrowding / illegal occupants",
+              "Verification records and witness statements"
+            ],
+            [
+              "Licence violation",
+              "Local authority notice"
+            ],
+            [
+              "Safety risk",
+              "Fire, electricity or building safety report"
+            ],
+            [
+              "Refusal of inspection",
+              "Communication and inspection request proof"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "public-premises-eviction-notice",
+      "title": "Public Premises Eviction Notice",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "If the property belongs to the Government, PSU, statutory authority or notified public body, the general private landlord-tenant route may not apply."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Practical Meaning"
+          ],
+          "rows": [
+            [
+              "Main Law",
+              "Public Premises (Eviction of Unauthorised Occupants) Act, 1971"
+            ],
+            [
+              "Authority",
+              "Estate Officer"
+            ],
+            [
+              "Notice",
+              "Show-cause notice for unauthorised occupation"
+            ],
+            [
+              "Hearing",
+              "Occupant gets opportunity to show cause"
+            ],
+            [
+              "Eviction Order",
+              "Estate Officer may pass reasoned order"
+            ],
+            [
+              "Damages",
+              "Damages for unauthorised occupation may be claimed"
+            ],
+            [
+              "Appeal",
+              "Statutory appeal route applies"
+            ],
+            [
+              "Private Lease Route",
+              "TPA/rent-control route may not apply"
+            ],
+            [
+              "Evidence",
+              "Allotment letter, licence, rent, authority record and occupation proof"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Public premises matters require separate legal strategy."
+        }
+      ]
+    },
+    {
+      "id": "legal-risks-if-tenant-eviction-notice-is-not-handled-properly",
+      "title": "Legal Risks If Tenant Eviction Notice Is Not Handled Properly",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Risk",
+            "Practical Impact"
+          ],
+          "rows": [
+            [
+              "Wrong notice period",
+              "Eviction suit may be delayed"
+            ],
+            [
+              "Wrong legal provision",
+              "Tenant may challenge maintainability"
+            ],
+            [
+              "Wrong address",
+              "Service dispute"
+            ],
+            [
+              "No proof of delivery",
+              "Notice may be disputed"
+            ],
+            [
+              "Vague grounds",
+              "Weak pleading in court"
+            ],
+            [
+              "Rent acceptance after termination",
+              "Holding-over argument"
+            ],
+            [
+              "Lock changed forcibly",
+              "Criminal/civil complaint risk"
+            ],
+            [
+              "Electricity disconnected",
+              "Tenant may seek injunction"
+            ],
+            [
+              "Security deposit mishandled",
+              "Counterclaim risk"
+            ],
+            [
+              "State rent law ignored",
+              "Wrong forum or dismissal"
+            ],
+            [
+              "Lease unregistered",
+              "Evidence and enforceability issue"
+            ],
+            [
+              "No arrears calculation",
+              "Rent recovery dispute"
+            ],
+            [
+              "No breach evidence",
+              "Tenant defence stronger"
+            ],
+            [
+              "Notice not preserved",
+              "Future filing difficulty"
+            ],
+            [
+              "Settlement oral only",
+              "Future dispute continues"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-issues-we-fixed-for-clients",
+      "title": "Common Issues We Fixed for Clients",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Issue",
+            "Practical Risk",
+            "How Estabizz Supports"
+          ],
+          "rows": [
+            [
+              "Tenant stopped paying rent",
+              "Cash-flow loss",
+              "Arrears notice and eviction strategy"
+            ],
+            [
+              "Tenant refused to vacate after expiry",
+              "Unauthorised occupation",
+              "Termination and possession notice"
+            ],
+            [
+              "Notice sent casually on WhatsApp",
+              "Service dispute",
+              "Formal notice and dispatch proof"
+            ],
+            [
+              "Landlord changed locks",
+              "Tenant complaint risk",
+              "Corrective legal route planning"
+            ],
+            [
+              "Tenant sublet without consent",
+              "Control loss",
+              "Evidence and breach notice"
+            ],
+            [
+              "Tenant damaged property",
+              "Repair cost and deposit dispute",
+              "Damage documentation checklist"
+            ],
+            [
+              "Lease was not registered",
+              "Evidentiary issue",
+              "Registration/stamp impact review"
+            ],
+            [
+              "NRI owner could not appear",
+              "Execution difficulty",
+              "Authorisation and POA support"
+            ],
+            [
+              "Tenant paid partial rent",
+              "Arrears dispute",
+              "Ledger reconciliation"
+            ],
+            [
+              "Society complaint received",
+              "Nuisance evidence",
+              "Society record and notice strategy"
+            ],
+            [
+              "Tenant claiming renewal",
+              "Holding-over risk",
+              "Renewal communication review"
+            ],
+            [
+              "Commercial tenant misused premises",
+              "Licence/property risk",
+              "Misuse and possession action plan"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "how-we-reduced-approval-time-for-clients",
+      "title": "How We Reduced Approval Time for Clients",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Tenant eviction matters often get delayed because landlords issue emotional, vague or incomplete notices without checking the lease, applicable State law, notice period, arrears, address and evidence."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz reduces avoidable delay by preparing an eviction-readiness file: lease review, State law check, arrears statement, breach evidence, notice period calculation, tenant address verification, notice draft, dispatch tracker, delivery proof and litigation-ready document index."
+        },
+        {
+          "type": "paragraph",
+          "text": "In eviction matters, speed comes from legal discipline. A properly drafted and served notice makes the next stage stronger."
+        }
+      ]
+    },
+    {
+      "id": "do-not-use-forceful-eviction",
+      "title": "Do Not Use Forceful Eviction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Landlords should avoid self-help eviction methods."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Action to Avoid",
+            "Why It Is Risky"
+          ],
+          "rows": [
+            [
+              "Changing locks",
+              "Tenant may file complaint or injunction"
+            ],
+            [
+              "Removing tenant belongings",
+              "Civil/criminal liability risk"
+            ],
+            [
+              "Disconnecting electricity/water",
+              "Tenant may seek urgent relief"
+            ],
+            [
+              "Threatening tenant",
+              "Police complaint risk"
+            ],
+            [
+              "Sending bouncers/security",
+              "Escalation and legal risk"
+            ],
+            [
+              "Entering premises without consent",
+              "Trespass/privacy dispute"
+            ],
+            [
+              "Blocking access",
+              "Injunction and damages risk"
+            ],
+            [
+              "Public shaming",
+              "Defamation/privacy risk"
+            ],
+            [
+              "Retaining deposit unfairly",
+              "Counterclaim risk"
+            ],
+            [
+              "Oral eviction only",
+              "No proper legal record"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Lawful eviction means notice, evidence, hearing and court/authority process where required."
+        }
+      ]
+    },
+    {
+      "id": "our-tenant-eviction-notice-services",
+      "title": "Our Tenant Eviction Notice Services",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Service",
+            "What We Do"
+          ],
+          "rows": [
+            [
+              "Lease Review",
+              "Check termination clause, lock-in and notice period"
+            ],
+            [
+              "State Law Mapping",
+              "Identify TPA, Rent Act, Model Tenancy Act or Public Premises route"
+            ],
+            [
+              "Arrears Calculation",
+              "Prepare rent, maintenance, utility and damages statement"
+            ],
+            [
+              "Breach Evidence Review",
+              "Compile proof of default, misuse, subletting or damage"
+            ],
+            [
+              "Notice Drafting",
+              "Draft legally structured Tenant Eviction Notice"
+            ],
+            [
+              "Section 106 Notice Support",
+              "Prepare TPA-based termination notice where applicable"
+            ],
+            [
+              "Address Verification",
+              "Check tenant address and service details"
+            ],
+            [
+              "Notice Dispatch Support",
+              "Speed post/courier/email/hand delivery strategy"
+            ],
+            [
+              "Delivery Tracking",
+              "Preserve proof of service"
+            ],
+            [
+              "Tenant Reply Review",
+              "Analyse reply and prepare next action"
+            ],
+            [
+              "Settlement Support",
+              "Draft handover and arrears settlement terms"
+            ],
+            [
+              "Eviction Suit Readiness",
+              "Prepare document index for advocate filing"
+            ],
+            [
+              "Rent Recovery Strategy",
+              "Rent arrears, mesne profits and damages support"
+            ],
+            [
+              "NRI Landlord Support",
+              "POA and remote documentation support"
+            ],
+            [
+              "Commercial Lease Support",
+              "Shop, office, warehouse and business premises cases"
+            ],
+            [
+              "Public Premises Support",
+              "Estate Officer notice and response strategy"
+            ],
+            [
+              "Ticket-Based Tracking",
+              "Track notice, dispatch, delivery, reply, settlement and filing stage"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "why-choose-estabizz-fintech",
+      "title": "Why Choose Estabizz Fintech?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Clients approach us for Tenant Eviction Notice because they want to recover possession without taking legally risky steps or wasting months through defective notice drafting."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz Fintech helps save time by reviewing the lease agreement, notice period, State law, rent default, property documents and tenant conduct before drafting the notice."
+        },
+        {
+          "type": "paragraph",
+          "text": "We reduce effort by handling document checklist, arrears calculation, notice drafting, address verification, dispatch planning, delivery tracking, reply review, settlement terms and eviction-suit readiness in one structured process."
+        },
+        {
+          "type": "paragraph",
+          "text": "We help avoid rejection, delay and counterclaims by ensuring that the notice is legally grounded, properly served, fact-specific and aligned with the lease agreement and applicable tenancy law."
+        },
+        {
+          "type": "paragraph",
+          "text": "Our support is end-to-end, including lease review, termination strategy, eviction notice drafting, rent recovery demand, evidence compilation, notice service tracking, tenant reply handling, settlement support, advocate coordination and court/authority filing readiness."
+        },
+        {
+          "type": "paragraph",
+          "text": "Our approach is budget-friendly and practical. Multiple payment options may be structured depending on urgency, property type, rent amount, number of tenants, State law complexity, notice stage, evidence volume and litigation requirement."
+        },
+        {
+          "type": "paragraph",
+          "text": "Every matter is handled through a structured ticket-based tracking system. Clients receive updates on document collection, notice drafting, dispatch, delivery, tenant response, settlement, filing readiness and next action through call, email or WhatsApp."
+        },
+        {
+          "type": "paragraph",
+          "text": "You focus on your business—we handle the compliance journey."
+        }
+      ]
+    },
+    {
+      "id": "what-clients-actually-want-and-how-we-help",
+      "title": "What Clients Actually Want—and How We Help",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Client Concern",
+            "Estabizz Support"
+          ],
+          "rows": [
+            [
+              "“Tenant is not paying rent.”",
+              "Arrears notice and recovery strategy"
+            ],
+            [
+              "“Tenant is not vacating.”",
+              "Termination and possession notice"
+            ],
+            [
+              "“Agreement has expired.”",
+              "Holding-over and notice review"
+            ],
+            [
+              "“Tenant damaged my property.”",
+              "Evidence and damages claim support"
+            ],
+            [
+              "“Tenant sublet the premises.”",
+              "Breach notice and proof checklist"
+            ],
+            [
+              "“I am an NRI owner.”",
+              "POA and remote notice support"
+            ],
+            [
+              "“Can I change the lock?”",
+              "Lawful eviction guidance"
+            ],
+            [
+              "“We need regular updates.”",
+              "Ticket-based tracking"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Tenant Eviction Notice is a critical first step in lawful eviction and possession recovery. It should be drafted after reviewing the lease agreement, notice period, rent default, breach evidence, State rent law, property type and service method."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz Fintech assists clients with lease review, Tenant Eviction Notice drafting, Section 106 notice support, arrears calculation, breach evidence preparation, notice dispatch tracking, tenant reply review, settlement support, eviction suit readiness and advocate coordination."
+        },
+        {
+          "type": "paragraph",
+          "text": "When your property is occupied by a defaulting or non-cooperative tenant, the objective should be clear: recover possession lawfully, protect rent recovery and avoid landlord-side legal mistakes."
+        },
+        {
+          "type": "paragraph",
+          "text": "Connect with Estabizz Fintech today and handle your Tenant Eviction Notice matter with clarity, confidence and professional legal support."
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What is Tenant Eviction Notice?",
+      "a": "Tenant Eviction Notice is a legal notice issued by a landlord asking the tenant to vacate the premises, pay arrears or stop breach of tenancy terms."
+    },
+    {
+      "q": "Is Tenant Eviction Notice a licence?",
+      "a": "No. It is not a licence. It is a legal notice and pre-litigation document."
+    },
+    {
+      "q": "Which law applies to Tenant Eviction Notice?",
+      "a": "Transfer of Property Act, State Rent Control/Tenancy Acts, lease agreement, Registration Act and civil procedure may apply depending on the property and State."
+    },
+    {
+      "q": "What is Section 106 notice?",
+      "a": "Section 106 of the Transfer of Property Act provides notice rules for termination of certain leases where contract/local law does not provide otherwise."
+    },
+    {
+      "q": "Is 15 days’ notice always enough?",
+      "a": "No. The notice period depends on lease terms, property type, State law and tenancy nature. Some cases may require a longer period."
+    },
+    {
+      "q": "Can a tenant be evicted without notice?",
+      "a": "Generally, notice or statutory process is required unless a specific legal exception applies. Proper legal review is necessary."
+    },
+    {
+      "q": "Can landlord change locks if tenant refuses to vacate?",
+      "a": "No. Forceful eviction is risky and can lead to legal action against the landlord."
+    },
+    {
+      "q": "Can landlord disconnect electricity or water?",
+      "a": "This is legally risky. The landlord should follow lawful notice and court/authority process."
+    },
+    {
+      "q": "What if tenant is not paying rent?",
+      "a": "The landlord can issue notice demanding arrears and possession, then proceed with rent recovery and eviction through proper legal forum."
+    },
+    {
+      "q": "Can tenant be evicted after lease expiry?",
+      "a": "Yes, but notice, holding-over conduct, rent acceptance and applicable State law should be reviewed."
+    },
+    {
+      "q": "What is holding over?",
+      "a": "Holding over means the tenant continues after lease expiry and the landlord’s conduct, such as rent acceptance, may affect legal position."
+    },
+    {
+      "q": "Can tenant be evicted for subletting?",
+      "a": "Yes, unauthorised subletting can be a valid ground if prohibited by agreement or law and supported by evidence."
+    },
+    {
+      "q": "Can tenant be evicted for nuisance?",
+      "a": "Yes, nuisance can support eviction where evidence such as society complaints, neighbour complaints or police records exists."
+    },
+    {
+      "q": "Can tenant be evicted for property damage?",
+      "a": "Yes, serious damage or unauthorised structural changes can support notice and eviction strategy."
+    },
+    {
+      "q": "Can landlord evict tenant for personal use?",
+      "a": "Many rent laws recognise bona fide requirement, but grounds and procedure depend on State law."
+    },
+    {
+      "q": "Can NRI landlord issue eviction notice?",
+      "a": "Yes. NRI landlords can issue notice through authorised representative or power of attorney, subject to proper documentation."
+    },
+    {
+      "q": "Is registered rent agreement necessary?",
+      "a": "A lease exceeding one year generally requires registration. Registration and stamp duty issues should be checked before action."
+    },
+    {
+      "q": "What if rent agreement is only for 11 months?",
+      "a": "Even 11-month agreements must be reviewed for stamp duty, notice period, renewal, possession and State law applicability."
+    },
+    {
+      "q": "Can eviction notice be sent by WhatsApp?",
+      "a": "Formal dispatch through legally recognised mode is safer. WhatsApp/email may support service evidence but should not replace proper notice strategy without review."
+    },
+    {
+      "q": "What if tenant refuses to accept notice?",
+      "a": "Refusal may support deemed service depending on facts. Dispatch proof and returned envelope should be preserved."
+    },
+    {
+      "q": "What if tenant replies with false allegations?",
+      "a": "The reply should be reviewed carefully and the landlord should prepare evidence before filing further proceedings."
+    },
+    {
+      "q": "Can landlord recover unpaid rent also?",
+      "a": "Yes. Rent arrears, maintenance, utilities, damages and mesne profits may be claimed depending on facts and forum."
+    },
+    {
+      "q": "Can security deposit be adjusted?",
+      "a": "Security deposit adjustment depends on lease terms, dues, damages and handover condition. It should be documented."
+    },
+    {
+      "q": "What is the biggest mistake in tenant eviction matters?",
+      "a": "The biggest mistake is using force or sending a vague notice without checking lease terms, State law, notice period, arrears and evidence."
+    },
+    {
+      "q": "Can Estabizz handle complete Tenant Eviction Notice support?",
+      "a": "Yes. Estabizz assists with lease review, notice drafting, arrears calculation, evidence compilation, dispatch tracking, reply review, settlement and advocate coordination."
+    }
+  ],
+  "expertQuote": {
+    "quote": "Tenant Eviction Notice should be drafted with legal precision and evidence discipline. A strong eviction strategy begins with lease review, correct notice period, State law mapping, arrears calculation, proper service and a clear possession recovery plan.",
+    "attribution": "CS Devyani Khambhati – Compliance Expert"
+  },
+  "disclaimer": "This guide is general information based on material supplied by Estabizz and remains under professional review. Eviction grounds, notice periods, forum, rent-control protection, arrears, security-deposit adjustment, public-premises procedure and possession remedies vary by State, property, lease and facts. Landlords should not use force, disconnect essential services or remove belongings without lawful authority. Estabizz provides lease review, notice, documentation and coordination support; court appearance is through enrolled advocates. Confirm the applicable State law and case-specific procedure before acting."
+}

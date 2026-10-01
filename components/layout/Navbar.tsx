@@ -24,7 +24,29 @@ interface AuthUser {
 const CANDIDATE_USER_MENU_ITEMS = getCandidateUserMenuItems();
 
 interface MenuGroup { heading: string; items: string[]; }
-interface MenuCategory { label: string; icon: string; items: string[]; groups?: MenuGroup[]; viewAll: string; viewAllLabel: string; }
+interface MenuCategory {
+    label: string;
+    icon: string;
+    items: string[];
+    groups?: MenuGroup[];
+    /**
+     * Labels (a subset of `items`) to surface in the desktop dropdown when the
+     * full list is too long for a panel.
+     *
+     * The dropdown is `fixed` and the page behind it does not scroll while it
+     * is open, so a category that renders taller than the viewport puts its
+     * last rows permanently out of reach -- which is exactly what 58 Legal
+     * services did. `featured` shows the handful people actually arrive for
+     * and sends the rest to the category hub, where they are grouped by
+     * situation and filterable.
+     *
+     * `items` still holds everything: searchItems reads it to label the global
+     * search index, so a label dropped from the dropdown stays findable.
+     */
+    featured?: string[];
+    viewAll: string;
+    viewAllLabel: string;
+}
 interface MegaMenu { categories: MenuCategory[]; viewAll: string; viewAllLabel: string; }
 
 const linkMap: Record<string, string> = {
@@ -252,6 +274,48 @@ const linkMap: Record<string, string> = {
     "Criminal Misappropriation of Property": "/solutions/legal/criminal-misappropriation-of-property",
     "Cyber Crime Complaint": "/solutions/legal/cyber-crime-complaint",
     "Cyber Security Advisory": "/solutions/legal/cyber-security-advisory",
+    "Defamation": "/solutions/legal/defamation-legal-services",
+    "Defamation Notice": "/solutions/legal/defamation-notice",
+    "Demerger": "/solutions/legal/demerger",
+    "Directors Disqualification": "/solutions/legal/directors-disqualification",
+    "Divorce and Marriage Consulting": "/solutions/legal/divorce-marriage-consulting",
+    "Divorce Notice": "/solutions/legal/divorce-notice",
+    "Divorce Settlement Agreements": "/solutions/legal/divorce-settlement-agreements",
+    "Domestic Violence": "/solutions/legal/domestic-violence-legal-services",
+    "Faulty Product Notice": "/solutions/legal/faulty-product-notice",
+    "First Information Report": "/solutions/legal/first-information-report",
+    "Food Adulteration": "/solutions/legal/food-adulteration-legal-services",
+    "General Legal Notice": "/solutions/legal/general-legal-notice",
+    "Gift Deed Registration": "/solutions/legal/gift-deed-registration",
+    "Judicial Separation": "/solutions/legal/judicial-separation",
+    "Lawyer for TRAI Matters": "/solutions/legal/lawyer-for-trai-matters",
+    "Lease Agreement Drafting": "/solutions/legal/lease-agreement-drafting",
+    "Loan Recovery Notice": "/solutions/legal/loan-recovery-notice",
+    "Marriage Registration": "/solutions/legal/marriage-registration",
+    "Mergers and Acquisitions": "/solutions/legal/mergers-and-acquisitions",
+    "Motor Accident Claims Tribunal": "/solutions/legal/motor-accident-claims-tribunal",
+    "Mutual Divorce": "/solutions/legal/mutual-divorce",
+    "Non Payment of Salary": "/solutions/legal/non-payment-of-salary",
+    "Probate Service": "/solutions/legal/probate-service",
+    "Property Registration": "/solutions/legal/property-registration",
+    "Property Valuation": "/solutions/legal/property-valuation",
+    "Property Verification": "/solutions/legal/property-verification",
+    "Public Interest Litigation": "/solutions/legal/public-interest-litigation",
+    "Quashing of FIR and Complaint": "/solutions/legal/quashing-of-fir-and-complaint",
+    "Recovery From Debtors": "/solutions/legal/recovery-from-debtors",
+    "Recovery Notice of Dues": "/solutions/legal/recovery-notice-of-dues",
+    "Refund of Security Deposit Notice": "/solutions/legal/refund-of-security-deposit-notice",
+    "Relinquishment Deed": "/solutions/legal/relinquishment-deed",
+    "Revival of Struck-Off Companies": "/solutions/legal/revival-of-struck-off-companies",
+    "Sexual Harassment at Workplace Compliance": "/solutions/legal/sexual-harassment-at-workplace-compliance",
+    "Special Leave Petition": "/solutions/legal/special-leave-petition",
+    "Succession Certificate": "/solutions/legal/succession-certificate",
+    "Suspension of Sentence": "/solutions/legal/suspension-of-sentence",
+    "Tenant Eviction Notice": "/solutions/legal/tenant-eviction-notice",
+    "Weights and Measures Offences": "/solutions/legal/weights-and-measures-offences",
+    "Will Registration": "/solutions/legal/will-registration",
+    "Winding Up of Companies": "/solutions/legal/winding-up-of-companies",
+    "Writ Petition": "/solutions/legal/writ-petition",
     "Legal Due Diligence": "/services/legal-due-diligence",
     "Legal Process Outsourcing": "/services/legal-process-outsourcing",
     "Finance & Accounting Outsourcing": "/services/finance-accounting-outsourcing",
@@ -446,8 +510,12 @@ const menus: Record<string, MegaMenu> = {
                 { heading: "Copyright", items: ["Copyright Registration", "Copyright Website"] },
                 { heading: "Design & Patent", items: ["Design Registration", "Patent Registration"] },
               ]},
-            { label: "Legal", icon: "📜", items: ["Adulteration of Drugs", "Appeal Before High Court", "Appeal Before ITAT", "Appeal Before NCLT", "Bail Application", "Cheque Bounce", "Caveat Filing", "Consumer Court Complaints", "Contested Divorce", "Court Marriage", "Court Proceedings", "Criminal Misappropriation of Property", "Cyber Crime Complaint", "Cyber Security Advisory", "Legal Due Diligence", "Legal Process Outsourcing"],
-              viewAll: "/solutions/legal", viewAllLabel: "View All Legal Services →" },
+            { label: "Legal", icon: "📜", items: ["Adulteration of Drugs", "Appeal Before High Court", "Appeal Before ITAT", "Appeal Before NCLT", "Bail Application", "Cheque Bounce", "Caveat Filing", "Consumer Court Complaints", "Contested Divorce", "Court Marriage", "Court Proceedings", "Criminal Misappropriation of Property", "Cyber Crime Complaint", "Cyber Security Advisory", "Defamation", "Defamation Notice", "Demerger", "Directors Disqualification", "Divorce and Marriage Consulting", "Divorce Notice", "Divorce Settlement Agreements", "Domestic Violence", "Faulty Product Notice", "First Information Report", "Food Adulteration", "General Legal Notice", "Gift Deed Registration", "Judicial Separation", "Lawyer for TRAI Matters", "Lease Agreement Drafting", "Loan Recovery Notice", "Marriage Registration", "Mergers and Acquisitions", "Motor Accident Claims Tribunal", "Mutual Divorce", "Non Payment of Salary", "Probate Service", "Property Registration", "Property Valuation", "Property Verification", "Public Interest Litigation", "Quashing of FIR and Complaint", "Recovery From Debtors", "Recovery Notice of Dues", "Refund of Security Deposit Notice", "Relinquishment Deed", "Revival of Struck-Off Companies", "Sexual Harassment at Workplace Compliance", "Special Leave Petition", "Succession Certificate", "Suspension of Sentence", "Tenant Eviction Notice", "Weights and Measures Offences", "Will Registration", "Winding Up of Companies", "Writ Petition", "Legal Due Diligence", "Legal Process Outsourcing"],
+              // 58 services is a hub page, not a dropdown. These nine are the
+              // high-intent entry points; everything else is one click away on
+              // /solutions/legal, grouped by situation.
+              featured: ["General Legal Notice", "Cheque Bounce", "Mutual Divorce", "Bail Application", "First Information Report", "Property Registration", "Consumer Court Complaints", "Will Registration", "Mergers and Acquisitions"],
+              viewAll: "/solutions/legal", viewAllLabel: "Browse all 58 Legal services by situation →" },
             { label: "Compliance Calendar", icon: "📅", items: ["Compliance Calendar", "Regulatory Updates", "Circular Explainers", "Compliance FAQs"],
               viewAll: "/solutions/compliance-calendar", viewAllLabel: "View All Compliance Tools →" },
             { label: "CFO Service", icon: "💼", items: ["Finance & Accounting Outsourcing", "Transfer Pricing", "Annual ROC Compliance", "Corporate Governance"],
@@ -671,6 +739,20 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
     };
 
     const currentMenu = activeMenu ? menus[activeMenu] : null;
+    const currentCategory = currentMenu?.categories[activeCategory];
+
+    // What the open category actually renders in the dropdown. A category with
+    // a `featured` list shows only those; `hiddenCount` is how many it is
+    // holding back, which the panel states outright rather than silently
+    // truncating. Filtering against `items` keeps the two in step: a label
+    // renamed in `items` and not in `featured` drops out instead of rendering
+    // a dead "#" link.
+    const visibleItems = currentCategory
+        ? (currentCategory.featured?.length
+            ? currentCategory.featured.filter((label) => currentCategory.items.includes(label))
+            : currentCategory.items)
+        : [];
+    const hiddenCount = currentCategory ? currentCategory.items.length - visibleItems.length : 0;
 
     const CountrySelector = ({ compact = false, selectorRef }: { compact?: boolean; selectorRef: React.MutableRefObject<HTMLDivElement | null> }) => (
         <div ref={(node) => { selectorRef.current = node; }} className="relative">
@@ -1004,15 +1086,20 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
             {/* Mega Menu Dropdown */}
             {activeMenu && currentMenu && (
                 <div onMouseEnter={keepOpen} onMouseLeave={closeMenu}
-                    className="fixed left-0 top-[64px] z-[999] w-full border-b border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_30px_90px_rgba(15,23,42,0.18)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.50)] animate-[fadeIn_0.15s_ease]">
+                    /* max-h + overflow is the backstop, not the fix: the per-category
+                       caps below keep every list short enough to read, but the panel is
+                       `fixed` and the page behind it cannot be scrolled while it is open,
+                       so without this a category that outgrows the viewport would again
+                       put its last rows out of reach entirely. */
+                    className="fixed left-0 top-[64px] z-[999] w-full max-h-[calc(100vh-64px)] overflow-y-auto border-b border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_30px_90px_rgba(15,23,42,0.18)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.50)] animate-[fadeIn_0.15s_ease]">
                     <div className="mx-auto flex max-w-[1480px] bg-white dark:bg-[#0d1a2d]">
                         {/* Left Categories */}
                         <div className="w-[240px] shrink-0 border-r border-blue-100 dark:border-[#223550] py-4 bg-[#f8fbff] dark:bg-[#0a1628]">
                             {currentMenu.categories.map((cat, i) => (
-                                <button key={i} onMouseEnter={() => setActiveCategory(i)} onFocus={() => setActiveCategory(i)} onClick={() => setActiveCategory(i)}
+                                <Link key={i} href={cat.viewAll} onMouseEnter={() => setActiveCategory(i)} onFocus={() => setActiveCategory(i)} onClick={() => setActiveMenu(null)}
                                     className={`w-full flex items-center gap-3 px-5 py-3 text-left text-[14px] transition-colors ${activeCategory === i ? "text-[#1677f2] font-bold bg-blue-50/50 dark:bg-[#1677f2]/10 border-l-[3px] border-[#1677f2] pl-[17px]" : "text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] hover:bg-gray-50 dark:hover:bg-[#12223a] border-l-[3px] border-transparent pl-[17px]"}`}>
                                     <span className="text-[16px]">{cat.icon}</span> {cat.label}
-                                </button>
+                                </Link>
                             ))}
                         </div>
                         {/* Right Content */}
@@ -1041,25 +1128,40 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                         </div>
                                     ))}
                                 </div>
-                            ) : currentMenu.categories[activeCategory]?.items.length > 0 ? (
-                                <div className="grid grid-cols-3 gap-x-8 gap-y-3">
-                                    {currentMenu.categories[activeCategory].items.map((item, j) => {
-                                        const isLive = !!linkMap[item];
-                                        return (
-                                            <Link
-                                                key={j}
-                                                href={linkMap[item] || "#"}
-                                                className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}
-                                            >
-                                                <span className={`${isLive ? 'text-[#1677f2]' : 'text-[#cbd5e1]'} text-[8px]`}>›</span>
-                                                {item}
-                                                {isLive && (
-                                                    <span className="ml-1 px-1.5 py-0.5 rounded-[4px] bg-[#10b981]/10 text-[#10b981] text-[9px] font-bold tracking-wider uppercase">Live</span>
-                                                )}
-                                            </Link>
-                                        );
-                                    })}
-                                </div>
+                            ) : visibleItems.length > 0 ? (
+                                <>
+                                    <div className="grid grid-cols-3 gap-x-8 gap-y-3 overflow-y-auto max-h-[420px] pr-1">
+                                        {visibleItems.map((item, j) => {
+                                            const isLive = !!linkMap[item];
+                                            return (
+                                                <Link
+                                                    key={j}
+                                                    href={linkMap[item] || "#"}
+                                                    className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}
+                                                >
+                                                    <span className={`${isLive ? 'text-[#1677f2]' : 'text-[#cbd5e1]'} text-[8px]`}>›</span>
+                                                    {item}
+                                                    {isLive && (
+                                                        <span className="ml-1 px-1.5 py-0.5 rounded-[4px] bg-[#10b981]/10 text-[#10b981] text-[9px] font-bold tracking-wider uppercase">Live</span>
+                                                    )}
+                                                </Link>
+                                            );
+                                        })}
+                                    </div>
+                                    {hiddenCount > 0 && (
+                                        <Link
+                                            href={currentCategory?.viewAll ?? currentMenu.viewAll}
+                                            onClick={() => setActiveMenu(null)}
+                                            className="mt-5 flex items-center justify-between gap-4 rounded-xl border border-blue-100 dark:border-[#223550] bg-[#f5fbff] dark:bg-[#12223a] px-5 py-3.5 transition-colors hover:border-[#1677f2]/40"
+                                        >
+                                            <span className="text-[13.5px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">
+                                                +{hiddenCount} more {currentCategory?.label.toLowerCase()} services
+                                                <span className="ml-2 font-medium text-[#64748b] dark:text-[#a9b6c9]">grouped by your situation</span>
+                                            </span>
+                                            <span className="shrink-0 text-[13px] font-bold text-[#1677f2]">Browse all →</span>
+                                        </Link>
+                                    )}
+                                </>
                             ) : (
                                 <p className="text-[14px] text-[#94a3b8]">Upcoming content...</p>
                             )}
@@ -1159,7 +1261,12 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                 </div>
                                             ) : (
                                                 <div className="grid grid-cols-1 gap-1">
-                                                    {cat.items.slice(0, 4).map((item, j) => {
+                                                    {/* Prefer `featured` over the head of `items`: the
+                                                        latter is alphabetical, so Legal's first four were
+                                                        "Adulteration of Drugs" through "Appeal Before
+                                                        NCLT" -- four niche pages standing in for 58. The
+                                                        viewAll link below carries the rest. */}
+                                                    {(cat.featured?.length ? cat.featured : cat.items).slice(0, 6).map((item, j) => {
                                                         const isLive = !!linkMap[item];
                                                         return (
                                                             <Link key={j} href={linkMap[item] || "/get-started"}

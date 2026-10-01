@@ -1,0 +1,2150 @@
+{
+  "title": "Will Registration",
+  "focusKeyword": "Will Registration",
+  "tags": [
+    "Legal",
+    "Estate Planning"
+  ],
+  "breadcrumbLabel": "Will Registration",
+  "readTime": "22 min read",
+  "trustLine": "Clear Will. Proper execution. Stronger succession planning.",
+  "reviewPending": true,
+  "heroParagraphs": [
+    "A Will is one of the most important legal documents for protecting family assets after death. A poorly drafted Will, missing witness details, unclear property description, family conflict, nominee mismatch or unplanned registration can create serious disputes for legal heirs.",
+    "At Estabizz Fintech, we assist individuals, senior citizens, parents, business owners, NRIs, families, property owners, HUF members, professionals and high-net-worth families with Will Registration, including Will drafting support, estate mapping, beneficiary planning, executor appointment, witness coordination, Sub-Registrar process support, Will custody guidance, probate/letters route review, mutation-readiness and advocate/counsel coordination."
+  ],
+  "quickFacts": [
+    {
+      "label": "Registration status",
+      "value": "Generally optional"
+    },
+    {
+      "label": "Core validity",
+      "value": "Proper execution and attestation"
+    },
+    {
+      "label": "Witnesses",
+      "value": "At least two for an unprivileged Will"
+    },
+    {
+      "label": "Authority",
+      "value": "Competent Sub-Registrar"
+    }
+  ],
+  "relatedArticles": [
+    {
+      "title": "Probate Service",
+      "href": "/solutions/legal/probate-service",
+      "category": "Legal",
+      "description": "Will review, probate, letters of administration, caveats and estate-document strategy."
+    },
+    {
+      "title": "Succession Certificate",
+      "href": "/solutions/legal/succession-certificate",
+      "category": "Legal",
+      "description": "Court-backed claims for specified bank balances, deposits, shares and securities."
+    },
+    {
+      "title": "Relinquishment Deed",
+      "href": "/solutions/legal/relinquishment-deed",
+      "category": "Legal",
+      "description": "Inherited and co-owned property share release, registration and mutation support."
+    }
+  ],
+  "finalCtaTitle": "Prepare a Clear, Executable and Registration-Ready Will",
+  "finalCtaDescription": "Before you proceed, speak with our experts. Will Registration can directly impact family succession, property transfer, bank transmission, nominee disputes, probate strategy, mutation, business continuity and long-term asset protection. Do not rely on a generic Will format or verbal family understanding. A short discussion today can help you prepare a clear, legally structured and registration-ready Will.",
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Will Registration is the process of registering a Will with the competent Sub-Registrar / registering authority so that the Will is recorded officially and its execution receives an additional layer of evidence."
+        },
+        {
+          "type": "paragraph",
+          "text": "It matters because a Will decides how a person’s assets should pass after death. If the Will is vague, unsigned improperly, not witnessed correctly, not updated after major life changes or kept secretly without proper custody, families may face litigation, succession disputes, mutation delays, bank claim issues and probate-related complications."
+        },
+        {
+          "type": "paragraph",
+          "text": "This service is relevant for property owners, parents, senior citizens, married couples, business families, NRIs, single individuals, widows, widowers, childless couples, blended families, people with multiple properties, persons with minor children, founders, directors, partners and anyone who wants to plan asset distribution clearly."
+        }
+      ]
+    },
+    {
+      "id": "quick-answer",
+      "title": "Quick Answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Will Registration is not a licence. It is an optional legal registration process for recording a Will before the registering authority."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is governed mainly by the Indian Succession Act, 1925, Registration Act, 1908, personal succession laws, State registration rules, property law, evidence law and court procedure."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is not mandatory for every Will. An unregistered Will may still be valid if properly executed, but registration can help reduce authenticity disputes, support preservation and create stronger evidentiary value."
+        }
+      ]
+    },
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In simple terms…"
+        },
+        {
+          "type": "paragraph",
+          "text": "Will Registration means officially recording a Will with the Sub-Registrar so that there is a formal record that the testator executed the Will."
+        },
+        {
+          "type": "paragraph",
+          "text": "The person making the Will is called the testator. The person receiving assets under the Will is called the beneficiary. The person appointed to carry out the Will is called the executor."
+        },
+        {
+          "type": "paragraph",
+          "text": "From a compliance perspective…"
+        },
+        {
+          "type": "paragraph",
+          "text": "Will Registration requires checking the testator’s capacity, free consent, asset list, beneficiary details, executor appointment, witness eligibility, property description, existing nominees, prior Will, revocation clause, minor beneficiary protection, digital assets, business assets, family settlement context, Sub-Registrar process and post-death asset-transfer route."
+        },
+        {
+          "type": "paragraph",
+          "text": "From a risk perspective, registration alone does not cure a defective Will. The Will must be properly drafted, signed, witnessed, dated, preserved and supported by clear evidence of sound mind and voluntary execution."
+        }
+      ]
+    },
+    {
+      "id": "regulatory-framework",
+      "title": "Regulatory Framework",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Particular",
+            "Applicable Legal Framework"
+          ],
+          "rows": [
+            [
+              "Main Succession Law",
+              "Indian Succession Act, 1925"
+            ],
+            [
+              "Capacity to Make Will",
+              "Indian Succession Act Section 59"
+            ],
+            [
+              "Execution of Unprivileged Will",
+              "Indian Succession Act Section 63"
+            ],
+            [
+              "Revocation of Will",
+              "Indian Succession Act Section 70 and related provisions"
+            ],
+            [
+              "Probate Framework",
+              "Indian Succession Act Sections 222, 276 and related provisions"
+            ],
+            [
+              "Registration Law",
+              "Registration Act, 1908"
+            ],
+            [
+              "Optional Registration of Will",
+              "Registration Act Section 18"
+            ],
+            [
+              "Presentation of Will",
+              "Registration Act Section 40"
+            ],
+            [
+              "Registration of Will",
+              "Registration Act Section 41"
+            ],
+            [
+              "Deposit of Will",
+              "Registration Act Sections 42 to 46, where used"
+            ],
+            [
+              "Personal Succession Law",
+              "Hindu Succession Act, Indian Succession Act, Muslim personal law, Parsi/Christian succession law or other applicable law"
+            ],
+            [
+              "Evidence",
+              "Bharatiya Sakshya Adhiniyam, 2023"
+            ],
+            [
+              "Property Transfer After Death",
+              "Mutation, transmission, probate, letters of administration or succession documents depending on asset"
+            ],
+            [
+              "Stamp Duty",
+              "Generally, Will itself does not operate like sale/gift deed stamp-duty transfer during lifetime; State practice must still be checked for registration charges"
+            ],
+            [
+              "Circular / Master Direction",
+              "No single master direction; Will Registration is governed by succession law, registration law, evidence law, personal law, court procedure and asset-transfer requirements"
+            ],
+            [
+              "Main Authority / Forum",
+              "Sub-Registrar / Registrar Office for registration; Civil Court / District Court / High Court for probate or succession disputes, depending on jurisdiction"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applicable-act-and-important-sections",
+      "title": "Applicable Act and Important Sections",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Law / Framework",
+            "Important Provision",
+            "Practical Relevance"
+          ],
+          "rows": [
+            [
+              "Indian Succession Act, 1925",
+              "Section 2(h)",
+              "Defines Will as legal declaration of intention regarding property after death"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 59",
+              "Persons capable of making Wills"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 61",
+              "Will caused by fraud, coercion or importunity"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 62",
+              "Will may be revoked or altered by maker"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 63",
+              "Execution of unprivileged Wills"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 70",
+              "Revocation of unprivileged Will or codicil"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 74",
+              "Wording of Will; no technical words necessary if intention is clear"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 82",
+              "Meaning or clause of Will to be collected from entire instrument"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 83",
+              "Court to give effect to every part of Will as far as possible"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 87",
+              "Testator’s intention to be effectuated as far as possible"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 222",
+              "Probate granted only to executor appointed by Will"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 276",
+              "Petition for probate"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 278",
+              "Petition for letters of administration"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 281",
+              "Verification of petition for probate / letters, where applicable"
+            ],
+            [
+              "Indian Succession Act, 1925",
+              "Section 295",
+              "Procedure in contentious probate cases"
+            ],
+            [
+              "Registration Act, 1908",
+              "Section 18",
+              "Documents of which registration is optional, including Wills"
+            ],
+            [
+              "Registration Act, 1908",
+              "Section 27",
+              "Wills may be presented for registration at any time"
+            ],
+            [
+              "Registration Act, 1908",
+              "Section 32",
+              "Persons who may present documents for registration"
+            ],
+            [
+              "Registration Act, 1908",
+              "Section 40",
+              "Persons entitled to present Wills and authorities to adopt"
+            ],
+            [
+              "Registration Act, 1908",
+              "Section 41",
+              "Registration of Wills and authorities to adopt"
+            ],
+            [
+              "Registration Act, 1908",
+              "Section 42",
+              "Deposit of Wills"
+            ],
+            [
+              "Registration Act, 1908",
+              "Section 43",
+              "Procedure on deposit of Wills"
+            ],
+            [
+              "Registration Act, 1908",
+              "Section 44",
+              "Withdrawal of sealed cover deposited under Section 42"
+            ],
+            [
+              "Registration Act, 1908",
+              "Section 45",
+              "Proceedings on death of depositor"
+            ],
+            [
+              "Registration Act, 1908",
+              "Section 46",
+              "Saving of certain enactments and powers of court"
+            ],
+            [
+              "Hindu Succession Act, 1956",
+              "Sections 6, 8, 9, 10, 14 and 15",
+              "Relevant where Hindu succession and family-property planning are involved"
+            ],
+            [
+              "Indian Contract Act, 1872",
+              "Free consent principles",
+              "Relevant for challenge based on coercion, undue influence or fraud context"
+            ],
+            [
+              "Bharatiya Sakshya Adhiniyam, 2023",
+              "Documentary/electronic evidence provisions",
+              "Medical records, digital assets, video record, emails, documents and proof of execution"
+            ],
+            [
+              "State Registration Rules",
+              "Local registration procedure",
+              "Sub-Registrar appointment, ID verification, biometric and local process"
+            ],
+            [
+              "State Revenue / Municipal Laws",
+              "Mutation and property record update",
+              "Post-death transfer of immovable property based on Will"
+            ],
+            [
+              "Companies / Depository / Bank Rules",
+              "Transmission after death",
+              "Shares, demat holdings, bank accounts, FDs and financial assets"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "what-is-will-registration",
+      "title": "What Is Will Registration?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Will Registration is the process of presenting a Will before the registering authority so that the Will is recorded officially."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Practical Meaning"
+          ],
+          "rows": [
+            [
+              "Testator",
+              "Person making the Will"
+            ],
+            [
+              "Beneficiary",
+              "Person receiving assets under the Will"
+            ],
+            [
+              "Executor",
+              "Person appointed to execute the Will after death"
+            ],
+            [
+              "Witness",
+              "Person who attests execution of Will"
+            ],
+            [
+              "Estate",
+              "Assets covered under Will"
+            ],
+            [
+              "Registration",
+              "Official recording before Sub-Registrar"
+            ],
+            [
+              "Revocation",
+              "Cancellation or replacement of old Will"
+            ],
+            [
+              "Codicil",
+              "Addition or modification to an existing Will"
+            ],
+            [
+              "Probate",
+              "Court certification of Will, where required or pursued"
+            ],
+            [
+              "Mutation",
+              "Post-death update of property records"
+            ],
+            [
+              "Transmission",
+              "Transfer of financial assets after death"
+            ],
+            [
+              "Custody",
+              "Safe keeping of original Will"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "is-will-registration-mandatory",
+      "title": "Is Will Registration Mandatory?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Will Registration is generally optional."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Practical Explanation"
+          ],
+          "rows": [
+            [
+              "Unregistered Will",
+              "Can be valid if properly executed and witnessed"
+            ],
+            [
+              "Registered Will",
+              "Creates official registration record"
+            ],
+            [
+              "Registration Benefit",
+              "Helps reduce disputes about execution and custody"
+            ],
+            [
+              "Registration Limitation",
+              "Does not automatically prove genuineness in all disputes"
+            ],
+            [
+              "Witness Requirement",
+              "Still important even if Will is registered"
+            ],
+            [
+              "Testator Capacity",
+              "Must be sound mind and not a minor"
+            ],
+            [
+              "Probate",
+              "Separate court process; registration is not probate"
+            ],
+            [
+              "Later Will",
+              "A later valid Will can revoke earlier Will"
+            ],
+            [
+              "Safe Custody",
+              "Original Will must be preserved carefully"
+            ],
+            [
+              "Dispute Risk",
+              "Registration helps but does not eliminate family dispute"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A registered Will is stronger from an evidence-management perspective, but the core validity depends on proper execution and intention."
+        }
+      ]
+    },
+    {
+      "id": "when-should-you-consider-will-registration",
+      "title": "When Should You Consider Will Registration?",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Situation",
+            "Why Registration Helps"
+          ],
+          "rows": [
+            [
+              "Multiple legal heirs",
+              "Reduces dispute risk"
+            ],
+            [
+              "Self-acquired property",
+              "Records clear intention"
+            ],
+            [
+              "Family members may object",
+              "Adds evidentiary support"
+            ],
+            [
+              "Blended family",
+              "Avoids confusion between first and second family"
+            ],
+            [
+              "No children",
+              "Clarifies beneficiary selection"
+            ],
+            [
+              "Minor beneficiaries",
+              "Guardian and trustee planning"
+            ],
+            [
+              "NRI testator",
+              "Helps Indian asset transfer planning"
+            ],
+            [
+              "Multiple properties",
+              "Better asset mapping"
+            ],
+            [
+              "Business ownership",
+              "Succession planning for shares/partnership interest"
+            ],
+            [
+              "Elderly testator",
+              "Capacity and voluntariness evidence"
+            ],
+            [
+              "Possible undue influence allegations",
+              "Registration record helps defence"
+            ],
+            [
+              "Asset distribution is unequal",
+              "Reduces future challenge risk"
+            ],
+            [
+              "Charity/trust beneficiary",
+              "Clear bequest record"
+            ],
+            [
+              "Prior Will exists",
+              "Registration of latest Will helps clarity"
+            ],
+            [
+              "High-value estate",
+              "Stronger documentation recommended"
+            ],
+            [
+              "Family settlement expected",
+              "Will can align with broader planning"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "will-registration-process",
+      "title": "Will Registration Process",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Step",
+            "Activity",
+            "Output"
+          ],
+          "rows": [
+            [
+              "Step 1",
+              "Initial consultation",
+              "Understand family, assets and succession goals"
+            ],
+            [
+              "Step 2",
+              "Asset mapping",
+              "Property, bank, shares, business assets and liabilities listed"
+            ],
+            [
+              "Step 3",
+              "Beneficiary planning",
+              "Who receives what is clearly mapped"
+            ],
+            [
+              "Step 4",
+              "Executor selection",
+              "Suitable executor identified"
+            ],
+            [
+              "Step 5",
+              "Guardian/trustee planning",
+              "Minor beneficiary protection reviewed"
+            ],
+            [
+              "Step 6",
+              "Existing nominee review",
+              "Bank, insurance, demat and mutual fund nominations checked"
+            ],
+            [
+              "Step 7",
+              "Prior Will review",
+              "Old Will/codicil and revocation strategy checked"
+            ],
+            [
+              "Step 8",
+              "Drafting support",
+              "Will draft prepared with clear clauses"
+            ],
+            [
+              "Step 9",
+              "Witness planning",
+              "Two independent witnesses selected"
+            ],
+            [
+              "Step 10",
+              "Medical/capacity support",
+              "Medical fitness record considered where advisable"
+            ],
+            [
+              "Step 11",
+              "Registration preparation",
+              "KYC, photos, witnesses and appointment checklist prepared"
+            ],
+            [
+              "Step 12",
+              "Sub-Registrar visit",
+              "Will presented for registration"
+            ],
+            [
+              "Step 13",
+              "Execution and admission",
+              "Testator confirms execution before authority"
+            ],
+            [
+              "Step 14",
+              "Registration endorsement",
+              "Will registered and record created"
+            ],
+            [
+              "Step 15",
+              "Safe custody guidance",
+              "Original Will custody and disclosure strategy planned"
+            ],
+            [
+              "Step 16",
+              "Future update tracker",
+              "Review after marriage, birth, death, property purchase or family change"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "documents-required-for-will-registration",
+      "title": "Documents Required for Will Registration",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Document / Information",
+            "Purpose"
+          ],
+          "rows": [
+            [
+              "Draft Will",
+              "Main estate-planning document"
+            ],
+            [
+              "Testator ID proof",
+              "Identity verification"
+            ],
+            [
+              "Testator address proof",
+              "Registration and jurisdiction record"
+            ],
+            [
+              "Passport-size photographs",
+              "Registration process"
+            ],
+            [
+              "PAN / Aadhaar / Passport",
+              "KYC and identification"
+            ],
+            [
+              "Witness ID proof",
+              "Witness verification"
+            ],
+            [
+              "Witness address proof",
+              "Witness record"
+            ],
+            [
+              "Asset list",
+              "Estate planning"
+            ],
+            [
+              "Property documents",
+              "Immovable property description"
+            ],
+            [
+              "Bank account details",
+              "Financial asset mapping"
+            ],
+            [
+              "FD / mutual fund / demat details",
+              "Investment transmission planning"
+            ],
+            [
+              "Shareholding details",
+              "Company/security transfer planning"
+            ],
+            [
+              "Insurance policy details",
+              "Nominee and beneficiary alignment"
+            ],
+            [
+              "Loan/liability details",
+              "Net estate planning"
+            ],
+            [
+              "Existing Will / codicil",
+              "Revocation or update review"
+            ],
+            [
+              "Nomination details",
+              "Avoid nominee-beneficiary conflict"
+            ],
+            [
+              "Family tree",
+              "Heirship and dispute-risk review"
+            ],
+            [
+              "Beneficiary ID/address details",
+              "Correct identification"
+            ],
+            [
+              "Executor details",
+              "Post-death execution planning"
+            ],
+            [
+              "Guardian details",
+              "Minor beneficiary planning"
+            ],
+            [
+              "Medical certificate, if advisable",
+              "Supports sound mind and capacity"
+            ],
+            [
+              "Video/photo record, if used",
+              "Additional evidence planning"
+            ],
+            [
+              "NRI passport/OCI/foreign address",
+              "NRI Will planning"
+            ],
+            [
+              "POA / authorised coordination papers",
+              "Limited assistance process, where relevant"
+            ],
+            [
+              "List of digital assets",
+              "Email, accounts, crypto, online records, where relevant"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "what-should-a-will-include",
+      "title": "What Should a Will Include?",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Clause / Detail",
+            "Why It Matters"
+          ],
+          "rows": [
+            [
+              "Testator declaration",
+              "Confirms who is making Will"
+            ],
+            [
+              "Sound mind statement",
+              "Supports capacity"
+            ],
+            [
+              "Revocation clause",
+              "Cancels previous Wills"
+            ],
+            [
+              "Family details",
+              "Identifies natural heirs"
+            ],
+            [
+              "Executor appointment",
+              "Names person to carry out Will"
+            ],
+            [
+              "Beneficiary details",
+              "Identifies recipients"
+            ],
+            [
+              "Asset schedule",
+              "Lists properties and movable assets"
+            ],
+            [
+              "Specific bequests",
+              "Allocates particular assets"
+            ],
+            [
+              "Residuary clause",
+              "Covers assets not specifically listed"
+            ],
+            [
+              "Guardian clause",
+              "Protects minor children"
+            ],
+            [
+              "Trustee clause",
+              "Handles minor or dependent beneficiaries"
+            ],
+            [
+              "Liability clause",
+              "Deals with loans and expenses"
+            ],
+            [
+              "Funeral/medical wishes",
+              "Optional personal direction"
+            ],
+            [
+              "Digital asset clause",
+              "Handles online accounts and digital property"
+            ],
+            [
+              "Dispute reduction clause",
+              "Explains unequal distribution where useful"
+            ],
+            [
+              "Witness attestation",
+              "Mandatory execution support"
+            ],
+            [
+              "Date and place",
+              "Helps prove execution"
+            ],
+            [
+              "Signature/mark",
+              "Valid execution"
+            ],
+            [
+              "Safe custody note",
+              "Helps locate Will after death"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A Will should be clear enough that family members and institutions understand the testator’s intention without unnecessary interpretation."
+        }
+      ]
+    },
+    {
+      "id": "types-of-wills-we-support",
+      "title": "Types of Wills We Support",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Type",
+            "Practical Use"
+          ],
+          "rows": [
+            [
+              "Simple Will",
+              "Basic asset distribution"
+            ],
+            [
+              "Registered Will",
+              "Will recorded with registering authority"
+            ],
+            [
+              "Unregistered Will Review",
+              "Validity and execution check"
+            ],
+            [
+              "NRI Will",
+              "Indian assets and overseas coordination"
+            ],
+            [
+              "Joint Planning for Spouses",
+              "Separate Wills aligned between spouses"
+            ],
+            [
+              "Senior Citizen Will",
+              "Capacity and family-dispute protection"
+            ],
+            [
+              "Will for Parents",
+              "Children/heirs asset allocation"
+            ],
+            [
+              "Will for Single Person",
+              "Beneficiary and executor planning"
+            ],
+            [
+              "Will for Childless Couple",
+              "Asset transfer to spouse/relatives/charity"
+            ],
+            [
+              "Will with Minor Beneficiary",
+              "Guardian/trustee planning"
+            ],
+            [
+              "Will for Business Owner",
+              "Shares, firm interest and succession planning"
+            ],
+            [
+              "Will for Property Owner",
+              "Multiple property allocation"
+            ],
+            [
+              "Will with Unequal Distribution",
+              "Reasoned drafting to reduce challenge"
+            ],
+            [
+              "Codicil",
+              "Amendment to existing Will"
+            ],
+            [
+              "Revocation Will",
+              "Replacement/cancellation of earlier Will"
+            ],
+            [
+              "Digital Asset Will Clause",
+              "Online records, crypto and digital access planning"
+            ],
+            [
+              "Charitable Bequest Will",
+              "Gift to trust/charity/institution"
+            ],
+            [
+              "Will Custody Support",
+              "Safe keeping and access planning"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "will-registration-vs-will-drafting",
+      "title": "Will Registration vs Will Drafting",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Will Drafting",
+            "Will Registration"
+          ],
+          "rows": [
+            [
+              "Meaning",
+              "Preparing the Will document",
+              "Recording the Will with registering authority"
+            ],
+            [
+              "Purpose",
+              "Capture testator’s wishes clearly",
+              "Add official registration record"
+            ],
+            [
+              "Mandatory?",
+              "A written Will is needed for clarity",
+              "Generally optional"
+            ],
+            [
+              "Main Risk",
+              "Poor clauses and unclear assets",
+              "Registration without good drafting still risky"
+            ],
+            [
+              "Witnesses",
+              "Required for execution",
+              "Still required; registration does not replace execution"
+            ],
+            [
+              "Authority",
+              "Drafted privately/professionally",
+              "Sub-Registrar/Registrar process"
+            ],
+            [
+              "Outcome",
+              "Executed Will",
+              "Registered Will"
+            ],
+            [
+              "Best Practice",
+              "Draft carefully first",
+              "Register after draft is final"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A weak Will does not become strong only because it is registered."
+        }
+      ]
+    },
+    {
+      "id": "will-registration-vs-probate",
+      "title": "Will Registration vs Probate",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Will Registration",
+            "Probate"
+          ],
+          "rows": [
+            [
+              "Nature",
+              "Registration before Sub-Registrar",
+              "Court process"
+            ],
+            [
+              "Timing",
+              "During testator’s lifetime or as permitted under law",
+              "After death"
+            ],
+            [
+              "Purpose",
+              "Records execution of Will",
+              "Court certifies Will/executor authority"
+            ],
+            [
+              "Authority",
+              "Registering authority",
+              "Court"
+            ],
+            [
+              "Mandatory?",
+              "Generally optional",
+              "Case-specific and affected by current legal position, asset type and disputes"
+            ],
+            [
+              "Cost/Time",
+              "Usually simpler",
+              "Court process and time involved"
+            ],
+            [
+              "Effect",
+              "Evidentiary support",
+              "Judicial recognition where granted"
+            ],
+            [
+              "Dispute Handling",
+              "Does not decide disputes",
+              "Contested probate can decide validity"
+            ],
+            [
+              "Used By",
+              "Testator during lifetime",
+              "Executor/legal heirs after death"
+            ],
+            [
+              "Best Use",
+              "Estate planning and evidence",
+              "Post-death court-backed authority"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Registration is not the same as probate. Probate is a separate court process."
+        }
+      ]
+    },
+    {
+      "id": "will-registration-vs-gift-deed-vs-settlement-deed",
+      "title": "Will Registration vs Gift Deed vs Settlement Deed",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Will",
+            "Gift Deed",
+            "Settlement Deed"
+          ],
+          "rows": [
+            [
+              "Takes Effect",
+              "After death",
+              "During lifetime",
+              "During lifetime or as structured"
+            ],
+            [
+              "Ownership Transfer Now?",
+              "No",
+              "Yes",
+              "Usually yes, depending on deed"
+            ],
+            [
+              "Registration",
+              "Optional for Will",
+              "Required for immovable property gift",
+              "Usually required for immovable property rights"
+            ],
+            [
+              "Stamp Duty",
+              "Usually minimal registration charges",
+              "State-wise gift duty",
+              "State-wise settlement duty"
+            ],
+            [
+              "Revocation",
+              "Can be changed anytime during lifetime",
+              "Difficult after valid gift",
+              "Depends on terms/law"
+            ],
+            [
+              "Best For",
+              "Estate planning after death",
+              "Lifetime property transfer",
+              "Family arrangement/transfer"
+            ],
+            [
+              "Risk",
+              "Challenge after death",
+              "Tax/stamp/family issues",
+              "Stamp/tax/title issues"
+            ],
+            [
+              "Control",
+              "Testator retains ownership during life",
+              "Donor transfers ownership now",
+              "Depends on terms"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Choose Will when the person wants to retain ownership and control during life."
+        }
+      ]
+    },
+    {
+      "id": "will-registration-for-immovable-property",
+      "title": "Will Registration for Immovable Property",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Property Issue",
+            "Practical Review"
+          ],
+          "rows": [
+            [
+              "Self-acquired property",
+              "Clearer bequest planning"
+            ],
+            [
+              "Ancestral property",
+              "Rights of other coparceners/heirs reviewed"
+            ],
+            [
+              "Joint property",
+              "Only testator’s share can be dealt with"
+            ],
+            [
+              "Mortgaged property",
+              "Loan liability and bank records reviewed"
+            ],
+            [
+              "Flat in society",
+              "Share certificate and nomination checked"
+            ],
+            [
+              "Agricultural land",
+              "State land restrictions reviewed"
+            ],
+            [
+              "Property with tenant",
+              "Possession and rent rights considered"
+            ],
+            [
+              "Disputed property",
+              "Litigation disclosure and bequest wording"
+            ],
+            [
+              "Multiple properties",
+              "Asset schedule and location details"
+            ],
+            [
+              "Property abroad",
+              "Separate foreign-law Will may be needed"
+            ],
+            [
+              "NRI-owned Indian property",
+              "Indian succession and mutation planning"
+            ],
+            [
+              "Minor beneficiary",
+              "Guardian/trustee clause needed"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A Will can only deal with property that the testator is legally entitled to dispose of."
+        }
+      ]
+    },
+    {
+      "id": "will-registration-for-financial-assets",
+      "title": "Will Registration for Financial Assets",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Financial Asset",
+            "Practical Review"
+          ],
+          "rows": [
+            [
+              "Bank accounts",
+              "Nominee and beneficiary alignment"
+            ],
+            [
+              "Fixed deposits",
+              "Nominee, joint holder and maturity details"
+            ],
+            [
+              "Mutual funds",
+              "Folio and nominee mapping"
+            ],
+            [
+              "Demat shares",
+              "DP ID/client ID and nomination"
+            ],
+            [
+              "Physical shares",
+              "Share certificate and folio details"
+            ],
+            [
+              "Insurance policies",
+              "Nominee/beneficiary review"
+            ],
+            [
+              "Bonds/debentures",
+              "Issuer and certificate details"
+            ],
+            [
+              "PPF/EPF",
+              "Statutory nomination rules reviewed"
+            ],
+            [
+              "Gratuity/pension",
+              "Service rules and nominee process"
+            ],
+            [
+              "Loans given",
+              "Debtor details and proof"
+            ],
+            [
+              "Loans payable",
+              "Liability settlement planning"
+            ],
+            [
+              "Business receivables",
+              "Executor recovery powers"
+            ],
+            [
+              "Digital investments",
+              "Crypto/platform access planning"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nominee and Will beneficiary should be aligned wherever possible to reduce disputes."
+        }
+      ]
+    },
+    {
+      "id": "will-registration-for-nri-families",
+      "title": "Will Registration for NRI Families",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "NRI Issue",
+            "Practical Review"
+          ],
+          "rows": [
+            [
+              "Indian property",
+              "Indian Will can cover Indian assets"
+            ],
+            [
+              "Foreign property",
+              "Separate foreign-law estate planning may be required"
+            ],
+            [
+              "Overseas heirs",
+              "Beneficiary details and service planning"
+            ],
+            [
+              "NRI testator visit",
+              "Registration appointment planning"
+            ],
+            [
+              "POA limitation",
+              "Will execution generally requires personal caution"
+            ],
+            [
+              "Passport/OCI",
+              "Identity and status proof"
+            ],
+            [
+              "Foreign address",
+              "Record consistency"
+            ],
+            [
+              "Multiple jurisdictions",
+              "Avoid conflict between Indian and foreign Will"
+            ],
+            [
+              "Probate abroad",
+              "Foreign estate process separate"
+            ],
+            [
+              "Repatriation",
+              "Banking and tax documentation"
+            ],
+            [
+              "Minor children abroad",
+              "Guardian/trustee clause"
+            ],
+            [
+              "Digital execution risk",
+              "Local law and execution formalities checked"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "NRI estate planning should avoid one generic Will for all countries without legal review."
+        }
+      ]
+    },
+    {
+      "id": "witness-planning-for-will-registration",
+      "title": "Witness Planning for Will Registration",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Witnesses are critical in Will validity."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Witness Point",
+            "Practical Importance"
+          ],
+          "rows": [
+            [
+              "At least two witnesses",
+              "Required for unprivileged Will execution"
+            ],
+            [
+              "Independent witnesses preferred",
+              "Reduces challenge risk"
+            ],
+            [
+              "Witness should see execution",
+              "Supports proof of signing"
+            ],
+            [
+              "Beneficiary as witness avoided",
+              "Reduces dispute and legal risk"
+            ],
+            [
+              "Witness identity proof",
+              "Needed for registration and future proof"
+            ],
+            [
+              "Younger/stable witnesses preferred",
+              "Easier to trace later"
+            ],
+            [
+              "Professional witness caution",
+              "Use credible and available witnesses"
+            ],
+            [
+              "Witness address",
+              "Future court/probate evidence"
+            ],
+            [
+              "Witness signature",
+              "Must be properly placed"
+            ],
+            [
+              "Witness understands role",
+              "Should know they attest execution"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A Will often fails in dispute because witnesses cannot be traced or execution is not proved properly."
+        }
+      ]
+    },
+    {
+      "id": "capacity-and-sound-mind",
+      "title": "Capacity and Sound Mind",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A Will can be challenged if the testator’s capacity is doubtful."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Capacity Factor",
+            "Practical Evidence"
+          ],
+          "rows": [
+            [
+              "Age",
+              "Senior citizen cases need extra care"
+            ],
+            [
+              "Medical condition",
+              "Medical certificate may help"
+            ],
+            [
+              "Mental clarity",
+              "Doctor note or video record may support"
+            ],
+            [
+              "Medication",
+              "Avoid execution when heavily sedated"
+            ],
+            [
+              "Pressure from family",
+              "Independent drafting and registration helps"
+            ],
+            [
+              "Free consent",
+              "No coercion or undue influence"
+            ],
+            [
+              "Understanding of assets",
+              "Testator should know property being disposed"
+            ],
+            [
+              "Understanding of beneficiaries",
+              "Testator should know natural heirs and chosen beneficiaries"
+            ],
+            [
+              "Unequal distribution",
+              "Reasons may be recorded carefully"
+            ],
+            [
+              "Physical disability",
+              "Proper signing/mark procedure"
+            ],
+            [
+              "Language understanding",
+              "Translation/explanation may be needed"
+            ],
+            [
+              "Witness credibility",
+              "Witnesses should support capacity if needed later"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "In sensitive cases, capacity evidence should be planned before execution."
+        }
+      ]
+    },
+    {
+      "id": "common-reasons-wills-get-challenged",
+      "title": "Common Reasons Wills Get Challenged",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Challenge Ground",
+            "Practical Risk"
+          ],
+          "rows": [
+            [
+              "Testator not of sound mind",
+              "Capacity dispute"
+            ],
+            [
+              "Will was forged",
+              "Signature/handwriting challenge"
+            ],
+            [
+              "Undue influence",
+              "Family member pressure allegation"
+            ],
+            [
+              "Coercion or fraud",
+              "Invalid execution claim"
+            ],
+            [
+              "Witnesses not proper",
+              "Attestation defect"
+            ],
+            [
+              "Beneficiary involved in drafting",
+              "Suspicion"
+            ],
+            [
+              "Sudden exclusion of natural heir",
+              "Litigation risk"
+            ],
+            [
+              "Multiple Wills exist",
+              "Latest valid Will dispute"
+            ],
+            [
+              "Property description vague",
+              "Asset transfer problem"
+            ],
+            [
+              "Will kept secretly",
+              "Suspicion after death"
+            ],
+            [
+              "Registration absent",
+              "More evidence needed"
+            ],
+            [
+              "Registration alone relied upon",
+              "Still may not prove validity fully"
+            ],
+            [
+              "Medical condition ignored",
+              "Capacity challenge"
+            ],
+            [
+              "Executor not appointed",
+              "Administration difficulty"
+            ],
+            [
+              "Minor beneficiary not planned",
+              "Guardian/trustee issue"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-issues-we-fixed-for-clients",
+      "title": "Common Issues We Fixed for Clients",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Issue",
+            "Practical Risk",
+            "How Estabizz Supports"
+          ],
+          "rows": [
+            [
+              "Client had property list but no clear beneficiary plan",
+              "Future family dispute",
+              "Asset-beneficiary mapping"
+            ],
+            [
+              "Previous Will was not revoked clearly",
+              "Multiple Will dispute",
+              "Revocation clause support"
+            ],
+            [
+              "Beneficiary was also planned as witness",
+              "Validity risk",
+              "Witness planning"
+            ],
+            [
+              "Elderly parent wanted unequal distribution",
+              "Challenge risk",
+              "Reasoned drafting and capacity support"
+            ],
+            [
+              "NRI client had Indian and foreign assets",
+              "Jurisdiction conflict",
+              "Indian asset Will planning"
+            ],
+            [
+              "Nominee and Will beneficiary differed",
+              "Bank/family dispute",
+              "Nomination alignment review"
+            ],
+            [
+              "Business shares not covered properly",
+              "Succession gap",
+              "Business asset clause"
+            ],
+            [
+              "Minor child beneficiary included",
+              "Guardian issue",
+              "Trustee/guardian clause"
+            ],
+            [
+              "Flat society records were unclear",
+              "Mutation delay",
+              "Property document checklist"
+            ],
+            [
+              "Family wanted gift deed but Will was better",
+              "Wrong instrument risk",
+              "Instrument selection review"
+            ],
+            [
+              "Will draft was too generic",
+              "Interpretation dispute",
+              "Clause-by-clause review"
+            ],
+            [
+              "Original Will custody was not planned",
+              "Document loss risk",
+              "Safe custody strategy"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "how-we-reduced-approval-time-for-clients",
+      "title": "How We Reduced Approval Time for Clients",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Will Registration matters often get delayed because the testator decides to register but does not prepare asset details, beneficiary information, witness documents, property papers, prior Will, nominee records and Sub-Registrar checklist."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz reduces avoidable delay by preparing a Will-registration-ready file: testator KYC, asset schedule, beneficiary list, executor details, witness KYC, property records, financial asset details, prior Will review, capacity-support note, registration checklist and safe-custody plan."
+        },
+        {
+          "type": "paragraph",
+          "text": "In Will matters, faster completion comes from clarity. A clear Will, proper witnesses and complete registration documents reduce avoidable Sub-Registrar and family-level confusion."
+        }
+      ]
+    },
+    {
+      "id": "legal-risks-if-will-registration-is-not-handled-properly",
+      "title": "Legal Risks If Will Registration Is Not Handled Properly",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Risk",
+            "Practical Impact"
+          ],
+          "rows": [
+            [
+              "Will not properly witnessed",
+              "Validity challenge"
+            ],
+            [
+              "Testator capacity not documented",
+              "Future dispute"
+            ],
+            [
+              "Beneficiary becomes witness",
+              "Challenge risk"
+            ],
+            [
+              "Asset description vague",
+              "Transfer difficulty"
+            ],
+            [
+              "Prior Will not revoked",
+              "Multiple Will dispute"
+            ],
+            [
+              "Executor not appointed",
+              "Administration delay"
+            ],
+            [
+              "Minor beneficiary not protected",
+              "Guardian issue"
+            ],
+            [
+              "Nominee mismatch",
+              "Bank/insurance dispute"
+            ],
+            [
+              "Ancestral property wrongly bequeathed",
+              "Coparcenary challenge"
+            ],
+            [
+              "Joint property fully bequeathed",
+              "Co-owner dispute"
+            ],
+            [
+              "Registration treated as final proof",
+              "Litigation risk remains"
+            ],
+            [
+              "Original Will lost",
+              "Execution proof difficulty"
+            ],
+            [
+              "NRI assets mixed poorly",
+              "Cross-border issue"
+            ],
+            [
+              "Tax and succession planning ignored",
+              "Future compliance issue"
+            ],
+            [
+              "Family conflict not anticipated",
+              "Probate/litigation risk"
+            ],
+            [
+              "Unsafe custody",
+              "Will may not be found after death"
+            ],
+            [
+              "Digital assets ignored",
+              "Access problem"
+            ],
+            [
+              "Business succession ignored",
+              "Operational disruption"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strategy-before-will-registration",
+      "title": "Strategy Before Will Registration",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Strategy Point",
+            "Why It Matters"
+          ],
+          "rows": [
+            [
+              "Prepare complete asset list",
+              "Avoid missing property/assets"
+            ],
+            [
+              "Check ownership type",
+              "Self-acquired, joint, ancestral and HUF assets differ"
+            ],
+            [
+              "Decide beneficiaries clearly",
+              "Reduces disputes"
+            ],
+            [
+              "Appoint executor",
+              "Helps post-death implementation"
+            ],
+            [
+              "Avoid beneficiary as witness",
+              "Reduces challenge risk"
+            ],
+            [
+              "Record revocation",
+              "Cancels previous Wills"
+            ],
+            [
+              "Align nominees",
+              "Prevents conflict with banks/insurance"
+            ],
+            [
+              "Include residuary clause",
+              "Covers assets not listed"
+            ],
+            [
+              "Plan minor beneficiaries",
+              "Guardian/trustee needed"
+            ],
+            [
+              "Review tax and succession issues",
+              "Helps family planning"
+            ],
+            [
+              "Preserve capacity proof",
+              "Useful for elderly/sensitive cases"
+            ],
+            [
+              "Use clear language",
+              "Avoid interpretation disputes"
+            ],
+            [
+              "Plan safe custody",
+              "Will should be traceable after death"
+            ],
+            [
+              "Review after major life events",
+              "Marriage, birth, death, divorce, new property"
+            ],
+            [
+              "Avoid generic templates",
+              "Estate planning should be personalised"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "our-will-registration-services",
+      "title": "Our Will Registration Services",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Service",
+            "What We Do"
+          ],
+          "rows": [
+            [
+              "Will Requirement Review",
+              "Understand family, assets and succession goals"
+            ],
+            [
+              "Estate Mapping",
+              "Prepare property, bank, investment and business asset list"
+            ],
+            [
+              "Beneficiary Planning",
+              "Map who gets what and why"
+            ],
+            [
+              "Executor Appointment Support",
+              "Help select executor and backup executor"
+            ],
+            [
+              "Will Drafting Support",
+              "Draft/vet Will through legal process"
+            ],
+            [
+              "Witness Planning",
+              "Identify suitable independent witnesses"
+            ],
+            [
+              "Registration Checklist",
+              "Prepare Sub-Registrar documentation"
+            ],
+            [
+              "Sub-Registrar Coordination",
+              "Appointment and process support"
+            ],
+            [
+              "Capacity Support Planning",
+              "Medical certificate/video record checklist where advisable"
+            ],
+            [
+              "Prior Will Review",
+              "Revocation and codicil review"
+            ],
+            [
+              "Nominee Alignment",
+              "Bank, insurance, demat and mutual fund nomination review"
+            ],
+            [
+              "NRI Will Support",
+              "Indian asset Will and cross-border caution"
+            ],
+            [
+              "Business Succession Clause Support",
+              "Shares, partnership/LLP interest and company holdings"
+            ],
+            [
+              "Minor Beneficiary Planning",
+              "Guardian/trustee clause support"
+            ],
+            [
+              "Safe Custody Guidance",
+              "Storage and disclosure planning"
+            ],
+            [
+              "Probate / Letters Route Review",
+              "Post-death court process assessment"
+            ],
+            [
+              "Mutation / Transmission Readiness",
+              "Asset transfer checklist for heirs"
+            ],
+            [
+              "Advocate/Counsel Coordination",
+              "Legal review and registration support through professionals"
+            ],
+            [
+              "Ticket-Based Tracking",
+              "Track drafting, witness planning, registration, custody and future review"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "why-choose-estabizz-fintech",
+      "title": "Why Choose Estabizz Fintech?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Clients approach us for Will Registration because they want their assets to pass smoothly to the right people without family confusion, avoidable litigation or institution-level rejection."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz Fintech helps save time by first mapping assets, legal heirs, beneficiaries, executor, nominees, property documents, existing Will and registration requirements."
+        },
+        {
+          "type": "paragraph",
+          "text": "We reduce effort by handling document checklist, Will drafting support, witness planning, Sub-Registrar coordination, registration tracking, safe-custody guidance, nominee-alignment review and post-death transfer-readiness in one structured process."
+        },
+        {
+          "type": "paragraph",
+          "text": "We help avoid rejection, delay and weak estate planning by ensuring that the Will is clear, properly executed, correctly witnessed, registration-ready and aligned with the testator’s actual intention."
+        },
+        {
+          "type": "paragraph",
+          "text": "Our support is end-to-end, including Will drafting, Will Registration, estate planning, asset schedule preparation, executor planning, witness checklist, NRI Will support, senior citizen Will, business-owner Will, minor-beneficiary planning, nominee review, probate/letters route review and advocate/counsel coordination."
+        },
+        {
+          "type": "paragraph",
+          "text": "Our approach is budget-friendly and practical. Multiple payment options may be structured depending on asset complexity, number of properties, NRI involvement, family-dispute risk, business assets, registration support, witness planning and review requirements."
+        },
+        {
+          "type": "paragraph",
+          "text": "Every matter is handled through a structured ticket-based tracking system. Clients receive updates on document collection, asset mapping, draft review, witness planning, registration appointment, execution, registered document status and safe-custody closure through call, email or WhatsApp."
+        },
+        {
+          "type": "paragraph",
+          "text": "You focus on your business—we handle the compliance journey."
+        }
+      ]
+    },
+    {
+      "id": "what-clients-actually-want-and-how-we-help",
+      "title": "What Clients Actually Want—and How We Help",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Client Concern",
+            "Estabizz Support"
+          ],
+          "rows": [
+            [
+              "“I want my property to go to selected family members.”",
+              "Beneficiary and asset mapping"
+            ],
+            [
+              "“My family may fight later.”",
+              "Clear drafting and registration support"
+            ],
+            [
+              "“Should I register my Will?”",
+              "Registration benefit and risk review"
+            ],
+            [
+              "“I am elderly and want safe execution.”",
+              "Capacity and witness planning"
+            ],
+            [
+              "“I have assets in India and abroad.”",
+              "NRI/cross-border Will review"
+            ],
+            [
+              "“Nominee and beneficiary are different.”",
+              "Nomination alignment strategy"
+            ],
+            [
+              "“I have business shares.”",
+              "Business succession clause support"
+            ],
+            [
+              "“We need regular updates.”",
+              "Ticket-based tracking"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Will Registration is an important estate-planning step for anyone who wants to protect family assets and reduce post-death disputes. Although registration is generally optional, it can add evidentiary strength and support safer succession planning."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz Fintech assists clients with Will drafting support, Will Registration coordination, asset schedule preparation, beneficiary planning, executor appointment, witness planning, senior citizen Will support, NRI Will planning, nominee alignment, safe custody guidance, probate/letters route review and advocate/counsel coordination."
+        },
+        {
+          "type": "paragraph",
+          "text": "When assets are built over a lifetime, the objective should be clear: document your wishes properly, protect your family and make succession simpler for the next generation."
+        },
+        {
+          "type": "paragraph",
+          "text": "Connect with Estabizz Fintech today and handle your Will Registration matter with clarity, confidence and professional support."
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What is Will Registration?",
+      "a": "Will Registration is the process of registering a Will before the Sub-Registrar or competent registering authority."
+    },
+    {
+      "q": "Is Will Registration a licence?",
+      "a": "No. It is not a licence. It is an optional legal registration process for estate-planning documentation."
+    },
+    {
+      "q": "Is Will Registration mandatory in India?",
+      "a": "Generally, no. An unregistered Will can be valid if properly executed and witnessed."
+    },
+    {
+      "q": "Which law governs Will Registration?",
+      "a": "Indian Succession Act, Registration Act, personal succession law, State registration rules and evidence law are relevant."
+    },
+    {
+      "q": "Who can make a Will?",
+      "a": "A person of sound mind who is not a minor can generally make a Will, subject to applicable law."
+    },
+    {
+      "q": "How many witnesses are required for a Will?",
+      "a": "An unprivileged Will should be attested by at least two witnesses."
+    },
+    {
+      "q": "Can beneficiary be witness?",
+      "a": "It is better to avoid making a beneficiary a witness because it can create legal and evidentiary issues."
+    },
+    {
+      "q": "Does registration make Will impossible to challenge?",
+      "a": "No. A registered Will can still be challenged on grounds such as fraud, coercion, undue influence, lack of capacity or suspicious circumstances."
+    },
+    {
+      "q": "What is the benefit of registering a Will?",
+      "a": "Registration creates an official record and may reduce disputes about execution, date, custody and authenticity."
+    },
+    {
+      "q": "Can a Will be changed after registration?",
+      "a": "Yes. A testator can make a new Will or codicil during lifetime, subject to proper execution."
+    },
+    {
+      "q": "What is codicil?",
+      "a": "A codicil is a document that modifies, adds to or explains an existing Will."
+    },
+    {
+      "q": "What happens if there are multiple Wills?",
+      "a": "Usually, the latest valid Will prevails to the extent it revokes or conflicts with earlier Wills."
+    },
+    {
+      "q": "Is stamp duty payable on Will?",
+      "a": "A Will is not treated like a sale or gift deed transferring property during lifetime. Registration charges and State-specific process should be checked."
+    },
+    {
+      "q": "Can property be transferred immediately through Will?",
+      "a": "No. A Will operates after the death of the testator. For lifetime transfer, gift deed, sale deed or settlement deed may be considered."
+    },
+    {
+      "q": "Can ancestral property be included in Will?",
+      "a": "Only the testator’s legally transferable share can be included. Ancestral/HUF/coparcenary rights require careful review."
+    },
+    {
+      "q": "Can joint property be included in Will?",
+      "a": "Yes, but only the testator’s share/right can be bequeathed."
+    },
+    {
+      "q": "Can NRI register Will in India?",
+      "a": "Yes, subject to practical registration, presence, ID, witness and jurisdiction requirements. NRI estate planning should be reviewed carefully."
+    },
+    {
+      "q": "Can digital assets be included in Will?",
+      "a": "Yes. Digital assets and access instructions can be planned carefully, subject to platform terms and privacy/security concerns."
+    },
+    {
+      "q": "Is probate required for a registered Will?",
+      "a": "Registration and probate are different. Probate is a court process and should be reviewed case-wise depending on law, asset, dispute and institution requirements."
+    },
+    {
+      "q": "Who should be executor?",
+      "a": "Executor should be trustworthy, capable, traceable and preferably younger or institutionally reliable enough to administer the estate."
+    },
+    {
+      "q": "Can minor child receive property under Will?",
+      "a": "Yes, but guardian/trustee arrangements should be included for management until majority."
+    },
+    {
+      "q": "Should nominees match Will beneficiaries?",
+      "a": "It is strongly advisable to align nominations with the Will to avoid dispute between nominees and legal beneficiaries."
+    },
+    {
+      "q": "What documents are required for Will Registration?",
+      "a": "Draft Will, testator KYC, witness KYC, asset details, property papers, beneficiary details and existing Will/nomination details are useful."
+    },
+    {
+      "q": "What is the biggest mistake in Will Registration?",
+      "a": "The biggest mistake is registering a generic Will without proper witnesses, asset clarity, revocation clause, executor appointment and nominee alignment."
+    },
+    {
+      "q": "Can Estabizz handle complete Will Registration support?",
+      "a": "Yes. Estabizz assists with Will drafting support, asset mapping, witness planning, registration coordination, NRI Will review, safe custody guidance and advocate/counsel coordination."
+    }
+  ],
+  "expertQuote": {
+    "quote": "Will Registration should be treated as part of a complete estate-planning process. A strong Will must clearly identify the testator, assets, beneficiaries, executor, witnesses, revocation of prior Wills and the exact intention behind distribution.",
+    "attribution": "CS Devyani Khambhati – Compliance Expert"
+  },
+  "disclaimer": "This guide is general information based on material supplied by Estabizz and remains under professional review. Will validity, registration procedure, testamentary capacity, property rights, personal law, witness requirements, probate, court fees and post-death transfer depend on the testator, assets, family circumstances, jurisdiction and current law. Registration does not cure defective drafting or execution. Estabizz provides document, planning and registration coordination support; legal opinions and court representation are through enrolled advocates. Obtain case-specific estate-planning advice before execution."
+}

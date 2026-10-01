@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { SOLUTION_CATEGORIES, getCategory } from "@/lib/content/services/registry";
+import { SOLUTION_CATEGORIES, getCategory, groupCategoryByTopic } from "@/lib/content/services/registry";
+import CategoryBrowser from "./CategoryBrowser";
 
 // /solutions/<category> — the index for one practice area.
 //
@@ -35,6 +36,8 @@ export default async function SolutionCategoryPage({ params }: { params: Params 
   if (!category) notFound();
 
   const hasAnything = category.pages.length + category.externalServices.length > 0;
+  const groups = groupCategoryByTopic(category);
+  const total = groups.reduce((n, g) => n + g.entries.length, 0);
 
   return (
     <main className="min-h-screen bg-white pt-[64px]">
@@ -76,50 +79,11 @@ export default async function SolutionCategoryPage({ params }: { params: Params 
             </Link>
           </div>
         ) : (
-          <div className="grid gap-6 md:grid-cols-2">
-            {category.pages.map((page) => (
-              <Link
-                key={page.slug}
-                href={`/solutions/${category.slug}/${page.slug}`}
-                className="group flex flex-col rounded-[28px] border border-blue-100 bg-white p-7 shadow-[0_18px_50px_rgba(0,80,140,0.07)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1677f2]/40"
-              >
-                <span className="text-[11.5px] font-black uppercase tracking-[0.18em] text-[#1677f2]">
-                  Full guide
-                </span>
-                <h2 className="mt-3 text-[20px] font-black leading-tight text-[#071426] transition-colors group-hover:text-[#1677f2]">
-                  {page.hero.heading}
-                </h2>
-                <p className="mt-3 flex-1 text-[14px] font-medium leading-[1.8] text-[#64748b]">
-                  {page.seo.description}
-                </p>
-                <span className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12.5px] font-bold text-[#94a3b8]">
-                  <span>{page.sections.length} sections</span>
-                  <span className="text-[#cbd5e1]">·</span>
-                  <span>{page.faqs.length} FAQs</span>
-                  <span className="ml-auto text-[#1677f2]">Read the guide →</span>
-                </span>
-              </Link>
-            ))}
-
-            {category.externalServices.map((svc) => (
-              <Link
-                key={svc.href + svc.title}
-                href={svc.href}
-                className="group flex flex-col rounded-[28px] border border-blue-100 bg-[#f7fbff] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#1677f2]/40 hover:bg-white"
-              >
-                <span className="text-[11.5px] font-black uppercase tracking-[0.18em] text-[#94a3b8]">
-                  Service
-                </span>
-                <h2 className="mt-3 text-[18px] font-black leading-tight text-[#071426] transition-colors group-hover:text-[#1677f2]">
-                  {svc.title}
-                </h2>
-                <p className="mt-3 flex-1 text-[14px] font-medium leading-[1.8] text-[#64748b]">
-                  {svc.description}
-                </p>
-                <span className="mt-5 text-[13px] font-bold text-[#1677f2]">Open →</span>
-              </Link>
-            ))}
-          </div>
+          <CategoryBrowser
+            groups={groups}
+            categoryLabel={category.label}
+            showFilter={total >= 10}
+          />
         )}
       </section>
     </main>

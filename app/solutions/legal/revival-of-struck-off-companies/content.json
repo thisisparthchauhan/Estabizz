@@ -1,0 +1,1761 @@
+{
+  "title": "Revival of Struck-Off Companies",
+  "focusKeyword": "Revival of Struck-Off Companies",
+  "tags": [
+    "Legal",
+    "Corporate Compliance"
+  ],
+  "breadcrumbLabel": "Revival of Struck-Off Companies",
+  "readTime": "20 min read",
+  "trustLine": "NCLT restoration support. ROC compliance review. End-to-end revival tracking.",
+  "reviewPending": true,
+  "heroParagraphs": [
+    "A struck-off company loses its active legal status. Bank accounts may get frozen, contracts may become difficult to enforce, assets may remain blocked, directors may face compliance complications, pending ROC filings may pile up and business continuity may suffer.",
+    "At Estabizz Fintech, we assist companies, directors, shareholders, creditors, investors and promoters with Revival of Struck off Companies, including Section 252 route assessment, NCLT-9 petition support, ROC notice review, STK-7 status check, evidence compilation, pending filing analysis, financial statement coordination, affidavit support, hearing coordination, restoration order follow-up and post-revival compliance regularisation."
+  ],
+  "quickFacts": [
+    {
+      "label": "Main provision",
+      "value": "Companies Act Section 252"
+    },
+    {
+      "label": "Forum",
+      "value": "NCLT"
+    },
+    {
+      "label": "Application windows",
+      "value": "3 years / 20 years"
+    },
+    {
+      "label": "Order filing",
+      "value": "Within 30 days"
+    }
+  ],
+  "relatedArticles": [
+    {
+      "title": "Appeal Before NCLT",
+      "href": "/solutions/legal/appeal-before-nclt",
+      "category": "Legal",
+      "description": "Company petitions, restoration, IBC applications, schemes and NCLAT appeals."
+    },
+    {
+      "title": "Directors Disqualification",
+      "href": "/solutions/legal/directors-disqualification",
+      "category": "Legal",
+      "description": "Section 164 defaults, DIN status, struck-off companies and director regularisation."
+    },
+    {
+      "title": "Court Proceedings",
+      "href": "/solutions/legal/court-proceedings",
+      "category": "Legal",
+      "description": "Forum, pleadings, evidence, hearings, orders and execution across court and tribunal matters."
+    }
+  ],
+  "finalCtaTitle": "Restore the Company With a Complete Compliance Plan",
+  "finalCtaDescription": "Before you proceed, speak with our experts. Revival of Struck off Companies can directly impact bank accounts, property, contracts, tax refunds, GST records, litigation, creditor claims, director status and future business continuity. Do not wait until limitation, bank, tax or property issues become more complicated. A short discussion today can help you understand whether revival is possible, what evidence is required and how to restore the company correctly.",
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Revival of Struck off Companies is the legal process of restoring a company’s name to the Register of Companies after it has been removed by the Registrar of Companies under the Companies Act."
+        },
+        {
+          "type": "paragraph",
+          "text": "It matters because a struck-off company is treated as dissolved, but its liabilities, obligations and pending responsibilities do not simply disappear. If the company had assets, bank balance, pending contracts, litigation, tax matters, business operations, property, investments, regulatory approvals or stakeholder claims, revival may be required to restore its legal existence."
+        },
+        {
+          "type": "paragraph",
+          "text": "This service is relevant for directors, shareholders, members, creditors, workmen, investors, lenders, property buyers, tax teams, business families and promoters who need a struck-off company restored for business continuation, asset recovery, compliance filing, litigation, bank operations, statutory closure or transaction completion."
+        }
+      ]
+    },
+    {
+      "id": "quick-answer",
+      "title": "Quick Answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Revival of Struck off Companies is not a licence. It is a statutory restoration process for bringing a struck-off company back to active legal status."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is regulated by the Ministry of Corporate Affairs, Registrar of Companies and National Company Law Tribunal under the Companies Act, 2013, NCLT Rules and MCA strike-off framework."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is not mandatory for every struck-off company. It becomes necessary where the company, member, creditor, workman or aggrieved person needs the company restored for business, compliance, asset, liability, contract, litigation or statutory reasons."
+        }
+      ]
+    },
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In simple terms…"
+        },
+        {
+          "type": "paragraph",
+          "text": "Revival of Struck off Companies means asking the NCLT to restore a company that ROC has removed from the register."
+        },
+        {
+          "type": "paragraph",
+          "text": "Once the company is restored, ROC updates the company’s status, and the company is generally placed in a position as if its name had not been struck off, subject to NCLT directions and compliance completion."
+        },
+        {
+          "type": "paragraph",
+          "text": "From a compliance perspective…"
+        },
+        {
+          "type": "paragraph",
+          "text": "Revival requires checking ROC strike-off reason, STK notice history, STK-7 date, limitation period, company operations, bank records, GST records, income-tax records, invoices, contracts, financial statements, pending AOC-4/MGT-7 filings, director status, outstanding liabilities and evidence that restoration is justified."
+        },
+        {
+          "type": "paragraph",
+          "text": "From a risk perspective, revival should not be filed only because the company wants to become active again. The petition must show a legally acceptable reason such as continuing business, existing assets, pending liabilities, creditor interest, workman claim, property record, tax matter, litigation, bank account, contractual obligation or “just” grounds for restoration."
+        }
+      ]
+    },
+    {
+      "id": "regulatory-framework",
+      "title": "Regulatory Framework",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Particular",
+            "Applicable Legal Framework"
+          ],
+          "rows": [
+            [
+              "Main Law",
+              "Companies Act, 2013"
+            ],
+            [
+              "Strike-Off by ROC",
+              "Section 248"
+            ],
+            [
+              "Restrictions on Strike-Off Application",
+              "Section 249"
+            ],
+            [
+              "Effect of Dissolution",
+              "Section 250"
+            ],
+            [
+              "Fraudulent Strike-Off Application",
+              "Section 251"
+            ],
+            [
+              "Revival / Restoration Route",
+              "Section 252"
+            ],
+            [
+              "Dormant Company Alternative",
+              "Section 455"
+            ],
+            [
+              "Annual Return Filing",
+              "Section 92"
+            ],
+            [
+              "Financial Statement Filing",
+              "Section 137"
+            ],
+            [
+              "Filing Fees / Additional Fees",
+              "Section 403"
+            ],
+            [
+              "Condonation of Delay",
+              "Section 460"
+            ],
+            [
+              "Director Disqualification / Vacation",
+              "Sections 164 and 167"
+            ],
+            [
+              "NCLT Procedural Rule",
+              "NCLT Rule 87A"
+            ],
+            [
+              "Main NCLT Form",
+              "NCLT-9"
+            ],
+            [
+              "Strike-Off Forms",
+              "STK-1, STK-5, STK-6, STK-7 and related STK forms"
+            ],
+            [
+              "Main Authorities",
+              "MCA, ROC, NCLT and Official Gazette"
+            ],
+            [
+              "Circular / Master Direction",
+              "No single master direction; Revival of Struck off Companies is governed by Companies Act, NCLT Rules, Companies Removal of Names Rules and MCA/ROC procedure"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applicable-laws",
+      "title": "Applicable Act and Important Sections",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Law / Framework",
+            "Important Provision",
+            "Practical Relevance"
+          ],
+          "rows": [
+            [
+              "Companies Act, 2013",
+              "Section 248",
+              "ROC’s power to remove name of company from register"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 248(1)",
+              "ROC strike-off grounds such as non-commencement, non-operation or other statutory defaults"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 248(5)",
+              "Publication of STK-7 notice and dissolution effect"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 248(6)",
+              "ROC satisfaction regarding assets and liabilities before strike-off"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 248(7)",
+              "Liability of directors, managers, officers and members continues despite strike-off"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 249",
+              "Restrictions on making voluntary strike-off application"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 250",
+              "Effect of company notified as dissolved"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 251",
+              "Fraudulent application for removal of name and consequences"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 252(1)",
+              "Appeal by aggrieved person within 3 years from ROC order"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 252(2)",
+              "NCLT restoration order to be filed with ROC within 30 days"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 252(3)",
+              "Application by company, member, creditor or workman within 20 years from Gazette publication"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 92",
+              "Pending annual return filing after restoration"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 137",
+              "Pending financial statement filing after restoration"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 403",
+              "Fees and additional fees for delayed filings"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 455",
+              "Dormant company option for inactive companies"
+            ],
+            [
+              "Companies Act, 2013",
+              "Sections 164 and 167",
+              "Director disqualification and vacation-of-office implications"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 421",
+              "Appeal to NCLAT against NCLT order, where applicable"
+            ],
+            [
+              "Companies (Removal of Names of Companies from the Register of Companies) Rules, 2016",
+              "STK process",
+              "ROC strike-off notices and STK-7 publication framework"
+            ],
+            [
+              "National Company Law Tribunal Rules, 2016",
+              "Rule 87A",
+              "Section 252 appeal/application in Form NCLT-9 and service to ROC"
+            ],
+            [
+              "Income-tax Act / GST Law",
+              "Tax and GST compliance",
+              "Pending tax filings, refunds, demands and registrations after revival"
+            ],
+            [
+              "Sectoral Regulations",
+              "RBI, SEBI, IRDAI, IFSCA etc.",
+              "Required where struck-off company held regulated approval or licence"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "struck-off-company",
+      "title": "What Is a Struck-Off Company?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A struck-off company is a company whose name has been removed from the Register of Companies by ROC under Section 248 of the Companies Act, 2013."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Practical Meaning"
+          ],
+          "rows": [
+            [
+              "ROC Status",
+              "Company appears as “Struck Off” on MCA master data"
+            ],
+            [
+              "Legal Position",
+              "Company stands dissolved after STK-7 publication"
+            ],
+            [
+              "Business Operation",
+              "Company cannot normally operate as an active company"
+            ],
+            [
+              "Bank Account",
+              "Bank operations may get restricted or frozen"
+            ],
+            [
+              "Contracts",
+              "Contract enforcement may become difficult"
+            ],
+            [
+              "Assets",
+              "Assets may remain blocked until restoration"
+            ],
+            [
+              "Liabilities",
+              "Liabilities of company and officers do not automatically vanish"
+            ],
+            [
+              "Revival Route",
+              "NCLT restoration under Section 252 may be required"
+            ],
+            [
+              "Post-Revival",
+              "Pending ROC filings and compliance must be completed"
+            ],
+            [
+              "Risk",
+              "Delay can increase cost, penalty and evidence difficulty"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strike-off-reasons",
+      "title": "Why Companies Get Struck Off",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Reason",
+            "Practical Explanation"
+          ],
+          "rows": [
+            [
+              "Non-commencement of business",
+              "Company failed to commence business within statutory timeline"
+            ],
+            [
+              "No business or operation",
+              "Company not carrying business for two immediately preceding financial years"
+            ],
+            [
+              "No dormant application",
+              "Company did not apply for dormant status under Section 455"
+            ],
+            [
+              "INC-20A / subscription issue",
+              "Subscription or commencement declaration-related default"
+            ],
+            [
+              "Registered office verification issue",
+              "ROC physical verification may show no business at registered office"
+            ],
+            [
+              "Long pending annual filings",
+              "AOC-4 and MGT-7/MGT-7A not filed for years"
+            ],
+            [
+              "ROC notice not replied",
+              "STK notice ignored or missed"
+            ],
+            [
+              "Directors changed contact details",
+              "MCA email / registered office communication missed"
+            ],
+            [
+              "Company became inactive",
+              "Promoters stopped using company but did not close it properly"
+            ],
+            [
+              "Compliance professional changed",
+              "Statutory filing responsibility was not tracked"
+            ],
+            [
+              "Group company neglected",
+              "Holding company or dormant investment company not maintained"
+            ],
+            [
+              "Start-up discontinued",
+              "Business stopped but strike-off/closure was not filed voluntarily"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eligible-applicants",
+      "title": "Who Can Apply for Revival?",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Applicant",
+            "Practical Position"
+          ],
+          "rows": [
+            [
+              "Company",
+              "Can seek restoration where revival is needed"
+            ],
+            [
+              "Member / Shareholder",
+              "Can apply where ownership or business interest is affected"
+            ],
+            [
+              "Creditor",
+              "Can apply where debt or claim is pending"
+            ],
+            [
+              "Workman",
+              "Can apply where employment dues or claim exists"
+            ],
+            [
+              "Aggrieved Person",
+              "May appeal where ROC strike-off order affects rights"
+            ],
+            [
+              "Registrar of Companies",
+              "Can seek restoration if strike-off was inadvertent or based on incorrect information"
+            ],
+            [
+              "Investor",
+              "May support revival where investment or shareholding is affected"
+            ],
+            [
+              "Lender",
+              "May seek or support revival for loan recovery or security enforcement"
+            ],
+            [
+              "Property Buyer / Claimant",
+              "May need revival where company asset or title is involved"
+            ],
+            [
+              "Tax / Regulatory Stakeholder",
+              "May need company restored for pending statutory proceedings"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "time-limit",
+      "title": "Time Limit for Revival of Struck off Companies",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Revival Route",
+            "Time Limit",
+            "Practical Meaning"
+          ],
+          "rows": [
+            [
+              "Appeal by aggrieved person under Section 252(1)",
+              "Within 3 years from ROC order",
+              "Used where strike-off was not justified"
+            ],
+            [
+              "ROC application under Section 252(1) proviso",
+              "Within 3 years from dissolution order",
+              "Used where ROC finds strike-off inadvertent or based on incorrect information"
+            ],
+            [
+              "Application by company/member/creditor/workman under Section 252(3)",
+              "Before expiry of 20 years from Gazette notice",
+              "Used where company was carrying business, in operation, or restoration is otherwise just"
+            ],
+            [
+              "Filing certified copy of NCLT order with ROC",
+              "Within 30 days from NCLT order",
+              "Required after restoration order"
+            ],
+            [
+              "Pending annual filing compliance",
+              "As directed by NCLT / ROC",
+              "AOC-4, MGT-7/MGT-7A and other forms must be completed"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Limitation should be checked from the correct STK-7 / Official Gazette date, not merely from the date the promoter noticed MCA status."
+        }
+      ]
+    },
+    {
+      "id": "when-to-revive",
+      "title": "When Should You Consider Revival?",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Situation",
+            "Why Revival May Be Needed"
+          ],
+          "rows": [
+            [
+              "Company has bank balance",
+              "Bank may not allow operation without revival"
+            ],
+            [
+              "Company owns property",
+              "Sale, mutation or mortgage may be blocked"
+            ],
+            [
+              "Company has pending receivables",
+              "Debtors may refuse payment to struck-off company"
+            ],
+            [
+              "Company has litigation",
+              "Company may need legal existence to pursue or defend matter"
+            ],
+            [
+              "Company has GST/tax refund",
+              "Refund processing may be blocked"
+            ],
+            [
+              "Company has tax demand",
+              "Compliance or response may require restoration"
+            ],
+            [
+              "Company has active contract",
+              "Contract performance or enforcement may be affected"
+            ],
+            [
+              "Company has loan or charge",
+              "Lender and MCA charge issues may arise"
+            ],
+            [
+              "Company is needed for business",
+              "Promoters want to restart operations"
+            ],
+            [
+              "Shareholders need title clarity",
+              "Investment or ownership records need correction"
+            ],
+            [
+              "Creditor wants recovery",
+              "Creditor may need company restored for claim"
+            ],
+            [
+              "Regulated approval existed",
+              "Sector regulator compliance may require revival or closure"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "process",
+      "title": "Revival of Struck off Companies Process",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Step",
+            "Activity",
+            "Output"
+          ],
+          "rows": [
+            [
+              "Step 1",
+              "Initial consultation",
+              "Reason for revival and company status review"
+            ],
+            [
+              "Step 2",
+              "MCA master data check",
+              "Strike-off status and ROC jurisdiction"
+            ],
+            [
+              "Step 3",
+              "STK notice review",
+              "STK-5/STK-7 and Gazette publication tracking"
+            ],
+            [
+              "Step 4",
+              "Limitation calculation",
+              "3-year / 20-year route assessment"
+            ],
+            [
+              "Step 5",
+              "Evidence collection",
+              "Proof of operation, assets, bank activity, tax/GST, contracts or liabilities"
+            ],
+            [
+              "Step 6",
+              "Compliance gap analysis",
+              "Pending AOC-4, MGT-7, ADT-1 and other filings"
+            ],
+            [
+              "Step 7",
+              "Petition drafting support",
+              "NCLT-9 application / appeal and affidavits"
+            ],
+            [
+              "Step 8",
+              "ROC service",
+              "Copy served to ROC and other directed persons"
+            ],
+            [
+              "Step 9",
+              "NCLT hearing",
+              "Representation and reply to ROC observations"
+            ],
+            [
+              "Step 10",
+              "Restoration order",
+              "NCLT order restoring company name"
+            ],
+            [
+              "Step 11",
+              "Certified copy filing",
+              "Certified order filed with ROC within prescribed timeline"
+            ],
+            [
+              "Step 12",
+              "ROC restoration",
+              "Company status restored in MCA records"
+            ],
+            [
+              "Step 13",
+              "Pending filings",
+              "Financial statements and annual returns filed"
+            ],
+            [
+              "Step 14",
+              "Post-revival regularisation",
+              "Bank, PAN, GST, licences, DIN and statutory records updated"
+            ],
+            [
+              "Step 15",
+              "Revival closure report",
+              "Restored company compliance file completed"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "documents",
+      "title": "Documents Required for Revival of Struck off Companies",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Document / Information",
+            "Purpose"
+          ],
+          "rows": [
+            [
+              "Certificate of incorporation",
+              "Company identity"
+            ],
+            [
+              "MOA and AOA",
+              "Constitutional documents"
+            ],
+            [
+              "MCA master data",
+              "Strike-off status and company details"
+            ],
+            [
+              "STK-7 notice / Gazette notice",
+              "Strike-off date and limitation"
+            ],
+            [
+              "ROC strike-off notices",
+              "Grounds and communication review"
+            ],
+            [
+              "Board resolution",
+              "Authority to file restoration petition"
+            ],
+            [
+              "Shareholder details",
+              "Member support and ownership proof"
+            ],
+            [
+              "Director KYC / DIN details",
+              "Director status and signatory verification"
+            ],
+            [
+              "Audited financial statements",
+              "Proof of financial position"
+            ],
+            [
+              "Pending AOC-4 details",
+              "Financial filing regularisation"
+            ],
+            [
+              "Pending MGT-7 / MGT-7A details",
+              "Annual return regularisation"
+            ],
+            [
+              "Bank statements",
+              "Proof of operation, assets or transactions"
+            ],
+            [
+              "Income-tax returns",
+              "Proof of operation / compliance"
+            ],
+            [
+              "GST returns",
+              "Business operation and statutory evidence"
+            ],
+            [
+              "Invoices / bills",
+              "Proof of business activity"
+            ],
+            [
+              "Contracts / purchase orders",
+              "Proof of active business or obligation"
+            ],
+            [
+              "Asset documents",
+              "Property, investment, vehicle or movable assets"
+            ],
+            [
+              "Loan documents / charge records",
+              "Creditor and lender relevance"
+            ],
+            [
+              "Litigation documents",
+              "Pending legal matter support"
+            ],
+            [
+              "Tax demand / refund documents",
+              "Statutory interest in revival"
+            ],
+            [
+              "Creditor claim documents",
+              "Revival by creditor or liability evidence"
+            ],
+            [
+              "Workman claim documents",
+              "Employee/workman interest evidence"
+            ],
+            [
+              "Affidavit verifying petition",
+              "NCLT filing support"
+            ],
+            [
+              "Authorisation / vakalatnama",
+              "Representation before NCLT"
+            ],
+            [
+              "Draft pending forms checklist",
+              "Post-revival compliance plan"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evidence",
+      "title": "Evidence That Helps in Revival",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Evidence Type",
+            "Why It Helps"
+          ],
+          "rows": [
+            [
+              "Bank account statement",
+              "Shows transactions, balance or operational continuity"
+            ],
+            [
+              "Income-tax returns",
+              "Shows statutory filing and business existence"
+            ],
+            [
+              "GST returns",
+              "Shows business activity and tax compliance"
+            ],
+            [
+              "TDS records",
+              "Shows payments, receipts or employee/vendor activity"
+            ],
+            [
+              "Invoices",
+              "Shows trading or service activity"
+            ],
+            [
+              "Contracts",
+              "Shows continuing rights and obligations"
+            ],
+            [
+              "Lease agreement",
+              "Shows office or operating premises"
+            ],
+            [
+              "Employee records",
+              "Shows active operations"
+            ],
+            [
+              "Property papers",
+              "Shows assets requiring legal status"
+            ],
+            [
+              "Loan documents",
+              "Shows liabilities and lender interest"
+            ],
+            [
+              "Litigation papers",
+              "Shows company needs legal personality"
+            ],
+            [
+              "Audit reports",
+              "Supports financial position"
+            ],
+            [
+              "Client/vendor confirmations",
+              "Supports business continuity"
+            ],
+            [
+              "E-way bills / shipping documents",
+              "Supports movement of goods"
+            ],
+            [
+              "ROC correspondence",
+              "Shows communication and procedural history"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A restoration petition becomes stronger when the company can show genuine business, assets, liabilities or a just reason for restoration."
+        }
+      ]
+    },
+    {
+      "id": "nclt-grounds",
+      "title": "Common Reasons NCLT May Consider Revival",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Ground",
+            "Practical Explanation"
+          ],
+          "rows": [
+            [
+              "Company was carrying business",
+              "Bank, GST, tax, invoices or contracts support operation"
+            ],
+            [
+              "Company had assets",
+              "Property, bank balance, investments or receivables exist"
+            ],
+            [
+              "Company had liabilities",
+              "Creditors, lenders, taxes or employee dues remain pending"
+            ],
+            [
+              "Strike-off was not justified",
+              "ROC action may be challenged on facts"
+            ],
+            [
+              "Notice was not properly received",
+              "Natural justice argument may be considered"
+            ],
+            [
+              "Company has pending litigation",
+              "Company must exist to pursue or defend case"
+            ],
+            [
+              "Member interest is affected",
+              "Shareholder rights require restoration"
+            ],
+            [
+              "Creditor interest is affected",
+              "Creditor needs company revived for recovery"
+            ],
+            [
+              "Workman claim is pending",
+              "Workman rights require legal existence"
+            ],
+            [
+              "It is otherwise just",
+              "Tribunal may restore where facts justify restoration"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "route-comparison",
+      "title": "Revival vs Strike-Off vs Fresh Incorporation",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Revival of Struck off Companies",
+            "Strike-Off",
+            "Fresh Incorporation"
+          ],
+          "rows": [
+            [
+              "Purpose",
+              "Restore old company",
+              "Close inactive company",
+              "Start new company"
+            ],
+            [
+              "Forum",
+              "NCLT and ROC",
+              "ROC / MCA",
+              "MCA / CRC"
+            ],
+            [
+              "Best For",
+              "Existing assets, contracts, bank account, tax/GST, litigation or business continuity",
+              "No business, no assets, no liabilities",
+              "New business identity"
+            ],
+            [
+              "Old CIN",
+              "Restored",
+              "Closed",
+              "New CIN"
+            ],
+            [
+              "Old bank/assets",
+              "Can be dealt with after restoration",
+              "Generally closure route",
+              "Not linked"
+            ],
+            [
+              "Pending filings",
+              "Must be regularised",
+              "Closure filings required",
+              "Not applicable"
+            ],
+            [
+              "Time and cost",
+              "Higher than fresh incorporation",
+              "Lower if eligible",
+              "Usually faster"
+            ],
+            [
+              "Brand continuity",
+              "Preserved",
+              "Ends",
+              "New brand/legal identity"
+            ],
+            [
+              "Legal history",
+              "Continues",
+              "Ends after strike-off",
+              "Fresh entity"
+            ],
+            [
+              "Best Decision",
+              "Use when old entity has value or obligations",
+              "Use when entity is not needed",
+              "Use where old company need not be restored"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Fresh incorporation is not a substitute where the old company has property, bank balance, contracts, debt, tax matters or litigation."
+        }
+      ]
+    },
+    {
+      "id": "roc-restoration",
+      "title": "Revival vs Restoration by ROC",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "NCLT Revival",
+            "ROC-Initiated Restoration"
+          ],
+          "rows": [
+            [
+              "Main Section",
+              "Section 252",
+              "Section 252 proviso"
+            ],
+            [
+              "Applicant",
+              "Company, member, creditor, workman or aggrieved person",
+              "Registrar of Companies"
+            ],
+            [
+              "Forum",
+              "NCLT",
+              "NCLT application by ROC"
+            ],
+            [
+              "Ground",
+              "Business, operation, asset, liability, injustice or aggrieved status",
+              "Inadvertent strike-off or incorrect information"
+            ],
+            [
+              "Time Limit",
+              "3 years / 20 years depending on route",
+              "Within 3 years"
+            ],
+            [
+              "Practical Use",
+              "Most private restoration cases",
+              "ROC-driven correction cases"
+            ],
+            [
+              "Documents",
+              "Petition, evidence, affidavit, filings and ROC service",
+              "ROC application and supporting records"
+            ],
+            [
+              "Result",
+              "Restoration order and pending compliance directions",
+              "Restoration order and ROC action"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "after-order",
+      "title": "What Happens After NCLT Restoration Order?",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Action",
+            "Practical Requirement"
+          ],
+          "rows": [
+            [
+              "Certified Copy",
+              "Obtain certified copy of NCLT order"
+            ],
+            [
+              "ROC Filing",
+              "File certified copy with ROC within prescribed timeline"
+            ],
+            [
+              "ROC Publication",
+              "ROC publishes restoration order in Official Gazette"
+            ],
+            [
+              "Status Update",
+              "MCA status changes from struck-off to active/restored"
+            ],
+            [
+              "Fresh Certificate",
+              "ROC issues fresh certificate of incorporation / restoration recognition as per law"
+            ],
+            [
+              "Pending Filings",
+              "File overdue financial statements and annual returns"
+            ],
+            [
+              "Additional Fees",
+              "Pay applicable normal/additional fees and penalties, where applicable"
+            ],
+            [
+              "DIN / DSC",
+              "Director DIN/DSC status may need review"
+            ],
+            [
+              "Bank Account",
+              "Bank records updated after restoration"
+            ],
+            [
+              "PAN / GST",
+              "Tax registrations and compliance reviewed"
+            ],
+            [
+              "Statutory Registers",
+              "Company records updated"
+            ],
+            [
+              "Business Restart",
+              "Operations resumed only after compliance regularisation"
+            ],
+            [
+              "Closure Option",
+              "If revival was only for closure, strike-off/liquidation route may follow after compliance"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Revival is not the final step. It is the beginning of compliance regularisation."
+        }
+      ]
+    },
+    {
+      "id": "post-revival",
+      "title": "Post-Revival Compliance Checklist",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Compliance Item",
+            "Why It Matters"
+          ],
+          "rows": [
+            [
+              "AOC-4 pending filings",
+              "Financial statements must be filed"
+            ],
+            [
+              "MGT-7 / MGT-7A pending filings",
+              "Annual returns must be filed"
+            ],
+            [
+              "ADT-1 auditor filings",
+              "Auditor appointment record must be regularised"
+            ],
+            [
+              "Director KYC",
+              "DIN status and KYC compliance reviewed"
+            ],
+            [
+              "DPT-3, MSME-1, BEN-2, if applicable",
+              "Event/period-based filing review"
+            ],
+            [
+              "INC-22, if registered office changed",
+              "Registered office update"
+            ],
+            [
+              "DIR-12, if directors changed",
+              "Board record regularisation"
+            ],
+            [
+              "PAS-3, if allotment occurred",
+              "Share capital compliance"
+            ],
+            [
+              "CHG forms",
+              "Charge creation/modification/satisfaction"
+            ],
+            [
+              "Income-tax returns",
+              "Tax compliance regularisation"
+            ],
+            [
+              "GST returns",
+              "GST status and pending returns"
+            ],
+            [
+              "Bank KYC",
+              "Bank account reactivation support"
+            ],
+            [
+              "Statutory registers",
+              "Internal company records updated"
+            ],
+            [
+              "Board minutes",
+              "Governance record reconstruction"
+            ],
+            [
+              "ROC penalties / adjudication",
+              "Exposure review and response"
+            ],
+            [
+              "Future closure / dormant status",
+              "Strategic decision after revival"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "specific-needs",
+      "title": "Revival for Bank Account, Property and Litigation",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Situation",
+            "Practical Need for Revival"
+          ],
+          "rows": [
+            [
+              "Bank account frozen",
+              "Bank may require active MCA status"
+            ],
+            [
+              "Company owns land/building",
+              "Property cannot be sold or transferred smoothly"
+            ],
+            [
+              "Company has receivables",
+              "Debtors may not pay dissolved company"
+            ],
+            [
+              "Company has pending lawsuit",
+              "Legal capacity may be challenged"
+            ],
+            [
+              "Company has tax refund",
+              "Refund may require active company status"
+            ],
+            [
+              "Company has GST matters",
+              "GST response or cancellation may need revival"
+            ],
+            [
+              "Company has loan/charge",
+              "Lender rights and MCA charge require status clarity"
+            ],
+            [
+              "Company has investments",
+              "Shares/securities cannot be dealt with properly"
+            ],
+            [
+              "Company is part of group restructuring",
+              "Old entity must exist for transaction"
+            ],
+            [
+              "Company has insurance claim",
+              "Claim processing may require legal existence"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-issues",
+      "title": "Common Issues We Fixed for Clients",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Issue",
+            "Practical Risk",
+            "How Estabizz Supports"
+          ],
+          "rows": [
+            [
+              "Promoters noticed strike-off too late",
+              "Limitation and evidence risk",
+              "STK-7 and limitation assessment"
+            ],
+            [
+              "Company had bank balance",
+              "Bank refused operation",
+              "Revival and bank update support"
+            ],
+            [
+              "Company owned property",
+              "Sale/mutation blocked",
+              "NCLT restoration and title support"
+            ],
+            [
+              "Pending AOC-4/MGT-7 for years",
+              "Heavy filing burden",
+              "Compliance gap report"
+            ],
+            [
+              "Directors’ DIN affected",
+              "Filing impossible",
+              "DIN/reactivation route review"
+            ],
+            [
+              "ROC notice not received",
+              "Natural justice concern",
+              "Notice history and affidavit support"
+            ],
+            [
+              "No business records organised",
+              "Weak petition",
+              "Evidence compilation support"
+            ],
+            [
+              "Tax refund pending",
+              "Refund blocked",
+              "Tax and revival coordination"
+            ],
+            [
+              "Creditor wanted recovery",
+              "Company dissolved",
+              "Creditor-led restoration support"
+            ],
+            [
+              "Company needed closure only",
+              "Wrong route confusion",
+              "Revival-for-closure strategy"
+            ],
+            [
+              "Regulated licence existed",
+              "Regulator issue",
+              "Sectoral compliance review"
+            ],
+            [
+              "Petition filed without evidence",
+              "NCLT objection",
+              "Business/asset/liability proof matrix"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reducing-delay",
+      "title": "How We Reduced Approval Time for Clients",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Revival of Struck off Companies often gets delayed because promoters file NCLT petitions without proper evidence, missing STK-7 date, incomplete financials, weak affidavit, unclear grounds, no compliance gap report and no plan for pending filings after restoration."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz reduces avoidable delay by preparing a revival readiness file at the beginning: MCA status report, STK notice history, limitation note, evidence matrix, asset-liability summary, pending forms list, draft compliance calendar, NCLT petition support file and ROC service checklist."
+        },
+        {
+          "type": "paragraph",
+          "text": "In company revival, NCLT must see why restoration is justified. A strong evidence file improves clarity and reduces repeated objections."
+        }
+      ]
+    },
+    {
+      "id": "legal-risks",
+      "title": "Legal Risks If Revival Is Not Handled Properly",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Risk",
+            "Practical Impact"
+          ],
+          "rows": [
+            [
+              "Limitation missed",
+              "Revival route may become difficult"
+            ],
+            [
+              "Weak petition",
+              "NCLT may dismiss application"
+            ],
+            [
+              "No proof of operation",
+              "Restoration may not be justified"
+            ],
+            [
+              "No asset/liability evidence",
+              "“Just and equitable” ground may fail"
+            ],
+            [
+              "Wrong applicant",
+              "Maintainability issue"
+            ],
+            [
+              "ROC not served properly",
+              "Procedural defect"
+            ],
+            [
+              "NCLT order not filed with ROC in time",
+              "Restoration implementation delay"
+            ],
+            [
+              "Pending filings ignored",
+              "Company remains non-compliant"
+            ],
+            [
+              "DIN issue not reviewed",
+              "Filing and governance difficulty"
+            ],
+            [
+              "Bank not updated",
+              "Account remains blocked"
+            ],
+            [
+              "GST/tax ignored",
+              "Statutory notices continue"
+            ],
+            [
+              "Revival done without closure plan",
+              "Company again becomes defaulting"
+            ],
+            [
+              "Directors assume revival means clean status",
+              "Penalties and filings may still remain"
+            ],
+            [
+              "Fraudulent strike-off history ignored",
+              "Officer liability risk"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "services",
+      "title": "Our Revival of Struck off Companies Services",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Service",
+            "What We Do"
+          ],
+          "rows": [
+            [
+              "Revival Feasibility Review",
+              "Check whether restoration is possible and justified"
+            ],
+            [
+              "MCA Status Review",
+              "Review master data, STK status and ROC jurisdiction"
+            ],
+            [
+              "STK-7 / Gazette Tracking",
+              "Identify strike-off date and limitation"
+            ],
+            [
+              "Limitation Note",
+              "Determine 3-year or 20-year route"
+            ],
+            [
+              "Evidence Matrix",
+              "Compile bank, tax, GST, invoices, contracts, assets and liabilities"
+            ],
+            [
+              "Pending Compliance Review",
+              "Identify AOC-4, MGT-7, ADT-1 and other defaulted filings"
+            ],
+            [
+              "NCLT-9 Petition Support",
+              "Drafting support and advocate coordination"
+            ],
+            [
+              "Affidavit and Authorisation Support",
+              "Prepare affidavits, board authority and representation documents"
+            ],
+            [
+              "ROC Service Support",
+              "Ensure ROC copy service and tracking"
+            ],
+            [
+              "Hearing Coordination",
+              "Coordinate NCLT hearing and ROC response"
+            ],
+            [
+              "Restoration Order Follow-Up",
+              "Certified copy and ROC filing support"
+            ],
+            [
+              "ROC Restoration Tracking",
+              "MCA status update and fresh certificate follow-up"
+            ],
+            [
+              "DIN / DSC Review",
+              "Director status and signing readiness review"
+            ],
+            [
+              "Post-Revival Filings",
+              "Pending forms and financial statement filing support"
+            ],
+            [
+              "Tax / GST Regularisation",
+              "Income-tax, GST, TDS and refund/demand review"
+            ],
+            [
+              "Revival-for-Closure Strategy",
+              "Restore company only to complete lawful closure"
+            ],
+            [
+              "Ticket-Based Tracking",
+              "Track petition, notice, hearing, order, ROC filing and compliance closure"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "why-estabizz",
+      "title": "Why Choose Estabizz Fintech?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Clients approach us for Revival of Struck off Companies because they want a clear route to restore the company without wasting time in defective petitions, weak documentation or post-revival confusion."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz Fintech helps save time by first checking whether the company can be revived, who should apply, which limitation route applies, what evidence is available and what pending compliance must be completed after restoration."
+        },
+        {
+          "type": "paragraph",
+          "text": "We reduce effort by preparing the MCA status review, STK notice tracking, evidence checklist, compliance gap report, petition support file, ROC service checklist, hearing coordination and post-revival filing plan in a structured manner."
+        },
+        {
+          "type": "paragraph",
+          "text": "We help avoid rejection, delay and future non-compliance by ensuring that the revival petition is supported by clear grounds, documents, business proof, asset/liability proof and a practical compliance regularisation plan."
+        },
+        {
+          "type": "paragraph",
+          "text": "Our support is end-to-end, including revival feasibility, NCLT-9 petition support, affidavit support, ROC coordination, order follow-up, certified copy filing, MCA status restoration, pending annual filings, DIN/DSC review, bank update, tax/GST regularisation and closure planning where needed."
+        },
+        {
+          "type": "paragraph",
+          "text": "Our approach is budget-friendly and practical. Multiple payment options may be structured depending on urgency, ROC jurisdiction, year of strike-off, pending filings, NCLT complexity, evidence availability, director status and post-revival compliance volume."
+        },
+        {
+          "type": "paragraph",
+          "text": "Every matter is handled through a structured ticket-based tracking system. Clients receive updates on MCA search, document collection, limitation, petition drafting, ROC service, NCLT hearing, order, ROC filing, status restoration and post-revival compliance through call, email or WhatsApp."
+        },
+        {
+          "type": "paragraph",
+          "text": "You focus on your business—we handle the compliance journey."
+        }
+      ]
+    },
+    {
+      "id": "client-needs",
+      "title": "What Clients Actually Want—and How We Help",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Client Concern",
+            "Estabizz Support"
+          ],
+          "rows": [
+            [
+              "“My company is struck off.”",
+              "MCA status and restoration route review"
+            ],
+            [
+              "“Can we revive it?”",
+              "Section 252 feasibility assessment"
+            ],
+            [
+              "“Bank account is blocked.”",
+              "Revival and bank update support"
+            ],
+            [
+              "“Company has property.”",
+              "Asset-based restoration evidence"
+            ],
+            [
+              "“We missed ROC filings.”",
+              "Pending compliance gap report"
+            ],
+            [
+              "“We only want to close properly.”",
+              "Revival-for-strike-off strategy"
+            ],
+            [
+              "“ROC notice was not received.”",
+              "Natural justice and notice history review"
+            ],
+            [
+              "“Directors’ DIN is affected.”",
+              "DIN/filing readiness review"
+            ],
+            [
+              "“We need regular updates.”",
+              "Ticket-based tracking"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Revival of Struck off Companies is a serious NCLT-driven restoration process. It should be handled carefully because the company’s legal existence, assets, liabilities, business rights, bank operations, pending filings and director compliance may all be affected."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz Fintech assists clients with revival feasibility, MCA status review, STK-7 tracking, limitation calculation, evidence preparation, NCLT-9 petition support, ROC coordination, restoration order filing, MCA status update, pending annual filings, DIN/DSC review, tax/GST regularisation and revival-for-closure strategy."
+        },
+        {
+          "type": "paragraph",
+          "text": "When a company has been struck off, the right question is not only “Can it be revived?” The right question is: Why should it be revived, what evidence supports revival, and what compliance must be completed after restoration?"
+        },
+        {
+          "type": "paragraph",
+          "text": "Connect with Estabizz Fintech today and complete your Revival of Struck off Companies process with clarity, confidence and professional NCLT/ROC support."
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What is Revival of Struck off Companies?",
+      "a": "Revival of Struck off Companies is the legal process of restoring a company’s name to the Register of Companies after ROC has struck it off."
+    },
+    {
+      "q": "Is Revival of Struck off Companies a licence?",
+      "a": "No. It is not a licence. It is a statutory restoration process under company law."
+    },
+    {
+      "q": "Which section applies to revival of struck-off company?",
+      "a": "Section 252 of the Companies Act, 2013 is the main provision for restoration of a struck-off company."
+    },
+    {
+      "q": "Which authority handles company revival?",
+      "a": "The National Company Law Tribunal handles restoration petitions, and ROC updates the company status after the NCLT order is filed."
+    },
+    {
+      "q": "Why does ROC strike off a company?",
+      "a": "ROC may strike off a company for non-commencement, non-operation, non-filing, non-maintenance of registered office or other statutory grounds under Section 248."
+    },
+    {
+      "q": "Can a struck-off company be revived?",
+      "a": "Yes. A struck-off company can be revived if the applicant shows valid grounds under Section 252 and NCLT is satisfied."
+    },
+    {
+      "q": "Who can file revival petition?",
+      "a": "The company, member, creditor, workman or aggrieved person may apply depending on the route and facts."
+    },
+    {
+      "q": "What is the time limit for revival?",
+      "a": "A Section 252(1) appeal is generally within 3 years from ROC order. Section 252(3) application by company/member/creditor/workman can be made before expiry of 20 years from Gazette publication."
+    },
+    {
+      "q": "What is STK-7?",
+      "a": "STK-7 is the notice of striking off and dissolution published after ROC removes the company’s name from the register."
+    },
+    {
+      "q": "What is NCLT-9?",
+      "a": "NCLT-9 is the form used for appeal or application under Section 252 for restoration of company name."
+    },
+    {
+      "q": "Is bank balance enough for revival?",
+      "a": "Bank balance is helpful evidence, but the petition should also explain why restoration is just and necessary."
+    },
+    {
+      "q": "Can a company be revived for property transfer?",
+      "a": "Yes. If the struck-off company owns property, revival may be required for sale, transfer, mutation or title clearance."
+    },
+    {
+      "q": "Can a creditor apply for revival?",
+      "a": "Yes. A creditor can apply if the company’s restoration is needed for recovery or enforcement of claim."
+    },
+    {
+      "q": "Can a workman apply for revival?",
+      "a": "Yes. A workman can apply where rights or dues are affected by the strike-off."
+    },
+    {
+      "q": "Can a struck-off company file ROC forms directly?",
+      "a": "Generally, restoration is required before regular filings can be completed, subject to MCA/ROC system and NCLT order directions."
+    },
+    {
+      "q": "What happens after NCLT restoration order?",
+      "a": "The certified copy of NCLT order must be filed with ROC, after which ROC restores the company’s name and pending compliances must be completed."
+    },
+    {
+      "q": "Does revival remove all penalties?",
+      "a": "No. Revival restores legal status, but pending filings, additional fees, penalties and compliance defaults may still need to be handled."
+    },
+    {
+      "q": "Can DIN be activated after company revival?",
+      "a": "DIN issues may need separate review. Where DIN was affected due to strike-off/default, post-restoration steps may be required."
+    },
+    {
+      "q": "Can company be revived only for closure?",
+      "a": "Yes. In some cases, the company is revived only to regularise filings, settle assets/liabilities and then complete lawful strike-off or liquidation."
+    },
+    {
+      "q": "Can fresh company incorporation replace revival?",
+      "a": "Fresh incorporation may work only where old company has no assets, liabilities, contracts, bank balance, tax matters or legal need. Otherwise revival may be required."
+    },
+    {
+      "q": "Is NCLT hearing required?",
+      "a": "Yes. NCLT generally hears the applicant and ROC before passing restoration order."
+    },
+    {
+      "q": "Can ROC object to revival?",
+      "a": "Yes. ROC may file observations or objections, especially if filings are pending or grounds for revival are weak."
+    },
+    {
+      "q": "What documents are required for revival?",
+      "a": "COI, MOA/AOA, MCA master data, STK-7, bank statements, tax/GST records, invoices, financials, pending forms list, board resolution, affidavit and evidence of business/assets/liabilities may be required."
+    },
+    {
+      "q": "What is the biggest mistake in company revival?",
+      "a": "The biggest mistake is filing a generic petition without limitation calculation, STK-7 date, evidence matrix, compliance gap report and post-revival filing plan."
+    },
+    {
+      "q": "Can Estabizz handle complete revival support?",
+      "a": "Yes. Estabizz assists with Section 252 route review, NCLT-9 petition support, evidence compilation, ROC coordination, restoration order follow-up and post-revival compliance regularisation."
+    }
+  ],
+  "expertQuote": {
+    "quote": "Revival of Struck off Companies should be prepared with evidence, not assumptions. A strong restoration file should show why the company deserves revival, what rights are affected, what compliances are pending and how the company will regularise its records after restoration.",
+    "attribution": "CS Devyani Khambhati – Compliance Expert"
+  },
+  "disclaimer": "This guide is general information based on material supplied by Estabizz and remains under professional review. Restoration strategy, limitation, evidence, filing requirements, penalties and post-restoration directions depend on the company record, the order of the Tribunal and current MCA and NCLT procedure. Estabizz provides status review, documentation, filing and coordination support; appearance before the Tribunal is through enrolled professionals or advocates as applicable. Confirm the current legal and procedural position before acting."
+}

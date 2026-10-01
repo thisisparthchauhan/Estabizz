@@ -1,7 +1,59 @@
 # Estabizz Admin OS — CMS Status
 
 > Single source of truth for the admin/CMS build. **Update this file after every development batch.**
-> Last updated: 2026-07-25 (IST) · Phase: **Blog image management** · Status: **completed locally** · Next: **CMS integration for country configs** · Last batch: **Blog cover image management + controlled inline article images**
+> Last updated: 2026-10-01 (IST) · Phase: **Navigation usability** · Status: **completed locally** · Next: **Owner review** · Last batch: **Mega-menu category hub links**
+
+---
+
+## 2026-10-01 — Mega-Menu Category Hub Navigation — DONE Locally
+
+**Fix**: Desktop Regulatory and Solutions mega-menu category rows are now real links to their existing category hubs. Hover and keyboard focus still select the category preview, while clicking a row opens its `viewAll` route. In particular, clicking Legal now opens `/solutions/legal` instead of only refreshing the Legal preview panel. The existing service links, footer “View All” links and mobile menu behaviour remain unchanged.
+
+**Verification**: TypeScript and targeted Navbar lint pass with no new warnings. Browser interaction checks confirm Legal navigates to `/solutions/legal` and IPR navigates to `/solutions/ipr`, with correct page headings and no runtime console errors.
+
+**Scope**: Local implementation only. No commit, push or deployment.
+
+---
+
+## 2026-10-01 — Further Legal Solutions Source-Document Guides — Local Content Review
+
+**Task**: Added four dedicated Legal solution guides from owner-supplied Word documents: `/solutions/legal/writ-petition`, `/solutions/legal/winding-up-of-companies`, `/solutions/legal/will-registration` and `/solutions/legal/tenant-eviction-notice`. All four use the shared source-document renderer and existing `ServicePageLayout`, and are connected from the Legal hub, desktop/mobile navigation and static sitemap. No existing route was renamed and no new CSS or dependency was introduced.
+
+**Source fidelity**: Writ Petition contains 29 source sections, all 23 Word tables and all 25 FAQs. Winding Up of Companies contains 27 source sections, all 21 tables and all 25 FAQs. Will Registration contains 29 source sections, all 23 tables and all 25 FAQs. Tenant Eviction Notice contains 26 source sections, all 20 tables and all 25 FAQs. Automated source-to-render comparison found no missing table cells, FAQ questions or FAQ answers. The supplied documents were not added to the repository.
+
+**Content status**: All four pages visibly use the existing `reviewPending` label and legal disclaimer. Core statutory anchors were cross-checked against official India Code materials, including Constitution Articles 32, 226 and 227; Companies Act sections 271 and 272; IBC section 59; Registration Act section 18; Indian Succession Act section 63; and Transfer of Property Act section 106. This is not an exhaustive legal review. Court procedure, State-specific rules, limitation, fees and current regulatory amendments require owner/professional approval before release. Source wording was not silently represented as approved legal advice.
+
+**Verification**: The Legal source-document test passes for ten routes in total (247 FAQs and 189 rendered tables, including the earlier source-document batches). Exact parity checks pass for all 87 tables and 100 FAQs in this batch. The Legal hub and all four new routes return HTTP 200. Browser checks at 1440px and 390px confirm the expected titles, review labels, tables, FAQ counts, content navigation and CTA rendering with no horizontal overflow or runtime console errors. TypeScript, targeted lint, repository-wide lint (0 errors; existing warnings only) and the production build (344 generated pages) pass.
+
+**Scope**: Local implementation only. No commit, push or deployment. Other pre-existing legal-route work and generated Tailwind changes remain untouched.
+
+---
+
+## 2026-10-01 — Additional Legal Solutions Source-Document Guides — Local Content Review
+
+**Task**: Added four dedicated Legal solution guides from owner-supplied Word documents: `/solutions/legal/suspension-of-sentence`, `/solutions/legal/succession-certificate`, `/solutions/legal/special-leave-petition` and `/solutions/legal/sexual-harassment-at-workplace-compliance`. All four use the shared source-document renderer and existing `ServicePageLayout`, and are connected from the Legal hub, desktop/mobile navigation and static sitemap. No existing route was renamed and no new CSS or dependency was introduced.
+
+**Source fidelity**: Suspension of Sentence contains 17 source sections, all 11 Word tables and all 25 FAQs. Succession Certificate contains 29 source sections, all 23 tables and all 25 FAQs. Special Leave Petition contains 28 source sections, all 22 tables and all 25 FAQs. Sexual Harassment at Workplace Compliance contains 14 source sections, all 8 tables and the 22 FAQs supplied in that document. Automated source-to-render checks found no missing table cells, FAQ questions or FAQ answers. The supplied documents were not added to the repository.
+
+**Content status**: All four pages visibly use the existing `reviewPending` label and legal disclaimer. Core provisions were cross-checked against official India Code and Supreme Court materials, including BNSS Section 430, Indian Succession Act Part X, Article 136/Supreme Court Rules and the POSH Act. This is not an exhaustive legal review; procedural detail, timelines, court practice, State court fees and organisation-specific POSH duties require owner/professional approval before release. Source wording was not silently represented as approved advice.
+
+**Verification**: The Legal source-document test now passes for six routes in total (147 FAQs and 102 rendered tables, including the prior two-guide batch). TypeScript and targeted lint pass. The Legal hub and all four new routes return HTTP 200. Browser checks at 1440px and 390px confirm correct titles, trust lines, review labels, tables, FAQ counts and responsive wrapping with no horizontal overflow or runtime console errors.
+
+**Scope**: Local implementation only. No commit, push or deployment. Other pre-existing legal-route work and generated Tailwind changes remain untouched.
+
+---
+
+## 2026-10-01 — Legal Solutions Source-Document Guides — Local Content Review
+
+**Task**: Added two dedicated Legal solution guides from the owner-supplied Word documents: `/solutions/legal/revival-of-struck-off-companies` and `/solutions/legal/relinquishment-deed`. Both routes use the existing `ServicePageLayout` design system and are connected from the Legal hub, desktop/mobile navigation and static sitemap. No existing route was renamed and no new CSS or dependency was introduced.
+
+**Source fidelity**: Revival of Struck-Off Companies contains 26 source sections, 19 Word tables plus one inline comparison converted into a responsive table, and all 25 FAQs. Relinquishment Deed contains 24 source sections, all 18 Word tables and all 25 FAQs. Automated source-to-render checks found no missing table cells, FAQ questions or FAQ answers. The supplied documents were not added to the repository.
+
+**Content status**: Both pages visibly retain the existing `reviewPending` label and legal disclaimer. Source wording is presented as supplied content, not as newly approved legal advice. Core statutory references were cross-checked against official India Code and NCLT materials, but professional content approval remains required before release.
+
+**Verification**: Dedicated content tests pass for both routes, including route files, section IDs, table widths, FAQs, entity leaks and hub/navigation/sitemap registration. TypeScript passes. Both the Legal hub and new routes return HTTP 200, and mobile browser checks confirm clean hero, content, table, FAQ and CTA rendering.
+
+**Scope**: Local implementation only. No commit, push or deployment. Other pre-existing legal-route work and generated Tailwind changes remain untouched.
 
 ---
 

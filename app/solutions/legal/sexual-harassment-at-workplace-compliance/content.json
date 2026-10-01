@@ -1,0 +1,707 @@
+{
+  "title": "Sexual Harassment at Workplace Compliance",
+  "focusKeyword": "Sexual Harassment At Workplace",
+  "tags": [
+    "Legal",
+    "POSH Compliance"
+  ],
+  "breadcrumbLabel": "Sexual Harassment at Workplace Compliance",
+  "readTime": "12 min read",
+  "trustLine": "Confidential guidance. Structured documentation. Practical compliance execution.",
+  "reviewPending": true,
+  "heroParagraphs": [
+    "Build a safe workplace, meet statutory POSH compliance requirements and protect your organisation from regulatory, reputational and employee-relations risk.",
+    "At Estabizz Fintech, we help companies implement Sexual Harassment At Workplace compliance through POSH policy drafting, Internal Committee formation, complaint process structuring, annual reporting, employee awareness training and end-to-end compliance documentation."
+  ],
+  "quickFacts": [
+    {
+      "label": "Main law",
+      "value": "POSH Act, 2013"
+    },
+    {
+      "label": "Committee threshold",
+      "value": "Generally 10 or more employees"
+    },
+    {
+      "label": "Core controls",
+      "value": "Policy, IC, training and reporting"
+    },
+    {
+      "label": "Handling standard",
+      "value": "Confidential and time-bound"
+    }
+  ],
+  "relatedArticles": [
+    {
+      "title": "Legal Due Diligence",
+      "href": "/services/legal-due-diligence",
+      "category": "Legal",
+      "description": "Review legal and governance gaps across corporate records, contracts and compliance controls."
+    },
+    {
+      "title": "Legal Process Outsourcing",
+      "href": "/services/legal-process-outsourcing",
+      "category": "Legal",
+      "description": "Structured legal documentation, research and process support for growing organisations."
+    },
+    {
+      "title": "General Legal Notice",
+      "href": "/solutions/legal/general-legal-notice",
+      "category": "Legal",
+      "description": "Notice drafting, service, proof, response strategy and limitation review."
+    }
+  ],
+  "finalCtaTitle": "Build a Practical and Confidential POSH Framework",
+  "finalCtaDescription": "Before you proceed, speak with our experts. Sexual Harassment At Workplace compliance affects employee trust, statutory reporting, governance standards and management responsibility. A short discussion today can help you avoid months of confusion, documentation gaps or sensitive complaint-handling mistakes.",
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sexual Harassment At Workplace is not only an HR concern; it is a statutory compliance, governance and workplace safety obligation for every responsible employer in India."
+        },
+        {
+          "type": "paragraph",
+          "text": "The Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013, commonly known as the POSH Act, provides a legal framework to prevent, prohibit and redress sexual harassment at the workplace. It requires covered organisations to create a safe working environment, constitute an Internal Committee, conduct awareness programmes, handle complaints confidentially and maintain proper records."
+        },
+        {
+          "type": "paragraph",
+          "text": "This matters to companies, LLPs, startups, NBFCs, fintech entities, factories, educational institutions, hospitals, service providers, professional firms and even growing businesses with multi-location teams. A weak POSH framework can expose the organisation to penalties, inspection risk, employee dissatisfaction, reputational damage and serious governance concerns."
+        }
+      ]
+    },
+    {
+      "id": "quick-answer",
+      "title": "Quick Answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sexual Harassment At Workplace compliance refers to the legal and procedural framework that employers must implement under the POSH Act, 2013. It is regulated through the statutory framework under the Ministry of Women and Child Development, appropriate government authorities, District Officers and related corporate disclosure requirements."
+        },
+        {
+          "type": "paragraph",
+          "text": "For organisations employing 10 or more employees, constitution of an Internal Committee is generally mandatory. Companies must also ensure policy implementation, training, complaint handling, annual reporting and statutory disclosure wherever applicable."
+        }
+      ]
+    },
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In simple terms…"
+        },
+        {
+          "type": "paragraph",
+          "text": "Sexual Harassment At Workplace compliance means creating a legally recognised system inside the organisation where employees know what conduct is unacceptable, how complaints can be made, who will hear the complaint and how confidentiality, fairness and timelines will be maintained."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is not enough to merely keep a POSH policy in files. The organisation must be able to show actual implementation through Internal Committee constitution, employee sensitisation, complaint register, annual reporting and board-level governance records."
+        },
+        {
+          "type": "paragraph",
+          "text": "From a compliance perspective…"
+        },
+        {
+          "type": "paragraph",
+          "text": "Sexual Harassment At Workplace compliance is a preventive and remedial framework. The intent of the law is to ensure that workplaces remain safe, dignified and accessible for women employees, consultants, trainees, visitors, contractual workers and other persons covered under the statute."
+        },
+        {
+          "type": "paragraph",
+          "text": "For regulated businesses, including entities in financial services, fintech, insurance, securities market, NBFC, payment systems and professional services, POSH compliance also becomes part of broader governance, employee conduct, risk management and internal control expectations."
+        }
+      ]
+    },
+    {
+      "id": "regulatory-framework",
+      "title": "Regulatory Framework",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Particular",
+            "Applicable Framework"
+          ],
+          "rows": [
+            [
+              "Main Law",
+              "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013"
+            ],
+            [
+              "Rules",
+              "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Rules, 2013"
+            ],
+            [
+              "Criminal Law Reference",
+              "Section 75 of Bharatiya Nyaya Sanhita, 2023"
+            ],
+            [
+              "Corporate Disclosure",
+              "Companies Act, 2013 read with Companies (Accounts) Rules, 2014, as amended"
+            ],
+            [
+              "Authority Involved",
+              "Appropriate Government, District Officer, Internal Committee, Local Committee"
+            ],
+            [
+              "Master Direction",
+              "Not applicable; this is a statutory legal compliance framework, not a sectoral master direction"
+            ],
+            [
+              "Core Requirement",
+              "Prevention, prohibition, redressal, confidentiality, reporting and employer accountability"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "important-legal-points",
+      "title": "Important legal points",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "As per the POSH framework, employers are expected to:"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Compliance Area",
+            "Practical Requirement"
+          ],
+          "rows": [
+            [
+              "POSH Policy",
+              "Adopt and circulate a workplace sexual harassment prevention policy"
+            ],
+            [
+              "Internal Committee",
+              "Constitute an Internal Committee with prescribed composition"
+            ],
+            [
+              "External Member",
+              "Appoint an external member familiar with POSH issues"
+            ],
+            [
+              "Employee Awareness",
+              "Conduct workshops and awareness sessions at regular intervals"
+            ],
+            [
+              "Display Requirement",
+              "Display penal consequences and IC details at a conspicuous place"
+            ],
+            [
+              "Complaint Handling",
+              "Create a confidential complaint filing and inquiry mechanism"
+            ],
+            [
+              "Timelines",
+              "Track complaint, inquiry, report and recommendation timelines"
+            ],
+            [
+              "Annual Report",
+              "Prepare and submit annual POSH reporting wherever applicable"
+            ],
+            [
+              "Board Disclosure",
+              "Include POSH-related disclosures in Board Report, where applicable"
+            ],
+            [
+              "Record Maintenance",
+              "Maintain registers, minutes, notices, reports and action records"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "who-needs-sexual-harassment-at-workplace-compliance",
+      "title": "Who Needs Sexual Harassment At Workplace Compliance?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sexual Harassment At Workplace compliance is relevant for:"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Organisation Type",
+            "Why It Matters"
+          ],
+          "rows": [
+            [
+              "Private Limited Companies",
+              "Board reporting, employee safety and statutory compliance"
+            ],
+            [
+              "LLPs and Partnerships",
+              "Workplace governance and complaint handling"
+            ],
+            [
+              "Startups",
+              "Early-stage compliance avoids future HR and investor concerns"
+            ],
+            [
+              "NBFCs and Fintech Companies",
+              "Governance and employee conduct controls are critical"
+            ],
+            [
+              "Insurance and SEBI-Regulated Entities",
+              "Strong compliance culture supports regulatory credibility"
+            ],
+            [
+              "Hospitals and Clinics",
+              "High employee and visitor interaction increases sensitivity"
+            ],
+            [
+              "Educational Institutions",
+              "Staff, faculty, students and trainees require clear redressal systems"
+            ],
+            [
+              "Factories and Manufacturing Units",
+              "Multi-shift workforce needs structured complaint channels"
+            ],
+            [
+              "Professional Firms",
+              "Confidential and neutral complaint process is essential"
+            ],
+            [
+              "Remote and Hybrid Teams",
+              "Digital reporting and virtual training are increasingly important"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scope-of-our-sexual-harassment-at-workplace-services",
+      "title": "Scope of Our Sexual Harassment At Workplace Services",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Service",
+            "What We Do"
+          ],
+          "rows": [
+            [
+              "POSH Gap Assessment",
+              "Review existing POSH policy, IC records, training status and reporting gaps"
+            ],
+            [
+              "POSH Policy Drafting",
+              "Prepare customised Sexual Harassment At Workplace policy"
+            ],
+            [
+              "Internal Committee Constitution",
+              "Draft IC constitution order and member appointment documents"
+            ],
+            [
+              "External Member Support",
+              "Assist in identifying and appointing suitable external member"
+            ],
+            [
+              "Employee Awareness Training",
+              "Conduct practical POSH awareness sessions"
+            ],
+            [
+              "IC Member Orientation",
+              "Train IC members on complaint handling, inquiry and confidentiality"
+            ],
+            [
+              "Complaint Process SOP",
+              "Prepare step-by-step complaint and inquiry procedure"
+            ],
+            [
+              "Annual Reporting Support",
+              "Prepare annual POSH report and internal compliance record"
+            ],
+            [
+              "Board Report Disclosure Support",
+              "Draft POSH disclosure language for Board Report"
+            ],
+            [
+              "Case Advisory",
+              "Support management in confidential handling of sensitive cases"
+            ],
+            [
+              "Documentation Kit",
+              "Provide formats, registers, notices, declarations and checklists"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sexual-harassment-at-workplace-compliance-process",
+      "title": "Sexual Harassment At Workplace Compliance Process",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Step",
+            "Activity",
+            "Output"
+          ],
+          "rows": [
+            [
+              "Step 1",
+              "Initial consultation",
+              "Compliance requirement mapping"
+            ],
+            [
+              "Step 2",
+              "Data collection",
+              "Employee count, locations, existing policy and HR documents"
+            ],
+            [
+              "Step 3",
+              "Gap review",
+              "Practical compliance gap note"
+            ],
+            [
+              "Step 4",
+              "Policy drafting",
+              "Customised POSH policy"
+            ],
+            [
+              "Step 5",
+              "IC constitution",
+              "IC order, member consent and appointment documents"
+            ],
+            [
+              "Step 6",
+              "Training",
+              "Employee awareness and IC orientation"
+            ],
+            [
+              "Step 7",
+              "Reporting framework",
+              "Complaint register, annual report and disclosure templates"
+            ],
+            [
+              "Step 8",
+              "Ongoing support",
+              "Advisory for updates, complaints and documentation"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "documents-required",
+      "title": "Documents Required",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Document / Information",
+            "Purpose"
+          ],
+          "rows": [
+            [
+              "Organisation name and structure",
+              "Policy and compliance records"
+            ],
+            [
+              "Employee count",
+              "IC applicability and reporting planning"
+            ],
+            [
+              "Office and branch details",
+              "Multi-location compliance mapping"
+            ],
+            [
+              "Existing HR policy",
+              "Alignment with service rules and misconduct policy"
+            ],
+            [
+              "Current POSH policy, if any",
+              "Gap review"
+            ],
+            [
+              "Details of proposed IC members",
+              "IC constitution"
+            ],
+            [
+              "External member details",
+              "Mandatory IC composition support"
+            ],
+            [
+              "Board / management details",
+              "Internal approval and reporting"
+            ],
+            [
+              "Prior complaints, if any",
+              "Risk review and documentation"
+            ],
+            [
+              "Annual report / Board report status",
+              "Disclosure alignment"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-issues-we-fixed-for-clients",
+      "title": "Common Issues We Fixed for Clients",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Issue",
+            "Practical Risk",
+            "How Estabizz Helps"
+          ],
+          "rows": [
+            [
+              "POSH policy copied from internet",
+              "Not aligned with actual organisation",
+              "Custom policy with practical complaint process"
+            ],
+            [
+              "IC formed without external member",
+              "Defective committee constitution",
+              "Proper IC composition and appointment documentation"
+            ],
+            [
+              "No IC training",
+              "Poor complaint handling and inquiry risk",
+              "IC orientation with role clarity"
+            ],
+            [
+              "No complaint register",
+              "Weak audit trail",
+              "Structured registers and reporting formats"
+            ],
+            [
+              "No annual reporting",
+              "Non-compliance exposure",
+              "Annual POSH report preparation support"
+            ],
+            [
+              "No display notice",
+              "Employer duty gap",
+              "Display format and workplace notice support"
+            ],
+            [
+              "Mishandled complaint",
+              "Reputational and legal risk",
+              "Confidential advisory and process guidance"
+            ],
+            [
+              "Board report disclosure missing",
+              "Corporate compliance issue",
+              "Draft disclosure for statutory reporting"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "why-choose-estabizz-fintech",
+      "title": "Why Choose Estabizz Fintech?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Clients generally do not approach us only for drafting a policy. They come to us because they want clarity, confidentiality, structure and timely execution."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz Fintech helps you save time by converting complex POSH compliance into a clear and manageable process. Our team reduces the effort required from management and HR by preparing documents, formats, policies, committee records and reporting templates in a structured manner."
+        },
+        {
+          "type": "paragraph",
+          "text": "We help avoid rejection, objections or compliance gaps by aligning documentation with the statutory framework. From initial assessment to POSH policy, Internal Committee formation, training, reporting and practical advisory, we handle the compliance journey end-to-end."
+        },
+        {
+          "type": "paragraph",
+          "text": "Our approach is budget-friendly and suitable for startups, growing companies and established regulated entities. We also offer structured payment options depending on the scope of work, documentation level and ongoing advisory requirement."
+        },
+        {
+          "type": "paragraph",
+          "text": "Every assignment is handled through a structured ticket-based tracking system. This ensures proper follow-up, accountability, documentation status visibility and timely updates through call, email, SMS or WhatsApp."
+        },
+        {
+          "type": "paragraph",
+          "text": "You focus on your business—we handle the compliance journey."
+        }
+      ]
+    },
+    {
+      "id": "what-makes-our-support-reliable",
+      "title": "What makes our support reliable?",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Client Need",
+            "Estabizz Advantage"
+          ],
+          "rows": [
+            [
+              "“I need this done properly.”",
+              "Compliance-led drafting and execution"
+            ],
+            [
+              "“I do not want future objections.”",
+              "Practical review of legal and documentation gaps"
+            ],
+            [
+              "“My HR team needs guidance.”",
+              "Training and implementation support"
+            ],
+            [
+              "“The matter is sensitive.”",
+              "Confidential and professional handling"
+            ],
+            [
+              "“I need everything in one place.”",
+              "Policy, IC records, formats, training and reporting"
+            ],
+            [
+              "“I want updates.”",
+              "Ticket-based tracking and structured communication"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "how-we-help-reduce-implementation-time",
+      "title": "How We Help Reduce Implementation Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sexual Harassment At Workplace compliance can be delayed when organisations are unsure about IC composition, external member appointment, policy wording, reporting format or training process."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz reduces implementation time by using a structured compliance checklist, ready-to-customise templates, professional review layers and clear responsibility mapping. This helps clients move from uncertainty to documented compliance within a practical timeline."
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sexual Harassment At Workplace compliance is a critical legal and governance requirement for Indian organisations. A proper POSH framework protects employees, strengthens workplace culture and helps the employer demonstrate responsible compliance."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz Fintech assists clients with practical, confidential and end-to-end POSH compliance support, including policy drafting, Internal Committee formation, training, annual reporting and advisory for sensitive matters."
+        },
+        {
+          "type": "paragraph",
+          "text": "When the compliance is sensitive, the execution must be structured."
+        },
+        {
+          "type": "paragraph",
+          "text": "Connect with Estabizz Fintech today and build a safer, compliant and professionally managed workplace."
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What is Sexual Harassment At Workplace compliance?",
+      "a": "It is the legal framework for preventing, prohibiting and redressing sexual harassment at the workplace. It includes POSH policy, Internal Committee, employee awareness, complaint handling, confidentiality and reporting."
+    },
+    {
+      "q": "Is POSH compliance mandatory in India?",
+      "a": "Yes, POSH compliance is mandatory for covered employers in India. Organisations with 10 or more employees generally need to constitute an Internal Committee."
+    },
+    {
+      "q": "Who regulates Sexual Harassment At Workplace compliance?",
+      "a": "The framework operates under the POSH Act, 2013, POSH Rules, appropriate government authorities, District Officers, Internal Committees and Local Committees."
+    },
+    {
+      "q": "What is an Internal Committee?",
+      "a": "An Internal Committee is the workplace-level committee responsible for receiving and inquiring into sexual harassment complaints as per the POSH framework."
+    },
+    {
+      "q": "Is an external member required in the Internal Committee?",
+      "a": "Yes, the Internal Committee should include an external member from an NGO, association or a person familiar with issues relating to sexual harassment."
+    },
+    {
+      "q": "Can a startup ignore POSH compliance?",
+      "a": "No. Startups should implement POSH compliance early because employee safety, investor due diligence and HR governance are important even at the growth stage."
+    },
+    {
+      "q": "What should a POSH policy contain?",
+      "a": "A POSH policy should define sexual harassment, explain complaint channels, mention IC details, state inquiry process, confidentiality obligations, timelines and consequences of misconduct."
+    },
+    {
+      "q": "Is employee training compulsory?",
+      "a": "Employers are expected to conduct awareness programmes and sensitisation workshops. Training also helps employees understand acceptable workplace conduct and complaint mechanisms."
+    },
+    {
+      "q": "What is the complaint timeline under POSH?",
+      "a": "A complaint is generally required to be made within three months from the incident or the last incident in a series. The committee may extend the timeline within the permitted framework."
+    },
+    {
+      "q": "Is confidentiality required in POSH cases?",
+      "a": "Yes. Identity, complaint details, inquiry proceedings, recommendations and action taken must be handled confidentially, except as permitted by law."
+    },
+    {
+      "q": "Can a company have one IC for all branches?",
+      "a": "If offices or administrative units are located at different places, IC constitution may be required at such units depending on the structure and applicability. Multi-location mapping is important."
+    },
+    {
+      "q": "What happens if an employer does not constitute an IC?",
+      "a": "Non-constitution of the Internal Committee can attract penalty and further consequences under the POSH framework, including higher exposure for repeated non-compliance."
+    },
+    {
+      "q": "Is POSH applicable to contract workers?",
+      "a": "Yes, the definition of employee is broad and may include regular, temporary, ad hoc, daily wage, contract, trainee, apprentice and similar categories."
+    },
+    {
+      "q": "Does POSH apply to remote work?",
+      "a": "Yes, workplace coverage can extend beyond the physical office depending on employment-related circumstances. Remote and hybrid teams should have digital complaint channels."
+    },
+    {
+      "q": "Is POSH applicable to men?",
+      "a": "The POSH Act specifically protects women from sexual harassment at the workplace. However, companies may adopt broader internal policies to maintain dignity and prevent harassment for all employees."
+    },
+    {
+      "q": "Can the employer directly decide a POSH complaint?",
+      "a": "The complaint should be handled through the prescribed committee process. Direct informal handling without proper procedure can create legal and fairness issues."
+    },
+    {
+      "q": "What records should be maintained?",
+      "a": "Important records include POSH policy, IC constitution order, member consents, training records, complaint register, inquiry documents, annual report and Board disclosure records."
+    },
+    {
+      "q": "Is annual POSH reporting required?",
+      "a": "Yes, the Internal Committee is required to prepare annual reporting records. Companies may also need to include relevant POSH details in statutory reporting."
+    },
+    {
+      "q": "What should be disclosed in the Board Report?",
+      "a": "Companies should disclose POSH compliance and, as applicable under amended reporting requirements, details of complaints received, disposed and pending beyond 90 days."
+    },
+    {
+      "q": "Can Estabizz help in case of an actual complaint?",
+      "a": "Yes. Estabizz can support the organisation with process advisory, documentation, committee guidance and compliance handling. Sensitive matters are handled with confidentiality."
+    },
+    {
+      "q": "How much time does POSH implementation take?",
+      "a": "The timeline depends on employee count, branch structure, existing documents and training requirement. With proper information, implementation can be structured efficiently."
+    },
+    {
+      "q": "Why should we take professional support?",
+      "a": "Professional support helps avoid defective IC constitution, poor policy drafting, missing records, weak inquiry process and statutory reporting gaps."
+    }
+  ],
+  "expertQuote": {
+    "quote": "Sexual Harassment At Workplace compliance should not be treated as a paper policy. It is a governance responsibility. A well-structured POSH framework protects employees, supports management decisions and strengthens the organisation’s compliance credibility.",
+    "attribution": "CS Devyani Khambhati – Compliance Expert"
+  },
+  "disclaimer": "This guide is general information based on material supplied by Estabizz and remains under professional review. POSH applicability, Internal Committee composition, complaint handling, reporting and disclosure duties depend on the workplace structure, locations, employee count, facts and current law. Confidential complaint matters require case-specific legal and procedural advice. Estabizz provides policy, documentation, training and process support; formal legal representation is through enrolled advocates where required. Confirm the current statutory and local requirements before acting."
+}

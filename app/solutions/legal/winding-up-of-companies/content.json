@@ -1,0 +1,1837 @@
+{
+  "title": "Winding Up of Companies",
+  "focusKeyword": "Winding up of Companies",
+  "tags": [
+    "Legal",
+    "Company Closure"
+  ],
+  "breadcrumbLabel": "Winding Up of Companies",
+  "readTime": "21 min read",
+  "trustLine": "Correct closure route. Strong documentation. End-to-end company exit support.",
+  "reviewPending": true,
+  "heroParagraphs": [
+    "Closing a company is not only about stopping business. The company must deal with creditors, assets, liabilities, statutory filings, employees, tax dues, bank accounts, legal proceedings, ROC records and shareholder responsibilities.",
+    "At Estabizz Fintech, we assist promoters, directors, shareholders, creditors, investors and group companies with Winding up of Companies, including closure-route assessment, NCLT winding-up petition support, voluntary liquidation guidance, strike-off comparison, statement of affairs, creditor documentation, ROC compliance, tax closure, liquidator coordination and final dissolution support."
+  ],
+  "quickFacts": [
+    {
+      "label": "Tribunal route",
+      "value": "Companies Act Section 271"
+    },
+    {
+      "label": "Solvent liquidation",
+      "value": "IBC Section 59"
+    },
+    {
+      "label": "Inactive-company route",
+      "value": "Companies Act Section 248"
+    },
+    {
+      "label": "Primary forum",
+      "value": "NCLT / applicable authority"
+    }
+  ],
+  "relatedArticles": [
+    {
+      "title": "Appeal Before NCLT",
+      "href": "/solutions/legal/appeal-before-nclt",
+      "category": "Legal",
+      "description": "Company petitions, restoration, IBC applications, schemes and NCLAT appeal support."
+    },
+    {
+      "title": "Revival of Struck-Off Companies",
+      "href": "/solutions/legal/revival-of-struck-off-companies",
+      "category": "Legal",
+      "description": "Section 252 restoration, evidence, ROC implementation and post-revival compliance."
+    },
+    {
+      "title": "Directors Disqualification",
+      "href": "/solutions/legal/directors-disqualification",
+      "category": "Legal",
+      "description": "Section 164 defaults, DIN status, struck-off companies and director regularisation."
+    }
+  ],
+  "finalCtaTitle": "Choose the Correct Company-Closure Route First",
+  "finalCtaDescription": "Before you proceed, speak with our experts. Winding up of Companies can directly impact directors, shareholders, creditors, employees, tax records, GST, bank accounts, ROC compliance, licences and future liability. Do not leave a company inactive and assume the risk is over. A short discussion today can help you choose the correct closure route, avoid penalties and complete dissolution with confidence.",
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Winding up of Companies is the legal process through which a company’s business is brought to an end, its assets are realised, liabilities are settled, remaining surplus is distributed and the company is finally dissolved."
+        },
+        {
+          "type": "paragraph",
+          "text": "It matters because an improperly closed company can continue to attract ROC notices, tax demands, director disqualification, creditor claims, bank account issues, GST non-compliance, litigation, penalty exposure and future due diligence problems."
+        },
+        {
+          "type": "paragraph",
+          "text": "This service is relevant for companies that cannot continue business, companies facing shareholder deadlock, fraudulent or non-compliant companies, companies with long-pending filings, group entities being closed, solvent companies seeking voluntary liquidation, creditors seeking recovery, and promoters who want a legally clean closure route."
+        }
+      ]
+    },
+    {
+      "id": "quick-answer",
+      "title": "Quick Answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Winding up of Companies is not a licence. It is a statutory legal process for liquidation and dissolution of a company."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is regulated by the Ministry of Corporate Affairs, Registrar of Companies, National Company Law Tribunal, Official Liquidator / Company Liquidator, IBBI, and other authorities depending on the closure route."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is not mandatory for every company closure. For inactive companies, strike-off may be possible; for solvent companies, voluntary liquidation may be used; for Tribunal-based winding up, NCLT process applies."
+        }
+      ]
+    },
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In simple terms…"
+        },
+        {
+          "type": "paragraph",
+          "text": "Winding up means legally closing the company after collecting assets, paying liabilities and completing formal dissolution."
+        },
+        {
+          "type": "paragraph",
+          "text": "The company does not disappear merely because business has stopped. Until it is struck off, liquidated or dissolved through proper legal process, it continues to exist in statutory records."
+        },
+        {
+          "type": "paragraph",
+          "text": "From a compliance perspective…"
+        },
+        {
+          "type": "paragraph",
+          "text": "Winding up of Companies requires closure-route selection, board and shareholder review, debt and asset assessment, creditor position, statutory filing status, tax compliance, employee dues, bank closure, NCLT/IBC/ROC procedure, liquidator appointment, public notices, claim settlement and final dissolution documentation."
+        },
+        {
+          "type": "paragraph",
+          "text": "From a risk perspective, the first question should always be: Is winding up the correct route, or should the company use strike-off or voluntary liquidation?"
+        }
+      ]
+    },
+    {
+      "id": "regulatory-framework",
+      "title": "Regulatory Framework",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Particular",
+            "Applicable Legal Framework"
+          ],
+          "rows": [
+            [
+              "Main Corporate Law",
+              "Companies Act, 2013"
+            ],
+            [
+              "Winding Up by Tribunal",
+              "Sections 270–303"
+            ],
+            [
+              "Key Tribunal Winding-Up Ground",
+              "Section 271"
+            ],
+            [
+              "Winding-Up Petition",
+              "Section 272"
+            ],
+            [
+              "Directions by Tribunal",
+              "Section 273"
+            ],
+            [
+              "Directions for Statement of Affairs",
+              "Section 274"
+            ],
+            [
+              "Company Liquidator",
+              "Sections 275–276"
+            ],
+            [
+              "Winding-Up Committee",
+              "Section 277"
+            ],
+            [
+              "Stay of Suits",
+              "Section 279"
+            ],
+            [
+              "Report by Company Liquidator",
+              "Section 281"
+            ],
+            [
+              "Powers and Duties of Liquidator",
+              "Section 290"
+            ],
+            [
+              "Dissolution by Tribunal",
+              "Section 302"
+            ],
+            [
+              "Winding-Up Procedure Rules",
+              "Companies (Winding Up) Rules, 2020"
+            ],
+            [
+              "Voluntary Liquidation",
+              "Insolvency and Bankruptcy Code, 2016 Section 59"
+            ],
+            [
+              "IBC Liquidation after CIRP",
+              "Insolvency and Bankruptcy Code, 2016 Sections 33–54"
+            ],
+            [
+              "Strike-Off Alternative",
+              "Companies Act, 2013 Sections 248–252"
+            ],
+            [
+              "Main Forums / Authorities",
+              "NCLT, ROC, MCA, Official Liquidator, Company Liquidator, IBBI and Insolvency Professional"
+            ],
+            [
+              "Circular / Master Direction",
+              "No single master direction; winding up is governed by Companies Act, Winding Up Rules, IBC and applicable ROC/NCLT/IBBI procedure"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applicable-act-and-important-sections",
+      "title": "Applicable Act and Important Sections",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Law / Framework",
+            "Important Provision",
+            "Practical Relevance"
+          ],
+          "rows": [
+            [
+              "Companies Act, 2013",
+              "Section 270",
+              "Winding up framework under the Act"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 271",
+              "Circumstances where company may be wound up by Tribunal"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 272",
+              "Who may file winding-up petition"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 273",
+              "Tribunal’s powers on receiving petition"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 274",
+              "Directions for filing statement of affairs"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 275",
+              "Company Liquidator and appointment-related framework"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 276",
+              "Removal and replacement of liquidator"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 277",
+              "Intimation to Company Liquidator, provisional liquidator and winding-up committee"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 278",
+              "Effect of winding-up order"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 279",
+              "Stay of suits and legal proceedings"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 280",
+              "Jurisdiction of Tribunal"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 281",
+              "Report by Company Liquidator"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 282",
+              "Directions of Tribunal on liquidator report"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 290",
+              "Powers and duties of Company Liquidator"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 292",
+              "Exercise and control of Company Liquidator’s powers"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 293",
+              "Books to be kept by Company Liquidator"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 299",
+              "Final meeting and dissolution preparation"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 302",
+              "Dissolution of company by Tribunal"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 356",
+              "Power to declare dissolution void in specified cases"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 248",
+              "Removal of name / strike-off alternative"
+            ],
+            [
+              "Companies Act, 2013",
+              "Section 252",
+              "Appeal / restoration after strike-off"
+            ],
+            [
+              "Companies (Winding Up) Rules, 2020",
+              "Form WIN-1 / WIN-2 and related forms",
+              "Petition, statement, notices, liquidator reports and procedural forms"
+            ],
+            [
+              "IBC, 2016",
+              "Section 59",
+              "Voluntary liquidation of solvent corporate persons"
+            ],
+            [
+              "IBC, 2016",
+              "Section 33",
+              "Liquidation after CIRP where resolution fails or liquidation is ordered"
+            ],
+            [
+              "IBC, 2016",
+              "Section 53",
+              "Waterfall for distribution of liquidation assets"
+            ],
+            [
+              "IBBI Voluntary Liquidation Regulations",
+              "2017 Regulations",
+              "Voluntary liquidation process, liquidator duties and final dissolution application"
+            ],
+            [
+              "Income-tax Act / GST Law",
+              "Closure-related provisions",
+              "Tax, GST, TDS, refund and assessment closure support"
+            ],
+            [
+              "Labour Laws",
+              "PF, ESIC, gratuity and employee dues",
+              "Employee and workmen dues closure"
+            ],
+            [
+              "SEBI / RBI / IRDAI / IFSCA laws",
+              "Sector-specific provisions",
+              "Regulated company closure, licence surrender and prior approval where applicable"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "what-is-winding-up-of-companies",
+      "title": "What Is Winding up of Companies?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Winding up of Companies is the legal process of closing a company by liquidating its assets, settling liabilities and dissolving the legal entity."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Practical Meaning"
+          ],
+          "rows": [
+            [
+              "Company Continues Until Dissolution",
+              "Business stopping does not automatically close the company"
+            ],
+            [
+              "Assets Are Realised",
+              "Company property, receivables and investments are collected"
+            ],
+            [
+              "Liabilities Are Settled",
+              "Creditors, employees, statutory dues and lenders are addressed"
+            ],
+            [
+              "Liquidator May Be Appointed",
+              "Liquidator manages the winding-up process"
+            ],
+            [
+              "Legal Proceedings Are Controlled",
+              "Tribunal directions may apply"
+            ],
+            [
+              "Final Dissolution Is Required",
+              "Company ceases to exist only after legal dissolution"
+            ],
+            [
+              "ROC Records Must Be Updated",
+              "Closure must reflect in MCA records"
+            ],
+            [
+              "Directors Must Act Carefully",
+              "Improper closure can create personal and compliance risk"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grounds-for-winding-up-by-tribunal",
+      "title": "Grounds for Winding up by Tribunal",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Under the present company-law framework, winding up by Tribunal is not only for debt default. Debt insolvency cases generally move under the IBC route. Tribunal winding up under the Companies Act focuses on specified statutory grounds."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Ground",
+            "Practical Meaning"
+          ],
+          "rows": [
+            [
+              "Special Resolution",
+              "Company resolves that it should be wound up by Tribunal"
+            ],
+            [
+              "Sovereignty / Public Order Ground",
+              "Company acts against sovereignty, integrity, security, foreign relations, public order, decency or morality"
+            ],
+            [
+              "Fraudulent Conduct",
+              "Affairs conducted fraudulently, company formed for fraudulent/unlawful purpose, or management guilty of fraud/misfeasance/misconduct"
+            ],
+            [
+              "Five-Year Filing Default",
+              "Company defaults in filing financial statements or annual returns for five consecutive financial years"
+            ],
+            [
+              "Just and Equitable Ground",
+              "Tribunal considers it just and equitable to wind up the company"
+            ],
+            [
+              "Regulatory Petition",
+              "ROC or authorised person may initiate action in specified cases"
+            ],
+            [
+              "Government Petition",
+              "Central/State Government may act in specified statutory situations"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "winding-up-vs-strike-off-vs-voluntary-liquidation",
+      "title": "Winding Up vs Strike-Off vs Voluntary Liquidation",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Winding Up by Tribunal",
+            "Strike-Off",
+            "Voluntary Liquidation"
+          ],
+          "rows": [
+            [
+              "Main Law",
+              "Companies Act, 2013",
+              "Companies Act Section 248",
+              "IBC Section 59"
+            ],
+            [
+              "Forum",
+              "NCLT",
+              "ROC / MCA",
+              "IBBI / NCLT process through liquidator"
+            ],
+            [
+              "Best For",
+              "Fraud, deadlock, just/equitable, regulatory grounds, complex closure",
+              "Inactive or non-operational company meeting eligibility conditions",
+              "Solvent company that can pay debts fully"
+            ],
+            [
+              "Liquidator",
+              "Company Liquidator / Official Liquidator involved",
+              "Usually no liquidator",
+              "Insolvency professional as liquidator"
+            ],
+            [
+              "Complexity",
+              "Higher",
+              "Lower",
+              "Moderate to high"
+            ],
+            [
+              "Creditors",
+              "Major consideration",
+              "Company should generally have no unresolved liabilities",
+              "Creditors must be paid / approved where debts exist"
+            ],
+            [
+              "Final Result",
+              "Dissolution by Tribunal",
+              "Name removed and company dissolved",
+              "Dissolution order after liquidation process"
+            ],
+            [
+              "Risk",
+              "NCLT process, claims, objections",
+              "Restoration risk if wrongly struck off",
+              "Liquidator compliance and IBBI procedure"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Choosing the wrong closure route can delay the process and increase cost."
+        }
+      ]
+    },
+    {
+      "id": "who-can-file-winding-up-petition",
+      "title": "Who Can File Winding-Up Petition?",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Petitioner",
+            "Practical Position"
+          ],
+          "rows": [
+            [
+              "Company",
+              "Company itself may file where statutory conditions are met"
+            ],
+            [
+              "Contributory / Shareholder",
+              "May file in specified circumstances"
+            ],
+            [
+              "Registrar of Companies",
+              "May file in statutory default, fraud or public interest situations"
+            ],
+            [
+              "Person Authorised by Central Government",
+              "Can file where authorised under law"
+            ],
+            [
+              "Central Government",
+              "Can file in specified public interest / statutory cases"
+            ],
+            [
+              "State Government",
+              "Can act in specified statutory grounds"
+            ],
+            [
+              "Creditor",
+              "Debt-driven company insolvency is generally assessed carefully in light of IBC route"
+            ],
+            [
+              "Liquidator / Official Liquidator",
+              "May file applications during winding-up process"
+            ],
+            [
+              "Interested Person",
+              "May approach Tribunal in specified post-dissolution or related proceedings"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "when-should-you-consider-winding-up-of-companies",
+      "title": "When Should You Consider Winding up of Companies?",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Situation",
+            "Suitable Review Required"
+          ],
+          "rows": [
+            [
+              "Company has no viable business",
+              "Check strike-off vs voluntary liquidation vs winding up"
+            ],
+            [
+              "Shareholders want legal closure",
+              "Review liabilities and assets"
+            ],
+            [
+              "Company has long ROC defaults",
+              "Check Section 271 and Section 248 risks"
+            ],
+            [
+              "Directors are facing notices",
+              "Compliance and defence review required"
+            ],
+            [
+              "Fraud allegations exist",
+              "Tribunal route and investigation risk"
+            ],
+            [
+              "Management deadlock exists",
+              "Just and equitable winding-up analysis"
+            ],
+            [
+              "Company cannot continue objects",
+              "Closure or restructuring route review"
+            ],
+            [
+              "Creditors are unpaid",
+              "IBC and settlement options must be reviewed"
+            ],
+            [
+              "Company is solvent but active",
+              "Voluntary liquidation may be better route"
+            ],
+            [
+              "Regulated entity wants closure",
+              "Regulator approval / licence surrender required"
+            ],
+            [
+              "Group company is redundant",
+              "Strike-off or liquidation route comparison"
+            ],
+            [
+              "Litigation is pending",
+              "Closure strategy must consider proceedings"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "winding-up-process-by-tribunal",
+      "title": "Winding-Up Process by Tribunal",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Step",
+            "Activity",
+            "Output"
+          ],
+          "rows": [
+            [
+              "Step 1",
+              "Initial closure consultation",
+              "Facts, company status and closure objective"
+            ],
+            [
+              "Step 2",
+              "Route assessment",
+              "Winding up, strike-off, voluntary liquidation or IBC route selection"
+            ],
+            [
+              "Step 3",
+              "MCA compliance review",
+              "Filing status, directors, charges and pending forms"
+            ],
+            [
+              "Step 4",
+              "Asset-liability review",
+              "Creditors, debtors, bank, tax and employee dues check"
+            ],
+            [
+              "Step 5",
+              "Board / shareholder review",
+              "Resolution and internal approval planning"
+            ],
+            [
+              "Step 6",
+              "Petition preparation",
+              "Petition, affidavit, statement of affairs and supporting documents"
+            ],
+            [
+              "Step 7",
+              "NCLT filing",
+              "Filing before appropriate Tribunal bench"
+            ],
+            [
+              "Step 8",
+              "Notice and hearing",
+              "Notices, objections and hearing process"
+            ],
+            [
+              "Step 9",
+              "Liquidator appointment",
+              "Company Liquidator / provisional liquidator involvement"
+            ],
+            [
+              "Step 10",
+              "Statement of affairs",
+              "Company financial position submitted"
+            ],
+            [
+              "Step 11",
+              "Claims and asset realisation",
+              "Creditors, contributors, assets and liabilities handled"
+            ],
+            [
+              "Step 12",
+              "Liquidator reports",
+              "Reports filed before Tribunal"
+            ],
+            [
+              "Step 13",
+              "Distribution",
+              "Funds distributed as per law"
+            ],
+            [
+              "Step 14",
+              "Final dissolution application",
+              "Application for dissolution"
+            ],
+            [
+              "Step 15",
+              "ROC update",
+              "Company dissolved and records updated"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "documents-required-for-winding-up-of-companies",
+      "title": "Documents Required for Winding up of Companies",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Document / Information",
+            "Purpose"
+          ],
+          "rows": [
+            [
+              "Certificate of incorporation",
+              "Company identity"
+            ],
+            [
+              "MOA and AOA",
+              "Object and constitutional review"
+            ],
+            [
+              "MCA master data",
+              "Company status check"
+            ],
+            [
+              "Latest financial statements",
+              "Assets and liabilities review"
+            ],
+            [
+              "Annual returns",
+              "ROC filing status"
+            ],
+            [
+              "Board resolutions",
+              "Internal authorisation"
+            ],
+            [
+              "Shareholder resolution",
+              "Special resolution, where applicable"
+            ],
+            [
+              "List of directors",
+              "Responsibility and signatory mapping"
+            ],
+            [
+              "List of shareholders",
+              "Contributory and approval review"
+            ],
+            [
+              "List of creditors",
+              "Claim and liability analysis"
+            ],
+            [
+              "List of debtors",
+              "Asset realisation support"
+            ],
+            [
+              "Bank statements",
+              "Cash and transaction review"
+            ],
+            [
+              "Loan documents",
+              "Secured creditor and charge review"
+            ],
+            [
+              "Charge documents",
+              "MCA charge status"
+            ],
+            [
+              "Tax records",
+              "Income tax, TDS and GST compliance"
+            ],
+            [
+              "GST registration and returns",
+              "GST closure and liability review"
+            ],
+            [
+              "Employee dues statement",
+              "Salary, PF, ESIC and gratuity check"
+            ],
+            [
+              "Litigation list",
+              "Pending cases and Tribunal stay issue"
+            ],
+            [
+              "Property / asset documents",
+              "Asset sale and realisation support"
+            ],
+            [
+              "Statement of affairs",
+              "Liquidator and Tribunal process"
+            ],
+            [
+              "Affidavit and petition",
+              "NCLT filing support"
+            ],
+            [
+              "Sectoral licence documents",
+              "Regulator closure / surrender support"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "statement-of-affairs-why-it-is-important",
+      "title": "Statement of Affairs – Why It Is Important",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Statement of affairs is a critical winding-up document. It presents the company’s financial position to the Tribunal and liquidator."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Component",
+            "Practical Value"
+          ],
+          "rows": [
+            [
+              "Assets",
+              "Cash, bank, receivables, inventory, fixed assets and investments"
+            ],
+            [
+              "Liabilities",
+              "Secured, unsecured, statutory and employee dues"
+            ],
+            [
+              "Creditors",
+              "Names, amounts and security status"
+            ],
+            [
+              "Debtors",
+              "Recoverable amounts and disputes"
+            ],
+            [
+              "Charges",
+              "Secured creditor and MCA charge position"
+            ],
+            [
+              "Contingent Liabilities",
+              "Guarantees, litigation and disputed claims"
+            ],
+            [
+              "Books of Account",
+              "Accounting record and audit support"
+            ],
+            [
+              "Tax Status",
+              "Pending assessments, demands and refunds"
+            ],
+            [
+              "Employee Dues",
+              "Workmen and staff liability"
+            ],
+            [
+              "Asset Realisation Estimate",
+              "Expected recovery value"
+            ],
+            [
+              "Litigation Details",
+              "Court and arbitration exposure"
+            ],
+            [
+              "Director Declaration",
+              "Management responsibility and accuracy"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A weak or incomplete statement of affairs can create liquidator queries and delay the winding-up process."
+        }
+      ]
+    },
+    {
+      "id": "role-of-company-liquidator",
+      "title": "Role of Company Liquidator",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Liquidator Function",
+            "Practical Meaning"
+          ],
+          "rows": [
+            [
+              "Taking Custody of Assets",
+              "Liquidator controls company property"
+            ],
+            [
+              "Reviewing Statement of Affairs",
+              "Checks financial position"
+            ],
+            [
+              "Inviting Claims",
+              "Creditors and stakeholders submit claims"
+            ],
+            [
+              "Realising Assets",
+              "Assets are sold or recovered"
+            ],
+            [
+              "Maintaining Books",
+              "Winding-up accounts and records maintained"
+            ],
+            [
+              "Investigating Affairs",
+              "Fraud, misfeasance or wrongful conduct may be examined"
+            ],
+            [
+              "Settling Claims",
+              "Creditors and contributors handled"
+            ],
+            [
+              "Reporting to Tribunal",
+              "Liquidator submits reports"
+            ],
+            [
+              "Seeking Directions",
+              "Tribunal guidance taken where required"
+            ],
+            [
+              "Applying for Dissolution",
+              "Final closure application filed"
+            ],
+            [
+              "Handling Distribution",
+              "Remaining amount distributed as per law"
+            ],
+            [
+              "Compliance Closure",
+              "Final filings and records completed"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "winding-up-for-fraud-or-misconduct",
+      "title": "Winding Up for Fraud or Misconduct",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Winding up may be ordered where the company’s affairs are conducted fraudulently or for unlawful purposes."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Issue",
+            "Why It Matters"
+          ],
+          "rows": [
+            [
+              "Fraudulent Incorporation",
+              "Company formed for unlawful purpose"
+            ],
+            [
+              "Misfeasance",
+              "Misconduct by management or officers"
+            ],
+            [
+              "False Filings",
+              "ROC or public record risk"
+            ],
+            [
+              "Diversion of Assets",
+              "Creditor and shareholder harm"
+            ],
+            [
+              "Fake Transactions",
+              "Tax and investigation exposure"
+            ],
+            [
+              "Shell Company Concern",
+              "MCA and enforcement scrutiny"
+            ],
+            [
+              "Public Interest",
+              "Tribunal may intervene"
+            ],
+            [
+              "Director Liability",
+              "Personal consequences may arise"
+            ],
+            [
+              "Investigation Link",
+              "SFIO / ROC / other authority action may be triggered"
+            ],
+            [
+              "Liquidator Report",
+              "May identify recoveries and misconduct"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Fraud-linked winding up should be handled carefully because it can create consequences beyond company closure."
+        }
+      ]
+    },
+    {
+      "id": "just-and-equitable-winding-up",
+      "title": "Just and Equitable Winding Up",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The Tribunal may wind up a company if it considers it just and equitable."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Situation",
+            "Practical Example"
+          ],
+          "rows": [
+            [
+              "Management Deadlock",
+              "Directors/shareholders cannot run company"
+            ],
+            [
+              "Loss of Substratum",
+              "Company can no longer carry out main business"
+            ],
+            [
+              "Breakdown of Trust",
+              "Quasi-partnership company dispute"
+            ],
+            [
+              "Oppression-Like Situation",
+              "Serious governance breakdown"
+            ],
+            [
+              "No Commercial Purpose",
+              "Company’s purpose has failed"
+            ],
+            [
+              "Family Business Dispute",
+              "Promoter branches unable to continue together"
+            ],
+            [
+              "Illegal Object Concern",
+              "Company cannot lawfully operate"
+            ],
+            [
+              "Continuing Company Is Unfair",
+              "Tribunal finds closure equitable"
+            ],
+            [
+              "Shareholder Exit Not Possible",
+              "Winding up may be considered in extreme cases"
+            ],
+            [
+              "Corporate Governance Failure",
+              "Company cannot function properly"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "This ground is discretionary and fact-heavy. Strong pleadings and evidence are essential."
+        }
+      ]
+    },
+    {
+      "id": "winding-up-due-to-roc-filing-default",
+      "title": "Winding Up Due to ROC Filing Default",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A company may face serious consequences if it fails to file financial statements or annual returns for five consecutive financial years."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Compliance Failure",
+            "Practical Impact"
+          ],
+          "rows": [
+            [
+              "AOC-4 not filed",
+              "Financial statements pending"
+            ],
+            [
+              "MGT-7 / MGT-7A not filed",
+              "Annual return default"
+            ],
+            [
+              "Five-year default",
+              "Winding-up ground may arise"
+            ],
+            [
+              "Director disqualification risk",
+              "Section 164/167 consequences may arise"
+            ],
+            [
+              "Strike-off risk",
+              "ROC may initiate Section 248 action"
+            ],
+            [
+              "Penalties",
+              "Additional fees and adjudication exposure"
+            ],
+            [
+              "Bank and investor issue",
+              "Due diligence failure"
+            ],
+            [
+              "Licence renewal issue",
+              "Regulator may object"
+            ],
+            [
+              "Restoration burden",
+              "NCLT process may be required if struck off"
+            ],
+            [
+              "Closure complexity",
+              "Clean closure becomes difficult"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Before winding up or strike-off, pending annual filings should be reviewed."
+        }
+      ]
+    },
+    {
+      "id": "voluntary-liquidation-under-ibc",
+      "title": "Voluntary Liquidation Under IBC",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Where a company is solvent and wants to close after paying its debts, voluntary liquidation under IBC Section 59 may be appropriate."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Requirement",
+            "Practical Meaning"
+          ],
+          "rows": [
+            [
+              "Solvency Declaration",
+              "Directors confirm no debt or ability to pay debts fully"
+            ],
+            [
+              "No Fraud Declaration",
+              "Company not liquidated to defraud any person"
+            ],
+            [
+              "Audited Financial Statements",
+              "Previous years’ records required"
+            ],
+            [
+              "Valuation Report",
+              "Asset valuation may be required"
+            ],
+            [
+              "Special Resolution",
+              "Members approve voluntary liquidation"
+            ],
+            [
+              "Insolvency Professional",
+              "Appointed as liquidator"
+            ],
+            [
+              "Creditor Approval",
+              "Required where company owes debt"
+            ],
+            [
+              "Public Announcement",
+              "Claims invited"
+            ],
+            [
+              "Asset Realisation",
+              "Assets sold/collected"
+            ],
+            [
+              "Final Report",
+              "Liquidator prepares closure report"
+            ],
+            [
+              "NCLT Dissolution",
+              "Final dissolution order obtained"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Voluntary liquidation is not the same as simple strike-off. It is a formal liquidation process."
+        }
+      ]
+    },
+    {
+      "id": "strike-off-as-an-alternative-closure-route",
+      "title": "Strike-Off as an Alternative Closure Route",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "For companies that are inactive or have not commenced business, strike-off under Section 248 may be a suitable route."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Point",
+            "Practical Meaning"
+          ],
+          "rows": [
+            [
+              "Forum",
+              "ROC / MCA"
+            ],
+            [
+              "Main Form",
+              "STK-2, where company applies voluntarily"
+            ],
+            [
+              "Best For",
+              "Inactive company with no business and no liabilities"
+            ],
+            [
+              "Not Suitable For",
+              "Active company, company with assets/liabilities, litigation or regulatory restrictions"
+            ],
+            [
+              "ROC Notice",
+              "ROC may also initiate strike-off"
+            ],
+            [
+              "Dissolution",
+              "Name removed from register after process"
+            ],
+            [
+              "Restoration Risk",
+              "Company may be restored through Tribunal in suitable cases"
+            ],
+            [
+              "Due Diligence",
+              "Liabilities, charges and filings must be checked first"
+            ],
+            [
+              "Simpler Than Winding Up",
+              "But only where eligibility is satisfied"
+            ],
+            [
+              "Professional Review",
+              "Avoid wrong closure route"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Strike-off should not be used where liabilities, disputes, bank loans, assets or regulatory restrictions exist."
+        }
+      ]
+    },
+    {
+      "id": "winding-up-of-regulated-companies",
+      "title": "Winding Up of Regulated Companies",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Regulated companies require additional approvals or intimations before closure."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Sector",
+            "Closure Concern"
+          ],
+          "rows": [
+            [
+              "NBFC",
+              "RBI approval/intimation, CoR surrender and borrower/lender obligations"
+            ],
+            [
+              "Insurance Broker",
+              "IRDAI licence surrender, client servicing and records"
+            ],
+            [
+              "SEBI Intermediary",
+              "SEBI registration surrender and investor/client closure"
+            ],
+            [
+              "IFSCA Entity",
+              "IFSCA approval and IFSC compliance closure"
+            ],
+            [
+              "Payment Business",
+              "RBI/PA/PSP or payment-system obligations"
+            ],
+            [
+              "Stock Broker",
+              "Exchange, clearing corporation and SEBI process"
+            ],
+            [
+              "RIA / PMS / AIF",
+              "SEBI investor protection and closure requirements"
+            ],
+            [
+              "Section 8 Company",
+              "Charitable asset and licence restrictions"
+            ],
+            [
+              "Nidhi Company",
+              "Deposit/member obligations"
+            ],
+            [
+              "Listed Company",
+              "SEBI LODR, stock exchange and investor disclosures"
+            ],
+            [
+              "Factory / Manufacturing",
+              "Labour, factory, pollution and tax closure"
+            ],
+            [
+              "Import-Export Company",
+              "IEC and customs record review"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Regulated entities should not start winding up without checking licence surrender and client/stakeholder obligations."
+        }
+      ]
+    },
+    {
+      "id": "common-issues-we-fixed-for-clients",
+      "title": "Common Issues We Fixed for Clients",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Issue",
+            "Practical Risk",
+            "How Estabizz Supports"
+          ],
+          "rows": [
+            [
+              "Company wanted winding up but strike-off was possible",
+              "Higher cost and time",
+              "Closure-route comparison"
+            ],
+            [
+              "Company applied for strike-off with liabilities",
+              "Rejection and future claims",
+              "Liability and asset review"
+            ],
+            [
+              "Five-year ROC filing default existed",
+              "Penalty and director risk",
+              "Compliance gap analysis"
+            ],
+            [
+              "GST registration remained active",
+              "GST notice after closure",
+              "GST cancellation support"
+            ],
+            [
+              "Bank account not closed",
+              "Transaction and KYC issue",
+              "Bank closure checklist"
+            ],
+            [
+              "Charges not satisfied on MCA",
+              "ROC objection",
+              "Charge satisfaction review"
+            ],
+            [
+              "Employee dues not settled",
+              "Labour claim risk",
+              "Employee dues checklist"
+            ],
+            [
+              "Regulated licence not surrendered",
+              "Regulator non-compliance",
+              "Licence surrender support"
+            ],
+            [
+              "Tax demand ignored",
+              "Future recovery issue",
+              "Tax and demand review"
+            ],
+            [
+              "Statement of affairs incomplete",
+              "Liquidator query",
+              "Structured financial file"
+            ],
+            [
+              "Litigation pending",
+              "Closure route impacted",
+              "Litigation and stay review"
+            ],
+            [
+              "Directors assumed company closed automatically",
+              "ROC penalties continued",
+              "Formal dissolution tracking"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "how-we-reduced-approval-time-for-clients",
+      "title": "How We Reduced Approval Time for Clients",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Winding up of Companies often gets delayed because promoters start closure without knowing whether the correct route is strike-off, voluntary liquidation, Tribunal winding up, IBC liquidation or restructuring."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz reduces avoidable delay by preparing a closure route report at the beginning: company status, filing defaults, assets, liabilities, creditors, tax position, GST status, employee dues, bank accounts, charges, litigation and sectoral licences."
+        },
+        {
+          "type": "paragraph",
+          "text": "In company closure, the fastest route is the legally correct route. A wrong closure application can waste months and create avoidable cost."
+        }
+      ]
+    },
+    {
+      "id": "legal-risks-if-company-closure-is-not-properly-handled",
+      "title": "Legal Risks If Company Closure Is Not Properly Handled",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Risk",
+            "Practical Impact"
+          ],
+          "rows": [
+            [
+              "Company remains active on MCA",
+              "ROC filings and penalties continue"
+            ],
+            [
+              "Directors ignore annual filings",
+              "Disqualification and default risk"
+            ],
+            [
+              "GST not cancelled",
+              "GST notices and late fees may continue"
+            ],
+            [
+              "Bank account not closed",
+              "Compliance and transaction risk"
+            ],
+            [
+              "Creditors not settled",
+              "Claims and litigation"
+            ],
+            [
+              "Employee dues unpaid",
+              "Labour dispute"
+            ],
+            [
+              "Tax demand pending",
+              "Recovery and attachment risk"
+            ],
+            [
+              "Charge not satisfied",
+              "Lender and MCA issue"
+            ],
+            [
+              "Strike-off filed wrongly",
+              "Rejection or restoration risk"
+            ],
+            [
+              "Liquidation process incomplete",
+              "Dissolution delayed"
+            ],
+            [
+              "Regulator not informed",
+              "Licence cancellation issues"
+            ],
+            [
+              "Books not preserved",
+              "Audit, tax and liquidator queries"
+            ],
+            [
+              "Fraud allegation ignored",
+              "Director liability exposure"
+            ],
+            [
+              "Assets not transferred lawfully",
+              "Ownership and tax dispute"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "our-winding-up-of-companies-services",
+      "title": "Our Winding up of Companies Services",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Service",
+            "What We Do"
+          ],
+          "rows": [
+            [
+              "Closure Route Assessment",
+              "Compare winding up, strike-off, voluntary liquidation and IBC route"
+            ],
+            [
+              "Company Status Review",
+              "Check MCA master data, filings, charges and defaults"
+            ],
+            [
+              "Asset-Liability Review",
+              "Identify creditors, debtors, bank balances and assets"
+            ],
+            [
+              "Tax and GST Closure Review",
+              "Review GST, TDS, income-tax, notices and refunds"
+            ],
+            [
+              "Board / Shareholder Documents",
+              "Prepare resolutions and internal records"
+            ],
+            [
+              "NCLT Petition Support",
+              "Drafting support and advocate coordination"
+            ],
+            [
+              "Statement of Affairs Support",
+              "Prepare financial and creditor records"
+            ],
+            [
+              "Liquidator Coordination",
+              "Coordinate liquidator documentation"
+            ],
+            [
+              "Creditor Claim Support",
+              "Assist claim filing or response"
+            ],
+            [
+              "Voluntary Liquidation Support",
+              "IBC Section 59 process support"
+            ],
+            [
+              "Strike-Off Support",
+              "STK route review and filing support"
+            ],
+            [
+              "ROC Filing Support",
+              "Forms, attachments and closure records"
+            ],
+            [
+              "Regulated Entity Closure",
+              "RBI, SEBI, IRDAI, IFSCA and other regulator support"
+            ],
+            [
+              "Employee and Vendor Closure",
+              "Dues, settlements and documentation"
+            ],
+            [
+              "Bank Account Closure",
+              "Bank closure and KYC update support"
+            ],
+            [
+              "Final Dissolution Tracking",
+              "NCLT/ROC order and final status update"
+            ],
+            [
+              "Ticket-Based Tracking",
+              "Track documents, filings, notices, hearings, liquidator reports and closure"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "why-choose-estabizz-fintech",
+      "title": "Why Choose Estabizz Fintech?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Clients approach us for Winding up of Companies because they want a clean closure without ROC penalties, tax notices, creditor disputes, director risk or regulatory non-compliance."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz Fintech helps save time by identifying the correct closure route first. We check whether the company should go for Tribunal winding up, voluntary liquidation, strike-off, IBC liquidation, merger, dormant status or compliance regularisation."
+        },
+        {
+          "type": "paragraph",
+          "text": "We reduce effort by preparing document checklists, board and shareholder papers, liability summary, tax closure checklist, GST cancellation support, bank closure checklist, creditor mapping, liquidator coordination and ROC/NCLT filing support."
+        },
+        {
+          "type": "paragraph",
+          "text": "We help avoid rejection, delay and future liability by ensuring that assets, liabilities, filings, charges, tax dues, employee dues, bank accounts, licences and pending litigations are reviewed before closure filings."
+        },
+        {
+          "type": "paragraph",
+          "text": "Our support is end-to-end, including closure-route assessment, compliance gap review, NCLT petition support, voluntary liquidation support, strike-off support, tax/GST closure, creditor coordination, liquidator support, ROC filing and final dissolution tracking."
+        },
+        {
+          "type": "paragraph",
+          "text": "Our approach is budget-friendly and practical. Multiple payment options may be structured depending on company size, filing defaults, liability position, creditor count, regulated-sector involvement, liquidator requirement, NCLT process and urgency."
+        },
+        {
+          "type": "paragraph",
+          "text": "Every matter is handled through a structured ticket-based tracking system. Clients receive updates on document collection, route assessment, resolutions, filings, liquidator coordination, notices, hearing, dissolution and post-closure records through call, email or WhatsApp."
+        },
+        {
+          "type": "paragraph",
+          "text": "You focus on your business—we handle the compliance journey."
+        }
+      ]
+    },
+    {
+      "id": "what-clients-actually-want-and-how-we-help",
+      "title": "What Clients Actually Want—and How We Help",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Client Concern",
+            "Estabizz Support"
+          ],
+          "rows": [
+            [
+              "“I want to close my company legally.”",
+              "Closure route assessment"
+            ],
+            [
+              "“Should I choose strike-off or liquidation?”",
+              "Route comparison and eligibility review"
+            ],
+            [
+              "“Company has pending filings.”",
+              "Compliance gap and penalty review"
+            ],
+            [
+              "“Company has liabilities.”",
+              "Creditor and settlement mapping"
+            ],
+            [
+              "“GST is still active.”",
+              "GST cancellation and tax closure support"
+            ],
+            [
+              "“Company is regulated.”",
+              "Licence surrender and regulator support"
+            ],
+            [
+              "“NCLT route is confusing.”",
+              "Petition and liquidator coordination"
+            ],
+            [
+              "“Directors may face risk.”",
+              "Compliance and liability review"
+            ],
+            [
+              "“We need regular updates.”",
+              "Ticket-based tracking"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Winding up of Companies is a serious legal process for bringing a company’s existence to an end. It must be handled with proper assessment of statutory filings, assets, liabilities, creditors, tax dues, GST status, bank accounts, employee obligations, pending litigation, sectoral licences and final dissolution requirements."
+        },
+        {
+          "type": "paragraph",
+          "text": "Estabizz Fintech assists clients with closure-route assessment, Tribunal winding-up support, voluntary liquidation guidance, strike-off support, ROC compliance, tax/GST closure, liquidator coordination, creditor documentation, regulated entity closure and final dissolution tracking."
+        },
+        {
+          "type": "paragraph",
+          "text": "When a company is being closed, the objective should not be only “stop business”; the objective should be clean legal exit."
+        },
+        {
+          "type": "paragraph",
+          "text": "Connect with Estabizz Fintech today and complete your Winding up of Companies process with clarity, confidence and professional compliance support."
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What is Winding up of Companies?",
+      "a": "Winding up of Companies is the legal process of closing a company by realising assets, settling liabilities and dissolving the entity."
+    },
+    {
+      "q": "Is Winding up of Companies a licence?",
+      "a": "No. It is not a licence. It is a legal closure, liquidation and dissolution process."
+    },
+    {
+      "q": "Who regulates winding up of companies?",
+      "a": "MCA, ROC, NCLT, Official Liquidator, Company Liquidator, IBBI and sector regulators may be involved depending on the route."
+    },
+    {
+      "q": "Which law applies to winding up?",
+      "a": "The Companies Act, 2013, Companies (Winding Up) Rules, 2020 and IBC, 2016 may apply depending on the closure route."
+    },
+    {
+      "q": "Which section deals with winding up by Tribunal?",
+      "a": "Section 271 of the Companies Act, 2013 deals with circumstances where a company may be wound up by Tribunal."
+    },
+    {
+      "q": "Who can file winding-up petition?",
+      "a": "The company, contributory, Registrar, authorised person, Central Government or State Government may file in specified circumstances."
+    },
+    {
+      "q": "Is inability to pay debts still a Companies Act winding-up ground?",
+      "a": "Debt insolvency issues are generally dealt with under IBC. Current company-law winding-up grounds under Section 271 should be reviewed carefully before filing."
+    },
+    {
+      "q": "What is the difference between winding up and strike-off?",
+      "a": "Winding up is a liquidation process, generally involving Tribunal/liquidator. Strike-off is ROC removal of name for eligible inactive companies."
+    },
+    {
+      "q": "What is voluntary liquidation?",
+      "a": "Voluntary liquidation is an IBC Section 59 process for solvent corporate persons that can pay debts fully and want formal liquidation."
+    },
+    {
+      "q": "Can an active company apply for strike-off?",
+      "a": "Strike-off eligibility must be reviewed carefully. Active companies with business, assets, liabilities or disputes may not be suitable for strike-off."
+    },
+    {
+      "q": "What is NCLT’s role in winding up?",
+      "a": "NCLT hears winding-up petitions, appoints liquidator, supervises process and orders final dissolution."
+    },
+    {
+      "q": "What is the role of Company Liquidator?",
+      "a": "The liquidator takes control of assets, reviews affairs, invites claims, realises assets, pays liabilities and applies for dissolution."
+    },
+    {
+      "q": "Can a company be wound up for five years of filing default?",
+      "a": "Yes. Default in filing financial statements or annual returns for five consecutive financial years is a statutory ground."
+    },
+    {
+      "q": "Can shareholders decide to wind up a company?",
+      "a": "Shareholders may pass a special resolution, but the correct legal route and Tribunal/IBC/ROC process must be followed."
+    },
+    {
+      "q": "Can creditors object to company closure?",
+      "a": "Yes. Creditors may object if liabilities are unpaid or closure affects their rights."
+    },
+    {
+      "q": "Can directors be liable after winding up?",
+      "a": "Directors may face liability for fraud, misfeasance, unpaid statutory dues, false declarations or non-compliance depending on facts."
+    },
+    {
+      "q": "What happens to company assets?",
+      "a": "Assets are realised or transferred according to law, and proceeds are used to settle liabilities before surplus distribution."
+    },
+    {
+      "q": "What happens to employees?",
+      "a": "Employee dues, salary, gratuity, PF, ESIC and labour obligations must be reviewed and settled as per applicable law."
+    },
+    {
+      "q": "What happens to pending court cases?",
+      "a": "Proceedings may require Tribunal leave or appropriate legal handling depending on the stage and type of winding up."
+    },
+    {
+      "q": "Can GST registration continue after company closure?",
+      "a": "No. GST registration should be cancelled or closed through proper process where applicable."
+    },
+    {
+      "q": "Can bank account remain open after closure?",
+      "a": "Bank accounts should be closed or handled as per liquidator/closure requirements before final dissolution."
+    },
+    {
+      "q": "Can a regulated company be wound up normally?",
+      "a": "Regulated entities may require regulator approval, intimation or licence surrender before closure."
+    },
+    {
+      "q": "How long does winding up take?",
+      "a": "Timeline depends on route, filings, assets, liabilities, creditors, litigation, liquidator process, NCLT workload and regulator involvement."
+    },
+    {
+      "q": "What is the biggest mistake in company closure?",
+      "a": "The biggest mistake is choosing strike-off, winding up or voluntary liquidation without first checking assets, liabilities, filings, taxes, charges, creditors and regulator obligations."
+    },
+    {
+      "q": "Can Estabizz handle complete winding-up support?",
+      "a": "Yes. Estabizz assists with closure-route assessment, documentation, NCLT/ROC/IBC support, tax/GST closure, liquidator coordination and final dissolution tracking."
+    }
+  ],
+  "expertQuote": {
+    "quote": "Winding up of Companies should begin with route selection. A company should not directly file for closure without checking whether strike-off, voluntary liquidation, Tribunal winding up, IBC process or compliance regularisation is the legally correct path.",
+    "attribution": "CS Devyani Khambhati – Compliance Expert"
+  },
+  "disclaimer": "This guide is general information based on material supplied by Estabizz and remains under professional review. Winding up, voluntary liquidation, insolvency resolution and strike-off are distinct procedures. Eligibility, forum, creditor rights, director exposure, employee dues, tax closure, sectoral approvals and dissolution requirements depend on the company record and current Companies Act, IBC, NCLT, IBBI and ROC framework. Estabizz provides route assessment, documentation and coordination support; Tribunal appearance and regulated professional functions are handled through appropriately enrolled professionals. Confirm the current route and requirements before acting."
+}

@@ -109,6 +109,7 @@ export default function SourceDocumentLegalPage({ data }: { data: LegalSourcePag
 
   return (
     <ServicePageLayout
+      faqs={data.faqs}
       tags={data.tags.map((label) => ({ emoji: '', label }))}
       breadcrumb={[
         { label: 'Home', href: '/' },
@@ -130,7 +131,7 @@ export default function SourceDocumentLegalPage({ data }: { data: LegalSourcePag
       finalCtaDescription={data.finalCtaDescription}
       heroDescription={<>{data.heroParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</>}
       heroActions={<>
-        <Link href="/contact" className="rounded-lg bg-[#1677f2] px-6 py-3 font-bold text-white hover:bg-[#0866d9]">Speak With an Expert</Link>
+        <Link href={`/contact?service=${encodeURIComponent(data.title)}`} className="rounded-lg bg-[#1677f2] px-6 py-3 font-bold text-white hover:bg-[#0866d9]">Speak With an Expert</Link>
         <a href={whatsappUrl} className="rounded-lg border border-blue-200 bg-white px-6 py-3 font-bold text-[#1677f2] hover:bg-blue-50">WhatsApp Estabizz</a>
       </>}
     >

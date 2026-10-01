@@ -72,6 +72,7 @@ function FaqList({ items }: { items: { q: string; a: string }[] }) {
 export default function PageClient() {
   return (
     <ServicePageLayout
+      faqs={faqs}
       tags={[{ emoji: '', label: 'Legal' }, { emoji: '', label: 'Criminal Appeals' }]}
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'Legal', href: '/solutions/legal' }, { label: 'Appeal Before High Court' }]}
       title="Appeal Before High Court"

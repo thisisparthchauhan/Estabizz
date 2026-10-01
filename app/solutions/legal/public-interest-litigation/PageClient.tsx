@@ -82,6 +82,7 @@ function FaqList({ items }: { items: { q: string; a: string }[] }) {
 export default function PageClient() {
   return (
     <ServicePageLayout
+      faqs={faqs}
       tags={[{ emoji: '', label: 'Legal' }, { emoji: '', label: 'Constitutional' }]}
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'Legal', href: '/solutions/legal' }, { label: 'Public Interest Litigation' }]}
       title="Public Interest Litigation"

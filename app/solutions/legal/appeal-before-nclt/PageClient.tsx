@@ -79,6 +79,7 @@ function FaqList({ items }: { items: { q: string; a: string }[] }) {
 export default function PageClient() {
   return (
     <ServicePageLayout
+      faqs={faqs}
       tags={[{ emoji: '', label: 'Legal' }, { emoji: '', label: 'Company Law & IBC' }]}
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'Legal', href: '/solutions/legal' }, { label: 'Appeal Before NCLT' }]}
       title="Appeal Before NCLT"

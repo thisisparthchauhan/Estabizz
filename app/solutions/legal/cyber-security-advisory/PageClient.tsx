@@ -79,6 +79,7 @@ function FaqList({ items }: { items: { q: string; a: string }[] }) {
 export default function PageClient() {
   return (
     <ServicePageLayout
+      faqs={faqs}
       tags={[{ emoji: '', label: 'Legal' }, { emoji: '', label: 'Cyber and Data Protection' }]}
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'Legal', href: '/solutions/legal' }, { label: 'Cyber Security Advisory' }]}
       title="Cyber Security Advisory"

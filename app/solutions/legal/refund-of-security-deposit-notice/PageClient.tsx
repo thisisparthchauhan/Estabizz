@@ -81,6 +81,7 @@ function FaqList({ items }: { items: { q: string; a: string }[] }) {
 export default function PageClient() {
   return (
     <ServicePageLayout
+      faqs={faqs}
       tags={[{ emoji: '', label: 'Legal' }, { emoji: '', label: 'Contracts' }]}
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'Legal', href: '/solutions/legal' }, { label: 'Refund of Security Deposit Notice' }]}
       title="Refund of Security Deposit Notice"

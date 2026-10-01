@@ -53,6 +53,145 @@ const SERVICES_GROUPED = [
             'India Entry Strategy',
         ],
     },
+    // The /solutions/ipr long-form guides. These strings are each page's
+    // `docTitle` (lib/content/services/ipr/*.ts), which is what
+    // ServicePageView puts into `?service=` -- hero.heading is a marketing
+    // sentence, not a service name, so it is deliberately not used here.
+    {
+        group: 'IPR & Trademark',
+        color: '#0077B6',
+        items: [
+            'Copyright registration Legal Services in India',
+            'Copyright website Legal Services in India',
+            'Design registration Legal Services in India',
+            'Patent registration Legal Services in India',
+            'Trademark Assignment Legal Services in India',
+            'Trademark Classes Advisory Services in India',
+            'Trademark Objection Reply Legal Services in India',
+            'Trademark Opposition Legal Services in India',
+            'Trademark Registration Legal Services in India',
+        ],
+    },
+    // The 56 /solutions/legal services, grouped exactly as the Legal hub page
+    // groups them (lib/content/services/registry.ts -> topics), so a visitor
+    // sees the same taxonomy in the dropdown as on the page they came from.
+    //
+    // These strings must stay identical to the `title` each legal PageClient
+    // passes to ServicePageLayout: the layout builds `/contact?service=<title>`
+    // and this form only pre-selects a value present in ALL_SERVICE_ITEMS. A
+    // drift between the two does not break the form -- the dropdown simply
+    // opens unselected -- but it silently loses the lead attribution, which is
+    // the whole point. scripts/contactServiceOptionsTest.mjs asserts the match.
+    {
+        group: 'Legal — Divorce, Marriage & Family',
+        color: '#1677f2',
+        items: [
+            'Divorce and Marriage Consulting',
+            'Mutual Divorce',
+            'Contested Divorce',
+            'Divorce Notice',
+            'Divorce Settlement Agreements',
+            'Judicial Separation',
+            'Domestic Violence',
+            'Court Marriage',
+            'Marriage Registration',
+        ],
+    },
+    {
+        group: 'Legal — Criminal, FIR & Bail',
+        color: '#0077B6',
+        items: [
+            'First Information Report',
+            'Bail Application',
+            'Quashing of FIR and Complaint',
+            'Suspension of Sentence',
+            'Criminal Misappropriation of Property',
+            'Defamation',
+        ],
+    },
+    {
+        group: 'Legal — Courts, Appeals & Petitions',
+        color: '#0866d9',
+        items: [
+            'Court Proceedings',
+            'Appeal Before High Court',
+            'Appeal Before NCLT',
+            'Appeal Before ITAT',
+            'Special Leave Petition',
+            'Writ Petition',
+            'Public Interest Litigation',
+            'Caveat Filing',
+        ],
+    },
+    {
+        group: 'Legal — Property, Rent & Deeds',
+        color: '#3b8ef5',
+        items: [
+            'Property Registration',
+            'Property Verification',
+            'Property Valuation',
+            'Gift Deed Registration',
+            'Relinquishment Deed',
+            'Lease Agreement Drafting',
+            'Tenant Eviction Notice',
+            'Refund of Security Deposit Notice',
+        ],
+    },
+    {
+        group: 'Legal — Money Recovery & Legal Notices',
+        color: '#1677f2',
+        items: [
+            'Cheque Bounce in India',
+            'Loan Recovery Notice',
+            'Recovery From Debtors',
+            'Recovery Notice of Dues',
+            'General Legal Notice',
+            'Defamation Notice',
+            'Faulty Product Notice',
+        ],
+    },
+    {
+        group: 'Legal — Wills, Probate & Succession',
+        color: '#0077B6',
+        items: [
+            'Will Registration',
+            'Probate Service',
+            'Succession Certificate',
+        ],
+    },
+    {
+        group: 'Legal — Company, M&A & Corporate Legal',
+        color: '#0866d9',
+        items: [
+            'Mergers and Acquisitions',
+            'Demerger',
+            'Directors Disqualification',
+            'Revival of Struck-Off Companies',
+            'Winding Up of Companies',
+        ],
+    },
+    {
+        group: 'Legal — Employment & Workplace',
+        color: '#3b8ef5',
+        items: [
+            'Non Payment of Salary',
+            'Sexual Harassment at Workplace Compliance',
+        ],
+    },
+    {
+        group: 'Legal — Consumer, Cyber & Regulatory Action',
+        color: '#1677f2',
+        items: [
+            'Complaints Before Consumer Court',
+            'Cyber Crime Complaint',
+            'Cyber Security Advisory',
+            'Motor Accident Claims Tribunal',
+            'Food Adulteration',
+            'Adulteration of Drugs Legal Services in India',
+            'Offences Relating to Weights and Measures',
+            'Lawyer for TRAI Matters',
+        ],
+    },
     {
         group: 'Corporate & Legal',
         color: '#d97706',

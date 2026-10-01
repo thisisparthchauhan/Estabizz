@@ -41,15 +41,42 @@ export default function ChatWidget() {
                         .map((m) => ({ role: m.role, content: m.content })),
                 }),
             });
-            const data = await res.json();
+            const data = await res.json().catch(() => ({}));
+
+            // 503 is the route's deliberate "not configured / unavailable"
+            // answer (see app/api/chat/route.ts), not a blip. Telling someone
+            // to "try again" there sends them round a loop that cannot
+            // succeed, so hand them the routes that do work instead. The
+            // /contact mention is turned into a real link by formatMsg below.
+            if (res.status === 503) {
+                setMessages((prev) => [
+                    ...prev,
+                    {
+                        role: "assistant",
+                        content:
+                            "The AI assistant is offline at the moment. You can still reach the team directly — /contact, WhatsApp +91 98256 00907, or info@estabizz.com — and a specialist will answer you personally.",
+                    },
+                ]);
+                return;
+            }
+
             setMessages((prev) => [
                 ...prev,
-                { role: "assistant", content: data.reply || "Sorry, I couldn't respond. Please try again." },
+                {
+                    role: "assistant",
+                    content:
+                        data.reply ||
+                        "I couldn't answer that one. Ask the team directly at /contact and someone will get back to you.",
+                },
             ]);
         } catch {
             setMessages((prev) => [
                 ...prev,
-                { role: "assistant", content: "Connection error. Please try again." },
+                {
+                    role: "assistant",
+                    content:
+                        "I couldn't reach the server. Check your connection, or reach the team at /contact.",
+                },
             ]);
         } finally {
             setLoading(false);

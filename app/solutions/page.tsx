@@ -22,22 +22,22 @@ export const metadata: Metadata = {
 
 export default function SolutionsHubPage() {
   return (
-    <main className="min-h-screen bg-white pt-[64px]">
-      <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+    <main className="min-h-screen bg-white dark:bg-[#06101f] pt-[64px]">
+      <header className="relative isolate overflow-hidden border-b border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d]">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-8%,rgba(22,119,242,0.12),transparent_46%),radial-gradient(circle_at_88%_84%,rgba(217,169,56,0.08),transparent_32%)]" />
         <div className="mx-auto w-full max-w-[1180px] px-6 py-16 sm:py-20">
-          <nav className="mb-6 flex items-center gap-2 text-[12px] font-medium text-[#94a3b8]" aria-label="Breadcrumb">
+          <nav className="mb-6 flex items-center gap-2 text-[12px] font-medium text-[#94a3b8] dark:text-[#94a3b8]" aria-label="Breadcrumb">
             <Link href="/" className="transition-colors hover:text-[#475569]">Home</Link>
             <span className="opacity-40">/</span>
-            <span className="text-[#475569]">Solutions</span>
+            <span className="text-[#475569] dark:text-[#a9b6c9]">Solutions</span>
           </nav>
           <div className="text-[13px] font-black uppercase tracking-[0.24em] text-[#1677f2]">
             Practice areas
           </div>
-          <h1 className="mt-4 max-w-[900px] text-[clamp(32px,4vw,52px)] font-black leading-[1.07] tracking-[-0.04em] text-[#071426]">
+          <h1 className="mt-4 max-w-[900px] text-[clamp(32px,4vw,52px)] font-black leading-[1.07] tracking-[-0.04em] text-[#071426] dark:text-[#f7f9fc]">
             Solutions beyond the licence.
           </h1>
-          <p className="mt-5 max-w-[720px] text-[17px] font-medium leading-[1.9] text-[#475569]">
+          <p className="mt-5 max-w-[720px] text-[17px] font-medium leading-[1.9] text-[#475569] dark:text-[#a9b6c9]">
             Regulatory registrations are only part of what a business needs. These are the practice
             areas Estabizz runs alongside them — protecting what you create, handling the legal
             work, tracking what falls due, and holding the finance function together.
@@ -51,7 +51,7 @@ export default function SolutionsHubPage() {
             </Link>
             <Link
               href="/regulatory"
-              className="inline-flex items-center justify-center rounded-xl border border-blue-100 bg-white px-8 py-3.5 text-[15px] font-bold text-[#0a2b58] shadow-[0_10px_28px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-0.5 hover:border-[#1677f2] hover:text-[#1677f2]"
+              className="inline-flex items-center justify-center rounded-xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-8 py-3.5 text-[15px] font-bold text-[#0a2b58] shadow-[0_10px_28px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-0.5 hover:border-[#1677f2] hover:text-[#1677f2]"
             >
               Looking for a licence? Regulatory →
             </Link>
@@ -67,7 +67,7 @@ export default function SolutionsHubPage() {
               <Link
                 key={category.slug}
                 href={`/solutions/${category.slug}`}
-                className="group flex flex-col rounded-[28px] border border-blue-100 bg-white p-7 shadow-[0_18px_50px_rgba(0,80,140,0.07)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1677f2]/40"
+                className="group flex flex-col rounded-[28px] border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-7 shadow-[0_18px_50px_rgba(0,80,140,0.07)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1677f2]/40"
               >
                 <span
                   className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#eef5ff] text-[22px]"
@@ -75,14 +75,14 @@ export default function SolutionsHubPage() {
                 >
                   {category.icon}
                 </span>
-                <h2 className="mt-4 text-[20px] font-black leading-tight text-[#071426] transition-colors group-hover:text-[#1677f2]">
+                <h2 className="mt-4 text-[20px] font-black leading-tight text-[#071426] dark:text-[#f7f9fc] transition-colors group-hover:text-[#1677f2]">
                   {category.label}
                 </h2>
-                <p className="mt-3 flex-1 text-[14px] font-medium leading-[1.8] text-[#64748b]">
+                <p className="mt-3 flex-1 text-[14px] font-medium leading-[1.8] text-[#64748b] dark:text-[#a9b6c9]">
                   {category.tagline}
                 </p>
                 <span className="mt-5 flex items-center justify-between text-[13px] font-bold">
-                  <span className="text-[#94a3b8]">
+                  <span className="text-[#94a3b8] dark:text-[#94a3b8]">
                     {count} {count === 1 ? "service" : "services"}
                   </span>
                   <span className="text-[#1677f2]">Explore →</span>

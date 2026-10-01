@@ -66,7 +66,7 @@ function Table({ headers, rows }: { headers: string[]; rows: string[][] }) {
   );
 }
 
-function Block({ block }: { block: ServiceBlock }) {
+function Block({ block, contactHref }: { block: ServiceBlock; contactHref: string }) {
   if (block.kind === "table") {
     return <Table headers={block.headers} rows={block.rows} />;
   }
@@ -79,7 +79,7 @@ function Block({ block }: { block: ServiceBlock }) {
     return (
       <p className="mt-6">
         <a
-          href={isWhatsApp ? WHATSAPP_HREF : CONTACT_HREF}
+          href={isWhatsApp ? WHATSAPP_HREF : contactHref}
           className={isWhatsApp ? BTN_SECONDARY : BTN_PRIMARY}
         >
           {label}
@@ -101,8 +101,13 @@ export default function ServicePageView({
 }) {
   const { hero, sections, faqs } = page;
 
+  // Carry the service into the contact form so the enquiry arrives tagged
+  // rather than as "Other / Not Listed". The form pre-selects only values it
+  // recognises, so an unlisted heading degrades to an unselected dropdown.
+  const contactHref = `${CONTACT_HREF}?service=${encodeURIComponent(page.docTitle)}`;
+
   return (
-    <main className="min-h-screen bg-white pt-[64px]">
+    <main className="min-h-screen bg-white dark:bg-[#06101f] pt-[64px]">
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-8%,rgba(22,119,242,0.12),transparent_46%),radial-gradient(circle_at_88%_84%,rgba(217,169,56,0.08),transparent_32%)]" />
@@ -149,7 +154,7 @@ export default function ServicePageView({
           ))}
 
           <div className="mt-9 flex flex-col gap-3.5 sm:flex-row">
-            <Link href={CONTACT_HREF} className={BTN_PRIMARY}>
+            <Link href={contactHref} className={BTN_PRIMARY}>
               {hero.primaryCta || "Speak with Expert"} →
             </Link>
             <a href={WHATSAPP_HREF} className={BTN_SECONDARY}>
@@ -211,7 +216,7 @@ export default function ServicePageView({
                 </h2>
                 <div className="mt-2 h-[3px] w-12 rounded-full bg-[#1677f2]" />
                 {section.blocks.map((block, i) => (
-                  <Block key={i} block={block} />
+                  <Block key={i} block={block} contactHref={contactHref} />
                 ))}
               </section>
             ))}
@@ -269,7 +274,7 @@ export default function ServicePageView({
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
             <Link
-              href={CONTACT_HREF}
+              href={contactHref}
               className="w-full rounded-xl bg-[#1677f2] px-8 py-3.5 text-center text-[15px] font-bold text-white shadow-[0_14px_35px_rgba(22,119,242,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0866d9] sm:w-auto"
             >
               {hero.primaryCta || "Speak with Expert"} →

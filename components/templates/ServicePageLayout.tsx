@@ -33,6 +33,24 @@ interface ServicePageLayoutProps {
     finalCtaTitle: string;
     finalCtaDescription: string;
     finalCtaActions?: React.ReactNode;
+    /**
+     * Question/answer pairs, for FAQPage structured data.
+     *
+     * Passing these does NOT render them -- pages already render their own FAQ
+     * accordion through `children`. This prop exists only so the layout can
+     * emit the matching schema, which Google requires to be machine-readable
+     * markup rather than inferred from the rendered <details> elements.
+     */
+    faqs?: { q: string; a: string }[];
+    /**
+     * Service name to carry into the contact form as `?service=`.
+     *
+     * Defaults to `title`. The contact form only pre-selects a value it
+     * recognises (ALL_SERVICE_ITEMS in app/contact/ContactClient.tsx), so a
+     * title that is not listed there degrades to an unselected dropdown --
+     * the same behaviour as before, never a broken form.
+     */
+    contactService?: string;
     // Content
     children: React.ReactNode;
 }
@@ -40,7 +58,7 @@ interface ServicePageLayoutProps {
 export default function ServicePageLayout({
     tags, breadcrumb, title, heroDescription, heroActions, trustLine, readTime = "12 min read", displayYear = "2026", reviewPending = false, hideReviewBadge = false, focusKeyword,
     sections, ctaTitle, ctaDescription, quickFacts,
-    relatedArticles, finalCtaTitle, finalCtaDescription, finalCtaActions, children
+    relatedArticles, finalCtaTitle, finalCtaDescription, finalCtaActions, faqs, contactService, children
 }: ServicePageLayoutProps) {
     const [activeSection, setActiveSection] = useState("");
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -90,8 +108,59 @@ export default function ServicePageLayout({
 
     const insightCards = quickFacts.slice(0, 4);
 
+    // Contact deep link. The form pre-selects `?service=` when it recognises
+    // the value, so the reader lands on the enquiry form with the service they
+    // were just reading about already filled in, and the lead reaches the
+    // admin tagged rather than as "Other / Not Listed".
+    const contactHref = `/contact?service=${encodeURIComponent(contactService ?? title)}`;
+
+    // Structured data.
+    //
+    // Emitted here rather than in each page's server `page.tsx` because the FAQ
+    // and breadcrumb data only exist inside the page client. This component is
+    // a client component, but Next renders it to HTML on the server, so the
+    // script tag is present in the initial response that crawlers read -- it
+    // does not depend on hydration.
+    //
+    // BreadcrumbList is built from the `breadcrumb` prop every page already
+    // passes, so every page using this layout gets it with no per-page change.
+    // Relative hrefs are left relative: metadataBase resolves them, and an
+    // absolute URL hardcoded here would go stale the next time the domain moves.
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: breadcrumb.map((item, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            name: item.label,
+            ...(item.href ? { item: item.href } : {}),
+        })),
+    };
+
+    const faqSchema = faqs?.length
+        ? {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.q,
+                acceptedAnswer: { "@type": "Answer", text: faq.a },
+            })),
+        }
+        : null;
+
     return (
         <div className="min-h-screen bg-[#f6f9ff] dark:bg-[#06101f] font-sans text-gray-800 dark:text-[#f7f9fc]">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            {faqSchema && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                />
+            )}
             {/* Scroll Progress Bar */}
             <div
                 className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-[#1677f2] to-[#0866d9] z-[120] transition-all duration-150 ease-out"
@@ -195,7 +264,7 @@ export default function ServicePageLayout({
                                         ))}
                                     </div>
 
-                                    <Link href="/contact" className="block w-full rounded-2xl bg-[#1677f2] px-5 py-3.5 text-center text-[14px] font-black text-white shadow-[0_16px_34px_rgba(22,119,242,0.24)] transition-all hover:-translate-y-0.5 hover:bg-[#0866d9]">
+                                    <Link href={contactHref} className="block w-full rounded-2xl bg-[#1677f2] px-5 py-3.5 text-center text-[14px] font-black text-white shadow-[0_16px_34px_rgba(22,119,242,0.24)] transition-all hover:-translate-y-0.5 hover:bg-[#0866d9]">
                                         Book Free Consultation
                                     </Link>
                                 </div>
@@ -380,7 +449,7 @@ export default function ServicePageLayout({
                         <div className="relative">
                         <h3 className="font-black text-[21px] mb-3 leading-tight">{ctaTitle}</h3>
                         <p className="text-white/86 text-[14px] mb-6 leading-7">{ctaDescription}</p>
-                        <Link href="/contact" className="block w-full bg-white text-[#1677f2] font-black text-[14px] py-3.5 rounded-2xl hover:bg-blue-50 hover:shadow-lg transition duration-300 text-center">
+                        <Link href={contactHref} className="block w-full bg-white text-[#1677f2] font-black text-[14px] py-3.5 rounded-2xl hover:bg-blue-50 hover:shadow-lg transition duration-300 text-center">
                             📞 Book Free Consultation
                         </Link>
                         <div className="text-center text-white/78 text-[12px] mt-4 font-bold tracking-wide">
@@ -477,7 +546,7 @@ export default function ServicePageLayout({
                         </div>
                     ) : (
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-[#1677f2] hover:bg-[#0866d9] text-white font-bold rounded-xl shadow-[0_14px_35px_rgba(22,119,242,0.28)] transition-all">
+                            <Link href={contactHref} className="w-full sm:w-auto px-8 py-3.5 bg-[#1677f2] hover:bg-[#0866d9] text-white font-bold rounded-xl shadow-[0_14px_35px_rgba(22,119,242,0.28)] transition-all">
                                 Get Started Free →
                             </Link>
                             <a href="tel:9825600907" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20">

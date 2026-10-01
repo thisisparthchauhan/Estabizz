@@ -56,7 +56,7 @@ function SubTypeBadge({ subType }: { subType: string }) {
     "Media File":     "bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]",
     "Website Section":"bg-amber-50 text-amber-700 border-amber-200 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]",
     "SEO Block":      "bg-green-50 text-green-700 border-green-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]",
-    "Global Block":   "bg-cyan-50 text-cyan-700 border-cyan-200",
+    "Global Block":   "bg-cyan-50 text-cyan-700 border-cyan-200 dark:bg-[#132530] dark:border-[#1d3f4a] dark:text-[#67e8f9]",
     "Regulatory Update":"bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-[#1c1c20] dark:text-[#818cf8] dark:border-[#27272b]",
     "Content Page":     "bg-teal-50 text-teal-700 border-teal-200 dark:bg-[#132a28] dark:text-[#5eead4] dark:border-[#1d4a43]",
   };

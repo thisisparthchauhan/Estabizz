@@ -138,7 +138,7 @@ export function CardFeaturedSide({ blog }: { blog: BlogSummary }) {
       <div className="flex-1 min-w-0 flex flex-col justify-between">
         <div>
           <CategoryBadge name={blog.category.name} color={blog.category.color} size="xs" />
-          <h3 className="mt-0.5 text-[13px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150">
+          <h3 className="mt-0.5 text-[13px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150 dark:text-[#fafafa]">
             {blog.title}
           </h3>
         </div>
@@ -210,7 +210,7 @@ export function CardList({ blog }: { blog: BlogSummary }) {
       {/* Text left */}
       <div className="flex-1 min-w-0">
         <CategoryBadge name={blog.category.name} color={blog.category.color} size="xs" />
-        <h3 className="mt-1 text-[15px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150">
+        <h3 className="mt-1 text-[15px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150 dark:text-[#fafafa]">
           {blog.title}
         </h3>
         <span className="mt-1 block text-[11px] text-[#9ca3af] dark:text-[#71717a]">{formatDate(blog.publishedAt)}</span>
@@ -243,7 +243,7 @@ export function CardMini({ blog }: { blog: BlogSummary }) {
         style={{ backgroundColor: blog.category.color }}
       />
       <div className="min-w-0">
-        <h4 className="text-[13px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150">
+        <h4 className="text-[13px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150 dark:text-[#fafafa]">
           {blog.title}
         </h4>
         <span className="mt-0.5 block text-[11px] text-[#9ca3af] dark:text-[#71717a]">{formatDate(blog.publishedAt)}</span>
@@ -276,7 +276,7 @@ export function CardHorizontal({
         />
         {/* Editorial label badge */}
         <div className="absolute left-3 top-3">
-          <span className="inline-flex items-center gap-1 rounded-sm bg-[#0a1628] dark:bg-[#1c1c20] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#1677f2]">
+          <span className="inline-flex items-center gap-1 rounded-sm bg-[#0a1628] dark:bg-[#1c1c20] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#1677f2] dark:text-[#4f9dfb]">
             {label}
           </span>
         </div>
@@ -320,7 +320,7 @@ export function CardPopularRank({ blog, rank }: { blog: BlogSummary; rank: numbe
       </span>
       <div className="min-w-0 flex-1">
         <CategoryBadge name={blog.category.name} color={blog.category.color} size="xs" />
-        <h4 className="mt-0.5 text-[13.5px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150">
+        <h4 className="mt-0.5 text-[13.5px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150 dark:text-[#fafafa]">
           {blog.title}
         </h4>
         <span className="mt-1 block text-[11px] text-[#9ca3af] dark:text-[#71717a]">{blog.readingTime} min read</span>

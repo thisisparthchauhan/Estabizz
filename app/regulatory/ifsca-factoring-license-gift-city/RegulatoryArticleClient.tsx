@@ -683,19 +683,19 @@ export default function RegulatoryArticleClient() {
 
           <div className="flex flex-col gap-3 mt-4 mb-8">
             <div className="bg-[rgba(16,185,129,0.04)] border-l-[4px] border-[#10b981] rounded-r-xl p-3 shadow-sm flex items-center gap-3">
-              <div className="text-green-500 font-bold shrink-0">✓</div>
+              <div className="text-green-500 font-bold shrink-0 dark:text-[#6ee7b7]">✓</div>
               <span className="text-[#374151] font-medium text-[14px] dark:text-[#a1a1aa]">Access to global markets</span>
             </div>
             <div className="bg-[rgba(16,185,129,0.04)] border-l-[4px] border-[#10b981] rounded-r-xl p-3 shadow-sm flex items-center gap-3">
-              <div className="text-green-500 font-bold shrink-0">✓</div>
+              <div className="text-green-500 font-bold shrink-0 dark:text-[#6ee7b7]">✓</div>
               <span className="text-[#374151] font-medium text-[14px] dark:text-[#a1a1aa]">Flexible foreign currency operations</span>
             </div>
             <div className="bg-[rgba(16,185,129,0.04)] border-l-[4px] border-[#10b981] rounded-r-xl p-3 shadow-sm flex items-center gap-3">
-              <div className="text-green-500 font-bold shrink-0">✓</div>
+              <div className="text-green-500 font-bold shrink-0 dark:text-[#6ee7b7]">✓</div>
               <span className="text-[#374151] font-medium text-[14px] dark:text-[#a1a1aa]">Integration with international trade finance platforms</span>
             </div>
             <div className="bg-[rgba(16,185,129,0.04)] border-l-[4px] border-[#10b981] rounded-r-xl p-3 shadow-sm flex items-center gap-3">
-              <div className="text-green-500 font-bold shrink-0">✓</div>
+              <div className="text-green-500 font-bold shrink-0 dark:text-[#6ee7b7]">✓</div>
               <span className="text-[#374151] font-medium text-[14px] dark:text-[#a1a1aa]">Positioning within an international financial centre</span>
             </div>
           </div>
@@ -869,7 +869,7 @@ export default function RegulatoryArticleClient() {
 
           <div className="bg-white border border-gray-100 rounded-[16px] p-5 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-100 to-teal-100 text-[#0077B6] flex items-center justify-center font-bold text-xl border-2 border-white shadow-sm ring-2 ring-blue-50 shrink-0 dark:text-[#4f9dfb]">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-100 to-teal-100 text-[#0077B6] flex items-center justify-center font-bold text-xl border-2 border-white shadow-sm ring-2 ring-blue-50 shrink-0 dark:text-[#4f9dfb] dark:from-[#1c1c20] dark:to-[#132a28]">
                 DK
               </div>
               <div>

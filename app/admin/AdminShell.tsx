@@ -326,7 +326,7 @@ function SidebarNavLink({
   onClick?: () => void;
 }) {
   const base = "relative flex items-center gap-3 rounded-xl text-[13px] font-medium transition-all duration-150 overflow-hidden";
-  const activeClass = "bg-[#1677f2]/15 text-[#1677f2] pl-[10px] pr-3 py-2.5 border-l-[3px] border-[#1677f2]";
+  const activeClass = "bg-[#1677f2]/15 text-[#1677f2] pl-[10px] pr-3 py-2.5 border-l-[3px] border-[#1677f2] dark:text-[#4f9dfb]";
   const idleClass = "text-white/50 hover:text-white/80 hover:bg-white/[0.07] px-3 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1677f2]/50 focus-visible:ring-offset-1 focus-visible:ring-offset-[#071224] dark:bg-[#141417]";
   return (
     <Link

@@ -98,7 +98,7 @@ function Callout({ tone = "blue", label, text }: { tone?: "blue" | "navy" | "amb
   if (tone === "amber") {
     return (
       <div className="rounded-2xl border border-amber-200 border-l-4 border-l-[#f59e0b] bg-[#fffbf0] p-5 sm:p-6 dark:bg-[#141417] dark:border-[#4a3a1a]">
-        {label && <p className="mb-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#92400e]">{label}</p>}
+        {label && <p className="mb-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#92400e] dark:text-[#fcd34d]">{label}</p>}
         <p className="text-[14.5px] leading-[1.75] text-[#78350f] dark:text-[#fcd34d]">{text}</p>
       </div>
     );
@@ -106,7 +106,7 @@ function Callout({ tone = "blue", label, text }: { tone?: "blue" | "navy" | "amb
   return (
     <div className="rounded-2xl border border-blue-100 border-l-4 border-l-[#1677f2] bg-[#f0f7ff] p-5 sm:p-6 dark:bg-[#141417] dark:border-[#27272b]">
       {label && <p className="mb-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#0866d9] dark:text-[#4f9dfb]">{label}</p>}
-      <p className="text-[14.5px] leading-[1.75] text-[#0c4a6e]">{text}</p>
+      <p className="text-[14.5px] leading-[1.75] text-[#0c4a6e] dark:text-[#7dd3fc]">{text}</p>
     </div>
   );
 }

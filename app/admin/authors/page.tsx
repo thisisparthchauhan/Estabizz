@@ -80,7 +80,7 @@ export default async function AuthorsPage() {
         )}
 
         <div className="border-t border-[#f0f4f8] bg-[#fffbf0] px-6 py-4 dark:bg-[#141417] dark:border-[#27272b]">
-          <div className="flex items-center gap-3 rounded-xl border border-[#1677f2]/30 bg-[#1677f2]/8 px-4 py-3">
+          <div className="flex items-center gap-3 rounded-xl border border-[#1677f2]/30 bg-[#1677f2]/10 px-4 py-3">
             <span className="text-[#1677f2] text-lg dark:text-[#4f9dfb]">ℹ</span>
             <p className="text-[12px] text-[#b8860b] font-medium">
               Author profiles are currently derived from blog data. A dedicated author

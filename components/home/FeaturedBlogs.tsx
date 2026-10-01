@@ -51,7 +51,7 @@ export default function FeaturedBlogs() {
 
     if (loading) {
         return (
-            <section className="py-20 bg-gradient-to-b from-white to-[#f0f7ff] dark:to-[#09090b]">
+            <section className="py-20 bg-gradient-to-b from-white to-[#f0f7ff] dark:to-[#09090b] dark:from-[#141417]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
                         <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4 animate-pulse" />
@@ -77,11 +77,11 @@ export default function FeaturedBlogs() {
     if (blogs.length === 0) return null;
 
     return (
-        <section className="py-20 bg-gradient-to-b from-white to-[#f0f7ff] dark:to-[#09090b]">
+        <section className="py-20 bg-gradient-to-b from-white to-[#f0f7ff] dark:to-[#09090b] dark:from-[#141417]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <div className="inline-flex items-center gap-2 bg-[#1677f2]/10 text-[#1677f2] text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+                    <div className="inline-flex items-center gap-2 bg-[#1677f2]/10 text-[#1677f2] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 dark:text-[#4f9dfb]">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                         </svg>

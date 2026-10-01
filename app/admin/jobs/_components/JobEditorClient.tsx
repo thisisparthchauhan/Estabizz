@@ -213,7 +213,7 @@ export default function JobEditorClient({ job }: Props) {
   // ─── Field helpers ──────────────────────────────────────────────────────────
 
   function inputCls(extra = "") {
-    return `w-full rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13.5px] text-[#0a1628] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20 ${extra}`;
+    return `w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] px-4 py-2.5 text-[13.5px] text-[#0a1628] dark:text-[#fafafa] placeholder-[#94a3b8] dark:placeholder-[#71717a] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20 ${extra}`;
   }
 
   function labelCls() {

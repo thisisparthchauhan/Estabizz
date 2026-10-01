@@ -731,7 +731,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="lead-name" className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">
-                Full name <span className="text-red-500" aria-label="required">*</span>
+                Full name <span className="text-red-500 dark:text-[#fca5a5]" aria-label="required">*</span>
               </label>
               <input
                 id="lead-name"
@@ -753,7 +753,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
             </div>
             <div>
               <label htmlFor="lead-email" className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">
-                Work email <span className="text-red-500" aria-label="required">*</span>
+                Work email <span className="text-red-500 dark:text-[#fca5a5]" aria-label="required">*</span>
               </label>
               <input
                 id="lead-email"
@@ -1029,7 +1029,7 @@ function FinalCTA({ country, scrollToForm }: { country: GlobalMarketConfig; scro
           </button>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/8 px-6 py-3 text-[14px] font-black text-white transition-all hover:border-white/40 hover:bg-white/12 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0a1628] dark:bg-[#141417]"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-[14px] font-black text-white transition-all hover:border-white/40 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0a1628] dark:bg-[#141417]"
           >
             Contact Estabizz
           </Link>
@@ -1060,7 +1060,7 @@ export default function CountryLandingClient({ country }: { country: GlobalMarke
       <section className="relative overflow-hidden bg-[#070d1a] pb-12 pt-16 text-white">
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
           <div className="absolute -left-32 top-0 h-96 w-96 rounded-full bg-[#1677f2]/10 blur-[100px]" />
-          <div className="absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-[#1677f2]/8 blur-[120px]" />
+          <div className="absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-[#1677f2]/10 blur-[120px]" />
         </div>
         <div className="relative mx-auto max-w-5xl px-6">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -1092,7 +1092,7 @@ export default function CountryLandingClient({ country }: { country: GlobalMarke
                 </button>
                 <button
                   onClick={scrollToForm}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/8 px-6 py-3 text-[14px] font-black text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/12 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#070d1a] sm:justify-start dark:bg-[#141417]"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-[14px] font-black text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#070d1a] sm:justify-start dark:bg-[#141417]"
                 >
                   Register Your Interest
                 </button>
@@ -1110,7 +1110,7 @@ export default function CountryLandingClient({ country }: { country: GlobalMarke
                 </div>
               </div>
               {country.callingCode && (
-                <div className="rounded-2xl border border-white/8 bg-white/5 px-5 py-3 dark:bg-[#141417]">
+                <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-3 dark:bg-[#141417]">
                   <div className="text-[10px] font-black uppercase tracking-[0.15em] text-white/50">
                     Dial Code
                   </div>

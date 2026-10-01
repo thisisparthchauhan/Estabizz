@@ -221,7 +221,7 @@ function ConfirmModal({
           {ac.requiresNote && (
             <div className="mb-4">
               <label className="text-[12px] font-semibold text-[#334155] mb-1.5 block dark:text-[#a1a1aa]">
-                Rejection Reason <span className="text-red-500">*</span>
+                Rejection Reason <span className="text-red-500 dark:text-[#fca5a5]">*</span>
               </label>
               <textarea
                 ref={noteRef}

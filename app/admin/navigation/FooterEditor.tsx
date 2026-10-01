@@ -136,14 +136,14 @@ export default function FooterEditor() {
       <section className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
         <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11] px-6 py-3">
           <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">Footer — Link Columns</span>
-          <button onClick={addColumn} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add column</button>
+          <button onClick={addColumn} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/10 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15 dark:text-[#4f9dfb]">+ Add column</button>
         </div>
         <div className="grid gap-5 px-6 py-6 lg:grid-cols-2 xl:grid-cols-3">
           {columns.map((col, ci) => (
             <div key={ci} className="rounded-xl border border-[#e8eef5] dark:border-[#27272b] bg-[#fbfdff] dark:bg-[#1c1c20] p-3.5">
               <div className="mb-2 flex items-center gap-2">
                 <input value={col.title} onChange={(e) => setColumn(ci, { title: e.target.value })} placeholder="Column title" className={inputCls + " font-bold"} />
-                <button onClick={() => removeColumn(ci)} title="Delete column" className="shrink-0 rounded-lg border border-red-200 px-2 py-2 text-[12px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225]">✕</button>
+                <button onClick={() => removeColumn(ci)} title="Delete column" className="shrink-0 rounded-lg border border-red-200 px-2 py-2 text-[12px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225] dark:text-[#fca5a5]">✕</button>
               </div>
               <div className="space-y-2">
                 {col.links.map((link, li) => (
@@ -164,14 +164,14 @@ export default function FooterEditor() {
       <section className="max-w-3xl rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
         <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11] px-6 py-3">
           <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">Footer — Regulator Chips</span>
-          <button onClick={addReg} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add</button>
+          <button onClick={addReg} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/10 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15 dark:text-[#4f9dfb]">+ Add</button>
         </div>
         <div className="grid gap-2 px-6 py-6 sm:grid-cols-2">
           {regulators.map((r, ri) => (
             <div key={ri} className="flex items-center gap-1.5">
               <input value={r.label} onChange={(e) => setReg(ri, { label: e.target.value })} placeholder="RBI" className={inputCls} />
               <input value={r.href} onChange={(e) => setReg(ri, { href: e.target.value })} placeholder="/rbi" className={inputCls + " font-mono text-[11px]"} />
-              <button onClick={() => removeReg(ri)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a]">✕</button>
+              <button onClick={() => removeReg(ri)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a] dark:bg-[#2a1618]">✕</button>
             </div>
           ))}
         </div>

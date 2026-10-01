@@ -259,11 +259,11 @@ function DetailDrawer({
             </Link>
             <div className="flex flex-wrap items-center gap-2">
               {item.type !== "regulatory_update" && (
-                <button type="button" onClick={() => onAction("request_changes")} disabled={!allowed || !!actionLoading} className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-2 text-[12px] font-bold text-amber-700 disabled:cursor-not-allowed disabled:opacity-50">
+                <button type="button" onClick={() => onAction("request_changes")} disabled={!allowed || !!actionLoading} className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-2 text-[12px] font-bold text-amber-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-[#2a2113] dark:border-[#4a3a1a] dark:text-[#fcd34d]">
                   {actionLoading === "request_changes" ? "Saving..." : "Request Changes"}
                 </button>
               )}
-              <button type="button" onClick={() => onAction("reject")} disabled={!allowed || !!actionLoading} className="rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-[12px] font-bold text-red-700 disabled:cursor-not-allowed disabled:opacity-50">
+              <button type="button" onClick={() => onAction("reject")} disabled={!allowed || !!actionLoading} className="rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-[12px] font-bold text-red-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-[#2a1618] dark:border-[#4a2225] dark:text-[#fca5a5]">
                 {actionLoading === "reject" ? "Saving..." : "Reject"}
               </button>
               <button type="button" onClick={() => onAction("approve")} disabled={!allowed || !!actionLoading} className="rounded-xl bg-[#1677f2] px-4 py-2 text-[12px] font-bold text-white hover:bg-[#0f63d6] disabled:cursor-not-allowed disabled:opacity-50">

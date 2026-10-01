@@ -199,7 +199,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                   className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-bold transition-all ${
                     isActive
                       ? tab.key === "all"
-                        ? "bg-[#0a1628] text-[#1677f2]"
+                        ? "bg-[#0a1628] text-[#1677f2] dark:text-[#4f9dfb]"
                         : "bg-[#1677f2] text-[#071224] dark:text-[#fafafa]"
                       : "border border-[#e2eaf2] text-[#475569] hover:border-[#1677f2]/40 hover:text-[#0a1628] dark:border-[#27272b] dark:text-[#a1a1aa]"
                   }`}

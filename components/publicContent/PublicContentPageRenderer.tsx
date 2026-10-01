@@ -72,7 +72,7 @@ const sectionClass: Record<PublicContentSectionDesign['stylePreset'], string> = 
 
 const themeClass: Record<PublicContentPageDesign['themePreset'], string> = {
   default: '',
-  premium: 'rounded-3xl bg-[radial-gradient(circle_at_top_right,rgba(22,119,242,0.08),transparent_34%),linear-gradient(180deg,#ffffff,#f8fbff)] p-4 md:p-6',
+  premium: 'rounded-3xl bg-[radial-gradient(circle_at_top_right,rgba(22,119,242,0.08),transparent_34%),linear-gradient(180deg,#ffffff,#f8fbff)] dark:bg-[radial-gradient(circle_at_top_right,rgba(22,119,242,0.10),transparent_34%),linear-gradient(180deg,#141417,#09090b)] p-4 md:p-6',
   minimal: 'border-t border-blue-100 pt-6 dark:border-[#27272b]',
 };
 

@@ -17,7 +17,7 @@ function fmt(iso?: string): string {
 const STATUS_META: Record<BlogStatus, { label: string; cls: string }> = {
   published:      { label: "Published",      cls: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]" },
   draft:          { label: "Draft",          cls: "bg-slate-100 text-slate-600 border-slate-200" },
-  pending_review: { label: "Pending Review", cls: "bg-[#1677f2]/10 text-[#0866d9] border-[#1677f2]/40" },
+  pending_review: { label: "Pending Review", cls: "bg-[#1677f2]/10 text-[#0866d9] border-[#1677f2]/40 dark:text-[#4f9dfb]" },
   approved:       { label: "Approved",       cls: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]" },
   rejected:       { label: "Rejected",       cls: "bg-red-50 text-red-700 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]" },
   archived:       { label: "Archived",       cls: "bg-purple-50 text-purple-700 border-purple-200 dark:bg-[#231a2e] dark:text-[#c4b5fd] dark:border-[#3a2a4a]" },

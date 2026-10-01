@@ -70,7 +70,7 @@ export default function RegulatoryServices({ content }: { content?: Partial<Regu
                                     <span
                                         key={i}
                                         onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.location.href = tag.href; }}
-                                    className="px-3 py-1 bg-[#f5fbff] border border-blue-100 text-[#0077B6] rounded-full text-[11px] font-semibold whitespace-nowrap hover:bg-[#1677f2] hover:border-[#1677f2] hover:text-white transition-colors cursor-pointer dark:bg-[#141417] dark:border-[#27272b]"
+                                    className="px-3 py-1 bg-[#f5fbff] border border-blue-100 text-[#0077B6] rounded-full text-[11px] font-semibold whitespace-nowrap hover:bg-[#1677f2] hover:border-[#1677f2] hover:text-white transition-colors cursor-pointer dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]"
                                     >
                                         {tag.name}
                                     </span>

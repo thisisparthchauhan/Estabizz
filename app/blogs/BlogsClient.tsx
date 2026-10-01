@@ -86,7 +86,7 @@ function NewsletterCTA() {
           </p>
 
           {done ? (
-            <div className="flex items-center gap-2 rounded-lg border border-[#1677f2]/40 bg-[#1677f2]/10 px-4 py-3 text-[13px] font-bold text-[#1677f2]">
+            <div className="flex items-center gap-2 rounded-lg border border-[#1677f2]/40 bg-[#1677f2]/10 px-4 py-3 text-[13px] font-bold text-[#1677f2] dark:text-[#4f9dfb]">
               ✓ You&apos;re subscribed. Watch your inbox for regulatory updates.
             </div>
           ) : (
@@ -317,7 +317,7 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
       {!isFiltered && tickerItems.length > 0 && (
         <div className="border-b border-[#e8e8e8] bg-white dark:bg-[#141417] dark:border-[#27272b]">
           <div className="mx-auto flex max-w-screen-xl items-center gap-4 px-4 py-2.5">
-            <span className="flex shrink-0 items-center gap-1.5 rounded-sm bg-[#0a1628] dark:bg-[#1c1c20] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#1677f2]">
+            <span className="flex shrink-0 items-center gap-1.5 rounded-sm bg-[#0a1628] dark:bg-[#1c1c20] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#1677f2] dark:text-[#4f9dfb]">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1677f2] opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#1677f2]" />

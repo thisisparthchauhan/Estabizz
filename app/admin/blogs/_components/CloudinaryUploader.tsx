@@ -111,7 +111,7 @@ export function CloudinaryUploader({
           </>
         )}
       </button>
-      {error && <span className="text-[11px] font-semibold text-red-500">{error}</span>}
+      {error && <span className="text-[11px] font-semibold text-red-500 dark:text-[#fca5a5]">{error}</span>}
     </div>
   );
 }

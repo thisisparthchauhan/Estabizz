@@ -111,7 +111,7 @@ export function ExpertQuote({ quote, expert }: { quote: string; expert?: string 
     return (
         <blockquote className="rounded-3xl border border-[#d7b56d]/40 bg-[#fffaf0] p-7 shadow-sm dark:bg-[#141417]">
             <p className="text-[20px] font-black leading-8 text-[#0a1628] dark:text-[#fafafa]">“{quote}”</p>
-            <footer className="mt-5 text-[14px] font-bold text-[#8a6a1f]">{expert || "CS Devyani Khambhati - Compliance Expert"}</footer>
+            <footer className="mt-5 text-[14px] font-bold text-[#8a6a1f] dark:text-[#fcd34d]">{expert || "CS Devyani Khambhati - Compliance Expert"}</footer>
         </blockquote>
     );
 }

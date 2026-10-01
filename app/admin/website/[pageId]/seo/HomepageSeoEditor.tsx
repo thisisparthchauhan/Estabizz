@@ -79,7 +79,7 @@ export default function HomepageSeoEditor() {
       {loading ? <LoadingCard /> : (
         <div className="max-w-4xl space-y-6">
           <Card title="Search Preview">
-            <div className="rounded-xl border border-[#e2eaf2] bg-white p-5 dark:border-[#27272b]">
+            <div className="rounded-xl border border-[#e2eaf2] bg-white p-5 dark:border-[#27272b] dark:bg-[#141417]">
               <p className="truncate text-[13px] text-[#202124]">{preview.url}</p>
               <p className="mt-1 text-[20px] leading-6 text-[#1a0dab]">{preview.title}</p>
               <p className="mt-1 text-[14px] leading-5 text-[#4d5156]">{preview.description}</p>

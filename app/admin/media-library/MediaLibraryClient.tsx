@@ -129,7 +129,7 @@ function TypeIcon({ format, className = "" }: { format: string; className?: stri
   const t = getMediaType(format);
   if (t === "pdf") {
     return (
-      <div className={`flex items-center justify-center rounded-xl bg-red-50 ${className}`}>
+      <div className={`flex items-center justify-center rounded-xl bg-red-50 dark:bg-[#2a1618] ${className}`}>
         <svg viewBox="0 0 40 48" fill="none" className="w-9 h-11">
           <rect width="40" height="48" rx="4" fill="#fee2e2"/>
           <path d="M6 28h28M6 34h20" stroke="#dc2626" strokeWidth="2" strokeLinecap="round"/>
@@ -140,7 +140,7 @@ function TypeIcon({ format, className = "" }: { format: string; className?: stri
   }
   if (t === "icon") {
     return (
-      <div className={`flex items-center justify-center rounded-xl bg-violet-50 ${className}`}>
+      <div className={`flex items-center justify-center rounded-xl bg-violet-50 dark:bg-[#231a2e] ${className}`}>
         <svg viewBox="0 0 40 48" fill="none" className="w-9 h-11">
           <rect width="40" height="48" rx="4" fill="#ede9fe"/>
           <text x="20" y="20" textAnchor="middle" fontSize="10" fontWeight="800" fill="#7c3aed">SVG</text>

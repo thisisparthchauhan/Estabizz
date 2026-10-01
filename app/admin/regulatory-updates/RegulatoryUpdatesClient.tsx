@@ -792,7 +792,7 @@ function Field({ label, required, hint, children }: {
   return (
     <label className="block">
       <span className="mb-1 flex items-center gap-1.5 text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">
-        {label}{required && <span className="text-red-500">*</span>}
+        {label}{required && <span className="text-red-500 dark:text-[#fca5a5]">*</span>}
         {hint && <span className="font-normal text-[#94a3b8] dark:text-[#71717a]">— {hint}</span>}
       </span>
       {children}

@@ -35,13 +35,13 @@ export default function ProcessEditor() {
             </div>
           </Card>
 
-          <Card title={`Steps (${steps.length})`} action={<button onClick={addStep} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add step</button>}>
+          <Card title={`Steps (${steps.length})`} action={<button onClick={addStep} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/10 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15 dark:text-[#4f9dfb]">+ Add step</button>}>
             <div className="space-y-4">
               {steps.map((s, i) => (
                 <div key={i} className="rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
                   <div className="mb-2 flex items-center justify-between">
                     <span className="text-[11px] font-black text-[#94a3b8] dark:text-[#71717a]">Step {i + 1}</span>
-                    <button onClick={() => removeStep(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225]">Delete</button>
+                    <button onClick={() => removeStep(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225] dark:text-[#fca5a5]">Delete</button>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-[70px_1fr]">
                     <Field label="No."><input value={s.num} onChange={(e) => setStep(i, { num: e.target.value })} className={inputCls + " text-center"} /></Field>

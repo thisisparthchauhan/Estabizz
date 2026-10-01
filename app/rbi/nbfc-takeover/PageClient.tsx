@@ -206,7 +206,7 @@ function Timeline({ steps }: { steps: { title: string; body: string }[] }) {
 }
 
 function Flow({ items }: { items: string[] }) {
-  return <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5 dark:border-[#27272b]"><div className="grid grid-cols-1 gap-3">{items.map((item, index) => <div key={item} className="flex items-center gap-3"><div className="min-w-8 h-8 rounded-full bg-[#0a1628] dark:bg-[#1c1c20] text-white text-sm font-bold flex items-center justify-center">{index + 1}</div><div className="flex-1 rounded-xl bg-white border border-blue-100 px-4 py-3 text-sm font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{item}</div></div>)}</div></div>;
+  return <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5 dark:border-[#27272b] dark:from-[#1c1c20] dark:to-[#141417]"><div className="grid grid-cols-1 gap-3">{items.map((item, index) => <div key={item} className="flex items-center gap-3"><div className="min-w-8 h-8 rounded-full bg-[#0a1628] dark:bg-[#1c1c20] text-white text-sm font-bold flex items-center justify-center">{index + 1}</div><div className="flex-1 rounded-xl bg-white border border-blue-100 px-4 py-3 text-sm font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{item}</div></div>)}</div></div>;
 }
 
 function CheckList({ items }: { items: string[] }) {

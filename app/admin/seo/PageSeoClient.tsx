@@ -60,7 +60,7 @@ function CharCount({ value, max }: { value: string; max: number }) {
   const over = len > max;
   const near = len > max * 0.9;
   return (
-    <span className={`text-[10px] font-semibold tabular-nums ${over ? "text-red-500" : near ? "text-amber-500" : "text-[#94a3b8] dark:text-[#71717a]"}`}>
+    <span className={`text-[10px] font-semibold tabular-nums ${over ? "text-red-500 dark:text-[#fca5a5]" : near ? "text-amber-500 dark:text-[#fcd34d]" : "text-[#94a3b8] dark:text-[#71717a]"}`}>
       {len}/{max}
     </span>
   );
@@ -144,7 +144,7 @@ function SeoWarnings({ draft }: { draft: Partial<SeoContent> }) {
       <div className="text-[10px] font-black uppercase tracking-wide text-amber-600 dark:text-[#fcd34d]">SEO Notes</div>
       {warnings.map(w => (
         <div key={w} className="flex items-start gap-1.5 text-[11px] text-amber-800 leading-4 dark:text-[#fcd34d]">
-          <span className="mt-0.5 shrink-0 text-amber-500">•</span>{w}
+          <span className="mt-0.5 shrink-0 text-amber-500 dark:text-[#fcd34d]">•</span>{w}
         </div>
       ))}
     </div>
@@ -321,7 +321,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                 />
                 <div className="mt-1 flex justify-between text-[10px] text-[#94a3b8] dark:text-[#71717a]">
                   <span>Shown in search results and browser tabs</span>
-                  <span className={titleLen > 60 ? "text-red-500 font-bold" : titleLen > 45 ? "text-green-600 dark:text-[#6ee7b7]" : ""}>
+                  <span className={titleLen > 60 ? "text-red-500 font-bold dark:text-[#fca5a5]" : titleLen > 45 ? "text-green-600 dark:text-[#6ee7b7]" : ""}>
                     {titleLen > 60 ? "Over limit" : titleLen >= 30 ? "Good" : titleLen > 0 ? "Short" : ""}
                   </span>
                 </div>
@@ -336,7 +336,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                 />
                 <div className="mt-1 flex justify-between text-[10px] text-[#94a3b8] dark:text-[#71717a]">
                   <span>Aim for 100–160 characters</span>
-                  <span className={descLen > 160 ? "text-red-500 font-bold" : descLen >= 100 ? "text-green-600 dark:text-[#6ee7b7]" : ""}>
+                  <span className={descLen > 160 ? "text-red-500 font-bold dark:text-[#fca5a5]" : descLen >= 100 ? "text-green-600 dark:text-[#6ee7b7]" : ""}>
                     {descLen > 160 ? "Over limit" : descLen >= 100 ? "Good" : descLen > 0 ? "Short" : ""}
                   </span>
                 </div>

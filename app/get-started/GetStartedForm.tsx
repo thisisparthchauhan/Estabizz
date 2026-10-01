@@ -51,11 +51,11 @@ export default function GetStartedForm({ services }: { services: string[] }) {
         <form className="space-y-6" onSubmit={submit}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <label className="block">
-                    <span className="block text-sm font-semibold text-[#0a1628] mb-2 dark:text-[#fafafa]">Full Name <span className="text-red-500">*</span></span>
+                    <span className="block text-sm font-semibold text-[#0a1628] mb-2 dark:text-[#fafafa]">Full Name <span className="text-red-500 dark:text-[#fca5a5]">*</span></span>
                     <input type="text" name="name" value={form.name} onChange={change} required className={inputCls} />
                 </label>
                 <label className="block">
-                    <span className="block text-sm font-semibold text-[#0a1628] mb-2 dark:text-[#fafafa]">Email Address <span className="text-red-500">*</span></span>
+                    <span className="block text-sm font-semibold text-[#0a1628] mb-2 dark:text-[#fafafa]">Email Address <span className="text-red-500 dark:text-[#fca5a5]">*</span></span>
                     <input type="email" name="email" value={form.email} onChange={change} required className={inputCls} />
                 </label>
             </div>

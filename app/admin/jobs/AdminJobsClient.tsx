@@ -10,9 +10,9 @@ import type { JobStatus } from "@prisma/client";
 const STATUS_META: Record<JobStatus, { label: string; cls: string; dotCls: string }> = {
   draft:     { label: "Draft",     cls: "bg-slate-100 text-slate-600 border-slate-200",       dotCls: "bg-slate-400" },
   open:      { label: "Open",      cls: "bg-emerald-50 text-emerald-700 border-emerald-200",  dotCls: "bg-emerald-500" },
-  on_hold:   { label: "On Hold",   cls: "bg-yellow-50 text-yellow-700 border-yellow-200",     dotCls: "bg-yellow-400" },
-  closed:    { label: "Closed",    cls: "bg-red-50 text-red-600 border-red-200",              dotCls: "bg-red-400" },
-  filled:    { label: "Filled",    cls: "bg-blue-50 text-blue-700 border-blue-200",           dotCls: "bg-blue-500" },
+  on_hold:   { label: "On Hold",   cls: "bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-[#2a2613] dark:border-[#4a431a] dark:text-[#fde047]",     dotCls: "bg-yellow-400" },
+  closed:    { label: "Closed",    cls: "bg-red-50 text-red-600 border-red-200 dark:bg-[#2a1618] dark:border-[#4a2225] dark:text-[#fca5a5]",              dotCls: "bg-red-400" },
+  filled:    { label: "Filled",    cls: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]",           dotCls: "bg-blue-500" },
   cancelled: { label: "Cancelled", cls: "bg-purple-50 text-purple-600 border-purple-200 dark:bg-[#231a2e] dark:text-[#c4b5fd] dark:border-[#3a2a4a]",    dotCls: "bg-purple-400" },
 };
 
@@ -216,7 +216,7 @@ export default function AdminJobsClient({ initialJobs }: Props) {
                       <button
                         type="button"
                         onClick={() => setDeleteTarget(job)}
-                        className="rounded-lg border border-red-100 px-3 py-1.5 text-[11px] font-bold text-red-500 hover:border-red-300 hover:bg-red-50 transition-colors dark:bg-[#2a1618] dark:border-[#4a2225]"
+                        className="rounded-lg border border-red-100 px-3 py-1.5 text-[11px] font-bold text-red-500 hover:border-red-300 hover:bg-red-50 transition-colors dark:bg-[#2a1618] dark:border-[#4a2225] dark:text-[#fca5a5]"
                       >
                         Delete
                       </button>

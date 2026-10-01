@@ -123,7 +123,7 @@ function validatePassword(pwd: string, confirm: string): string {
 const ROLE_BADGE: Record<AdminRole, string> = {
   super_admin:         "bg-amber-50 text-amber-700 border-amber-200 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]",
   website_editor:      "bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]",
-  content_writer:      "bg-cyan-50 text-cyan-700 border-cyan-200",
+  content_writer:      "bg-cyan-50 text-cyan-700 border-cyan-200 dark:bg-[#132530] dark:border-[#1d3f4a] dark:text-[#67e8f9]",
   compliance_reviewer: "bg-violet-50 text-violet-700 border-violet-200 dark:bg-[#231a2e] dark:text-[#c4b5fd] dark:border-[#3a2a4a]",
   seo_manager:         "bg-green-50 text-green-700 border-green-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]",
   admin_viewer:        "bg-slate-50 text-slate-600 border-slate-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]",
@@ -142,7 +142,7 @@ function RoleBadge({ role }: { role: AdminRole }) {
 
 function StatusBadge({ status }: { status: AdminStatus }) {
   const map: Record<AdminStatus, { label: string; cls: string; dot: string }> = {
-    active:    { label: "Active",    cls: "bg-emerald-50 text-emerald-700 border-emerald-200", dot: "bg-emerald-500" },
+    active:    { label: "Active",    cls: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#132a20] dark:border-[#1d4a37] dark:text-[#6ee7b7]", dot: "bg-emerald-500" },
     inactive:  { label: "Inactive",  cls: "bg-gray-50 text-gray-500 border-gray-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]",         dot: "bg-gray-400"    },
     suspended: { label: "Suspended", cls: "bg-red-50 text-red-600 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]",             dot: "bg-red-500"     },
   };

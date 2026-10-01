@@ -203,7 +203,7 @@ function LeftSidebar({
                         item.level === 3 ? "ml-3 text-[11px]" : ""
                       } ${
                         activeId === item.id
-                          ? "bg-[#1677f2]/8 font-bold text-[#1677f2] border-l-2 border-[#1677f2] pl-[6px]"
+                          ? "bg-[#1677f2]/10 font-bold text-[#1677f2] border-l-2 border-[#1677f2] pl-[6px] dark:text-[#4f9dfb]"
                           : "text-[#6b7280] hover:text-[#111827] dark:text-[#a1a1aa]"
                       }`}
                     >
@@ -422,7 +422,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
             {blog.category.icon} {blog.category.name}
           </span>
           {blog.featured && (
-            <span className="ml-2 inline-flex items-center gap-1 rounded-full border border-[#1677f2]/50 bg-[#1677f2]/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#0866d9]">
+            <span className="ml-2 inline-flex items-center gap-1 rounded-full border border-[#1677f2]/50 bg-[#1677f2]/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#0866d9] dark:text-[#4f9dfb]">
               ★ Featured
             </span>
           )}
@@ -607,7 +607,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
 
             {/* CTA box */}
             <div className="mt-10 overflow-hidden rounded-sm bg-[#0a1628] dark:bg-[#1c1c20] p-6 sm:p-8">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#1677f2]/35 bg-[#1677f2]/10 px-3 py-1 text-[11px] font-bold text-[#1677f2]">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#1677f2]/35 bg-[#1677f2]/10 px-3 py-1 text-[11px] font-bold text-[#1677f2] dark:text-[#4f9dfb]">
                 <span>✦</span> REGULATORY ADVISORY
               </div>
               <h3 className="mb-2 text-[18px] font-black leading-snug text-white sm:text-[20px]">

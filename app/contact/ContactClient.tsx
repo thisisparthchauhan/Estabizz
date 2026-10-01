@@ -617,7 +617,7 @@ export default function ContactClient() {
                             {submitted ? (
                                 <div className="text-center py-12">
                                     <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4 dark:bg-[#132a20]">
-                                        <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg className="w-8 h-8 text-green-500 dark:text-[#6ee7b7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                         </svg>
                                     </div>
@@ -634,7 +634,7 @@ export default function ContactClient() {
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-sm font-semibold text-[#0a1628] dark:text-[#fafafa] mb-2">Full Name <span className="text-red-500">*</span></label>
+                                            <label className="block text-sm font-semibold text-[#0a1628] dark:text-[#fafafa] mb-2">Full Name <span className="text-red-500 dark:text-[#fca5a5]">*</span></label>
                                             <input
                                                 type="text"
                                                 name="name"
@@ -646,7 +646,7 @@ export default function ContactClient() {
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-semibold text-[#0a1628] dark:text-[#fafafa] mb-2">Email Address <span className="text-red-500">*</span></label>
+                                            <label className="block text-sm font-semibold text-[#0a1628] dark:text-[#fafafa] mb-2">Email Address <span className="text-red-500 dark:text-[#fca5a5]">*</span></label>
                                             <input
                                                 type="email"
                                                 name="email"
@@ -661,7 +661,7 @@ export default function ContactClient() {
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-sm font-semibold text-[#0a1628] mb-2 dark:text-[#fafafa]">Phone Number <span className="text-red-500">*</span></label>
+                                            <label className="block text-sm font-semibold text-[#0a1628] mb-2 dark:text-[#fafafa]">Phone Number <span className="text-red-500 dark:text-[#fca5a5]">*</span></label>
                                             <div className="flex rounded-xl border border-gray-200 focus-within:border-[#1677f2] focus-within:ring-2 focus-within:ring-blue-50 transition-all overflow-visible dark:border-[#27272b]">
                                                 <div ref={dialRef} className="relative flex-shrink-0">
                                                     <button
@@ -737,7 +737,7 @@ export default function ContactClient() {
                                     {/* Service Required — custom grouped dropdown */}
                                     <div>
                                         <label className="block text-sm font-semibold text-[#0a1628] mb-2 dark:text-[#fafafa]">
-                                            Service Required <span className="text-red-500">*</span>
+                                            Service Required <span className="text-red-500 dark:text-[#fca5a5]">*</span>
                                         </label>
                                         <div ref={serviceRef} className="relative">
                                             <button

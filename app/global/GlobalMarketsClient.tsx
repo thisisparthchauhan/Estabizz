@@ -100,7 +100,7 @@ export default function GlobalMarketsClient() {
       <section className="relative overflow-hidden bg-[#070d1a] pb-14 pt-20 text-white">
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
           <div className="absolute -left-32 top-0 h-96 w-96 rounded-full bg-[#1677f2]/10 blur-[100px]" />
-          <div className="absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-[#1677f2]/8 blur-[120px]" />
+          <div className="absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-[#1677f2]/10 blur-[120px]" />
         </div>
         <div className="relative mx-auto max-w-5xl px-6">
           <div className="mb-4 flex items-center gap-2">
@@ -221,7 +221,7 @@ export default function GlobalMarketsClient() {
               </p>
               <Link
                 href="/"
-                className="group flex items-center gap-4 rounded-2xl border-2 border-[#1677f2]/20 bg-gradient-to-r from-[#f0f6ff] to-white p-5 transition-all hover:border-[#1677f2]/50 hover:shadow-md dark:from-[#09090b]"
+                className="group flex items-center gap-4 rounded-2xl border-2 border-[#1677f2]/20 bg-gradient-to-r from-[#f0f6ff] to-white p-5 transition-all hover:border-[#1677f2]/50 hover:shadow-md dark:from-[#09090b] dark:to-[#141417]"
               >
                 <span className="text-[40px] leading-none" aria-hidden="true">🇮🇳</span>
                 <div className="flex-1">
@@ -314,7 +314,7 @@ export default function GlobalMarketsClient() {
             </Link>
             <Link
               href="/get-started"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/8 px-6 py-3 text-[14px] font-black text-white transition-all hover:border-white/40 hover:bg-white/12 dark:bg-[#141417]"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-[14px] font-black text-white transition-all hover:border-white/40 hover:bg-white/10 dark:bg-[#141417]"
             >
               Get Started
             </Link>

@@ -133,7 +133,7 @@ function Btn({
       className={`px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold leading-none transition-colors ${
         active
           ? "bg-[#1677f2] text-white"
-          : "text-[#334155] hover:bg-[#1677f2] hover:text-white"
+          : "text-[#334155] hover:bg-[#1677f2] hover:text-white dark:text-[#a1a1aa]"
       } disabled:opacity-30 disabled:cursor-not-allowed`}
     >
       {children}
@@ -190,7 +190,7 @@ function LinkDialog({
             if (e.key === "Escape") onCancel();
           }}
           placeholder="https://…"
-          className="w-full rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] text-[#0a1628] outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/12 mb-4 dark:border-[#27272b] dark:text-[#fafafa]"
+          className="w-full rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] text-[#0a1628] outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 mb-4 dark:border-[#27272b] dark:text-[#fafafa]"
         />
         <div className="flex justify-end gap-2">
           <button type="button" onClick={onCancel} className="px-4 py-2 rounded-xl border border-[#dbe7f3] text-[12.5px] font-semibold text-[#64748b] hover:bg-[#f8fbff] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
@@ -355,7 +355,7 @@ function BlogImageDialog({
           />
         </div>
 
-        {error && <p className="mt-3 text-[12px] font-semibold text-red-500">{error}</p>}
+        {error && <p className="mt-3 text-[12px] font-semibold text-red-500 dark:text-[#fca5a5]">{error}</p>}
 
         <div className="mt-5 flex justify-end gap-2">
           <button type="button" onClick={onCancel} className="rounded-xl border border-[#dbe7f3] dark:border-[#27272b] px-4 py-2 text-[12px] font-bold text-[#64748b] dark:text-[#a1a1aa]">Cancel</button>
@@ -900,7 +900,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
         overflow-hidden intentionally omitted — it would break position:sticky
         on the toolbar. Rounded corners are applied per-child instead.
       */}
-      <div className="rounded-xl border border-[#dbe7f3] focus-within:border-[#1677f2] focus-within:ring-2 focus-within:ring-[#1677f2]/12 transition-all dark:border-[#27272b]">
+      <div className="rounded-xl border border-[#dbe7f3] focus-within:border-[#1677f2] focus-within:ring-2 focus-within:ring-[#1677f2]/10 transition-all dark:border-[#27272b]">
 
         {/* ── Toolbar (sticky) ─────────────────────────────────────────────── */}
         {/* Keep the 60px sticky offset aligned with the BlogEditorClient ActionBar height. */}
@@ -945,7 +945,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
                   setPendingImageInsertPos(editor.state.selection.from);
                   setImageDialogOpen(true);
                 }}
-                className="px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold text-[#1677f2] border border-[#1677f2]/30 hover:bg-[#1677f2] hover:text-white hover:border-[#1677f2] transition-colors leading-none shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold text-[#1677f2] border border-[#1677f2]/30 hover:bg-[#1677f2] hover:text-white hover:border-[#1677f2] transition-colors leading-none shrink-0 disabled:opacity-50 disabled:cursor-not-allowed dark:text-[#4f9dfb]"
               >
                 Add Image
               </button>
@@ -955,7 +955,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
                 title="Import from Word .docx file"
                 disabled={isImporting || isUploadingImage}
                 onClick={() => wordFileRef.current?.click()}
-                className="px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold text-[#1677f2] border border-[#1677f2]/30 hover:bg-[#1677f2] hover:text-white hover:border-[#1677f2] transition-colors leading-none shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-2.5 py-1.5 rounded-lg text-[11.5px] font-bold text-[#1677f2] border border-[#1677f2]/30 hover:bg-[#1677f2] hover:text-white hover:border-[#1677f2] transition-colors leading-none shrink-0 disabled:opacity-50 disabled:cursor-not-allowed dark:text-[#4f9dfb]"
               >
                 {isImporting ? "Importing…" : "📄 Import Word"}
               </button>
@@ -1016,7 +1016,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
                 className="h-7 w-20 rounded-lg border border-[#c7d9f5] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-2 text-[11px] text-[#0a1628] dark:text-[#fafafa]"
               />
               <button type="button" onClick={() => imageFileRef.current?.click()} className="rounded-lg bg-white dark:bg-[#141417] px-2.5 py-1 text-[11px] font-bold text-[#334155] dark:text-[#e4e4e7] hover:text-[#1677f2]">Replace</button>
-              <button type="button" onClick={() => editor.chain().focus().deleteSelection().run()} className="rounded-lg bg-white px-2.5 py-1 text-[11px] font-bold text-red-500 hover:bg-red-50 dark:bg-[#141417]">Delete</button>
+              <button type="button" onClick={() => editor.chain().focus().deleteSelection().run()} className="rounded-lg bg-white px-2.5 py-1 text-[11px] font-bold text-red-500 hover:bg-red-50 dark:bg-[#141417] dark:text-[#fca5a5]">Delete</button>
             </div>
             <div className="grid grid-cols-1 gap-2 lg:grid-cols-[1fr_1fr_1fr_auto_auto]">
               <input

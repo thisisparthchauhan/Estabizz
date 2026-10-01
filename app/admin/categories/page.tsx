@@ -43,7 +43,7 @@ export default async function CategoriesPage() {
         </div>
 
         <div className="border-t border-[#f0f4f8] dark:border-[#27272b] bg-[#fffbf0] dark:bg-[#0f0f11] px-6 py-4">
-          <div className="flex items-center gap-3 rounded-xl border border-[#1677f2]/30 bg-[#1677f2]/8 px-4 py-3">
+          <div className="flex items-center gap-3 rounded-xl border border-[#1677f2]/30 bg-[#1677f2]/10 px-4 py-3">
             <span className="text-[#1677f2] text-lg dark:text-[#4f9dfb]">ℹ</span>
             <p className="text-[12px] text-[#b8860b] dark:text-amber-400 font-medium">
               Full category management (add, edit, delete, reorder) is in the development roadmap.

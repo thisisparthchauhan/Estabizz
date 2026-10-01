@@ -48,7 +48,7 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
             {/* Subtle ambient glows */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
                 <div className="absolute -left-24 -top-24 h-64 w-64 rounded-full bg-[#1677f2]/10 blur-[80px]" />
-                <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-[#1677f2]/8 blur-[80px]" />
+                <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-[#1677f2]/10 blur-[80px]" />
             </div>
 
             {/* Top accent line */}
@@ -112,7 +112,7 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
                                 </svg>
                             </div>
                             <div>
-                                <p className="mb-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-white/28">Office</p>
+                                <p className="mb-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-white/30">Office</p>
                                 <p className="text-[13px] leading-snug text-white/60">{c.address}</p>
                             </div>
                         </div>
@@ -128,7 +128,7 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
                                 </svg>
                             </div>
                             <div>
-                                <p className="mb-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-white/28">Phone</p>
+                                <p className="mb-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-white/30">Phone</p>
                                 <p className="text-[14px] font-semibold leading-tight text-white/70 transition-colors group-hover:text-white">{c.phone}</p>
                             </div>
                         </a>
@@ -144,7 +144,7 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
                                 </svg>
                             </div>
                             <div>
-                                <p className="mb-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-white/28">Email</p>
+                                <p className="mb-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-white/30">Email</p>
                                 <p className="text-[14px] font-semibold leading-tight text-white/70 transition-colors group-hover:text-white">{c.email}</p>
                             </div>
                         </a>
@@ -157,7 +157,7 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
                                 </svg>
                             </div>
                             <div>
-                                <p className="mb-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-white/28">CIN</p>
+                                <p className="mb-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-white/30">CIN</p>
                                 <p className="font-mono text-[13px] leading-tight text-white/55">{c.cin}</p>
                             </div>
                         </div>
@@ -178,7 +178,7 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
                                     <li key={link.label}>
                                         <Link
                                             href={link.href}
-                                            className="group inline-flex items-center gap-1.5 text-[13.5px] font-medium leading-snug text-white/48 transition-colors hover:text-white"
+                                            className="group inline-flex items-center gap-1.5 text-[13.5px] font-medium leading-snug text-white/50 transition-colors hover:text-white"
                                         >
                                             <span className="h-px w-0 flex-shrink-0 rounded-full bg-[#1677f2] transition-all duration-200 group-hover:w-2.5" />
                                             {link.label}
@@ -195,7 +195,7 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
                 ═══════════════════════════════════════════════════════════ */}
                 <div className="border-b border-white/[0.06] py-4">
                     <div className="flex flex-nowrap items-center gap-2 overflow-x-auto">
-                        <span className="mr-1.5 flex-shrink-0 text-[9.5px] font-semibold uppercase tracking-[0.2em] text-white/22">
+                        <span className="mr-1.5 flex-shrink-0 text-[9.5px] font-semibold uppercase tracking-[0.2em] text-white/20">
                             Regulatory domains we support
                         </span>
                         <span className="mr-1.5 h-3 w-px flex-shrink-0 bg-white/10 dark:bg-[#141417]" />
@@ -210,7 +210,7 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
                                     <span className="flex h-[15px] w-[15px] flex-shrink-0 items-center justify-center rounded-[3px] bg-[#1677f2]/75 text-[7px] font-black leading-none text-white transition-colors group-hover:bg-[#1677f2]">
                                         {initials}
                                     </span>
-                                    <span className="text-[12px] font-semibold text-white/42 transition-colors group-hover:text-white/80">
+                                    <span className="text-[12px] font-semibold text-white/40 transition-colors group-hover:text-white/80">
                                         {r.label}
                                     </span>
                                 </Link>
@@ -222,9 +222,9 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
                 {/* ═══════════════════════════════════════════════════════════
                     Section 4 — Bottom legal strip
                 ═══════════════════════════════════════════════════════════ */}
-                <div className="flex flex-col justify-between gap-3 py-4 text-[11.5px] leading-relaxed text-white/32 sm:flex-row sm:items-center">
+                <div className="flex flex-col justify-between gap-3 py-4 text-[11.5px] leading-relaxed text-white/30 sm:flex-row sm:items-center">
                     <p className="max-w-[660px]">
-                        <strong className="font-semibold text-white/48">Disclaimer:</strong>{' '}
+                        <strong className="font-semibold text-white/50">Disclaimer:</strong>{' '}
                         Estabizz Fintech Private Limited is an independent regulatory advisory and compliance support organisation and does not represent any statutory or regulatory authority. Licence issuance is at the regulator&apos;s sole discretion.{' '}
                         <Link href="/legal/privacy-policy" className="text-white/40 underline underline-offset-2 transition-colors hover:text-white/65">
                             Full disclaimer

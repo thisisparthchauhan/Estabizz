@@ -780,11 +780,11 @@ input, textarea, select, [contenteditable="true"] {
   color: #fafafa;
 }
 
-.dark .blog-content a {
+.dark .blog-content a:not([class*="bg-"]) {
   color: #60a5fa;
 }
 
-.dark .blog-content a:hover {
+.dark .blog-content a:not([class*="bg-"]):hover {
   color: #93c5fd;
 }
 
@@ -919,7 +919,11 @@ input, textarea, select, [contenteditable="true"] {
   color: #fafafa !important;
 }
 
-.dark .article-content a {
+/* Links inside article prose turn blue in dark mode -- but an <a> that carries
+   its own background is a button, not a link, and already has a deliberate text
+   colour (usually white on a solid brand fill). Without the :not() this rule's
+   !important repainted those buttons' labels blue on blue. */
+.dark .article-content a:not([class*="bg-"]) {
   color: #60a5fa !important;
 }
 

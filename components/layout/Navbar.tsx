@@ -784,7 +784,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                             <div>
                                 <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8edcff]">Global Market Desk</div>
                                 <div className="mt-1 text-[22px] font-black tracking-tight">India base. Global expansion support.</div>
-                                <p className="mt-2 max-w-[480px] text-[13px] font-medium leading-relaxed text-white/78">
+                                <p className="mt-2 max-w-[480px] text-[13px] font-medium leading-relaxed text-white/80">
                                     Select a market to discuss entity setup, licensing, fintech compliance, tax readiness and regulator-facing documentation.
                                 </p>
                             </div>
@@ -980,7 +980,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                             <p className="text-[13px] font-bold text-[#0a1628] dark:text-[#fafafa]">{authUser.firstName} {authUser.lastName}</p>
                                             <p className="text-[11px] text-[#64748b] dark:text-[#a1a1aa] truncate">{authUser.email}</p>
                                             {authUser.isAdmin && (
-                                                <span className="mt-1 inline-block rounded-full bg-[#1677f2]/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#1677f2]">
+                                                <span className="mt-1 inline-block rounded-full bg-[#1677f2]/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#1677f2] dark:text-[#4f9dfb]">
                                                     Admin Access
                                                 </span>
                                             )}
@@ -1097,7 +1097,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                         <div className="w-[240px] shrink-0 border-r border-blue-100 dark:border-[#27272b] py-4 bg-[#f8fbff] dark:bg-[#0f0f11]">
                             {currentMenu.categories.map((cat, i) => (
                                 <Link key={i} href={cat.viewAll} onMouseEnter={() => setActiveCategory(i)} onFocus={() => setActiveCategory(i)} onClick={() => setActiveMenu(null)}
-                                    className={`w-full flex items-center gap-3 px-5 py-3 text-left text-[14px] transition-colors ${activeCategory === i ? "text-[#1677f2] font-bold bg-blue-50/50 dark:bg-[#1677f2]/10 border-l-[3px] border-[#1677f2] pl-[17px]" : "text-[#334155] dark:text-[#a1a1aa] hover:text-[#1677f2] dark:hover:text-[#60a5fa] hover:bg-gray-50 dark:hover:bg-[#12223a] border-l-[3px] border-transparent pl-[17px] dark:bg-[#141417]"}`}>
+                                    className={`w-full flex items-center gap-3 px-5 py-3 text-left text-[14px] transition-colors ${activeCategory === i ? "text-[#1677f2] font-bold bg-blue-50/50 dark:bg-[#1677f2]/10 border-l-[3px] border-[#1677f2] pl-[17px] dark:text-[#4f9dfb]" : "text-[#334155] dark:text-[#a1a1aa] hover:text-[#1677f2] dark:hover:text-[#60a5fa] hover:bg-gray-50 dark:hover:bg-[#12223a] border-l-[3px] border-transparent pl-[17px] dark:bg-[#141417]"}`}>
                                     <span className="text-[16px]">{cat.icon}</span> {cat.label}
                                 </Link>
                             ))}

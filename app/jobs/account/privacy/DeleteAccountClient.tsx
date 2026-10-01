@@ -81,7 +81,7 @@ export default function DeleteAccountClient() {
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             <div className="rounded-lg border border-red-100 bg-red-50/60 p-4 dark:bg-[#2a1618] dark:border-[#4a2225]">
               <h3 className="text-sm font-black text-[#991b1b] dark:text-[#fca5a5]">Permanently deleted</h3>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[#7f1d1d]">
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[#7f1d1d] dark:text-[#fca5a5]">
                 <li>Your uploaded resume files</li>
                 <li>Details we extracted from your resume</li>
                 <li>Your email address and phone number</li>
@@ -91,7 +91,7 @@ export default function DeleteAccountClient() {
             </div>
 
             <div className="rounded-lg border border-blue-100 bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
-              <h3 className="text-sm font-black text-[#1e3a8a]">Kept, with your identity removed</h3>
+              <h3 className="text-sm font-black text-[#1e3a8a] dark:text-[#93c5fd]">Kept, with your identity removed</h3>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[#475569] dark:text-[#a1a1aa]">
                 <li>A record that you applied to a role, for our legal and business obligations</li>
                 <li>Security logs showing that changes happened, without your personal details</li>
@@ -109,7 +109,7 @@ export default function DeleteAccountClient() {
             <button
               type="button"
               onClick={() => setStage("confirming")}
-              className="mt-6 w-full rounded-lg border border-red-200 bg-white px-5 py-3 text-sm font-black text-[#b91c1c] transition hover:bg-red-50 sm:w-auto dark:bg-[#141417] dark:border-[#4a2225]"
+              className="mt-6 w-full rounded-lg border border-red-200 bg-white px-5 py-3 text-sm font-black text-[#b91c1c] transition hover:bg-red-50 sm:w-auto dark:bg-[#141417] dark:border-[#4a2225] dark:text-[#fca5a5]"
             >
               Delete my account
             </button>

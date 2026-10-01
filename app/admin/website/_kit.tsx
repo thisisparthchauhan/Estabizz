@@ -137,7 +137,7 @@ export function StringList({ items, onChange, placeholder }: { items: string[]; 
       {items.map((val, i) => (
         <div key={i} className="flex items-center gap-1.5">
           <input value={val} onChange={(e) => onChange(items.map((x, j) => (j === i ? e.target.value : x)))} placeholder={placeholder} className={inputCls} />
-          <button onClick={() => onChange(items.filter((_, j) => j !== i))} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a]">✕</button>
+          <button onClick={() => onChange(items.filter((_, j) => j !== i))} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a] dark:bg-[#2a1618]">✕</button>
         </div>
       ))}
       <button onClick={() => onChange([...items, ""])} className="text-[11px] font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">+ Add</button>

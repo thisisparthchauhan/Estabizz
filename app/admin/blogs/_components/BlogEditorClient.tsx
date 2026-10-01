@@ -210,7 +210,7 @@ function validate(form: BlogFormData): FormErrors {
 // ─── Shared styles ────────────────────────────────────────────────────────────
 
 const inputCls =
-  "w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13.5px] text-[#0a1628] dark:text-[#fafafa] placeholder:text-[#b0bec5] dark:placeholder:text-[#64748b] outline-none transition-all focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/12";
+  "w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13.5px] text-[#0a1628] dark:text-[#fafafa] placeholder:text-[#b0bec5] dark:placeholder:text-[#64748b] outline-none transition-all focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10";
 
 const errorInputCls =
   "w-full rounded-xl border border-red-300 bg-red-50/30 px-3.5 py-2.5 text-[13.5px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none focus:border-red-400 focus:ring-2 focus:ring-red-300/20 dark:text-[#fafafa] dark:bg-[#2a1618] dark:border-[#4a2225]";
@@ -242,16 +242,16 @@ function Field({ label, required, error, hint, counter, children }: {
       <div className="flex items-center justify-between mb-1.5">
         <label className="text-[12.5px] font-semibold text-[#334155] dark:text-[#8b8b94] flex items-center gap-1">
           {label}
-          {required && <span className="text-red-500 text-[11px]">*</span>}
+          {required && <span className="text-red-500 text-[11px] dark:text-[#fca5a5]">*</span>}
         </label>
         {counter && (
-          <span className={`text-[11px] font-mono ${counter.current > counter.max ? "text-red-500" : "text-[#94a3b8] dark:text-[#71717a]"}`}>
+          <span className={`text-[11px] font-mono ${counter.current > counter.max ? "text-red-500 dark:text-[#fca5a5]" : "text-[#94a3b8] dark:text-[#71717a]"}`}>
             {counter.current}/{counter.max}
           </span>
         )}
       </div>
       {children}
-      {error && <p className="mt-1 text-[11.5px] text-red-500">⚠ {error}</p>}
+      {error && <p className="mt-1 text-[11.5px] text-red-500 dark:text-[#fca5a5]">⚠ {error}</p>}
       {hint && !error && <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">{hint}</p>}
     </div>
   );
@@ -268,12 +268,12 @@ function SerpPreview({ title, slug, description }: { title: string; slug: string
   const descTrunc  = displayDesc.length  > 160 ? displayDesc.slice(0, 160)  + "…" : displayDesc;
 
   return (
-    <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 shadow-[0_2px_12px_rgba(0,80,140,0.06)] dark:border-[#27272b]">
+    <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 shadow-[0_2px_12px_rgba(0,80,140,0.06)] dark:border-[#27272b] dark:bg-[#141417]">
       <p className="text-[11px] font-black uppercase tracking-widest text-[#94a3b8] mb-4">Google Search Preview</p>
       {/* Mock Google search bar */}
-      <div className="mb-4 flex items-center gap-2 rounded-full border border-[#dbe7f3] bg-[#f8fbff] px-4 py-2">
+      <div className="mb-4 flex items-center gap-2 rounded-full border border-[#dbe7f3] bg-[#f8fbff] px-4 py-2 dark:bg-[#141417] dark:border-[#27272b]">
         <svg className="shrink-0 h-3.5 w-3.5 text-[#94a3b8] dark:text-[#71717a]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" /></svg>
-        <span className="text-[12px] text-[#64748b] truncate">{displaySlug.replace(`${SITE_URL_DISPLAY} › `, "")}</span>
+        <span className="text-[12px] text-[#64748b] truncate dark:text-[#a1a1aa]">{displaySlug.replace(`${SITE_URL_DISPLAY} › `, "")}</span>
       </div>
       {/* Search result card */}
       <div className="pl-1">
@@ -291,10 +291,10 @@ function SerpPreview({ title, slug, description }: { title: string; slug: string
       </div>
       {/* Counters */}
       <div className="mt-4 pt-3 border-t border-[#f0f4f8] flex gap-4 text-[11px] dark:border-[#27272b]">
-        <span className={displayTitle.length > 60 ? "text-red-500 font-semibold" : "text-[#94a3b8] dark:text-[#71717a]"}>
+        <span className={displayTitle.length > 60 ? "text-red-500 font-semibold dark:text-[#fca5a5]" : "text-[#94a3b8] dark:text-[#71717a]"}>
           Title: {displayTitle.length}/60 chars
         </span>
-        <span className={displayDesc.length > 160 ? "text-amber-500 font-semibold" : displayDesc.length < 120 ? "text-[#94a3b8] dark:text-[#71717a]" : "text-emerald-600 font-semibold dark:text-[#6ee7b7]"}>
+        <span className={displayDesc.length > 160 ? "text-amber-500 font-semibold dark:text-[#fcd34d]" : displayDesc.length < 120 ? "text-[#94a3b8] dark:text-[#71717a]" : "text-emerald-600 font-semibold dark:text-[#6ee7b7]"}>
           Desc: {displayDesc.length}/160 chars {displayDesc.length >= 120 && displayDesc.length <= 160 ? "✓" : ""}
         </span>
       </div>
@@ -355,7 +355,7 @@ function FaqEditor({ faqs, onChange }: { faqs: FaqEntry[]; onChange: (faqs: FaqE
         <div key={i} className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-4 space-y-3 dark:bg-[#141417] dark:border-[#27272b]">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-black uppercase tracking-wider text-[#1677f2] dark:text-[#4f9dfb]">FAQ {i + 1}</span>
-            <button type="button" onClick={() => removeFaq(i)} className="text-[11px] text-[#94a3b8] hover:text-red-500 hover:bg-red-50 rounded-lg px-2 py-1 transition-colors dark:text-[#71717a]">Remove</button>
+            <button type="button" onClick={() => removeFaq(i)} className="text-[11px] text-[#94a3b8] hover:text-red-500 hover:bg-red-50 rounded-lg px-2 py-1 transition-colors dark:text-[#71717a] dark:bg-[#2a1618]">Remove</button>
           </div>
           <div>
             <label className="text-[11px] font-medium text-[#64748b] mb-1 block dark:text-[#a1a1aa]">Question</label>
@@ -400,7 +400,7 @@ function ActionBar({ title, isEditing, saving, onDraft, onPublish, onUpdate }: {
     <div className="sticky top-0 z-[10000] bg-white dark:bg-[#141417] border-b border-[#e2e8f0] dark:border-[#27272b] shadow-[0_2px_8px_rgba(15,23,42,0.06)]">
       <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0">
-          <span className="hidden sm:inline-flex items-center rounded-lg bg-[#0a1628] dark:bg-[#1c1c20] px-2.5 py-1 text-[10.5px] font-black text-[#1677f2] uppercase tracking-wider shrink-0">Admin Blog Panel</span>
+          <span className="hidden sm:inline-flex items-center rounded-lg bg-[#0a1628] dark:bg-[#1c1c20] px-2.5 py-1 text-[10.5px] font-black text-[#1677f2] uppercase tracking-wider shrink-0 dark:text-[#4f9dfb]">Admin Blog Panel</span>
           <span className="text-[13px] text-[#94a3b8] truncate max-w-[240px] hidden md:inline dark:text-[#71717a]">{title || (isEditing ? "Edit Blog" : "New Blog")}</span>
         </div>
         <div className="flex items-center gap-2 shrink-0">
@@ -586,7 +586,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
             <div className="flex items-center justify-between mb-1.5">
               <label className="text-[12.5px] font-semibold text-[#334155] dark:text-[#8b8b94] flex items-center gap-1.5">
                 URL Slug
-                <span className="text-red-500 text-[11px]">*</span>
+                <span className="text-red-500 text-[11px] dark:text-[#fca5a5]">*</span>
                 {form.slugManual && (
                   <span className="ml-1 inline-flex items-center rounded-full bg-amber-100 text-amber-700 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider dark:bg-[#2a2113] dark:text-[#fcd34d]">
                     Locked
@@ -611,7 +611,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                 <svg className="h-3 w-3 text-[#64748b] shrink-0 dark:text-[#a1a1aa]" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/><path d="M5.5 8h5M8 5.5v5" strokeLinecap="round"/></svg>
                 <span className="text-[11px] text-[#64748b] font-mono dark:text-[#a1a1aa]">
                   <span className="text-[#94a3b8] dark:text-[#71717a]">{SITE_URL_DISPLAY}/blogs/</span>
-                  <span className={`font-bold ${errors.slug ? "text-red-500" : form.slugManual ? "text-amber-700 dark:text-[#fcd34d]" : "text-[#1677f2] dark:text-[#4f9dfb]"}`}>
+                  <span className={`font-bold ${errors.slug ? "text-red-500 dark:text-[#fca5a5]" : form.slugManual ? "text-amber-700 dark:text-[#fcd34d]" : "text-[#1677f2] dark:text-[#4f9dfb]"}`}>
                     {form.slug || <span className="opacity-40">your-slug-here</span>}
                   </span>
                 </span>
@@ -639,7 +639,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                 )}
               </div>
             </div>
-            {errors.slug && <p className="mt-1 text-[11.5px] text-red-500">⚠ {errors.slug}</p>}
+            {errors.slug && <p className="mt-1 text-[11.5px] text-red-500 dark:text-[#fca5a5]">⚠ {errors.slug}</p>}
             {!errors.slug && <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">Auto-generated from title. Edit to lock it manually. Only a–z, 0–9 and hyphens.</p>}
           </div>
 

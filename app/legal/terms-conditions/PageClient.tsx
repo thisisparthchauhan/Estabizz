@@ -119,7 +119,7 @@ const faqs = [
 export default function PageClient() {
   return (
     <main className="min-h-screen bg-white pt-[64px] text-[#0a1628] dark:bg-[#141417] dark:text-[#fafafa]">
-      <section className="border-b border-[#dbe7f3] bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.14),transparent_36%),linear-gradient(180deg,#ffffff_0%,#f5fbff_100%)] dark:border-[#27272b]">
+      <section className="border-b border-[#dbe7f3] bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.14),transparent_36%),linear-gradient(180deg,#ffffff_0%,#f5fbff_100%)] dark:bg-[radial-gradient(circle_at_85%_18%,rgba(22,119,242,0.10),transparent_36%),linear-gradient(180deg,#09090b_0%,#141417_100%)] dark:border-[#27272b]">
         <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-[12px] font-semibold text-[#64748b] dark:text-[#a1a1aa]" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-[#1677f2] dark:text-[#4f9dfb]">Home</Link>

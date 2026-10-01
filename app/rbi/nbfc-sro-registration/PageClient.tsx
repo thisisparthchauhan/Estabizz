@@ -97,7 +97,7 @@ function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; column
 
 function FormulaCard({ children }: { children: ReactNode }) {
   return (
-    <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#f0f9ff] to-white p-5 text-center text-[15px] font-bold leading-8 text-[#0a1628] shadow-sm dark:border-[#27272b] dark:from-[#09090b] dark:text-[#fafafa]">
+    <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#f0f9ff] to-white p-5 text-center text-[15px] font-bold leading-8 text-[#0a1628] shadow-sm dark:border-[#27272b] dark:from-[#09090b] dark:text-[#fafafa] dark:to-[#141417]">
       {children}
     </div>
   );

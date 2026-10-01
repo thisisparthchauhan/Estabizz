@@ -117,7 +117,7 @@ export function MediaPickerModal({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search images by name, alt text or tag"
-            className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#fafafa] outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/12"
+            className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#fafafa] outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10"
             autoFocus
           />
         </div>

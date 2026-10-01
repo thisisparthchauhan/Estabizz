@@ -68,7 +68,7 @@ export default function SettingsPage() {
         ))}
       </div>
 
-      <div className="mt-5 rounded-2xl border border-[#1677f2]/30 bg-[#1677f2]/8 px-6 py-4">
+      <div className="mt-5 rounded-2xl border border-[#1677f2]/30 bg-[#1677f2]/10 px-6 py-4">
         <div className="flex items-start gap-3">
           <span className="text-[#1677f2] text-lg mt-0.5 shrink-0 dark:text-[#4f9dfb]">ℹ</span>
           <p className="text-[12px] text-[#b8860b] font-medium leading-5">

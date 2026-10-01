@@ -34,7 +34,7 @@ function statusBadge(s: string) {
   const MAP: Record<string, { label: string; cls: string }> = {
     published:      { label: "Published",  cls: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]" },
     draft:          { label: "Draft",      cls: "bg-slate-100 text-slate-600 border-slate-200" },
-    pending_review: { label: "Pending",    cls: "bg-amber-50 text-amber-700 border-amber-200" },
+    pending_review: { label: "Pending",    cls: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-[#2a2113] dark:border-[#4a3a1a] dark:text-[#fcd34d]" },
     approved:       { label: "Approved",   cls: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]" },
     rejected:       { label: "Rejected",   cls: "bg-red-50 text-red-700 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]" },
     archived:       { label: "Archived",   cls: "bg-purple-50 text-purple-700 border-purple-200 dark:bg-[#231a2e] dark:text-[#c4b5fd] dark:border-[#3a2a4a]" },
@@ -158,7 +158,7 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
       label:     "Total Blogs",
       value:     stats.total,
       icon:      <IconTotal />,
-      iconBg:    "bg-[#0a1628]/8",
+      iconBg:    "bg-[#0a1628]/10",
       iconColor: "text-[#0a1628] dark:text-[#fafafa]",
       href:      "/admin/blogs",
     },

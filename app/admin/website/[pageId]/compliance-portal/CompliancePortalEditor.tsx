@@ -64,7 +64,7 @@ export default function CompliancePortalEditor() {
             <StringList items={checklist} onChange={setChecklist} placeholder="Checklist item" />
           </Card>
 
-          <Card title={`Feature Cards (${features.length})`} action={<button onClick={addFeature} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add</button>}>
+          <Card title={`Feature Cards (${features.length})`} action={<button onClick={addFeature} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/10 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15 dark:text-[#4f9dfb]">+ Add</button>}>
             <div className="space-y-3">
               {features.map((f, i) => (
                 <div key={i} className="rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-3.5 dark:bg-[#141417] dark:border-[#27272b]">
@@ -72,7 +72,7 @@ export default function CompliancePortalEditor() {
                     <input value={f.icon} onChange={(e) => setFeature(i, { icon: e.target.value })} className={inputCls + " w-14 text-center"} title="Icon" />
                     <input value={f.title} onChange={(e) => setFeature(i, { title: e.target.value })} placeholder="Title" className={inputCls} />
                     <input type="color" value={f.color} onChange={(e) => setFeature(i, { color: e.target.value })} className="h-[38px] w-12 shrink-0 rounded-lg border border-[#dbe7f3] bg-white dark:bg-[#141417] dark:border-[#27272b]" title="Colour" />
-                    <button onClick={() => removeFeature(i)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a]">✕</button>
+                    <button onClick={() => removeFeature(i)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a] dark:bg-[#2a1618]">✕</button>
                   </div>
                   <textarea value={f.desc} onChange={(e) => setFeature(i, { desc: e.target.value })} rows={2} placeholder="Description" className={inputCls + " mt-2 resize-y"} />
                 </div>

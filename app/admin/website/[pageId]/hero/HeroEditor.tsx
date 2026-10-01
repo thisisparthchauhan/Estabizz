@@ -137,14 +137,14 @@ export default function HeroEditor() {
             <section key={def.name} className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden dark:bg-[#141417] dark:border-[#27272b]">
               <div className="flex items-center justify-between border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3 dark:bg-[#141417] dark:border-[#27272b]">
                 <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#71717a]">{def.label}</span>
-                <button onClick={() => addListItem(def.name)} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add</button>
+                <button onClick={() => addListItem(def.name)} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/10 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15 dark:text-[#4f9dfb]">+ Add</button>
               </div>
               <div className="space-y-2 px-6 py-5">
                 <p className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">{def.hint}</p>
                 {(lists[def.name] ?? []).map((val, i) => (
                   <div key={i} className="flex items-center gap-1.5">
                     <input value={val} onChange={(e) => setListItem(def.name, i, e.target.value)} className={inputCls} />
-                    <button onClick={() => removeListItem(def.name, i)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a]">✕</button>
+                    <button onClick={() => removeListItem(def.name, i)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a] dark:bg-[#2a1618]">✕</button>
                   </div>
                 ))}
               </div>

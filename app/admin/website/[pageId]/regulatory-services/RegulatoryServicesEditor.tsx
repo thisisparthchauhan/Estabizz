@@ -39,13 +39,13 @@ export default function RegulatoryServicesEditor() {
             </div>
           </Card>
 
-          <Card title={`Service Cards (${services.length})`} action={<button onClick={addSvc} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add service</button>}>
+          <Card title={`Service Cards (${services.length})`} action={<button onClick={addSvc} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/10 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15 dark:text-[#4f9dfb]">+ Add service</button>}>
             <div className="space-y-4">
               {services.map((svc, i) => (
                 <div key={i} className="rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
                   <div className="mb-2 flex items-center justify-between">
                     <span className="text-[11px] font-black text-[#94a3b8] dark:text-[#71717a]">Service {i + 1}</span>
-                    <button onClick={() => removeSvc(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225]">Delete</button>
+                    <button onClick={() => removeSvc(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225] dark:text-[#fca5a5]">Delete</button>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-[60px_1fr_1fr]">
                     <Field label="Icon"><input value={svc.icon} onChange={(e) => setSvc(i, { icon: e.target.value })} className={inputCls + " text-center"} /></Field>
@@ -64,7 +64,7 @@ export default function RegulatoryServicesEditor() {
                         <div key={ti} className="flex items-center gap-1.5">
                           <input value={t.name} onChange={(e) => setTag(i, ti, { name: e.target.value })} placeholder="Tag name" className={inputCls} />
                           <input value={t.href} onChange={(e) => setTag(i, ti, { href: e.target.value })} placeholder="/path" className={inputCls + " font-mono text-[11px]"} />
-                          <button onClick={() => removeTag(i, ti)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a]">✕</button>
+                          <button onClick={() => removeTag(i, ti)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a] dark:bg-[#2a1618]">✕</button>
                         </div>
                       ))}
                     </div>

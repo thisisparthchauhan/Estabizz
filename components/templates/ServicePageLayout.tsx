@@ -174,7 +174,7 @@ export default function ServicePageLayout({
                 <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
                 <div className="absolute inset-x-0 bottom-0 pointer-events-none h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="absolute -left-24 top-16 h-[360px] w-[360px] rounded-full bg-[#1677f2]/10 blur-[100px] pointer-events-none" />
-                <div className="absolute -right-24 bottom-8 h-[360px] w-[360px] rounded-full bg-[#1677f2]/12 blur-[100px] pointer-events-none" />
+                <div className="absolute -right-24 bottom-8 h-[360px] w-[360px] rounded-full bg-[#1677f2]/10 blur-[100px] pointer-events-none" />
 
                 <div className="max-w-7xl mx-auto relative z-10">
                     {/* Breadcrumb */}
@@ -220,7 +220,7 @@ export default function ServicePageLayout({
                             )}
 
                             {trustLine && (
-                                <div className="max-w-4xl text-[14px] font-semibold text-[#0a1628] dark:text-[#fafafa] bg-white/78 dark:bg-[#1c1c20]/80 border border-blue-100 dark:border-[#27272b] rounded-2xl px-5 py-4 mb-7 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-md">
+                                <div className="max-w-4xl text-[14px] font-semibold text-[#0a1628] dark:text-[#fafafa] bg-white/80 dark:bg-[#1c1c20]/80 border border-blue-100 dark:border-[#27272b] rounded-2xl px-5 py-4 mb-7 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-md">
                                     {trustLine}
                                 </div>
                             )}
@@ -236,7 +236,7 @@ export default function ServicePageLayout({
                                 <div className="flex items-center gap-1.5"><span>{reviewPending ? '📋' : '✅'}</span> {reviewPending ? 'Content Review Pending' : 'Expert Reviewed'}</div></>}
                             </div>
 
-                            <div className="inline-block px-5 py-3 border border-blue-200 dark:border-[#27272b] bg-white/76 dark:bg-[#141417]/80 backdrop-blur-sm rounded-full text-sm text-[#0a1628] dark:text-[#fafafa] font-bold shadow-sm">
+                            <div className="inline-block px-5 py-3 border border-blue-200 dark:border-[#27272b] bg-white/75 dark:bg-[#141417]/80 backdrop-blur-sm rounded-full text-sm text-[#0a1628] dark:text-[#fafafa] font-bold shadow-sm">
                                 Focus: <span className="text-[#1677f2] dark:text-[#4f9dfb]">{focusKeyword}</span>
                             </div>
                         </div>
@@ -276,7 +276,7 @@ export default function ServicePageLayout({
 
             {insightCards.length > 0 && (
                 <section className="relative z-20 -mt-7 px-5 md:px-6 lg:hidden">
-                    <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 rounded-[28px] border border-blue-100 dark:border-[#27272b] bg-white/92 dark:bg-[#141417]/92 p-3 shadow-[0_24px_70px_rgba(0,100,200,0.10)] backdrop-blur-xl sm:grid-cols-2 xl:grid-cols-4">
+                    <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 rounded-[28px] border border-blue-100 dark:border-[#27272b] bg-white/90 dark:bg-[#141417]/90 p-3 shadow-[0_24px_70px_rgba(0,100,200,0.10)] backdrop-blur-xl sm:grid-cols-2 xl:grid-cols-4">
                         {insightCards.map((fact, i) => (
                             <div key={`${fact.label}-${i}`} className="rounded-[22px] border border-blue-50 dark:border-[#27272b] bg-gradient-to-br from-[#f8fbff] to-white dark:from-[#1c1c20] dark:to-[#141417] p-5">
                                 <div className="mb-2 text-[11px] font-black uppercase tracking-[0.16em] text-[#64748b] dark:text-[#a1a1aa]">{fact.label}</div>
@@ -291,7 +291,7 @@ export default function ServicePageLayout({
             <div className="max-w-[1480px] mx-auto px-5 md:px-6 py-10 md:py-12 flex flex-col xl:flex-row gap-7 2xl:gap-10 items-start">
 
                 {/* Left TOC Sidebar */}
-                <aside className="hidden xl:block w-[286px] shrink-0 sticky top-[88px] bg-white/88 dark:bg-[#141417]/90 border border-[rgba(0,150,220,0.12)] dark:border-[#27272b] rounded-[24px] p-5 shadow-[0_18px_46px_rgba(0,100,200,0.08)] backdrop-blur-xl z-10">
+                <aside className="hidden xl:block w-[286px] shrink-0 sticky top-[88px] bg-white/90 dark:bg-[#141417]/90 border border-[rgba(0,150,220,0.12)] dark:border-[#27272b] rounded-[24px] p-5 shadow-[0_18px_46px_rgba(0,100,200,0.08)] backdrop-blur-xl z-10">
                     <h4 className="text-[12px] font-black text-[#94a3b8] dark:text-[#a1a1aa] tracking-[0.18em] uppercase mb-5">Contents</h4>
                     <nav className="flex flex-col gap-1 max-h-[calc(100vh-160px)] overflow-y-auto pr-2">
                         {sections.map((section) => (
@@ -300,7 +300,7 @@ export default function ServicePageLayout({
                                 href={`#${section.id}`}
                                 onClick={(e) => scrollToSection(e, section.id)}
                                 className={`text-[13.5px] block py-3 pl-4 pr-3 rounded-xl border-l-[3px] leading-snug transition-all duration-200 ${activeSection === section.id
-                                    ? "border-l-[#1677f2] bg-[rgba(0,150,220,0.08)] dark:bg-[#1677f2]/10 text-[#1677f2] font-black shadow-sm"
+                                    ? "border-l-[#1677f2] bg-[rgba(0,150,220,0.08)] dark:bg-[#1677f2]/10 text-[#1677f2] font-black shadow-sm dark:text-[#4f9dfb]"
                                     : "border-l-transparent text-[#64748b] dark:text-[#a1a1aa] hover:text-[#1677f2] hover:bg-blue-50/70 dark:hover:bg-[#12223a] dark:bg-[#1c1c20]"}`}
                             >
                                 {section.title}
@@ -448,11 +448,11 @@ export default function ServicePageLayout({
                         <div className="absolute -right-12 -top-12 h-28 w-28 rounded-full bg-white/15 blur-2xl dark:bg-[#141417]" />
                         <div className="relative">
                         <h3 className="font-black text-[21px] mb-3 leading-tight">{ctaTitle}</h3>
-                        <p className="text-white/86 text-[14px] mb-6 leading-7">{ctaDescription}</p>
+                        <p className="text-white/85 text-[14px] mb-6 leading-7">{ctaDescription}</p>
                         <Link href={contactHref} className="block w-full bg-white text-[#1677f2] font-black text-[14px] py-3.5 rounded-2xl hover:bg-blue-50 hover:shadow-lg transition duration-300 text-center dark:bg-[#141417] dark:text-[#4f9dfb]">
                             📞 Book Free Consultation
                         </Link>
-                        <div className="text-center text-white/78 text-[12px] mt-4 font-bold tracking-wide">
+                        <div className="text-center text-white/80 text-[12px] mt-4 font-bold tracking-wide">
                             ⚡ Response within 24 hours
                         </div>
                         </div>

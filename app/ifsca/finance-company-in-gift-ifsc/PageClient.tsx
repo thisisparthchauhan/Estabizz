@@ -296,7 +296,7 @@ export default function FinanceCompanyRegistrationPage() {
         ]} />
         <h3>What is Owned Fund?</h3>
         <p>Owned fund generally includes paid-up capital, free reserves, balance in share premium account and capital reserves arising from asset sale surplus. It excludes revaluation reserves, accumulated losses, book value of intangible assets and deferred revenue expenditure.</p>
-        <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#f0f9ff] to-white p-5 text-center text-[15px] font-bold leading-8 text-[#0a1628] shadow-sm dark:border-[#27272b] dark:from-[#09090b] dark:text-[#fafafa]">Owned Fund = Paid-up Capital + Free Reserves + Share Premium + Eligible Capital Reserves - Accumulated Losses - Intangible Assets - Deferred Revenue Expenditure</div>
+        <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#f0f9ff] to-white p-5 text-center text-[15px] font-bold leading-8 text-[#0a1628] shadow-sm dark:border-[#27272b] dark:from-[#09090b] dark:text-[#fafafa] dark:to-[#141417]">Owned Fund = Paid-up Capital + Free Reserves + Share Premium + Eligible Capital Reserves - Accumulated Losses - Intangible Assets - Deferred Revenue Expenditure</div>
         <div className="warning-box">Where multiple activities are proposed, the applicant should maintain the higher of the minimum capital / owned fund / net worth prescribed for each activity or category of activity.</div>
       </Section>
 

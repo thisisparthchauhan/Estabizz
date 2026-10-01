@@ -66,8 +66,8 @@ export default function HeroSection({ content }: { content?: Partial<HeroContent
                 </div>
 
                 <div className="relative mx-auto mt-12 max-w-[980px] overflow-hidden rounded-[28px] border border-blue-100 dark:border-[#27272b] bg-white/70 dark:bg-[#141417]/70 px-5 py-4 shadow-[0_18px_60px_rgba(0,80,140,0.08)] backdrop-blur-xl">
-                    <div className="absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent" />
-                    <div className="absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent" />
+                    <div className="absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent dark:from-[#141417]" />
+                    <div className="absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent dark:from-[#141417]" />
                     <div className="flex w-max animate-[heroTicker_26s_linear_infinite] gap-3">
                         {[...servicePills, ...servicePills].map((service, index) => (
                             <span key={`${service}-${index}`} className="rounded-full border border-blue-100 bg-[#f8fbff] px-4 py-2 text-[12px] font-black text-[#0077B6] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">

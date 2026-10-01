@@ -135,7 +135,7 @@ function Timeline({ steps }: { steps: { title: string; body: string }[] }) {
 
 function Flow({ items }: { items: string[] }) {
   return (
-    <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5 dark:border-[#27272b]">
+    <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5 dark:border-[#27272b] dark:from-[#1c1c20] dark:to-[#141417]">
       <div className="grid grid-cols-1 gap-3">
         {items.map((item, index) => (
           <div key={item} className="flex items-center gap-3">

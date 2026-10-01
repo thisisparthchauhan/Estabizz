@@ -129,17 +129,17 @@ function FieldGroup({
       <div className="flex items-center justify-between mb-1.5">
         <label className="text-[13px] font-semibold text-[#1e293b] dark:text-[#fafafa]">
           {label}
-          {required && <span className="ml-0.5 text-red-500">*</span>}
+          {required && <span className="ml-0.5 text-red-500 dark:text-[#fca5a5]">*</span>}
         </label>
         {counter && (
-          <span className={`text-[11.5px] font-mono tabular-nums ${overMax ? 'text-red-500' : nearMax ? 'text-amber-500' : 'text-[#94a3b8] dark:text-[#71717a]'}`}>
+          <span className={`text-[11.5px] font-mono tabular-nums ${overMax ? 'text-red-500 dark:text-[#fca5a5]' : nearMax ? 'text-amber-500 dark:text-[#fcd34d]' : 'text-[#94a3b8] dark:text-[#71717a]'}`}>
             {counter.current}/{counter.max}
           </span>
         )}
       </div>
       {children}
       {error && (
-        <p className="mt-1.5 text-[12px] text-red-500 flex items-center gap-1.5">
+        <p className="mt-1.5 text-[12px] text-red-500 flex items-center gap-1.5 dark:text-[#fca5a5]">
           <span className="shrink-0">⚠</span> {error}
         </p>
       )}
@@ -397,13 +397,13 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
         <div className="relative overflow-hidden bg-gradient-to-br from-[#071224] via-[#0a1e3c] to-[#0a2952]">
           {/* Background glows */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute left-[-10%] top-[-10%] w-[480px] h-[480px] rounded-full bg-[#1677f2]/14 blur-[120px]" />
+            <div className="absolute left-[-10%] top-[-10%] w-[480px] h-[480px] rounded-full bg-[#1677f2]/15 blur-[120px]" />
             <div className="absolute right-[-6%] bottom-[-10%] w-[420px] h-[420px] rounded-full bg-[#1677f2]/10 blur-[110px]" />
             <div className="absolute inset-0 opacity-[0.12] bg-[linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.07)_1px,transparent_1px)] bg-[length:52px_52px]" />
           </div>
 
           <div className="relative z-10 mx-auto max-w-[1100px] px-6 py-14 md:py-18 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#1677f2]/30 bg-[#1677f2]/12 text-[#8edcff] text-[12px] font-black uppercase tracking-[0.2em] mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#1677f2]/30 bg-[#1677f2]/10 text-[#8edcff] text-[12px] font-black uppercase tracking-[0.2em] mb-6">
               ✍ Estabizz Regulatory Insights
             </div>
 
@@ -412,7 +412,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
               {' '}Estabizz Regulatory Insights
             </h1>
 
-            <p className="max-w-[680px] mx-auto text-[15.5px] text-white/66 leading-relaxed mb-10">
+            <p className="max-w-[680px] mx-auto text-[15.5px] text-white/65 leading-relaxed mb-10">
               Share professional insights on finance, compliance, fintech, corporate governance, regulatory updates or business licensing. Every submission is reviewed by the Estabizz editorial team before publication.
             </p>
 
@@ -448,7 +448,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
             { icon: '✓', text: 'No promotional or sales content' },
           ].map((g) => (
             <span key={g.text} className="flex items-center gap-1.5 text-[12.5px] font-medium text-[#475569] dark:text-[#a1a1aa]">
-              <span className="text-emerald-500 font-bold">{g.icon}</span> {g.text}
+              <span className="text-emerald-500 font-bold dark:text-[#6ee7b7]">{g.icon}</span> {g.text}
             </span>
           ))}
         </div>
@@ -460,7 +460,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
         {/* Server error banner */}
         {serverError && (
           <div className="mb-6 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 dark:bg-[#2a1618] dark:border-[#4a2225]">
-            <span className="text-red-500 text-lg shrink-0">⚠</span>
+            <span className="text-red-500 text-lg shrink-0 dark:text-[#fca5a5]">⚠</span>
             <p className="text-[13.5px] font-semibold text-red-700 dark:text-[#fca5a5]">{serverError}</p>
           </div>
         )}
@@ -553,7 +553,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
                     {/* Live stats bar */}
                     <div className="flex items-center justify-between px-1 text-[11.5px] text-[#94a3b8] dark:text-[#71717a]">
                       <span>
-                        <span className={wc < 400 ? 'text-amber-500 font-semibold' : 'text-emerald-600 font-semibold dark:text-[#6ee7b7]'}>
+                        <span className={wc < 400 ? 'text-amber-500 font-semibold dark:text-[#fcd34d]' : 'text-emerald-600 font-semibold dark:text-[#6ee7b7]'}>
                           {wc} words
                         </span>
                         {wc < 400 && <span className="ml-1">(400 min. recommended)</span>}
@@ -781,7 +781,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
             </div>
 
             {errors.declaration && (
-              <p className="mb-4 text-[12.5px] text-red-500 flex items-center gap-1.5">
+              <p className="mb-4 text-[12.5px] text-red-500 flex items-center gap-1.5 dark:text-[#fca5a5]">
                 <span>⚠</span> {errors.declaration}
               </p>
             )}

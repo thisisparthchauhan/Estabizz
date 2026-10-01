@@ -244,7 +244,7 @@ function EditField({
       <div className="flex items-center justify-between">
         <label className="text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">{label}</label>
         {maxLength !== undefined && (
-          <span className={`text-[11px] font-bold ${value.length > maxLength * 0.88 ? "text-amber-500" : "text-[#94a3b8] dark:text-[#71717a]"}`}>
+          <span className={`text-[11px] font-bold ${value.length > maxLength * 0.88 ? "text-amber-500 dark:text-[#fcd34d]" : "text-[#94a3b8] dark:text-[#71717a]"}`}>
             {value.length}/{maxLength}
           </span>
         )}

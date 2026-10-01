@@ -50,7 +50,7 @@ export default function CaseHighlightsEditor() {
             </div>
           </Card>
 
-          <Card title={`Case Cards (${cases.length})`} action={<button onClick={addCase} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add case</button>}>
+          <Card title={`Case Cards (${cases.length})`} action={<button onClick={addCase} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/10 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15 dark:text-[#4f9dfb]">+ Add case</button>}>
             <div className="space-y-4">
               {cases.map((cs, i) => (
                 <div key={i} className={`rounded-xl border p-4 ${cs.visible ? "border-[#e8eef5] bg-[#fbfdff] dark:bg-[#141417] dark:border-[#27272b]" : "border-[#e8eef5] bg-[#f3f4f6] opacity-75 dark:bg-[#1c1c20] dark:border-[#27272b]"}`}>
@@ -60,7 +60,7 @@ export default function CaseHighlightsEditor() {
                       <button onClick={() => move(i, -1)} title="Move up" className="rounded-md border border-[#dbe7f3] px-2 py-1 text-[11px] text-[#64748b] hover:bg-white dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">↑</button>
                       <button onClick={() => move(i, 1)} title="Move down" className="rounded-md border border-[#dbe7f3] px-2 py-1 text-[11px] text-[#64748b] hover:bg-white dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">↓</button>
                       <label className="flex items-center gap-1 text-[11px] text-[#64748b] dark:text-[#a1a1aa]"><input type="checkbox" checked={cs.visible} onChange={(e) => setCase(i, { visible: e.target.checked })} /> Show on website</label>
-                      <button onClick={() => removeCase(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225]">Delete</button>
+                      <button onClick={() => removeCase(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225] dark:text-[#fca5a5]">Delete</button>
                     </div>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-[140px_1fr]">

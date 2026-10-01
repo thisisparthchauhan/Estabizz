@@ -29,7 +29,7 @@ function KpiCard({ label, value, accent, sub, href, alert }: KpiCardProps) {
           : "border-[#dbe7f3] dark:border-[#27272b]"
       }`}
     >
-      <p className={`text-[10.5px] font-black uppercase tracking-[0.12em] ${alert ? "text-red-500" : "text-[#64748b] dark:text-[#a1a1aa]"}`}>
+      <p className={`text-[10.5px] font-black uppercase tracking-[0.12em] ${alert ? "text-red-500 dark:text-[#fca5a5]" : "text-[#64748b] dark:text-[#a1a1aa]"}`}>
         {label}
       </p>
       <p

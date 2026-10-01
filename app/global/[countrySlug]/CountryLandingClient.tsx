@@ -37,7 +37,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string; "aria-h
 
 function SupportIcon({ name }: { name: string }) {
   const Icon = ICON_MAP[name] ?? Route;
-  return <Icon className="h-5 w-5 text-[#1677f2]" aria-hidden="true" />;
+  return <Icon className="h-5 w-5 text-[#1677f2] dark:text-[#4f9dfb]" aria-hidden="true" />;
 }
 
 // ─── Form options ─────────────────────────────────────────────────────────────
@@ -134,16 +134,16 @@ const EMPTY_FORM: FormState = {
 
 function Breadcrumb({ country }: { country: GlobalMarketConfig }) {
   return (
-    <nav aria-label="Breadcrumb" className="border-b border-[#e2edf8] bg-[#f8fbff] py-2.5">
+    <nav aria-label="Breadcrumb" className="border-b border-[#e2edf8] bg-[#f8fbff] py-2.5 dark:bg-[#141417] dark:border-[#27272b]">
       <div className="mx-auto max-w-5xl px-6">
-        <ol className="flex flex-wrap items-center gap-1 text-[12px] text-[#64748b]">
-          <li><Link href="/" className="hover:text-[#1677f2]">Home</Link></li>
+        <ol className="flex flex-wrap items-center gap-1 text-[12px] text-[#64748b] dark:text-[#a1a1aa]">
+          <li><Link href="/" className="hover:text-[#1677f2] dark:text-[#4f9dfb]">Home</Link></li>
           <li aria-hidden="true"><ChevronRight className="h-3 w-3" /></li>
-          <li><Link href="/global" className="hover:text-[#1677f2]">Global Markets</Link></li>
+          <li><Link href="/global" className="hover:text-[#1677f2] dark:text-[#4f9dfb]">Global Markets</Link></li>
           <li aria-hidden="true"><ChevronRight className="h-3 w-3" /></li>
-          <li className="text-[#94a3b8]">{country.region}</li>
+          <li className="text-[#94a3b8] dark:text-[#71717a]">{country.region}</li>
           <li aria-hidden="true"><ChevronRight className="h-3 w-3" /></li>
-          <li aria-current="page" className="font-semibold text-[#0a1628]">{country.name}</li>
+          <li aria-current="page" className="font-semibold text-[#0a1628] dark:text-[#fafafa]">{country.name}</li>
         </ol>
       </div>
     </nav>
@@ -154,9 +154,9 @@ function Breadcrumb({ country }: { country: GlobalMarketConfig }) {
 
 function TierBadge({ tier }: { tier: GlobalMarketConfig["tier"] }) {
   const styles = {
-    active:     "bg-emerald-100 text-emerald-800",
-    developing: "bg-blue-100 text-blue-800",
-    planned:    "bg-amber-100 text-amber-800",
+    active:     "bg-emerald-100 text-emerald-800 dark:bg-[#132a20] dark:text-[#6ee7b7]",
+    developing: "bg-blue-100 text-blue-800 dark:bg-[#1c1c20] dark:text-[#60a5fa]",
+    planned:    "bg-amber-100 text-amber-800 dark:bg-[#2a2113] dark:text-[#fcd34d]",
   };
   return (
     <span className={`inline-block rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wide ${styles[tier]}`}>
@@ -174,21 +174,21 @@ function StatusNotice({ country }: { country: GlobalMarketConfig }) {
 
   return (
     <section
-      className={`border-b py-5 ${isDeveloping ? "border-blue-100 bg-blue-50" : "border-amber-100 bg-amber-50"}`}
+      className={`border-b py-5 ${isDeveloping ? "border-blue-100 bg-blue-50 dark:bg-[#1c1c20] dark:border-[#27272b]" : "border-amber-100 bg-amber-50 dark:bg-[#2a2113] dark:border-[#4a3a1a]"}`}
       aria-label="Current market status"
     >
       <div className="mx-auto max-w-5xl px-6">
         <div className="flex gap-3">
           <AlertCircle
-            className={`mt-0.5 h-5 w-5 flex-shrink-0 ${isDeveloping ? "text-blue-600" : "text-amber-600"}`}
+            className={`mt-0.5 h-5 w-5 flex-shrink-0 ${isDeveloping ? "text-blue-600 dark:text-[#60a5fa]" : "text-amber-600 dark:text-[#fcd34d]"}`}
             aria-hidden="true"
           />
           <div>
-            <p className={`text-[13.5px] font-bold ${isDeveloping ? "text-blue-900" : "text-amber-900"}`}>
+            <p className={`text-[13.5px] font-bold ${isDeveloping ? "text-blue-900 dark:text-[#60a5fa]" : "text-amber-900 dark:text-[#fcd34d]"}`}>
               Current Market Status
             </p>
             {isDeveloping ? (
-              <p className="mt-1 text-[13px] leading-relaxed text-blue-800">
+              <p className="mt-1 text-[13px] leading-relaxed text-blue-800 dark:text-[#60a5fa]">
                 Estabizz is currently developing its advisory and professional-coordination
                 capabilities for {country.name}. We do not presently claim a permanent local
                 office, locally incorporated entity or direct regulatory authorisation in this
@@ -196,7 +196,7 @@ function StatusNotice({ country }: { country: GlobalMarketConfig }) {
                 where required, coordinated with independent local professionals.
               </p>
             ) : (
-              <p className="mt-1 text-[13px] leading-relaxed text-amber-800">
+              <p className="mt-1 text-[13px] leading-relaxed text-amber-800 dark:text-[#fcd34d]">
                 Estabizz is evaluating future support capabilities for {country.name}. This
                 page is intended for market-interest registration and does not represent an
                 existing local operation.
@@ -242,30 +242,30 @@ function MarketEntryOverview({ country }: { country: GlobalMarketConfig }) {
   return (
     <section className="py-12">
       <div className="mx-auto max-w-5xl px-6">
-        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
           Market Overview
         </p>
-        <h2 className="text-[24px] font-black tracking-tight text-[#0a1628]">
+        <h2 className="text-[24px] font-black tracking-tight text-[#0a1628] dark:text-[#fafafa]">
           Understanding the {country.name} market-entry landscape
         </h2>
         {country.overview && (
-          <p className="mt-3 max-w-3xl text-[14px] leading-relaxed text-[#334155]">
+          <p className="mt-3 max-w-3xl text-[14px] leading-relaxed text-[#334155] dark:text-[#a1a1aa]">
             {country.overview}
           </p>
         )}
-        <p className="mt-2 text-[12px] text-[#94a3b8]">
+        <p className="mt-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]">
           Country information is general and subject to verification based on the proposed activity.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {cards.map((card) => {
             const Icon = card.icon;
             return (
-              <div key={card.title} className="rounded-xl border border-[#e2edf8] bg-[#f8fbff] p-4">
+              <div key={card.title} className="rounded-xl border border-[#e2edf8] bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="mb-2 flex items-center gap-2">
-                  <Icon className="h-5 w-5 text-[#1677f2]" aria-hidden="true" />
-                  <p className="text-[13px] font-bold text-[#0a1628]">{card.title}</p>
+                  <Icon className="h-5 w-5 text-[#1677f2] dark:text-[#4f9dfb]" aria-hidden="true" />
+                  <p className="text-[13px] font-bold text-[#0a1628] dark:text-[#fafafa]">{card.title}</p>
                 </div>
-                <p className="text-[12.5px] leading-relaxed text-[#334155]">{card.text}</p>
+                <p className="text-[12.5px] leading-relaxed text-[#334155] dark:text-[#a1a1aa]">{card.text}</p>
               </div>
             );
           })}
@@ -280,25 +280,25 @@ function MarketEntryOverview({ country }: { country: GlobalMarketConfig }) {
 function SupportAreas({ country }: { country: GlobalMarketConfig }) {
   const areas = country.supportAreas.slice(0, 8);
   return (
-    <section className="bg-[#f8fbff] py-12">
+    <section className="bg-[#f8fbff] py-12 dark:bg-[#141417]">
       <div className="mx-auto max-w-5xl px-6">
-        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
           {country.tier === "planned" ? "Intended Support Areas" : "Support Areas"}
         </p>
-        <h2 className="text-[24px] font-black tracking-tight text-[#0a1628]">
+        <h2 className="text-[24px] font-black tracking-tight text-[#0a1628] dark:text-[#fafafa]">
           {country.tier === "planned"
             ? `Planned advisory scope for ${country.name}`
             : `How Estabizz supports ${country.name} market-entry enquiries`}
         </h2>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {areas.map((area) => (
-            <div key={area.label} className="rounded-xl border border-[#e2edf8] bg-white p-4">
+            <div key={area.label} className="rounded-xl border border-[#e2edf8] bg-white p-4 dark:bg-[#141417] dark:border-[#27272b]">
               <div className="mb-2">
                 <SupportIcon name={area.icon} />
               </div>
-              <p className="text-[12.5px] font-semibold leading-snug text-[#1e3a5f]">{area.label}</p>
+              <p className="text-[12.5px] font-semibold leading-snug text-[#1e3a5f] dark:text-[#a1a1aa]">{area.label}</p>
               {area.description && (
-                <p className="mt-1 text-[11.5px] text-[#64748b]">{area.description}</p>
+                <p className="mt-1 text-[11.5px] text-[#64748b] dark:text-[#a1a1aa]">{area.description}</p>
               )}
             </div>
           ))}
@@ -314,20 +314,20 @@ function AudienceSection({ country }: { country: GlobalMarketConfig }) {
   return (
     <section className="py-12">
       <div className="mx-auto max-w-5xl px-6">
-        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
           Who This Is For
         </p>
-        <h2 className="text-[24px] font-black tracking-tight text-[#0a1628]">
+        <h2 className="text-[24px] font-black tracking-tight text-[#0a1628] dark:text-[#fafafa]">
           Is this relevant to you?
         </h2>
         <div className="mt-5 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {country.audiences.map((audience) => (
             <div
               key={audience}
-              className="flex items-start gap-3 rounded-xl border border-[#dbe7f3] bg-white p-3.5"
+              className="flex items-start gap-3 rounded-xl border border-[#dbe7f3] bg-white p-3.5 dark:bg-[#141417] dark:border-[#27272b]"
             >
-              <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1677f2]" aria-hidden="true" />
-              <p className="text-[13px] font-semibold text-[#1e3a5f]">{audience}</p>
+              <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1677f2] dark:text-[#4f9dfb]" aria-hidden="true" />
+              <p className="text-[13px] font-semibold text-[#1e3a5f] dark:text-[#a1a1aa]">{audience}</p>
             </div>
           ))}
         </div>
@@ -353,14 +353,14 @@ function CorridorSection({ country }: { country: GlobalMarketConfig }) {
         </h2>
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
           {corridor.indiaToMarket && corridor.indiaToMarket.length > 0 && (
-            <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+            <div className="rounded-xl border border-white/10 bg-white/5 p-5 dark:bg-[#141417]">
               <p className="mb-3 text-[12px] font-black uppercase tracking-[0.15em] text-[#6ab4ff]">
                 Indian businesses entering {country.name}
               </p>
               <ul className="space-y-2">
                 {corridor.indiaToMarket.map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <ArrowRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1677f2]" aria-hidden="true" />
+                    <ArrowRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1677f2] dark:text-[#4f9dfb]" aria-hidden="true" />
                     <span className="text-[13px] text-white/80">{item}</span>
                   </li>
                 ))}
@@ -368,14 +368,14 @@ function CorridorSection({ country }: { country: GlobalMarketConfig }) {
             </div>
           )}
           {corridor.marketToIndia && corridor.marketToIndia.length > 0 && (
-            <div className="rounded-xl border border-white/10 bg-white/5 p-5">
+            <div className="rounded-xl border border-white/10 bg-white/5 p-5 dark:bg-[#141417]">
               <p className="mb-3 text-[12px] font-black uppercase tracking-[0.15em] text-[#6ab4ff]">
                 {country.name} businesses entering India
               </p>
               <ul className="space-y-2">
                 {corridor.marketToIndia.map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <ArrowRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1677f2]" aria-hidden="true" />
+                    <ArrowRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1677f2] dark:text-[#4f9dfb]" aria-hidden="true" />
                     <span className="text-[13px] text-white/80">{item}</span>
                   </li>
                 ))}
@@ -401,20 +401,20 @@ function ProcessSection({ country }: { country: GlobalMarketConfig }) {
   return (
     <section className="py-12">
       <div className="mx-auto max-w-5xl px-6">
-        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
           Our Approach
         </p>
-        <h2 className="text-[24px] font-black tracking-tight text-[#0a1628]">
+        <h2 className="text-[24px] font-black tracking-tight text-[#0a1628] dark:text-[#fafafa]">
           How Estabizz supports your market-entry assessment
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step) => (
-            <div key={step.number} className="relative rounded-xl border border-[#e2edf8] bg-white p-5">
+            <div key={step.number} className="relative rounded-xl border border-[#e2edf8] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
               <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#1677f2] text-[13px] font-black text-white">
                 {step.number}
               </div>
-              <p className="text-[13px] font-bold text-[#0a1628]">{step.title}</p>
-              <p className="mt-1.5 text-[12px] leading-relaxed text-[#64748b]">{step.description}</p>
+              <p className="text-[13px] font-bold text-[#0a1628] dark:text-[#fafafa]">{step.title}</p>
+              <p className="mt-1.5 text-[12px] leading-relaxed text-[#64748b] dark:text-[#a1a1aa]">{step.description}</p>
             </div>
           ))}
         </div>
@@ -430,22 +430,22 @@ function DeliverablesSection({ country }: { country: GlobalMarketConfig }) {
   if (!deliverables || deliverables.length === 0) return null;
 
   return (
-    <section className="bg-[#f8fbff] py-10">
+    <section className="bg-[#f8fbff] py-10 dark:bg-[#141417]">
       <div className="mx-auto max-w-5xl px-6">
-        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
           Advisory Outputs
         </p>
-        <h2 className="text-[22px] font-black tracking-tight text-[#0a1628]">
+        <h2 className="text-[22px] font-black tracking-tight text-[#0a1628] dark:text-[#fafafa]">
           Indicative advisory outputs
         </h2>
-        <p className="mt-1 text-[13px] text-[#64748b]">
+        <p className="mt-1 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">
           Depending on the engagement, advisory outputs may include:
         </p>
         <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {deliverables.map((d) => (
-            <div key={d} className="flex items-start gap-2.5 rounded-lg border border-[#dbe7f3] bg-white p-3">
-              <FileText className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1677f2]" aria-hidden="true" />
-              <span className="text-[12.5px] font-medium text-[#334155]">{d}</span>
+            <div key={d} className="flex items-start gap-2.5 rounded-lg border border-[#dbe7f3] bg-white p-3 dark:bg-[#141417] dark:border-[#27272b]">
+              <FileText className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#1677f2] dark:text-[#4f9dfb]" aria-hidden="true" />
+              <span className="text-[12.5px] font-medium text-[#334155] dark:text-[#a1a1aa]">{d}</span>
             </div>
           ))}
         </div>
@@ -684,13 +684,13 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
   return (
     <section ref={formRef} className="py-12" id="enquiry-form">
       <div className="mx-auto max-w-2xl px-6">
-        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
           Get in Touch
         </p>
-        <h2 className="text-[26px] font-black tracking-tight text-[#0a1628]">
+        <h2 className="text-[26px] font-black tracking-tight text-[#0a1628] dark:text-[#fafafa]">
           Submit a market-entry enquiry
         </h2>
-        <p className="mt-2 text-[14px] leading-relaxed text-[#64748b]">
+        <p className="mt-2 text-[14px] leading-relaxed text-[#64748b] dark:text-[#a1a1aa]">
           Tell us about your proposed activity and target timeline. Our Global Market Desk
           will review the enquiry and identify the appropriate next step.
         </p>
@@ -706,10 +706,10 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
             <div
               role="alert"
               aria-live="polite"
-              className="rounded-xl border border-red-200 bg-red-50 px-4 py-3"
+              className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 dark:bg-[#2a1618] dark:border-[#4a2225]"
             >
-              <p className="text-[13px] font-bold text-red-800">Please correct the following:</p>
-              <ul className="mt-1 list-inside list-disc text-[12.5px] text-red-700">
+              <p className="text-[13px] font-bold text-red-800 dark:text-[#fca5a5]">Please correct the following:</p>
+              <ul className="mt-1 list-inside list-disc text-[12.5px] text-red-700 dark:text-[#fca5a5]">
                 {Object.values(errors).map((e, i) => <li key={i}>{e}</li>)}
               </ul>
             </div>
@@ -730,7 +730,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
           {/* Name + Email */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="lead-name" className="mb-1.5 block text-[12px] font-bold text-[#334155]">
+              <label htmlFor="lead-name" className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">
                 Full name <span className="text-red-500" aria-label="required">*</span>
               </label>
               <input
@@ -743,8 +743,8 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
                 placeholder="Your full name"
                 aria-describedby={errors.name ? "lead-name-error" : undefined}
                 aria-invalid={!!errors.name}
-                className={`w-full rounded-xl border bg-white px-4 py-3 text-[14px] text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:ring-2 focus:ring-[#1677f2]/10 ${
-                  errors.name ? "border-red-400 focus:border-red-400" : "border-[#dbe7f3] focus:border-[#1677f2]"
+                className={`w-full rounded-xl border bg-white px-4 py-3 text-[14px] text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:ring-2 focus:ring-[#1677f2]/10  dark:bg-[#141417] dark:text-[#fafafa] ${
+                  errors.name ? "border-red-400 focus:border-red-400" : "border-[#dbe7f3] focus:border-[#1677f2] dark:border-[#27272b]"
                 }`}
               />
               {errors.name && (
@@ -752,7 +752,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
               )}
             </div>
             <div>
-              <label htmlFor="lead-email" className="mb-1.5 block text-[12px] font-bold text-[#334155]">
+              <label htmlFor="lead-email" className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">
                 Work email <span className="text-red-500" aria-label="required">*</span>
               </label>
               <input
@@ -765,8 +765,8 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
                 placeholder="you@company.com"
                 aria-describedby={errors.email ? "lead-email-error" : undefined}
                 aria-invalid={!!errors.email}
-                className={`w-full rounded-xl border bg-white px-4 py-3 text-[14px] text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:ring-2 focus:ring-[#1677f2]/10 ${
-                  errors.email ? "border-red-400 focus:border-red-400" : "border-[#dbe7f3] focus:border-[#1677f2]"
+                className={`w-full rounded-xl border bg-white px-4 py-3 text-[14px] text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:ring-2 focus:ring-[#1677f2]/10  dark:bg-[#141417] dark:text-[#fafafa] ${
+                  errors.email ? "border-red-400 focus:border-red-400" : "border-[#dbe7f3] focus:border-[#1677f2] dark:border-[#27272b]"
                 }`}
               />
               {errors.email && (
@@ -778,13 +778,13 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
           {/* Phone + Company */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="lead-phone" className="mb-1.5 block text-[12px] font-bold text-[#334155]">
+              <label htmlFor="lead-phone" className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">
                 Mobile number
               </label>
-              <div className="flex overflow-hidden rounded-xl border border-[#dbe7f3] bg-white transition-all focus-within:border-[#1677f2] focus-within:ring-2 focus-within:ring-[#1677f2]/10">
-                <div className="flex flex-shrink-0 items-center gap-1.5 border-r border-[#dbe7f3] bg-[#f8fbff] px-3 py-3">
+              <div className="flex overflow-hidden rounded-xl border border-[#dbe7f3] bg-white transition-all focus-within:border-[#1677f2] focus-within:ring-2 focus-within:ring-[#1677f2]/10 dark:bg-[#141417] dark:border-[#27272b]">
+                <div className="flex flex-shrink-0 items-center gap-1.5 border-r border-[#dbe7f3] bg-[#f8fbff] px-3 py-3 dark:bg-[#141417] dark:border-[#27272b]">
                   <span className="text-[15px] leading-none" aria-hidden="true">{flag}</span>
-                  <span className="text-[12.5px] font-bold text-[#334155]">{country.callingCode}</span>
+                  <span className="text-[12.5px] font-bold text-[#334155] dark:text-[#a1a1aa]">{country.callingCode}</span>
                 </div>
                 <input
                   id="lead-phone"
@@ -795,7 +795,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
                   placeholder="Mobile number"
                   aria-describedby={errors.phoneNumber ? "lead-phone-error" : undefined}
                   aria-invalid={!!errors.phoneNumber}
-                  className="min-w-0 flex-1 bg-transparent px-3 py-3 text-[14px] text-[#0a1628] outline-none placeholder:text-[#94a3b8]"
+                  className="min-w-0 flex-1 bg-transparent px-3 py-3 text-[14px] text-[#0a1628] outline-none placeholder:text-[#94a3b8] dark:text-[#fafafa]"
                 />
               </div>
               {errors.phoneNumber && (
@@ -803,7 +803,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
               )}
             </div>
             <div>
-              <label htmlFor="lead-company" className="mb-1.5 block text-[12px] font-bold text-[#334155]">
+              <label htmlFor="lead-company" className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">
                 Company name
               </label>
               <input
@@ -812,19 +812,19 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
                 value={form.company}
                 onChange={e => setField("company", e.target.value)}
                 placeholder="Your company"
-                className="w-full rounded-xl border border-[#dbe7f3] bg-white px-4 py-3 text-[14px] text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10"
+                className="w-full rounded-xl border border-[#dbe7f3] bg-white px-4 py-3 text-[14px] text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
               />
             </div>
           </div>
 
           {/* Selected market (read-only) */}
           <div>
-            <p className="mb-1.5 text-[12px] font-bold text-[#334155]">Selected market</p>
-            <div className="flex items-center gap-3 rounded-xl border border-[#dbe7f3] bg-[#f8fbff] px-4 py-3">
+            <p className="mb-1.5 text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">Selected market</p>
+            <div className="flex items-center gap-3 rounded-xl border border-[#dbe7f3] bg-[#f8fbff] px-4 py-3 dark:bg-[#141417] dark:border-[#27272b]">
               <span className="text-[18px]" aria-hidden="true">{flag}</span>
-              <span className="text-[14px] font-semibold text-[#0a1628]">{country.name}</span>
+              <span className="text-[14px] font-semibold text-[#0a1628] dark:text-[#fafafa]">{country.name}</span>
               <TierBadge tier={country.tier} />
-              <span className="ml-auto text-[11px] text-[#64748b]">{country.region}</span>
+              <span className="ml-auto text-[11px] text-[#64748b] dark:text-[#a1a1aa]">{country.region}</span>
             </div>
           </div>
 
@@ -902,8 +902,8 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
 
           {/* Additional context */}
           <div>
-            <label htmlFor="lead-message" className="mb-1.5 block text-[12px] font-bold text-[#334155]">
-              Additional context <span className="font-normal text-[#94a3b8]">(optional)</span>
+            <label htmlFor="lead-message" className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">
+              Additional context <span className="font-normal text-[#94a3b8] dark:text-[#71717a]">(optional)</span>
             </label>
             <textarea
               id="lead-message"
@@ -914,7 +914,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
               placeholder="Brief background on your expansion plans, entity structure, or specific regulatory questions…"
               aria-describedby={errors.message ? "lead-message-error" : undefined}
               aria-invalid={!!errors.message}
-              className="w-full resize-none rounded-xl border border-[#dbe7f3] bg-white px-4 py-3 text-[14px] text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10"
+              className="w-full resize-none rounded-xl border border-[#dbe7f3] bg-white px-4 py-3 text-[14px] text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
             />
             {errors.message && (
               <p id="lead-message-error" role="alert" className="mt-1 text-[11.5px] text-red-600">{errors.message}</p>
@@ -930,8 +930,8 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
               tabIndex={-1}
               className={`rounded-xl border px-4 py-3 text-[13.5px] font-semibold ${
                 result.ok
-                  ? "border-green-200 bg-green-50 text-green-800"
-                  : "border-red-200 bg-red-50 text-red-800"
+                  ? "border-green-200 bg-green-50 text-green-800 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]"
+                  : "border-red-200 bg-red-50 text-red-800 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]"
               }`}
             >
               {result.msg}
@@ -943,15 +943,15 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-xl bg-[#0a1628] py-3.5 text-[14px] font-black text-white shadow-lg transition-all hover:bg-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-xl bg-[#0a1628] dark:bg-[#1c1c20] py-3.5 text-[14px] font-black text-white shadow-lg transition-all hover:bg-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {submitting ? "Submitting Enquiry…" : "Submit Market-Entry Enquiry →"}
             </button>
           )}
 
-          <p className="text-center text-[11px] text-[#94a3b8]">
+          <p className="text-center text-[11px] text-[#94a3b8] dark:text-[#71717a]">
             By submitting you agree to our{" "}
-            <Link href="/legal/privacy-policy" className="underline hover:text-[#1677f2]">
+            <Link href="/legal/privacy-policy" className="underline hover:text-[#1677f2] dark:text-[#4f9dfb]">
               Privacy Policy
             </Link>
             . We will never share your details with third parties.
@@ -981,21 +981,21 @@ function RelatedMarkets({ country }: { country: GlobalMarketConfig }) {
   return (
     <section className="py-10">
       <div className="mx-auto max-w-5xl px-6">
-        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+        <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
           Also in {country.region}
         </p>
-        <h2 className="text-[22px] font-black tracking-tight text-[#0a1628]">Related markets</h2>
+        <h2 className="text-[22px] font-black tracking-tight text-[#0a1628] dark:text-[#fafafa]">Related markets</h2>
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {related.map((rel) => (
             <Link
               key={rel.slug}
               href={`/global/${rel.slug}`}
-              className="flex items-center gap-3 rounded-xl border border-[#dbe7f3] bg-white p-3.5 transition-all hover:border-[#1677f2]/40 hover:shadow-sm"
+              className="flex items-center gap-3 rounded-xl border border-[#dbe7f3] bg-white p-3.5 transition-all hover:border-[#1677f2]/40 hover:shadow-sm dark:bg-[#141417] dark:border-[#27272b]"
             >
               <span className="text-[22px]" aria-hidden="true">{flagEmoji(rel.iso2)}</span>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-[13px] font-semibold text-[#0a1628]">{rel.name}</p>
-                <p className="text-[11px] text-[#64748b]">{rel.region}</p>
+                <p className="truncate text-[13px] font-semibold text-[#0a1628] dark:text-[#fafafa]">{rel.name}</p>
+                <p className="text-[11px] text-[#64748b] dark:text-[#a1a1aa]">{rel.region}</p>
               </div>
               <TierBadge tier={rel.tier} />
             </Link>
@@ -1010,7 +1010,7 @@ function RelatedMarkets({ country }: { country: GlobalMarketConfig }) {
 
 function FinalCTA({ country, scrollToForm }: { country: GlobalMarketConfig; scrollToForm: () => void }) {
   return (
-    <section className="bg-[#0a1628] py-12 text-white">
+    <section className="bg-[#0a1628] dark:bg-[#1c1c20] py-12 text-white">
       <div className="mx-auto max-w-3xl px-6 text-center">
         <div className="mb-3 text-[40px]" aria-hidden="true">{flagEmoji(country.iso2)}</div>
         <h2 className="text-[26px] font-black tracking-tight">
@@ -1029,7 +1029,7 @@ function FinalCTA({ country, scrollToForm }: { country: GlobalMarketConfig; scro
           </button>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/8 px-6 py-3 text-[14px] font-black text-white transition-all hover:border-white/40 hover:bg-white/12 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0a1628]"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/8 px-6 py-3 text-[14px] font-black text-white transition-all hover:border-white/40 hover:bg-white/12 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0a1628] dark:bg-[#141417]"
           >
             Contact Estabizz
           </Link>
@@ -1052,7 +1052,7 @@ export default function CountryLandingClient({ country }: { country: GlobalMarke
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-[#141417]">
       {/* Breadcrumb */}
       <Breadcrumb country={country} />
 
@@ -1092,7 +1092,7 @@ export default function CountryLandingClient({ country }: { country: GlobalMarke
                 </button>
                 <button
                   onClick={scrollToForm}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/8 px-6 py-3 text-[14px] font-black text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/12 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#070d1a] sm:justify-start"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/8 px-6 py-3 text-[14px] font-black text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/12 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#070d1a] sm:justify-start dark:bg-[#141417]"
                 >
                   Register Your Interest
                 </button>
@@ -1110,7 +1110,7 @@ export default function CountryLandingClient({ country }: { country: GlobalMarke
                 </div>
               </div>
               {country.callingCode && (
-                <div className="rounded-2xl border border-white/8 bg-white/5 px-5 py-3">
+                <div className="rounded-2xl border border-white/8 bg-white/5 px-5 py-3 dark:bg-[#141417]">
                   <div className="text-[10px] font-black uppercase tracking-[0.15em] text-white/50">
                     Dial Code
                   </div>
@@ -1132,12 +1132,12 @@ export default function CountryLandingClient({ country }: { country: GlobalMarke
         <>
           <MarketEntryOverview country={country} />
           {country.regulators && country.regulators.length > 0 && (
-            <section className="bg-[#f8fbff] py-12">
+            <section className="bg-[#f8fbff] py-12 dark:bg-[#141417]">
               <div className="mx-auto max-w-5xl px-6">
-                <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+                <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
                   Regulatory Landscape
                 </p>
-                <h2 className="text-[24px] font-black tracking-tight text-[#0a1628]">
+                <h2 className="text-[24px] font-black tracking-tight text-[#0a1628] dark:text-[#fafafa]">
                   Key regulatory bodies
                 </h2>
                 <RegulatoryLandscape countryName={country.name} regulators={country.regulators} />
@@ -1151,12 +1151,12 @@ export default function CountryLandingClient({ country }: { country: GlobalMarke
           <DeliverablesSection country={country} />
           <LeadForm country={country} />
           {country.faqs && country.faqs.length > 0 && (
-            <section className="bg-[#f8fbff] py-12">
+            <section className="bg-[#f8fbff] py-12 dark:bg-[#141417]">
               <div className="mx-auto max-w-5xl px-6">
-                <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+                <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
                   FAQs
                 </p>
-                <h2 className="text-[24px] font-black tracking-tight text-[#0a1628]">
+                <h2 className="text-[24px] font-black tracking-tight text-[#0a1628] dark:text-[#fafafa]">
                   Frequently asked questions
                 </h2>
                 <CountryFAQ faqs={country.faqs} countryName={country.name} />
@@ -1179,12 +1179,12 @@ export default function CountryLandingClient({ country }: { country: GlobalMarke
           <DeliverablesSection country={country} />
           <LeadForm country={country} />
           {country.faqs && country.faqs.length > 0 && (
-            <section className="bg-[#f8fbff] py-12">
+            <section className="bg-[#f8fbff] py-12 dark:bg-[#141417]">
               <div className="mx-auto max-w-5xl px-6">
-                <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+                <p className="mb-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
                   FAQs
                 </p>
-                <h2 className="text-[24px] font-black tracking-tight text-[#0a1628]">
+                <h2 className="text-[24px] font-black tracking-tight text-[#0a1628] dark:text-[#fafafa]">
                   Frequently asked questions
                 </h2>
                 <CountryFAQ faqs={country.faqs} countryName={country.name} />

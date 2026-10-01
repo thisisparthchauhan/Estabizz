@@ -13,11 +13,11 @@ const STATUS_META: Record<JobStatus, { label: string; cls: string; dotCls: strin
   on_hold:   { label: "On Hold",   cls: "bg-yellow-50 text-yellow-700 border-yellow-200",     dotCls: "bg-yellow-400" },
   closed:    { label: "Closed",    cls: "bg-red-50 text-red-600 border-red-200",              dotCls: "bg-red-400" },
   filled:    { label: "Filled",    cls: "bg-blue-50 text-blue-700 border-blue-200",           dotCls: "bg-blue-500" },
-  cancelled: { label: "Cancelled", cls: "bg-purple-50 text-purple-600 border-purple-200",    dotCls: "bg-purple-400" },
+  cancelled: { label: "Cancelled", cls: "bg-purple-50 text-purple-600 border-purple-200 dark:bg-[#231a2e] dark:text-[#c4b5fd] dark:border-[#3a2a4a]",    dotCls: "bg-purple-400" },
 };
 
 function StatusBadge({ status }: { status: JobStatus }) {
-  const m = STATUS_META[status] ?? { label: status, cls: "bg-slate-100 text-slate-500 border-slate-200", dotCls: "bg-slate-400" };
+  const m = STATUS_META[status] ?? { label: status, cls: "bg-slate-100 text-slate-500 border-slate-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]", dotCls: "bg-slate-400" };
   return (
     <span className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10.5px] font-bold ${m.cls}`}>
       <span className={`h-1.5 w-1.5 rounded-full ${m.dotCls}`} />
@@ -103,16 +103,16 @@ export default function AdminJobsClient({ initialJobs }: Props) {
       {/* Header */}
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <div className="mb-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+          <div className="mb-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
             Admin · Jobs
           </div>
-          <h1 className="text-[28px] font-black leading-tight tracking-tight text-[#0a1628]">
+          <h1 className="text-[28px] font-black leading-tight tracking-tight text-[#0a1628] dark:text-[#fafafa]">
             Job Postings
           </h1>
         </div>
         <Link
           href="/admin/jobs/new"
-          className="inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-5 py-2.5 text-[13.5px] font-black text-white hover:bg-[#1677f2] transition-colors"
+          className="inline-flex items-center gap-2 rounded-xl bg-[#0a1628] dark:bg-[#1c1c20] px-5 py-2.5 text-[13.5px] font-black text-white hover:bg-[#1677f2] transition-colors"
         >
           + New Job
         </Link>
@@ -120,7 +120,7 @@ export default function AdminJobsClient({ initialJobs }: Props) {
 
       {/* Toast */}
       {toast && (
-        <div className={`mb-5 flex items-center gap-2 rounded-xl border px-4 py-3 text-[13px] font-bold ${toast.type === "ok" ? "border-emerald-200 bg-emerald-50 text-emerald-700" : "border-red-200 bg-red-50 text-red-700"}`}>
+        <div className={`mb-5 flex items-center gap-2 rounded-xl border px-4 py-3 text-[13px] font-bold ${toast.type === "ok" ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]" : "border-red-200 bg-red-50 text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]"}`}>
           <span className={`h-2 w-2 rounded-full ${toast.type === "ok" ? "bg-emerald-500" : "bg-red-500"}`} />
           {toast.msg}
         </div>
@@ -135,10 +135,10 @@ export default function AdminJobsClient({ initialJobs }: Props) {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-[12px] font-bold transition-colors ${active ? "border-[#1677f2] bg-[#1677f2] text-white" : "border-[#dbe7f3] bg-white text-[#64748b] hover:border-[#1677f2]/40"}`}
+              className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-[12px] font-bold transition-colors ${active ? "border-[#1677f2] bg-[#1677f2] text-white" : "border-[#dbe7f3] bg-white text-[#64748b] hover:border-[#1677f2]/40 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"}`}
             >
               {tab.label}
-              <span className={`rounded-full px-1.5 py-0.5 text-[10px] ${active ? "bg-white/20 text-white" : "bg-[#f1f5f9] text-[#94a3b8]"}`}>
+              <span className={`rounded-full px-1.5 py-0.5 text-[10px] ${active ? "bg-white/20 text-white dark:bg-[#141417]" : "bg-[#f1f5f9] text-[#94a3b8] dark:bg-[#1c1c20] dark:text-[#71717a]"}`}>
                 {count}
               </span>
             </button>
@@ -149,7 +149,7 @@ export default function AdminJobsClient({ initialJobs }: Props) {
       {/* Search */}
       <div className="mb-5">
         <input
-          className="w-full max-w-sm rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13.5px] text-[#0a1628] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+          className="w-full max-w-sm rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13.5px] text-[#0a1628] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
           placeholder="Search jobs…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -158,28 +158,28 @@ export default function AdminJobsClient({ initialJobs }: Props) {
 
       {/* Table */}
       {visible.length === 0 ? (
-        <div className="flex h-40 items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] text-[14px] text-[#94a3b8]">
+        <div className="flex h-40 items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] text-[14px] text-[#94a3b8] dark:border-[#27272b] dark:text-[#71717a]">
           {jobs.length === 0 ? "No jobs yet. Create your first one." : "No jobs match the current filter."}
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-2xl border border-[#dbe7f3] bg-white">
+        <div className="overflow-x-auto rounded-2xl border border-[#dbe7f3] bg-white dark:bg-[#141417] dark:border-[#27272b]">
           <table className="w-full text-[13px]">
             <thead>
-              <tr className="border-b border-[#dbe7f3] bg-[#f8fbff]">
-                <th className="px-4 py-3 text-left font-black uppercase tracking-widest text-[#64748b] text-[11px]">Job</th>
-                <th className="px-4 py-3 text-left font-black uppercase tracking-widest text-[#64748b] text-[11px]">Status</th>
-                <th className="px-4 py-3 text-left font-black uppercase tracking-widest text-[#64748b] text-[11px]">Location</th>
-                <th className="px-4 py-3 text-left font-black uppercase tracking-widest text-[#64748b] text-[11px]">Deadline</th>
-                <th className="px-4 py-3 text-left font-black uppercase tracking-widest text-[#64748b] text-[11px]">Public</th>
+              <tr className="border-b border-[#dbe7f3] bg-[#f8fbff] dark:bg-[#141417] dark:border-[#27272b]">
+                <th className="px-4 py-3 text-left font-black uppercase tracking-widest text-[#64748b] text-[11px] dark:text-[#a1a1aa]">Job</th>
+                <th className="px-4 py-3 text-left font-black uppercase tracking-widest text-[#64748b] text-[11px] dark:text-[#a1a1aa]">Status</th>
+                <th className="px-4 py-3 text-left font-black uppercase tracking-widest text-[#64748b] text-[11px] dark:text-[#a1a1aa]">Location</th>
+                <th className="px-4 py-3 text-left font-black uppercase tracking-widest text-[#64748b] text-[11px] dark:text-[#a1a1aa]">Deadline</th>
+                <th className="px-4 py-3 text-left font-black uppercase tracking-widest text-[#64748b] text-[11px] dark:text-[#a1a1aa]">Public</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
             <tbody>
               {visible.map((job) => (
-                <tr key={job.id} className="border-b border-[#f1f5f9] hover:bg-[#f8fbff] transition-colors last:border-0">
+                <tr key={job.id} className="border-b border-[#f1f5f9] hover:bg-[#f8fbff] transition-colors last:border-0 dark:bg-[#141417] dark:border-[#27272b]">
                   <td className="px-4 py-3">
-                    <div className="font-bold text-[#0a1628] leading-tight">{job.title}</div>
-                    <div className="mt-0.5 text-[11px] text-[#94a3b8]">
+                    <div className="font-bold text-[#0a1628] leading-tight dark:text-[#fafafa]">{job.title}</div>
+                    <div className="mt-0.5 text-[11px] text-[#94a3b8] dark:text-[#71717a]">
                       {job.job_code}
                       {job.department && <> · {job.department}</>}
                     </div>
@@ -187,13 +187,13 @@ export default function AdminJobsClient({ initialJobs }: Props) {
                   <td className="px-4 py-3">
                     <StatusBadge status={job.status} />
                   </td>
-                  <td className="px-4 py-3 text-[#64748b]">{job.location_text || "—"}</td>
-                  <td className="px-4 py-3 text-[#64748b]">{fmt(job.closes_at)}</td>
+                  <td className="px-4 py-3 text-[#64748b] dark:text-[#a1a1aa]">{job.location_text || "—"}</td>
+                  <td className="px-4 py-3 text-[#64748b] dark:text-[#a1a1aa]">{fmt(job.closes_at)}</td>
                   <td className="px-4 py-3">
                     {job.is_public ? (
-                      <span className="text-emerald-600 font-bold text-[11px]">Yes</span>
+                      <span className="text-emerald-600 font-bold text-[11px] dark:text-[#6ee7b7]">Yes</span>
                     ) : (
-                      <span className="text-[#94a3b8] text-[11px]">No</span>
+                      <span className="text-[#94a3b8] text-[11px] dark:text-[#71717a]">No</span>
                     )}
                   </td>
                   <td className="px-4 py-3">
@@ -202,21 +202,21 @@ export default function AdminJobsClient({ initialJobs }: Props) {
                         <Link
                           href={`/jobs/${job.slug}`}
                           target="_blank"
-                          className="rounded-lg border border-[#dbe7f3] px-3 py-1.5 text-[11px] font-bold text-[#64748b] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors"
+                          className="rounded-lg border border-[#dbe7f3] px-3 py-1.5 text-[11px] font-bold text-[#64748b] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors dark:border-[#27272b] dark:text-[#a1a1aa]"
                         >
                           View
                         </Link>
                       )}
                       <Link
                         href={`/admin/jobs/${job.id}/edit`}
-                        className="rounded-lg border border-[#dbe7f3] px-3 py-1.5 text-[11px] font-bold text-[#64748b] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors"
+                        className="rounded-lg border border-[#dbe7f3] px-3 py-1.5 text-[11px] font-bold text-[#64748b] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors dark:border-[#27272b] dark:text-[#a1a1aa]"
                       >
                         Edit
                       </Link>
                       <button
                         type="button"
                         onClick={() => setDeleteTarget(job)}
-                        className="rounded-lg border border-red-100 px-3 py-1.5 text-[11px] font-bold text-red-500 hover:border-red-300 hover:bg-red-50 transition-colors"
+                        className="rounded-lg border border-red-100 px-3 py-1.5 text-[11px] font-bold text-red-500 hover:border-red-300 hover:bg-red-50 transition-colors dark:bg-[#2a1618] dark:border-[#4a2225]"
                       >
                         Delete
                       </button>
@@ -232,16 +232,16 @@ export default function AdminJobsClient({ initialJobs }: Props) {
       {/* Delete modal */}
       {deleteTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-          <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl">
-            <h3 className="text-[16px] font-black text-[#0a1628]">Delete job?</h3>
-            <p className="mt-2 text-[13px] text-[#64748b]">
+          <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl dark:bg-[#141417]">
+            <h3 className="text-[16px] font-black text-[#0a1628] dark:text-[#fafafa]">Delete job?</h3>
+            <p className="mt-2 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">
               "<strong>{deleteTarget.title}</strong>" will be removed. This action cannot be undone.
             </p>
             <div className="mt-5 flex gap-3">
               <button
                 type="button"
                 onClick={() => setDeleteTarget(null)}
-                className="flex-1 rounded-xl border border-[#dbe7f3] py-2.5 text-[13px] font-bold text-[#64748b] hover:border-[#1677f2]/40 transition-colors"
+                className="flex-1 rounded-xl border border-[#dbe7f3] py-2.5 text-[13px] font-bold text-[#64748b] hover:border-[#1677f2]/40 transition-colors dark:border-[#27272b] dark:text-[#a1a1aa]"
               >
                 Cancel
               </button>

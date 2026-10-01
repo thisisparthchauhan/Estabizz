@@ -17,27 +17,27 @@ const guides = [
 
 export default function InsurancePage() {
   return (
-    <main className="min-h-screen bg-white pt-24">
+    <main className="min-h-screen bg-white pt-24 dark:bg-[#141417]">
       <div className="mx-auto max-w-7xl px-6 pb-16 pt-8">
-        <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-sm text-[#64748b]">
-          <Link href="/" className="hover:text-[#1677f2]">Home</Link><span aria-hidden="true">/</span>
-          <Link href="/regulatory" className="hover:text-[#1677f2]">Regulatory</Link><span aria-hidden="true">/</span>
-          <span aria-current="page" className="text-[#120b45]">Insurance</span>
+        <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-sm text-[#64748b] dark:text-[#a1a1aa]">
+          <Link href="/" className="hover:text-[#1677f2] dark:text-[#4f9dfb]">Home</Link><span aria-hidden="true">/</span>
+          <Link href="/regulatory" className="hover:text-[#1677f2] dark:text-[#4f9dfb]">Regulatory</Link><span aria-hidden="true">/</span>
+          <span aria-current="page" className="text-[#120b45] dark:text-[#fafafa]">Insurance</span>
         </nav>
         <header className="mb-10 max-w-3xl">
-          <h1 className="text-4xl font-bold leading-tight text-[#120b45]">Insurance Services</h1>
-          <p className="mt-4 text-lg leading-relaxed text-[#475569]">Licensing, registration and compliance support for insurance businesses.</p>
+          <h1 className="text-4xl font-bold leading-tight text-[#120b45] dark:text-[#fafafa]">Insurance Services</h1>
+          <p className="mt-4 text-lg leading-relaxed text-[#475569] dark:text-[#a1a1aa]">Licensing, registration and compliance support for insurance businesses.</p>
         </header>
         <section aria-label="Insurance services" className="grid gap-6 md:grid-cols-2">
           {guides.map((guide) => (
-            <Link key={guide.href} href={guide.href} className="group flex h-full flex-col rounded-lg border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-colors hover:border-[#1677f2] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1677f2] sm:p-8">
-              <h2 className="text-xl font-bold leading-snug text-[#120b45] group-hover:text-[#1677f2]">{guide.title}</h2>
-              <p className="mb-6 mt-3 text-base leading-relaxed text-[#475569]">{guide.description}</p>
-              <span className="mt-auto text-sm font-semibold text-[#1677f2]">Explore service <span aria-hidden="true">&rarr;</span></span>
+            <Link key={guide.href} href={guide.href} className="group flex h-full flex-col rounded-lg border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-colors hover:border-[#1677f2] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1677f2] sm:p-8 dark:bg-[#141417] dark:border-[#27272b]">
+              <h2 className="text-xl font-bold leading-snug text-[#120b45] group-hover:text-[#1677f2] dark:text-[#fafafa]">{guide.title}</h2>
+              <p className="mb-6 mt-3 text-base leading-relaxed text-[#475569] dark:text-[#a1a1aa]">{guide.description}</p>
+              <span className="mt-auto text-sm font-semibold text-[#1677f2] dark:text-[#4f9dfb]">Explore service <span aria-hidden="true">&rarr;</span></span>
             </Link>
           ))}
         </section>
-        <div className="mt-12 border-t border-blue-100 pt-8">
+        <div className="mt-12 border-t border-blue-100 pt-8 dark:border-[#27272b]">
           <Link href="/contact" className="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#1677f2] px-6 py-3 font-semibold text-white hover:bg-[#0866d9]">Discuss your insurance requirements</Link>
         </div>
       </div>

@@ -100,7 +100,7 @@ function CopyLinkButton() {
     <button
       onClick={copy}
       title="Copy link"
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e0e0e0] bg-white text-[#374151] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors"
+      className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e0e0e0] bg-white text-[#374151] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
     >
       {copied ? (
         <svg className="h-4 w-4 text-[#10b981]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -124,7 +124,7 @@ function ShareButtons({ title }: { title: string }) {
 
   return (
     <div className="mt-5">
-      <p className="mb-2 text-[10px] font-black uppercase tracking-[0.14em] text-[#9ca3af]">
+      <p className="mb-2 text-[10px] font-black uppercase tracking-[0.14em] text-[#9ca3af] dark:text-[#71717a]">
         Share
       </p>
       <div className="flex gap-2">
@@ -135,7 +135,7 @@ function ShareButtons({ title }: { title: string }) {
           target="_blank"
           rel="noopener noreferrer"
           title="Share on X"
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e0e0e0] bg-white text-[#374151] hover:border-[#0a1628] hover:text-[#0a1628] transition-colors"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e0e0e0] bg-white text-[#374151] hover:border-[#0a1628] hover:text-[#0a1628] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
         >
           <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -147,7 +147,7 @@ function ShareButtons({ title }: { title: string }) {
           target="_blank"
           rel="noopener noreferrer"
           title="Share on LinkedIn"
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e0e0e0] bg-white text-[#374151] hover:border-[#0077b5] hover:text-[#0077b5] transition-colors"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e0e0e0] bg-white text-[#374151] hover:border-[#0077b5] hover:text-[#0077b5] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
         >
           <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
@@ -159,7 +159,7 @@ function ShareButtons({ title }: { title: string }) {
           target="_blank"
           rel="noopener noreferrer"
           title="Share on WhatsApp"
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e0e0e0] bg-white text-[#374151] hover:border-[#25d366] hover:text-[#25d366] transition-colors"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e0e0e0] bg-white text-[#374151] hover:border-[#25d366] hover:text-[#25d366] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
         >
           <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
@@ -185,8 +185,8 @@ function LeftSidebar({
     <aside className="hidden lg:block">
       <div className="sticky top-[96px] max-h-[calc(100vh-120px)] overflow-y-auto [&::-webkit-scrollbar]:hidden">
         {items.length >= 2 && (
-          <div className="mb-6 rounded-sm border border-[#e8e8e8] bg-white p-5">
-            <p className="mb-3 text-[10px] font-black uppercase tracking-[0.14em] text-[#9ca3af]">
+          <div className="mb-6 rounded-sm border border-[#e8e8e8] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+            <p className="mb-3 text-[10px] font-black uppercase tracking-[0.14em] text-[#9ca3af] dark:text-[#71717a]">
               Contents
             </p>
             <nav aria-label="Article sections">
@@ -204,7 +204,7 @@ function LeftSidebar({
                       } ${
                         activeId === item.id
                           ? "bg-[#1677f2]/8 font-bold text-[#1677f2] border-l-2 border-[#1677f2] pl-[6px]"
-                          : "text-[#6b7280] hover:text-[#111827]"
+                          : "text-[#6b7280] hover:text-[#111827] dark:text-[#a1a1aa]"
                       }`}
                     >
                       {item.level === 3 && (
@@ -234,20 +234,20 @@ function MobileToc({ items }: { items: TocItem[] }) {
   if (items.length < 2) return null;
 
   return (
-    <div className="mb-7 overflow-hidden rounded-sm border border-[#e0e0e0] bg-[#f7f8fc] lg:hidden">
+    <div className="mb-7 overflow-hidden rounded-sm border border-[#e0e0e0] bg-[#f7f8fc] lg:hidden dark:bg-[#141417] dark:border-[#27272b]">
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between px-4 py-3.5 text-[13px] font-bold text-[#0a1628]"
+        className="flex w-full items-center justify-between px-4 py-3.5 text-[13px] font-bold text-[#0a1628] dark:text-[#fafafa]"
       >
         <span className="flex items-center gap-2">
-          <svg className="h-4 w-4 text-[#1677f2]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="h-4 w-4 text-[#1677f2] dark:text-[#4f9dfb]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h12M4 14h8" />
           </svg>
           Table of Contents
         </span>
         <svg
-          className={`h-4 w-4 text-[#1677f2] transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`h-4 w-4 text-[#1677f2] transition-transform duration-200  dark:text-[#4f9dfb] ${open ? "rotate-180" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -256,7 +256,7 @@ function MobileToc({ items }: { items: TocItem[] }) {
         </svg>
       </button>
       {open && (
-        <nav className="border-t border-[#e0e0e0] px-4 pb-4 pt-3" aria-label="Article sections">
+        <nav className="border-t border-[#e0e0e0] px-4 pb-4 pt-3 dark:border-[#27272b]" aria-label="Article sections">
           <ol className="space-y-2">
             {items.map((item) => (
               <li key={item.id}>
@@ -267,7 +267,7 @@ function MobileToc({ items }: { items: TocItem[] }) {
                     setOpen(false);
                     scrollToId(item.id);
                   }}
-                  className={`block text-[13px] leading-snug text-[#374151] transition-colors hover:text-[#1677f2] ${
+                  className={`block text-[13px] leading-snug text-[#374151] transition-colors hover:text-[#1677f2]  dark:text-[#a1a1aa] ${
                     item.level === 3 ? "ml-4" : ""
                   }`}
                 >
@@ -298,14 +298,14 @@ function RightSidebar({
   return (
     <aside className="hidden xl:block">
       <div className="sticky top-[96px] max-h-[calc(100vh-120px)] overflow-y-auto [&::-webkit-scrollbar]:hidden">
-        <div className="rounded-sm border border-[#e8e8e8] bg-white p-5">
+        <div className="rounded-sm border border-[#e8e8e8] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
           <div className="mb-4 flex items-center justify-between">
-            <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#9ca3af]">
+            <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#9ca3af] dark:text-[#71717a]">
               More in {categoryName}
             </p>
             <Link
               href={`/blogs/category/${categorySlug}`}
-              className="text-[11px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
+              className="text-[11px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors dark:text-[#4f9dfb]"
             >
               See all →
             </Link>
@@ -318,7 +318,7 @@ function RightSidebar({
         </div>
 
         {/* Subscribe box */}
-        <div className="mt-5 rounded-sm bg-[#0a1628] p-5 text-center">
+        <div className="mt-5 rounded-sm bg-[#0a1628] dark:bg-[#1c1c20] p-5 text-center">
           <p className="mb-2 text-[13px] font-black text-white">
             Stay Updated
           </p>
@@ -352,7 +352,7 @@ function fmt(iso?: string): string {
 
 function HeroImage({ src, alt, icon, width, height }: { src: string; alt: string; icon: string; width?: number; height?: number }) {
   return (
-    <div className="relative h-64 w-full overflow-hidden bg-gradient-to-br from-[#eef4fb] via-[#f7f8fc] to-[#eaf2fb] md:h-[400px] lg:h-[460px]">
+    <div className="relative h-64 w-full overflow-hidden bg-gradient-to-br from-[#eef4fb] via-[#f7f8fc] to-[#eaf2fb] md:h-[400px] lg:h-[460px] dark:from-[#09090b] dark:via-[#09090b] dark:to-[#09090b]">
       <span className="absolute inset-0 flex items-center justify-center text-[100px] opacity-[0.10] select-none pointer-events-none">
         {icon}
       </span>
@@ -392,21 +392,21 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
   const activeId = useActiveHeading(tocIds);
 
   return (
-    <main className="relative z-[1] min-h-screen bg-white dark:bg-[#06101f] pt-[64px]">
+    <main className="relative z-[1] min-h-screen bg-white dark:bg-[#09090b] pt-[64px]">
 
       {/* ── Breadcrumb ── */}
-      <div className="border-b border-blue-100 bg-[#f5fbff]">
+      <div className="border-b border-blue-100 bg-[#f5fbff] dark:bg-[#141417] dark:border-[#27272b]">
         <div className="mx-auto max-w-screen-xl px-4 py-2.5">
-          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-[12px] text-[#9ca3af]">
-            <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link>
+          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-[12px] text-[#9ca3af] dark:text-[#71717a]">
+            <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link>
             <span className="opacity-40">/</span>
-            <Link href="/blogs" className="hover:text-[#374151] transition-colors">Regulatory Insights</Link>
+            <Link href="/blogs" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Regulatory Insights</Link>
             <span className="opacity-40">/</span>
-            <Link href={`/blogs/category/${blog.category.slug}`} className="hover:text-[#374151] transition-colors">
+            <Link href={`/blogs/category/${blog.category.slug}`} className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">
               {blog.category.name}
             </Link>
             <span className="opacity-40">/</span>
-            <span className="max-w-[200px] truncate text-[#374151] sm:max-w-none">{blog.title}</span>
+            <span className="max-w-[200px] truncate text-[#374151] sm:max-w-none dark:text-[#a1a1aa]">{blog.title}</span>
           </nav>
         </div>
       </div>
@@ -429,12 +429,12 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
         </div>
 
         {/* Title */}
-        <h1 className="mb-4 max-w-3xl text-[26px] font-black leading-tight tracking-[-0.02em] text-[#120b45] sm:text-[30px] lg:text-[36px]">
+        <h1 className="mb-4 max-w-3xl text-[26px] font-black leading-tight tracking-[-0.02em] text-[#120b45] sm:text-[30px] lg:text-[36px] dark:text-[#fafafa]">
           {blog.title}
         </h1>
 
         {/* Summary */}
-        <p className="mb-5 max-w-2xl text-[16px] italic leading-7 text-[#6b7280]">
+        <p className="mb-5 max-w-2xl text-[16px] italic leading-7 text-[#6b7280] dark:text-[#a1a1aa]">
           {blog.summary}
         </p>
 
@@ -442,7 +442,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
         {blog.tags.length > 0 && (
           <div className="mb-5 flex flex-wrap gap-2">
             {blog.tags.map((tag) => (
-              <span key={tag} className="rounded-full border border-[#e0e0e0] bg-[#f7f8fc] px-2.5 py-0.5 text-[11px] font-semibold text-[#374151]">
+              <span key={tag} className="rounded-full border border-[#e0e0e0] bg-[#f7f8fc] px-2.5 py-0.5 text-[11px] font-semibold text-[#374151] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                 {tag}
               </span>
             ))}
@@ -450,31 +450,31 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
         )}
 
         {/* Author row */}
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-b border-[#f0f0f0] py-4">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-b border-[#f0f0f0] py-4 dark:border-[#27272b]">
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[13px] font-black text-white">
               {blog.author.firstName[0]}
             </div>
             <div>
-              <span className="block text-[13px] font-bold leading-tight text-[#0a1628]">
+              <span className="block text-[13px] font-bold leading-tight text-[#0a1628] dark:text-[#fafafa]">
                 {blog.author.firstName} {blog.author.lastName}
               </span>
-              <span className="block text-[11px] leading-tight text-[#9ca3af]">
+              <span className="block text-[11px] leading-tight text-[#9ca3af] dark:text-[#71717a]">
                 {blog.author.designation}
               </span>
             </div>
           </div>
 
-          <span className="text-[12px] text-[#6b7280]">{fmt(blog.publishedAt)}</span>
+          <span className="text-[12px] text-[#6b7280] dark:text-[#a1a1aa]">{fmt(blog.publishedAt)}</span>
 
           {blog.updatedAt && blog.updatedAt !== blog.publishedAt && (
-            <span className="hidden text-[12px] text-[#9ca3af] sm:block">
+            <span className="hidden text-[12px] text-[#9ca3af] sm:block dark:text-[#71717a]">
               Updated {fmt(blog.updatedAt)}
             </span>
           )}
 
-          <span className="ml-auto flex items-center gap-1.5 rounded-lg border border-[#e0e0e0] bg-[#f7f8fc] px-2.5 py-1 text-[12px] font-bold text-[#374151]">
-            <svg className="h-3.5 w-3.5 text-[#1677f2]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <span className="ml-auto flex items-center gap-1.5 rounded-lg border border-[#e0e0e0] bg-[#f7f8fc] px-2.5 py-1 text-[12px] font-bold text-[#374151] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
+            <svg className="h-3.5 w-3.5 text-[#1677f2] dark:text-[#4f9dfb]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             {blog.readingTime} min read
@@ -492,7 +492,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
           height={blog.featuredImage.height}
         />
         {blog.featuredImage.caption && (
-          <p className="mt-2 text-center text-[12px] italic text-[#9ca3af]">
+          <p className="mt-2 text-center text-[12px] italic text-[#9ca3af] dark:text-[#71717a]">
             {blog.featuredImage.caption}
           </p>
         )}
@@ -522,8 +522,8 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
 
             {/* FAQ section — only rendered when at least one FAQ has a non-empty question */}
             {blog.faqs && blog.faqs.filter(f => f.question?.trim()).length > 0 && (
-              <section className="mt-10 rounded-sm border border-[#e8e8e8] dark:border-[#223550] bg-[#f7f8fc] dark:bg-[#0d1a2d] p-6 lg:p-8">
-                <h2 className="mb-6 text-[20px] font-black text-[#0a1628] dark:text-[#f7f9fc]">
+              <section className="mt-10 rounded-sm border border-[#e8e8e8] dark:border-[#27272b] bg-[#f7f8fc] dark:bg-[#141417] p-6 lg:p-8">
+                <h2 className="mb-6 text-[20px] font-black text-[#0a1628] dark:text-[#fafafa]">
                   Frequently Asked Questions
                 </h2>
                 <div className="space-y-3">
@@ -533,12 +533,12 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
                     .map((faq, i) => (
                       <details
                         key={i}
-                        className="group overflow-hidden rounded-sm border border-[#e0e0e0] dark:border-[#223550] bg-white dark:bg-[#0d1a2d]"
+                        className="group overflow-hidden rounded-sm border border-[#e0e0e0] dark:border-[#27272b] bg-white dark:bg-[#141417]"
                       >
-                        <summary className="flex cursor-pointer items-start justify-between gap-4 px-5 py-4 text-[14px] font-bold text-[#0a1628] dark:text-[#f7f9fc] transition-colors hover:text-[#1677f2] dark:hover:text-[#60a5fa] [list-style:none] [&::-webkit-details-marker]:hidden">
+                        <summary className="flex cursor-pointer items-start justify-between gap-4 px-5 py-4 text-[14px] font-bold text-[#0a1628] dark:text-[#fafafa] transition-colors hover:text-[#1677f2] dark:hover:text-[#60a5fa] [list-style:none] [&::-webkit-details-marker]:hidden">
                           <span className="flex-1 leading-snug">{faq.question}</span>
                           <svg
-                            className="mt-0.5 h-4 w-4 shrink-0 text-[#1677f2] transition-transform duration-200 group-open:rotate-180"
+                            className="mt-0.5 h-4 w-4 shrink-0 text-[#1677f2] transition-transform duration-200 group-open:rotate-180 dark:text-[#4f9dfb]"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -546,7 +546,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
                           </svg>
                         </summary>
-                        <div className="border-t border-[#f0f0f0] px-5 py-4 text-[13px] leading-6 text-[#374151]">
+                        <div className="border-t border-[#f0f0f0] px-5 py-4 text-[13px] leading-6 text-[#374151] dark:border-[#27272b] dark:text-[#a1a1aa]">
                           {faq.answer}
                         </div>
                       </details>
@@ -556,31 +556,31 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
             )}
 
             {/* Author box */}
-            <div className="mt-10 overflow-hidden rounded-sm border border-[#e8e8e8] dark:border-[#223550] bg-white dark:bg-[#0d1a2d]">
+            <div className="mt-10 overflow-hidden rounded-sm border border-[#e8e8e8] dark:border-[#27272b] bg-white dark:bg-[#141417]">
               <div className="flex flex-col gap-4 p-5 sm:flex-row sm:p-6">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[17px] font-black text-white">
                   {blog.author.firstName[0]}
                 </div>
                 <div className="flex-1">
-                  <p className="text-[10px] font-black uppercase tracking-wider text-[#9ca3af]">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-[#9ca3af] dark:text-[#71717a]">
                     Written by
                   </p>
-                  <p className="mt-0.5 text-[15px] font-black text-[#0a1628] dark:text-[#f7f9fc]">
+                  <p className="mt-0.5 text-[15px] font-black text-[#0a1628] dark:text-[#fafafa]">
                     {blog.author.firstName} {blog.author.lastName}
                   </p>
                   {blog.author.designation && (
-                    <p className="text-[12px] font-semibold text-[#1677f2]">
+                    <p className="text-[12px] font-semibold text-[#1677f2] dark:text-[#4f9dfb]">
                       {blog.author.designation}
                     </p>
                   )}
-                  <p className="mt-2 text-[13px] leading-6 text-[#6b7280]">
+                  <p className="mt-2 text-[13px] leading-6 text-[#6b7280] dark:text-[#a1a1aa]">
                     Estabizz Research Team prepares regulatory and compliance
                     insights covering RBI, SEBI, IRDAI, IFSCA, MCA, FEMA and
                     fintech licensing matters.
                   </p>
-                  <p className="mt-3 text-[12.5px] font-semibold text-[#374151]">
+                  <p className="mt-3 text-[12.5px] font-semibold text-[#374151] dark:text-[#a1a1aa]">
                     Need professional assistance? Contact the Estabizz Team at{" "}
-                    <a href="tel:9825600907" className="font-black text-[#1677f2] hover:text-[#0077B6]">
+                    <a href="tel:9825600907" className="font-black text-[#1677f2] hover:text-[#0077B6] dark:text-[#4f9dfb]">
                       9825600907
                     </a>.
                   </p>
@@ -589,16 +589,16 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
             </div>
 
             {/* Disclaimer */}
-            <div className="mt-8 rounded-sm border border-[#e8e8e8] dark:border-[#223550] bg-[#f7f8fc] dark:bg-[#0d1a2d] p-4 sm:p-5">
+            <div className="mt-8 rounded-sm border border-[#e8e8e8] dark:border-[#27272b] bg-[#f7f8fc] dark:bg-[#141417] p-4 sm:p-5">
               <div className="flex gap-3">
-                <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#9ca3af]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#9ca3af] dark:text-[#71717a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
-                  <p className="mb-0.5 text-[10px] font-black uppercase tracking-wide text-[#9ca3af]">
+                  <p className="mb-0.5 text-[10px] font-black uppercase tracking-wide text-[#9ca3af] dark:text-[#71717a]">
                     Disclaimer
                   </p>
-                  <p className="text-[12px] leading-5 text-[#6b7280]">
+                  <p className="text-[12px] leading-5 text-[#6b7280] dark:text-[#a1a1aa]">
                     {DISCLAIMER}
                   </p>
                 </div>
@@ -606,14 +606,14 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
             </div>
 
             {/* CTA box */}
-            <div className="mt-10 overflow-hidden rounded-sm bg-[#0a1628] p-6 sm:p-8">
+            <div className="mt-10 overflow-hidden rounded-sm bg-[#0a1628] dark:bg-[#1c1c20] p-6 sm:p-8">
               <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#1677f2]/35 bg-[#1677f2]/10 px-3 py-1 text-[11px] font-bold text-[#1677f2]">
                 <span>✦</span> REGULATORY ADVISORY
               </div>
               <h3 className="mb-2 text-[18px] font-black leading-snug text-white sm:text-[20px]">
                 {CTA_TITLE}
               </h3>
-              <p className="mb-6 text-[13px] leading-6 text-[#94a3b8]">
+              <p className="mb-6 text-[13px] leading-6 text-[#94a3b8] dark:text-[#71717a]">
                 {CTA_BODY}
               </p>
               <div className="flex flex-wrap gap-3">
@@ -635,10 +635,10 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
             </div>
 
             {/* Back link */}
-            <div className="mt-8 flex items-center justify-between border-t border-[#f0f0f0] pt-6">
+            <div className="mt-8 flex items-center justify-between border-t border-[#f0f0f0] pt-6 dark:border-[#27272b]">
               <Link
                 href="/blogs"
-                className="inline-flex items-center gap-2 text-[13px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
+                className="inline-flex items-center gap-2 text-[13px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors dark:text-[#4f9dfb]"
               >
                 <svg className="h-3.5 w-3.5 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -663,18 +663,18 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
 
       {/* Related blogs section (below main content) */}
       {relatedBlogs.length > 0 && (
-        <section className="border-t border-[#e8e8e8] dark:border-[#223550] bg-[#f7f8fc] dark:bg-[#0d1a2d] py-12">
+        <section className="border-t border-[#e8e8e8] dark:border-[#27272b] bg-[#f7f8fc] dark:bg-[#141417] py-12">
           <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
             <div className="mb-6 flex items-center justify-between">
               <div>
-                <h2 className="text-[20px] font-black text-[#0a1628]">
+                <h2 className="text-[20px] font-black text-[#0a1628] dark:text-[#fafafa]">
                   More in {blog.category.name}
                 </h2>
                 <div className="mt-1 h-[3px] w-10 rounded-full bg-[#1677f2]" />
               </div>
               <Link
                 href={`/blogs/category/${blog.category.slug}`}
-                className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
+                className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors dark:text-[#4f9dfb]"
               >
                 See all →
               </Link>

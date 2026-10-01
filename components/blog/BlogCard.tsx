@@ -32,7 +32,7 @@ function CoverImage({
   className?: string;
 }) {
   return (
-    <div className={`relative overflow-hidden bg-gradient-to-br from-[#e8f4fd] via-[#eef6ff] to-[#e2eefe] ${className}`}>
+    <div className={`relative overflow-hidden bg-gradient-to-br from-[#e8f4fd] via-[#eef6ff] to-[#e2eefe]  dark:from-[#09090b] dark:via-[#09090b] dark:to-[#09090b] ${className}`}>
       <span className="absolute inset-0 flex items-center justify-center text-5xl opacity-[0.12] select-none pointer-events-none">
         {icon}
       </span>
@@ -81,7 +81,7 @@ function CategoryBadge({
 export function CardHero({ blog }: { blog: BlogSummary }) {
   return (
     <Link href={`/blogs/${blog.slug}`} className="group block h-full">
-      <article className="relative h-full min-h-[420px] overflow-hidden rounded-none bg-[#0a1628]">
+      <article className="relative h-full min-h-[420px] overflow-hidden rounded-none bg-[#0a1628] dark:bg-[#1c1c20]">
         {/* Full-bleed image */}
         <CoverImage
           src={blog.featuredImage.url}
@@ -105,7 +105,7 @@ export function CardHero({ blog }: { blog: BlogSummary }) {
 
         {/* Content overlay — bottom */}
         <div className="absolute bottom-0 left-0 right-0 z-10 p-5 md:p-7">
-          <h2 className="mb-2 text-[22px] font-black leading-tight text-white md:text-[26px] line-clamp-3 group-hover:text-[#1677f2] transition-colors duration-200">
+          <h2 className="mb-2 text-[22px] font-black leading-tight text-white md:text-[26px] line-clamp-3 group-hover:text-[#1677f2] transition-colors duration-200 dark:text-[#4f9dfb]">
             {blog.title}
           </h2>
           <div className="flex items-center gap-3 text-[12px] text-white/70">
@@ -123,7 +123,7 @@ export function CardHero({ blog }: { blog: BlogSummary }) {
 
 export function CardFeaturedSide({ blog }: { blog: BlogSummary }) {
   return (
-    <Link href={`/blogs/${blog.slug}`} className="group flex gap-3 py-3 border-b border-[#f0f0f0] last:border-b-0">
+    <Link href={`/blogs/${blog.slug}`} className="group flex gap-3 py-3 border-b border-[#f0f0f0] last:border-b-0 dark:border-[#27272b]">
       {/* Image left */}
       <div className="relative h-[80px] w-[110px] shrink-0 overflow-hidden rounded">
         <CoverImage
@@ -142,7 +142,7 @@ export function CardFeaturedSide({ blog }: { blog: BlogSummary }) {
             {blog.title}
           </h3>
         </div>
-        <span className="text-[11px] text-[#6b7280]">{formatDate(blog.publishedAt)}</span>
+        <span className="text-[11px] text-[#6b7280] dark:text-[#a1a1aa]">{formatDate(blog.publishedAt)}</span>
       </div>
     </Link>
   );
@@ -152,7 +152,7 @@ export function CardFeaturedSide({ blog }: { blog: BlogSummary }) {
 
 export function CardStandard({ blog }: { blog: BlogSummary }) {
   return (
-    <Link href={`/blogs/${blog.slug}`} className="group flex flex-col overflow-hidden bg-white border border-[#e8e8e8] hover:border-[#d0d0d0] transition-all duration-200">
+    <Link href={`/blogs/${blog.slug}`} className="group flex flex-col overflow-hidden bg-white border border-[#e8e8e8] hover:border-[#d0d0d0] transition-all duration-200 dark:bg-[#141417] dark:border-[#27272b]">
       {/* Image top — 16:9 */}
       <div className="relative aspect-video w-full shrink-0 overflow-hidden">
         <CoverImage
@@ -171,22 +171,22 @@ export function CardStandard({ blog }: { blog: BlogSummary }) {
         </div>
 
         {/* Title */}
-        <h3 className="mb-2 text-[16px] font-bold leading-snug text-[#111827] line-clamp-3 group-hover:text-[#1677f2] transition-colors duration-150">
+        <h3 className="mb-2 text-[16px] font-bold leading-snug text-[#111827] line-clamp-3 group-hover:text-[#1677f2] transition-colors duration-150 dark:text-[#fafafa]">
           {blog.title}
         </h3>
 
         {/* Summary */}
-        <p className="mb-4 flex-1 text-[13px] leading-[1.65] text-[#6b7280] line-clamp-2">
+        <p className="mb-4 flex-1 text-[13px] leading-[1.65] text-[#6b7280] line-clamp-2 dark:text-[#a1a1aa]">
           {blog.summary}
         </p>
 
         {/* Footer */}
-        <div className="flex items-center justify-between text-[11px] text-[#9ca3af] pt-3 border-t border-[#f3f4f6]">
+        <div className="flex items-center justify-between text-[11px] text-[#9ca3af] pt-3 border-t border-[#f3f4f6] dark:border-[#27272b] dark:text-[#71717a]">
           <div className="flex items-center gap-2">
             <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[9px] font-black text-white">
               {blog.author.firstName[0]}
             </div>
-            <span className="font-medium text-[#374151]">{authorDisplay(blog)}</span>
+            <span className="font-medium text-[#374151] dark:text-[#a1a1aa]">{authorDisplay(blog)}</span>
           </div>
           <div className="flex items-center gap-2">
             <span>{formatDate(blog.publishedAt)}</span>
@@ -205,7 +205,7 @@ export function CardList({ blog }: { blog: BlogSummary }) {
   return (
     <Link
       href={`/blogs/${blog.slug}`}
-      className="group flex items-start gap-4 py-4 border-b border-[#f0f0f0] last:border-b-0"
+      className="group flex items-start gap-4 py-4 border-b border-[#f0f0f0] last:border-b-0 dark:border-[#27272b]"
     >
       {/* Text left */}
       <div className="flex-1 min-w-0">
@@ -213,7 +213,7 @@ export function CardList({ blog }: { blog: BlogSummary }) {
         <h3 className="mt-1 text-[15px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150">
           {blog.title}
         </h3>
-        <span className="mt-1 block text-[11px] text-[#9ca3af]">{formatDate(blog.publishedAt)}</span>
+        <span className="mt-1 block text-[11px] text-[#9ca3af] dark:text-[#71717a]">{formatDate(blog.publishedAt)}</span>
       </div>
 
       {/* Image right */}
@@ -235,7 +235,7 @@ export function CardMini({ blog }: { blog: BlogSummary }) {
   return (
     <Link
       href={`/blogs/${blog.slug}`}
-      className="group flex items-start gap-3 py-2.5 border-b border-[#f0f0f0] last:border-b-0"
+      className="group flex items-start gap-3 py-2.5 border-b border-[#f0f0f0] last:border-b-0 dark:border-[#27272b]"
       style={{ borderLeftColor: blog.category.color }}
     >
       <span
@@ -246,7 +246,7 @@ export function CardMini({ blog }: { blog: BlogSummary }) {
         <h4 className="text-[13px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150">
           {blog.title}
         </h4>
-        <span className="mt-0.5 block text-[11px] text-[#9ca3af]">{formatDate(blog.publishedAt)}</span>
+        <span className="mt-0.5 block text-[11px] text-[#9ca3af] dark:text-[#71717a]">{formatDate(blog.publishedAt)}</span>
       </div>
     </Link>
   );
@@ -264,7 +264,7 @@ export function CardHorizontal({
   return (
     <Link
       href={`/blogs/${blog.slug}`}
-      className="group flex flex-col overflow-hidden border border-[#e8e8e8] bg-white transition-all duration-200 hover:border-[#d0d0d0] hover:shadow-[0_8px_30px_rgba(10,22,40,0.08)] sm:flex-row"
+      className="group flex flex-col overflow-hidden border border-[#e8e8e8] bg-white transition-all duration-200 hover:border-[#d0d0d0] hover:shadow-[0_8px_30px_rgba(10,22,40,0.08)] sm:flex-row dark:bg-[#141417] dark:border-[#27272b]"
     >
       {/* Image left — 42% on desktop */}
       <div className="relative aspect-video w-full shrink-0 overflow-hidden sm:aspect-auto sm:w-[42%]">
@@ -276,7 +276,7 @@ export function CardHorizontal({
         />
         {/* Editorial label badge */}
         <div className="absolute left-3 top-3">
-          <span className="inline-flex items-center gap-1 rounded-sm bg-[#0a1628] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#1677f2]">
+          <span className="inline-flex items-center gap-1 rounded-sm bg-[#0a1628] dark:bg-[#1c1c20] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#1677f2]">
             {label}
           </span>
         </div>
@@ -285,17 +285,17 @@ export function CardHorizontal({
       {/* Content right */}
       <div className="flex flex-1 flex-col justify-center p-5 sm:p-7">
         <CategoryBadge name={blog.category.name} color={blog.category.color} />
-        <h3 className="mb-2.5 mt-1.5 text-[18px] font-black leading-snug text-[#0a1628] line-clamp-3 group-hover:text-[#1677f2] transition-colors duration-150 sm:text-[21px]">
+        <h3 className="mb-2.5 mt-1.5 text-[18px] font-black leading-snug text-[#0a1628] line-clamp-3 group-hover:text-[#1677f2] transition-colors duration-150 sm:text-[21px] dark:text-[#fafafa]">
           {blog.title}
         </h3>
-        <p className="mb-4 text-[13.5px] leading-[1.7] text-[#6b7280] line-clamp-3">
+        <p className="mb-4 text-[13.5px] leading-[1.7] text-[#6b7280] line-clamp-3 dark:text-[#a1a1aa]">
           {blog.summary}
         </p>
-        <div className="flex items-center gap-2.5 text-[11.5px] text-[#9ca3af]">
+        <div className="flex items-center gap-2.5 text-[11.5px] text-[#9ca3af] dark:text-[#71717a]">
           <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[9px] font-black text-white">
             {blog.author.firstName[0]}
           </div>
-          <span className="font-medium text-[#374151]">{authorDisplay(blog)}</span>
+          <span className="font-medium text-[#374151] dark:text-[#a1a1aa]">{authorDisplay(blog)}</span>
           <span className="opacity-40">·</span>
           <span>{formatDate(blog.publishedAt)}</span>
           <span className="opacity-40">·</span>
@@ -312,7 +312,7 @@ export function CardPopularRank({ blog, rank }: { blog: BlogSummary; rank: numbe
   return (
     <Link
       href={`/blogs/${blog.slug}`}
-      className="group flex items-start gap-4 border-b border-[#f0f0f0] py-3.5 last:border-b-0"
+      className="group flex items-start gap-4 border-b border-[#f0f0f0] py-3.5 last:border-b-0 dark:border-[#27272b]"
     >
       {/* Rank number */}
       <span className="shrink-0 text-[26px] font-black leading-none text-[#e2e8f0] transition-colors duration-150 group-hover:text-[#1677f2]">
@@ -323,7 +323,7 @@ export function CardPopularRank({ blog, rank }: { blog: BlogSummary; rank: numbe
         <h4 className="mt-0.5 text-[13.5px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150">
           {blog.title}
         </h4>
-        <span className="mt-1 block text-[11px] text-[#9ca3af]">{blog.readingTime} min read</span>
+        <span className="mt-1 block text-[11px] text-[#9ca3af] dark:text-[#71717a]">{blog.readingTime} min read</span>
       </div>
     </Link>
   );

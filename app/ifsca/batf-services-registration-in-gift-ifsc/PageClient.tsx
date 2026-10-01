@@ -85,9 +85,9 @@ function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; column
   return (
     <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>
       {cards.map((card) => (
-        <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)]">
-          <h3 className="!p-0 !mb-2 !text-[#0a1628]">{card.title}</h3>
-          <div className="text-[14px] leading-7 text-gray-600">{card.body}</div>
+        <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)] dark:bg-[#141417]">
+          <h3 className="!p-0 !mb-2 !text-[#0a1628] dark:text-[#fafafa]">{card.title}</h3>
+          <div className="text-[14px] leading-7 text-gray-600 dark:text-[#a1a1aa]">{card.body}</div>
         </div>
       ))}
     </div>
@@ -96,7 +96,7 @@ function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; column
 
 function FormulaCard({ children }: { children: ReactNode }) {
   return (
-    <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#f0f9ff] to-white p-5 text-center text-[15px] font-bold leading-8 text-[#0a1628] shadow-sm">
+    <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#f0f9ff] to-white p-5 text-center text-[15px] font-bold leading-8 text-[#0a1628] shadow-sm dark:border-[#27272b] dark:from-[#09090b] dark:text-[#fafafa]">
       {children}
     </div>
   );
@@ -158,8 +158,8 @@ export default function BatfRegistrationPage() {
       }
       heroActions={
         <>
-          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for BATF Registration</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check BATF Eligibility</Link>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for BATF Registration</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Check BATF Eligibility</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm text-center">WhatsApp Estabizz Team</a>
         </>
       }
@@ -474,7 +474,7 @@ export default function BatfRegistrationPage() {
       <Section id="speak-to-expert" title="Start Your BATF Services Registration Journey with Estabizz">
         <p>Build your BATF Services setup in GIFT IFSC with structured regulatory support, service scope assessment, IFSC entity structuring, safeguarding review, Principal Officer and Compliance Officer documentation, business plan, application filing and post-registration compliance assistance.</p>
         <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-6">
-          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors text-center">Speak to IFSCA Compliance Expert</Link>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors text-center">Speak to IFSCA Compliance Expert</Link>
           <Link href="/get-started" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-xl hover:bg-[#0077B6] transition-colors text-center">Apply for BATF Services Registration</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors text-center">WhatsApp Estabizz Team</a>
         </div>

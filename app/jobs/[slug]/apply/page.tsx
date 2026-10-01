@@ -48,13 +48,13 @@ export default async function ApplyPage({ params }: Props) {
 
   if (existing) {
     return (
-      <div className="min-h-screen bg-[#f8fbff] pt-[64px]">
+      <div className="min-h-screen bg-[#f8fbff] pt-[64px] dark:bg-[#141417]">
         <div className="mx-auto max-w-2xl px-4 py-20 text-center">
-          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-3xl">
+          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-3xl dark:bg-[#132a20]">
             ✓
           </div>
-          <h1 className="text-[28px] font-black text-[#0a1628]">Already Applied</h1>
-          <p className="mt-3 text-[15px] text-[#64748b]">
+          <h1 className="text-[28px] font-black text-[#0a1628] dark:text-[#fafafa]">Already Applied</h1>
+          <p className="mt-3 text-[15px] text-[#64748b] dark:text-[#a1a1aa]">
             You applied for <strong>{job.title}</strong> on{" "}
             {new Date(existing.createdAt).toLocaleDateString("en-IN", {
               day: "numeric",
@@ -62,7 +62,7 @@ export default async function ApplyPage({ params }: Props) {
               year: "numeric",
             })}
             . Current status:{" "}
-            <span className="font-bold text-[#1677f2]">{existing.stageName}</span>.
+            <span className="font-bold text-[#1677f2] dark:text-[#4f9dfb]">{existing.stageName}</span>.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
@@ -73,7 +73,7 @@ export default async function ApplyPage({ params }: Props) {
             </Link>
             <Link
               href="/jobs"
-              className="rounded-xl border border-[#dbe7f3] bg-white px-6 py-3 text-[14px] font-bold text-[#334155] hover:border-[#1677f2]/40 transition-colors"
+              className="rounded-xl border border-[#dbe7f3] bg-white px-6 py-3 text-[14px] font-bold text-[#334155] hover:border-[#1677f2]/40 transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
             >
               Browse All Jobs
             </Link>
@@ -84,13 +84,13 @@ export default async function ApplyPage({ params }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8fbff] pt-[64px]">
+    <div className="min-h-screen bg-[#f8fbff] pt-[64px] dark:bg-[#141417]">
       {/* Header */}
-      <div className="bg-[#0a1628] px-6 py-12">
+      <div className="bg-[#0a1628] dark:bg-[#1c1c20] px-6 py-12">
         <div className="mx-auto max-w-2xl">
           <Link
             href={`/jobs/${slug}`}
-            className="mb-4 inline-flex items-center gap-1.5 text-[12px] font-bold text-[#94a3b8] hover:text-white transition-colors"
+            className="mb-4 inline-flex items-center gap-1.5 text-[12px] font-bold text-[#94a3b8] hover:text-white transition-colors dark:text-[#71717a]"
           >
             ← Back to job
           </Link>
@@ -103,7 +103,7 @@ export default async function ApplyPage({ params }: Props) {
             Apply — {job.title}
           </h1>
           {job.location_text && (
-            <p className="mt-2 text-[13px] text-[#94a3b8]">📍 {job.location_text}</p>
+            <p className="mt-2 text-[13px] text-[#94a3b8] dark:text-[#71717a]">📍 {job.location_text}</p>
           )}
         </div>
       </div>
@@ -111,15 +111,15 @@ export default async function ApplyPage({ params }: Props) {
       {/* Form */}
       <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6">
         {/* Candidate summary */}
-        <div className="mb-6 rounded-2xl border border-[#dbe7f3] bg-white p-5">
-          <h2 className="mb-1 text-[12px] font-black uppercase tracking-widest text-[#64748b]">
+        <div className="mb-6 rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+          <h2 className="mb-1 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">
             Applying as
           </h2>
-          <p className="text-[16px] font-black text-[#0a1628]">{session.displayName}</p>
-          <p className="text-[13px] text-[#64748b]">{session.email}</p>
+          <p className="text-[16px] font-black text-[#0a1628] dark:text-[#fafafa]">{session.displayName}</p>
+          <p className="text-[13px] text-[#64748b] dark:text-[#a1a1aa]">{session.email}</p>
           <Link
             href="/jobs/account/profile"
-            className="mt-2 inline-block text-[12px] font-bold text-[#1677f2] hover:underline"
+            className="mt-2 inline-block text-[12px] font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]"
           >
             Edit profile →
           </Link>

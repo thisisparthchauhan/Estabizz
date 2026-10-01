@@ -76,20 +76,20 @@ export default function AdminApplicationDetailClient({ application, notes, tasks
       {/* Breadcrumb */}
       <Link
         href="/admin/jobs/applications"
-        className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#64748b] hover:text-[#1677f2] transition-colors"
+        className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#64748b] hover:text-[#1677f2] transition-colors dark:text-[#a1a1aa]"
       >
         ← All Applications
       </Link>
 
       {/* Header */}
       <div>
-        <h1 className="text-[24px] font-black text-[#0a1628]">{application.candidateName}</h1>
-        <p className="mt-1 text-[13px] text-[#64748b]">
+        <h1 className="text-[24px] font-black text-[#0a1628] dark:text-[#fafafa]">{application.candidateName}</h1>
+        <p className="mt-1 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">
           Applied for{" "}
           <Link
             href={`/jobs/${application.jobSlug}`}
             target="_blank"
-            className="font-bold text-[#1677f2] hover:underline"
+            className="font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]"
           >
             {application.jobTitle}
           </Link>{" "}
@@ -101,58 +101,58 @@ export default function AdminApplicationDetailClient({ application, notes, tasks
         {/* Main column */}
         <div className="space-y-5 lg:col-span-2">
           {/* Candidate info */}
-          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-            <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b]">
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+            <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">
               Candidate
             </h2>
             <dl className="space-y-2 text-[13.5px]">
               <div className="flex justify-between">
-                <dt className="font-bold text-[#0a1628]">Name</dt>
-                <dd className="text-[#64748b]">{application.candidateName}</dd>
+                <dt className="font-bold text-[#0a1628] dark:text-[#fafafa]">Name</dt>
+                <dd className="text-[#64748b] dark:text-[#a1a1aa]">{application.candidateName}</dd>
               </div>
               {application.candidateEmail && (
                 <div className="flex justify-between">
-                  <dt className="font-bold text-[#0a1628]">Email</dt>
-                  <dd className="text-[#64748b]">{application.candidateEmail}</dd>
+                  <dt className="font-bold text-[#0a1628] dark:text-[#fafafa]">Email</dt>
+                  <dd className="text-[#64748b] dark:text-[#a1a1aa]">{application.candidateEmail}</dd>
                 </div>
               )}
               <div className="flex justify-between">
-                <dt className="font-bold text-[#0a1628]">Source</dt>
-                <dd className="text-[#64748b]">{SOURCE_LABELS[application.source] ?? application.source}</dd>
+                <dt className="font-bold text-[#0a1628] dark:text-[#fafafa]">Source</dt>
+                <dd className="text-[#64748b] dark:text-[#a1a1aa]">{SOURCE_LABELS[application.source] ?? application.source}</dd>
               </div>
             </dl>
           </div>
 
           {/* Cover note */}
           {application.coverNote && (
-            <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-              <h2 className="mb-3 text-[12px] font-black uppercase tracking-widest text-[#64748b]">
+            <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+              <h2 className="mb-3 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">
                 Cover Note
               </h2>
-              <p className="text-[13.5px] leading-7 text-[#334155] whitespace-pre-line">
+              <p className="text-[13.5px] leading-7 text-[#334155] whitespace-pre-line dark:text-[#a1a1aa]">
                 {application.coverNote}
               </p>
             </div>
           )}
 
           {/* Stage history */}
-          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-            <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b]">
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+            <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">
               Stage History
             </h2>
             {application.stageHistory.length === 0 ? (
-              <p className="text-[13px] text-[#94a3b8]">No history recorded.</p>
+              <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No history recorded.</p>
             ) : (
               <ol className="space-y-3">
                 {application.stageHistory.map((h) => (
                   <li key={h.id} className="flex gap-3 text-[13px]">
                     <span className="mt-0.5 h-2 w-2 flex-shrink-0 rounded-full bg-[#1677f2] mt-1.5" />
                     <div>
-                      <p className="font-bold text-[#0a1628]">
+                      <p className="font-bold text-[#0a1628] dark:text-[#fafafa]">
                         {h.previousStageName ? `${h.previousStageName} → ` : "Initial: "}
                         {h.newStageName}
                       </p>
-                      <p className="text-[#64748b]">
+                      <p className="text-[#64748b] dark:text-[#a1a1aa]">
                         {fmt(h.changedAt)} · {h.changedByName}
                       </p>
                     </div>
@@ -163,17 +163,17 @@ export default function AdminApplicationDetailClient({ application, notes, tasks
           </div>
 
           {/* Interviews */}
-          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
             <InterviewPanel applicationId={application.id} initialInterviews={interviews} />
           </div>
 
           {/* Notes */}
-          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
             <NotesPanel entityType="application" entityId={application.id} initialNotes={notes} />
           </div>
 
           {/* Tasks */}
-          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
             <TasksPanel entityType="application" entityId={application.id} initialTasks={tasks} />
           </div>
         </div>
@@ -181,8 +181,8 @@ export default function AdminApplicationDetailClient({ application, notes, tasks
         {/* Sidebar */}
         <div className="space-y-5">
           {/* Current stage + update */}
-          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-            <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b]">
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+            <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">
               Stage
             </h2>
             <div className="mb-3">
@@ -193,11 +193,11 @@ export default function AdminApplicationDetailClient({ application, notes, tasks
                 {application.currentStageName}
               </span>
             </div>
-            <label className="mb-1 block text-[12px] font-bold text-[#0a1628]">
+            <label className="mb-1 block text-[12px] font-bold text-[#0a1628] dark:text-[#fafafa]">
               Move to
             </label>
             <select
-              className="w-full rounded-xl border border-[#dbe7f3] px-3 py-2.5 text-[13.5px] text-[#334155] focus:border-[#1677f2] focus:outline-none"
+              className="w-full rounded-xl border border-[#dbe7f3] px-3 py-2.5 text-[13.5px] text-[#334155] focus:border-[#1677f2] focus:outline-none dark:border-[#27272b] dark:text-[#a1a1aa]"
               value={selectedStageId}
               onChange={(e) => {
                 setSelectedStageId(e.target.value);
@@ -212,10 +212,10 @@ export default function AdminApplicationDetailClient({ application, notes, tasks
             </select>
 
             {saveError && (
-              <p className="mt-2 text-[12px] font-bold text-red-600">{saveError}</p>
+              <p className="mt-2 text-[12px] font-bold text-red-600 dark:text-[#fca5a5]">{saveError}</p>
             )}
             {saveSuccess && (
-              <p className="mt-2 text-[12px] font-bold text-emerald-600">Stage updated.</p>
+              <p className="mt-2 text-[12px] font-bold text-emerald-600 dark:text-[#6ee7b7]">Stage updated.</p>
             )}
 
             <button
@@ -229,18 +229,18 @@ export default function AdminApplicationDetailClient({ application, notes, tasks
           </div>
 
           {/* Job info */}
-          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-            <h2 className="mb-3 text-[12px] font-black uppercase tracking-widest text-[#64748b]">
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+            <h2 className="mb-3 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">
               Job
             </h2>
             <Link
               href={`/jobs/${application.jobSlug}`}
               target="_blank"
-              className="font-bold text-[#1677f2] hover:underline text-[13.5px]"
+              className="font-bold text-[#1677f2] hover:underline text-[13.5px] dark:text-[#4f9dfb]"
             >
               {application.jobTitle} ↗
             </Link>
-            <p className="mt-2 text-[12px] text-[#94a3b8]">Last updated {fmt(application.updatedAt)}</p>
+            <p className="mt-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]">Last updated {fmt(application.updatedAt)}</p>
           </div>
         </div>
       </div>

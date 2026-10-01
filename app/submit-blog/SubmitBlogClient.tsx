@@ -101,10 +101,10 @@ function readingTime(text: string): number {
 // ─── Small UI primitives ──────────────────────────────────────────────────────
 
 const inputCls =
-  'w-full rounded-xl border border-[#dbe7f3] bg-white px-4 py-3 text-[14px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none transition-all focus:border-[#1677f2] focus:ring-3 focus:ring-[#1677f2]/10';
+  'w-full rounded-xl border border-[#dbe7f3] bg-white px-4 py-3 text-[14px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none transition-all focus:border-[#1677f2] focus:ring-3 focus:ring-[#1677f2]/10 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]';
 
 const errorInputCls =
-  'w-full rounded-xl border border-red-300 bg-red-50/40 px-4 py-3 text-[14px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none transition-all focus:border-red-400 focus:ring-3 focus:ring-red-200/30';
+  'w-full rounded-xl border border-red-300 bg-red-50/40 px-4 py-3 text-[14px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none transition-all focus:border-red-400 focus:ring-3 focus:ring-red-200/30 dark:text-[#fafafa] dark:bg-[#2a1618] dark:border-[#4a2225]';
 
 function FieldGroup({
   label,
@@ -127,12 +127,12 @@ function FieldGroup({
   return (
     <div className="mb-5 last:mb-0">
       <div className="flex items-center justify-between mb-1.5">
-        <label className="text-[13px] font-semibold text-[#1e293b]">
+        <label className="text-[13px] font-semibold text-[#1e293b] dark:text-[#fafafa]">
           {label}
           {required && <span className="ml-0.5 text-red-500">*</span>}
         </label>
         {counter && (
-          <span className={`text-[11.5px] font-mono tabular-nums ${overMax ? 'text-red-500' : nearMax ? 'text-amber-500' : 'text-[#94a3b8]'}`}>
+          <span className={`text-[11.5px] font-mono tabular-nums ${overMax ? 'text-red-500' : nearMax ? 'text-amber-500' : 'text-[#94a3b8] dark:text-[#71717a]'}`}>
             {counter.current}/{counter.max}
           </span>
         )}
@@ -144,7 +144,7 @@ function FieldGroup({
         </p>
       )}
       {hint && !error && (
-        <p className="mt-1 text-[11.5px] text-[#94a3b8] leading-relaxed">{hint}</p>
+        <p className="mt-1 text-[11.5px] text-[#94a3b8] leading-relaxed dark:text-[#71717a]">{hint}</p>
       )}
     </div>
   );
@@ -166,14 +166,14 @@ function FormSection({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-white rounded-2xl border border-[#e2eaf2] shadow-[0_2px_12px_rgba(10,22,40,0.06)]">
-      <div className="flex items-start gap-3.5 px-6 py-4 border-b border-[#f0f6ff] bg-[#fafcff]">
+    <div className="bg-white rounded-2xl border border-[#e2eaf2] shadow-[0_2px_12px_rgba(10,22,40,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+      <div className="flex items-start gap-3.5 px-6 py-4 border-b border-[#f0f6ff] bg-[#fafcff] dark:bg-[#141417] dark:border-[#27272b]">
         <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center text-white font-black text-[13px] shrink-0 mt-0.5">
           {step}
         </div>
         <div>
-          <h3 className="text-[14.5px] font-black text-[#0a1628]">{title}</h3>
-          {subtitle && <p className="text-[12px] text-[#64748b] mt-0.5">{subtitle}</p>}
+          <h3 className="text-[14.5px] font-black text-[#0a1628] dark:text-[#fafafa]">{title}</h3>
+          {subtitle && <p className="text-[12px] text-[#64748b] mt-0.5 dark:text-[#a1a1aa]">{subtitle}</p>}
         </div>
         <span className="ml-auto text-[22px] shrink-0 opacity-60">{icon}</span>
       </div>
@@ -220,7 +220,7 @@ function SupportingImages({
             <button
               type="button"
               onClick={() => remove(i)}
-              className="shrink-0 px-3 rounded-xl border border-[#dbe7f3] text-[#94a3b8] hover:border-red-300 hover:text-red-500 hover:bg-red-50 transition-colors text-[13px]"
+              className="shrink-0 px-3 rounded-xl border border-[#dbe7f3] text-[#94a3b8] hover:border-red-300 hover:text-red-500 hover:bg-red-50 transition-colors text-[13px] dark:border-[#27272b] dark:text-[#71717a] dark:bg-[#2a1618]"
               aria-label="Remove image"
             >✕</button>
           )}
@@ -231,7 +231,7 @@ function SupportingImages({
         <button
           type="button"
           onClick={add}
-          className="flex items-center gap-2 text-[13px] font-semibold text-[#1677f2] hover:text-[#0077B6] transition-colors"
+          className="flex items-center gap-2 text-[13px] font-semibold text-[#1677f2] hover:text-[#0077B6] transition-colors dark:text-[#4f9dfb]"
         >
           <span className="text-lg leading-none">+</span> Add another image URL
         </button>
@@ -243,7 +243,7 @@ function SupportingImages({
         Upload each file to /api/upload → Cloudinary / S3 / /public/images/blog/
         Ref: see app/api/upload/route.ts (to be created)
       */}
-      <p className="text-[11px] text-[#94a3b8] italic">
+      <p className="text-[11px] text-[#94a3b8] italic dark:text-[#71717a]">
         File upload coming soon. Please provide publicly accessible image URLs for now.
       </p>
     </div>
@@ -254,7 +254,7 @@ function SupportingImages({
 
 function SuccessScreen({ title }: { title: string }) {
   return (
-    <div className="min-h-[calc(100vh-64px)] bg-[#f8fbff] flex items-center justify-center px-4 py-16">
+    <div className="min-h-[calc(100vh-64px)] bg-[#f8fbff] flex items-center justify-center px-4 py-16 dark:bg-[#141417]">
       <div className="max-w-[580px] w-full text-center">
         {/* Check icon */}
         <div className="mx-auto mb-6 w-20 h-20 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center shadow-[0_16px_48px_rgba(0,150,214,0.25)]">
@@ -263,19 +263,19 @@ function SuccessScreen({ title }: { title: string }) {
           </svg>
         </div>
 
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 text-[12px] font-black uppercase tracking-[0.14em] mb-5">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 text-[12px] font-black uppercase tracking-[0.14em] mb-5 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]">
           Submission Received
         </div>
 
-        <h1 className="text-[28px] font-black text-[#0a1628] leading-tight mb-4">
+        <h1 className="text-[28px] font-black text-[#0a1628] leading-tight mb-4 dark:text-[#fafafa]">
           Thank you for your submission.
         </h1>
 
-        <div className="bg-white rounded-2xl border border-[#e2eaf2] shadow-[0_4px_20px_rgba(10,22,40,0.07)] p-6 mb-8 text-left">
-          <p className="text-[14.5px] text-[#334155] leading-relaxed mb-4">
-            Your article <strong className="text-[#0a1628]">&ldquo;{title}&rdquo;</strong> has been submitted for editorial review.
+        <div className="bg-white rounded-2xl border border-[#e2eaf2] shadow-[0_4px_20px_rgba(10,22,40,0.07)] p-6 mb-8 text-left dark:bg-[#141417] dark:border-[#27272b]">
+          <p className="text-[14.5px] text-[#334155] leading-relaxed mb-4 dark:text-[#a1a1aa]">
+            Your article <strong className="text-[#0a1628] dark:text-[#fafafa]">&ldquo;{title}&rdquo;</strong> has been submitted for editorial review.
           </p>
-          <p className="text-[14px] text-[#475569] leading-relaxed">
+          <p className="text-[14px] text-[#475569] leading-relaxed dark:text-[#a1a1aa]">
             Thank you. Your article has been submitted for editorial review. Our team will review the content and publish it after approval, if found suitable.
           </p>
         </div>
@@ -287,12 +287,12 @@ function SuccessScreen({ title }: { title: string }) {
             { step: '2', label: 'Under Review', sub: 'Editorial review in progress',  color: 'bg-amber-400', done: false },
             { step: '3', label: 'Decision',     sub: 'Publish or feedback from team', color: 'bg-[#10b981]', done: false },
           ].map((s) => (
-            <div key={s.step} className={`rounded-xl border p-3.5 text-center ${s.done ? 'border-[#1677f2]/30 bg-[#f0faff]' : 'border-[#e2eaf2] bg-white'}`}>
-              <div className={`mx-auto mb-2 w-7 h-7 rounded-full ${s.done ? s.color : 'bg-[#e2eaf2]'} flex items-center justify-center text-[11px] font-black ${s.done ? 'text-white' : 'text-[#94a3b8]'}`}>
+            <div key={s.step} className={`rounded-xl border p-3.5 text-center ${s.done ? 'border-[#1677f2]/30 bg-[#f0faff] dark:bg-[#141417]' : 'border-[#e2eaf2] bg-white dark:bg-[#141417] dark:border-[#27272b]'}`}>
+              <div className={`mx-auto mb-2 w-7 h-7 rounded-full ${s.done ? s.color : 'bg-[#e2eaf2] dark:bg-[#1c1c20]'} flex items-center justify-center text-[11px] font-black ${s.done ? 'text-white' : 'text-[#94a3b8] dark:text-[#71717a]'}`}>
                 {s.done ? '✓' : s.step}
               </div>
-              <div className="text-[12px] font-bold text-[#0a1628]">{s.label}</div>
-              <div className="text-[11px] text-[#94a3b8] mt-0.5">{s.sub}</div>
+              <div className="text-[12px] font-bold text-[#0a1628] dark:text-[#fafafa]">{s.label}</div>
+              <div className="text-[11px] text-[#94a3b8] mt-0.5 dark:text-[#71717a]">{s.sub}</div>
             </div>
           ))}
         </div>
@@ -300,13 +300,13 @@ function SuccessScreen({ title }: { title: string }) {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             href="/blogs"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#0a1628] text-white text-[14px] font-bold hover:bg-[#1a2638] transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#0a1628] dark:bg-[#1c1c20] text-white text-[14px] font-bold hover:bg-[#1a2638] transition-colors"
           >
             Browse Regulatory Insights →
           </Link>
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[#dbe7f3] bg-white text-[14px] font-semibold text-[#334155] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[#dbe7f3] bg-white text-[14px] font-semibold text-[#334155] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
           >
             Back to Home
           </Link>
@@ -390,7 +390,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
 
   // ── Form ───────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#f8fbff]">
+    <div className="min-h-screen bg-[#f8fbff] dark:bg-[#141417]">
 
       {/* ── Hero ────────────────────────────────────────────────────────── */}
       <div className="pt-[64px]">
@@ -423,7 +423,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
                 { n: '2', label: 'Editorial Review', sub: 'Reviewed within 5–7 working days', icon: '🔍' },
                 { n: '3', label: 'Publication',      sub: 'Published on approval',             icon: '🚀' },
               ].map((s) => (
-                <div key={s.n} className="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-sm text-left">
+                <div key={s.n} className="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-sm text-left dark:bg-[#141417]">
                   <div className="w-9 h-9 rounded-xl bg-[#1677f2]/25 border border-[#1677f2]/40 flex items-center justify-center text-[16px] shrink-0">
                     {s.icon}
                   </div>
@@ -439,7 +439,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
       </div>
 
       {/* ── Guidelines bar ──────────────────────────────────────────────── */}
-      <div className="bg-white border-b border-[#e2eaf2] shadow-[0_1px_4px_rgba(10,22,40,0.05)]">
+      <div className="bg-white border-b border-[#e2eaf2] shadow-[0_1px_4px_rgba(10,22,40,0.05)] dark:bg-[#141417] dark:border-[#27272b]">
         <div className="mx-auto max-w-[1100px] px-6 py-3 flex flex-wrap items-center justify-center gap-x-8 gap-y-1.5">
           {[
             { icon: '✓', text: 'Original, unpublished content only' },
@@ -447,7 +447,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
             { icon: '✓', text: 'Finance, compliance or regulatory focus' },
             { icon: '✓', text: 'No promotional or sales content' },
           ].map((g) => (
-            <span key={g.text} className="flex items-center gap-1.5 text-[12.5px] font-medium text-[#475569]">
+            <span key={g.text} className="flex items-center gap-1.5 text-[12.5px] font-medium text-[#475569] dark:text-[#a1a1aa]">
               <span className="text-emerald-500 font-bold">{g.icon}</span> {g.text}
             </span>
           ))}
@@ -459,9 +459,9 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
 
         {/* Server error banner */}
         {serverError && (
-          <div className="mb-6 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 px-5 py-4">
+          <div className="mb-6 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 dark:bg-[#2a1618] dark:border-[#4a2225]">
             <span className="text-red-500 text-lg shrink-0">⚠</span>
-            <p className="text-[13.5px] font-semibold text-red-700">{serverError}</p>
+            <p className="text-[13.5px] font-semibold text-red-700 dark:text-[#fca5a5]">{serverError}</p>
           </div>
         )}
 
@@ -551,9 +551,9 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
                       className={`${errors.content ? errorInputCls : inputCls} font-mono text-[13px] leading-relaxed resize-y`}
                     />
                     {/* Live stats bar */}
-                    <div className="flex items-center justify-between px-1 text-[11.5px] text-[#94a3b8]">
+                    <div className="flex items-center justify-between px-1 text-[11.5px] text-[#94a3b8] dark:text-[#71717a]">
                       <span>
-                        <span className={wc < 400 ? 'text-amber-500 font-semibold' : 'text-emerald-600 font-semibold'}>
+                        <span className={wc < 400 ? 'text-amber-500 font-semibold' : 'text-emerald-600 font-semibold dark:text-[#6ee7b7]'}>
                           {wc} words
                         </span>
                         {wc < 400 && <span className="ml-1">(400 min. recommended)</span>}
@@ -594,8 +594,8 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
             <div className="space-y-5">
 
               {/* Editorial Standards card */}
-              <div className="rounded-2xl border border-[#dbe7f3] bg-gradient-to-br from-[#f0faff] to-[#f8fbff] p-5">
-                <h4 className="text-[12px] font-black uppercase tracking-[0.14em] text-[#1677f2] mb-3">
+              <div className="rounded-2xl border border-[#dbe7f3] bg-gradient-to-br from-[#f0faff] to-[#f8fbff] p-5 dark:border-[#27272b] dark:from-[#09090b] dark:to-[#09090b]">
+                <h4 className="text-[12px] font-black uppercase tracking-[0.14em] text-[#1677f2] mb-3 dark:text-[#4f9dfb]">
                   Editorial Standards
                 </h4>
                 <ul className="space-y-2">
@@ -607,8 +607,8 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
                     'Minimum 400 words; 800+ preferred',
                     'No plagiarised or AI-generated boilerplate',
                   ].map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-[12.5px] text-[#334155]">
-                      <span className="text-[#1677f2] font-bold shrink-0 mt-0.5">›</span>
+                    <li key={item} className="flex items-start gap-2 text-[12.5px] text-[#334155] dark:text-[#a1a1aa]">
+                      <span className="text-[#1677f2] font-bold shrink-0 mt-0.5 dark:text-[#4f9dfb]">›</span>
                       {item}
                     </li>
                   ))}
@@ -744,15 +744,15 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
           </div>
 
           {/* ── Declaration & Submit ──────────────────────────────────────── */}
-          <div className="mt-6 bg-white rounded-2xl border border-[#e2eaf2] shadow-[0_2px_12px_rgba(10,22,40,0.06)] p-6">
-            <h3 className="text-[13px] font-black uppercase tracking-[0.12em] text-[#0a1628] mb-4">
+          <div className="mt-6 bg-white rounded-2xl border border-[#e2eaf2] shadow-[0_2px_12px_rgba(10,22,40,0.06)] p-6 dark:bg-[#141417] dark:border-[#27272b]">
+            <h3 className="text-[13px] font-black uppercase tracking-[0.12em] text-[#0a1628] mb-4 dark:text-[#fafafa]">
               Declaration
             </h3>
 
             <div
               data-error={!!errors.declaration || undefined}
               className={`rounded-xl border p-4 mb-5 transition-colors ${
-                errors.declaration ? 'border-red-300 bg-red-50/30' : 'border-[#dbe7f3] bg-[#fafcff]'
+                errors.declaration ? 'border-red-300 bg-red-50/30 dark:bg-[#2a1618] dark:border-[#4a2225]' : 'border-[#dbe7f3] bg-[#fafcff] dark:bg-[#141417] dark:border-[#27272b]'
               }`}
             >
               <label className="flex items-start gap-3.5 cursor-pointer">
@@ -764,7 +764,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
                     className="sr-only"
                   />
                   <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
-                    form.declaration ? 'bg-[#1677f2] border-[#1677f2]' : errors.declaration ? 'border-red-400 bg-white' : 'border-[#b0bec5] bg-white'
+                    form.declaration ? 'bg-[#1677f2] border-[#1677f2]' : errors.declaration ? 'border-red-400 bg-white dark:bg-[#141417]' : 'border-[#b0bec5] bg-white dark:bg-[#141417]'
                   }`}>
                     {form.declaration && (
                       <svg viewBox="0 0 12 10" className="w-3 h-2.5 text-white" fill="none" stroke="currentColor">
@@ -773,8 +773,8 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
                     )}
                   </div>
                 </div>
-                <p className="text-[13.5px] text-[#334155] leading-relaxed">
-                  <span className="font-semibold text-[#0a1628]">I declare that: </span>
+                <p className="text-[13.5px] text-[#334155] leading-relaxed dark:text-[#a1a1aa]">
+                  <span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">I declare that: </span>
                   {DECLARATION_TEXT}
                 </p>
               </label>
@@ -787,8 +787,8 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
             )}
 
             {/* Note box */}
-            <div className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] px-4 py-3 mb-6 text-[12.5px] text-[#64748b] leading-relaxed">
-              <strong className="text-[#0a1628]">Please note:</strong> Submission does not guarantee publication.
+            <div className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] px-4 py-3 mb-6 text-[12.5px] text-[#64748b] leading-relaxed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
+              <strong className="text-[#0a1628] dark:text-[#fafafa]">Please note:</strong> Submission does not guarantee publication.
               The Estabizz editorial team reviews all articles for quality, accuracy and alignment with our
               publication standards. You will be notified by email with the editorial decision.
             </div>
@@ -797,7 +797,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <Link
                 href="/blogs"
-                className="text-[13.5px] font-semibold text-[#64748b] hover:text-[#1677f2] transition-colors"
+                className="text-[13.5px] font-semibold text-[#64748b] hover:text-[#1677f2] transition-colors dark:text-[#a1a1aa]"
               >
                 ← Browse published articles first
               </Link>

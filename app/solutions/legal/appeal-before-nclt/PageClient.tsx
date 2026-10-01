@@ -64,7 +64,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -98,7 +98,7 @@ export default function PageClient() {
       finalCtaTitle="Get the Forum and the Route Right the First Time"
       finalCtaDescription="NCLT proceedings can affect company status, director rights, shareholder control, creditor recovery and business continuity. The most expensive mistakes are made at the filing stage."
       heroDescription={<p>NCLT proceedings can directly affect company status, director rights, shareholder control, creditor recovery, insolvency admission, merger approval, company revival, winding up, bank accounts and business continuity. Estabizz assists companies, directors, shareholders, creditors, insolvency professionals and promoters with company petitions, applications, restoration matters, insolvency proceedings and corporate restructuring before the Tribunal.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> this is legal support for filing, defending or responding to matters before the National Company Law Tribunal, where company-law, insolvency, restructuring, restoration or corporate governance issues are involved.</p>

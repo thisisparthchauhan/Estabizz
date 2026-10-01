@@ -24,21 +24,21 @@ const WHATSAPP_HREF = "https://wa.me/919825600907";
 const BTN_PRIMARY =
   "inline-flex items-center justify-center gap-2 rounded-xl bg-[#1677f2] px-8 py-3.5 text-[15px] font-bold text-white shadow-[0_14px_35px_rgba(22,119,242,0.32)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#0866d9]";
 const BTN_SECONDARY =
-  "inline-flex items-center justify-center gap-2 rounded-xl border border-blue-100 bg-white px-8 py-3.5 text-[15px] font-bold text-[#0a2b58] shadow-[0_10px_28px_rgba(0,70,130,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#1677f2] hover:text-[#1677f2]";
+  "inline-flex items-center justify-center gap-2 rounded-xl border border-blue-100 bg-white px-8 py-3.5 text-[15px] font-bold text-[#0a2b58] shadow-[0_10px_28px_rgba(0,70,130,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#1677f2] hover:text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]";
 
 /** A table whose first column repeats a label ("Step 1", "Section 14") reads
  *  better with that column held narrow and emphasised. */
 function Table({ headers, rows }: { headers: string[]; rows: string[][] }) {
   return (
     <div className="-mx-6 mt-6 overflow-x-auto px-6 sm:mx-0 sm:px-0">
-      <table className="w-full min-w-[520px] border-collapse overflow-hidden rounded-2xl border border-blue-100 text-left">
+      <table className="w-full min-w-[520px] border-collapse overflow-hidden rounded-2xl border border-blue-100 text-left dark:border-[#27272b]">
         <thead>
-          <tr className="bg-[#f7fbff]">
+          <tr className="bg-[#f7fbff] dark:bg-[#141417]">
             {headers.map((h, i) => (
               <th
                 key={i}
                 scope="col"
-                className="border-b border-blue-100 px-5 py-3.5 text-[11.5px] font-black uppercase tracking-[0.12em] text-[#1677f2]"
+                className="border-b border-blue-100 px-5 py-3.5 text-[11.5px] font-black uppercase tracking-[0.12em] text-[#1677f2] dark:border-[#27272b] dark:text-[#4f9dfb]"
               >
                 {h}
               </th>
@@ -47,12 +47,12 @@ function Table({ headers, rows }: { headers: string[]; rows: string[][] }) {
         </thead>
         <tbody>
           {rows.map((row, ri) => (
-            <tr key={ri} className="align-top even:bg-[#fbfdff]">
+            <tr key={ri} className="align-top even:bg-[#fbfdff] dark:bg-[#141417]">
               {row.map((cell, ci) => (
                 <td
                   key={ci}
-                  className={`border-b border-blue-100/70 px-5 py-3.5 text-[13.5px] leading-[1.7] ${
-                    ci === 0 ? "font-bold text-[#071426]" : "font-medium text-[#64748b]"
+                  className={`border-b border-blue-100/70 px-5 py-3.5 text-[13.5px] leading-[1.7]  dark:border-[#27272b] ${
+                    ci === 0 ? "font-bold text-[#071426] dark:text-[#fafafa]" : "font-medium text-[#64748b] dark:text-[#a1a1aa]"
                   }`}
                 >
                   {cell}
@@ -88,7 +88,7 @@ function Block({ block, contactHref }: { block: ServiceBlock; contactHref: strin
     );
   }
   return (
-    <p className="mt-4 text-[15.5px] font-medium leading-[1.9] text-[#475569]">{block.text}</p>
+    <p className="mt-4 text-[15.5px] font-medium leading-[1.9] text-[#475569] dark:text-[#a1a1aa]">{block.text}</p>
   );
 }
 
@@ -107,24 +107,24 @@ export default function ServicePageView({
   const contactHref = `${CONTACT_HREF}?service=${encodeURIComponent(page.docTitle)}`;
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[#06101f] pt-[64px]">
+    <main className="min-h-screen bg-white dark:bg-[#09090b] pt-[64px]">
       {/* ── Hero ───────────────────────────────────────────────────────── */}
-      <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+      <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-8%,rgba(22,119,242,0.12),transparent_46%),radial-gradient(circle_at_88%_84%,rgba(217,169,56,0.08),transparent_32%)]" />
         <div className="mx-auto w-full max-w-[1180px] px-6 py-16 sm:py-20">
           <nav
-            className="mb-6 flex flex-wrap items-center gap-2 text-[12px] font-medium text-[#94a3b8]"
+            className="mb-6 flex flex-wrap items-center gap-2 text-[12px] font-medium text-[#94a3b8] dark:text-[#71717a]"
             aria-label="Breadcrumb"
           >
-            <Link href="/" className="transition-colors hover:text-[#475569]">Home</Link>
+            <Link href="/" className="transition-colors hover:text-[#475569] dark:text-[#a1a1aa]">Home</Link>
             <span className="opacity-40">/</span>
-            <Link href="/solutions" className="transition-colors hover:text-[#475569]">Solutions</Link>
+            <Link href="/solutions" className="transition-colors hover:text-[#475569] dark:text-[#a1a1aa]">Solutions</Link>
             <span className="opacity-40">/</span>
-            <Link href={`/solutions/${category.slug}`} className="transition-colors hover:text-[#475569]">
+            <Link href={`/solutions/${category.slug}`} className="transition-colors hover:text-[#475569] dark:text-[#a1a1aa]">
               {category.label}
             </Link>
             <span className="opacity-40">/</span>
-            <span className="text-[#475569]">{page.seo.focusKeyword || page.slug}</span>
+            <span className="text-[#475569] dark:text-[#a1a1aa]">{page.seo.focusKeyword || page.slug}</span>
           </nav>
 
           {/* docTitle is the source document's own title line ("… Legal
@@ -132,20 +132,20 @@ export default function ServicePageView({
               is rendered rather than dropped -- it reads as the service name
               above the longer hero headline. */}
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <span className="text-[13px] font-black uppercase tracking-[0.24em] text-[#1677f2]">
+            <span className="text-[13px] font-black uppercase tracking-[0.24em] text-[#1677f2] dark:text-[#4f9dfb]">
               {category.icon} {category.label}
             </span>
-            <span className="text-[13px] font-bold text-[#94a3b8]">{page.docTitle}</span>
+            <span className="text-[13px] font-bold text-[#94a3b8] dark:text-[#71717a]">{page.docTitle}</span>
           </div>
 
-          <h1 className="mt-4 max-w-[900px] text-[clamp(30px,3.8vw,50px)] font-black leading-[1.08] tracking-[-0.035em] text-[#071426]">
+          <h1 className="mt-4 max-w-[900px] text-[clamp(30px,3.8vw,50px)] font-black leading-[1.08] tracking-[-0.035em] text-[#071426] dark:text-[#fafafa]">
             {hero.heading}
           </h1>
 
           {hero.paragraphs.map((text, i) => (
             <p
               key={i}
-              className={`mt-5 max-w-[860px] font-medium leading-[1.9] text-[#475569] ${
+              className={`mt-5 max-w-[860px] font-medium leading-[1.9] text-[#475569]  dark:text-[#a1a1aa] ${
                 i === 0 ? "text-[17px]" : "text-[15.5px]"
               }`}
             >
@@ -163,8 +163,8 @@ export default function ServicePageView({
           </div>
 
           {hero.trustLine && (
-            <p className="mt-7 flex items-start gap-2.5 text-[14px] font-bold leading-relaxed text-[#071426]">
-              <span className="mt-[3px] text-[#1677f2]" aria-hidden="true">◆</span>
+            <p className="mt-7 flex items-start gap-2.5 text-[14px] font-bold leading-relaxed text-[#071426] dark:text-[#fafafa]">
+              <span className="mt-[3px] text-[#1677f2] dark:text-[#4f9dfb]" aria-hidden="true">◆</span>
               {hero.trustLine}
             </p>
           )}
@@ -185,23 +185,23 @@ export default function ServicePageView({
 
           {/* Mobile index: same links, collapsed by default so it never pushes
               the first section below the fold on a phone. */}
-          <details className="mb-10 rounded-2xl border border-blue-100 bg-[#f7fbff] px-5 py-4 lg:hidden [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[14px] font-black text-[#071426]">
+          <details className="mb-10 rounded-2xl border border-blue-100 bg-[#f7fbff] px-5 py-4 lg:hidden [&_summary::-webkit-details-marker]:hidden dark:bg-[#141417] dark:border-[#27272b]">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[14px] font-black text-[#071426] dark:text-[#fafafa]">
               On this page
-              <span className="text-[12px] font-medium text-[#64748b]">
+              <span className="text-[12px] font-medium text-[#64748b] dark:text-[#a1a1aa]">
                 {sections.length + 1} sections
               </span>
             </summary>
             <ol className="mt-4 space-y-2">
               {sections.map((s) => (
                 <li key={s.id}>
-                  <a href={`#${s.id}`} className="block text-[13.5px] font-medium leading-snug text-[#475569]">
+                  <a href={`#${s.id}`} className="block text-[13.5px] font-medium leading-snug text-[#475569] dark:text-[#a1a1aa]">
                     {s.heading}
                   </a>
                 </li>
               ))}
               <li>
-                <a href={`#${FAQ_ANCHOR}`} className="block text-[13.5px] font-medium leading-snug text-[#475569]">
+                <a href={`#${FAQ_ANCHOR}`} className="block text-[13.5px] font-medium leading-snug text-[#475569] dark:text-[#a1a1aa]">
                   FAQs
                 </a>
               </li>
@@ -211,7 +211,7 @@ export default function ServicePageView({
           <article className="min-w-0">
             {sections.map((section) => (
               <section key={section.id} id={section.id} className="scroll-mt-24 pb-12">
-                <h2 className="text-[clamp(22px,2.3vw,30px)] font-black leading-[1.15] tracking-[-0.025em] text-[#071426]">
+                <h2 className="text-[clamp(22px,2.3vw,30px)] font-black leading-[1.15] tracking-[-0.025em] text-[#071426] dark:text-[#fafafa]">
                   {section.heading}
                 </h2>
                 <div className="mt-2 h-[3px] w-12 rounded-full bg-[#1677f2]" />
@@ -223,7 +223,7 @@ export default function ServicePageView({
 
             {faqs.length > 0 && (
               <section id={FAQ_ANCHOR} className="scroll-mt-24 pb-4">
-                <h2 className="text-[clamp(22px,2.3vw,30px)] font-black leading-[1.15] tracking-[-0.025em] text-[#071426]">
+                <h2 className="text-[clamp(22px,2.3vw,30px)] font-black leading-[1.15] tracking-[-0.025em] text-[#071426] dark:text-[#fafafa]">
                   What People Ask – FAQs
                 </h2>
                 <div className="mt-2 h-[3px] w-12 rounded-full bg-[#1677f2]" />
@@ -231,21 +231,21 @@ export default function ServicePageView({
                   {faqs.map((faq, i) => (
                     <details
                       key={i}
-                      className="group rounded-2xl border border-blue-100 bg-white px-6 py-5 shadow-[0_8px_32px_rgba(0,100,200,0.05)] transition-colors open:border-[#1677f2]/30 [&_summary::-webkit-details-marker]:hidden"
+                      className="group rounded-2xl border border-blue-100 bg-white px-6 py-5 shadow-[0_8px_32px_rgba(0,100,200,0.05)] transition-colors open:border-[#1677f2]/30 [&_summary::-webkit-details-marker]:hidden dark:bg-[#141417] dark:border-[#27272b]"
                     >
-                      <summary className="flex cursor-pointer list-none items-start justify-between gap-5 text-[15px] font-black leading-snug text-[#071426]">
+                      <summary className="flex cursor-pointer list-none items-start justify-between gap-5 text-[15px] font-black leading-snug text-[#071426] dark:text-[#fafafa]">
                         <span>
-                          <span className="mr-2 text-[#1677f2]">{i + 1}.</span>
+                          <span className="mr-2 text-[#1677f2] dark:text-[#4f9dfb]">{i + 1}.</span>
                           {faq.question}
                         </span>
                         <span
-                          className="mt-0.5 shrink-0 text-[18px] font-normal text-[#1677f2] transition-transform duration-300 group-open:rotate-45"
+                          className="mt-0.5 shrink-0 text-[18px] font-normal text-[#1677f2] transition-transform duration-300 group-open:rotate-45 dark:text-[#4f9dfb]"
                           aria-hidden="true"
                         >
                           +
                         </span>
                       </summary>
-                      <p className="mt-4 text-[14.5px] font-medium leading-[1.85] text-[#64748b]">
+                      <p className="mt-4 text-[14.5px] font-medium leading-[1.85] text-[#64748b] dark:text-[#a1a1aa]">
                         {faq.answer}
                       </p>
                     </details>
@@ -269,7 +269,7 @@ export default function ServicePageView({
           <h2 className="text-[28px] font-black leading-[1.12] tracking-tight text-white md:text-[38px]">
             Talk to an Estabizz {category.label} specialist.
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-[14.5px] font-medium leading-relaxed text-[#94a3b8] md:text-[16px]">
+          <p className="mx-auto mt-3 max-w-2xl text-[14.5px] font-medium leading-relaxed text-[#94a3b8] md:text-[16px] dark:text-[#71717a]">
             {hero.trustLine || "We handle the filing, the follow-up and the paperwork end to end."}
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
@@ -281,13 +281,13 @@ export default function ServicePageView({
             </Link>
             <a
               href={WHATSAPP_HREF}
-              className="w-full rounded-xl border border-white/20 bg-white/10 px-8 py-3.5 text-center text-[15px] font-bold text-white transition-all duration-300 hover:border-white/40 hover:bg-white/20 sm:w-auto"
+              className="w-full rounded-xl border border-white/20 bg-white/10 px-8 py-3.5 text-center text-[15px] font-bold text-white transition-all duration-300 hover:border-white/40 hover:bg-white/20 sm:w-auto dark:bg-[#141417]"
             >
               {hero.secondaryCta || "WhatsApp Us"}
             </a>
             <a
               href="tel:+919825600907"
-              className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/20 px-6 py-3.5 text-[15px] font-bold text-white transition-all duration-300 hover:border-white/40 hover:bg-white/10 sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/20 px-6 py-3.5 text-[15px] font-bold text-white transition-all duration-300 hover:border-white/40 hover:bg-white/10 sm:w-auto dark:bg-[#141417]"
             >
               <span className="text-[17px]" aria-hidden="true">📞</span> +91 98256 00907
             </a>

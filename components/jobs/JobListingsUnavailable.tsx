@@ -28,11 +28,11 @@ export function JobListingsUnavailable({
   variant?: "page" | "section";
 } = {}) {
   const body = (
-    <div className="rounded-2xl border border-[#dbe7f3] bg-white p-8 text-center">
+    <div className="rounded-2xl border border-[#dbe7f3] bg-white p-8 text-center dark:bg-[#141417] dark:border-[#27272b]">
       {variant === "section" && (
-        <p className="text-[15px] font-bold text-[#0a1628]">Job listings coming shortly</p>
+        <p className="text-[15px] font-bold text-[#0a1628] dark:text-[#fafafa]">Job listings coming shortly</p>
       )}
-      <p className="mt-1 text-[13px] leading-6 text-[#64748b]">
+      <p className="mt-1 text-[13px] leading-6 text-[#64748b] dark:text-[#a1a1aa]">
         {variant === "section"
           ? "We're finalising open roles across regulated financial services, fintech, technology and growing businesses. Everything else on this page is live — reach out and we'll keep you posted as listings go up."
           : "Interested in opportunities with Estabizz? Send us a note and we'll keep you posted as roles open."}
@@ -46,7 +46,7 @@ export function JobListingsUnavailable({
         </Link>
         <a
           href="mailto:info@estabizz.com?subject=Career%20Enquiry%20-%20Estabizz"
-          className="inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-6 py-3 text-[14px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors"
+          className="inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-6 py-3 text-[14px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
         >
           Email Our Recruitment Team
         </a>
@@ -59,15 +59,15 @@ export function JobListingsUnavailable({
   }
 
   return (
-    <div className="min-h-screen bg-[#f8fbff] pt-[64px]">
-      <div className="bg-[#0a1628] px-6 py-14 text-center">
+    <div className="min-h-screen bg-[#f8fbff] pt-[64px] dark:bg-[#141417]">
+      <div className="bg-[#0a1628] dark:bg-[#1c1c20] px-6 py-14 text-center">
         <div className="mb-3 inline-block rounded-full bg-[#1677f2]/20 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#60a5fa]">
           Estabizz Jobs
         </div>
         <h1 className="mt-3 text-[32px] font-black leading-tight tracking-tight text-white sm:text-[40px]">
           Job Listings Coming Shortly
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8]">
+        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8] dark:text-[#71717a]">
           We&apos;re finalising open roles across regulated financial services, fintech, technology and
           growing businesses. Please check back soon, or reach out directly.
         </p>

@@ -36,15 +36,15 @@ export default function CaseStudies({ content }: { content?: Partial<CaseStudies
         
         <div className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {c.label && (
-            <div className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[#0077B6]">{c.label}</div>
+            <div className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[#0077B6] dark:text-[#4f9dfb]">{c.label}</div>
           )}
-          <h2 className="text-[32px] md:text-[40px] font-black text-[#0a1628] leading-[1.2] mb-4 tracking-tight">
+          <h2 className="text-[32px] md:text-[40px] font-black text-[#0a1628] leading-[1.2] mb-4 tracking-tight dark:text-[#fafafa]">
             {c.heading}
           </h2>
-          <div className="text-[18px] font-bold text-[#1677f2] mb-6">
+          <div className="text-[18px] font-bold text-[#1677f2] mb-6 dark:text-[#4f9dfb]">
             {c.subheading}
           </div>
-          <p className="text-[15px] text-[#475569] leading-relaxed font-medium">
+          <p className="text-[15px] text-[#475569] leading-relaxed font-medium dark:text-[#a1a1aa]">
             {c.intro}
           </p>
         </div>
@@ -54,7 +54,7 @@ export default function CaseStudies({ content }: { content?: Partial<CaseStudies
           {cases.map((caseStudy, index) => (
             <div
               key={index}
-              className={`bg-white/85 backdrop-blur-[12px] border border-[rgba(0,150,220,0.1)] rounded-[20px] p-8 md:p-10 relative overflow-hidden group hover:shadow-[0_12px_40px_rgba(0,100,200,0.15)] hover:-translate-y-1 transition-all duration-500 ease-out flex flex-col h-full shadow-[0_4px_20px_rgba(0,100,200,0.07)]`}
+              className={`bg-white/85 backdrop-blur-[12px] border border-[rgba(0,150,220,0.1)] rounded-[20px] p-8 md:p-10 relative overflow-hidden group hover:shadow-[0_12px_40px_rgba(0,100,200,0.15)] hover:-translate-y-1 transition-all duration-500 ease-out flex flex-col h-full shadow-[0_4px_20px_rgba(0,100,200,0.07)] dark:bg-[#141417]`}
               style={{
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? 'translateY(0)' : 'translateY(32px)',
@@ -80,23 +80,23 @@ export default function CaseStudies({ content }: { content?: Partial<CaseStudies
                 {caseStudy.category}
               </div>
 
-              <h3 className="text-[17px] font-bold text-[#0a1628] mb-4 leading-[1.4] pr-10">
+              <h3 className="text-[17px] font-bold text-[#0a1628] mb-4 leading-[1.4] pr-10 dark:text-[#fafafa]">
                 {caseStudy.title}
               </h3>
 
-              <p className="text-[13px] text-[#475569] leading-[1.8] mb-4 font-medium">
+              <p className="text-[13px] text-[#475569] leading-[1.8] mb-4 font-medium dark:text-[#a1a1aa]">
                 {caseStudy.description}
               </p>
 
               {caseStudy.support && (
-                <p className="text-[12.5px] text-[#64748b] leading-[1.7] mb-6 flex-grow">
-                  <span className="font-bold text-[#0a1628]">Support provided: </span>{caseStudy.support}
+                <p className="text-[12.5px] text-[#64748b] leading-[1.7] mb-6 flex-grow dark:text-[#a1a1aa]">
+                  <span className="font-bold text-[#0a1628] dark:text-[#fafafa]">Support provided: </span>{caseStudy.support}
                 </p>
               )}
 
               {/* Outcome Box */}
               {caseStudy.outcome && (
-                <div className="mt-auto bg-[#f5fbff] border border-blue-100 border-l-[3px] rounded-r-lg px-4 py-3" style={{ borderLeftColor: CARD_COLOR }}>
+                <div className="mt-auto bg-[#f5fbff] border border-blue-100 border-l-[3px] rounded-r-lg px-4 py-3 dark:bg-[#141417] dark:border-[#27272b]" style={{ borderLeftColor: CARD_COLOR }}>
                   <span className="text-[13px] font-bold tracking-wide" style={{ color: CARD_COLOR }}>
                     {caseStudy.outcome}
                   </span>
@@ -104,7 +104,7 @@ export default function CaseStudies({ content }: { content?: Partial<CaseStudies
               )}
 
               {caseStudy.disclaimer && (
-                <p className="mt-3 text-[11px] italic leading-relaxed text-[#94a3b8]">
+                <p className="mt-3 text-[11px] italic leading-relaxed text-[#94a3b8] dark:text-[#71717a]">
                   {caseStudy.disclaimer}
                 </p>
               )}
@@ -113,12 +113,12 @@ export default function CaseStudies({ content }: { content?: Partial<CaseStudies
         </div>
 
         {c.disclaimer && (
-          <p className="mx-auto mb-8 max-w-3xl text-center text-[12px] leading-relaxed text-[#64748b]">
+          <p className="mx-auto mb-8 max-w-3xl text-center text-[12px] leading-relaxed text-[#64748b] dark:text-[#a1a1aa]">
             {c.disclaimer}
           </p>
         )}
 
-        <div className={`text-center font-bold text-[18px] italic text-[#0077B6] transition-all duration-700 delay-500 ease-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`text-center font-bold text-[18px] italic text-[#0077B6] transition-all duration-700 delay-500 ease-out  dark:text-[#4f9dfb] ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           {c.closingLine}
         </div>
 

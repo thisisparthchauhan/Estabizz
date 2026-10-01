@@ -10,9 +10,9 @@ function fmt(d: Date | string | null) {
 }
 
 const PRIORITY_COLOURS: Record<string, string> = {
-  high: "text-red-600 bg-red-50 border border-red-200",
-  normal: "text-[#1677f2] bg-[#eaf2ff] border border-blue-200",
-  low: "text-[#64748b] bg-[#f1f5f9] border border-[#dbe7f3]",
+  high: "text-red-600 bg-red-50 border border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]",
+  normal: "text-[#1677f2] bg-[#eaf2ff] border border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#4f9dfb]",
+  low: "text-[#64748b] bg-[#f1f5f9] border border-[#dbe7f3] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#a1a1aa]",
 };
 
 function entityLink(task: TaskRow) {
@@ -34,20 +34,20 @@ function TaskSection({ title, tasks, accent, onComplete, onReopen }: SectionProp
   if (tasks.length === 0) return null;
   return (
     <div>
-      <h2 className={`mb-3 text-[12px] font-black uppercase tracking-widest ${accent ?? "text-[#64748b]"}`}>
+      <h2 className={`mb-3 text-[12px] font-black uppercase tracking-widest ${accent ?? "text-[#64748b] dark:text-[#a1a1aa]"}`}>
         {title} ({tasks.length})
       </h2>
       <div className="space-y-2">
         {tasks.map((t) => {
           const link = entityLink(t);
           return (
-            <div key={t.id} className="flex items-start gap-3 rounded-xl border border-[#dbe7f3] bg-white p-4">
+            <div key={t.id} className="flex items-start gap-3 rounded-xl border border-[#dbe7f3] bg-white p-4 dark:bg-[#141417] dark:border-[#27272b]">
               <div className="mt-0.5 shrink-0">
                 {onComplete && t.status === "open" && (
                   <button
                     type="button"
                     onClick={() => onComplete(t.id)}
-                    className="h-4 w-4 rounded border-2 border-[#cbd5e1] hover:border-[#1677f2] transition-colors"
+                    className="h-4 w-4 rounded border-2 border-[#cbd5e1] hover:border-[#1677f2] transition-colors dark:border-[#27272b]"
                     title="Mark complete"
                   />
                 )}
@@ -65,19 +65,19 @@ function TaskSection({ title, tasks, accent, onComplete, onReopen }: SectionProp
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <p className={`font-bold text-[#0a1628] text-[13.5px] ${t.status === "completed" ? "line-through text-[#94a3b8]" : ""}`}>
+                <p className={`font-bold text-[#0a1628] text-[13.5px]  dark:text-[#fafafa] ${t.status === "completed" ? "line-through text-[#94a3b8] dark:text-[#71717a]" : ""}`}>
                   {t.title}
                 </p>
                 <div className="mt-1 flex flex-wrap items-center gap-2 text-[11px]">
                   <span className={`rounded-full px-2 py-0.5 font-bold ${PRIORITY_COLOURS[t.priority] ?? ""}`}>
                     {t.priority}
                   </span>
-                  <span className={t.dueAt && new Date(t.dueAt) < new Date() && t.status !== "completed" ? "font-bold text-red-600" : "text-[#94a3b8]"}>
+                  <span className={t.dueAt && new Date(t.dueAt) < new Date() && t.status !== "completed" ? "font-bold text-red-600 dark:text-[#fca5a5]" : "text-[#94a3b8] dark:text-[#71717a]"}>
                     Due {fmt(t.dueAt)}
                   </span>
-                  <span className="text-[#94a3b8]">→ {t.assignedToName}</span>
+                  <span className="text-[#94a3b8] dark:text-[#71717a]">→ {t.assignedToName}</span>
                   {link && (
-                    <Link href={link} className="text-[#1677f2] hover:underline">
+                    <Link href={link} className="text-[#1677f2] hover:underline dark:text-[#4f9dfb]">
                       View {t.entityType}
                     </Link>
                   )}
@@ -143,14 +143,14 @@ export default function AdminTasksClient({ tasks: initial }: Props) {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-[26px] font-black text-[#0a1628]">Tasks</h1>
-        <p className="mt-0.5 text-[13px] text-[#64748b]">{totalOpen} open · {totalCompleted} completed</p>
+        <h1 className="text-[26px] font-black text-[#0a1628] dark:text-[#fafafa]">Tasks</h1>
+        <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">{totalOpen} open · {totalCompleted} completed</p>
       </div>
 
       <TaskSection
         title="Overdue"
         tasks={overdue}
-        accent="text-red-600"
+        accent="text-red-600 dark:text-[#fca5a5]"
         onComplete={handleComplete}
       />
       <TaskSection
@@ -166,18 +166,18 @@ export default function AdminTasksClient({ tasks: initial }: Props) {
       />
 
       {completed.length > 0 && (
-        <details className="rounded-2xl border border-[#dbe7f3] bg-white">
-          <summary className="cursor-pointer px-5 py-4 text-[12px] font-black uppercase tracking-widest text-[#64748b]">
+        <details className="rounded-2xl border border-[#dbe7f3] bg-white dark:bg-[#141417] dark:border-[#27272b]">
+          <summary className="cursor-pointer px-5 py-4 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">
             Completed ({totalCompleted > completed.length ? `${completed.length} of ${totalCompleted}` : completed.length})
           </summary>
-          <div className="border-t border-[#dbe7f3] p-4 space-y-2">
+          <div className="border-t border-[#dbe7f3] p-4 space-y-2 dark:border-[#27272b]">
             {completed.map((t) => (
               <div key={t.id} className="flex items-center justify-between gap-3">
-                <p className="text-[13px] text-[#94a3b8] line-through">{t.title}</p>
+                <p className="text-[13px] text-[#94a3b8] line-through dark:text-[#71717a]">{t.title}</p>
                 <button
                   type="button"
                   onClick={() => handleReopen(t.id)}
-                  className="shrink-0 rounded-lg border border-[#dbe7f3] px-2.5 py-1 text-[11px] font-bold text-[#64748b] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors"
+                  className="shrink-0 rounded-lg border border-[#dbe7f3] px-2.5 py-1 text-[11px] font-bold text-[#64748b] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors dark:border-[#27272b] dark:text-[#a1a1aa]"
                 >
                   Reopen
                 </button>
@@ -188,7 +188,7 @@ export default function AdminTasksClient({ tasks: initial }: Props) {
       )}
 
       {totalOpen === 0 && completed.length === 0 && (
-        <p className="text-[13px] text-[#94a3b8]">No tasks yet.</p>
+        <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No tasks yet.</p>
       )}
     </div>
   );

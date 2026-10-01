@@ -64,7 +64,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -103,7 +103,7 @@ export default function PageClient() {
       finalCtaTitle="In Cyber Fraud, Hours Decide Outcomes"
       finalCtaDescription="Money moves through layered accounts, SIM cards are discarded and posts are deleted. Report first, preserve everything, and let the complaint be drafted properly around what you managed to keep."
       heroDescription={<p>Cyber fraud moves faster than any legal process. Funds are routed through layered accounts within minutes, devices are discarded, and content is deleted before anyone reads a complaint. What determines the outcome is usually what happened in the first few hours. Estabizz assists individuals, families, professionals, businesses, directors and regulated entities with online fraud reporting, 1930 helpline and cyber portal guidance, digital evidence preservation, police complaint drafting, FIR strategy, bank coordination and account-freeze representation, platform takedown support, CERT-In reporting review and defence where a cyber notice has been received — under the current framework of the IT Act, BNS, BNSS and BSA.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> a Cyber Crime Complaint is what you file when someone uses a phone, computer, payment app, social media account, email or website to cheat, threaten, harass, impersonate, steal from or otherwise act unlawfully against you.</p>

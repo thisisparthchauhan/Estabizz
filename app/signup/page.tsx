@@ -73,7 +73,7 @@ export default function SignupPage() {
         </button>
     );
 
-    const inputClass = "w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all";
+    const inputClass = "w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]";
 
     return (
         <div className="min-h-screen flex">
@@ -99,11 +99,11 @@ export default function SignupPage() {
 
                 <div className="relative space-y-6">
                     <div>
-                        <p className="text-[#1677f2] text-sm font-semibold tracking-wider uppercase mb-3">Join 1000+ businesses</p>
+                        <p className="text-[#1677f2] text-sm font-semibold tracking-wider uppercase mb-3 dark:text-[#4f9dfb]">Join 1000+ businesses</p>
                         <h2 className="text-4xl font-bold text-white leading-tight">
                             Start Your<br />Compliance Journey
                         </h2>
-                        <p className="text-gray-400 mt-4 text-base leading-relaxed">
+                        <p className="text-gray-400 mt-4 text-base leading-relaxed dark:text-[#71717a]">
                             Get expert guidance for RBI, SEBI, IFSCA and IRDAI licenses — handled end-to-end.
                         </p>
                     </div>
@@ -114,19 +114,19 @@ export default function SignupPage() {
                             { icon: "🌐", label: "IFSCA Compliant" },
                             { icon: "🛡️", label: "IRDAI Approved" },
                         ].map(({ icon, label }) => (
-                            <div key={label} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2.5">
+                            <div key={label} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2.5 dark:bg-[#141417]">
                                 <span className="text-base">{icon}</span>
-                                <span className="text-gray-300 text-xs font-medium">{label}</span>
+                                <span className="text-gray-300 text-xs font-medium dark:text-[#71717a]">{label}</span>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <p className="relative text-gray-600 text-xs">© {new Date().getFullYear()} Estabizz Fintech Pvt. Ltd.</p>
+                <p className="relative text-gray-600 text-xs dark:text-[#a1a1aa]">© {new Date().getFullYear()} Estabizz Fintech Pvt. Ltd.</p>
             </div>
 
             {/* Right panel — form */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center bg-[#f8faff] px-6 py-12 overflow-y-auto">
+            <div className="w-full lg:w-1/2 flex items-center justify-center bg-[#f8faff] px-6 py-12 overflow-y-auto dark:bg-[#141417]">
                 <div className="w-full max-w-md">
                     <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors mb-8 group">
                         <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -136,44 +136,44 @@ export default function SignupPage() {
                     </Link>
 
                     <div className="mb-7">
-                        <h1 className="text-2xl font-bold text-gray-900">Create Account</h1>
-                        <p className="text-gray-500 text-sm mt-1">Start your compliance journey with us today.</p>
+                        <h1 className="text-2xl font-bold text-gray-900 dark:text-[#fafafa]">Create Account</h1>
+                        <p className="text-gray-500 text-sm mt-1 dark:text-[#71717a]">Start your compliance journey with us today.</p>
                     </div>
 
-                    {error && <div className="mb-5 bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-xl">{error}</div>}
-                    {success && <div className="mb-5 bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-xl">{success}</div>}
+                    {error && <div className="mb-5 bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-xl dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">{error}</div>}
+                    {success && <div className="mb-5 bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-3 rounded-xl dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]">{success}</div>}
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="grid grid-cols-2 gap-3">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">First Name</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1.5 dark:text-[#a1a1aa]">First Name</label>
                                 <input type="text" name="firstName" value={form.firstName} onChange={handleChange} required placeholder="John" className={inputClass} />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">Last Name</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1.5 dark:text-[#a1a1aa]">Last Name</label>
                                 <input type="text" name="lastName" value={form.lastName} onChange={handleChange} required placeholder="Doe" className={inputClass} />
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                Mobile Number <span className="text-gray-400 font-normal">(Optional)</span>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5 dark:text-[#a1a1aa]">
+                                Mobile Number <span className="text-gray-400 font-normal dark:text-[#71717a]">(Optional)</span>
                             </label>
                             <div className="flex gap-2">
-                                <div className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-xl px-3 py-3 text-sm text-gray-600 whitespace-nowrap">
+                                <div className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-xl px-3 py-3 text-sm text-gray-600 whitespace-nowrap dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                                     🇮🇳 +91
                                 </div>
-                                <input type="tel" name="mobile" value={form.mobile} onChange={handleChange} placeholder="9876543210" className="flex-1 border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all" />
+                                <input type="tel" name="mobile" value={form.mobile} onChange={handleChange} placeholder="9876543210" className="flex-1 border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all dark:bg-[#141417] dark:border-[#27272b]" />
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1.5">Email Address</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5 dark:text-[#a1a1aa]">Email Address</label>
                             <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="john@example.com" className={inputClass} />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5 dark:text-[#a1a1aa]">Password</label>
                             <div className="relative">
                                 <input type={showPassword ? "text" : "password"} name="password" value={form.password} onChange={handleChange} required placeholder="Min. 8 characters" className={`${inputClass} pr-11`} />
                                 <EyeBtn show={showPassword} onToggle={() => setShowPassword(!showPassword)} />
@@ -181,7 +181,7 @@ export default function SignupPage() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1.5">Confirm Password</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5 dark:text-[#a1a1aa]">Confirm Password</label>
                             <div className="relative">
                                 <input type={showConfirm ? "text" : "password"} name="confirmPassword" value={form.confirmPassword} onChange={handleChange} required placeholder="Re-enter password" className={`${inputClass} pr-11`} />
                                 <EyeBtn show={showConfirm} onToggle={() => setShowConfirm(!showConfirm)} />
@@ -205,12 +205,12 @@ export default function SignupPage() {
                         </button>
                     </form>
 
-                    <p className="text-center text-gray-500 text-sm mt-6">
+                    <p className="text-center text-gray-500 text-sm mt-6 dark:text-[#71717a]">
                         Already have an account?{" "}
-                        <Link href={buildLoginHref(returnPath)} className="text-[#1677f2] font-semibold hover:underline">Log in</Link>
+                        <Link href={buildLoginHref(returnPath)} className="text-[#1677f2] font-semibold hover:underline dark:text-[#4f9dfb]">Log in</Link>
                     </p>
 
-                    <p className="text-center text-gray-400 text-xs mt-4">
+                    <p className="text-center text-gray-400 text-xs mt-4 dark:text-[#71717a]">
                         By signing up, you agree to our{" "}
                         <Link href="/legal/terms-conditions" className="hover:text-gray-600 underline">Terms</Link>
                         {" & "}

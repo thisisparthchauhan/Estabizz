@@ -87,9 +87,9 @@ function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; column
   return (
     <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>
       {cards.map((card) => (
-        <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)]">
-          <h3 className="!p-0 !mb-2 !text-[#0a1628]">{card.title}</h3>
-          <div className="text-[14px] leading-7 text-gray-600">{card.body}</div>
+        <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)] dark:bg-[#141417]">
+          <h3 className="!p-0 !mb-2 !text-[#0a1628] dark:text-[#fafafa]">{card.title}</h3>
+          <div className="text-[14px] leading-7 text-gray-600 dark:text-[#a1a1aa]">{card.body}</div>
         </div>
       ))}
     </div>
@@ -141,8 +141,8 @@ export default function ItfsRegistrationPage() {
       }
       heroActions={
         <>
-          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for ITFS Registration</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check ITFS Eligibility</Link>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for ITFS Registration</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Check ITFS Eligibility</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm text-center">WhatsApp Estabizz Team</a>
         </>
       }
@@ -175,8 +175,8 @@ export default function ItfsRegistrationPage() {
       finalCtaActions={
         <>
           <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#1677f2] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all text-center">Speak to IFSCA Compliance Expert</Link>
-          <Link href="/get-started" className="w-full sm:w-auto px-8 py-3.5 bg-white text-[#0077B6] font-bold rounded-xl hover:bg-blue-50 transition-all text-center">Apply for ITFS Registration</Link>
-          <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20 text-center">Check ITFS Eligibility</Link>
+          <Link href="/get-started" className="w-full sm:w-auto px-8 py-3.5 bg-white text-[#0077B6] font-bold rounded-xl hover:bg-blue-50 transition-all text-center dark:bg-[#141417] dark:text-[#4f9dfb]">Apply for ITFS Registration</Link>
+          <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20 text-center dark:bg-[#141417]">Check ITFS Eligibility</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-3.5 bg-[#10b981] hover:bg-[#059669] text-white font-bold rounded-xl shadow-lg transition-all text-center">WhatsApp Estabizz Team</a>
         </>
       }

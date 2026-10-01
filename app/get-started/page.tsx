@@ -37,25 +37,25 @@ const services = [
 
 export default function GetStartedPage() {
     return (
-        <main className="min-h-screen bg-white pt-[64px]">
+        <main className="min-h-screen bg-white pt-[64px] dark:bg-[#141417]">
             {/* Hero — homepage-themed */}
-            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
-                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 sm:py-16">
-                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
-                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link>
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link>
                         <span className="opacity-40">/</span>
-                        <span className="text-[#374151]">Get Started</span>
+                        <span className="text-[#374151] dark:text-[#a1a1aa]">Get Started</span>
                     </nav>
-                    <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">
+                    <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
                         Structured Regulatory Advisory
                     </div>
                     <div className="max-w-3xl">
-                        <h1 className="mt-4 text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">
-                            Start Your Regulatory Journey <span className="text-[#1677f2]">with Estabizz</span>
+                        <h1 className="mt-4 text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px] dark:text-[#fafafa]">
+                            Start Your Regulatory Journey <span className="text-[#1677f2] dark:text-[#4f9dfb]">with Estabizz</span>
                         </h1>
-                        <p className="mt-4 text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px]">
+                        <p className="mt-4 text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px] dark:text-[#a1a1aa]">
                             Expert support for RBI, SEBI, IRDAI, IFSCA, MCA, fintech licensing and compliance advisory.
                         </p>
                         <a
@@ -71,9 +71,9 @@ export default function GetStartedPage() {
             <section className="mx-auto max-w-7xl px-6 py-14">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     {trustIndicators.map((item) => (
-                        <div key={item} className="rounded-xl border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
-                            <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#f5fbff] font-black text-[#1677f2]">✓</div>
-                            <p className="text-sm font-bold leading-snug text-[#120b45]">{item}</p>
+                        <div key={item} className="rounded-xl border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+                            <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#f5fbff] font-black text-[#1677f2] dark:bg-[#141417] dark:text-[#4f9dfb]">✓</div>
+                            <p className="text-sm font-bold leading-snug text-[#120b45] dark:text-[#fafafa]">{item}</p>
                         </div>
                     ))}
                 </div>
@@ -81,20 +81,20 @@ export default function GetStartedPage() {
 
             <section id="enquiry" className="max-w-7xl mx-auto px-6 pb-16">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                    <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-                        <h2 className="text-[24px] font-black text-[#0a1628] mb-2">Lead Enquiry</h2>
-                        <p className="text-gray-500 text-sm mb-8">Share a few details and our advisory team will help map the next steps.</p>
+                    <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-8 dark:bg-[#141417] dark:border-[#27272b]">
+                        <h2 className="text-[24px] font-black text-[#0a1628] mb-2 dark:text-[#fafafa]">Lead Enquiry</h2>
+                        <p className="text-gray-500 text-sm mb-8 dark:text-[#71717a]">Share a few details and our advisory team will help map the next steps.</p>
 
                         <GetStartedForm services={services} />
                     </div>
 
-                    <aside className="bg-[#0a1628] rounded-2xl p-8 text-white h-fit">
+                    <aside className="bg-[#0a1628] dark:bg-[#1c1c20] rounded-2xl p-8 text-white h-fit">
                         <h2 className="text-[22px] font-black mb-6">How Estabizz Supports You</h2>
                         <div className="space-y-4">
                             {supportSteps.map((step, index) => (
                                 <div key={step} className="flex gap-3">
                                     <span className="w-7 h-7 rounded-full bg-[#1677f2] flex items-center justify-center text-xs font-black shrink-0">{index + 1}</span>
-                                    <p className="text-sm text-gray-200 leading-relaxed">{step}</p>
+                                    <p className="text-sm text-gray-200 leading-relaxed dark:text-[#71717a]">{step}</p>
                                 </div>
                             ))}
                         </div>

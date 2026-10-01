@@ -55,16 +55,16 @@ export default async function JoinEstabizzPage() {
   const primaryCtaLabel = session ? "Complete Your Profile" : "Create Your Profile";
 
   return (
-    <div className="min-h-screen bg-[#f8fbff] pt-[64px]">
+    <div className="min-h-screen bg-[#f8fbff] pt-[64px] dark:bg-[#141417]">
       {/* Header */}
-      <div className="bg-[#0a1628] px-6 py-14 text-center">
+      <div className="bg-[#0a1628] dark:bg-[#1c1c20] px-6 py-14 text-center">
         <div className="mb-3 inline-block rounded-full bg-[#1677f2]/20 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#60a5fa]">
           Estabizz Talent Network
         </div>
         <h1 className="mt-3 text-[32px] font-black leading-tight tracking-tight text-white sm:text-[40px]">
           Join Estabizz
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8]">
+        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8] dark:text-[#71717a]">
           Create your candidate profile once, and the Estabizz recruitment team can consider you for
           current openings and roles that open later — without you needing to reapply from scratch each time.
         </p>
@@ -77,7 +77,7 @@ export default async function JoinEstabizzPage() {
           </Link>
           <Link
             href="/jobs"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-6 py-3.5 text-[15px] font-black text-white hover:bg-white/10 transition-colors"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-6 py-3.5 text-[15px] font-black text-white hover:bg-white/10 transition-colors dark:bg-[#141417]"
           >
             Browse Open Roles
           </Link>
@@ -104,14 +104,14 @@ export default async function JoinEstabizzPage() {
           />
         </div>
 
-        <div className="mt-10 rounded-2xl border border-[#dbe7f3] bg-white p-8 text-center">
-          <p className="text-[15px] font-bold text-[#0a1628]">Already have an account?</p>
-          <p className="mt-2 text-[13px] text-[#64748b]">
+        <div className="mt-10 rounded-2xl border border-[#dbe7f3] bg-white p-8 text-center dark:bg-[#141417] dark:border-[#27272b]">
+          <p className="text-[15px] font-bold text-[#0a1628] dark:text-[#fafafa]">Already have an account?</p>
+          <p className="mt-2 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">
             Sign in to pick up where you left off on your profile.
           </p>
           <Link
             href="/jobs/account"
-            className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-6 py-3 text-[14px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors"
+            className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-6 py-3 text-[14px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
           >
             Go to Candidate Account
           </Link>
@@ -123,12 +123,12 @@ export default async function JoinEstabizzPage() {
 
 function Step({ n, title, body }: { n: string; title: string; body: string }) {
   return (
-    <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#eaf2ff] text-[13px] font-black text-[#1677f2]">
+    <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#eaf2ff] text-[13px] font-black text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">
         {n}
       </div>
-      <h2 className="mt-3 text-[14px] font-black text-[#0a1628]">{title}</h2>
-      <p className="mt-2 text-[13px] leading-6 text-[#64748b]">{body}</p>
+      <h2 className="mt-3 text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">{title}</h2>
+      <p className="mt-2 text-[13px] leading-6 text-[#64748b] dark:text-[#a1a1aa]">{body}</p>
     </div>
   );
 }

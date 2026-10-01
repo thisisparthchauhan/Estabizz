@@ -45,7 +45,7 @@ const StatCard = ({ item, isVisible, delay }: { item: StatItem; isVisible: boole
 
     return (
         <div
-            className={`bg-white/80 backdrop-blur-[16px] border border-[rgba(0,150,220,0.12)] rounded-2xl p-6 text-center shadow-[0_8px_32px_rgba(0,100,200,0.08)] hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,100,200,0.15)] transition-all duration-300 ease-[cubic-bezier(.34,1.56,.64,1)]`}
+            className={`bg-white/80 backdrop-blur-[16px] border border-[rgba(0,150,220,0.12)] rounded-2xl p-6 text-center shadow-[0_8px_32px_rgba(0,100,200,0.08)] hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,100,200,0.15)] transition-all duration-300 ease-[cubic-bezier(.34,1.56,.64,1)] dark:bg-[#141417]`}
             style={{
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
@@ -53,10 +53,10 @@ const StatCard = ({ item, isVisible, delay }: { item: StatItem; isVisible: boole
       }}
     >
       <div className="text-[24px] mb-4">{item.icon}</div>
-      <div className="text-[32px] md:text-[40px] font-black text-[#0a1628] leading-tight mb-1">
+      <div className="text-[32px] md:text-[40px] font-black text-[#0a1628] leading-tight mb-1 dark:text-[#fafafa]">
         {display}{item.suffix}
       </div>
-      <div className="text-[14px] font-bold text-[#64748b] tracking-wide">{item.label}</div>
+      <div className="text-[14px] font-bold text-[#64748b] tracking-wide dark:text-[#a1a1aa]">{item.label}</div>
     </div>
   );
 };

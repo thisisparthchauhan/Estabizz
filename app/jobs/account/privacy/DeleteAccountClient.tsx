@@ -44,10 +44,10 @@ export default function DeleteAccountClient() {
 
   if (stage === "deleted") {
     return (
-      <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl rounded-lg border border-emerald-200 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] sm:p-8">
-          <h1 className="text-2xl font-black text-[#120b45] sm:text-3xl">Your account has been deleted</h1>
-          <p className="mt-4 text-[15px] leading-7 text-[#475569]">
+      <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8 dark:bg-[#141417] dark:text-[#fafafa]">
+        <div className="mx-auto max-w-2xl rounded-lg border border-emerald-200 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] sm:p-8 dark:bg-[#141417] dark:border-[#1d4a37]">
+          <h1 className="text-2xl font-black text-[#120b45] sm:text-3xl dark:text-[#fafafa]">Your account has been deleted</h1>
+          <p className="mt-4 text-[15px] leading-7 text-[#475569] dark:text-[#a1a1aa]">
             Your resume, extracted profile details and contact information have been permanently
             removed. You have been signed out and will be taken to the homepage shortly.
           </p>
@@ -63,24 +63,24 @@ export default function DeleteAccountClient() {
   }
 
   return (
-    <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8 dark:bg-[#141417] dark:text-[#fafafa]">
       <div className="mx-auto max-w-3xl">
-        <div className="mb-3 inline-flex rounded-full bg-[#eaf2ff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+        <div className="mb-3 inline-flex rounded-full bg-[#eaf2ff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">
           Privacy
         </div>
-        <h1 className="text-[30px] font-black leading-tight tracking-tight text-[#120b45] sm:text-[38px]">
+        <h1 className="text-[30px] font-black leading-tight tracking-tight text-[#120b45] sm:text-[38px] dark:text-[#fafafa]">
           Your data and your account
         </h1>
 
-        <section className="mt-6 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] sm:p-6">
-          <h2 className="text-lg font-black text-[#120b45]">Delete my account</h2>
-          <p className="mt-2 text-sm leading-6 text-[#64748b]">
+        <section className="mt-6 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] sm:p-6 dark:bg-[#141417] dark:border-[#27272b]">
+          <h2 className="text-lg font-black text-[#120b45] dark:text-[#fafafa]">Delete my account</h2>
+          <p className="mt-2 text-sm leading-6 text-[#64748b] dark:text-[#a1a1aa]">
             This is permanent. We cannot restore your account or your resume once it is deleted.
           </p>
 
           <div className="mt-5 grid gap-4 md:grid-cols-2">
-            <div className="rounded-lg border border-red-100 bg-red-50/60 p-4">
-              <h3 className="text-sm font-black text-[#991b1b]">Permanently deleted</h3>
+            <div className="rounded-lg border border-red-100 bg-red-50/60 p-4 dark:bg-[#2a1618] dark:border-[#4a2225]">
+              <h3 className="text-sm font-black text-[#991b1b] dark:text-[#fca5a5]">Permanently deleted</h3>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[#7f1d1d]">
                 <li>Your uploaded resume files</li>
                 <li>Details we extracted from your resume</li>
@@ -90,14 +90,14 @@ export default function DeleteAccountClient() {
               </ul>
             </div>
 
-            <div className="rounded-lg border border-blue-100 bg-[#f8fbff] p-4">
+            <div className="rounded-lg border border-blue-100 bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
               <h3 className="text-sm font-black text-[#1e3a8a]">Kept, with your identity removed</h3>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[#475569]">
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-[#475569] dark:text-[#a1a1aa]">
                 <li>A record that you applied to a role, for our legal and business obligations</li>
                 <li>Security logs showing that changes happened, without your personal details</li>
                 <li>A record that you gave or withdrew consent</li>
               </ul>
-              <p className="mt-3 text-xs leading-5 text-[#64748b]">
+              <p className="mt-3 text-xs leading-5 text-[#64748b] dark:text-[#a1a1aa]">
                 Anything published under your name, such as a submitted article, stays online with
                 the author details removed. Backups may hold a copy for a short period before they
                 expire.
@@ -109,18 +109,18 @@ export default function DeleteAccountClient() {
             <button
               type="button"
               onClick={() => setStage("confirming")}
-              className="mt-6 w-full rounded-lg border border-red-200 bg-white px-5 py-3 text-sm font-black text-[#b91c1c] transition hover:bg-red-50 sm:w-auto"
+              className="mt-6 w-full rounded-lg border border-red-200 bg-white px-5 py-3 text-sm font-black text-[#b91c1c] transition hover:bg-red-50 sm:w-auto dark:bg-[#141417] dark:border-[#4a2225]"
             >
               Delete my account
             </button>
           ) : (
-            <div className="mt-6 rounded-lg border border-red-200 bg-white p-4 sm:p-5">
-              <h3 className="text-sm font-black text-[#991b1b]">Confirm permanent deletion</h3>
-              <p className="mt-2 text-sm leading-6 text-[#475569]">
+            <div className="mt-6 rounded-lg border border-red-200 bg-white p-4 sm:p-5 dark:bg-[#141417] dark:border-[#4a2225]">
+              <h3 className="text-sm font-black text-[#991b1b] dark:text-[#fca5a5]">Confirm permanent deletion</h3>
+              <p className="mt-2 text-sm leading-6 text-[#475569] dark:text-[#a1a1aa]">
                 Enter your password to confirm. This cannot be undone.
               </p>
 
-              <label className="mt-4 block text-xs font-black uppercase tracking-[0.12em] text-[#64748b]">
+              <label className="mt-4 block text-xs font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">
                 Password
                 <input
                   type="password"
@@ -128,11 +128,11 @@ export default function DeleteAccountClient() {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   disabled={stage === "deleting"}
-                  className="mt-2 w-full rounded-lg border border-blue-100 px-4 py-3 text-sm font-normal normal-case tracking-normal text-[#0f172a] outline-none focus:border-[#1677f2] disabled:opacity-60"
+                  className="mt-2 w-full rounded-lg border border-blue-100 px-4 py-3 text-sm font-normal normal-case tracking-normal text-[#0f172a] outline-none focus:border-[#1677f2] disabled:opacity-60 dark:border-[#27272b] dark:text-[#fafafa]"
                 />
               </label>
 
-              <label className="mt-4 flex items-start gap-3 text-sm leading-6 text-[#475569]">
+              <label className="mt-4 flex items-start gap-3 text-sm leading-6 text-[#475569] dark:text-[#a1a1aa]">
                 <input
                   type="checkbox"
                   checked={acknowledged}
@@ -147,7 +147,7 @@ export default function DeleteAccountClient() {
               </label>
 
               {error && (
-                <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-700" role="alert">
+                <p className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]" role="alert">
                   {error}
                 </p>
               )}
@@ -170,7 +170,7 @@ export default function DeleteAccountClient() {
                     setError("");
                   }}
                   disabled={stage === "deleting"}
-                  className="rounded-lg border border-blue-100 bg-white px-5 py-3 text-sm font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2] disabled:opacity-60"
+                  className="rounded-lg border border-blue-100 bg-white px-5 py-3 text-sm font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2] disabled:opacity-60 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
                 >
                   Cancel
                 </button>

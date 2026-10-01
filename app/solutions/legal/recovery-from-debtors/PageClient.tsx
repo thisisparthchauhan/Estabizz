@@ -67,7 +67,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -106,7 +106,7 @@ export default function PageClient() {
       finalCtaTitle="Route First, Notice Second"
       finalCtaDescription="The same unpaid invoice can go to a Facilitation Council, a commercial court, a tribunal or an arbitrator — with completely different speed, cost and leverage. Choosing badly is the most expensive thing you can do."
       heroDescription={<p>Unpaid receivables are not a collections problem; they are a forum selection problem. The same invoice can be pursued before a Micro and Small Enterprises Facilitation Council with interest at three times the bank rate, through a summary suit where the defendant needs leave to defend, through a tribunal where a crore is at stake, or through a civil suit that takes years — and the choice is largely determined before you send a single notice. Estabizz assists businesses, suppliers, service providers, lenders and professionals with debtor classification, evidence and limitation review, MSMED eligibility assessment, pre-institution mediation, notice drafting, forum selection, filing coordination, settlement documentation and execution strategy.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> recovering a debt is less about pressure and more about picking the right forum and getting there before the claim ages.</p>

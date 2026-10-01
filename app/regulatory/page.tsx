@@ -150,31 +150,31 @@ const categories = [
 
 export default function RegulatoryPage() {
     return (
-        <main className="min-h-screen bg-white pt-[64px]">
+        <main className="min-h-screen bg-white pt-[64px] dark:bg-[#141417]">
             {/* Hero — homepage-themed */}
-            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
-                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
-                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
-                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link>
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link>
                         <span className="opacity-40">/</span>
-                        <span className="text-[#374151]">Regulatory Services</span>
+                        <span className="text-[#374151] dark:text-[#a1a1aa]">Regulatory Services</span>
                     </nav>
-                    <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">
+                    <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
                         ⚖️ Regulatory Compliance
                     </div>
-                    <h1 className="mt-4 text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">
-                        Our Regulatory <span className="text-[#1677f2]">Services</span>
+                    <h1 className="mt-4 text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px] dark:text-[#fafafa]">
+                        Our Regulatory <span className="text-[#1677f2] dark:text-[#4f9dfb]">Services</span>
                     </h1>
-                    <p className="mt-4 max-w-2xl text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px]">
+                    <p className="mt-4 max-w-2xl text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px] dark:text-[#a1a1aa]">
                         Comprehensive regulatory solutions across all major frameworks — RBI, SEBI, IFSCA, IRDAI and FEMA.
                     </p>
                     <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                         <Link href="/contact" className="inline-flex items-center justify-center rounded-xl bg-[#1677f2] px-7 py-3.5 text-[15px] font-black text-white shadow-[0_14px_35px_rgba(22,119,242,0.28)] transition-all hover:-translate-y-0.5 hover:bg-[#0866d9]">
                             Book Free Consultation →
                         </Link>
-                        <Link href="/contact" className="inline-flex items-center justify-center rounded-xl border border-blue-100 bg-white px-7 py-3.5 text-[15px] font-black text-[#0a2b58] shadow-[0_10px_28px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-0.5 hover:border-[#1677f2] hover:text-[#1677f2]">
+                        <Link href="/contact" className="inline-flex items-center justify-center rounded-xl border border-blue-100 bg-white px-7 py-3.5 text-[15px] font-black text-[#0a2b58] shadow-[0_10px_28px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-0.5 hover:border-[#1677f2] hover:text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">
                             Talk to Expert
                         </Link>
                     </div>
@@ -184,39 +184,39 @@ export default function RegulatoryPage() {
             {/* Categories */}
             <section className="mx-auto max-w-7xl px-6 py-14">
                 <div className="mb-8">
-                    <h2 className="text-[26px] font-black tracking-[-0.02em] text-[#120b45]">Explore Regulatory Categories</h2>
+                    <h2 className="text-[26px] font-black tracking-[-0.02em] text-[#120b45] dark:text-[#fafafa]">Explore Regulatory Categories</h2>
                     <div className="mt-2 h-[3px] w-12 rounded-full bg-[#1677f2]" />
-                    <p className="mt-3 text-[14px] text-[#64748b]">Select a framework to access the complete suite of registration, licensing and compliance services.</p>
+                    <p className="mt-3 text-[14px] text-[#64748b] dark:text-[#a1a1aa]">Select a framework to access the complete suite of registration, licensing and compliance services.</p>
                 </div>
                 <div className="grid gap-6 md:grid-cols-2">
                     {categories.map((cat, idx) => (
                         <div
                             key={idx}
                             id={cat.title === "Compliance" ? "compliance" : undefined}
-                            className="flex h-full scroll-mt-24 flex-col rounded-2xl border border-blue-100 bg-white p-8 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-all hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_16px_44px_rgba(0,80,140,0.12)]"
+                            className="flex h-full scroll-mt-24 flex-col rounded-2xl border border-blue-100 bg-white p-8 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-all hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_16px_44px_rgba(0,80,140,0.12)] dark:bg-[#141417] dark:border-[#27272b]"
                         >
                             <div className="mb-4 flex items-center gap-3">
-                                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5fbff] text-2xl">{cat.icon}</span>
-                                <h3 className="text-[18px] font-bold tracking-[-0.01em] text-[#120b45]">{cat.href ? <Link href={cat.href} className="hover:text-[#1677f2]">{cat.title}</Link> : cat.title}</h3>
+                                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f5fbff] text-2xl dark:bg-[#141417]">{cat.icon}</span>
+                                <h3 className="text-[18px] font-bold tracking-[-0.01em] text-[#120b45] dark:text-[#fafafa]">{cat.href ? <Link href={cat.href} className="hover:text-[#1677f2] dark:text-[#4f9dfb]">{cat.title}</Link> : cat.title}</h3>
                             </div>
-                            <p className="mb-5 text-[13px] leading-relaxed text-[#64748b]">{cat.description}</p>
+                            <p className="mb-5 text-[13px] leading-relaxed text-[#64748b] dark:text-[#a1a1aa]">{cat.description}</p>
                             <div className="mb-6 flex flex-wrap gap-2">
                                 {cat.tags.map((tag, i) => (
-                                    <span key={i} className="rounded-full bg-[#f5fbff] px-2.5 py-1 text-[10.5px] font-bold text-[#0077B6]">
+                                    <span key={i} className="rounded-full bg-[#f5fbff] px-2.5 py-1 text-[10.5px] font-bold text-[#0077B6] dark:bg-[#141417] dark:text-[#4f9dfb]">
                                         {tag}
                                     </span>
                                 ))}
                             </div>
                             <div className="mt-auto space-y-1">
-                                <Link href={cat.href} className="block px-3 py-2 text-sm font-bold text-[#1677f2]">View all {cat.title} →</Link>
+                                <Link href={cat.href} className="block px-3 py-2 text-sm font-bold text-[#1677f2] dark:text-[#4f9dfb]">View all {cat.title} →</Link>
                                 {cat.services.map((svc, i) => (
                                     <Link
                                         key={i}
                                         href={svc.href}
-                                        className="group flex items-center justify-between rounded-lg px-3 py-2 transition-colors hover:bg-[#f5fbff]"
+                                        className="group flex items-center justify-between rounded-lg px-3 py-2 transition-colors hover:bg-[#f5fbff] dark:bg-[#141417]"
                                     >
-                                        <span className="text-[13.5px] font-medium text-[#475569] group-hover:text-[#1677f2]">{svc.name}</span>
-                                        <span className="text-[#94a3b8] transition-transform group-hover:translate-x-1 group-hover:text-[#1677f2]">→</span>
+                                        <span className="text-[13.5px] font-medium text-[#475569] group-hover:text-[#1677f2] dark:text-[#a1a1aa]">{svc.name}</span>
+                                        <span className="text-[#94a3b8] transition-transform group-hover:translate-x-1 group-hover:text-[#1677f2] dark:text-[#71717a]">→</span>
                                     </Link>
                                 ))}
                             </div>
@@ -226,7 +226,7 @@ export default function RegulatoryPage() {
             </section>
 
             {/* Final CTA */}
-            <section className="mx-6 mb-16 overflow-hidden rounded-2xl border border-[#1677f2]/25 bg-gradient-to-br from-[#0a1628] to-[#0c2040] px-6 py-14 text-center sm:px-10">
+            <section className="mx-6 mb-16 overflow-hidden rounded-2xl border border-[#1677f2]/25 bg-gradient-to-br from-[#0a1628] to-[#0c2040] dark:from-[#141417] dark:to-[#1c1c20] px-6 py-14 text-center sm:px-10">
                 <div className="mx-auto max-w-3xl">
                     <p className="mb-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#4f9dfb]">Estabizz Fintech Private Limited</p>
                     <h2 className="mb-4 text-[26px] font-black text-white sm:text-[30px]">Need Regulatory Compliance Help?</h2>

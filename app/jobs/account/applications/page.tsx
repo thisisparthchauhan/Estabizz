@@ -24,16 +24,16 @@ export default async function CandidateApplicationsPage() {
   const dashboard = await loadCandidateAccountDashboard(session);
 
   return (
-    <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8 dark:bg-[#141417] dark:text-[#fafafa]">
       <div className="mx-auto max-w-6xl">
         <div className="mb-8">
-          <div className="mb-3 inline-flex rounded-full bg-[#eaf2ff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+          <div className="mb-3 inline-flex rounded-full bg-[#eaf2ff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">
             My Applications
           </div>
-          <h1 className="text-[34px] font-black leading-tight tracking-tight text-[#120b45] md:text-[44px]">
+          <h1 className="text-[34px] font-black leading-tight tracking-tight text-[#120b45] md:text-[44px] dark:text-[#fafafa]">
             Track your applications
           </h1>
-          <p className="mt-4 max-w-3xl text-[15px] leading-7 text-[#64748b]">
+          <p className="mt-4 max-w-3xl text-[15px] leading-7 text-[#64748b] dark:text-[#a1a1aa]">
             Candidate-facing application updates appear here. Internal recruiter notes, AI scores and rankings are never shown.
           </p>
         </div>
@@ -45,11 +45,11 @@ export default async function CandidateApplicationsPage() {
           <SummaryCard label="Selected / Offered" value={dashboard.applicationSummary.offeredOrSelected} />
         </div>
 
-        <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
+        <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
           {dashboard.recentApplications.length === 0 ? (
-            <div className="rounded-lg bg-[#f5fbff] p-6 text-center">
-              <h2 className="text-xl font-black text-[#120b45]">No applications yet</h2>
-              <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-[#64748b]">
+            <div className="rounded-lg bg-[#f5fbff] p-6 text-center dark:bg-[#141417]">
+              <h2 className="text-xl font-black text-[#120b45] dark:text-[#fafafa]">No applications yet</h2>
+              <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-[#64748b] dark:text-[#a1a1aa]">
                 Your submitted applications will appear here once candidate application submission is connected.
               </p>
               <Link
@@ -62,18 +62,18 @@ export default async function CandidateApplicationsPage() {
           ) : (
             <div className="grid gap-3">
               {dashboard.recentApplications.map((application) => (
-                <article key={application.id} className="rounded-lg border border-[#e2ecf7] bg-[#fbfdff] p-4">
+                <article key={application.id} className="rounded-lg border border-[#e2ecf7] bg-[#fbfdff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
                   <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                     <div>
-                      <h2 className="text-lg font-black text-[#0f172a]">{application.jobTitle}</h2>
-                      <p className="mt-1 text-sm text-[#64748b]">{application.organizationName}</p>
-                      <p className="mt-3 text-sm leading-6 text-[#475569]">{application.nextStep}</p>
+                      <h2 className="text-lg font-black text-[#0f172a] dark:text-[#fafafa]">{application.jobTitle}</h2>
+                      <p className="mt-1 text-sm text-[#64748b] dark:text-[#a1a1aa]">{application.organizationName}</p>
+                      <p className="mt-3 text-sm leading-6 text-[#475569] dark:text-[#a1a1aa]">{application.nextStep}</p>
                     </div>
                     <div className="flex flex-wrap gap-2 md:justify-end">
-                      <span className="rounded-full bg-[#eef6ff] px-3 py-1 text-xs font-black text-[#1677f2]">
+                      <span className="rounded-full bg-[#eef6ff] px-3 py-1 text-xs font-black text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">
                         {application.statusLabel}
                       </span>
-                      <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-[#64748b]">
+                      <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-[#64748b] dark:bg-[#141417] dark:text-[#a1a1aa]">
                         Applied {formatDate(application.appliedDate)}
                       </span>
                     </div>
@@ -90,9 +90,9 @@ export default async function CandidateApplicationsPage() {
 
 function SummaryCard({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-lg border border-blue-100 bg-white p-4 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
-      <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#1677f2]">{label}</p>
-      <p className="mt-3 text-3xl font-black text-[#120b45]">{value}</p>
+    <div className="rounded-lg border border-blue-100 bg-white p-4 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+      <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#1677f2] dark:text-[#4f9dfb]">{label}</p>
+      <p className="mt-3 text-3xl font-black text-[#120b45] dark:text-[#fafafa]">{value}</p>
     </div>
   );
 }

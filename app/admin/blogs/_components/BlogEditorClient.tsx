@@ -210,21 +210,21 @@ function validate(form: BlogFormData): FormErrors {
 // ─── Shared styles ────────────────────────────────────────────────────────────
 
 const inputCls =
-  "w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13.5px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#b0bec5] dark:placeholder:text-[#64748b] outline-none transition-all focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/12";
+  "w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13.5px] text-[#0a1628] dark:text-[#fafafa] placeholder:text-[#b0bec5] dark:placeholder:text-[#64748b] outline-none transition-all focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/12";
 
 const errorInputCls =
-  "w-full rounded-xl border border-red-300 bg-red-50/30 px-3.5 py-2.5 text-[13.5px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none focus:border-red-400 focus:ring-2 focus:ring-red-300/20";
+  "w-full rounded-xl border border-red-300 bg-red-50/30 px-3.5 py-2.5 text-[13.5px] text-[#0a1628] placeholder:text-[#b0bec5] outline-none focus:border-red-400 focus:ring-2 focus:ring-red-300/20 dark:text-[#fafafa] dark:bg-[#2a1618] dark:border-[#4a2225]";
 
 // ─── Section card ─────────────────────────────────────────────────────────────
 
 function SectionCard({ number, title, children }: { number: number; title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-white dark:bg-[#0d1a2d] rounded-2xl border border-[#e2e8f0] dark:border-[#223550] shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
-      <div className="flex items-center gap-3 border-b border-[#f0f4f8] dark:border-[#1a2e48] px-6 py-4">
-        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0a1628] text-[11px] font-black text-white">
+    <div className="bg-white dark:bg-[#141417] rounded-2xl border border-[#e2e8f0] dark:border-[#27272b] shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
+      <div className="flex items-center gap-3 border-b border-[#f0f4f8] dark:border-[#27272b] px-6 py-4">
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0a1628] dark:bg-[#1c1c20] text-[11px] font-black text-white">
           {number}
         </div>
-        <h2 className="text-[14px] font-black text-[#0a1628] dark:text-[#f7f9fc]">{title}</h2>
+        <h2 className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">{title}</h2>
       </div>
       <div className="px-6 py-5">{children}</div>
     </div>
@@ -240,19 +240,19 @@ function Field({ label, required, error, hint, counter, children }: {
   return (
     <div className="mb-5 last:mb-0">
       <div className="flex items-center justify-between mb-1.5">
-        <label className="text-[12.5px] font-semibold text-[#334155] dark:text-[#94a3b8] flex items-center gap-1">
+        <label className="text-[12.5px] font-semibold text-[#334155] dark:text-[#8b8b94] flex items-center gap-1">
           {label}
           {required && <span className="text-red-500 text-[11px]">*</span>}
         </label>
         {counter && (
-          <span className={`text-[11px] font-mono ${counter.current > counter.max ? "text-red-500" : "text-[#94a3b8]"}`}>
+          <span className={`text-[11px] font-mono ${counter.current > counter.max ? "text-red-500" : "text-[#94a3b8] dark:text-[#71717a]"}`}>
             {counter.current}/{counter.max}
           </span>
         )}
       </div>
       {children}
       {error && <p className="mt-1 text-[11.5px] text-red-500">⚠ {error}</p>}
-      {hint && !error && <p className="mt-1 text-[11px] text-[#94a3b8]">{hint}</p>}
+      {hint && !error && <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">{hint}</p>}
     </div>
   );
 }
@@ -268,33 +268,33 @@ function SerpPreview({ title, slug, description }: { title: string; slug: string
   const descTrunc  = displayDesc.length  > 160 ? displayDesc.slice(0, 160)  + "…" : displayDesc;
 
   return (
-    <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 shadow-[0_2px_12px_rgba(0,80,140,0.06)]">
+    <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 shadow-[0_2px_12px_rgba(0,80,140,0.06)] dark:border-[#27272b]">
       <p className="text-[11px] font-black uppercase tracking-widest text-[#94a3b8] mb-4">Google Search Preview</p>
       {/* Mock Google search bar */}
       <div className="mb-4 flex items-center gap-2 rounded-full border border-[#dbe7f3] bg-[#f8fbff] px-4 py-2">
-        <svg className="shrink-0 h-3.5 w-3.5 text-[#94a3b8]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" /></svg>
+        <svg className="shrink-0 h-3.5 w-3.5 text-[#94a3b8] dark:text-[#71717a]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" /></svg>
         <span className="text-[12px] text-[#64748b] truncate">{displaySlug.replace(`${SITE_URL_DISPLAY} › `, "")}</span>
       </div>
       {/* Search result card */}
       <div className="pl-1">
         <div className="flex items-center gap-2 mb-1">
-          <div className="h-4 w-4 rounded-full bg-[#e2e8f0] shrink-0" />
+          <div className="h-4 w-4 rounded-full bg-[#e2e8f0] shrink-0 dark:bg-[#1c1c20]" />
           <div>
             <p className="text-[11px] text-[#202124] font-medium leading-tight">Estabizz Fintech</p>
             <p className="text-[10.5px] text-[#4d5156] leading-tight">{displaySlug}</p>
           </div>
         </div>
-        <p className={`text-[16px] font-normal leading-snug mb-0.5 ${displayTitle.length > 60 ? "text-red-600" : "text-[#1a0dab]"}`}>
+        <p className={`text-[16px] font-normal leading-snug mb-0.5 ${displayTitle.length > 60 ? "text-red-600 dark:text-[#fca5a5]" : "text-[#1a0dab]"}`}>
           {titleTrunc}
         </p>
         <p className="text-[13px] text-[#4d5156] leading-[1.5]">{descTrunc}</p>
       </div>
       {/* Counters */}
-      <div className="mt-4 pt-3 border-t border-[#f0f4f8] flex gap-4 text-[11px]">
-        <span className={displayTitle.length > 60 ? "text-red-500 font-semibold" : "text-[#94a3b8]"}>
+      <div className="mt-4 pt-3 border-t border-[#f0f4f8] flex gap-4 text-[11px] dark:border-[#27272b]">
+        <span className={displayTitle.length > 60 ? "text-red-500 font-semibold" : "text-[#94a3b8] dark:text-[#71717a]"}>
           Title: {displayTitle.length}/60 chars
         </span>
-        <span className={displayDesc.length > 160 ? "text-amber-500 font-semibold" : displayDesc.length < 120 ? "text-[#94a3b8]" : "text-emerald-600 font-semibold"}>
+        <span className={displayDesc.length > 160 ? "text-amber-500 font-semibold" : displayDesc.length < 120 ? "text-[#94a3b8] dark:text-[#71717a]" : "text-emerald-600 font-semibold dark:text-[#6ee7b7]"}>
           Desc: {displayDesc.length}/160 chars {displayDesc.length >= 120 && displayDesc.length <= 160 ? "✓" : ""}
         </span>
       </div>
@@ -314,8 +314,8 @@ function KeywordChecker({ keyword, title, description, content }: { keyword: str
   const count = (plainContent.match(new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g")) || []).length;
 
   return (
-    <div className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-4">
-      <p className="text-[11px] font-black uppercase tracking-widest text-[#94a3b8] mb-3">Keyword Usage: "{keyword}"</p>
+    <div className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+      <p className="text-[11px] font-black uppercase tracking-widest text-[#94a3b8] mb-3 dark:text-[#71717a]">Keyword Usage: "{keyword}"</p>
       <div className="space-y-1.5">
         {[
           { label: "In SEO Title", ok: inTitle },
@@ -323,10 +323,10 @@ function KeywordChecker({ keyword, title, description, content }: { keyword: str
           { label: `In Article Content (${count}×)`, ok: inContent },
         ].map(({ label, ok }) => (
           <div key={label} className="flex items-center gap-2">
-            <span className={`h-4 w-4 rounded-full flex items-center justify-center text-[9px] font-black shrink-0 ${ok ? "bg-emerald-100 text-emerald-600" : "bg-red-50 text-red-400"}`}>
+            <span className={`h-4 w-4 rounded-full flex items-center justify-center text-[9px] font-black shrink-0 ${ok ? "bg-emerald-100 text-emerald-600 dark:bg-[#132a20] dark:text-[#6ee7b7]" : "bg-red-50 text-red-400 dark:bg-[#2a1618]"}`}>
               {ok ? "✓" : "✗"}
             </span>
-            <span className={`text-[12px] ${ok ? "text-[#334155]" : "text-[#94a3b8]"}`}>{label}</span>
+            <span className={`text-[12px] ${ok ? "text-[#334155] dark:text-[#a1a1aa]" : "text-[#94a3b8] dark:text-[#71717a]"}`}>{label}</span>
           </div>
         ))}
       </div>
@@ -347,27 +347,27 @@ function FaqEditor({ faqs, onChange }: { faqs: FaqEntry[]; onChange: (faqs: FaqE
   return (
     <div className="space-y-3">
       {faqs.length === 0 && (
-        <p className="text-[12.5px] text-[#94a3b8] italic py-1">
+        <p className="text-[12.5px] text-[#94a3b8] italic py-1 dark:text-[#71717a]">
           No FAQs yet. They render as an expandable accordion below the article and generate FAQPage schema for Google — great for featured snippets.
         </p>
       )}
       {faqs.map((faq, i) => (
-        <div key={i} className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-4 space-y-3">
+        <div key={i} className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-4 space-y-3 dark:bg-[#141417] dark:border-[#27272b]">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-black uppercase tracking-wider text-[#1677f2]">FAQ {i + 1}</span>
-            <button type="button" onClick={() => removeFaq(i)} className="text-[11px] text-[#94a3b8] hover:text-red-500 hover:bg-red-50 rounded-lg px-2 py-1 transition-colors">Remove</button>
+            <span className="text-[11px] font-black uppercase tracking-wider text-[#1677f2] dark:text-[#4f9dfb]">FAQ {i + 1}</span>
+            <button type="button" onClick={() => removeFaq(i)} className="text-[11px] text-[#94a3b8] hover:text-red-500 hover:bg-red-50 rounded-lg px-2 py-1 transition-colors dark:text-[#71717a]">Remove</button>
           </div>
           <div>
-            <label className="text-[11px] font-medium text-[#64748b] mb-1 block">Question</label>
+            <label className="text-[11px] font-medium text-[#64748b] mb-1 block dark:text-[#a1a1aa]">Question</label>
             <input type="text" value={faq.question} onChange={(e) => updateFaq(i, { question: e.target.value })} placeholder="e.g. What is the minimum NOF for NBFC registration?" className={inputCls} />
           </div>
           <div>
-            <label className="text-[11px] font-medium text-[#64748b] mb-1 block">Answer</label>
+            <label className="text-[11px] font-medium text-[#64748b] mb-1 block dark:text-[#a1a1aa]">Answer</label>
             <textarea value={faq.answer} onChange={(e) => updateFaq(i, { answer: e.target.value })} rows={3} placeholder="Provide a clear, concise answer…" className={`${inputCls} resize-y`} />
           </div>
         </div>
       ))}
-      <button type="button" onClick={addFaq} className="w-full flex items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#1677f2]/30 bg-[#f0faff] py-3 text-[13px] font-semibold text-[#1677f2] hover:border-[#1677f2] hover:bg-[#e8f7ff] transition-colors">
+      <button type="button" onClick={addFaq} className="w-full flex items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#1677f2]/30 bg-[#f0faff] py-3 text-[13px] font-semibold text-[#1677f2] hover:border-[#1677f2] hover:bg-[#e8f7ff] transition-colors dark:bg-[#141417] dark:text-[#4f9dfb]">
         + Add FAQ
       </button>
     </div>
@@ -397,14 +397,14 @@ function ActionBar({ title, isEditing, saving, onDraft, onPublish, onUpdate }: {
   onDraft: () => void; onPublish: () => void; onUpdate: () => void;
 }) {
   return (
-    <div className="sticky top-0 z-[10000] bg-white dark:bg-[#0d1a2d] border-b border-[#e2e8f0] dark:border-[#223550] shadow-[0_2px_8px_rgba(15,23,42,0.06)]">
+    <div className="sticky top-0 z-[10000] bg-white dark:bg-[#141417] border-b border-[#e2e8f0] dark:border-[#27272b] shadow-[0_2px_8px_rgba(15,23,42,0.06)]">
       <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0">
-          <span className="hidden sm:inline-flex items-center rounded-lg bg-[#0a1628] px-2.5 py-1 text-[10.5px] font-black text-[#1677f2] uppercase tracking-wider shrink-0">Admin Blog Panel</span>
-          <span className="text-[13px] text-[#94a3b8] truncate max-w-[240px] hidden md:inline">{title || (isEditing ? "Edit Blog" : "New Blog")}</span>
+          <span className="hidden sm:inline-flex items-center rounded-lg bg-[#0a1628] dark:bg-[#1c1c20] px-2.5 py-1 text-[10.5px] font-black text-[#1677f2] uppercase tracking-wider shrink-0">Admin Blog Panel</span>
+          <span className="text-[13px] text-[#94a3b8] truncate max-w-[240px] hidden md:inline dark:text-[#71717a]">{title || (isEditing ? "Edit Blog" : "New Blog")}</span>
         </div>
         <div className="flex items-center gap-2 shrink-0">
-          <button type="button" onClick={onDraft} disabled={saving} className="px-4 py-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-[12.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f8fbff] dark:hover:bg-[#12223a] transition-colors disabled:opacity-50">
+          <button type="button" onClick={onDraft} disabled={saving} className="px-4 py-2 rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] text-[12.5px] font-semibold text-[#334155] dark:text-[#a1a1aa] hover:bg-[#f8fbff] dark:hover:bg-[#12223a] transition-colors disabled:opacity-50">
             {saving ? "Saving…" : "Save as Draft"}
           </button>
           {isEditing ? (
@@ -556,14 +556,14 @@ export default function BlogEditorClient({ blog, categories }: Props) {
   const handleUpdate  = () => doSave(form.status);
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#06101f]">
+    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#09090b]">
 
       <ActionBar title={form.title} isEditing={isEditing} saving={saving} onDraft={handleDraft} onPublish={handlePublish} onUpdate={handleUpdate} />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-6">
 
         <div>
-          <Link href="/admin/blogs" className="inline-flex items-center gap-1.5 text-[12px] text-[#64748b] hover:text-[#1677f2] transition-colors font-medium">
+          <Link href="/admin/blogs" className="inline-flex items-center gap-1.5 text-[12px] text-[#64748b] hover:text-[#1677f2] transition-colors font-medium dark:text-[#a1a1aa]">
             ← All Blogs
           </Link>
         </div>
@@ -584,54 +584,54 @@ export default function BlogEditorClient({ blog, categories }: Props) {
           {/* Slug — prominent box */}
           <div className="mb-5">
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-[12.5px] font-semibold text-[#334155] dark:text-[#94a3b8] flex items-center gap-1.5">
+              <label className="text-[12.5px] font-semibold text-[#334155] dark:text-[#8b8b94] flex items-center gap-1.5">
                 URL Slug
                 <span className="text-red-500 text-[11px]">*</span>
                 {form.slugManual && (
-                  <span className="ml-1 inline-flex items-center rounded-full bg-amber-100 text-amber-700 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
+                  <span className="ml-1 inline-flex items-center rounded-full bg-amber-100 text-amber-700 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider dark:bg-[#2a2113] dark:text-[#fcd34d]">
                     Locked
                   </span>
                 )}
                 {!form.slugManual && form.slug && (
-                  <span className="ml-1 inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
+                  <span className="ml-1 inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider dark:bg-[#132a20] dark:text-[#6ee7b7]">
                     Auto
                   </span>
                 )}
               </label>
               {form.slugManual && (
-                <button type="button" onClick={resetSlug} className="text-[11px] font-semibold text-[#1677f2] hover:underline">
+                <button type="button" onClick={resetSlug} className="text-[11px] font-semibold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">
                   ↺ Reset to auto
                 </button>
               )}
             </div>
             {/* URL preview bar */}
-            <div className={`rounded-xl border-2 ${errors.slug ? "border-red-300 bg-red-50/30" : form.slugManual ? "border-amber-300 bg-amber-50/40" : "border-[#1677f2]/30 bg-[#f0faff]"} overflow-hidden`}>
+            <div className={`rounded-xl border-2 ${errors.slug ? "border-red-300 bg-red-50/30 dark:bg-[#2a1618] dark:border-[#4a2225]" : form.slugManual ? "border-amber-300 bg-amber-50/40 dark:bg-[#2a2113] dark:border-[#4a3a1a]" : "border-[#1677f2]/30 bg-[#f0faff] dark:bg-[#141417]"} overflow-hidden`}>
               {/* URL bar header */}
-              <div className={`flex items-center gap-2 px-3.5 py-2 border-b ${errors.slug ? "border-red-200 bg-red-50/50" : form.slugManual ? "border-amber-200/60 bg-amber-50/60" : "border-[#1677f2]/15 bg-[#e8f7ff]/60"}`}>
-                <svg className="h-3 w-3 text-[#64748b] shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/><path d="M5.5 8h5M8 5.5v5" strokeLinecap="round"/></svg>
-                <span className="text-[11px] text-[#64748b] font-mono">
-                  <span className="text-[#94a3b8]">{SITE_URL_DISPLAY}/blogs/</span>
-                  <span className={`font-bold ${errors.slug ? "text-red-500" : form.slugManual ? "text-amber-700" : "text-[#1677f2]"}`}>
+              <div className={`flex items-center gap-2 px-3.5 py-2 border-b ${errors.slug ? "border-red-200 bg-red-50/50 dark:bg-[#2a1618] dark:border-[#4a2225]" : form.slugManual ? "border-amber-200/60 bg-amber-50/60 dark:bg-[#2a2113] dark:border-[#4a3a1a]" : "border-[#1677f2]/15 bg-[#e8f7ff]/60 dark:bg-[#1c1c20]"}`}>
+                <svg className="h-3 w-3 text-[#64748b] shrink-0 dark:text-[#a1a1aa]" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/><path d="M5.5 8h5M8 5.5v5" strokeLinecap="round"/></svg>
+                <span className="text-[11px] text-[#64748b] font-mono dark:text-[#a1a1aa]">
+                  <span className="text-[#94a3b8] dark:text-[#71717a]">{SITE_URL_DISPLAY}/blogs/</span>
+                  <span className={`font-bold ${errors.slug ? "text-red-500" : form.slugManual ? "text-amber-700 dark:text-[#fcd34d]" : "text-[#1677f2] dark:text-[#4f9dfb]"}`}>
                     {form.slug || <span className="opacity-40">your-slug-here</span>}
                   </span>
                 </span>
               </div>
               {/* Slug input */}
               <div className="flex items-center">
-                <span className="px-3.5 text-[12px] text-[#94a3b8] font-mono whitespace-nowrap select-none border-r border-[#dbe7f3]/60 py-2.5">/blogs/</span>
+                <span className="px-3.5 text-[12px] text-[#94a3b8] font-mono whitespace-nowrap select-none border-r border-[#dbe7f3]/60 py-2.5 dark:border-[#27272b] dark:text-[#71717a]">/blogs/</span>
                 <input
                   ref={slugInputRef}
                   type="text"
                   value={form.slug}
                   onChange={(e) => handleSlugChange(e.target.value)}
                   placeholder="type-your-slug-here"
-                  className="flex-1 bg-transparent px-3 py-2.5 text-[13px] font-mono text-[#0a1628] dark:text-[#f7f9fc] outline-none placeholder:text-[#c8d6e2]"
+                  className="flex-1 bg-transparent px-3 py-2.5 text-[13px] font-mono text-[#0a1628] dark:text-[#fafafa] outline-none placeholder:text-[#c8d6e2]"
                 />
                 {form.slug && (
                   <button
                     type="button"
                     onClick={() => { navigator.clipboard?.writeText(`${SITE_URL_DISPLAY}/blogs/${form.slug}`); }}
-                    className="px-3 py-2.5 text-[11px] text-[#94a3b8] hover:text-[#1677f2] border-l border-[#dbe7f3]/60 transition-colors"
+                    className="px-3 py-2.5 text-[11px] text-[#94a3b8] hover:text-[#1677f2] border-l border-[#dbe7f3]/60 transition-colors dark:border-[#27272b] dark:text-[#71717a]"
                     title="Copy full URL"
                   >
                     Copy
@@ -640,7 +640,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
               </div>
             </div>
             {errors.slug && <p className="mt-1 text-[11.5px] text-red-500">⚠ {errors.slug}</p>}
-            {!errors.slug && <p className="mt-1 text-[11px] text-[#94a3b8]">Auto-generated from title. Edit to lock it manually. Only a–z, 0–9 and hyphens.</p>}
+            {!errors.slug && <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">Auto-generated from title. Edit to lock it manually. Only a–z, 0–9 and hyphens.</p>}
           </div>
 
           {/* Status + Category row */}
@@ -672,7 +672,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                     className={inputCls}
                     autoFocus
                   />
-                  <p className="mt-1 text-[11px] text-[#94a3b8]">This new category name will be saved with the blog.</p>
+                  <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">This new category name will be saved with the blog.</p>
                 </div>
               )}
             </div>
@@ -685,8 +685,8 @@ export default function BlogEditorClient({ blog, categories }: Props) {
           <div className="mb-6">
             <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className="text-[12px] font-bold text-[#334155] dark:text-[#dbeafe]">Cover Image</p>
-                <p className="text-[11px] text-[#94a3b8]">Recommended: 1600 × 900 px · 16:9 · JPG, PNG, WebP</p>
+                <p className="text-[12px] font-bold text-[#334155] dark:text-[#e4e4e7]">Cover Image</p>
+                <p className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">Recommended: 1600 × 900 px · 16:9 · JPG, PNG, WebP</p>
               </div>
               {form.featuredImageUrl && (
                 <button type="button" onClick={() => { setForm((f) => ({ ...f, featuredImageUrl: "", featuredImagePublicId: "", featuredImageAlt: "", featuredImageCaption: "", featuredImageWidth: "", featuredImageHeight: "" })); setImagePreview(false); }} className="self-start rounded-xl border border-red-200 px-3 py-1.5 text-[11px] font-bold text-red-500 hover:bg-red-50">
@@ -699,9 +699,9 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                 <div className="flex gap-2">
                   <input type="url" value={form.featuredImageUrl} onChange={(e) => { set("featuredImageUrl", e.target.value); setImagePreview(false); }} placeholder="https://… or /images/…" className={inputCls} />
                   <CloudinaryUploader onUploaded={(url, uploadData) => { setForm((f) => ({ ...f, featuredImageUrl: url, featuredImagePublicId: String(uploadData?.public_id ?? ""), featuredImageWidth: uploadData?.width != null ? Number(uploadData.width) : "", featuredImageHeight: uploadData?.height != null ? Number(uploadData.height) : "" })); setImagePreview(true); }} />
-                  <button type="button" onClick={() => setCoverPickerOpen(true)} className="shrink-0 px-3 py-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#12223a] text-[12px] font-semibold text-[#64748b] dark:text-[#dbeafe] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors">Library</button>
+                  <button type="button" onClick={() => setCoverPickerOpen(true)} className="shrink-0 px-3 py-2 rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#1c1c20] text-[12px] font-semibold text-[#64748b] dark:text-[#e4e4e7] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors">Library</button>
                   {form.featuredImageUrl && (
-                    <button type="button" onClick={() => setImagePreview((p) => !p)} className="shrink-0 px-3 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12px] font-semibold text-[#64748b] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors">{imagePreview ? "Hide" : "Preview"}</button>
+                    <button type="button" onClick={() => setImagePreview((p) => !p)} className="shrink-0 px-3 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12px] font-semibold text-[#64748b] hover:border-[#1677f2] hover:text-[#1677f2] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">{imagePreview ? "Hide" : "Preview"}</button>
                   )}
                 </div>
               </Field>
@@ -721,25 +721,25 @@ export default function BlogEditorClient({ blog, categories }: Props) {
               </div>
             </div>
             {imagePreview && form.featuredImageUrl && (
-              <div className="rounded-xl overflow-hidden border border-[#dbe7f3] bg-[#f8fbff]">
+              <div className="rounded-xl overflow-hidden border border-[#dbe7f3] bg-[#f8fbff] dark:bg-[#141417] dark:border-[#27272b]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={form.featuredImageUrl} alt={form.featuredImageAlt || "preview"} className="w-full h-48 object-cover" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
-                {form.featuredImageCaption && <p className="px-3 py-2 text-center text-[12px] italic text-[#64748b]">{form.featuredImageCaption}</p>}
+                {form.featuredImageCaption && <p className="px-3 py-2 text-center text-[12px] italic text-[#64748b] dark:text-[#a1a1aa]">{form.featuredImageCaption}</p>}
               </div>
             )}
           </div>
 
           {/* Supporting images */}
           <div>
-            <p className="text-[12px] font-bold text-[#334155] mb-3">
-              Supporting Images <span className="ml-2 text-[11px] font-medium text-[#94a3b8]">({form.supportingImages.length}/6)</span>
+            <p className="text-[12px] font-bold text-[#334155] mb-3 dark:text-[#a1a1aa]">
+              Supporting Images <span className="ml-2 text-[11px] font-medium text-[#94a3b8] dark:text-[#71717a]">({form.supportingImages.length}/6)</span>
             </p>
             <div className="space-y-3">
               {form.supportingImages.map((img, i) => (
-                <div key={i} className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-3.5">
+                <div key={i} className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-3.5 dark:bg-[#141417] dark:border-[#27272b]">
                   <div className="flex items-center justify-between mb-2.5">
-                    <span className="text-[11px] font-black uppercase tracking-wider text-[#1677f2]">Image {i + 1}</span>
-                    <button type="button" onClick={() => removeSupportingImage(i)} className="text-[11px] text-[#94a3b8] hover:text-red-500 transition-colors">Remove</button>
+                    <span className="text-[11px] font-black uppercase tracking-wider text-[#1677f2] dark:text-[#4f9dfb]">Image {i + 1}</span>
+                    <button type="button" onClick={() => removeSupportingImage(i)} className="text-[11px] text-[#94a3b8] hover:text-red-500 transition-colors dark:text-[#71717a]">Remove</button>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div className="flex gap-2">
@@ -750,7 +750,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                     <input type="text" value={img.caption ?? ""} onChange={(e) => updateSupportingImage(i, { caption: e.target.value })} placeholder="Caption" className={`${inputCls} text-[12.5px] py-2 sm:col-span-2`} />
                   </div>
                   {img.url && (
-                    <div className="mt-2.5 overflow-hidden rounded-lg border border-[#dbe7f3] bg-white">
+                    <div className="mt-2.5 overflow-hidden rounded-lg border border-[#dbe7f3] bg-white dark:bg-[#141417] dark:border-[#27272b]">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={img.url} alt={img.alt || "preview"} className="h-28 w-full object-cover" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
                     </div>
@@ -759,7 +759,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
               ))}
             </div>
             {form.supportingImages.length < 6 && (
-              <button type="button" onClick={addSupportingImage} className="mt-3 w-full flex items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#1677f2]/30 bg-[#f0faff] py-2.5 text-[13px] font-semibold text-[#1677f2] hover:border-[#1677f2] hover:bg-[#e8f7ff] transition-colors">
+              <button type="button" onClick={addSupportingImage} className="mt-3 w-full flex items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#1677f2]/30 bg-[#f0faff] py-2.5 text-[13px] font-semibold text-[#1677f2] hover:border-[#1677f2] hover:bg-[#e8f7ff] transition-colors dark:bg-[#141417] dark:text-[#4f9dfb]">
                 + Add Supporting Image
               </button>
             )}
@@ -809,10 +809,10 @@ export default function BlogEditorClient({ blog, categories }: Props) {
             />
 
             {/* Info box */}
-            <div className="rounded-xl border border-blue-100 bg-[#f0faff] p-4 text-[12.5px] text-[#334155] leading-[1.6] space-y-1">
-              <p className="font-bold text-[#0a1628]">How this SEO section works on the live site:</p>
-              <p>• <span className="font-semibold">SEO Title</span> → page <code className="bg-blue-50 px-1 rounded text-[11px]">&lt;title&gt;</code> tag + OG/Twitter title. Falls back to Blog Title if left blank.</p>
-              <p>• <span className="font-semibold">Meta Description</span> → <code className="bg-blue-50 px-1 rounded text-[11px]">&lt;meta name="description"&gt;</code> + OG/Twitter description. Falls back to Summary if blank.</p>
+            <div className="rounded-xl border border-blue-100 bg-[#f0faff] p-4 text-[12.5px] text-[#334155] leading-[1.6] space-y-1 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
+              <p className="font-bold text-[#0a1628] dark:text-[#fafafa]">How this SEO section works on the live site:</p>
+              <p>• <span className="font-semibold">SEO Title</span> → page <code className="bg-blue-50 px-1 rounded text-[11px] dark:bg-[#1c1c20]">&lt;title&gt;</code> tag + OG/Twitter title. Falls back to Blog Title if left blank.</p>
+              <p>• <span className="font-semibold">Meta Description</span> → <code className="bg-blue-50 px-1 rounded text-[11px] dark:bg-[#1c1c20]">&lt;meta name="description"&gt;</code> + OG/Twitter description. Falls back to Summary if blank.</p>
               <p>• <span className="font-semibold">FAQs</span> (Section 7) → FAQPage JSON-LD schema → eligible for Google FAQ rich results.</p>
               <p>• <span className="font-semibold">Canonical URL</span> → tells Google the authoritative URL for this page.</p>
             </div>
@@ -866,9 +866,9 @@ export default function BlogEditorClient({ blog, categories }: Props) {
       </div>
 
       {/* Bottom bar */}
-      <div className="sticky bottom-0 z-[10000] bg-white dark:bg-[#0d1a2d] border-t border-[#e2e8f0] dark:border-[#223550] shadow-[0_-2px_8px_rgba(15,23,42,0.06)]">
+      <div className="sticky bottom-0 z-[10000] bg-white dark:bg-[#141417] border-t border-[#e2e8f0] dark:border-[#27272b] shadow-[0_-2px_8px_rgba(15,23,42,0.06)]">
         <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-end gap-2">
-          <button type="button" onClick={handleDraft} disabled={saving} className="px-4 py-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-[12.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f8fbff] dark:hover:bg-[#12223a] transition-colors disabled:opacity-50">
+          <button type="button" onClick={handleDraft} disabled={saving} className="px-4 py-2 rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] text-[12.5px] font-semibold text-[#334155] dark:text-[#a1a1aa] hover:bg-[#f8fbff] dark:hover:bg-[#12223a] transition-colors disabled:opacity-50">
             {saving ? "Saving…" : "Save as Draft"}
           </button>
           {isEditing ? (

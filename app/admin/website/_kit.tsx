@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export const inputCls =
-  "w-full rounded-lg border border-[#dbe7f3] bg-white px-3 py-2 text-[13px] text-[#0a1628] outline-none transition-colors focus:border-[#1677f2]";
+  "w-full rounded-lg border border-[#dbe7f3] bg-white px-3 py-2 text-[13px] text-[#0a1628] outline-none transition-colors focus:border-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]";
 
 export function formatIST(iso: string | null): string {
   if (!iso) return "—";
@@ -73,18 +73,18 @@ export function EditorHeader({ title, subtitle, updatedAt }: { title: string; su
   return (
     <>
       <div className="mb-5 flex items-center gap-2 text-[13px]">
-        <Link href="/admin/website" className="font-semibold text-[#1677f2] hover:underline">Website Editor</Link>
-        <span className="text-[#94a3b8]">/</span>
-        <Link href="/admin/website/homepage" className="font-semibold text-[#1677f2] hover:underline">Homepage</Link>
-        <span className="text-[#94a3b8]">/</span>
-        <span className="font-bold text-[#0a1628]">{title}</span>
+        <Link href="/admin/website" className="font-semibold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">Website Editor</Link>
+        <span className="text-[#94a3b8] dark:text-[#71717a]">/</span>
+        <Link href="/admin/website/homepage" className="font-semibold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">Homepage</Link>
+        <span className="text-[#94a3b8] dark:text-[#71717a]">/</span>
+        <span className="font-bold text-[#0a1628] dark:text-[#fafafa]">{title}</span>
       </div>
       <div className="mb-5 flex items-center justify-between">
         <div>
-          <h1 className="text-[21px] font-black text-[#0a1628]">{title}</h1>
-          <p className="mt-0.5 text-[13px] text-[#64748b]">{subtitle} · Last updated: {formatIST(updatedAt)}</p>
+          <h1 className="text-[21px] font-black text-[#0a1628] dark:text-[#fafafa]">{title}</h1>
+          <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">{subtitle} · Last updated: {formatIST(updatedAt)}</p>
         </div>
-        <a href="/" target="_blank" rel="noopener noreferrer" className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2 text-[12px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2]">Preview ↗</a>
+        <a href="/" target="_blank" rel="noopener noreferrer" className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2 text-[12px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">Preview ↗</a>
       </div>
     </>
   );
@@ -92,9 +92,9 @@ export function EditorHeader({ title, subtitle, updatedAt }: { title: string; su
 
 export function Card({ title, action, children }: { title: string; action?: React.ReactNode; children: React.ReactNode }) {
   return (
-    <section className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
-      <div className="flex items-center justify-between border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3">
-        <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">{title}</span>
+    <section className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden dark:bg-[#141417] dark:border-[#27272b]">
+      <div className="flex items-center justify-between border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3 dark:bg-[#141417] dark:border-[#27272b]">
+        <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#71717a]">{title}</span>
         {action}
       </div>
       <div className="px-6 py-6">{children}</div>
@@ -105,9 +105,9 @@ export function Card({ title, action, children }: { title: string; action?: Reac
 export function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
     <div>
-      <label className="mb-1.5 block text-[12px] font-bold text-[#334155]">{label}</label>
+      <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">{label}</label>
       {children}
-      {hint && <p className="mt-1 text-[11px] text-[#94a3b8]">{hint}</p>}
+      {hint && <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">{hint}</p>}
     </div>
   );
 }
@@ -117,8 +117,8 @@ export function SaveBar({ saving, error, notice, onSave }: { saving: boolean; er
     <>
       {(error || notice) && (
         <div>
-          {error && <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-[12px] font-medium text-red-700">{error}</div>}
-          {notice && <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-2.5 text-[12px] font-medium text-green-700">{notice}</div>}
+          {error && <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-[12px] font-medium text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">{error}</div>}
+          {notice && <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-2.5 text-[12px] font-medium text-green-700 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]">{notice}</div>}
         </div>
       )}
       <div className="flex justify-end">
@@ -137,14 +137,14 @@ export function StringList({ items, onChange, placeholder }: { items: string[]; 
       {items.map((val, i) => (
         <div key={i} className="flex items-center gap-1.5">
           <input value={val} onChange={(e) => onChange(items.map((x, j) => (j === i ? e.target.value : x)))} placeholder={placeholder} className={inputCls} />
-          <button onClick={() => onChange(items.filter((_, j) => j !== i))} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500">✕</button>
+          <button onClick={() => onChange(items.filter((_, j) => j !== i))} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a]">✕</button>
         </div>
       ))}
-      <button onClick={() => onChange([...items, ""])} className="text-[11px] font-bold text-[#1677f2] hover:underline">+ Add</button>
+      <button onClick={() => onChange([...items, ""])} className="text-[11px] font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">+ Add</button>
     </div>
   );
 }
 
 export function LoadingCard() {
-  return <div className="rounded-2xl border border-[#e2eaf2] bg-white px-6 py-12 text-center text-[13px] text-[#94a3b8]">Loading…</div>;
+  return <div className="rounded-2xl border border-[#e2eaf2] bg-white px-6 py-12 text-center text-[13px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">Loading…</div>;
 }

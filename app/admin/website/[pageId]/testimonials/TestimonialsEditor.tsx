@@ -41,11 +41,11 @@ export default function TestimonialsEditor() {
   const publicCount = items.filter((t) => t.consent === "consent_received" && t.visible).length;
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8 dark:bg-[#141417]">
       <EditorHeader title="Testimonials" subtitle="Only 'Consent received' + shown items appear publicly" updatedAt={updatedAt} />
       {loading ? <LoadingCard /> : (
         <div className="max-w-3xl space-y-6">
-          <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-[12px] text-blue-800">
+          <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-[12px] text-blue-800 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]">
             A testimonial appears on the website only when its consent status is <strong>Consent received</strong> and <strong>Show on website</strong> is on.
             Right now <strong>{publicCount}</strong> testimonial(s) will show publicly.
           </div>
@@ -60,17 +60,17 @@ export default function TestimonialsEditor() {
 
           <Card title="When there are no public testimonials">
             <div className="space-y-3">
-              <label className="flex items-center gap-2 text-[13px] text-[#334155]">
+              <label className="flex items-center gap-2 text-[13px] text-[#334155] dark:text-[#a1a1aa]">
                 <input type="radio" checked={emptyBehavior === "coming_soon"} onChange={() => setEmptyBehavior("coming_soon")} />
                 Show &ldquo;Client feedback coming soon&rdquo; placeholders
               </label>
-              <label className="flex items-center gap-2 text-[13px] text-[#334155]">
+              <label className="flex items-center gap-2 text-[13px] text-[#334155] dark:text-[#a1a1aa]">
                 <input type="radio" checked={emptyBehavior === "hidden"} onChange={() => setEmptyBehavior("hidden")} />
                 Hide the whole section
               </label>
               {emptyBehavior === "coming_soon" && (
                 <div className="pt-2">
-                  <label className="mb-1.5 block text-[12px] font-bold text-[#334155]">Placeholder category labels</label>
+                  <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">Placeholder category labels</label>
                   <StringList items={placeholders} onChange={setPlaceholders} placeholder="Category label" />
                 </div>
               )}
@@ -82,12 +82,12 @@ export default function TestimonialsEditor() {
               {items.map((t, i) => {
                 const isPublic = t.consent === "consent_received" && t.visible;
                 return (
-                  <div key={i} className={`rounded-xl border p-4 ${isPublic ? "border-green-200 bg-green-50/40" : "border-[#e8eef5] bg-[#fbfdff]"}`}>
+                  <div key={i} className={`rounded-xl border p-4 ${isPublic ? "border-green-200 bg-green-50/40 dark:bg-[#132a20] dark:border-[#1d4a37]" : "border-[#e8eef5] bg-[#fbfdff] dark:bg-[#141417] dark:border-[#27272b]"}`}>
                     <div className="mb-2 flex items-center justify-between">
-                      <span className="text-[11px] font-black text-[#94a3b8]">
-                        {i + 1} · {isPublic ? <span className="text-green-600">Public</span> : <span className="text-[#94a3b8]">Not public</span>}
+                      <span className="text-[11px] font-black text-[#94a3b8] dark:text-[#71717a]">
+                        {i + 1} · {isPublic ? <span className="text-green-600 dark:text-[#6ee7b7]">Public</span> : <span className="text-[#94a3b8] dark:text-[#71717a]">Not public</span>}
                       </span>
-                      <button onClick={() => removeItem(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50">Delete</button>
+                      <button onClick={() => removeItem(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225]">Delete</button>
                     </div>
                     <div className="grid gap-3 sm:grid-cols-3">
                       <Field label="Client name"><input value={t.name} onChange={(e) => setItem(i, { name: e.target.value })} className={inputCls} /></Field>
@@ -101,7 +101,7 @@ export default function TestimonialsEditor() {
                     </div>
                     <div className="mt-3 flex flex-wrap items-end gap-4">
                       <div>
-                        <label className="mb-1.5 block text-[12px] font-bold text-[#334155]">Consent status</label>
+                        <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">Consent status</label>
                         <EstabizzSelect
                           variant="admin"
                           value={t.consent}
@@ -109,7 +109,7 @@ export default function TestimonialsEditor() {
                           options={CONSENT_OPTIONS}
                         />
                       </div>
-                      <label className="flex items-center gap-2 pb-2 text-[13px] text-[#334155]">
+                      <label className="flex items-center gap-2 pb-2 text-[13px] text-[#334155] dark:text-[#a1a1aa]">
                         <input type="checkbox" checked={t.visible} onChange={(e) => setItem(i, { visible: e.target.checked })} /> Show on website
                       </label>
                     </div>

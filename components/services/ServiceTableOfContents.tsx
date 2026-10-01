@@ -50,7 +50,7 @@ export default function ServiceTableOfContents({
 
   return (
     <nav aria-label="On this page" className="text-[13px]">
-      <p className="mb-3 text-[11px] font-black uppercase tracking-[0.2em] text-[#94a3b8]">
+      <p className="mb-3 text-[11px] font-black uppercase tracking-[0.2em] text-[#94a3b8] dark:text-[#71717a]">
         On this page
       </p>
       <ol className="max-h-[calc(100vh-190px)] space-y-0.5 overflow-y-auto pr-2">
@@ -63,8 +63,8 @@ export default function ServiceTableOfContents({
                 aria-current={isActive ? "true" : undefined}
                 className={`block border-l-2 py-1.5 pl-3 leading-snug transition-colors ${
                   isActive
-                    ? "border-[#1677f2] font-bold text-[#1677f2]"
-                    : "border-transparent text-[#64748b] hover:border-blue-100 hover:text-[#071426]"
+                    ? "border-[#1677f2] font-bold text-[#1677f2] dark:text-[#4f9dfb]"
+                    : "border-transparent text-[#64748b] hover:border-blue-100 hover:text-[#071426] dark:border-[#27272b] dark:text-[#a1a1aa]"
                 }`}
               >
                 {s.heading}
@@ -78,8 +78,8 @@ export default function ServiceTableOfContents({
             aria-current={active === faqAnchor ? "true" : undefined}
             className={`block border-l-2 py-1.5 pl-3 leading-snug transition-colors ${
               active === faqAnchor
-                ? "border-[#1677f2] font-bold text-[#1677f2]"
-                : "border-transparent text-[#64748b] hover:border-blue-100 hover:text-[#071426]"
+                ? "border-[#1677f2] font-bold text-[#1677f2] dark:text-[#4f9dfb]"
+                : "border-transparent text-[#64748b] hover:border-blue-100 hover:text-[#071426] dark:border-[#27272b] dark:text-[#a1a1aa]"
             }`}
           >
             FAQs

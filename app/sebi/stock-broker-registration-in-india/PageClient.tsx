@@ -113,7 +113,7 @@ function DataTable({ headers, rows }: { headers: string[]; rows: TableRow[] }) {
 }
 
 function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; columns?: string }) {
-  return <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>{cards.map((card) => <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)]"><h3 className="!p-0 !mb-2 !text-[#0a1628]">{card.title}</h3><div className="text-[14px] leading-7 text-gray-600">{card.body}</div></div>)}</div>;
+  return <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>{cards.map((card) => <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)] dark:bg-[#141417]"><h3 className="!p-0 !mb-2 !text-[#0a1628] dark:text-[#fafafa]">{card.title}</h3><div className="text-[14px] leading-7 text-gray-600 dark:text-[#a1a1aa]">{card.body}</div></div>)}</div>;
 }
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
@@ -125,7 +125,7 @@ function Timeline({ steps }: { steps: { title: string; body: string }[] }) {
 }
 
 function Flow({ items }: { items: string[] }) {
-  return <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5"><div className="grid grid-cols-1 gap-3">{items.map((item, index) => <div key={item} className="flex items-center gap-3"><div className="min-w-8 h-8 rounded-full bg-[#0a1628] text-white text-sm font-bold flex items-center justify-center">{index + 1}</div><div className="flex-1 rounded-xl bg-white border border-blue-100 px-4 py-3 text-sm font-semibold text-[#0a1628] shadow-sm">{item}</div></div>)}</div></div>;
+  return <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5 dark:border-[#27272b]"><div className="grid grid-cols-1 gap-3">{items.map((item, index) => <div key={item} className="flex items-center gap-3"><div className="min-w-8 h-8 rounded-full bg-[#0a1628] dark:bg-[#1c1c20] text-white text-sm font-bold flex items-center justify-center">{index + 1}</div><div className="flex-1 rounded-xl bg-white border border-blue-100 px-4 py-3 text-sm font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{item}</div></div>)}</div></div>;
 }
 
 const quickOverview: Card[] = [
@@ -155,8 +155,8 @@ export default function PageClient() {
       tags={[{ emoji: '📈', label: 'SEBI Regulatory Advisory' }, { emoji: '🏛️', label: 'NSE / BSE Membership' }, { emoji: '🛡️', label: 'Client Fund Protection' }]}
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'SEBI Services', href: '/sebi' }, { label: 'Stock Broker Registration in India' }]}
       title="Stock Broker Registration in India - Complete SEBI and Exchange Compliance Guide"
-      heroDescription={<><p><strong>Stock Broker Registration in India</strong> is the foundational regulatory approval required for an eligible entity intending to trade in securities on behalf of clients on recognised stock exchanges. A stock broker must obtain exchange membership and SEBI registration before offering trading access in equity, derivatives, currency, debt or other approved segments. For promoters planning to build a full-service brokerage, discount broking platform, fintech trading app or institutional brokerage desk, Stock Broker Registration in India requires serious planning around capital, infrastructure, technology, risk management, client fund protection and ongoing exchange compliance.</p><div className="flex flex-wrap gap-2 mt-5">{['SEBI Regulatory Advisory', 'NSE / BSE Membership Support', 'Trading Member Structuring', 'Clearing Member Planning', 'Capital and Net Worth Readiness', 'Client Fund Segregation Framework', 'Margin and Risk Policy Support', 'Post-Registration Compliance'].map((badge) => <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm">{badge}</span>)}</div></>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Apply for Stock Broker Registration</Link><Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors">Check Stock Broker Eligibility</Link><Link href="/contact" className="px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors">Plan Exchange Membership</Link><a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a></>}
+      heroDescription={<><p><strong>Stock Broker Registration in India</strong> is the foundational regulatory approval required for an eligible entity intending to trade in securities on behalf of clients on recognised stock exchanges. A stock broker must obtain exchange membership and SEBI registration before offering trading access in equity, derivatives, currency, debt or other approved segments. For promoters planning to build a full-service brokerage, discount broking platform, fintech trading app or institutional brokerage desk, Stock Broker Registration in India requires serious planning around capital, infrastructure, technology, risk management, client fund protection and ongoing exchange compliance.</p><div className="flex flex-wrap gap-2 mt-5">{['SEBI Regulatory Advisory', 'NSE / BSE Membership Support', 'Trading Member Structuring', 'Clearing Member Planning', 'Capital and Net Worth Readiness', 'Client Fund Segregation Framework', 'Margin and Risk Policy Support', 'Post-Registration Compliance'].map((badge) => <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{badge}</span>)}</div></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Apply for Stock Broker Registration</Link><Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Check Stock Broker Eligibility</Link><Link href="/contact" className="px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">Plan Exchange Membership</Link><a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a></>}
       trustLine="Trusted support for RBI, SEBI, IRDAI, IFSCA and financial regulatory advisory across India and global markets."
       readTime="38 min read"
       displayYear="2026"
@@ -174,7 +174,7 @@ export default function PageClient() {
       ]}
       finalCtaTitle="Start Your Stock Broker Registration Journey with Estabizz"
       finalCtaDescription="Build your SEBI Stock Broker application with structured regulatory support, exchange membership planning, capital and net worth readiness, trading and clearing structure, infrastructure inspection preparation, margin policy, client fund segregation framework, cyber security documentation, SEBI query response and post-registration compliance assistance."
-      finalCtaActions={<><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to SEBI Compliance Expert</Link><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20">Apply for Stock Broker Registration</Link><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl">Plan Exchange Membership</Link><a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a></>}
+      finalCtaActions={<><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to SEBI Compliance Expert</Link><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20 dark:bg-[#141417]">Apply for Stock Broker Registration</Link><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl dark:bg-[#141417] dark:text-[#fafafa]">Plan Exchange Membership</Link><a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a></>}
     >
       <Section id="quick-overview" title="Stock Broker Registration in India: Quick Overview">
         <CardGrid columns="md:grid-cols-2" cards={quickOverview} />
@@ -298,7 +298,7 @@ export default function PageClient() {
           ['Operational Capital', 'Technology, salary, rent, compliance and working capital buffer'],
           ['Risk Buffer', 'Additional capital to absorb volatility, margin and settlement risk']
         ]} />
-        <div className="rounded-2xl bg-[#0a1628] text-white p-6 my-6"><div className="text-xs uppercase tracking-[0.2em] text-blue-200 mb-2">Net Worth Formula</div><p className="text-xl font-bold">Net Worth = Paid-up Capital + Free Reserves - Accumulated Losses - Intangible Assets - Non-Qualifying Items</p></div>
+        <div className="rounded-2xl bg-[#0a1628] dark:bg-[#1c1c20] text-white p-6 my-6"><div className="text-xs uppercase tracking-[0.2em] text-blue-200 mb-2">Net Worth Formula</div><p className="text-xl font-bold">Net Worth = Paid-up Capital + Free Reserves - Accumulated Losses - Intangible Assets - Non-Qualifying Items</p></div>
         <div className="warning-box">Do not hardcode a single capital number for all stock brokers. Capital requirement must be checked exchange-wise, segment-wise and membership-category-wise before filing.</div>
       </Section>
 
@@ -613,7 +613,7 @@ export default function PageClient() {
 
       <Section id="strategic-recommendations" title="Strategic Structuring Recommendations Before Applying">
         <Flow items={['Decide full-service, discount, institutional or hybrid broking model', 'Select exchange and segment carefully', 'Prepare capital and deposit budget beyond minimum requirement', 'Decide PCM or self-clearing structure', 'Appoint compliance officer early', 'Build trading and risk system before inspection', 'Prepare client fund segregation policy', 'Prepare margin and square-off policy', 'Prepare cyber security and BCP framework', 'Prepare authorised person policy if network model is planned', 'Avoid investment advisory or research activities without separate SEBI review', 'Prepare for internal audit and system audit from day one']} />
-        <blockquote className="rounded-2xl border-l-4 border-[#1677f2] bg-blue-50 p-6 text-[#0a1628] font-semibold">In stock broking, trust is not created by technology alone. It is created when capital, compliance, systems and client protection move together.<br /><span className="block mt-3 text-sm font-normal text-gray-600">- CS Devyani Khambhati, Compliance Expert</span></blockquote>
+        <blockquote className="rounded-2xl border-l-4 border-[#1677f2] bg-blue-50 p-6 text-[#0a1628] font-semibold dark:bg-[#1c1c20] dark:text-[#fafafa]">In stock broking, trust is not created by technology alone. It is created when capital, compliance, systems and client protection move together.<br /><span className="block mt-3 text-sm font-normal text-gray-600 dark:text-[#a1a1aa]">- CS Devyani Khambhati, Compliance Expert</span></blockquote>
       </Section>
 
       <Section id="how-estabizz-helps" title="How Estabizz Helps with Stock Broker Registration in India">
@@ -645,16 +645,16 @@ export default function PageClient() {
       <Section id="faqs" title="FAQs on Stock Broker Registration in India">
         <div className="space-y-3">
           {faqs.map((faq) => (
-            <details key={faq.q} className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm">
-              <summary className="cursor-pointer font-semibold text-[#0a1628]">{faq.q}</summary>
-              <p className="mt-3 text-sm leading-7 text-gray-600">{faq.a}</p>
+            <details key={faq.q} className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
+              <summary className="cursor-pointer font-semibold text-[#0a1628] dark:text-[#fafafa]">{faq.q}</summary>
+              <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-[#a1a1aa]">{faq.a}</p>
             </details>
           ))}
         </div>
       </Section>
 
       <Section id="expert-review" title="Reviewer and Legal Disclaimer">
-        <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
+        <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
           <h3>Reviewed by Estabizz Compliance Expert</h3>
           <p><strong>CS Devyani Khambhati</strong></p>
           <p>Compliance Expert | Estabizz Fintech Private Limited</p>
@@ -667,9 +667,9 @@ export default function PageClient() {
       <Section id="speak-to-expert" title="Speak to Our SEBI Compliance Expert">
         <p>Build your Stock Broker Registration in India application with structured regulatory support, exchange membership planning, capital and net worth readiness, trading and clearing structure, infrastructure inspection preparation, margin policy, client fund segregation framework, cyber security documentation, SEBI query response and post-registration compliance assistance.</p>
         <div className="flex flex-col sm:flex-row gap-3 mt-6">
-          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl text-center">Speak to SEBI Compliance Expert</Link>
-          <Link href="/contact" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 text-center">Apply for Stock Broker Registration</Link>
-          <Link href="/contact" className="px-6 py-3 bg-blue-50 text-[#0a1628] font-bold rounded-xl text-center">Plan Exchange Membership</Link>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl text-center">Speak to SEBI Compliance Expert</Link>
+          <Link href="/contact" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 text-center dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Apply for Stock Broker Registration</Link>
+          <Link href="/contact" className="px-6 py-3 bg-blue-50 text-[#0a1628] font-bold rounded-xl text-center dark:bg-[#1c1c20] dark:text-[#fafafa]">Plan Exchange Membership</Link>
           <a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl text-center">WhatsApp Estabizz Team</a>
         </div>
       </Section>

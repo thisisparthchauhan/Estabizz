@@ -254,7 +254,7 @@ export function EstabizzSelect({
         ? "border-[#1677f2] ring-2 ring-[#1677f2]/20"
         : "border-[#dbe7f3] dark:border-[var(--input-border)] hover:border-[#1677f2]/40 focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/20",
     disabled
-      ? "cursor-not-allowed bg-[#f8fafc] dark:bg-[#0a1628] opacity-60"
+      ? "cursor-not-allowed bg-[#f8fafc] dark:bg-[#0f0f11] opacity-60"
       : "cursor-pointer",
     className,
   ]
@@ -267,7 +267,7 @@ export function EstabizzSelect({
       {label && (
         <label
           htmlFor={triggerId}
-          className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#f7f9fc]"
+          className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#fafafa]"
         >
           {label}
           {required && (
@@ -300,7 +300,7 @@ export function EstabizzSelect({
       >
         <span
           className={
-            selectedLabel ? "truncate text-[#0a1628] dark:text-[#f7f9fc]" : "text-[#94a3b8] dark:text-[#64748b]"
+            selectedLabel ? "truncate text-[#0a1628] dark:text-[#fafafa]" : "text-[#94a3b8] dark:text-[#71717a]"
           }
         >
           {selectedLabel || placeholder}
@@ -308,7 +308,7 @@ export function EstabizzSelect({
 
         {/* Chevron */}
         <svg
-          className={`ml-2 h-4 w-4 shrink-0 text-[#64748b] dark:text-[#a9b6c9] transition-transform duration-150 ${open ? "rotate-180" : ""}`}
+          className={`ml-2 h-4 w-4 shrink-0 text-[#64748b] dark:text-[#a1a1aa] transition-transform duration-150 ${open ? "rotate-180" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -361,7 +361,7 @@ export function EstabizzSelect({
                         : "hover:bg-[#f0f7ff] dark:hover:bg-[#12223a]",
                     isSelected
                       ? "font-semibold text-[#1677f2] dark:text-[#60a5fa]"
-                      : "text-[#334155] dark:text-[#a9b6c9]",
+                      : "text-[#334155] dark:text-[#a1a1aa]",
                   ]
                     .filter(Boolean)
                     .join(" ")}
@@ -370,7 +370,7 @@ export function EstabizzSelect({
                   <span className="flex h-3.5 w-3.5 shrink-0 items-center justify-center">
                     {isSelected && (
                       <svg
-                        className="h-3.5 w-3.5 text-[#1677f2]"
+                        className="h-3.5 w-3.5 text-[#1677f2] dark:text-[#4f9dfb]"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -402,7 +402,7 @@ export function EstabizzSelect({
 
       {/* Hint */}
       {hint && !error && (
-        <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#a9b6c9]">{hint}</p>
+        <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#a1a1aa]">{hint}</p>
       )}
     </div>
   );

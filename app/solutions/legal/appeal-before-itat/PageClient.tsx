@@ -63,7 +63,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -97,7 +97,7 @@ export default function PageClient() {
       finalCtaTitle="Protect the Demand Before the Limitation Runs"
       finalCtaDescription="An adverse appellate order can create tax demand, interest, penalty exposure and cash-flow pressure. A short discussion helps you assess appealability, limitation and stay strategy."
       heroDescription={<p>An adverse CIT(A), JCIT(A), NFAC, revision or penalty order can create serious tax demand, interest, penalty exposure and cash-flow pressure. ITAT is generally the final fact-finding authority in income-tax disputes, which makes the record built at this stage decisive. Estabizz assists with order review, limitation check, appeal form preparation, grounds of appeal, paper book compilation, stay applications, cross-objections, written submissions and hearing coordination.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> an appeal before ITAT challenges an adverse income-tax appellate or revision order before the Income Tax Appellate Tribunal. It is generally filed after the first appeal stage, where the taxpayer is not satisfied with the order of the CIT(A), JCIT(A), NFAC or other specified authority.</p>

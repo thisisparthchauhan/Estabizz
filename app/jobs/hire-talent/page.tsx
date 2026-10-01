@@ -20,16 +20,16 @@ export const metadata: Metadata = {
 
 export default function HireTalentPage() {
   return (
-    <div className="min-h-screen bg-[#f8fbff] pt-[64px]">
+    <div className="min-h-screen bg-[#f8fbff] pt-[64px] dark:bg-[#141417]">
       {/* Header */}
-      <div className="bg-[#0a1628] px-6 py-14 text-center">
+      <div className="bg-[#0a1628] dark:bg-[#1c1c20] px-6 py-14 text-center">
         <div className="mb-3 inline-block rounded-full bg-[#1677f2]/20 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#60a5fa]">
           For Employers
         </div>
         <h1 className="mt-3 text-[32px] font-black leading-tight tracking-tight text-white sm:text-[40px]">
           Hire Talent Through Estabizz
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8]">
+        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8] dark:text-[#71717a]">
           Managed recruitment for regulated financial services, fintech and technology roles.
           Tell us what you need — our recruitment team handles sourcing, screening and coordination.
         </p>
@@ -45,7 +45,7 @@ export default function HireTalentPage() {
 
       {/* Body */}
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
-        <h2 className="text-center text-[13px] font-black uppercase tracking-widest text-[#1677f2]">
+        <h2 className="text-center text-[13px] font-black uppercase tracking-widest text-[#1677f2] dark:text-[#4f9dfb]">
           How it works
         </h2>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -55,14 +55,14 @@ export default function HireTalentPage() {
           <Step n="4" title="Interview & placement" body="You interview shortlisted candidates; we coordinate through to offer." />
         </div>
 
-        <div className="mt-10 rounded-2xl border border-[#dbe7f3] bg-white p-8 text-center">
-          <p className="text-[15px] font-bold text-[#0a1628]">Ready to start?</p>
-          <p className="mt-2 text-[13px] text-[#64748b]">
+        <div className="mt-10 rounded-2xl border border-[#dbe7f3] bg-white p-8 text-center dark:bg-[#141417] dark:border-[#27272b]">
+          <p className="text-[15px] font-bold text-[#0a1628] dark:text-[#fafafa]">Ready to start?</p>
+          <p className="mt-2 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">
             Submit your requirement and a member of our recruitment team will get in touch.
           </p>
           <Link
             href={CONTACT_HREF}
-            className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-6 py-3 text-[14px] font-black text-white hover:bg-[#1677f2] transition-colors"
+            className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#0a1628] dark:bg-[#1c1c20] px-6 py-3 text-[14px] font-black text-white hover:bg-[#1677f2] transition-colors"
           >
             Submit a Hiring Requirement
           </Link>
@@ -74,12 +74,12 @@ export default function HireTalentPage() {
 
 function Step({ n, title, body }: { n: string; title: string; body: string }) {
   return (
-    <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#eaf2ff] text-[13px] font-black text-[#1677f2]">
+    <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#eaf2ff] text-[13px] font-black text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">
         {n}
       </div>
-      <h3 className="mt-3 text-[14px] font-black text-[#0a1628]">{title}</h3>
-      <p className="mt-2 text-[13px] leading-6 text-[#64748b]">{body}</p>
+      <h3 className="mt-3 text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">{title}</h3>
+      <p className="mt-2 text-[13px] leading-6 text-[#64748b] dark:text-[#a1a1aa]">{body}</p>
     </div>
   );
 }

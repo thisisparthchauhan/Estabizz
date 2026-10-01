@@ -67,7 +67,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -106,7 +106,7 @@ export default function PageClient() {
       finalCtaTitle="The Award Is Decided by the File"
       finalCtaDescription="Two families with identical losses routinely receive very different awards, because one produced income proof, medical records and dependency evidence and the other did not. That gap is closed in the first few weeks, not at the hearing."
       heroDescription={<p>After a road accident, compensation is not automatic. It has to be claimed, proved and computed — the accident, the negligence, the injury or death, the income, the dependency, the disability and the future loss, each supported by documents that are easiest to obtain immediately and hardest to obtain a year later. Estabizz assists accident victims, injured persons, legal heirs, dependants, vehicle owners and businesses with claim route assessment under Sections 164 and 166, limitation review, DAR coordination, police and hospital record collection, income and dependency documentation, disability evidence, insurance policy review, compensation computation, hearing file preparation, award follow-up and execution and appeal support.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="first-steps" title="What to Do After an Accident">
         <div className="warning-box" aria-label="Immediate steps">

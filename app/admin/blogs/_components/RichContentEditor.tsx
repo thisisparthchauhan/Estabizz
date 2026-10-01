@@ -142,7 +142,7 @@ function Btn({
 }
 
 function Divider() {
-  return <span className="w-px h-5 bg-[#dbe7f3] mx-1 shrink-0" />;
+  return <span className="w-px h-5 bg-[#dbe7f3] mx-1 shrink-0 dark:bg-[#1c1c20]" />;
 }
 
 function cleanImageUrl(value: string): string {
@@ -178,8 +178,8 @@ function LinkDialog({
   const [url, setUrl] = useState(current || "https://");
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/30">
-      <div className="bg-white rounded-2xl border border-[#dbe7f3] shadow-xl p-6 w-[380px] max-w-[90vw]">
-        <p className="text-[13px] font-bold text-[#0a1628] mb-3">Insert / Edit Link</p>
+      <div className="bg-white rounded-2xl border border-[#dbe7f3] shadow-xl p-6 w-[380px] max-w-[90vw] dark:bg-[#141417] dark:border-[#27272b]">
+        <p className="text-[13px] font-bold text-[#0a1628] mb-3 dark:text-[#fafafa]">Insert / Edit Link</p>
         <input
           autoFocus
           type="url"
@@ -190,10 +190,10 @@ function LinkDialog({
             if (e.key === "Escape") onCancel();
           }}
           placeholder="https://…"
-          className="w-full rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] text-[#0a1628] outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/12 mb-4"
+          className="w-full rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] text-[#0a1628] outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/12 mb-4 dark:border-[#27272b] dark:text-[#fafafa]"
         />
         <div className="flex justify-end gap-2">
-          <button type="button" onClick={onCancel} className="px-4 py-2 rounded-xl border border-[#dbe7f3] text-[12.5px] font-semibold text-[#64748b] hover:bg-[#f8fbff]">
+          <button type="button" onClick={onCancel} className="px-4 py-2 rounded-xl border border-[#dbe7f3] text-[12.5px] font-semibold text-[#64748b] hover:bg-[#f8fbff] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
             Cancel
           </button>
           {current && (
@@ -256,13 +256,13 @@ function BlogImageDialog({
 
   return (
     <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-[#06101f]/55 px-4 py-6" role="dialog" aria-modal="true" aria-label="Add image">
-      <div className="w-full max-w-xl rounded-2xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-5 shadow-[0_24px_70px_rgba(6,16,31,0.32)]">
+      <div className="w-full max-w-xl rounded-2xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] p-5 shadow-[0_24px_70px_rgba(6,16,31,0.32)]">
         <div className="mb-4 flex items-start justify-between gap-4">
           <div>
-            <p className="text-[14px] font-black text-[#0a1628] dark:text-[#f7f9fc]">Add Image</p>
-            <p className="mt-1 text-[12px] text-[#64748b] dark:text-[#a9b6c9]">Images stay inside the article flow and remain responsive.</p>
+            <p className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Add Image</p>
+            <p className="mt-1 text-[12px] text-[#64748b] dark:text-[#a1a1aa]">Images stay inside the article flow and remain responsive.</p>
           </div>
-          <button type="button" onClick={onCancel} className="rounded-lg px-2 py-1 text-[12px] font-bold text-[#64748b] hover:text-[#1677f2]">Close</button>
+          <button type="button" onClick={onCancel} className="rounded-lg px-2 py-1 text-[12px] font-bold text-[#64748b] hover:text-[#1677f2] dark:text-[#a1a1aa]">Close</button>
         </div>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -290,32 +290,32 @@ function BlogImageDialog({
             type="button"
             disabled={uploading}
             onClick={() => fileRef.current?.click()}
-            className="rounded-xl border border-[#1677f2]/40 bg-[#f0faff] px-4 py-3 text-[13px] font-bold text-[#1677f2] hover:border-[#1677f2] disabled:opacity-50"
+            className="rounded-xl border border-[#1677f2]/40 bg-[#f0faff] px-4 py-3 text-[13px] font-bold text-[#1677f2] hover:border-[#1677f2] disabled:opacity-50 dark:bg-[#141417] dark:text-[#4f9dfb]"
           >
             {uploading ? "Uploading..." : "Upload New"}
           </button>
           <button
             type="button"
             onClick={onPick}
-            className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#12223a] px-4 py-3 text-[13px] font-bold text-[#334155] dark:text-[#dbeafe] hover:border-[#1677f2] hover:text-[#1677f2]"
+            className="rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#1c1c20] px-4 py-3 text-[13px] font-bold text-[#334155] dark:text-[#e4e4e7] hover:border-[#1677f2] hover:text-[#1677f2]"
           >
             Choose from Media Library
           </button>
         </div>
 
         <div className="mt-4">
-          <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#dbeafe]">Image URL</label>
+          <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#e4e4e7]">Image URL</label>
           <input
             type="url"
             value={attrs.src}
             onChange={(e) => setAttrs((current) => ({ ...current, src: e.target.value }))}
             placeholder="Upload or choose an image"
-            className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+            className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#fafafa] outline-none focus:border-[#1677f2]"
           />
         </div>
 
         {attrs.src && (
-          <div className="mt-3 overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-[#f8fbff] dark:bg-[#12223a]">
+          <div className="mt-3 overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-[#f8fbff] dark:bg-[#1c1c20]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={attrs.src} alt="" className="max-h-48 w-full object-contain" />
           </div>
@@ -323,42 +323,42 @@ function BlogImageDialog({
 
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div>
-            <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#dbeafe]">Alt text</label>
+            <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#e4e4e7]">Alt text</label>
             <input
               type="text"
               value={attrs.alt ?? ""}
               onChange={(e) => setAttrs((current) => ({ ...current, alt: e.target.value }))}
               placeholder="Describe the image"
-              className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+              className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#fafafa] outline-none focus:border-[#1677f2]"
             />
           </div>
           <div>
-            <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#dbeafe]">Caption</label>
+            <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#e4e4e7]">Caption</label>
             <input
               type="text"
               value={attrs.caption ?? ""}
               onChange={(e) => setAttrs((current) => ({ ...current, caption: e.target.value }))}
               placeholder="Optional"
-              className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+              className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#fafafa] outline-none focus:border-[#1677f2]"
             />
           </div>
         </div>
 
         <div className="mt-4">
-          <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#dbeafe]">Optional link</label>
+          <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#e4e4e7]">Optional link</label>
           <input
             type="text"
             value={attrs.linkUrl ?? ""}
             onChange={(e) => setAttrs((current) => ({ ...current, linkUrl: e.target.value }))}
             placeholder="/services or https://..."
-            className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+            className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-3.5 py-2.5 text-[13px] text-[#0a1628] dark:text-[#fafafa] outline-none focus:border-[#1677f2]"
           />
         </div>
 
         {error && <p className="mt-3 text-[12px] font-semibold text-red-500">{error}</p>}
 
         <div className="mt-5 flex justify-end gap-2">
-          <button type="button" onClick={onCancel} className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] px-4 py-2 text-[12px] font-bold text-[#64748b] dark:text-[#a9b6c9]">Cancel</button>
+          <button type="button" onClick={onCancel} className="rounded-xl border border-[#dbe7f3] dark:border-[#27272b] px-4 py-2 text-[12px] font-bold text-[#64748b] dark:text-[#a1a1aa]">Cancel</button>
           <button
             type="button"
             disabled={!canInsert}
@@ -537,7 +537,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
 
     editorProps: {
       attributes: {
-        class: "rich-editor-prose outline-none min-h-[420px] px-4 py-4 text-[14px] leading-relaxed text-[#0a1628]",
+        class: "rich-editor-prose outline-none min-h-[420px] px-4 py-4 text-[14px] leading-relaxed text-[#0a1628] dark:text-[#fafafa]",
       },
 
       handlePaste(view, event) {
@@ -900,11 +900,11 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
         overflow-hidden intentionally omitted — it would break position:sticky
         on the toolbar. Rounded corners are applied per-child instead.
       */}
-      <div className="rounded-xl border border-[#dbe7f3] focus-within:border-[#1677f2] focus-within:ring-2 focus-within:ring-[#1677f2]/12 transition-all">
+      <div className="rounded-xl border border-[#dbe7f3] focus-within:border-[#1677f2] focus-within:ring-2 focus-within:ring-[#1677f2]/12 transition-all dark:border-[#27272b]">
 
         {/* ── Toolbar (sticky) ─────────────────────────────────────────────── */}
         {/* Keep the 60px sticky offset aligned with the BlogEditorClient ActionBar height. */}
-        <div className="sticky top-[60px] z-30 rounded-t-xl border-b border-[#e8f0f8] bg-[#f8fbff] shadow-[0_2px_6px_rgba(15,23,42,0.06)]">
+        <div className="sticky top-[60px] z-30 rounded-t-xl border-b border-[#e8f0f8] bg-[#f8fbff] shadow-[0_2px_6px_rgba(15,23,42,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
           <div className="flex items-center gap-0 p-2">
 
             <div className="flex items-center gap-1 overflow-x-auto [&::-webkit-scrollbar]:hidden flex-1 min-w-0">
@@ -962,13 +962,13 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
             </div>
 
             {/* HTML source toggle — pinned right */}
-            <div className="shrink-0 border-l border-[#dbe7f3] pl-2 ml-1">
+            <div className="shrink-0 border-l border-[#dbe7f3] pl-2 ml-1 dark:border-[#27272b]">
               <button
                 type="button"
                 title="View raw HTML output"
                 onClick={() => setShowHtml((s) => !s)}
                 className={`px-2.5 py-1.5 rounded-lg text-[11px] font-bold leading-none transition-colors ${
-                  showHtml ? "bg-[#0a1628] text-white" : "text-[#94a3b8] hover:text-[#334155]"
+                  showHtml ? "bg-[#0a1628] text-white" : "text-[#94a3b8] hover:text-[#334155] dark:text-[#71717a]"
                 }`}
               >
                 {"</>"}
@@ -979,9 +979,9 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
 
         {/* ── Selected image controls ───────────────────────────────────────── */}
         {altPanelOpen && (
-          <div className="space-y-2 border-b border-[#c7d9f5] dark:border-[#223550] bg-[#f0f7ff] dark:bg-[#12223a] px-4 py-3">
+          <div className="space-y-2 border-b border-[#c7d9f5] dark:border-[#27272b] bg-[#f0f7ff] dark:bg-[#1c1c20] px-4 py-3">
             <div className="flex flex-wrap items-center gap-1.5">
-              <span className="mr-1 text-[11px] font-black uppercase tracking-wide text-[#1677f2]">Image</span>
+              <span className="mr-1 text-[11px] font-black uppercase tracking-wide text-[#1677f2] dark:text-[#4f9dfb]">Image</span>
               {(Object.keys(IMAGE_SIZE_LABELS) as BlogImageSize[]).map((size) => (
                 <button
                   key={size}
@@ -990,7 +990,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
                     size,
                     ...(size === "custom" ? { width: Math.min(960, Math.max(160, Number(customWidthValue) || 640)) } : { width: undefined }),
                   })}
-                  className={`rounded-lg px-2.5 py-1 text-[11px] font-bold ${editor.isActive("blogImage", { size }) ? "bg-[#1677f2] text-white" : "bg-white dark:bg-[#0d1a2d] text-[#334155] dark:text-[#dbeafe] hover:text-[#1677f2]"}`}
+                  className={`rounded-lg px-2.5 py-1 text-[11px] font-bold ${editor.isActive("blogImage", { size }) ? "bg-[#1677f2] text-white" : "bg-white dark:bg-[#141417] text-[#334155] dark:text-[#e4e4e7] hover:text-[#1677f2]"}`}
                 >
                   {IMAGE_SIZE_LABELS[size]}
                 </button>
@@ -1000,7 +1000,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
                   key={alignment}
                   type="button"
                   onClick={() => updateSelectedBlogImage({ alignment })}
-                  className={`rounded-lg px-2.5 py-1 text-[11px] font-bold ${editor.isActive("blogImage", { alignment }) ? "bg-[#0a1628] text-white" : "bg-white dark:bg-[#0d1a2d] text-[#334155] dark:text-[#dbeafe] hover:text-[#1677f2]"}`}
+                  className={`rounded-lg px-2.5 py-1 text-[11px] font-bold ${editor.isActive("blogImage", { alignment }) ? "bg-[#0a1628] text-white" : "bg-white dark:bg-[#141417] text-[#334155] dark:text-[#e4e4e7] hover:text-[#1677f2]"}`}
                 >
                   {IMAGE_ALIGNMENT_LABELS[alignment]}
                 </button>
@@ -1013,10 +1013,10 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
                 onChange={(e) => setCustomWidthValue(e.target.value)}
                 onBlur={() => updateSelectedBlogImage({ size: "custom", width: Math.min(960, Math.max(160, Number(customWidthValue) || 640)) })}
                 aria-label="Custom image width"
-                className="h-7 w-20 rounded-lg border border-[#c7d9f5] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-2 text-[11px] text-[#0a1628] dark:text-[#f7f9fc]"
+                className="h-7 w-20 rounded-lg border border-[#c7d9f5] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-2 text-[11px] text-[#0a1628] dark:text-[#fafafa]"
               />
-              <button type="button" onClick={() => imageFileRef.current?.click()} className="rounded-lg bg-white dark:bg-[#0d1a2d] px-2.5 py-1 text-[11px] font-bold text-[#334155] dark:text-[#dbeafe] hover:text-[#1677f2]">Replace</button>
-              <button type="button" onClick={() => editor.chain().focus().deleteSelection().run()} className="rounded-lg bg-white px-2.5 py-1 text-[11px] font-bold text-red-500 hover:bg-red-50">Delete</button>
+              <button type="button" onClick={() => imageFileRef.current?.click()} className="rounded-lg bg-white dark:bg-[#141417] px-2.5 py-1 text-[11px] font-bold text-[#334155] dark:text-[#e4e4e7] hover:text-[#1677f2]">Replace</button>
+              <button type="button" onClick={() => editor.chain().focus().deleteSelection().run()} className="rounded-lg bg-white px-2.5 py-1 text-[11px] font-bold text-red-500 hover:bg-red-50 dark:bg-[#141417]">Delete</button>
             </div>
             <div className="grid grid-cols-1 gap-2 lg:grid-cols-[1fr_1fr_1fr_auto_auto]">
               <input
@@ -1029,7 +1029,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
                 }}
                 placeholder="Alt text"
                 aria-label="Image alt text"
-                className="min-w-0 rounded-lg border border-[#c7d9f5] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-2.5 py-1.5 text-[12px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+                className="min-w-0 rounded-lg border border-[#c7d9f5] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-2.5 py-1.5 text-[12px] text-[#0a1628] dark:text-[#fafafa] outline-none focus:border-[#1677f2]"
               />
               <input
                 type="text"
@@ -1037,7 +1037,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
                 onChange={(e) => setCaptionEditValue(e.target.value)}
                 placeholder="Caption"
                 aria-label="Image caption"
-                className="min-w-0 rounded-lg border border-[#c7d9f5] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-2.5 py-1.5 text-[12px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+                className="min-w-0 rounded-lg border border-[#c7d9f5] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-2.5 py-1.5 text-[12px] text-[#0a1628] dark:text-[#fafafa] outline-none focus:border-[#1677f2]"
               />
               <input
                 type="text"
@@ -1045,7 +1045,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
                 onChange={(e) => setLinkEditValue(e.target.value)}
                 placeholder="/services or https://..."
                 aria-label="Image link"
-                className="min-w-0 rounded-lg border border-[#c7d9f5] dark:border-[#223550] bg-white dark:bg-[var(--input-background)] px-2.5 py-1.5 text-[12px] text-[#0a1628] dark:text-[#f7f9fc] outline-none focus:border-[#1677f2]"
+                className="min-w-0 rounded-lg border border-[#c7d9f5] dark:border-[#27272b] bg-white dark:bg-[var(--input-background)] px-2.5 py-1.5 text-[12px] text-[#0a1628] dark:text-[#fafafa] outline-none focus:border-[#1677f2]"
               />
               <button
                 type="button"
@@ -1064,12 +1064,12 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
               >
                 Save
               </button>
-              <button type="button" onClick={handleAltCancel} className="rounded-lg px-2 py-1.5 text-[11.5px] font-semibold text-[#64748b] dark:text-[#a9b6c9] hover:text-[#0a1628] dark:hover:text-white">
+              <button type="button" onClick={handleAltCancel} className="rounded-lg px-2 py-1.5 text-[11.5px] font-semibold text-[#64748b] dark:text-[#a1a1aa] hover:text-[#0a1628] dark:hover:text-white">
                 Done
               </button>
             </div>
             {PLACEHOLDER_ALT_RE.test(altEditValue.trim()) && (
-              <p className="text-[11px] font-semibold text-amber-600">Placeholder alt text needs a clear description before publishing.</p>
+              <p className="text-[11px] font-semibold text-amber-600 dark:text-[#fcd34d]">Placeholder alt text needs a clear description before publishing.</p>
             )}
           </div>
         )}
@@ -1096,7 +1096,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
               type="button"
               onClick={handleMediaRetry}
               disabled={isRetrying}
-              className="shrink-0 px-3 py-1.5 rounded-lg bg-white text-orange-600 text-[11px] font-black hover:bg-orange-50 disabled:opacity-60 transition-colors"
+              className="shrink-0 px-3 py-1.5 rounded-lg bg-white text-orange-600 text-[11px] font-black hover:bg-orange-50 disabled:opacity-60 transition-colors dark:bg-[#141417] dark:text-[#fdba74]"
             >
               {isRetrying ? "Syncing…" : "Retry Sync"}
             </button>
@@ -1104,13 +1104,13 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
         )}
 
         {/* ── Editor / HTML view ────────────────────────────────────────────── */}
-        <div className="bg-white dark:bg-[#0d1a2d]">
+        <div className="bg-white dark:bg-[#141417]">
           {showHtml ? (
             <textarea
               readOnly
               value={editor.getHTML()}
               rows={20}
-              className="w-full px-4 py-3 text-[12px] font-mono text-[#334155] resize-y outline-none bg-[#f8fbff] min-h-[420px]"
+              className="w-full px-4 py-3 text-[12px] font-mono text-[#334155] resize-y outline-none bg-[#f8fbff] min-h-[420px] dark:bg-[#141417] dark:text-[#a1a1aa]"
             />
           ) : (
             <EditorContent editor={editor} />
@@ -1118,7 +1118,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
         </div>
 
         {/* ── Footer ───────────────────────────────────────────────────────── */}
-        <div className="flex items-center justify-between rounded-b-xl border-t border-[#e8f0f8] bg-[#f8fbff] px-3 py-1.5 text-[11px] text-[#94a3b8]">
+        <div className="flex items-center justify-between rounded-b-xl border-t border-[#e8f0f8] bg-[#f8fbff] px-3 py-1.5 text-[11px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">
           <span>
             {wordCount} {wordCount === 1 ? "word" : "words"} · ~{Math.max(1, Math.ceil(wordCount / 238))} min read
           </span>

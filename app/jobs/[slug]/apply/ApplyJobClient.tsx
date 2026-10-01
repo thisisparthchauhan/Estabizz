@@ -47,13 +47,13 @@ export default function ApplyJobClient({ slug, jobTitle }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="rounded-2xl border border-[#dbe7f3] bg-white p-6">
-        <h2 className="mb-1 text-[14px] font-black text-[#0a1628]">Cover Note</h2>
-        <p className="mb-4 text-[12.5px] text-[#94a3b8]">
+      <div className="rounded-2xl border border-[#dbe7f3] bg-white p-6 dark:bg-[#141417] dark:border-[#27272b]">
+        <h2 className="mb-1 text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Cover Note</h2>
+        <p className="mb-4 text-[12.5px] text-[#94a3b8] dark:text-[#71717a]">
           Optional — briefly introduce yourself and why you&apos;re interested in this role.
         </p>
         <textarea
-          className="w-full rounded-xl border border-[#dbe7f3] px-4 py-3 text-[14px] text-[#334155] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20 resize-y min-h-[120px]"
+          className="w-full rounded-xl border border-[#dbe7f3] px-4 py-3 text-[14px] text-[#334155] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20 resize-y min-h-[120px] dark:border-[#27272b] dark:text-[#a1a1aa]"
           placeholder={`I'm excited about the ${jobTitle} role because…`}
           value={coverNote}
           onChange={(e) => setCoverNote(e.target.value)}
@@ -61,14 +61,14 @@ export default function ApplyJobClient({ slug, jobTitle }: Props) {
           disabled={submitting}
         />
         {coverNote.length > 0 && (
-          <p className="mt-1 text-right text-[11px] text-[#94a3b8]">
+          <p className="mt-1 text-right text-[11px] text-[#94a3b8] dark:text-[#71717a]">
             {coverNote.length}/3000
           </p>
         )}
       </div>
 
       {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[13px] font-bold text-red-700">
+        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[13px] font-bold text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">
           {error}
         </div>
       )}
@@ -83,13 +83,13 @@ export default function ApplyJobClient({ slug, jobTitle }: Props) {
         </button>
         <Link
           href={`/jobs/${slug}`}
-          className="rounded-xl border border-[#dbe7f3] bg-white px-6 py-3.5 text-[15px] font-bold text-[#334155] hover:border-[#1677f2]/40 transition-colors"
+          className="rounded-xl border border-[#dbe7f3] bg-white px-6 py-3.5 text-[15px] font-bold text-[#334155] hover:border-[#1677f2]/40 transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
         >
           Cancel
         </Link>
       </div>
 
-      <p className="text-center text-[11.5px] text-[#94a3b8]">
+      <p className="text-center text-[11.5px] text-[#94a3b8] dark:text-[#71717a]">
         By submitting, you confirm that all information is accurate.
         Your profile details will be shared with the hiring team.
       </p>

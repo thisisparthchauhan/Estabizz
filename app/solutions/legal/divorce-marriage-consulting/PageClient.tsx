@@ -67,7 +67,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -106,7 +106,7 @@ export default function PageClient() {
       finalCtaTitle="The Route Decides Almost Everything"
       finalCtaDescription="Mutual consent, contested, judicial separation and nullity lead to very different places, take very different amounts of time and cost very different amounts. Choosing between them is the conversation worth having first."
       heroDescription={<p>Most people arrive at family law having already decided they want a divorce, without knowing which law governs their marriage, which remedy fits their facts, or what each route will actually cost in time. That choice matters more than almost anything that follows: mutual consent and contested proceedings can be separated by years, judicial separation and nullity lead somewhere different again, and a maintenance claim can be brought in more than one forum. Estabizz provides confidential consulting on applicable law, remedy selection, mutual consent and contested strategy, maintenance and custody positioning, settlement drafting, marriage registration and validity, NRI and cross-border questions, and Family Court documentation.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> this is the advice you get before you choose a legal route, rather than after.</p>

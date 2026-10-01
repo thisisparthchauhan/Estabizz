@@ -66,7 +66,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -105,7 +105,7 @@ export default function PageClient() {
       finalCtaTitle="Diagnosis First, Filing Second"
       finalCtaDescription="Most of the time lost in these matters is spent filing the wrong form for the wrong cause. A status report that identifies whether this is Section 164, a KYC failure, a strike-off or an MCA data error is the cheapest hour of the whole exercise."
       heroDescription={<p>Director disqualification usually surfaces at the worst moment — a funding round, a bank KYC refresh, a new incorporation or an ROC filing that suddenly will not go through. The cause is rarely what the director first assumes. It may be a Section 164(2) default at a company they had half forgotten, a DIR-3 KYC lapse that has nothing to do with disqualification, a strike-off that blocked the filings, or an MCA record that is simply wrong. Estabizz assists directors, promoters, founders and companies with DIN and MCA status review, cause analysis under Section 164, associated company mapping, Section 167 impact assessment, DIR-8, DIR-9 and DIR-10 support, pending AOC-4 and MGT-7 filings, struck-off company revival under Section 252, board regularisation and ROC, RD and NCLT coordination.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> disqualification means the law says you cannot be appointed or re-appointed as a director, for a fixed period, because of a specified default.</p>

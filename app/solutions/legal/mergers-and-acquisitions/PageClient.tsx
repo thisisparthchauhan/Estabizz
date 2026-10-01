@@ -66,7 +66,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -105,7 +105,7 @@ export default function PageClient() {
       finalCtaTitle="Fix the Structure Before the Term Sheet"
       finalCtaDescription="Price and structure agreed before diligence and before the approvals are mapped is not a deal — it is a position that will be renegotiated once someone reads the contracts."
       heroDescription={<p>Most transactions that go badly were mispriced at the term sheet, because the structure was chosen before anyone established what was actually being bought or which approvals would govern the timetable. A share purchase takes the company with all of its history; an asset purchase can leave defined liabilities behind; a court-sanctioned scheme moves an undertaking whole but takes months. Estabizz assists acquirers, targets, promoters, investors and group companies with structure comparison, legal due diligence, transaction documentation, regulatory mapping across the Companies Act, CCI, SEBI, FEMA and sectoral regulators, conditions precedent management, closing mechanics and post-closing compliance.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> an M&amp;A transaction moves ownership or control of a business from one party to another, and the legal work is about what exactly moves, what stays behind, and who carries the risk for what.</p>

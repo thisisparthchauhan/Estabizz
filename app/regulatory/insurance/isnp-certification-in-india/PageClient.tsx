@@ -73,7 +73,7 @@ function DataTable({ headers, rows }: { headers: string[]; rows: TableRow[] }) {
 }
 
 function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; columns?: string }) {
-  return <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>{cards.map((card) => <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)]"><h3 className="!p-0 !mb-2 !text-[#0a1628]">{card.title}</h3><div className="text-[14px] leading-7 text-gray-600">{card.body}</div></div>)}</div>;
+  return <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>{cards.map((card) => <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)] dark:bg-[#141417]"><h3 className="!p-0 !mb-2 !text-[#0a1628] dark:text-[#fafafa]">{card.title}</h3><div className="text-[14px] leading-7 text-gray-600 dark:text-[#a1a1aa]">{card.body}</div></div>)}</div>;
 }
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
@@ -85,7 +85,7 @@ function Timeline({ steps }: { steps: { title: string; body: string }[] }) {
 }
 
 function CheckList({ items }: { items: string[] }) {
-  return <ul className="my-6 grid grid-cols-1 gap-2 md:grid-cols-2 !pl-0">{items.map((item) => <li key={item} className="flex items-start gap-2 rounded-xl border border-blue-100 bg-white px-4 py-3 text-[14px] leading-6 text-gray-700 !mb-0 list-none"><span className="text-[#10b981] font-bold shrink-0">✔</span><span>{item}</span></li>)}</ul>;
+  return <ul className="my-6 grid grid-cols-1 gap-2 md:grid-cols-2 !pl-0">{items.map((item) => <li key={item} className="flex items-start gap-2 rounded-xl border border-blue-100 bg-white px-4 py-3 text-[14px] leading-6 text-gray-700 !mb-0 list-none dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"><span className="text-[#10b981] font-bold shrink-0">✔</span><span>{item}</span></li>)}</ul>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string; points?: string[] }[] }) {
@@ -103,8 +103,8 @@ export default function PageClient() {
       tags={[{ emoji: '🔐', label: 'IRDAI Cyber Compliance' }, { emoji: '🧪', label: 'CERT-In Empanelled Audit' }, { emoji: '📋', label: 'Pre-Launch and Annual' }]}
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Regulatory Services', href: '/regulatory' }, { label: 'Insurance', href: '/regulatory/insurance' }, { label: 'ISNP Security Audit' }]}
       title="ISNP Security Audit for IRDAI Compliance"
-      heroDescription={<><p>Before an <strong>Insurance Self-Network Platform</strong> is used to sell or service insurance, IRDAI expects its security controls to be independently reviewed by a suitably qualified external auditor — in practice a CERT-In empanelled firm — and reviewed again on a recurring basis afterwards. This guide sets out what that audit covers, who can perform it, what is delivered and how to prepare for it.</p><div className="flex flex-wrap gap-2 mt-5">{['CERT-In Empanelled Auditor', 'Application Security and VAPT', 'Payment and Premium Flows', 'Policyholder Data Protection', 'Logging and Audit Trail', 'Network and ISMS', 'Annual Re-Audit', 'DPDP Alignment'].map((badge) => <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm">{badge}</span>)}</div></>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Scope an ISNP Audit</Link><Link href="/irdai/isnp-registration" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors">ISNP Registration Guide</Link><a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a></>}
+      heroDescription={<><p>Before an <strong>Insurance Self-Network Platform</strong> is used to sell or service insurance, IRDAI expects its security controls to be independently reviewed by a suitably qualified external auditor — in practice a CERT-In empanelled firm — and reviewed again on a recurring basis afterwards. This guide sets out what that audit covers, who can perform it, what is delivered and how to prepare for it.</p><div className="flex flex-wrap gap-2 mt-5">{['CERT-In Empanelled Auditor', 'Application Security and VAPT', 'Payment and Premium Flows', 'Policyholder Data Protection', 'Logging and Audit Trail', 'Network and ISMS', 'Annual Re-Audit', 'DPDP Alignment'].map((badge) => <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{badge}</span>)}</div></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Scope an ISNP Audit</Link><Link href="/irdai/isnp-registration" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">ISNP Registration Guide</Link><a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a></>}
       trustLine="Trusted support for RBI, SEBI, IRDAI, IFSCA and financial regulatory advisory across India and global markets."
       readTime="14 min read"
       displayYear="2026"
@@ -121,7 +121,7 @@ export default function PageClient() {
       ]}
       finalCtaTitle="Build an ISNP That Survives the Audit"
       finalCtaDescription="Estabizz helps scope the review, close documentation gaps before testing starts, coordinate the empanelled auditor, track remediation through retesting and keep the platform ready for its next annual cycle."
-      finalCtaActions={<><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to a Compliance Expert</Link><Link href="/irdai/isnp-registration" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20">ISNP Registration Guide</Link><a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a></>}
+      finalCtaActions={<><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to a Compliance Expert</Link><Link href="/irdai/isnp-registration" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20 dark:bg-[#141417]">ISNP Registration Guide</Link><a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a></>}
     >
       <Section id="quick-overview" title="ISNP Security Audit: Quick Overview">
         <CardGrid columns="md:grid-cols-2" cards={[

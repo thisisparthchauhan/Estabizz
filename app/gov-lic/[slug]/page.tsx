@@ -76,26 +76,26 @@ export default async function GovLicServicePage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <main className="min-h-screen bg-white pt-[64px]">
+      <main className="min-h-screen bg-white pt-[64px] dark:bg-[#141417]">
         {/* Hero */}
-        <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+        <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
-          <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
           <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-16">
-            <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
-              <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link>
+            <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+              <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link>
               <span className="opacity-40">/</span>
-              <Link href="/gov-lic" className="hover:text-[#374151] transition-colors">Government Licences</Link>
+              <Link href="/gov-lic" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Government Licences</Link>
               <span className="opacity-40">/</span>
-              <span className="text-[#374151]">{svc.title}</span>
+              <span className="text-[#374151] dark:text-[#a1a1aa]">{svc.title}</span>
             </nav>
-            <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">
+            <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
               {svc.category}
             </div>
-            <h1 className="mt-4 text-[32px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">
+            <h1 className="mt-4 text-[32px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px] dark:text-[#fafafa]">
               {svc.title}
             </h1>
-            <p className="mt-3 max-w-2xl text-[16px] font-medium leading-[1.7] text-[#475569]">
+            <p className="mt-3 max-w-2xl text-[16px] font-medium leading-[1.7] text-[#475569] dark:text-[#a1a1aa]">
               {svc.tagline}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -107,7 +107,7 @@ export default async function GovLicServicePage({ params }: Props) {
               </Link>
               <Link
                 href="/gov-lic"
-                className="inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-6 py-3 text-[14px] font-black text-[#334155] transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+                className="inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-6 py-3 text-[14px] font-black text-[#334155] transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
               >
                 ← All Government Licences
               </Link>
@@ -118,18 +118,18 @@ export default async function GovLicServicePage({ params }: Props) {
         <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 space-y-14">
           {/* Overview */}
           <section>
-            <h2 className="text-[22px] font-black text-[#0a1628] mb-4">Overview</h2>
-            <p className="text-[15.5px] leading-[1.8] text-[#475569]">{svc.description}</p>
+            <h2 className="text-[22px] font-black text-[#0a1628] mb-4 dark:text-[#fafafa]">Overview</h2>
+            <p className="text-[15.5px] leading-[1.8] text-[#475569] dark:text-[#a1a1aa]">{svc.description}</p>
           </section>
 
           {/* What we offer */}
           <section>
-            <h2 className="text-[22px] font-black text-[#0a1628] mb-6">What We Offer</h2>
+            <h2 className="text-[22px] font-black text-[#0a1628] mb-6 dark:text-[#fafafa]">What We Offer</h2>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {svc.features.map((f, i) => (
-                <div key={i} className="flex items-start gap-3 rounded-xl border border-blue-50 bg-[#f8fbff] px-5 py-4">
-                  <span className="mt-0.5 text-[#1677f2] text-[18px] leading-none shrink-0">✓</span>
-                  <span className="text-[14px] leading-[1.6] text-[#334155]">{f}</span>
+                <div key={i} className="flex items-start gap-3 rounded-xl border border-blue-50 bg-[#f8fbff] px-5 py-4 dark:bg-[#141417]">
+                  <span className="mt-0.5 text-[#1677f2] text-[18px] leading-none shrink-0 dark:text-[#4f9dfb]">✓</span>
+                  <span className="text-[14px] leading-[1.6] text-[#334155] dark:text-[#a1a1aa]">{f}</span>
                 </div>
               ))}
             </div>
@@ -137,16 +137,16 @@ export default async function GovLicServicePage({ params }: Props) {
 
           {/* Process */}
           <section>
-            <h2 className="text-[22px] font-black text-[#0a1628] mb-6">How It Works</h2>
+            <h2 className="text-[22px] font-black text-[#0a1628] mb-6 dark:text-[#fafafa]">How It Works</h2>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               {svc.process.map((p, i) => (
-                <div key={i} className="flex gap-4 rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_4px_18px_rgba(0,80,140,0.05)]">
+                <div key={i} className="flex gap-4 rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_4px_18px_rgba(0,80,140,0.05)] dark:bg-[#141417] dark:border-[#27272b]">
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1677f2] text-[13px] font-black text-white">
                     {i + 1}
                   </div>
                   <div>
-                    <h3 className="text-[15px] font-black text-[#0a1628]">{p.step}</h3>
-                    <p className="mt-1 text-[13.5px] leading-[1.65] text-[#64748b]">{p.detail}</p>
+                    <h3 className="text-[15px] font-black text-[#0a1628] dark:text-[#fafafa]">{p.step}</h3>
+                    <p className="mt-1 text-[13.5px] leading-[1.65] text-[#64748b] dark:text-[#a1a1aa]">{p.detail}</p>
                   </div>
                 </div>
               ))}
@@ -155,10 +155,10 @@ export default async function GovLicServicePage({ params }: Props) {
 
           {/* Documents */}
           <section>
-            <h2 className="text-[22px] font-black text-[#0a1628] mb-5">Documents Required</h2>
+            <h2 className="text-[22px] font-black text-[#0a1628] mb-5 dark:text-[#fafafa]">Documents Required</h2>
             <ul className="space-y-2">
               {svc.documents.map((d, i) => (
-                <li key={i} className="flex items-center gap-3 text-[14px] text-[#475569]">
+                <li key={i} className="flex items-center gap-3 text-[14px] text-[#475569] dark:text-[#a1a1aa]">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#1677f2] shrink-0" />
                   {d}
                 </li>
@@ -168,15 +168,15 @@ export default async function GovLicServicePage({ params }: Props) {
 
           {/* FAQs */}
           <section>
-            <h2 className="text-[22px] font-black text-[#0a1628] mb-6">Frequently Asked Questions</h2>
+            <h2 className="text-[22px] font-black text-[#0a1628] mb-6 dark:text-[#fafafa]">Frequently Asked Questions</h2>
             <div className="space-y-4">
               {svc.faqs.map((faq, i) => (
-                <details key={i} className="group rounded-xl border border-blue-100 bg-white p-5 shadow-[0_2px_12px_rgba(0,80,140,0.04)] open:shadow-[0_4px_20px_rgba(0,80,140,0.08)]">
+                <details key={i} className="group rounded-xl border border-blue-100 bg-white p-5 shadow-[0_2px_12px_rgba(0,80,140,0.04)] open:shadow-[0_4px_20px_rgba(0,80,140,0.08)] dark:bg-[#141417] dark:border-[#27272b]">
                   <summary className="cursor-pointer list-none flex items-center justify-between gap-4">
-                    <span className="text-[15px] font-black text-[#0a1628]">{faq.q}</span>
-                    <span className="shrink-0 text-[#1677f2] text-[20px] leading-none group-open:rotate-45 transition-transform">+</span>
+                    <span className="text-[15px] font-black text-[#0a1628] dark:text-[#fafafa]">{faq.q}</span>
+                    <span className="shrink-0 text-[#1677f2] text-[20px] leading-none group-open:rotate-45 transition-transform dark:text-[#4f9dfb]">+</span>
                   </summary>
-                  <p className="mt-3 text-[14px] leading-[1.7] text-[#64748b]">{faq.a}</p>
+                  <p className="mt-3 text-[14px] leading-[1.7] text-[#64748b] dark:text-[#a1a1aa]">{faq.a}</p>
                 </details>
               ))}
             </div>
@@ -188,7 +188,7 @@ export default async function GovLicServicePage({ params }: Props) {
             <p className="text-[14px] text-blue-100 mb-6 max-w-lg mx-auto">{svc.tagline}</p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-3 text-[14px] font-black text-[#1677f2] hover:bg-blue-50 transition-colors"
+              className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-3 text-[14px] font-black text-[#1677f2] hover:bg-blue-50 transition-colors dark:bg-[#141417] dark:text-[#4f9dfb]"
             >
               Book a Free Consultation →
             </Link>

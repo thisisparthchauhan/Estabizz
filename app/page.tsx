@@ -112,7 +112,7 @@ export default async function Home() {
         cases: (caseStudiesContent.cases ?? []).filter((cs) => cs.visible !== false),
     };
     return (
-        <div className="bg-transparent min-h-screen font-sans text-gray-800">
+        <div className="bg-transparent min-h-screen font-sans text-gray-800 dark:text-[#fafafa]">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
 

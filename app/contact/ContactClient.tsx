@@ -588,20 +588,20 @@ export default function ContactClient() {
     };
 
     return (
-        <div className="min-h-screen bg-white dark:bg-[#06101f] pt-[64px]">
+        <div className="min-h-screen bg-white dark:bg-[#09090b] pt-[64px]">
             {/* Hero */}
-            <header className="relative isolate overflow-hidden border-b border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d]">
+            <header className="relative isolate overflow-hidden border-b border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417]">
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
-                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 sm:py-16">
-                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
-                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link>
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link>
                         <span className="opacity-40">/</span>
-                        <span className="text-[#374151]">Contact Us</span>
+                        <span className="text-[#374151] dark:text-[#a1a1aa]">Contact Us</span>
                     </nav>
-                    <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">📞 Free Consultation</div>
-                    <h1 className="mt-4 text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">Get Expert <span className="text-[#1677f2]">Regulatory Guidance</span></h1>
-                    <p className="mt-4 max-w-2xl text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px]">Book a free consultation with our regulatory compliance experts. We specialise in RBI, SEBI, IRDAI, FEMA and fintech regulatory frameworks in India.</p>
+                    <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">📞 Free Consultation</div>
+                    <h1 className="mt-4 text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px] dark:text-[#fafafa]">Get Expert <span className="text-[#1677f2] dark:text-[#4f9dfb]">Regulatory Guidance</span></h1>
+                    <p className="mt-4 max-w-2xl text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px] dark:text-[#a1a1aa]">Book a free consultation with our regulatory compliance experts. We specialise in RBI, SEBI, IRDAI, FEMA and fintech regulatory frameworks in India.</p>
                 </div>
             </header>
 
@@ -610,19 +610,19 @@ export default function ContactClient() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                     {/* Form */}
                     <div className="lg:col-span-2">
-                        <div className="bg-white dark:bg-[#0d1a2d] rounded-2xl shadow-sm border border-gray-100 dark:border-[#223550] p-8">
-                            <h2 className="text-[22px] font-black text-[#0a1628] dark:text-[#f7f9fc] mb-2">Send Us a Message</h2>
-                            <p className="text-gray-500 text-sm mb-8">Fill in your details and we&apos;ll get back to you within 24 hours.</p>
+                        <div className="bg-white dark:bg-[#141417] rounded-2xl shadow-sm border border-gray-100 dark:border-[#27272b] p-8">
+                            <h2 className="text-[22px] font-black text-[#0a1628] dark:text-[#fafafa] mb-2">Send Us a Message</h2>
+                            <p className="text-gray-500 text-sm mb-8 dark:text-[#71717a]">Fill in your details and we&apos;ll get back to you within 24 hours.</p>
 
                             {submitted ? (
                                 <div className="text-center py-12">
-                                    <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4 dark:bg-[#132a20]">
                                         <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-xl font-bold text-[#0a1628] mb-2">Thank You!</h3>
-                                    <p className="text-gray-500">Your inquiry has been received. Our team will contact you within 24 hours.</p>
+                                    <h3 className="text-xl font-bold text-[#0a1628] mb-2 dark:text-[#fafafa]">Thank You!</h3>
+                                    <p className="text-gray-500 dark:text-[#71717a]">Your inquiry has been received. Our team will contact you within 24 hours.</p>
                                     <button
                                         onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", company: "", service: "", message: "" }); setDialIdx(0); }}
                                         className="mt-6 px-6 py-2.5 bg-[#1677f2] text-white font-semibold rounded-xl text-sm hover:bg-[#0866d9] transition-colors"
@@ -634,7 +634,7 @@ export default function ContactClient() {
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-sm font-semibold text-[#0a1628] dark:text-[#f7f9fc] mb-2">Full Name <span className="text-red-500">*</span></label>
+                                            <label className="block text-sm font-semibold text-[#0a1628] dark:text-[#fafafa] mb-2">Full Name <span className="text-red-500">*</span></label>
                                             <input
                                                 type="text"
                                                 name="name"
@@ -642,11 +642,11 @@ export default function ContactClient() {
                                                 onChange={handleChange}
                                                 required
                                                 placeholder="Your full name"
-                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all"
+                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all dark:border-[#27272b]"
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-semibold text-[#0a1628] dark:text-[#f7f9fc] mb-2">Email Address <span className="text-red-500">*</span></label>
+                                            <label className="block text-sm font-semibold text-[#0a1628] dark:text-[#fafafa] mb-2">Email Address <span className="text-red-500">*</span></label>
                                             <input
                                                 type="email"
                                                 name="email"
@@ -654,37 +654,37 @@ export default function ContactClient() {
                                                 onChange={handleChange}
                                                 required
                                                 placeholder="your@email.com"
-                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all"
+                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all dark:border-[#27272b]"
                                             />
                                         </div>
                                     </div>
 
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-sm font-semibold text-[#0a1628] mb-2">Phone Number <span className="text-red-500">*</span></label>
-                                            <div className="flex rounded-xl border border-gray-200 focus-within:border-[#1677f2] focus-within:ring-2 focus-within:ring-blue-50 transition-all overflow-visible">
+                                            <label className="block text-sm font-semibold text-[#0a1628] mb-2 dark:text-[#fafafa]">Phone Number <span className="text-red-500">*</span></label>
+                                            <div className="flex rounded-xl border border-gray-200 focus-within:border-[#1677f2] focus-within:ring-2 focus-within:ring-blue-50 transition-all overflow-visible dark:border-[#27272b]">
                                                 <div ref={dialRef} className="relative flex-shrink-0">
                                                     <button
                                                         type="button"
                                                         onClick={() => { setDialOpen(o => !o); setDialSearch(''); setServiceOpen(false); }}
-                                                        className="flex items-center gap-1 h-full px-3 py-3 bg-gray-50 border-r border-gray-200 rounded-l-xl text-sm focus:outline-none cursor-pointer whitespace-nowrap hover:bg-gray-100 transition-colors"
+                                                        className="flex items-center gap-1 h-full px-3 py-3 bg-gray-50 border-r border-gray-200 rounded-l-xl text-sm focus:outline-none cursor-pointer whitespace-nowrap hover:bg-gray-100 transition-colors dark:bg-[#141417] dark:border-[#27272b]"
                                                         aria-label="Select country code"
                                                     >
                                                         <span className="text-base leading-none">{DIAL_CODES[dialIdx].flag}</span>
-                                                        <span className="text-xs font-semibold text-[#0a1628]">{DIAL_CODES[dialIdx].dial}</span>
+                                                        <span className="text-xs font-semibold text-[#0a1628] dark:text-[#fafafa]">{DIAL_CODES[dialIdx].dial}</span>
                                                         <svg className={`w-3 h-3 text-gray-400 transition-transform ${dialOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                                         </svg>
                                                     </button>
                                                     {dialOpen && (
-                                                        <div className="absolute left-0 top-full z-50 mt-1 w-64 rounded-xl border border-gray-200 bg-white shadow-xl">
-                                                            <div className="p-2 border-b border-gray-100">
+                                                        <div className="absolute left-0 top-full z-50 mt-1 w-64 rounded-xl border border-gray-200 bg-white shadow-xl dark:bg-[#141417] dark:border-[#27272b]">
+                                                            <div className="p-2 border-b border-gray-100 dark:border-[#27272b]">
                                                                 <input
                                                                     type="text"
                                                                     placeholder="Search country or code..."
                                                                     value={dialSearch}
                                                                     onChange={e => setDialSearch(e.target.value)}
-                                                                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#1677f2]"
+                                                                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#1677f2] dark:border-[#27272b]"
                                                                     autoFocus
                                                                 />
                                                             </div>
@@ -696,15 +696,15 @@ export default function ContactClient() {
                                                                             key={i}
                                                                             type="button"
                                                                             onClick={() => { setDialIdx(realIdx); setDialOpen(false); setDialSearch(''); }}
-                                                                            className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left transition-colors ${realIdx === dialIdx ? 'bg-[#f0f7ff] text-[#1677f2]' : 'hover:bg-[#f5fbff] text-[#0a1628]'}`}
+                                                                            className={`w-full flex items-center gap-2 px-3 py-2 text-sm text-left transition-colors ${realIdx === dialIdx ? 'bg-[#f0f7ff] text-[#1677f2] dark:bg-[#141417] dark:text-[#4f9dfb]' : 'hover:bg-[#f5fbff] text-[#0a1628] dark:bg-[#141417] dark:text-[#fafafa]'}`}
                                                                         >
                                                                             <span className="text-base leading-none w-6 flex-shrink-0">{c.flag}</span>
                                                                             <span className="flex-1 truncate">{c.name}</span>
-                                                                            <span className="text-xs text-gray-400 flex-shrink-0">{c.dial}</span>
+                                                                            <span className="text-xs text-gray-400 flex-shrink-0 dark:text-[#71717a]">{c.dial}</span>
                                                                         </button>
                                                                     );
                                                                 }) : (
-                                                                    <p className="px-3 py-3 text-sm text-gray-400 text-center">No country found</p>
+                                                                    <p className="px-3 py-3 text-sm text-gray-400 text-center dark:text-[#71717a]">No country found</p>
                                                                 )}
                                                             </div>
                                                         </div>
@@ -717,33 +717,33 @@ export default function ContactClient() {
                                                     onChange={handleChange}
                                                     required
                                                     placeholder="98765 43210"
-                                                    className="flex-1 min-w-0 px-4 py-3 text-sm focus:outline-none bg-white rounded-r-xl"
+                                                    className="flex-1 min-w-0 px-4 py-3 text-sm focus:outline-none bg-white rounded-r-xl dark:bg-[#141417]"
                                                 />
                                             </div>
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-semibold text-[#0a1628] mb-2">Company / Organisation</label>
+                                            <label className="block text-sm font-semibold text-[#0a1628] mb-2 dark:text-[#fafafa]">Company / Organisation</label>
                                             <input
                                                 type="text"
                                                 name="company"
                                                 value={form.company}
                                                 onChange={handleChange}
                                                 placeholder="Your company name"
-                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all"
+                                                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all dark:border-[#27272b]"
                                             />
                                         </div>
                                     </div>
 
                                     {/* Service Required — custom grouped dropdown */}
                                     <div>
-                                        <label className="block text-sm font-semibold text-[#0a1628] mb-2">
+                                        <label className="block text-sm font-semibold text-[#0a1628] mb-2 dark:text-[#fafafa]">
                                             Service Required <span className="text-red-500">*</span>
                                         </label>
                                         <div ref={serviceRef} className="relative">
                                             <button
                                                 type="button"
                                                 onClick={() => { setServiceOpen(o => !o); setServiceSearch(''); setDialOpen(false); }}
-                                                className={`w-full flex items-center justify-between px-4 py-3 border rounded-xl text-sm transition-all focus:outline-none ${serviceOpen ? 'border-[#1677f2] ring-2 ring-blue-50' : 'border-gray-200 hover:border-gray-300'}`}
+                                                className={`w-full flex items-center justify-between px-4 py-3 border rounded-xl text-sm transition-all focus:outline-none ${serviceOpen ? 'border-[#1677f2] ring-2 ring-blue-50' : 'border-gray-200 hover:border-gray-300 dark:border-[#27272b]'}`}
                                             >
                                                 {form.service ? (
                                                     <div className="flex items-center gap-2 min-w-0">
@@ -751,10 +751,10 @@ export default function ContactClient() {
                                                             className="w-2 h-2 rounded-full flex-shrink-0"
                                                             style={{ backgroundColor: SERVICES_GROUPED.find(g => g.items.includes(form.service))?.color ?? '#1677f2' }}
                                                         />
-                                                        <span className="truncate text-[#0a1628] font-medium">{form.service}</span>
+                                                        <span className="truncate text-[#0a1628] font-medium dark:text-[#fafafa]">{form.service}</span>
                                                     </div>
                                                 ) : (
-                                                    <span className="text-gray-400">Select a service...</span>
+                                                    <span className="text-gray-400 dark:text-[#71717a]">Select a service...</span>
                                                 )}
                                                 <svg className={`w-4 h-4 text-gray-400 flex-shrink-0 ml-2 transition-transform ${serviceOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -762,14 +762,14 @@ export default function ContactClient() {
                                             </button>
 
                                             {serviceOpen && (
-                                                <div className="absolute left-0 top-full z-50 mt-1 w-full rounded-xl border border-gray-200 bg-white shadow-xl">
-                                                    <div className="p-2 border-b border-gray-100">
+                                                <div className="absolute left-0 top-full z-50 mt-1 w-full rounded-xl border border-gray-200 bg-white shadow-xl dark:bg-[#141417] dark:border-[#27272b]">
+                                                    <div className="p-2 border-b border-gray-100 dark:border-[#27272b]">
                                                         <input
                                                             type="text"
                                                             placeholder="Search service..."
                                                             value={serviceSearch}
                                                             onChange={e => setServiceSearch(e.target.value)}
-                                                            className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#1677f2]"
+                                                            className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#1677f2] dark:border-[#27272b]"
                                                             autoFocus
                                                         />
                                                     </div>
@@ -777,7 +777,7 @@ export default function ContactClient() {
                                                         {filteredServiceGroups.length > 0 ? filteredServiceGroups.map(group => (
                                                             <div key={group.group}>
                                                                 <div
-                                                                    className="sticky top-0 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider bg-gray-50 border-b border-gray-100"
+                                                                    className="sticky top-0 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider bg-gray-50 border-b border-gray-100 dark:bg-[#141417] dark:border-[#27272b]"
                                                                     style={{ color: group.color }}
                                                                 >
                                                                     {group.group}
@@ -787,7 +787,7 @@ export default function ContactClient() {
                                                                         key={service}
                                                                         type="button"
                                                                         onClick={() => { setForm(prev => ({ ...prev, service })); setServiceOpen(false); setServiceSearch(''); }}
-                                                                        className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left transition-colors ${form.service === service ? 'bg-[#f0f7ff] font-semibold' : 'hover:bg-[#f5fbff] text-[#0a1628]'}`}
+                                                                        className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left transition-colors ${form.service === service ? 'bg-[#f0f7ff] font-semibold dark:bg-[#141417]' : 'hover:bg-[#f5fbff] text-[#0a1628] dark:bg-[#141417] dark:text-[#fafafa]'}`}
                                                                     >
                                                                         <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: group.color }} />
                                                                         <span style={form.service === service ? { color: group.color } : undefined}>{service}</span>
@@ -795,7 +795,7 @@ export default function ContactClient() {
                                                                 ))}
                                                             </div>
                                                         )) : (
-                                                            <p className="px-4 py-4 text-sm text-gray-400 text-center">No service found</p>
+                                                            <p className="px-4 py-4 text-sm text-gray-400 text-center dark:text-[#71717a]">No service found</p>
                                                         )}
                                                     </div>
                                                 </div>
@@ -804,14 +804,14 @@ export default function ContactClient() {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-semibold text-[#0a1628] mb-2">Message</label>
+                                        <label className="block text-sm font-semibold text-[#0a1628] mb-2 dark:text-[#fafafa]">Message</label>
                                         <textarea
                                             name="message"
                                             value={form.message}
                                             onChange={handleChange}
                                             rows={5}
                                             placeholder="Describe your requirements or questions..."
-                                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all resize-none"
+                                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all resize-none dark:border-[#27272b]"
                                         />
                                     </div>
 
@@ -819,7 +819,7 @@ export default function ContactClient() {
                                     <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" onChange={() => {}} />
 
                                     {submitError && (
-                                        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[13px] font-semibold text-red-600">{submitError}</p>
+                                        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[13px] font-semibold text-red-600 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">{submitError}</p>
                                     )}
                                     <button
                                         type="submit"
@@ -843,41 +843,41 @@ export default function ContactClient() {
 
                     {/* Sidebar Info */}
                     <div className="space-y-6">
-                        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                            <h3 className="text-[16px] font-bold text-[#0a1628] mb-4">Contact Information</h3>
+                        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 dark:bg-[#141417] dark:border-[#27272b]">
+                            <h3 className="text-[16px] font-bold text-[#0a1628] mb-4 dark:text-[#fafafa]">Contact Information</h3>
                             <div className="space-y-4">
                                 <div className="flex items-start gap-3">
-                                    <div className="w-9 h-9 rounded-lg bg-[#f5fbff] flex items-center justify-center flex-shrink-0">
-                                        <svg className="w-4 h-4 text-[#1677f2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div className="w-9 h-9 rounded-lg bg-[#f5fbff] flex items-center justify-center flex-shrink-0 dark:bg-[#141417]">
+                                        <svg className="w-4 h-4 text-[#1677f2] dark:text-[#4f9dfb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                         </svg>
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-400 font-medium">Phone</p>
-                                        <a href="tel:9825600907" className="text-sm font-semibold text-[#0a1628] hover:text-[#1677f2]">+91 98256 00907</a>
+                                        <p className="text-xs text-gray-400 font-medium dark:text-[#71717a]">Phone</p>
+                                        <a href="tel:9825600907" className="text-sm font-semibold text-[#0a1628] hover:text-[#1677f2] dark:text-[#fafafa]">+91 98256 00907</a>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="w-9 h-9 rounded-lg bg-[#f5fbff] flex items-center justify-center flex-shrink-0">
-                                        <svg className="w-4 h-4 text-[#1677f2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div className="w-9 h-9 rounded-lg bg-[#f5fbff] flex items-center justify-center flex-shrink-0 dark:bg-[#141417]">
+                                        <svg className="w-4 h-4 text-[#1677f2] dark:text-[#4f9dfb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                         </svg>
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-400 font-medium">Email</p>
-                                        <a href="mailto:info@estabizz.com" className="text-sm font-semibold text-[#0a1628] hover:text-[#1677f2]">info@estabizz.com</a>
+                                        <p className="text-xs text-gray-400 font-medium dark:text-[#71717a]">Email</p>
+                                        <a href="mailto:info@estabizz.com" className="text-sm font-semibold text-[#0a1628] hover:text-[#1677f2] dark:text-[#fafafa]">info@estabizz.com</a>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="w-9 h-9 rounded-lg bg-[#f5fbff] flex items-center justify-center flex-shrink-0">
-                                        <svg className="w-4 h-4 text-[#1677f2]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div className="w-9 h-9 rounded-lg bg-[#f5fbff] flex items-center justify-center flex-shrink-0 dark:bg-[#141417]">
+                                        <svg className="w-4 h-4 text-[#1677f2] dark:text-[#4f9dfb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-400 font-medium">Office</p>
-                                        <p className="text-sm font-semibold leading-relaxed text-[#0a1628]">15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421</p>
+                                        <p className="text-xs text-gray-400 font-medium dark:text-[#71717a]">Office</p>
+                                        <p className="text-sm font-semibold leading-relaxed text-[#0a1628] dark:text-[#fafafa]">15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421</p>
                                     </div>
                                 </div>
                             </div>
@@ -899,23 +899,23 @@ export default function ContactClient() {
                             </div>
                         </div>
 
-                        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                            <h3 className="text-[14px] font-bold text-[#0a1628] mb-4 uppercase tracking-wider">Your Expert</h3>
+                        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 dark:bg-[#141417] dark:border-[#27272b]">
+                            <h3 className="text-[14px] font-bold text-[#0a1628] mb-4 uppercase tracking-wider dark:text-[#fafafa]">Your Expert</h3>
                             <div className="flex items-center gap-3 mb-3">
                                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center text-white font-bold text-lg">CS</div>
                                 <div>
-                                    <p className="font-bold text-[#0a1628] text-sm">CS Devyani Khambhati</p>
-                                    <p className="text-xs text-gray-500">Regulatory Compliance Expert</p>
+                                    <p className="font-bold text-[#0a1628] text-sm dark:text-[#fafafa]">CS Devyani Khambhati</p>
+                                    <p className="text-xs text-gray-500 dark:text-[#71717a]">Regulatory Compliance Expert</p>
                                 </div>
                             </div>
-                            <p className="text-xs text-gray-500 leading-relaxed">10+ years of experience in RBI, SEBI, IRDAI and FEMA regulatory frameworks. Trusted by 500+ businesses across India.</p>
+                            <p className="text-xs text-gray-500 leading-relaxed dark:text-[#71717a]">10+ years of experience in RBI, SEBI, IRDAI and FEMA regulatory frameworks. Trusted by 500+ businesses across India.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Bottom CTA */}
-            <section className="bg-gradient-to-br from-[#0a1628] to-[#1a2b45] py-16 text-center px-6">
+            <section className="bg-gradient-to-br from-[#0a1628] to-[#1a2b45] dark:from-[#141417] dark:to-[#1c1c20] py-16 text-center px-6">
                 <div className="max-w-3xl mx-auto">
                     <h2 className="text-[28px] font-bold text-white mb-4">Ready to Get Started?</h2>
                     <p className="text-blue-100 mb-4">Join 500+ businesses that trust Estabizz Fintech for their regulatory compliance needs.</p>

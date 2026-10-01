@@ -61,7 +61,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -95,7 +95,7 @@ export default function PageClient() {
       finalCtaTitle="The Clock Started When the Cheque Bounced"
       finalCtaDescription="Section 138 runs on fixed windows, and missing one can end the case regardless of its merits. A short conversation now establishes where you are on the calendar."
       heroDescription={<p>A dishonoured cheque is one of the few disputes where the calendar matters as much as the merits. Section 138 of the Negotiable Instruments Act runs on three fixed windows, and missing any one of them can end the matter before it is heard. Estabizz assists with notice drafting and dispatch, complaint preparation, company and director liability mapping, evidence compilation, settlement strategy and parallel civil recovery.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> where a cheque issued to discharge a debt or liability is returned unpaid for insufficiency of funds, or because it exceeds the arrangement with the bank, Section 138 of the Negotiable Instruments Act, 1881 creates a criminal offence alongside the ordinary civil right to recover.</p>

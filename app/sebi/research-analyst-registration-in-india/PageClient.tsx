@@ -94,7 +94,7 @@ function DataTable({ headers, rows }: { headers: string[]; rows: TableRow[] }) {
 }
 
 function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; columns?: string }) {
-  return <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>{cards.map((card) => <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)]"><h3 className="!p-0 !mb-2 !text-[#0a1628]">{card.title}</h3><div className="text-[14px] leading-7 text-gray-600">{card.body}</div></div>)}</div>;
+  return <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>{cards.map((card) => <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)] dark:bg-[#141417]"><h3 className="!p-0 !mb-2 !text-[#0a1628] dark:text-[#fafafa]">{card.title}</h3><div className="text-[14px] leading-7 text-gray-600 dark:text-[#a1a1aa]">{card.body}</div></div>)}</div>;
 }
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
@@ -106,7 +106,7 @@ function Timeline({ steps }: { steps: { title: string; body: string }[] }) {
 }
 
 function Flow({ items }: { items: string[] }) {
-  return <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5"><div className="grid grid-cols-1 gap-3">{items.map((item, index) => <div key={item} className="flex items-center gap-3"><div className="min-w-8 h-8 rounded-full bg-[#0a1628] text-white text-sm font-bold flex items-center justify-center">{index + 1}</div><div className="flex-1 rounded-xl bg-white border border-blue-100 px-4 py-3 text-sm font-semibold text-[#0a1628] shadow-sm">{item}</div></div>)}</div></div>;
+  return <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5 dark:border-[#27272b]"><div className="grid grid-cols-1 gap-3">{items.map((item, index) => <div key={item} className="flex items-center gap-3"><div className="min-w-8 h-8 rounded-full bg-[#0a1628] dark:bg-[#1c1c20] text-white text-sm font-bold flex items-center justify-center">{index + 1}</div><div className="flex-1 rounded-xl bg-white border border-blue-100 px-4 py-3 text-sm font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{item}</div></div>)}</div></div>;
 }
 
 const quickOverview: Card[] = [
@@ -134,8 +134,8 @@ export default function PageClient() {
       tags={[{ emoji: '📊', label: 'SEBI Regulatory Advisory' }, { emoji: '🔎', label: 'Research Analyst License' }, { emoji: '📋', label: 'Form A & Query Support' }]}
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'SEBI Services', href: '/sebi' }, { label: 'Research Analyst Registration in India' }]}
       title="Research Analyst Registration in India - Complete SEBI Compliance Guide"
-      heroDescription={<><p><strong>Research Analyst Registration in India</strong> is a mandatory regulatory requirement under the SEBI Research Analysts framework for any individual, company, LLP, partnership firm or research entity engaged in issuing research reports, making investment recommendations, providing securities analysis or publishing structured buy / sell / hold calls relating to listed or proposed-to-be-listed securities. If a person monetises stock recommendations, runs a research platform, publishes equity reports or provides systematic market calls, SEBI registration must be carefully evaluated before commencing such activity.</p><div className="flex flex-wrap gap-2 mt-5">{['SEBI Regulatory Advisory', 'Individual / Company / LLP RA Structuring', 'NISM Certification Mapping', 'Rs. 1 Lakh / Rs. 25 Lakh Net Worth Readiness', 'Form A Filing Support', 'SEBI Query Response', 'Research Report Disclosure Framework', 'Post-Registration Compliance'].map((badge) => <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm">{badge}</span>)}</div></>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Apply for Research Analyst Registration</Link><Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors">Check RA Eligibility</Link><a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a></>}
+      heroDescription={<><p><strong>Research Analyst Registration in India</strong> is a mandatory regulatory requirement under the SEBI Research Analysts framework for any individual, company, LLP, partnership firm or research entity engaged in issuing research reports, making investment recommendations, providing securities analysis or publishing structured buy / sell / hold calls relating to listed or proposed-to-be-listed securities. If a person monetises stock recommendations, runs a research platform, publishes equity reports or provides systematic market calls, SEBI registration must be carefully evaluated before commencing such activity.</p><div className="flex flex-wrap gap-2 mt-5">{['SEBI Regulatory Advisory', 'Individual / Company / LLP RA Structuring', 'NISM Certification Mapping', 'Rs. 1 Lakh / Rs. 25 Lakh Net Worth Readiness', 'Form A Filing Support', 'SEBI Query Response', 'Research Report Disclosure Framework', 'Post-Registration Compliance'].map((badge) => <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{badge}</span>)}</div></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Apply for Research Analyst Registration</Link><Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Check RA Eligibility</Link><a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a></>}
       trustLine="Trusted support for RBI, SEBI, IRDAI, IFSCA and financial regulatory advisory across India and global markets."
       readTime="35 min read"
       displayYear="2026"
@@ -151,7 +151,7 @@ export default function PageClient() {
       ]}
       finalCtaTitle="Start Your Research Analyst Registration Journey with Estabizz"
       finalCtaDescription="Build your SEBI Research Analyst application with structured regulatory support, applicability review, qualification and NISM mapping, net worth readiness, business plan, conflict policy, Form A filing, SEBI query response and post-registration compliance assistance."
-      finalCtaActions={<><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to SEBI Compliance Expert</Link><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20">Apply for Research Analyst Registration</Link><Link href="/get-started" className="w-full sm:w-auto px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl">Check RA Eligibility</Link><a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a></>}
+      finalCtaActions={<><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to SEBI Compliance Expert</Link><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20 dark:bg-[#141417]">Apply for Research Analyst Registration</Link><Link href="/get-started" className="w-full sm:w-auto px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl dark:bg-[#141417] dark:text-[#fafafa]">Check RA Eligibility</Link><a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a></>}
     >
       <Section id="quick-overview" title="Research Analyst Registration in India: Quick Overview">
         <CardGrid columns="md:grid-cols-2" cards={quickOverview} />
@@ -296,7 +296,7 @@ export default function PageClient() {
           ['Individual / Proprietor', 'Rs. 1 lakh'],
           ['Body Corporate / LLP', 'Rs. 25 lakh']
         ]} />
-        <div className="rounded-2xl bg-[#0a1628] text-white p-6 my-6"><div className="text-xs uppercase tracking-[0.2em] text-blue-200 mb-2">Net Worth Formula</div><p className="text-xl font-bold">Net Worth = Assets - Liabilities, certified by a Chartered Accountant, subject to regulatory interpretation.</p></div>
+        <div className="rounded-2xl bg-[#0a1628] dark:bg-[#1c1c20] text-white p-6 my-6"><div className="text-xs uppercase tracking-[0.2em] text-blue-200 mb-2">Net Worth Formula</div><p className="text-xl font-bold">Net Worth = Assets - Liabilities, certified by a Chartered Accountant, subject to regulatory interpretation.</p></div>
         <p>Net worth must be maintained continuously. If net worth falls below the prescribed level, the applicant should restore it immediately, failing which regulatory action may follow.</p>
       </Section>
 
@@ -521,7 +521,7 @@ export default function PageClient() {
 
       <Section id="strategic-recommendations" title="Strategic Structuring Recommendations Before Applying">
         <Flow items={['Confirm whether activity is research, advice or PMS', 'Complete NISM certification before filing', 'Prepare clear experience documentation', 'Obtain CA-certified net worth certificate', 'Draft research methodology note', 'Prepare conflict of interest policy', 'Prepare Chinese Wall policy', 'Draft research report disclaimer template', 'Create client / subscriber agreement', 'Build digital channel compliance checks', 'Maintain research report archive', 'Avoid guaranteed return language', 'Do not issue paid stock calls before registration']} />
-        <blockquote className="rounded-2xl border-l-4 border-[#1677f2] bg-blue-50 p-6 text-[#0a1628] font-semibold">Research in securities markets carries influence. Regulation ensures that such influence is exercised with competence, disclosure and responsibility.<br /><span className="block mt-3 text-sm font-normal text-gray-600">- CS Devyani Khambhati, Compliance Expert</span></blockquote>
+        <blockquote className="rounded-2xl border-l-4 border-[#1677f2] bg-blue-50 p-6 text-[#0a1628] font-semibold dark:bg-[#1c1c20] dark:text-[#fafafa]">Research in securities markets carries influence. Regulation ensures that such influence is exercised with competence, disclosure and responsibility.<br /><span className="block mt-3 text-sm font-normal text-gray-600 dark:text-[#a1a1aa]">- CS Devyani Khambhati, Compliance Expert</span></blockquote>
       </Section>
 
       <Section id="how-estabizz-helps" title="How Estabizz Helps with Research Analyst Registration in India">
@@ -553,16 +553,16 @@ export default function PageClient() {
       <Section id="faqs" title="FAQs on Research Analyst Registration in India">
         <div className="space-y-3">
           {faqs.map((faq) => (
-            <details key={faq.q} className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm">
-              <summary className="cursor-pointer font-semibold text-[#0a1628]">{faq.q}</summary>
-              <p className="mt-3 text-sm leading-7 text-gray-600">{faq.a}</p>
+            <details key={faq.q} className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
+              <summary className="cursor-pointer font-semibold text-[#0a1628] dark:text-[#fafafa]">{faq.q}</summary>
+              <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-[#a1a1aa]">{faq.a}</p>
             </details>
           ))}
         </div>
       </Section>
 
       <Section id="expert-review" title="Reviewer and Legal Disclaimer">
-        <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
+        <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
           <h3>Reviewed by Estabizz Compliance Expert</h3>
           <p><strong>CS Devyani Khambhati</strong></p>
           <p>Compliance Expert | Estabizz Fintech Private Limited</p>
@@ -575,9 +575,9 @@ export default function PageClient() {
       <Section id="speak-to-expert" title="Speak to Our SEBI Compliance Expert">
         <p>Build your Research Analyst Registration in India application with structured regulatory support, careful activity mapping, certification review, net worth documentation, research disclosure controls and post-registration compliance planning.</p>
         <div className="flex flex-col sm:flex-row gap-3 mt-6">
-          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl text-center">Speak to SEBI Compliance Expert</Link>
-          <Link href="/contact" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 text-center">Apply for Research Analyst Registration</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-blue-50 text-[#0a1628] font-bold rounded-xl text-center">Check RA Eligibility</Link>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl text-center">Speak to SEBI Compliance Expert</Link>
+          <Link href="/contact" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 text-center dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Apply for Research Analyst Registration</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-blue-50 text-[#0a1628] font-bold rounded-xl text-center dark:bg-[#1c1c20] dark:text-[#fafafa]">Check RA Eligibility</Link>
           <a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl text-center">WhatsApp Estabizz Team</a>
         </div>
       </Section>

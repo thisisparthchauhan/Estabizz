@@ -90,9 +90,9 @@ function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; column
   return (
     <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>
       {cards.map((card) => (
-        <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)]">
-          <h3 className="!p-0 !mb-2 !text-[#0a1628]">{card.title}</h3>
-          <div className="text-[14px] leading-7 text-gray-600">{card.body}</div>
+        <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)] dark:bg-[#141417]">
+          <h3 className="!p-0 !mb-2 !text-[#0a1628] dark:text-[#fafafa]">{card.title}</h3>
+          <div className="text-[14px] leading-7 text-gray-600 dark:text-[#a1a1aa]">{card.body}</div>
         </div>
       ))}
     </div>
@@ -128,8 +128,8 @@ export default function FinanceCompanyRegistrationPage() {
       }
       heroActions={
         <>
-          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for Finance Company Registration</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check IFSC Eligibility</Link>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for Finance Company Registration</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Check IFSC Eligibility</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm text-center">WhatsApp Estabizz Team</a>
         </>
       }
@@ -165,7 +165,7 @@ export default function FinanceCompanyRegistrationPage() {
           <Link href="/contact" className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#1677f2] to-[#0077B6] hover:from-[#0077B6] hover:to-[#025b8a] text-white font-bold rounded-xl shadow-lg transition-all text-center">
             Speak to IFSCA Compliance Expert
           </Link>
-          <Link href="/get-started" className="w-full sm:w-auto px-8 py-3.5 bg-white text-[#0077B6] font-bold rounded-xl hover:bg-blue-50 transition-all text-center">
+          <Link href="/get-started" className="w-full sm:w-auto px-8 py-3.5 bg-white text-[#0077B6] font-bold rounded-xl hover:bg-blue-50 transition-all text-center dark:bg-[#141417] dark:text-[#4f9dfb]">
             Apply for Finance Company Registration
           </Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-3.5 bg-[#10b981] hover:bg-[#059669] text-white font-bold rounded-xl shadow-lg transition-all text-center">
@@ -296,7 +296,7 @@ export default function FinanceCompanyRegistrationPage() {
         ]} />
         <h3>What is Owned Fund?</h3>
         <p>Owned fund generally includes paid-up capital, free reserves, balance in share premium account and capital reserves arising from asset sale surplus. It excludes revaluation reserves, accumulated losses, book value of intangible assets and deferred revenue expenditure.</p>
-        <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#f0f9ff] to-white p-5 text-center text-[15px] font-bold leading-8 text-[#0a1628] shadow-sm">Owned Fund = Paid-up Capital + Free Reserves + Share Premium + Eligible Capital Reserves - Accumulated Losses - Intangible Assets - Deferred Revenue Expenditure</div>
+        <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#f0f9ff] to-white p-5 text-center text-[15px] font-bold leading-8 text-[#0a1628] shadow-sm dark:border-[#27272b] dark:from-[#09090b] dark:text-[#fafafa]">Owned Fund = Paid-up Capital + Free Reserves + Share Premium + Eligible Capital Reserves - Accumulated Losses - Intangible Assets - Deferred Revenue Expenditure</div>
         <div className="warning-box">Where multiple activities are proposed, the applicant should maintain the higher of the minimum capital / owned fund / net worth prescribed for each activity or category of activity.</div>
       </Section>
 
@@ -637,7 +637,7 @@ export default function FinanceCompanyRegistrationPage() {
       <Section id="speak-to-expert" title="Start Your Finance Company in GIFT IFSC Journey with Estabizz">
         <p>Build your Finance Company or Finance Unit setup in GIFT IFSC with structured regulatory support, activity classification, IFSC entity structuring, owned fund readiness review, SWIT application, business plan, policy documentation and post-registration compliance assistance.</p>
         <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-6">
-          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors text-center">Speak to IFSCA Compliance Expert</Link>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors text-center">Speak to IFSCA Compliance Expert</Link>
           <Link href="/get-started" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-xl hover:bg-[#0077B6] transition-colors text-center">Apply for Finance Company Registration</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors text-center">WhatsApp Estabizz Team</a>
         </div>

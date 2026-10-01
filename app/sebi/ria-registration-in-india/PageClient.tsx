@@ -103,7 +103,7 @@ function DataTable({ headers, rows }: { headers: string[]; rows: TableRow[] }) {
 }
 
 function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; columns?: string }) {
-  return <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>{cards.map((card) => <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)]"><h3 className="!p-0 !mb-2 !text-[#0a1628]">{card.title}</h3><div className="text-[14px] leading-7 text-gray-600">{card.body}</div></div>)}</div>;
+  return <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>{cards.map((card) => <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)] dark:bg-[#141417]"><h3 className="!p-0 !mb-2 !text-[#0a1628] dark:text-[#fafafa]">{card.title}</h3><div className="text-[14px] leading-7 text-gray-600 dark:text-[#a1a1aa]">{card.body}</div></div>)}</div>;
 }
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
@@ -115,7 +115,7 @@ function Timeline({ steps }: { steps: { title: string; body: string }[] }) {
 }
 
 function Flow({ items }: { items: string[] }) {
-  return <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5"><div className="grid grid-cols-1 gap-3">{items.map((item, index) => <div key={item} className="flex items-center gap-3"><div className="min-w-8 h-8 rounded-full bg-[#0a1628] text-white text-sm font-bold flex items-center justify-center">{index + 1}</div><div className="flex-1 rounded-xl bg-white border border-blue-100 px-4 py-3 text-sm font-semibold text-[#0a1628] shadow-sm">{item}</div></div>)}</div></div>;
+  return <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5 dark:border-[#27272b]"><div className="grid grid-cols-1 gap-3">{items.map((item, index) => <div key={item} className="flex items-center gap-3"><div className="min-w-8 h-8 rounded-full bg-[#0a1628] dark:bg-[#1c1c20] text-white text-sm font-bold flex items-center justify-center">{index + 1}</div><div className="flex-1 rounded-xl bg-white border border-blue-100 px-4 py-3 text-sm font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{item}</div></div>)}</div></div>;
 }
 
 export default function PageClient() {
@@ -124,8 +124,8 @@ export default function PageClient() {
       tags={[{ emoji: '💼', label: 'SEBI Regulatory Advisory' }, { emoji: '🧭', label: 'Investment Adviser License' }, { emoji: '📋', label: 'Form A & Query Support' }]}
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'SEBI Services', href: '/sebi' }, { label: 'RIA Registration in India' }]}
       title="RIA Registration in India - Complete SEBI Investment Adviser Compliance Guide"
-      heroDescription={<><p><strong>RIA Registration in India</strong> is the mandatory regulatory approval required for individuals and entities intending to provide investment advice for consideration under the supervision of the Securities and Exchange Board of India. If an adviser provides paid guidance relating to securities, portfolio allocation, mutual funds, listed securities, investment products or financial planning linked with securities, RIA Registration in India must be carefully evaluated before commencing advisory activity.</p><div className="flex flex-wrap gap-2 mt-5">{['SEBI Regulatory Advisory', 'Individual / Company / LLP RIA Structuring', 'NISM Certification Mapping', 'Rs. 5 Lakh / Rs. 50 Lakh Net Worth Readiness', 'Form A Filing Support', 'Advisory Agreement Drafting', 'Fee Model Structuring', 'Post-Registration Compliance'].map((badge) => <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm">{badge}</span>)}</div></>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Apply for RIA Registration</Link><Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors">Check RIA Eligibility</Link><a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a></>}
+      heroDescription={<><p><strong>RIA Registration in India</strong> is the mandatory regulatory approval required for individuals and entities intending to provide investment advice for consideration under the supervision of the Securities and Exchange Board of India. If an adviser provides paid guidance relating to securities, portfolio allocation, mutual funds, listed securities, investment products or financial planning linked with securities, RIA Registration in India must be carefully evaluated before commencing advisory activity.</p><div className="flex flex-wrap gap-2 mt-5">{['SEBI Regulatory Advisory', 'Individual / Company / LLP RIA Structuring', 'NISM Certification Mapping', 'Rs. 5 Lakh / Rs. 50 Lakh Net Worth Readiness', 'Form A Filing Support', 'Advisory Agreement Drafting', 'Fee Model Structuring', 'Post-Registration Compliance'].map((badge) => <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{badge}</span>)}</div></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Apply for RIA Registration</Link><Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Check RIA Eligibility</Link><a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a></>}
       trustLine="Trusted support for RBI, SEBI, IRDAI, IFSCA and financial regulatory advisory across India and global markets."
       readTime="36 min read"
       displayYear="2026"
@@ -141,7 +141,7 @@ export default function PageClient() {
       ]}
       finalCtaTitle="Start Your RIA Registration Journey with Estabizz"
       finalCtaDescription="Build your SEBI Investment Adviser application with structured regulatory support, applicability review, qualification and NISM mapping, net worth readiness, advisory agreement, fee model policy, risk profiling framework, Form A filing, SEBI query response and post-registration compliance assistance."
-      finalCtaActions={<><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to SEBI Compliance Expert</Link><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20">Apply for RIA Registration</Link><Link href="/get-started" className="w-full sm:w-auto px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl">Check RIA Eligibility</Link><a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a></>}
+      finalCtaActions={<><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to SEBI Compliance Expert</Link><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20 dark:bg-[#141417]">Apply for RIA Registration</Link><Link href="/get-started" className="w-full sm:w-auto px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl dark:bg-[#141417] dark:text-[#fafafa]">Check RIA Eligibility</Link><a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a></>}
     >
       <Section id="quick-overview" title="RIA Registration in India: Quick Overview">
         <CardGrid columns="md:grid-cols-2" cards={[
@@ -293,7 +293,7 @@ export default function PageClient() {
           ['Individual / Proprietor', 'Rs. 5 lakh'],
           ['Non-Individual / Company / LLP / Body Corporate', 'Rs. 50 lakh']
         ]} />
-        <div className="rounded-2xl bg-[#0a1628] text-white p-6 my-6"><div className="text-xs uppercase tracking-[0.2em] text-blue-200 mb-2">Net Worth Formula</div><p className="text-xl font-bold">Net Worth = Assets - Liabilities, excluding intangible assets, deferred expenditure and fictitious assets, certified by a Chartered Accountant.</p></div>
+        <div className="rounded-2xl bg-[#0a1628] dark:bg-[#1c1c20] text-white p-6 my-6"><div className="text-xs uppercase tracking-[0.2em] text-blue-200 mb-2">Net Worth Formula</div><p className="text-xl font-bold">Net Worth = Assets - Liabilities, excluding intangible assets, deferred expenditure and fictitious assets, certified by a Chartered Accountant.</p></div>
         <p>Net worth must be maintained continuously. Borrowed funds should not be treated as owned net worth. If net worth falls below the prescribed threshold, the adviser must restore it within the prescribed timeline, failing which regulatory action may follow.</p>
       </Section>
 
@@ -561,7 +561,7 @@ export default function PageClient() {
 
       <Section id="strategic-recommendations" title="Strategic Structuring Recommendations Before Applying">
         <Flow items={['Confirm whether activity is investment advice, research or PMS', 'Complete NISM certification before filing', 'Prepare clear experience documentation', 'Obtain CA-certified net worth certificate', 'Draft advisory agreement template', 'Prepare risk profiling and suitability framework', 'Prepare fee model policy', 'Prepare conflict disclosure policy', 'Prepare client grievance policy', 'Create data protection and record retention framework', 'Build digital advisory compliance checks', 'Avoid guaranteed return language', 'Do not charge advisory fees before registration']} />
-        <blockquote className="rounded-2xl border-l-4 border-[#1677f2] bg-blue-50 p-6 text-[#0a1628] font-semibold">True investment advisory begins where commercial temptation ends. Governance is not about compliance paperwork; it is about fiduciary character.<br /><span className="block mt-3 text-sm font-normal text-gray-600">- CS Devyani Khambhati, Compliance Expert</span></blockquote>
+        <blockquote className="rounded-2xl border-l-4 border-[#1677f2] bg-blue-50 p-6 text-[#0a1628] font-semibold dark:bg-[#1c1c20] dark:text-[#fafafa]">True investment advisory begins where commercial temptation ends. Governance is not about compliance paperwork; it is about fiduciary character.<br /><span className="block mt-3 text-sm font-normal text-gray-600 dark:text-[#a1a1aa]">- CS Devyani Khambhati, Compliance Expert</span></blockquote>
       </Section>
 
       <Section id="how-estabizz-helps" title="How Estabizz Helps with RIA Registration in India">
@@ -593,16 +593,16 @@ export default function PageClient() {
       <Section id="faqs" title="FAQs on RIA Registration in India">
         <div className="space-y-3">
           {faqs.map((faq) => (
-            <details key={faq.q} className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm">
-              <summary className="cursor-pointer font-semibold text-[#0a1628]">{faq.q}</summary>
-              <p className="mt-3 text-sm leading-7 text-gray-600">{faq.a}</p>
+            <details key={faq.q} className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
+              <summary className="cursor-pointer font-semibold text-[#0a1628] dark:text-[#fafafa]">{faq.q}</summary>
+              <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-[#a1a1aa]">{faq.a}</p>
             </details>
           ))}
         </div>
       </Section>
 
       <Section id="expert-review" title="Reviewer and Legal Disclaimer">
-        <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
+        <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
           <h3>Reviewed by Estabizz Compliance Expert</h3>
           <p><strong>CS Devyani Khambhati</strong></p>
           <p>Compliance Expert | Estabizz Fintech Private Limited</p>
@@ -615,9 +615,9 @@ export default function PageClient() {
       <Section id="speak-to-expert" title="Speak to Our SEBI Compliance Expert">
         <p>Build your RIA Registration in India application with structured regulatory support, advisory model mapping, NISM and qualification review, net worth documentation, risk profiling controls, fee policy and post-registration compliance planning.</p>
         <div className="flex flex-col sm:flex-row gap-3 mt-6">
-          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl text-center">Speak to SEBI Compliance Expert</Link>
-          <Link href="/contact" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 text-center">Apply for RIA Registration</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-blue-50 text-[#0a1628] font-bold rounded-xl text-center">Check RIA Eligibility</Link>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl text-center">Speak to SEBI Compliance Expert</Link>
+          <Link href="/contact" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 text-center dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Apply for RIA Registration</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-blue-50 text-[#0a1628] font-bold rounded-xl text-center dark:bg-[#1c1c20] dark:text-[#fafafa]">Check RIA Eligibility</Link>
           <a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl text-center">WhatsApp Estabizz Team</a>
         </div>
       </Section>

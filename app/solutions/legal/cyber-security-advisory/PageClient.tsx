@@ -64,7 +64,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -103,7 +103,7 @@ export default function PageClient() {
       finalCtaTitle="Prepare Before the Six-Hour Clock Starts"
       finalCtaDescription="Nobody drafts an incident response plan well at 2 a.m. during a ransomware event. The reporting workflow, the log retention and the escalation matrix are cheap to build in advance and impossible to build under pressure."
       heroDescription={<p>A cyber incident is a legal event as much as a technical one. A phishing compromise, an exposed database, a ransomware attack or a vendor breach can trigger reporting obligations measured in hours, alongside customer claims, regulatory scrutiny and contractual liability. Estabizz assists companies, fintechs, NBFCs, insurance intermediaries, payment businesses, ecommerce platforms, SaaS providers, healthcare and education entities with cyber risk assessment, IT Act and SPDI compliance, CERT-In reporting readiness, DPDP preparation, policy drafting, VAPT coordination, vendor risk review, cyber due diligence and board-level governance.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> Cyber Security Advisory means helping a business protect its systems, data and legal position — and proving afterwards that it did so.</p>

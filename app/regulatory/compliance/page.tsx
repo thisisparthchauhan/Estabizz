@@ -48,31 +48,31 @@ const services = [
 
 export default function CompliancePage() {
   return (
-    <main className="min-h-screen bg-white pt-24">
+    <main className="min-h-screen bg-white pt-24 dark:bg-[#141417]">
       <div className="mx-auto max-w-7xl px-6 pb-16 pt-8">
-        <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-sm text-[#64748b]">
-          <Link href="/" className="hover:text-[#1677f2]">Home</Link>
+        <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-sm text-[#64748b] dark:text-[#a1a1aa]">
+          <Link href="/" className="hover:text-[#1677f2] dark:text-[#4f9dfb]">Home</Link>
           <span aria-hidden="true">/</span>
-          <Link href="/regulatory" className="hover:text-[#1677f2]">Regulatory</Link>
+          <Link href="/regulatory" className="hover:text-[#1677f2] dark:text-[#4f9dfb]">Regulatory</Link>
           <span aria-hidden="true">/</span>
-          <span aria-current="page" className="text-[#120b45]">Compliance</span>
+          <span aria-current="page" className="text-[#120b45] dark:text-[#fafafa]">Compliance</span>
         </nav>
         <header className="mb-10 max-w-3xl">
-          <h1 className="text-4xl font-bold leading-tight text-[#120b45]">Compliance</h1>
-          <p className="mt-4 text-lg leading-relaxed text-[#475569]">Regulatory reporting, financial operations, tax compliance and transaction support for your business.</p>
+          <h1 className="text-4xl font-bold leading-tight text-[#120b45] dark:text-[#fafafa]">Compliance</h1>
+          <p className="mt-4 text-lg leading-relaxed text-[#475569] dark:text-[#a1a1aa]">Regulatory reporting, financial operations, tax compliance and transaction support for your business.</p>
         </header>
         <section aria-label="Compliance services" className="grid gap-6 md:grid-cols-2">
           {services.map((service) => (
-            <Link key={service.href} href={service.href} className="group flex h-full flex-col rounded-lg border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-colors hover:border-[#1677f2] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1677f2] sm:p-8">
-              <p className="text-sm font-semibold text-[#0077B6]">{service.category}</p>
-              <h2 className="mt-3 text-xl font-bold leading-snug text-[#120b45] group-hover:text-[#1677f2]">{service.title}</h2>
-              <p className="mb-6 mt-3 text-base leading-relaxed text-[#475569]">{service.description}</p>
-              <span className="mt-auto text-sm font-semibold text-[#1677f2]">Explore service <span aria-hidden="true">&rarr;</span></span>
+            <Link key={service.href} href={service.href} className="group flex h-full flex-col rounded-lg border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-colors hover:border-[#1677f2] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1677f2] sm:p-8 dark:bg-[#141417] dark:border-[#27272b]">
+              <p className="text-sm font-semibold text-[#0077B6] dark:text-[#4f9dfb]">{service.category}</p>
+              <h2 className="mt-3 text-xl font-bold leading-snug text-[#120b45] group-hover:text-[#1677f2] dark:text-[#fafafa]">{service.title}</h2>
+              <p className="mb-6 mt-3 text-base leading-relaxed text-[#475569] dark:text-[#a1a1aa]">{service.description}</p>
+              <span className="mt-auto text-sm font-semibold text-[#1677f2] dark:text-[#4f9dfb]">Explore service <span aria-hidden="true">&rarr;</span></span>
             </Link>
           ))}
         </section>
-        <section className="mt-12 flex flex-col gap-4 border-t border-blue-100 pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-xl font-bold text-[#120b45]">Discuss your compliance requirements</h2>
+        <section className="mt-12 flex flex-col gap-4 border-t border-blue-100 pt-8 sm:flex-row sm:items-center sm:justify-between dark:border-[#27272b]">
+          <h2 className="text-xl font-bold text-[#120b45] dark:text-[#fafafa]">Discuss your compliance requirements</h2>
           <Link href="/contact" className="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#1677f2] px-6 py-3 font-semibold text-white hover:bg-[#0866d9]">Contact Estabizz</Link>
         </section>
       </div>

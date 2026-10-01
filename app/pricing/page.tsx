@@ -38,24 +38,24 @@ const engagementModels = [
 
 export default function PricingPage() {
     return (
-        <main className="min-h-screen bg-white pt-[64px]">
+        <main className="min-h-screen bg-white pt-[64px] dark:bg-[#141417]">
             {/* Hero — homepage-themed */}
-            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
-                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
-                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
-                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link>
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link>
                         <span className="opacity-40">/</span>
-                        <span className="text-[#374151]">Engagement Models</span>
+                        <span className="text-[#374151] dark:text-[#a1a1aa]">Engagement Models</span>
                     </nav>
-                    <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">
+                    <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
                         Advisory Fees Are Scope-Based
                     </div>
-                    <h1 className="mt-4 text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">
-                        Transparent <span className="text-[#1677f2]">Engagement Models</span>
+                    <h1 className="mt-4 text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px] dark:text-[#fafafa]">
+                        Transparent <span className="text-[#1677f2] dark:text-[#4f9dfb]">Engagement Models</span>
                     </h1>
-                    <p className="mt-4 max-w-3xl text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px]">
+                    <p className="mt-4 max-w-3xl text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px] dark:text-[#a1a1aa]">
                         Regulatory, licensing and compliance assignments vary by regulator, entity type, documentation depth and post-approval responsibilities. Estabizz works through clear scope definition before fee finalisation.
                     </p>
                 </div>
@@ -64,17 +64,17 @@ export default function PricingPage() {
             <section className="mx-auto max-w-7xl px-6 py-14">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {engagementModels.map((model) => (
-                        <div key={model.title} className="flex h-full flex-col rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-all hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_16px_44px_rgba(0,80,140,0.12)]">
-                            <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-[#f5fbff] font-black text-[#1677f2]">✓</div>
-                            <h2 className="mb-3 text-[19px] font-black text-[#120b45]">{model.title}</h2>
-                            <p className="text-sm leading-relaxed text-[#64748b]">{model.description}</p>
+                        <div key={model.title} className="flex h-full flex-col rounded-2xl border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-all hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_16px_44px_rgba(0,80,140,0.12)] dark:bg-[#141417] dark:border-[#27272b]">
+                            <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-[#f5fbff] font-black text-[#1677f2] dark:bg-[#141417] dark:text-[#4f9dfb]">✓</div>
+                            <h2 className="mb-3 text-[19px] font-black text-[#120b45] dark:text-[#fafafa]">{model.title}</h2>
+                            <p className="text-sm leading-relaxed text-[#64748b] dark:text-[#a1a1aa]">{model.description}</p>
                         </div>
                     ))}
                 </div>
 
-                <div className="mt-10 rounded-2xl border border-blue-100 bg-white p-8 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
-                    <h2 className="mb-3 text-[22px] font-black text-[#120b45]">Professional Fee Disclaimer</h2>
-                    <p className="text-sm leading-relaxed text-[#64748b]">
+                <div className="mt-10 rounded-2xl border border-blue-100 bg-white p-8 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+                    <h2 className="mb-3 text-[22px] font-black text-[#120b45] dark:text-[#fafafa]">Professional Fee Disclaimer</h2>
+                    <p className="text-sm leading-relaxed text-[#64748b] dark:text-[#a1a1aa]">
                         Professional fees may vary depending on the regulator, entity structure, capital requirement, business model, documentation scope, regulatory queries and ongoing compliance responsibility.
                     </p>
                     <Link

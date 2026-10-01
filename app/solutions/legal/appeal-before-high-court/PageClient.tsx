@@ -57,7 +57,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -90,7 +90,7 @@ export default function PageClient() {
       finalCtaTitle="Do Not Let the Limitation Period Become the Problem"
       finalCtaDescription="A High Court appeal can affect custody, reputation, business continuity and future legal remedies. A short discussion today can save weeks of filing defects and avoidable delay."
       heroDescription={<p>A High Court appeal is not simply a second chance. It is a statutory remedy where the facts, documents, grounds and timelines all have to be handled precisely. Estabizz assists with conviction and acquittal appeals, sentence matters, suspension of sentence, bail pending appeal, evidence review and counsel coordination under the BNS, BNSS and BSA framework.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With a Legal Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp for Urgent Case Review</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With a Legal Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp for Urgent Case Review</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> an appeal before the High Court asks the Court to examine whether the lower court&rsquo;s judgment or order is legally correct, factually sustainable and procedurally fair.</p>

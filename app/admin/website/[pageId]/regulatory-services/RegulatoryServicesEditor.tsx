@@ -27,7 +27,7 @@ export default function RegulatoryServicesEditor() {
   const removeTag = (si: number, ti: number) => setServices((s) => s.map((x, j) => j === si ? { ...x, tags: x.tags.filter((_, k) => k !== ti) } : x));
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8 dark:bg-[#141417]">
       <EditorHeader title="Regulatory Services" subtitle="The 8 service category cards" updatedAt={updatedAt} />
       {loading ? <LoadingCard /> : (
         <div className="max-w-3xl space-y-6">
@@ -42,10 +42,10 @@ export default function RegulatoryServicesEditor() {
           <Card title={`Service Cards (${services.length})`} action={<button onClick={addSvc} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add service</button>}>
             <div className="space-y-4">
               {services.map((svc, i) => (
-                <div key={i} className="rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-4">
+                <div key={i} className="rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="text-[11px] font-black text-[#94a3b8]">Service {i + 1}</span>
-                    <button onClick={() => removeSvc(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50">Delete</button>
+                    <span className="text-[11px] font-black text-[#94a3b8] dark:text-[#71717a]">Service {i + 1}</span>
+                    <button onClick={() => removeSvc(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225]">Delete</button>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-[60px_1fr_1fr]">
                     <Field label="Icon"><input value={svc.icon} onChange={(e) => setSvc(i, { icon: e.target.value })} className={inputCls + " text-center"} /></Field>
@@ -56,15 +56,15 @@ export default function RegulatoryServicesEditor() {
                   <div className="mt-3"><Field label="Description"><textarea value={svc.desc} onChange={(e) => setSvc(i, { desc: e.target.value })} rows={2} className={inputCls + " resize-y"} /></Field></div>
                   <div className="mt-3">
                     <div className="mb-1.5 flex items-center justify-between">
-                      <label className="text-[12px] font-bold text-[#334155]">Service tags (name + link)</label>
-                      <button onClick={() => addTag(i)} className="text-[11px] font-bold text-[#1677f2] hover:underline">+ Add tag</button>
+                      <label className="text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">Service tags (name + link)</label>
+                      <button onClick={() => addTag(i)} className="text-[11px] font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">+ Add tag</button>
                     </div>
                     <div className="space-y-1.5">
                       {svc.tags.map((t, ti) => (
                         <div key={ti} className="flex items-center gap-1.5">
                           <input value={t.name} onChange={(e) => setTag(i, ti, { name: e.target.value })} placeholder="Tag name" className={inputCls} />
                           <input value={t.href} onChange={(e) => setTag(i, ti, { href: e.target.value })} placeholder="/path" className={inputCls + " font-mono text-[11px]"} />
-                          <button onClick={() => removeTag(i, ti)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500">✕</button>
+                          <button onClick={() => removeTag(i, ti)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a]">✕</button>
                         </div>
                       ))}
                     </div>

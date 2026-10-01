@@ -66,7 +66,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -105,7 +105,7 @@ export default function PageClient() {
       finalCtaTitle="Get It Before You Need It"
       finalCtaDescription="Nobody registers a marriage because they want a certificate. They do it because a visa application, a passport renewal or an insurance nomination has just stopped — and by then the appointment is urgent."
       heroDescription={<p>A marriage certificate is the document everything else asks for: spouse visas, passports, bank and insurance nominations, immigration, employer records, property and succession matters. Registration itself is usually straightforward — the delays come from the wrong route being chosen, documents that do not match each other, or a couple discovering at the counter that a name is spelt three different ways across their papers. Estabizz assists couples, interfaith couples, NRIs and foreign nationals with route assessment, document verification, application preparation, witness and appointment planning, authority coordination, late registration, corrections and apostille or attestation for overseas use.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> registration is the official record of a marriage, and the certificate is the proof you will be asked for repeatedly.</p>

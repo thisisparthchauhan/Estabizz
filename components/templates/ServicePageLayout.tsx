@@ -150,7 +150,7 @@ export default function ServicePageLayout({
         : null;
 
     return (
-        <div className="min-h-screen bg-[#f6f9ff] dark:bg-[#06101f] font-sans text-gray-800 dark:text-[#f7f9fc]">
+        <div className="min-h-screen bg-[#f6f9ff] dark:bg-[#09090b] font-sans text-gray-800 dark:text-[#fafafa]">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -169,23 +169,23 @@ export default function ServicePageLayout({
 
             {/* Hero Header */}
             <section
-                className="relative pt-24 pb-10 px-6 lg:px-8 border-b border-blue-100 dark:border-[#223550] overflow-hidden bg-white dark:bg-[#0d1a2d]"
+                className="relative pt-24 pb-10 px-6 lg:px-8 border-b border-blue-100 dark:border-[#27272b] overflow-hidden bg-white dark:bg-[#141417]"
             >
                 <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
-                <div className="absolute inset-x-0 bottom-0 pointer-events-none h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="absolute inset-x-0 bottom-0 pointer-events-none h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="absolute -left-24 top-16 h-[360px] w-[360px] rounded-full bg-[#1677f2]/10 blur-[100px] pointer-events-none" />
                 <div className="absolute -right-24 bottom-8 h-[360px] w-[360px] rounded-full bg-[#1677f2]/12 blur-[100px] pointer-events-none" />
 
                 <div className="max-w-7xl mx-auto relative z-10">
                     {/* Breadcrumb */}
-                    <nav className="text-sm font-semibold text-gray-500 dark:text-[#a9b6c9] mb-8 flex items-center space-x-2 flex-wrap">
+                    <nav className="text-sm font-semibold text-gray-500 dark:text-[#a1a1aa] mb-8 flex items-center space-x-2 flex-wrap">
                         {breadcrumb.map((item, i) => (
                             <React.Fragment key={i}>
                                 {i > 0 && <span>&gt;</span>}
                                 {item.href ? (
-                                    <Link href={item.href} className="hover:text-[#1677f2] transition-colors">{item.label}</Link>
+                                    <Link href={item.href} className="hover:text-[#1677f2] transition-colors dark:text-[#4f9dfb]">{item.label}</Link>
                                 ) : (
-                                    <span className="text-[#1677f2]">{item.label}</span>
+                                    <span className="text-[#1677f2] dark:text-[#4f9dfb]">{item.label}</span>
                                 )}
                             </React.Fragment>
                         ))}
@@ -196,19 +196,19 @@ export default function ServicePageLayout({
                             {/* Tags */}
                             <div className="flex flex-wrap gap-3 mb-7">
                                 {tags.map((tag, i) => (
-                                    <span key={i} className="px-4 py-2 bg-white/80 dark:bg-[#0a1628]/80 text-[#1677f2] border border-blue-100 dark:border-[#223550] rounded-full text-xs font-bold shadow-sm backdrop-blur-sm">
+                                    <span key={i} className="px-4 py-2 bg-white/80 dark:bg-[#0f0f11]/80 text-[#1677f2] border border-blue-100 dark:border-[#27272b] rounded-full text-xs font-bold shadow-sm backdrop-blur-sm dark:text-[#4f9dfb]">
                                         {tag.emoji} {tag.label}
                                     </span>
                                 ))}
                             </div>
 
                             {/* Title */}
-                            <h1 className="text-[30px] md:text-[44px] font-black text-[#120b45] dark:text-[#f7f9fc] leading-[1.08] mb-5 tracking-[-0.03em] max-w-4xl">
+                            <h1 className="text-[30px] md:text-[44px] font-black text-[#120b45] dark:text-[#fafafa] leading-[1.08] mb-5 tracking-[-0.03em] max-w-4xl">
                                 {title}
                             </h1>
 
                             {heroDescription && (
-                                <div className="max-w-4xl text-[17px] leading-[1.85] text-[#475569] dark:text-[#a9b6c9] mb-7">
+                                <div className="max-w-4xl text-[17px] leading-[1.85] text-[#475569] dark:text-[#a1a1aa] mb-7">
                                     {heroDescription}
                                 </div>
                             )}
@@ -220,46 +220,46 @@ export default function ServicePageLayout({
                             )}
 
                             {trustLine && (
-                                <div className="max-w-4xl text-[14px] font-semibold text-[#0a1628] dark:text-[#f7f9fc] bg-white/78 dark:bg-[#12223a]/80 border border-blue-100 dark:border-[#223550] rounded-2xl px-5 py-4 mb-7 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-md">
+                                <div className="max-w-4xl text-[14px] font-semibold text-[#0a1628] dark:text-[#fafafa] bg-white/78 dark:bg-[#1c1c20]/80 border border-blue-100 dark:border-[#27272b] rounded-2xl px-5 py-4 mb-7 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-md">
                                     {trustLine}
                                 </div>
                             )}
 
                             {/* Meta */}
-                            <div className="flex flex-wrap items-center gap-4 text-[13.5px] text-[#64748b] dark:text-[#a9b6c9] font-semibold mb-6">
+                            <div className="flex flex-wrap items-center gap-4 text-[13.5px] text-[#64748b] dark:text-[#a1a1aa] font-semibold mb-6">
                                 <div className="flex items-center gap-1.5"><span>📅</span> {displayYear}</div>
-                                <span className="text-gray-300">|</span>
+                                <span className="text-gray-300 dark:text-[#71717a]">|</span>
                                 <div className="flex items-center gap-1.5"><span>⏱️</span> {readTime}</div>
-                                <span className="text-gray-300">|</span>
+                                <span className="text-gray-300 dark:text-[#71717a]">|</span>
                                 <div className="flex items-center gap-1.5"><span>👁️</span> Regulatory Guide</div>
-                                {!hideReviewBadge && <><span className="text-gray-300">|</span>
+                                {!hideReviewBadge && <><span className="text-gray-300 dark:text-[#71717a]">|</span>
                                 <div className="flex items-center gap-1.5"><span>{reviewPending ? '📋' : '✅'}</span> {reviewPending ? 'Content Review Pending' : 'Expert Reviewed'}</div></>}
                             </div>
 
-                            <div className="inline-block px-5 py-3 border border-blue-200 dark:border-[#223550] bg-white/76 dark:bg-[#0d1a2d]/80 backdrop-blur-sm rounded-full text-sm text-[#0a1628] dark:text-[#f7f9fc] font-bold shadow-sm">
-                                Focus: <span className="text-[#1677f2]">{focusKeyword}</span>
+                            <div className="inline-block px-5 py-3 border border-blue-200 dark:border-[#27272b] bg-white/76 dark:bg-[#141417]/80 backdrop-blur-sm rounded-full text-sm text-[#0a1628] dark:text-[#fafafa] font-bold shadow-sm">
+                                Focus: <span className="text-[#1677f2] dark:text-[#4f9dfb]">{focusKeyword}</span>
                             </div>
                         </div>
 
                         <div className="hidden lg:block lg:sticky lg:top-[88px]">
-                            <div className="relative overflow-hidden rounded-[26px] border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-6 shadow-[0_22px_60px_rgba(0,80,140,0.10)] dark:shadow-[0_22px_60px_rgba(0,0,0,0.35)]">
-                                <div className="absolute right-[-80px] top-[-80px] h-44 w-44 rounded-full bg-[#dff2ff] blur-3xl" />
+                            <div className="relative overflow-hidden rounded-[26px] border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] p-6 shadow-[0_22px_60px_rgba(0,80,140,0.10)] dark:shadow-[0_22px_60px_rgba(0,0,0,0.35)]">
+                                <div className="absolute right-[-80px] top-[-80px] h-44 w-44 rounded-full bg-[#dff2ff] blur-3xl dark:bg-[#1c1c20]" />
                                 <div className="relative">
                                     <div className="mb-5 flex items-start justify-between gap-4">
                                         <div>
-                                            <div className="text-[10.5px] font-black uppercase tracking-[0.22em] text-[#1677f2]">Licence Snapshot</div>
-                                            <div className="mt-1.5 text-[20px] font-black leading-tight text-[#120b45] dark:text-[#f7f9fc]">{ctaTitle}</div>
+                                            <div className="text-[10.5px] font-black uppercase tracking-[0.22em] text-[#1677f2] dark:text-[#4f9dfb]">Licence Snapshot</div>
+                                            <div className="mt-1.5 text-[20px] font-black leading-tight text-[#120b45] dark:text-[#fafafa]">{ctaTitle}</div>
                                         </div>
-                                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0a1628] text-base font-black text-white shadow-lg">E</div>
+                                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0a1628] dark:bg-[#1c1c20] text-base font-black text-white shadow-lg">E</div>
                                     </div>
 
-                                    <p className="mb-5 text-[13.5px] font-medium leading-6 text-[#64748b] dark:text-[#a9b6c9]">{ctaDescription}</p>
+                                    <p className="mb-5 text-[13.5px] font-medium leading-6 text-[#64748b] dark:text-[#a1a1aa]">{ctaDescription}</p>
 
                                     <div className="mb-5 grid grid-cols-2 gap-2.5">
                                         {quickFacts.slice(0, 4).map((fact, i) => (
-                                            <div key={`${fact.label}-${i}`} className="rounded-xl border border-blue-100 dark:border-[#223550] bg-[#f8fbff] dark:bg-[#12223a] p-3.5">
-                                                <div className="text-[9.5px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a9b6c9]">{fact.label}</div>
-                                                <div className="mt-1 text-[13.5px] font-black leading-snug text-[#0a1628] dark:text-[#f7f9fc]">{fact.value}</div>
+                                            <div key={`${fact.label}-${i}`} className="rounded-xl border border-blue-100 dark:border-[#27272b] bg-[#f8fbff] dark:bg-[#1c1c20] p-3.5">
+                                                <div className="text-[9.5px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">{fact.label}</div>
+                                                <div className="mt-1 text-[13.5px] font-black leading-snug text-[#0a1628] dark:text-[#fafafa]">{fact.value}</div>
                                             </div>
                                         ))}
                                     </div>
@@ -276,11 +276,11 @@ export default function ServicePageLayout({
 
             {insightCards.length > 0 && (
                 <section className="relative z-20 -mt-7 px-5 md:px-6 lg:hidden">
-                    <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 rounded-[28px] border border-blue-100 dark:border-[#223550] bg-white/92 dark:bg-[#0d1a2d]/92 p-3 shadow-[0_24px_70px_rgba(0,100,200,0.10)] backdrop-blur-xl sm:grid-cols-2 xl:grid-cols-4">
+                    <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 rounded-[28px] border border-blue-100 dark:border-[#27272b] bg-white/92 dark:bg-[#141417]/92 p-3 shadow-[0_24px_70px_rgba(0,100,200,0.10)] backdrop-blur-xl sm:grid-cols-2 xl:grid-cols-4">
                         {insightCards.map((fact, i) => (
-                            <div key={`${fact.label}-${i}`} className="rounded-[22px] border border-blue-50 dark:border-[#223550] bg-gradient-to-br from-[#f8fbff] to-white dark:from-[#12223a] dark:to-[#0d1a2d] p-5">
-                                <div className="mb-2 text-[11px] font-black uppercase tracking-[0.16em] text-[#64748b] dark:text-[#a9b6c9]">{fact.label}</div>
-                                <div className="text-[18px] font-black leading-tight text-[#0a1628] dark:text-[#f7f9fc]">{fact.value}</div>
+                            <div key={`${fact.label}-${i}`} className="rounded-[22px] border border-blue-50 dark:border-[#27272b] bg-gradient-to-br from-[#f8fbff] to-white dark:from-[#1c1c20] dark:to-[#141417] p-5">
+                                <div className="mb-2 text-[11px] font-black uppercase tracking-[0.16em] text-[#64748b] dark:text-[#a1a1aa]">{fact.label}</div>
+                                <div className="text-[18px] font-black leading-tight text-[#0a1628] dark:text-[#fafafa]">{fact.value}</div>
                             </div>
                         ))}
                     </div>
@@ -291,8 +291,8 @@ export default function ServicePageLayout({
             <div className="max-w-[1480px] mx-auto px-5 md:px-6 py-10 md:py-12 flex flex-col xl:flex-row gap-7 2xl:gap-10 items-start">
 
                 {/* Left TOC Sidebar */}
-                <aside className="hidden xl:block w-[286px] shrink-0 sticky top-[88px] bg-white/88 dark:bg-[#0d1a2d]/90 border border-[rgba(0,150,220,0.12)] dark:border-[#223550] rounded-[24px] p-5 shadow-[0_18px_46px_rgba(0,100,200,0.08)] backdrop-blur-xl z-10">
-                    <h4 className="text-[12px] font-black text-[#94a3b8] dark:text-[#a9b6c9] tracking-[0.18em] uppercase mb-5">Contents</h4>
+                <aside className="hidden xl:block w-[286px] shrink-0 sticky top-[88px] bg-white/88 dark:bg-[#141417]/90 border border-[rgba(0,150,220,0.12)] dark:border-[#27272b] rounded-[24px] p-5 shadow-[0_18px_46px_rgba(0,100,200,0.08)] backdrop-blur-xl z-10">
+                    <h4 className="text-[12px] font-black text-[#94a3b8] dark:text-[#a1a1aa] tracking-[0.18em] uppercase mb-5">Contents</h4>
                     <nav className="flex flex-col gap-1 max-h-[calc(100vh-160px)] overflow-y-auto pr-2">
                         {sections.map((section) => (
                             <a
@@ -301,7 +301,7 @@ export default function ServicePageLayout({
                                 onClick={(e) => scrollToSection(e, section.id)}
                                 className={`text-[13.5px] block py-3 pl-4 pr-3 rounded-xl border-l-[3px] leading-snug transition-all duration-200 ${activeSection === section.id
                                     ? "border-l-[#1677f2] bg-[rgba(0,150,220,0.08)] dark:bg-[#1677f2]/10 text-[#1677f2] font-black shadow-sm"
-                                    : "border-l-transparent text-[#64748b] dark:text-[#a9b6c9] hover:text-[#1677f2] hover:bg-blue-50/70 dark:hover:bg-[#12223a]"}`}
+                                    : "border-l-transparent text-[#64748b] dark:text-[#a1a1aa] hover:text-[#1677f2] hover:bg-blue-50/70 dark:hover:bg-[#12223a] dark:bg-[#1c1c20]"}`}
                             >
                                 {section.title}
                             </a>
@@ -310,9 +310,9 @@ export default function ServicePageLayout({
                 </aside>
 
                 {/* Mobile TOC */}
-                <div className="xl:hidden w-full bg-white/90 dark:bg-[#0d1a2d]/90 border border-[rgba(0,150,220,0.12)] dark:border-[#223550] rounded-[22px] p-5 mb-4 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-xl">
+                <div className="xl:hidden w-full bg-white/90 dark:bg-[#141417]/90 border border-[rgba(0,150,220,0.12)] dark:border-[#27272b] rounded-[22px] p-5 mb-4 shadow-[0_14px_34px_rgba(0,100,200,0.08)] backdrop-blur-xl">
                     <details className="group">
-                        <summary className="flex justify-between items-center font-bold cursor-pointer list-none text-[#1677f2]">
+                        <summary className="flex justify-between items-center font-bold cursor-pointer list-none text-[#1677f2] dark:text-[#4f9dfb]">
                             <span>Contents</span>
                             <span className="transition group-open:rotate-180">
                                 <svg fill="none" height="24" viewBox="0 0 24 24" width="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M6 9l6 6 6-6" /></svg>
@@ -321,7 +321,7 @@ export default function ServicePageLayout({
                         <nav className="flex flex-col gap-2 mt-4 max-h-[320px] overflow-y-auto">
                             {sections.map((section) => (
                                 <a key={section.id} href={`#${section.id}`} onClick={(e) => scrollToSection(e, section.id)}
-                                    className="text-[14px] text-gray-600 dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] border-b border-gray-50 dark:border-[#223550] pb-2 leading-snug">
+                                    className="text-[14px] text-gray-600 dark:text-[#a1a1aa] hover:text-[#1677f2] dark:hover:text-[#60a5fa] border-b border-gray-50 dark:border-[#27272b] pb-2 leading-snug">
                                     {section.title}
                                 </a>
                             ))}
@@ -330,7 +330,7 @@ export default function ServicePageLayout({
                 </div>
 
                 {/* Main Content */}
-                <main className="flex-1 w-full max-w-[860px] bg-white dark:bg-[#0d1a2d] border border-[rgba(0,150,220,0.10)] dark:border-[#223550] rounded-[28px] p-6 md:p-9 lg:p-12 shadow-[0_24px_70px_rgba(0,100,200,0.08)] dark:shadow-[0_24px_70px_rgba(0,0,0,0.35)] article-content relative overflow-x-auto">
+                <main className="flex-1 w-full max-w-[860px] bg-white dark:bg-[#141417] border border-[rgba(0,150,220,0.10)] dark:border-[#27272b] rounded-[28px] p-6 md:p-9 lg:p-12 shadow-[0_24px_70px_rgba(0,100,200,0.08)] dark:shadow-[0_24px_70px_rgba(0,0,0,0.35)] article-content relative overflow-x-auto">
                     <style dangerouslySetInnerHTML={{
                         __html: `
               .article-content{font-feature-settings:"kern";letter-spacing:0}
@@ -401,38 +401,38 @@ export default function ServicePageLayout({
                 .article-content li{font-size:15px}
               }
               /* ── Dark mode overrides ───────────────────────────── */
-              .dark .article-content h2{color:#f7f9fc}
+              .dark .article-content h2{color:#fafafa}
               .dark .article-content h3{color:#60a5fa}
-              .dark .article-content h4{color:#f7f9fc}
-              .dark .article-content p{color:#a9b6c9}
-              .dark .article-content li{color:#a9b6c9}
-              .dark .article-content li strong{color:#f7f9fc}
-              .dark .article-content p strong{color:#f7f9fc}
-              .dark .article-content .clean-list li{background:linear-gradient(135deg,#12223a,#0d1a2d);border-color:rgba(34,53,80,0.8)}
-              .dark .article-content .numbered-list li{background:#0d1a2d;border-color:rgba(34,53,80,0.8)}
-              .dark .article-content .numbered-list li::before{background:#1e3050}
-              .dark .article-content .field-label{color:#f7f9fc}
-              .dark .article-content .process-card{background:linear-gradient(135deg,#12223a,#0d1a2d);border-color:rgba(34,53,80,0.8)}
-              .dark .article-content .process-card h3{color:#f7f9fc}
-              .dark .article-content .process-card p{color:#a9b6c9}
-              .dark .numbered-card{background:#0d1a2d;border-color:rgba(34,53,80,0.8)}
-              .dark .faq-item{background:#0d1a2d;border-color:#223550}
-              .dark .faq-item summary{color:#f7f9fc}
-              .dark .faq-item summary:hover{background:#12223a}
-              .dark .faq-item>div{color:#a9b6c9;border-top-color:#223550}
-              .dark .expert-quote{background:linear-gradient(135deg,#0d1a2d,#12223a)}
-              .dark .expert-quote blockquote{color:#f7f9fc}
-              .dark .expert-quote cite{color:#a9b6c9}
-              .dark .info-box{background:rgba(22,119,242,0.08);border-color:rgba(34,53,80,0.8)}
+              .dark .article-content h4{color:#fafafa}
+              .dark .article-content p{color:#a1a1aa}
+              .dark .article-content li{color:#a1a1aa}
+              .dark .article-content li strong{color:#fafafa}
+              .dark .article-content p strong{color:#fafafa}
+              .dark .article-content .clean-list li{background:linear-gradient(135deg,#1c1c20,#141417);border-color:rgba(39,39,43,0.8)}
+              .dark .article-content .numbered-list li{background:#141417;border-color:rgba(39,39,43,0.8)}
+              .dark .article-content .numbered-list li::before{background:#1c1c20}
+              .dark .article-content .field-label{color:#fafafa}
+              .dark .article-content .process-card{background:linear-gradient(135deg,#1c1c20,#141417);border-color:rgba(39,39,43,0.8)}
+              .dark .article-content .process-card h3{color:#fafafa}
+              .dark .article-content .process-card p{color:#a1a1aa}
+              .dark .numbered-card{background:#141417;border-color:rgba(39,39,43,0.8)}
+              .dark .faq-item{background:#141417;border-color:#27272b}
+              .dark .faq-item summary{color:#fafafa}
+              .dark .faq-item summary:hover{background:#1c1c20}
+              .dark .faq-item>div{color:#a1a1aa;border-top-color:#27272b}
+              .dark .expert-quote{background:linear-gradient(135deg,#141417,#1c1c20)}
+              .dark .expert-quote blockquote{color:#fafafa}
+              .dark .expert-quote cite{color:#a1a1aa}
+              .dark .info-box{background:rgba(22,119,242,0.08);border-color:rgba(39,39,43,0.8)}
               .dark .warning-box{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.3)}
               .dark .success-box{background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3)}
-              .dark .data-table{border-color:#223550}
-              .dark .data-table tbody tr:nth-child(odd){background:#0d1a2d}
-              .dark .data-table tbody tr:nth-child(even){background:#12223a}
-              .dark .data-table tbody td{color:#a9b6c9;border-bottom-color:#223550}
-              .dark .step-timeline{border-left-color:#223550}
-              .dark .step-dot{box-shadow:0 0 0 4px #06101f}
-              .dark .step-card{background:#0d1a2d;border-color:#223550;border-left-color:#1677f2}
+              .dark .data-table{border-color:#27272b}
+              .dark .data-table tbody tr:nth-child(odd){background:#141417}
+              .dark .data-table tbody tr:nth-child(even){background:#1c1c20}
+              .dark .data-table tbody td{color:#a1a1aa;border-bottom-color:#27272b}
+              .dark .step-timeline{border-left-color:#27272b}
+              .dark .step-dot{box-shadow:0 0 0 4px #09090b}
+              .dark .step-card{background:#141417;border-color:#27272b;border-left-color:#1677f2}
               .dark .badge-yes{background:rgba(22,163,74,0.15);color:#4ade80}
               .dark .badge-no{background:rgba(220,38,38,0.15);color:#f87171}
               .dark .badge-optional{background:rgba(217,119,6,0.15);color:#fbbf24}
@@ -445,11 +445,11 @@ export default function ServicePageLayout({
 
                     {/* CTA Card */}
                     <div className="relative overflow-hidden rounded-[24px] p-[26px] shadow-[0_24px_60px_rgba(22,119,242,0.25)] text-white" style={{ background: "linear-gradient(135deg, #1677f2, #0866d9)" }}>
-                        <div className="absolute -right-12 -top-12 h-28 w-28 rounded-full bg-white/15 blur-2xl" />
+                        <div className="absolute -right-12 -top-12 h-28 w-28 rounded-full bg-white/15 blur-2xl dark:bg-[#141417]" />
                         <div className="relative">
                         <h3 className="font-black text-[21px] mb-3 leading-tight">{ctaTitle}</h3>
                         <p className="text-white/86 text-[14px] mb-6 leading-7">{ctaDescription}</p>
-                        <Link href={contactHref} className="block w-full bg-white text-[#1677f2] font-black text-[14px] py-3.5 rounded-2xl hover:bg-blue-50 hover:shadow-lg transition duration-300 text-center">
+                        <Link href={contactHref} className="block w-full bg-white text-[#1677f2] font-black text-[14px] py-3.5 rounded-2xl hover:bg-blue-50 hover:shadow-lg transition duration-300 text-center dark:bg-[#141417] dark:text-[#4f9dfb]">
                             📞 Book Free Consultation
                         </Link>
                         <div className="text-center text-white/78 text-[12px] mt-4 font-bold tracking-wide">
@@ -459,36 +459,36 @@ export default function ServicePageLayout({
                     </div>
 
                     {/* Expert Card */}
-                    <div className="bg-white dark:bg-[#0d1a2d] border border-blue-100 dark:border-[#223550] rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] dark:shadow-[0_16px_42px_rgba(0,0,0,0.30)]">
+                    <div className="bg-white dark:bg-[#141417] border border-blue-100 dark:border-[#27272b] rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] dark:shadow-[0_16px_42px_rgba(0,0,0,0.30)]">
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-100 to-teal-100 dark:from-[#1e3050] dark:to-[#12223a] text-[#0077B6] flex items-center justify-center font-bold text-xl border-2 border-white dark:border-[#223550] shadow-sm ring-2 ring-blue-50 dark:ring-[#223550] shrink-0">
+                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-100 to-teal-100 dark:from-[#1c1c20] dark:to-[#1c1c20] text-[#0077B6] flex items-center justify-center font-bold text-xl border-2 border-white dark:border-[#27272b] shadow-sm ring-2 ring-blue-50 dark:ring-[#27272b] shrink-0 dark:text-[#4f9dfb]">
                                 DK
                             </div>
                             <div>
-                                <h4 className="font-bold text-[15px] text-[#0a1628] dark:text-[#f7f9fc] leading-tight">CS Devyani Khambhati</h4>
-                                <div className="text-[12px] text-[#1677f2] font-medium">Compliance Expert</div>
+                                <h4 className="font-bold text-[15px] text-[#0a1628] dark:text-[#fafafa] leading-tight">CS Devyani Khambhati</h4>
+                                <div className="text-[12px] text-[#1677f2] font-medium dark:text-[#4f9dfb]">Compliance Expert</div>
                             </div>
                         </div>
-                        <div className="text-[13.5px] text-gray-600 dark:text-[#a9b6c9] leading-relaxed">
+                        <div className="text-[13.5px] text-gray-600 dark:text-[#a1a1aa] leading-relaxed">
                             Specialist in fintech regulatory compliance, government licenses and RBI, SEBI, IRDAI frameworks.
                         </div>
-                        <a href="mailto:info@estabizz.com" className="mt-4 block text-center w-full py-2.5 bg-blue-50 dark:bg-[#12223a] text-[#0077B6] dark:text-[#60a5fa] font-bold text-[13px] rounded-xl hover:bg-[#1677f2] hover:text-white transition-colors">
+                        <a href="mailto:info@estabizz.com" className="mt-4 block text-center w-full py-2.5 bg-blue-50 dark:bg-[#1c1c20] text-[#0077B6] dark:text-[#60a5fa] font-bold text-[13px] rounded-xl hover:bg-[#1677f2] hover:text-white transition-colors">
                             Ask a Question
                         </a>
                     </div>
 
                     {/* Quick Facts */}
                     {quickFacts.length > 0 && (
-                        <div className="bg-white dark:bg-[#0d1a2d] border border-[rgba(0,150,220,0.15)] dark:border-[#223550] rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] dark:shadow-[0_16px_42px_rgba(0,0,0,0.30)] relative overflow-hidden">
+                        <div className="bg-white dark:bg-[#141417] border border-[rgba(0,150,220,0.15)] dark:border-[#27272b] rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] dark:shadow-[0_16px_42px_rgba(0,0,0,0.30)] relative overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#1677f2] to-[#10b981]" />
-                            <h4 className="font-bold text-[#0a1628] dark:text-[#f7f9fc] flex items-center gap-2 mb-4">
-                                <span className="text-[#1677f2]">⚡</span> Quick Facts
+                            <h4 className="font-bold text-[#0a1628] dark:text-[#fafafa] flex items-center gap-2 mb-4">
+                                <span className="text-[#1677f2] dark:text-[#4f9dfb]">⚡</span> Quick Facts
                             </h4>
                             <div className="space-y-3">
                                 {quickFacts.map((fact, i) => (
-                                    <div key={i} className="flex justify-between items-center gap-4 text-[13px] border-b border-gray-50 dark:border-[#223550] pb-3 last:border-0 last:pb-0">
-                                        <span className="text-gray-500 dark:text-[#a9b6c9]">{fact.label}</span>
-                                        <span className="font-semibold text-[#0a1628] dark:text-[#f7f9fc] text-right max-w-[120px]">{fact.value}</span>
+                                    <div key={i} className="flex justify-between items-center gap-4 text-[13px] border-b border-gray-50 dark:border-[#27272b] pb-3 last:border-0 last:pb-0">
+                                        <span className="text-gray-500 dark:text-[#a1a1aa]">{fact.label}</span>
+                                        <span className="font-semibold text-[#0a1628] dark:text-[#fafafa] text-right max-w-[120px]">{fact.value}</span>
                                     </div>
                                 ))}
                             </div>
@@ -496,16 +496,16 @@ export default function ServicePageLayout({
                     )}
 
                     {/* Share */}
-                    <div className="bg-white dark:bg-[#0d1a2d] border border-blue-100 dark:border-[#223550] rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] dark:shadow-[0_16px_42px_rgba(0,0,0,0.30)] text-center">
-                        <h4 className="font-bold text-[13px] text-gray-500 dark:text-[#a9b6c9] uppercase tracking-wider mb-3">Share Guide</h4>
+                    <div className="bg-white dark:bg-[#141417] border border-blue-100 dark:border-[#27272b] rounded-[24px] p-5 shadow-[0_16px_42px_rgba(0,100,200,0.06)] dark:shadow-[0_16px_42px_rgba(0,0,0,0.30)] text-center">
+                        <h4 className="font-bold text-[13px] text-gray-500 dark:text-[#a1a1aa] uppercase tracking-wider mb-3">Share Guide</h4>
                         <div className="flex justify-center gap-2">
-                            <button onClick={() => handleShare("linkedin")} className="w-10 h-10 rounded-full bg-blue-50 dark:bg-[#12223a] text-[#0077B6] dark:text-[#60a5fa] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Share on LinkedIn">
+                            <button onClick={() => handleShare("linkedin")} className="w-10 h-10 rounded-full bg-blue-50 dark:bg-[#1c1c20] text-[#0077B6] dark:text-[#60a5fa] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Share on LinkedIn">
                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
                             </button>
-                            <button onClick={() => handleShare("twitter")} className="w-10 h-10 rounded-full bg-blue-50 dark:bg-[#12223a] text-[#0077B6] dark:text-[#60a5fa] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Share on X">
+                            <button onClick={() => handleShare("twitter")} className="w-10 h-10 rounded-full bg-blue-50 dark:bg-[#1c1c20] text-[#0077B6] dark:text-[#60a5fa] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Share on X">
                                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                             </button>
-                            <button onClick={() => handleShare("copy")} className="w-10 h-10 rounded-full bg-blue-50 dark:bg-[#12223a] text-[#0077B6] dark:text-[#60a5fa] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Copy Link">
+                            <button onClick={() => handleShare("copy")} className="w-10 h-10 rounded-full bg-blue-50 dark:bg-[#1c1c20] text-[#0077B6] dark:text-[#60a5fa] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors" title="Copy Link">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
                             </button>
                         </div>
@@ -516,16 +516,16 @@ export default function ServicePageLayout({
 
             {/* Related Articles */}
             {relatedArticles.length > 0 && (
-                <section className="border-t border-blue-100 dark:border-[#223550] bg-[#f8fbff] dark:bg-[#0a1628] py-16">
+                <section className="border-t border-blue-100 dark:border-[#27272b] bg-[#f8fbff] dark:bg-[#0f0f11] py-16">
                     <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                        <h2 className="text-2xl font-bold text-[#0a1628] dark:text-[#f7f9fc] mb-8 text-center">Related Articles</h2>
+                        <h2 className="text-2xl font-bold text-[#0a1628] dark:text-[#fafafa] mb-8 text-center">Related Articles</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {relatedArticles.map((article, i) => (
                                 <Link key={i} href={article.href} className="block group">
-                                    <div className="bg-white dark:bg-[#0d1a2d] border border-blue-100 dark:border-[#223550] rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(0,100,200,0.10)] dark:hover:shadow-[0_18px_42px_rgba(0,0,0,0.40)] hover:border-blue-200 dark:hover:border-[#1677f2]/40 transition-all h-full">
-                                        <div className="text-[12px] font-bold text-[#1677f2] uppercase tracking-wider mb-2">{article.category}</div>
-                                        <h3 className="text-[16px] font-bold text-[#0a1628] dark:text-[#f7f9fc] group-hover:text-[#1677f2] transition-colors mb-2">{article.title}</h3>
-                                        <p className="text-[13px] text-gray-500 dark:text-[#a9b6c9] line-clamp-2">{article.description}</p>
+                                    <div className="bg-white dark:bg-[#141417] border border-blue-100 dark:border-[#27272b] rounded-2xl p-6 shadow-sm hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(0,100,200,0.10)] dark:hover:shadow-[0_18px_42px_rgba(0,0,0,0.40)] hover:border-blue-200 dark:hover:border-[#1677f2]/40 transition-all h-full">
+                                        <div className="text-[12px] font-bold text-[#1677f2] uppercase tracking-wider mb-2 dark:text-[#4f9dfb]">{article.category}</div>
+                                        <h3 className="text-[16px] font-bold text-[#0a1628] dark:text-[#fafafa] group-hover:text-[#1677f2] transition-colors mb-2">{article.title}</h3>
+                                        <p className="text-[13px] text-gray-500 dark:text-[#a1a1aa] line-clamp-2">{article.description}</p>
                                     </div>
                                 </Link>
                             ))}
@@ -535,7 +535,7 @@ export default function ServicePageLayout({
             )}
 
             {/* Final CTA */}
-            <section className="relative overflow-hidden bg-gradient-to-br from-[#0a1628] to-[#0c2040] py-20 text-center px-6">
+            <section className="relative overflow-hidden bg-gradient-to-br from-[#0a1628] to-[#0c2040] dark:from-[#141417] dark:to-[#1c1c20] py-20 text-center px-6">
                 <div className="absolute inset-0 opacity-[0.10] pointer-events-none" style={{ backgroundImage: "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)", backgroundSize: "54px 54px" }} />
                 <div className="relative z-10 max-w-3xl mx-auto">
                     <h2 className="text-[28px] md:text-[32px] font-bold text-white mb-4">{finalCtaTitle}</h2>
@@ -549,7 +549,7 @@ export default function ServicePageLayout({
                             <Link href={contactHref} className="w-full sm:w-auto px-8 py-3.5 bg-[#1677f2] hover:bg-[#0866d9] text-white font-bold rounded-xl shadow-[0_14px_35px_rgba(22,119,242,0.28)] transition-all">
                                 Get Started Free →
                             </Link>
-                            <a href="tel:9825600907" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20">
+                            <a href="tel:9825600907" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20 dark:bg-[#141417]">
                                 Talk to Expert
                             </a>
                         </div>

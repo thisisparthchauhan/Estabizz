@@ -40,7 +40,7 @@ export default function GlobalMarketsEditor() {
   const removeRegion = (i: number) => setRegions((rs) => rs.filter((_, j) => j !== i));
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8 dark:bg-[#141417]">
       <EditorHeader title="Global Market Desk" subtitle="The India → Global expansion section" updatedAt={updatedAt} />
       {loading ? <LoadingCard /> : (
         <div className="max-w-3xl space-y-6">
@@ -63,7 +63,7 @@ export default function GlobalMarketsEditor() {
           <Card title="Feature Boxes (3 small cards)">
             <div className="space-y-3">
               {features.map((f, i) => (
-                <div key={i} className="grid gap-2 rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-3 sm:grid-cols-[1fr_1.6fr]">
+                <div key={i} className="grid gap-2 rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-3 sm:grid-cols-[1fr_1.6fr] dark:bg-[#141417] dark:border-[#27272b]">
                   <input value={f.title} onChange={(e) => setFeature(i, { title: e.target.value })} placeholder="Title" className={inputCls} />
                   <input value={f.text} onChange={(e) => setFeature(i, { text: e.target.value })} placeholder="Text" className={inputCls} />
                 </div>
@@ -74,14 +74,14 @@ export default function GlobalMarketsEditor() {
           <Card title={`Region Cards (${regions.length})`} action={<button onClick={addRegion} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add region</button>}>
             <div className="space-y-4">
               {regions.map((r, i) => (
-                <div key={i} className="rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-4">
+                <div key={i} className="rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="text-[11px] font-black text-[#94a3b8]">Region {i + 1}</span>
-                    <button onClick={() => removeRegion(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50">Delete</button>
+                    <span className="text-[11px] font-black text-[#94a3b8] dark:text-[#71717a]">Region {i + 1}</span>
+                    <button onClick={() => removeRegion(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225]">Delete</button>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-[1fr_90px]">
                     <Field label="Title"><input value={r.title} onChange={(e) => setRegion(i, { title: e.target.value })} className={inputCls} /></Field>
-                    <Field label="Accent"><input type="color" value={r.accent} onChange={(e) => setRegion(i, { accent: e.target.value })} className="h-[38px] w-full rounded-lg border border-[#dbe7f3] bg-white" /></Field>
+                    <Field label="Accent"><input type="color" value={r.accent} onChange={(e) => setRegion(i, { accent: e.target.value })} className="h-[38px] w-full rounded-lg border border-[#dbe7f3] bg-white dark:bg-[#141417] dark:border-[#27272b]" /></Field>
                   </div>
                   <div className="mt-3"><Field label="Description"><textarea value={r.description} onChange={(e) => setRegion(i, { description: e.target.value })} rows={2} className={inputCls + " resize-y"} /></Field></div>
                   <div className="mt-3"><Field label="Markets"><StringList items={r.markets ?? []} onChange={(markets) => setRegion(i, { markets })} placeholder="Country / market" /></Field></div>

@@ -23,13 +23,13 @@ export default async function ApplySuccessPage({ params }: Props) {
   const { slug } = await params;
 
   return (
-    <div className="min-h-screen bg-[#f8fbff] pt-[64px]">
+    <div className="min-h-screen bg-[#f8fbff] pt-[64px] dark:bg-[#141417]">
       <div className="mx-auto max-w-2xl px-4 py-20 text-center">
-        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-4xl">
+        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-4xl dark:bg-[#132a20]">
           🎉
         </div>
-        <h1 className="text-[30px] font-black text-[#0a1628]">Application Submitted!</h1>
-        <p className="mt-4 text-[15px] leading-7 text-[#64748b]">
+        <h1 className="text-[30px] font-black text-[#0a1628] dark:text-[#fafafa]">Application Submitted!</h1>
+        <p className="mt-4 text-[15px] leading-7 text-[#64748b] dark:text-[#a1a1aa]">
           Your application has been received. Our team will review it and be in touch.
           You can track the status from your applications dashboard.
         </p>
@@ -42,14 +42,14 @@ export default async function ApplySuccessPage({ params }: Props) {
           </Link>
           <Link
             href="/jobs"
-            className="rounded-xl border border-[#dbe7f3] bg-white px-7 py-3.5 text-[15px] font-bold text-[#334155] hover:border-[#1677f2]/40 transition-colors"
+            className="rounded-xl border border-[#dbe7f3] bg-white px-7 py-3.5 text-[15px] font-bold text-[#334155] hover:border-[#1677f2]/40 transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
           >
             Browse More Jobs
           </Link>
         </div>
-        <p className="mt-6 text-[12px] text-[#94a3b8]">
+        <p className="mt-6 text-[12px] text-[#94a3b8] dark:text-[#71717a]">
           Applied for the wrong role?{" "}
-          <Link href={`/jobs/${slug}`} className="font-bold text-[#1677f2] hover:underline">
+          <Link href={`/jobs/${slug}`} className="font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">
             View job posting
           </Link>
         </p>

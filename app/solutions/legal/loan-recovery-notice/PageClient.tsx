@@ -68,7 +68,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -107,7 +107,7 @@ export default function PageClient() {
       finalCtaTitle="Patience Is How Good Debts Die"
       finalCtaDescription="Three years passes quietly while a lender is being reasonable. Get the limitation date on paper, get a signed acknowledgement before it runs, and choose the route deliberately — in that order."
       heroDescription={<p>Most unrecovered loans were recoverable once. What killed them was not the borrower&rsquo;s resistance but the lender&rsquo;s patience: three years of reassurance, no written acknowledgement, and a claim that quietly became unenforceable. A recovery notice is worth sending only once two questions are answered — can the loan actually be proved, and where does limitation stand. Estabizz assists lenders, NBFCs, fintech lenders, businesses, private and family lenders, companies and guarantors with loan document and evidence review, limitation analysis, outstanding computation, route selection across civil, summary suit, cheque, SARFAESI, DRT and insolvency, notice drafting, guarantor and security review, settlement documentation and borrower-side responses.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> a loan recovery notice formally demands repayment and warns of what comes next.</p>

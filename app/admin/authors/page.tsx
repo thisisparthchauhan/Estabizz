@@ -35,17 +35,17 @@ export default async function AuthorsPage() {
   );
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8 dark:bg-[#141417]">
       <div className="mb-6">
-        <h1 className="text-[21px] font-black text-[#0a1628]">Authors</h1>
-        <p className="mt-0.5 text-[13px] text-[#64748b]">
+        <h1 className="text-[21px] font-black text-[#0a1628] dark:text-[#fafafa]">Authors</h1>
+        <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">
           {authors.length} contributing author{authors.length !== 1 ? "s" : ""} across all blog entries.
         </p>
       </div>
 
-      <div className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
-        <div className="border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">
+      <div className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden dark:bg-[#141417] dark:border-[#27272b]">
+        <div className="border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3 dark:bg-[#141417] dark:border-[#27272b]">
+          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#71717a]">
             Contributing Authors
           </span>
         </div>
@@ -53,25 +53,25 @@ export default async function AuthorsPage() {
         {authors.length === 0 ? (
           <div className="py-16 text-center">
             <div className="text-3xl mb-3 opacity-20">◉</div>
-            <p className="text-[13px] text-[#94a3b8]">No authors found.</p>
+            <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No authors found.</p>
           </div>
         ) : (
           <div className="divide-y divide-[#f8fafc]">
             {authors.map((author) => (
               <div
                 key={author.name}
-                className="flex items-center justify-between px-6 py-3.5 hover:bg-[#f8fafc] transition-colors"
+                className="flex items-center justify-between px-6 py-3.5 hover:bg-[#f8fafc] transition-colors dark:bg-[#141417]"
               >
                 <div className="flex items-center gap-3">
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[13px] font-black text-white">
                     {author.name[0]}
                   </div>
                   <div>
-                    <div className="text-[13px] font-bold text-[#0a1628]">{author.name}</div>
-                    <div className="text-[11px] text-[#94a3b8]">{author.designation}</div>
+                    <div className="text-[13px] font-bold text-[#0a1628] dark:text-[#fafafa]">{author.name}</div>
+                    <div className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">{author.designation}</div>
                   </div>
                 </div>
-                <span className="rounded-full border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#1677f2]">
+                <span className="rounded-full border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
                   {author.count} article{author.count !== 1 ? "s" : ""}
                 </span>
               </div>
@@ -79,9 +79,9 @@ export default async function AuthorsPage() {
           </div>
         )}
 
-        <div className="border-t border-[#f0f4f8] bg-[#fffbf0] px-6 py-4">
+        <div className="border-t border-[#f0f4f8] bg-[#fffbf0] px-6 py-4 dark:bg-[#141417] dark:border-[#27272b]">
           <div className="flex items-center gap-3 rounded-xl border border-[#1677f2]/30 bg-[#1677f2]/8 px-4 py-3">
-            <span className="text-[#1677f2] text-lg">ℹ</span>
+            <span className="text-[#1677f2] text-lg dark:text-[#4f9dfb]">ℹ</span>
             <p className="text-[12px] text-[#b8860b] font-medium">
               Author profiles are currently derived from blog data. A dedicated author
               management panel (add bio, avatar, social links) is planned for a future release.

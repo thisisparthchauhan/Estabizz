@@ -74,12 +74,12 @@ export default function HomepageSeoEditor() {
   };
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8 dark:bg-[#141417]">
       <EditorHeader title="SEO Settings" subtitle="Homepage search and social preview" updatedAt={updatedAt} />
       {loading ? <LoadingCard /> : (
         <div className="max-w-4xl space-y-6">
           <Card title="Search Preview">
-            <div className="rounded-xl border border-[#e2eaf2] bg-white p-5">
+            <div className="rounded-xl border border-[#e2eaf2] bg-white p-5 dark:border-[#27272b]">
               <p className="truncate text-[13px] text-[#202124]">{preview.url}</p>
               <p className="mt-1 text-[20px] leading-6 text-[#1a0dab]">{preview.title}</p>
               <p className="mt-1 text-[14px] leading-5 text-[#4d5156]">{preview.description}</p>
@@ -136,11 +136,11 @@ export default function HomepageSeoEditor() {
 
           <Card title="Search Controls">
             <div className="grid gap-5 sm:grid-cols-2">
-              <label className="flex items-center gap-3 rounded-xl border border-[#e2eaf2] bg-[#fbfdff] px-4 py-3 text-[13px] font-semibold text-[#334155]">
+              <label className="flex items-center gap-3 rounded-xl border border-[#e2eaf2] bg-[#fbfdff] px-4 py-3 text-[13px] font-semibold text-[#334155] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                 <input type="checkbox" checked={seo.robotsIndex} onChange={(e) => setField("robotsIndex", e.target.checked)} />
                 Allow Search Engines
               </label>
-              <label className="flex items-center gap-3 rounded-xl border border-[#e2eaf2] bg-[#fbfdff] px-4 py-3 text-[13px] font-semibold text-[#334155]">
+              <label className="flex items-center gap-3 rounded-xl border border-[#e2eaf2] bg-[#fbfdff] px-4 py-3 text-[13px] font-semibold text-[#334155] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                 <input type="checkbox" checked={seo.robotsFollow} onChange={(e) => setField("robotsFollow", e.target.checked)} />
                 Allow Links To Be Followed
               </label>

@@ -67,7 +67,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -106,7 +106,7 @@ export default function PageClient() {
       finalCtaTitle="A Family Gift Still Has to Satisfy the Statute"
       finalCtaDescription="Most defective gift deeds were made in good faith between people who trusted each other. The defect surfaces years later, when the property is being sold or an heir objects — and by then the donor may not be available to fix it."
       heroDescription={<p>Gifting property within a family feels like a private arrangement, and that is exactly why so many gift deeds fail. For immovable property the law is unforgiving: the transfer must be by a registered instrument, signed by the donor and attested by at least two witnesses, and accepted by the donee while the donor is alive and capable. Miss any of that and no title passes, however genuine the intention. Estabizz assists donors, donees, families, NRIs and property owners with title and capacity review, donor-donee relationship and tax checks, deed drafting support, stamp duty and registration planning, Sub-Registrar coordination, witness and power of attorney planning, mutation support and advocate coordination.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> a gift deed transfers property to someone without any sale price, and for immovable property it only works if it is registered.</p>

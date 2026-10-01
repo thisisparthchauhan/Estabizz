@@ -66,7 +66,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -105,7 +105,7 @@ export default function PageClient() {
       finalCtaTitle="Structure First, Scheme Second"
       finalCtaDescription="Most demerger delay is created before the first filing, by drafting a scheme around a structure that the tax conditions, the creditor position or a sector regulator was never going to support."
       heroDescription={<p>A demerger separates a business undertaking from the company that built it and moves it into another company, usually through a scheme of arrangement sanctioned by the NCLT. Done well, it unlocks value, lets a vertical raise its own capital, isolates regulatory risk and settles family or promoter questions cleanly. Done without preparation, it runs into tax exposure, creditor objection, a licence that will not transfer or a stamp duty bill nobody budgeted. Estabizz assists companies, promoters, family groups, listed entities, NBFCs, fintechs and investors with feasibility and structure comparison, undertaking mapping, due diligence, valuation coordination, scheme drafting support, NCLT process support, SEBI, CCI and FEMA review, stamp duty planning and post-demerger compliance.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> a demerger takes one business division out of a company and puts it into another company, with the shareholders generally receiving shares in the new company.</p>

@@ -83,7 +83,7 @@ export default function NotesPanel({ entityType, entityId, initialNotes }: Props
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-[12px] font-black uppercase tracking-widest text-[#64748b]">Recruiter Notes</h2>
+        <h2 className="text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">Recruiter Notes</h2>
         {!adding && (
           <button
             type="button"
@@ -96,9 +96,9 @@ export default function NotesPanel({ entityType, entityId, initialNotes }: Props
       </div>
 
       {adding && (
-        <div className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-4 space-y-3">
+        <div className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-4 space-y-3 dark:bg-[#141417] dark:border-[#27272b]">
           <textarea
-            className="w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13.5px] text-[#334155] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none resize-y min-h-[80px]"
+            className="w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13.5px] text-[#334155] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none resize-y min-h-[80px] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
             placeholder="Add a note…"
             value={newContent}
             onChange={(e) => setNewContent(e.target.value)}
@@ -117,7 +117,7 @@ export default function NotesPanel({ entityType, entityId, initialNotes }: Props
             <button
               type="button"
               onClick={() => { setAdding(false); setNewContent(""); setError(null); }}
-              className="rounded-lg border border-[#dbe7f3] bg-white px-4 py-2 text-[12px] font-bold text-[#64748b] hover:border-[#1677f2]/40 transition-colors"
+              className="rounded-lg border border-[#dbe7f3] bg-white px-4 py-2 text-[12px] font-bold text-[#64748b] hover:border-[#1677f2]/40 transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
             >
               Cancel
             </button>
@@ -126,19 +126,19 @@ export default function NotesPanel({ entityType, entityId, initialNotes }: Props
       )}
 
       {error && (
-        <p className="text-[12px] font-bold text-red-600">{error}</p>
+        <p className="text-[12px] font-bold text-red-600 dark:text-[#fca5a5]">{error}</p>
       )}
 
       {notes.length === 0 ? (
-        <p className="text-[13px] text-[#94a3b8]">No notes yet.</p>
+        <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No notes yet.</p>
       ) : (
         <div className="space-y-3">
           {notes.map((note) => (
-            <div key={note.id} className="rounded-xl border border-[#dbe7f3] bg-white p-4">
+            <div key={note.id} className="rounded-xl border border-[#dbe7f3] bg-white p-4 dark:bg-[#141417] dark:border-[#27272b]">
               {editId === note.id ? (
                 <div className="space-y-2">
                   <textarea
-                    className="w-full rounded-xl border border-[#dbe7f3] px-3 py-2.5 text-[13.5px] focus:border-[#1677f2] focus:outline-none resize-y min-h-[80px]"
+                    className="w-full rounded-xl border border-[#dbe7f3] px-3 py-2.5 text-[13.5px] focus:border-[#1677f2] focus:outline-none resize-y min-h-[80px] dark:border-[#27272b]"
                     value={editContent}
                     onChange={(e) => setEditContent(e.target.value)}
                     disabled={saving}
@@ -155,7 +155,7 @@ export default function NotesPanel({ entityType, entityId, initialNotes }: Props
                     <button
                       type="button"
                       onClick={() => setEditId(null)}
-                      className="rounded-lg border border-[#dbe7f3] px-3 py-1.5 text-[12px] font-bold text-[#64748b]"
+                      className="rounded-lg border border-[#dbe7f3] px-3 py-1.5 text-[12px] font-bold text-[#64748b] dark:border-[#27272b] dark:text-[#a1a1aa]"
                     >
                       Cancel
                     </button>
@@ -163,9 +163,9 @@ export default function NotesPanel({ entityType, entityId, initialNotes }: Props
                 </div>
               ) : (
                 <>
-                  <p className="text-[13.5px] leading-7 text-[#334155] whitespace-pre-line">{note.content}</p>
+                  <p className="text-[13.5px] leading-7 text-[#334155] whitespace-pre-line dark:text-[#a1a1aa]">{note.content}</p>
                   <div className="mt-2 flex items-center justify-between">
-                    <p className="text-[11px] text-[#94a3b8]">
+                    <p className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">
                       {note.authorName} · {fmt(note.createdAt)}
                       {note.updatedAt > note.createdAt && " (edited)"}
                     </p>
@@ -173,14 +173,14 @@ export default function NotesPanel({ entityType, entityId, initialNotes }: Props
                       <button
                         type="button"
                         onClick={() => { setEditId(note.id); setEditContent(note.content); }}
-                        className="text-[11px] font-bold text-[#64748b] hover:text-[#1677f2]"
+                        className="text-[11px] font-bold text-[#64748b] hover:text-[#1677f2] dark:text-[#a1a1aa]"
                       >
                         Edit
                       </button>
                       <button
                         type="button"
                         onClick={() => handleDelete(note.id)}
-                        className="text-[11px] font-bold text-red-400 hover:text-red-600"
+                        className="text-[11px] font-bold text-red-400 hover:text-red-600 dark:text-[#fca5a5]"
                       >
                         Delete
                       </button>

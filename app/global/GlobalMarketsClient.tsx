@@ -25,19 +25,19 @@ const TIER_CONFIG = {
     label: "Active",
     description: "Active Market Support",
     dot:   "bg-emerald-500",
-    badge: "bg-emerald-100 text-emerald-800",
+    badge: "bg-emerald-100 text-emerald-800 dark:bg-[#132a20] dark:text-[#6ee7b7]",
   },
   developing: {
     label: "Developing",
     description: "Market Coverage Under Development",
     dot:   "bg-blue-500",
-    badge: "bg-blue-100 text-blue-800",
+    badge: "bg-blue-100 text-blue-800 dark:bg-[#1c1c20] dark:text-[#60a5fa]",
   },
   planned: {
     label: "Planned",
     description: "Market Entry Desk Planned",
     dot:   "bg-amber-400",
-    badge: "bg-amber-100 text-amber-800",
+    badge: "bg-amber-100 text-amber-800 dark:bg-[#2a2113] dark:text-[#fcd34d]",
   },
 };
 
@@ -52,20 +52,20 @@ function CountryCard({ country }: { country: GlobalMarketConfig }) {
   return (
     <Link
       href={href}
-      className="group flex items-center gap-3 rounded-xl border border-[#e2edf8] bg-white p-3.5 transition-all hover:border-[#1677f2]/40 hover:shadow-sm"
+      className="group flex items-center gap-3 rounded-xl border border-[#e2edf8] bg-white p-3.5 transition-all hover:border-[#1677f2]/40 hover:shadow-sm dark:bg-[#141417] dark:border-[#27272b]"
     >
       <span className="text-[26px] leading-none" aria-hidden="true">{flag}</span>
       <div className="min-w-0 flex-1">
-        <p className="truncate text-[13.5px] font-semibold text-[#0a1628] group-hover:text-[#1677f2]">
+        <p className="truncate text-[13.5px] font-semibold text-[#0a1628] group-hover:text-[#1677f2] dark:text-[#fafafa]">
           {country.name}
         </p>
-        <p className="text-[11px] text-[#94a3b8]">{country.region}</p>
+        <p className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">{country.region}</p>
       </div>
       <div className="flex flex-col items-end gap-1.5">
         <span className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-black uppercase tracking-wide ${tc.badge}`}>
           {tc.label}
         </span>
-        <ChevronRight className="h-3.5 w-3.5 text-[#94a3b8] group-hover:text-[#1677f2]" aria-hidden="true" />
+        <ChevronRight className="h-3.5 w-3.5 text-[#94a3b8] group-hover:text-[#1677f2] dark:text-[#71717a]" aria-hidden="true" />
       </div>
     </Link>
   );
@@ -94,7 +94,7 @@ export default function GlobalMarketsClient() {
   const totalPlanned    = GLOBAL_COUNTRIES.filter(c => c.tier === "planned").length;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-[#141417]">
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[#070d1a] pb-14 pt-20 text-white">
@@ -122,7 +122,7 @@ export default function GlobalMarketsClient() {
               { label: "Developing",    count: totalDeveloping, dot: "bg-blue-500",    desc: "Advisory capabilities in development" },
               { label: "Planned",       count: totalPlanned,    dot: "bg-amber-400",   desc: "Under evaluation" },
             ].map(item => (
-              <div key={item.label} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+              <div key={item.label} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 dark:bg-[#141417]">
                 <div className="flex items-center gap-2">
                   <span className={`h-2 w-2 rounded-full ${item.dot}`} aria-hidden="true" />
                   <span className="text-[11px] font-black uppercase tracking-wide text-white/60">{item.label}</span>
@@ -140,10 +140,10 @@ export default function GlobalMarketsClient() {
       </section>
 
       {/* ── Positioning notice ────────────────────────────────────────────── */}
-      <section className="border-b border-[#e2edf8] bg-[#f8fbff] py-4">
+      <section className="border-b border-[#e2edf8] bg-[#f8fbff] py-4 dark:bg-[#141417] dark:border-[#27272b]">
         <div className="mx-auto max-w-5xl px-6">
-          <p className="text-[12.5px] leading-relaxed text-[#64748b]">
-            <strong className="text-[#334155]">About Global Market Desk coverage:</strong>{" "}
+          <p className="text-[12.5px] leading-relaxed text-[#64748b] dark:text-[#a1a1aa]">
+            <strong className="text-[#334155] dark:text-[#a1a1aa]">About Global Market Desk coverage:</strong>{" "}
             Estabizz manages international market-entry enquiries through its India-based Global
             Market Desk. Country pages marked &ldquo;Developing&rdquo; or &ldquo;Planned&rdquo; reflect enquiry
             management capability, not local offices, incorporated entities or direct regulatory
@@ -153,19 +153,19 @@ export default function GlobalMarketsClient() {
       </section>
 
       {/* ── Search and filters ────────────────────────────────────────────── */}
-      <section className="sticky top-0 z-20 border-b border-[#e2edf8] bg-white/95 py-4 backdrop-blur-sm">
+      <section className="sticky top-0 z-20 border-b border-[#e2edf8] bg-white/95 py-4 backdrop-blur-sm dark:bg-[#141417] dark:border-[#27272b]">
         <div className="mx-auto max-w-5xl px-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             {/* Search */}
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8]" aria-hidden="true" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8] dark:text-[#71717a]" aria-hidden="true" />
               <input
                 type="search"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Search countries…"
                 aria-label="Search countries"
-                className="w-full rounded-xl border border-[#dbe7f3] bg-white py-2.5 pl-9 pr-4 text-[13.5px] text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10"
+                className="w-full rounded-xl border border-[#dbe7f3] bg-white py-2.5 pl-9 pr-4 text-[13.5px] text-[#0a1628] outline-none transition-all placeholder:text-[#94a3b8] focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
               />
             </div>
 
@@ -178,7 +178,7 @@ export default function GlobalMarketsClient() {
                   className={`rounded-full border px-3 py-1.5 text-[11px] font-bold transition-all ${
                     activeRegion === region
                       ? "border-[#1677f2] bg-[#1677f2] text-white"
-                      : "border-[#dbe7f3] bg-white text-[#64748b] hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+                      : "border-[#dbe7f3] bg-white text-[#64748b] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
                   }`}
                   aria-pressed={activeRegion === region}
                 >
@@ -196,7 +196,7 @@ export default function GlobalMarketsClient() {
                   className={`rounded-full border px-3 py-1.5 text-[11px] font-bold capitalize transition-all ${
                     activeTier === t
                       ? "border-[#1677f2] bg-[#1677f2] text-white"
-                      : "border-[#dbe7f3] bg-white text-[#64748b] hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+                      : "border-[#dbe7f3] bg-white text-[#64748b] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
                   }`}
                   aria-pressed={activeTier === t}
                 >
@@ -216,26 +216,26 @@ export default function GlobalMarketsClient() {
            (activeTier === "All" || activeTier === "active") &&
            (!search || "India".toLowerCase().includes(search.toLowerCase())) && (
             <div className="mb-6">
-              <p className="mb-3 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+              <p className="mb-3 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
                 Primary Operating Market
               </p>
               <Link
                 href="/"
-                className="group flex items-center gap-4 rounded-2xl border-2 border-[#1677f2]/20 bg-gradient-to-r from-[#f0f6ff] to-white p-5 transition-all hover:border-[#1677f2]/50 hover:shadow-md"
+                className="group flex items-center gap-4 rounded-2xl border-2 border-[#1677f2]/20 bg-gradient-to-r from-[#f0f6ff] to-white p-5 transition-all hover:border-[#1677f2]/50 hover:shadow-md dark:from-[#09090b]"
               >
                 <span className="text-[40px] leading-none" aria-hidden="true">🇮🇳</span>
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
-                    <p className="text-[18px] font-black text-[#0a1628] group-hover:text-[#1677f2]">India</p>
-                    <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wide text-emerald-800">
+                    <p className="text-[18px] font-black text-[#0a1628] group-hover:text-[#1677f2] dark:text-[#fafafa]">India</p>
+                    <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wide text-emerald-800 dark:bg-[#132a20] dark:text-[#6ee7b7]">
                       Active
                     </span>
                   </div>
-                  <p className="mt-0.5 text-[13px] text-[#64748b]">
+                  <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">
                     Primary operating market · RBI, SEBI, IRDAI, IFSCA, FIU-IND, MCA
                   </p>
                 </div>
-                <div className="flex items-center gap-1 text-[13px] font-bold text-[#1677f2]">
+                <div className="flex items-center gap-1 text-[13px] font-bold text-[#1677f2] dark:text-[#4f9dfb]">
                   View India services <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </div>
               </Link>
@@ -243,10 +243,10 @@ export default function GlobalMarketsClient() {
           )}
 
           {/* Result count */}
-          <p className="mb-4 text-[12.5px] text-[#94a3b8]">
+          <p className="mb-4 text-[12.5px] text-[#94a3b8] dark:text-[#71717a]">
             {filtered.filter(c => c.slug !== "india").length} markets
-            {search && <> matching &ldquo;<strong className="text-[#334155]">{search}</strong>&rdquo;</>}
-            {activeRegion !== "All" && <> in <strong className="text-[#334155]">{activeRegion}</strong></>}
+            {search && <> matching &ldquo;<strong className="text-[#334155] dark:text-[#a1a1aa]">{search}</strong>&rdquo;</>}
+            {activeRegion !== "All" && <> in <strong className="text-[#334155] dark:text-[#a1a1aa]">{activeRegion}</strong></>}
             {activeTier !== "All" && <> · {activeTier}</>}
           </p>
 
@@ -261,11 +261,11 @@ export default function GlobalMarketsClient() {
               return (
                 <div key={region} className="mb-8">
                   <div className="mb-3 flex items-center gap-2">
-                    <Globe2 className="h-4 w-4 text-[#1677f2]" aria-hidden="true" />
-                    <h2 className="text-[13px] font-black uppercase tracking-[0.15em] text-[#0a1628]">
+                    <Globe2 className="h-4 w-4 text-[#1677f2] dark:text-[#4f9dfb]" aria-hidden="true" />
+                    <h2 className="text-[13px] font-black uppercase tracking-[0.15em] text-[#0a1628] dark:text-[#fafafa]">
                       {region}
                     </h2>
-                    <span className="text-[11px] text-[#94a3b8]">
+                    <span className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">
                       ({regionCountries.length})
                     </span>
                   </div>
@@ -281,10 +281,10 @@ export default function GlobalMarketsClient() {
           {/* No results */}
           {filtered.filter(c => c.slug !== "india").length === 0 && (
             <div className="py-16 text-center">
-              <p className="text-[15px] font-semibold text-[#64748b]">No markets match your search.</p>
+              <p className="text-[15px] font-semibold text-[#64748b] dark:text-[#a1a1aa]">No markets match your search.</p>
               <button
                 onClick={() => { setSearch(""); setActiveRegion("All"); setActiveTier("All"); }}
-                className="mt-3 text-[13px] text-[#1677f2] hover:underline"
+                className="mt-3 text-[13px] text-[#1677f2] hover:underline dark:text-[#4f9dfb]"
               >
                 Clear filters
               </button>
@@ -294,9 +294,9 @@ export default function GlobalMarketsClient() {
       </section>
 
       {/* ── Final CTA ─────────────────────────────────────────────────────── */}
-      <section className="bg-[#0a1628] py-14 text-white">
+      <section className="bg-[#0a1628] dark:bg-[#1c1c20] py-14 text-white">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <Building2 className="mx-auto mb-4 h-10 w-10 text-[#1677f2]" aria-hidden="true" />
+          <Building2 className="mx-auto mb-4 h-10 w-10 text-[#1677f2] dark:text-[#4f9dfb]" aria-hidden="true" />
           <h2 className="text-[26px] font-black tracking-tight">
             Planning international expansion?
           </h2>
@@ -314,7 +314,7 @@ export default function GlobalMarketsClient() {
             </Link>
             <Link
               href="/get-started"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/8 px-6 py-3 text-[14px] font-black text-white transition-all hover:border-white/40 hover:bg-white/12"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/8 px-6 py-3 text-[14px] font-black text-white transition-all hover:border-white/40 hover:bg-white/12 dark:bg-[#141417]"
             >
               Get Started
             </Link>

@@ -19,10 +19,10 @@ interface Props {
 type FilterMode = "pending" | "website" | "seo" | "regulatory" | "blogs" | "content-pages" | "rejected";
 
 const statusMeta: Record<string, { label: string; cls: string }> = {
-  pending_approval: { label: "Pending", cls: "border-amber-200 bg-amber-50 text-amber-700" },
-  pending_review: { label: "Pending", cls: "border-amber-200 bg-amber-50 text-amber-700" },
-  rejected: { label: "Rejected", cls: "border-red-200 bg-red-50 text-red-700" },
-  published: { label: "Published", cls: "border-emerald-200 bg-emerald-50 text-emerald-700" },
+  pending_approval: { label: "Pending", cls: "border-amber-200 bg-amber-50 text-amber-700 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]" },
+  pending_review: { label: "Pending", cls: "border-amber-200 bg-amber-50 text-amber-700 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]" },
+  rejected: { label: "Rejected", cls: "border-red-200 bg-red-50 text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]" },
+  published: { label: "Published", cls: "border-emerald-200 bg-emerald-50 text-emerald-700 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]" },
 };
 
 function formatIST(iso: string): string {
@@ -123,7 +123,7 @@ function FilterButton({
       className={`rounded-xl border px-3.5 py-2 text-[12px] font-bold transition-colors ${
         active
           ? "border-[#1677f2] bg-[#1677f2] text-white"
-          : "border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
+          : "border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] text-[#475569] dark:text-[#a1a1aa] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
       }`}
     >
       {children}
@@ -153,31 +153,31 @@ function DetailDrawer({
   return (
     <div className="fixed inset-0 z-[3100] flex items-stretch">
       <div className="flex-1 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <aside className="flex w-full max-w-[920px] flex-col bg-white dark:bg-[#0d1a2d] shadow-[0_0_80px_rgba(0,0,0,0.30)] dark:shadow-[0_0_80px_rgba(0,0,0,0.60)]">
-        <div className="shrink-0 border-b border-[#e2eaf2] dark:border-[#223550] bg-[#fbfdff] dark:bg-[#0a1628] px-6 py-5">
+      <aside className="flex w-full max-w-[920px] flex-col bg-white dark:bg-[#141417] shadow-[0_0_80px_rgba(0,0,0,0.30)] dark:shadow-[0_0_80px_rgba(0,0,0,0.60)]">
+        <div className="shrink-0 border-b border-[#e2eaf2] dark:border-[#27272b] bg-[#fbfdff] dark:bg-[#0f0f11] px-6 py-5">
           <div className="flex items-start justify-between gap-4">
             <div>
               <div className="mb-2 flex flex-wrap items-center gap-2">
                 <span className={`rounded-full border px-2.5 py-0.5 text-[10px] font-bold ${statusMeta[item.status]?.cls ?? statusMeta.pending_approval.cls}`}>
                   {statusMeta[item.status]?.label ?? item.status}
                 </span>
-                <span className="rounded-full border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#12223a] px-2.5 py-0.5 text-[10px] font-bold text-[#64748b] dark:text-[#a9b6c9]">
+                <span className="rounded-full border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#1c1c20] px-2.5 py-0.5 text-[10px] font-bold text-[#64748b] dark:text-[#a1a1aa]">
                   {typeLabel(item)}
                 </span>
                 {item.type === "regulatory_update" && (
-                  <span className="rounded-full border border-[#cfe3ff] bg-[#f5faff] px-2.5 py-0.5 text-[10px] font-bold text-[#1677f2]">
+                  <span className="rounded-full border border-[#cfe3ff] bg-[#f5faff] px-2.5 py-0.5 text-[10px] font-bold text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
                     {regulatoryStateLabel(item)}
                   </span>
                 )}
               </div>
-              <h2 className="text-[20px] font-black leading-tight text-[#0a1628]">{item.sectionName}</h2>
-              <p className="mt-1 text-[12px] text-[#64748b]">
+              <h2 className="text-[20px] font-black leading-tight text-[#0a1628] dark:text-[#fafafa]">{item.sectionName}</h2>
+              <p className="mt-1 text-[12px] text-[#64748b] dark:text-[#a1a1aa]">
                 {item.type === "regulatory_update"
                   ? [item.regulator, item.category, item.impactLevel].filter(Boolean).join(" · ")
                   : `${item.pageName} · ${item.key}`}
               </p>
             </div>
-            <button type="button" onClick={onClose} className="rounded-xl px-3 py-2 text-[18px] text-[#94a3b8] hover:bg-[#f0f4f8] hover:text-[#0a1628]">x</button>
+            <button type="button" onClick={onClose} className="rounded-xl px-3 py-2 text-[18px] text-[#94a3b8] hover:bg-[#f0f4f8] hover:text-[#0a1628] dark:bg-[#1c1c20] dark:text-[#71717a]">x</button>
           </div>
         </div>
 
@@ -195,66 +195,66 @@ function DetailDrawer({
                 ["Review Type", regulatoryStateLabel(item)],
               ] : []),
             ].map(([label, value]) => (
-              <div key={label} className="rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-[#fbfdff] dark:bg-[#12223a] px-4 py-3">
-                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">{label}</div>
-                <div className="mt-1 break-words text-[12px] font-bold text-[#334155]">{value}</div>
+              <div key={label} className="rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-[#fbfdff] dark:bg-[#1c1c20] px-4 py-3">
+                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">{label}</div>
+                <div className="mt-1 break-words text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">{value}</div>
               </div>
             ))}
           </div>
 
           {item.type === "regulatory_update" && (
-            <div className="mb-5 rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-5">
-              <div className="mb-2 text-[12px] font-black uppercase tracking-wide text-[#94a3b8]">Regulatory Update</div>
-              <p className="text-[13px] leading-6 text-[#475569]">{item.summary || "No summary provided."}</p>
+            <div className="mb-5 rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-5">
+              <div className="mb-2 text-[12px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Regulatory Update</div>
+              <p className="text-[13px] leading-6 text-[#475569] dark:text-[#a1a1aa]">{item.summary || "No summary provided."}</p>
               {item.sourceUrl && (
-                <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex rounded-xl border border-blue-100 bg-blue-50 px-4 py-2 text-[12px] font-bold text-[#1677f2] hover:border-[#1677f2]/40">
+                <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex rounded-xl border border-blue-100 bg-blue-50 px-4 py-2 text-[12px] font-bold text-[#1677f2] hover:border-[#1677f2]/40 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#4f9dfb]">
                   Source Link
                 </a>
               )}
             </div>
           )}
 
-          <div className="mb-5 rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d]">
-            <div className="border-b border-[#f0f4f8] bg-[#f8fafc] px-5 py-3">
-              <h3 className="text-[12px] font-black uppercase tracking-wide text-[#94a3b8]">Changed Fields</h3>
+          <div className="mb-5 rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417]">
+            <div className="border-b border-[#f0f4f8] bg-[#f8fafc] px-5 py-3 dark:bg-[#141417] dark:border-[#27272b]">
+              <h3 className="text-[12px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Changed Fields</h3>
             </div>
             <div className="divide-y divide-[#f0f4f8]">
               {item.changedFields.length ? item.changedFields.map((change, index) => (
                 <div key={`${change.field}-${index}`} className="grid gap-3 px-5 py-4 lg:grid-cols-[180px_1fr_1fr]">
-                  <div className="text-[12px] font-black text-[#0a1628]">{change.field}</div>
+                  <div className="text-[12px] font-black text-[#0a1628] dark:text-[#fafafa]">{change.field}</div>
                   <div>
-                    <div className="mb-1 text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Published</div>
-                    <div className="whitespace-pre-wrap rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-[#fbfdff] dark:bg-[#12223a] px-3 py-2 text-[12px] leading-5 text-[#475569] dark:text-[#a9b6c9]">{change.oldValue}</div>
+                    <div className="mb-1 text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Published</div>
+                    <div className="whitespace-pre-wrap rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-[#fbfdff] dark:bg-[#1c1c20] px-3 py-2 text-[12px] leading-5 text-[#475569] dark:text-[#a1a1aa]">{change.oldValue}</div>
                   </div>
                   <div>
-                    <div className="mb-1 text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Draft</div>
-                    <div className="whitespace-pre-wrap rounded-xl border border-[#cfe3ff] bg-[#f5faff] px-3 py-2 text-[12px] leading-5 text-[#0a1628]">{change.newValue}</div>
+                    <div className="mb-1 text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Draft</div>
+                    <div className="whitespace-pre-wrap rounded-xl border border-[#cfe3ff] bg-[#f5faff] px-3 py-2 text-[12px] leading-5 text-[#0a1628] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{change.newValue}</div>
                   </div>
                 </div>
               )) : (
-                <div className="px-5 py-8 text-center text-[13px] text-[#94a3b8]">No changed fields were detected.</div>
+                <div className="px-5 py-8 text-center text-[13px] text-[#94a3b8] dark:text-[#71717a]">No changed fields were detected.</div>
               )}
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-5">
-            <label className="mb-2 block text-[12px] font-black uppercase tracking-wide text-[#94a3b8]">Reviewer Comment</label>
+          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-5">
+            <label className="mb-2 block text-[12px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Reviewer Comment</label>
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               rows={4}
               placeholder="Add a note for the person who submitted this change."
-              className="w-full resize-y rounded-xl border border-[#dbe7f3] px-3.5 py-3 text-[13px] text-[#0a1628] outline-none focus:border-[#1677f2]"
+              className="w-full resize-y rounded-xl border border-[#dbe7f3] px-3.5 py-3 text-[13px] text-[#0a1628] outline-none focus:border-[#1677f2] dark:border-[#27272b] dark:text-[#fafafa]"
             />
             {!allowed && item.status !== "rejected" && (
-              <p className="mt-2 text-[12px] text-amber-700">You can view this item, but you cannot review it.</p>
+              <p className="mt-2 text-[12px] text-amber-700 dark:text-[#fcd34d]">You can view this item, but you cannot review it.</p>
             )}
           </div>
         </div>
 
-        <div className="shrink-0 border-t border-[#e2eaf2] dark:border-[#223550] bg-[#fbfdff] dark:bg-[#0a1628] px-6 py-4">
+        <div className="shrink-0 border-t border-[#e2eaf2] dark:border-[#27272b] bg-[#fbfdff] dark:bg-[#0f0f11] px-6 py-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <Link href={item.previewPath} target="_blank" className="rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2 text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]">
+            <Link href={item.previewPath} target="_blank" className="rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] px-4 py-2 text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]">
               {item.type === "regulatory_update" ? "Review Regulatory Update" : "Preview"}
             </Link>
             <div className="flex flex-wrap items-center gap-2">
@@ -347,26 +347,26 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
   }
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8 dark:bg-[#141417]">
       <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-[22px] font-black text-[#0a1628]">Approval Queue</h1>
-          <p className="mt-1 text-[13px] text-[#64748b] dark:text-[#a9b6c9]">Review pending website, SEO, blog and regulatory updates before they go live.</p>
+          <h1 className="text-[22px] font-black text-[#0a1628] dark:text-[#fafafa]">Approval Queue</h1>
+          <p className="mt-1 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">Review pending website, SEO, blog and regulatory updates before they go live.</p>
         </div>
-        <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-5 py-3 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
-          <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Pending Changes</div>
-          <div className="mt-1 text-[24px] font-black text-[#1677f2]">{counts.pending}</div>
+        <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-5 py-3 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
+          <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Pending Changes</div>
+          <div className="mt-1 text-[24px] font-black text-[#1677f2] dark:text-[#4f9dfb]">{counts.pending}</div>
         </div>
       </div>
 
       {(notice || error) && (
         <div className="mb-5">
-          {notice && <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-[13px] font-semibold text-green-700">{notice}</div>}
-          {error && <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[13px] font-semibold text-red-700">{error}</div>}
+          {notice && <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-[13px] font-semibold text-green-700 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]">{notice}</div>}
+          {error && <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[13px] font-semibold text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">{error}</div>}
         </div>
       )}
 
-      <div className="mb-5 rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-4 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
+      <div className="mb-5 rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-4 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
         <div className="mb-4 flex flex-wrap gap-2">
           <FilterButton active={mode === "pending"} onClick={() => setMode("pending")}>All Pending ({counts.pending})</FilterButton>
           <FilterButton active={mode === "website"} onClick={() => setMode("website")}>Website Content ({counts.website})</FilterButton>
@@ -377,15 +377,15 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
           <FilterButton active={mode === "rejected"} onClick={() => setMode("rejected")}>Rejected ({counts.rejected})</FilterButton>
         </div>
         <div className="grid gap-3 lg:grid-cols-[1.2fr_1fr_160px_160px]">
-          <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search page or section" className="rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] outline-none focus:border-[#1677f2]" />
-          <input value={submittedBy} onChange={(e) => setSubmittedBy(e.target.value)} placeholder="Submitted by" className="rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] outline-none focus:border-[#1677f2]" />
-          <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} className="rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] outline-none focus:border-[#1677f2]" />
-          <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} className="rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] outline-none focus:border-[#1677f2]" />
+          <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search page or section" className="rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] outline-none focus:border-[#1677f2] dark:border-[#27272b]" />
+          <input value={submittedBy} onChange={(e) => setSubmittedBy(e.target.value)} placeholder="Submitted by" className="rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] outline-none focus:border-[#1677f2] dark:border-[#27272b]" />
+          <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} className="rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] outline-none focus:border-[#1677f2] dark:border-[#27272b]" />
+          <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} className="rounded-xl border border-[#dbe7f3] px-3.5 py-2.5 text-[13px] outline-none focus:border-[#1677f2] dark:border-[#27272b]" />
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
-        <div className="grid grid-cols-[1fr_auto_auto] items-center gap-4 border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-6 py-3 text-[10px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">
+      <div className="overflow-hidden rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+        <div className="grid grid-cols-[1fr_auto_auto] items-center gap-4 border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11] px-6 py-3 text-[10px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">
           <span>Pending Changes</span>
           <span className="hidden lg:block">Submitted On</span>
           <span className="text-right">Actions</span>
@@ -396,32 +396,32 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
             {filtered.map((item) => {
               const allowed = canReview(viewer, item) && item.status !== "rejected";
               return (
-                <div key={item.id} className="grid grid-cols-[1fr_auto] items-center gap-4 px-6 py-4 hover:bg-[#fbfdff] dark:hover:bg-[#12223a] lg:grid-cols-[1fr_auto_auto]">
+                <div key={item.id} className="grid grid-cols-[1fr_auto] items-center gap-4 px-6 py-4 hover:bg-[#fbfdff] dark:hover:bg-[#12223a] lg:grid-cols-[1fr_auto_auto] dark:bg-[#141417]">
                   <div className="min-w-0">
                     <div className="mb-1 flex flex-wrap items-center gap-2">
                       <span className={`rounded-full border px-2.5 py-0.5 text-[10px] font-bold ${statusMeta[item.status]?.cls ?? statusMeta.pending_approval.cls}`}>
                         {statusMeta[item.status]?.label ?? item.status}
                       </span>
-                      <span className="text-[11px] font-bold text-[#94a3b8]">{item.pageName}</span>
+                      <span className="text-[11px] font-bold text-[#94a3b8] dark:text-[#71717a]">{item.pageName}</span>
                       {item.type === "regulatory_update" && (
-                        <span className="rounded-full border border-[#cfe3ff] bg-[#f5faff] px-2.5 py-0.5 text-[10px] font-bold text-[#1677f2]">
+                        <span className="rounded-full border border-[#cfe3ff] bg-[#f5faff] px-2.5 py-0.5 text-[10px] font-bold text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
                           {regulatoryStateLabel(item)}
                         </span>
                       )}
                     </div>
-                    <div className="text-[14px] font-black text-[#0a1628]">{item.sectionName}</div>
-                    <div className="mt-1 text-[12px] text-[#64748b]">
+                    <div className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">{item.sectionName}</div>
+                    <div className="mt-1 text-[12px] text-[#64748b] dark:text-[#a1a1aa]">
                       {item.type === "regulatory_update"
                         ? `${[item.regulator, item.category, item.impactLevel].filter(Boolean).join(" · ")} · Submitted By ${item.submittedBy || "Unknown"} · ${item.submittedByRole}`
                         : `${item.key} · Submitted By ${item.submittedBy || "Unknown"} · ${item.submittedByRole}`}
                     </div>
                   </div>
                   <div className="hidden text-right lg:block">
-                    <div className="text-[12px] font-bold text-[#334155]">{formatIST(item.submittedAt)}</div>
-                    <div className="mt-1 text-[11px] text-[#94a3b8]">Last updated {formatIST(item.updatedAt)}</div>
+                    <div className="text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">{formatIST(item.submittedAt)}</div>
+                    <div className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">Last updated {formatIST(item.updatedAt)}</div>
                   </div>
                   <div className="flex items-center justify-end gap-2">
-                    <button type="button" onClick={() => openItem(item)} className="rounded-lg border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3.5 py-1.5 text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]">
+                    <button type="button" onClick={() => openItem(item)} className="rounded-lg border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] px-3.5 py-1.5 text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]">
                       {item.type === "regulatory_update" ? "Details" : "Preview"}
                     </button>
                     <button type="button" onClick={() => openItem(item)} disabled={!allowed} className="rounded-lg bg-[#1677f2] px-3.5 py-1.5 text-[12px] font-bold text-white hover:bg-[#0f63d6] disabled:cursor-not-allowed disabled:opacity-45">Review</button>
@@ -432,9 +432,9 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
           </div>
         ) : (
           <div className="px-6 py-16 text-center">
-            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef4fc] text-[20px] font-black text-[#1677f2]">0</div>
-            <p className="text-[14px] font-black text-[#0a1628]">No pending changes found</p>
-            <p className="mt-1 text-[12px] text-[#94a3b8]">Try another filter or date range.</p>
+            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef4fc] text-[20px] font-black text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">0</div>
+            <p className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">No pending changes found</p>
+            <p className="mt-1 text-[12px] text-[#94a3b8] dark:text-[#71717a]">Try another filter or date range.</p>
           </div>
         )}
       </div>

@@ -343,7 +343,7 @@ export default function PageClient() {
                         <div className="step-card">
                             <div className="step-label">Step 1</div>
                             <h4>Structure Selection &amp; FEMA Mapping</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Determine entry mode (WOS/JV), FDI route, sector eligibility, and FEMA compliance requirements. Obtain government route approval if required.</p>
+                            <p className="text-[13px] text-[#64748b] !mb-0 dark:text-[#a1a1aa]">Determine entry mode (WOS/JV), FDI route, sector eligibility, and FEMA compliance requirements. Obtain government route approval if required.</p>
                         </div>
                     </div>
                     <div className="step-item">
@@ -351,7 +351,7 @@ export default function PageClient() {
                         <div className="step-card">
                             <div className="step-label">Step 2</div>
                             <h4>DIN for Foreign Directors</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Foreign national directors must obtain DIN. Documents (passport, address proof) must be apostilled / notarised per the Hague Convention and attested by the Indian Embassy/Consulate.</p>
+                            <p className="text-[13px] text-[#64748b] !mb-0 dark:text-[#a1a1aa]">Foreign national directors must obtain DIN. Documents (passport, address proof) must be apostilled / notarised per the Hague Convention and attested by the Indian Embassy/Consulate.</p>
                         </div>
                     </div>
                     <div className="step-item">
@@ -359,7 +359,7 @@ export default function PageClient() {
                         <div className="step-card">
                             <div className="step-label">Step 3</div>
                             <h4>Name Reservation (RUN / SPICe+)</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Apply for company name reservation through MCA&apos;s RUN portal. Names must be unique, not identical or similar to existing registered names or trademarks.</p>
+                            <p className="text-[13px] text-[#64748b] !mb-0 dark:text-[#a1a1aa]">Apply for company name reservation through MCA&apos;s RUN portal. Names must be unique, not identical or similar to existing registered names or trademarks.</p>
                         </div>
                     </div>
                     <div className="step-item">
@@ -367,7 +367,7 @@ export default function PageClient() {
                         <div className="step-card">
                             <div className="step-label">Step 4</div>
                             <h4>SPICe+ Form Filing</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">File SPICe+ form with MCA along with MOA, AOA, identity/address proofs for all directors and subscribers. PAN, TAN, EPFO, ESIC, GST, and bank account applied simultaneously through INC-35 (AGILE-PRO).</p>
+                            <p className="text-[13px] text-[#64748b] !mb-0 dark:text-[#a1a1aa]">File SPICe+ form with MCA along with MOA, AOA, identity/address proofs for all directors and subscribers. PAN, TAN, EPFO, ESIC, GST, and bank account applied simultaneously through INC-35 (AGILE-PRO).</p>
                         </div>
                     </div>
                     <div className="step-item">
@@ -375,7 +375,7 @@ export default function PageClient() {
                         <div className="step-card">
                             <div className="step-label">Step 5</div>
                             <h4>Certificate of Incorporation</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">MCA issues the Certificate of Incorporation (CoI) with CIN. The company is now a legal entity. Open a bank account, receive FDI funds, and file FC-GPR within 30 days of share allotment.</p>
+                            <p className="text-[13px] text-[#64748b] !mb-0 dark:text-[#a1a1aa]">MCA issues the Certificate of Incorporation (CoI) with CIN. The company is now a legal entity. Open a bank account, receive FDI funds, and file FC-GPR within 30 days of share allotment.</p>
                         </div>
                     </div>
                     <div className="step-item">
@@ -383,7 +383,7 @@ export default function PageClient() {
                         <div className="step-card">
                             <div className="step-label">Step 6</div>
                             <h4>Sector Licence Applications</h4>
-                            <p className="text-[13px] text-[#64748b] !mb-0">Apply to relevant sectoral regulator (RBI, SEBI, IRDAI, DPIIT) for any business-specific licences required to commence regulated operations.</p>
+                            <p className="text-[13px] text-[#64748b] !mb-0 dark:text-[#a1a1aa]">Apply to relevant sectoral regulator (RBI, SEBI, IRDAI, DPIIT) for any business-specific licences required to commence regulated operations.</p>
                         </div>
                     </div>
                 </div>

@@ -58,8 +58,8 @@ export const dynamic = "force-dynamic";
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="mb-3 text-[13px] font-black uppercase tracking-widest text-[#1677f2]">{title}</h2>
-      <div className="text-[14.5px] leading-7 text-[#334155] whitespace-pre-line">{children}</div>
+      <h2 className="mb-3 text-[13px] font-black uppercase tracking-widest text-[#1677f2] dark:text-[#4f9dfb]">{title}</h2>
+      <div className="text-[14.5px] leading-7 text-[#334155] whitespace-pre-line dark:text-[#a1a1aa]">{children}</div>
     </div>
   );
 }
@@ -96,7 +96,7 @@ export default async function JobDetailPage({ params }: Props) {
   const jobPostingJsonLd = buildJobPostingJsonLd(job, getSiteUrl());
 
   return (
-    <div className="min-h-screen bg-[#f8fbff] pt-[64px]">
+    <div className="min-h-screen bg-[#f8fbff] pt-[64px] dark:bg-[#141417]">
       {jobPostingJsonLd && (
         <script
           type="application/ld+json"
@@ -106,11 +106,11 @@ export default async function JobDetailPage({ params }: Props) {
         />
       )}
       {/* Header */}
-      <div className="bg-[#0a1628] px-6 py-14">
+      <div className="bg-[#0a1628] dark:bg-[#1c1c20] px-6 py-14">
         <div className="mx-auto max-w-4xl">
           <Link
             href="/jobs"
-            className="mb-5 inline-flex items-center gap-1.5 text-[12px] font-bold text-[#94a3b8] hover:text-white transition-colors"
+            className="mb-5 inline-flex items-center gap-1.5 text-[12px] font-bold text-[#94a3b8] hover:text-white transition-colors dark:text-[#71717a]"
           >
             ← Back to all jobs
           </Link>
@@ -125,7 +125,7 @@ export default async function JobDetailPage({ params }: Props) {
             {job.title}
           </h1>
 
-          <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-[#94a3b8]">
+          <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-[#94a3b8] dark:text-[#71717a]">
             {job.location_text && <span>📍 {job.location_text}</span>}
             {job.remote_policy && <span>{REMOTE_LABELS[job.remote_policy]}</span>}
             {job.employment_type && <span>{EMPLOYMENT_LABELS[job.employment_type]}</span>}
@@ -155,14 +155,14 @@ export default async function JobDetailPage({ params }: Props) {
               <span
                 aria-disabled="true"
                 title="Applications open shortly"
-                className="inline-flex cursor-not-allowed items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-7 py-3.5 text-[15px] font-black text-white/50"
+                className="inline-flex cursor-not-allowed items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-7 py-3.5 text-[15px] font-black text-white/50 dark:bg-[#141417]"
               >
                 Applications Opening Soon
               </span>
             )}
             <Link
               href="/jobs"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-6 py-3.5 text-[15px] font-black text-white hover:bg-white/10 transition-colors"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-6 py-3.5 text-[15px] font-black text-white hover:bg-white/10 transition-colors dark:bg-[#141417]"
             >
               View All Jobs
             </Link>
@@ -189,12 +189,12 @@ export default async function JobDetailPage({ params }: Props) {
             )}
             {skills.length > 0 && (
               <div>
-                <h2 className="mb-3 text-[13px] font-black uppercase tracking-widest text-[#1677f2]">Skills</h2>
+                <h2 className="mb-3 text-[13px] font-black uppercase tracking-widest text-[#1677f2] dark:text-[#4f9dfb]">Skills</h2>
                 <div className="flex flex-wrap gap-2">
                   {skills.map((s) => (
                     <span
                       key={s}
-                      className="rounded-full border border-[#dbe7f3] bg-white px-3 py-1 text-[12.5px] font-bold text-[#334155]"
+                      className="rounded-full border border-[#dbe7f3] bg-white px-3 py-1 text-[12.5px] font-bold text-[#334155] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
                     >
                       {s}
                     </span>
@@ -207,43 +207,43 @@ export default async function JobDetailPage({ params }: Props) {
           {/* Sidebar */}
           <div className="space-y-5">
             {/* Job meta card */}
-            <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-              <h3 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b]">Position Details</h3>
+            <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+              <h3 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">Position Details</h3>
               <dl className="space-y-3 text-[13px]">
                 {job.department && (
                   <div>
-                    <dt className="font-bold text-[#0a1628]">Department</dt>
-                    <dd className="text-[#64748b]">{job.department}</dd>
+                    <dt className="font-bold text-[#0a1628] dark:text-[#fafafa]">Department</dt>
+                    <dd className="text-[#64748b] dark:text-[#a1a1aa]">{job.department}</dd>
                   </div>
                 )}
                 {job.location_text && (
                   <div>
-                    <dt className="font-bold text-[#0a1628]">Location</dt>
-                    <dd className="text-[#64748b]">{job.location_text}</dd>
+                    <dt className="font-bold text-[#0a1628] dark:text-[#fafafa]">Location</dt>
+                    <dd className="text-[#64748b] dark:text-[#a1a1aa]">{job.location_text}</dd>
                   </div>
                 )}
                 {job.remote_policy && (
                   <div>
-                    <dt className="font-bold text-[#0a1628]">Workplace</dt>
-                    <dd className="text-[#64748b]">{REMOTE_LABELS[job.remote_policy]}</dd>
+                    <dt className="font-bold text-[#0a1628] dark:text-[#fafafa]">Workplace</dt>
+                    <dd className="text-[#64748b] dark:text-[#a1a1aa]">{REMOTE_LABELS[job.remote_policy]}</dd>
                   </div>
                 )}
                 {job.employment_type && (
                   <div>
-                    <dt className="font-bold text-[#0a1628]">Employment</dt>
-                    <dd className="text-[#64748b]">{EMPLOYMENT_LABELS[job.employment_type]}</dd>
+                    <dt className="font-bold text-[#0a1628] dark:text-[#fafafa]">Employment</dt>
+                    <dd className="text-[#64748b] dark:text-[#a1a1aa]">{EMPLOYMENT_LABELS[job.employment_type]}</dd>
                   </div>
                 )}
                 {exp && (
                   <div>
-                    <dt className="font-bold text-[#0a1628]">Experience</dt>
-                    <dd className="text-[#64748b]">{exp}</dd>
+                    <dt className="font-bold text-[#0a1628] dark:text-[#fafafa]">Experience</dt>
+                    <dd className="text-[#64748b] dark:text-[#a1a1aa]">{exp}</dd>
                   </div>
                 )}
                 {job.salary_disclosed && job.salary_min && (
                   <div>
-                    <dt className="font-bold text-[#0a1628]">Salary</dt>
-                    <dd className="text-[#64748b]">
+                    <dt className="font-bold text-[#0a1628] dark:text-[#fafafa]">Salary</dt>
+                    <dd className="text-[#64748b] dark:text-[#a1a1aa]">
                       {job.salary_min}
                       {job.salary_max && `–${job.salary_max}`}
                       {job.salary_currency && ` ${job.salary_currency}`} LPA
@@ -252,13 +252,13 @@ export default async function JobDetailPage({ params }: Props) {
                 )}
                 {sr.regulatory_domain && (
                   <div>
-                    <dt className="font-bold text-[#0a1628]">Regulatory Domain</dt>
-                    <dd className="text-[#64748b]">{sr.regulatory_domain}</dd>
+                    <dt className="font-bold text-[#0a1628] dark:text-[#fafafa]">Regulatory Domain</dt>
+                    <dd className="text-[#64748b] dark:text-[#a1a1aa]">{sr.regulatory_domain}</dd>
                   </div>
                 )}
                 {job.closes_at && (
                   <div>
-                    <dt className="font-bold text-[#0a1628]">Application Deadline</dt>
+                    <dt className="font-bold text-[#0a1628] dark:text-[#fafafa]">Application Deadline</dt>
                     <dd className="font-bold text-[#fb923c]">{fmt(job.closes_at)}</dd>
                   </div>
                 )}
@@ -266,12 +266,12 @@ export default async function JobDetailPage({ params }: Props) {
             </div>
 
             {/* Apply CTA */}
-            <div className="rounded-2xl border border-[#1677f2]/30 bg-[#eaf2ff] p-5 text-center">
+            <div className="rounded-2xl border border-[#1677f2]/30 bg-[#eaf2ff] p-5 text-center dark:bg-[#1c1c20]">
               {existingApplication ? (
                 <>
-                  <p className="text-[14px] font-black text-emerald-700">✓ Application Submitted</p>
-                  <p className="mt-1 text-[12px] text-[#64748b]">
-                    Status: <span className="font-bold text-[#1677f2]">{existingApplication.stageName}</span>
+                  <p className="text-[14px] font-black text-emerald-700 dark:text-[#6ee7b7]">✓ Application Submitted</p>
+                  <p className="mt-1 text-[12px] text-[#64748b] dark:text-[#a1a1aa]">
+                    Status: <span className="font-bold text-[#1677f2] dark:text-[#4f9dfb]">{existingApplication.stageName}</span>
                   </p>
                   <Link
                     href="/jobs/account/applications"
@@ -282,8 +282,8 @@ export default async function JobDetailPage({ params }: Props) {
                 </>
               ) : candidateFeaturesEnabled ? (
                 <>
-                  <p className="text-[14px] font-black text-[#0a1628]">Ready to apply?</p>
-                  <p className="mt-1 text-[12px] text-[#64748b]">
+                  <p className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Ready to apply?</p>
+                  <p className="mt-1 text-[12px] text-[#64748b] dark:text-[#a1a1aa]">
                     Submit your application in minutes.
                   </p>
                   <Link
@@ -295,13 +295,13 @@ export default async function JobDetailPage({ params }: Props) {
                 </>
               ) : (
                 <>
-                  <p className="text-[14px] font-black text-[#0a1628]">Applications opening shortly</p>
-                  <p className="mt-1 text-[12px] text-[#64748b]">
+                  <p className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Applications opening shortly</p>
+                  <p className="mt-1 text-[12px] text-[#64748b] dark:text-[#a1a1aa]">
                     We&apos;re finishing the secure infrastructure for online applications.
                   </p>
                   <a
                     href="mailto:info@estabizz.com?subject=Career%20Enquiry%20-%20Estabizz"
-                    className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-5 py-3 text-[14px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors"
+                    className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-5 py-3 text-[14px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
                   >
                     Email Our Recruitment Team
                   </a>
@@ -309,7 +309,7 @@ export default async function JobDetailPage({ params }: Props) {
               )}
               <Link
                 href="/jobs"
-                className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-5 py-2.5 text-[13px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors"
+                className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[#dbe7f3] bg-white px-5 py-2.5 text-[13px] font-bold text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
               >
                 View All Jobs
               </Link>

@@ -217,11 +217,11 @@ export default function JobEditorClient({ job }: Props) {
   }
 
   function labelCls() {
-    return "block text-[12px] font-bold uppercase tracking-widest text-[#64748b] mb-1.5";
+    return "block text-[12px] font-bold uppercase tracking-widest text-[#64748b] mb-1.5 dark:text-[#a1a1aa]";
   }
 
   function textareaCls() {
-    return "w-full rounded-xl border border-[#dbe7f3] bg-white px-4 py-3 text-[13.5px] text-[#0a1628] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20 resize-none";
+    return "w-full rounded-xl border border-[#dbe7f3] bg-white px-4 py-3 text-[13.5px] text-[#0a1628] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20 resize-none dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]";
   }
 
   return (
@@ -229,21 +229,21 @@ export default function JobEditorClient({ job }: Props) {
       {/* Header */}
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <div className="mb-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+          <div className="mb-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
             {job ? "Edit Job" : "New Job"}
           </div>
-          <h1 className="text-[28px] font-black leading-tight tracking-tight text-[#0a1628]">
+          <h1 className="text-[28px] font-black leading-tight tracking-tight text-[#0a1628] dark:text-[#fafafa]">
             {job ? job.title : "Create Job Posting"}
           </h1>
           {job && (
-            <p className="mt-1 text-[12px] text-[#94a3b8]">Code: {job.job_code}</p>
+            <p className="mt-1 text-[12px] text-[#94a3b8] dark:text-[#71717a]">Code: {job.job_code}</p>
           )}
         </div>
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => router.push("/admin/jobs")}
-            className="rounded-xl border border-[#dbe7f3] px-4 py-2 text-[13px] font-bold text-[#64748b] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors"
+            className="rounded-xl border border-[#dbe7f3] px-4 py-2 text-[13px] font-bold text-[#64748b] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors dark:border-[#27272b] dark:text-[#a1a1aa]"
           >
             ← Back
           </button>
@@ -252,7 +252,7 @@ export default function JobEditorClient({ job }: Props) {
 
       {/* Toast */}
       {toast && (
-        <div className="mb-6 flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-[13px] font-bold text-emerald-700">
+        <div className="mb-6 flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-[13px] font-bold text-emerald-700 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]">
           <span className="h-2 w-2 rounded-full bg-emerald-500" />
           {toast}
         </div>
@@ -260,15 +260,15 @@ export default function JobEditorClient({ job }: Props) {
 
       {/* Error */}
       {error && (
-        <div className="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[13px] font-bold text-red-700">
+        <div className="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[13px] font-bold text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">
           {error}
         </div>
       )}
 
       <div className="space-y-8">
         {/* ── Core Info ── */}
-        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6">
-          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628]">Core Info</h2>
+        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6 dark:bg-[#141417] dark:border-[#27272b]">
+          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628] dark:text-[#fafafa]">Core Info</h2>
           <div className="grid gap-5 sm:grid-cols-2">
             {/* Title */}
             <div className="sm:col-span-2">
@@ -285,7 +285,7 @@ export default function JobEditorClient({ job }: Props) {
             <div className="sm:col-span-2">
               <label className={labelCls()}>Slug *</label>
               <div className="flex items-center gap-2">
-                <span className="text-[12px] text-[#94a3b8] whitespace-nowrap">/jobs/</span>
+                <span className="text-[12px] text-[#94a3b8] whitespace-nowrap dark:text-[#71717a]">/jobs/</span>
                 <input
                   className={inputCls("flex-1")}
                   placeholder="senior-compliance-officer"
@@ -339,8 +339,8 @@ export default function JobEditorClient({ job }: Props) {
         </section>
 
         {/* ── Employment Details ── */}
-        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6">
-          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628]">Employment Details</h2>
+        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6 dark:bg-[#141417] dark:border-[#27272b]">
+          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628] dark:text-[#fafafa]">Employment Details</h2>
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
               <label className={labelCls()}>Employment Type</label>
@@ -397,8 +397,8 @@ export default function JobEditorClient({ job }: Props) {
         </section>
 
         {/* ── Salary (optional) ── */}
-        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6">
-          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628]">Salary (Optional)</h2>
+        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6 dark:bg-[#141417] dark:border-[#27272b]">
+          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628] dark:text-[#fafafa]">Salary (Optional)</h2>
           <div className="grid gap-5 sm:grid-cols-3">
             <div>
               <label className={labelCls()}>Min (LPA)</label>
@@ -438,15 +438,15 @@ export default function JobEditorClient({ job }: Props) {
               type="checkbox"
               checked={form.salary_disclosed}
               onChange={(e) => set("salary_disclosed", e.target.checked)}
-              className="h-4 w-4 rounded border-[#dbe7f3] text-[#1677f2]"
+              className="h-4 w-4 rounded border-[#dbe7f3] text-[#1677f2] dark:border-[#27272b] dark:text-[#4f9dfb]"
             />
-            <span className="text-[13px] text-[#334155]">Show salary publicly</span>
+            <span className="text-[13px] text-[#334155] dark:text-[#a1a1aa]">Show salary publicly</span>
           </label>
         </section>
 
         {/* ── Description ── */}
-        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6">
-          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628]">Job Description *</h2>
+        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6 dark:bg-[#141417] dark:border-[#27272b]">
+          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628] dark:text-[#fafafa]">Job Description *</h2>
           <textarea
             rows={6}
             className={textareaCls()}
@@ -457,8 +457,8 @@ export default function JobEditorClient({ job }: Props) {
         </section>
 
         {/* ── Structured Content ── */}
-        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6">
-          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628]">Structured Content</h2>
+        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6 dark:bg-[#141417] dark:border-[#27272b]">
+          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628] dark:text-[#fafafa]">Structured Content</h2>
           <div className="space-y-5">
             <div>
               <label className={labelCls()}>Responsibilities</label>
@@ -503,8 +503,8 @@ export default function JobEditorClient({ job }: Props) {
         </section>
 
         {/* ── Publishing ── */}
-        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6">
-          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628]">Publishing</h2>
+        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6 dark:bg-[#141417] dark:border-[#27272b]">
+          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628] dark:text-[#fafafa]">Publishing</h2>
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
               <label className={labelCls()}>Status</label>
@@ -521,17 +521,17 @@ export default function JobEditorClient({ job }: Props) {
                   type="checkbox"
                   checked={form.is_public}
                   onChange={(e) => set("is_public", e.target.checked)}
-                  className="h-4 w-4 rounded border-[#dbe7f3] text-[#1677f2]"
+                  className="h-4 w-4 rounded border-[#dbe7f3] text-[#1677f2] dark:border-[#27272b] dark:text-[#4f9dfb]"
                 />
-                <span className="text-[13px] font-bold text-[#334155]">Show on public jobs page</span>
+                <span className="text-[13px] font-bold text-[#334155] dark:text-[#a1a1aa]">Show on public jobs page</span>
               </label>
             </div>
           </div>
         </section>
 
         {/* ── Internal Notes ── */}
-        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6">
-          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628]">Internal Notes</h2>
+        <section className="rounded-2xl border border-[#dbe7f3] bg-white p-6 dark:bg-[#141417] dark:border-[#27272b]">
+          <h2 className="mb-5 text-[14px] font-black uppercase tracking-widest text-[#0a1628] dark:text-[#fafafa]">Internal Notes</h2>
           <textarea
             rows={3}
             className={textareaCls()}
@@ -547,7 +547,7 @@ export default function JobEditorClient({ job }: Props) {
             type="button"
             disabled={saving}
             onClick={() => save("draft")}
-            className="rounded-xl border border-[#dbe7f3] bg-white px-6 py-3 text-[13.5px] font-black text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors disabled:opacity-50"
+            className="rounded-xl border border-[#dbe7f3] bg-white px-6 py-3 text-[13.5px] font-black text-[#334155] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-colors disabled:opacity-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
           >
             Save Draft
           </button>
@@ -555,7 +555,7 @@ export default function JobEditorClient({ job }: Props) {
             type="button"
             disabled={saving}
             onClick={() => save()}
-            className="rounded-xl bg-[#0a1628] px-6 py-3 text-[13.5px] font-black text-white hover:bg-[#1677f2] transition-colors disabled:opacity-50"
+            className="rounded-xl bg-[#0a1628] dark:bg-[#1c1c20] px-6 py-3 text-[13.5px] font-black text-white hover:bg-[#1677f2] transition-colors disabled:opacity-50"
           >
             {saving ? "Saving…" : "Save"}
           </button>
@@ -580,7 +580,7 @@ export default function JobEditorClient({ job }: Props) {
                 setForm((p) => ({ ...p, status: "closed", is_public: false }));
                 save("closed");
               }}
-              className="rounded-xl border border-red-200 bg-red-50 px-6 py-3 text-[13.5px] font-black text-red-700 hover:bg-red-100 transition-colors disabled:opacity-50"
+              className="rounded-xl border border-red-200 bg-red-50 px-6 py-3 text-[13.5px] font-black text-red-700 hover:bg-red-100 transition-colors disabled:opacity-50 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]"
             >
               Close Job
             </button>

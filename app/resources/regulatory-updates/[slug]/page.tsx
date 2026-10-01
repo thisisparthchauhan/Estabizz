@@ -85,25 +85,25 @@ export default async function RegulatoryUpdateDetailPage({ params }: Props) {
     };
 
     return (
-        <main className="min-h-screen bg-white pt-[64px]">
+        <main className="min-h-screen bg-white pt-[64px] dark:bg-[#141417]">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
-                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="mx-auto max-w-7xl px-6 py-14">
-                    <nav className="mb-5 flex flex-wrap items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
-                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link><span className="opacity-40">/</span><Link href="/resources" className="hover:text-[#374151] transition-colors">Resources</Link><span className="opacity-40">/</span><Link href="/resources/regulatory-updates" className="hover:text-[#374151] transition-colors">Regulatory Updates</Link>
+                    <nav className="mb-5 flex flex-wrap items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link><span className="opacity-40">/</span><Link href="/resources" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Resources</Link><span className="opacity-40">/</span><Link href="/resources/regulatory-updates" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Regulatory Updates</Link>
                     </nav>
                     <div className="mb-5 flex flex-wrap gap-2">
-                        <span className="rounded-full bg-[#f5fbff] px-3 py-1 text-xs font-black text-[#0077B6]">{update.regulator}</span>
-                        <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#64748b]">{new Date(update.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</span>
-                        <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#64748b]">{update.circularNumber}</span>
-                        <span className={`rounded-full px-3 py-1 text-xs font-black ${update.riskRating === "High" ? "bg-red-50 text-red-600" : update.riskRating === "Moderate" ? "bg-amber-50 text-amber-700" : "bg-green-50 text-green-700"}`}>{update.riskRating} Risk</span>
+                        <span className="rounded-full bg-[#f5fbff] px-3 py-1 text-xs font-black text-[#0077B6] dark:bg-[#141417] dark:text-[#4f9dfb]">{update.regulator}</span>
+                        <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#64748b] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">{new Date(update.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })}</span>
+                        <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#64748b] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">{update.circularNumber}</span>
+                        <span className={`rounded-full px-3 py-1 text-xs font-black ${update.riskRating === "High" ? "bg-red-50 text-red-600 dark:bg-[#2a1618] dark:text-[#fca5a5]" : update.riskRating === "Moderate" ? "bg-amber-50 text-amber-700 dark:bg-[#2a2113] dark:text-[#fcd34d]" : "bg-green-50 text-green-700 dark:bg-[#132a20] dark:text-[#6ee7b7]"}`}>{update.riskRating} Risk</span>
                     </div>
-                    <h1 className="mb-4 max-w-4xl text-[34px] font-black leading-[1.1] tracking-[-0.03em] text-[#120b45] md:text-[48px]">{update.title}</h1>
-                    <p className="mb-5 max-w-3xl text-[18px] leading-8 text-[#475569]">{update.subtitle}</p>
-                    <p className="text-[13px] font-semibold text-[#64748b]">Affected entities: {update.affectedEntities.join(", ")} • Last reviewed: {new Date(update.lastReviewed).toLocaleDateString("en-IN")}</p>
+                    <h1 className="mb-4 max-w-4xl text-[34px] font-black leading-[1.1] tracking-[-0.03em] text-[#120b45] md:text-[48px] dark:text-[#fafafa]">{update.title}</h1>
+                    <p className="mb-5 max-w-3xl text-[18px] leading-8 text-[#475569] dark:text-[#a1a1aa]">{update.subtitle}</p>
+                    <p className="text-[13px] font-semibold text-[#64748b] dark:text-[#a1a1aa]">Affected entities: {update.affectedEntities.join(", ")} • Last reviewed: {new Date(update.lastReviewed).toLocaleDateString("en-IN")}</p>
                 </div>
             </header>
 
@@ -127,16 +127,16 @@ export default async function RegulatoryUpdateDetailPage({ params }: Props) {
                 </Section>
 
                 <Section title="Key Changes Table">
-                    <div className="overflow-x-auto rounded-2xl border border-blue-100 bg-white">
+                    <div className="overflow-x-auto rounded-2xl border border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                         <table className="min-w-[760px] w-full text-left text-sm">
-                            <thead className="bg-[#0a1628] text-white"><tr>{["Area", "Earlier Position", "Revised Position", "Compliance Impact"].map((h) => <th key={h} className="p-4">{h}</th>)}</tr></thead>
-                            <tbody>{update.changes.map((row) => <tr key={row.area} className="border-t border-gray-100"><td className="p-4 font-bold">{row.area}</td><td className="p-4">{row.earlier}</td><td className="p-4">{row.revised}</td><td className="p-4">{row.impact}</td></tr>)}</tbody>
+                            <thead className="bg-[#0a1628] dark:bg-[#1c1c20] text-white"><tr>{["Area", "Earlier Position", "Revised Position", "Compliance Impact"].map((h) => <th key={h} className="p-4">{h}</th>)}</tr></thead>
+                            <tbody>{update.changes.map((row) => <tr key={row.area} className="border-t border-gray-100 dark:border-[#27272b]"><td className="p-4 font-bold">{row.area}</td><td className="p-4">{row.earlier}</td><td className="p-4">{row.revised}</td><td className="p-4">{row.impact}</td></tr>)}</tbody>
                         </table>
                     </div>
                 </Section>
 
                 <Section title="Who Is Affected">
-                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2">{update.affectedEntities.map((entity) => <div key={entity} className="rounded-xl border border-blue-100 bg-white p-4 font-semibold text-[#0a1628] shadow-sm">{entity}</div>)}</div>
+                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2">{update.affectedEntities.map((entity) => <div key={entity} className="rounded-xl border border-blue-100 bg-white p-4 font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{entity}</div>)}</div>
                 </Section>
 
                 <Section title="Action Checklist">
@@ -156,9 +156,9 @@ export default async function RegulatoryUpdateDetailPage({ params }: Props) {
                 </Section>
 
                 <Section title="Regulatory Risk Rating">
-                    <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
-                        <h3 className="mb-2 text-xl font-black text-[#0a1628]">Risk Rating: {update.riskRating}</h3>
-                        <p className="text-[#475569]">Reason: This update affects regulatory operations, reporting discipline or inspection readiness. The exact risk depends on the entity's business model, regulator exposure and implementation evidence.</p>
+                    <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
+                        <h3 className="mb-2 text-xl font-black text-[#0a1628] dark:text-[#fafafa]">Risk Rating: {update.riskRating}</h3>
+                        <p className="text-[#475569] dark:text-[#a1a1aa]">Reason: This update affects regulatory operations, reporting discipline or inspection readiness. The exact risk depends on the entity's business model, regulator exposure and implementation evidence.</p>
                     </div>
                 </Section>
 
@@ -170,45 +170,45 @@ export default async function RegulatoryUpdateDetailPage({ params }: Props) {
                     <Checklist items={["Circular applicability review", "Policy update", "SOP revision", "Board note drafting", "Compliance checklist preparation", "Regulatory filing support", "Audit preparedness", "Inspection readiness", "Staff training note"]} />
                 </Section>
 
-                <div className="rounded-3xl bg-[#0a1628] p-8 text-white">
+                <div className="rounded-3xl bg-[#0a1628] dark:bg-[#1c1c20] p-8 text-white">
                     <h2 className="mb-3 text-[28px] font-black">Need Help Implementing This Regulatory Update?</h2>
                     <p className="mb-6 text-blue-100">Estabizz can help you understand applicability, prepare internal action notes, update policies and maintain compliance evidence.</p>
                     <div className="flex flex-wrap gap-3">
                         <Link href="/contact" className="rounded-xl bg-[#1677f2] px-6 py-3 text-sm font-bold">Speak to Compliance Expert</Link>
-                        <Link href="/contact" className="rounded-xl bg-white/10 px-6 py-3 text-sm font-bold">Request Circular Impact Review</Link>
+                        <Link href="/contact" className="rounded-xl bg-white/10 px-6 py-3 text-sm font-bold dark:bg-[#141417]">Request Circular Impact Review</Link>
                         <a href="https://wa.me/919825600907" className="rounded-xl bg-[#10b981] px-6 py-3 text-sm font-bold">WhatsApp Estabizz Team</a>
                     </div>
                 </div>
 
-                <p className="mt-8 rounded-2xl border border-blue-100 bg-white p-5 text-[12px] leading-6 text-[#64748b]">This update is for general informational purposes only and should not be treated as legal, regulatory, tax, investment or financial advice. Regulatory requirements may change from time to time. Businesses should verify the latest circular, regulation and regulator guidance before taking any action.</p>
+                <p className="mt-8 rounded-2xl border border-blue-100 bg-white p-5 text-[12px] leading-6 text-[#64748b] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">This update is for general informational purposes only and should not be treated as legal, regulatory, tax, investment or financial advice. Regulatory requirements may change from time to time. Businesses should verify the latest circular, regulation and regulator guidance before taking any action.</p>
             </article>
         </main>
     );
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
-    return <section className="mb-10"><h2 className="mb-4 text-[26px] font-black text-[#0a1628]">{title}</h2><div className="space-y-4 text-[15px] leading-8 text-[#475569]">{children}</div></section>;
+    return <section className="mb-10"><h2 className="mb-4 text-[26px] font-black text-[#0a1628] dark:text-[#fafafa]">{title}</h2><div className="space-y-4 text-[15px] leading-8 text-[#475569] dark:text-[#a1a1aa]">{children}</div></section>;
 }
 
 function DataTable({ rows }: { rows: string[][] }) {
-    return <div className="overflow-x-auto rounded-2xl border border-blue-100 bg-white"><table className="min-w-[680px] w-full text-left text-sm"><tbody>{rows.map(([a, b]) => <tr key={a} className="border-b border-gray-100 last:border-0"><th className="w-1/3 bg-blue-50 p-4 text-[#0a1628]">{a}</th><td className="p-4">{b}</td></tr>)}</tbody></table></div>;
+    return <div className="overflow-x-auto rounded-2xl border border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]"><table className="min-w-[680px] w-full text-left text-sm"><tbody>{rows.map(([a, b]) => <tr key={a} className="border-b border-gray-100 last:border-0 dark:border-[#27272b]"><th className="w-1/3 bg-blue-50 p-4 text-[#0a1628] dark:bg-[#1c1c20] dark:text-[#fafafa]">{a}</th><td className="p-4">{b}</td></tr>)}</tbody></table></div>;
 }
 
 function ActionTable({ rows, headers = ["Action Item", "Responsibility", "Suggested Timeline"] }: { rows: string[][]; headers?: string[] }) {
-    return <div className="overflow-x-auto rounded-2xl border border-blue-100 bg-white"><table className="min-w-[720px] w-full text-left text-sm"><thead className="bg-[#0a1628] text-white"><tr>{headers.filter(Boolean).map((h) => <th key={h} className="p-4">{h}</th>)}</tr></thead><tbody>{rows.map((row) => <tr key={row.join("-")} className="border-t border-gray-100">{row.filter(Boolean).map((cell) => <td key={cell} className="p-4">{cell}</td>)}</tr>)}</tbody></table></div>;
+    return <div className="overflow-x-auto rounded-2xl border border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]"><table className="min-w-[720px] w-full text-left text-sm"><thead className="bg-[#0a1628] dark:bg-[#1c1c20] text-white"><tr>{headers.filter(Boolean).map((h) => <th key={h} className="p-4">{h}</th>)}</tr></thead><tbody>{rows.map((row) => <tr key={row.join("-")} className="border-t border-gray-100 dark:border-[#27272b]">{row.filter(Boolean).map((cell) => <td key={cell} className="p-4">{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function Checklist({ items }: { items: string[] }) {
-    return <div className="grid grid-cols-1 gap-3 md:grid-cols-2">{items.map((item) => <div key={item} className="rounded-xl border border-blue-100 bg-white p-4 text-sm font-semibold text-[#0a1628] shadow-sm">{item}</div>)}</div>;
+    return <div className="grid grid-cols-1 gap-3 md:grid-cols-2">{items.map((item) => <div key={item} className="rounded-xl border border-blue-100 bg-white p-4 text-sm font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{item}</div>)}</div>;
 }
 
 // ── Live (admin-published) regulatory update ─────────────────────────────────
 
 const LIVE_IMPACT_STYLES: Record<ImpactLevel, string> = {
-    Low: "bg-green-50 text-green-700",
-    Medium: "bg-blue-50 text-blue-700",
-    High: "bg-amber-50 text-amber-700",
-    Critical: "bg-red-50 text-red-600",
+    Low: "bg-green-50 text-green-700 dark:bg-[#132a20] dark:text-[#6ee7b7]",
+    Medium: "bg-blue-50 text-blue-700 dark:bg-[#1c1c20] dark:text-[#60a5fa]",
+    High: "bg-amber-50 text-amber-700 dark:bg-[#2a2113] dark:text-[#fcd34d]",
+    Critical: "bg-red-50 text-red-600 dark:bg-[#2a1618] dark:text-[#fca5a5]",
 };
 
 function liveDate(iso: string | null): string {
@@ -229,25 +229,25 @@ function LiveUpdateDetail({ update }: { update: PublicRegulatoryUpdate }) {
     };
 
     return (
-        <main className="min-h-screen bg-white pt-[64px]">
+        <main className="min-h-screen bg-white pt-[64px] dark:bg-[#141417]">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
-                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="mx-auto max-w-5xl px-6 py-14">
-                    <nav className="mb-5 flex flex-wrap items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
-                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link><span className="opacity-40">/</span><Link href="/resources" className="hover:text-[#374151] transition-colors">Resources</Link><span className="opacity-40">/</span><Link href="/resources/regulatory-updates" className="hover:text-[#374151] transition-colors">Regulatory Updates</Link>
+                    <nav className="mb-5 flex flex-wrap items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link><span className="opacity-40">/</span><Link href="/resources" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Resources</Link><span className="opacity-40">/</span><Link href="/resources/regulatory-updates" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Regulatory Updates</Link>
                     </nav>
                     <div className="mb-5 flex flex-wrap gap-2">
-                        <span className="rounded-full bg-[#f5fbff] px-3 py-1 text-xs font-black text-[#0077B6]">{update.regulator}</span>
-                        <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#64748b]">{update.category}</span>
-                        {update.sourceDate && <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#64748b]">{liveDate(update.sourceDate)}</span>}
+                        <span className="rounded-full bg-[#f5fbff] px-3 py-1 text-xs font-black text-[#0077B6] dark:bg-[#141417] dark:text-[#4f9dfb]">{update.regulator}</span>
+                        <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#64748b] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">{update.category}</span>
+                        {update.sourceDate && <span className="rounded-full border border-blue-100 bg-white px-3 py-1 text-xs font-bold text-[#64748b] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">{liveDate(update.sourceDate)}</span>}
                         <span className={`rounded-full px-3 py-1 text-xs font-black ${LIVE_IMPACT_STYLES[update.impactLevel]}`}>{update.impactLevel} Impact</span>
                     </div>
-                    <h1 className="mb-4 max-w-4xl text-[34px] font-black leading-[1.1] tracking-[-0.03em] text-[#120b45] md:text-[44px]">{update.title}</h1>
-                    <p className="mb-5 max-w-3xl text-[17px] leading-8 text-[#475569]">{update.summary}</p>
+                    <h1 className="mb-4 max-w-4xl text-[34px] font-black leading-[1.1] tracking-[-0.03em] text-[#120b45] md:text-[44px] dark:text-[#fafafa]">{update.title}</h1>
+                    <p className="mb-5 max-w-3xl text-[17px] leading-8 text-[#475569] dark:text-[#a1a1aa]">{update.summary}</p>
                     {(update.applicableTo.length > 0 || update.effectiveDate) && (
-                        <p className="text-[13px] font-semibold text-[#64748b]">
+                        <p className="text-[13px] font-semibold text-[#64748b] dark:text-[#a1a1aa]">
                             {update.applicableTo.length > 0 && <>Applicable to: {update.applicableTo.join(", ")}</>}
                             {update.effectiveDate && <> • Effective from: {liveDate(update.effectiveDate)}</>}
                         </p>
@@ -258,31 +258,31 @@ function LiveUpdateDetail({ update }: { update: PublicRegulatoryUpdate }) {
             <article className="mx-auto max-w-3xl px-6 py-12">
                 {update.detailedContent ? (
                     <div
-                        className="prose prose-slate max-w-none text-[15px] leading-8 text-[#334155] [&_a]:text-[#1677f2] [&_h2]:text-[#0a1628] [&_h3]:text-[#0a1628] [&_h2]:font-black [&_h3]:font-bold [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6"
+                        className="prose prose-slate max-w-none text-[15px] leading-8 text-[#334155] [&_a]:text-[#1677f2] [&_h2]:text-[#0a1628] [&_h3]:text-[#0a1628] [&_h2]:font-black [&_h3]:font-bold [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 dark:text-[#a1a1aa]"
                         dangerouslySetInnerHTML={{ __html: update.detailedContent }}
                     />
                 ) : (
-                    <p className="text-[15px] leading-8 text-[#475569]">{update.summary}</p>
+                    <p className="text-[15px] leading-8 text-[#475569] dark:text-[#a1a1aa]">{update.summary}</p>
                 )}
 
                 {update.tags.length > 0 && (
                     <div className="mt-8 flex flex-wrap gap-2">
                         {update.tags.map((t) => (
-                            <span key={t} className="rounded-full border border-blue-100 bg-[#f5fbff] px-3 py-1 text-[12px] font-semibold text-[#0077B6]">{t}</span>
+                            <span key={t} className="rounded-full border border-blue-100 bg-[#f5fbff] px-3 py-1 text-[12px] font-semibold text-[#0077B6] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">{t}</span>
                         ))}
                     </div>
                 )}
 
                 {update.sourceUrl && (
-                    <div className="mt-8 rounded-2xl border border-blue-100 bg-[#f8fbff] p-5">
-                        <p className="text-[12px] font-bold uppercase tracking-wide text-[#94a3b8]">Official Source</p>
-                        <a href={update.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-[14px] font-bold text-[#1677f2] hover:underline">
+                    <div className="mt-8 rounded-2xl border border-blue-100 bg-[#f8fbff] p-5 dark:bg-[#141417] dark:border-[#27272b]">
+                        <p className="text-[12px] font-bold uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Official Source</p>
+                        <a href={update.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-[14px] font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">
                             {update.sourceTitle || update.sourceUrl} ↗
                         </a>
                     </div>
                 )}
 
-                <div className="mt-10 rounded-3xl bg-[#0a1628] p-8 text-white">
+                <div className="mt-10 rounded-3xl bg-[#0a1628] dark:bg-[#1c1c20] p-8 text-white">
                     <h2 className="mb-3 text-[26px] font-black">Need help understanding this update?</h2>
                     <p className="mb-6 text-blue-100">Estabizz can help you assess applicability, prepare internal action notes and maintain compliance evidence — subject to eligibility, documentation and applicable law.</p>
                     <div className="flex flex-wrap gap-3">
@@ -291,7 +291,7 @@ function LiveUpdateDetail({ update }: { update: PublicRegulatoryUpdate }) {
                     </div>
                 </div>
 
-                <p className="mt-8 rounded-2xl border border-blue-100 bg-white p-5 text-[12px] leading-6 text-[#64748b]">This update is for general informational purposes only and should not be treated as legal, regulatory, tax, investment or financial advice. Regulatory requirements may change from time to time. Businesses should verify the latest circular, regulation and regulator guidance before taking any action.</p>
+                <p className="mt-8 rounded-2xl border border-blue-100 bg-white p-5 text-[12px] leading-6 text-[#64748b] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">This update is for general informational purposes only and should not be treated as legal, regulatory, tax, investment or financial advice. Regulatory requirements may change from time to time. Businesses should verify the latest circular, regulation and regulator guidance before taking any action.</p>
             </article>
         </main>
     );

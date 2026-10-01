@@ -38,13 +38,13 @@ function roleLabel(role: string): string {
 
 function StatusBadge({ status }: { status: string }) {
   const map: Record<string, string> = {
-    success: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    pending: "bg-amber-50 text-amber-700 border-amber-200",
-    failed:  "bg-red-50 text-red-600 border-red-200",
+    success: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]",
+    pending: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]",
+    failed:  "bg-red-50 text-red-600 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]",
   };
   const labels: Record<string, string> = { success: "Saved", pending: "Saving…", failed: "Failed" };
   return (
-    <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10.5px] font-bold ${map[status] ?? "bg-gray-50 text-gray-600 border-gray-200"}`}>
+    <span className={`inline-flex rounded-full border px-2 py-0.5 text-[10.5px] font-bold ${map[status] ?? "bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"}`}>
       {labels[status] ?? status}
     </span>
   );
@@ -54,10 +54,10 @@ function StatusBadge({ status }: { status: string }) {
 
 function DestBadge({ destination }: { destination: string }) {
   if (destination === "local+github")
-    return <span className="inline-flex rounded-full border border-[#1677f2]/30 bg-blue-50 px-2 py-0.5 text-[10.5px] font-bold text-blue-700">Local + GitHub</span>;
+    return <span className="inline-flex rounded-full border border-[#1677f2]/30 bg-blue-50 px-2 py-0.5 text-[10.5px] font-bold text-blue-700 dark:bg-[#1c1c20] dark:text-[#60a5fa]">Local + GitHub</span>;
   if (destination === "github")
-    return <span className="inline-flex rounded-full border border-purple-200 bg-purple-50 px-2 py-0.5 text-[10.5px] font-bold text-purple-700">GitHub</span>;
-  return <span className="inline-flex rounded-full border border-[#e2eaf2] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] px-2 py-0.5 text-[10.5px] font-bold text-[#64748b] dark:text-[#a9b6c9]">Local Only</span>;
+    return <span className="inline-flex rounded-full border border-purple-200 bg-purple-50 px-2 py-0.5 text-[10.5px] font-bold text-purple-700 dark:bg-[#231a2e] dark:text-[#c4b5fd] dark:border-[#3a2a4a]">GitHub</span>;
+  return <span className="inline-flex rounded-full border border-[#e2eaf2] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20] px-2 py-0.5 text-[10.5px] font-bold text-[#64748b] dark:text-[#a1a1aa]">Local Only</span>;
 }
 
 // ─── Detail drawer ────────────────────────────────────────────────────────────
@@ -65,8 +65,8 @@ function DestBadge({ destination }: { destination: string }) {
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">{label}</div>
-      <div className="mt-0.5 text-[12px] text-[#0a1628] font-medium break-words">{value || "—"}</div>
+      <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">{label}</div>
+      <div className="mt-0.5 text-[12px] text-[#0a1628] font-medium break-words dark:text-[#fafafa]">{value || "—"}</div>
     </div>
   );
 }
@@ -133,12 +133,12 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
   // ─────────────────────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#06101f]">
+    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#09090b]">
 
       {/* Toast */}
       {toast && (
         <div className={`fixed top-4 right-4 z-[9999] max-w-sm rounded-2xl border px-4 py-3 text-[13px] font-semibold shadow-xl ${
-          toast.ok ? "border-green-200 bg-green-50 text-green-800" : "border-red-200 bg-red-50 text-red-800"
+          toast.ok ? "border-green-200 bg-green-50 text-green-800 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]" : "border-red-200 bg-red-50 text-red-800 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]"
         }`}>
           {toast.message}
         </div>
@@ -148,12 +148,12 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
       {selected && (
         <div className="fixed inset-0 z-[7000] flex items-start justify-end bg-black/30 backdrop-blur-sm"
              onClick={() => setSelected(null)}>
-          <div className="h-full w-full max-w-[400px] overflow-y-auto bg-white dark:bg-[#0d1a2d] shadow-2xl dark:shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col"
+          <div className="h-full w-full max-w-[400px] overflow-y-auto bg-white dark:bg-[#141417] shadow-2xl dark:shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col"
                onClick={e => e.stopPropagation()}>
 
-            <div className="flex items-center justify-between border-b border-[#e2eaf2] px-6 py-4">
-              <div className="text-[14px] font-black text-[#0a1628]">Backup Details</div>
-              <button onClick={() => setSelected(null)} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] hover:text-[#0a1628]">
+            <div className="flex items-center justify-between border-b border-[#e2eaf2] px-6 py-4 dark:border-[#27272b]">
+              <div className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Backup Details</div>
+              <button onClick={() => setSelected(null)} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] hover:text-[#0a1628] dark:bg-[#141417] dark:text-[#71717a]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
@@ -173,7 +173,7 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
 
               {/* Item counts */}
               <div>
-                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-2">Items Backed Up</div>
+                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-2 dark:text-[#71717a]">Items Backed Up</div>
                 <div className="grid grid-cols-2 gap-2">
                   {[
                     ["Content Sections",   selected.itemCounts.contentBlocks],
@@ -184,9 +184,9 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
                     ["Content Pages",      selected.itemCounts.publicContentPages],
                     ["Admin Users",        selected.itemCounts.adminUsers],
                   ].map(([label, val]) => (
-                    <div key={String(label)} className="rounded-xl border border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] p-3 text-center">
-                      <div className="text-[18px] font-black text-[#1677f2]">{String(val)}</div>
-                      <div className="text-[10px] text-[#94a3b8] font-semibold mt-0.5">{String(label)}</div>
+                    <div key={String(label)} className="rounded-xl border border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20] p-3 text-center">
+                      <div className="text-[18px] font-black text-[#1677f2] dark:text-[#4f9dfb]">{String(val)}</div>
+                      <div className="text-[10px] text-[#94a3b8] font-semibold mt-0.5 dark:text-[#71717a]">{String(label)}</div>
                     </div>
                   ))}
                 </div>
@@ -199,15 +199,15 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
                 <DetailRow label="GitHub Path" value={selected.filePath} />
               )}
               {selected.errorMessage && (
-                <div className="rounded-xl border border-red-200 bg-red-50 px-3 py-3">
+                <div className="rounded-xl border border-red-200 bg-red-50 px-3 py-3 dark:bg-[#2a1618] dark:border-[#4a2225]">
                   <div className="text-[10px] font-black uppercase tracking-wide text-red-400 mb-1">Error Details</div>
-                  <div className="text-[11px] text-red-700 leading-5 font-medium">{selected.errorMessage}</div>
+                  <div className="text-[11px] text-red-700 leading-5 font-medium dark:text-[#fca5a5]">{selected.errorMessage}</div>
                 </div>
               )}
             </div>
 
             {selected.status === "success" && canBackup && (
-              <div className="border-t border-[#e2eaf2] px-6 py-4">
+              <div className="border-t border-[#e2eaf2] px-6 py-4 dark:border-[#27272b]">
                 <button
                   onClick={() => handleDownload(selected)}
                   className="w-full rounded-xl bg-[#1677f2] px-4 py-2.5 text-[13px] font-black text-white hover:bg-[#1265d8] transition-colors"
@@ -226,11 +226,11 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
         {/* Header */}
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-[21px] font-black text-[#0a1628] dark:text-[#f7f9fc]">Backups</h1>
-            <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a9b6c9]">
+            <h1 className="text-[21px] font-black text-[#0a1628] dark:text-[#fafafa]">Backups</h1>
+            <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">
               Save a snapshot of all CMS content for safekeeping.
               {result.total > 0 && (
-                <span className="ml-1 font-semibold text-[#0a1628]">{result.total} backup{result.total !== 1 ? "s" : ""} stored</span>
+                <span className="ml-1 font-semibold text-[#0a1628] dark:text-[#fafafa]">{result.total} backup{result.total !== 1 ? "s" : ""} stored</span>
               )}
             </p>
           </div>
@@ -261,9 +261,9 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
 
         {/* Access restricted */}
         {!canView && (
-          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-8 text-center shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
-            <div className="text-[15px] font-black text-[#0a1628] mb-1">Access Restricted</div>
-            <p className="text-[13px] text-[#64748b] max-w-xs mx-auto leading-5">
+          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-8 text-center shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+            <div className="text-[15px] font-black text-[#0a1628] mb-1 dark:text-[#fafafa]">Access Restricted</div>
+            <p className="text-[13px] text-[#64748b] max-w-xs mx-auto leading-5 dark:text-[#a1a1aa]">
               You do not have permission to view Backups.
             </p>
           </div>
@@ -274,20 +274,20 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
             {/* ── GitHub status panel ──────────────────────────────────────── */}
             <div className={`rounded-2xl border p-4 ${
               githubReady
-                ? "border-blue-100 bg-blue-50"
-                : "border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d]"
+                ? "border-blue-100 bg-blue-50 dark:bg-[#1c1c20] dark:border-[#27272b]"
+                : "border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417]"
             } shadow-[0_2px_12px_rgba(10,22,40,0.05)]`}>
               <div className="flex items-start gap-3">
-                <div className={`h-8 w-8 rounded-xl flex items-center justify-center shrink-0 ${githubReady ? "bg-[#1677f2]" : "bg-[#f4f7fb]"}`}>
+                <div className={`h-8 w-8 rounded-xl flex items-center justify-center shrink-0 ${githubReady ? "bg-[#1677f2]" : "bg-[#f4f7fb] dark:bg-[#141417]"}`}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill={githubReady ? "white" : "#94a3b8"}>
                     <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                   </svg>
                 </div>
                 <div>
-                  <div className={`text-[12px] font-black ${githubReady ? "text-[#1677f2]" : "text-[#0a1628]"}`}>
+                  <div className={`text-[12px] font-black ${githubReady ? "text-[#1677f2] dark:text-[#4f9dfb]" : "text-[#0a1628] dark:text-[#fafafa]"}`}>
                     GitHub Backup — {githubReady ? "Connected" : "Not configured"}
                   </div>
-                  <div className="text-[11px] text-[#64748b] leading-5 mt-0.5">
+                  <div className="text-[11px] text-[#64748b] leading-5 mt-0.5 dark:text-[#a1a1aa]">
                     {githubReady
                       ? "Backups are automatically pushed to your GitHub repository in addition to being saved locally."
                       : "To enable GitHub backup, add GITHUB_BACKUP_TOKEN, GITHUB_BACKUP_OWNER, and GITHUB_BACKUP_REPO to your environment settings. Backups will still be saved locally without GitHub."}
@@ -298,59 +298,59 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
 
             {/* ── Backup list ───────────────────────────────────────────────── */}
             {result.records.length === 0 ? (
-              <div className="flex h-56 flex-col items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-center">
-                <svg className="mb-3 text-[#cbd5e1]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <div className="flex h-56 flex-col items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] text-center">
+                <svg className="mb-3 text-[#cbd5e1] dark:text-[#71717a]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
                 </svg>
-                <div className="text-[14px] font-black text-[#0a1628] mb-1">No Backups Yet</div>
-                <div className="text-[12px] text-[#94a3b8] leading-5 max-w-xs">
+                <div className="text-[14px] font-black text-[#0a1628] mb-1 dark:text-[#fafafa]">No Backups Yet</div>
+                <div className="text-[12px] text-[#94a3b8] leading-5 max-w-xs dark:text-[#71717a]">
                   {canBackup
                     ? 'Click "Create Backup" to save your first snapshot.'
                     : "No backups have been created yet."}
                 </div>
               </div>
             ) : (
-              <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+              <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
                 <table className="w-full text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628]">
-                      <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">File Name</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden md:table-cell">Status</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell">Destination</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell">Created By</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Created On</th>
-                      <th className="px-4 py-3 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Actions</th>
+                    <tr className="border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11]">
+                      <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">File Name</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden md:table-cell dark:text-[#71717a]">Status</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell dark:text-[#71717a]">Destination</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell dark:text-[#71717a]">Created By</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Created On</th>
+                      <th className="px-4 py-3 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#f4f7fb]">
                     {result.records.map(rec => (
-                      <tr key={rec.id} className="hover:bg-[#fafcff] transition-colors">
+                      <tr key={rec.id} className="hover:bg-[#fafcff] transition-colors dark:bg-[#141417]">
 
                         {/* Name */}
                         <td className="px-5 py-3.5">
-                          <div className="font-bold text-[#0a1628] truncate max-w-[200px]">{rec.fileName}</div>
+                          <div className="font-bold text-[#0a1628] truncate max-w-[200px] dark:text-[#fafafa]">{rec.fileName}</div>
                           {rec.summary && (
-                            <div className="text-[10.5px] text-[#94a3b8] mt-0.5 truncate max-w-[220px]">{rec.summary}</div>
+                            <div className="text-[10.5px] text-[#94a3b8] mt-0.5 truncate max-w-[220px] dark:text-[#71717a]">{rec.summary}</div>
                           )}
                         </td>
 
                         <td className="px-4 py-3.5 hidden md:table-cell"><StatusBadge status={rec.status} /></td>
                         <td className="px-4 py-3.5 hidden lg:table-cell"><DestBadge destination={rec.destination} /></td>
-                        <td className="px-4 py-3.5 text-[#64748b] hidden lg:table-cell">{rec.createdBy}</td>
-                        <td className="px-4 py-3.5 text-[#64748b]">{formatIST(rec.createdAt)}</td>
+                        <td className="px-4 py-3.5 text-[#64748b] hidden lg:table-cell dark:text-[#a1a1aa]">{rec.createdBy}</td>
+                        <td className="px-4 py-3.5 text-[#64748b] dark:text-[#a1a1aa]">{formatIST(rec.createdAt)}</td>
 
                         <td className="px-4 py-3.5">
                           <div className="flex items-center justify-end gap-1.5 flex-wrap">
                             <button
                               onClick={() => setSelected(rec)}
-                              className="rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-2.5 py-1.5 text-[11px] font-bold text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
+                              className="rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-2.5 py-1.5 text-[11px] font-bold text-[#475569] dark:text-[#a1a1aa] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
                             >
                               Details
                             </button>
                             {rec.status === "success" && canBackup && (
                               <button
                                 onClick={() => handleDownload(rec)}
-                                className="rounded-xl border border-[#1677f2]/30 bg-blue-50 px-2.5 py-1.5 text-[11px] font-bold text-[#1677f2] hover:bg-blue-100 transition-colors"
+                                className="rounded-xl border border-[#1677f2]/30 bg-blue-50 px-2.5 py-1.5 text-[11px] font-bold text-[#1677f2] hover:bg-blue-100 transition-colors dark:bg-[#1c1c20] dark:text-[#4f9dfb]"
                               >
                                 Download
                               </button>
@@ -362,8 +362,8 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
                   </tbody>
                 </table>
 
-                <div className="border-t border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-5 py-3">
-                  <span className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9]">
+                <div className="border-t border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11] px-5 py-3">
+                  <span className="text-[11px] text-[#94a3b8] dark:text-[#a1a1aa]">
                     {result.records.length} of {result.total} backup{result.total !== 1 ? "s" : ""}
                   </span>
                 </div>
@@ -371,31 +371,31 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
             )}
 
             {/* ── Info panel ────────────────────────────────────────────────── */}
-            <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-5 shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
-              <div className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-3">What is included in a backup?</div>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-[11px] text-[#64748b]">
-                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
-                  <div className="font-bold text-[#0a1628] mb-1">Website content</div>
+            <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-5 shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+              <div className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-3 dark:text-[#71717a]">What is included in a backup?</div>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-[11px] text-[#64748b] dark:text-[#a1a1aa]">
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
+                  <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Website content</div>
                   All published, draft, and pending website sections — homepage, navigation, SEO settings, and all content blocks.
                 </div>
-                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
-                  <div className="font-bold text-[#0a1628] mb-1">Version history</div>
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
+                  <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Version history</div>
                   Every saved version of every content section, so you can track changes over time.
                 </div>
-                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
-                  <div className="font-bold text-[#0a1628] mb-1">Activity log</div>
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
+                  <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Activity log</div>
                   Who changed what and when — the full audit trail for the admin panel.
                 </div>
-                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
-                  <div className="font-bold text-[#0a1628] mb-1">Media file records</div>
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
+                  <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Media file records</div>
                   File names, links, and labels for all uploaded media. The actual files remain on Cloudinary and are not downloaded.
                 </div>
-                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
-                  <div className="font-bold text-[#0a1628] mb-1">Admin user list</div>
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
+                  <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Admin user list</div>
                   Names, roles, and permissions only. Passwords are never included in any backup.
                 </div>
-                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
-                  <div className="font-bold text-[#0a1628] mb-1">Security</div>
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
+                  <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Security</div>
                   Passwords, tokens, database connection strings, and secret keys are never included. Only Super Admin and Administrator can create or download backups.
                 </div>
               </div>

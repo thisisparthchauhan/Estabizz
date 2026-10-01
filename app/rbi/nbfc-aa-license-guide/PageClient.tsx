@@ -456,42 +456,42 @@ export default function NBFCAALicenseClient() {
 
             <h2 id="faq">Frequently Asked Questions</h2>
             <details className="faq-accordion border border-[rgba(0,150,220,0.12)] rounded-xl mb-3 overflow-hidden">
-                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50">
+                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50 dark:bg-[#141417] dark:text-[#fafafa]">
                     Can any company become an Account Aggregator?
                 </summary>
-                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
+                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                     No. Only entities licensed by RBI as NBFC-AA can operate as Account Aggregators. The entity must be incorporated as a company in India, maintain a minimum NOF of ₹2 crore, and receive a Certificate of Registration from RBI under the NBFC-AA Master Direction, 2016.
                 </div>
             </details>
             <details className="faq-accordion border border-[rgba(0,150,220,0.12)] rounded-xl mb-3 overflow-hidden">
-                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50">
+                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50 dark:bg-[#141417] dark:text-[#fafafa]">
                     Can an NBFC-AA also be a Financial Information User (FIU)?
                 </summary>
-                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
+                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                     No. RBI explicitly prohibits an NBFC-AA from acting as an FIU to prevent conflicts of interest. The NBFC-AA must operate solely as a consent management and data routing intermediary. It cannot use the data flowing through it for its own benefit.
                 </div>
             </details>
             <details className="faq-accordion border border-[rgba(0,150,220,0.12)] rounded-xl mb-3 overflow-hidden">
-                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50">
+                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50 dark:bg-[#141417] dark:text-[#fafafa]">
                     How does an NBFC-AA make money?
                 </summary>
-                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
+                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                     NBFC-AAs primarily generate revenue through transaction fees charged to FIUs for each consent or data fetch request. They may also charge monthly/annual platform access fees to FIPs and FIUs, or offer value-added services around data analytics infrastructure (without accessing the underlying data).
                 </div>
             </details>
             <details className="faq-accordion border border-[rgba(0,150,220,0.12)] rounded-xl mb-3 overflow-hidden">
-                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50">
+                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50 dark:bg-[#141417] dark:text-[#fafafa]">
                     What data types can be shared through the AA framework?
                 </summary>
-                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
+                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                     The AA framework currently supports bank account data (statements, transactions), deposit accounts, SIP/mutual fund accounts, insurance policy data, pension fund data, and securities demat account data. SEBI has also onboarded its regulated entities as FIPs/FIUs, expanding the ecosystem beyond RBI-regulated entities.
                 </div>
             </details>
             <details className="faq-accordion border border-[rgba(0,150,220,0.12)] rounded-xl mb-3 overflow-hidden">
-                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50">
+                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50 dark:bg-[#141417] dark:text-[#fafafa]">
                     Is Estabizz able to assist with the full NBFC-AA license process?
                 </summary>
-                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
+                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                     Yes. Estabizz Fintech provides end-to-end support for NBFC-AA license applications including company incorporation, MoA drafting, business plan and financial model preparation, RBI application filing, technology architecture advisory, compliance framework setup, and post-licensing regulatory support.
                 </div>
             </details>

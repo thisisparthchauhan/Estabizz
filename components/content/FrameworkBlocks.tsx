@@ -13,11 +13,11 @@ export function ResourceCardGrid({
                 <Link
                     key={card.href}
                     href={card.href}
-                    className="group rounded-2xl border border-blue-100 bg-white p-7 shadow-sm transition-all hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_18px_45px_rgba(0,100,200,0.12)]"
+                    className="group rounded-2xl border border-blue-100 bg-white p-7 shadow-sm transition-all hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_18px_45px_rgba(0,100,200,0.12)] dark:bg-[#141417] dark:border-[#27272b]"
                 >
-                    <h2 className="mb-3 text-[20px] font-black text-[#0a1628] group-hover:text-[#1677f2]">{card.title}</h2>
-                    <p className="mb-6 text-[14px] leading-7 text-[#64748b]">{card.description}</p>
-                    <span className="text-[14px] font-bold text-[#1677f2]">{card.button || "Open Resource"} →</span>
+                    <h2 className="mb-3 text-[20px] font-black text-[#0a1628] group-hover:text-[#1677f2] dark:text-[#fafafa]">{card.title}</h2>
+                    <p className="mb-6 text-[14px] leading-7 text-[#64748b] dark:text-[#a1a1aa]">{card.description}</p>
+                    <span className="text-[14px] font-bold text-[#1677f2] dark:text-[#4f9dfb]">{card.button || "Open Resource"} →</span>
                 </Link>
             ))}
         </div>
@@ -32,13 +32,13 @@ export function QuickAnswerBox({
     answers: { question: string; answer: string }[];
 }) {
     return (
-        <section className="rounded-3xl border border-blue-100 bg-[#f7fbff] p-6 shadow-sm md:p-8">
-            <h2 className="mb-6 text-[26px] font-black text-[#0a1628]">{title}</h2>
+        <section className="rounded-3xl border border-blue-100 bg-[#f7fbff] p-6 shadow-sm md:p-8 dark:bg-[#141417] dark:border-[#27272b]">
+            <h2 className="mb-6 text-[26px] font-black text-[#0a1628] dark:text-[#fafafa]">{title}</h2>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 {answers.map((item) => (
-                    <div key={item.question} className="rounded-2xl border border-blue-100 bg-white p-5">
-                        <h3 className="mb-2 text-[15px] font-black text-[#0a1628]">{item.question}</h3>
-                        <p className="text-[13.5px] leading-6 text-[#64748b]">{item.answer}</p>
+                    <div key={item.question} className="rounded-2xl border border-blue-100 bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+                        <h3 className="mb-2 text-[15px] font-black text-[#0a1628] dark:text-[#fafafa]">{item.question}</h3>
+                        <p className="text-[13.5px] leading-6 text-[#64748b] dark:text-[#a1a1aa]">{item.answer}</p>
                     </div>
                 ))}
             </div>
@@ -56,12 +56,12 @@ export function FrameworkTable({
     rows: TableRow[];
 }) {
     return (
-        <div className="rounded-2xl border border-blue-100 bg-white p-5 shadow-sm">
-            {title && <h3 className="mb-4 text-[18px] font-black text-[#0a1628]">{title}</h3>}
+        <div className="rounded-2xl border border-blue-100 bg-white p-5 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
+            {title && <h3 className="mb-4 text-[18px] font-black text-[#0a1628] dark:text-[#fafafa]">{title}</h3>}
             <div className="overflow-x-auto">
                 <table className="min-w-[720px] w-full border-collapse text-left text-[13.5px]">
                     <thead>
-                        <tr className="bg-[#0a1628] text-white">
+                        <tr className="bg-[#0a1628] dark:bg-[#1c1c20] text-white">
                             {columns.map((column) => (
                                 <th key={column} className="px-4 py-3 font-bold">{column}</th>
                             ))}
@@ -71,7 +71,7 @@ export function FrameworkTable({
                         {rows.map((row, index) => (
                             <tr key={index} className="border-b border-blue-50 last:border-b-0">
                                 {columns.map((column) => (
-                                    <td key={column} className="px-4 py-3 leading-6 text-[#475569]">{row[column] || ""}</td>
+                                    <td key={column} className="px-4 py-3 leading-6 text-[#475569] dark:text-[#a1a1aa]">{row[column] || ""}</td>
                                 ))}
                             </tr>
                         ))}
@@ -96,11 +96,11 @@ export function ProcessTimeline({
     return (
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {steps.map((step, index) => (
-                <div key={step.title} className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
-                    <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0a1628] text-sm font-black text-white">{index + 1}</div>
-                    <h3 className="text-[18px] font-black text-[#0a1628]">{step.title}</h3>
-                    {step.subtitle && <p className="mt-1 text-[13px] font-bold uppercase tracking-[0.12em] text-[#1677f2]">{step.subtitle}</p>}
-                    <p className="mt-3 text-[14px] leading-7 text-[#64748b]">{step.description}</p>
+                <div key={step.title} className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
+                    <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0a1628] dark:bg-[#1c1c20] text-sm font-black text-white">{index + 1}</div>
+                    <h3 className="text-[18px] font-black text-[#0a1628] dark:text-[#fafafa]">{step.title}</h3>
+                    {step.subtitle && <p className="mt-1 text-[13px] font-bold uppercase tracking-[0.12em] text-[#1677f2] dark:text-[#4f9dfb]">{step.subtitle}</p>}
+                    <p className="mt-3 text-[14px] leading-7 text-[#64748b] dark:text-[#a1a1aa]">{step.description}</p>
                 </div>
             ))}
         </div>
@@ -109,8 +109,8 @@ export function ProcessTimeline({
 
 export function ExpertQuote({ quote, expert }: { quote: string; expert?: string }) {
     return (
-        <blockquote className="rounded-3xl border border-[#d7b56d]/40 bg-[#fffaf0] p-7 shadow-sm">
-            <p className="text-[20px] font-black leading-8 text-[#0a1628]">“{quote}”</p>
+        <blockquote className="rounded-3xl border border-[#d7b56d]/40 bg-[#fffaf0] p-7 shadow-sm dark:bg-[#141417]">
+            <p className="text-[20px] font-black leading-8 text-[#0a1628] dark:text-[#fafafa]">“{quote}”</p>
             <footer className="mt-5 text-[14px] font-bold text-[#8a6a1f]">{expert || "CS Devyani Khambhati - Compliance Expert"}</footer>
         </blockquote>
     );
@@ -128,7 +128,7 @@ export function FinalCTA({
     secondary?: { label: string; href: string };
 }) {
     return (
-        <section className="rounded-3xl bg-[#0a1628] p-8 text-white shadow-[0_24px_70px_rgba(10,22,40,0.22)] md:p-10">
+        <section className="rounded-3xl bg-[#0a1628] dark:bg-[#1c1c20] p-8 text-white shadow-[0_24px_70px_rgba(10,22,40,0.22)] md:p-10">
             <h2 className="mb-4 text-[30px] font-black leading-tight md:text-[40px]">{title}</h2>
             <p className="mb-7 max-w-3xl text-[16px] leading-8 text-blue-100">{text}</p>
             <div className="flex flex-col gap-3 sm:flex-row">

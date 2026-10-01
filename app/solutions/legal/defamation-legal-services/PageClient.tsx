@@ -66,7 +66,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -105,7 +105,7 @@ export default function PageClient() {
       finalCtaTitle="Assess It Before You React"
       finalCtaDescription="Not every damaging statement is defamation, and not every defamation is worth litigating. The valuable half hour is the one spent deciding which of those you are dealing with — before a public reply makes it worse."
       heroDescription={<p>A false statement can damage a reputation faster than any remedy can repair it, and reputation is a legal and commercial asset in its own right. But reacting badly makes things worse: an aggressive notice on weak facts invites a counter-claim, a public reply amplifies the original statement, and an emotional complaint that does not establish the ingredients gets dismissed. Estabizz assists individuals, professionals, founders, directors, companies and public-facing businesses with assessing whether a statement is legally actionable, preserving evidence, choosing between the civil and criminal routes, drafting notices and complaints, coordinating damages and injunction claims, handling online content and platform escalation, and defending against allegations — under the current framework of the BNS, BNSS and BSA.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> defamation is a statement that lowers a person in the estimation of others — spoken, written, printed, posted, broadcast or shown through images or video.</p>

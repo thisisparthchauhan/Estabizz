@@ -62,7 +62,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -96,7 +96,7 @@ export default function PageClient() {
       finalCtaTitle="Stop Following Up. Start a Case."
       finalCtaDescription="Most consumers spend months on call centres and grievance tickets before moving to a legal remedy. A properly drafted complaint converts the issue into a structured claim with facts, evidence and reliefs."
       heroDescription={<p>Many consumers keep following up through call centres, emails and grievance tickets without ever moving to a legal remedy. A consumer complaint converts the issue into a structured legal claim with pleaded facts, documents, evidence, calculated reliefs and the correct forum. Estabizz assists with case review, legal notice drafting, evidence compilation, jurisdiction and limitation checks, relief calculation, complaint drafting, e-Jagriti filing support and hearing coordination.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> a consumer complaint is filed where goods are defective, a service is deficient, a trade practice is unfair, a product causes harm, you have been overcharged, an advertisement misled you, or what was promised was simply not delivered.</p>

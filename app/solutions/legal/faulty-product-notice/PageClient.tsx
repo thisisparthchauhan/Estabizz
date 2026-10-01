@@ -67,7 +67,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -106,7 +106,7 @@ export default function PageClient() {
       finalCtaTitle="Stop Chasing, Start Documenting"
       finalCtaDescription="A year of service tickets and assurances is not progress — it is the two-year limitation running down while the evidence degrades. One properly drafted notice usually achieves more than twenty follow-up calls."
       heroDescription={<p>When a product fails and the seller stalls, most people spend months in a loop of photographs, service visits and ticket numbers. That loop is not neutral: the evidence deteriorates, the product often leaves your possession, and the statutory clock keeps running. A properly drafted notice changes the dynamic — it fixes the defect in writing, names the right party, states what is demanded and by when, and builds the record a Consumer Commission will later want to see. Estabizz assists consumers and business buyers with defect documentation, warranty and liability analysis, identifying the correct recipients, notice drafting, e-commerce platform escalation, compensation assessment, complaint preparation and advocate coordination.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> this is the formal demand you make when a product is defective and the seller, brand or platform will not put it right.</p>

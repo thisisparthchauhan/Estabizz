@@ -23,7 +23,7 @@ export default function ProcessEditor() {
   const removeStep = (i: number) => setSteps((s) => s.filter((_, j) => j !== i));
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8 dark:bg-[#141417]">
       <EditorHeader title="Execution Process" subtitle="The numbered steps section" updatedAt={updatedAt} />
       {loading ? <LoadingCard /> : (
         <div className="max-w-3xl space-y-6">
@@ -38,10 +38,10 @@ export default function ProcessEditor() {
           <Card title={`Steps (${steps.length})`} action={<button onClick={addStep} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add step</button>}>
             <div className="space-y-4">
               {steps.map((s, i) => (
-                <div key={i} className="rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-4">
+                <div key={i} className="rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="text-[11px] font-black text-[#94a3b8]">Step {i + 1}</span>
-                    <button onClick={() => removeStep(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50">Delete</button>
+                    <span className="text-[11px] font-black text-[#94a3b8] dark:text-[#71717a]">Step {i + 1}</span>
+                    <button onClick={() => removeStep(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225]">Delete</button>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-[70px_1fr]">
                     <Field label="No."><input value={s.num} onChange={(e) => setStep(i, { num: e.target.value })} className={inputCls + " text-center"} /></Field>

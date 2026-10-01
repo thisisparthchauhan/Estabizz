@@ -19,7 +19,7 @@ export default function TrustedByEditor() {
   }, [fields]);
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8 dark:bg-[#141417]">
       <EditorHeader title="Client Logos / Trusted By" subtitle="The scrolling client names strip" updatedAt={updatedAt} />
       {loading ? <LoadingCard /> : (
         <div className="max-w-3xl space-y-6">

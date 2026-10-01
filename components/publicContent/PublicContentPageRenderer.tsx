@@ -58,22 +58,22 @@ function sectionDesign(section: PublicContentPageRenderData['sections'][number])
 }
 
 const accentClass: Record<PublicContentPageDesign['accentPreset'], string> = {
-  navy: 'border-[#1677f2] bg-[#f5fbff]',
-  gold: 'border-amber-200 bg-amber-50',
-  emerald: 'border-emerald-200 bg-emerald-50',
-  slate: 'border-slate-200 bg-slate-50',
+  navy: 'border-[#1677f2] bg-[#f5fbff] dark:bg-[#141417]',
+  gold: 'border-amber-200 bg-amber-50 dark:bg-[#2a2113] dark:border-[#4a3a1a]',
+  emerald: 'border-emerald-200 bg-emerald-50 dark:bg-[#132a20] dark:border-[#1d4a37]',
+  slate: 'border-slate-200 bg-slate-50 dark:bg-[#141417] dark:border-[#27272b]',
 };
 
 const sectionClass: Record<PublicContentSectionDesign['stylePreset'], string> = {
   standard: '',
-  highlight: 'rounded-2xl border-l-4 bg-[#f8fbff] px-5 py-5',
-  soft_card: 'rounded-2xl border border-blue-100 bg-white px-5 py-5 shadow-[0_14px_34px_rgba(0,80,140,0.06)]',
+  highlight: 'rounded-2xl border-l-4 bg-[#f8fbff] px-5 py-5 dark:bg-[#141417]',
+  soft_card: 'rounded-2xl border border-blue-100 bg-white px-5 py-5 shadow-[0_14px_34px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]',
 };
 
 const themeClass: Record<PublicContentPageDesign['themePreset'], string> = {
   default: '',
   premium: 'rounded-3xl bg-[radial-gradient(circle_at_top_right,rgba(22,119,242,0.08),transparent_34%),linear-gradient(180deg,#ffffff,#f8fbff)] p-4 md:p-6',
-  minimal: 'border-t border-blue-100 pt-6',
+  minimal: 'border-t border-blue-100 pt-6 dark:border-[#27272b]',
 };
 
 function slugify(input: string, index: number): string {
@@ -255,8 +255,8 @@ export default function PublicContentPageRenderer({ page }: { page: PublicConten
       ? 'shadow-[0_16px_36px_rgba(0,80,140,0.08)]'
       : '';
   const heroImageClass = design.heroLayout === 'image_right'
-    ? 'mb-8 grid gap-5 overflow-hidden rounded-2xl border border-[#e2eaf2] bg-white md:grid-cols-[minmax(0,1fr)_280px]'
-    : 'mb-8 overflow-hidden rounded-2xl border border-[#e2eaf2] bg-white';
+    ? 'mb-8 grid gap-5 overflow-hidden rounded-2xl border border-[#e2eaf2] bg-white md:grid-cols-[minmax(0,1fr)_280px] dark:bg-[#141417] dark:border-[#27272b]'
+    : 'mb-8 overflow-hidden rounded-2xl border border-[#e2eaf2] bg-white dark:bg-[#141417] dark:border-[#27272b]';
 
   return (
     <ServicePageLayout
@@ -285,7 +285,7 @@ export default function PublicContentPageRenderer({ page }: { page: PublicConten
               className={design.heroLayout === 'image_right' ? 'h-full min-h-48 w-full object-cover md:order-2' : 'h-auto w-full object-cover'}
             />
             {page.heroImage.caption && (
-              <p className="border-t border-[#e2eaf2] bg-[#f8fafc] px-4 py-2 text-[12px] text-[#64748b]">
+              <p className="border-t border-[#e2eaf2] bg-[#f8fafc] px-4 py-2 text-[12px] text-[#64748b] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                 {page.heroImage.caption}
               </p>
             )}
@@ -300,7 +300,7 @@ export default function PublicContentPageRenderer({ page }: { page: PublicConten
             >
               <h2 id={section.id} className={headingClass}>{section.title}</h2>
               {section.image?.url && (
-                <div className={`mb-5 overflow-hidden rounded-xl border border-[#e2eaf2] ${
+                <div className={`mb-5 overflow-hidden rounded-xl border border-[#e2eaf2]  dark:border-[#27272b] ${
                   section.design.imagePosition === 'left' ? 'md:float-left md:mr-6 md:w-5/12' :
                   section.design.imagePosition === 'right' ? 'md:float-right md:ml-6 md:w-5/12' :
                   ''
@@ -311,7 +311,7 @@ export default function PublicContentPageRenderer({ page }: { page: PublicConten
                     className="h-auto w-full object-cover"
                   />
                   {section.image.caption && (
-                    <p className="border-t border-[#e2eaf2] bg-[#f8fafc] px-4 py-2 text-[12px] text-[#64748b]">
+                    <p className="border-t border-[#e2eaf2] bg-[#f8fafc] px-4 py-2 text-[12px] text-[#64748b] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                       {section.image.caption}
                     </p>
                   )}

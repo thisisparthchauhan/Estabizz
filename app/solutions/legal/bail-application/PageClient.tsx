@@ -57,7 +57,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -91,7 +91,7 @@ export default function PageClient() {
       finalCtaTitle="Custody Time Is Not Recoverable"
       finalCtaDescription="Bail matters reward speed and precision. Getting the forum, the type of application and the grounds right the first time is what shortens the process."
       heroDescription={<p>Bail is about liberty during a process that has not yet decided anything. Under the Bharatiya Nagarik Suraksha Sanhita, 2023 the section numbers have changed, the forum depends on the offence and the stage, and the application has to answer the specific objections a court will weigh. Estabizz assists with case review, forum assessment, drafting regular, anticipatory, interim and default bail applications, surety and bond documentation, and counsel coordination.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp for Urgent Bail Matter</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp for Urgent Bail Matter</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> a bail application asks a competent criminal court to release a person from custody, or to protect them against arrest, on conditions the court considers appropriate.</p>

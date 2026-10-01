@@ -29,30 +29,30 @@ export default function GlobalMarketsSection({ content }: { content?: Partial<Gl
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative overflow-hidden bg-white px-5 py-20 md:px-6 lg:py-24">
+        <section ref={sectionRef} className="relative overflow-hidden bg-white px-5 py-20 md:px-6 lg:py-24 dark:bg-[#141417]">
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_15%,rgba(0,150,214,0.14),transparent_40%),radial-gradient(circle_at_5%_95%,rgba(22,119,242,0.10),transparent_36%)]" />
-            <div className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+            <div className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
 
             <div className="relative z-10 mx-auto grid max-w-[1240px] gap-10 xl:grid-cols-[0.82fr_1.18fr] xl:items-center">
                 <div
                     className="transition-all duration-700"
                     style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "translateY(0)" : "translateY(28px)" }}
                 >
-                    <div className="mb-5 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">
+                    <div className="mb-5 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
                         {c.label}
                     </div>
-                    <h2 className="max-w-[620px] text-[clamp(32px,4.2vw,52px)] font-black leading-[1.05] tracking-[-0.03em] text-[#120b45]">
-                        {c.headingMain} <span className="text-[#1677f2]">{c.headingHighlight}</span>
+                    <h2 className="max-w-[620px] text-[clamp(32px,4.2vw,52px)] font-black leading-[1.05] tracking-[-0.03em] text-[#120b45] dark:text-[#fafafa]">
+                        {c.headingMain} <span className="text-[#1677f2] dark:text-[#4f9dfb]">{c.headingHighlight}</span>
                     </h2>
-                    <p className="mt-6 max-w-[620px] text-[16px] font-medium leading-[1.7] text-[#475569]">
+                    <p className="mt-6 max-w-[620px] text-[16px] font-medium leading-[1.7] text-[#475569] dark:text-[#a1a1aa]">
                         {c.description}
                     </p>
 
                     <div className="mt-7 grid gap-3 sm:grid-cols-3">
                         {features.map((f) => (
-                            <div key={f.title} className="rounded-2xl border border-blue-100 bg-white p-4 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
-                                <div className="text-[13px] font-black text-[#120b45]">{f.title}</div>
-                                <div className="mt-2 text-[12px] font-medium leading-relaxed text-[#64748b]">{f.text}</div>
+                            <div key={f.title} className="rounded-2xl border border-blue-100 bg-white p-4 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+                                <div className="text-[13px] font-black text-[#120b45] dark:text-[#fafafa]">{f.title}</div>
+                                <div className="mt-2 text-[12px] font-medium leading-relaxed text-[#64748b] dark:text-[#a1a1aa]">{f.text}</div>
                             </div>
                         ))}
                     </div>
@@ -61,7 +61,7 @@ export default function GlobalMarketsSection({ content }: { content?: Partial<Gl
                         <Link href={c.primaryBtnLink} className="inline-flex items-center justify-center rounded-2xl bg-[#1677f2] px-6 py-4 text-[14px] font-black text-white shadow-[0_14px_35px_rgba(22,119,242,0.28)] transition-all hover:-translate-y-0.5 hover:bg-[#0866d9]">
                             {c.primaryBtnText}
                         </Link>
-                        <a href={c.whatsappLink} className="inline-flex items-center justify-center rounded-2xl border border-blue-100 bg-white px-6 py-4 text-[14px] font-black text-[#0a2b58] shadow-[0_10px_28px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-0.5 hover:border-[#1677f2] hover:text-[#1677f2]">
+                        <a href={c.whatsappLink} className="inline-flex items-center justify-center rounded-2xl border border-blue-100 bg-white px-6 py-4 text-[14px] font-black text-[#0a2b58] shadow-[0_10px_28px_rgba(0,70,130,0.08)] transition-all hover:-translate-y-0.5 hover:border-[#1677f2] hover:text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">
                             {c.whatsappText}
                         </a>
                     </div>
@@ -72,10 +72,10 @@ export default function GlobalMarketsSection({ content }: { content?: Partial<Gl
                     style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "translateY(0)" : "translateY(34px)" }}
                 >
                     <div className="grid gap-5 lg:grid-cols-[0.72fr_1fr]">
-                        <div className="relative flex h-full flex-col overflow-hidden rounded-[30px] border border-blue-100 bg-[#f8fbff] p-6 shadow-[0_16px_44px_rgba(0,80,140,0.10)]">
+                        <div className="relative flex h-full flex-col overflow-hidden rounded-[30px] border border-blue-100 bg-[#f8fbff] p-6 shadow-[0_16px_44px_rgba(0,80,140,0.10)] dark:bg-[#141417] dark:border-[#27272b]">
                             <div className="pointer-events-none absolute left-1/2 top-20 h-[200px] w-[200px] -translate-x-1/2 rounded-full bg-[#1677f2]/10 blur-[70px]" />
 
-                            <div className="relative text-center text-[10px] font-black uppercase tracking-[0.22em] text-[#94a3b8]">
+                            <div className="relative text-center text-[10px] font-black uppercase tracking-[0.22em] text-[#94a3b8] dark:text-[#71717a]">
                                 Regulatory Coverage
                             </div>
 
@@ -85,7 +85,7 @@ export default function GlobalMarketsSection({ content }: { content?: Partial<Gl
                                     <div className="absolute h-[230px] w-[230px] rounded-full border border-[#1677f2]/15" />
                                     <div className="absolute h-[162px] w-[162px] rounded-full border border-dashed border-[#1677f2]/30 animate-[spin_24s_linear_infinite]" />
                                     <div className="absolute h-[118px] w-[118px] rounded-full bg-[radial-gradient(circle,rgba(22,119,242,0.18),transparent_72%)]" />
-                                    <div className="relative z-10 flex h-[90px] w-[90px] items-center justify-center rounded-full border border-blue-100 bg-white text-center text-[10px] font-black uppercase leading-[1.3] tracking-[0.12em] text-[#120b45] shadow-[0_8px_24px_rgba(0,80,140,0.12)]">
+                                    <div className="relative z-10 flex h-[90px] w-[90px] items-center justify-center rounded-full border border-blue-100 bg-white text-center text-[10px] font-black uppercase leading-[1.3] tracking-[0.12em] text-[#120b45] shadow-[0_8px_24px_rgba(0,80,140,0.12)] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">
                                         Global<br />Compliance
                                     </div>
 
@@ -94,7 +94,7 @@ export default function GlobalMarketsSection({ content }: { content?: Partial<Gl
                                         return (
                                             <div
                                                 key={node}
-                                                className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl border border-blue-100 bg-white text-[9.5px] font-black text-[#0a2b58] shadow-[0_8px_22px_rgba(0,80,140,0.12)]"
+                                                className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl border border-blue-100 bg-white text-[9.5px] font-black text-[#0a2b58] shadow-[0_8px_22px_rgba(0,80,140,0.12)] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
                                                 style={{ transform: `rotate(${angle}deg) translateX(95px) rotate(-${angle}deg)` }}
                                             >
                                                 {node}
@@ -105,10 +105,10 @@ export default function GlobalMarketsSection({ content }: { content?: Partial<Gl
                             </div>
 
                             {/* Expansion path */}
-                            <div className="relative flex items-center justify-between gap-3 rounded-2xl border border-blue-100 bg-white px-4 py-3">
+                            <div className="relative flex items-center justify-between gap-3 rounded-2xl border border-blue-100 bg-white px-4 py-3 dark:bg-[#141417] dark:border-[#27272b]">
                                 <div>
-                                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#94a3b8]">Expansion Path</div>
-                                    <div className="mt-0.5 text-[16px] font-black text-[#1677f2]">India → Global</div>
+                                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#94a3b8] dark:text-[#71717a]">Expansion Path</div>
+                                    <div className="mt-0.5 text-[16px] font-black text-[#1677f2] dark:text-[#4f9dfb]">India → Global</div>
                                 </div>
                                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1677f2] text-[15px] font-black text-white shadow-[0_8px_20px_rgba(22,119,242,0.3)]">→</span>
                             </div>
@@ -118,17 +118,17 @@ export default function GlobalMarketsSection({ content }: { content?: Partial<Gl
                             {regions.map((region, index) => (
                                 <div
                                     key={region.title}
-                                    className="group rounded-[24px] border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_16px_44px_rgba(0,80,140,0.12)]"
+                                    className="group rounded-[24px] border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1677f2]/40 hover:shadow-[0_16px_44px_rgba(0,80,140,0.12)] dark:bg-[#141417] dark:border-[#27272b]"
                                     style={{ transitionDelay: `${index * 80}ms` }}
                                 >
                                     <div className="flex items-start gap-4">
                                         <div className="mt-1 h-11 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: region.accent }} />
                                         <div>
-                                            <h3 className="text-[18px] font-black text-[#120b45]">{region.title}</h3>
-                                            <p className="mt-2 text-[13px] font-medium leading-relaxed text-[#64748b]">{region.description}</p>
+                                            <h3 className="text-[18px] font-black text-[#120b45] dark:text-[#fafafa]">{region.title}</h3>
+                                            <p className="mt-2 text-[13px] font-medium leading-relaxed text-[#64748b] dark:text-[#a1a1aa]">{region.description}</p>
                                             <div className="mt-4 flex flex-wrap gap-2">
                                                 {region.markets.map((market) => (
-                                                    <span key={market} className="rounded-full border border-blue-100 bg-[#f5fbff] px-3 py-1.5 text-[11px] font-bold text-[#0077B6]">
+                                                    <span key={market} className="rounded-full border border-blue-100 bg-[#f5fbff] px-3 py-1.5 text-[11px] font-bold text-[#0077B6] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
                                                         {market}
                                                     </span>
                                                 ))}

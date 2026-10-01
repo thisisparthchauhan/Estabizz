@@ -92,7 +92,7 @@ export default function ChatWidget() {
         const contactPattern = /(\/contact)/;
         return text.split(contactPattern).map((part, i) =>
             part === "/contact" ? (
-                <Link key={i} href="/contact" className="underline font-semibold text-[#1677f2] hover:text-[#0077B6]" onClick={() => setOpen(false)}>
+                <Link key={i} href="/contact" className="underline font-semibold text-[#1677f2] hover:text-[#0077B6] dark:text-[#4f9dfb]" onClick={() => setOpen(false)}>
                     book a free consultation
                 </Link>
             ) : part
@@ -125,13 +125,13 @@ export default function ChatWidget() {
 
             {/* Chat panel */}
             {open && (
-                <div className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-1.5rem)] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-blue-100"
+                <div className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[calc(100vw-1.5rem)] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-blue-100 dark:border-[#27272b]"
                     style={{ height: "480px", background: "#fff" }}>
 
                     {/* Header */}
                     <div className="flex items-center gap-3 px-4 py-3 text-white flex-shrink-0"
                         style={{ background: "linear-gradient(135deg, #1677f2, #0a1628)" }}>
-                        <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center font-bold text-sm flex-shrink-0">AI</div>
+                        <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center font-bold text-sm flex-shrink-0 dark:bg-[#141417]">AI</div>
                         <div className="min-w-0">
                             <p className="font-bold text-sm leading-tight">Estabizz AI</p>
                             <p className="text-blue-100 text-xs">Regulatory Compliance Assistant</p>
@@ -143,7 +143,7 @@ export default function ChatWidget() {
                     </div>
 
                     {/* Messages */}
-                    <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 bg-[#f8faff]">
+                    <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 bg-[#f8faff] dark:bg-[#141417]">
                         {messages.map((msg, i) => (
                             <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                                 {msg.role === "assistant" && (
@@ -152,7 +152,7 @@ export default function ChatWidget() {
                                 <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${
                                     msg.role === "user"
                                         ? "bg-[#1677f2] text-white rounded-tr-sm"
-                                        : "bg-white text-[#0a1628] shadow-sm border border-gray-100 rounded-tl-sm"
+                                        : "bg-white text-[#0a1628] shadow-sm border border-gray-100 rounded-tl-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
                                 }`}>
                                     {msg.role === "assistant" ? formatMsg(msg.content) : msg.content}
                                 </div>
@@ -161,7 +161,7 @@ export default function ChatWidget() {
                         {loading && (
                             <div className="flex justify-start">
                                 <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center text-white text-[10px] font-bold mr-2 flex-shrink-0">AI</div>
-                                <div className="bg-white border border-gray-100 shadow-sm rounded-2xl rounded-tl-sm px-4 py-3 flex gap-1 items-center">
+                                <div className="bg-white border border-gray-100 shadow-sm rounded-2xl rounded-tl-sm px-4 py-3 flex gap-1 items-center dark:bg-[#141417] dark:border-[#27272b]">
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#1677f2] animate-bounce" style={{ animationDelay: "0ms" }} />
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#1677f2] animate-bounce" style={{ animationDelay: "150ms" }} />
                                     <span className="w-1.5 h-1.5 rounded-full bg-[#1677f2] animate-bounce" style={{ animationDelay: "300ms" }} />
@@ -173,10 +173,10 @@ export default function ChatWidget() {
 
                     {/* Quick questions */}
                     {messages.length === 1 && (
-                        <div className="px-4 pb-2 bg-[#f8faff] flex flex-wrap gap-1.5">
+                        <div className="px-4 pb-2 bg-[#f8faff] flex flex-wrap gap-1.5 dark:bg-[#141417]">
                             {["NBFC registration?", "SEBI AIF license?", "Insurance broker?", "FEMA compliance?"].map((q) => (
                                 <button key={q} onClick={() => setInput(q)}
-                                    className="px-2.5 py-1 bg-white border border-blue-100 text-[#1677f2] rounded-full text-xs font-medium hover:bg-blue-50 transition-colors">
+                                    className="px-2.5 py-1 bg-white border border-blue-100 text-[#1677f2] rounded-full text-xs font-medium hover:bg-blue-50 transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
                                     {q}
                                 </button>
                             ))}
@@ -184,14 +184,14 @@ export default function ChatWidget() {
                     )}
 
                     {/* Input */}
-                    <div className="px-3 py-3 border-t border-gray-100 bg-white flex gap-2 flex-shrink-0">
+                    <div className="px-3 py-3 border-t border-gray-100 bg-white flex gap-2 flex-shrink-0 dark:bg-[#141417] dark:border-[#27272b]">
                         <input
                             type="text"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKey}
                             placeholder="Ask about licenses, compliance..."
-                            className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all min-w-0"
+                            className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 transition-all min-w-0 dark:border-[#27272b]"
                         />
                         <button
                             onClick={send}

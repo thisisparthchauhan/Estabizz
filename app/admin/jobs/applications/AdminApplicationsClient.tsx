@@ -64,15 +64,15 @@ export default function AdminApplicationsClient({
     <div className="space-y-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-[24px] font-black text-[#0a1628]">Applications</h1>
-          <p className="mt-1 text-[13px] text-[#64748b]">{total} total</p>
+          <h1 className="text-[24px] font-black text-[#0a1628] dark:text-[#fafafa]">Applications</h1>
+          <p className="mt-1 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">{total} total</p>
         </div>
       </div>
 
       {/* Filters */}
       <div className="flex flex-wrap gap-3">
         <input
-          className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13.5px] text-[#0a1628] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+          className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13.5px] text-[#0a1628] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
           placeholder="Search name, job, email…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -80,7 +80,7 @@ export default function AdminApplicationsClient({
           onBlur={handleSearchSubmit}
         />
         <select
-          className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13.5px] text-[#334155] focus:border-[#1677f2] focus:outline-none"
+          className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13.5px] text-[#334155] focus:border-[#1677f2] focus:outline-none dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
           value={initialStageId}
           onChange={(e) => handleStageChange(e.target.value)}
         >
@@ -93,23 +93,23 @@ export default function AdminApplicationsClient({
           <button
             type="button"
             onClick={() => { setSearch(""); navigate({ search: "", stageId: "", page: "1" }); }}
-            className="text-[12px] font-bold text-[#1677f2] hover:underline self-center"
+            className="text-[12px] font-bold text-[#1677f2] hover:underline self-center dark:text-[#4f9dfb]"
           >
             Clear
           </button>
         )}
-        {isPending && <span className="self-center text-[12px] text-[#94a3b8]">Loading…</span>}
+        {isPending && <span className="self-center text-[12px] text-[#94a3b8] dark:text-[#71717a]">Loading…</span>}
       </div>
 
       {applications.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-[#dbe7f3] bg-white py-16 text-center text-[14px] text-[#94a3b8]">
+        <div className="rounded-2xl border border-dashed border-[#dbe7f3] bg-white py-16 text-center text-[14px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">
           {total === 0 ? "No applications yet." : "No results match your filters."}
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-2xl border border-[#dbe7f3] bg-white">
+        <div className="overflow-x-auto rounded-2xl border border-[#dbe7f3] bg-white dark:bg-[#141417] dark:border-[#27272b]">
           <table className="w-full text-[13.5px]">
             <thead>
-              <tr className="border-b border-[#dbe7f3] bg-[#f8fbff] text-left text-[11px] font-black uppercase tracking-widest text-[#64748b]">
+              <tr className="border-b border-[#dbe7f3] bg-[#f8fbff] text-left text-[11px] font-black uppercase tracking-widest text-[#64748b] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                 <th className="px-4 py-3">Candidate</th>
                 <th className="px-4 py-3">Job</th>
                 <th className="px-4 py-3">Stage</th>
@@ -122,19 +122,19 @@ export default function AdminApplicationsClient({
               {applications.map((app) => (
                 <tr
                   key={app.id}
-                  className="border-b border-[#f1f5f9] last:border-0 hover:bg-[#f8fbff] transition-colors"
+                  className="border-b border-[#f1f5f9] last:border-0 hover:bg-[#f8fbff] transition-colors dark:bg-[#141417] dark:border-[#27272b]"
                 >
                   <td className="px-4 py-3">
-                    <p className="font-bold text-[#0a1628]">{app.candidateName}</p>
+                    <p className="font-bold text-[#0a1628] dark:text-[#fafafa]">{app.candidateName}</p>
                     {app.candidateEmail && (
-                      <p className="text-[12px] text-[#64748b]">{app.candidateEmail}</p>
+                      <p className="text-[12px] text-[#64748b] dark:text-[#a1a1aa]">{app.candidateEmail}</p>
                     )}
                   </td>
                   <td className="px-4 py-3">
                     <Link
                       href={`/jobs/${app.jobSlug}`}
                       target="_blank"
-                      className="font-bold text-[#1677f2] hover:underline"
+                      className="font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]"
                     >
                       {app.jobTitle}
                     </Link>
@@ -147,14 +147,14 @@ export default function AdminApplicationsClient({
                       {app.currentStageName}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-[#64748b]">
+                  <td className="px-4 py-3 text-[#64748b] dark:text-[#a1a1aa]">
                     {SOURCE_LABELS[app.source] ?? app.source}
                   </td>
-                  <td className="px-4 py-3 text-[#64748b]">{fmt(app.createdAt)}</td>
+                  <td className="px-4 py-3 text-[#64748b] dark:text-[#a1a1aa]">{fmt(app.createdAt)}</td>
                   <td className="px-4 py-3">
                     <Link
                       href={`/admin/jobs/applications/${app.id}`}
-                      className="text-[12px] font-bold text-[#1677f2] hover:underline"
+                      className="text-[12px] font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]"
                     >
                       View →
                     </Link>
@@ -169,7 +169,7 @@ export default function AdminApplicationsClient({
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between text-[13px]">
-          <span className="text-[#64748b]">
+          <span className="text-[#64748b] dark:text-[#a1a1aa]">
             Page {page} of {totalPages}
           </span>
           <div className="flex gap-2">
@@ -177,7 +177,7 @@ export default function AdminApplicationsClient({
               type="button"
               disabled={page <= 1}
               onClick={() => handlePage(page - 1)}
-              className="rounded-xl border border-[#dbe7f3] px-4 py-2 font-bold text-[#334155] hover:bg-[#f8fbff] disabled:opacity-40"
+              className="rounded-xl border border-[#dbe7f3] px-4 py-2 font-bold text-[#334155] hover:bg-[#f8fbff] disabled:opacity-40 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
             >
               ← Prev
             </button>
@@ -185,7 +185,7 @@ export default function AdminApplicationsClient({
               type="button"
               disabled={page >= totalPages}
               onClick={() => handlePage(page + 1)}
-              className="rounded-xl border border-[#dbe7f3] px-4 py-2 font-bold text-[#334155] hover:bg-[#f8fbff] disabled:opacity-40"
+              className="rounded-xl border border-[#dbe7f3] px-4 py-2 font-bold text-[#334155] hover:bg-[#f8fbff] disabled:opacity-40 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
             >
               Next →
             </button>

@@ -45,9 +45,9 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
   useResumeProcessingPoll(isProcessing, refreshReviewState);
 
   const statusTone = useMemo(() => {
-    if (state.status === "confirmed") return "border-emerald-200 bg-emerald-50 text-emerald-700";
-    if (state.status === "recovery") return "border-amber-200 bg-amber-50 text-amber-700";
-    return "border-blue-100 bg-[#eef6ff] text-[#1677f2]";
+    if (state.status === "confirmed") return "border-emerald-200 bg-emerald-50 text-emerald-700 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]";
+    if (state.status === "recovery") return "border-amber-200 bg-amber-50 text-amber-700 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]";
+    return "border-blue-100 bg-[#eef6ff] text-[#1677f2] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#4f9dfb]";
   }, [state.status]);
 
   function runAction(action: ReviewAction, successMessage: string) {
@@ -84,17 +84,17 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
   }
 
   return (
-    <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8 dark:bg-[#141417] dark:text-[#fafafa]">
       <div className="mx-auto max-w-6xl">
         <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <div className="mb-3 inline-flex rounded-full bg-[#eaf2ff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+            <div className="mb-3 inline-flex rounded-full bg-[#eaf2ff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">
               Estabizz Jobs
             </div>
-            <h1 className="text-[34px] font-black leading-tight tracking-tight text-[#120b45] md:text-[46px]">
+            <h1 className="text-[34px] font-black leading-tight tracking-tight text-[#120b45] md:text-[46px] dark:text-[#fafafa]">
               {state.heading}
             </h1>
-            <p className="mt-4 max-w-3xl text-[15px] leading-7 text-[#64748b] md:text-[17px]">
+            <p className="mt-4 max-w-3xl text-[15px] leading-7 text-[#64748b] md:text-[17px] dark:text-[#a1a1aa]">
               {state.message}
             </p>
           </div>
@@ -104,22 +104,22 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
           </div>
         </div>
 
-        <section className="mb-8 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
+        <section className="mb-8 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="text-lg font-black text-[#120b45]">Review progress</h2>
-              <p className="mt-1 text-sm text-[#64748b]">
+              <h2 className="text-lg font-black text-[#120b45] dark:text-[#fafafa]">Review progress</h2>
+              <p className="mt-1 text-sm text-[#64748b] dark:text-[#a1a1aa]">
                 {state.progress.reviewedCount} of {state.progress.totalCount} suggestions reviewed
               </p>
             </div>
             <div className="w-full md:max-w-sm">
-              <div className="h-3 overflow-hidden rounded-full bg-[#e5eef8]">
+              <div className="h-3 overflow-hidden rounded-full bg-[#e5eef8] dark:bg-[#1c1c20]">
                 <div
                   className="h-full rounded-full bg-[#1677f2] transition-all"
                   style={{ width: `${state.progress.percentage}%` }}
                 />
               </div>
-              <p className="mt-2 text-right text-xs font-black uppercase tracking-[0.16em] text-[#1677f2]">
+              <p className="mt-2 text-right text-xs font-black uppercase tracking-[0.16em] text-[#1677f2] dark:text-[#4f9dfb]">
                 {state.progress.percentage}% complete
               </p>
             </div>
@@ -177,7 +177,7 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
         {(error || success) && (
           <div
             className={`mb-6 rounded-lg border px-4 py-3 text-sm font-bold ${
-              error ? "border-red-200 bg-red-50 text-red-700" : "border-emerald-200 bg-emerald-50 text-emerald-700"
+              error ? "border-red-200 bg-red-50 text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]" : "border-emerald-200 bg-emerald-50 text-emerald-700 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]"
             }`}
             role="status"
           >
@@ -223,10 +223,10 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
 
         {state.status === "confirmed" && <ConfirmedProfileSummary state={state} />}
 
-        <div className="mt-8 flex flex-col gap-3 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col gap-3 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] sm:flex-row sm:items-center sm:justify-between dark:bg-[#141417] dark:border-[#27272b]">
           <div>
-            <h2 className="text-lg font-black text-[#120b45]">Ready to finish?</h2>
-            <p className="mt-1 text-sm text-[#64748b]">
+            <h2 className="text-lg font-black text-[#120b45] dark:text-[#fafafa]">Ready to finish?</h2>
+            <p className="mt-1 text-sm text-[#64748b] dark:text-[#a1a1aa]">
               Confirm your profile when the suggestions look right. You can still edit later.
             </p>
           </div>
@@ -235,7 +235,7 @@ export default function ProfileReviewClient({ initialState }: ProfileReviewClien
               type="button"
               onClick={() => runAction({ action: "save_progress" }, "Progress saved.")}
               disabled={isPending}
-              className="rounded-lg border border-blue-100 bg-white px-5 py-3 text-sm font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2] disabled:opacity-60"
+              className="rounded-lg border border-blue-100 bg-white px-5 py-3 text-sm font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2] disabled:opacity-60 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
             >
               Save Progress
             </button>
@@ -372,27 +372,27 @@ function ResumeUploadPanel({
   return (
     <section
       id="upload-resume"
-      className="mb-8 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)]"
+      className="mb-8 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]"
     >
       <div className="grid gap-5 lg:grid-cols-[1fr_0.8fr] lg:items-start">
         <div>
-          <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1677f2]">Resume</p>
-          <h2 className="mt-3 text-2xl font-black text-[#120b45]">
+          <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1677f2] dark:text-[#4f9dfb]">Resume</p>
+          <h2 className="mt-3 text-2xl font-black text-[#120b45] dark:text-[#fafafa]">
             {state.resume.hasResume ? "Replace or upload a new resume" : "Upload your resume"}
           </h2>
-          <p className="mt-2 text-sm leading-6 text-[#64748b]">
+          <p className="mt-2 text-sm leading-6 text-[#64748b] dark:text-[#a1a1aa]">
             Upload a PDF or DOCX resume. Your file is stored privately and is not given a public URL.
           </p>
-          <p className="mt-2 text-xs font-bold text-[#64748b]">
+          <p className="mt-2 text-xs font-bold text-[#64748b] dark:text-[#a1a1aa]">
             Maximum size: {formatBytes(state.resumeUploadPolicy.maxUploadBytes)}
           </p>
         </div>
 
-        <div className="rounded-lg border border-[#dce9f8] bg-[#f8fbff] p-4">
-          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#1677f2]">{statusLabel}</p>
+        <div className="rounded-lg border border-[#dce9f8] bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#1677f2] dark:text-[#4f9dfb]">{statusLabel}</p>
           {state.resume.hasResume ? (
-            <div className="mt-3 text-sm text-[#475569]">
-              <p className="font-black text-[#0f172a]">{state.resume.fileName || "Resume file"}</p>
+            <div className="mt-3 text-sm text-[#475569] dark:text-[#a1a1aa]">
+              <p className="font-black text-[#0f172a] dark:text-[#fafafa]">{state.resume.fileName || "Resume file"}</p>
               <p className="mt-1">
                 {[state.resume.fileType, state.resume.fileSizeBytes ? formatBytes(state.resume.fileSizeBytes) : null]
                   .filter(Boolean)
@@ -401,26 +401,26 @@ function ResumeUploadPanel({
               {state.resume.uploadedAt && <p className="mt-1">Uploaded {formatDate(state.resume.uploadedAt)}</p>}
             </div>
           ) : (
-            <p className="mt-3 text-sm text-[#64748b]">No resume uploaded yet.</p>
+            <p className="mt-3 text-sm text-[#64748b] dark:text-[#a1a1aa]">No resume uploaded yet.</p>
           )}
 
           {uploadStatus === "uploading" && (
             <div className="mt-4">
-              <div className="h-2 overflow-hidden rounded-full bg-[#e5eef8]">
+              <div className="h-2 overflow-hidden rounded-full bg-[#e5eef8] dark:bg-[#1c1c20]">
                 <div
                   className="h-full rounded-full bg-[#1677f2] transition-all"
                   style={{ width: `${uploadProgress}%` }}
                 />
               </div>
-              <p className="mt-2 text-right text-xs font-black text-[#1677f2]">{uploadProgress}%</p>
+              <p className="mt-2 text-right text-xs font-black text-[#1677f2] dark:text-[#4f9dfb]">{uploadProgress}%</p>
             </div>
           )}
 
-          <label className="mt-5 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-blue-200 bg-white px-4 py-6 text-center transition hover:border-[#1677f2]/50">
-            <span className="text-sm font-black text-[#0f172a]">
+          <label className="mt-5 flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-blue-200 bg-white px-4 py-6 text-center transition hover:border-[#1677f2]/50 dark:bg-[#141417] dark:border-[#27272b]">
+            <span className="text-sm font-black text-[#0f172a] dark:text-[#fafafa]">
               {disabled ? "Upload in progress" : "Choose PDF or DOCX"}
             </span>
-            <span className="mt-1 text-xs text-[#64748b]">Drag and drop is supported by your browser file picker.</span>
+            <span className="mt-1 text-xs text-[#64748b] dark:text-[#a1a1aa]">Drag and drop is supported by your browser file picker.</span>
             <input
               type="file"
               className="sr-only"
@@ -533,11 +533,11 @@ function ProfileStatePanel({
   onSave: () => void;
 }) {
   return (
-    <section className="mb-8 rounded-lg border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
+    <section className="mb-8 rounded-lg border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
       <div className="grid gap-5 md:grid-cols-[1.4fr_0.6fr] md:items-center">
         <div>
-          <h2 className="text-2xl font-black text-[#120b45]">{state.heading}</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-[#64748b]">{state.message}</p>
+          <h2 className="text-2xl font-black text-[#120b45] dark:text-[#fafafa]">{state.heading}</h2>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-[#64748b] dark:text-[#a1a1aa]">{state.message}</p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
           {state.showUploadCta && (
@@ -552,7 +552,7 @@ function ProfileStatePanel({
             <button
               type="button"
               onClick={onSave}
-              className="rounded-lg border border-blue-100 bg-white px-5 py-3 text-sm font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+              className="rounded-lg border border-blue-100 bg-white px-5 py-3 text-sm font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
             >
               Complete Manually
             </button>
@@ -561,7 +561,7 @@ function ProfileStatePanel({
             <button
               type="button"
               onClick={onSave}
-              className="rounded-lg border border-blue-100 bg-white px-5 py-3 text-sm font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+              className="rounded-lg border border-blue-100 bg-white px-5 py-3 text-sm font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
             >
               Retry
             </button>
@@ -600,14 +600,14 @@ function ProfileSection({
   const needsReview = section.fields.some((field) => field.needsReview);
 
   return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
+    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
       <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
-          <h2 className="text-xl font-black text-[#120b45]">{section.title}</h2>
-          <p className="mt-1 text-sm leading-6 text-[#64748b]">{section.description}</p>
+          <h2 className="text-xl font-black text-[#120b45] dark:text-[#fafafa]">{section.title}</h2>
+          <p className="mt-1 text-sm leading-6 text-[#64748b] dark:text-[#a1a1aa]">{section.description}</p>
         </div>
         <div className="flex items-center gap-3">
-          <span className="rounded-full bg-[#f5fbff] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#1677f2]">
+          <span className="rounded-full bg-[#f5fbff] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#1677f2] dark:bg-[#141417] dark:text-[#4f9dfb]">
             {section.reviewedCount}/{section.totalCount}
           </span>
           {needsReview && (
@@ -615,7 +615,7 @@ function ProfileSection({
               type="button"
               onClick={() => onConfirmSection(section.id)}
               disabled={isPending}
-              className="rounded-lg bg-[#0a1628] px-4 py-2 text-xs font-black text-white transition hover:bg-[#1677f2] disabled:opacity-60"
+              className="rounded-lg bg-[#0a1628] dark:bg-[#1c1c20] px-4 py-2 text-xs font-black text-white transition hover:bg-[#1677f2] disabled:opacity-60"
             >
               Confirm Section
             </button>
@@ -630,37 +630,37 @@ function ProfileSection({
           return (
             <article
               key={field.proposalId}
-              className="rounded-lg border border-[#e2ecf7] bg-[#fbfdff] p-4"
+              className="rounded-lg border border-[#e2ecf7] bg-[#fbfdff] p-4 dark:bg-[#141417] dark:border-[#27272b]"
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="text-sm font-black text-[#0f172a]">{field.label}</h3>
+                    <h3 className="text-sm font-black text-[#0f172a] dark:text-[#fafafa]">{field.label}</h3>
                     <StatusBadge field={field} />
                     {field.pleaseCheck && (
-                      <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-black text-amber-700">
+                      <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-black text-amber-700 dark:bg-[#2a2113] dark:text-[#fcd34d]">
                         Please check this
                       </span>
                     )}
                   </div>
                   {isEditing ? (
                     <label className="mt-3 block">
-                      <span className="mb-2 block text-xs font-black uppercase tracking-[0.14em] text-[#64748b]">
+                      <span className="mb-2 block text-xs font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">
                         Correct detail
                       </span>
                       <textarea
                         value={editValue}
                         onChange={(event) => onEditValueChange(event.target.value)}
-                        className="min-h-[96px] w-full rounded-lg border border-blue-100 bg-white px-3 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/15"
+                        className="min-h-[96px] w-full rounded-lg border border-blue-100 bg-white px-3 py-3 text-sm text-[#0f172a] outline-none transition focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/15 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
                       />
                     </label>
                   ) : (
-                    <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-[#334155]">
+                    <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-[#334155] dark:text-[#a1a1aa]">
                       {field.displayValue}
                     </p>
                   )}
                   {field.canApplyToProfile && (
-                    <p className="mt-2 text-xs text-[#64748b]">
+                    <p className="mt-2 text-xs text-[#64748b] dark:text-[#a1a1aa]">
                       Confirming this updates your profile details only. It does not change login credentials.
                     </p>
                   )}
@@ -681,7 +681,7 @@ function ProfileSection({
                         type="button"
                         onClick={onCancelEditing}
                         disabled={isPending}
-                        className="rounded-lg border border-blue-100 bg-white px-4 py-2 text-xs font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2] disabled:opacity-60"
+                        className="rounded-lg border border-blue-100 bg-white px-4 py-2 text-xs font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2] disabled:opacity-60 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
                       >
                         Cancel
                       </button>
@@ -702,7 +702,7 @@ function ProfileSection({
                         type="button"
                         onClick={() => onStartEditing(field)}
                         disabled={isPending}
-                        className="rounded-lg border border-blue-100 bg-white px-4 py-2 text-xs font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2] disabled:opacity-60"
+                        className="rounded-lg border border-blue-100 bg-white px-4 py-2 text-xs font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2] disabled:opacity-60 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
                       >
                         Edit
                       </button>
@@ -711,7 +711,7 @@ function ProfileSection({
                           type="button"
                           onClick={() => onReject(field)}
                           disabled={isPending}
-                          className="rounded-lg border border-red-100 bg-white px-4 py-2 text-xs font-black text-red-600 transition hover:border-red-200 hover:bg-red-50 disabled:opacity-60"
+                          className="rounded-lg border border-red-100 bg-white px-4 py-2 text-xs font-black text-red-600 transition hover:border-red-200 hover:bg-red-50 disabled:opacity-60 dark:bg-[#141417] dark:text-[#fca5a5] dark:border-[#4a2225]"
                         >
                           Reject
                         </button>
@@ -731,12 +731,12 @@ function ProfileSection({
 function StatusBadge({ field }: { field: CandidateProfileReviewFieldView }) {
   const styles =
     field.statusLabel === "Confirmed"
-      ? "bg-emerald-50 text-emerald-700"
+      ? "bg-emerald-50 text-emerald-700 dark:bg-[#132a20] dark:text-[#6ee7b7]"
       : field.statusLabel === "Edited"
-        ? "bg-[#eef6ff] text-[#1677f2]"
+        ? "bg-[#eef6ff] text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]"
         : field.statusLabel === "Rejected"
-          ? "bg-red-50 text-red-700"
-          : "bg-amber-50 text-amber-700";
+          ? "bg-red-50 text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5]"
+          : "bg-amber-50 text-amber-700 dark:bg-[#2a2113] dark:text-[#fcd34d]";
 
   return (
     <span className={`rounded-full px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.12em] ${styles}`}>
@@ -759,13 +759,13 @@ function ConfirmedProfileSummary({ state }: { state: CandidateProfileReviewState
   if (entries.length === 0) return null;
 
   return (
-    <section className="mt-8 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
-      <h2 className="text-xl font-black text-[#120b45]">Confirmed profile</h2>
+    <section className="mt-8 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+      <h2 className="text-xl font-black text-[#120b45] dark:text-[#fafafa]">Confirmed profile</h2>
       <div className="mt-4 grid gap-3 md:grid-cols-2">
         {entries.map(([label, value]) => (
-          <div key={label} className="rounded-lg border border-[#e2ecf7] bg-[#fbfdff] p-4">
-            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#1677f2]">{label}</p>
-            <p className="mt-2 text-sm font-bold text-[#0f172a]">{value}</p>
+          <div key={label} className="rounded-lg border border-[#e2ecf7] bg-[#fbfdff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#1677f2] dark:text-[#4f9dfb]">{label}</p>
+            <p className="mt-2 text-sm font-bold text-[#0f172a] dark:text-[#fafafa]">{value}</p>
           </div>
         ))}
       </div>

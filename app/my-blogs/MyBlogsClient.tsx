@@ -15,12 +15,12 @@ function fmt(iso?: string): string {
 }
 
 const STATUS_META: Record<BlogStatus, { label: string; cls: string }> = {
-  published:      { label: "Published",      cls: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+  published:      { label: "Published",      cls: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]" },
   draft:          { label: "Draft",          cls: "bg-slate-100 text-slate-600 border-slate-200" },
   pending_review: { label: "Pending Review", cls: "bg-[#1677f2]/10 text-[#0866d9] border-[#1677f2]/40" },
-  approved:       { label: "Approved",       cls: "bg-blue-50 text-blue-700 border-blue-200" },
-  rejected:       { label: "Rejected",       cls: "bg-red-50 text-red-700 border-red-200" },
-  archived:       { label: "Archived",       cls: "bg-purple-50 text-purple-700 border-purple-200" },
+  approved:       { label: "Approved",       cls: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]" },
+  rejected:       { label: "Rejected",       cls: "bg-red-50 text-red-700 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]" },
+  archived:       { label: "Archived",       cls: "bg-purple-50 text-purple-700 border-purple-200 dark:bg-[#231a2e] dark:text-[#c4b5fd] dark:border-[#3a2a4a]" },
 };
 
 export default function MyBlogsClient({ initialBlogs, email }: Props) {
@@ -50,20 +50,20 @@ export default function MyBlogsClient({ initialBlogs, email }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-[#f7f8fc] pt-[64px]">
+    <main className="min-h-screen bg-[#f7f8fc] pt-[64px] dark:bg-[#141417]">
       <div className="mx-auto max-w-4xl px-4 py-10">
 
         {/* Header */}
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-[26px] font-black text-[#0a1628]">My Submissions</h1>
-            <p className="mt-1 text-[13.5px] text-[#64748b]">
-              Articles submitted with <span className="font-semibold text-[#374151]">{email}</span>
+            <h1 className="text-[26px] font-black text-[#0a1628] dark:text-[#fafafa]">My Submissions</h1>
+            <p className="mt-1 text-[13.5px] text-[#64748b] dark:text-[#a1a1aa]">
+              Articles submitted with <span className="font-semibold text-[#374151] dark:text-[#a1a1aa]">{email}</span>
             </p>
           </div>
           <Link
             href="/submit-blog"
-            className="inline-flex items-center gap-2 self-start rounded-lg bg-[#0a1628] px-5 py-2.5 text-[13px] font-bold text-white hover:bg-[#0a1628]/90 transition-colors"
+            className="inline-flex items-center gap-2 self-start rounded-lg bg-[#0a1628] dark:bg-[#1c1c20] px-5 py-2.5 text-[13px] font-bold text-white hover:bg-[#0a1628]/90 transition-colors"
           >
             ✚ Submit New Article
           </Link>
@@ -71,10 +71,10 @@ export default function MyBlogsClient({ initialBlogs, email }: Props) {
 
         {/* Empty state */}
         {blogs.length === 0 ? (
-          <div className="rounded-2xl border border-[#e8e8e8] bg-white px-8 py-16 text-center">
+          <div className="rounded-2xl border border-[#e8e8e8] bg-white px-8 py-16 text-center dark:bg-[#141417] dark:border-[#27272b]">
             <div className="mb-4 text-4xl opacity-30">📝</div>
-            <h2 className="mb-1.5 text-[18px] font-black text-[#0a1628]">No submissions yet</h2>
-            <p className="mb-6 text-[13.5px] text-[#64748b]">
+            <h2 className="mb-1.5 text-[18px] font-black text-[#0a1628] dark:text-[#fafafa]">No submissions yet</h2>
+            <p className="mb-6 text-[13.5px] text-[#64748b] dark:text-[#a1a1aa]">
               You haven&apos;t submitted any articles. Share your regulatory insight with Estabizz.
             </p>
             <Link
@@ -85,24 +85,24 @@ export default function MyBlogsClient({ initialBlogs, email }: Props) {
             </Link>
           </div>
         ) : (
-          <div className="overflow-hidden rounded-2xl border border-[#e8e8e8] bg-white">
+          <div className="overflow-hidden rounded-2xl border border-[#e8e8e8] bg-white dark:bg-[#141417] dark:border-[#27272b]">
             {blogs.map((blog) => {
-              const m = STATUS_META[blog.status] ?? { label: blog.status, cls: "bg-slate-100 text-slate-500 border-slate-200" };
+              const m = STATUS_META[blog.status] ?? { label: blog.status, cls: "bg-slate-100 text-slate-500 border-slate-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]" };
               return (
                 <div
                   key={blog.id}
-                  className="flex flex-col gap-3 border-b border-[#f0f0f0] p-5 last:border-b-0 sm:flex-row sm:items-center sm:justify-between"
+                  className="flex flex-col gap-3 border-b border-[#f0f0f0] p-5 last:border-b-0 sm:flex-row sm:items-center sm:justify-between dark:border-[#27272b]"
                 >
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10.5px] font-bold ${m.cls}`}>
                         {m.label}
                       </span>
-                      <span className="text-[11px] text-[#9ca3af]">
+                      <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a]">
                         {blog.category.icon} {blog.category.name} · {fmt(blog.createdAt)}
                       </span>
                     </div>
-                    <h3 className="mt-1.5 text-[15px] font-bold leading-snug text-[#0a1628]">
+                    <h3 className="mt-1.5 text-[15px] font-bold leading-snug text-[#0a1628] dark:text-[#fafafa]">
                       {blog.title}
                     </h3>
                   </div>
@@ -113,14 +113,14 @@ export default function MyBlogsClient({ initialBlogs, email }: Props) {
                         href={`/blogs/${blog.slug}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-[12px] font-bold text-emerald-700 hover:bg-emerald-100 transition-colors"
+                        className="inline-flex items-center gap-1 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-[12px] font-bold text-emerald-700 hover:bg-emerald-100 transition-colors dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]"
                       >
                         ↗ View
                       </Link>
                     )}
                     <button
                       onClick={() => setDeleteTarget(blog)}
-                      className="inline-flex items-center gap-1 rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-[12px] font-bold text-red-600 hover:bg-red-100 transition-colors"
+                      className="inline-flex items-center gap-1 rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-[12px] font-bold text-red-600 hover:bg-red-100 transition-colors dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]"
                     >
                       🗑 Delete
                     </button>
@@ -133,8 +133,8 @@ export default function MyBlogsClient({ initialBlogs, email }: Props) {
 
         {/* Pending note */}
         {blogs.some((b) => b.status === "pending_review") && (
-          <p className="mt-4 text-[12.5px] leading-6 text-[#94a3b8]">
-            Submissions marked <strong className="text-[#0866d9]">Pending Review</strong> are awaiting
+          <p className="mt-4 text-[12.5px] leading-6 text-[#94a3b8] dark:text-[#71717a]">
+            Submissions marked <strong className="text-[#0866d9] dark:text-[#4f9dfb]">Pending Review</strong> are awaiting
             admin approval and are not yet publicly visible.
           </p>
         )}
@@ -147,20 +147,20 @@ export default function MyBlogsClient({ initialBlogs, email }: Props) {
           onClick={() => !deleting && setDeleteTarget(null)}
         >
           <div
-            className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl"
+            className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl dark:bg-[#141417]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-red-50 text-[20px]">🗑</div>
-            <h3 className="text-[16px] font-black text-[#0a1628]">Delete this submission?</h3>
-            <p className="mt-1.5 text-[13px] leading-6 text-[#64748b]">
+            <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-red-50 text-[20px] dark:bg-[#2a1618]">🗑</div>
+            <h3 className="text-[16px] font-black text-[#0a1628] dark:text-[#fafafa]">Delete this submission?</h3>
+            <p className="mt-1.5 text-[13px] leading-6 text-[#64748b] dark:text-[#a1a1aa]">
               You are about to permanently delete{" "}
-              <span className="font-bold text-[#0a1628]">“{deleteTarget.title}”</span>. This cannot be undone.
+              <span className="font-bold text-[#0a1628] dark:text-[#fafafa]">“{deleteTarget.title}”</span>. This cannot be undone.
             </p>
             <div className="mt-5 flex justify-end gap-2.5">
               <button
                 onClick={() => setDeleteTarget(null)}
                 disabled={deleting}
-                className="rounded-lg border border-[#e2eaf2] bg-white px-4 py-2 text-[13px] font-bold text-[#475569] hover:bg-[#f8fafc] transition-colors disabled:opacity-50"
+                className="rounded-lg border border-[#e2eaf2] bg-white px-4 py-2 text-[13px] font-bold text-[#475569] hover:bg-[#f8fafc] transition-colors disabled:opacity-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
               >
                 No, keep it
               </button>

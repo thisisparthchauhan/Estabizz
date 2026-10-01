@@ -25,17 +25,17 @@ export default async function CandidateAccountDashboardPage() {
   const dashboard = await loadCandidateAccountDashboard(session);
 
   return (
-    <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8 dark:bg-[#141417] dark:text-[#fafafa]">
       <div className="mx-auto max-w-6xl">
         <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <div className="mb-3 inline-flex rounded-full bg-[#eaf2ff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+            <div className="mb-3 inline-flex rounded-full bg-[#eaf2ff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">
               Dashboard
             </div>
-            <h1 className="text-[34px] font-black leading-tight tracking-tight text-[#120b45] md:text-[46px]">
+            <h1 className="text-[34px] font-black leading-tight tracking-tight text-[#120b45] md:text-[46px] dark:text-[#fafafa]">
               Welcome, {dashboard.candidateName}
             </h1>
-            <p className="mt-4 max-w-3xl text-[15px] leading-7 text-[#64748b] md:text-[17px]">
+            <p className="mt-4 max-w-3xl text-[15px] leading-7 text-[#64748b] md:text-[17px] dark:text-[#a1a1aa]">
               Track your profile, applications and job-search activity from one professional workspace.
             </p>
           </div>
@@ -47,15 +47,15 @@ export default async function CandidateAccountDashboardPage() {
           </Link>
         </div>
 
-        <section className="mb-8 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
+        <section className="mb-8 rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
           <div className="grid gap-5 lg:grid-cols-[1fr_0.7fr] lg:items-center">
             <div>
-              <h2 className="text-2xl font-black text-[#120b45]">{dashboard.nextAction.title}</h2>
-              <p className="mt-2 text-sm leading-6 text-[#64748b]">{dashboard.nextAction.description}</p>
+              <h2 className="text-2xl font-black text-[#120b45] dark:text-[#fafafa]">{dashboard.nextAction.title}</h2>
+              <p className="mt-2 text-sm leading-6 text-[#64748b] dark:text-[#a1a1aa]">{dashboard.nextAction.description}</p>
             </div>
             <Link
               href={dashboard.nextAction.ctaHref}
-              className="rounded-lg border border-blue-100 bg-[#f5fbff] px-5 py-3 text-center text-sm font-black text-[#1677f2] transition hover:border-[#1677f2]/40"
+              className="rounded-lg border border-blue-100 bg-[#f5fbff] px-5 py-3 text-center text-sm font-black text-[#1677f2] transition hover:border-[#1677f2]/40 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]"
             >
               {dashboard.nextAction.ctaLabel}
             </Link>
@@ -106,12 +106,12 @@ export default async function CandidateAccountDashboardPage() {
             href="/jobs/account/alerts"
             cta="Manage Job Alerts"
           />
-          <section className="rounded-lg border border-dashed border-blue-200 bg-white p-5">
-            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1677f2]">
+          <section className="rounded-lg border border-dashed border-blue-200 bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1677f2] dark:text-[#4f9dfb]">
               Recommended Jobs
             </p>
-            <h2 className="mt-3 text-xl font-black text-[#120b45]">Recommendations are not enabled yet</h2>
-            <p className="mt-2 text-sm leading-6 text-[#64748b]">
+            <h2 className="mt-3 text-xl font-black text-[#120b45] dark:text-[#fafafa]">Recommendations are not enabled yet</h2>
+            <p className="mt-2 text-sm leading-6 text-[#64748b] dark:text-[#a1a1aa]">
               AI matching has not started, so this dashboard does not label any role as recommended.
             </p>
           </section>
@@ -135,13 +135,13 @@ function MetricCard({
   cta: string;
 }) {
   return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
-      <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1677f2]">{title}</p>
-      <p className="mt-4 text-3xl font-black text-[#120b45]">{value}</p>
-      <p className="mt-2 min-h-[44px] text-sm leading-6 text-[#64748b]">{description}</p>
+    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+      <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1677f2] dark:text-[#4f9dfb]">{title}</p>
+      <p className="mt-4 text-3xl font-black text-[#120b45] dark:text-[#fafafa]">{value}</p>
+      <p className="mt-2 min-h-[44px] text-sm leading-6 text-[#64748b] dark:text-[#a1a1aa]">{description}</p>
       <Link
         href={href}
-        className="mt-4 inline-flex rounded-lg border border-blue-100 px-4 py-2 text-xs font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+        className="mt-4 inline-flex rounded-lg border border-blue-100 px-4 py-2 text-xs font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:border-[#27272b] dark:text-[#a1a1aa]"
       >
         {cta}
       </Link>
@@ -151,26 +151,26 @@ function MetricCard({
 
 function RecentApplications({ dashboard }: { dashboard: CandidateAccountDashboardViewModel }) {
   return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
+    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
       <div className="flex items-center justify-between gap-4">
-        <h2 className="text-xl font-black text-[#120b45]">Recent Applications</h2>
-        <Link href="/jobs/account/applications" className="text-sm font-black text-[#1677f2]">
+        <h2 className="text-xl font-black text-[#120b45] dark:text-[#fafafa]">Recent Applications</h2>
+        <Link href="/jobs/account/applications" className="text-sm font-black text-[#1677f2] dark:text-[#4f9dfb]">
           View All
         </Link>
       </div>
       {dashboard.recentApplications.length === 0 ? (
-        <p className="mt-5 rounded-lg bg-[#f5fbff] p-4 text-sm text-[#64748b]">
+        <p className="mt-5 rounded-lg bg-[#f5fbff] p-4 text-sm text-[#64748b] dark:bg-[#141417] dark:text-[#a1a1aa]">
           No applications yet. Your submitted applications will appear here.
         </p>
       ) : (
         <div className="mt-5 grid gap-3">
           {dashboard.recentApplications.slice(0, 3).map((application) => (
-            <div key={application.id} className="rounded-lg border border-[#e2ecf7] bg-[#fbfdff] p-4">
-              <p className="font-black text-[#0f172a]">{application.jobTitle}</p>
-              <p className="mt-1 text-sm text-[#64748b]">{application.organizationName}</p>
-              <div className="mt-3 flex flex-wrap gap-2 text-xs font-bold text-[#64748b]">
+            <div key={application.id} className="rounded-lg border border-[#e2ecf7] bg-[#fbfdff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+              <p className="font-black text-[#0f172a] dark:text-[#fafafa]">{application.jobTitle}</p>
+              <p className="mt-1 text-sm text-[#64748b] dark:text-[#a1a1aa]">{application.organizationName}</p>
+              <div className="mt-3 flex flex-wrap gap-2 text-xs font-bold text-[#64748b] dark:text-[#a1a1aa]">
                 <span>{formatDate(application.appliedDate)}</span>
-                <span className="rounded-full bg-[#eef6ff] px-2 py-0.5 text-[#1677f2]">
+                <span className="rounded-full bg-[#eef6ff] px-2 py-0.5 text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">
                   {application.statusLabel}
                 </span>
               </div>
@@ -184,20 +184,20 @@ function RecentApplications({ dashboard }: { dashboard: CandidateAccountDashboar
 
 function UpcomingInterviews({ dashboard }: { dashboard: CandidateAccountDashboardViewModel }) {
   return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
-      <h2 className="text-xl font-black text-[#120b45]">Upcoming Interviews</h2>
+    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+      <h2 className="text-xl font-black text-[#120b45] dark:text-[#fafafa]">Upcoming Interviews</h2>
       {dashboard.upcomingInterviews.length === 0 ? (
-        <p className="mt-5 rounded-lg bg-[#f5fbff] p-4 text-sm text-[#64748b]">
+        <p className="mt-5 rounded-lg bg-[#f5fbff] p-4 text-sm text-[#64748b] dark:bg-[#141417] dark:text-[#a1a1aa]">
           No upcoming interviews yet. Interview updates will appear here when scheduled.
         </p>
       ) : (
         <div className="mt-5 grid gap-3">
           {dashboard.upcomingInterviews.map((interview) => (
-            <div key={interview.id} className="rounded-lg border border-[#e2ecf7] bg-[#fbfdff] p-4">
-              <p className="font-black text-[#0f172a]">{interview.jobTitle}</p>
-              <p className="mt-1 text-sm text-[#64748b]">{interview.organizationName}</p>
-              <p className="mt-3 text-sm font-bold text-[#1677f2]">{formatDate(interview.scheduledLabel)}</p>
-              <p className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-[#64748b]">
+            <div key={interview.id} className="rounded-lg border border-[#e2ecf7] bg-[#fbfdff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+              <p className="font-black text-[#0f172a] dark:text-[#fafafa]">{interview.jobTitle}</p>
+              <p className="mt-1 text-sm text-[#64748b] dark:text-[#a1a1aa]">{interview.organizationName}</p>
+              <p className="mt-3 text-sm font-bold text-[#1677f2] dark:text-[#4f9dfb]">{formatDate(interview.scheduledLabel)}</p>
+              <p className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">
                 {interview.typeLabel} · {interview.statusLabel}
               </p>
             </div>

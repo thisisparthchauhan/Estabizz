@@ -21,27 +21,27 @@ const sections = [
 
 export default function RegulatoryEmailTemplatePage() {
     return (
-        <main className="min-h-screen bg-white">
-            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+        <main className="min-h-screen bg-white dark:bg-[#141417]">
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
-                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
-                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
-                        <Link href="/admin" className="hover:text-[#374151] transition-colors">Admin</Link><span className="opacity-40">/</span><Link href="/admin/tools" className="hover:text-[#374151] transition-colors">Internal Tools</Link><span className="opacity-40">/</span><span className="text-[#374151]">Email Template</span>
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                        <Link href="/admin" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Admin</Link><span className="opacity-40">/</span><Link href="/admin/tools" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Internal Tools</Link><span className="opacity-40">/</span><span className="text-[#374151] dark:text-[#a1a1aa]">Email Template</span>
                     </nav>
-                    <span className="mb-4 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">Circular Interpretation Template</span>
-                    <h1 className="mb-5 max-w-4xl text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">Regulatory Update Email Template <span className="text-[#1677f2]">for Compliance Teams</span></h1>
-                    <p className="max-w-3xl text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px]">
+                    <span className="mb-4 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Circular Interpretation Template</span>
+                    <h1 className="mb-5 max-w-4xl text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px] dark:text-[#fafafa]">Regulatory Update Email Template <span className="text-[#1677f2] dark:text-[#4f9dfb]">for Compliance Teams</span></h1>
+                    <p className="max-w-3xl text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px] dark:text-[#a1a1aa]">
                         Use this structured format to convert any RBI, SEBI, IRDAI, IFSCA or allied regulatory circular into a professional compliance update email with impact analysis, affected entities, implementation checklist and risk rating.
                     </p>
                 </div>
             </header>
 
             <section className="mx-auto max-w-6xl px-6 py-14">
-                <div className="rounded-3xl border border-blue-100 bg-white p-6 shadow-sm md:p-10">
-                    <h2 className="mb-6 text-[28px] font-black text-[#0a1628]">Template Preview</h2>
+                <div className="rounded-3xl border border-blue-100 bg-white p-6 shadow-sm md:p-10 dark:bg-[#141417] dark:border-[#27272b]">
+                    <h2 className="mb-6 text-[28px] font-black text-[#0a1628] dark:text-[#fafafa]">Template Preview</h2>
 
-                    <div className="space-y-6 text-[14px] leading-7 text-[#475569]">
+                    <div className="space-y-6 text-[14px] leading-7 text-[#475569] dark:text-[#a1a1aa]">
                         <Block title="EMAIL SUBJECT OPTIONS">
                             <ol className="list-decimal space-y-2 pl-5">
                                 <li>Regulatory Update: [Regulator] Circular on [Topic] – Action Required</li>
@@ -68,12 +68,12 @@ export default function RegulatoryEmailTemplatePage() {
                     </div>
                 </div>
 
-                <div className="mt-10 rounded-3xl bg-[#0a1628] p-8 text-white">
+                <div className="mt-10 rounded-3xl bg-[#0a1628] dark:bg-[#1c1c20] p-8 text-white">
                     <h2 className="mb-3 text-[28px] font-black">Need Estabizz to prepare a regulatory update email for your team?</h2>
                     <p className="mb-6 text-blue-100">Our team can convert circulars into client-ready impact notes, board notes and implementation checklists.</p>
                     <div className="flex flex-wrap gap-3">
                         <Link href="/contact" className="rounded-xl bg-[#1677f2] px-6 py-3 text-sm font-bold">Request Email Draft</Link>
-                        <Link href="/contact" className="rounded-xl bg-white/10 px-6 py-3 text-sm font-bold">Speak to Compliance Expert</Link>
+                        <Link href="/contact" className="rounded-xl bg-white/10 px-6 py-3 text-sm font-bold dark:bg-[#141417]">Speak to Compliance Expert</Link>
                     </div>
                 </div>
             </section>
@@ -82,5 +82,5 @@ export default function RegulatoryEmailTemplatePage() {
 }
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
-    return <section className="rounded-2xl border border-blue-100 bg-[#fbfdff] p-5"><h3 className="mb-2 text-[13px] font-black uppercase tracking-[0.14em] text-[#1677f2]">{title}</h3><div>{children}</div></section>;
+    return <section className="rounded-2xl border border-blue-100 bg-[#fbfdff] p-5 dark:bg-[#141417] dark:border-[#27272b]"><h3 className="mb-2 text-[13px] font-black uppercase tracking-[0.14em] text-[#1677f2] dark:text-[#4f9dfb]">{title}</h3><div>{children}</div></section>;
 }

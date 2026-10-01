@@ -19,7 +19,7 @@ const FOOTER_FIELDS: { name: string; label: string; hint?: string; multiline?: b
 type Scalars = Record<string, string>;
 
 const inputCls =
-  "w-full rounded-lg border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none transition-colors focus:border-[#1677f2] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b]";
+  "w-full rounded-lg border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] px-3 py-2 text-[13px] text-[#0a1628] dark:text-[#fafafa] outline-none transition-colors focus:border-[#1677f2] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b]";
 
 function formatIST(iso: string | null): string {
   if (!iso) return "—";
@@ -102,68 +102,68 @@ export default function FooterEditor() {
   const removeReg = (ri: number) => { setRegulators((rs) => rs.filter((_, i) => i !== ri)); touched(); };
 
   if (loading) {
-    return <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-6 py-10 text-center text-[13px] text-[#94a3b8] dark:text-[#a9b6c9]">Loading footer…</div>;
+    return <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-6 py-10 text-center text-[13px] text-[#94a3b8] dark:text-[#a1a1aa]">Loading footer…</div>;
   }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-[15px] font-black text-[#0a1628] dark:text-[#f7f9fc]">Footer</h2>
-        <span className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9]">Last updated: {formatIST(updatedAt)}</span>
+        <h2 className="text-[15px] font-black text-[#0a1628] dark:text-[#fafafa]">Footer</h2>
+        <span className="text-[11px] text-[#94a3b8] dark:text-[#a1a1aa]">Last updated: {formatIST(updatedAt)}</span>
       </div>
 
       {/* Contact details */}
-      <section className="max-w-3xl rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
-        <div className="border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-6 py-3">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Footer — Contact Details</span>
+      <section className="max-w-3xl rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+        <div className="border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11] px-6 py-3">
+          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">Footer — Contact Details</span>
         </div>
         <div className="grid gap-5 px-6 py-6 sm:grid-cols-2">
           {FOOTER_FIELDS.map((def) => (
             <div key={def.name} className={def.multiline ? "sm:col-span-2" : ""}>
-              <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]">{def.label}</label>
+              <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">{def.label}</label>
               {def.multiline ? (
                 <textarea value={scalars[def.name] ?? ""} onChange={(e) => { setScalars((p) => ({ ...p, [def.name]: e.target.value })); touched(); }} rows={2} className={inputCls + " resize-y"} />
               ) : (
                 <input type="text" value={scalars[def.name] ?? ""} onChange={(e) => { setScalars((p) => ({ ...p, [def.name]: e.target.value })); touched(); }} className={inputCls} />
               )}
-              {def.hint && <p className="mt-1 text-[11px] text-[#94a3b8]">{def.hint}</p>}
+              {def.hint && <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">{def.hint}</p>}
             </div>
           ))}
         </div>
       </section>
 
       {/* Link columns */}
-      <section className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
-        <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-6 py-3">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Footer — Link Columns</span>
+      <section className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+        <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11] px-6 py-3">
+          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">Footer — Link Columns</span>
           <button onClick={addColumn} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add column</button>
         </div>
         <div className="grid gap-5 px-6 py-6 lg:grid-cols-2 xl:grid-cols-3">
           {columns.map((col, ci) => (
-            <div key={ci} className="rounded-xl border border-[#e8eef5] dark:border-[#223550] bg-[#fbfdff] dark:bg-[#12223a] p-3.5">
+            <div key={ci} className="rounded-xl border border-[#e8eef5] dark:border-[#27272b] bg-[#fbfdff] dark:bg-[#1c1c20] p-3.5">
               <div className="mb-2 flex items-center gap-2">
                 <input value={col.title} onChange={(e) => setColumn(ci, { title: e.target.value })} placeholder="Column title" className={inputCls + " font-bold"} />
-                <button onClick={() => removeColumn(ci)} title="Delete column" className="shrink-0 rounded-lg border border-red-200 px-2 py-2 text-[12px] text-red-500 hover:bg-red-50">✕</button>
+                <button onClick={() => removeColumn(ci)} title="Delete column" className="shrink-0 rounded-lg border border-red-200 px-2 py-2 text-[12px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225]">✕</button>
               </div>
               <div className="space-y-2">
                 {col.links.map((link, li) => (
                   <div key={li} className="flex items-center gap-1.5">
                     <input value={link.label} onChange={(e) => setColLink(ci, li, { label: e.target.value })} placeholder="Label" className={inputCls} />
                     <input value={link.href} onChange={(e) => setColLink(ci, li, { href: e.target.value })} placeholder="/path" className={inputCls + " font-mono text-[11px]"} />
-                    <button onClick={() => removeColLink(ci, li)} title="Remove link" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500">✕</button>
+                    <button onClick={() => removeColLink(ci, li)} title="Remove link" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a] dark:bg-[#2a1618]">✕</button>
                   </div>
                 ))}
               </div>
-              <button onClick={() => addColLink(ci)} className="mt-2 text-[11px] font-bold text-[#1677f2] hover:underline">+ Add link</button>
+              <button onClick={() => addColLink(ci)} className="mt-2 text-[11px] font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">+ Add link</button>
             </div>
           ))}
         </div>
       </section>
 
       {/* Regulators */}
-      <section className="max-w-3xl rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
-        <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-6 py-3">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Footer — Regulator Chips</span>
+      <section className="max-w-3xl rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+        <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11] px-6 py-3">
+          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">Footer — Regulator Chips</span>
           <button onClick={addReg} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add</button>
         </div>
         <div className="grid gap-2 px-6 py-6 sm:grid-cols-2">
@@ -171,7 +171,7 @@ export default function FooterEditor() {
             <div key={ri} className="flex items-center gap-1.5">
               <input value={r.label} onChange={(e) => setReg(ri, { label: e.target.value })} placeholder="RBI" className={inputCls} />
               <input value={r.href} onChange={(e) => setReg(ri, { href: e.target.value })} placeholder="/rbi" className={inputCls + " font-mono text-[11px]"} />
-              <button onClick={() => removeReg(ri)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500">✕</button>
+              <button onClick={() => removeReg(ri)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a]">✕</button>
             </div>
           ))}
         </div>
@@ -179,8 +179,8 @@ export default function FooterEditor() {
 
       {(error || notice) && (
         <div className="max-w-3xl">
-          {error && <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-[12px] font-medium text-red-700">{error}</div>}
-          {notice && <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-2.5 text-[12px] font-medium text-green-700">{notice}</div>}
+          {error && <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-[12px] font-medium text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">{error}</div>}
+          {notice && <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-2.5 text-[12px] font-medium text-green-700 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]">{notice}</div>}
         </div>
       )}
 

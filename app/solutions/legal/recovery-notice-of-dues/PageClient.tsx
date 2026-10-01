@@ -66,7 +66,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -105,7 +105,7 @@ export default function PageClient() {
       finalCtaTitle="Send a Figure They Can Check, Not One They Can Argue With"
       finalCtaDescription="Credits, part payments, retention and TDS deducted at source — reconcile all of it first. An arithmetical error in a demand is the easiest thing in the world for a debtor to hide behind."
       heroDescription={<p>A recovery notice is not a strongly worded reminder. It is the document the other side&rsquo;s lawyer reads first, the computation their accounts team will try to break, and the record a court or tribunal will see at the outset of whatever follows. Done well it settles the matter without proceedings; done carelessly it concedes points, inflates the claim, and in an insolvency context can create the very dispute that closes the route you were heading for. Estabizz assists businesses, suppliers, lenders, landlords, professionals and companies with claim reconciliation, interest computation on a stated basis, limitation review, notice drafting for the route intended, address verification, dispatch and proof of service, reply analysis, settlement documentation and filing readiness.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> a recovery notice is a written demand that states exactly what is owed, on what basis, and what happens if it is not paid.</p>

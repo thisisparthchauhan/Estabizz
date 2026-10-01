@@ -16,8 +16,8 @@ function Field({ label, value }: { label: string; value: string | number | null 
   if (!value && value !== 0) return null;
   return (
     <div>
-      <dt className="text-[11px] font-black uppercase tracking-widest text-[#64748b]">{label}</dt>
-      <dd className="mt-0.5 text-[13.5px] text-[#334155]">{value}</dd>
+      <dt className="text-[11px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">{label}</dt>
+      <dd className="mt-0.5 text-[13.5px] text-[#334155] dark:text-[#a1a1aa]">{value}</dd>
     </div>
   );
 }
@@ -38,15 +38,15 @@ export default function AdminCandidateDetailClient({ candidate, notes, tasks }: 
   return (
     <div className="space-y-6">
       <Link href="/admin/jobs/candidates"
-        className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#64748b] hover:text-[#1677f2] transition-colors">
+        className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#64748b] hover:text-[#1677f2] transition-colors dark:text-[#a1a1aa]">
         ← Candidates
       </Link>
 
       <div>
-        <h1 className="text-[26px] font-black text-[#0a1628]">{fullName}</h1>
-        <p className="mt-0.5 text-[13px] text-[#64748b]">{candidate.candidateCode}</p>
+        <h1 className="text-[26px] font-black text-[#0a1628] dark:text-[#fafafa]">{fullName}</h1>
+        <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">{candidate.candidateCode}</p>
         {candidate.currentTitle && (
-          <p className="mt-1 text-[14px] text-[#334155]">
+          <p className="mt-1 text-[14px] text-[#334155] dark:text-[#a1a1aa]">
             {candidate.currentTitle}
             {candidate.currentEmployer ? ` @ ${candidate.currentEmployer}` : ""}
           </p>
@@ -57,8 +57,8 @@ export default function AdminCandidateDetailClient({ candidate, notes, tasks }: 
         {/* Left: info + employment + education + skills */}
         <div className="space-y-5 lg:col-span-2">
           {/* Personal & Professional */}
-          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-            <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b]">Profile</h2>
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+            <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">Profile</h2>
             <dl className="grid gap-x-6 gap-y-3 sm:grid-cols-2">
               <Field label="Email" value={email} />
               <Field label="Phone" value={phone} />
@@ -75,14 +75,14 @@ export default function AdminCandidateDetailClient({ candidate, notes, tasks }: 
 
           {/* Employment */}
           {candidate.employments.length > 0 && (
-            <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-              <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b]">Employment</h2>
+            <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+              <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">Employment</h2>
               <div className="space-y-4">
                 {candidate.employments.map((e) => (
                   <div key={e.id}>
-                    <p className="font-bold text-[#0a1628]">{e.title}</p>
-                    <p className="text-[13px] text-[#64748b]">{e.employerName}</p>
-                    <p className="text-[12px] text-[#94a3b8]">
+                    <p className="font-bold text-[#0a1628] dark:text-[#fafafa]">{e.title}</p>
+                    <p className="text-[13px] text-[#64748b] dark:text-[#a1a1aa]">{e.employerName}</p>
+                    <p className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">
                       {fmt(e.startDate)} — {e.isCurrent ? "Present" : (e.endDate ? fmt(e.endDate) : "—")}
                     </p>
                   </div>
@@ -93,16 +93,16 @@ export default function AdminCandidateDetailClient({ candidate, notes, tasks }: 
 
           {/* Education */}
           {candidate.educations.length > 0 && (
-            <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-              <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b]">Education</h2>
+            <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+              <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">Education</h2>
               <div className="space-y-3">
                 {candidate.educations.map((ed) => (
                   <div key={ed.id}>
-                    <p className="font-bold text-[#0a1628]">
+                    <p className="font-bold text-[#0a1628] dark:text-[#fafafa]">
                       {ed.degree}{ed.fieldOfStudy ? ` — ${ed.fieldOfStudy}` : ""}
                     </p>
-                    <p className="text-[13px] text-[#64748b]">{ed.institutionName}</p>
-                    {ed.endYear && <p className="text-[12px] text-[#94a3b8]">{ed.endYear}</p>}
+                    <p className="text-[13px] text-[#64748b] dark:text-[#a1a1aa]">{ed.institutionName}</p>
+                    {ed.endYear && <p className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">{ed.endYear}</p>}
                   </div>
                 ))}
               </div>
@@ -111,12 +111,12 @@ export default function AdminCandidateDetailClient({ candidate, notes, tasks }: 
 
           {/* Skills */}
           {candidate.skills.length > 0 && (
-            <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-              <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b]">Skills</h2>
+            <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+              <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">Skills</h2>
               <div className="flex flex-wrap gap-2">
                 {candidate.skills.map((s) => (
                   <span key={s.id}
-                    className="rounded-full border border-[#dbe7f3] bg-[#f8fbff] px-3 py-1 text-[12.5px] font-bold text-[#334155]">
+                    className="rounded-full border border-[#dbe7f3] bg-[#f8fbff] px-3 py-1 text-[12.5px] font-bold text-[#334155] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                     {s.skillName}
                     {s.proficiency ? ` · ${s.proficiency}` : ""}
                   </span>
@@ -126,31 +126,31 @@ export default function AdminCandidateDetailClient({ candidate, notes, tasks }: 
           )}
 
           {/* Notes */}
-          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
             <NotesPanel entityType="candidate" entityId={candidate.id} initialNotes={notes} />
           </div>
 
           {/* Tasks */}
-          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
             <TasksPanel entityType="candidate" entityId={candidate.id} initialTasks={tasks} />
           </div>
         </div>
 
         {/* Right sidebar: applications */}
         <div className="space-y-5">
-          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-            <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b]">
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+            <h2 className="mb-4 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">
               Applications ({candidate.applications.length})
             </h2>
             {candidate.applications.length === 0 ? (
-              <p className="text-[13px] text-[#94a3b8]">No applications.</p>
+              <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No applications.</p>
             ) : (
               <div className="space-y-3">
                 {candidate.applications.map((app) => (
                   <div key={app.id}>
                     <Link
                       href={`/admin/jobs/applications/${app.id}`}
-                      className="font-bold text-[#1677f2] hover:underline text-[13.5px]"
+                      className="font-bold text-[#1677f2] hover:underline text-[13.5px] dark:text-[#4f9dfb]"
                     >
                       {app.jobTitle}
                     </Link>
@@ -161,7 +161,7 @@ export default function AdminCandidateDetailClient({ candidate, notes, tasks }: 
                       >
                         {app.stageName}
                       </span>
-                      <span className="text-[11px] text-[#94a3b8]">{fmt(app.appliedAt)}</span>
+                      <span className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">{fmt(app.appliedAt)}</span>
                     </div>
                   </div>
                 ))}
@@ -169,11 +169,11 @@ export default function AdminCandidateDetailClient({ candidate, notes, tasks }: 
             )}
           </div>
 
-          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5">
-            <h2 className="mb-2 text-[12px] font-black uppercase tracking-widest text-[#64748b]">Dates</h2>
+          <div className="rounded-2xl border border-[#dbe7f3] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+            <h2 className="mb-2 text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">Dates</h2>
             <dl className="space-y-2 text-[13px]">
-              <div><dt className="text-[#64748b]">Created</dt><dd className="font-bold">{fmt(candidate.createdAt)}</dd></div>
-              <div><dt className="text-[#64748b]">Updated</dt><dd className="font-bold">{fmt(candidate.updatedAt)}</dd></div>
+              <div><dt className="text-[#64748b] dark:text-[#a1a1aa]">Created</dt><dd className="font-bold">{fmt(candidate.createdAt)}</dd></div>
+              <div><dt className="text-[#64748b] dark:text-[#a1a1aa]">Updated</dt><dd className="font-bold">{fmt(candidate.updatedAt)}</dd></div>
             </dl>
           </div>
         </div>

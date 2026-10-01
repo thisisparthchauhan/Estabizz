@@ -66,7 +66,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -105,7 +105,7 @@ export default function PageClient() {
       finalCtaTitle="Identify the Instrument Before You Reply"
       finalCtaDescription="Most weak responses to a telecom regulatory notice are weak because nobody established which regulation, direction or tariff order it was issued under. That single step reframes the whole reply."
       heroDescription={<p>Telecom and broadcasting sit inside a dense regulatory framework that changed substantially when the Telecommunications Act, 2023 replaced the colonial-era statutes and moved the sector from licences to authorisations. A tariff finding, an interconnection disagreement, a quality of service shortfall, a commercial communication violation or a TRAI direction can affect revenue, subscriber relationships and the authorisation itself. Estabizz assists telecom service providers, ISPs, broadcasters, MSOs, LCOs, DTH operators, enterprises and telemarketing businesses with compliance review, regulatory notice analysis and response, tariff and interconnection issues, quality of service and reporting obligations, UCC and commercial communication compliance, consumer grievance strategy, broadcasting and cable matters, consultation submissions and TDSAT coordination.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> TRAI sets the rules for telecom and broadcasting services, and this is the legal support for operating inside them and for disputes when something goes wrong.</p>

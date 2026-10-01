@@ -195,13 +195,13 @@ function previewText(value: string, length = 180): string {
 function chipClass(active: boolean): string {
   return active
     ? "border-[#1677f2] bg-[#1677f2] text-white shadow-[0_10px_24px_rgba(22,119,242,0.20)]"
-    : "border-blue-100 bg-white text-[#334155] hover:border-[#1677f2]/50 hover:bg-blue-50";
+    : "border-blue-100 bg-white text-[#334155] hover:border-[#1677f2]/50 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]";
 }
 
 function blockClass(active: boolean): string {
   return active
     ? "border-[#1677f2] ring-4 ring-[#1677f2]/10 shadow-[0_18px_44px_rgba(22,119,242,0.13)]"
-    : "border-blue-100 hover:border-[#1677f2]/45 hover:shadow-[0_14px_34px_rgba(0,80,140,0.08)]";
+    : "border-blue-100 hover:border-[#1677f2]/45 hover:shadow-[0_14px_34px_rgba(0,80,140,0.08)] dark:border-[#27272b]";
 }
 
 // ─── Primitive UI ─────────────────────────────────────────────────────────────
@@ -214,8 +214,8 @@ function BlockShell({
   const active = activeBlock === blockKey;
   return (
     <button type="button" onClick={() => onSelect(blockKey)}
-      className={`block w-full rounded-2xl border bg-white p-5 text-left transition ${blockClass(active)}`}>
-      <div className="mb-3 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-[#1677f2]">
+      className={`block w-full rounded-2xl border bg-white p-5 text-left transition  dark:bg-[#141417] ${blockClass(active)}`}>
+      <div className="mb-3 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
         {label}
       </div>
       {children}
@@ -225,9 +225,9 @@ function BlockShell({
 
 function DetailRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-blue-100 bg-[#f8fbff] p-3">
-      <div className="text-[10px] font-black uppercase tracking-[0.12em] text-[#64748b]">{label}</div>
-      <div className="mt-1 text-sm font-bold leading-5 text-[#0a1628]">{value || "Not set"}</div>
+    <div className="rounded-xl border border-blue-100 bg-[#f8fbff] p-3 dark:bg-[#141417] dark:border-[#27272b]">
+      <div className="text-[10px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">{label}</div>
+      <div className="mt-1 text-sm font-bold leading-5 text-[#0a1628] dark:text-[#fafafa]">{value || "Not set"}</div>
     </div>
   );
 }
@@ -238,13 +238,13 @@ function EditField({
   label: string; value: string; onChange: (v: string) => void;
   multiline?: boolean; rows?: number; maxLength?: number; placeholder?: string; hint?: string; disabled?: boolean;
 }) {
-  const base = "w-full rounded-xl border border-blue-100 bg-[#f8fbff] px-3 text-sm font-medium text-[#0a1628] outline-none transition focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10 disabled:opacity-50 disabled:cursor-not-allowed";
+  const base = "w-full rounded-xl border border-blue-100 bg-[#f8fbff] px-3 text-sm font-medium text-[#0a1628] outline-none transition focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]";
   return (
     <div className="grid gap-1.5">
       <div className="flex items-center justify-between">
-        <label className="text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b]">{label}</label>
+        <label className="text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">{label}</label>
         {maxLength !== undefined && (
-          <span className={`text-[11px] font-bold ${value.length > maxLength * 0.88 ? "text-amber-500" : "text-[#94a3b8]"}`}>
+          <span className={`text-[11px] font-bold ${value.length > maxLength * 0.88 ? "text-amber-500" : "text-[#94a3b8] dark:text-[#71717a]"}`}>
             {value.length}/{maxLength}
           </span>
         )}
@@ -258,7 +258,7 @@ function EditField({
           maxLength={maxLength} placeholder={placeholder} disabled={disabled}
           className={`${base} h-10 py-0`} />
       )}
-      {hint && <p className="text-[11px] font-medium text-[#94a3b8]">{hint}</p>}
+      {hint && <p className="text-[11px] font-medium text-[#94a3b8] dark:text-[#71717a]">{hint}</p>}
     </div>
   );
 }
@@ -270,7 +270,7 @@ function PresetGroup<T extends string>({
 }) {
   return (
     <div className="grid gap-2">
-      <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b]">{label}</div>
+      <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">{label}</div>
       <div className="flex flex-wrap gap-2">
         {options.map((option) => (
           <button
@@ -281,7 +281,7 @@ function PresetGroup<T extends string>({
             className={`rounded-xl border px-3 py-2 text-xs font-black transition disabled:cursor-not-allowed disabled:opacity-55 ${
               option === value
                 ? "border-[#1677f2] bg-[#1677f2] text-white shadow-[0_8px_20px_rgba(22,119,242,0.18)]"
-                : "border-blue-100 bg-white text-[#334155] hover:border-[#1677f2]/50 hover:bg-blue-50"
+                : "border-blue-100 bg-white text-[#334155] hover:border-[#1677f2]/50 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
             }`}
           >
             {labels[option]}
@@ -335,18 +335,18 @@ function MediaPickerModal({
       onClick={onClose}
     >
       <div
-        className="flex w-full max-w-3xl max-h-[82vh] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+        className="flex w-full max-w-3xl max-h-[82vh] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-[#141417]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between border-b border-blue-100 px-5 py-4">
-          <div className="text-[14px] font-black text-[#0a1628]">Select from Media Library</div>
-          <button type="button" onClick={onClose} className="rounded-lg p-1 text-[#94a3b8] hover:text-[#0a1628]">
+        <div className="flex items-center justify-between border-b border-blue-100 px-5 py-4 dark:border-[#27272b]">
+          <div className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Select from Media Library</div>
+          <button type="button" onClick={onClose} className="rounded-lg p-1 text-[#94a3b8] hover:text-[#0a1628] dark:text-[#71717a]">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
         </div>
-        <div className="border-b border-blue-100 px-5 py-3">
+        <div className="border-b border-blue-100 px-5 py-3 dark:border-[#27272b]">
           <div className="flex gap-2">
             <input
               type="text"
@@ -354,7 +354,7 @@ function MediaPickerModal({
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter") setQuery(search); }}
               placeholder="Search images…"
-              className="flex-1 rounded-xl border border-blue-100 bg-[#f8fbff] px-3 py-2 text-sm text-[#0a1628] outline-none focus:border-[#1677f2]"
+              className="flex-1 rounded-xl border border-blue-100 bg-[#f8fbff] px-3 py-2 text-sm text-[#0a1628] outline-none focus:border-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
             />
             <button
               type="button"
@@ -367,12 +367,12 @@ function MediaPickerModal({
         </div>
         <div className="flex-1 overflow-y-auto p-5">
           {loading ? (
-            <div className="flex h-32 items-center justify-center text-sm text-[#64748b]">Loading…</div>
+            <div className="flex h-32 items-center justify-center text-sm text-[#64748b] dark:text-[#a1a1aa]">Loading…</div>
           ) : items.length === 0 ? (
-            <div className="flex h-32 flex-col items-center justify-center gap-2 text-sm text-[#64748b]">
+            <div className="flex h-32 flex-col items-center justify-center gap-2 text-sm text-[#64748b] dark:text-[#a1a1aa]">
               <div>No images found.</div>
               <a href="/admin/media-library" target="_blank" rel="noopener noreferrer"
-                className="text-xs font-bold text-[#1677f2] hover:underline">
+                className="text-xs font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">
                 Upload images in Media Library →
               </a>
             </div>
@@ -392,9 +392,9 @@ function MediaPickerModal({
                     });
                     onClose();
                   }}
-                  className="group overflow-hidden rounded-xl border border-blue-100 bg-[#f8fbff] text-left transition hover:border-[#1677f2] hover:ring-2 hover:ring-[#1677f2]/20"
+                  className="group overflow-hidden rounded-xl border border-blue-100 bg-[#f8fbff] text-left transition hover:border-[#1677f2] hover:ring-2 hover:ring-[#1677f2]/20 dark:bg-[#141417] dark:border-[#27272b]"
                 >
-                  <div className="h-24 overflow-hidden bg-[#f0f4f8]">
+                  <div className="h-24 overflow-hidden bg-[#f0f4f8] dark:bg-[#1c1c20]">
                     <img
                       src={item.secureUrl}
                       alt={item.altText || item.title || item.fileName}
@@ -402,7 +402,7 @@ function MediaPickerModal({
                     />
                   </div>
                   <div className="px-2 py-1.5">
-                    <div className="truncate text-[10px] font-semibold text-[#475569]">
+                    <div className="truncate text-[10px] font-semibold text-[#475569] dark:text-[#a1a1aa]">
                       {item.title || item.fileName}
                     </div>
                   </div>
@@ -411,13 +411,13 @@ function MediaPickerModal({
             </div>
           )}
         </div>
-        <div className="flex items-center justify-between border-t border-blue-100 px-5 py-3">
+        <div className="flex items-center justify-between border-t border-blue-100 px-5 py-3 dark:border-[#27272b]">
           <a href="/admin/media-library" target="_blank" rel="noopener noreferrer"
-            className="text-xs font-bold text-[#1677f2] hover:underline">
+            className="text-xs font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">
             Open Media Library →
           </a>
           <button type="button" onClick={onClose}
-            className="rounded-xl border border-blue-100 px-4 py-2 text-sm font-bold text-[#475569] hover:text-[#0a1628]">
+            className="rounded-xl border border-blue-100 px-4 py-2 text-sm font-bold text-[#475569] hover:text-[#0a1628] dark:border-[#27272b] dark:text-[#a1a1aa]">
             Cancel
           </button>
         </div>
@@ -449,14 +449,14 @@ function EditPanel({
   onUpdateSectionImageAlt: (i: number, v: string) => void;
   onUpdateSectionImageCaption: (i: number, v: string) => void;
 }) {
-  const panelClass = "rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)]";
-  const sectionHead = "mb-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#1677f2]";
+  const panelClass = "rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]";
+  const sectionHead = "mb-1 text-[11px] font-black uppercase tracking-[0.14em] text-[#1677f2] dark:text-[#4f9dfb]";
 
   if (activeBlock === "hero" || activeBlock === "summary") {
     return (
       <div className={panelClass}>
         <div className={sectionHead}>{activeBlock === "hero" ? "Hero Section" : "Summary"}</div>
-        <p className="mb-5 text-xs font-medium text-[#64748b]">
+        <p className="mb-5 text-xs font-medium text-[#64748b] dark:text-[#a1a1aa]">
           {activeBlock === "hero" ? "Edit the page title and opening summary." : "Edit the main opening explanation shown on the page."}
         </p>
         <div className="grid gap-5">
@@ -464,11 +464,11 @@ function EditPanel({
             <>
               <EditField label="Page Title" value={workingCopy.title} onChange={onUpdateTitle}
                 maxLength={200} placeholder="Enter the page title" />
-              <div className="grid gap-3 rounded-xl border border-blue-100 bg-[#f0f8ff] p-4">
-                <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#1677f2]">Hero Image (optional)</div>
+              <div className="grid gap-3 rounded-xl border border-blue-100 bg-[#f0f8ff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+                <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#1677f2] dark:text-[#4f9dfb]">Hero Image (optional)</div>
                 {workingCopy.heroImage?.url ? (
                   <>
-                    <div className="overflow-hidden rounded-xl border border-blue-100 bg-white">
+                    <div className="overflow-hidden rounded-xl border border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                       <img src={workingCopy.heroImage.url} alt={workingCopy.heroImage.alt || ""}
                         className="h-36 w-full object-cover" />
                     </div>
@@ -478,7 +478,7 @@ function EditPanel({
                         Change Image
                       </button>
                       <button type="button" onClick={onRemoveHeroImage}
-                        className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-[11px] font-black text-red-600 hover:bg-red-100 transition-colors">
+                        className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-[11px] font-black text-red-600 hover:bg-red-100 transition-colors dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">
                         Remove
                       </button>
                     </div>
@@ -492,12 +492,12 @@ function EditPanel({
                   </>
                 ) : (
                   <>
-                    <div className="flex h-24 items-center justify-center rounded-xl border border-dashed border-blue-200 bg-white">
+                    <div className="flex h-24 items-center justify-center rounded-xl border border-dashed border-blue-200 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                       <div className="text-center">
-                        <svg className="mx-auto mb-1 text-[#cbd5e1]" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <svg className="mx-auto mb-1 text-[#cbd5e1] dark:text-[#71717a]" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                           <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" />
                         </svg>
-                        <div className="text-[11px] font-semibold text-[#94a3b8]">No image selected</div>
+                        <div className="text-[11px] font-semibold text-[#94a3b8] dark:text-[#71717a]">No image selected</div>
                       </div>
                     </div>
                     <button type="button" onClick={onOpenHeroImagePicker}
@@ -520,11 +520,11 @@ function EditPanel({
     return (
       <div className={panelClass}>
         <div className={sectionHead}>Quick Facts</div>
-        <p className="mb-4 text-xs font-medium text-[#64748b]">{workingCopy.quickFacts.length} facts shown beside the page</p>
+        <p className="mb-4 text-xs font-medium text-[#64748b] dark:text-[#a1a1aa]">{workingCopy.quickFacts.length} facts shown beside the page</p>
         <div className="grid gap-4 max-h-[580px] overflow-y-auto pr-1">
           {workingCopy.quickFacts.map((fact, index) => (
-            <div key={index} className="grid gap-3 rounded-xl border border-blue-100 bg-[#f8fbff] p-4">
-              <div className="text-[11px] font-black text-[#1677f2]">Fact {index + 1}</div>
+            <div key={index} className="grid gap-3 rounded-xl border border-blue-100 bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+              <div className="text-[11px] font-black text-[#1677f2] dark:text-[#4f9dfb]">Fact {index + 1}</div>
               <EditField label="Label" value={fact.label}
                 onChange={(v) => onUpdateQuickFact(index, "label", v)} maxLength={100} />
               <EditField label="Value" value={fact.value}
@@ -532,7 +532,7 @@ function EditPanel({
             </div>
           ))}
           {workingCopy.quickFacts.length === 0 && (
-            <div className="rounded-xl border border-dashed border-blue-200 bg-blue-50 p-6 text-center text-sm font-semibold text-[#64748b]">
+            <div className="rounded-xl border border-dashed border-blue-200 bg-blue-50 p-6 text-center text-sm font-semibold text-[#64748b] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#a1a1aa]">
               No quick facts found.
             </div>
           )}
@@ -545,22 +545,22 @@ function EditPanel({
     return (
       <div className={panelClass}>
         <div className={sectionHead}>Article Sections</div>
-        <p className="mb-4 text-xs font-medium text-[#64748b]">
+        <p className="mb-4 text-xs font-medium text-[#64748b] dark:text-[#a1a1aa]">
           {workingCopy.sections.length} sections — scroll to find and edit each section
         </p>
         <div className="grid gap-5 max-h-[580px] overflow-y-auto pr-1">
           {workingCopy.sections.map((section, index) => (
-            <div key={section.id || index} className="grid gap-3 rounded-xl border border-blue-100 bg-[#f8fbff] p-4">
-              <div className="text-[11px] font-black text-[#1677f2]">Section {index + 1}</div>
+            <div key={section.id || index} className="grid gap-3 rounded-xl border border-blue-100 bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+              <div className="text-[11px] font-black text-[#1677f2] dark:text-[#4f9dfb]">Section {index + 1}</div>
               <EditField label="Section Title" value={section.title || ""}
                 onChange={(v) => onUpdateSection(index, "title", v)} maxLength={200} />
               <EditField label="Section Content" value={section.body || ""}
                 onChange={(v) => onUpdateSection(index, "body", v)} multiline rows={5} />
-              <div className="grid gap-2 rounded-xl border border-blue-100 bg-white p-3">
-                <div className="text-[10px] font-black uppercase tracking-[0.10em] text-[#64748b]">Section Image (optional)</div>
+              <div className="grid gap-2 rounded-xl border border-blue-100 bg-white p-3 dark:bg-[#141417] dark:border-[#27272b]">
+                <div className="text-[10px] font-black uppercase tracking-[0.10em] text-[#64748b] dark:text-[#a1a1aa]">Section Image (optional)</div>
                 {section.image?.url ? (
                   <>
-                    <div className="overflow-hidden rounded-xl border border-blue-100">
+                    <div className="overflow-hidden rounded-xl border border-blue-100 dark:border-[#27272b]">
                       <img src={section.image.url} alt={section.image.alt || ""} className="h-28 w-full object-cover" />
                     </div>
                     <div className="flex gap-2">
@@ -569,7 +569,7 @@ function EditPanel({
                         Change
                       </button>
                       <button type="button" onClick={() => onRemoveSectionImage(index)}
-                        className="rounded-xl border border-red-200 bg-red-50 px-2.5 py-1.5 text-[10px] font-black text-red-600 hover:bg-red-100 transition-colors">
+                        className="rounded-xl border border-red-200 bg-red-50 px-2.5 py-1.5 text-[10px] font-black text-red-600 hover:bg-red-100 transition-colors dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">
                         Remove
                       </button>
                     </div>
@@ -582,7 +582,7 @@ function EditPanel({
                   </>
                 ) : (
                   <button type="button" onClick={() => onOpenSectionImagePicker(index)}
-                    className="rounded-xl border border-dashed border-blue-200 bg-blue-50 px-3 py-2 text-[10px] font-black text-[#1677f2] hover:bg-blue-100 transition-colors">
+                    className="rounded-xl border border-dashed border-blue-200 bg-blue-50 px-3 py-2 text-[10px] font-black text-[#1677f2] hover:bg-blue-100 transition-colors dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#4f9dfb]">
                     + Add Image
                   </button>
                 )}
@@ -598,11 +598,11 @@ function EditPanel({
     return (
       <div className={panelClass}>
         <div className={sectionHead}>CTA Cards</div>
-        <p className="mb-4 text-xs font-medium text-[#64748b]">{workingCopy.ctaCards.length} cards</p>
+        <p className="mb-4 text-xs font-medium text-[#64748b] dark:text-[#a1a1aa]">{workingCopy.ctaCards.length} cards</p>
         <div className="grid gap-5">
           {workingCopy.ctaCards.map((card, index) => (
-            <div key={index} className="grid gap-3 rounded-xl border border-blue-100 bg-[#f8fbff] p-4">
-              <div className="text-[11px] font-black text-[#1677f2]">Card {index + 1}</div>
+            <div key={index} className="grid gap-3 rounded-xl border border-blue-100 bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+              <div className="text-[11px] font-black text-[#1677f2] dark:text-[#4f9dfb]">Card {index + 1}</div>
               <EditField label="Title" value={card.title}
                 onChange={(v) => onUpdateCtaCard(index, "title", v)} maxLength={100} />
               <EditField label="Description" value={card.description || ""}
@@ -616,7 +616,7 @@ function EditPanel({
             </div>
           ))}
           {workingCopy.ctaCards.length === 0 && (
-            <div className="rounded-xl border border-dashed border-blue-200 bg-blue-50 p-6 text-center text-sm font-semibold text-[#64748b]">
+            <div className="rounded-xl border border-dashed border-blue-200 bg-blue-50 p-6 text-center text-sm font-semibold text-[#64748b] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#a1a1aa]">
               No CTA cards found.
             </div>
           )}
@@ -629,7 +629,7 @@ function EditPanel({
     return (
       <div className={panelClass}>
         <div className={sectionHead}>SEO & Settings</div>
-        <p className="mb-5 text-sm font-medium text-[#64748b]">
+        <p className="mb-5 text-sm font-medium text-[#64748b] dark:text-[#a1a1aa]">
           SEO fields are available in the SEO & Settings tab.
         </p>
         <button type="button" onClick={onSwitchToSeo}
@@ -645,9 +645,9 @@ function EditPanel({
   return (
     <div className={panelClass}>
       <div className={sectionHead}>{block?.label}</div>
-      <div className="mt-4 rounded-xl border border-dashed border-blue-200 bg-blue-50 p-8 text-center">
-        <div className="text-sm font-black text-[#1677f2]">Coming Soon</div>
-        <p className="mt-2 text-xs font-medium text-[#64748b]">
+      <div className="mt-4 rounded-xl border border-dashed border-blue-200 bg-blue-50 p-8 text-center dark:bg-[#1c1c20] dark:border-[#27272b]">
+        <div className="text-sm font-black text-[#1677f2] dark:text-[#4f9dfb]">Coming Soon</div>
+        <p className="mt-2 text-xs font-medium text-[#64748b] dark:text-[#a1a1aa]">
           Editing this section will be available in a future update.
         </p>
       </div>
@@ -694,14 +694,14 @@ function Inspector({
   })();
 
   return (
-    <aside className="rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.07)]">
-      <div className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1677f2]">Section Details</div>
-      <h2 className="mt-2 text-xl font-black tracking-tight text-[#120b45]">{block.label}</h2>
-      <p className="mt-1 text-sm font-medium leading-6 text-[#64748b]">{block.description}</p>
+    <aside className="rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.07)] dark:bg-[#141417] dark:border-[#27272b]">
+      <div className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1677f2] dark:text-[#4f9dfb]">Section Details</div>
+      <h2 className="mt-2 text-xl font-black tracking-tight text-[#120b45] dark:text-[#fafafa]">{block.label}</h2>
+      <p className="mt-1 text-sm font-medium leading-6 text-[#64748b] dark:text-[#a1a1aa]">{block.description}</p>
       <div className="mt-5 grid gap-3">
         {details.map((d) => <DetailRow key={d.label} label={d.label} value={d.value} />)}
       </div>
-      <div className="mt-5 rounded-xl border border-blue-100 bg-blue-50 p-3 text-xs font-bold leading-5 text-[#1677f2]">
+      <div className="mt-5 rounded-xl border border-blue-100 bg-blue-50 p-3 text-xs font-bold leading-5 text-[#1677f2] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#4f9dfb]">
         Working Copy — changes here save to pending only. The live page is unchanged.
       </div>
     </aside>
@@ -717,22 +717,22 @@ function VisualPreview({
 }) {
   const firstSections = page.sections.slice(0, 5);
   return (
-    <div className="rounded-[28px] border border-blue-100 bg-[#f6f9ff] p-4 md:p-6">
-      <div className="overflow-hidden rounded-[24px] border border-blue-100 bg-white shadow-[0_20px_60px_rgba(0,80,140,0.08)]">
+    <div className="rounded-[28px] border border-blue-100 bg-[#f6f9ff] p-4 md:p-6 dark:bg-[#141417] dark:border-[#27272b]">
+      <div className="overflow-hidden rounded-[24px] border border-blue-100 bg-white shadow-[0_20px_60px_rgba(0,80,140,0.08)] dark:bg-[#141417] dark:border-[#27272b]">
         <div className="bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)] p-5 md:p-7">
           <BlockShell blockKey="hero" activeBlock={activeBlock} onSelect={onSelect} label="Hero Section">
             <div className="flex flex-wrap gap-2">
               {page.badges.slice(0, 6).map((badge) => (
-                <span key={badge.label} className="rounded-full border border-blue-100 bg-white px-3 py-1 text-[11px] font-black text-[#1677f2]">{badge.label}</span>
+                <span key={badge.label} className="rounded-full border border-blue-100 bg-white px-3 py-1 text-[11px] font-black text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">{badge.label}</span>
               ))}
             </div>
-            <h1 className="mt-4 text-3xl font-black leading-tight tracking-tight text-[#120b45]">{page.hero?.title || page.title}</h1>
-            <p className="mt-3 max-w-3xl text-sm font-medium leading-6 text-[#475569]">{page.hero?.description || page.summary}</p>
+            <h1 className="mt-4 text-3xl font-black leading-tight tracking-tight text-[#120b45] dark:text-[#fafafa]">{page.hero?.title || page.title}</h1>
+            <p className="mt-3 max-w-3xl text-sm font-medium leading-6 text-[#475569] dark:text-[#a1a1aa]">{page.hero?.description || page.summary}</p>
             {page.hero?.trustLine && (
-              <div className="mt-4 rounded-xl border border-blue-100 bg-white/80 p-3 text-sm font-bold text-[#0a1628]">{page.hero.trustLine}</div>
+              <div className="mt-4 rounded-xl border border-blue-100 bg-white/80 p-3 text-sm font-bold text-[#0a1628] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{page.hero.trustLine}</div>
             )}
             {page.heroImage?.url && (
-              <div className="mt-4 overflow-hidden rounded-xl border border-blue-100">
+              <div className="mt-4 overflow-hidden rounded-xl border border-blue-100 dark:border-[#27272b]">
                 <img src={page.heroImage.url} alt={page.heroImage.alt || ""} className="h-36 w-full object-cover" />
               </div>
             )}
@@ -741,19 +741,19 @@ function VisualPreview({
         <div className="grid gap-4 p-5 md:p-7 xl:grid-cols-[minmax(0,1fr)_300px]">
           <div className="space-y-4">
             <BlockShell blockKey="summary" activeBlock={activeBlock} onSelect={onSelect} label="Summary">
-              <p className="text-sm font-medium leading-7 text-[#334155]">{previewText(page.summary, 360)}</p>
+              <p className="text-sm font-medium leading-7 text-[#334155] dark:text-[#a1a1aa]">{previewText(page.summary, 360)}</p>
             </BlockShell>
             <BlockShell blockKey="article-sections" activeBlock={activeBlock} onSelect={onSelect} label="Article Sections">
               <div className="grid gap-3">
                 {firstSections.map((section, index) => (
-                  <div key={`${section.id || section.title}-${index}`} className="rounded-xl border border-blue-100 bg-[#f8fbff] p-4">
-                    <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b]">Section {index + 1}</div>
-                    <div className="mt-1 text-base font-black text-[#0a1628]">{section.title || `Section ${index + 1}`}</div>
-                    <p className="mt-2 text-sm font-medium leading-6 text-[#64748b]">{previewText(section.body || "", 160)}</p>
+                  <div key={`${section.id || section.title}-${index}`} className="rounded-xl border border-blue-100 bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+                    <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">Section {index + 1}</div>
+                    <div className="mt-1 text-base font-black text-[#0a1628] dark:text-[#fafafa]">{section.title || `Section ${index + 1}`}</div>
+                    <p className="mt-2 text-sm font-medium leading-6 text-[#64748b] dark:text-[#a1a1aa]">{previewText(section.body || "", 160)}</p>
                   </div>
                 ))}
                 {page.sections.length > firstSections.length && (
-                  <div className="rounded-xl border border-dashed border-blue-200 bg-white p-4 text-sm font-bold text-[#1677f2]">
+                  <div className="rounded-xl border border-dashed border-blue-200 bg-white p-4 text-sm font-bold text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
                     {page.sections.length - firstSections.length} more sections in this guide
                   </div>
                 )}
@@ -762,7 +762,7 @@ function VisualPreview({
             <BlockShell blockKey="cta-cards" activeBlock={activeBlock} onSelect={onSelect} label="CTA Cards">
               <div className="grid gap-3 md:grid-cols-2">
                 {page.ctaCards.map((card) => (
-                  <div key={card.title} className="rounded-xl border border-blue-100 bg-[#0a1628] p-4 text-white">
+                  <div key={card.title} className="rounded-xl border border-blue-100 bg-[#0a1628] dark:bg-[#1c1c20] p-4 text-white dark:border-[#27272b]">
                     <div className="text-sm font-black">{card.title}</div>
                     <p className="mt-2 text-xs font-medium leading-5 text-blue-100">{card.description}</p>
                   </div>
@@ -774,9 +774,9 @@ function VisualPreview({
             <BlockShell blockKey="quick-facts" activeBlock={activeBlock} onSelect={onSelect} label="Quick Facts">
               <div className="grid gap-2">
                 {page.quickFacts.slice(0, 6).map((fact) => (
-                  <div key={fact.label} className="rounded-xl border border-blue-100 bg-[#f8fbff] p-3">
-                    <div className="text-[10px] font-black uppercase tracking-[0.12em] text-[#64748b]">{fact.label}</div>
-                    <div className="mt-1 text-sm font-black text-[#0a1628]">{fact.value}</div>
+                  <div key={fact.label} className="rounded-xl border border-blue-100 bg-[#f8fbff] p-3 dark:bg-[#141417] dark:border-[#27272b]">
+                    <div className="text-[10px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">{fact.label}</div>
+                    <div className="mt-1 text-sm font-black text-[#0a1628] dark:text-[#fafafa]">{fact.value}</div>
                   </div>
                 ))}
               </div>
@@ -784,9 +784,9 @@ function VisualPreview({
             <BlockShell blockKey="related-pages" activeBlock={activeBlock} onSelect={onSelect} label="Related Pages">
               <div className="space-y-2">
                 {page.relatedPages.slice(0, 4).map((related) => (
-                  <div key={related.href} className="rounded-xl border border-blue-100 bg-white p-3">
-                    <div className="text-sm font-black text-[#0a1628]">{related.title}</div>
-                    <div className="mt-1 text-xs font-bold text-[#1677f2]">{related.category || "Related"}</div>
+                  <div key={related.href} className="rounded-xl border border-blue-100 bg-white p-3 dark:bg-[#141417] dark:border-[#27272b]">
+                    <div className="text-sm font-black text-[#0a1628] dark:text-[#fafafa]">{related.title}</div>
+                    <div className="mt-1 text-xs font-bold text-[#1677f2] dark:text-[#4f9dfb]">{related.category || "Related"}</div>
                   </div>
                 ))}
               </div>
@@ -794,17 +794,17 @@ function VisualPreview({
             <BlockShell blockKey="source-references" activeBlock={activeBlock} onSelect={onSelect} label="Source References">
               <div className="space-y-2">
                 {page.sourceReferences.length ? page.sourceReferences.map((source) => (
-                  <div key={`${source.title}-${source.url}`} className="rounded-xl border border-blue-100 bg-[#f8fbff] p-3 text-sm font-bold text-[#0a1628]">
+                  <div key={`${source.title}-${source.url}`} className="rounded-xl border border-blue-100 bg-[#f8fbff] p-3 text-sm font-bold text-[#0a1628] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">
                     {source.title}
                   </div>
                 )) : (
-                  <div className="text-sm font-semibold text-[#64748b]">No source references shown.</div>
+                  <div className="text-sm font-semibold text-[#64748b] dark:text-[#a1a1aa]">No source references shown.</div>
                 )}
               </div>
             </BlockShell>
             <BlockShell blockKey="seo" activeBlock={activeBlock} onSelect={onSelect} label="SEO">
-              <div className="text-sm font-black text-[#0a1628]">{page.seoTitle || page.title}</div>
-              <p className="mt-2 text-xs font-medium leading-5 text-[#64748b]">{previewText(page.seoDescription, 160)}</p>
+              <div className="text-sm font-black text-[#0a1628] dark:text-[#fafafa]">{page.seoTitle || page.title}</div>
+              <p className="mt-2 text-xs font-medium leading-5 text-[#64748b] dark:text-[#a1a1aa]">{previewText(page.seoDescription, 160)}</p>
             </BlockShell>
           </div>
         </div>
@@ -828,45 +828,45 @@ function StructureTab({
     <div className="grid gap-6">
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">Content Structure</div>
-          <p className="mt-1 text-sm font-medium text-[#64748b]">
+          <div className="text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">Content Structure</div>
+          <p className="mt-1 text-sm font-medium text-[#64748b] dark:text-[#a1a1aa]">
             Edit all sections and quick facts. Save Pending Changes when ready.
           </p>
         </div>
         {isDirty && (
           <button type="button" onClick={onReset}
-            className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-black text-amber-700 transition hover:bg-amber-100">
+            className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-black text-amber-700 transition hover:bg-amber-100 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]">
             Reset Unsaved Changes
           </button>
         )}
       </div>
 
       {/* Summary */}
-      <div className="rounded-2xl border border-blue-100 bg-white p-5">
-        <div className="mb-4 text-xs font-black uppercase tracking-[0.12em] text-[#1677f2]">Page Summary</div>
+      <div className="rounded-2xl border border-blue-100 bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+        <div className="mb-4 text-xs font-black uppercase tracking-[0.12em] text-[#1677f2] dark:text-[#4f9dfb]">Page Summary</div>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
           {[
             ["Sections", `${workingCopy.sections.length}`],
             ["Quick Facts", `${workingCopy.quickFacts.length}`],
             ["CTA Cards", `${workingCopy.ctaCards.length}`],
           ].map(([label, value]) => (
-            <div key={label} className="rounded-xl border border-blue-100 bg-[#f8fbff] p-3">
-              <div className="text-[10px] font-black uppercase tracking-[0.12em] text-[#64748b]">{label}</div>
-              <div className="mt-1 text-xl font-black text-[#0a1628]">{value}</div>
+            <div key={label} className="rounded-xl border border-blue-100 bg-[#f8fbff] p-3 dark:bg-[#141417] dark:border-[#27272b]">
+              <div className="text-[10px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">{label}</div>
+              <div className="mt-1 text-xl font-black text-[#0a1628] dark:text-[#fafafa]">{value}</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Article Sections */}
-      <div className="rounded-2xl border border-blue-100 bg-white p-5">
-        <div className="mb-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">
+      <div className="rounded-2xl border border-blue-100 bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+        <div className="mb-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">
           Article Sections ({workingCopy.sections.length})
         </div>
         <div className="grid gap-5 max-h-[700px] overflow-y-auto pr-1">
           {workingCopy.sections.map((section, index) => (
-            <div key={section.id || index} className="grid gap-3 rounded-xl border border-blue-100 bg-[#f8fbff] p-4">
-              <div className="text-xs font-black text-[#1677f2]">Section {index + 1}</div>
+            <div key={section.id || index} className="grid gap-3 rounded-xl border border-blue-100 bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+              <div className="text-xs font-black text-[#1677f2] dark:text-[#4f9dfb]">Section {index + 1}</div>
               <EditField label="Section Title" value={section.title || ""}
                 onChange={(v) => onUpdateSection(index, "title", v)} maxLength={200} />
               <EditField label="Section Content" value={section.body || ""}
@@ -877,14 +877,14 @@ function StructureTab({
       </div>
 
       {/* Quick Facts */}
-      <div className="rounded-2xl border border-blue-100 bg-white p-5">
-        <div className="mb-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">
+      <div className="rounded-2xl border border-blue-100 bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+        <div className="mb-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">
           Quick Facts ({workingCopy.quickFacts.length})
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {workingCopy.quickFacts.map((fact, index) => (
-            <div key={index} className="grid gap-3 rounded-xl border border-blue-100 bg-[#f8fbff] p-4">
-              <div className="text-[10px] font-black text-[#1677f2]">Fact {index + 1}</div>
+            <div key={index} className="grid gap-3 rounded-xl border border-blue-100 bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+              <div className="text-[10px] font-black text-[#1677f2] dark:text-[#4f9dfb]">Fact {index + 1}</div>
               <EditField label="Label" value={fact.label}
                 onChange={(v) => onUpdateQuickFact(index, "label", v)} maxLength={100} />
               <EditField label="Value" value={fact.value}
@@ -909,8 +909,8 @@ function SeoTab({
 }) {
   return (
     <div className="grid gap-5">
-      <div className="rounded-2xl border border-blue-100 bg-white p-5">
-        <div className="mb-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">Search Engine Settings</div>
+      <div className="rounded-2xl border border-blue-100 bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+        <div className="mb-5 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">Search Engine Settings</div>
         <div className="grid gap-5">
           <EditField label="SEO Title" value={workingCopy.seoTitle}
             onChange={(v) => onUpdateSeo("seoTitle", v)} maxLength={100}
@@ -935,7 +935,7 @@ function SeoTab({
         <DetailRow label="Last Updated" value={formatDate(page.updatedAt)} />
       </div>
       {!canEdit && (
-        <div className="rounded-xl border border-blue-100 bg-blue-50 p-4 text-sm font-bold text-[#1677f2]">
+        <div className="rounded-xl border border-blue-100 bg-blue-50 p-4 text-sm font-bold text-[#1677f2] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#4f9dfb]">
           You can view this page, but you do not have permission to save changes.
         </div>
       )}
@@ -965,10 +965,10 @@ function DesignPreview({ workingCopy }: { workingCopy: PublicContentWorkingCopy 
   const firstSection = workingCopy.sections[0];
   const sectionDesign = normaliseSectionDesign(firstSection?.design);
   const accentClass: Record<PublicContentAccentPreset, string> = {
-    navy: "border-[#1677f2] bg-[#f5fbff]",
-    gold: "border-amber-200 bg-amber-50",
-    emerald: "border-emerald-200 bg-emerald-50",
-    slate: "border-slate-200 bg-slate-50",
+    navy: "border-[#1677f2] bg-[#f5fbff] dark:bg-[#141417]",
+    gold: "border-amber-200 bg-amber-50 dark:bg-[#2a2113] dark:border-[#4a3a1a]",
+    emerald: "border-emerald-200 bg-emerald-50 dark:bg-[#132a20] dark:border-[#1d4a37]",
+    slate: "border-slate-200 bg-slate-50 dark:bg-[#141417] dark:border-[#27272b]",
   };
   const cardClass: Record<PublicContentCardStyle, string> = {
     flat: "shadow-none",
@@ -976,15 +976,15 @@ function DesignPreview({ workingCopy }: { workingCopy: PublicContentWorkingCopy 
     bordered: "border-2",
   };
   const sectionClass: Record<PublicContentSectionStylePreset, string> = {
-    standard: "bg-white",
+    standard: "bg-white dark:bg-[#141417]",
     highlight: "border-l-4",
-    soft_card: "bg-white shadow-[0_12px_28px_rgba(0,80,140,0.08)]",
+    soft_card: "bg-white shadow-[0_12px_28px_rgba(0,80,140,0.08)] dark:bg-[#141417]",
   };
   return (
     <div className={`rounded-2xl border p-4 ${accentClass[design.accentPreset]} ${cardClass[design.cardStyle]}`}>
-      <div className="mb-3 flex flex-wrap gap-2 text-[10px] font-black uppercase tracking-[0.12em] text-[#1677f2]">
-        <span className="rounded-full bg-white px-2.5 py-1">Live page unchanged</span>
-        <span className="rounded-full bg-white px-2.5 py-1">Design changes will appear after approval</span>
+      <div className="mb-3 flex flex-wrap gap-2 text-[10px] font-black uppercase tracking-[0.12em] text-[#1677f2] dark:text-[#4f9dfb]">
+        <span className="rounded-full bg-white px-2.5 py-1 dark:bg-[#141417]">Live page unchanged</span>
+        <span className="rounded-full bg-white px-2.5 py-1 dark:bg-[#141417]">Design changes will appear after approval</span>
       </div>
       <div className={design.heroLayout === "image_right" ? "grid gap-4 md:grid-cols-[minmax(0,1fr)_180px]" : "grid gap-4"}>
         {workingCopy.heroImage?.url && design.heroLayout !== "text_only" && (
@@ -993,20 +993,20 @@ function DesignPreview({ workingCopy }: { workingCopy: PublicContentWorkingCopy 
           </div>
         )}
         <div>
-          <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b]">Preview</div>
-          <h3 className={`mt-2 text-2xl font-black text-[#120b45] ${design.headingStyle === "modern" ? "tracking-normal" : "tracking-tight"}`}>
+          <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">Preview</div>
+          <h3 className={`mt-2 text-2xl font-black text-[#120b45]  dark:text-[#fafafa] ${design.headingStyle === "modern" ? "tracking-normal" : "tracking-tight"}`}>
             {workingCopy.hero?.title || workingCopy.title}
           </h3>
-          <p className={`mt-2 font-medium text-[#475569] ${design.textScale === "large" ? "text-base leading-8" : "text-sm leading-6"}`}>
+          <p className={`mt-2 font-medium text-[#475569]  dark:text-[#a1a1aa] ${design.textScale === "large" ? "text-base leading-8" : "text-sm leading-6"}`}>
             {previewText(workingCopy.summary, 220)}
           </p>
         </div>
       </div>
       {firstSection && (
         <div className={`${design.sectionSpacing === "spacious" ? "mt-6" : "mt-4"} rounded-xl border p-4 ${accentClass[design.accentPreset]} ${sectionClass[sectionDesign.stylePreset]}`}>
-          <div className="text-[10px] font-black uppercase tracking-[0.12em] text-[#64748b]">Article Section</div>
-          <div className="mt-1 text-base font-black text-[#0a1628]">{firstSection.title || "Section preview"}</div>
-          <p className={`mt-2 font-medium text-[#64748b] ${design.textScale === "large" ? "text-sm leading-7" : "text-xs leading-5"}`}>
+          <div className="text-[10px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">Article Section</div>
+          <div className="mt-1 text-base font-black text-[#0a1628] dark:text-[#fafafa]">{firstSection.title || "Section preview"}</div>
+          <p className={`mt-2 font-medium text-[#64748b]  dark:text-[#a1a1aa] ${design.textScale === "large" ? "text-sm leading-7" : "text-xs leading-5"}`}>
             {previewText(firstSection.body || "", 150)}
           </p>
         </div>
@@ -1032,14 +1032,14 @@ function DesignTab({
   return (
     <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
       <div className="grid gap-5">
-        <div className="rounded-2xl border border-blue-100 bg-white p-5">
-          <div className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1677f2]">Design & Layout</div>
-          <p className="mt-2 text-sm font-bold text-[#64748b]">
+        <div className="rounded-2xl border border-blue-100 bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+          <div className="text-[11px] font-black uppercase tracking-[0.14em] text-[#1677f2] dark:text-[#4f9dfb]">Design & Layout</div>
+          <p className="mt-2 text-sm font-bold text-[#64748b] dark:text-[#a1a1aa]">
             Use approved brand presets only. Live page unchanged. Design changes will appear after approval.
           </p>
         </div>
-        <div className="rounded-2xl border border-blue-100 bg-white p-5">
-          <div className="mb-4 text-[13px] font-black text-[#0a1628]">Page Style</div>
+        <div className="rounded-2xl border border-blue-100 bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
+          <div className="mb-4 text-[13px] font-black text-[#0a1628] dark:text-[#fafafa]">Page Style</div>
           <div className="grid gap-5">
             <PresetGroup label="Theme Preset" value={design.themePreset} options={PAGE_DESIGN_OPTIONS.themePreset} labels={PAGE_DESIGN_LABELS.themePreset} onChange={(value) => onUpdatePageDesign("themePreset", value)} disabled={!canEdit} />
             <PresetGroup label="Brand Accent" value={design.accentPreset} options={PAGE_DESIGN_OPTIONS.accentPreset} labels={PAGE_DESIGN_LABELS.accentPreset} onChange={(value) => onUpdatePageDesign("accentPreset", value)} disabled={!canEdit} />
@@ -1050,14 +1050,14 @@ function DesignTab({
             <PresetGroup label="Hero Layout" value={design.heroLayout} options={PAGE_DESIGN_OPTIONS.heroLayout} labels={PAGE_DESIGN_LABELS.heroLayout} onChange={(value) => onUpdatePageDesign("heroLayout", value)} disabled={!canEdit} />
           </div>
         </div>
-        <div className="rounded-2xl border border-blue-100 bg-white p-5">
+        <div className="rounded-2xl border border-blue-100 bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
           <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
-              <div className="text-[13px] font-black text-[#0a1628]">Selected Article Section</div>
-              <p className="mt-1 text-xs font-bold text-[#64748b]">Section-level presets are optional and limited.</p>
+              <div className="text-[13px] font-black text-[#0a1628] dark:text-[#fafafa]">Selected Article Section</div>
+              <p className="mt-1 text-xs font-bold text-[#64748b] dark:text-[#a1a1aa]">Section-level presets are optional and limited.</p>
             </div>
             <select value={sectionIndex} onChange={(e) => onSelectSection(Number(e.target.value))}
-              className="rounded-xl border border-blue-100 bg-[#f8fbff] px-3 py-2 text-sm font-bold text-[#0a1628] outline-none focus:border-[#1677f2]">
+              className="rounded-xl border border-blue-100 bg-[#f8fbff] px-3 py-2 text-sm font-bold text-[#0a1628] outline-none focus:border-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">
               {workingCopy.sections.map((item, index) => (
                 <option key={item.id || index} value={index}>{index + 1}. {item.title || `Section ${index + 1}`}</option>
               ))}
@@ -1069,17 +1069,17 @@ function DesignTab({
               <PresetGroup label="Image Position" value={sectionDesign.imagePosition} options={SECTION_DESIGN_OPTIONS.imagePosition} labels={SECTION_DESIGN_LABELS.imagePosition} onChange={(value) => onUpdateSectionDesign(sectionIndex, "imagePosition", value)} disabled={!canEdit} />
             </div>
           ) : (
-            <div className="rounded-xl border border-dashed border-blue-200 bg-blue-50 p-5 text-sm font-bold text-[#64748b]">No article sections available.</div>
+            <div className="rounded-xl border border-dashed border-blue-200 bg-blue-50 p-5 text-sm font-bold text-[#64748b] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#a1a1aa]">No article sections available.</div>
           )}
         </div>
         {!canEdit && (
-          <div className="rounded-xl border border-blue-100 bg-blue-50 p-4 text-sm font-bold text-[#1677f2]">
+          <div className="rounded-xl border border-blue-100 bg-blue-50 p-4 text-sm font-bold text-[#1677f2] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#4f9dfb]">
             You can view design controls, but you do not have permission to save changes.
           </div>
         )}
       </div>
-      <div className="rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)]">
-        <div className="mb-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">Local Preview</div>
+      <div className="rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+        <div className="mb-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">Local Preview</div>
         <DesignPreview workingCopy={workingCopy} />
       </div>
     </div>
@@ -1482,10 +1482,10 @@ export default function PublicContentVisualEditorClient({
   // ─── Access gate ────────────────────────────────────────────────────────────
   if (!canView) {
     return (
-      <div className="min-h-[60vh] bg-[#f6f9ff] p-6">
-        <div className="rounded-2xl border border-blue-100 bg-white p-8 shadow-sm">
-          <h1 className="text-2xl font-black text-[#120b45]">Visual Editor</h1>
-          <p className="mt-2 text-sm font-medium text-[#64748b]">You do not have access to view this page.</p>
+      <div className="min-h-[60vh] bg-[#f6f9ff] p-6 dark:bg-[#141417]">
+        <div className="rounded-2xl border border-blue-100 bg-white p-8 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
+          <h1 className="text-2xl font-black text-[#120b45] dark:text-[#fafafa]">Visual Editor</h1>
+          <p className="mt-2 text-sm font-medium text-[#64748b] dark:text-[#a1a1aa]">You do not have access to view this page.</p>
         </div>
       </div>
     );
@@ -1493,7 +1493,7 @@ export default function PublicContentVisualEditorClient({
 
   // ─── Render ─────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#f6f9ff] p-5 md:p-6">
+    <div className="min-h-screen bg-[#f6f9ff] p-5 md:p-6 dark:bg-[#141417]">
       {pickerFor !== null && (
         <MediaPickerModal
           onSelect={handlePickerSelect}
@@ -1503,42 +1503,42 @@ export default function PublicContentVisualEditorClient({
       <div className="mx-auto max-w-[1540px]">
 
         {/* ── Header ─────────────────────────────────────────────────────────── */}
-        <div className="mb-5 flex flex-col gap-4 rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)] xl:flex-row xl:items-center xl:justify-between">
+        <div className="mb-5 flex flex-col gap-4 rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)] xl:flex-row xl:items-center xl:justify-between dark:bg-[#141417] dark:border-[#27272b]">
           <div>
-            <div className="text-xs font-black uppercase tracking-[0.14em] text-[#1677f2]">
+            <div className="text-xs font-black uppercase tracking-[0.14em] text-[#1677f2] dark:text-[#4f9dfb]">
               Public Content Pages › {page?.title || "Content Page"}
             </div>
-            <h1 className="mt-2 text-[28px] font-black tracking-tight text-[#120b45]">Visual Editor</h1>
+            <h1 className="mt-2 text-[28px] font-black tracking-tight text-[#120b45] dark:text-[#fafafa]">Visual Editor</h1>
             <div className="mt-3 flex flex-wrap items-center gap-2">
-              <span className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-black text-[#1677f2]">
+              <span className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-black text-[#1677f2] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#4f9dfb]">
                 Published
               </span>
               {hasPendingChanges && (
-                <span className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-black text-amber-700">
+                <span className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-black text-amber-700 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]">
                   Pending Changes
                 </span>
               )}
               {isDirty && (
-                <span className="rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-xs font-black text-orange-600">
+                <span className="rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-xs font-black text-orange-600 dark:bg-[#2a1d13] dark:text-[#fdba74] dark:border-[#4a3320]">
                   Unsaved Changes
                 </span>
               )}
-              <span className="rounded-full border border-blue-100 bg-[#f8fbff] px-3 py-1 text-xs font-bold text-[#334155]">
+              <span className="rounded-full border border-blue-100 bg-[#f8fbff] px-3 py-1 text-xs font-bold text-[#334155] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                 {fullPath}
               </span>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
             <Link href="/admin/content-pages"
-              className="rounded-xl border border-blue-100 bg-white px-4 py-2.5 text-sm font-black text-[#1677f2] transition hover:border-[#1677f2]">
+              className="rounded-xl border border-blue-100 bg-white px-4 py-2.5 text-sm font-black text-[#1677f2] transition hover:border-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
               Back to Content Pages
             </Link>
             <a href={fullPath} target="_blank" rel="noopener noreferrer"
-              className="rounded-xl border border-blue-100 bg-white px-4 py-2.5 text-sm font-black text-[#0a1628] transition hover:border-[#1677f2]">
+              className="rounded-xl border border-blue-100 bg-white px-4 py-2.5 text-sm font-black text-[#0a1628] transition hover:border-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">
               Open Live Page
             </a>
             <button type="button" onClick={() => setActiveTab("visual")}
-              className="rounded-xl border border-blue-100 bg-[#f8fbff] px-4 py-2.5 text-sm font-black text-[#0a1628] transition hover:border-[#1677f2]">
+              className="rounded-xl border border-blue-100 bg-[#f8fbff] px-4 py-2.5 text-sm font-black text-[#0a1628] transition hover:border-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">
               Preview Working Copy
             </button>
             {canEdit ? (
@@ -1549,13 +1549,13 @@ export default function PublicContentVisualEditorClient({
                 </button>
                 {hasPendingChanges && (
                   <button type="button" onClick={handleDiscard} disabled={discarding}
-                    className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-black text-red-600 transition hover:bg-red-100 disabled:opacity-60">
+                    className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-black text-red-600 transition hover:bg-red-100 disabled:opacity-60 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">
                     {discarding ? "Discarding…" : "Discard Pending Changes"}
                   </button>
                 )}
               </>
             ) : (
-              <span className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-black text-slate-500">
+              <span className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-black text-slate-500 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">
                 Coming Soon
               </span>
             )}
@@ -1566,14 +1566,14 @@ export default function PublicContentVisualEditorClient({
                   {approving ? "Approving…" : "Approve Changes"}
                 </button>
                 <button type="button" onClick={() => { setShowRejectPanel((v) => !v); setSaveMessage(null); }}
-                  className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-black text-red-700 transition hover:bg-red-100">
+                  className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-black text-red-700 transition hover:bg-red-100 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">
                   Reject Changes
                 </button>
               </>
             )}
             {canDelete && !!page && (
               <button type="button" onClick={handleMoveToRecycleBin} disabled={deleting}
-                className="rounded-xl border border-red-300 bg-red-50 px-4 py-2.5 text-sm font-black text-red-700 transition hover:bg-red-100 disabled:opacity-60 disabled:cursor-not-allowed">
+                className="rounded-xl border border-red-300 bg-red-50 px-4 py-2.5 text-sm font-black text-red-700 transition hover:bg-red-100 disabled:opacity-60 disabled:cursor-not-allowed dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">
                 {deleting ? "Moving…" : "Move to Recycle Bin"}
               </button>
             )}
@@ -1584,8 +1584,8 @@ export default function PublicContentVisualEditorClient({
         {saveMessage && (
           <div className={`mb-5 rounded-2xl border p-4 text-sm font-bold ${
             saveMessage.type === "success"
-              ? "border-green-200 bg-green-50 text-green-700"
-              : "border-red-200 bg-red-50 text-red-700"
+              ? "border-green-200 bg-green-50 text-green-700 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]"
+              : "border-red-200 bg-red-50 text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]"
           }`}>
             {saveMessage.text}
           </div>
@@ -1593,9 +1593,9 @@ export default function PublicContentVisualEditorClient({
 
         {/* ── Reject panel ────────────────────────────────────────────────────── */}
         {showRejectPanel && canPublish && hasPendingChanges && (
-          <div className="mb-5 rounded-2xl border border-red-200 bg-red-50 p-5">
-            <div className="mb-3 text-sm font-black text-red-700">Reject Pending Changes</div>
-            <p className="mb-3 text-xs font-medium text-red-600">
+          <div className="mb-5 rounded-2xl border border-red-200 bg-red-50 p-5 dark:bg-[#2a1618] dark:border-[#4a2225]">
+            <div className="mb-3 text-sm font-black text-red-700 dark:text-[#fca5a5]">Reject Pending Changes</div>
+            <p className="mb-3 text-xs font-medium text-red-600 dark:text-[#fca5a5]">
               Provide a comment explaining why these changes are being rejected. The editor will see this note.
             </p>
             <textarea
@@ -1603,7 +1603,7 @@ export default function PublicContentVisualEditorClient({
               onChange={(e) => setRejectComment(e.target.value)}
               rows={3}
               placeholder="Reason for rejection (required)"
-              className="mb-3 w-full resize-y rounded-xl border border-red-200 bg-white px-3.5 py-2.5 text-sm text-[#0a1628] outline-none focus:border-red-400"
+              className="mb-3 w-full resize-y rounded-xl border border-red-200 bg-white px-3.5 py-2.5 text-sm text-[#0a1628] outline-none focus:border-red-400 dark:bg-[#141417] dark:text-[#fafafa] dark:border-[#4a2225]"
             />
             <div className="flex flex-wrap gap-2">
               <button type="button" onClick={handleReject} disabled={rejecting || !rejectComment.trim()}
@@ -1611,7 +1611,7 @@ export default function PublicContentVisualEditorClient({
                 {rejecting ? "Rejecting…" : "Confirm Rejection"}
               </button>
               <button type="button" onClick={() => { setShowRejectPanel(false); setRejectComment(""); }}
-                className="rounded-xl border border-red-200 bg-white px-4 py-2 text-sm font-black text-red-600 transition hover:bg-red-50">
+                className="rounded-xl border border-red-200 bg-white px-4 py-2 text-sm font-black text-red-600 transition hover:bg-red-50 dark:bg-[#141417] dark:text-[#fca5a5] dark:border-[#4a2225]">
                 Cancel
               </button>
             </div>
@@ -1620,19 +1620,19 @@ export default function PublicContentVisualEditorClient({
 
         {/* ── View-only notice ────────────────────────────────────────────────── */}
         {!canEdit && !loading && page && (
-          <div className="mb-5 rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm font-bold text-[#1677f2]">
+          <div className="mb-5 rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm font-bold text-[#1677f2] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#4f9dfb]">
             You can view this page, but you do not have permission to save changes.
           </div>
         )}
 
         {/* ── Loading / Error ─────────────────────────────────────────────────── */}
         {loading && (
-          <div className="rounded-2xl border border-blue-100 bg-white p-8 text-sm font-bold text-[#64748b]">
+          <div className="rounded-2xl border border-blue-100 bg-white p-8 text-sm font-bold text-[#64748b] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
             Loading visual editor…
           </div>
         )}
         {error && !loading && (
-          <div className="rounded-2xl border border-red-100 bg-red-50 p-8 text-sm font-bold text-red-700">{error}</div>
+          <div className="rounded-2xl border border-red-100 bg-red-50 p-8 text-sm font-bold text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">{error}</div>
         )}
 
         {/* ── Main editor content ─────────────────────────────────────────────── */}
@@ -1652,14 +1652,14 @@ export default function PublicContentVisualEditorClient({
             {activeTab === "visual" && (
               <div className="grid gap-5 xl:grid-cols-[270px_minmax(0,1fr)_320px]">
                 {/* Section nav */}
-                <aside className="rounded-2xl border border-blue-100 bg-white p-4 shadow-[0_14px_36px_rgba(0,80,140,0.06)]">
-                  <div className="mb-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">Page Sections</div>
+                <aside className="rounded-2xl border border-blue-100 bg-white p-4 shadow-[0_14px_36px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+                  <div className="mb-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">Page Sections</div>
                   <div className="grid gap-2">
                     {sectionNav.map((block) => (
                       <button key={block.key} type="button" onClick={() => setActiveBlock(block.key)}
                         className={`rounded-xl border px-3 py-3 text-left transition ${chipClass(activeBlock === block.key)}`}>
                         <div className="text-sm font-black">{block.label}</div>
-                        <div className={`mt-1 text-xs font-semibold leading-4 ${activeBlock === block.key ? "text-white/80" : "text-[#64748b]"}`}>
+                        <div className={`mt-1 text-xs font-semibold leading-4 ${activeBlock === block.key ? "text-white/80" : "text-[#64748b] dark:text-[#a1a1aa]"}`}>
                           {block.description}
                         </div>
                       </button>
@@ -1697,7 +1697,7 @@ export default function PublicContentVisualEditorClient({
 
             {/* Content Structure tab */}
             {activeTab === "structure" && (
-              <div className="rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)]">
+              <div className="rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
                 {canEdit ? (
                   <StructureTab
                     workingCopy={workingCopy}
@@ -1735,7 +1735,7 @@ export default function PublicContentVisualEditorClient({
 
             {/* SEO & Settings tab */}
             {activeTab === "seo" && (
-              <div className="rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)]">
+              <div className="rounded-2xl border border-blue-100 bg-white p-5 shadow-[0_14px_36px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
                 <SeoTab
                   workingCopy={workingCopy}
                   page={page}
@@ -1747,9 +1747,9 @@ export default function PublicContentVisualEditorClient({
 
             {/* Pending Changes status bar */}
             {hasPendingChanges && (
-              <div className="mt-5 rounded-2xl border border-amber-100 bg-amber-50 p-4">
-                <div className="text-sm font-black text-amber-700">Pending Changes Awaiting Approval</div>
-                <p className="mt-1 text-xs font-medium text-amber-600">
+              <div className="mt-5 rounded-2xl border border-amber-100 bg-amber-50 p-4 dark:bg-[#2a2113] dark:border-[#4a3a1a]">
+                <div className="text-sm font-black text-amber-700 dark:text-[#fcd34d]">Pending Changes Awaiting Approval</div>
+                <p className="mt-1 text-xs font-medium text-amber-600 dark:text-[#fcd34d]">
                   {canPublish
                     ? "You can approve or reject these changes using the buttons above. The live page will update immediately on approval."
                     : "These changes are saved and waiting for review by someone with publishing access. The live page is unchanged until approved."}

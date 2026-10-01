@@ -29,16 +29,16 @@ export default function RegulatoryLandscape({ countryName, regulators }: Props) 
           {verified.map((r) => (
             <div
               key={r.name}
-              className="rounded-xl border border-[#e2edf8] bg-[#f8fbff] p-4"
+              className="rounded-xl border border-[#e2edf8] bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]"
             >
               <div className="flex items-start gap-3">
-                <Scale className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#1677f2]" aria-hidden="true" />
+                <Scale className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#1677f2] dark:text-[#4f9dfb]" aria-hidden="true" />
                 <div>
-                  <p className="text-[13px] font-bold text-[#0a1628]">
+                  <p className="text-[13px] font-bold text-[#0a1628] dark:text-[#fafafa]">
                     {r.name}{r.acronym ? ` (${r.acronym})` : ""}
                   </p>
-                  <p className="mt-0.5 text-[12px] text-[#64748b]">{r.area}</p>
-                  <p className="mt-1 text-[12px] leading-relaxed text-[#334155]">
+                  <p className="mt-0.5 text-[12px] text-[#64748b] dark:text-[#a1a1aa]">{r.area}</p>
+                  <p className="mt-1 text-[12px] leading-relaxed text-[#334155] dark:text-[#a1a1aa]">
                     {r.whenItMayApply}
                   </p>
                   {r.officialUrl && (
@@ -46,7 +46,7 @@ export default function RegulatoryLandscape({ countryName, regulators }: Props) 
                       href={r.officialUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-1 inline-block text-[11px] text-[#1677f2] hover:underline"
+                      className="mt-1 inline-block text-[11px] text-[#1677f2] hover:underline dark:text-[#4f9dfb]"
                     >
                       Official website ↗
                     </a>
@@ -57,15 +57,15 @@ export default function RegulatoryLandscape({ countryName, regulators }: Props) 
           ))}
         </div>
       ) : (
-        <div className="mt-6 rounded-xl border border-[#e2edf8] bg-[#f8fbff] p-5">
-          <p className="text-[13.5px] leading-relaxed text-[#334155]">
+        <div className="mt-6 rounded-xl border border-[#e2edf8] bg-[#f8fbff] p-5 dark:bg-[#141417] dark:border-[#27272b]">
+          <p className="text-[13.5px] leading-relaxed text-[#334155] dark:text-[#a1a1aa]">
             Country-specific regulatory mapping for {countryName} is available as part of
             a formal market-entry assessment. Enquiries are managed through our India-based
             Global Market Desk.
           </p>
         </div>
       )}
-      <p className="mt-4 text-[11.5px] leading-relaxed text-[#94a3b8]">
+      <p className="mt-4 text-[11.5px] leading-relaxed text-[#94a3b8] dark:text-[#71717a]">
         Regulatory applicability depends on the proposed business model and must be
         confirmed with qualified local professionals. Estabizz does not provide legal
         opinions on foreign law.

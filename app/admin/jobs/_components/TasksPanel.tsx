@@ -26,9 +26,9 @@ function fmt(d: Date | string | null) {
 }
 
 const PRIORITY_COLOURS: Record<string, string> = {
-  high: "text-red-600 bg-red-50 border-red-200",
-  normal: "text-[#1677f2] bg-[#eaf2ff] border-blue-200",
-  low: "text-[#64748b] bg-[#f1f5f9] border-[#dbe7f3]",
+  high: "text-red-600 bg-red-50 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]",
+  normal: "text-[#1677f2] bg-[#eaf2ff] border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#4f9dfb]",
+  low: "text-[#64748b] bg-[#f1f5f9] border-[#dbe7f3] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#a1a1aa]",
 };
 
 interface Props {
@@ -90,7 +90,7 @@ export default function TasksPanel({ entityType, entityId, initialTasks }: Props
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-[12px] font-black uppercase tracking-widest text-[#64748b]">Follow-up Tasks</h2>
+        <h2 className="text-[12px] font-black uppercase tracking-widest text-[#64748b] dark:text-[#a1a1aa]">Follow-up Tasks</h2>
         {!adding && (
           <button
             type="button"
@@ -103,9 +103,9 @@ export default function TasksPanel({ entityType, entityId, initialTasks }: Props
       </div>
 
       {adding && (
-        <div className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-4 space-y-3">
+        <div className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-4 space-y-3 dark:bg-[#141417] dark:border-[#27272b]">
           <input
-            className="w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13.5px] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none"
+            className="w-full rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13.5px] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none dark:bg-[#141417] dark:border-[#27272b]"
             placeholder="Task title…"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -115,13 +115,13 @@ export default function TasksPanel({ entityType, entityId, initialTasks }: Props
           <div className="flex gap-3">
             <input
               type="date"
-              className="rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] focus:border-[#1677f2] focus:outline-none"
+              className="rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] focus:border-[#1677f2] focus:outline-none dark:bg-[#141417] dark:border-[#27272b]"
               value={dueAt}
               onChange={(e) => setDueAt(e.target.value)}
               disabled={saving}
             />
             <select
-              className="rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] focus:border-[#1677f2] focus:outline-none"
+              className="rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] focus:border-[#1677f2] focus:outline-none dark:bg-[#141417] dark:border-[#27272b]"
               value={priority}
               onChange={(e) => setPriority(e.target.value)}
               disabled={saving}
@@ -131,7 +131,7 @@ export default function TasksPanel({ entityType, entityId, initialTasks }: Props
               <option value="high">High</option>
             </select>
           </div>
-          {error && <p className="text-[12px] font-bold text-red-600">{error}</p>}
+          {error && <p className="text-[12px] font-bold text-red-600 dark:text-[#fca5a5]">{error}</p>}
           <div className="flex gap-2">
             <button
               type="button"
@@ -144,7 +144,7 @@ export default function TasksPanel({ entityType, entityId, initialTasks }: Props
             <button
               type="button"
               onClick={() => { setAdding(false); setTitle(""); setError(null); }}
-              className="rounded-lg border border-[#dbe7f3] bg-white px-4 py-2 text-[12px] font-bold text-[#64748b]"
+              className="rounded-lg border border-[#dbe7f3] bg-white px-4 py-2 text-[12px] font-bold text-[#64748b] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
             >
               Cancel
             </button>
@@ -153,28 +153,28 @@ export default function TasksPanel({ entityType, entityId, initialTasks }: Props
       )}
 
       {tasks.length === 0 && !adding && (
-        <p className="text-[13px] text-[#94a3b8]">No tasks yet.</p>
+        <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No tasks yet.</p>
       )}
 
       {open.length > 0 && (
         <div className="space-y-2">
           {open.map((t) => (
-            <div key={t.id} className="flex items-start gap-3 rounded-xl border border-[#dbe7f3] bg-white p-3">
+            <div key={t.id} className="flex items-start gap-3 rounded-xl border border-[#dbe7f3] bg-white p-3 dark:bg-[#141417] dark:border-[#27272b]">
               <button
                 type="button"
                 onClick={() => handleComplete(t.id)}
-                className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-2 border-[#cbd5e1] hover:border-[#1677f2] transition-colors"
+                className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-2 border-[#cbd5e1] hover:border-[#1677f2] transition-colors dark:border-[#27272b]"
                 title="Mark complete"
               />
               <div className="flex-1">
-                <p className="text-[13.5px] font-bold text-[#0a1628]">{t.title}</p>
+                <p className="text-[13.5px] font-bold text-[#0a1628] dark:text-[#fafafa]">{t.title}</p>
                 <div className="mt-1 flex flex-wrap items-center gap-2 text-[11px]">
                   <span
                     className={`rounded-full border px-2 py-0.5 font-bold ${PRIORITY_COLOURS[t.priority] ?? ""}`}
                   >
                     {t.priority}
                   </span>
-                  <span className={t.dueAt && new Date(t.dueAt) < new Date() ? "font-bold text-red-600" : "text-[#94a3b8]"}>
+                  <span className={t.dueAt && new Date(t.dueAt) < new Date() ? "font-bold text-red-600 dark:text-[#fca5a5]" : "text-[#94a3b8] dark:text-[#71717a]"}>
                     Due {fmt(t.dueAt)}
                   </span>
                 </div>
@@ -185,13 +185,13 @@ export default function TasksPanel({ entityType, entityId, initialTasks }: Props
       )}
 
       {done.length > 0 && (
-        <details className="rounded-xl border border-[#dbe7f3] bg-white">
-          <summary className="cursor-pointer px-4 py-3 text-[12px] font-bold text-[#64748b]">
+        <details className="rounded-xl border border-[#dbe7f3] bg-white dark:bg-[#141417] dark:border-[#27272b]">
+          <summary className="cursor-pointer px-4 py-3 text-[12px] font-bold text-[#64748b] dark:text-[#a1a1aa]">
             {done.length} completed task{done.length !== 1 ? "s" : ""}
           </summary>
-          <div className="space-y-2 border-t border-[#dbe7f3] p-3">
+          <div className="space-y-2 border-t border-[#dbe7f3] p-3 dark:border-[#27272b]">
             {done.map((t) => (
-              <p key={t.id} className="text-[13px] text-[#94a3b8] line-through">{t.title}</p>
+              <p key={t.id} className="text-[13px] text-[#94a3b8] line-through dark:text-[#71717a]">{t.title}</p>
             ))}
           </div>
         </details>

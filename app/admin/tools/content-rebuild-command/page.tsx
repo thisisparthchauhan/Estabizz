@@ -45,17 +45,17 @@ const complianceRows = [
 
 export default function ContentRebuildCommandPage() {
     return (
-        <main className="min-h-screen bg-white">
-            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+        <main className="min-h-screen bg-white dark:bg-[#141417]">
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
-                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
-                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
-                        <Link href="/admin" className="hover:text-[#374151] transition-colors">Admin</Link><span className="opacity-40">/</span><Link href="/admin/tools" className="hover:text-[#374151] transition-colors">Internal Tools</Link><span className="opacity-40">/</span><span className="text-[#374151]">Content Rebuild Command</span>
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                        <Link href="/admin" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Admin</Link><span className="opacity-40">/</span><Link href="/admin/tools" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Internal Tools</Link><span className="opacity-40">/</span><span className="text-[#374151] dark:text-[#a1a1aa]">Content Rebuild Command</span>
                     </nav>
-                    <span className="mb-4 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">Reference Content Rebuild System</span>
-                    <h1 className="max-w-5xl text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">Content Rebuild Command for <span className="text-[#1677f2]">SEO, GEO and AEO Regulatory Pages</span></h1>
-                    <p className="mt-5 max-w-3xl text-[16px] leading-8 text-[#64748b]">
+                    <span className="mb-4 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Reference Content Rebuild System</span>
+                    <h1 className="max-w-5xl text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px] dark:text-[#fafafa]">Content Rebuild Command for <span className="text-[#1677f2] dark:text-[#4f9dfb]">SEO, GEO and AEO Regulatory Pages</span></h1>
+                    <p className="mt-5 max-w-3xl text-[16px] leading-8 text-[#64748b] dark:text-[#a1a1aa]">
                         Use this Estabizz framework whenever a competitor or reference URL is provided. The objective is not to copy the page, but to understand the regulatory concept and rebuild it into original, practical, legally safe and conversion-focused Estabizz content.
                     </p>
                 </div>
@@ -64,13 +64,13 @@ export default function ContentRebuildCommandPage() {
             <div className="mx-auto max-w-7xl px-6 py-14">
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_360px]">
                     <div className="space-y-10">
-                        <section className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9">
-                            <h2 className="mb-5 text-[28px] font-black text-[#0a1628]">Core Rebuild Rules</h2>
+                        <section className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9 dark:bg-[#141417] dark:border-[#27272b]">
+                            <h2 className="mb-5 text-[28px] font-black text-[#0a1628] dark:text-[#fafafa]">Core Rebuild Rules</h2>
                             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                                 {rebuildRules.map((rule, index) => (
-                                    <div key={rule} className="rounded-2xl bg-[#f8fbff] p-4">
-                                        <span className="text-xs font-black text-[#1677f2]">Rule {index + 1}</span>
-                                        <p className="mt-2 text-[14px] font-semibold leading-7 text-[#475569]">{rule}</p>
+                                    <div key={rule} className="rounded-2xl bg-[#f8fbff] p-4 dark:bg-[#141417]">
+                                        <span className="text-xs font-black text-[#1677f2] dark:text-[#4f9dfb]">Rule {index + 1}</span>
+                                        <p className="mt-2 text-[14px] font-semibold leading-7 text-[#475569] dark:text-[#a1a1aa]">{rule}</p>
                                     </div>
                                 ))}
                             </div>
@@ -80,9 +80,9 @@ export default function ContentRebuildCommandPage() {
 
                         <FrameworkTable title="SEO + GEO + AEO Compliance Standard" columns={["Area", "Standard"]} rows={complianceRows} />
 
-                        <section className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9">
-                            <h2 className="mb-4 text-[28px] font-black text-[#0a1628]">Safe Regulatory Wording</h2>
-                            <p className="mb-5 text-[15.5px] leading-8 text-[#475569]">
+                        <section className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9 dark:bg-[#141417] dark:border-[#27272b]">
+                            <h2 className="mb-4 text-[28px] font-black text-[#0a1628] dark:text-[#fafafa]">Safe Regulatory Wording</h2>
+                            <p className="mb-5 text-[15.5px] leading-8 text-[#475569] dark:text-[#a1a1aa]">
                                 Every rebuilt page must be regulator-respectful and legally safe. Use practical caution where thresholds, fee schedules, circulars or timelines may change from time to time.
                             </p>
                             <div className="flex flex-wrap gap-3">
@@ -95,7 +95,7 @@ export default function ContentRebuildCommandPage() {
                                     "regulatory requirements may change from time to time",
                                     "professional assistance may help reduce documentation gaps",
                                 ].map((phrase) => (
-                                    <span key={phrase} className="rounded-full border border-blue-100 bg-[#f8fbff] px-4 py-2 text-[13px] font-bold text-[#0a1628]">{phrase}</span>
+                                    <span key={phrase} className="rounded-full border border-blue-100 bg-[#f8fbff] px-4 py-2 text-[13px] font-bold text-[#0a1628] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{phrase}</span>
                                 ))}
                             </div>
                         </section>
@@ -104,7 +104,7 @@ export default function ContentRebuildCommandPage() {
                     </div>
 
                     <aside className="space-y-6">
-                        <div className="sticky top-6 rounded-3xl bg-[#0a1628] p-7 text-white shadow-[0_24px_70px_rgba(10,22,40,0.22)]">
+                        <div className="sticky top-6 rounded-3xl bg-[#0a1628] dark:bg-[#1c1c20] p-7 text-white shadow-[0_24px_70px_rgba(10,22,40,0.22)]">
                             <h2 className="mb-4 text-[24px] font-black">Rebuild Checklist</h2>
                             <p className="mb-6 text-[14px] leading-7 text-blue-100">
                                 Before publishing, verify originality, regulatory safety, CTA strength, FAQ quality and internal link validity.

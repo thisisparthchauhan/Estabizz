@@ -202,7 +202,7 @@ function DataTable({ headers, rows }: { headers: string[]; rows: TableRow[] }) {
 }
 
 function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; columns?: string }) {
-  return <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>{cards.map((card) => <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)]"><h3 className="!p-0 !mb-2 !text-[#0a1628]">{card.title}</h3><div className="text-[14px] leading-7 text-gray-600">{card.body}</div></div>)}</div>;
+  return <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>{cards.map((card) => <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)] dark:bg-[#141417]"><h3 className="!p-0 !mb-2 !text-[#0a1628] dark:text-[#fafafa]">{card.title}</h3><div className="text-[14px] leading-7 text-gray-600 dark:text-[#a1a1aa]">{card.body}</div></div>)}</div>;
 }
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
@@ -214,11 +214,11 @@ function Timeline({ steps }: { steps: { title: string; body: string }[] }) {
 }
 
 function Flow({ items }: { items: string[] }) {
-  return <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5"><div className="grid grid-cols-1 gap-3">{items.map((item, index) => <div key={item} className="flex items-center gap-3"><div className="min-w-8 h-8 rounded-full bg-[#0a1628] text-white text-sm font-bold flex items-center justify-center">{index + 1}</div><div className="flex-1 rounded-xl bg-white border border-blue-100 px-4 py-3 text-sm font-semibold text-[#0a1628] shadow-sm">{item}</div></div>)}</div></div>;
+  return <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-sky-50 to-white p-5 dark:border-[#27272b]"><div className="grid grid-cols-1 gap-3">{items.map((item, index) => <div key={item} className="flex items-center gap-3"><div className="min-w-8 h-8 rounded-full bg-[#0a1628] dark:bg-[#1c1c20] text-white text-sm font-bold flex items-center justify-center">{index + 1}</div><div className="flex-1 rounded-xl bg-white border border-blue-100 px-4 py-3 text-sm font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{item}</div></div>)}</div></div>;
 }
 
 function CheckList({ items }: { items: string[] }) {
-  return <ul className="my-6 grid grid-cols-1 gap-2 md:grid-cols-2 !pl-0">{items.map((item) => <li key={item} className="flex items-start gap-2 rounded-xl border border-blue-100 bg-white px-4 py-3 text-[14px] leading-6 text-gray-700 !mb-0 list-none"><span className="text-[#10b981] font-bold shrink-0">✔</span><span>{item}</span></li>)}</ul>;
+  return <ul className="my-6 grid grid-cols-1 gap-2 md:grid-cols-2 !pl-0">{items.map((item) => <li key={item} className="flex items-start gap-2 rounded-xl border border-blue-100 bg-white px-4 py-3 text-[14px] leading-6 text-gray-700 !mb-0 list-none dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"><span className="text-[#10b981] font-bold shrink-0">✔</span><span>{item}</span></li>)}</ul>;
 }
 
 export default function PageClient() {
@@ -227,8 +227,8 @@ export default function PageClient() {
       tags={[{ emoji: '📈', label: 'SEBI Regulatory Advisory' }, { emoji: '🏛️', label: 'Mutual Fund & AMC Licensing' }, { emoji: '📋', label: 'Structuring & Query Support' }]}
       breadcrumb={[{ label: 'Home', href: '/' }, { label: 'SEBI Services', href: '/sebi' }, { label: 'Mutual Fund Registration' }]}
       title="SEBI Mutual Fund Registration India - Complete Guide with Eligibility, Process and Compliance"
-      heroDescription={<><p><strong>SEBI Mutual Fund Registration India</strong> is a highly structured and regulated process that enables entities to establish and operate mutual funds under the supervision of the Securities and Exchange Board of India. From a practical perspective, SEBI does not register a mutual fund as a standalone entity. It approves a complete ecosystem comprising the sponsor, the trustee structure, the asset management company and an independent custodian.</p><div className="flex flex-wrap gap-2 mt-5">{['SEBI (Mutual Funds) Regulations, 1996', 'Sponsor Eligibility Mapping', 'Trust Deed and Trustee Structure', 'AMC Incorporation', 'Rs. 50 Crore AMC Net Worth', 'Custodian Appointment', 'SEBI Query Handling', 'Post-Registration Compliance'].map((badge) => <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm">{badge}</span>)}</div></>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Apply for Mutual Fund Registration</Link><Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors">Check Sponsor Eligibility</Link><a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a></>}
+      heroDescription={<><p><strong>SEBI Mutual Fund Registration India</strong> is a highly structured and regulated process that enables entities to establish and operate mutual funds under the supervision of the Securities and Exchange Board of India. From a practical perspective, SEBI does not register a mutual fund as a standalone entity. It approves a complete ecosystem comprising the sponsor, the trustee structure, the asset management company and an independent custodian.</p><div className="flex flex-wrap gap-2 mt-5">{['SEBI (Mutual Funds) Regulations, 1996', 'Sponsor Eligibility Mapping', 'Trust Deed and Trustee Structure', 'AMC Incorporation', 'Rs. 50 Crore AMC Net Worth', 'Custodian Appointment', 'SEBI Query Handling', 'Post-Registration Compliance'].map((badge) => <span key={badge} className="rounded-full border border-blue-100 bg-white/80 px-3 py-1 text-xs font-semibold text-[#0a1628] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{badge}</span>)}</div></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm">Apply for Mutual Fund Registration</Link><Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Check Sponsor Eligibility</Link><a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm">WhatsApp Estabizz Team</a></>}
       trustLine="Trusted support for RBI, SEBI, IRDAI, IFSCA and financial regulatory advisory across India and global markets."
       readTime="32 min read"
       displayYear="2026"
@@ -244,7 +244,7 @@ export default function PageClient() {
       ]}
       finalCtaTitle="Start Your Mutual Fund Registration Journey with Estabizz"
       finalCtaDescription="Build your SEBI mutual fund application with structured regulatory support covering sponsor eligibility review, trust and AMC structuring, trust deed drafting, policy and governance frameworks, SEBI filing, query response and post-registration compliance."
-      finalCtaActions={<><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to SEBI Compliance Expert</Link><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20">Apply for Mutual Fund Registration</Link><Link href="/get-started" className="w-full sm:w-auto px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl">Check Sponsor Eligibility</Link><a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a></>}
+      finalCtaActions={<><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#1677f2] to-[#0077B6] text-white font-bold rounded-xl shadow-lg">Speak to SEBI Compliance Expert</Link><Link href="/contact" className="w-full sm:w-auto px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20 dark:bg-[#141417]">Apply for Mutual Fund Registration</Link><Link href="/get-started" className="w-full sm:w-auto px-6 py-3 bg-white text-[#0a1628] font-bold rounded-xl dark:bg-[#141417] dark:text-[#fafafa]">Check Sponsor Eligibility</Link><a href={whatsappUrl} className="w-full sm:w-auto px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl">WhatsApp Estabizz Team</a></>}
     >
       <Section id="quick-overview" title="SEBI Mutual Fund Registration India: Quick Overview">
         <CardGrid columns="md:grid-cols-2" cards={[
@@ -519,17 +519,17 @@ export default function PageClient() {
         <p>{faqs.length} questions covering eligibility, process, documents, fees, timeline, compliance, penalties and expert-level structuring considerations.</p>
         <div className="space-y-3">
           {faqs.map((faq) => (
-            <details key={faq.q} className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm">
-              <summary className="cursor-pointer font-semibold text-[#0a1628]">{faq.q}</summary>
-              <p className="mt-3 text-sm leading-7 text-gray-600">{faq.a}</p>
+            <details key={faq.q} className="rounded-xl border border-blue-100 bg-white p-5 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
+              <summary className="cursor-pointer font-semibold text-[#0a1628] dark:text-[#fafafa]">{faq.q}</summary>
+              <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-[#a1a1aa]">{faq.a}</p>
             </details>
           ))}
         </div>
       </Section>
 
       <Section id="expert-review" title="Reviewer and Legal Disclaimer">
-        <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm">
-          <blockquote className="border-l-4 border-[#1677f2] pl-4 italic text-gray-700">Mutual fund registration is not merely a licensing exercise. It is a test of governance strength, financial credibility and long-term commitment to investor protection. SEBI evaluates intent as much as structure.</blockquote>
+        <div className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
+          <blockquote className="border-l-4 border-[#1677f2] pl-4 italic text-gray-700 dark:text-[#a1a1aa]">Mutual fund registration is not merely a licensing exercise. It is a test of governance strength, financial credibility and long-term commitment to investor protection. SEBI evaluates intent as much as structure.</blockquote>
           <h3 className="mt-6">Reviewed by Estabizz Compliance Expert</h3>
           <p><strong>CS Devyani Khambhati</strong></p>
           <p>Compliance Expert | Estabizz Fintech Private Limited</p>
@@ -542,9 +542,9 @@ export default function PageClient() {
       <Section id="speak-to-expert" title="Speak to Our SEBI Compliance Expert">
         <p>SEBI Mutual Fund Registration India is a prestigious yet demanding regulatory journey. A well-prepared application, backed by proper structuring and expert guidance, significantly improves approval chances and sets the foundation for a successful asset management business.</p>
         <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-6">
-          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl text-center">Speak to SEBI Compliance Expert</Link>
-          <Link href="/contact" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 text-center">Apply for Mutual Fund Registration</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-blue-50 text-[#0a1628] font-bold rounded-xl text-center">Check Sponsor Eligibility</Link>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl text-center">Speak to SEBI Compliance Expert</Link>
+          <Link href="/contact" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 text-center dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Apply for Mutual Fund Registration</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-blue-50 text-[#0a1628] font-bold rounded-xl text-center dark:bg-[#1c1c20] dark:text-[#fafafa]">Check Sponsor Eligibility</Link>
           <a href={whatsappUrl} className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl text-center">WhatsApp Estabizz Team</a>
         </div>
       </Section>

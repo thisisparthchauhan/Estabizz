@@ -31,11 +31,11 @@ export default function CaseHighlightsEditor() {
   });
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8 dark:bg-[#141417]">
       <EditorHeader title="Regulatory Experience / Case Highlights" subtitle="Compliance-sensitive — avoid any approval guarantees" updatedAt={updatedAt} />
       {loading ? <LoadingCard /> : (
         <div className="max-w-3xl space-y-6">
-          <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-[12px] text-amber-800">
+          <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-[12px] text-amber-800 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]">
             <strong>Compliance reminder:</strong> Do not use wording that guarantees any registration, licence or approval
             (e.g. &ldquo;guaranteed approval&rdquo;, &ldquo;assured licence&rdquo;, &ldquo;RBI/SEBI/IRDAI approved consultant&rdquo;).
             Use advisory/support wording and keep &ldquo;subject to regulator review&rdquo; framing.
@@ -53,14 +53,14 @@ export default function CaseHighlightsEditor() {
           <Card title={`Case Cards (${cases.length})`} action={<button onClick={addCase} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add case</button>}>
             <div className="space-y-4">
               {cases.map((cs, i) => (
-                <div key={i} className={`rounded-xl border p-4 ${cs.visible ? "border-[#e8eef5] bg-[#fbfdff]" : "border-[#e8eef5] bg-[#f3f4f6] opacity-75"}`}>
+                <div key={i} className={`rounded-xl border p-4 ${cs.visible ? "border-[#e8eef5] bg-[#fbfdff] dark:bg-[#141417] dark:border-[#27272b]" : "border-[#e8eef5] bg-[#f3f4f6] opacity-75 dark:bg-[#1c1c20] dark:border-[#27272b]"}`}>
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="text-[11px] font-black text-[#94a3b8]">Case {i + 1}</span>
+                    <span className="text-[11px] font-black text-[#94a3b8] dark:text-[#71717a]">Case {i + 1}</span>
                     <div className="flex items-center gap-2">
-                      <button onClick={() => move(i, -1)} title="Move up" className="rounded-md border border-[#dbe7f3] px-2 py-1 text-[11px] text-[#64748b] hover:bg-white">↑</button>
-                      <button onClick={() => move(i, 1)} title="Move down" className="rounded-md border border-[#dbe7f3] px-2 py-1 text-[11px] text-[#64748b] hover:bg-white">↓</button>
-                      <label className="flex items-center gap-1 text-[11px] text-[#64748b]"><input type="checkbox" checked={cs.visible} onChange={(e) => setCase(i, { visible: e.target.checked })} /> Show on website</label>
-                      <button onClick={() => removeCase(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50">Delete</button>
+                      <button onClick={() => move(i, -1)} title="Move up" className="rounded-md border border-[#dbe7f3] px-2 py-1 text-[11px] text-[#64748b] hover:bg-white dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">↑</button>
+                      <button onClick={() => move(i, 1)} title="Move down" className="rounded-md border border-[#dbe7f3] px-2 py-1 text-[11px] text-[#64748b] hover:bg-white dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">↓</button>
+                      <label className="flex items-center gap-1 text-[11px] text-[#64748b] dark:text-[#a1a1aa]"><input type="checkbox" checked={cs.visible} onChange={(e) => setCase(i, { visible: e.target.checked })} /> Show on website</label>
+                      <button onClick={() => removeCase(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225]">Delete</button>
                     </div>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-[140px_1fr]">

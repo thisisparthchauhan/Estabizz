@@ -63,7 +63,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -96,7 +96,7 @@ export default function PageClient() {
       finalCtaTitle="Do Not Wait for Notice to Become Prosecution"
       finalCtaDescription="A drug adulteration allegation can affect your licence, recall, market supply, management liability and brand. A short discussion today helps you preserve documents and prepare a structured response."
       heroDescription={<p>Drug quality allegations are sensitive because they involve public health, regulatory scrutiny, licence risk, seizure, recall, prosecution and brand credibility. Estabizz assists pharmaceutical manufacturers, importers, distributors, pharmacies, hospitals, medical device and cosmetic businesses with drug sample failure, CDSCO and State Drug Control notices, recall support, lab report review, licence risk and prosecution defence under the Drugs and Cosmetics Act together with BNS, BNSS and BSA.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp for Urgent Notice Review</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp for Urgent Notice Review</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> adulteration of drugs means a medicine or medical preparation has been changed, contaminated, diluted, mixed, stored, packed or handled in a way that affects its quality, strength, safety or therapeutic purpose.</p>

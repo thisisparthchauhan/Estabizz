@@ -451,42 +451,42 @@ export default function NBFCBusinessPlanClient() {
 
             <h2 id="faq">Frequently Asked Questions</h2>
             <details className="faq-accordion border border-[rgba(0,150,220,0.12)] rounded-xl mb-3 overflow-hidden">
-                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50">
+                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50 dark:bg-[#141417] dark:text-[#fafafa]">
                     Does RBI specify a format for the NBFC business plan?
                 </summary>
-                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
+                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                     RBI does not prescribe a specific format for the business plan but specifies the topics it should cover in its application guidelines. The business plan should be comprehensive, logical, and internally consistent. Our team ensures the business plan addresses all topics specified in RBI's NBFC registration guidelines.
                 </div>
             </details>
             <details className="faq-accordion border border-[rgba(0,150,220,0.12)] rounded-xl mb-3 overflow-hidden">
-                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50">
+                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50 dark:bg-[#141417] dark:text-[#fafafa]">
                     Can the business plan be used for investor fundraising as well?
                 </summary>
-                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
+                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                     Yes. We prepare investor-ready NBFC business plans that serve dual purpose — satisfying RBI's registration requirements and providing the strategic narrative and financial projections that PE/VC investors need for due diligence. We can also prepare a separate shorter pitch deck tailored to investor audiences.
                 </div>
             </details>
             <details className="faq-accordion border border-[rgba(0,150,220,0.12)] rounded-xl mb-3 overflow-hidden">
-                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50">
+                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50 dark:bg-[#141417] dark:text-[#fafafa]">
                     How long does it take to prepare an NBFC business plan?
                 </summary>
-                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
+                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                     Standard delivery is 10–15 working days from receipt of all inputs and completion of the discovery call. For complex or specialized NBFCs (e.g., NBFC-Factor, NBFC-P2P, NBFC-AA), additional time may be required. Expedited delivery within 7 working days is available at additional cost.
                 </div>
             </details>
             <details className="faq-accordion border border-[rgba(0,150,220,0.12)] rounded-xl mb-3 overflow-hidden">
-                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50">
+                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50 dark:bg-[#141417] dark:text-[#fafafa]">
                     Do you also prepare business plans for NBFC-MFI, NBFC-P2P, and NBFC-AA?
                 </summary>
-                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
+                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                     Yes. We prepare specialized business plans for all categories of NBFCs including NBFC-ND, NBFC-MFI (Microfinance Institutions), NBFC-P2P (Peer-to-Peer lending), NBFC-AA (Account Aggregator), NBFC-Factor, NBFC-IFC (Infrastructure Finance Company), and HFCs (Housing Finance Companies regulated by NHB).
                 </div>
             </details>
             <details className="faq-accordion border border-[rgba(0,150,220,0.12)] rounded-xl mb-3 overflow-hidden">
-                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50">
+                <summary className="flex justify-between items-center p-5 cursor-pointer font-semibold text-[#0a1628] bg-white hover:bg-blue-50/50 dark:bg-[#141417] dark:text-[#fafafa]">
                     What information do we need to provide for the business plan preparation?
                 </summary>
-                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
+                <div className="p-5 bg-white border-t border-gray-100 text-gray-600 text-sm leading-relaxed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                     We will share a comprehensive questionnaire after the initial consultation. Key information includes: promoter backgrounds and CVs, target customer segment details, proposed product portfolio, geographic focus, technology strategy, organizational structure plans, and details of funding sources. We guide you through each requirement throughout the process.
                 </div>
             </details>

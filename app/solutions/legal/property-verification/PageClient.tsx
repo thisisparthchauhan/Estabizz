@@ -68,7 +68,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -107,7 +107,7 @@ export default function PageClient() {
       finalCtaTitle="The Encumbrance Certificate Is Not a Clean Bill of Health"
       finalCtaDescription="It shows registered dealings. It does not show equitable mortgages, pending litigation, unregistered tenancies or statutory dues — which is where most defects actually live."
       heroDescription={<p>Property fraud is rarely crude. It is a missing link document in a thirty-year chain, an equitable mortgage that never reached the register, a suit filed last year that the seller did not mention, a power of attorney from a principal who died, or a daughter whose share nobody accounted for. None of it is visible in the one registered deed a seller is happy to show. Estabizz assists buyers, investors, lenders, NRIs, companies and families with title chain and link document review, encumbrance and CERSAI searches, litigation search, revenue and municipal record checks, RERA and approval verification, power of attorney and succession review, possession and tenancy assessment, dues verification, and a risk-rated report with clear conditions before payment.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> verification answers one question in several parts: can this person lawfully give me what I am paying for, and will anyone else be able to take it back?</p>

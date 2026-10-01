@@ -679,7 +679,7 @@ SEBI may suspend or cancel registration and may impose monetary penalties depend
           issuance. Actual duration depends on documentation quality, SEBI scrutiny and clarification
           rounds.
         </p>
-        <div className="my-6 rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white">
+        <div className="my-6 rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white dark:bg-[#141417] dark:border-[#27272b]">
           <Image
             src="/images/sebi/rta/process-timeline.jpg"
             alt="RTA Registration in India process timeline by Estabizz"
@@ -695,7 +695,7 @@ SEBI may suspend or cancel registration and may impose monetary penalties depend
       {/* ==================== VISUAL — END-TO-END FRAMEWORK ==================== */}
       <section id="end-to-end-framework" className="mt-16">
         <h2>RTA Registration Process Flowchart – End-to-End Framework</h2>
-        <div className="my-6 rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white">
+        <div className="my-6 rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white dark:bg-[#141417] dark:border-[#27272b]">
           <Image
             src="/images/sebi/rta/process-flowchart.png"
             alt="RTA Registration in India SEBI application flowchart by Estabizz"

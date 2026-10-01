@@ -28,16 +28,16 @@ const STATUS_META: Record<
   BlogStatus,
   { label: string; cls: string; dotCls: string }
 > = {
-  published:      { label: "Published",     cls: "bg-emerald-50 text-emerald-700 border-emerald-200",     dotCls: "bg-emerald-500" },
+  published:      { label: "Published",     cls: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]",     dotCls: "bg-emerald-500" },
   draft:          { label: "Draft",         cls: "bg-slate-100  text-slate-600  border-slate-200",        dotCls: "bg-slate-400" },
   pending_review: { label: "Pending",       cls: "bg-[#1677f2]/10 text-[#b8860b] border-[#1677f2]/30",   dotCls: "bg-[#1677f2]" },
-  approved:       { label: "Approved",      cls: "bg-blue-50    text-blue-700   border-blue-200",         dotCls: "bg-blue-500" },
-  rejected:       { label: "Rejected",      cls: "bg-red-50     text-red-700    border-red-200",          dotCls: "bg-red-500" },
-  archived:       { label: "Archived",      cls: "bg-purple-50  text-purple-700 border-purple-200",       dotCls: "bg-purple-500" },
+  approved:       { label: "Approved",      cls: "bg-blue-50    text-blue-700   border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]",         dotCls: "bg-blue-500" },
+  rejected:       { label: "Rejected",      cls: "bg-red-50     text-red-700    border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]",          dotCls: "bg-red-500" },
+  archived:       { label: "Archived",      cls: "bg-purple-50  text-purple-700 border-purple-200 dark:bg-[#231a2e] dark:text-[#c4b5fd] dark:border-[#3a2a4a]",       dotCls: "bg-purple-500" },
 };
 
 function StatusBadge({ status }: { status: BlogStatus }) {
-  const m = STATUS_META[status] ?? { label: status, cls: "bg-slate-100 text-slate-500 border-slate-200", dotCls: "bg-slate-400" };
+  const m = STATUS_META[status] ?? { label: status, cls: "bg-slate-100 text-slate-500 border-slate-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]", dotCls: "bg-slate-400" };
   return (
     <span className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10.5px] font-bold ${m.cls}`}>
       <span className={`h-1.5 w-1.5 rounded-full ${m.dotCls}`} />
@@ -148,22 +148,22 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
   }
 
   function SortIcon({ col }: { col: SortKey }) {
-    if (sortKey !== col) return <span className="ml-1 text-[#cbd5e1]">⇅</span>;
+    if (sortKey !== col) return <span className="ml-1 text-[#cbd5e1] dark:text-[#71717a]">⇅</span>;
     return (
-      <span className="ml-1 text-[#1677f2]">
+      <span className="ml-1 text-[#1677f2] dark:text-[#4f9dfb]">
         {sortDir === "asc" ? "↑" : "↓"}
       </span>
     );
   }
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8 dark:bg-[#141417]">
 
       {/* ── Header ──────────────────────────────────────────────────────────── */}
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h1 className="text-[21px] font-black text-[#0a1628] leading-tight">All Blogs</h1>
-          <p className="mt-0.5 text-[13px] text-[#64748b]">
+          <h1 className="text-[21px] font-black text-[#0a1628] leading-tight dark:text-[#fafafa]">All Blogs</h1>
+          <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">
             {blogs.length} article{blogs.length !== 1 ? "s" : ""} — search, filter and manage
           </p>
         </div>
@@ -176,17 +176,17 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
           </Link>
           <Link
             href="/admin/blogs/new"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-4 py-2 text-[12px] font-bold text-white hover:bg-[#0a1628]/90 shadow-sm transition-all"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#0a1628] dark:bg-[#1c1c20] px-4 py-2 text-[12px] font-bold text-white hover:bg-[#0a1628]/90 shadow-sm transition-all"
           >
-            <span className="text-[#1677f2]">✚</span> New Blog
+            <span className="text-[#1677f2] dark:text-[#4f9dfb]">✚</span> New Blog
           </Link>
         </div>
       </div>
 
-      <div className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+      <div className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden dark:bg-[#141417] dark:border-[#27272b]">
 
         {/* ── Toolbar ─────────────────────────────────────────────────────── */}
-        <div className="border-b border-[#f0f4f8] px-5 pt-4">
+        <div className="border-b border-[#f0f4f8] px-5 pt-4 dark:border-[#27272b]">
           {/* Status tabs */}
           <div className="mb-4 flex flex-wrap gap-1.5">
             {STATUS_TABS.map((tab) => {
@@ -200,8 +200,8 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                     isActive
                       ? tab.key === "all"
                         ? "bg-[#0a1628] text-[#1677f2]"
-                        : "bg-[#1677f2] text-[#071224]"
-                      : "border border-[#e2eaf2] text-[#475569] hover:border-[#1677f2]/40 hover:text-[#0a1628]"
+                        : "bg-[#1677f2] text-[#071224] dark:text-[#fafafa]"
+                      : "border border-[#e2eaf2] text-[#475569] hover:border-[#1677f2]/40 hover:text-[#0a1628] dark:border-[#27272b] dark:text-[#a1a1aa]"
                   }`}
                 >
                   {tab.label}
@@ -209,9 +209,9 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                     className={`rounded-full px-1.5 py-0.5 text-[9.5px] font-black ${
                       isActive
                         ? tab.key === "all"
-                          ? "bg-white/15 text-[#1677f2]"
-                          : "bg-[#071224]/20 text-[#071224]"
-                        : "bg-slate-100 text-[#94a3b8]"
+                          ? "bg-white/15 text-[#1677f2] dark:bg-[#141417] dark:text-[#4f9dfb]"
+                          : "bg-[#071224]/20 text-[#071224] dark:text-[#fafafa]"
+                        : "bg-slate-100 text-[#94a3b8] dark:bg-[#141417] dark:text-[#71717a]"
                     }`}
                   >
                     {count}
@@ -224,24 +224,24 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
           {/* Search row */}
           <div className="mb-3 flex items-center gap-3">
             <div className="relative flex-1 max-w-sm">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-[13px]">⌕</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8] text-[13px] dark:text-[#71717a]">⌕</span>
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search title, author, category, tag…"
-                className="w-full rounded-xl border border-[#e2eaf2] bg-[#f8fafc] pl-8 pr-3 py-2 text-[13px] text-[#0a1628] placeholder:text-[#94a3b8] focus:outline-none focus:border-[#1677f2]/60 focus:ring-2 focus:ring-[#1677f2]/15 transition-colors"
+                className="w-full rounded-xl border border-[#e2eaf2] bg-[#f8fafc] pl-8 pr-3 py-2 text-[13px] text-[#0a1628] placeholder:text-[#94a3b8] focus:outline-none focus:border-[#1677f2]/60 focus:ring-2 focus:ring-[#1677f2]/15 transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
               />
             </div>
             {search && (
               <button
                 onClick={() => setSearch("")}
-                className="text-[11px] font-bold text-[#94a3b8] hover:text-[#0a1628] transition-colors"
+                className="text-[11px] font-bold text-[#94a3b8] hover:text-[#0a1628] transition-colors dark:text-[#71717a]"
               >
                 Clear ✕
               </button>
             )}
-            <span className="text-[12px] text-[#94a3b8] ml-auto">
+            <span className="text-[12px] text-[#94a3b8] ml-auto dark:text-[#71717a]">
               {filtered.length} result{filtered.length !== 1 ? "s" : ""}
             </span>
           </div>
@@ -251,9 +251,9 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
         {filtered.length === 0 ? (
           <div className="py-16 text-center">
             <div className="text-3xl mb-3 opacity-20">☰</div>
-            <p className="text-[13px] font-semibold text-[#94a3b8]">No blogs found</p>
+            <p className="text-[13px] font-semibold text-[#94a3b8] dark:text-[#71717a]">No blogs found</p>
             {search && (
-              <p className="text-[12px] text-[#cbd5e1] mt-1">
+              <p className="text-[12px] text-[#cbd5e1] mt-1 dark:text-[#71717a]">
                 Try adjusting your search or clearing the filters.
               </p>
             )}
@@ -262,11 +262,11 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-[#f0f4f8] bg-[#f8fafc]">
+                <tr className="border-b border-[#f0f4f8] bg-[#f8fafc] dark:bg-[#141417] dark:border-[#27272b]">
                   <th className="px-6 py-3">
                     <button
                       onClick={() => handleSort("title")}
-                      className="flex items-center text-[11px] font-black uppercase tracking-wider text-[#94a3b8] hover:text-[#0a1628] transition-colors"
+                      className="flex items-center text-[11px] font-black uppercase tracking-wider text-[#94a3b8] hover:text-[#0a1628] transition-colors dark:text-[#71717a]"
                     >
                       Title <SortIcon col="title" />
                     </button>
@@ -274,7 +274,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                   <th className="hidden md:table-cell px-4 py-3">
                     <button
                       onClick={() => handleSort("category")}
-                      className="flex items-center text-[11px] font-black uppercase tracking-wider text-[#94a3b8] hover:text-[#0a1628] transition-colors"
+                      className="flex items-center text-[11px] font-black uppercase tracking-wider text-[#94a3b8] hover:text-[#0a1628] transition-colors dark:text-[#71717a]"
                     >
                       Category <SortIcon col="category" />
                     </button>
@@ -282,7 +282,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                   <th className="hidden sm:table-cell px-4 py-3">
                     <button
                       onClick={() => handleSort("status")}
-                      className="flex items-center text-[11px] font-black uppercase tracking-wider text-[#94a3b8] hover:text-[#0a1628] transition-colors"
+                      className="flex items-center text-[11px] font-black uppercase tracking-wider text-[#94a3b8] hover:text-[#0a1628] transition-colors dark:text-[#71717a]"
                     >
                       Status <SortIcon col="status" />
                     </button>
@@ -290,15 +290,15 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                   <th className="hidden lg:table-cell px-4 py-3">
                     <button
                       onClick={() => handleSort("date")}
-                      className="flex items-center text-[11px] font-black uppercase tracking-wider text-[#94a3b8] hover:text-[#0a1628] transition-colors"
+                      className="flex items-center text-[11px] font-black uppercase tracking-wider text-[#94a3b8] hover:text-[#0a1628] transition-colors dark:text-[#71717a]"
                     >
                       Date <SortIcon col="date" />
                     </button>
                   </th>
-                  <th className="hidden lg:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">
+                  <th className="hidden lg:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#71717a]">
                     Author
                   </th>
-                  <th className="px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">
+                  <th className="px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#71717a]">
                     Actions
                   </th>
                 </tr>
@@ -307,18 +307,18 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                 {filtered.map((blog) => (
                   <tr
                     key={blog.id}
-                    className="group hover:bg-[#f8fafc] transition-colors"
+                    className="group hover:bg-[#f8fafc] transition-colors dark:bg-[#141417]"
                   >
                     {/* Title */}
                     <td className="px-6 py-3.5 max-w-[260px]">
-                      <div className="text-[13px] font-bold text-[#0a1628] truncate group-hover:text-[#1677f2] transition-colors leading-snug">
+                      <div className="text-[13px] font-bold text-[#0a1628] truncate group-hover:text-[#1677f2] transition-colors leading-snug dark:text-[#fafafa]">
                         {blog.featured && (
-                          <span className="mr-1 text-[10px] text-[#1677f2]">★</span>
+                          <span className="mr-1 text-[10px] text-[#1677f2] dark:text-[#4f9dfb]">★</span>
                         )}
                         {blog.title}
                       </div>
                       {blog.isUserSubmitted && (
-                        <span className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-blue-50 border border-blue-100 px-1.5 py-0 text-[9.5px] font-bold text-blue-600">
+                        <span className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-blue-50 border border-blue-100 px-1.5 py-0 text-[9.5px] font-bold text-blue-600 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]">
                           User submission
                         </span>
                       )}
@@ -326,7 +326,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
 
                     {/* Category */}
                     <td className="hidden md:table-cell px-4 py-3.5 whitespace-nowrap">
-                      <span className="text-[12px] text-[#475569]">
+                      <span className="text-[12px] text-[#475569] dark:text-[#a1a1aa]">
                         {blog.category.icon} {blog.category.name}
                       </span>
                     </td>
@@ -337,7 +337,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                     </td>
 
                     {/* Date */}
-                    <td className="hidden lg:table-cell px-4 py-3.5 text-[12px] text-[#94a3b8] whitespace-nowrap">
+                    <td className="hidden lg:table-cell px-4 py-3.5 text-[12px] text-[#94a3b8] whitespace-nowrap dark:text-[#71717a]">
                       {fmt(blog.publishedAt ?? blog.createdAt)}
                     </td>
 
@@ -347,7 +347,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                         <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[9px] font-black text-white">
                           {blog.author.firstName[0]}
                         </div>
-                        <span className="text-[12px] text-[#475569] whitespace-nowrap">
+                        <span className="text-[12px] text-[#475569] whitespace-nowrap dark:text-[#a1a1aa]">
                           {blog.author.firstName} {blog.author.lastName}
                         </span>
                       </div>
@@ -358,7 +358,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                       <div className="flex items-center gap-1.5">
                         <Link
                           href={`/admin/blogs/edit/${blog.id}`}
-                          className="inline-flex items-center gap-1 rounded-lg border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#e0f0fa] transition-colors whitespace-nowrap"
+                          className="inline-flex items-center gap-1 rounded-lg border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#e0f0fa] transition-colors whitespace-nowrap dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]"
                         >
                           ✎ Edit
                         </Link>
@@ -375,14 +375,14 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
                             href={`/blogs/${blog.slug}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-emerald-700 hover:bg-emerald-100 transition-colors whitespace-nowrap"
+                            className="inline-flex items-center gap-1 rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-emerald-700 hover:bg-emerald-100 transition-colors whitespace-nowrap dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]"
                           >
                             ↗ View
                           </Link>
                         )}
                         <button
                           onClick={() => setDeleteTarget(blog)}
-                          className="inline-flex items-center gap-1 rounded-lg border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-bold text-red-600 hover:bg-red-100 transition-colors whitespace-nowrap"
+                          className="inline-flex items-center gap-1 rounded-lg border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-bold text-red-600 hover:bg-red-100 transition-colors whitespace-nowrap dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]"
                           title="Delete blog"
                         >
                           🗑 Delete
@@ -398,7 +398,7 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
 
         {/* Footer count */}
         {filtered.length > 0 && (
-          <div className="border-t border-[#f0f4f8] bg-[#f8fafc] px-6 py-3 text-[12px] text-[#94a3b8]">
+          <div className="border-t border-[#f0f4f8] bg-[#f8fafc] px-6 py-3 text-[12px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">
             Showing {filtered.length} of {blogs.length} articles
           </div>
         )}
@@ -411,23 +411,23 @@ export default function AdminBlogsClient({ initialBlogs }: Props) {
           onClick={() => !deleting && setDeleteTarget(null)}
         >
           <div
-            className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl"
+            className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl dark:bg-[#141417]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-red-50 text-[20px]">
+            <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-red-50 text-[20px] dark:bg-[#2a1618]">
               🗑
             </div>
-            <h3 className="text-[16px] font-black text-[#0a1628]">Delete this blog?</h3>
-            <p className="mt-1.5 text-[13px] leading-6 text-[#64748b]">
+            <h3 className="text-[16px] font-black text-[#0a1628] dark:text-[#fafafa]">Delete this blog?</h3>
+            <p className="mt-1.5 text-[13px] leading-6 text-[#64748b] dark:text-[#a1a1aa]">
               You are about to permanently delete{" "}
-              <span className="font-bold text-[#0a1628]">“{deleteTarget.title}”</span>.
+              <span className="font-bold text-[#0a1628] dark:text-[#fafafa]">“{deleteTarget.title}”</span>.
               This action cannot be undone.
             </p>
             <div className="mt-5 flex justify-end gap-2.5">
               <button
                 onClick={() => setDeleteTarget(null)}
                 disabled={deleting}
-                className="rounded-lg border border-[#e2eaf2] bg-white px-4 py-2 text-[13px] font-bold text-[#475569] hover:bg-[#f8fafc] transition-colors disabled:opacity-50"
+                className="rounded-lg border border-[#e2eaf2] bg-white px-4 py-2 text-[13px] font-bold text-[#475569] hover:bg-[#f8fafc] transition-colors disabled:opacity-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
               >
                 No, keep it
               </button>

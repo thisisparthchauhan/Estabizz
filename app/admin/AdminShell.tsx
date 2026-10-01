@@ -294,13 +294,13 @@ function getBreadcrumbs(pathname: string): string[] {
 function SidebarBrand({ collapsed }: { collapsed: boolean }) {
   return (
     <div className={`flex items-center gap-2.5 border-b border-white/[0.06] px-4 py-[14px] shrink-0 ${collapsed ? "justify-center" : ""}`}>
-      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#1677f2] via-[#c8921a] to-[#8b6110] flex items-center justify-center font-black text-[#071224] text-[15px] shrink-0 shadow-[0_4px_14px_rgba(217,169,56,0.30)]">
+      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#1677f2] via-[#c8921a] to-[#8b6110] flex items-center justify-center font-black text-[#071224] text-[15px] shrink-0 shadow-[0_4px_14px_rgba(217,169,56,0.30)] dark:text-[#fafafa]">
         E
       </div>
       {!collapsed && (
         <div className="min-w-0">
           <div className="text-[13px] font-black text-white leading-tight truncate">Estabizz Admin</div>
-          <div className="text-[9.5px] text-[#1677f2]/70 font-semibold tracking-[0.09em] uppercase mt-0.5">Content Panel</div>
+          <div className="text-[9.5px] text-[#1677f2]/70 font-semibold tracking-[0.09em] uppercase mt-0.5 dark:text-[#4f9dfb]">Content Panel</div>
         </div>
       )}
     </div>
@@ -327,7 +327,7 @@ function SidebarNavLink({
 }) {
   const base = "relative flex items-center gap-3 rounded-xl text-[13px] font-medium transition-all duration-150 overflow-hidden";
   const activeClass = "bg-[#1677f2]/15 text-[#1677f2] pl-[10px] pr-3 py-2.5 border-l-[3px] border-[#1677f2]";
-  const idleClass = "text-white/50 hover:text-white/80 hover:bg-white/[0.07] px-3 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1677f2]/50 focus-visible:ring-offset-1 focus-visible:ring-offset-[#071224]";
+  const idleClass = "text-white/50 hover:text-white/80 hover:bg-white/[0.07] px-3 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1677f2]/50 focus-visible:ring-offset-1 focus-visible:ring-offset-[#071224] dark:bg-[#141417]";
   return (
     <Link
       href={item.href}
@@ -335,10 +335,10 @@ function SidebarNavLink({
       onClick={onClick}
       className={`${base} ${active ? activeClass : idleClass}`}
     >
-      <span className={`shrink-0 ${active ? "text-[#1677f2]" : ""}`}>{item.icon}</span>
+      <span className={`shrink-0 ${active ? "text-[#1677f2] dark:text-[#4f9dfb]" : ""}`}>{item.icon}</span>
       {!collapsed && <span className="truncate leading-none flex-1">{item.label}</span>}
       {!collapsed && item.pendingBadge && pendingCount > 0 && (
-        <span className="ml-auto flex h-4.5 min-w-[18px] items-center justify-center rounded-full bg-[#1677f2] px-1 text-[9.5px] font-black text-[#071224] leading-none">
+        <span className="ml-auto flex h-4.5 min-w-[18px] items-center justify-center rounded-full bg-[#1677f2] px-1 text-[9.5px] font-black text-[#071224] leading-none dark:text-[#fafafa]">
           {pendingCount > 99 ? "99+" : pendingCount}
         </span>
       )}
@@ -446,7 +446,7 @@ export default function AdminShell({
 
         {/* ── Mobile drawer ────────────────────────────────────────────────── */}
         <aside
-          className={`fixed inset-y-0 left-0 z-50 flex w-[240px] flex-col bg-[#071224] dark:bg-[var(--sidebar-background)] border-r border-white/[0.06] dark:border-[#2d4a6b] transition-transform duration-200 md:hidden overflow-hidden`}
+          className={`fixed inset-y-0 left-0 z-50 flex w-[240px] flex-col bg-[#071224] dark:bg-[var(--sidebar-background)] border-r border-white/[0.06] dark:border-[#3f3f46] transition-transform duration-200 md:hidden overflow-hidden`}
           style={{ transform: drawerOpen ? "translateX(0)" : "translateX(-100%)" }}
           aria-label="Navigation drawer"
           aria-hidden={!drawerOpen}
@@ -458,7 +458,7 @@ export default function AdminShell({
               href="/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-[12px] font-medium text-white/35 transition-all hover:text-[#1677f2]/80 hover:bg-white/[0.04]"
+              className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-[12px] font-medium text-white/35 transition-all hover:text-[#1677f2]/80 hover:bg-white/[0.04] dark:bg-[#141417] dark:text-[#4f9dfb]"
               title="Back to Site"
             >
               <span className="shrink-0"><IconArrowLeft /></span>
@@ -469,7 +469,7 @@ export default function AdminShell({
 
         {/* ── Desktop sidebar ──────────────────────────────────────────────── */}
         <aside
-          className={`flex-shrink-0 flex flex-col overflow-hidden transition-[width] duration-200 bg-[#071224] dark:bg-[var(--sidebar-background)] border-r border-white/[0.06] dark:border-[#2d4a6b] w-0 ${collapsed ? "md:w-[68px]" : "md:w-[240px]"}`}
+          className={`flex-shrink-0 flex flex-col overflow-hidden transition-[width] duration-200 bg-[#071224] dark:bg-[var(--sidebar-background)] border-r border-white/[0.06] dark:border-[#3f3f46] w-0 ${collapsed ? "md:w-[68px]" : "md:w-[240px]"}`}
         >
           <SidebarBrand collapsed={collapsed} />
           <SidebarNav entries={visibleEntries} collapsed={collapsed} activeCheck={isActive} pendingCount={pendingCount} />
@@ -478,7 +478,7 @@ export default function AdminShell({
               href="/"
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-[12px] font-medium text-white/35 transition-all hover:text-[#1677f2]/80 hover:bg-white/[0.04] ${collapsed ? "justify-center" : ""}`}
+              className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-[12px] font-medium text-white/35 transition-all hover:text-[#1677f2]/80 hover:bg-white/[0.04]  dark:bg-[#141417] dark:text-[#4f9dfb] ${collapsed ? "justify-center" : ""}`}
               title="Back to Site"
             >
               <span className="shrink-0"><IconArrowLeft /></span>
@@ -488,7 +488,7 @@ export default function AdminShell({
           <div className="shrink-0 p-2 border-t border-white/[0.06]">
             <button
               onClick={() => setCollapsed((c) => !c)}
-              className="w-full flex items-center justify-center py-2 rounded-xl text-white/25 hover:text-white/60 hover:bg-white/[0.05] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1677f2]/50"
+              className="w-full flex items-center justify-center py-2 rounded-xl text-white/25 hover:text-white/60 hover:bg-white/[0.05] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1677f2]/50 dark:bg-[#141417]"
               aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             >
               {collapsed ? <IconChevronRight /> : <IconChevronLeft />}
@@ -497,14 +497,14 @@ export default function AdminShell({
         </aside>
 
         {/* ── Main area ────────────────────────────────────────────────────── */}
-        <div className="flex flex-1 flex-col overflow-hidden bg-[#f4f7fb] dark:bg-[#06101f] min-w-0">
+        <div className="flex flex-1 flex-col overflow-hidden bg-[#f4f7fb] dark:bg-[#09090b] min-w-0">
 
           {/* Top bar */}
-          <header className="h-[52px] shrink-0 flex items-center justify-between px-4 md:px-6 bg-white dark:bg-[#0d1a2d] border-b border-[#e2e8f0] dark:border-[#223550] shadow-[0_1px_4px_rgba(15,23,42,0.05)]">
+          <header className="h-[52px] shrink-0 flex items-center justify-between px-4 md:px-6 bg-white dark:bg-[#141417] border-b border-[#e2e8f0] dark:border-[#27272b] shadow-[0_1px_4px_rgba(15,23,42,0.05)]">
             <div className="flex items-center gap-3 min-w-0">
               {/* Hamburger — mobile only */}
               <button
-                className="md:hidden flex items-center justify-center w-9 h-9 rounded-xl text-[#64748b] hover:text-[#0a1628] hover:bg-[#f1f5f9] dark:hover:bg-white/[0.06] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1677f2]/60"
+                className="md:hidden flex items-center justify-center w-9 h-9 rounded-xl text-[#64748b] hover:text-[#0a1628] hover:bg-[#f1f5f9] dark:hover:bg-white/[0.06] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1677f2]/60 dark:bg-[#141417] dark:text-[#a1a1aa]"
                 onClick={() => setDrawerOpen(true)}
                 aria-label="Open navigation"
                 aria-expanded={drawerOpen}
@@ -517,12 +517,12 @@ export default function AdminShell({
               <div className="flex items-center gap-2 min-w-0">
                 {breadcrumbs.map((crumb, i) => (
                   <React.Fragment key={i}>
-                    {i > 0 && <span className="text-[#1677f2]/50 text-[11px] shrink-0">/</span>}
+                    {i > 0 && <span className="text-[#1677f2]/50 text-[11px] shrink-0 dark:text-[#4f9dfb]">/</span>}
                     <span
                       className={
                         i === breadcrumbs.length - 1
-                          ? "text-[13px] font-black text-[#0a1628] dark:text-[#f7f9fc] truncate"
-                          : "text-[12px] font-medium text-[#94a3b8] dark:text-[#a9b6c9] hidden sm:inline shrink-0"
+                          ? "text-[13px] font-black text-[#0a1628] dark:text-[#fafafa] truncate"
+                          : "text-[12px] font-medium text-[#94a3b8] dark:text-[#a1a1aa] hidden sm:inline shrink-0"
                       }
                     >
                       {crumb}
@@ -544,10 +544,10 @@ export default function AdminShell({
                   Pending {pendingCount}
                 </Link>
               )}
-              <span className="text-[12px] font-medium text-[#94a3b8] dark:text-[#a9b6c9] hidden md:inline truncate max-w-[160px]">
+              <span className="text-[12px] font-medium text-[#94a3b8] dark:text-[#a1a1aa] hidden md:inline truncate max-w-[160px]">
                 {adminEmail ?? "admin@estabizz.com"}
               </span>
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#1677f2] to-[#b8860b] flex items-center justify-center text-[#071224] text-[11px] font-black uppercase shadow-sm shrink-0">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#1677f2] to-[#b8860b] flex items-center justify-center text-[#071224] text-[11px] font-black uppercase shadow-sm shrink-0 dark:text-[#fafafa]">
                 {adminEmail?.[0] ?? "A"}
               </div>
             </div>

@@ -24,27 +24,27 @@ export default async function CandidateSavedJobsPage() {
   const dashboard = await loadCandidateAccountDashboard(session);
 
   return (
-    <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#f8fbff] px-4 py-10 text-[#0a1628] sm:px-6 lg:px-8 dark:bg-[#141417] dark:text-[#fafafa]">
       <div className="mx-auto max-w-6xl">
         <div className="mb-8">
-          <div className="mb-3 inline-flex rounded-full bg-[#eaf2ff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+          <div className="mb-3 inline-flex rounded-full bg-[#eaf2ff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">
             Saved Jobs
           </div>
-          <h1 className="text-[34px] font-black leading-tight tracking-tight text-[#120b45] md:text-[44px]">
+          <h1 className="text-[34px] font-black leading-tight tracking-tight text-[#120b45] md:text-[44px] dark:text-[#fafafa]">
             Your saved roles
           </h1>
-          <p className="mt-4 max-w-3xl text-[15px] leading-7 text-[#64748b]">
+          <p className="mt-4 max-w-3xl text-[15px] leading-7 text-[#64748b] dark:text-[#a1a1aa]">
             Save roles for later review once public job listings and saved-job persistence are connected.
           </p>
         </div>
 
-        <section className="rounded-lg border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
-          <div className="rounded-lg bg-[#f5fbff] p-6 text-center">
-            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1677f2]">
+        <section className="rounded-lg border border-blue-100 bg-white p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+          <div className="rounded-lg bg-[#f5fbff] p-6 text-center dark:bg-[#141417]">
+            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#1677f2] dark:text-[#4f9dfb]">
               {dashboard.savedJobsCount} saved jobs
             </p>
-            <h2 className="mt-3 text-2xl font-black text-[#120b45]">No saved jobs yet</h2>
-            <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-[#64748b]">
+            <h2 className="mt-3 text-2xl font-black text-[#120b45] dark:text-[#fafafa]">No saved jobs yet</h2>
+            <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-[#64748b] dark:text-[#a1a1aa]">
               Saved jobs will appear here. Each saved job can later be opened, removed or used as the starting point for an application.
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-3">
@@ -56,7 +56,7 @@ export default async function CandidateSavedJobsPage() {
               </Link>
               <Link
                 href="/jobs/account/profile"
-                className="rounded-lg border border-blue-100 bg-white px-5 py-3 text-sm font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+                className="rounded-lg border border-blue-100 bg-white px-5 py-3 text-sm font-black text-[#334155] transition hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
               >
                 Complete Profile
               </Link>

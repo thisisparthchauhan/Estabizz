@@ -32,14 +32,14 @@ function fmt(iso?: string): string {
 
 function statusBadge(s: string) {
   const MAP: Record<string, { label: string; cls: string }> = {
-    published:      { label: "Published",  cls: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+    published:      { label: "Published",  cls: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]" },
     draft:          { label: "Draft",      cls: "bg-slate-100 text-slate-600 border-slate-200" },
     pending_review: { label: "Pending",    cls: "bg-amber-50 text-amber-700 border-amber-200" },
-    approved:       { label: "Approved",   cls: "bg-blue-50 text-blue-700 border-blue-200" },
-    rejected:       { label: "Rejected",   cls: "bg-red-50 text-red-700 border-red-200" },
-    archived:       { label: "Archived",   cls: "bg-purple-50 text-purple-700 border-purple-200" },
+    approved:       { label: "Approved",   cls: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]" },
+    rejected:       { label: "Rejected",   cls: "bg-red-50 text-red-700 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]" },
+    archived:       { label: "Archived",   cls: "bg-purple-50 text-purple-700 border-purple-200 dark:bg-[#231a2e] dark:text-[#c4b5fd] dark:border-[#3a2a4a]" },
   };
-  const m = MAP[s] ?? { label: s, cls: "bg-slate-100 text-slate-500 border-slate-200" };
+  const m = MAP[s] ?? { label: s, cls: "bg-slate-100 text-slate-500 border-slate-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]" };
   return (
     <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10.5px] font-bold ${m.cls}`}>
       {m.label}
@@ -102,16 +102,16 @@ function StatCard({ label, value, icon, iconBg, iconColor, href }: StatCardProps
   return (
     <Link
       href={href}
-      className="flex flex-col justify-between rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_24px_rgba(10,22,40,0.09)] hover:-translate-y-0.5 hover:border-[#1677f2]/35 transition-all duration-200"
+      className="flex flex-col justify-between rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_24px_rgba(10,22,40,0.09)] hover:-translate-y-0.5 hover:border-[#1677f2]/35 transition-all duration-200"
     >
       <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${iconBg} ${iconColor} mb-4`}>
         {icon}
       </div>
       <div>
-        <div className="text-[30px] font-black text-[#0a1628] dark:text-[#f7f9fc] leading-none tabular-nums">
+        <div className="text-[30px] font-black text-[#0a1628] dark:text-[#fafafa] leading-none tabular-nums">
           {value}
         </div>
-        <div className="mt-1.5 text-[12px] font-semibold text-[#64748b]">{label}</div>
+        <div className="mt-1.5 text-[12px] font-semibold text-[#64748b] dark:text-[#a1a1aa]">{label}</div>
       </div>
     </Link>
   );
@@ -135,11 +135,11 @@ function QuickCard({
   return (
     <Link
       href={href}
-      className="group flex flex-col justify-between rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_20px_rgba(10,22,40,0.08)] hover:-translate-y-0.5 hover:border-[#1677f2]/25 transition-all duration-200"
+      className="group flex flex-col justify-between rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-5 shadow-[0_2px_8px_rgba(10,22,40,0.04)] hover:shadow-[0_6px_20px_rgba(10,22,40,0.08)] hover:-translate-y-0.5 hover:border-[#1677f2]/25 transition-all duration-200"
     >
       <div>
-        <h3 className="text-[13.5px] font-black text-[#0a1628] dark:text-[#f7f9fc] mb-1.5">{title}</h3>
-        <p className="text-[12px] text-[#64748b] leading-5">{desc}</p>
+        <h3 className="text-[13.5px] font-black text-[#0a1628] dark:text-[#fafafa] mb-1.5">{title}</h3>
+        <p className="text-[12px] text-[#64748b] leading-5 dark:text-[#a1a1aa]">{desc}</p>
       </div>
       <div className="mt-4">
         <span className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[11.5px] font-bold transition-all ${ctaCls}`}>
@@ -159,47 +159,47 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
       value:     stats.total,
       icon:      <IconTotal />,
       iconBg:    "bg-[#0a1628]/8",
-      iconColor: "text-[#0a1628]",
+      iconColor: "text-[#0a1628] dark:text-[#fafafa]",
       href:      "/admin/blogs",
     },
     {
       label:     "Published",
       value:     stats.published,
       icon:      <IconPublished />,
-      iconBg:    "bg-emerald-50",
-      iconColor: "text-emerald-600",
+      iconBg:    "bg-emerald-50 dark:bg-[#132a20]",
+      iconColor: "text-emerald-600 dark:text-[#6ee7b7]",
       href:      "/admin/blogs",
     },
     {
       label:     "Pending Review",
       value:     stats.pending,
       icon:      <IconPending />,
-      iconBg:    "bg-amber-50",
-      iconColor: "text-amber-600",
+      iconBg:    "bg-amber-50 dark:bg-[#2a2113]",
+      iconColor: "text-amber-600 dark:text-[#fcd34d]",
       href:      "/admin/blogs/pending",
     },
     {
       label:     "Drafts",
       value:     stats.draft,
       icon:      <IconDraft />,
-      iconBg:    "bg-slate-100",
-      iconColor: "text-slate-500",
+      iconBg:    "bg-slate-100 dark:bg-[#141417]",
+      iconColor: "text-slate-500 dark:text-[#71717a]",
       href:      "/admin/blogs",
     },
   ];
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#06101f] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#09090b] p-6 lg:p-8">
 
       {/* ── Page header ──────────────────────────────────────────────────────── */}
       <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-[22px] font-black text-[#0a1628] dark:text-[#f7f9fc] leading-tight">Dashboard</h1>
-          <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a9b6c9]">Content overview</p>
+          <h1 className="text-[22px] font-black text-[#0a1628] dark:text-[#fafafa] leading-tight">Dashboard</h1>
+          <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">Content overview</p>
         </div>
         <Link
           href="/admin/blogs/new"
-          className="inline-flex items-center gap-2 rounded-xl bg-[#0a1628] px-4 py-2.5 text-[13px] font-bold text-white hover:bg-[#0a1628]/90 shadow-sm transition-all self-start sm:self-auto"
+          className="inline-flex items-center gap-2 rounded-xl bg-[#0a1628] dark:bg-[#1c1c20] px-4 py-2.5 text-[13px] font-bold text-white hover:bg-[#0a1628]/90 shadow-sm transition-all self-start sm:self-auto"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
@@ -216,15 +216,15 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
       </div>
 
       {/* ── Recent blogs table ────────────────────────────────────────────────── */}
-      <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_8px_rgba(10,22,40,0.04)] overflow-hidden mb-6">
-        <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#223550] px-6 py-4">
+      <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_2px_8px_rgba(10,22,40,0.04)] overflow-hidden mb-6">
+        <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#27272b] px-6 py-4">
           <div>
-            <h2 className="text-[14px] font-black text-[#0a1628] dark:text-[#f7f9fc]">Recent Blogs</h2>
-            <p className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9] mt-0.5">Latest entries across all statuses</p>
+            <h2 className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Recent Blogs</h2>
+            <p className="text-[11px] text-[#94a3b8] dark:text-[#a1a1aa] mt-0.5">Latest entries across all statuses</p>
           </div>
           <Link
             href="/admin/blogs"
-            className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
+            className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors dark:text-[#4f9dfb]"
           >
             View all →
           </Link>
@@ -232,17 +232,17 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
 
         {recentBlogs.length === 0 ? (
           <div className="py-16 text-center">
-            <div className="w-12 h-12 mx-auto mb-4 rounded-2xl bg-[#f0f4f8] flex items-center justify-center">
+            <div className="w-12 h-12 mx-auto mb-4 rounded-2xl bg-[#f0f4f8] flex items-center justify-center dark:bg-[#1c1c20]">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
                 <polyline points="14 2 14 8 20 8" />
               </svg>
             </div>
-            <p className="text-[13px] font-semibold text-[#94a3b8]">No blogs yet</p>
-            <p className="text-[12px] text-[#cbd5e1] mt-1">Create your first blog to see it here.</p>
+            <p className="text-[13px] font-semibold text-[#94a3b8] dark:text-[#71717a]">No blogs yet</p>
+            <p className="text-[12px] text-[#cbd5e1] mt-1 dark:text-[#71717a]">Create your first blog to see it here.</p>
             <Link
               href="/admin/blogs/new"
-              className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[#0a1628] px-4 py-2 text-[12px] font-bold text-white hover:bg-[#0a1628]/90 transition-colors"
+              className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[#0a1628] dark:bg-[#1c1c20] px-4 py-2 text-[12px] font-bold text-white hover:bg-[#0a1628]/90 transition-colors"
             >
               Create your first blog
             </Link>
@@ -251,40 +251,40 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628]">
-                  <th className="px-6 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Title</th>
-                  <th className="hidden md:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Category</th>
-                  <th className="hidden sm:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Status</th>
-                  <th className="hidden lg:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Date</th>
-                  <th className="px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Action</th>
+                <tr className="border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11]">
+                  <th className="px-6 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">Title</th>
+                  <th className="hidden md:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">Category</th>
+                  <th className="hidden sm:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">Status</th>
+                  <th className="hidden lg:table-cell px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">Date</th>
+                  <th className="px-4 py-3 text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#f0f4f8] dark:divide-[#223550]">
+              <tbody className="divide-y divide-[#f0f4f8] dark:divide-[#27272b]">
                 {recentBlogs.map((blog) => (
-                  <tr key={blog.id} className="group hover:bg-[#f8fafc] dark:hover:bg-[#12223a] transition-colors">
+                  <tr key={blog.id} className="group hover:bg-[#f8fafc] dark:hover:bg-[#12223a] transition-colors dark:bg-[#141417]">
                     <td className="px-6 py-3.5 max-w-[240px]">
-                      <div className="text-[13px] font-bold text-[#0a1628] dark:text-[#f7f9fc] truncate group-hover:text-[#1677f2] transition-colors">
+                      <div className="text-[13px] font-bold text-[#0a1628] dark:text-[#fafafa] truncate group-hover:text-[#1677f2] transition-colors">
                         {blog.title}
                       </div>
-                      <div className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9] truncate mt-0.5">
+                      <div className="text-[11px] text-[#94a3b8] dark:text-[#a1a1aa] truncate mt-0.5">
                         {blog.author.firstName} {blog.author.lastName}
                       </div>
                     </td>
                     <td className="hidden md:table-cell px-4 py-3.5">
-                      <span className="text-[12px] text-[#475569] dark:text-[#a9b6c9]">
+                      <span className="text-[12px] text-[#475569] dark:text-[#a1a1aa]">
                         {blog.category.icon} {blog.category.name}
                       </span>
                     </td>
                     <td className="hidden sm:table-cell px-4 py-3.5">
                       {statusBadge(blog.status)}
                     </td>
-                    <td className="hidden lg:table-cell px-4 py-3.5 text-[12px] text-[#94a3b8] whitespace-nowrap">
+                    <td className="hidden lg:table-cell px-4 py-3.5 text-[12px] text-[#94a3b8] whitespace-nowrap dark:text-[#71717a]">
                       {fmt(blog.publishedAt ?? blog.createdAt)}
                     </td>
                     <td className="px-4 py-3.5">
                       <Link
                         href={`/admin/blogs/edit/${blog.id}`}
-                        className="inline-flex items-center gap-1 rounded-lg border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#e0f0fa] transition-colors"
+                        className="inline-flex items-center gap-1 rounded-lg border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#e0f0fa] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]"
                       >
                         Edit
                       </Link>
@@ -304,7 +304,7 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
           desc="Draft an article for the Regulatory Insights section."
           href="/admin/blogs/new"
           cta="Open Editor"
-          ctaCls="bg-[#1677f2] text-[#071224] hover:bg-[#c8921a]"
+          ctaCls="bg-[#1677f2] text-[#071224] hover:bg-[#c8921a] dark:text-[#fafafa]"
         />
         <QuickCard
           title="Review Pending"

@@ -48,20 +48,32 @@
 }
 
 /* ── Dark mode semantic tokens ────────────────────────────────────────────── */
+/*
+ * Neutral black, not navy.
+ *
+ * This ramp used to be a blue-navy one (#06101f / #0d1a2d / #223550). On a
+ * screen that reads as dark blue rather than as dark, and next to the brand
+ * blue #1677f2 the two blues fight: the accent stops looking like an accent
+ * because the page behind it is already blue.
+ *
+ * The ramp below is neutral (hue-free) so the only colour on a dark page is
+ * the brand itself. Steps are spaced so each surface is distinguishable from
+ * the one beneath it without any step becoming grey-looking.
+ */
 .dark {
-  /* Backgrounds — premium navy, NOT pure black */
-  --background: #06101f;
-  --surface: #0d1a2d;
-  --surface-muted: #0a1628;
-  --surface-elevated: #12223a;
+  /* Backgrounds — neutral near-black */
+  --background: #09090b;
+  --surface: #141417;
+  --surface-muted: #0f0f11;
+  --surface-elevated: #1c1c20;
 
   /* Text */
-  --foreground: #f7f9fc;
-  --muted-foreground: #a9b6c9;
+  --foreground: #fafafa;
+  --muted-foreground: #a1a1aa;
 
   /* Borders */
-  --border: #223550;
-  --border-strong: #2d4a6b;
+  --border: #27272b;
+  --border-strong: #3f3f46;
 
   /* Brand (keep primary blue) */
   --primary: #1677f2;
@@ -69,16 +81,16 @@
   --accent: #d4a017;
 
   /* Inputs */
-  --input-background: #0d1a2d;
-  --input-border: #223550;
+  --input-background: #141417;
+  --input-border: #27272b;
 
   /* Cards */
-  --card-background: #0d1a2d;
-  --popover-background: #12223a;
+  --card-background: #141417;
+  --popover-background: #1c1c20;
 
-  /* Sidebar — slightly lighter in dark mode to distinguish from page bg */
-  --sidebar-background: #0a1e3a;
-  --sidebar-foreground: #f7f9fc;
+  /* Sidebar — one step above the page so it separates without a border */
+  --sidebar-background: #141417;
+  --sidebar-foreground: #fafafa;
 }
 
 html {
@@ -109,12 +121,15 @@ body {
     linear-gradient(180deg, #f9fcff 0%, #eef7ff 45%, #f8fbff 100%);
 }
 
-/* Dark mode body — subtle gradient */
+/* Dark mode body — near-flat neutral.
+   The old version laid two blue radials over a navy gradient, which is what
+   made the whole page read blue. A very low-opacity brand tint is kept so the
+   page is not dead flat, but it sits far below the threshold where it reads
+   as a colour. */
 .dark body {
   background:
-    radial-gradient(circle at 8% 8%, rgba(22, 119, 242, 0.06), transparent 30vw),
-    radial-gradient(circle at 92% 12%, rgba(0, 150, 214, 0.06), transparent 26vw),
-    linear-gradient(180deg, #06101f 0%, #0a1628 45%, #06101f 100%);
+    radial-gradient(circle at 8% 8%, rgba(22, 119, 242, 0.035), transparent 32vw),
+    linear-gradient(180deg, #09090b 0%, #0d0d10 50%, #09090b 100%);
 }
 
 /* Browser autofill fix for dark mode */
@@ -123,9 +138,9 @@ body {
 .dark input:-webkit-autofill:focus,
 .dark textarea:-webkit-autofill,
 .dark select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px #0d1a2d inset;
-  -webkit-text-fill-color: #f7f9fc;
-  caret-color: #f7f9fc;
+  -webkit-box-shadow: 0 0 0px 1000px #141417 inset;
+  -webkit-text-fill-color: #fafafa;
+  caret-color: #fafafa;
 }
 
 ::selection {
@@ -136,8 +151,8 @@ body {
 /* ── Dark mode: body grid overlay ────────────────────────────────────────── */
 .dark body::before {
   background-image:
-    linear-gradient(rgba(0, 150, 214, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 150, 214, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
 }
 
 * {
@@ -489,7 +504,7 @@ body::before {
 
 /* ── Dark mode ── */
 .dark .reg-table {
-  background: #0d1a2d;
+  background: #141417;
 }
 
 .dark .reg-table thead tr {
@@ -517,7 +532,7 @@ body::before {
 }
 
 .dark .reg-table-note {
-  color: #94a3b8;
+  color: #8b8b94;
 }
 
 /* ─── Blog table ─────────────────────────────────────────────────────────── */
@@ -745,12 +760,12 @@ input, textarea, select, [contenteditable="true"] {
 /* ── Dark mode — blog content ─────────────────────────────────────────────── */
 
 .dark .blog-content h2 {
-  color: #f7f9fc;
-  border-bottom-color: #223550;
+  color: #fafafa;
+  border-bottom-color: #27272b;
 }
 
 .dark .blog-content h3 {
-  color: #f7f9fc;
+  color: #fafafa;
 }
 
 .dark .blog-content p {
@@ -758,11 +773,11 @@ input, textarea, select, [contenteditable="true"] {
 }
 
 .dark .blog-content li {
-  color: #a9b6c9;
+  color: #a1a1aa;
 }
 
 .dark .blog-content strong {
-  color: #f7f9fc;
+  color: #fafafa;
 }
 
 .dark .blog-content a {
@@ -774,11 +789,11 @@ input, textarea, select, [contenteditable="true"] {
 }
 
 .dark .blog-content figcaption {
-  color: #64748b;
+  color: #71717a;
 }
 
 .dark .blog-content .blog-image figcaption {
-  color: #94a3b8;
+  color: #8b8b94;
 }
 
 .dark .blog-content blockquote {
@@ -792,29 +807,29 @@ input, textarea, select, [contenteditable="true"] {
 }
 
 .dark .blog-content thead tr {
-  background: #0a1628;
+  background: #0f0f11;
 }
 
 .dark .blog-content tbody tr {
-  border-bottom-color: #223550;
+  border-bottom-color: #27272b;
 }
 
 .dark .blog-content tbody tr:nth-child(even) {
-  background: #0d1a2d;
+  background: #141417;
 }
 
 .dark .blog-content tbody tr:hover {
-  background: #12223a;
+  background: #1c1c20;
 }
 
 .dark .blog-content td {
-  color: #a9b6c9;
+  color: #a1a1aa;
 }
 
 .dark .blog-content code {
-  background: #0a1628;
+  background: #0f0f11;
   color: #60a5fa;
-  border-color: #223550;
+  border-color: #27272b;
 }
 
 /* ── Dark mode — callout boxes ───────────────────────────────────────────── */
@@ -881,7 +896,7 @@ input, textarea, select, [contenteditable="true"] {
 /* ── Dark mode — article-content (ServicePageLayout inline styles override) ── */
 
 .dark .article-content h2 {
-  color: #f7f9fc !important;
+  color: #fafafa !important;
 }
 
 .dark .article-content h3 {
@@ -889,7 +904,7 @@ input, textarea, select, [contenteditable="true"] {
 }
 
 .dark .article-content h4 {
-  color: #f7f9fc !important;
+  color: #fafafa !important;
 }
 
 .dark .article-content p {
@@ -897,11 +912,11 @@ input, textarea, select, [contenteditable="true"] {
 }
 
 .dark .article-content li {
-  color: #a9b6c9 !important;
+  color: #a1a1aa !important;
 }
 
 .dark .article-content li strong {
-  color: #f7f9fc !important;
+  color: #fafafa !important;
 }
 
 .dark .article-content a {

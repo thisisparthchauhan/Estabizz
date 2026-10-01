@@ -73,7 +73,7 @@ export default async function JobsPage({ searchParams }: { searchParams: SearchP
   const jobs = databaseReady ? await listPublicJobs() : [];
 
   return (
-    <main className="min-h-screen bg-white pt-[64px]">
+    <main className="min-h-screen bg-white pt-[64px] dark:bg-[#141417]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJobsLandingJsonLd()) }}
@@ -82,7 +82,7 @@ export default async function JobsPage({ searchParams }: { searchParams: SearchP
       <JobsSafetyNotice />
       <JobsHero openCount={databaseReady ? jobs.length : null} />
 
-      <section id={OPENINGS_ANCHOR} className="scroll-mt-24 bg-[#f7fbff] py-24">
+      <section id={OPENINGS_ANCHOR} className="scroll-mt-24 bg-[#f7fbff] py-24 dark:bg-[#141417]">
         {databaseReady ? (
           // keyed on the search term so a taxonomy link clicked FROM this page
           // actually re-seeds the board. Navigating /jobs?q=A -> /jobs?q=B

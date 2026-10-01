@@ -124,30 +124,30 @@ export default async function CategoryBlogsPage({ params }: Props) {
         }}
       />
 
-      <main className="min-h-screen bg-white pt-[64px]">
+      <main className="min-h-screen bg-white pt-[64px] dark:bg-[#141417]">
 
         {/* ── Category hero — homepage gradient + editorial style ── */}
-        <div className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+        <div className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_20%,rgba(0,150,214,0.16),transparent_36%),radial-gradient(circle_at_5%_90%,rgba(22,119,242,0.10),transparent_32%)]" />
-          <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
           <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
             {/* Breadcrumb */}
             <nav
-              className="mb-5 flex items-center gap-2 text-[12px] text-[#9ca3af]"
+              className="mb-5 flex items-center gap-2 text-[12px] text-[#9ca3af] dark:text-[#71717a]"
               aria-label="Breadcrumb"
             >
-              <Link href="/" className="hover:text-[#374151] transition-colors">
+              <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">
                 Home
               </Link>
               <span className="opacity-40">/</span>
               <Link
                 href="/blogs"
-                className="hover:text-[#374151] transition-colors"
+                className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]"
               >
                 Regulatory Insights
               </Link>
               <span className="opacity-40">/</span>
-              <span className="text-[#374151]">{category.name}</span>
+              <span className="text-[#374151] dark:text-[#a1a1aa]">{category.name}</span>
             </nav>
 
             {/* Category badge */}
@@ -162,25 +162,25 @@ export default async function CategoryBlogsPage({ params }: Props) {
             </div>
 
             {/* Large category title */}
-            <h1 className="mb-3 text-[32px] font-black leading-tight tracking-[-0.03em] text-[#120b45] md:text-[40px] lg:text-[48px]">
+            <h1 className="mb-3 text-[32px] font-black leading-tight tracking-[-0.03em] text-[#120b45] md:text-[40px] lg:text-[48px] dark:text-[#fafafa]">
               {category.name}
             </h1>
 
             {/* Accent underline */}
             <div className="mb-4 h-[4px] w-14 rounded-full bg-[#1677f2]" />
 
-            <p className="max-w-2xl text-[15px] leading-7 text-[#6b7280]">
+            <p className="max-w-2xl text-[15px] leading-7 text-[#6b7280] dark:text-[#a1a1aa]">
               {category.description}
             </p>
 
             <div className="mt-5 flex items-center gap-4">
-              <span className="text-[13px] text-[#9ca3af]">
+              <span className="text-[13px] text-[#9ca3af] dark:text-[#71717a]">
                 {blogs.length} published article
                 {blogs.length !== 1 ? "s" : ""}
               </span>
               <Link
                 href="/blogs"
-                className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
+                className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors dark:text-[#4f9dfb]"
               >
                 ← All Categories
               </Link>
@@ -195,16 +195,16 @@ export default async function CategoryBlogsPage({ params }: Props) {
             /* Empty state */
             <div className="flex flex-col items-center justify-center py-24 text-center">
               <div className="mb-4 text-5xl opacity-20">{category.icon}</div>
-              <h2 className="mb-2 text-[20px] font-black text-[#0a1628]">
+              <h2 className="mb-2 text-[20px] font-black text-[#0a1628] dark:text-[#fafafa]">
                 No articles yet
               </h2>
-              <p className="mb-6 max-w-sm text-[13px] leading-6 text-[#6b7280]">
+              <p className="mb-6 max-w-sm text-[13px] leading-6 text-[#6b7280] dark:text-[#a1a1aa]">
                 No published articles in <strong>{category.name}</strong> yet.
                 Check back soon or explore other categories.
               </p>
               <Link
                 href="/blogs"
-                className="inline-flex items-center gap-2 rounded-lg bg-[#0a1628] px-5 py-2.5 text-[13px] font-bold text-white hover:bg-[#0a1628]/90 transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg bg-[#0a1628] dark:bg-[#1c1c20] px-5 py-2.5 text-[13px] font-bold text-white hover:bg-[#0a1628]/90 transition-colors"
               >
                 ← Browse All Articles
               </Link>
@@ -235,17 +235,17 @@ async function OtherCategories({ currentSlug }: { currentSlug: string }) {
   if (others.length === 0) return null;
 
   return (
-    <section className="mt-14 border-t border-[#e8e8e8] pt-10">
+    <section className="mt-14 border-t border-[#e8e8e8] pt-10 dark:border-[#27272b]">
       <div className="mb-6 flex items-end justify-between">
         <div>
-          <h2 className="text-[18px] font-black text-[#0a1628]">
+          <h2 className="text-[18px] font-black text-[#0a1628] dark:text-[#fafafa]">
             Browse Other Topics
           </h2>
           <div className="mt-1 h-[3px] w-8 rounded-full bg-[#1677f2]" />
         </div>
         <Link
           href="/blogs"
-          className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
+          className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors dark:text-[#4f9dfb]"
         >
           All Articles →
         </Link>
@@ -255,7 +255,7 @@ async function OtherCategories({ currentSlug }: { currentSlug: string }) {
           <Link
             key={cat.slug}
             href={`/blogs/category/${cat.slug}`}
-            className="group inline-flex items-center gap-1.5 rounded-full border border-[#e0e0e0] bg-white px-3.5 py-2 text-[12px] font-semibold text-[#374151] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-all"
+            className="group inline-flex items-center gap-1.5 rounded-full border border-[#e0e0e0] bg-white px-3.5 py-2 text-[12px] font-semibold text-[#374151] hover:border-[#1677f2]/40 hover:text-[#1677f2] transition-all dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
           >
             <span>{cat.icon}</span>
             {cat.name}

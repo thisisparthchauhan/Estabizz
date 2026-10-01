@@ -63,17 +63,17 @@ const qcItems = [
 
 export default function ServicePageContentFrameworkPage() {
     return (
-        <main className="min-h-screen bg-white">
-            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+        <main className="min-h-screen bg-white dark:bg-[#141417]">
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
-                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
-                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
-                        <Link href="/admin" className="hover:text-[#374151] transition-colors">Admin</Link><span className="opacity-40">/</span><Link href="/admin/tools" className="hover:text-[#374151] transition-colors">Internal Tools</Link><span className="opacity-40">/</span><span className="text-[#374151]">Service Page Framework</span>
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                        <Link href="/admin" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Admin</Link><span className="opacity-40">/</span><Link href="/admin/tools" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Internal Tools</Link><span className="opacity-40">/</span><span className="text-[#374151] dark:text-[#a1a1aa]">Service Page Framework</span>
                     </nav>
-                    <span className="mb-4 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">SEO + GEO + AEO Content Engine</span>
-                    <h1 className="max-w-5xl text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">Service Page Content Framework <span className="text-[#1677f2]">for Regulatory Licence Pages</span></h1>
-                    <p className="mt-5 max-w-3xl text-[16px] leading-8 text-[#64748b]">
+                    <span className="mb-4 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">SEO + GEO + AEO Content Engine</span>
+                    <h1 className="max-w-5xl text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px] dark:text-[#fafafa]">Service Page Content Framework <span className="text-[#1677f2] dark:text-[#4f9dfb]">for Regulatory Licence Pages</span></h1>
+                    <p className="mt-5 max-w-3xl text-[16px] leading-8 text-[#64748b] dark:text-[#a1a1aa]">
                         A reusable Estabizz standard for premium RBI, SEBI, IRDAI, IFSCA and government licence pages. Each page should explain eligibility, documents, process, fees, timeline, compliance risks, FAQs and Estabizz support in a legally safe, client-ready format.
                     </p>
                 </div>
@@ -81,10 +81,10 @@ export default function ServicePageContentFrameworkPage() {
 
             <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 py-14 lg:grid-cols-[280px_1fr]">
                 <aside className="hidden lg:block">
-                    <div className="sticky top-6 rounded-2xl border border-blue-100 bg-white p-5 shadow-sm">
-                        <p className="mb-4 text-xs font-black uppercase tracking-[0.16em] text-[#1677f2]">Framework Flow</p>
+                    <div className="sticky top-6 rounded-2xl border border-blue-100 bg-white p-5 shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
+                        <p className="mb-4 text-xs font-black uppercase tracking-[0.16em] text-[#1677f2] dark:text-[#4f9dfb]">Framework Flow</p>
                         {frameworkSections.slice(0, 14).map((section) => (
-                            <a key={section} href={`#${section.replaceAll(" ", "-").replaceAll("/", "").toLowerCase()}`} className="block rounded-lg px-3 py-2 text-[13px] font-bold text-[#475569] hover:bg-blue-50 hover:text-[#1677f2]">{section}</a>
+                            <a key={section} href={`#${section.replaceAll(" ", "-").replaceAll("/", "").toLowerCase()}`} className="block rounded-lg px-3 py-2 text-[13px] font-bold text-[#475569] hover:bg-blue-50 hover:text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#a1a1aa]">{section}</a>
                         ))}
                     </div>
                 </aside>
@@ -104,24 +104,24 @@ export default function ServicePageContentFrameworkPage() {
                         <FrameworkTable title="SEO Elements and Rules" columns={["SEO Element", "Content Rule", "Practical Note"]} rows={seoRows} />
                     </section>
 
-                    <section id="hero-section" className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9">
-                        <h2 className="mb-4 text-[28px] font-black text-[#0a1628]">Hero Section Standard</h2>
-                        <p className="text-[15.5px] leading-8 text-[#475569]">
+                    <section id="hero-section" className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9 dark:bg-[#141417] dark:border-[#27272b]">
+                        <h2 className="mb-4 text-[28px] font-black text-[#0a1628] dark:text-[#fafafa]">Hero Section Standard</h2>
+                        <p className="text-[15.5px] leading-8 text-[#475569] dark:text-[#a1a1aa]">
                             Every service page should open with a strong headline, short problem-solving subtext, regulatory trust badges, primary CTA, secondary CTA and WhatsApp CTA. Add this urgency line where suitable: One wrong step can delay approval. Speak with our experts before applying.
                         </p>
                         <div className="mt-5 flex flex-wrap gap-3">
                             {["Speak with Compliance Expert", "Check Eligibility", "WhatsApp Estabizz Team"].map((cta) => (
-                                <span key={cta} className="rounded-full border border-blue-100 bg-[#f8fbff] px-4 py-2 text-[13px] font-bold text-[#0a1628]">{cta}</span>
+                                <span key={cta} className="rounded-full border border-blue-100 bg-[#f8fbff] px-4 py-2 text-[13px] font-bold text-[#0a1628] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{cta}</span>
                             ))}
                         </div>
                     </section>
 
-                    <section id="introduction" className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9">
-                        <h2 className="mb-4 text-[28px] font-black text-[#0a1628]">Introduction, Overview and Regulatory Framework</h2>
-                        <p className="text-[15.5px] leading-8 text-[#475569]">
+                    <section id="introduction" className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9 dark:bg-[#141417] dark:border-[#27272b]">
+                        <h2 className="mb-4 text-[28px] font-black text-[#0a1628] dark:text-[#fafafa]">Introduction, Overview and Regulatory Framework</h2>
+                        <p className="text-[15.5px] leading-8 text-[#475569] dark:text-[#a1a1aa]">
                             The first line must start with the focus keyword. The introduction should explain what the licence is, why it matters, who should care and why regulatory clarity is important. Use practical phrases such as "In simple terms", "From a compliance perspective" and "Legally speaking" where they improve clarity.
                         </p>
-                        <p className="mt-4 text-[15.5px] leading-8 text-[#475569]">
+                        <p className="mt-4 text-[15.5px] leading-8 text-[#475569] dark:text-[#a1a1aa]">
                             The regulatory framework section should mention the applicable Act, regulation, master direction, circular, guideline or official FAQ. If a latest fee, threshold or capital requirement is unclear, use: "To be verified from the latest official regulatory schedule."
                         </p>
                     </section>
@@ -152,8 +152,8 @@ export default function ServicePageContentFrameworkPage() {
                         />
                     </section>
 
-                    <section id="registration-process" className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9">
-                        <h2 className="mb-5 text-[28px] font-black text-[#0a1628]">Registration Process Standard</h2>
+                    <section id="registration-process" className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9 dark:bg-[#141417] dark:border-[#27272b]">
+                        <h2 className="mb-5 text-[28px] font-black text-[#0a1628] dark:text-[#fafafa]">Registration Process Standard</h2>
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             {[
                                 "Eligibility and business model review",
@@ -165,10 +165,10 @@ export default function ServicePageContentFrameworkPage() {
                                 "Certificate issuance",
                                 "Post-registration compliance setup",
                             ].map((step, index) => (
-                                <div key={step} className="rounded-2xl border border-blue-100 bg-[#f8fbff] p-5">
-                                    <span className="text-xs font-black text-[#1677f2]">Step {index + 1}</span>
-                                    <h3 className="mt-2 text-[16px] font-black text-[#0a1628]">{step}</h3>
-                                    <p className="mt-2 text-[13.5px] leading-6 text-[#64748b]">Add what the regulator checks and where clients commonly make mistakes.</p>
+                                <div key={step} className="rounded-2xl border border-blue-100 bg-[#f8fbff] p-5 dark:bg-[#141417] dark:border-[#27272b]">
+                                    <span className="text-xs font-black text-[#1677f2] dark:text-[#4f9dfb]">Step {index + 1}</span>
+                                    <h3 className="mt-2 text-[16px] font-black text-[#0a1628] dark:text-[#fafafa]">{step}</h3>
+                                    <p className="mt-2 text-[13.5px] leading-6 text-[#64748b] dark:text-[#a1a1aa]">Add what the regulator checks and where clients commonly make mistakes.</p>
                                 </div>
                             ))}
                         </div>
@@ -178,20 +178,20 @@ export default function ServicePageContentFrameworkPage() {
                         <FrameworkTable title="FAQ Standard for Service Pages" columns={["Category", "Purpose", "Question Style"]} rows={faqRows} />
                     </section>
 
-                    <section className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9">
-                        <h2 className="mb-4 text-[28px] font-black text-[#0a1628]">SEO + GEO + AEO Support</h2>
-                        <p className="text-[15.5px] leading-8 text-[#475569]">
+                    <section className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9 dark:bg-[#141417] dark:border-[#27272b]">
+                        <h2 className="mb-4 text-[28px] font-black text-[#0a1628] dark:text-[#fafafa]">SEO + GEO + AEO Support</h2>
+                        <p className="text-[15.5px] leading-8 text-[#475569] dark:text-[#a1a1aa]">
                             Every service page should include short answer boxes, definition lines, tables, step-by-step sections, query-based headings and scenario-led FAQs. This makes the page easier for Google, featured snippets and AI answer engines to understand without weakening legal accuracy.
                         </p>
                     </section>
 
                     <ExpertQuote quote="A strong regulatory page should not merely describe a licence. It should help the client understand eligibility, risk, documentation discipline and the cost of getting the first step wrong." />
 
-                    <section id="final-self-qc-checklist" className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9">
-                        <h2 className="mb-6 text-[28px] font-black text-[#0a1628]">Final Self-QC Checklist</h2>
+                    <section id="final-self-qc-checklist" className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm md:p-9 dark:bg-[#141417] dark:border-[#27272b]">
+                        <h2 className="mb-6 text-[28px] font-black text-[#0a1628] dark:text-[#fafafa]">Final Self-QC Checklist</h2>
                         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                             {qcItems.map((item) => (
-                                <div key={item} className="rounded-xl bg-[#f8fbff] px-4 py-3 text-[14px] font-semibold leading-6 text-[#475569]">{item}</div>
+                                <div key={item} className="rounded-xl bg-[#f8fbff] px-4 py-3 text-[14px] font-semibold leading-6 text-[#475569] dark:bg-[#141417] dark:text-[#a1a1aa]">{item}</div>
                             ))}
                         </div>
                     </section>

@@ -57,7 +57,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
   return (
-    <div className="my-6 overflow-x-auto rounded-lg border border-blue-100">
+    <div className="my-6 overflow-x-auto rounded-lg border border-blue-100 dark:border-[#27272b]">
       <table className="data-table my-0 min-w-[640px]">
         <thead><tr>{headers.map((header) => <th scope="col" key={header}>{header}</th>)}</tr></thead>
         <tbody>{rows.map((row, rowIndex) => (
@@ -132,7 +132,7 @@ export default function SourceDocumentLegalPage({ data }: { data: LegalSourcePag
       heroDescription={<>{data.heroParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</>}
       heroActions={<>
         <Link href={`/contact?service=${encodeURIComponent(data.title)}`} className="rounded-lg bg-[#1677f2] px-6 py-3 font-bold text-white hover:bg-[#0866d9]">Speak With an Expert</Link>
-        <a href={whatsappUrl} className="rounded-lg border border-blue-200 bg-white px-6 py-3 font-bold text-[#1677f2] hover:bg-blue-50">WhatsApp Estabizz</a>
+        <a href={whatsappUrl} className="rounded-lg border border-blue-200 bg-white px-6 py-3 font-bold text-[#1677f2] hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a>
       </>}
     >
       {data.sections.map((section) => (

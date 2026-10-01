@@ -27,7 +27,7 @@ export default function ResourceArchitectureEditor() {
   const move = (i: number, dir: -1 | 1) => setCards((cs) => { const j = i + dir; if (j < 0 || j >= cs.length) return cs; const n = [...cs]; [n[i], n[j]] = [n[j], n[i]]; return n; });
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8">
+    <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8 dark:bg-[#141417]">
       <EditorHeader title="Resource Architecture" subtitle="The resource cards section" updatedAt={updatedAt} />
       {loading ? <LoadingCard /> : (
         <div className="max-w-3xl space-y-6">
@@ -42,14 +42,14 @@ export default function ResourceArchitectureEditor() {
           <Card title={`Resource Cards (${cards.length})`} action={<button onClick={addCard} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/8 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15">+ Add card</button>}>
             <div className="space-y-4">
               {cards.map((card, i) => (
-                <div key={i} className={`rounded-xl border p-4 ${card.visible ? "border-[#e8eef5] bg-[#fbfdff]" : "border-[#e8eef5] bg-[#f3f4f6] opacity-75"}`}>
+                <div key={i} className={`rounded-xl border p-4 ${card.visible ? "border-[#e8eef5] bg-[#fbfdff] dark:bg-[#141417] dark:border-[#27272b]" : "border-[#e8eef5] bg-[#f3f4f6] opacity-75 dark:bg-[#1c1c20] dark:border-[#27272b]"}`}>
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="text-[11px] font-black text-[#94a3b8]">Card {i + 1}</span>
+                    <span className="text-[11px] font-black text-[#94a3b8] dark:text-[#71717a]">Card {i + 1}</span>
                     <div className="flex items-center gap-2">
-                      <button onClick={() => move(i, -1)} className="rounded-md border border-[#dbe7f3] px-2 py-1 text-[11px] text-[#64748b] hover:bg-white">↑</button>
-                      <button onClick={() => move(i, 1)} className="rounded-md border border-[#dbe7f3] px-2 py-1 text-[11px] text-[#64748b] hover:bg-white">↓</button>
-                      <label className="flex items-center gap-1 text-[11px] text-[#64748b]"><input type="checkbox" checked={card.visible} onChange={(e) => setCard(i, { visible: e.target.checked })} /> Show on website</label>
-                      <button onClick={() => removeCard(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50">Delete</button>
+                      <button onClick={() => move(i, -1)} className="rounded-md border border-[#dbe7f3] px-2 py-1 text-[11px] text-[#64748b] hover:bg-white dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">↑</button>
+                      <button onClick={() => move(i, 1)} className="rounded-md border border-[#dbe7f3] px-2 py-1 text-[11px] text-[#64748b] hover:bg-white dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">↓</button>
+                      <label className="flex items-center gap-1 text-[11px] text-[#64748b] dark:text-[#a1a1aa]"><input type="checkbox" checked={card.visible} onChange={(e) => setCard(i, { visible: e.target.checked })} /> Show on website</label>
+                      <button onClick={() => removeCard(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225]">Delete</button>
                     </div>
                   </div>
                   <Field label="Card title"><input value={card.title} onChange={(e) => setCard(i, { title: e.target.value })} className={inputCls} /></Field>

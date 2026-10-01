@@ -74,18 +74,18 @@ const calendars: Calendar[] = [
 
 export default function ComplianceCalendarPage() {
     return (
-        <main className="min-h-screen bg-white pt-[64px]">
+        <main className="min-h-screen bg-white pt-[64px] dark:bg-[#141417]">
             {/* Hero */}
-            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+            <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
-                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+                <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
-                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
-                        <Link href="/" className="hover:text-[#374151] transition-colors">Home</Link><span className="opacity-40">/</span><Link href="/resources" className="hover:text-[#374151] transition-colors">Resources</Link><span className="opacity-40">/</span><span className="text-[#374151]">Compliance Calendar</span>
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                        <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link><span className="opacity-40">/</span><Link href="/resources" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Resources</Link><span className="opacity-40">/</span><span className="text-[#374151] dark:text-[#a1a1aa]">Compliance Calendar</span>
                     </nav>
-                    <span className="mb-4 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm">Filing Timelines</span>
-                    <h1 className="mb-5 max-w-4xl text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px]">Regulatory <span className="text-[#1677f2]">Compliance Calendar</span></h1>
-                    <p className="max-w-3xl text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px]">
+                    <span className="mb-4 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Filing Timelines</span>
+                    <h1 className="mb-5 max-w-4xl text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[44px] dark:text-[#fafafa]">Regulatory <span className="text-[#1677f2] dark:text-[#4f9dfb]">Compliance Calendar</span></h1>
+                    <p className="max-w-3xl text-[16px] font-medium leading-[1.7] text-[#475569] sm:text-[18px] dark:text-[#a1a1aa]">
                         A consolidated, indicative view of the recurring filings and returns regulated entities are expected to manage across RBI, SEBI, IRDAI, IFSCA, MCA/ROC and tax frameworks — so nothing slips through the cracks.
                     </p>
                 </div>
@@ -95,15 +95,15 @@ export default function ComplianceCalendarPage() {
             <section className="mx-auto max-w-7xl px-6 py-14">
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
                     {calendars.map((cal) => (
-                        <div key={cal.regulator} className="overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-[0_8px_30px_rgba(0,80,140,0.06)]">
-                            <div className="flex items-center gap-3 border-b border-blue-100 bg-[#f8fbff] px-5 py-4">
-                                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f5fbff] text-xl">{cal.icon}</span>
-                                <h2 className="text-[16px] font-black tracking-[-0.01em] text-[#120b45]">{cal.regulator}</h2>
+                        <div key={cal.regulator} className="overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-[0_8px_30px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+                            <div className="flex items-center gap-3 border-b border-blue-100 bg-[#f8fbff] px-5 py-4 dark:bg-[#141417] dark:border-[#27272b]">
+                                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f5fbff] text-xl dark:bg-[#141417]">{cal.icon}</span>
+                                <h2 className="text-[16px] font-black tracking-[-0.01em] text-[#120b45] dark:text-[#fafafa]">{cal.regulator}</h2>
                             </div>
                             <div className="overflow-x-auto">
                                 <table className="w-full min-w-[520px] text-left text-[13px]">
                                     <thead>
-                                        <tr className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8]">
+                                        <tr className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">
                                             <th className="px-5 py-3">Filing / Return</th>
                                             <th className="px-5 py-3">Frequency</th>
                                             <th className="px-5 py-3">Indicative Timing</th>
@@ -112,11 +112,11 @@ export default function ComplianceCalendarPage() {
                                     </thead>
                                     <tbody>
                                         {cal.rows.map((r) => (
-                                            <tr key={r.filing} className="border-t border-gray-100 align-top">
-                                                <td className="px-5 py-3 font-bold text-[#0a1628]">{r.filing}</td>
-                                                <td className="px-5 py-3 text-[#475569]">{r.frequency}</td>
-                                                <td className="px-5 py-3 text-[#475569]">{r.timing}</td>
-                                                <td className="px-5 py-3 text-[#64748b]">{r.applies}</td>
+                                            <tr key={r.filing} className="border-t border-gray-100 align-top dark:border-[#27272b]">
+                                                <td className="px-5 py-3 font-bold text-[#0a1628] dark:text-[#fafafa]">{r.filing}</td>
+                                                <td className="px-5 py-3 text-[#475569] dark:text-[#a1a1aa]">{r.frequency}</td>
+                                                <td className="px-5 py-3 text-[#475569] dark:text-[#a1a1aa]">{r.timing}</td>
+                                                <td className="px-5 py-3 text-[#64748b] dark:text-[#a1a1aa]">{r.applies}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -127,15 +127,15 @@ export default function ComplianceCalendarPage() {
                 </div>
 
                 {/* Disclaimer */}
-                <div className="mt-8 rounded-2xl border border-amber-200 border-l-4 border-l-[#f59e0b] bg-[#fffbf0] p-5">
-                    <p className="text-[13px] leading-relaxed text-[#78350f]">
+                <div className="mt-8 rounded-2xl border border-amber-200 border-l-4 border-l-[#f59e0b] bg-[#fffbf0] p-5 dark:bg-[#141417] dark:border-[#4a3a1a]">
+                    <p className="text-[13px] leading-relaxed text-[#78350f] dark:text-[#fcd34d]">
                         <strong>Important:</strong> This calendar is indicative and for general guidance only. Exact due dates, frequencies and applicability vary by entity type, registration category, turnover, financial-year end and the regulations in force at the time. Always verify the latest official schedule from the relevant regulator before acting. Estabizz can prepare an entity-specific compliance calendar mapped to your registrations.
                     </p>
                 </div>
             </section>
 
             {/* CTA */}
-            <section className="mx-6 mb-16 overflow-hidden rounded-2xl border border-[#1677f2]/25 bg-gradient-to-br from-[#0a1628] to-[#0c2040] px-6 py-14 text-center sm:px-10">
+            <section className="mx-6 mb-16 overflow-hidden rounded-2xl border border-[#1677f2]/25 bg-gradient-to-br from-[#0a1628] to-[#0c2040] dark:from-[#141417] dark:to-[#1c1c20] px-6 py-14 text-center sm:px-10">
                 <div className="mx-auto max-w-3xl">
                     <p className="mb-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#4f9dfb]">Estabizz Fintech Private Limited</p>
                     <h2 className="mb-4 text-[26px] font-black text-white sm:text-[30px]">Want a compliance calendar built for your entity?</h2>

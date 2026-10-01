@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 interface NavQuickLink { label: string; href: string; icon: string; newTab: boolean }
 
 const inputCls =
-  "w-full rounded-lg border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2 text-[13px] text-[#0a1628] dark:text-[#f7f9fc] outline-none transition-colors focus:border-[#1677f2] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b]";
+  "w-full rounded-lg border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] px-3 py-2 text-[13px] text-[#0a1628] dark:text-[#fafafa] outline-none transition-colors focus:border-[#1677f2] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b]";
 
 function formatIST(iso: string | null): string {
   if (!iso) return "—";
@@ -77,47 +77,47 @@ export default function NavbarEditor() {
   }
 
   return (
-    <section className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
-      <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-6 py-3">
-        <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">Navbar — Quick Links & Button</span>
-        <span className="text-[11px] text-[#94a3b8] dark:text-[#a9b6c9]">Last updated: {formatIST(updatedAt)}</span>
+    <section className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+      <div className="flex items-center justify-between border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11] px-6 py-3">
+        <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">Navbar — Quick Links & Button</span>
+        <span className="text-[11px] text-[#94a3b8] dark:text-[#a1a1aa]">Last updated: {formatIST(updatedAt)}</span>
       </div>
 
       {loading ? (
-        <div className="px-6 py-10 text-center text-[13px] text-[#94a3b8] dark:text-[#a9b6c9]">Loading…</div>
+        <div className="px-6 py-10 text-center text-[13px] text-[#94a3b8] dark:text-[#a1a1aa]">Loading…</div>
       ) : (
         <div className="px-6 py-6">
-          <p className="mb-3 text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]">Quick links (the standalone links beside the menus)</p>
+          <p className="mb-3 text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">Quick links (the standalone links beside the menus)</p>
           <div className="space-y-2">
             {links.map((link, i) => (
               <div key={i} className="flex items-center gap-1.5">
                 <input value={link.icon} onChange={(e) => setLink(i, { icon: e.target.value })} placeholder="🔗" className={inputCls + " w-14 text-center"} title="Emoji (mobile)" />
                 <input value={link.label} onChange={(e) => setLink(i, { label: e.target.value })} placeholder="Label" className={inputCls} />
                 <input value={link.href} onChange={(e) => setLink(i, { href: e.target.value })} placeholder="/path or https://…" className={inputCls + " font-mono text-[11px]"} />
-                <label className="flex shrink-0 items-center gap-1 text-[11px] text-[#64748b]" title="Open in new tab">
+                <label className="flex shrink-0 items-center gap-1 text-[11px] text-[#64748b] dark:text-[#a1a1aa]" title="Open in new tab">
                   <input type="checkbox" checked={link.newTab} onChange={(e) => setLink(i, { newTab: e.target.checked })} /> new tab
                 </label>
-                <button onClick={() => removeLink(i)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500">✕</button>
+                <button onClick={() => removeLink(i)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a]">✕</button>
               </div>
             ))}
           </div>
-          <button onClick={addLink} className="mt-2 text-[11px] font-bold text-[#1677f2] hover:underline">+ Add quick link</button>
+          <button onClick={addLink} className="mt-2 text-[11px] font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">+ Add quick link</button>
 
-          <div className="mt-6 grid gap-4 border-t border-[#f0f4f8] dark:border-[#223550] pt-5 sm:grid-cols-2">
+          <div className="mt-6 grid gap-4 border-t border-[#f0f4f8] dark:border-[#27272b] pt-5 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]">Button label</label>
+              <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">Button label</label>
               <input value={ctaLabel} onChange={(e) => { setCtaLabel(e.target.value); setNotice(""); }} className={inputCls} />
             </div>
             <div>
-              <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]">Button link</label>
+              <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">Button link</label>
               <input value={ctaHref} onChange={(e) => { setCtaHref(e.target.value); setNotice(""); }} className={inputCls + " font-mono text-[11px]"} />
             </div>
           </div>
 
           {(error || notice) && (
             <div className="mt-4">
-              {error && <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-[12px] font-medium text-red-700">{error}</div>}
-              {notice && <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-2.5 text-[12px] font-medium text-green-700">{notice}</div>}
+              {error && <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-[12px] font-medium text-red-700 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">{error}</div>}
+              {notice && <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-2.5 text-[12px] font-medium text-green-700 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]">{notice}</div>}
             </div>
           )}
 

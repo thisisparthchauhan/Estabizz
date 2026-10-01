@@ -65,7 +65,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -104,7 +104,7 @@ export default function PageClient() {
       finalCtaTitle="Show That No Offence Is Made Out, Not That the Allegations Are False"
       finalCtaDescription="The High Court is not trying the case. Petitions that dispute the complainant's version invite the answer that this is for evidence. Petitions that succeed show the case fails on the complainant's own material."
       heroDescription={<p>A false, exaggerated or legally unsustainable FIR affects liberty, reputation, business relationships, banking and employment long before any trial begins. The High Court can terminate such proceedings under Section 528 of the Bharatiya Nagarik Suraksha Sanhita — but the power is exceptional, the framework is settled, and the petition has to be built for it. Estabizz assists individuals, directors, business owners, professionals and NRIs with case and stage assessment, offence-ingredient mapping under the BNS, evidence and chronology preparation, grounds analysis, settlement documentation where quashing on settlement is available, interim protection strategy, petition drafting support, annexure compilation, filing coordination and advocate briefing.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> quashing is asking the High Court to stop a criminal case before it runs its course, because the case should not legally have started.</p>

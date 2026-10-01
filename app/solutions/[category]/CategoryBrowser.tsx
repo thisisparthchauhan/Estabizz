@@ -66,7 +66,7 @@ export default function CategoryBrowser({
           <div className="relative max-w-[540px]">
             <span
               aria-hidden
-              className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-[15px] text-[#94a3b8] dark:text-[#94a3b8]"
+              className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-[15px] text-[#94a3b8] dark:text-[#8b8b94]"
             >
               ⌕
             </span>
@@ -76,10 +76,10 @@ export default function CategoryBrowser({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={`Describe your situation — divorce, cheque, FIR, property…`}
-              className="w-full rounded-2xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] py-3.5 pl-11 pr-5 text-[15px] font-medium text-[#071426] dark:text-[#f7f9fc] shadow-[0_8px_30px_rgba(0,80,140,0.06)] outline-none transition-colors placeholder:text-[#94a3b8] focus:border-[#1677f2]"
+              className="w-full rounded-2xl border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] py-3.5 pl-11 pr-5 text-[15px] font-medium text-[#071426] dark:text-[#fafafa] shadow-[0_8px_30px_rgba(0,80,140,0.06)] outline-none transition-colors placeholder:text-[#94a3b8] focus:border-[#1677f2]"
             />
           </div>
-          <p className="mt-3 text-[13px] font-semibold text-[#94a3b8] dark:text-[#94a3b8]" aria-live="polite">
+          <p className="mt-3 text-[13px] font-semibold text-[#94a3b8] dark:text-[#8b8b94]" aria-live="polite">
             {query.trim()
               ? `${matches} of ${total} services match “${query.trim()}”`
               : `${total} services, grouped by what you are trying to do`}
@@ -93,10 +93,10 @@ export default function CategoryBrowser({
             <a
               key={group.heading}
               href={`#${slugify(group.heading)}`}
-              className="rounded-full border border-blue-100 dark:border-[#223550] bg-[#f5fbff] dark:bg-[#12223a] px-4 py-2 text-[13px] font-bold text-[#0077B6] dark:text-[#60a5fa] transition-all hover:-translate-y-0.5 hover:border-[#1677f2]/40 hover:text-[#1677f2]"
+              className="rounded-full border border-blue-100 dark:border-[#27272b] bg-[#f5fbff] dark:bg-[#1c1c20] px-4 py-2 text-[13px] font-bold text-[#0077B6] dark:text-[#60a5fa] transition-all hover:-translate-y-0.5 hover:border-[#1677f2]/40 hover:text-[#1677f2]"
             >
               {group.heading}
-              <span className="ml-2 text-[11.5px] font-black text-[#94a3b8] dark:text-[#94a3b8]">
+              <span className="ml-2 text-[11.5px] font-black text-[#94a3b8] dark:text-[#8b8b94]">
                 {group.entries.length}
               </span>
             </a>
@@ -105,11 +105,11 @@ export default function CategoryBrowser({
       )}
 
       {filtered.length === 0 ? (
-        <div className="rounded-[28px] border border-dashed border-blue-100 dark:border-[#223550] bg-[#f7fbff] dark:bg-[#12223a] px-6 py-14 text-center">
-          <p className="text-[18px] font-black text-[#071426] dark:text-[#f7f9fc]">
+        <div className="rounded-[28px] border border-dashed border-blue-100 dark:border-[#27272b] bg-[#f7fbff] dark:bg-[#1c1c20] px-6 py-14 text-center">
+          <p className="text-[18px] font-black text-[#071426] dark:text-[#fafafa]">
             Nothing here matches “{query.trim()}”
           </p>
-          <p className="mx-auto mt-3 max-w-md text-[14.5px] font-medium leading-[1.8] text-[#64748b] dark:text-[#a9b6c9]">
+          <p className="mx-auto mt-3 max-w-md text-[14.5px] font-medium leading-[1.8] text-[#64748b] dark:text-[#a1a1aa]">
             Clear the filter to see all {total} {categoryLabel.toLowerCase()} services, or tell us
             the situation and we will point you to the right one.
           </p>
@@ -117,7 +117,7 @@ export default function CategoryBrowser({
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="inline-flex items-center justify-center rounded-xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-6 py-3 text-[14.5px] font-bold text-[#1677f2] transition-colors hover:border-[#1677f2]/40"
+              className="inline-flex items-center justify-center rounded-xl border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] px-6 py-3 text-[14.5px] font-bold text-[#1677f2] transition-colors hover:border-[#1677f2]/40 dark:text-[#4f9dfb]"
             >
               Clear filter
             </button>
@@ -133,11 +133,11 @@ export default function CategoryBrowser({
         <div className="space-y-14">
           {filtered.map((group) => (
             <section key={group.heading} id={slugify(group.heading)} className="scroll-mt-[96px]">
-              <div className="mb-6 border-b border-blue-100 dark:border-[#223550] pb-4">
-                <h2 className="text-[22px] font-black leading-tight tracking-[-0.03em] text-[#120b45] dark:text-[#f7f9fc]">
+              <div className="mb-6 border-b border-blue-100 dark:border-[#27272b] pb-4">
+                <h2 className="text-[22px] font-black leading-tight tracking-[-0.03em] text-[#120b45] dark:text-[#fafafa]">
                   {group.heading}
                 </h2>
-                <p className="mt-2 max-w-[760px] text-[14.5px] font-medium leading-[1.8] text-[#64748b] dark:text-[#a9b6c9]">
+                <p className="mt-2 max-w-[760px] text-[14.5px] font-medium leading-[1.8] text-[#64748b] dark:text-[#a1a1aa]">
                   {group.blurb}
                 </p>
               </div>
@@ -146,20 +146,20 @@ export default function CategoryBrowser({
                   <Link
                     key={entry.href + entry.title}
                     href={entry.href}
-                    className="group flex flex-col rounded-[22px] border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1677f2]/40"
+                    className="group flex flex-col rounded-[22px] border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] p-6 shadow-[0_8px_30px_rgba(0,80,140,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1677f2]/40"
                   >
-                    <span className="text-[10.5px] font-black uppercase tracking-[0.18em] text-[#1677f2]">
+                    <span className="text-[10.5px] font-black uppercase tracking-[0.18em] text-[#1677f2] dark:text-[#4f9dfb]">
                       {entry.kind === "guide" ? "Full guide" : "Service"}
                     </span>
-                    <h3 className="mt-2.5 text-[17px] font-black leading-snug text-[#071426] dark:text-[#f7f9fc] transition-colors group-hover:text-[#1677f2]">
+                    <h3 className="mt-2.5 text-[17px] font-black leading-snug text-[#071426] dark:text-[#fafafa] transition-colors group-hover:text-[#1677f2]">
                       {entry.title}
                     </h3>
-                    <p className="mt-2.5 flex-1 text-[13.5px] font-medium leading-[1.75] text-[#64748b] dark:text-[#a9b6c9]">
+                    <p className="mt-2.5 flex-1 text-[13.5px] font-medium leading-[1.75] text-[#64748b] dark:text-[#a1a1aa]">
                       {entry.description}
                     </p>
-                    <span className="mt-4 flex flex-wrap items-center gap-x-3 text-[12px] font-bold text-[#94a3b8] dark:text-[#94a3b8]">
+                    <span className="mt-4 flex flex-wrap items-center gap-x-3 text-[12px] font-bold text-[#94a3b8] dark:text-[#8b8b94]">
                       {entry.meta && <span>{entry.meta}</span>}
-                      <span className="ml-auto text-[#1677f2]">Open →</span>
+                      <span className="ml-auto text-[#1677f2] dark:text-[#4f9dfb]">Open →</span>
                     </span>
                   </Link>
                 ))}
@@ -175,11 +175,11 @@ export default function CategoryBrowser({
           which one described their situation reached the end of the page with
           nothing to do. That is the reader most worth talking to. */}
       {!query.trim() && (
-        <div className="mt-16 rounded-[28px] border border-blue-100 dark:border-[#223550] bg-[#f7fbff] dark:bg-[#12223a] px-6 py-12 text-center sm:px-12">
-          <p className="text-[22px] font-black tracking-[-0.03em] text-[#120b45] dark:text-[#f7f9fc]">
+        <div className="mt-16 rounded-[28px] border border-blue-100 dark:border-[#27272b] bg-[#f7fbff] dark:bg-[#1c1c20] px-6 py-12 text-center sm:px-12">
+          <p className="text-[22px] font-black tracking-[-0.03em] text-[#120b45] dark:text-[#fafafa]">
             Not sure which one is your situation?
           </p>
-          <p className="mx-auto mt-3 max-w-[560px] text-[14.5px] font-medium leading-[1.8] text-[#64748b] dark:text-[#a9b6c9]">
+          <p className="mx-auto mt-3 max-w-[560px] text-[14.5px] font-medium leading-[1.8] text-[#64748b] dark:text-[#a1a1aa]">
             Describe what has happened in your own words. We will tell you which route applies,
             what it costs and what the realistic timeline looks like — before you commit to anything.
           </p>
@@ -192,7 +192,7 @@ export default function CategoryBrowser({
             </Link>
             <a
               href="https://wa.me/919825600907"
-              className="inline-flex items-center justify-center rounded-xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-7 py-3.5 text-[15px] font-bold text-[#1677f2] transition-colors hover:border-[#1677f2]/40"
+              className="inline-flex items-center justify-center rounded-xl border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] px-7 py-3.5 text-[15px] font-bold text-[#1677f2] transition-colors hover:border-[#1677f2]/40 dark:text-[#4f9dfb]"
             >
               WhatsApp us
             </a>

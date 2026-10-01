@@ -30,7 +30,7 @@ function SectionHeading({
   return (
     <div className="mb-5 flex items-end justify-between">
       <div>
-        <h2 className="text-[20px] font-black tracking-tight text-[#0a1628] leading-tight">
+        <h2 className="text-[20px] font-black tracking-tight text-[#0a1628] leading-tight dark:text-[#fafafa]">
           {title}
         </h2>
         <div className="mt-1.5 h-[3px] w-12 rounded-full bg-[#1677f2]" />
@@ -38,7 +38,7 @@ function SectionHeading({
       {href && hrefLabel && (
         <Link
           href={href}
-          className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors"
+          className="text-[12px] font-bold text-[#1677f2] hover:text-[#0077B6] transition-colors dark:text-[#4f9dfb]"
         >
           {hrefLabel}
         </Link>
@@ -48,7 +48,7 @@ function SectionHeading({
 }
 
 function Divider() {
-  return <hr className="border-t border-[#e8e8e8] my-10" />;
+  return <hr className="border-t border-[#e8e8e8] my-10 dark:border-[#27272b]" />;
 }
 
 function fmtShort(iso?: string) {
@@ -70,11 +70,11 @@ function NewsletterCTA() {
   };
 
   return (
-    <div className="mb-16 overflow-hidden border border-[#e8e8e8] bg-[#0a1628]">
+    <div className="mb-16 overflow-hidden border border-[#e8e8e8] bg-[#0a1628] dark:bg-[#1c1c20] dark:border-[#27272b]">
       <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr]">
         {/* Left — copy + form */}
         <div className="px-7 py-10 md:px-10 md:py-12">
-          <p className="mb-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#1677f2]">
+          <p className="mb-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
             Estabizz Regulatory Intelligence
           </p>
           <h2 className="mb-3 text-[24px] font-black leading-tight text-white md:text-[28px]">
@@ -97,7 +97,7 @@ function NewsletterCTA() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email address"
-                className="h-11 flex-1 rounded-lg border border-white/15 bg-white/[0.06] px-4 text-[13.5px] text-white placeholder:text-white/35 outline-none focus:border-[#1677f2]/50 focus:ring-2 focus:ring-[#1677f2]/15"
+                className="h-11 flex-1 rounded-lg border border-white/15 bg-white/[0.06] px-4 text-[13.5px] text-white placeholder:text-white/35 outline-none focus:border-[#1677f2]/50 focus:ring-2 focus:ring-[#1677f2]/15 dark:bg-[#141417]"
               />
               <button
                 type="submit"
@@ -110,7 +110,7 @@ function NewsletterCTA() {
         </div>
 
         {/* Right — speak to an expert */}
-        <div className="flex flex-col justify-center gap-4 border-t border-white/10 bg-white/[0.02] px-7 py-10 md:px-10 lg:border-l lg:border-t-0">
+        <div className="flex flex-col justify-center gap-4 border-t border-white/10 bg-white/[0.02] px-7 py-10 md:px-10 lg:border-l lg:border-t-0 dark:bg-[#141417]">
           <div>
             <p className="mb-1 text-[11px] font-black uppercase tracking-wider text-white/40">
               Need professional help?
@@ -121,9 +121,9 @@ function NewsletterCTA() {
           </div>
           <a
             href="tel:9825600907"
-            className="inline-flex items-center gap-2.5 rounded-lg border border-white/15 bg-white/[0.05] px-5 py-3 text-[15px] font-black text-white transition-colors hover:border-[#1677f2]/50 hover:text-[#1677f2]"
+            className="inline-flex items-center gap-2.5 rounded-lg border border-white/15 bg-white/[0.05] px-5 py-3 text-[15px] font-black text-white transition-colors hover:border-[#1677f2]/50 hover:text-[#1677f2] dark:bg-[#141417] dark:text-[#4f9dfb]"
           >
-            <svg className="h-4 w-4 text-[#1677f2]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="h-4 w-4 text-[#1677f2] dark:text-[#4f9dfb]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
             Estabizz Team 9825600907
@@ -219,21 +219,21 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
   const moreToRead = !isFiltered ? initialBlogs.slice(0, 3) : [];
 
   return (
-    <main className="min-h-screen bg-white pt-[64px]">
+    <main className="min-h-screen bg-white pt-[64px] dark:bg-[#141417]">
 
       {/* ── BLOG HEADER AREA ────────────────────────────────────────────────── */}
-      <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white">
+      <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
         {/* Homepage-style ambient gradients */}
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_20%,rgba(0,150,214,0.16),transparent_36%),radial-gradient(circle_at_5%_90%,rgba(22,119,242,0.10),transparent_32%)]" />
-        <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff]" />
+        <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
         <div className="mx-auto max-w-screen-xl px-4 py-10 sm:py-14">
-          <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-[#0077B6] shadow-sm">
+          <div className="inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-[#0077B6] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
             Estabizz Regulatory Intelligence
           </div>
-          <h1 className="mt-4 text-[34px] font-black leading-[1.05] tracking-[-0.03em] text-[#120b45] sm:text-[48px]">
-            Estabizz <span className="text-[#1677f2]">Insights</span>
+          <h1 className="mt-4 text-[34px] font-black leading-[1.05] tracking-[-0.03em] text-[#120b45] sm:text-[48px] dark:text-[#fafafa]">
+            Estabizz <span className="text-[#1677f2] dark:text-[#4f9dfb]">Insights</span>
           </h1>
-          <p className="mt-3 max-w-2xl text-[15px] font-medium leading-relaxed text-[#64748b] sm:text-[17px]">
+          <p className="mt-3 max-w-2xl text-[15px] font-medium leading-relaxed text-[#64748b] sm:text-[17px] dark:text-[#a1a1aa]">
             Regulatory updates, licensing insights and financial compliance
             intelligence for Indian businesses.
           </p>
@@ -241,7 +241,7 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
       </header>
 
       {/* ── STICKY CATEGORY NAV BAR ─────────────────────────────────────────── */}
-      <div className="sticky top-[64px] z-40 bg-white border-b border-[#e8e8e8] shadow-sm">
+      <div className="sticky top-[64px] z-40 bg-white border-b border-[#e8e8e8] shadow-sm dark:bg-[#141417] dark:border-[#27272b]">
         <div className="mx-auto max-w-screen-xl px-4">
           <div className="flex items-center gap-1 overflow-x-auto py-3 [&::-webkit-scrollbar]:hidden scrollbar-hide">
             <button
@@ -249,7 +249,7 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
               className={`shrink-0 rounded-full px-4 py-1.5 text-[13px] font-bold transition-all ${
                 activeCategory === "all"
                   ? "bg-[#0a1628] text-white"
-                  : "text-[#374151] hover:text-[#0a1628] hover:bg-[#f7f8fc]"
+                  : "text-[#374151] hover:text-[#0a1628] hover:bg-[#f7f8fc] dark:bg-[#141417] dark:text-[#a1a1aa]"
               }`}
             >
               All
@@ -261,7 +261,7 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
                 className={`shrink-0 flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[13px] font-bold transition-all ${
                   activeCategory === cat.slug
                     ? "text-white"
-                    : "text-[#374151] hover:text-[#0a1628] hover:bg-[#f7f8fc]"
+                    : "text-[#374151] hover:text-[#0a1628] hover:bg-[#f7f8fc] dark:bg-[#141417] dark:text-[#a1a1aa]"
                 }`}
                 style={activeCategory === cat.slug ? { backgroundColor: cat.color } : {}}
               >
@@ -274,12 +274,12 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
       </div>
 
       {/* ── SEARCH BAR ──────────────────────────────────────────────────────── */}
-      <div className="bg-[#f7f8fc] border-b border-[#e8e8e8]">
+      <div className="bg-[#f7f8fc] border-b border-[#e8e8e8] dark:bg-[#141417] dark:border-[#27272b]">
         <div className="mx-auto max-w-screen-xl px-4 py-3">
           <div className="flex items-center gap-3">
             <div className="relative flex-1 max-w-lg">
               <svg
-                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9ca3af]"
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9ca3af] dark:text-[#71717a]"
                 fill="none" viewBox="0 0 24 24" stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -290,21 +290,21 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search articles, topics, regulations..."
-                className="h-9 w-full rounded-lg border border-[#e0e0e0] bg-white pl-9 pr-4 text-[13px] text-[#111827] placeholder:text-[#9ca3af] outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10"
+                className="h-9 w-full rounded-lg border border-[#e0e0e0] bg-white pl-9 pr-4 text-[13px] text-[#111827] placeholder:text-[#9ca3af] outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
               />
             </div>
             {isFiltered && (
               <button
                 onClick={clearFilters}
-                className="text-[12px] font-bold text-[#6b7280] hover:text-[#0a1628] transition-colors whitespace-nowrap"
+                className="text-[12px] font-bold text-[#6b7280] hover:text-[#0a1628] transition-colors whitespace-nowrap dark:text-[#a1a1aa]"
               >
                 Clear ×
               </button>
             )}
-            <p className="hidden sm:block text-[12px] text-[#9ca3af]">
+            <p className="hidden sm:block text-[12px] text-[#9ca3af] dark:text-[#71717a]">
               {filteredBlogs.length === 1 ? "1 article" : `${filteredBlogs.length} articles`}
               {activeCategory !== "all" && (
-                <span> in <strong className="text-[#374151]">
+                <span> in <strong className="text-[#374151] dark:text-[#a1a1aa]">
                   {categories.find((c) => c.slug === activeCategory)?.name}
                 </strong></span>
               )}
@@ -315,9 +315,9 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
 
       {/* ── LATEST REGULATORY UPDATE TICKER ─────────────────────────────────── */}
       {!isFiltered && tickerItems.length > 0 && (
-        <div className="border-b border-[#e8e8e8] bg-white">
+        <div className="border-b border-[#e8e8e8] bg-white dark:bg-[#141417] dark:border-[#27272b]">
           <div className="mx-auto flex max-w-screen-xl items-center gap-4 px-4 py-2.5">
-            <span className="flex shrink-0 items-center gap-1.5 rounded-sm bg-[#0a1628] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#1677f2]">
+            <span className="flex shrink-0 items-center gap-1.5 rounded-sm bg-[#0a1628] dark:bg-[#1c1c20] px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#1677f2]">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1677f2] opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#1677f2]" />
@@ -334,11 +334,11 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
                   <span className="font-black uppercase tracking-wide" style={{ color: b.category.color }}>
                     {b.category.name.split(" ")[0]}
                   </span>
-                  <span className="font-semibold text-[#374151] group-hover:text-[#1677f2] transition-colors">
+                  <span className="font-semibold text-[#374151] group-hover:text-[#1677f2] transition-colors dark:text-[#a1a1aa]">
                     {b.title}
                   </span>
-                  <span className="text-[#cbd5e1]">·</span>
-                  <span className="text-[#9ca3af]">{fmtShort(b.publishedAt)}</span>
+                  <span className="text-[#cbd5e1] dark:text-[#71717a]">·</span>
+                  <span className="text-[#9ca3af] dark:text-[#71717a]">{fmtShort(b.publishedAt)}</span>
                 </Link>
               ))}
             </div>
@@ -350,15 +350,15 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
       {filteredBlogs.length === 0 && (
         <div className="mx-auto max-w-screen-xl px-4 py-24 text-center">
           <div className="mb-5 text-5xl opacity-30">🔍</div>
-          <h2 className="mb-2 text-[22px] font-black text-[#0a1628]">No regulatory insight found</h2>
-          <p className="mb-8 text-[14px] text-[#6b7280]">
+          <h2 className="mb-2 text-[22px] font-black text-[#0a1628] dark:text-[#fafafa]">No regulatory insight found</h2>
+          <p className="mb-8 text-[14px] text-[#6b7280] dark:text-[#a1a1aa]">
             {search.trim()
               ? <>No results for &quot;{search}&quot;. Try RBI, SEBI, NBFC, Insurance or Fintech.</>
               : "No articles in this category yet. Check back soon or browse all insights."}
           </p>
           <button
             onClick={clearFilters}
-            className="rounded-lg bg-[#0a1628] px-6 py-2.5 text-[13px] font-bold text-white hover:bg-[#0a1628]/90 transition-colors"
+            className="rounded-lg bg-[#0a1628] dark:bg-[#1c1c20] px-6 py-2.5 text-[13px] font-bold text-white hover:bg-[#0a1628]/90 transition-colors"
           >
             View all articles
           </button>
@@ -369,12 +369,12 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
       {isFiltered && filteredBlogs.length > 0 && (
         <div className="mx-auto max-w-screen-xl px-4 py-10">
           <div className="mb-6">
-            <h2 className="text-[18px] font-black text-[#0a1628]">
+            <h2 className="text-[18px] font-black text-[#0a1628] dark:text-[#fafafa]">
               {search.trim()
                 ? <>Results for &quot;{search}&quot;</>
                 : categories.find((c) => c.slug === activeCategory)?.name}
             </h2>
-            <p className="mt-1 text-[12.5px] text-[#9ca3af]">
+            <p className="mt-1 text-[12.5px] text-[#9ca3af] dark:text-[#71717a]">
               {filteredBlogs.length} {filteredBlogs.length === 1 ? "article" : "articles"} found
             </p>
           </div>
@@ -396,12 +396,12 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
               <div className="pt-8">
                 <SectionHeading title="Top Regulatory Stories" />
                 <div className="grid grid-cols-1 gap-0 lg:grid-cols-[3fr_2fr]">
-                  <div className="border border-[#e8e8e8]">
+                  <div className="border border-[#e8e8e8] dark:border-[#27272b]">
                     <CardHero blog={heroPrimary} />
                   </div>
                   {heroSide.length > 0 && (
-                    <div className="border border-t-0 border-[#e8e8e8] px-5 py-4 lg:border-l-0 lg:border-t">
-                      <p className="mb-3 text-[10px] font-black uppercase tracking-[0.18em] text-[#9ca3af]">
+                    <div className="border border-t-0 border-[#e8e8e8] px-5 py-4 lg:border-l-0 lg:border-t dark:border-[#27272b]">
+                      <p className="mb-3 text-[10px] font-black uppercase tracking-[0.18em] text-[#9ca3af] dark:text-[#71717a]">
                         More Top Stories
                       </p>
                       {heroSide.map((blog) => (
@@ -462,7 +462,7 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
                 {/* Right — Most Popular ranked */}
                 <div>
                   <SectionHeading title="Most Popular" />
-                  <div className="border border-[#e8e8e8] bg-[#f7f8fc] px-5 py-2">
+                  <div className="border border-[#e8e8e8] bg-[#f7f8fc] px-5 py-2 dark:bg-[#141417] dark:border-[#27272b]">
                     {mostPopular.map((blog, i) => (
                       <CardPopularRank key={blog.id} blog={blog} rank={i + 1} />
                     ))}

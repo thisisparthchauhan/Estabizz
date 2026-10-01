@@ -61,11 +61,11 @@ const STATUS_LABELS: Record<ImportStatus, string> = {
 };
 
 const STATUS_STYLES: Record<ImportStatus, string> = {
-  importable: "border-green-200 bg-green-50 text-green-700",
-  needs_manual_mapping: "border-amber-200 bg-amber-50 text-amber-700",
-  "redirect/alias": "border-slate-200 bg-slate-50 text-slate-600",
-  excluded_for_now: "border-zinc-200 bg-zinc-50 text-zinc-600",
-  skipped_existing: "border-blue-200 bg-blue-50 text-blue-700",
+  importable: "border-green-200 bg-green-50 text-green-700 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]",
+  needs_manual_mapping: "border-amber-200 bg-amber-50 text-amber-700 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]",
+  "redirect/alias": "border-slate-200 bg-slate-50 text-slate-600 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]",
+  excluded_for_now: "border-zinc-200 bg-zinc-50 text-zinc-600 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]",
+  skipped_existing: "border-blue-200 bg-blue-50 text-blue-700 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]",
 };
 
 function labelise(value: string): string {
@@ -82,9 +82,9 @@ function unique(items: InventoryItem[], key: keyof InventoryItem): string[] {
 
 function SummaryCard({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-4 shadow-[0_8px_24px_rgba(0,80,140,0.05)]">
-      <div className="text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">{label}</div>
-      <div className="mt-2 text-[28px] font-black tracking-tight text-[#120b45]">{value}</div>
+    <div className="rounded-xl border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] p-4 shadow-[0_8px_24px_rgba(0,80,140,0.05)]">
+      <div className="text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">{label}</div>
+      <div className="mt-2 text-[28px] font-black tracking-tight text-[#120b45] dark:text-[#fafafa]">{value}</div>
     </div>
   );
 }
@@ -161,26 +161,26 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
 
   if (!canView) {
     return (
-      <div className="min-h-[60vh] bg-[#f6f9ff] p-6">
-        <div className="rounded-2xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-8 shadow-sm">
-          <h1 className="text-2xl font-black text-[#120b45]">Content Pages</h1>
-          <p className="mt-2 text-sm font-medium text-[#64748b]">You do not have access to view this page.</p>
+      <div className="min-h-[60vh] bg-[#f6f9ff] p-6 dark:bg-[#141417]">
+        <div className="rounded-2xl border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] p-8 shadow-sm">
+          <h1 className="text-2xl font-black text-[#120b45] dark:text-[#fafafa]">Content Pages</h1>
+          <p className="mt-2 text-sm font-medium text-[#64748b] dark:text-[#a1a1aa]">You do not have access to view this page.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#f6f9ff] p-5 md:p-6">
+    <div className="min-h-screen bg-[#f6f9ff] p-5 md:p-6 dark:bg-[#141417]">
       <div className="mx-auto max-w-[1500px]">
         <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h1 className="text-[28px] font-black tracking-tight text-[#120b45]">Public Content Pages</h1>
-            <p className="mt-2 max-w-3xl text-sm font-medium leading-6 text-[#64748b]">
+            <h1 className="text-[28px] font-black tracking-tight text-[#120b45] dark:text-[#fafafa]">Public Content Pages</h1>
+            <p className="mt-2 max-w-3xl text-sm font-medium leading-6 text-[#64748b] dark:text-[#a1a1aa]">
               Review existing public service, regulatory, resource, legal and 19/5 pages before CMS setup.
             </p>
           </div>
-          <div className="rounded-full border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2 text-xs font-bold text-[#1677f2] shadow-sm">
+          <div className="rounded-full border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] px-4 py-2 text-xs font-bold text-[#1677f2] shadow-sm dark:text-[#4f9dfb]">
             Read-only inventory
           </div>
         </div>
@@ -194,16 +194,16 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
           <SummaryCard label="Existing in CMS" value={summary.existingDbMatches} />
         </div>
 
-        <div className="mb-5 rounded-2xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-4 shadow-[0_10px_30px_rgba(0,80,140,0.05)]">
+        <div className="mb-5 rounded-2xl border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] p-4 shadow-[0_10px_30px_rgba(0,80,140,0.05)]">
           <div className="grid gap-3 lg:grid-cols-[minmax(260px,1.4fr)_repeat(4,minmax(150px,1fr))]">
             <label className="block">
-              <span className="mb-1.5 block text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">Search</span>
+              <span className="mb-1.5 block text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">Search</span>
               <input
                 type="search"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
                 placeholder="Search title, path, slug or source file"
-                className="h-11 w-full rounded-xl border border-blue-100 bg-[#f8fbff] px-3 text-sm font-medium text-[#0a1628] outline-none transition focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10"
+                className="h-11 w-full rounded-xl border border-blue-100 bg-[#f8fbff] px-3 text-sm font-medium text-[#0a1628] outline-none transition focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
               />
             </label>
 
@@ -214,11 +214,11 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
               ["Import Status", importStatus, setImportStatus, statusOptions],
             ].map(([label, value, setter, options]) => (
               <label key={label as string} className="block">
-                <span className="mb-1.5 block text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b]">{label as string}</span>
+                <span className="mb-1.5 block text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">{label as string}</span>
                 <select
                   value={value as string}
                   onChange={(event) => (setter as React.Dispatch<React.SetStateAction<string>>)(event.target.value)}
-                  className="h-11 w-full rounded-xl border border-blue-100 bg-[#f8fbff] px-3 text-sm font-bold text-[#0a1628] outline-none transition focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10"
+                  className="h-11 w-full rounded-xl border border-blue-100 bg-[#f8fbff] px-3 text-sm font-bold text-[#0a1628] outline-none transition focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
                 >
                   <option value="all">All</option>
                   {(options as string[]).map((option) => (
@@ -232,16 +232,16 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_14px_42px_rgba(0,80,140,0.07)]">
+        <div className="overflow-hidden rounded-2xl border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_14px_42px_rgba(0,80,140,0.07)]">
           <div className="flex items-center justify-between border-b border-blue-50 px-4 py-3">
-            <div className="text-sm font-black text-[#0a1628]">{filtered.length} pages shown</div>
-            {loading && <div className="text-xs font-bold text-[#64748b]">Loading pages...</div>}
-            {error && <div className="text-xs font-bold text-red-600">{error}</div>}
+            <div className="text-sm font-black text-[#0a1628] dark:text-[#fafafa]">{filtered.length} pages shown</div>
+            {loading && <div className="text-xs font-bold text-[#64748b] dark:text-[#a1a1aa]">Loading pages...</div>}
+            {error && <div className="text-xs font-bold text-red-600 dark:text-[#fca5a5]">{error}</div>}
           </div>
 
           <div className="overflow-x-auto">
             <table className="min-w-[1280px] w-full text-left">
-              <thead className="bg-[#f8fbff] text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b]">
+              <thead className="bg-[#f8fbff] text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:bg-[#141417] dark:text-[#a1a1aa]">
                 <tr>
                   <th className="px-4 py-3">Title</th>
                   <th className="px-4 py-3">Path</th>
@@ -262,47 +262,47 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
                   const editorSlug = isManaged ? editorSlugForPublicContentPath(item.fullPath) : "";
                   const editorRoute = editorSlug ? `/admin/content-pages/${editorSlug}/edit` : "";
                   return (
-                    <tr key={`${item.fullPath}-${item.sourceFile}`} className="align-top hover:bg-[#f8fbff]">
+                    <tr key={`${item.fullPath}-${item.sourceFile}`} className="align-top hover:bg-[#f8fbff] dark:bg-[#141417]">
                       <td className="max-w-[260px] px-4 py-3">
-                        <div className="text-sm font-black leading-snug text-[#0a1628]">{item.title}</div>
-                        <div className="mt-1 text-[11px] font-semibold text-[#94a3b8]">{item.slug}</div>
+                        <div className="text-sm font-black leading-snug text-[#0a1628] dark:text-[#fafafa]">{item.title}</div>
+                        <div className="mt-1 text-[11px] font-semibold text-[#94a3b8] dark:text-[#71717a]">{item.slug}</div>
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-start gap-2">
-                          <code className="rounded-lg bg-blue-50 px-2 py-1 text-[12px] font-bold text-[#0a2b58]">{item.fullPath}</code>
+                          <code className="rounded-lg bg-blue-50 px-2 py-1 text-[12px] font-bold text-[#0a2b58] dark:bg-[#1c1c20] dark:text-[#fafafa]">{item.fullPath}</code>
                           <button
                             type="button"
                             onClick={() => copyPath(item.fullPath)}
-                            className="rounded-lg border border-blue-100 px-2 py-1 text-[11px] font-black text-[#1677f2] transition hover:border-[#1677f2]"
+                            className="rounded-lg border border-blue-100 px-2 py-1 text-[11px] font-black text-[#1677f2] transition hover:border-[#1677f2] dark:border-[#27272b] dark:text-[#4f9dfb]"
                           >
                             {copiedPath === item.fullPath ? "Copied" : "Copy Path"}
                           </button>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-sm font-semibold text-[#334155]">{labelise(item.menuGroup)}</td>
-                      <td className="px-4 py-3 text-sm font-semibold text-[#334155]">{labelise(item.pageType)}</td>
-                      <td className="px-4 py-3 text-sm font-semibold text-[#334155]">{item.regulator}</td>
+                      <td className="px-4 py-3 text-sm font-semibold text-[#334155] dark:text-[#a1a1aa]">{labelise(item.menuGroup)}</td>
+                      <td className="px-4 py-3 text-sm font-semibold text-[#334155] dark:text-[#a1a1aa]">{labelise(item.pageType)}</td>
+                      <td className="px-4 py-3 text-sm font-semibold text-[#334155] dark:text-[#a1a1aa]">{item.regulator}</td>
                       <td className="px-4 py-3">
                         <span className={`inline-flex rounded-full border px-2.5 py-1 text-[11px] font-black ${STATUS_STYLES[item.importStatus]}`}>
                           {STATUS_LABELS[item.importStatus]}
                         </span>
                       </td>
-                      <td className="max-w-[260px] px-4 py-3 text-[12px] font-semibold leading-5 text-[#64748b]">{item.sourceFile}</td>
-                      <td className="max-w-[320px] px-4 py-3 text-[12px] font-medium leading-5 text-[#64748b]">{item.reason}</td>
+                      <td className="max-w-[260px] px-4 py-3 text-[12px] font-semibold leading-5 text-[#64748b] dark:text-[#a1a1aa]">{item.sourceFile}</td>
+                      <td className="max-w-[320px] px-4 py-3 text-[12px] font-medium leading-5 text-[#64748b] dark:text-[#a1a1aa]">{item.reason}</td>
                       <td className="px-4 py-3">
                         {isManaged && item.existingDbMatch ? (
                           <a
                             href={editorRoute}
-                            className="inline-flex rounded-lg bg-[#0a1628] px-3 py-2 text-[12px] font-black text-white transition hover:bg-[#1677f2]"
+                            className="inline-flex rounded-lg bg-[#0a1628] dark:bg-[#1c1c20] px-3 py-2 text-[12px] font-black text-white transition hover:bg-[#1677f2]"
                           >
                             Open Editor
                           </a>
                         ) : isManaged ? (
-                          <span className="inline-flex rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[12px] font-black text-amber-700">
+                          <span className="inline-flex rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[12px] font-black text-amber-700 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]">
                             Import First
                           </span>
                         ) : (
-                          <span className="inline-flex rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[12px] font-black text-slate-500">
+                          <span className="inline-flex rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[12px] font-black text-slate-500 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">
                             Coming Soon
                           </span>
                         )}
@@ -318,7 +318,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
                             Open Page
                           </a>
                         ) : (
-                          <span className="text-[12px] font-semibold text-[#94a3b8]">Not available</span>
+                          <span className="text-[12px] font-semibold text-[#94a3b8] dark:text-[#71717a]">Not available</span>
                         )}
                       </td>
                     </tr>
@@ -327,7 +327,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
 
                 {!loading && filtered.length === 0 && (
                   <tr>
-                    <td colSpan={10} className="px-4 py-12 text-center text-sm font-semibold text-[#64748b]">
+                    <td colSpan={10} className="px-4 py-12 text-center text-sm font-semibold text-[#64748b] dark:text-[#a1a1aa]">
                       No content pages found for this view.
                     </td>
                   </tr>

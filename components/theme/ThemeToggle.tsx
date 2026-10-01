@@ -61,7 +61,7 @@ export function ThemeToggle({ variant = "compact", className = "" }: ThemeToggle
     // Render a stable placeholder that matches the layout footprint
     return (
       <div
-        className={`inline-flex items-center gap-0.5 rounded-xl border border-[#dbe7f3] bg-white p-1 ${className}`}
+        className={`inline-flex items-center gap-0.5 rounded-xl border border-[#dbe7f3] bg-white p-1  dark:bg-[#141417] dark:border-[#27272b] ${className}`}
         aria-hidden="true"
         style={{ height: "36px", minWidth: variant === "compact" ? "118px" : "36px" }}
       />
@@ -77,7 +77,7 @@ export function ThemeToggle({ variant = "compact", className = "" }: ThemeToggle
         onClick={() => setTheme(next.value)}
         aria-label={`Switch to ${next.label} mode (currently ${current.label})`}
         title={`Theme: ${current.label} — click for ${next.label}`}
-        className={`flex h-9 w-9 items-center justify-center rounded-xl border border-[#dbe7f3] bg-white text-[#64748b] transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:border-[#223550] dark:bg-[#0d1a2d] dark:text-[#a9b6c9] dark:hover:border-[#1677f2]/40 dark:hover:text-[#60a5fa] ${className}`}
+        className={`flex h-9 w-9 items-center justify-center rounded-xl border border-[#dbe7f3] bg-white text-[#64748b] transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:border-[#27272b] dark:bg-[#141417] dark:text-[#a1a1aa] dark:hover:border-[#1677f2]/40 dark:hover:text-[#60a5fa] ${className}`}
       >
         {current.icon}
       </button>
@@ -88,7 +88,7 @@ export function ThemeToggle({ variant = "compact", className = "" }: ThemeToggle
     <div
       role="group"
       aria-label="Color theme selector"
-      className={`inline-flex items-center gap-0.5 rounded-xl border border-[#dbe7f3] bg-white p-1 dark:border-[#223550] dark:bg-[#0d1a2d] ${className}`}
+      className={`inline-flex items-center gap-0.5 rounded-xl border border-[#dbe7f3] bg-white p-1 dark:border-[#27272b] dark:bg-[#141417] ${className}`}
     >
       {OPTIONS.map((opt) => {
         const isActive = theme === opt.value;
@@ -105,7 +105,7 @@ export function ThemeToggle({ variant = "compact", className = "" }: ThemeToggle
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1677f2] focus-visible:ring-offset-1",
               isActive
                 ? "bg-[#1677f2] text-white shadow-sm"
-                : "text-[#64748b] hover:text-[#0a1628] dark:text-[#a9b6c9] dark:hover:text-[#f7f9fc]",
+                : "text-[#64748b] hover:text-[#0a1628] dark:text-[#a1a1aa] dark:hover:text-[#f7f9fc]",
             ].join(" ")}
           >
             {opt.icon}

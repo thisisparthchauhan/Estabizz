@@ -59,21 +59,21 @@ export default function AdminCandidatesClient({
   }
 
   const { items: candidates, total, page, totalPages } = result;
-  const selectCls = "rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#334155] focus:border-[#1677f2] focus:outline-none";
+  const selectCls = "rounded-xl border border-[#dbe7f3] bg-white px-3 py-2.5 text-[13px] text-[#334155] focus:border-[#1677f2] focus:outline-none dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]";
 
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-[24px] font-black text-[#0a1628]">Candidates</h1>
-          <p className="mt-0.5 text-[13px] text-[#64748b]">{total} total</p>
+          <h1 className="text-[24px] font-black text-[#0a1628] dark:text-[#fafafa]">Candidates</h1>
+          <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">{total} total</p>
         </div>
       </div>
 
       {/* Filters */}
       <div className="flex flex-wrap gap-3">
         <input
-          className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13px] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
+          className="rounded-xl border border-[#dbe7f3] bg-white px-4 py-2.5 text-[13px] placeholder-[#94a3b8] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20 dark:bg-[#141417] dark:border-[#27272b]"
           placeholder="Search name, email, phone…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -89,22 +89,22 @@ export default function AdminCandidatesClient({
         </select>
         {(search || initialCity || initialExpFilter) && (
           <button type="button" onClick={() => { setSearch(""); navigate({ search: "", city: "", expFilter: "", page: "1" }); }}
-            className="self-center text-[12px] font-bold text-[#1677f2] hover:underline">
+            className="self-center text-[12px] font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">
             Clear
           </button>
         )}
-        {isPending && <span className="self-center text-[12px] text-[#94a3b8]">Loading…</span>}
+        {isPending && <span className="self-center text-[12px] text-[#94a3b8] dark:text-[#71717a]">Loading…</span>}
       </div>
 
       {candidates.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-[#dbe7f3] bg-white py-16 text-center text-[14px] text-[#94a3b8]">
+        <div className="rounded-2xl border border-dashed border-[#dbe7f3] bg-white py-16 text-center text-[14px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">
           {total === 0 ? "No candidates yet." : "No results."}
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-2xl border border-[#dbe7f3] bg-white">
+        <div className="overflow-x-auto rounded-2xl border border-[#dbe7f3] bg-white dark:bg-[#141417] dark:border-[#27272b]">
           <table className="w-full text-[13px]">
             <thead>
-              <tr className="border-b border-[#dbe7f3] bg-[#f8fbff] text-left text-[11px] font-black uppercase tracking-widest text-[#64748b]">
+              <tr className="border-b border-[#dbe7f3] bg-[#f8fbff] text-left text-[11px] font-black uppercase tracking-widest text-[#64748b] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                 <th className="px-4 py-3">Name</th>
                 <th className="px-4 py-3">Contact</th>
                 <th className="px-4 py-3">City</th>
@@ -119,49 +119,49 @@ export default function AdminCandidatesClient({
             </thead>
             <tbody>
               {candidates.map((c) => (
-                <tr key={c.id} className="border-b border-[#f1f5f9] last:border-0 hover:bg-[#f8fbff] transition-colors">
+                <tr key={c.id} className="border-b border-[#f1f5f9] last:border-0 hover:bg-[#f8fbff] transition-colors dark:bg-[#141417] dark:border-[#27272b]">
                   <td className="px-4 py-3">
-                    <p className="font-bold text-[#0a1628]">{c.firstName} {c.lastName}</p>
-                    <p className="text-[11px] text-[#94a3b8]">{c.candidateCode}</p>
+                    <p className="font-bold text-[#0a1628] dark:text-[#fafafa]">{c.firstName} {c.lastName}</p>
+                    <p className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">{c.candidateCode}</p>
                   </td>
                   <td className="px-4 py-3">
-                    {c.email && <p className="text-[#64748b]">{c.email}</p>}
-                    {c.phone && <p className="text-[12px] text-[#94a3b8]">{c.phone}</p>}
+                    {c.email && <p className="text-[#64748b] dark:text-[#a1a1aa]">{c.email}</p>}
+                    {c.phone && <p className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">{c.phone}</p>}
                   </td>
-                  <td className="px-4 py-3 text-[#64748b]">{c.currentCity ?? "—"}</td>
+                  <td className="px-4 py-3 text-[#64748b] dark:text-[#a1a1aa]">{c.currentCity ?? "—"}</td>
                   <td className="px-4 py-3">
-                    {c.currentTitle && <p className="text-[#0a1628]">{c.currentTitle}</p>}
-                    {c.currentEmployer && <p className="text-[12px] text-[#64748b]">{c.currentEmployer}</p>}
+                    {c.currentTitle && <p className="text-[#0a1628] dark:text-[#fafafa]">{c.currentTitle}</p>}
+                    {c.currentEmployer && <p className="text-[12px] text-[#64748b] dark:text-[#a1a1aa]">{c.currentEmployer}</p>}
                   </td>
-                  <td className="px-4 py-3 text-[#64748b]">
+                  <td className="px-4 py-3 text-[#64748b] dark:text-[#a1a1aa]">
                     {c.yearsOfExperience != null ? `${c.yearsOfExperience} yr` : "—"}
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-1.5">
-                      <div className="h-1.5 w-16 rounded-full bg-[#e2e8f0]">
+                      <div className="h-1.5 w-16 rounded-full bg-[#e2e8f0] dark:bg-[#1c1c20]">
                         <div
                           className="h-1.5 rounded-full bg-[#1677f2]"
                           style={{ width: `${c.profileCompletenessPct}%` }}
                         />
                       </div>
-                      <span className="text-[11px] text-[#64748b]">{c.profileCompletenessPct}%</span>
+                      <span className="text-[11px] text-[#64748b] dark:text-[#a1a1aa]">{c.profileCompletenessPct}%</span>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-center text-[#64748b]">{c.applicationCount}</td>
+                  <td className="px-4 py-3 text-center text-[#64748b] dark:text-[#a1a1aa]">{c.applicationCount}</td>
                   <td className="px-4 py-3">
                     {c.latestStageName ? (
-                      <span className="rounded-full bg-[#eaf2ff] px-2.5 py-0.5 text-[11px] font-bold text-[#1677f2]">
+                      <span className="rounded-full bg-[#eaf2ff] px-2.5 py-0.5 text-[11px] font-bold text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">
                         {c.latestStageName}
                       </span>
                     ) : (
-                      <span className="text-[#94a3b8]">—</span>
+                      <span className="text-[#94a3b8] dark:text-[#71717a]">—</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-[#94a3b8]">{fmt(c.createdAt)}</td>
+                  <td className="px-4 py-3 text-[#94a3b8] dark:text-[#71717a]">{fmt(c.createdAt)}</td>
                   <td className="px-4 py-3">
                     <Link
                       href={`/admin/jobs/candidates/${c.id}`}
-                      className="text-[12px] font-bold text-[#1677f2] hover:underline whitespace-nowrap"
+                      className="text-[12px] font-bold text-[#1677f2] hover:underline whitespace-nowrap dark:text-[#4f9dfb]"
                     >
                       View →
                     </Link>
@@ -176,13 +176,13 @@ export default function AdminCandidatesClient({
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between text-[13px]">
-          <span className="text-[#64748b]">Page {page} of {totalPages}</span>
+          <span className="text-[#64748b] dark:text-[#a1a1aa]">Page {page} of {totalPages}</span>
           <div className="flex gap-2">
             <button
               type="button"
               disabled={page <= 1}
               onClick={() => handlePage(page - 1)}
-              className="rounded-xl border border-[#dbe7f3] px-4 py-2 font-bold text-[#334155] hover:bg-[#f8fbff] disabled:opacity-40"
+              className="rounded-xl border border-[#dbe7f3] px-4 py-2 font-bold text-[#334155] hover:bg-[#f8fbff] disabled:opacity-40 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
             >
               ← Prev
             </button>
@@ -190,7 +190,7 @@ export default function AdminCandidatesClient({
               type="button"
               disabled={page >= totalPages}
               onClick={() => handlePage(page + 1)}
-              className="rounded-xl border border-[#dbe7f3] px-4 py-2 font-bold text-[#334155] hover:bg-[#f8fbff] disabled:opacity-40"
+              className="rounded-xl border border-[#dbe7f3] px-4 py-2 font-bold text-[#334155] hover:bg-[#f8fbff] disabled:opacity-40 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
             >
               Next →
             </button>

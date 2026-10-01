@@ -763,11 +763,11 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                     setSearchOpen(false);
                     setCountryOpen((open) => !open);
                 }}
-                className={`${compact ? "h-10 px-3" : "h-10 px-4"} inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] text-[13px] font-black text-[#0a1628] dark:text-[#f7f9fc] shadow-sm transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]`}
+                className={`${compact ? "h-10 px-3" : "h-10 px-4"} inline-flex items-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] text-[13px] font-black text-[#0a1628] dark:text-[#fafafa] shadow-sm transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]`}
                 aria-expanded={countryOpen}
                 aria-label="Open country and global market selector"
             >
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#eaf6ff] text-[11px]">IN</span>
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#eaf6ff] text-[11px] dark:bg-[#1c1c20]">IN</span>
                 <span className={compact ? "hidden sm:inline" : ""}>
                     <span className="hidden 2xl:inline">Country: </span>India
                 </span>
@@ -777,8 +777,8 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
             </button>
 
             {countryOpen && (
-                <div className={`${compact ? "right-[-54px] sm:right-0" : "right-0"} absolute top-[48px] w-[min(92vw,720px)] overflow-hidden rounded-[26px] border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_30px_90px_rgba(0,60,110,0.18)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.50)]`}>
-                    <div className="relative overflow-hidden border-b border-blue-100 dark:border-[#223550] bg-gradient-to-br from-[#071426] via-[#0a2947] to-[#006da8] p-5 text-white">
+                <div className={`${compact ? "right-[-54px] sm:right-0" : "right-0"} absolute top-[48px] w-[min(92vw,720px)] overflow-hidden rounded-[26px] border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_30px_90px_rgba(0,60,110,0.18)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.50)]`}>
+                    <div className="relative overflow-hidden border-b border-blue-100 dark:border-[#27272b] bg-gradient-to-br from-[#071426] via-[#0a2947] to-[#006da8] p-5 text-white">
                         <div className="absolute right-[-40px] top-[-60px] h-40 w-40 rounded-full bg-[#1677f2]/25 blur-3xl" />
                         <div className="relative flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                             <div>
@@ -791,7 +791,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                             <Link
                                 href="/contact"
                                 onClick={() => setCountryOpen(false)}
-                                className="inline-flex shrink-0 items-center justify-center rounded-xl bg-white px-4 py-2 text-[12px] font-black text-[#0077B6] transition-transform hover:-translate-y-0.5"
+                                className="inline-flex shrink-0 items-center justify-center rounded-xl bg-white px-4 py-2 text-[12px] font-black text-[#0077B6] transition-transform hover:-translate-y-0.5 dark:bg-[#141417] dark:text-[#4f9dfb]"
                             >
                                 Plan Expansion
                             </Link>
@@ -800,15 +800,15 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                     <div className="max-h-[470px] overflow-y-auto p-5">
                         <div className="grid gap-4 md:grid-cols-2">
                             {globalMarketRegions.map((group) => (
-                                <div key={group.region} className="rounded-2xl border border-blue-100 dark:border-[#223550] bg-[#f8fbff] dark:bg-[#12223a] p-4">
-                                    <h3 className="text-[12px] font-black uppercase tracking-[0.16em] text-[#1677f2]">{group.region}</h3>
+                                <div key={group.region} className="rounded-2xl border border-blue-100 dark:border-[#27272b] bg-[#f8fbff] dark:bg-[#1c1c20] p-4">
+                                    <h3 className="text-[12px] font-black uppercase tracking-[0.16em] text-[#1677f2] dark:text-[#4f9dfb]">{group.region}</h3>
                                     <div className="mt-3 flex flex-wrap gap-2">
                                         {group.countries.map((country) => (
                                             <Link
                                                 key={country}
                                                 href={countryHref(country)}
                                                 onClick={() => setCountryOpen(false)}
-                                                className="rounded-full border border-white dark:border-[#2d4a6b] bg-white dark:bg-[#0d1a2d] px-3 py-1.5 text-[11.5px] font-bold text-[#334155] dark:text-[#a9b6c9] shadow-sm transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
+                                                className="rounded-full border border-white dark:border-[#3f3f46] bg-white dark:bg-[#141417] px-3 py-1.5 text-[11.5px] font-bold text-[#334155] dark:text-[#a1a1aa] shadow-sm transition-all hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
                                             >
                                                 {country}
                                             </Link>
@@ -828,7 +828,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
 
     return (
         <>
-            <nav className={`fixed top-0 w-full z-[1000] border-b border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0a1628] transition-all duration-300 ${scrolled ? "shadow-[0_14px_42px_rgba(15,23,42,0.10)] dark:shadow-[0_14px_42px_rgba(0,0,0,0.35)]" : "shadow-[0_6px_22px_rgba(15,23,42,0.06)] dark:shadow-[0_6px_22px_rgba(0,0,0,0.25)]"}`} style={{ height: "64px" }}>
+            <nav className={`fixed top-0 w-full z-[1000] border-b border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#0f0f11] transition-all duration-300 ${scrolled ? "shadow-[0_14px_42px_rgba(15,23,42,0.10)] dark:shadow-[0_14px_42px_rgba(0,0,0,0.35)]" : "shadow-[0_6px_22px_rgba(15,23,42,0.06)] dark:shadow-[0_6px_22px_rgba(0,0,0,0.25)]"}`} style={{ height: "64px" }}>
                 <div className="max-w-[1480px] mx-auto px-5 2xl:px-6 h-full flex items-center justify-between">
 
                     {/* Logo */}
@@ -845,7 +845,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                             <div key={item} onMouseEnter={() => openMenu(item)} onMouseLeave={closeMenu}
                                 onKeyDown={handleMenuTriggerKeyDown(item)}
                                 role="button" tabIndex={0} aria-haspopup="true" aria-expanded={activeMenu === item}
-                                className={`relative cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1677f2] focus-visible:outline-offset-[-2px] ${activeMenu === item ? "text-[#1677f2]" : "text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"}`}>
+                                className={`relative cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1677f2] focus-visible:outline-offset-[-2px] ${activeMenu === item ? "text-[#1677f2] dark:text-[#4f9dfb]" : "text-[#334155] dark:text-[#a1a1aa] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"}`}>
                                 {item} <svg className={`w-3 h-3 transition-transform ${activeMenu === item ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </div>
                         ))}
@@ -859,28 +859,28 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                             className="relative flex items-center">
                             <div onKeyDown={handleMenuTriggerKeyDown("Jobs")}
                                 role="button" tabIndex={0} aria-haspopup="true" aria-expanded={activeMenu === "Jobs"}
-                                className={`cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1677f2] focus-visible:outline-offset-[-2px] ${activeMenu === "Jobs" ? "text-[#1677f2]" : "text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"}`}>
+                                className={`cursor-pointer flex items-center gap-1 text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1677f2] focus-visible:outline-offset-[-2px] ${activeMenu === "Jobs" ? "text-[#1677f2] dark:text-[#4f9dfb]" : "text-[#334155] dark:text-[#a1a1aa] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"}`}>
                                 Jobs <svg className={`w-3 h-3 transition-transform ${activeMenu === "Jobs" ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </div>
                             {activeMenu === "Jobs" && (
-                                <div className="absolute left-0 top-[52px] w-72 overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] py-2 shadow-[0_18px_45px_rgba(15,23,42,0.14)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.40)] z-[1100] animate-[fadeIn_0.15s_ease]">
+                                <div className="absolute left-0 top-[52px] w-72 overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] py-2 shadow-[0_18px_45px_rgba(15,23,42,0.14)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.40)] z-[1100] animate-[fadeIn_0.15s_ease]">
                                     {JOBS_MENU_ITEMS.map((item) => (
                                         <Link
                                             key={item.href}
                                             href={item.href}
-                                            className="block px-4 py-2.5 transition-colors hover:bg-[#f5fbff] dark:hover:bg-[#12223a]"
+                                            className="block px-4 py-2.5 transition-colors hover:bg-[#f5fbff] dark:hover:bg-[#12223a] dark:bg-[#141417]"
                                         >
-                                            <span className="block text-[13.5px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">{item.label}</span>
-                                            <span className="block text-[11.5px] font-medium text-[#64748b] dark:text-[#a9b6c9]">{item.description}</span>
+                                            <span className="block text-[13.5px] font-bold text-[#0a1628] dark:text-[#fafafa]">{item.label}</span>
+                                            <span className="block text-[11.5px] font-medium text-[#64748b] dark:text-[#a1a1aa]">{item.description}</span>
                                         </Link>
                                     ))}
-                                    <div className="my-2 border-t border-gray-100 dark:border-[#223550]" />
+                                    <div className="my-2 border-t border-gray-100 dark:border-[#27272b]" />
                                     <Link
                                         href={HIRE_TALENT_ITEM.href}
-                                        className="block px-4 py-2.5 transition-colors hover:bg-[#f5fbff] dark:hover:bg-[#12223a]"
+                                        className="block px-4 py-2.5 transition-colors hover:bg-[#f5fbff] dark:hover:bg-[#12223a] dark:bg-[#141417]"
                                     >
-                                        <span className="block text-[13.5px] font-bold text-[#1677f2]">{HIRE_TALENT_ITEM.label}</span>
-                                        <span className="block text-[11.5px] font-medium text-[#64748b] dark:text-[#a9b6c9]">{HIRE_TALENT_ITEM.description}</span>
+                                        <span className="block text-[13.5px] font-bold text-[#1677f2] dark:text-[#4f9dfb]">{HIRE_TALENT_ITEM.label}</span>
+                                        <span className="block text-[11.5px] font-medium text-[#64748b] dark:text-[#a1a1aa]">{HIRE_TALENT_ITEM.description}</span>
                                     </Link>
                                 </div>
                             )}
@@ -893,7 +893,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     href={link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors cursor-pointer"
+                                    className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] dark:text-[#a1a1aa] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors cursor-pointer"
                                 >
                                     {link.label}
                                 </a>
@@ -901,7 +901,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                 <Link
                                     key={link.label}
                                     href={link.href}
-                                    className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
+                                    className="text-[13px] 2xl:text-[13.5px] font-semibold px-2.5 2xl:px-3 py-5 text-[#334155] dark:text-[#a1a1aa] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
                                 >
                                     {link.label}
                                 </Link>
@@ -916,7 +916,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                             <div ref={searchRef} className="relative w-[200px] 2xl:w-[240px]">
                                 <label className="sr-only" htmlFor="desktop-page-search">Search pages</label>
                                 <div className="relative">
-                                    <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8] dark:text-[#71717a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" />
                                     </svg>
                                     <input
@@ -927,30 +927,30 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                         onFocus={() => { setActiveMenu(null); setSearchOpen(true); }}
                                         onKeyDown={handleSearchKeyDown}
                                         placeholder="Search pages..."
-                                        className="w-full rounded-lg border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] pl-9 pr-3 text-[13.5px] font-medium text-[#0a1628] dark:text-[#f7f9fc] outline-none transition-all placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10 h-10"
+                                        className="w-full rounded-lg border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] pl-9 pr-3 text-[13.5px] font-medium text-[#0a1628] dark:text-[#fafafa] outline-none transition-all placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10 h-10"
                                         aria-expanded={searchOpen}
                                         aria-controls="desktop-page-search-results"
                                     />
                                 </div>
                                 {searchOpen && (
-                                    <div id="desktop-page-search-results" className="absolute right-0 top-[46px] w-[360px] overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_18px_45px_rgba(15,23,42,0.14)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.40)]">
-                                        <div className="border-b border-gray-100 dark:border-[#223550] px-4 py-2 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a9b6c9]">
+                                    <div id="desktop-page-search-results" className="absolute right-0 top-[46px] w-[360px] overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_18px_45px_rgba(15,23,42,0.14)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.40)]">
+                                        <div className="border-b border-gray-100 dark:border-[#27272b] px-4 py-2 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">
                                             {searchQuery.trim() ? "Search Results" : "Popular Pages"}
                                         </div>
                                         {searchResults.length > 0 ? (
                                             <div className="max-h-[330px] overflow-y-auto py-1">
                                                 {searchResults.map((item) => (
-                                                    <Link key={`${item.label}-${item.href}`} href={item.href} onClick={() => { closeSearch(); setMobileOpen(false); }} className="flex items-start justify-between gap-4 px-4 py-3 transition-colors hover:bg-[#f5fbff] dark:hover:bg-[#12223a]">
+                                                    <Link key={`${item.label}-${item.href}`} href={item.href} onClick={() => { closeSearch(); setMobileOpen(false); }} className="flex items-start justify-between gap-4 px-4 py-3 transition-colors hover:bg-[#f5fbff] dark:hover:bg-[#12223a] dark:bg-[#141417]">
                                                         <span>
-                                                            <span className="block text-[13.5px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">{item.label}</span>
-                                                            <span className="mt-0.5 block text-[11.5px] font-medium text-[#64748b] dark:text-[#a9b6c9]">{item.group}</span>
+                                                            <span className="block text-[13.5px] font-bold text-[#0a1628] dark:text-[#fafafa]">{item.label}</span>
+                                                            <span className="mt-0.5 block text-[11.5px] font-medium text-[#64748b] dark:text-[#a1a1aa]">{item.group}</span>
                                                         </span>
-                                                        <span className="mt-0.5 shrink-0 text-[12px] font-bold text-[#1677f2]">Open</span>
+                                                        <span className="mt-0.5 shrink-0 text-[12px] font-bold text-[#1677f2] dark:text-[#4f9dfb]">Open</span>
                                                     </Link>
                                                 ))}
                                             </div>
                                         ) : (
-                                            <div className="px-4 py-5 text-[13px] font-medium text-[#64748b] dark:text-[#a9b6c9]">No page found. Try RBI, IFSCA, NBFC, payment, insurance or SEBI.</div>
+                                            <div className="px-4 py-5 text-[13px] font-medium text-[#64748b] dark:text-[#a1a1aa]">No page found. Try RBI, IFSCA, NBFC, payment, insurance or SEBI.</div>
                                         )}
                                     </div>
                                 )}
@@ -963,7 +963,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                 <button
                                     type="button"
                                     onClick={() => setUserMenuOpen((o) => !o)}
-                                    className="flex items-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-2 text-[13.5px] font-semibold text-[#0a1628] dark:text-[#f7f9fc] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-all shadow-sm"
+                                    className="flex items-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] px-3 py-2 text-[13.5px] font-semibold text-[#0a1628] dark:text-[#fafafa] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-all shadow-sm"
                                 >
                                     <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0077B6] text-[11px] font-black text-white uppercase">
                                         {authUser.firstName[0]}{authUser.lastName?.[0] ?? ""}
@@ -974,11 +974,11 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     </svg>
                                 </button>
                                 {userMenuOpen && (
-                                    <div className="absolute right-0 top-[48px] w-56 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_18px_45px_rgba(15,23,42,0.14)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.40)] py-1 z-[1100]">
+                                    <div className="absolute right-0 top-[48px] w-56 rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_18px_45px_rgba(15,23,42,0.14)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.40)] py-1 z-[1100]">
                                         {/* User info header */}
-                                        <div className="px-4 py-3 border-b border-gray-100 dark:border-[#223550]">
-                                            <p className="text-[13px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">{authUser.firstName} {authUser.lastName}</p>
-                                            <p className="text-[11px] text-[#64748b] dark:text-[#a9b6c9] truncate">{authUser.email}</p>
+                                        <div className="px-4 py-3 border-b border-gray-100 dark:border-[#27272b]">
+                                            <p className="text-[13px] font-bold text-[#0a1628] dark:text-[#fafafa]">{authUser.firstName} {authUser.lastName}</p>
+                                            <p className="text-[11px] text-[#64748b] dark:text-[#a1a1aa] truncate">{authUser.email}</p>
                                             {authUser.isAdmin && (
                                                 <span className="mt-1 inline-block rounded-full bg-[#1677f2]/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#1677f2]">
                                                     Admin Access
@@ -988,7 +988,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
 
                                         {/* Admin quick links */}
                                         {authUser.isAdmin && (
-                                            <div className="border-b border-gray-100 dark:border-[#223550] py-1">
+                                            <div className="border-b border-gray-100 dark:border-[#27272b] py-1">
                                                 {[
                                                     { label: "Dashboard",       href: "/admin" },
                                                     { label: "New Blog",        href: "/admin/blogs/new" },
@@ -999,7 +999,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                         key={item.href}
                                                         href={item.href}
                                                         onClick={() => setUserMenuOpen(false)}
-                                                        className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f5fbff] dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
+                                                        className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] dark:text-[#a1a1aa] hover:bg-[#f5fbff] dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors dark:bg-[#141417]"
                                                     >
                                                         {item.label}
                                                     </Link>
@@ -1010,8 +1010,8 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                         {/* Candidate / Jobs account (all logged-in users — a candidate is
                                             just a logged-in user who has an Estabizz Jobs profile; see
                                             CANDIDATE_USER_MENU_ITEMS above). */}
-                                        <div className="border-b border-gray-100 dark:border-[#223550] py-1">
-                                            <p className="px-4 pb-1 pt-1.5 text-[10.5px] font-black uppercase tracking-[0.14em] text-[#94a3b8] dark:text-[#64748b]">
+                                        <div className="border-b border-gray-100 dark:border-[#27272b] py-1">
+                                            <p className="px-4 pb-1 pt-1.5 text-[10.5px] font-black uppercase tracking-[0.14em] text-[#94a3b8] dark:text-[#71717a]">
                                                 Estabizz Jobs
                                             </p>
                                             {CANDIDATE_USER_MENU_ITEMS.map((item) => (
@@ -1019,7 +1019,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                     key={item.href}
                                                     href={item.href}
                                                     onClick={() => setUserMenuOpen(false)}
-                                                    className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f5fbff] dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
+                                                    className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] dark:text-[#a1a1aa] hover:bg-[#f5fbff] dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors dark:bg-[#141417]"
                                                 >
                                                     {item.label}
                                                 </Link>
@@ -1027,18 +1027,18 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                         </div>
 
                                         {/* My submissions (all logged-in users) */}
-                                        <div className="border-b border-gray-100 dark:border-[#223550] py-1">
+                                        <div className="border-b border-gray-100 dark:border-[#27272b] py-1">
                                             <Link
                                                 href="/my-blogs"
                                                 onClick={() => setUserMenuOpen(false)}
-                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f5fbff] dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
+                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] dark:text-[#a1a1aa] hover:bg-[#f5fbff] dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors dark:bg-[#141417]"
                                             >
                                                 My Submissions
                                             </Link>
                                             <Link
                                                 href="/submit-blog"
                                                 onClick={() => setUserMenuOpen(false)}
-                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-[#f5fbff] dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
+                                                className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-[#334155] dark:text-[#a1a1aa] hover:bg-[#f5fbff] dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors dark:bg-[#141417]"
                                             >
                                                 Submit an Article
                                             </Link>
@@ -1047,7 +1047,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                         {/* Logout */}
                                         <button
                                             onClick={handleLogout}
-                                            className="w-full flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-red-600 hover:bg-red-50 transition-colors"
+                                            className="w-full flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-red-600 hover:bg-red-50 transition-colors dark:bg-[#2a1618] dark:text-[#fca5a5]"
                                         >
                                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -1058,7 +1058,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                 )}
                             </div>
                         ) : (
-                            <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors px-3 py-2">
+                            <Link href="/login" className="text-[13.5px] font-semibold text-[#334155] dark:text-[#a1a1aa] hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors px-3 py-2">
                                 Sign In
                             </Link>
                         )}
@@ -1075,9 +1075,9 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                     <div className="xl:hidden flex items-center gap-2">
                         <CountrySelector compact selectorRef={compactCountryRef} />
                         <button onClick={() => setMobileOpen(!mobileOpen)} className="flex flex-col gap-1.5 p-2" aria-label="Open navigation menu">
-                            <span className={`block w-6 h-0.5 bg-[#0a1628] dark:bg-[#f7f9fc] transition-all ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
-                            <span className={`block w-6 h-0.5 bg-[#0a1628] dark:bg-[#f7f9fc] transition-all ${mobileOpen ? "opacity-0" : ""}`} />
-                            <span className={`block w-6 h-0.5 bg-[#0a1628] dark:bg-[#f7f9fc] transition-all ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+                            <span className={`block w-6 h-0.5 bg-[#0a1628] dark:bg-[#fafafa] transition-all ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
+                            <span className={`block w-6 h-0.5 bg-[#0a1628] dark:bg-[#fafafa] transition-all ${mobileOpen ? "opacity-0" : ""}`} />
+                            <span className={`block w-6 h-0.5 bg-[#0a1628] dark:bg-[#fafafa] transition-all ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
                         </button>
                     </div>
                 </div>
@@ -1091,32 +1091,32 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                        `fixed` and the page behind it cannot be scrolled while it is open,
                        so without this a category that outgrows the viewport would again
                        put its last rows out of reach entirely. */
-                    className="fixed left-0 top-[64px] z-[999] w-full max-h-[calc(100vh-64px)] overflow-y-auto border-b border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_30px_90px_rgba(15,23,42,0.18)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.50)] animate-[fadeIn_0.15s_ease]">
-                    <div className="mx-auto flex max-w-[1480px] bg-white dark:bg-[#0d1a2d]">
+                    className="fixed left-0 top-[64px] z-[999] w-full max-h-[calc(100vh-64px)] overflow-y-auto border-b border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_30px_90px_rgba(15,23,42,0.18)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.50)] animate-[fadeIn_0.15s_ease]">
+                    <div className="mx-auto flex max-w-[1480px] bg-white dark:bg-[#141417]">
                         {/* Left Categories */}
-                        <div className="w-[240px] shrink-0 border-r border-blue-100 dark:border-[#223550] py-4 bg-[#f8fbff] dark:bg-[#0a1628]">
+                        <div className="w-[240px] shrink-0 border-r border-blue-100 dark:border-[#27272b] py-4 bg-[#f8fbff] dark:bg-[#0f0f11]">
                             {currentMenu.categories.map((cat, i) => (
                                 <Link key={i} href={cat.viewAll} onMouseEnter={() => setActiveCategory(i)} onFocus={() => setActiveCategory(i)} onClick={() => setActiveMenu(null)}
-                                    className={`w-full flex items-center gap-3 px-5 py-3 text-left text-[14px] transition-colors ${activeCategory === i ? "text-[#1677f2] font-bold bg-blue-50/50 dark:bg-[#1677f2]/10 border-l-[3px] border-[#1677f2] pl-[17px]" : "text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa] hover:bg-gray-50 dark:hover:bg-[#12223a] border-l-[3px] border-transparent pl-[17px]"}`}>
+                                    className={`w-full flex items-center gap-3 px-5 py-3 text-left text-[14px] transition-colors ${activeCategory === i ? "text-[#1677f2] font-bold bg-blue-50/50 dark:bg-[#1677f2]/10 border-l-[3px] border-[#1677f2] pl-[17px]" : "text-[#334155] dark:text-[#a1a1aa] hover:text-[#1677f2] dark:hover:text-[#60a5fa] hover:bg-gray-50 dark:hover:bg-[#12223a] border-l-[3px] border-transparent pl-[17px] dark:bg-[#141417]"}`}>
                                     <span className="text-[16px]">{cat.icon}</span> {cat.label}
                                 </Link>
                             ))}
                         </div>
                         {/* Right Content */}
-                        <div className="flex-1 bg-white dark:bg-[#0d1a2d] p-6">
-                            <h3 className="text-[18px] font-bold text-[#0a1628] dark:text-[#f7f9fc] mb-5">{currentMenu.categories[activeCategory]?.label}</h3>
+                        <div className="flex-1 bg-white dark:bg-[#141417] p-6">
+                            <h3 className="text-[18px] font-bold text-[#0a1628] dark:text-[#fafafa] mb-5">{currentMenu.categories[activeCategory]?.label}</h3>
                             {currentMenu.categories[activeCategory]?.groups ? (
                                 <div className="space-y-4 overflow-y-auto max-h-[420px] pr-1">
                                     {currentMenu.categories[activeCategory].groups!.map((group, gi) => (
                                         <div key={gi}>
-                                            <h4 className="text-[10px] font-black uppercase tracking-[0.15em] text-[#64748b] dark:text-[#a9b6c9] mb-2 pb-1 border-b border-gray-100 dark:border-[#223550]">{group.heading}</h4>
+                                            <h4 className="text-[10px] font-black uppercase tracking-[0.15em] text-[#64748b] dark:text-[#a1a1aa] mb-2 pb-1 border-b border-gray-100 dark:border-[#27272b]">{group.heading}</h4>
                                             <div className="grid grid-cols-3 gap-x-8 gap-y-3">
                                                 {group.items.map((item, j) => {
                                                     const isLive = !!linkMap[item];
                                                     return (
                                                         <Link key={j} href={linkMap[item] || "#"}
-                                                            className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}>
-                                                            <span className={`${isLive ? 'text-[#1677f2]' : 'text-[#cbd5e1]'} text-[8px] shrink-0`}>›</span>
+                                                            className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6] dark:text-[#4f9dfb]' : 'text-[#94a3b8] hover:text-[#64748b] dark:text-[#71717a]'}`}>
+                                                            <span className={`${isLive ? 'text-[#1677f2] dark:text-[#4f9dfb]' : 'text-[#cbd5e1] dark:text-[#71717a]'} text-[8px] shrink-0`}>›</span>
                                                             {item}
                                                             {isLive && (
                                                                 <span className="ml-1 px-1.5 py-0.5 rounded-[4px] bg-[#10b981]/10 text-[#10b981] text-[9px] font-bold tracking-wider uppercase">Live</span>
@@ -1137,9 +1137,9 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                 <Link
                                                     key={j}
                                                     href={linkMap[item] || "#"}
-                                                    className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}
+                                                    className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6] dark:text-[#4f9dfb]' : 'text-[#94a3b8] hover:text-[#64748b] dark:text-[#71717a]'}`}
                                                 >
-                                                    <span className={`${isLive ? 'text-[#1677f2]' : 'text-[#cbd5e1]'} text-[8px]`}>›</span>
+                                                    <span className={`${isLive ? 'text-[#1677f2] dark:text-[#4f9dfb]' : 'text-[#cbd5e1] dark:text-[#71717a]'} text-[8px]`}>›</span>
                                                     {item}
                                                     {isLive && (
                                                         <span className="ml-1 px-1.5 py-0.5 rounded-[4px] bg-[#10b981]/10 text-[#10b981] text-[9px] font-bold tracking-wider uppercase">Live</span>
@@ -1152,24 +1152,24 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                         <Link
                                             href={currentCategory?.viewAll ?? currentMenu.viewAll}
                                             onClick={() => setActiveMenu(null)}
-                                            className="mt-5 flex items-center justify-between gap-4 rounded-xl border border-blue-100 dark:border-[#223550] bg-[#f5fbff] dark:bg-[#12223a] px-5 py-3.5 transition-colors hover:border-[#1677f2]/40"
+                                            className="mt-5 flex items-center justify-between gap-4 rounded-xl border border-blue-100 dark:border-[#27272b] bg-[#f5fbff] dark:bg-[#1c1c20] px-5 py-3.5 transition-colors hover:border-[#1677f2]/40"
                                         >
-                                            <span className="text-[13.5px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">
+                                            <span className="text-[13.5px] font-bold text-[#0a1628] dark:text-[#fafafa]">
                                                 +{hiddenCount} more {currentCategory?.label.toLowerCase()} services
-                                                <span className="ml-2 font-medium text-[#64748b] dark:text-[#a9b6c9]">grouped by your situation</span>
+                                                <span className="ml-2 font-medium text-[#64748b] dark:text-[#a1a1aa]">grouped by your situation</span>
                                             </span>
-                                            <span className="shrink-0 text-[13px] font-bold text-[#1677f2]">Browse all →</span>
+                                            <span className="shrink-0 text-[13px] font-bold text-[#1677f2] dark:text-[#4f9dfb]">Browse all →</span>
                                         </Link>
                                     )}
                                 </>
                             ) : (
-                                <p className="text-[14px] text-[#94a3b8]">Upcoming content...</p>
+                                <p className="text-[14px] text-[#94a3b8] dark:text-[#71717a]">Upcoming content...</p>
                             )}
-                            <div className="flex items-center justify-between mt-8 pt-4 border-t border-gray-100 dark:border-[#223550]">
-                                <Link href={currentMenu.categories[activeCategory]?.viewAll ?? currentMenu.viewAll} className="text-[14px] font-bold text-[#1677f2] hover:underline">
+                            <div className="flex items-center justify-between mt-8 pt-4 border-t border-gray-100 dark:border-[#27272b]">
+                                <Link href={currentMenu.categories[activeCategory]?.viewAll ?? currentMenu.viewAll} className="text-[14px] font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">
                                     {currentMenu.categories[activeCategory]?.viewAllLabel ?? currentMenu.viewAllLabel}
                                 </Link>
-                                <span className="text-[13px] text-[#94a3b8] dark:text-[#a9b6c9]">Need help? <Link href="/contact" className="text-[#1677f2] underline">Talk to an expert</Link></span>
+                                <span className="text-[13px] text-[#94a3b8] dark:text-[#a1a1aa]">Need help? <Link href="/contact" className="text-[#1677f2] underline dark:text-[#4f9dfb]">Talk to an expert</Link></span>
                             </div>
                         </div>
                     </div>
@@ -1178,13 +1178,13 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
 
             {/* Mobile Menu */}
             {mobileOpen && (
-                <div className="fixed top-[64px] left-0 w-full h-[calc(100vh-64px)] bg-white dark:bg-[#06101f] z-[98] overflow-y-auto xl:hidden">
+                <div className="fixed top-[64px] left-0 w-full h-[calc(100vh-64px)] bg-white dark:bg-[#09090b] z-[98] overflow-y-auto xl:hidden">
                     <div className="p-6 space-y-4">
                         {/* Mobile search — inlined to avoid remount-on-rerender focus bug */}
                         <div ref={searchRef} className="relative w-full">
                             <label className="sr-only" htmlFor="mobile-page-search">Search pages</label>
                             <div className="relative">
-                                <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8] dark:text-[#71717a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" />
                                 </svg>
                                 <input
@@ -1195,45 +1195,45 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     onFocus={() => { setActiveMenu(null); setSearchOpen(true); }}
                                     onKeyDown={handleSearchKeyDown}
                                     placeholder="Search pages..."
-                                    className="w-full rounded-lg border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] pl-9 pr-3 text-[13.5px] font-medium text-[#0a1628] dark:text-[#f7f9fc] outline-none transition-all placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10 h-11"
+                                    className="w-full rounded-lg border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] pl-9 pr-3 text-[13.5px] font-medium text-[#0a1628] dark:text-[#fafafa] outline-none transition-all placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:ring-4 focus:ring-[#1677f2]/10 h-11"
                                     aria-expanded={searchOpen}
                                     aria-controls="mobile-page-search-results"
                                 />
                             </div>
                             {searchOpen && (
-                                <div id="mobile-page-search-results" className="mt-2 w-full overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_18px_45px_rgba(15,23,42,0.14)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.40)]">
-                                    <div className="border-b border-gray-100 dark:border-[#223550] px-4 py-2 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a9b6c9]">
+                                <div id="mobile-page-search-results" className="mt-2 w-full overflow-hidden rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_18px_45px_rgba(15,23,42,0.14)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.40)]">
+                                    <div className="border-b border-gray-100 dark:border-[#27272b] px-4 py-2 text-[11px] font-black uppercase tracking-[0.14em] text-[#64748b] dark:text-[#a1a1aa]">
                                         {searchQuery.trim() ? "Search Results" : "Popular Pages"}
                                     </div>
                                     {searchResults.length > 0 ? (
                                         <div className="max-h-[330px] overflow-y-auto py-1">
                                             {searchResults.map((item) => (
-                                                <Link key={`${item.label}-${item.href}`} href={item.href} onClick={() => { closeSearch(); setMobileOpen(false); }} className="flex items-start justify-between gap-4 px-4 py-3 transition-colors hover:bg-[#f5fbff] dark:hover:bg-[#12223a]">
+                                                <Link key={`${item.label}-${item.href}`} href={item.href} onClick={() => { closeSearch(); setMobileOpen(false); }} className="flex items-start justify-between gap-4 px-4 py-3 transition-colors hover:bg-[#f5fbff] dark:hover:bg-[#12223a] dark:bg-[#141417]">
                                                     <span>
-                                                        <span className="block text-[13.5px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">{item.label}</span>
-                                                        <span className="mt-0.5 block text-[11.5px] font-medium text-[#64748b] dark:text-[#a9b6c9]">{item.group}</span>
+                                                        <span className="block text-[13.5px] font-bold text-[#0a1628] dark:text-[#fafafa]">{item.label}</span>
+                                                        <span className="mt-0.5 block text-[11.5px] font-medium text-[#64748b] dark:text-[#a1a1aa]">{item.group}</span>
                                                     </span>
-                                                    <span className="mt-0.5 shrink-0 text-[12px] font-bold text-[#1677f2]">Open</span>
+                                                    <span className="mt-0.5 shrink-0 text-[12px] font-bold text-[#1677f2] dark:text-[#4f9dfb]">Open</span>
                                                 </Link>
                                             ))}
                                         </div>
                                     ) : (
-                                        <div className="px-4 py-5 text-[13px] font-medium text-[#64748b] dark:text-[#a9b6c9]">No page found. Try RBI, IFSCA, NBFC, payment, insurance or SEBI.</div>
+                                        <div className="px-4 py-5 text-[13px] font-medium text-[#64748b] dark:text-[#a1a1aa]">No page found. Try RBI, IFSCA, NBFC, payment, insurance or SEBI.</div>
                                     )}
                                 </div>
                             )}
                         </div>
                         {Object.entries(menus).map(([name, menu]) => (
-                            <details key={name} className="rounded-xl border border-gray-100 dark:border-[#223550] bg-[#f8faff] dark:bg-[#0d1a2d] px-4 py-2">
-                                <summary className="text-[15px] font-bold text-[#0a1628] dark:text-[#f7f9fc] cursor-pointer py-2">{name}</summary>
+                            <details key={name} className="rounded-xl border border-gray-100 dark:border-[#27272b] bg-[#f8faff] dark:bg-[#141417] px-4 py-2">
+                                <summary className="text-[15px] font-bold text-[#0a1628] dark:text-[#fafafa] cursor-pointer py-2">{name}</summary>
                                 <div className="mt-2 space-y-4 pb-2">
                                     {menu.categories.map((cat, i) => (
                                         <div key={i}>
-                                            <h4 className="text-[12px] font-black text-[#1677f2] uppercase tracking-wide mb-2">{cat.icon} {cat.label}</h4>
+                                            <h4 className="text-[12px] font-black text-[#1677f2] uppercase tracking-wide mb-2 dark:text-[#4f9dfb]">{cat.icon} {cat.label}</h4>
                                             {cat.groups ? (
                                                 <div className="space-y-2">
                                                     {cat.groups.map((group, gi) => (
-                                                        <details key={gi} className="rounded-lg border border-gray-100 dark:border-[#223550] bg-white dark:bg-[#12223a]">
+                                                        <details key={gi} className="rounded-lg border border-gray-100 dark:border-[#27272b] bg-white dark:bg-[#1c1c20]">
                                                             {/* No aria-expanded here (Phase 7B fix): <details>/<summary>
                                                                 already expose their open/closed state natively to
                                                                 assistive tech via the `open` attribute. The removed
@@ -1241,7 +1241,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                                 screen reader the group was still collapsed even after
                                                                 a sighted user had opened it -- actively wrong, not
                                                                 just redundant. */}
-                                                            <summary className="cursor-pointer px-3 py-2 text-[12px] font-bold text-[#334155] dark:text-[#a9b6c9]">
+                                                            <summary className="cursor-pointer px-3 py-2 text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">
                                                                 {group.heading}
                                                             </summary>
                                                             <div className="px-3 pb-2 space-y-1">
@@ -1250,7 +1250,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                                     return (
                                                                         <Link key={j} href={linkMap[item] || "/get-started"}
                                                                             onClick={() => setMobileOpen(false)}
-                                                                            className={`block py-1.5 text-[12.5px] ${isLive ? 'text-[#1677f2] font-medium' : 'text-[#64748b] dark:text-[#a9b6c9]'}`}>
+                                                                            className={`block py-1.5 text-[12.5px] ${isLive ? 'text-[#1677f2] font-medium dark:text-[#4f9dfb]' : 'text-[#64748b] dark:text-[#a1a1aa]'}`}>
                                                                             › {item}
                                                                         </Link>
                                                                     );
@@ -1271,7 +1271,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                         return (
                                                             <Link key={j} href={linkMap[item] || "/get-started"}
                                                                 onClick={() => setMobileOpen(false)}
-                                                                className={`block rounded-lg px-3 py-2 text-[13px] ${isLive ? 'text-[#0a1628] dark:text-[#f7f9fc] bg-white dark:bg-[#12223a] border border-gray-100 dark:border-[#223550]' : 'text-[#64748b] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]'}`}>
+                                                                className={`block rounded-lg px-3 py-2 text-[13px] ${isLive ? 'text-[#0a1628] dark:text-[#fafafa] bg-white dark:bg-[#1c1c20] border border-gray-100 dark:border-[#27272b]' : 'text-[#64748b] dark:text-[#a1a1aa] hover:text-[#1677f2] dark:hover:text-[#60a5fa]'}`}>
                                                                 {item}
                                                             </Link>
                                                         );
@@ -1281,7 +1281,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                             <Link
                                                 href={cat.viewAll}
                                                 onClick={() => setMobileOpen(false)}
-                                                className="mt-2 inline-flex min-h-10 items-center px-3 text-[12.5px] font-bold text-[#1677f2]"
+                                                className="mt-2 inline-flex min-h-10 items-center px-3 text-[12.5px] font-bold text-[#1677f2] dark:text-[#4f9dfb]"
                                             >
                                                 {cat.viewAllLabel}
                                             </Link>
@@ -1294,15 +1294,15 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                         {/* Jobs — mobile equivalent of the desktop Jobs dropdown. Flat list,
                             same four links, always shown regardless of auth state (candidate
                             account pages redirect through login safely on their own). */}
-                        <details className="rounded-xl border border-gray-100 dark:border-[#223550] bg-[#f8faff] dark:bg-[#0d1a2d] px-4 py-2">
-                            <summary className="text-[15px] font-bold text-[#0a1628] dark:text-[#f7f9fc] cursor-pointer py-2">Jobs</summary>
+                        <details className="rounded-xl border border-gray-100 dark:border-[#27272b] bg-[#f8faff] dark:bg-[#141417] px-4 py-2">
+                            <summary className="text-[15px] font-bold text-[#0a1628] dark:text-[#fafafa] cursor-pointer py-2">Jobs</summary>
                             <div className="mt-1 space-y-1 pb-2">
                                 {[...JOBS_MENU_ITEMS, HIRE_TALENT_ITEM].map((item) => (
                                     <Link
                                         key={item.href}
                                         href={item.href}
                                         onClick={() => setMobileOpen(false)}
-                                        className="block rounded-lg px-3 py-2.5 text-[13.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:bg-white dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
+                                        className="block rounded-lg px-3 py-2.5 text-[13.5px] font-semibold text-[#334155] dark:text-[#a1a1aa] hover:bg-white dark:hover:bg-[#12223a] hover:text-[#1677f2] dark:hover:text-[#60a5fa] dark:bg-[#141417]"
                                     >
                                         {item.label}
                                     </Link>
@@ -1317,7 +1317,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     href={link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className={`${i === 0 ? "" : "mt-2 "}flex items-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-[#f0f9ff] dark:bg-[#0d1a2d] px-4 py-3 text-[14px] font-bold text-[#1677f2] cursor-pointer`}
+                                    className={`${i === 0 ? "" : "mt-2 "}flex items-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-[#f0f9ff] dark:bg-[#141417] px-4 py-3 text-[14px] font-bold text-[#1677f2] cursor-pointer dark:text-[#4f9dfb]`}
                                 >
                                     {link.icon} {link.label}
                                 </a>
@@ -1326,13 +1326,13 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     key={link.label}
                                     href={link.href}
                                     onClick={() => setMobileOpen(false)}
-                                    className={`${i === 0 ? "" : "mt-2 "}flex items-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#223550] bg-[#f0f9ff] dark:bg-[#0d1a2d] px-4 py-3 text-[14px] font-bold text-[#1677f2]`}
+                                    className={`${i === 0 ? "" : "mt-2 "}flex items-center gap-2 rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-[#f0f9ff] dark:bg-[#141417] px-4 py-3 text-[14px] font-bold text-[#1677f2] dark:text-[#4f9dfb]`}
                                 >
                                     {link.icon} {link.label}
                                 </Link>
                             )
                         )}
-                        <div className="border-t border-gray-100 dark:border-[#223550] pt-4 mt-4">
+                        <div className="border-t border-gray-100 dark:border-[#27272b] pt-4 mt-4">
                             {authUser ? (
                                 <div className="mb-2">
                                     <div className="flex items-center gap-3 py-2">
@@ -1340,15 +1340,15 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                             {authUser.firstName[0]}{authUser.lastName?.[0] ?? ""}
                                         </span>
                                         <div>
-                                            <p className="text-[14px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">{authUser.firstName} {authUser.lastName}</p>
-                                            <p className="text-[11px] text-[#64748b] dark:text-[#a9b6c9]">{authUser.email}</p>
+                                            <p className="text-[14px] font-bold text-[#0a1628] dark:text-[#fafafa]">{authUser.firstName} {authUser.lastName}</p>
+                                            <p className="text-[11px] text-[#64748b] dark:text-[#a1a1aa]">{authUser.email}</p>
                                         </div>
                                     </div>
                                     {/* Candidate account — mobile equivalent of the desktop user
                                         dropdown's Estabizz Jobs section. No functionality may be
                                         desktop-only. */}
-                                    <div className="mb-2 mt-1 rounded-lg border border-gray-100 dark:border-[#223550] py-1">
-                                        <p className="px-1 pb-1 pt-1 text-[10.5px] font-black uppercase tracking-[0.14em] text-[#94a3b8] dark:text-[#64748b]">
+                                    <div className="mb-2 mt-1 rounded-lg border border-gray-100 dark:border-[#27272b] py-1">
+                                        <p className="px-1 pb-1 pt-1 text-[10.5px] font-black uppercase tracking-[0.14em] text-[#94a3b8] dark:text-[#71717a]">
                                             Estabizz Jobs
                                         </p>
                                         {CANDIDATE_USER_MENU_ITEMS.map((item) => (
@@ -1356,7 +1356,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                 key={item.href}
                                                 href={item.href}
                                                 onClick={() => setMobileOpen(false)}
-                                                className="block px-1 py-2 text-[13.5px] font-semibold text-[#334155] dark:text-[#a9b6c9] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
+                                                className="block px-1 py-2 text-[13.5px] font-semibold text-[#334155] dark:text-[#a1a1aa] hover:text-[#1677f2] dark:hover:text-[#60a5fa]"
                                             >
                                                 {item.label}
                                             </Link>
@@ -1367,25 +1367,25 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     </button>
                                 </div>
                             ) : (
-                                <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] dark:text-[#f7f9fc] py-2">Sign In</Link>
+                                <Link href="/login" onClick={() => setMobileOpen(false)} className="block text-[15px] font-bold text-[#0a1628] dark:text-[#fafafa] py-2">Sign In</Link>
                             )}
                             <div className="flex items-center justify-between py-2">
-                                <span className="text-[13px] font-semibold text-[#64748b] dark:text-[#a9b6c9]">Theme</span>
+                                <span className="text-[13px] font-semibold text-[#64748b] dark:text-[#a1a1aa]">Theme</span>
                                 <ThemeToggle variant="compact" />
                             </div>
-                            <details className="rounded-xl border border-blue-100 dark:border-[#223550] bg-[#f8fbff] dark:bg-[#0d1a2d] px-4 py-2">
-                                <summary className="cursor-pointer py-2 text-[15px] font-bold text-[#0a1628] dark:text-[#f7f9fc]">Country / Global Markets</summary>
+                            <details className="rounded-xl border border-blue-100 dark:border-[#27272b] bg-[#f8fbff] dark:bg-[#141417] px-4 py-2">
+                                <summary className="cursor-pointer py-2 text-[15px] font-bold text-[#0a1628] dark:text-[#fafafa]">Country / Global Markets</summary>
                                 <div className="mt-3 space-y-3 pb-2">
                                     {globalMarketRegions.map((group) => (
                                         <div key={group.region}>
-                                            <h4 className="text-[11px] font-black uppercase tracking-[0.16em] text-[#1677f2]">{group.region}</h4>
+                                            <h4 className="text-[11px] font-black uppercase tracking-[0.16em] text-[#1677f2] dark:text-[#4f9dfb]">{group.region}</h4>
                                             <div className="mt-2 flex flex-wrap gap-2">
                                                 {group.countries.map((country) => (
                                                     <Link
                                                         key={country}
                                                         href={countryHref(country)}
                                                         onClick={() => setMobileOpen(false)}
-                                                        className="rounded-full border border-blue-100 dark:border-[#2d4a6b] bg-white dark:bg-[#12223a] px-3 py-1.5 text-[11.5px] font-bold text-[#334155] dark:text-[#a9b6c9]"
+                                                        className="rounded-full border border-blue-100 dark:border-[#3f3f46] bg-white dark:bg-[#1c1c20] px-3 py-1.5 text-[11.5px] font-bold text-[#334155] dark:text-[#a1a1aa]"
                                                     >
                                                         {country}
                                                     </Link>

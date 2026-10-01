@@ -40,24 +40,24 @@ export default async function SolutionCategoryPage({ params }: { params: Params 
   const total = groups.reduce((n, g) => n + g.entries.length, 0);
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[#06101f] pt-[64px]">
-      <header className="relative isolate overflow-hidden border-b border-blue-100 dark:border-[#223550] bg-white dark:bg-[#0d1a2d]">
+    <main className="min-h-screen bg-white dark:bg-[#09090b] pt-[64px]">
+      <header className="relative isolate overflow-hidden border-b border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417]">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-8%,rgba(22,119,242,0.12),transparent_46%)]" />
         <div className="mx-auto w-full max-w-[1180px] px-6 py-16 sm:py-20">
-          <nav className="mb-6 flex items-center gap-2 text-[12px] font-medium text-[#94a3b8] dark:text-[#94a3b8]" aria-label="Breadcrumb">
-            <Link href="/" className="transition-colors hover:text-[#475569]">Home</Link>
+          <nav className="mb-6 flex items-center gap-2 text-[12px] font-medium text-[#94a3b8] dark:text-[#8b8b94]" aria-label="Breadcrumb">
+            <Link href="/" className="transition-colors hover:text-[#475569] dark:text-[#a1a1aa]">Home</Link>
             <span className="opacity-40">/</span>
-            <Link href="/solutions" className="transition-colors hover:text-[#475569]">Solutions</Link>
+            <Link href="/solutions" className="transition-colors hover:text-[#475569] dark:text-[#a1a1aa]">Solutions</Link>
             <span className="opacity-40">/</span>
-            <span className="text-[#475569] dark:text-[#a9b6c9]">{category.label}</span>
+            <span className="text-[#475569] dark:text-[#a1a1aa]">{category.label}</span>
           </nav>
-          <div className="text-[13px] font-black uppercase tracking-[0.24em] text-[#1677f2]">
+          <div className="text-[13px] font-black uppercase tracking-[0.24em] text-[#1677f2] dark:text-[#4f9dfb]">
             {category.icon} Solutions
           </div>
-          <h1 className="mt-4 max-w-[860px] text-[clamp(32px,4vw,52px)] font-black leading-[1.07] tracking-[-0.04em] text-[#071426] dark:text-[#f7f9fc]">
+          <h1 className="mt-4 max-w-[860px] text-[clamp(32px,4vw,52px)] font-black leading-[1.07] tracking-[-0.04em] text-[#071426] dark:text-[#fafafa]">
             {category.label}
           </h1>
-          <p className="mt-5 max-w-[720px] text-[17px] font-medium leading-[1.9] text-[#475569] dark:text-[#a9b6c9]">
+          <p className="mt-5 max-w-[720px] text-[17px] font-medium leading-[1.9] text-[#475569] dark:text-[#a1a1aa]">
             {category.tagline}
           </p>
         </div>
@@ -65,9 +65,9 @@ export default async function SolutionCategoryPage({ params }: { params: Params 
 
       <section className="mx-auto w-full max-w-[1180px] px-6 py-16 sm:py-20">
         {!hasAnything ? (
-          <div className="rounded-[28px] border border-dashed border-blue-100 dark:border-[#223550] bg-[#f7fbff] dark:bg-[#12223a] px-6 py-16 text-center">
-            <p className="text-[20px] font-black text-[#071426] dark:text-[#f7f9fc]">Pages are being published</p>
-            <p className="mx-auto mt-3 max-w-md text-[14.5px] font-medium leading-[1.8] text-[#64748b] dark:text-[#a9b6c9]">
+          <div className="rounded-[28px] border border-dashed border-blue-100 dark:border-[#27272b] bg-[#f7fbff] dark:bg-[#1c1c20] px-6 py-16 text-center">
+            <p className="text-[20px] font-black text-[#071426] dark:text-[#fafafa]">Pages are being published</p>
+            <p className="mx-auto mt-3 max-w-md text-[14.5px] font-medium leading-[1.8] text-[#64748b] dark:text-[#a1a1aa]">
               We are finalising the {category.label} guides. Talk to the team in the meantime and we
               will walk you through the position for your business.
             </p>

@@ -24,14 +24,14 @@ export default function ProcessSection({ content }: { content?: Partial<ProcessC
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative overflow-hidden bg-white px-6 py-24">
+        <section ref={sectionRef} className="relative overflow-hidden bg-white px-6 py-24 dark:bg-[#141417]">
             <div className="mx-auto max-w-[1180px]">
                 <div className={`mx-auto mb-14 max-w-[820px] text-center transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
-                    <div className="mb-4 text-[13px] font-black uppercase tracking-[0.24em] text-[#1677f2]">{c.label}</div>
-                    <h2 className="text-[clamp(34px,4vw,58px)] font-black leading-[1.08] tracking-[-0.04em] text-[#071426]">
+                    <div className="mb-4 text-[13px] font-black uppercase tracking-[0.24em] text-[#1677f2] dark:text-[#4f9dfb]">{c.label}</div>
+                    <h2 className="text-[clamp(34px,4vw,58px)] font-black leading-[1.08] tracking-[-0.04em] text-[#071426] dark:text-[#fafafa]">
                         {c.heading}
                     </h2>
-                    <p className="mx-auto mt-5 max-w-[700px] text-[17px] font-medium leading-relaxed text-[#64748b]">
+                    <p className="mx-auto mt-5 max-w-[700px] text-[17px] font-medium leading-relaxed text-[#64748b] dark:text-[#a1a1aa]">
                         {c.description}
                     </p>
                 </div>
@@ -41,7 +41,7 @@ export default function ProcessSection({ content }: { content?: Partial<ProcessC
                     {steps.map((step, index) => (
                         <div
                             key={step.num}
-                            className="relative rounded-[28px] border border-blue-100 bg-[#f8fbff] p-7 shadow-[0_18px_50px_rgba(0,80,140,0.06)] transition-all duration-500 hover:-translate-y-1 hover:bg-white"
+                            className="relative rounded-[28px] border border-blue-100 bg-[#f8fbff] p-7 shadow-[0_18px_50px_rgba(0,80,140,0.06)] transition-all duration-500 hover:-translate-y-1 hover:bg-white dark:bg-[#141417] dark:border-[#27272b]"
                             style={{
                                 opacity: isVisible ? 1 : 0,
                                 transform: isVisible ? "translateY(0)" : "translateY(28px)",
@@ -51,11 +51,11 @@ export default function ProcessSection({ content }: { content?: Partial<ProcessC
                             <div className="relative z-10 mb-8 flex h-16 w-16 items-center justify-center rounded-full bg-[#1677f2] text-[20px] font-black text-white shadow-[0_16px_35px_rgba(22,119,242,0.25)]">
                                 {step.num}
                             </div>
-                            <div className="mb-4 inline-flex rounded-full bg-white px-3 py-1.5 text-[11px] font-black italic text-[#1677f2] shadow-sm">
+                            <div className="mb-4 inline-flex rounded-full bg-white px-3 py-1.5 text-[11px] font-black italic text-[#1677f2] shadow-sm dark:bg-[#141417] dark:text-[#4f9dfb]">
                                 {step.badge}
                             </div>
-                            <h3 className="text-[20px] font-black leading-tight text-[#071426]">{step.title}</h3>
-                            <p className="mt-4 text-[14.5px] font-medium leading-[1.8] text-[#64748b]">{step.body}</p>
+                            <h3 className="text-[20px] font-black leading-tight text-[#071426] dark:text-[#fafafa]">{step.title}</h3>
+                            <p className="mt-4 text-[14.5px] font-medium leading-[1.8] text-[#64748b] dark:text-[#a1a1aa]">{step.body}</p>
                         </div>
                     ))}
                 </div>

@@ -23,22 +23,22 @@ interface KpiCardProps {
 function KpiCard({ label, value, accent, sub, href, alert }: KpiCardProps) {
   const inner = (
     <div
-      className={`rounded-2xl border bg-white p-5 shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-shadow hover:shadow-[0_4px_16px_rgba(15,23,42,0.08)] ${
+      className={`rounded-2xl border bg-white p-5 shadow-[0_1px_3px_rgba(15,23,42,0.04)] transition-shadow hover:shadow-[0_4px_16px_rgba(15,23,42,0.08)]  dark:bg-[#141417] ${
         alert
-          ? "border-red-200 bg-red-50"
-          : "border-[#dbe7f3]"
+          ? "border-red-200 bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225]"
+          : "border-[#dbe7f3] dark:border-[#27272b]"
       }`}
     >
-      <p className={`text-[10.5px] font-black uppercase tracking-[0.12em] ${alert ? "text-red-500" : "text-[#64748b]"}`}>
+      <p className={`text-[10.5px] font-black uppercase tracking-[0.12em] ${alert ? "text-red-500" : "text-[#64748b] dark:text-[#a1a1aa]"}`}>
         {label}
       </p>
       <p
-        className={`mt-3 text-[40px] font-black leading-none ${alert && value > 0 ? "text-red-600" : ""}`}
+        className={`mt-3 text-[40px] font-black leading-none ${alert && value > 0 ? "text-red-600 dark:text-[#fca5a5]" : ""}`}
         style={{ color: !alert || value === 0 ? (accent ?? "#0a1628") : undefined }}
       >
         {value}
       </p>
-      {sub && <p className="mt-1.5 text-[11.5px] text-[#94a3b8]">{sub}</p>}
+      {sub && <p className="mt-1.5 text-[11.5px] text-[#94a3b8] dark:text-[#71717a]">{sub}</p>}
     </div>
   );
   if (href) return <Link href={href} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1677f2]/60 rounded-2xl">{inner}</Link>;
@@ -54,15 +54,15 @@ export default async function RecruitmentDashboardPage() {
       <div className="mb-8">
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div>
-            <p className="text-[10.5px] font-black uppercase tracking-[0.14em] text-[#1677f2]/70 mb-1">
+            <p className="text-[10.5px] font-black uppercase tracking-[0.14em] text-[#1677f2]/70 mb-1 dark:text-[#4f9dfb]">
               Estabizz Jobs
             </p>
-            <h1 className="text-[26px] font-black text-[#0a1628]">Recruitment Dashboard</h1>
-            <p className="mt-1 text-[13px] text-[#64748b]">
+            <h1 className="text-[26px] font-black text-[#0a1628] dark:text-[#fafafa]">Recruitment Dashboard</h1>
+            <p className="mt-1 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">
               Live counts from staging database — updates on every page load.
             </p>
           </div>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-bold text-emerald-700 self-start">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-bold text-emerald-700 self-start dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
             Live
           </span>
@@ -71,7 +71,7 @@ export default async function RecruitmentDashboardPage() {
 
       {/* KPI overview */}
       <section className="mb-8">
-        <h2 className="mb-4 text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b]">Overview</h2>
+        <h2 className="mb-4 text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">Overview</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
           <KpiCard label="Open Jobs" value={data.openJobs} accent="#1677f2" sub="active listings" href="/admin/jobs" />
           <KpiCard label="Total Candidates" value={data.totalCandidates} sub="in database" href="/admin/jobs/candidates" />
@@ -92,24 +92,24 @@ export default async function RecruitmentDashboardPage() {
       {/* Pipeline by stage */}
       {data.byStage.length > 0 && (
         <section>
-          <h2 className="mb-4 text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b]">Pipeline by Stage</h2>
+          <h2 className="mb-4 text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">Pipeline by Stage</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
             {data.byStage.map((s) => (
               <div
                 key={s.stageSlug}
-                className="rounded-2xl border border-[#dbe7f3] bg-white p-5 shadow-[0_1px_3px_rgba(15,23,42,0.04)]"
+                className="rounded-2xl border border-[#dbe7f3] bg-white p-5 shadow-[0_1px_3px_rgba(15,23,42,0.04)] dark:bg-[#141417] dark:border-[#27272b]"
               >
                 <div className="flex items-center gap-2 mb-3">
                   <span
                     className="h-2.5 w-2.5 rounded-full shrink-0"
                     style={{ backgroundColor: s.colour ?? "#94a3b8" }}
                   />
-                  <p className="text-[10.5px] font-black uppercase tracking-[0.12em] text-[#64748b] truncate">
+                  <p className="text-[10.5px] font-black uppercase tracking-[0.12em] text-[#64748b] truncate dark:text-[#a1a1aa]">
                     {s.stageName}
                   </p>
                 </div>
-                <p className="text-[36px] font-black text-[#0a1628] leading-none">{s.count}</p>
-                <p className="mt-1.5 text-[11.5px] text-[#94a3b8]">
+                <p className="text-[36px] font-black text-[#0a1628] leading-none dark:text-[#fafafa]">{s.count}</p>
+                <p className="mt-1.5 text-[11.5px] text-[#94a3b8] dark:text-[#71717a]">
                   {s.count === 1 ? "application" : "applications"}
                 </p>
               </div>

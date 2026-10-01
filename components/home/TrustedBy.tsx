@@ -30,27 +30,27 @@ export default function TrustedBy({ content }: { content?: Partial<TrustedByCont
     // Helper to render pills
     const renderPill = (name: string, index: number) => (
         <div key={`${name}-${index}`} className="flex-shrink-0 premium-glass border border-[rgba(0,150,220,0.18)] rounded-full px-5 py-2 mx-3 shadow-sm hover:shadow-[0_14px_34px_rgba(0,150,220,0.16)] hover:bg-[#1677f2] hover:text-white transition-all duration-300 hover:-translate-y-1 cursor-default">
-            <span className="text-[13px] font-bold text-[#334155] group-hover:text-white transition-colors">{name}</span>
+            <span className="text-[13px] font-bold text-[#334155] group-hover:text-white transition-colors dark:text-[#a1a1aa]">{name}</span>
         </div>
     );
 
     return (
-        <section ref={sectionRef} className={`py-16 md:py-24 bg-[#f8faff] overflow-hidden relative transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+        <section ref={sectionRef} className={`py-16 md:py-24 bg-[#f8faff] overflow-hidden relative transition-all duration-700 ease-out  dark:bg-[#141417] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_0%,rgba(0,150,214,0.10),transparent_42%)]" />
 
             <div className="max-w-[1240px] mx-auto px-6 mb-12 text-center relative z-10">
-                <h2 className="text-[16px] md:text-[18px] font-extrabold text-[#0a1628] uppercase tracking-widest text-[#94a3b8]">
+                <h2 className="text-[16px] md:text-[18px] font-extrabold text-[#0a1628] uppercase tracking-widest text-[#94a3b8] dark:text-[#fafafa]">
                     {c.heading}
                 </h2>
-                <p className="mt-4 text-[12px] text-[#64748b] max-w-3xl mx-auto">
+                <p className="mt-4 text-[12px] text-[#64748b] max-w-3xl mx-auto dark:text-[#a1a1aa]">
                     {c.disclaimer}
                 </p>
             </div>
 
             <div className="relative w-full max-w-[1400px] mx-auto">
                 {/* Gradients masks for smooth fade left/right */}
-                <div className="absolute left-0 top-0 bottom-0 w-[80px] md:w-[120px] bg-gradient-to-r from-[#f8faff] to-transparent z-10 pointer-events-none"></div>
-                <div className="absolute right-0 top-0 bottom-0 w-[80px] md:w-[120px] bg-gradient-to-l from-[#f8faff] to-transparent z-10 pointer-events-none"></div>
+                <div className="absolute left-0 top-0 bottom-0 w-[80px] md:w-[120px] bg-gradient-to-r from-[#f8faff] to-transparent z-10 pointer-events-none dark:from-[#09090b]"></div>
+                <div className="absolute right-0 top-0 bottom-0 w-[80px] md:w-[120px] bg-gradient-to-l from-[#f8faff] to-transparent z-10 pointer-events-none dark:from-[#09090b]"></div>
 
                 {/* Row 1 - Scroll Left */}
                 <div className="flex w-fit animate-marquee-left mb-6 whitespace-nowrap group">

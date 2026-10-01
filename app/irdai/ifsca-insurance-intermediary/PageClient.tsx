@@ -86,10 +86,10 @@ export default function PageClient() {
 
             <h2 id="process">Registration Process</h2>
             <div className="step-timeline">
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Preparation & Documentation</h4><p className="text-[13px] text-[#64748b] !mb-0">Gather all required documents and ensure eligibility criteria are met.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Application Filing</h4><p className="text-[13px] text-[#64748b] !mb-0">Submit the complete application to the regulatory authority with supporting documents.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Regulatory Review</h4><p className="text-[13px] text-[#64748b] !mb-0">The regulatory authority reviews the application and may seek clarifications.</p></div></div>
-                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Approval & Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0">Upon approval, set up compliance framework and begin operations.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 1</div><h4>Preparation & Documentation</h4><p className="text-[13px] text-[#64748b] !mb-0 dark:text-[#a1a1aa]">Gather all required documents and ensure eligibility criteria are met.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 2</div><h4>Application Filing</h4><p className="text-[13px] text-[#64748b] !mb-0 dark:text-[#a1a1aa]">Submit the complete application to the regulatory authority with supporting documents.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 3</div><h4>Regulatory Review</h4><p className="text-[13px] text-[#64748b] !mb-0 dark:text-[#a1a1aa]">The regulatory authority reviews the application and may seek clarifications.</p></div></div>
+                <div className="step-item"><div className="step-dot"></div><div className="step-card"><div className="step-label">Step 4</div><h4>Approval & Compliance Setup</h4><p className="text-[13px] text-[#64748b] !mb-0 dark:text-[#a1a1aa]">Upon approval, set up compliance framework and begin operations.</p></div></div>
             </div>
 
             <h2 id="fees">Fees Structure</h2>
@@ -130,12 +130,12 @@ export default function PageClient() {
             {faqs.length > 0 ? (
             <div className="space-y-3 my-6">
                 {faqs.map((item, i) => (
-                    <details key={i} className="faq-accordion border border-gray-100 rounded-xl overflow-hidden">
-                        <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px]">
+                    <details key={i} className="faq-accordion border border-gray-100 rounded-xl overflow-hidden dark:border-[#27272b]">
+                        <summary className="flex justify-between items-center p-5 cursor-pointer bg-white hover:bg-blue-50/30 transition-colors font-semibold text-[#0a1628] text-[15px] dark:bg-[#141417] dark:text-[#fafafa]">
                             <span>{item.q}</span>
-                            <span className="text-[#1677f2] transition-transform group-open:rotate-180 shrink-0 ml-4">▼</span>
+                            <span className="text-[#1677f2] transition-transform group-open:rotate-180 shrink-0 ml-4 dark:text-[#4f9dfb]">▼</span>
                         </summary>
-                        <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151] leading-relaxed">
+                        <div className="p-5 border-t border-gray-100 bg-white text-[14px] text-[#374151] leading-relaxed dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                             {item.a}
                         </div>
                     </details>

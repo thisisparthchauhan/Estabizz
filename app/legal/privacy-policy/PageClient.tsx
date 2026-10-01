@@ -563,24 +563,24 @@ const policySections = policyText
 
 export default function PageClient() {
   return (
-    <main className="min-h-screen bg-white pt-[64px] text-[#0a1628]">
-      <section className="border-b border-[#dbe7f3] bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.14),transparent_36%),linear-gradient(180deg,#ffffff_0%,#f5fbff_100%)]">
+    <main className="min-h-screen bg-white pt-[64px] text-[#0a1628] dark:bg-[#141417] dark:text-[#fafafa]">
+      <section className="border-b border-[#dbe7f3] bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.14),transparent_36%),linear-gradient(180deg,#ffffff_0%,#f5fbff_100%)] dark:border-[#27272b]">
         <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-[12px] font-semibold text-[#64748b]" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-[#1677f2]">Home</Link>
-            <span className="text-[#94a3b8]">/</span>
-            <span className="text-[#64748b]">Legal</span>
-            <span className="text-[#94a3b8]">/</span>
-            <span className="text-[#0a1628]">Privacy Policy</span>
+          <nav className="mb-6 flex flex-wrap items-center gap-2 text-[12px] font-semibold text-[#64748b] dark:text-[#a1a1aa]" aria-label="Breadcrumb">
+            <Link href="/" className="hover:text-[#1677f2] dark:text-[#4f9dfb]">Home</Link>
+            <span className="text-[#94a3b8] dark:text-[#71717a]">/</span>
+            <span className="text-[#64748b] dark:text-[#a1a1aa]">Legal</span>
+            <span className="text-[#94a3b8] dark:text-[#71717a]">/</span>
+            <span className="text-[#0a1628] dark:text-[#fafafa]">Privacy Policy</span>
           </nav>
           <div className="max-w-3xl">
-            <p className="mb-3 text-[11px] font-black uppercase tracking-[0.22em] text-[#1677f2]">
+            <p className="mb-3 text-[11px] font-black uppercase tracking-[0.22em] text-[#1677f2] dark:text-[#4f9dfb]">
               Legal & Transparency
             </p>
-            <h1 className="text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[46px]">
+            <h1 className="text-[34px] font-black leading-[1.08] tracking-[-0.03em] text-[#120b45] sm:text-[46px] dark:text-[#fafafa]">
               Privacy Policy
             </h1>
-            <p className="mt-5 text-[15px] leading-7 text-[#475569] sm:text-[17px]">
+            <p className="mt-5 text-[15px] leading-7 text-[#475569] sm:text-[17px] dark:text-[#a1a1aa]">
               This Privacy Policy explains how Estabizz Fintech Private Limited collects,
               uses, stores, shares and protects personal information while providing its
               professional services.
@@ -593,9 +593,9 @@ export default function PageClient() {
               ["Company", "Estabizz Fintech Private Limited"],
               ["Governing Law", "India"],
             ].map(([label, value]) => (
-              <div key={label} className="rounded-lg border border-[#dbe7f3] bg-white/90 px-4 py-3 shadow-[0_8px_24px_rgba(0,80,140,0.06)]">
-                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1677f2]">{label}</p>
-                <p className="mt-1 text-[13px] font-bold leading-5 text-[#0a1628]">{value}</p>
+              <div key={label} className="rounded-lg border border-[#dbe7f3] bg-white/90 px-4 py-3 shadow-[0_8px_24px_rgba(0,80,140,0.06)] dark:bg-[#141417] dark:border-[#27272b]">
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#1677f2] dark:text-[#4f9dfb]">{label}</p>
+                <p className="mt-1 text-[13px] font-bold leading-5 text-[#0a1628] dark:text-[#fafafa]">{value}</p>
               </div>
             ))}
           </div>
@@ -604,14 +604,14 @@ export default function PageClient() {
 
       <section className="mx-auto grid max-w-6xl gap-10 px-6 py-12 lg:grid-cols-[260px_minmax(0,1fr)]">
         <aside className="hidden lg:block">
-          <div className="sticky top-24 rounded-lg border border-[#dbe7f3] bg-[#f8fbff] p-4">
-            <p className="mb-3 text-[11px] font-black uppercase tracking-[0.18em] text-[#1677f2]">Contents</p>
+          <div className="sticky top-24 rounded-lg border border-[#dbe7f3] bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
+            <p className="mb-3 text-[11px] font-black uppercase tracking-[0.18em] text-[#1677f2] dark:text-[#4f9dfb]">Contents</p>
             <nav className="max-h-[70vh] space-y-1 overflow-y-auto pr-1" aria-label="Privacy policy contents">
               {policySections.map(section => (
                 <a
                   key={section.id}
                   href={`#${section.id}`}
-                  className="block rounded-md px-3 py-2 text-[12.5px] font-semibold leading-5 text-[#475569] transition-colors hover:bg-white hover:text-[#1677f2]"
+                  className="block rounded-md px-3 py-2 text-[12.5px] font-semibold leading-5 text-[#475569] transition-colors hover:bg-white hover:text-[#1677f2] dark:bg-[#141417] dark:text-[#a1a1aa]"
                 >
                   {section.number}. {section.title}
                 </a>
@@ -620,9 +620,9 @@ export default function PageClient() {
           </div>
         </aside>
 
-        <article className="min-w-0 rounded-lg border border-[#e2edf8] bg-white p-6 shadow-[0_12px_36px_rgba(0,80,140,0.06)] sm:p-8 lg:p-10">
-          <div className="mb-8 rounded-lg border-l-4 border-[#1677f2] bg-[#f5fbff] px-5 py-4">
-            <p className="text-[13.5px] leading-6 text-[#334155]">
+        <article className="min-w-0 rounded-lg border border-[#e2edf8] bg-white p-6 shadow-[0_12px_36px_rgba(0,80,140,0.06)] sm:p-8 lg:p-10 dark:bg-[#141417] dark:border-[#27272b]">
+          <div className="mb-8 rounded-lg border-l-4 border-[#1677f2] bg-[#f5fbff] px-5 py-4 dark:bg-[#141417]">
+            <p className="text-[13.5px] leading-6 text-[#334155] dark:text-[#a1a1aa]">
               This page contains the privacy policy text supplied by Estabizz Fintech Private Limited.
               It should be read together with applicable Indian data protection, information technology
               and professional-service requirements.
@@ -636,16 +636,16 @@ export default function PageClient() {
                   <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1677f2] text-[12px] font-black text-white">
                     {section.number}
                   </span>
-                  <h2 className="text-[23px] font-black leading-tight tracking-[-0.02em] text-[#120b45]">
+                  <h2 className="text-[23px] font-black leading-tight tracking-[-0.02em] text-[#120b45] dark:text-[#fafafa]">
                     {section.title}
                   </h2>
                 </div>
 
-                <div className="space-y-4 pl-0 text-[14.5px] leading-7 text-[#475569] sm:pl-10">
+                <div className="space-y-4 pl-0 text-[14.5px] leading-7 text-[#475569] sm:pl-10 dark:text-[#a1a1aa]">
                   {section.content.map((line, index) => {
                     if (subheadings.has(line)) {
                       return (
-                        <h3 key={`${section.id}-${index}`} className="pt-2 text-[15px] font-black uppercase tracking-[0.08em] text-[#0a1628]">
+                        <h3 key={`${section.id}-${index}`} className="pt-2 text-[15px] font-black uppercase tracking-[0.08em] text-[#0a1628] dark:text-[#fafafa]">
                           {line}
                         </h3>
                       );
@@ -661,7 +661,7 @@ export default function PageClient() {
                     return (
                       <p
                         key={`${section.id}-${index}`}
-                        className={isContactLine ? "font-semibold text-[#0a1628]" : undefined}
+                        className={isContactLine ? "font-semibold text-[#0a1628] dark:text-[#fafafa]" : undefined}
                       >
                         {line}
                       </p>

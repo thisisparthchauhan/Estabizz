@@ -81,28 +81,28 @@ export default function LoginPage() {
 
                 <div className="relative space-y-6">
                     <div>
-                        <p className="text-[#1677f2] text-sm font-semibold tracking-wider uppercase mb-3">Trusted by 1000+ businesses</p>
+                        <p className="text-[#1677f2] text-sm font-semibold tracking-wider uppercase mb-3 dark:text-[#4f9dfb]">Trusted by 1000+ businesses</p>
                         <h2 className="text-4xl font-bold text-white leading-tight">
                             India&apos;s #1 Fintech<br />Compliance Platform
                         </h2>
-                        <p className="text-gray-400 mt-4 text-base leading-relaxed">
+                        <p className="text-gray-400 mt-4 text-base leading-relaxed dark:text-[#71717a]">
                             Expert regulatory guidance for RBI, SEBI, IFSCA and IRDAI licenses — end-to-end.
                         </p>
                     </div>
                     <div className="flex flex-wrap gap-3">
                         {["RBI Licensed", "SEBI Registered", "IFSCA Compliant"].map((tag) => (
-                            <span key={tag} className="text-xs bg-white/5 border border-white/10 text-gray-300 px-3 py-1.5 rounded-full">
+                            <span key={tag} className="text-xs bg-white/5 border border-white/10 text-gray-300 px-3 py-1.5 rounded-full dark:bg-[#141417] dark:text-[#71717a]">
                                 ✓ {tag}
                             </span>
                         ))}
                     </div>
                 </div>
 
-                <p className="relative text-gray-600 text-xs">© {new Date().getFullYear()} Estabizz Fintech Pvt. Ltd.</p>
+                <p className="relative text-gray-600 text-xs dark:text-[#a1a1aa]">© {new Date().getFullYear()} Estabizz Fintech Pvt. Ltd.</p>
             </div>
 
             {/* Right panel — form */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center bg-[#f8faff] px-6 py-12">
+            <div className="w-full lg:w-1/2 flex items-center justify-center bg-[#f8faff] px-6 py-12 dark:bg-[#141417]">
                 <div className="w-full max-w-md">
                     <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors mb-8 group">
                         <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -112,30 +112,30 @@ export default function LoginPage() {
                     </Link>
 
                     <div className="mb-8">
-                        <h1 className="text-2xl font-bold text-gray-900">Welcome Back</h1>
-                        <p className="text-gray-500 text-sm mt-1">Please enter your details to sign in.</p>
+                        <h1 className="text-2xl font-bold text-gray-900 dark:text-[#fafafa]">Welcome Back</h1>
+                        <p className="text-gray-500 text-sm mt-1 dark:text-[#71717a]">Please enter your details to sign in.</p>
                     </div>
 
                     {/* Tab toggle */}
-                    <div className="flex bg-gray-100 rounded-xl p-1 mb-6">
+                    <div className="flex bg-gray-100 rounded-xl p-1 mb-6 dark:bg-[#141417]">
                         <button
                             type="button"
                             onClick={() => { setTab("email"); setForm({ identifier: "", password: "" }); setError(""); }}
-                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${tab === "email" ? "bg-white text-[#1677f2] shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
+                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${tab === "email" ? "bg-white text-[#1677f2] shadow-sm dark:bg-[#141417] dark:text-[#4f9dfb]" : "text-gray-500 hover:text-gray-700 dark:text-[#71717a]"}`}
                         >
                             Email
                         </button>
                         <button
                             type="button"
                             onClick={() => { setTab("phone"); setForm({ identifier: "", password: "" }); setError(""); }}
-                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${tab === "phone" ? "bg-white text-[#1677f2] shadow-sm" : "text-gray-500 hover:text-gray-700"}`}
+                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${tab === "phone" ? "bg-white text-[#1677f2] shadow-sm dark:bg-[#141417] dark:text-[#4f9dfb]" : "text-gray-500 hover:text-gray-700 dark:text-[#71717a]"}`}
                         >
                             Phone Number
                         </button>
                     </div>
 
                     {error && (
-                        <div className="mb-5 bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-xl">
+                        <div className="mb-5 bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-xl dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">
                             {error}
                         </div>
                     )}
@@ -143,7 +143,7 @@ export default function LoginPage() {
                     <form onSubmit={handleSubmit} className="space-y-4">
                         {tab === "email" ? (
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">Email Address</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1.5 dark:text-[#a1a1aa]">Email Address</label>
                                 <input
                                     type="email"
                                     name="identifier"
@@ -151,14 +151,14 @@ export default function LoginPage() {
                                     onChange={handleChange}
                                     required
                                     placeholder="Enter your email"
-                                    className="w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all"
+                                    className="w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
                                 />
                             </div>
                         ) : (
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">Phone Number</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1.5 dark:text-[#a1a1aa]">Phone Number</label>
                                 <div className="flex gap-2">
-                                    <div className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-xl px-3 py-3 text-sm text-gray-600 whitespace-nowrap">
+                                    <div className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-xl px-3 py-3 text-sm text-gray-600 whitespace-nowrap dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                                         🇮🇳 +91
                                     </div>
                                     <input
@@ -168,7 +168,7 @@ export default function LoginPage() {
                                         onChange={handleChange}
                                         required
                                         placeholder="9876543210"
-                                        className="flex-1 border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all"
+                                        className="flex-1 border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
                                     />
                                 </div>
                             </div>
@@ -176,8 +176,8 @@ export default function LoginPage() {
 
                         <div>
                             <div className="flex items-center justify-between mb-1.5">
-                                <label className="block text-sm font-medium text-gray-700">Password</label>
-                                <Link href="/contact" className="text-xs text-[#1677f2] hover:underline">Need help?</Link>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-[#a1a1aa]">Password</label>
+                                <Link href="/contact" className="text-xs text-[#1677f2] hover:underline dark:text-[#4f9dfb]">Need help?</Link>
                             </div>
                             <div className="relative">
                                 <input
@@ -187,12 +187,12 @@ export default function LoginPage() {
                                     onChange={handleChange}
                                     required
                                     placeholder="Enter your password"
-                                    className="w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 pr-11 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all"
+                                    className="w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 pr-11 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors dark:text-[#71717a]"
                                 >
                                     {showPassword ? (
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -224,9 +224,9 @@ export default function LoginPage() {
                         </button>
                     </form>
 
-                    <p className="text-center text-gray-500 text-sm mt-6">
+                    <p className="text-center text-gray-500 text-sm mt-6 dark:text-[#71717a]">
                         Don&apos;t have an account?{" "}
-                        <Link href={buildSignupHref(returnPath)} className="text-[#1677f2] font-semibold hover:underline">Sign up</Link>
+                        <Link href={buildSignupHref(returnPath)} className="text-[#1677f2] font-semibold hover:underline dark:text-[#4f9dfb]">Sign up</Link>
                     </p>
                 </div>
             </div>

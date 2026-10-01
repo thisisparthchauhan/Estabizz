@@ -67,7 +67,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function DataTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
+  return <div className="overflow-x-auto my-6 rounded-lg border border-blue-100 dark:border-[#27272b]"><table className="data-table my-0 min-w-[640px]"><thead><tr>{headers.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function FaqList({ items }: { items: { q: string; a: string }[] }) {
@@ -106,7 +106,7 @@ export default function PageClient() {
       finalCtaTitle="Correct It, Then Answer It"
       finalCtaDescription="Since May 2026 a first-time procedural lapse can be met with an improvement notice rather than a penalty. That route closes if the correction is not made and the reply does not ask for it."
       heroDescription={<p>A weighing scale on an expired verification, a label missing the importer details, a listing without the net quantity — these are ordinary operational lapses that the Legal Metrology Department treats as contraventions. The framework changed materially in 2026: a first-time procedural lapse can now be met with an improvement notice and an opportunity to rectify, while repeated and deliberate conduct is treated more seriously than before. Estabizz assists manufacturers, importers, packers, retailers, e-commerce sellers, petrol pumps, jewellers, warehouses, logistics operators and food businesses with notice review, reply drafting, compliance correction, packaged commodity and listing review, verification and licence advisory, compounding assessment, appeal strategy, company and officer liability mapping, and advocate coordination.</p>}
-      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50">WhatsApp Estabizz</a></>}
+      heroActions={<><Link href="/contact" className="px-6 py-3 bg-[#1677f2] text-white font-bold rounded-lg hover:bg-[#0866d9]">Speak With an Expert</Link><a href={whatsappUrl} className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-lg border border-blue-200 hover:bg-blue-50 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">WhatsApp Estabizz</a></>}
     >
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> if your business weighs, measures, counts or packs anything it sells, the instruments and the declarations have to meet the standards the Legal Metrology Act sets — and a lapse is a contravention whether or not anyone was misled.</p>

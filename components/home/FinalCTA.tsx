@@ -38,7 +38,7 @@ export default function FinalCTA({ content }: { content?: Partial<FinalCtaConten
                         {c.heading}
                     </h2>
 
-                    <p className="text-[14.5px] md:text-[16px] text-[#94a3b8] leading-relaxed font-medium mb-7 max-w-2xl mx-auto">
+                    <p className="text-[14.5px] md:text-[16px] text-[#94a3b8] leading-relaxed font-medium mb-7 max-w-2xl mx-auto dark:text-[#71717a]">
                         {c.paragraph}
                     </p>
 
@@ -50,10 +50,10 @@ export default function FinalCTA({ content }: { content?: Partial<FinalCtaConten
                             </span>
                         </a>
 
-                        <a href={phoneHref} className="w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center gap-2 bg-transparent border border-white/20 text-white font-bold text-[15px] rounded-xl px-6 py-3.5 hover:bg-white/10 hover:border-white/40 transition-all duration-300">
+                        <a href={phoneHref} className="w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center gap-2 bg-transparent border border-white/20 text-white font-bold text-[15px] rounded-xl px-6 py-3.5 hover:bg-white/10 hover:border-white/40 transition-all duration-300 dark:bg-[#141417]">
                             <span className="text-[17px]">📞</span> {c.phone}
                         </a>
-                        <a href={c.whatsappLink} className="w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-bold text-[15px] rounded-xl px-6 py-3.5 hover:bg-white/20 hover:border-white/40 transition-all duration-300">
+                        <a href={c.whatsappLink} className="w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-bold text-[15px] rounded-xl px-6 py-3.5 hover:bg-white/20 hover:border-white/40 transition-all duration-300 dark:bg-[#141417]">
                             {c.whatsappText}
                         </a>
                     </div>

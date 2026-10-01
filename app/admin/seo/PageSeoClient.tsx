@@ -39,11 +39,11 @@ function formatIST(iso?: string): string {
 
 function StatusBadge({ status }: { status: SeoPageItem["status"] }) {
   const map: Record<string, { cls: string; label: string }> = {
-    published:        { cls: "bg-emerald-50 text-emerald-700 border-emerald-200", label: "Live" },
-    draft:            { cls: "bg-[#f8fafc] text-[#64748b] border-[#e2eaf2]",     label: "Draft" },
-    pending_approval: { cls: "bg-amber-50 text-amber-700 border-amber-200",       label: "Pending" },
-    rejected:         { cls: "bg-red-50 text-red-600 border-red-200",             label: "Rejected" },
-    default:          { cls: "bg-[#f0f4f8] text-[#94a3b8] border-[#dbe7f3]",     label: "Default" },
+    published:        { cls: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]", label: "Live" },
+    draft:            { cls: "bg-[#f8fafc] text-[#64748b] border-[#e2eaf2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]",     label: "Draft" },
+    pending_approval: { cls: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]",       label: "Pending" },
+    rejected:         { cls: "bg-red-50 text-red-600 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]",             label: "Rejected" },
+    default:          { cls: "bg-[#f0f4f8] text-[#94a3b8] border-[#dbe7f3] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#71717a]",     label: "Default" },
   };
   const { cls, label } = map[status] ?? map.default;
   return (
@@ -60,7 +60,7 @@ function CharCount({ value, max }: { value: string; max: number }) {
   const over = len > max;
   const near = len > max * 0.9;
   return (
-    <span className={`text-[10px] font-semibold tabular-nums ${over ? "text-red-500" : near ? "text-amber-500" : "text-[#94a3b8]"}`}>
+    <span className={`text-[10px] font-semibold tabular-nums ${over ? "text-red-500" : near ? "text-amber-500" : "text-[#94a3b8] dark:text-[#71717a]"}`}>
       {len}/{max}
     </span>
   );
@@ -76,10 +76,10 @@ function Toggle({ on, onChange, label }: { on: boolean; onChange: (v: boolean) =
       className="flex items-center gap-2 group"
       aria-label={label}
     >
-      <span className={`relative inline-flex h-5 w-9 shrink-0 rounded-full border-2 transition-colors ${on ? "border-[#1677f2] bg-[#1677f2]" : "border-[#cbd5e1] bg-[#e2eaf2]"}`}>
-        <span className={`inline-block h-3.5 w-3.5 translate-y-[-1px] rounded-full bg-white shadow transition-transform ${on ? "translate-x-[14px]" : "translate-x-[1px]"}`} />
+      <span className={`relative inline-flex h-5 w-9 shrink-0 rounded-full border-2 transition-colors ${on ? "border-[#1677f2] bg-[#1677f2]" : "border-[#cbd5e1] bg-[#e2eaf2] dark:bg-[#1c1c20] dark:border-[#27272b]"}`}>
+        <span className={`inline-block h-3.5 w-3.5 translate-y-[-1px] rounded-full bg-white shadow transition-transform  dark:bg-[#141417] ${on ? "translate-x-[14px]" : "translate-x-[1px]"}`} />
       </span>
-      <span className={`text-[12px] font-semibold ${on ? "text-[#0a1628]" : "text-[#94a3b8]"}`}>{label}</span>
+      <span className={`text-[12px] font-semibold ${on ? "text-[#0a1628] dark:text-[#fafafa]" : "text-[#94a3b8] dark:text-[#71717a]"}`}>{label}</span>
     </button>
   );
 }
@@ -90,8 +90,8 @@ function Field({ label, hint, children }: { label: string; hint?: ReactNode; chi
   return (
     <div>
       <div className="flex items-center justify-between mb-1">
-        <label className="text-[11px] font-black uppercase tracking-wide text-[#64748b]">{label}</label>
-        {hint && <span className="text-[10px] text-[#94a3b8]">{hint}</span>}
+        <label className="text-[11px] font-black uppercase tracking-wide text-[#64748b] dark:text-[#a1a1aa]">{label}</label>
+        {hint && <span className="text-[10px] text-[#94a3b8] dark:text-[#71717a]">{hint}</span>}
       </div>
       {children}
     </div>
@@ -108,7 +108,7 @@ function Input({ value, onChange, placeholder, maxLength }: {
       onChange={e => onChange(e.target.value)}
       placeholder={placeholder}
       maxLength={maxLength}
-      className="w-full rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] px-3 py-2 text-[12px] text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#cbd5e1] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:bg-white dark:focus:bg-[#0d1a2d] focus:outline-none transition-colors"
+      className="w-full rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20] px-3 py-2 text-[12px] text-[#0a1628] dark:text-[#fafafa] placeholder:text-[#cbd5e1] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:bg-white dark:focus:bg-[#0d1a2d] focus:outline-none transition-colors"
     />
   );
 }
@@ -122,7 +122,7 @@ function Textarea({ value, onChange, placeholder, rows = 3 }: {
       onChange={e => onChange(e.target.value)}
       placeholder={placeholder}
       rows={rows}
-      className="w-full resize-none rounded-xl border border-[#e2eaf2] bg-[#f8fafc] px-3 py-2 text-[12px] text-[#0a1628] placeholder:text-[#cbd5e1] focus:border-[#1677f2] focus:bg-white focus:outline-none transition-colors leading-5"
+      className="w-full resize-none rounded-xl border border-[#e2eaf2] bg-[#f8fafc] px-3 py-2 text-[12px] text-[#0a1628] placeholder:text-[#cbd5e1] focus:border-[#1677f2] focus:bg-white focus:outline-none transition-colors leading-5 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]"
     />
   );
 }
@@ -140,10 +140,10 @@ function SeoWarnings({ draft }: { draft: Partial<SeoContent> }) {
   if (!draft.focusKeyword?.trim())       warnings.push("No focus keyword set — consider adding one.");
   if (warnings.length === 0) return null;
   return (
-    <div className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-3 space-y-1.5">
-      <div className="text-[10px] font-black uppercase tracking-wide text-amber-600">SEO Notes</div>
+    <div className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-3 space-y-1.5 dark:bg-[#2a2113] dark:border-[#4a3a1a]">
+      <div className="text-[10px] font-black uppercase tracking-wide text-amber-600 dark:text-[#fcd34d]">SEO Notes</div>
       {warnings.map(w => (
-        <div key={w} className="flex items-start gap-1.5 text-[11px] text-amber-800 leading-4">
+        <div key={w} className="flex items-start gap-1.5 text-[11px] text-amber-800 leading-4 dark:text-[#fcd34d]">
           <span className="mt-0.5 shrink-0 text-amber-500">•</span>{w}
         </div>
       ))}
@@ -156,7 +156,7 @@ function SeoWarnings({ draft }: { draft: Partial<SeoContent> }) {
 function ImagePreview({ url }: { url: string }) {
   if (!url.trim()) return null;
   return (
-    <div className="mt-1.5 overflow-hidden rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a]">
+    <div className="mt-1.5 overflow-hidden rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={url} alt="Social image preview" className="h-24 w-full object-cover" onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
     </div>
@@ -167,8 +167,8 @@ function ImagePreview({ url }: { url: string }) {
 
 function DrawerSection({ title }: { title: string }) {
   return (
-    <div className="border-b border-[#f0f4f8] pb-1 mb-3 mt-2">
-      <span className="text-[10px] font-black uppercase tracking-wider text-[#94a3b8]">{title}</span>
+    <div className="border-b border-[#f0f4f8] pb-1 mb-3 mt-2 dark:border-[#27272b]">
+      <span className="text-[10px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#71717a]">{title}</span>
     </div>
   );
 }
@@ -271,12 +271,12 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
   // ─────────────────────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#06101f]">
+    <div className="min-h-full bg-[#f4f7fb] dark:bg-[#09090b]">
 
       {/* Toast */}
       {toast && (
         <div className={`fixed top-4 right-4 z-[9999] max-w-sm rounded-2xl border px-4 py-3 text-[13px] font-semibold shadow-xl ${
-          toast.ok ? "border-green-200 bg-green-50 text-green-800" : "border-red-200 bg-red-50 text-red-800"
+          toast.ok ? "border-green-200 bg-green-50 text-green-800 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]" : "border-red-200 bg-red-50 text-red-800 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]"
         }`}>
           {toast.msg}
         </div>
@@ -286,17 +286,17 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
       {editing && (
         <div className="fixed inset-0 z-[7000] flex items-start justify-end bg-black/30 backdrop-blur-sm"
              onClick={closeDrawer}>
-          <div className="h-full w-full max-w-[460px] overflow-y-auto bg-white dark:bg-[#0d1a2d] shadow-2xl dark:shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col"
+          <div className="h-full w-full max-w-[460px] overflow-y-auto bg-white dark:bg-[#141417] shadow-2xl dark:shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col"
                onClick={e => e.stopPropagation()}>
 
             {/* Drawer header */}
-            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-6 py-4">
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-6 py-4">
               <div>
-                <div className="text-[14px] font-black text-[#0a1628]">{editing.label}</div>
-                <div className="text-[11px] text-[#94a3b8] mt-0.5">{editing.path}</div>
+                <div className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">{editing.label}</div>
+                <div className="text-[11px] text-[#94a3b8] mt-0.5 dark:text-[#71717a]">{editing.path}</div>
               </div>
               <button onClick={closeDrawer}
-                      className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] hover:text-[#0a1628] transition-colors">
+                      className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] hover:text-[#0a1628] transition-colors dark:bg-[#141417] dark:text-[#71717a]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
@@ -319,9 +319,9 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                   placeholder="E.g. RBI Services – NBFC Registration | Estabizz Fintech"
                   maxLength={120}
                 />
-                <div className="mt-1 flex justify-between text-[10px] text-[#94a3b8]">
+                <div className="mt-1 flex justify-between text-[10px] text-[#94a3b8] dark:text-[#71717a]">
                   <span>Shown in search results and browser tabs</span>
-                  <span className={titleLen > 60 ? "text-red-500 font-bold" : titleLen > 45 ? "text-green-600" : ""}>
+                  <span className={titleLen > 60 ? "text-red-500 font-bold" : titleLen > 45 ? "text-green-600 dark:text-[#6ee7b7]" : ""}>
                     {titleLen > 60 ? "Over limit" : titleLen >= 30 ? "Good" : titleLen > 0 ? "Short" : ""}
                   </span>
                 </div>
@@ -334,9 +334,9 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                   placeholder="Brief description shown under the page title in search results."
                   rows={3}
                 />
-                <div className="mt-1 flex justify-between text-[10px] text-[#94a3b8]">
+                <div className="mt-1 flex justify-between text-[10px] text-[#94a3b8] dark:text-[#71717a]">
                   <span>Aim for 100–160 characters</span>
-                  <span className={descLen > 160 ? "text-red-500 font-bold" : descLen >= 100 ? "text-green-600" : ""}>
+                  <span className={descLen > 160 ? "text-red-500 font-bold" : descLen >= 100 ? "text-green-600 dark:text-[#6ee7b7]" : ""}>
                     {descLen > 160 ? "Over limit" : descLen >= 100 ? "Good" : descLen > 0 ? "Short" : ""}
                   </span>
                 </div>
@@ -359,7 +359,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                   onChange={v => set("canonicalUrl", v)}
                   placeholder="/rbi"
                 />
-                <p className="mt-1 text-[10px] text-[#94a3b8]">
+                <p className="mt-1 text-[10px] text-[#94a3b8] dark:text-[#71717a]">
                   Prevents duplicate content issues. Leave blank to use the page's default path.
                 </p>
               </Field>
@@ -446,7 +446,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                   onChange={v => set("secondaryKeywords", v)}
                   placeholder="Comma-separated, e.g. NBFC compliance, RBI registration, fintech India"
                 />
-                <p className="mt-1 text-[10px] text-[#94a3b8]">
+                <p className="mt-1 text-[10px] text-[#94a3b8] dark:text-[#71717a]">
                   For team reference only — not shown publicly.
                 </p>
               </Field>
@@ -462,7 +462,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
 
               {/* Last updated info */}
               {(editing.lastUpdatedAt || editing.lastUpdatedBy) && (
-                <div className="rounded-xl border border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] px-3 py-2.5 text-[10px] text-[#94a3b8] dark:text-[#a9b6c9]">
+                <div className="rounded-xl border border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20] px-3 py-2.5 text-[10px] text-[#94a3b8] dark:text-[#a1a1aa]">
                   Last saved {editing.lastUpdatedBy ? `by ${editing.lastUpdatedBy}` : ""} on {formatIST(editing.lastUpdatedAt)}
                 </div>
               )}
@@ -470,9 +470,9 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
             </div>
 
             {/* Drawer footer */}
-            <div className="sticky bottom-0 border-t border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-6 py-4">
+            <div className="sticky bottom-0 border-t border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-6 py-4">
               {!canEdit ? (
-                <div className="rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] px-4 py-2.5 text-center text-[12px] text-[#94a3b8] dark:text-[#a9b6c9]">
+                <div className="rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20] px-4 py-2.5 text-center text-[12px] text-[#94a3b8] dark:text-[#a1a1aa]">
                   Your role cannot edit SEO settings.
                 </div>
               ) : (
@@ -480,7 +480,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                   <button
                     onClick={closeDrawer}
                     disabled={saving}
-                    className="flex-1 rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-4 py-2.5 text-[13px] font-black text-[#475569] dark:text-[#a9b6c9] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] disabled:opacity-50 transition-colors"
+                    className="flex-1 rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-4 py-2.5 text-[13px] font-black text-[#475569] dark:text-[#a1a1aa] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] disabled:opacity-50 transition-colors"
                   >
                     Cancel
                   </button>
@@ -510,17 +510,17 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
 
         {/* Header */}
         <div>
-          <h1 className="text-[21px] font-black text-[#0a1628] dark:text-[#f7f9fc]">Page SEO</h1>
-          <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a9b6c9]">
+          <h1 className="text-[21px] font-black text-[#0a1628] dark:text-[#fafafa]">Page SEO</h1>
+          <p className="mt-0.5 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">
             Manage page titles, descriptions and social sharing settings for all public pages.
           </p>
         </div>
 
         {/* Access restricted */}
         {!canView && (
-          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-8 text-center shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
-            <div className="text-[15px] font-black text-[#0a1628] mb-1">Access Restricted</div>
-            <p className="text-[13px] text-[#64748b] max-w-xs mx-auto leading-5">
+          <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-8 text-center shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+            <div className="text-[15px] font-black text-[#0a1628] mb-1 dark:text-[#fafafa]">Access Restricted</div>
+            <p className="text-[13px] text-[#64748b] max-w-xs mx-auto leading-5 dark:text-[#a1a1aa]">
               You do not have permission to view SEO settings.
             </p>
           </div>
@@ -530,21 +530,21 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
           <>
             {/* Info bar */}
             {!canEdit && (
-              <div className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-3.5">
-                <p className="text-[12px] text-amber-800 font-medium leading-5">
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-3.5 dark:bg-[#2a2113] dark:border-[#4a3a1a]">
+                <p className="text-[12px] text-amber-800 font-medium leading-5 dark:text-[#fcd34d]">
                   You have read-only access to SEO settings. Contact a Super Admin or SEO Manager to make changes.
                 </p>
               </div>
             )}
 
             {/* Search */}
-            <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-5 py-4 shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+            <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-5 py-4 shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
               <input
                 type="search"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Search pages by name, path or SEO title"
-                className="w-full rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#12223a] px-4 py-2.5 text-[13px] font-medium text-[#0a1628] dark:text-[#f7f9fc] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:bg-white dark:focus:bg-[#0d1a2d] focus:outline-none transition-colors"
+                className="w-full rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20] px-4 py-2.5 text-[13px] font-medium text-[#0a1628] dark:text-[#fafafa] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:bg-white dark:focus:bg-[#0d1a2d] focus:outline-none transition-colors"
               />
             </div>
 
@@ -553,42 +553,42 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
               const groupPages = grouped[group];
               if (!groupPages?.length) return null;
               return (
-                <div key={group} className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
-                  <div className="border-b border-[#f0f4f8] dark:border-[#223550] bg-[#f8fafc] dark:bg-[#0a1628] px-5 py-3">
-                    <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a9b6c9]">{group}</span>
+                <div key={group} className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
+                  <div className="border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11] px-5 py-3">
+                    <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#a1a1aa]">{group}</span>
                   </div>
                   <table className="w-full text-[12px]">
                     <thead>
-                      <tr className="border-b border-[#f0f4f8]">
-                        <th className="px-5 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Page</th>
-                        <th className="px-4 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden sm:table-cell">Path</th>
-                        <th className="px-4 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Status</th>
-                        <th className="px-4 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell">Last Updated</th>
-                        <th className="px-4 py-2.5 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Action</th>
+                      <tr className="border-b border-[#f0f4f8] dark:border-[#27272b]">
+                        <th className="px-5 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Page</th>
+                        <th className="px-4 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden sm:table-cell dark:text-[#71717a]">Path</th>
+                        <th className="px-4 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Status</th>
+                        <th className="px-4 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell dark:text-[#71717a]">Last Updated</th>
+                        <th className="px-4 py-2.5 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Action</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[#f4f7fb]">
                       {groupPages.map(page => (
-                        <tr key={page.key} className="hover:bg-[#fafcff] transition-colors">
+                        <tr key={page.key} className="hover:bg-[#fafcff] transition-colors dark:bg-[#141417]">
                           <td className="px-5 py-3.5">
-                            <div className="font-bold text-[#0a1628]">{page.label}</div>
-                            <div className="text-[10.5px] text-[#94a3b8] mt-0.5 truncate max-w-[220px]">
-                              {page.current.seoTitle || <span className="italic text-[#cbd5e1]">No title set</span>}
+                            <div className="font-bold text-[#0a1628] dark:text-[#fafafa]">{page.label}</div>
+                            <div className="text-[10.5px] text-[#94a3b8] mt-0.5 truncate max-w-[220px] dark:text-[#71717a]">
+                              {page.current.seoTitle || <span className="italic text-[#cbd5e1] dark:text-[#71717a]">No title set</span>}
                             </div>
                           </td>
-                          <td className="px-4 py-3.5 text-[#64748b] hidden sm:table-cell font-mono text-[11px]">
+                          <td className="px-4 py-3.5 text-[#64748b] hidden sm:table-cell font-mono text-[11px] dark:text-[#a1a1aa]">
                             {page.path}
                           </td>
                           <td className="px-4 py-3.5">
                             <StatusBadge status={page.status} />
                           </td>
-                          <td className="px-4 py-3.5 text-[#94a3b8] text-[11px] hidden lg:table-cell">
+                          <td className="px-4 py-3.5 text-[#94a3b8] text-[11px] hidden lg:table-cell dark:text-[#71717a]">
                             {page.lastUpdatedAt ? formatIST(page.lastUpdatedAt) : "—"}
                           </td>
                           <td className="px-4 py-3.5 text-right">
                             <button
                               onClick={() => openEdit(page)}
-                              className="rounded-xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-3 py-1.5 text-[11px] font-bold text-[#475569] dark:text-[#a9b6c9] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
+                              className="rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-3 py-1.5 text-[11px] font-bold text-[#475569] dark:text-[#a1a1aa] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa] transition-colors"
                             >
                               {canEdit ? "Edit" : "View"}
                             </button>
@@ -602,38 +602,38 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
             })}
 
             {!hasVisiblePages && (
-              <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] px-5 py-10 text-center shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
-                <div className="text-[15px] font-black text-[#0a1628] dark:text-[#f7f9fc]">No SEO pages found for this search.</div>
-                <p className="mt-1 text-[12px] text-[#64748b]">Try a different page name, path or title.</p>
+              <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-5 py-10 text-center shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+                <div className="text-[15px] font-black text-[#0a1628] dark:text-[#fafafa]">No SEO pages found for this search.</div>
+                <p className="mt-1 text-[12px] text-[#64748b] dark:text-[#a1a1aa]">Try a different page name, path or title.</p>
               </div>
             )}
 
             {/* Quick-reference guide */}
-            <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#223550] bg-white dark:bg-[#0d1a2d] p-5 shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
-              <div className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-3">Quick Reference</div>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-[11px] text-[#64748b]">
-                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
-                  <div className="font-bold text-[#0a1628] mb-1">Page Title</div>
+            <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-5 shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
+              <div className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-3 dark:text-[#71717a]">Quick Reference</div>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-[11px] text-[#64748b] dark:text-[#a1a1aa]">
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
+                  <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Page Title</div>
                   30–60 characters. Shown in browser tabs and Google search results. Include the primary keyword near the start.
                 </div>
-                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
-                  <div className="font-bold text-[#0a1628] mb-1">Meta Description</div>
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
+                  <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Meta Description</div>
                   100–160 characters. Shown under the title in search results. Should summarise the page and include the focus keyword.
                 </div>
-                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
-                  <div className="font-bold text-[#0a1628] mb-1">Social Image</div>
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
+                  <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Social Image</div>
                   1200×630 pixels recommended. Shown when someone shares the page on LinkedIn, WhatsApp or Twitter. Upload the image to the Media Library first, then paste the link here.
                 </div>
-                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
-                  <div className="font-bold text-[#0a1628] mb-1">Status: Default</div>
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
+                  <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Status: Default</div>
                   The page is using built-in SEO settings. Click Edit to customise them. Default settings are already good — only update them if you need to improve for a specific keyword or campaign.
                 </div>
-                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
-                  <div className="font-bold text-[#0a1628] mb-1">Status: Live</div>
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
+                  <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Status: Live</div>
                   Your custom SEO settings are active and visible to search engines.
                 </div>
-                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5">
-                  <div className="font-bold text-[#0a1628] mb-1">Status: Pending</div>
+                <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
+                  <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Status: Pending</div>
                   Changes have been submitted and are waiting for admin approval before going live.
                 </div>
               </div>

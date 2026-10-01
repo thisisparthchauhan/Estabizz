@@ -93,9 +93,9 @@ function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; column
   return (
     <div className={`grid grid-cols-1 ${columns} gap-4 my-6`}>
       {cards.map((card) => (
-        <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)]">
-          <h3 className="!p-0 !mb-2 !text-[#0a1628]">{card.title}</h3>
-          <div className="text-[14px] leading-7 text-gray-600">{card.body}</div>
+        <div key={card.title} className="rounded-xl border border-[rgba(0,150,220,0.12)] bg-white p-5 shadow-[0_4px_18px_rgba(0,100,200,0.04)] dark:bg-[#141417]">
+          <h3 className="!p-0 !mb-2 !text-[#0a1628] dark:text-[#fafafa]">{card.title}</h3>
+          <div className="text-[14px] leading-7 text-gray-600 dark:text-[#a1a1aa]">{card.body}</div>
         </div>
       ))}
     </div>
@@ -104,7 +104,7 @@ function CardGrid({ cards, columns = 'md:grid-cols-2' }: { cards: Card[]; column
 
 function FormulaCard({ children }: { children: ReactNode }) {
   return (
-    <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#f0f9ff] to-white p-5 text-center text-[15px] font-bold leading-8 text-[#0a1628] shadow-sm">
+    <div className="my-6 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#f0f9ff] to-white p-5 text-center text-[15px] font-bold leading-8 text-[#0a1628] shadow-sm dark:border-[#27272b] dark:from-[#09090b] dark:text-[#fafafa]">
       {children}
     </div>
   );
@@ -165,8 +165,8 @@ export default function PaymentAggregatorPage() {
       }
       heroActions={
         <>
-          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for Payment Aggregator License</Link>
-          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center">Check PA Eligibility</Link>
+          <Link href="/contact" className="px-6 py-3 bg-[#0a1628] dark:bg-[#1c1c20] text-white font-bold rounded-xl hover:bg-[#1a2638] transition-colors shadow-sm text-center">Apply for Payment Aggregator License</Link>
+          <Link href="/get-started" className="px-6 py-3 bg-white text-[#1677f2] font-bold rounded-xl border border-blue-200 hover:bg-blue-50 transition-colors text-center dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Check PA Eligibility</Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-[#10b981] text-white font-bold rounded-xl hover:bg-[#059669] transition-colors shadow-sm text-center">WhatsApp Estabizz Team</a>
         </>
       }
@@ -431,7 +431,7 @@ export default function PaymentAggregatorPage() {
               <div className="step-dot" />
               <div className="step-card">
                 <div className="step-label">Step {index + 1}</div>
-                <h3 className="!p-0 !mb-2 !text-[#0a1628]">{title}</h3>
+                <h3 className="!p-0 !mb-2 !text-[#0a1628] dark:text-[#fafafa]">{title}</h3>
                 <p className="!mb-0">{body}</p>
               </div>
             </div>
@@ -546,7 +546,7 @@ export default function PaymentAggregatorPage() {
 
       <Section id="expert-review" title="Reviewed by Estabizz Compliance Expert">
         <div className="success-box">
-          <h3 className="!p-0 !mb-2 !text-[#0a1628]">CS Devyani Khambhati</h3>
+          <h3 className="!p-0 !mb-2 !text-[#0a1628] dark:text-[#fafafa]">CS Devyani Khambhati</h3>
           <p className="!mb-2"><strong>Designation:</strong> Compliance Expert | Estabizz Fintech Private Limited</p>
           <p className="!mb-2"><strong>Expertise:</strong> RBI, SEBI, IRDAI, IFSCA, fintech regulatory compliance, payment system authorisation, Payment Aggregator registration, FEMA, cyber compliance and post-authorisation regulatory support.</p>
           <p className="!mb-0">This content has been prepared from a regulatory advisory perspective to help fintech founders, payment companies, cross-border payment businesses, merchant platforms and compliance teams understand the broad RBI framework for Payment Aggregator authorisation in India.</p>
@@ -555,10 +555,10 @@ export default function PaymentAggregatorPage() {
       </Section>
 
       <Section id="speak-to-expert" title="Start Your Payment Aggregator License Journey with Estabizz">
-        <div className="rounded-2xl bg-gradient-to-br from-[#0a1628] to-[#1a2b45] p-6 md:p-8 text-white">
+        <div className="rounded-2xl bg-gradient-to-br from-[#0a1628] to-[#1a2b45] dark:from-[#141417] dark:to-[#1c1c20] p-6 md:p-8 text-white">
           <p className="!text-blue-100">Build your Payment Aggregator application with structured RBI regulatory support, Rs.15 crore net worth readiness review, PA-O / PA-P / PA-CB category assessment, escrow design, cyber compliance framework, business plan, policy documentation and post-authorisation compliance assistance.</p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Link href="/contact" className="rounded-xl bg-white px-5 py-3 text-center text-sm font-bold text-[#0077B6] hover:bg-blue-50">Speak to RBI Compliance Expert</Link>
+            <Link href="/contact" className="rounded-xl bg-white px-5 py-3 text-center text-sm font-bold text-[#0077B6] hover:bg-blue-50 dark:bg-[#141417] dark:text-[#4f9dfb]">Speak to RBI Compliance Expert</Link>
             <Link href="/get-started" className="rounded-xl bg-[#1677f2] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#0077B6]">Apply for Payment Aggregator License</Link>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="rounded-xl bg-[#10b981] px-5 py-3 text-center text-sm font-bold text-white hover:bg-[#059669]">WhatsApp Estabizz Team</a>
           </div>

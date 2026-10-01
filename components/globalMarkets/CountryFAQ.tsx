@@ -30,11 +30,11 @@ export default function CountryFAQ({ faqs, countryName: _countryName }: Props) {
             className="flex w-full items-center justify-between gap-4 py-4 text-left"
             aria-expanded={openIndex === i}
           >
-            <span className="text-[14px] font-semibold text-[#0a1628] leading-snug">
+            <span className="text-[14px] font-semibold text-[#0a1628] leading-snug dark:text-[#fafafa]">
               {faq.question}
             </span>
             <ChevronDown
-              className={`h-4 w-4 flex-shrink-0 text-[#64748b] transition-transform duration-200 ${
+              className={`h-4 w-4 flex-shrink-0 text-[#64748b] transition-transform duration-200  dark:text-[#a1a1aa] ${
                 openIndex === i ? "rotate-180" : ""
               }`}
               aria-hidden="true"
@@ -42,7 +42,7 @@ export default function CountryFAQ({ faqs, countryName: _countryName }: Props) {
           </button>
           {openIndex === i && (
             <div className="pb-4">
-              <p className="text-[13.5px] leading-relaxed text-[#334155]">
+              <p className="text-[13.5px] leading-relaxed text-[#334155] dark:text-[#a1a1aa]">
                 {faq.answer}
               </p>
             </div>

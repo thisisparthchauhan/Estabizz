@@ -175,6 +175,7 @@ const NAV_ENTRIES: NavEntry[] = [
   { kind: "item", label: "Page SEO",        href: "/admin/seo",                icon: <IconSearch /> },
   { kind: "item", label: "Regulatory Updates", href: "/admin/regulatory-updates", icon: <IconShield /> },
   { kind: "item", label: "Leads",           href: "/admin/leads",              icon: <IconList /> },
+  { kind: "item", label: "Subscribers",     href: "/admin/subscribers",        icon: <IconUsers /> },
 
   { kind: "section", label: "Recruitment" },
   { kind: "item", label: "Jobs Dashboard",  href: "/admin/jobs/dashboard",     icon: <IconGrid /> },
@@ -251,6 +252,7 @@ const PAGE_TITLES: Record<string, string> = {
   "/admin/seo":                    "Page SEO",
   "/admin/regulatory-updates":     "Regulatory Update Desk",
   "/admin/leads":                  "Leads",
+  "/admin/subscribers":            "Newsletter Subscribers",
   "/admin/jobs":                   "Job Postings",
   "/admin/jobs/dashboard":         "Jobs Dashboard",
   "/admin/jobs/new":               "New Job",

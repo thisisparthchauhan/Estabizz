@@ -1,0 +1,138 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
+export type Subscriber = {
+    id: string;
+    email: string;
+    status: string;
+    source: string;
+    pageUrl: string;
+    createdAt: string;
+};
+
+const STATUS_META: Record<string, { label: string; cls: string }> = {
+    active: { label: "Active", cls: "bg-green-50 text-green-700 border-green-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]" },
+    unsubscribed: { label: "Unsubscribed", cls: "bg-slate-100 text-slate-600 border-slate-200 dark:bg-[#1c1c20] dark:text-[#a1a1aa] dark:border-[#27272b]" },
+};
+
+function toCsv(rows: Subscriber[]): string {
+    const cols = ["createdAt", "email", "status", "source", "pageUrl"];
+    const esc = (v: string) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+    const head = cols.join(",");
+    const body = rows.map((r) => cols.map((c) => esc((r as unknown as Record<string, string>)[c])).join(",")).join("\n");
+    return head + "\n" + body;
+}
+
+export default function SubscribersClient({ subscribers }: { subscribers: Subscriber[] }) {
+    const [q, setQ] = useState("");
+    const [statusFilter, setStatusFilter] = useState<string>("all");
+
+    const filtered = useMemo(() => {
+        const term = q.trim().toLowerCase();
+        return subscribers.filter((r) => {
+            if (statusFilter !== "all" && r.status !== statusFilter) return false;
+            if (!term) return true;
+            return [r.email, r.source, r.pageUrl].join(" ").toLowerCase().includes(term);
+        });
+    }, [subscribers, q, statusFilter]);
+
+    const counts = useMemo(() => {
+        const c: Record<string, number> = { all: subscribers.length, active: 0, unsubscribed: 0 };
+        subscribers.forEach((r) => { c[r.status] = (c[r.status] || 0) + 1; });
+        return c;
+    }, [subscribers]);
+
+    // New signups in the last 7 days — the "are we growing?" number.
+    const last7 = useMemo(() => {
+        const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
+        return subscribers.filter((r) => r.createdAt && new Date(r.createdAt).getTime() >= cutoff).length;
+    }, [subscribers]);
+
+    const exportCsv = () => {
+        const blob = new Blob([toCsv(filtered)], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `estabizz-subscribers-${new Date().toISOString().slice(0, 10)}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
+    return (
+        <div className="p-6 md:p-8">
+            <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+                <div>
+                    <h1 className="text-[24px] font-black tracking-[-0.02em] text-[#120b45] dark:text-[#fafafa]">Newsletter Subscribers</h1>
+                    <p className="mt-1 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">
+                        Signups from the footer form. <span className="font-bold text-[#1677f2] dark:text-[#4f9dfb]">{last7}</span> new in the last 7 days.
+                    </p>
+                </div>
+                <button onClick={exportCsv} className="inline-flex items-center gap-2 rounded-xl bg-[#1677f2] px-4 py-2.5 text-[13px] font-black text-white shadow-[0_10px_24px_rgba(22,119,242,0.25)] transition-all hover:-translate-y-0.5 hover:bg-[#0866d9]">
+                    ↓ Export CSV
+                </button>
+            </div>
+
+            <div className="mb-5 flex flex-wrap items-center gap-3">
+                <input
+                    value={q}
+                    onChange={(e) => setQ(e.target.value)}
+                    placeholder="Search email, source, page…"
+                    className="h-10 min-w-[260px] flex-1 rounded-xl border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] px-4 text-[13.5px] text-[#0a1628] dark:text-[#fafafa] outline-none transition-all placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:ring-2 focus:ring-blue-50 dark:focus:ring-[#1677f2]/10"
+                />
+                <div className="flex flex-wrap gap-1.5">
+                    {["all", "active", "unsubscribed"].map((s) => (
+                        <button
+                            key={s}
+                            onClick={() => setStatusFilter(s)}
+                            className={`rounded-full border px-3.5 py-1.5 text-[12px] font-bold transition-colors ${statusFilter === s ? "border-[#1677f2] bg-[#1677f2] text-white" : "border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] text-[#475569] dark:text-[#a1a1aa] hover:border-[#1677f2]"}`}
+                        >
+                            {s === "all" ? "All" : STATUS_META[s].label} <span className="opacity-70">({counts[s] || 0})</span>
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            {filtered.length === 0 ? (
+                <div className="rounded-2xl border border-blue-100 dark:border-[#27272b] bg-[#f8fbff] dark:bg-[#141417] p-8 text-center text-[14px] text-[#64748b] dark:text-[#a1a1aa]">
+                    {subscribers.length === 0
+                        ? "No subscribers yet. New signups from the footer form will appear here."
+                        : "No subscribers match your search."}
+                </div>
+            ) : (
+                <div className="overflow-x-auto rounded-2xl border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417]">
+                    <table className="w-full min-w-[720px] border-collapse text-left">
+                        <thead>
+                            <tr className="border-b border-blue-100 dark:border-[#27272b] bg-[#f8fbff] dark:bg-[#0f0f11]">
+                                {["Date", "Email", "Status", "Source", "Signed up on"].map((h) => (
+                                    <th key={h} className="px-4 py-3 text-[11px] font-black uppercase tracking-[0.06em] text-[#64748b] dark:text-[#a1a1aa]">
+                                        {h}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filtered.map((s) => (
+                                <tr key={s.id} className="border-b border-blue-50 dark:border-[#27272b] last:border-0">
+                                    <td className="whitespace-nowrap px-4 py-3 text-[12.5px] text-[#64748b] dark:text-[#a1a1aa]">
+                                        {s.createdAt ? new Date(s.createdAt).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }) : "—"}
+                                    </td>
+                                    <td className="px-4 py-3 text-[13.5px] font-semibold text-[#0a1628] dark:text-[#fafafa]">
+                                        <a href={`mailto:${s.email}`} className="hover:text-[#1677f2] dark:hover:text-[#4f9dfb]">{s.email}</a>
+                                    </td>
+                                    <td className="px-4 py-3">
+                                        <span className={`inline-block rounded-full border px-2.5 py-1 text-[11px] font-bold ${STATUS_META[s.status]?.cls || STATUS_META.active.cls}`}>
+                                            {STATUS_META[s.status]?.label || s.status}
+                                        </span>
+                                    </td>
+                                    <td className="px-4 py-3 text-[12.5px] text-[#475569] dark:text-[#a1a1aa]">{s.source}</td>
+                                    <td className="px-4 py-3 font-mono text-[12px] text-[#64748b] dark:text-[#a1a1aa]">{s.pageUrl || "—"}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
+        </div>
+    );
+}

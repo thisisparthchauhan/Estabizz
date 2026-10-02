@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import NewsletterSignup from '@/components/ui/NewsletterSignup';
 import Image from "next/image";
 import { FOOTER_DEFAULTS, type FooterContent } from "@/lib/content/footerDefaults";
 
@@ -162,6 +163,13 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
                             </div>
                         </div>
                     </div>
+                </div>
+
+                {/* ═══════════════════════════════════════════════════════════
+                    Section 1b — Newsletter signup
+                ═══════════════════════════════════════════════════════════ */}
+                <div className="border-b border-white/[0.06] py-8">
+                    <NewsletterSignup source="footer" />
                 </div>
 
                 {/* ═══════════════════════════════════════════════════════════

@@ -74,7 +74,7 @@ export default function CategoryBrowser({
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder={`Describe your situation — divorce, cheque, FIR, property…`}
+              placeholder={`Describe your situation — cheque, recovery, property, notice…`}
               className="w-full rounded-2xl border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] py-3.5 pl-11 pr-5 text-[15px] font-medium text-[#071426] dark:text-[#fafafa] shadow-[0_8px_30px_rgba(0,80,140,0.06)] outline-none transition-colors placeholder:text-[#94a3b8] focus:border-[#1677f2]"
             />
           </div>

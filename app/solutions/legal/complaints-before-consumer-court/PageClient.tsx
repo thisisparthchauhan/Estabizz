@@ -23,7 +23,7 @@ const sections = [
   { id: 'rejection-reasons', title: 'Why Complaints Get Rejected' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -343,8 +343,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Consumers lose good cases on two things: filing in the wrong forum because they sized it by the compensation they wanted rather than what they paid, and being unable to point to the date they were actually refused. Both are settled before drafting begins, not after.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Consumers lose good cases on two things: filing in the wrong forum because they sized it by the compensation they wanted rather than what they paid, and being unable to point to the date they were actually refused. Both are settled before drafting begins, not after."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

@@ -2619,12 +2619,12 @@ export const designRegistration: ServicePageContent = {
       "blocks": []
     },
     {
-      "id": "cs-devyani-khambhati-compliance-expert",
-      "heading": "CS Devyani Khambhati – Compliance Expert",
+      "id": "estabizz-practice-note",
+      "heading": "Estabizz Practice Note",
       "blocks": [
         {
           "kind": "p",
-          "text": "“Design registration should be filed before public disclosure. A strong design filing depends on novelty, correct article identification, clear representation sheets, proper Locarno class selection, ownership clarity and timely renewal tracking.”"
+          "text": "Design registration should be filed before public disclosure. A strong design filing depends on novelty, correct article identification, clear representation sheets, proper Locarno class selection, ownership clarity and timely renewal tracking."
         }
       ]
     },

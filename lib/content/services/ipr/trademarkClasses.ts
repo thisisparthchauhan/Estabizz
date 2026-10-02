@@ -2271,12 +2271,12 @@ export const trademarkClasses: ServicePageContent = {
       "blocks": []
     },
     {
-      "id": "cs-devyani-khambhati-compliance-expert",
-      "heading": "CS Devyani Khambhati – Compliance Expert",
+      "id": "estabizz-practice-note",
+      "heading": "Estabizz Practice Note",
       "blocks": [
         {
           "kind": "p",
-          "text": "“Trademark classes should be selected with business strategy, not guesswork. A strong filing starts with correct class mapping, precise goods/services description, related-class search, future expansion review and fee planning.”"
+          "text": "Trademark classes should be selected with business strategy, not guesswork. A strong filing starts with correct class mapping, precise goods/services description, related-class search, future expansion review and fee planning."
         }
       ]
     },

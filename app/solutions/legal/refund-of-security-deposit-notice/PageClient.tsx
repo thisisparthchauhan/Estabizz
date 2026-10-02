@@ -28,7 +28,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Deposits Are Not Recovered' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -464,8 +464,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“A security deposit is held, not earned, and that single proposition decides most of these disputes. A forfeiture clause caps what can be claimed; it does not establish the loss, and Section 74 compensates loss rather than breach. So the notice that works does not argue about whether a wall needed repainting — it asks for the inspection record, the estimate and the paid invoice. Most deduction lists do not survive that request, because they were written after the demand rather than at the handover.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"A security deposit is held, not earned, and that single proposition decides most of these disputes. A forfeiture clause caps what can be claimed; it does not establish the loss, and Section 74 compensates loss rather than breach. So the notice that works does not argue about whether a wall needed repainting — it asks for the inspection record, the estimate and the paid invoice. Most deduction lists do not survive that request, because they were written after the demand rather than at the handover."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

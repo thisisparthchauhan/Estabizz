@@ -30,7 +30,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Recovery Fails' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -469,8 +469,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Most bad debts were good debts that nobody dated. Three years runs quietly while the lender is being decent about it, and no signed acknowledgement is ever obtained because asking felt awkward. Fix the limitation date on day one, get a balance confirmation signed every year, and choose the recovery route before drafting the notice rather than after the borrower's lawyer points out the arbitration clause.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Most bad debts were good debts that nobody dated. Three years runs quietly while the lender is being decent about it, and no signed acknowledgement is ever obtained because asking felt awkward. Fix the limitation date on day one, get a balance confirmation signed every year, and choose the recovery route before drafting the notice rather than after the borrower's lawyer points out the arbitration clause."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

@@ -27,7 +27,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Complaints Fail' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -375,8 +375,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“The strongest cyber complaint is not the longest one. It is the one filed the same day, supported by a clean chronology, a complete transaction trail, evidence preserved in the form the law expects, and the correct provision named. Everything that makes a complaint work is decided in the first few hours.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"The strongest cyber complaint is not the longest one. It is the one filed the same day, supported by a clean chronology, a complete transaction trail, evidence preserved in the form the law expects, and the correct provision named. Everything that makes a complaint work is decided in the first few hours."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

@@ -30,7 +30,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Registrations Go Wrong' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -504,8 +504,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Registration is where a transaction becomes permanent, including its mistakes. The description that was copied from the brochure, the duty that was estimated, the TDS that was applied on resident logic to a non-resident seller — all of it is now on the public record and will be read by the next buyer's lawyer. A file that is verified, computed and authorised before the appointment registers in a single visit. One that is assembled at the counter rarely does.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Registration is where a transaction becomes permanent, including its mistakes. The description that was copied from the brochure, the duty that was estimated, the TDS that was applied on resident logic to a non-resident seller — all of it is now on the public record and will be read by the next buyer's lawyer. A file that is verified, computed and authorised before the appointment registers in a single visit. One that is assembled at the counter rarely does."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

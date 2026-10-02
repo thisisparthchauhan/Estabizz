@@ -29,7 +29,7 @@ const sections = [
   { id: 'common-issues', title: 'Where Operators Go Wrong' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -425,8 +425,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Telecom regulation lives in the subordinate instruments, not the parent statute, so the first question on any notice is which regulation, direction or tariff order it was issued under — and the second is whether your reported data actually reconciles to your source data. Most findings we see are reporting failures rather than service failures, and most weak responses were written before anyone answered the first question.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Telecom regulation lives in the subordinate instruments, not the parent statute, so the first question on any notice is which regulation, direction or tariff order it was issued under — and the second is whether your reported data actually reconciles to your source data. Most findings we see are reporting failures rather than service failures, and most weak responses were written before anyone answered the first question."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

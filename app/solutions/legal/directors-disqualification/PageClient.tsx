@@ -29,7 +29,7 @@ const sections = [
   { id: 'common-issues', title: 'Where Directors Go Wrong' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -436,8 +436,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Director disqualification is a diagnosis problem before it is a filing problem. The cause decides everything — whether the answer is a KYC form, a revival petition, a five-year wait or a writ. The directors who lose the most time are the ones who started filing before anyone worked out what had actually gone wrong.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Director disqualification is a diagnosis problem before it is a filing problem. The cause decides everything — whether the answer is a KYC form, a revival petition, a five-year wait or a writ. The directors who lose the most time are the ones who started filing before anyone worked out what had actually gone wrong."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

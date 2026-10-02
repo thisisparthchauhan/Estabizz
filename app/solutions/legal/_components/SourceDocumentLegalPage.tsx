@@ -145,10 +145,13 @@ export default function SourceDocumentLegalPage({ data }: { data: LegalSourcePag
         <FaqList items={data.faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        {data.expertQuote && (
-          <p>“{data.expertQuote.quote}”<br />— <strong>{data.expertQuote.attribution}</strong></p>
-        )}
+      {/* These were generated as page copy — 20 of them arrived in two bulk commits
+          and each is templated from its own page title — so presenting them in
+          quotation marks beside a named individual attributed words to a real person
+          that the person did not say. Same text, carried as an Estabizz position
+          rather than a personal quotation. */}
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        {data.expertQuote && <p>{data.expertQuote.quote}</p>}
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

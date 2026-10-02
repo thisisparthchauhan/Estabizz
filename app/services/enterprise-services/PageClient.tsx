@@ -196,7 +196,6 @@ export default function PageClient() {
                 </ul>
                 <blockquote className="expert-quote">
                     <p>&ldquo;Enterprise compliance is not a burden — it is the foundation on which scalable, investor-ready businesses are built. Every licensing decision, every governance structure, and every regulatory filing shapes the long-term credibility of your business.&rdquo;</p>
-                    <footer>— <strong>CS Devyani Khambhati</strong>, Compliance Expert</footer>
                 </blockquote>
             </section>
 

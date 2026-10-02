@@ -2164,12 +2164,12 @@ export const copyrightRegistration: ServicePageContent = {
       "blocks": []
     },
     {
-      "id": "cs-devyani-khambhati-compliance-expert",
-      "heading": "CS Devyani Khambhati – Compliance Expert",
+      "id": "estabizz-practice-note",
+      "heading": "Estabizz Practice Note",
       "blocks": [
         {
           "kind": "p",
-          "text": "“Copyright registration should be handled with ownership discipline. A strong filing must clearly identify the work, author, owner, category, supporting documents, NOC or assignment chain, software code requirements and objection response strategy.”"
+          "text": "Copyright registration should be handled with ownership discipline. A strong filing must clearly identify the work, author, owner, category, supporting documents, NOC or assignment chain, software code requirements and objection response strategy."
         }
       ]
     },

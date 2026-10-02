@@ -29,7 +29,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Matters Escalate' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -474,8 +474,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“These matters are decided by documents and by the first fortnight. Since May 2026 a genuine first-time procedural lapse can be met with an improvement notice rather than a penalty, but that route has to be earned — the deficiency corrected, the correction evidenced with dates, and the reply drafted to ask for it. The businesses that come through these notices well are the ones that could produce their verification calendar, their artwork approval trail and their own listing history. The ones that struggle sent a general apology.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"These matters are decided by documents and by the first fortnight. Since May 2026 a genuine first-time procedural lapse can be met with an improvement notice rather than a penalty, but that route has to be earned — the deficiency corrected, the correction evidenced with dates, and the reply drafted to ask for it. The businesses that come through these notices well are the ones that could produce their verification calendar, their artwork approval trail and their own listing history. The ones that struggle sent a general apology."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

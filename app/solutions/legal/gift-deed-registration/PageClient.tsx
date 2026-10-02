@@ -30,7 +30,7 @@ const sections = [
   { id: 'common-issues', title: 'Where Gift Deeds Go Wrong' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -457,8 +457,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Almost every defective gift deed we see was made in good faith between people who trusted each other, which is exactly why nobody checked the statute. Register it, attest it with two witnesses, record the acceptance, and never insert a clause letting the donor take it back at will — that clause is void and it takes the gift with it. If the donor wants to keep control until death, the document they actually need is a Will.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Almost every defective gift deed we see was made in good faith between people who trusted each other, which is exactly why nobody checked the statute. Register it, attest it with two witnesses, record the acceptance, and never insert a clause letting the donor take it back at will — that clause is void and it takes the gift with it. If the donor wants to keep control until death, the document they actually need is a Will."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

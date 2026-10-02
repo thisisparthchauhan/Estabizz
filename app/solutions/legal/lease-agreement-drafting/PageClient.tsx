@@ -29,7 +29,7 @@ const sections = [
   { id: 'common-issues', title: 'Where Leases Go Wrong' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -445,8 +445,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Lease disputes are remarkably predictable. They are about the deposit, the repairs, the lock-in or the notice — and in nearly every case the agreement said nothing useful about the one that went wrong. Two further points are worth fixing at the start: whether the term crosses the registration threshold, and whether the use is a manufacturing use, because that turns fifteen days' notice into six months.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Lease disputes are remarkably predictable. They are about the deposit, the repairs, the lock-in or the notice — and in nearly every case the agreement said nothing useful about the one that went wrong. Two further points are worth fixing at the start: whether the term crosses the registration threshold, and whether the use is a manufacturing use, because that turns fifteen days' notice into six months."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

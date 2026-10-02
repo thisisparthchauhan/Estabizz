@@ -2286,12 +2286,12 @@ export const trademarkOpposition: ServicePageContent = {
       "blocks": []
     },
     {
-      "id": "cs-devyani-khambhati-compliance-expert",
-      "heading": "CS Devyani Khambhati – Compliance Expert",
+      "id": "estabizz-practice-note",
+      "heading": "Estabizz Practice Note",
       "blocks": [
         {
           "kind": "p",
-          "text": "“Trademark Opposition should be handled like a contested brand dispute. A strong case depends on deadline control, prior-use proof, mark comparison, class analysis, evidence affidavit, hearing preparation and practical settlement strategy.”"
+          "text": "Trademark Opposition should be handled like a contested brand dispute. A strong case depends on deadline control, prior-use proof, mark comparison, class analysis, evidence affidavit, hearing preparation and practical settlement strategy."
         }
       ]
     },

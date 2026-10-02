@@ -27,7 +27,7 @@ const sections = [
   { id: 'risks', title: 'Risks of Handling It Poorly' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -348,8 +348,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Most NCLT matters are won or lost at the filing stage. The forum, the statutory route and the limitation position have to be settled before drafting begins — correcting any of the three later is expensive, and sometimes it is simply too late.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Most NCLT matters are won or lost at the filing stage. The forum, the statutory route and the limitation position have to be settled before drafting begins — correcting any of the three later is expensive, and sometimes it is simply too late."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

@@ -28,7 +28,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Notices Fail' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -455,8 +455,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“A recovery notice is a proof, not a protest. The ones that get paid annex an invoice-wise statement the recipient can tick off against their own ledger, state the interest basis instead of asserting a rate, and name the specific route that follows. And the sequence matters as much as the words — a general notice sent before a statutory demand can hand the other side the dispute that closes your best remedy.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"A recovery notice is a proof, not a protest. The ones that get paid annex an invoice-wise statement the recipient can tick off against their own ledger, state the interest basis instead of asserting a rate, and name the specific route that follows. And the sequence matters as much as the words — a general notice sent before a statutory demand can hand the other side the dispute that closes your best remedy."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

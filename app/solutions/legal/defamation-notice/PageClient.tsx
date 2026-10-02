@@ -30,7 +30,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Notices Fail' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -431,8 +431,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“A defamation notice is read by the other side's lawyer before it is read by anyone else. The ones that work quote the exact words, prove publication, demand two or three specific things and set a deadline the sender intends to honour. The ones that fail are angry, vague and sent before anyone checked whether the statement was actually true.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"A defamation notice is read by the other side's lawyer before it is read by anyone else. The ones that work quote the exact words, prove publication, demand two or three specific things and set a deadline the sender intends to honour. The ones that fail are angry, vague and sent before anyone checked whether the statement was actually true."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

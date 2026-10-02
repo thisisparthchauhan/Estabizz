@@ -29,7 +29,7 @@ const sections = [
   { id: 'common-issues', title: 'Where Deals Fail' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -469,8 +469,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“The two most expensive mistakes in Indian M&A are agreeing price before structure, and assessing the CCI position on the asset and turnover tests alone. The first means renegotiating once diligence reveals what is actually being bought. The second can mean implementing a notifiable combination without approval. Both are avoided in the first fortnight, by people who have not yet drafted anything.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"The two most expensive mistakes in Indian M&A are agreeing price before structure, and assessing the CCI position on the asset and turnover tests alone. The first means renegotiating once diligence reveals what is actually being bought. The second can mean implementing a notifiable combination without approval. Both are avoided in the first fortnight, by people who have not yet drafted anything."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

@@ -30,7 +30,7 @@ const sections = [
   { id: 'common-issues', title: 'Where Buyers Get Caught' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -518,8 +518,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“India does not guarantee title, so a registered deed proves a transaction happened, not that the seller owned anything. The defects that cost people money are the ones no single document shows — an equitable mortgage with no entry in the register, a suit filed last year, a daughter whose share nobody counted, a power of attorney from a principal who has died. Each of those is found by a specific search, and all of them are found cheaply before the advance and expensively afterwards.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"India does not guarantee title, so a registered deed proves a transaction happened, not that the seller owned anything. The defects that cost people money are the ones no single document shows — an equitable mortgage with no entry in the register, a suit filed last year, a daughter whose share nobody counted, a power of attorney from a principal who has died. Each of those is found by a specific search, and all of them are found cheaply before the advance and expensively afterwards."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

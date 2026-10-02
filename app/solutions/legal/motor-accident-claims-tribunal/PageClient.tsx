@@ -30,7 +30,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Claims Are Reduced' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -461,8 +461,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Compensation in accident claims is largely arithmetic once the inputs are proved — income, age, dependency and disability. The tragedy is how often those inputs are never assembled. Families grieve, months pass, the employer's records are gone and a notional income is applied to a man who filed returns every year. Collect the documents in the first fortnight, and take advice on the limitation position rather than assuming the claim is dead or that there is no hurry.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Compensation in accident claims is largely arithmetic once the inputs are proved — income, age, dependency and disability. The tragedy is how often those inputs are never assembled. Families grieve, months pass, the employer's records are gone and a notional income is applied to a man who filed returns every year. Collect the documents in the first fortnight, and take advice on the limitation position rather than assuming the claim is dead or that there is no hurry."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

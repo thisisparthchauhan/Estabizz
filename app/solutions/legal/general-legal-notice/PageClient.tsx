@@ -29,7 +29,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Notices Fail' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -421,8 +421,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Before drafting a single line, establish two things: whether the law requires a notice here and with what period, and when the limitation expires. Those answers decide whether you are writing a statutory precondition or a demand letter, and whether you have time to send one at all. Everything people usually worry about — tone, length, how firm to sound — matters far less than those two dates.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Before drafting a single line, establish two things: whether the law requires a notice here and with what period, and when the limitation expires. Those answers decide whether you are writing a statutory precondition or a demand letter, and whether you have time to send one at all. Everything people usually worry about — tone, length, how firm to sound — matters far less than those two dates."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

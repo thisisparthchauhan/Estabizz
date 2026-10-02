@@ -2020,12 +2020,12 @@ export const trademarkAssignment: ServicePageContent = {
       "blocks": []
     },
     {
-      "id": "cs-devyani-khambhati-compliance-expert",
-      "heading": "CS Devyani Khambhati – Compliance Expert",
+      "id": "estabizz-practice-note",
+      "heading": "Estabizz Practice Note",
       "blocks": [
         {
           "kind": "p",
-          "text": "“Trademark Assignment should be handled like an asset transfer, not a simple letter. A strong assignment requires clean title, correct deed, goodwill clarity, proper stamping, Form TM-P recordal, tax review and post-transfer brand-control planning.”"
+          "text": "Trademark Assignment should be handled like an asset transfer, not a simple letter. A strong assignment requires clean title, correct deed, goodwill clarity, proper stamping, Form TM-P recordal, tax review and post-transfer brand-control planning."
         }
       ]
     },

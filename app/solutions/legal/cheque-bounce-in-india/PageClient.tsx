@@ -24,7 +24,7 @@ const sections = [
   { id: 'common-issues', title: 'Issues We Commonly Fix' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -335,8 +335,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Cheque bounce matters are decided by the calendar far more often than by the merits. The date on the bank return memo is the single most important fact in the file, and it should be recorded on the day it arrives.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Cheque bounce matters are decided by the calendar far more often than by the merits. The date on the bank return memo is the single most important fact in the file, and it should be recorded on the day it arrives."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

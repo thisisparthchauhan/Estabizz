@@ -27,7 +27,7 @@ const sections = [
   { id: 'legal-risks', title: 'Cost of Ignoring It' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -436,8 +436,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Cyber security advice fails when it stops at the firewall. What decides the outcome after an incident is whether the logs exist, whether the reporting call was already decided, whether the vendor contract allocates the loss, and whether anyone can show the board knew. Those are legal questions, and they are cheap to answer in advance.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Cyber security advice fails when it stops at the firewall. What decides the outcome after an incident is whether the logs exist, whether the reporting call was already decided, whether the vendor contract allocates the loss, and whether anyone can show the board knew. Those are legal questions, and they are cheap to answer in advance."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

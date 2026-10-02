@@ -27,7 +27,7 @@ const sections = [
   { id: 'specific-matters', title: 'Specific Matters We Handle' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -311,8 +311,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Procedural defects relating to jurisdiction, limitation, pleadings and evidence can materially weaken an otherwise valid claim or defence. Forum, limitation and evidence decide the case long before argument does — and all three are settled cheaply at the start, or expensively in the middle.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Procedural defects relating to jurisdiction, limitation, pleadings and evidence can materially weaken an otherwise valid claim or defence. Forum, limitation and evidence decide the case long before argument does — and all three are settled cheaply at the start, or expensively in the middle."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

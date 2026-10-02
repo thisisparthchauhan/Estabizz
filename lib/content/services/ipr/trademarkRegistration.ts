@@ -2137,12 +2137,12 @@ export const trademarkRegistration: ServicePageContent = {
       "blocks": []
     },
     {
-      "id": "cs-devyani-khambhati-compliance-expert",
-      "heading": "CS Devyani Khambhati – Compliance Expert",
+      "id": "estabizz-practice-note",
+      "heading": "Estabizz Practice Note",
       "blocks": [
         {
           "kind": "p",
-          "text": "“Trademark Registration should be handled before the brand becomes exposed in the market. A strong trademark filing depends on distinctiveness, correct class selection, clean applicant ownership, proper user claim, timely objection response and active brand monitoring.”"
+          "text": "Trademark Registration should be handled before the brand becomes exposed in the market. A strong trademark filing depends on distinctiveness, correct class selection, clean applicant ownership, proper user claim, timely objection response and active brand monitoring."
         }
       ]
     },

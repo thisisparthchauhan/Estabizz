@@ -29,7 +29,7 @@ const sections = [
   { id: 'common-issues', title: 'Why PILs Are Dismissed' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -484,8 +484,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“A PIL is assessed at the threshold, and almost everything that decides it is within the petitioner's control before filing. Courts verify credentials now as a matter of course, so the petitioner's record and disclosure matter as much as the cause. Build the official file through representation and RTI, join the authority that actually holds the duty, and ask for something a court can order and enforce. Indignation is not evidence, and a direction nobody can comply with is not relief.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"A PIL is assessed at the threshold, and almost everything that decides it is within the petitioner's control before filing. Courts verify credentials now as a matter of course, so the petitioner's record and disclosure matter as much as the cause. Build the official file through representation and RTI, join the authority that actually holds the duty, and ask for something a court can order and enforce. Indignation is not evidence, and a direction nobody can comply with is not relief."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

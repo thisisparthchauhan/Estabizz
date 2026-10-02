@@ -2809,12 +2809,12 @@ export const patentRegistration: ServicePageContent = {
       "blocks": []
     },
     {
-      "id": "cs-devyani-khambhati-compliance-expert",
-      "heading": "CS Devyani Khambhati – Compliance Expert",
+      "id": "estabizz-practice-note",
+      "heading": "Estabizz Practice Note",
       "blocks": [
         {
           "kind": "p",
-          "text": "“Patent registration should be handled before the invention is publicly disclosed. A strong patent file depends on novelty review, clear inventorship, clean ownership, proper specification, strong claims, timely examination request and disciplined FER response.”"
+          "text": "Patent registration should be handled before the invention is publicly disclosed. A strong patent file depends on novelty review, clear inventorship, clean ownership, proper specification, strong claims, timely examination request and disciplined FER response."
         }
       ]
     },

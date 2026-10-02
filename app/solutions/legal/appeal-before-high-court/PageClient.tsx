@@ -21,7 +21,7 @@ const sections = [
   { id: 'reducing-delay', title: 'How We Reduce Delay' },
   { id: 'why-estabizz', title: 'Why Estabizz Fintech' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -256,8 +256,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“An Appeal Before High Court should be approached with urgency and legal discipline. A strong appeal is not built only on dissatisfaction with the judgment; it is built on clear grounds, evidence review, procedural accuracy and timely filing under the correct BNS, BNSS and BSA framework.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"An Appeal Before High Court should be approached with urgency and legal discipline. A strong appeal is not built only on dissatisfaction with the judgment; it is built on clear grounds, evidence review, procedural accuracy and timely filing under the correct BNS, BNSS and BSA framework."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

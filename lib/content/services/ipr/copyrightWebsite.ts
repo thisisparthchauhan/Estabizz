@@ -2467,12 +2467,12 @@ export const copyrightWebsite: ServicePageContent = {
       "blocks": []
     },
     {
-      "id": "cs-devyani-khambhati-compliance-expert",
-      "heading": "CS Devyani Khambhati – Compliance Expert",
+      "id": "estabizz-practice-note",
+      "heading": "Estabizz Practice Note",
       "blocks": [
         {
           "kind": "p",
-          "text": "“Website copyright protection should be handled work-wise. A strong case depends on identifying the exact website asset, proving authorship and ownership, preserving publication evidence, securing developer or agency assignment, and filing the correct copyright category.”"
+          "text": "Website copyright protection should be handled work-wise. A strong case depends on identifying the exact website asset, proving authorship and ownership, preserving publication evidence, securing developer or agency assignment, and filing the correct copyright category."
         }
       ]
     },

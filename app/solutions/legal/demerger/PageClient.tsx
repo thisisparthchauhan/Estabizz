@@ -29,7 +29,7 @@ const sections = [
   { id: 'common-issues', title: 'Where Demergers Go Wrong' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -457,8 +457,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“A demerger is not a filing, it is a restructuring project with a filing at the end of it. The schemes that go through cleanly are the ones where the undertaking was mapped, the valuation was ready, the tax conditions were tested against the draft and every approval was identified before the first motion. The ones that stall are the ones that started with the drafting.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"A demerger is not a filing, it is a restructuring project with a filing at the end of it. The schemes that go through cleanly are the ones where the undertaking was mapped, the valuation was ready, the tax conditions were tested against the draft and every approval was identified before the first motion. The ones that stall are the ones that started with the drafting."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

@@ -30,7 +30,7 @@ const sections = [
   { id: 'common-issues', title: 'Where Businesses Go Wrong' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -452,8 +452,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Food safety cases are won or lost on records that had to exist before the inspector arrived, and on a referral deadline that does not reopen. The businesses that come through these matters well are the ones that protected the referral right in the first week, produced a complete batch file, and answered the report on its own terms instead of writing a letter about how seriously they take quality.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Food safety cases are won or lost on records that had to exist before the inspector arrived, and on a referral deadline that does not reopen. The businesses that come through these matters well are the ones that protected the referral right in the first week, produced a complete batch file, and answered the report on its own terms instead of writing a letter about how seriously they take quality."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

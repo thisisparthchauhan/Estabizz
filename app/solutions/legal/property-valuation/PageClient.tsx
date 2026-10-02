@@ -29,7 +29,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Valuations Get Rejected' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -494,8 +494,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“A valuation is only as good as the purpose it was built for. Fix the purpose and the valuation date first; the valuer, the registration, the method and the documents all follow from them. In our experience reports fail far more often on purpose, registration and area than on the number — and a report that shows its working can be defended, while one that states a figure cannot.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"A valuation is only as good as the purpose it was built for. Fix the purpose and the valuation date first; the valuer, the registration, the method and the documents all follow from them. In our experience reports fail far more often on purpose, registration and area than on the number — and a report that shows its working can be defended, while one that states a figure cannot."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

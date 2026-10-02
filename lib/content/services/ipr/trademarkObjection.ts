@@ -2053,12 +2053,12 @@ export const trademarkObjection: ServicePageContent = {
       "blocks": []
     },
     {
-      "id": "cs-devyani-khambhati-compliance-expert",
-      "heading": "CS Devyani Khambhati – Compliance Expert",
+      "id": "estabizz-practice-note",
+      "heading": "Estabizz Practice Note",
       "blocks": [
         {
           "kind": "p",
-          "text": "“Trademark Objection should be handled with speed and evidence discipline. A strong reply must directly address the objection, compare cited marks, prove distinctiveness, support prior use and protect the application before it moves toward abandonment or refusal.”"
+          "text": "Trademark Objection should be handled with speed and evidence discipline. A strong reply must directly address the objection, compare cited marks, prove distinctiveness, support prior use and protect the application before it moves toward abandonment or refusal."
         }
       ]
     },

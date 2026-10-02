@@ -30,7 +30,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Claims Fail' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -461,8 +461,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“The two things that decide a product claim are both settled in the first week: whether the evidence was preserved before the product left your hands, and whether anyone noticed that the two-year clock had already started. Everything after that is drafting. A year of polite follow-up is not patience — it is the claim quietly expiring.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"The two things that decide a product claim are both settled in the first week: whether the evidence was preserved before the product left your hands, and whether anyone noticed that the two-year clock had already started. Everything after that is drafting. A year of polite follow-up is not patience — it is the claim quietly expiring."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

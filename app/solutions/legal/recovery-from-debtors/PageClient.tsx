@@ -29,7 +29,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Recovery Fails' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -496,8 +496,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Recovery is decided by forum selection, and forum selection is decided by facts that are fixed long before anyone is unpaid — whether you registered as a micro or small enterprise before the contract, whether the arrangement is in writing, whether you obtained a ledger confirmation last year. Creditors who manage those three things recover routinely. Creditors who send reminders for two years and then look for a remedy find the strongest ones have already closed.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Recovery is decided by forum selection, and forum selection is decided by facts that are fixed long before anyone is unpaid — whether you registered as a micro or small enterprise before the contract, whether the arrangement is in writing, whether you obtained a ledger confirmation last year. Creditors who manage those three things recover routinely. Creditors who send reminders for two years and then look for a remedy find the strongest ones have already closed."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

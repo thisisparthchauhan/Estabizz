@@ -18,6 +18,10 @@ interface ServicePageLayoutProps {
     trustLine?: string;
     readTime?: string;
     displayYear?: string;
+    /** ISO date this page was last substantively updated. "2026" alone does not
+     *  tell a reader whether the page predates the statutes that changed this
+     *  year, which is the only thing they need to know. */
+    lastUpdated?: string;
     reviewPending?: boolean;
     hideReviewBadge?: boolean;
     /** Overrides the sidebar heading. Defaults to "Legal Matter Snapshot" on
@@ -70,7 +74,7 @@ interface ServicePageLayoutProps {
 }
 
 export default function ServicePageLayout({
-    tags, breadcrumb, title, heroDescription, heroActions, trustLine, readTime = "12 min read", displayYear = "2026", reviewPending = false, hideReviewBadge = false, snapshotLabel, guideLabel, legalSources, showJurisdictionNote, focusKeyword,
+    tags, breadcrumb, title, heroDescription, heroActions, trustLine, readTime = "12 min read", displayYear = "2026", lastUpdated, reviewPending = false, hideReviewBadge = false, snapshotLabel, guideLabel, legalSources, showJurisdictionNote, focusKeyword,
     sections, ctaTitle, ctaDescription, quickFacts,
     relatedArticles, finalCtaTitle, finalCtaDescription, finalCtaActions, faqs, contactService, children
 }: ServicePageLayoutProps) {
@@ -255,7 +259,9 @@ export default function ServicePageLayout({
 
                             {/* Meta */}
                             <div className="flex flex-wrap items-center gap-4 text-[13.5px] text-[#64748b] dark:text-[#a1a1aa] font-semibold mb-6">
-                                <div className="flex items-center gap-1.5"><span>📅</span> {displayYear}</div>
+                                <div className="flex items-center gap-1.5"><span>📅</span> {lastUpdated
+                                    ? `Updated ${new Date(lastUpdated).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}`
+                                    : displayYear}</div>
                                 <span className="text-gray-300">|</span>
                                 <div className="flex items-center gap-1.5"><span>⏱️</span> {readTime}</div>
                                 <span className="text-gray-300">|</span>
@@ -528,11 +534,17 @@ export default function ServicePageLayout({
                             </div>
                             <div>
                                 <h4 className="font-bold text-[15px] text-[#0a1628] dark:text-[#fafafa] leading-tight">CS Devyani Khambhati</h4>
-                                <div className="text-[12px] text-[#1677f2] font-medium dark:text-[#4f9dfb]">Compliance Expert</div>
+                                {/* On a licence application a compliance reviewer is the right person to
+                                    headline. On a criminal appeal, a writ or an SLP the reader expects
+                                    litigation credentials, so the card states what this reviewer covers
+                                    rather than implying she carries the matter in court. */}
+                                <div className="text-[12px] text-[#1677f2] font-medium dark:text-[#4f9dfb]">{isLegalMatter ? "Content & Regulatory Review" : "Compliance Expert"}</div>
                             </div>
                         </div>
                         <div className="text-[13.5px] text-gray-600 dark:text-[#a1a1aa] leading-relaxed">
-                            Specialist in fintech regulatory compliance, government licenses and RBI, SEBI, IRDAI frameworks.
+                            {isLegalMatter
+                                ? "Reviews this page for regulatory and documentation accuracy. Legal advice on the matter itself, and any appearance before a court or tribunal, is provided through appropriately enrolled advocates."
+                                : "Specialist in fintech regulatory compliance, government licences and RBI, SEBI, IRDAI frameworks."}
                         </div>
                         <a href="mailto:info@estabizz.com" className="mt-4 block text-center w-full py-2.5 bg-blue-50 dark:bg-[#1c1c20] text-[#0077B6] dark:text-[#60a5fa] font-bold text-[13px] rounded-xl hover:bg-[#1677f2] hover:text-white transition-colors">
                             Ask a Question

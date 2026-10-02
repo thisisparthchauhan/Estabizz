@@ -28,7 +28,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Salary Claims Fail' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -424,8 +424,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“The labour codes changed the arithmetic of a salary dispute, and most employers have not caught up. Full and final settlement is due in two working days, the wage ceiling that kept senior employees out of the statutory route is gone, the claim window is three years, and the authority can add compensation of up to ten times the amount withheld. A claim that computes every component and names the provision does not need to argue — it only needs to be answered.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"The labour codes changed the arithmetic of a salary dispute, and most employers have not caught up. Full and final settlement is due in two working days, the wage ceiling that kept senior employees out of the statutory route is gone, the claim window is three years, and the authority can add compensation of up to ten times the amount withheld. A claim that computes every component and names the provision does not need to argue — it only needs to be answered."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

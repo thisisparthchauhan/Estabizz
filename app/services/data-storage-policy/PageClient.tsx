@@ -792,7 +792,6 @@ export default function PageClient() {
                 </ul>
                 <blockquote className="expert-quote">
                     <p>&ldquo;Data governance today is no longer optional — it is a regulatory cornerstone. Organisations that proactively align their storage practices with Indian compliance frameworks will not only avoid penalties but also build long-term institutional credibility with regulators, investors, and customers.&rdquo;</p>
-                    <footer>— <strong>CS Devyani Khambhati</strong>, Compliance Expert</footer>
                 </blockquote>
             </section>
 

@@ -26,7 +26,7 @@ const sections = [
   { id: 'preventive-checklist', title: 'Preventive Compliance Checklist' },
   { id: 'why-estabizz', title: 'Why Estabizz Fintech' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -371,8 +371,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Adulteration of Drugs matters require immediate technical and legal review. A strong response is built on sample procedure, lab findings, batch records, quality control documents, distribution trail and correct BNS-BNSS-BSA mapping — not merely on a general denial.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"Adulteration of Drugs matters require immediate technical and legal review. A strong response is built on sample procedure, lab findings, batch records, quality control documents, distribution trail and correct BNS-BNSS-BSA mapping — not merely on a general denial."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

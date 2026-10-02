@@ -23,7 +23,7 @@ const sections = [
   { id: 'common-issues', title: 'Issues We Commonly Fix' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -315,8 +315,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“A caveat is cheap insurance that expires quietly. The two things that defeat it are filing in the wrong forum and forgetting the ninetieth day — both entirely avoidable with a diary entry and a moment&rsquo;s thought about where the other side will actually go.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"A caveat is cheap insurance that expires quietly. The two things that defeat it are filing in the wrong forum and forgetting the ninetieth day — both entirely avoidable with a diary entry and a moment&rsquo;s thought about where the other side will actually go."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

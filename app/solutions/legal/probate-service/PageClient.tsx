@@ -28,7 +28,7 @@ const sections = [
   { id: 'common-issues', title: 'Why Probate Matters Stall' },
   { id: 'services', title: 'Our Services' },
   { id: 'faqs', title: 'FAQs' },
-  { id: 'expert-insight', title: 'Expert Insight' },
+  { id: 'expert-insight', title: 'Estabizz Practice Note' },
   { id: 'disclaimer', title: 'Disclaimer' }
 ];
 
@@ -434,8 +434,8 @@ export default function PageClient() {
         <FaqList items={faqs} />
       </Section>
 
-      <Section id="expert-insight" title="Expert Insight">
-        <p>{"“The omission of Section 213 changed the first question families should ask. It is no longer how to obtain probate but whether a grant is needed at all — and on many estates it is not. Where a Will is likely to be challenged, a grant is still the only thing that settles the question for everyone. Where the heirs agree and the estate is modest, the file that matters is the original Will, a willing attesting witness and a complete asset schedule.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+      <Section id="expert-insight" title="Estabizz Practice Note">
+        <p>{"The omission of Section 213 changed the first question families should ask. It is no longer how to obtain probate but whether a grant is needed at all — and on many estates it is not. Where a Will is likely to be challenged, a grant is still the only thing that settles the question for everyone. Where the heirs agree and the estate is modest, the file that matters is the original Will, a willing attesting witness and a complete asset schedule."}</p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

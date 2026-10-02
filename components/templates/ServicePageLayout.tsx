@@ -20,6 +20,14 @@ interface ServicePageLayoutProps {
     displayYear?: string;
     reviewPending?: boolean;
     hideReviewBadge?: boolean;
+    /** Overrides the sidebar heading. Defaults to "Legal Matter Snapshot" on
+     *  /solutions/legal pages and "Licence Snapshot" elsewhere — a divorce or a
+     *  court matter is not a licence, and this component is shared with the RBI
+     *  and SEBI registration pages where "Licence Snapshot" is correct. */
+    snapshotLabel?: string;
+    /** Overrides the meta-row label. Defaults to "Legal Guide" / "Regulatory Guide"
+     *  on the same basis. */
+    guideLabel?: string;
     focusKeyword: string;
     // TOC
     sections: TocSection[];
@@ -56,7 +64,7 @@ interface ServicePageLayoutProps {
 }
 
 export default function ServicePageLayout({
-    tags, breadcrumb, title, heroDescription, heroActions, trustLine, readTime = "12 min read", displayYear = "2026", reviewPending = false, hideReviewBadge = false, focusKeyword,
+    tags, breadcrumb, title, heroDescription, heroActions, trustLine, readTime = "12 min read", displayYear = "2026", reviewPending = false, hideReviewBadge = false, snapshotLabel, guideLabel, focusKeyword,
     sections, ctaTitle, ctaDescription, quickFacts,
     relatedArticles, finalCtaTitle, finalCtaDescription, finalCtaActions, faqs, contactService, children
 }: ServicePageLayoutProps) {
@@ -113,6 +121,15 @@ export default function ServicePageLayout({
     // were just reading about already filled in, and the lead reaches the
     // admin tagged rather than as "Other / Not Listed".
     const contactHref = `/contact?service=${encodeURIComponent(contactService ?? title)}`;
+
+    // This template is shared by the regulator licence pages and the legal
+    // services pages. "Licence Snapshot" and "Regulatory Guide" are right for an
+    // NBFC or broker registration and wrong for a court matter, a will or a
+    // property deed, so the labels follow the category in the breadcrumb unless a
+    // page names something more specific.
+    const isLegalMatter = breadcrumb.some((item) => item.label === "Legal");
+    const resolvedSnapshotLabel = snapshotLabel ?? (isLegalMatter ? "Legal Matter Snapshot" : "Licence Snapshot");
+    const resolvedGuideLabel = guideLabel ?? (isLegalMatter ? "Legal Guide" : "Regulatory Guide");
 
     // Structured data.
     //
@@ -231,9 +248,14 @@ export default function ServicePageLayout({
                                 <span className="text-gray-300">|</span>
                                 <div className="flex items-center gap-1.5"><span>⏱️</span> {readTime}</div>
                                 <span className="text-gray-300">|</span>
-                                <div className="flex items-center gap-1.5"><span>👁️</span> Regulatory Guide</div>
-                                {!hideReviewBadge && <><span className="text-gray-300">|</span>
-                                <div className="flex items-center gap-1.5"><span>{reviewPending ? '📋' : '✅'}</span> {reviewPending ? 'Content Review Pending' : 'Expert Reviewed'}</div></>}
+                                <div className="flex items-center gap-1.5"><span>👁️</span> {resolvedGuideLabel}</div>
+                                {/* An unreviewed page must not advertise that it is unreviewed: a reader
+                                    was being told, on a live legal page, that nobody had finished checking
+                                    the guidance they were about to rely on. `reviewPending` now suppresses
+                                    the badge entirely rather than publishing its own disclaimer. It still
+                                    never shows "Expert Reviewed", which would be the opposite error. */}
+                                {!hideReviewBadge && !reviewPending && <><span className="text-gray-300">|</span>
+                                <div className="flex items-center gap-1.5"><span>✅</span> Expert Reviewed</div></>}
                             </div>
 
                             <div className="inline-block px-5 py-3 border border-blue-200 dark:border-[#27272b] bg-white/75 dark:bg-[#141417]/80 backdrop-blur-sm rounded-full text-sm text-[#0a1628] dark:text-[#fafafa] font-bold shadow-sm">
@@ -247,7 +269,7 @@ export default function ServicePageLayout({
                                 <div className="relative">
                                     <div className="mb-5 flex items-start justify-between gap-4">
                                         <div>
-                                            <div className="text-[10.5px] font-black uppercase tracking-[0.22em] text-[#1677f2] dark:text-[#4f9dfb]">Licence Snapshot</div>
+                                            <div className="text-[10.5px] font-black uppercase tracking-[0.22em] text-[#1677f2] dark:text-[#4f9dfb]">{resolvedSnapshotLabel}</div>
                                             <div className="mt-1.5 text-[20px] font-black leading-tight text-[#120b45] dark:text-[#fafafa]">{ctaTitle}</div>
                                         </div>
                                         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0a1628] dark:bg-[#1c1c20] text-base font-black text-white shadow-lg">E</div>

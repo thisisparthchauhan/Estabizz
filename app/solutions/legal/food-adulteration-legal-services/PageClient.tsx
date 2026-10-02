@@ -306,7 +306,7 @@ export default function PageClient() {
           ['FSS Act Section 89', 'FSS Act has overriding effect over inconsistent food-related laws'],
           ['Practical position', 'Which framework is invoked depends on the facts and the authority proceeding']
         ]} />
-        <p>Where an FIR is registered alongside regulatory action, both tracks need handling together and consistently — see <Link href="/solutions/legal/first-information-report">First Information Report</Link>.</p>
+        <p>Where an FIR is registered alongside regulatory action, both tracks need handling together and consistently.</p>
       </Section>
 
       <Section id="types" title="Matters We Handle">

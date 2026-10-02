@@ -43,14 +43,6 @@ const pages = [
     distinctiveText: 'Section 387',
   },
   {
-    route: '/solutions/legal/suspension-of-sentence',
-    title: 'Suspension of Sentence',
-    tables: 11,
-    sections: 17,
-    faqs: 25,
-    distinctiveText: 'BNSS Section 430(3)',
-  },
-  {
     route: '/solutions/legal/tenant-eviction-notice',
     title: 'Tenant Eviction Notice',
     tables: 20,

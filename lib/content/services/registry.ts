@@ -135,12 +135,6 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
         href: "/solutions/legal/appeal-before-nclt",
       },
       {
-        title: "Bail Application",
-        description:
-          "Regular, anticipatory, interim and default bail under the BNSS framework — forum, grounds, conditions, bonds and cancellation defence.",
-        href: "/solutions/legal/bail-application",
-      },
-      {
         title: "Cheque Bounce in India",
         description:
           "Section 138 notice and complaint deadlines, company and director liability, interim compensation, settlement and civil recovery.",
@@ -159,28 +153,10 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
         href: "/solutions/legal/complaints-before-consumer-court",
       },
       {
-        title: "Contested Divorce",
-        description:
-          "Grounds, interim maintenance and custody, evidence strategy, NRI matters and Family Court procedure for contested matrimonial disputes.",
-        href: "/solutions/legal/contested-divorce",
-      },
-      {
-        title: "Court Marriage",
-        description:
-          "Civil marriage under the Special Marriage Act, 1954 — eligibility, notice period, objections, witnesses and the marriage certificate.",
-        href: "/solutions/legal/court-marriage",
-      },
-      {
         title: "Court Proceedings",
         description:
           "Forum, limitation, pleadings, interim relief, evidence, hearings, orders, appeal routes and execution across civil, criminal and tribunal matters.",
         href: "/solutions/legal/court-proceedings",
-      },
-      {
-        title: "Criminal Misappropriation of Property",
-        description:
-          "BNS Section 314 — dishonest conversion of movable property, the civil-criminal line, the Magistrate complaint route and defence against false allegations.",
-        href: "/solutions/legal/criminal-misappropriation-of-property",
       },
       {
         title: "Cyber Crime Complaint",
@@ -193,12 +169,6 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
         description:
           "IT Act and SPDI compliance, CERT-In six-hour incident reporting and log retention, DPDP readiness ahead of 2027, VAPT coordination and vendor risk.",
         href: "/solutions/legal/cyber-security-advisory",
-      },
-      {
-        title: "Defamation",
-        description:
-          "BNS Section 356, the statutory exceptions, civil damages and injunctions, online and corporate reputation, and the one-year civil limitation.",
-        href: "/solutions/legal/defamation-legal-services",
       },
       {
         title: "Defamation Notice",
@@ -219,40 +189,10 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
         href: "/solutions/legal/directors-disqualification",
       },
       {
-        title: "Divorce and Marriage Consulting",
-        description:
-          "Which personal law governs your marriage, choosing between mutual consent, contested, judicial separation and nullity, maintenance, custody and settlement.",
-        href: "/solutions/legal/divorce-marriage-consulting",
-      },
-      {
-        title: "Divorce Notice",
-        description:
-          "Drafting and replying to a matrimonial notice, settlement and mutual divorce proposals, maintenance, custody, stridhan recovery and NRI service.",
-        href: "/solutions/legal/divorce-notice",
-      },
-      {
-        title: "Divorce Settlement Agreements",
-        description:
-          "Enforceable consent terms for alimony, custody, stridhan, property and loans, closing connected proceedings, and what a full-and-final clause can achieve.",
-        href: "/solutions/legal/divorce-settlement-agreements",
-      },
-      {
-        title: "Domestic Violence",
-        description:
-          "Protection, residence, monetary relief, custody and compensation under the PWDVA, 2005, interim and ex parte orders, and breach of a protection order.",
-        href: "/solutions/legal/domestic-violence-legal-services",
-      },
-      {
         title: "Faulty Product Notice",
         description:
           "Legal notice for defective goods and warranty denial, product liability under Sections 82 to 87, e-commerce escalation and the two-year limitation.",
         href: "/solutions/legal/faulty-product-notice",
-      },
-      {
-        title: "First Information Report",
-        description:
-          "FIR registration under BNSS Section 173, Zero FIR, e-FIR and the three-day signature, preliminary enquiry, refusal escalation and accused-side review.",
-        href: "/solutions/legal/first-information-report",
       },
       {
         title: "Food Adulteration",
@@ -273,12 +213,6 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
         href: "/solutions/legal/gift-deed-registration",
       },
       {
-        title: "Judicial Separation",
-        description:
-          "Hindu Marriage Act Section 10 and Special Marriage Act Section 23 — grounds, what the decree changes, maintenance, custody, rescission and the one-year divorce ground.",
-        href: "/solutions/legal/judicial-separation",
-      },
-      {
         title: "Lawyer for TRAI Matters",
         description:
           "TRAI Act and the Telecommunications Act, 2023, tariff and interconnection, quality of service, UCC compliance, regulatory notices and TDSAT coordination.",
@@ -297,12 +231,6 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
         href: "/solutions/legal/loan-recovery-notice",
       },
       {
-        title: "Marriage Registration",
-        description:
-          "Registering a solemnised marriage, the Special Marriage Act route, documents and witnesses, interfaith and NRI marriages, late registration and apostille.",
-        href: "/solutions/legal/marriage-registration",
-      },
-      {
         title: "Mergers and Acquisitions",
         description:
           "Structure comparison, legal due diligence, the NCLT scheme route, the CCI deal value threshold, SEBI takeover code, FEMA, closing and post-closing compliance.",
@@ -313,12 +241,6 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
         description:
           "MACT compensation claims — Section 166 fault claims and Section 164 fixed compensation, the six-month limitation position, DAR, computation and award execution.",
         href: "/solutions/legal/motor-accident-claims-tribunal",
-      },
-      {
-        title: "Mutual Divorce",
-        description:
-          "Section 13B and Section 28 mutual consent divorce — the two motions, the cooling-off waiver, settlement terms and withdrawal of consent.",
-        href: "/solutions/legal/mutual-divorce",
       },
       {
         title: "Non Payment of Salary",
@@ -355,12 +277,6 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
         description:
           "Article 32 and Article 226 routes, the Balwant Singh Chaufal credential checks, the NGT forum question, RTI groundwork, respondent mapping and relief a court can grant.",
         href: "/solutions/legal/public-interest-litigation",
-      },
-      {
-        title: "Quashing of FIR and Complaint",
-        description:
-          "BNSS Section 528 inherent powers, the Bhajan Lal categories, why Section 482 now means anticipatory bail, interim relief limits and settlement-based quashing.",
-        href: "/solutions/legal/quashing-of-fir-and-complaint",
       },
       {
         title: "Recovery From Debtors",
@@ -411,12 +327,6 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
         href: "/solutions/legal/succession-certificate",
       },
       {
-        title: "Suspension of Sentence",
-        description:
-          "BNSS Section 430 sentence suspension and bail pending appeal, including judgment review, documentation, surety readiness and counsel coordination.",
-        href: "/solutions/legal/suspension-of-sentence",
-      },
-      {
         title: "Tenant Eviction Notice",
         description:
           "Lease review, rent-default and termination grounds, Section 106 notice, arrears, lawful service and possession-recovery strategy.",
@@ -460,33 +370,6 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
       },
     ],
     topics: [
-      {
-        heading: "Divorce, Marriage & Family",
-        blurb: "Ending, formalising or defending a marriage, and protection orders within the home.",
-        services: [
-          "Divorce and Marriage Consulting",
-          "Mutual Divorce",
-          "Contested Divorce",
-          "Divorce Notice",
-          "Divorce Settlement Agreements",
-          "Judicial Separation",
-          "Domestic Violence",
-          "Court Marriage",
-          "Marriage Registration",
-        ],
-      },
-      {
-        heading: "Criminal, FIR & Bail",
-        blurb: "You have been named in an FIR or complaint, or need the police to register one.",
-        services: [
-          "First Information Report",
-          "Bail Application",
-          "Quashing of FIR and Complaint",
-          "Suspension of Sentence",
-          "Criminal Misappropriation of Property",
-          "Defamation",
-        ],
-      },
       {
         heading: "Courts, Appeals & Petitions",
         blurb: "Carrying a matter up to the Tribunal, High Court or Supreme Court, or guarding against an ex-parte order.",

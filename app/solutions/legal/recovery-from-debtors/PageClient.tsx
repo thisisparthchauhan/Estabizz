@@ -386,7 +386,6 @@ export default function PageClient() {
           ['Disputed accounts', 'Civil; reconciliation is the answer'],
           ['Filing a criminal case to force payment', 'Invites a quashing petition and adverse observations']
         ]} />
-        <p>See <Link href="/solutions/legal/criminal-misappropriation-of-property">Criminal Misappropriation of Property</Link> for where the line genuinely falls, and <Link href="/solutions/legal/quashing-of-fir-and-complaint">Quashing of FIR and Complaint</Link> for what happens when a commercial dispute is criminalised without foundation.</p>
       </Section>
 
       <Section id="execution" title="Winning Is Not Recovering">

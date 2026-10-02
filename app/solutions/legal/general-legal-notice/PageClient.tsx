@@ -380,7 +380,7 @@ export default function PageClient() {
           ['Return of movable property or assets', 'Criminal Misappropriation of Property'],
           ['Consumer complaint after the notice', 'Complaints Before Consumer Court']
         ]} />
-        <p>See <Link href="/solutions/legal/cheque-bounce-in-india">Cheque Bounce in India</Link>, <Link href="/solutions/legal/faulty-product-notice">Faulty Product Notice</Link>, <Link href="/solutions/legal/defamation-notice">Defamation Notice</Link>, <Link href="/solutions/legal/divorce-notice">Divorce Notice</Link> and <Link href="/solutions/legal/complaints-before-consumer-court">Complaints Before Consumer Court</Link>.</p>
+        <p>See <Link href="/solutions/legal/cheque-bounce-in-india">Cheque Bounce in India</Link>, <Link href="/solutions/legal/faulty-product-notice">Faulty Product Notice</Link>, <Link href="/solutions/legal/defamation-notice">Defamation Notice</Link> and <Link href="/solutions/legal/complaints-before-consumer-court">Complaints Before Consumer Court</Link>.</p>
       </Section>
 
       <Section id="common-issues" title="Why Notices Fail">

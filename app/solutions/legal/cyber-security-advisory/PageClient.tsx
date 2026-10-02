@@ -98,7 +98,7 @@ export default function PageClient() {
       relatedArticles={[
         { title: 'Cyber Crime Complaint', href: '/solutions/legal/cyber-crime-complaint', category: 'Legal', description: 'Online fraud, the 1930 helpline, digital evidence preservation and FIR strategy under IT Act, BNS, BNSS and BSA.' },
         { title: 'Court Proceedings', href: '/solutions/legal/court-proceedings', category: 'Legal', description: 'Forum, limitation, pleadings, interim relief, evidence and execution across civil, criminal and tribunal matters.' },
-        { title: 'Criminal Misappropriation of Property', href: '/solutions/legal/criminal-misappropriation-of-property', category: 'Legal', description: 'BNS Section 314 — dishonest conversion of movable property, including data and asset misuse by insiders.' }
+        { title: 'Complaints Before Consumer Court', href: '/solutions/legal/complaints-before-consumer-court', category: 'Legal', description: 'Consumer Protection Act, 2019 complaints — forum, limitation and reliefs.' }
       ]}
       finalCtaTitle="Prepare Before the Six-Hour Clock Starts"
       finalCtaDescription="Nobody drafts an incident response plan well at 2 a.m. during a ransomware event. The reporting workflow, the log retention and the escalation matrix are cheap to build in advance and impossible to build under pressure."

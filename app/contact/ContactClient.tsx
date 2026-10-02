@@ -83,33 +83,6 @@ const SERVICES_GROUPED = [
     // opens unselected -- but it silently loses the lead attribution, which is
     // the whole point. scripts/contactServiceOptionsTest.mjs asserts the match.
     {
-        group: 'Legal — Divorce, Marriage & Family',
-        color: '#1677f2',
-        items: [
-            'Divorce and Marriage Consulting',
-            'Mutual Divorce',
-            'Contested Divorce',
-            'Divorce Notice',
-            'Divorce Settlement Agreements',
-            'Judicial Separation',
-            'Domestic Violence',
-            'Court Marriage',
-            'Marriage Registration',
-        ],
-    },
-    {
-        group: 'Legal — Criminal, FIR & Bail',
-        color: '#0077B6',
-        items: [
-            'First Information Report',
-            'Bail Application',
-            'Quashing of FIR and Complaint',
-            'Suspension of Sentence',
-            'Criminal Misappropriation of Property',
-            'Defamation',
-        ],
-    },
-    {
         group: 'Legal — Courts, Appeals & Petitions',
         color: '#0866d9',
         items: [

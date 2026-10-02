@@ -317,7 +317,7 @@ export default function PageClient() {
           ['Gift or settlement deed', 'Stamp duty value and the tax position on both sides'],
           ['Consent terms before a court', 'A valuation annexed makes the terms harder to reopen']
         ]} />
-        <p>Where a transfer within the family is contemplated, the stamp duty and tax position should be assessed before the instrument is drawn. See <Link href="/solutions/legal/gift-deed-registration">Gift Deed Registration</Link>, and <Link href="/solutions/legal/divorce-settlement-agreements">Divorce Settlement Agreements</Link> where the settlement is matrimonial.</p>
+        <p>Where a transfer within the family is contemplated, the stamp duty and tax position should be assessed before the instrument is drawn. See <Link href="/solutions/legal/gift-deed-registration">Gift Deed Registration</Link>.</p>
       </Section>
 
       <Section id="corporate" title="Corporate Transactions">

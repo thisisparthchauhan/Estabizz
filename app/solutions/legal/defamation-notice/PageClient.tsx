@@ -99,7 +99,7 @@ export default function PageClient() {
         { label: 'First step', value: 'Preserve evidence' }
       ]}
       relatedArticles={[
-        { title: 'Defamation', href: '/solutions/legal/defamation-legal-services', category: 'Legal', description: 'BNS Section 356, the statutory exceptions, civil damages, injunctions and the two limitation clocks.' },
+        { title: 'General Legal Notice', href: '/solutions/legal/general-legal-notice', category: 'Legal', description: 'When a notice is required, what it must say and how it should be served.' },
         { title: 'Cyber Crime Complaint', href: '/solutions/legal/cyber-crime-complaint', category: 'Legal', description: 'Fake profiles, impersonation, online fraud and digital evidence preservation.' },
         { title: 'Court Proceedings', href: '/solutions/legal/court-proceedings', category: 'Legal', description: 'Forum, limitation, pleadings, interim relief, evidence, orders and execution.' }
       ]}
@@ -111,7 +111,6 @@ export default function PageClient() {
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> a defamation notice is a formal demand that someone stop making a false statement about you, remove what they have published, put the record straight and, where justified, compensate you.</p>
         <p>It carries weight because it is the last step before litigation, and because it puts the recipient on notice in a way that affects how a court later views their conduct if they carry on regardless.</p>
-        <p>This page covers the notice itself. For the underlying cause of action, the statutory exceptions and the remedies available in court, see <Link href="/solutions/legal/defamation-legal-services">Defamation</Link>.</p>
       </Section>
 
       <Section id="quick-answer" title="Quick Answer">

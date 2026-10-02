@@ -104,7 +104,7 @@ export default function PageClient() {
       <Section id="overview" title="Overview">
         <p><strong>In simple terms…</strong> court proceedings are the formal steps by which a dispute is presented, heard and decided by a court, tribunal or judicial authority.</p>
         <p>They matter because the outcome reaches things that are hard to work around — property, money, business continuity, reputation, liberty, family rights, employment, a licence, a contract, a tax liability or a regulatory approval.</p>
-        <p>This page covers the process itself. For specific remedies, see the pages on <Link href="/solutions/legal/appeal-before-high-court">High Court appeals</Link>, <Link href="/solutions/legal/bail-application">bail</Link>, <Link href="/solutions/legal/complaints-before-consumer-court">consumer complaints</Link>, <Link href="/solutions/legal/cheque-bounce-in-india">cheque dishonour</Link>, <Link href="/solutions/legal/appeal-before-nclt">NCLT matters</Link> and <Link href="/solutions/legal/appeal-before-itat">income-tax appeals</Link>.</p>
+        <p>This page covers the process itself. For specific remedies, see the pages on <Link href="/solutions/legal/appeal-before-high-court">High Court appeals</Link>, <Link href="/solutions/legal/complaints-before-consumer-court">consumer complaints</Link>, <Link href="/solutions/legal/cheque-bounce-in-india">cheque dishonour</Link>, <Link href="/solutions/legal/appeal-before-nclt">NCLT matters</Link> and <Link href="/solutions/legal/appeal-before-itat">income-tax appeals</Link>.</p>
       </Section>
 
       <Section id="forum" title="Getting the Forum Right">
@@ -153,7 +153,6 @@ export default function PageClient() {
 
       <Section id="family" title="Family Court Matters">
         <p>Family matters require legal clarity and a degree of restraint that ordinary civil litigation does not. Divorce, maintenance, custody, guardianship and protection proceedings often run in parallel, and interim orders shape the practical position long before any final decision.</p>
-        <p>For contested matrimonial matters specifically, see <Link href="/solutions/legal/contested-divorce">Contested Divorce</Link>.</p>
       </Section>
 
       <Section id="writ" title="Writ, PIL and Constitutional Matters">

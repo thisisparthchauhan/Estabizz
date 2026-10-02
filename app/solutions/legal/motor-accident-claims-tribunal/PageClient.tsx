@@ -99,7 +99,7 @@ export default function PageClient() {
         { label: 'Appeal', value: 'High Court, Section 173' }
       ]}
       relatedArticles={[
-        { title: 'First Information Report', href: '/solutions/legal/first-information-report', category: 'Legal', description: 'FIR registration under BNSS Section 173, Zero FIR and escalation where the police will not register.' },
+        { title: 'Appeal Before High Court', href: '/solutions/legal/appeal-before-high-court', category: 'Legal', description: 'Carrying a tribunal or trial-court decision up to the High Court.' },
         { title: 'Complaints Before Consumer Court', href: '/solutions/legal/complaints-before-consumer-court', category: 'Legal', description: 'Where an insurer has repudiated or delayed a claim as a deficiency in service.' },
         { title: 'Court Proceedings', href: '/solutions/legal/court-proceedings', category: 'Legal', description: 'Forum, limitation, evidence, orders, appeal routes and execution.' }
       ]}

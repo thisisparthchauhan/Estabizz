@@ -101,7 +101,7 @@ export default function PageClient() {
       relatedArticles={[
         { title: 'Court Proceedings', href: '/solutions/legal/court-proceedings', category: 'Legal', description: 'Forum, limitation, pleadings, interim relief, evidence, orders and execution.' },
         { title: 'General Legal Notice', href: '/solutions/legal/general-legal-notice', category: 'Legal', description: 'When a notice is legally mandatory, what it must say, and how to reply to one.' },
-        { title: 'Divorce Settlement Agreements', href: '/solutions/legal/divorce-settlement-agreements', category: 'Legal', description: 'Consent terms covering property transfer, registration and stamp duty implications.' }
+        { title: 'Relinquishment Deed', href: '/solutions/legal/relinquishment-deed', category: 'Legal', description: 'Releasing a share in inherited property, and how it is registered and stamped.' }
       ]}
       finalCtaTitle="A Family Gift Still Has to Satisfy the Statute"
       finalCtaDescription="Most defective gift deeds were made in good faith between people who trusted each other. The defect surfaces years later, when the property is being sold or an heir objects — and by then the donor may not be available to fix it."

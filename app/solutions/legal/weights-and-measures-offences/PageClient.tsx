@@ -166,7 +166,7 @@ export default function PageClient() {
           ['Consumer Protection Act, 2019', 'Where a consumer complaint accompanies the departmental action'],
           ['Sector law', 'FSSAI, drugs, petroleum or other regulators where the product is separately regulated']
         ]} />
-        <p>The practical effect runs in both directions. A business facing a metrology notice should not be told it faces a criminal charge for a short-weight allegation standing alone. Equally, where there is genuine deception — a tampered seal, a manipulated dispensing unit, a declaration known to be false — the BNS provisions on cheating and forgery remain fully available on those facts. See <Link href="/solutions/legal/criminal-misappropriation-of-property">Criminal Misappropriation of Property</Link> for how the civil and criminal line is drawn in property offences generally.</p>
+        <p>The practical effect runs in both directions. A business facing a metrology notice should not be told it faces a criminal charge for a short-weight allegation standing alone. Equally, where there is genuine deception — a tampered seal, a manipulated dispensing unit, a declaration known to be false — the BNS provisions on cheating and forgery remain fully available on those facts.</p>
       </Section>
 
       <Section id="framework" title="Regulatory Framework">

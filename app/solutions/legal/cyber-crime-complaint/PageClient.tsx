@@ -97,8 +97,8 @@ export default function PageClient() {
       ]}
       relatedArticles={[
         { title: 'Cyber Security Advisory', href: '/solutions/legal/cyber-security-advisory', category: 'Legal', description: 'CERT-In reporting readiness, log retention, DPDP preparation and the controls that prevent the incident.' },
-        { title: 'Criminal Misappropriation of Property', href: '/solutions/legal/criminal-misappropriation-of-property', category: 'Legal', description: 'BNS Section 314 — dishonest conversion of movable property, including insider asset and fund misuse.' },
-        { title: 'Bail Application', href: '/solutions/legal/bail-application', category: 'Legal', description: 'Regular, anticipatory, interim and default bail under the BNSS framework.' }
+        { title: 'Recovery From Debtors', href: '/solutions/legal/recovery-from-debtors', category: 'Legal', description: 'Choosing the right recovery route once money has left the account.' },
+        { title: 'Court Proceedings', href: '/solutions/legal/court-proceedings', category: 'Legal', description: 'Forum, filing, evidence and orders once a matter reaches court.' }
       ]}
       finalCtaTitle="In Cyber Fraud, Hours Decide Outcomes"
       finalCtaDescription="Money moves through layered accounts, SIM cards are discarded and posts are deleted. Report first, preserve everything, and let the complaint be drafted properly around what you managed to keep."
@@ -337,7 +337,7 @@ export default function PageClient() {
           ['Cyber FIR registered', 'Bail, quashing and defence route mapping'],
           ['Company named in a complaint', 'Authorised response and internal investigation']
         ]} />
-        <p>Handle this carefully. A casual reply can create admissions that are difficult to walk back, and a delayed response tends to harden the investigation&rsquo;s working assumption. Where an FIR has been registered, see <Link href="/solutions/legal/bail-application">Bail Application</Link> and <Link href="/solutions/legal/court-proceedings">Court Proceedings</Link>.</p>
+        <p>Handle this carefully. A casual reply can create admissions that are difficult to walk back, and a delayed response tends to harden the investigation&rsquo;s working assumption. Where an FIR has been registered, see <Link href="/solutions/legal/court-proceedings">Court Proceedings</Link>.</p>
       </Section>
 
       <Section id="common-issues" title="Why Complaints Fail">

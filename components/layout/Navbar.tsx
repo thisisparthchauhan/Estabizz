@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { NAVBAR_DEFAULTS, type NavbarContent } from "@/lib/content/navbarDefaults";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { JOBS_MENU_ITEMS, HIRE_TALENT_ITEM, getCandidateUserMenuItems } from "@/lib/jobs/navigation/jobsMenu";
@@ -572,6 +572,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
     // otherwise render Jobs twice.
     const quickLinks = baseLinks.filter((l) => l.href !== '/jobs');
     const router = useRouter();
+    const pathname = usePathname();
     const [scrolled, setScrolled] = useState(false);
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
     const [activeCategory, setActiveCategory] = useState(0);
@@ -692,6 +693,18 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
         setSearchQuery("");
     };
 
+    // Backstop for every other way a navigation can start (mobile drawer,
+    // search results, keyboard activation): once the route actually changes,
+    // no overlay should still be covering the new page.
+    useEffect(() => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        setActiveMenu(null);
+        setMobileOpen(false);
+        setCountryOpen(false);
+        setSearchOpen(false);
+        setSearchQuery("");
+    }, [pathname]);
+
     const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Escape") {
             closeSearch();
@@ -718,6 +731,18 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
         timeoutRef.current = setTimeout(() => setActiveMenu(null), 150);
     };
     const keepOpen = () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
+
+    // The mega panel only ever closed on mouse-leave. Clicking a link inside it
+    // navigates client-side without moving the cursor, so mouse-leave never
+    // fired and the panel stayed up covering the page the user had just asked
+    // for -- it only went away once they happened to move the mouse out.
+    // Close it the moment a link inside the panel is clicked.
+    const handlePanelClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        if ((event.target as HTMLElement).closest("a")) {
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+            setActiveMenu(null);
+        }
+    };
 
     // Phase 7B: the Regulatory/Solutions/Jobs dropdown triggers are plain
     // <div>s with hover handlers -- unreachable by keyboard at all before this.
@@ -1085,7 +1110,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
 
             {/* Mega Menu Dropdown */}
             {activeMenu && currentMenu && (
-                <div onMouseEnter={keepOpen} onMouseLeave={closeMenu}
+                <div onMouseEnter={keepOpen} onMouseLeave={closeMenu} onClick={handlePanelClick}
                     /* max-h + overflow is the backstop, not the fix: the per-category
                        caps below keep every list short enough to read, but the panel is
                        `fixed` and the page behind it cannot be scrolled while it is open,

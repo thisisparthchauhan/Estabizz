@@ -54,12 +54,11 @@ export default function CategoryBrowser({
   }, [groups, query]);
 
   const matches = filtered.reduce((n, g) => n + g.entries.length, 0);
-  const hasTopicNav = groups.length > 1;
 
   return (
     <div>
       {showFilter && (
-        <div className="mb-10">
+        <div className="mb-14">
           <label className="sr-only" htmlFor="category-filter">
             Filter {categoryLabel} services
           </label>
@@ -85,23 +84,6 @@ export default function CategoryBrowser({
               : `${total} services, grouped by what you are trying to do`}
           </p>
         </div>
-      )}
-
-      {hasTopicNav && !query.trim() && (
-        <nav aria-label="Jump to a topic" className="mb-12 flex flex-wrap gap-2.5">
-          {groups.map((group) => (
-            <a
-              key={group.heading}
-              href={`#${slugify(group.heading)}`}
-              className="rounded-full border border-blue-100 dark:border-[#27272b] bg-[#f5fbff] dark:bg-[#1c1c20] px-4 py-2 text-[13px] font-bold text-[#0077B6] dark:text-[#60a5fa] transition-all hover:-translate-y-0.5 hover:border-[#1677f2]/40 hover:text-[#1677f2]"
-            >
-              {group.heading}
-              <span className="ml-2 text-[11.5px] font-black text-[#94a3b8]">
-                {group.entries.length}
-              </span>
-            </a>
-          ))}
-        </nav>
       )}
 
       {filtered.length === 0 ? (

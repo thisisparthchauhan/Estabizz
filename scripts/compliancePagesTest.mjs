@@ -47,7 +47,8 @@ for (const route of routes) {
 
 const layout = read('components/templates/ServicePageLayout.tsx');
 assert.ok(layout.includes('hideReviewBadge = false'), 'Layout supports suppressing the review badge');
-assert.match(layout, /\{!hideReviewBadge && <>/, 'Badge is suppressed entirely, never rendered as Expert Reviewed');
+assert.match(layout, /\{!hideReviewBadge && !reviewPending && <>/, 'Badge is suppressed entirely, never rendered as Expert Reviewed');
+assert.ok(!layout.includes('Content Review Pending'), 'A published page must never advertise that it is unreviewed');
 const navbar = read('components/layout/Navbar.tsx');
 assert.match(navbar, /label: "Compliance",[^\n]+"Compliance Test Report for AIF", "FEMA Compliance"/);
 for (const label of ["Legal Process Outsourcing", "Legal Due Diligence"]) {

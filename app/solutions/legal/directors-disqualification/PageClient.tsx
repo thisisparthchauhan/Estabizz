@@ -98,7 +98,7 @@ export default function PageClient() {
         { label: 'DIR-10 goes to', value: 'Regional Director' }
       ]}
       relatedArticles={[
-        { title: 'Appeal Before NCLT', href: '/solutions/legal/appeal-before-nclt', category: 'Legal', description: 'Company petitions, struck-off company restoration, oppression and mismanagement and NCLAT appeals.' },
+        { title: 'NCLT Legal Services', href: '/solutions/legal/appeal-before-nclt', category: 'Legal', description: 'Company petitions, struck-off company restoration, oppression and mismanagement and NCLAT appeals.' },
         { title: 'Demerger', href: '/solutions/legal/demerger', category: 'Legal', description: 'Scheme of arrangement, the NCLT process, tax neutrality and the approvals that decide the timeline.' },
         { title: 'Legal Due Diligence', href: '/services/legal-due-diligence', category: 'Legal', description: 'Comprehensive due diligence for mergers, acquisitions and investment transactions.' }
       ]}

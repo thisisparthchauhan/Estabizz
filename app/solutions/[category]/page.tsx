@@ -55,7 +55,7 @@ export default async function SolutionCategoryPage({ params }: { params: Params 
             {category.icon} Solutions
           </div>
           <h1 className="mt-4 max-w-[860px] text-[clamp(32px,4vw,52px)] font-black leading-[1.07] tracking-[-0.04em] text-[#071426] dark:text-[#fafafa]">
-            {category.label}
+            {category.h1 ?? category.label}
           </h1>
           <p className="mt-5 max-w-[720px] text-[17px] font-medium leading-[1.9] text-[#475569] dark:text-[#a1a1aa]">
             {category.tagline}

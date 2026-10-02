@@ -81,11 +81,11 @@ export default function PageClient() {
     <ServicePageLayout
       faqs={faqs}
       tags={[{ emoji: '', label: 'Legal' }, { emoji: '', label: 'Company Law & IBC' }]}
-      breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'Legal', href: '/solutions/legal' }, { label: 'Appeal Before NCLT' }]}
-      title="Appeal Before NCLT"
+      breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'Legal', href: '/solutions/legal' }, { label: 'NCLT Legal Services' }]}
+      title="NCLT Legal Services"
       readTime="14 min read"
       hideReviewBadge
-      focusKeyword="Appeal Before NCLT"
+      focusKeyword="NCLT Legal Services"
       sections={sections}
       ctaTitle="Speak With a Company Law Expert"
       ctaDescription="Discuss forum, statutory route, limitation and petition drafting for your NCLT matter with the Estabizz team."

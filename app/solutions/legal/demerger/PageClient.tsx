@@ -42,7 +42,7 @@ const faqs = ([
   ['What is the demerged company and what is the resulting company?', 'The demerged company is the one from which the undertaking is separated. The resulting company is the one that receives it.'],
   ['Is a demerger tax-free?', 'Not automatically, and this is the single most expensive misconception in this area. Tax neutrality depends on satisfying every condition in Section 2(19AA) of the Income-tax Act. Miss one and the transfer can be taxed as a transfer.'],
   ['What are the main tax-neutrality conditions?', 'Broadly: the undertaking transfers as a going concern, all its property and liabilities move to the resulting company, the transfer is generally at book value, the resulting company issues shares to the demerged company’s shareholders on a proportionate basis, and the prescribed shareholder continuity is maintained. The section should be worked through line by line against the draft scheme.'],
-  ['Can accumulated losses be carried forward?', 'In eligible cases, subject to Section 72A and the conditions in it. This should be confirmed before the scheme is drafted rather than discovered afterwards.'],
+  ['Can accumulated losses be carried forward?', 'In eligible cases, subject to s.116 of the Income-tax Act, 2025 (s.72A of the 1961 Act for earlier tax years) and the conditions in it. This should be confirmed before the scheme is drafted rather than discovered afterwards.'],
   ['Is a valuation required?', 'Generally yes, to support the share entitlement ratio. For listed entities a fairness opinion is typically required in addition.'],
   ['What is the share entitlement ratio?', 'The ratio in which shareholders of the demerged company receive shares in the resulting company. It is the most common source of shareholder objection, which is why the valuation basis needs to be defensible.'],
   ['Is shareholder approval required?', 'Usually, at meetings convened as the Tribunal directs, with approval by the statutory majority. Dispensation of meetings is possible in appropriate cases, typically where consents are already on record.'],
@@ -94,11 +94,18 @@ export default function PageClient() {
       quickFacts={[
         { label: 'Scheme route', value: 'Sections 230–232' },
         { label: 'Forum', value: 'NCLT, two motions' },
-        { label: 'Tax neutrality', value: 'Section 2(19AA)' },
+        { label: 'Tax neutrality', value: 'Demerger definition, s.2' },
         { label: 'Decided first', value: 'Structure, not drafting' }
       ]}
+      legalSources={[
+        { label: 'Companies Act, 2013 — sections 230 to 232', href: 'https://www.indiacode.nic.in/' },
+        { label: 'Income-tax Act, 2025 — sections 2, 70, 77 and 116' },
+        { label: 'NCLT Rules, 2016' },
+        { label: 'Ministry of Corporate Affairs notifications', href: 'https://www.mca.gov.in/' },
+        { label: 'Income Tax Department — Act 1961 vis-a-vis Act 2025 section mapping', href: 'https://www.incometaxindia.gov.in/utility-income-tax-act-vis-a-vis-bill' },
+      ]}
       relatedArticles={[
-        { title: 'Appeal Before NCLT', href: '/solutions/legal/appeal-before-nclt', category: 'Legal', description: 'Company petitions, restoration, oppression and mismanagement, IBC applications and NCLAT appeals.' },
+        { title: 'NCLT Legal Services', href: '/solutions/legal/appeal-before-nclt', category: 'Legal', description: 'Company petitions, restoration, oppression and mismanagement, IBC applications and NCLAT appeals.' },
         { title: 'Legal Due Diligence', href: '/services/legal-due-diligence', category: 'Legal', description: 'Comprehensive due diligence for mergers, acquisitions and investment transactions.' },
         { title: 'Court Proceedings', href: '/solutions/legal/court-proceedings', category: 'Legal', description: 'Forum, limitation, pleadings, interim relief, evidence, orders and execution.' }
       ]}
@@ -168,7 +175,7 @@ export default function PageClient() {
           ['Approval', 'NCLT sanction generally required', 'Usually no Tribunal approval', 'Usually no Tribunal approval'],
           ['Consideration', 'Usually shares of the resulting company', 'Lump-sum price', 'As agreed'],
           ['Transfer of contracts', 'By operation of the order', 'By assignment, consent often needed', 'By assignment, consent often needed'],
-          ['Tax', 'Neutral if Section 2(19AA) conditions are met', 'Specific slump sale taxation applies', 'Depends on structure'],
+          ['Tax', 'Neutral only if every condition in the statutory demerger definition is met', 'Specific slump sale taxation applies', 'Depends on structure'],
           ['Speed', 'Slower, Tribunal-dependent', 'Faster', 'Faster'],
           ['Main risk', 'Scheme, tax conditions and approvals', 'Tax and stamp cost', 'Assignment, liabilities and GST']
         ]} />
@@ -185,7 +192,7 @@ export default function PageClient() {
           ['Forum', 'National Company Law Tribunal'],
           ['Fast track', 'Section 233, where eligible'],
           ['Cross-border', 'Section 234, where a foreign company is involved'],
-          ['Tax definition', 'Income-tax Act, 1961, Section 2(19AA)'],
+          ['Tax definition', 'Income-tax Act, 2025 s.2 (previously s.2(19AA) of the 1961 Act)'],
           ['Listed entities', 'SEBI LODR Regulation 37 and the SEBI master circular on schemes of arrangement, as supplemented'],
           ['Competition', 'Competition Act, 2002 and the CCI (Combinations) Regulations, 2024'],
           ['Foreign investment', 'FEMA, the NDI Rules and the RBI framework'],
@@ -206,10 +213,10 @@ export default function PageClient() {
           ['Companies Act, 2013', 'Sections 179, 180, 186 and 188', 'Board powers, disposal of undertaking, investments and related party review'],
           ['Companies Act, 2013', 'Sections 239 and 240', 'Preservation of books, and liability of officers for prior offences'],
           ['CAA Rules, 2016', 'Rule 3 onwards', 'Application, notices, meetings, disclosures and Tribunal procedure'],
-          ['Income-tax Act, 1961', 'Section 2(19AA)', 'The definition of demerger for tax purposes — the tax-neutrality gateway'],
-          ['Income-tax Act, 1961', 'Sections 47(vib) and 47(vid)', 'Transfers and share issues in a demerger not regarded as transfer, subject to conditions'],
-          ['Income-tax Act, 1961', 'Section 72A', 'Carry forward and set-off of accumulated loss and depreciation in specified cases'],
-          ['Income-tax Act, 1961', 'Section 50B', 'Slump sale taxation, relevant when comparing routes'],
+          ['Income-tax Act, 2025', 'Section 2 (definitions)', 'The definition of demerger for tax purposes — the tax-neutrality gateway. Previously s.2(19AA) of the Income-tax Act, 1961'],
+          ['Income-tax Act, 2025', 'Section 70', 'Transfers and share issues in a demerger not regarded as transfer, subject to conditions. Previously s.47 (incl. (vib) and (vid)) of the 1961 Act'],
+          ['Income-tax Act, 2025', 'Section 116', 'Carry forward and set-off of accumulated loss and depreciation in specified cases. Previously s.72A of the 1961 Act'],
+          ['Income-tax Act, 2025', 'Section 77', 'Slump sale taxation, relevant when comparing routes. Previously s.50B of the 1961 Act'],
           ['SEBI LODR, 2015', 'Regulation 37', 'Listed-entity scheme filing with the stock exchanges'],
           ['Competition Act, 2002', 'Sections 5 and 6', 'Combination thresholds and the requirement to notify']
         ]} />
@@ -245,7 +252,7 @@ export default function PageClient() {
           ['Effective date', 'Drives legal effectiveness'],
           ['Consideration and share entitlement ratio', 'What shareholders receive, and on what basis'],
           ['Accounting treatment', 'Must comply with the applicable accounting standards'],
-          ['Tax treatment', 'Should track the Section 2(19AA) conditions explicitly'],
+          ['Tax treatment', 'Should track the statutory demerger conditions explicitly'],
           ['Contracts and licences', 'Continuity and assignment provisions'],
           ['Employee transfer', 'Continuity of service and protection of benefits'],
           ['Legal proceedings', 'Which entity carries which litigation forward'],
@@ -258,7 +265,7 @@ export default function PageClient() {
 
       <Section id="tax" title="Tax Neutrality Is Not Automatic">
         <div className="warning-box" aria-label="Tax neutrality caution">
-          <p><strong>This is where demergers become expensive.</strong> A demerger is tax-neutral only if it satisfies every condition in Section 2(19AA) of the Income-tax Act. These are cumulative, not indicative. A scheme that is commercially sensible but misses one condition can convert an internal reorganisation into a taxable transfer, and the discovery usually comes long after the order is filed and the structure cannot easily be unwound.</p>
+          <p><strong>This is where demergers become expensive.</strong> A demerger is tax-neutral only if it satisfies every condition in the statutory demerger definition in section 2 of the Income-tax Act. These are cumulative, not indicative. A scheme that is commercially sensible but misses one condition can convert an internal reorganisation into a taxable transfer, and the discovery usually comes long after the order is filed and the structure cannot easily be unwound.</p>
         </div>
         <DataTable headers={['Condition area', 'What it requires']} rows={[
           ['Undertaking', 'One or more undertakings transfer to the resulting company'],
@@ -270,7 +277,7 @@ export default function PageClient() {
           ['Shareholder continuity', 'The prescribed continuity of shareholding is maintained'],
           ['Going concern', 'The undertaking transfers as a going concern'],
           ['Scheme route', 'The transfer is under a scheme of arrangement'],
-          ['Losses and depreciation', 'Section 72A conditions reviewed separately for carry forward'],
+          ['Losses and depreciation', 'Carry-forward conditions (s.116) reviewed separately'],
           ['Commercial substance', 'A genuine business rationale, given anti-avoidance and GAAR exposure']
         ]} />
         <p>Work the section against the draft scheme clause by clause, and keep the record that evidences compliance — valuation, accounting treatment and the business rationale. Tax neutrality is something the scheme has to be built to achieve, not something it is assumed to attract.</p>
@@ -410,7 +417,7 @@ export default function PageClient() {
       <Section id="common-issues" title="Where Demergers Go Wrong">
         <DataTable headers={['Problem', 'Consequence', 'How we address it']} rows={[
           ['Undertaking not clearly defined', 'Scheme objection and tax risk', 'Undertaking mapping with asset and liability schedules'],
-          ['Tax conditions not tested', 'Capital gains exposure discovered late', 'Section 2(19AA) review against the draft scheme'],
+          ['Tax conditions not tested', 'Capital gains exposure discovered late', 'Statutory demerger conditions reviewed against the draft scheme'],
           ['Valuation started late', 'Share entitlement ratio delays everything downstream', 'Valuer coordination and document readiness'],
           ['Creditors not mapped', 'Objection at the Tribunal', 'Creditor list and consent planning'],
           ['Listed-entity process underestimated', 'SEBI and exchange stage blocks the petition', 'SEBI scheme checklist planned on the critical path'],
@@ -430,7 +437,7 @@ export default function PageClient() {
           ['Structure note', 'Demerger compared against slump sale, business transfer and asset sale'],
           ['Undertaking mapping', 'Assets, liabilities, employees, contracts and licences'],
           ['Legal due diligence', 'Corporate, contracts, litigation, IP and property'],
-          ['Tax-neutrality review', 'Section 2(19AA) and Section 72A analysis'],
+          ['Tax-neutrality review', 'Demerger definition and carry-forward (s.116) analysis'],
           ['Valuation coordination', 'Valuer, share entitlement ratio and fairness support'],
           ['Scheme drafting support', 'Inputs and legal drafting support for the scheme'],
           ['NCLT process support', 'First motion, second motion and order tracking'],

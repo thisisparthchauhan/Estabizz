@@ -88,7 +88,7 @@ export default function PageClient() {
       quickFacts={[{ label: 'Main law', value: 'CPC, 1908' }, { label: 'Provision', value: 'Section 148A' }, { label: 'Validity', value: '90 days from lodging' }, { label: 'Purpose', value: 'Be heard before any order' }]}
       relatedArticles={[
         { title: 'Cheque Bounce in India', href: '/solutions/legal/cheque-bounce-in-india', category: 'Legal', description: 'Section 138 notice deadlines, complaint preparation and recovery strategy.' },
-        { title: 'Appeal Before NCLT', href: '/solutions/legal/appeal-before-nclt', category: 'Legal', description: 'Company petitions, restoration, IBC applications, schemes and NCLAT appeals.' },
+        { title: 'NCLT Legal Services', href: '/solutions/legal/appeal-before-nclt', category: 'Legal', description: 'Company petitions, restoration, IBC applications, schemes and NCLAT appeals.' },
         { title: 'Appeal Before High Court', href: '/solutions/legal/appeal-before-high-court', category: 'Legal', description: 'Criminal appeals, suspension of sentence and bail pending appeal.' }
       ]}
       finalCtaTitle="A Caveat Only Works Before the Order"

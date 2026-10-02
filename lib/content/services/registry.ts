@@ -56,6 +56,9 @@ export interface SolutionCategory {
   label: string;
   icon: string;
   tagline: string;
+  /** Optional page heading. `label` stays short for breadcrumbs and navigation;
+   *  this is what the category page shows as its H1. */
+  h1?: string;
   /** Long-form pages served from this repo at /solutions/<slug>/<page slug>. */
   pages: ServicePageContent[];
   /** Related pages that still live at their original URL. */
@@ -106,8 +109,10 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
   {
     slug: "legal",
     label: "Legal",
+    h1: "Legal Services in India",
     icon: "📜",
-    tagline: "Litigation support, regulatory defence, tribunal filings and transaction diligence.",
+    tagline:
+      "Litigation support, corporate legal advisory, property documentation, recovery matters, succession, regulatory defence and transaction due diligence across India.",
     pages: [],
     externalServices: [
       {
@@ -129,7 +134,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
         href: "/solutions/legal/appeal-before-itat",
       },
       {
-        title: "Appeal Before NCLT",
+        title: "NCLT Legal Services",
         description:
           "Company petitions, struck-off company restoration, oppression and mismanagement, IBC applications, schemes and NCLAT appeals.",
         href: "/solutions/legal/appeal-before-nclt",
@@ -143,7 +148,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
       {
         title: "Caveat Filing",
         description:
-          "Preventive filing under CPC Section 148A so no ex-parte stay or injunction passes without you being heard.",
+          "Preventive filing under Section 148A CPC to seek prior notice where an application is expected, reducing the risk of an interim order being made without notice.",
         href: "/solutions/legal/caveat-filing",
       },
       {
@@ -213,7 +218,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
         href: "/solutions/legal/gift-deed-registration",
       },
       {
-        title: "Lawyer for TRAI Matters",
+        title: "TRAI & TDSAT Legal Support",
         description:
           "TRAI Act and the Telecommunications Act, 2023, tariff and interconnection, quality of service, UCC compliance, regulatory notices and TDSAT coordination.",
         href: "/solutions/legal/lawyer-for-trai-matters",
@@ -376,7 +381,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
         services: [
           "Court Proceedings",
           "Appeal Before High Court",
-          "Appeal Before NCLT",
+          "NCLT Legal Services",
           "Appeal Before ITAT",
           "Special Leave Petition",
           "Writ Petition",
@@ -445,7 +450,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
           "Food Adulteration",
           "Adulteration of Drugs",
           "Weights and Measures Offences",
-          "Lawyer for TRAI Matters",
+          "TRAI & TDSAT Legal Support",
         ],
       },
     ],

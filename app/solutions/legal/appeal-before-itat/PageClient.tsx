@@ -90,7 +90,7 @@ export default function PageClient() {
       ctaDescription="Discuss appealability, limitation, grounds of appeal, stay of demand and paper book preparation with the Estabizz team."
       quickFacts={[{ label: 'Forum', value: 'Income Tax Appellate Tribunal' }, { label: 'Stage', value: 'Second appeal' }, { label: 'Filing mode', value: 'E-filing with DSC only' }, { label: 'Next remedy', value: 'High Court, on a question of law' }]}
       relatedArticles={[
-        { title: 'Appeal Before NCLT', href: '/solutions/legal/appeal-before-nclt', category: 'Legal', description: 'Company-law and insolvency matters before the National Company Law Tribunal.' },
+        { title: 'NCLT Legal Services', href: '/solutions/legal/appeal-before-nclt', category: 'Legal', description: 'Company-law and insolvency matters before the National Company Law Tribunal.' },
         { title: 'GST Appeal Services India', href: '/services/gst-appeal-services', category: 'Compliance', description: 'Section 107 appeals, pre-deposit, grounds of appeal and GST litigation strategy.' },
         { title: 'Appeal Before High Court', href: '/solutions/legal/appeal-before-high-court', category: 'Legal', description: 'Criminal appeals, suspension of sentence and bail pending appeal under BNS, BNSS and BSA.' }
       ]}

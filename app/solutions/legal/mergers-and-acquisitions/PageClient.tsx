@@ -97,6 +97,13 @@ export default function PageClient() {
         { label: 'CCI deal value', value: '₹2,000 crore' },
         { label: 'Sets the timetable', value: 'Approvals' }
       ]}
+      legalSources={[
+        { label: 'Companies Act, 2013 — sections 230 to 232', href: 'https://www.indiacode.nic.in/' },
+        { label: 'Income-tax Act, 2025 — sections 2, 70, 77 and 116' },
+        { label: 'Insolvency and Bankruptcy Code, 2016, where applicable', href: 'https://www.indiacode.nic.in/' },
+        { label: 'Competition Act, 2002, where thresholds are met', href: 'https://www.indiacode.nic.in/' },
+        { label: 'Income Tax Department — Act 1961 vis-a-vis Act 2025 section mapping', href: 'https://www.incometaxindia.gov.in/utility-income-tax-act-vis-a-vis-bill' },
+      ]}
       relatedArticles={[
         { title: 'Demerger', href: '/solutions/legal/demerger', category: 'Legal', description: 'Separating a business undertaking — scheme of arrangement, NCLT process and tax neutrality.' },
         { title: 'Legal Due Diligence', href: '/services/legal-due-diligence', category: 'Legal', description: 'Comprehensive legal due diligence for mergers, acquisitions and investment transactions.' },
@@ -330,7 +337,7 @@ export default function PageClient() {
           ['Scheme route', 'Sections 230 to 232, and Section 233 for fast track'],
           ['Cross-border scheme', 'Section 234'],
           ['Procedure rules', 'Companies (Compromises, Arrangements and Amalgamations) Rules, 2016'],
-          ['Tax', 'Income-tax Act, 1961, including Sections 2(1B), 47, 50B and 72A'],
+          ['Tax', 'Income-tax Act, 2025 — s.70 (transactions not regarded as transfer), s.77 (slump sale) and s.116 (carry forward in amalgamation or demerger), with amalgamation defined in s.2. The Income-tax Act, 1961 (ss.2(1B), 47, 50B, 72A) continues to govern tax years beginning before 1 April 2026'],
           ['Competition', 'Competition Act, 2002 and the CCI (Combinations) Regulations, 2024'],
           ['Listed companies', 'SEBI LODR and SEBI SAST Regulations, 2011'],
           ['Insider trading', 'SEBI PIT Regulations'],
@@ -352,10 +359,10 @@ export default function PageClient() {
           ['Companies Act Section 234', 'Cross-border schemes'],
           ['Companies Act Section 180', 'Sale or disposal of an undertaking, and shareholder approval'],
           ['Companies Act Section 188', 'Related party transactions'],
-          ['Income-tax Act Section 2(1B)', 'Definition of amalgamation'],
-          ['Income-tax Act Section 47', 'Transactions not regarded as transfer'],
-          ['Income-tax Act Section 50B', 'Slump sale taxation'],
-          ['Income-tax Act Section 72A', 'Carry forward of losses in specified cases'],
+          ['Income-tax Act, 2025 s.2', 'Definition of amalgamation (s.2(1B) of the 1961 Act)'],
+          ['Income-tax Act, 2025 s.70', 'Transactions not regarded as transfer (s.47 of the 1961 Act)'],
+          ['Income-tax Act, 2025 s.77', 'Slump sale taxation (s.50B of the 1961 Act)'],
+          ['Income-tax Act, 2025 s.116', 'Carry forward of losses in specified cases (s.72A of the 1961 Act)'],
           ['Competition Act Sections 5 and 6', 'Combination thresholds and the obligation to notify'],
           ['SEBI SAST Regulations', 'Open offer triggers, pricing and disclosures'],
           ['FEMA NDI Rules', 'Sectoral caps, pricing and reporting'],

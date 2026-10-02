@@ -28,6 +28,12 @@ interface ServicePageLayoutProps {
     /** Overrides the meta-row label. Defaults to "Legal Guide" / "Regulatory Guide"
      *  on the same basis. */
     guideLabel?: string;
+    /** Official primary sources for the law stated on the page, rendered at the
+     *  end of the article. Citing the statute and the regulator a reader can check
+     *  is the difference between advisory content and generic copy. */
+    legalSources?: { label: string; href?: string }[];
+    /** Set false only where nothing on the page varies by State. */
+    showJurisdictionNote?: boolean;
     focusKeyword: string;
     // TOC
     sections: TocSection[];
@@ -64,7 +70,7 @@ interface ServicePageLayoutProps {
 }
 
 export default function ServicePageLayout({
-    tags, breadcrumb, title, heroDescription, heroActions, trustLine, readTime = "12 min read", displayYear = "2026", reviewPending = false, hideReviewBadge = false, snapshotLabel, guideLabel, focusKeyword,
+    tags, breadcrumb, title, heroDescription, heroActions, trustLine, readTime = "12 min read", displayYear = "2026", reviewPending = false, hideReviewBadge = false, snapshotLabel, guideLabel, legalSources, showJurisdictionNote, focusKeyword,
     sections, ctaTitle, ctaDescription, quickFacts,
     relatedArticles, finalCtaTitle, finalCtaDescription, finalCtaActions, faqs, contactService, children
 }: ServicePageLayoutProps) {
@@ -130,6 +136,7 @@ export default function ServicePageLayout({
     const isLegalMatter = breadcrumb.some((item) => item.label === "Legal");
     const resolvedSnapshotLabel = snapshotLabel ?? (isLegalMatter ? "Legal Matter Snapshot" : "Licence Snapshot");
     const resolvedGuideLabel = guideLabel ?? (isLegalMatter ? "Legal Guide" : "Regulatory Guide");
+    const jurisdictionNote = showJurisdictionNote ?? isLegalMatter;
 
     // Structured data.
     //
@@ -459,7 +466,36 @@ export default function ServicePageLayout({
               .dark .badge-no{background:rgba(220,38,38,0.15);color:#f87171}
               .dark .badge-optional{background:rgba(217,119,6,0.15);color:#fbbf24}
             `}} />
+                    {jurisdictionNote && (
+                        <div className="not-prose mb-8 rounded-2xl border-l-[3px] border-l-[#1677f2] border border-blue-100 dark:border-[#27272b] bg-[#f5fbff] dark:bg-[#1c1c20] px-5 py-4">
+                            <p className="mb-1 text-[10.5px] font-black uppercase tracking-[0.18em] text-[#0077B6] dark:text-[#60a5fa]">Jurisdiction note</p>
+                            <p className="text-[13.5px] leading-[1.75] text-[#475569] dark:text-[#a1a1aa]">
+                                Stamp duty, registration charges, tenancy law, court fees, local procedure and
+                                certain property and succession requirements vary by State and on the facts of
+                                the matter. This page is a general Indian-law overview and should be checked
+                                against the position in the relevant jurisdiction before anything is acted on.
+                            </p>
+                        </div>
+                    )}
+
                     {children}
+
+                    {legalSources && legalSources.length > 0 && (
+                        <div className="not-prose mt-12 rounded-2xl border border-blue-100 dark:border-[#27272b] bg-[#f8fbff] dark:bg-[#1c1c20] px-5 py-5">
+                            <p className="mb-3 text-[10.5px] font-black uppercase tracking-[0.18em] text-[#0077B6] dark:text-[#60a5fa]">Primary legal sources</p>
+                            <ul className="grid gap-2 sm:grid-cols-2">
+                                {legalSources.map((src) => (
+                                    <li key={src.label} className="text-[13px] leading-[1.6] text-[#475569] dark:text-[#a1a1aa]">
+                                        {src.href ? (
+                                            <a href={src.href} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">
+                                                {src.label} <span aria-hidden>↗</span>
+                                            </a>
+                                        ) : src.label}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </main>
 
                 {/* Right Sidebar */}

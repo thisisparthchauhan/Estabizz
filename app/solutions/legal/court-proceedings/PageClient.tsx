@@ -92,7 +92,7 @@ export default function PageClient() {
       ctaDescription="Discuss forum, limitation, pleadings, interim relief and evidence strategy with the Estabizz team."
       quickFacts={[{ label: 'First question', value: 'Which forum' }, { label: 'Second question', value: 'Limitation position' }, { label: 'Most urgent', value: 'Interim relief' }, { label: 'Decides outcomes', value: 'Evidence' }]}
       relatedArticles={[
-        { title: 'Caveat Filing', href: '/solutions/legal/caveat-filing', category: 'Legal', description: 'Preventive filing under CPC Section 148A so no ex-parte order passes without you being heard.' },
+        { title: 'Caveat Filing', href: '/solutions/legal/caveat-filing', category: 'Legal', description: 'Preventive filing under Section 148A CPC to seek prior notice where an application is expected, reducing the risk of an interim order being made without notice.' },
         { title: 'Appeal Before High Court', href: '/solutions/legal/appeal-before-high-court', category: 'Legal', description: 'Criminal appeals, suspension of sentence and bail pending appeal.' },
         { title: 'Complaints Before Consumer Court', href: '/solutions/legal/complaints-before-consumer-court', category: 'Legal', description: 'Consumer Protection Act, 2019 complaints — forum, limitation and reliefs.' }
       ]}
@@ -281,7 +281,7 @@ export default function PageClient() {
           ['Bail, anticipatory and default bail', 'Bail Application'],
           ['Cheque dishonour under Section 138', 'Cheque Bounce in India'],
           ['Consumer disputes', 'Complaints Before Consumer Court'],
-          ['Company law and insolvency', 'Appeal Before NCLT'],
+          ['Company law and insolvency', 'NCLT Legal Services'],
           ['Income-tax appeals', 'Appeal Before ITAT'],
           ['Contested matrimonial matters', 'Contested Divorce'],
           ['Preventive filing against ex-parte orders', 'Caveat Filing'],
@@ -312,7 +312,7 @@ export default function PageClient() {
       </Section>
 
       <Section id="expert-insight" title="Expert Insight">
-        <p>{"“Most litigation is lost on procedure rather than merit. Forum, limitation and evidence decide the case long before argument does — and all three are settled cheaply at the start, or expensively in the middle.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
+        <p>{"“Procedural defects relating to jurisdiction, limitation, pleadings and evidence can materially weaken an otherwise valid claim or defence. Forum, limitation and evidence decide the case long before argument does — and all three are settled cheaply at the start, or expensively in the middle.”"}<br />{"— "}<strong>CS Devyani Khambhati, Compliance Expert</strong></p>
       </Section>
 
       <Section id="disclaimer" title="Disclaimer">

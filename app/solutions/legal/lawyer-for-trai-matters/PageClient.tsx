@@ -83,11 +83,11 @@ export default function PageClient() {
     <ServicePageLayout
       faqs={faqs}
       tags={[{ emoji: '', label: 'Legal' }, { emoji: '', label: 'Telecom Regulatory' }]}
-      breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'Legal', href: '/solutions/legal' }, { label: 'Lawyer for TRAI Matters' }]}
-      title="Lawyer for TRAI Matters"
+      breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: 'Legal', href: '/solutions/legal' }, { label: 'TRAI & TDSAT Legal Support' }]}
+      title="TRAI & TDSAT Legal Support"
       readTime="15 min read"
       hideReviewBadge
-      focusKeyword="Lawyer for TRAI Matters"
+      focusKeyword="TRAI & TDSAT Legal Support"
       sections={sections}
       ctaTitle="Speak With a Telecom Regulatory Expert"
       ctaDescription="The right forum identified, the instrument behind the notice pinned down, and a response built on your own data."

@@ -90,7 +90,7 @@ export default function PageClient() {
       relatedArticles={[
         { title: 'Appeal Before High Court', href: '/solutions/legal/appeal-before-high-court', category: 'Legal', description: 'Criminal appeals, suspension of sentence and bail pending appeal.' },
         { title: 'Appeal Before ITAT', href: '/solutions/legal/appeal-before-itat', category: 'Legal', description: 'Income-tax appeal support covering limitation, grounds, paper books and stay applications.' },
-        { title: 'Appeal Before NCLT', href: '/solutions/legal/appeal-before-nclt', category: 'Legal', description: 'Company law and insolvency tribunal support, including restoration and appellate planning.' }
+        { title: 'NCLT Legal Services', href: '/solutions/legal/appeal-before-nclt', category: 'Legal', description: 'Company law and insolvency tribunal support, including restoration and appellate planning.' }
       ]}
       finalCtaTitle="The Clock Started When the Cheque Bounced"
       finalCtaDescription="Section 138 runs on fixed windows, and missing one can end the case regardless of its merits. A short conversation now establishes where you are on the calendar."

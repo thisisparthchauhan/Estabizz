@@ -91,7 +91,7 @@ export default function PageClient() {
       relatedArticles={[
         { title: 'Cheque Bounce in India', href: '/solutions/legal/cheque-bounce-in-india', category: 'Legal', description: 'Section 138 notice deadlines, complaint preparation and recovery strategy.' },
         { title: 'Caveat Filing', href: '/solutions/legal/caveat-filing', category: 'Legal', description: 'Preventive filing under CPC Section 148A against ex-parte orders.' },
-        { title: 'Appeal Before NCLT', href: '/solutions/legal/appeal-before-nclt', category: 'Legal', description: 'Company petitions, restoration, IBC applications and NCLAT appeals.' }
+        { title: 'NCLT Legal Services', href: '/solutions/legal/appeal-before-nclt', category: 'Legal', description: 'Company petitions, restoration, IBC applications and NCLAT appeals.' }
       ]}
       finalCtaTitle="Stop Following Up. Start a Case."
       finalCtaDescription="Most consumers spend months on call centres and grievance tickets before moving to a legal remedy. A properly drafted complaint converts the issue into a structured claim with facts, evidence and reliefs."

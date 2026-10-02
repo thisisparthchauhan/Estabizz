@@ -45,7 +45,7 @@ const faqs = ([
   ['So can a gift ever be revoked?', 'By agreement on a specified independent event, or by rescission as in the case of a contract — for example where consent was obtained by fraud, coercion or undue influence. Not simply because the donor changed their mind.'],
   ['My parents want to gift me a flat. Any special risk?', 'Yes, worth knowing. Under Section 23 of the Maintenance and Welfare of Parents and Senior Citizens Act, 2007, where a senior citizen transfers property subject to a condition that the transferee provide basic amenities and needs, and the transferee fails, the transfer can be declared void by the Tribunal. Courts have differed on whether that condition must be express in the deed, so how it is drafted matters to both sides.'],
   ['What stamp duty applies?', 'Stamp duty on a gift deed is fixed by State law and varies considerably. Many States provide concessional rates for gifts to specified family members, and some cap the duty. It must be checked for the State where the property is situated.'],
-  ['Is the gift taxable for the donee?', 'Under Section 56(2)(x) of the Income-tax Act, immovable property received without consideration is taxable in the recipient’s hands by reference to stamp duty value where it exceeds the prescribed threshold. A gift received from a "relative" as defined is exempt, regardless of value.'],
+  ['Is the gift taxable for the donee?', 'For tax years beginning on or after 1 April 2026 the governing provision is section 92 of the Income-tax Act, 2025 (income from other sources), which carries forward the charge previously in section 56(2)(x) of the Income-tax Act, 1961. Immovable property received without consideration is taxable in the recipient’s hands by reference to stamp duty value where it exceeds the prescribed threshold. A gift received from a "relative" as defined is exempt, regardless of value.'],
   ['Who counts as a relative for that exemption?', 'The definition includes spouse, brother or sister, brother or sister of the spouse, brother or sister of either parent, any lineal ascendant or descendant, any lineal ascendant or descendant of the spouse, and the spouses of those persons. It is specific, so check it rather than assuming.'],
   ['What happens when the donee later sells the property?', 'The gift itself is not a transfer giving rise to capital gains for the donor. On a later sale by the donee, the cost of acquisition is generally the cost to the previous owner, and the previous owner’s holding period is generally included in determining whether the gain is long term.'],
   ['Is mutation the same as ownership?', 'No. Mutation updates the revenue or municipal record for tax and administrative purposes; it is not by itself proof of title. Registration transfers the title, mutation records it. Both should be completed.'],
@@ -97,6 +97,13 @@ export default function PageClient() {
         { label: 'Witnesses', value: 'At least two' },
         { label: 'Registration', value: 'Compulsory' },
         { label: 'Revocable at will', value: 'Void' }
+      ]}
+      legalSources={[
+        { label: 'Transfer of Property Act, 1882', href: 'https://www.indiacode.nic.in/' },
+        { label: 'Registration Act, 1908', href: 'https://www.indiacode.nic.in/' },
+        { label: 'Income-tax Act, 2025 — section 92 (income from other sources)' },
+        { label: 'Applicable State Stamp Act and State registration portal' },
+        { label: 'Income Tax Department — Act 1961 vis-a-vis Act 2025 section mapping', href: 'https://www.incometaxindia.gov.in/utility-income-tax-act-vis-a-vis-bill' },
       ]}
       relatedArticles={[
         { title: 'Court Proceedings', href: '/solutions/legal/court-proceedings', category: 'Legal', description: 'Forum, limitation, pleadings, interim relief, evidence, orders and execution.' },
@@ -216,7 +223,7 @@ export default function PageClient() {
 
       <Section id="tax" title="Income Tax on the Gift">
         <DataTable headers={['Point', 'Position']} rows={[
-          ['Governing provision', 'Income-tax Act Section 56(2)(x)'],
+          ['Governing provision', 'Income-tax Act, 2025 s.92 (previously s.56(2)(x) of the 1961 Act)'],
           ['General rule', 'Immovable property received without consideration is taxable in the recipient’s hands by reference to stamp duty value, where it exceeds the prescribed threshold'],
           ['Exemption for relatives', 'A gift from a "relative" as defined is exempt, regardless of value'],
           ['Who is a relative', 'Spouse; brother or sister; brother or sister of the spouse; brother or sister of either parent; any lineal ascendant or descendant; any lineal ascendant or descendant of the spouse; and spouses of those persons'],
@@ -264,7 +271,7 @@ export default function PageClient() {
           ['Registration', 'Registration Act, 1908'],
           ['Compulsory registration', 'Registration Act Section 17'],
           ['Stamp duty', 'Indian Stamp Act, 1899 and State stamp legislation'],
-          ['Income tax', 'Income-tax Act, 1961, including Section 56(2)(x) and capital gains provisions'],
+          ['Income tax', 'Income-tax Act, 2025 — s.92 and the capital gains provisions. The Income-tax Act, 1961 (s.56(2)(x)) continues to govern tax years beginning before 1 April 2026'],
           ['Senior citizens', 'Maintenance and Welfare of Parents and Senior Citizens Act, 2007, Section 23'],
           ['Succession context', 'Hindu Succession Act, 1956 and applicable personal law'],
           ['Contract principles', 'Indian Contract Act, 1872'],
@@ -289,7 +296,7 @@ export default function PageClient() {
           ['Registration Act Section 23', 'Time for presenting documents for registration'],
           ['Registration Act Section 32', 'Persons who must present the document'],
           ['Registration Act Section 49', 'Effect of non-registration'],
-          ['Income-tax Act Section 56(2)(x)', 'Taxability of property received without consideration'],
+          ['Income-tax Act, 2025 s.92', 'Taxability of property received without consideration (s.56(2)(x) of the 1961 Act for earlier tax years)'],
           ['Senior Citizens Act Section 23', 'Conditional transfer by a senior citizen may be declared void']
         ]} />
       </Section>
@@ -298,7 +305,7 @@ export default function PageClient() {
         <DataTable headers={['Step', 'Activity', 'Output']} rows={[
           ['1', 'Title verification', 'Chain of title, encumbrances and any litigation'],
           ['2', 'Donor capacity check', 'Ownership, competence and free will'],
-          ['3', 'Relationship and tax review', 'Stamp concession and Section 56(2)(x) position'],
+          ['3', 'Relationship and tax review', 'Stamp concession and the s.92 position under the Income-tax Act, 2025'],
           ['4', 'Encumbrance and loan check', 'Lender NOC where the property is mortgaged'],
           ['5', 'Property description', 'Schedule, boundaries, area and identifiers'],
           ['6', 'Deed drafting', 'Including acceptance, possession and any reserved rights'],
@@ -419,7 +426,7 @@ export default function PageClient() {
           ['Title not verified', 'Donor gifts what they cannot give', 'Chain of title and encumbrance search'],
           ['Mortgage ignored', 'Breach of loan terms', 'Lender NOC obtained first'],
           ['Stamp duty underestimated', 'Document impounded, penalties', 'State rate established before drafting'],
-          ['Tax exemption assumed', 'Unexpected liability for the donee', 'Relationship tested against Section 56(2)(x)'],
+          ['Tax exemption assumed', 'Unexpected liability for the donee', 'Relationship tested against s.92 of the Income-tax Act, 2025'],
           ['Donor’s old purchase papers discarded', 'Capital gains computation problems later', 'Document custody plan'],
           ['Mutation not completed', 'Records inconsistent with title', 'Mutation followed through'],
           ['Elderly donor, no safeguards', 'Capacity and Senior Citizens Act challenges', 'Independent advice and medical record']
@@ -430,7 +437,7 @@ export default function PageClient() {
         <DataTable headers={['Service', 'What we do']} rows={[
           ['Title and chain review', 'Ownership, encumbrances and litigation'],
           ['Donor capacity assessment', 'Competence and voluntariness safeguards'],
-          ['Relationship and tax review', 'Stamp concession and Section 56(2)(x) position'],
+          ['Relationship and tax review', 'Stamp concession and the s.92 position under the Income-tax Act, 2025'],
           ['Deed drafting support', 'Acceptance, possession, reserved rights and indemnity'],
           ['Revocation and condition drafting', 'Lawful structuring under Section 126'],
           ['Stamp duty computation', 'State-specific rate and valuation'],

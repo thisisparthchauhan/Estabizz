@@ -263,7 +263,7 @@ const linkMap: Record<string, string> = {
     "Adulteration of Drugs": "/solutions/legal/adulteration-of-drugs-legal-services",
     "Appeal Before High Court": "/solutions/legal/appeal-before-high-court",
     "Appeal Before ITAT": "/solutions/legal/appeal-before-itat",
-    "Appeal Before NCLT": "/solutions/legal/appeal-before-nclt",
+    "NCLT Legal Services": "/solutions/legal/appeal-before-nclt",
     "Cheque Bounce": "/solutions/legal/cheque-bounce-in-india",
     "Caveat Filing": "/solutions/legal/caveat-filing",
     "Consumer Court Complaints": "/solutions/legal/complaints-before-consumer-court",
@@ -277,7 +277,7 @@ const linkMap: Record<string, string> = {
     "Food Adulteration": "/solutions/legal/food-adulteration-legal-services",
     "General Legal Notice": "/solutions/legal/general-legal-notice",
     "Gift Deed Registration": "/solutions/legal/gift-deed-registration",
-    "Lawyer for TRAI Matters": "/solutions/legal/lawyer-for-trai-matters",
+    "TRAI & TDSAT Legal Support": "/solutions/legal/lawyer-for-trai-matters",
     "Lease Agreement Drafting": "/solutions/legal/lease-agreement-drafting",
     "Loan Recovery Notice": "/solutions/legal/loan-recovery-notice",
     "Mergers and Acquisitions": "/solutions/legal/mergers-and-acquisitions",
@@ -495,7 +495,7 @@ const menus: Record<string, MegaMenu> = {
                 { heading: "Copyright", items: ["Copyright Registration", "Copyright Website"] },
                 { heading: "Design & Patent", items: ["Design Registration", "Patent Registration"] },
               ]},
-            { label: "Legal", icon: "📜", items: ["Adulteration of Drugs", "Appeal Before High Court", "Appeal Before ITAT", "Appeal Before NCLT", "Cheque Bounce", "Caveat Filing", "Consumer Court Complaints", "Court Proceedings", "Cyber Crime Complaint", "Cyber Security Advisory", "Defamation Notice", "Demerger", "Directors Disqualification", "Faulty Product Notice", "Food Adulteration", "General Legal Notice", "Gift Deed Registration", "Lawyer for TRAI Matters", "Lease Agreement Drafting", "Loan Recovery Notice", "Mergers and Acquisitions", "Motor Accident Claims Tribunal", "Non Payment of Salary", "Probate Service", "Property Registration", "Property Valuation", "Property Verification", "Public Interest Litigation", "Recovery From Debtors", "Recovery Notice of Dues", "Refund of Security Deposit Notice", "Relinquishment Deed", "Revival of Struck-Off Companies", "Sexual Harassment at Workplace Compliance", "Special Leave Petition", "Succession Certificate", "Tenant Eviction Notice", "Weights and Measures Offences", "Will Registration", "Winding Up of Companies", "Writ Petition", "Legal Due Diligence", "Legal Process Outsourcing"],
+            { label: "Legal", icon: "📜", items: ["Adulteration of Drugs", "Appeal Before High Court", "Appeal Before ITAT", "NCLT Legal Services", "Cheque Bounce", "Caveat Filing", "Consumer Court Complaints", "Court Proceedings", "Cyber Crime Complaint", "Cyber Security Advisory", "Defamation Notice", "Demerger", "Directors Disqualification", "Faulty Product Notice", "Food Adulteration", "General Legal Notice", "Gift Deed Registration", "TRAI & TDSAT Legal Support", "Lease Agreement Drafting", "Loan Recovery Notice", "Mergers and Acquisitions", "Motor Accident Claims Tribunal", "Non Payment of Salary", "Probate Service", "Property Registration", "Property Valuation", "Property Verification", "Public Interest Litigation", "Recovery From Debtors", "Recovery Notice of Dues", "Refund of Security Deposit Notice", "Relinquishment Deed", "Revival of Struck-Off Companies", "Sexual Harassment at Workplace Compliance", "Special Leave Petition", "Succession Certificate", "Tenant Eviction Notice", "Weights and Measures Offences", "Will Registration", "Winding Up of Companies", "Writ Petition", "Legal Due Diligence", "Legal Process Outsourcing"],
               // The full catalogue is a hub page, not a dropdown. These nine are
               // the high-intent entry points; everything else is one click away
               // on /solutions/legal, grouped by situation.

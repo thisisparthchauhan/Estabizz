@@ -88,7 +88,7 @@ const SERVICES_GROUPED = [
         items: [
             'Court Proceedings',
             'Appeal Before High Court',
-            'Appeal Before NCLT',
+            'NCLT Legal Services',
             'Appeal Before ITAT',
             'Special Leave Petition',
             'Writ Petition',
@@ -162,7 +162,7 @@ const SERVICES_GROUPED = [
             'Food Adulteration',
             'Adulteration of Drugs Legal Services in India',
             'Offences Relating to Weights and Measures',
-            'Lawyer for TRAI Matters',
+            'TRAI & TDSAT Legal Support',
         ],
     },
     {

@@ -124,7 +124,7 @@ function ShareButtons({ title }: { title: string }) {
 
   return (
     <div className="mt-5">
-      <p className="mb-2 text-[10px] font-black uppercase tracking-[0.14em] text-[#9ca3af] dark:text-[#71717a]">
+      <p className="mb-2 text-[10px] font-black uppercase tracking-[0.14em] text-[#9ca3af] dark:text-[#a1a1aa]">
         Share
       </p>
       <div className="flex gap-2">
@@ -186,7 +186,7 @@ function LeftSidebar({
       <div className="sticky top-[96px] max-h-[calc(100vh-120px)] overflow-y-auto [&::-webkit-scrollbar]:hidden">
         {items.length >= 2 && (
           <div className="mb-6 rounded-sm border border-[#e8e8e8] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
-            <p className="mb-3 text-[10px] font-black uppercase tracking-[0.14em] text-[#9ca3af] dark:text-[#71717a]">
+            <p className="mb-3 text-[10px] font-black uppercase tracking-[0.14em] text-[#9ca3af] dark:text-[#a1a1aa]">
               Contents
             </p>
             <nav aria-label="Article sections">
@@ -300,7 +300,7 @@ function RightSidebar({
       <div className="sticky top-[96px] max-h-[calc(100vh-120px)] overflow-y-auto [&::-webkit-scrollbar]:hidden">
         <div className="rounded-sm border border-[#e8e8e8] bg-white p-5 dark:bg-[#141417] dark:border-[#27272b]">
           <div className="mb-4 flex items-center justify-between">
-            <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#9ca3af] dark:text-[#71717a]">
+            <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#9ca3af] dark:text-[#a1a1aa]">
               More in {categoryName}
             </p>
             <Link
@@ -397,7 +397,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
       {/* ── Breadcrumb ── */}
       <div className="border-b border-blue-100 bg-[#f5fbff] dark:bg-[#141417] dark:border-[#27272b]">
         <div className="mx-auto max-w-screen-xl px-4 py-2.5">
-          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-[12px] text-[#9ca3af] dark:text-[#71717a]">
+          <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-[12px] text-[#9ca3af] dark:text-[#a1a1aa]">
             <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link>
             <span className="opacity-40">/</span>
             <Link href="/blogs" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Regulatory Insights</Link>
@@ -459,7 +459,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
               <span className="block text-[13px] font-bold leading-tight text-[#0a1628] dark:text-[#fafafa]">
                 {blog.author.firstName} {blog.author.lastName}
               </span>
-              <span className="block text-[11px] leading-tight text-[#9ca3af] dark:text-[#71717a]">
+              <span className="block text-[11px] leading-tight text-[#9ca3af] dark:text-[#a1a1aa]">
                 {blog.author.designation}
               </span>
             </div>
@@ -468,7 +468,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
           <span className="text-[12px] text-[#6b7280] dark:text-[#a1a1aa]">{fmt(blog.publishedAt)}</span>
 
           {blog.updatedAt && blog.updatedAt !== blog.publishedAt && (
-            <span className="hidden text-[12px] text-[#9ca3af] sm:block dark:text-[#71717a]">
+            <span className="hidden text-[12px] text-[#9ca3af] sm:block dark:text-[#a1a1aa]">
               Updated {fmt(blog.updatedAt)}
             </span>
           )}
@@ -492,7 +492,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
           height={blog.featuredImage.height}
         />
         {blog.featuredImage.caption && (
-          <p className="mt-2 text-center text-[12px] italic text-[#9ca3af] dark:text-[#71717a]">
+          <p className="mt-2 text-center text-[12px] italic text-[#9ca3af] dark:text-[#a1a1aa]">
             {blog.featuredImage.caption}
           </p>
         )}
@@ -562,7 +562,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
                   {blog.author.firstName[0]}
                 </div>
                 <div className="flex-1">
-                  <p className="text-[10px] font-black uppercase tracking-wider text-[#9ca3af] dark:text-[#71717a]">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-[#9ca3af] dark:text-[#a1a1aa]">
                     Written by
                   </p>
                   <p className="mt-0.5 text-[15px] font-black text-[#0a1628] dark:text-[#fafafa]">
@@ -591,11 +591,11 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
             {/* Disclaimer */}
             <div className="mt-8 rounded-sm border border-[#e8e8e8] dark:border-[#27272b] bg-[#f7f8fc] dark:bg-[#141417] p-4 sm:p-5">
               <div className="flex gap-3">
-                <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#9ca3af] dark:text-[#71717a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#9ca3af] dark:text-[#a1a1aa]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
-                  <p className="mb-0.5 text-[10px] font-black uppercase tracking-wide text-[#9ca3af] dark:text-[#71717a]">
+                  <p className="mb-0.5 text-[10px] font-black uppercase tracking-wide text-[#9ca3af] dark:text-[#a1a1aa]">
                     Disclaimer
                   </p>
                   <p className="text-[12px] leading-5 text-[#6b7280] dark:text-[#a1a1aa]">
@@ -613,7 +613,7 @@ export default function BlogDetailClient({ blog, relatedBlogs }: Props) {
               <h3 className="mb-2 text-[18px] font-black leading-snug text-white sm:text-[20px]">
                 {CTA_TITLE}
               </h3>
-              <p className="mb-6 text-[13px] leading-6 text-[#94a3b8] dark:text-[#71717a]">
+              <p className="mb-6 text-[13px] leading-6 text-[#94a3b8]">
                 {CTA_BODY}
               </p>
               <div className="flex flex-wrap gap-3">

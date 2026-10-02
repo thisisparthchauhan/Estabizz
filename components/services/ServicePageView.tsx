@@ -113,7 +113,7 @@ export default function ServicePageView({
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-8%,rgba(22,119,242,0.12),transparent_46%),radial-gradient(circle_at_88%_84%,rgba(217,169,56,0.08),transparent_32%)]" />
         <div className="mx-auto w-full max-w-[1180px] px-6 py-16 sm:py-20">
           <nav
-            className="mb-6 flex flex-wrap items-center gap-2 text-[12px] font-medium text-[#94a3b8] dark:text-[#71717a]"
+            className="mb-6 flex flex-wrap items-center gap-2 text-[12px] font-medium text-[#94a3b8]"
             aria-label="Breadcrumb"
           >
             <Link href="/" className="transition-colors hover:text-[#475569] dark:text-[#a1a1aa]">Home</Link>
@@ -135,7 +135,7 @@ export default function ServicePageView({
             <span className="text-[13px] font-black uppercase tracking-[0.24em] text-[#1677f2] dark:text-[#4f9dfb]">
               {category.icon} {category.label}
             </span>
-            <span className="text-[13px] font-bold text-[#94a3b8] dark:text-[#71717a]">{page.docTitle}</span>
+            <span className="text-[13px] font-bold text-[#94a3b8]">{page.docTitle}</span>
           </div>
 
           <h1 className="mt-4 max-w-[900px] text-[clamp(30px,3.8vw,50px)] font-black leading-[1.08] tracking-[-0.035em] text-[#071426] dark:text-[#fafafa]">
@@ -269,7 +269,7 @@ export default function ServicePageView({
           <h2 className="text-[28px] font-black leading-[1.12] tracking-tight text-white md:text-[38px]">
             Talk to an Estabizz {category.label} specialist.
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-[14.5px] font-medium leading-relaxed text-[#94a3b8] md:text-[16px] dark:text-[#71717a]">
+          <p className="mx-auto mt-3 max-w-2xl text-[14.5px] font-medium leading-relaxed text-[#94a3b8] md:text-[16px]">
             {hero.trustLine || "We handle the filing, the follow-up and the paperwork end to end."}
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3.5 sm:flex-row">

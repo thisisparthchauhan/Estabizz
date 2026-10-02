@@ -89,11 +89,11 @@ export default function AdminInterviewsClient({ result, initialSearch, initialSt
             <option key={s} value={s}>{s === "all" ? "All Statuses" : s.replace("_", " ")}</option>
           ))}
         </select>
-        {isPending && <span className="self-center text-[12px] text-[#94a3b8] dark:text-[#71717a]">Loading…</span>}
+        {isPending && <span className="self-center text-[12px] text-[#94a3b8]">Loading…</span>}
       </div>
 
       {interviews.length === 0 ? (
-        <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No interviews found.</p>
+        <p className="text-[13px] text-[#94a3b8]">No interviews found.</p>
       ) : (
         <div className="overflow-x-auto rounded-2xl border border-[#dbe7f3] bg-white dark:bg-[#141417] dark:border-[#27272b]">
           <table className="w-full min-w-[640px] text-[13px]">

@@ -75,7 +75,7 @@ export default function GlobalMarketsSection({ content }: { content?: Partial<Gl
                         <div className="relative flex h-full flex-col overflow-hidden rounded-[30px] border border-blue-100 bg-[#f8fbff] p-6 shadow-[0_16px_44px_rgba(0,80,140,0.10)] dark:bg-[#141417] dark:border-[#27272b]">
                             <div className="pointer-events-none absolute left-1/2 top-20 h-[200px] w-[200px] -translate-x-1/2 rounded-full bg-[#1677f2]/10 blur-[70px]" />
 
-                            <div className="relative text-center text-[10px] font-black uppercase tracking-[0.22em] text-[#94a3b8] dark:text-[#71717a]">
+                            <div className="relative text-center text-[10px] font-black uppercase tracking-[0.22em] text-[#94a3b8]">
                                 Regulatory Coverage
                             </div>
 
@@ -107,7 +107,7 @@ export default function GlobalMarketsSection({ content }: { content?: Partial<Gl
                             {/* Expansion path */}
                             <div className="relative flex items-center justify-between gap-3 rounded-2xl border border-blue-100 bg-white px-4 py-3 dark:bg-[#141417] dark:border-[#27272b]">
                                 <div>
-                                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#94a3b8] dark:text-[#71717a]">Expansion Path</div>
+                                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#94a3b8]">Expansion Path</div>
                                     <div className="mt-0.5 text-[16px] font-black text-[#1677f2] dark:text-[#4f9dfb]">India → Global</div>
                                 </div>
                                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1677f2] text-[15px] font-black text-white shadow-[0_8px_20px_rgba(22,119,242,0.3)]">→</span>

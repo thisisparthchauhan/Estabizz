@@ -66,7 +66,7 @@ export default function CategoryBrowser({
           <div className="relative max-w-[540px]">
             <span
               aria-hidden
-              className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-[15px] text-[#94a3b8] dark:text-[#8b8b94]"
+              className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-[15px] text-[#94a3b8]"
             >
               ⌕
             </span>
@@ -79,7 +79,7 @@ export default function CategoryBrowser({
               className="w-full rounded-2xl border border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417] py-3.5 pl-11 pr-5 text-[15px] font-medium text-[#071426] dark:text-[#fafafa] shadow-[0_8px_30px_rgba(0,80,140,0.06)] outline-none transition-colors placeholder:text-[#94a3b8] focus:border-[#1677f2]"
             />
           </div>
-          <p className="mt-3 text-[13px] font-semibold text-[#94a3b8] dark:text-[#8b8b94]" aria-live="polite">
+          <p className="mt-3 text-[13px] font-semibold text-[#94a3b8]" aria-live="polite">
             {query.trim()
               ? `${matches} of ${total} services match “${query.trim()}”`
               : `${total} services, grouped by what you are trying to do`}
@@ -96,7 +96,7 @@ export default function CategoryBrowser({
               className="rounded-full border border-blue-100 dark:border-[#27272b] bg-[#f5fbff] dark:bg-[#1c1c20] px-4 py-2 text-[13px] font-bold text-[#0077B6] dark:text-[#60a5fa] transition-all hover:-translate-y-0.5 hover:border-[#1677f2]/40 hover:text-[#1677f2]"
             >
               {group.heading}
-              <span className="ml-2 text-[11.5px] font-black text-[#94a3b8] dark:text-[#8b8b94]">
+              <span className="ml-2 text-[11.5px] font-black text-[#94a3b8]">
                 {group.entries.length}
               </span>
             </a>
@@ -157,7 +157,7 @@ export default function CategoryBrowser({
                     <p className="mt-2.5 flex-1 text-[13.5px] font-medium leading-[1.75] text-[#64748b] dark:text-[#a1a1aa]">
                       {entry.description}
                     </p>
-                    <span className="mt-4 flex flex-wrap items-center gap-x-3 text-[12px] font-bold text-[#94a3b8] dark:text-[#8b8b94]">
+                    <span className="mt-4 flex flex-wrap items-center gap-x-3 text-[12px] font-bold text-[#94a3b8]">
                       {entry.meta && <span>{entry.meta}</span>}
                       <span className="ml-auto text-[#1677f2] dark:text-[#4f9dfb]">Open →</span>
                     </span>

@@ -26,7 +26,7 @@ export function CandidateApplicationsGate({
         <h1 className="mt-3 text-[32px] font-black leading-tight tracking-tight text-white sm:text-[40px]">
           {heading}
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8] dark:text-[#71717a]">
+        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8]">
           Online applications and candidate profiles will be available here shortly. We&apos;re finishing
           the secure infrastructure that keeps your information protected before opening this up.
         </p>

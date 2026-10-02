@@ -143,7 +143,7 @@ function RoleBadge({ role }: { role: AdminRole }) {
 function StatusBadge({ status }: { status: AdminStatus }) {
   const map: Record<AdminStatus, { label: string; cls: string; dot: string }> = {
     active:    { label: "Active",    cls: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#132a20] dark:border-[#1d4a37] dark:text-[#6ee7b7]", dot: "bg-emerald-500" },
-    inactive:  { label: "Inactive",  cls: "bg-gray-50 text-gray-500 border-gray-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]",         dot: "bg-gray-400"    },
+    inactive:  { label: "Inactive",  cls: "bg-gray-50 text-gray-500 border-gray-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]",         dot: "bg-gray-400"    },
     suspended: { label: "Suspended", cls: "bg-red-50 text-red-600 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]",             dot: "bg-red-500"     },
   };
   const m = map[status] ?? map.inactive;
@@ -183,7 +183,7 @@ function PasswordField({
   const [show, setShow] = useState(false);
   return (
     <div>
-      <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">{label}</label>
+      <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">{label}</label>
       <div className="relative mt-1">
         <input
           type={show ? "text" : "password"}
@@ -195,7 +195,7 @@ function PasswordField({
         <button
           type="button"
           onClick={() => setShow(v => !v)}
-          className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8] hover:text-[#475569] dark:text-[#71717a]"
+          className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8] hover:text-[#475569]"
           tabIndex={-1}
         >
           {show ? (
@@ -458,9 +458,9 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
             <div className="flex items-center justify-between border-b border-[#e2eaf2] px-6 py-4 dark:border-[#27272b]">
               <div>
                 <div className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Edit User</div>
-                <div className="text-[11px] text-[#94a3b8] truncate max-w-[260px] dark:text-[#71717a]">{editUser.email}</div>
+                <div className="text-[11px] text-[#94a3b8] truncate max-w-[260px]">{editUser.email}</div>
               </div>
-              <button onClick={closeEdit} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] hover:text-[#0a1628] dark:hover:text-[#f7f9fc] dark:bg-[#141417] dark:text-[#71717a]">
+              <button onClick={closeEdit} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] hover:text-[#0a1628] dark:hover:text-[#f7f9fc] dark:bg-[#141417]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
@@ -506,7 +506,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
 
                 {/* Full Name */}
                 <div>
-                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Full Name</label>
+                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Full Name</label>
                   <input
                     type="text"
                     value={editName}
@@ -517,16 +517,16 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
 
                 {/* Email (read-only) */}
                 <div>
-                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Email Address</label>
+                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Email Address</label>
                   <div className="mt-1 rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20] px-3 py-2.5 text-[13px] text-[#94a3b8] dark:text-[#a1a1aa]">
                     {editUser.email}
                   </div>
-                  <div className="mt-1 text-[10px] text-[#94a3b8] dark:text-[#71717a]">Email address cannot be changed.</div>
+                  <div className="mt-1 text-[10px] text-[#94a3b8]">Email address cannot be changed.</div>
                 </div>
 
                 {/* Role */}
                 <div>
-                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Role</label>
+                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Role</label>
                   <div className="mt-1">
                     <EstabizzSelect
                       variant="admin"
@@ -552,7 +552,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
 
                 {/* Status */}
                 <div>
-                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Status</label>
+                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Status</label>
                   <div className="mt-1">
                     <EstabizzSelect
                       variant="admin"
@@ -658,7 +658,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
               <button
                 type="button"
                 onClick={() => setShowPerms(v => !v)}
-                className="flex items-center gap-1.5 text-[11px] font-semibold text-[#94a3b8] hover:text-[#475569] dark:text-[#71717a]"
+                className="flex items-center gap-1.5 text-[11px] font-semibold text-[#94a3b8] hover:text-[#475569]"
               >
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
                   className={`transition-transform ${showPerms ? "rotate-90" : ""}`}>
@@ -670,7 +670,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
               {showPerms && (
                 <div className="mt-2 rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20] p-3">
                   {editUser.permissions.length === 0 ? (
-                    <div className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">No permissions assigned.</div>
+                    <div className="text-[12px] text-[#94a3b8]">No permissions assigned.</div>
                   ) : (
                     <div className="flex flex-wrap gap-1.5">
                       {editUser.permissions.map(p => (
@@ -687,15 +687,15 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
             {/* Metadata */}
             <div className="mx-5 mb-6 grid grid-cols-2 gap-3 rounded-2xl border border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20] p-4">
               <div>
-                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Created On</div>
+                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Created On</div>
                 <div className="mt-0.5 text-[11px] font-semibold text-[#475569] dark:text-[#a1a1aa]">{formatIST(editUser.createdAt)}</div>
               </div>
               <div>
-                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Last Updated</div>
+                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Last Updated</div>
                 <div className="mt-0.5 text-[11px] font-semibold text-[#475569] dark:text-[#a1a1aa]">{formatIST(editUser.updatedAt)}</div>
               </div>
               <div className="col-span-2">
-                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Last Login</div>
+                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Last Login</div>
                 <div className="mt-0.5 text-[11px] font-semibold text-[#475569] dark:text-[#a1a1aa]">{formatIST(editUser.lastLoginAt)}</div>
               </div>
             </div>
@@ -712,7 +712,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
 
             <div className="flex items-center justify-between mb-5">
               <div className="text-[16px] font-black text-[#0a1628] dark:text-[#fafafa]">Add User</div>
-              <button onClick={() => setShowAdd(false)} className="rounded-xl p-1.5 text-[#94a3b8] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] hover:text-[#0a1628] dark:hover:text-[#f7f9fc] dark:bg-[#141417] dark:text-[#71717a]">
+              <button onClick={() => setShowAdd(false)} className="rounded-xl p-1.5 text-[#94a3b8] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] hover:text-[#0a1628] dark:hover:text-[#f7f9fc] dark:bg-[#141417]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
@@ -722,7 +722,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
             <div className="space-y-4">
               {/* Full Name */}
               <div>
-                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Full Name</label>
+                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Full Name</label>
                 <input
                   type="text"
                   value={addName}
@@ -734,7 +734,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
 
               {/* Email */}
               <div>
-                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Email Address</label>
+                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Email Address</label>
                 <input
                   type="email"
                   value={addEmail}
@@ -746,7 +746,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
 
               {/* Role */}
               <div>
-                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Role</label>
+                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Role</label>
                 <div className="mt-1">
                   <EstabizzSelect
                     variant="admin"
@@ -864,7 +864,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
         {/* No permission */}
         {!canManage && (
           <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-8 text-center shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
-            <svg className="mx-auto mb-3 text-[#cbd5e1] dark:text-[#71717a]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg className="mx-auto mb-3 text-[#cbd5e1]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
             </svg>
             <div className="text-[15px] font-black text-[#0a1628] mb-1 dark:text-[#fafafa]">Access Restricted</div>
@@ -879,7 +879,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
             {/* Search & filter bar */}
             <div className="flex flex-wrap items-center gap-3">
               <div className="relative flex-1 min-w-[200px]">
-                <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8] dark:text-[#71717a]" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                 </svg>
                 <input
@@ -890,7 +890,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                   className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] py-2 pl-8 pr-3 text-[12px] text-[#0a1628] dark:text-[#fafafa] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
                 />
                 {search && (
-                  <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8] hover:text-[#475569] dark:text-[#71717a]">×</button>
+                  <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8] hover:text-[#475569] dark:text-[#a1a1aa]">×</button>
                 )}
               </div>
 
@@ -924,23 +924,23 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
             {/* Users table */}
             {filtered.length === 0 ? (
               <div className="flex h-48 flex-col items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] text-center">
-                <svg className="mb-3 text-[#cbd5e1] dark:text-[#71717a]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <svg className="mb-3 text-[#cbd5e1]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
                 </svg>
                 <div className="text-[14px] font-black text-[#0a1628] mb-1 dark:text-[#fafafa]">No users found</div>
-                <div className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">Try a different search or filter.</div>
+                <div className="text-[12px] text-[#94a3b8]">Try a different search or filter.</div>
               </div>
             ) : (
               <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden">
                 <table className="w-full text-[12px]">
                   <thead>
                     <tr className="border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11]">
-                      <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Name</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden sm:table-cell dark:text-[#71717a]">Email</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Role</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Status</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell dark:text-[#71717a]">Login</th>
-                      <th className="px-4 py-3 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Actions</th>
+                      <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Name</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden sm:table-cell">Email</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Role</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Status</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell">Login</th>
+                      <th className="px-4 py-3 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#f4f7fb]">
@@ -960,7 +960,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                                   {u.fullName}
                                   {isSelf && <span className="ml-1.5 text-[9px] font-bold text-[#1677f2] border border-[#1677f2]/30 rounded-full px-1.5 py-0.5 dark:text-[#4f9dfb]">You</span>}
                                 </div>
-                                <div className="text-[10.5px] text-[#94a3b8] sm:hidden truncate max-w-[140px] dark:text-[#71717a]">{u.email}</div>
+                                <div className="text-[10.5px] text-[#94a3b8] sm:hidden truncate max-w-[140px]">{u.email}</div>
                               </div>
                             </div>
                           </td>
@@ -1004,7 +1004,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
                 {/* Footer row */}
                 <div className="border-t border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11] px-5 py-3 flex items-center justify-between">
                   <span className="text-[11px] text-[#94a3b8] dark:text-[#a1a1aa]">{filtered.length} of {users.length} user{users.length !== 1 ? "s" : ""}</span>
-                  <div className="flex items-center gap-3 text-[11px] text-[#94a3b8] dark:text-[#71717a]">
+                  <div className="flex items-center gap-3 text-[11px] text-[#94a3b8]">
                     <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-emerald-400" /> Login Ready</span>
                     <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-amber-400" /> Setup Needed</span>
                   </div>
@@ -1014,7 +1014,7 @@ export default function UsersClient({ viewer, initialUsers }: Props) {
 
             {/* Role guide */}
             <div className="rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_12px_rgba(10,22,40,0.05)] dark:bg-[#141417] dark:border-[#27272b]">
-              <div className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-3 dark:text-[#71717a]">Role Guide</div>
+              <div className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-3">Role Guide</div>
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 {CREATABLE_ROLES.map(r => (
                   <div key={r} className="flex items-start gap-2.5 rounded-xl border border-[#f0f4f8] p-3 dark:border-[#27272b]">

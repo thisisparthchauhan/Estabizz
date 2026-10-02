@@ -74,9 +74,9 @@ export function EditorHeader({ title, subtitle, updatedAt }: { title: string; su
     <>
       <div className="mb-5 flex items-center gap-2 text-[13px]">
         <Link href="/admin/website" className="font-semibold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">Website Editor</Link>
-        <span className="text-[#94a3b8] dark:text-[#71717a]">/</span>
+        <span className="text-[#94a3b8]">/</span>
         <Link href="/admin/website/homepage" className="font-semibold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">Homepage</Link>
-        <span className="text-[#94a3b8] dark:text-[#71717a]">/</span>
+        <span className="text-[#94a3b8]">/</span>
         <span className="font-bold text-[#0a1628] dark:text-[#fafafa]">{title}</span>
       </div>
       <div className="mb-5 flex items-center justify-between">
@@ -94,7 +94,7 @@ export function Card({ title, action, children }: { title: string; action?: Reac
   return (
     <section className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden dark:bg-[#141417] dark:border-[#27272b]">
       <div className="flex items-center justify-between border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3 dark:bg-[#141417] dark:border-[#27272b]">
-        <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#71717a]">{title}</span>
+        <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">{title}</span>
         {action}
       </div>
       <div className="px-6 py-6">{children}</div>
@@ -107,7 +107,7 @@ export function Field({ label, hint, children }: { label: string; hint?: string;
     <div>
       <label className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">{label}</label>
       {children}
-      {hint && <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">{hint}</p>}
+      {hint && <p className="mt-1 text-[11px] text-[#94a3b8]">{hint}</p>}
     </div>
   );
 }
@@ -137,7 +137,7 @@ export function StringList({ items, onChange, placeholder }: { items: string[]; 
       {items.map((val, i) => (
         <div key={i} className="flex items-center gap-1.5">
           <input value={val} onChange={(e) => onChange(items.map((x, j) => (j === i ? e.target.value : x)))} placeholder={placeholder} className={inputCls} />
-          <button onClick={() => onChange(items.filter((_, j) => j !== i))} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a] dark:bg-[#2a1618]">✕</button>
+          <button onClick={() => onChange(items.filter((_, j) => j !== i))} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:bg-[#2a1618]">✕</button>
         </div>
       ))}
       <button onClick={() => onChange([...items, ""])} className="text-[11px] font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">+ Add</button>
@@ -146,5 +146,5 @@ export function StringList({ items, onChange, placeholder }: { items: string[]; 
 }
 
 export function LoadingCard() {
-  return <div className="rounded-2xl border border-[#e2eaf2] bg-white px-6 py-12 text-center text-[13px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">Loading…</div>;
+  return <div className="rounded-2xl border border-[#e2eaf2] bg-white px-6 py-12 text-center text-[13px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b]">Loading…</div>;
 }

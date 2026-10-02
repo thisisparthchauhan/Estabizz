@@ -245,14 +245,14 @@ function Field({ label, required, error, hint, counter, children }: {
           {required && <span className="text-red-500 text-[11px] dark:text-[#fca5a5]">*</span>}
         </label>
         {counter && (
-          <span className={`text-[11px] font-mono ${counter.current > counter.max ? "text-red-500 dark:text-[#fca5a5]" : "text-[#94a3b8] dark:text-[#71717a]"}`}>
+          <span className={`text-[11px] font-mono ${counter.current > counter.max ? "text-red-500 dark:text-[#fca5a5]" : "text-[#94a3b8]"}`}>
             {counter.current}/{counter.max}
           </span>
         )}
       </div>
       {children}
       {error && <p className="mt-1 text-[11.5px] text-red-500 dark:text-[#fca5a5]">⚠ {error}</p>}
-      {hint && !error && <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">{hint}</p>}
+      {hint && !error && <p className="mt-1 text-[11px] text-[#94a3b8]">{hint}</p>}
     </div>
   );
 }
@@ -272,7 +272,7 @@ function SerpPreview({ title, slug, description }: { title: string; slug: string
       <p className="text-[11px] font-black uppercase tracking-widest text-[#94a3b8] mb-4">Google Search Preview</p>
       {/* Mock Google search bar */}
       <div className="mb-4 flex items-center gap-2 rounded-full border border-[#dbe7f3] bg-[#f8fbff] px-4 py-2 dark:bg-[#141417] dark:border-[#27272b]">
-        <svg className="shrink-0 h-3.5 w-3.5 text-[#94a3b8] dark:text-[#71717a]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" /></svg>
+        <svg className="shrink-0 h-3.5 w-3.5 text-[#94a3b8]" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" /></svg>
         <span className="text-[12px] text-[#64748b] truncate dark:text-[#a1a1aa]">{displaySlug.replace(`${SITE_URL_DISPLAY} › `, "")}</span>
       </div>
       {/* Search result card */}
@@ -291,10 +291,10 @@ function SerpPreview({ title, slug, description }: { title: string; slug: string
       </div>
       {/* Counters */}
       <div className="mt-4 pt-3 border-t border-[#f0f4f8] flex gap-4 text-[11px] dark:border-[#27272b]">
-        <span className={displayTitle.length > 60 ? "text-red-500 font-semibold dark:text-[#fca5a5]" : "text-[#94a3b8] dark:text-[#71717a]"}>
+        <span className={displayTitle.length > 60 ? "text-red-500 font-semibold dark:text-[#fca5a5]" : "text-[#94a3b8]"}>
           Title: {displayTitle.length}/60 chars
         </span>
-        <span className={displayDesc.length > 160 ? "text-amber-500 font-semibold dark:text-[#fcd34d]" : displayDesc.length < 120 ? "text-[#94a3b8] dark:text-[#71717a]" : "text-emerald-600 font-semibold dark:text-[#6ee7b7]"}>
+        <span className={displayDesc.length > 160 ? "text-amber-500 font-semibold dark:text-[#fcd34d]" : displayDesc.length < 120 ? "text-[#94a3b8]" : "text-emerald-600 font-semibold dark:text-[#6ee7b7]"}>
           Desc: {displayDesc.length}/160 chars {displayDesc.length >= 120 && displayDesc.length <= 160 ? "✓" : ""}
         </span>
       </div>
@@ -315,7 +315,7 @@ function KeywordChecker({ keyword, title, description, content }: { keyword: str
 
   return (
     <div className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
-      <p className="text-[11px] font-black uppercase tracking-widest text-[#94a3b8] mb-3 dark:text-[#71717a]">Keyword Usage: "{keyword}"</p>
+      <p className="text-[11px] font-black uppercase tracking-widest text-[#94a3b8] mb-3">Keyword Usage: "{keyword}"</p>
       <div className="space-y-1.5">
         {[
           { label: "In SEO Title", ok: inTitle },
@@ -326,7 +326,7 @@ function KeywordChecker({ keyword, title, description, content }: { keyword: str
             <span className={`h-4 w-4 rounded-full flex items-center justify-center text-[9px] font-black shrink-0 ${ok ? "bg-emerald-100 text-emerald-600 dark:bg-[#132a20] dark:text-[#6ee7b7]" : "bg-red-50 text-red-400 dark:bg-[#2a1618]"}`}>
               {ok ? "✓" : "✗"}
             </span>
-            <span className={`text-[12px] ${ok ? "text-[#334155] dark:text-[#a1a1aa]" : "text-[#94a3b8] dark:text-[#71717a]"}`}>{label}</span>
+            <span className={`text-[12px] ${ok ? "text-[#334155] dark:text-[#a1a1aa]" : "text-[#94a3b8]"}`}>{label}</span>
           </div>
         ))}
       </div>
@@ -347,7 +347,7 @@ function FaqEditor({ faqs, onChange }: { faqs: FaqEntry[]; onChange: (faqs: FaqE
   return (
     <div className="space-y-3">
       {faqs.length === 0 && (
-        <p className="text-[12.5px] text-[#94a3b8] italic py-1 dark:text-[#71717a]">
+        <p className="text-[12.5px] text-[#94a3b8] italic py-1">
           No FAQs yet. They render as an expandable accordion below the article and generate FAQPage schema for Google — great for featured snippets.
         </p>
       )}
@@ -355,7 +355,7 @@ function FaqEditor({ faqs, onChange }: { faqs: FaqEntry[]; onChange: (faqs: FaqE
         <div key={i} className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-4 space-y-3 dark:bg-[#141417] dark:border-[#27272b]">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-black uppercase tracking-wider text-[#1677f2] dark:text-[#4f9dfb]">FAQ {i + 1}</span>
-            <button type="button" onClick={() => removeFaq(i)} className="text-[11px] text-[#94a3b8] hover:text-red-500 hover:bg-red-50 rounded-lg px-2 py-1 transition-colors dark:text-[#71717a] dark:bg-[#2a1618]">Remove</button>
+            <button type="button" onClick={() => removeFaq(i)} className="text-[11px] text-[#94a3b8] hover:text-red-500 hover:bg-red-50 rounded-lg px-2 py-1 transition-colors dark:bg-[#2a1618]">Remove</button>
           </div>
           <div>
             <label className="text-[11px] font-medium text-[#64748b] mb-1 block dark:text-[#a1a1aa]">Question</label>
@@ -401,7 +401,7 @@ function ActionBar({ title, isEditing, saving, onDraft, onPublish, onUpdate }: {
       <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0">
           <span className="hidden sm:inline-flex items-center rounded-lg bg-[#0a1628] dark:bg-[#1c1c20] px-2.5 py-1 text-[10.5px] font-black text-[#1677f2] uppercase tracking-wider shrink-0 dark:text-[#4f9dfb]">Admin Blog Panel</span>
-          <span className="text-[13px] text-[#94a3b8] truncate max-w-[240px] hidden md:inline dark:text-[#71717a]">{title || (isEditing ? "Edit Blog" : "New Blog")}</span>
+          <span className="text-[13px] text-[#94a3b8] truncate max-w-[240px] hidden md:inline">{title || (isEditing ? "Edit Blog" : "New Blog")}</span>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <button type="button" onClick={onDraft} disabled={saving} className="px-4 py-2 rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] text-[12.5px] font-semibold text-[#334155] dark:text-[#a1a1aa] hover:bg-[#f8fbff] dark:hover:bg-[#12223a] transition-colors disabled:opacity-50">
@@ -610,7 +610,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
               <div className={`flex items-center gap-2 px-3.5 py-2 border-b ${errors.slug ? "border-red-200 bg-red-50/50 dark:bg-[#2a1618] dark:border-[#4a2225]" : form.slugManual ? "border-amber-200/60 bg-amber-50/60 dark:bg-[#2a2113] dark:border-[#4a3a1a]" : "border-[#1677f2]/15 bg-[#e8f7ff]/60 dark:bg-[#1c1c20]"}`}>
                 <svg className="h-3 w-3 text-[#64748b] shrink-0 dark:text-[#a1a1aa]" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M8 2.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11z"/><path d="M5.5 8h5M8 5.5v5" strokeLinecap="round"/></svg>
                 <span className="text-[11px] text-[#64748b] font-mono dark:text-[#a1a1aa]">
-                  <span className="text-[#94a3b8] dark:text-[#71717a]">{SITE_URL_DISPLAY}/blogs/</span>
+                  <span className="text-[#94a3b8]">{SITE_URL_DISPLAY}/blogs/</span>
                   <span className={`font-bold ${errors.slug ? "text-red-500 dark:text-[#fca5a5]" : form.slugManual ? "text-amber-700 dark:text-[#fcd34d]" : "text-[#1677f2] dark:text-[#4f9dfb]"}`}>
                     {form.slug || <span className="opacity-40">your-slug-here</span>}
                   </span>
@@ -618,7 +618,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
               </div>
               {/* Slug input */}
               <div className="flex items-center">
-                <span className="px-3.5 text-[12px] text-[#94a3b8] font-mono whitespace-nowrap select-none border-r border-[#dbe7f3]/60 py-2.5 dark:border-[#27272b] dark:text-[#71717a]">/blogs/</span>
+                <span className="px-3.5 text-[12px] text-[#94a3b8] font-mono whitespace-nowrap select-none border-r border-[#dbe7f3]/60 py-2.5 dark:border-[#27272b]">/blogs/</span>
                 <input
                   ref={slugInputRef}
                   type="text"
@@ -631,7 +631,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                   <button
                     type="button"
                     onClick={() => { navigator.clipboard?.writeText(`${SITE_URL_DISPLAY}/blogs/${form.slug}`); }}
-                    className="px-3 py-2.5 text-[11px] text-[#94a3b8] hover:text-[#1677f2] border-l border-[#dbe7f3]/60 transition-colors dark:border-[#27272b] dark:text-[#71717a]"
+                    className="px-3 py-2.5 text-[11px] text-[#94a3b8] hover:text-[#1677f2] border-l border-[#dbe7f3]/60 transition-colors dark:border-[#27272b]"
                     title="Copy full URL"
                   >
                     Copy
@@ -640,7 +640,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
               </div>
             </div>
             {errors.slug && <p className="mt-1 text-[11.5px] text-red-500 dark:text-[#fca5a5]">⚠ {errors.slug}</p>}
-            {!errors.slug && <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">Auto-generated from title. Edit to lock it manually. Only a–z, 0–9 and hyphens.</p>}
+            {!errors.slug && <p className="mt-1 text-[11px] text-[#94a3b8]">Auto-generated from title. Edit to lock it manually. Only a–z, 0–9 and hyphens.</p>}
           </div>
 
           {/* Status + Category row */}
@@ -672,7 +672,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
                     className={inputCls}
                     autoFocus
                   />
-                  <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">This new category name will be saved with the blog.</p>
+                  <p className="mt-1 text-[11px] text-[#94a3b8]">This new category name will be saved with the blog.</p>
                 </div>
               )}
             </div>
@@ -686,7 +686,7 @@ export default function BlogEditorClient({ blog, categories }: Props) {
             <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-[12px] font-bold text-[#334155] dark:text-[#e4e4e7]">Cover Image</p>
-                <p className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">Recommended: 1600 × 900 px · 16:9 · JPG, PNG, WebP</p>
+                <p className="text-[11px] text-[#94a3b8]">Recommended: 1600 × 900 px · 16:9 · JPG, PNG, WebP</p>
               </div>
               {form.featuredImageUrl && (
                 <button type="button" onClick={() => { setForm((f) => ({ ...f, featuredImageUrl: "", featuredImagePublicId: "", featuredImageAlt: "", featuredImageCaption: "", featuredImageWidth: "", featuredImageHeight: "" })); setImagePreview(false); }} className="self-start rounded-xl border border-red-200 px-3 py-1.5 text-[11px] font-bold text-red-500 hover:bg-red-50">
@@ -732,14 +732,14 @@ export default function BlogEditorClient({ blog, categories }: Props) {
           {/* Supporting images */}
           <div>
             <p className="text-[12px] font-bold text-[#334155] mb-3 dark:text-[#a1a1aa]">
-              Supporting Images <span className="ml-2 text-[11px] font-medium text-[#94a3b8] dark:text-[#71717a]">({form.supportingImages.length}/6)</span>
+              Supporting Images <span className="ml-2 text-[11px] font-medium text-[#94a3b8]">({form.supportingImages.length}/6)</span>
             </p>
             <div className="space-y-3">
               {form.supportingImages.map((img, i) => (
                 <div key={i} className="rounded-xl border border-[#dbe7f3] bg-[#f8fbff] p-3.5 dark:bg-[#141417] dark:border-[#27272b]">
                   <div className="flex items-center justify-between mb-2.5">
                     <span className="text-[11px] font-black uppercase tracking-wider text-[#1677f2] dark:text-[#4f9dfb]">Image {i + 1}</span>
-                    <button type="button" onClick={() => removeSupportingImage(i)} className="text-[11px] text-[#94a3b8] hover:text-red-500 transition-colors dark:text-[#71717a]">Remove</button>
+                    <button type="button" onClick={() => removeSupportingImage(i)} className="text-[11px] text-[#94a3b8] hover:text-red-500 transition-colors">Remove</button>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div className="flex gap-2">

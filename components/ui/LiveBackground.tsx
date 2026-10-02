@@ -35,12 +35,34 @@ export default function LiveBackground() {
         let shockwaveOpacity = 0;
         let mouse = { x: width / 2, y: height / 2 };
 
-        const themes = [
+        // Scroll-linked background wash.
+        //
+        // This canvas paints the full viewport behind the page, and the page's
+        // own sections sit on it transparently. It therefore IS the page
+        // background -- so it has to follow the theme. It previously had one
+        // hardcoded light palette, which meant that in dark mode the canvas
+        // kept painting #f0f9ff..#f8faff behind transparent sections: white
+        // bands appeared further down the page and white headings landed on
+        // them. No DOM audit can catch that, because the offending pixels are
+        // drawn by canvas, not by any element's computed style.
+        const lightThemes = [
             { r: 240, g: 249, b: 255 }, // #f0f9ff
             { r: 239, g: 246, b: 255 }, // #eff6ff
             { r: 240, g: 253, b: 244 }, // #f0fdf4
             { r: 248, g: 250, b: 255 }, // #f8faff
         ];
+        // Neutral near-black, matching the --background / --surface ramp in
+        // globals.css so the wash is never lighter than a real surface.
+        const darkThemes = [
+            { r: 9,  g: 9,  b: 11 },  // #09090b
+            { r: 13, g: 13, b: 16 },  // #0d0d10
+            { r: 16, g: 16, b: 19 },  // #101013
+            { r: 9,  g: 9,  b: 11 },  // #09090b
+        ];
+
+        // Read live rather than once: next-themes toggles the class on <html>
+        // at runtime, and this effect does not re-run on theme change.
+        const isDark = () => document.documentElement.classList.contains("dark");
 
         // Objects
         const particles = Array.from({ length: 85 }, () => ({
@@ -141,6 +163,7 @@ export default function LiveBackground() {
       const nextThemeIndex = Math.min(themeIndex + 1, 3);
       const frac = (scrollFrac * 4) - themeIndex;
 
+      const themes = isDark() ? darkThemes : lightThemes;
       const c1 = themes[themeIndex];
       const c2 = themes[nextThemeIndex];
       

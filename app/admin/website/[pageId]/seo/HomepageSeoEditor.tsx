@@ -102,7 +102,7 @@ export default function HomepageSeoEditor() {
                 <input value={seo.focusKeyword} onChange={(e) => setField("focusKeyword", e.target.value)} className={inputCls} />
               </Field>
               <Field label="Page URL" hint="The homepage always opens at / and this field cannot change that route.">
-                <input value="/" readOnly className={inputCls + " bg-[#f8fafc] font-mono text-[11px]"} />
+                <input value="/" readOnly className={inputCls + " bg-[#f8fafc] dark:bg-[#1c1c20] font-mono text-[11px]"} />
               </Field>
               <div className="sm:col-span-2">
                 <Field label="Canonical URL">

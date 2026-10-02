@@ -98,11 +98,11 @@ export default function AdminApplicationsClient({
             Clear
           </button>
         )}
-        {isPending && <span className="self-center text-[12px] text-[#94a3b8] dark:text-[#71717a]">Loading…</span>}
+        {isPending && <span className="self-center text-[12px] text-[#94a3b8]">Loading…</span>}
       </div>
 
       {applications.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-[#dbe7f3] bg-white py-16 text-center text-[14px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">
+        <div className="rounded-2xl border border-dashed border-[#dbe7f3] bg-white py-16 text-center text-[14px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b]">
           {total === 0 ? "No applications yet." : "No results match your filters."}
         </div>
       ) : (

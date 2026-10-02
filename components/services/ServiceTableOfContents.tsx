@@ -50,7 +50,7 @@ export default function ServiceTableOfContents({
 
   return (
     <nav aria-label="On this page" className="text-[13px]">
-      <p className="mb-3 text-[11px] font-black uppercase tracking-[0.2em] text-[#94a3b8] dark:text-[#71717a]">
+      <p className="mb-3 text-[11px] font-black uppercase tracking-[0.2em] text-[#94a3b8]">
         On this page
       </p>
       <ol className="max-h-[calc(100vh-190px)] space-y-0.5 overflow-y-auto pr-2">

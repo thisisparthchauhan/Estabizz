@@ -33,13 +33,13 @@ function fmt(iso?: string): string {
 function statusBadge(s: string) {
   const MAP: Record<string, { label: string; cls: string }> = {
     published:      { label: "Published",  cls: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]" },
-    draft:          { label: "Draft",      cls: "bg-slate-100 text-slate-600 border-slate-200" },
+    draft:          { label: "Draft",      cls: "bg-slate-100 text-slate-600 border-slate-200 dark:bg-[#1c1c20] dark:text-[#a1a1aa] dark:border-[#27272b]" },
     pending_review: { label: "Pending",    cls: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-[#2a2113] dark:border-[#4a3a1a] dark:text-[#fcd34d]" },
     approved:       { label: "Approved",   cls: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]" },
     rejected:       { label: "Rejected",   cls: "bg-red-50 text-red-700 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]" },
     archived:       { label: "Archived",   cls: "bg-purple-50 text-purple-700 border-purple-200 dark:bg-[#231a2e] dark:text-[#c4b5fd] dark:border-[#3a2a4a]" },
   };
-  const m = MAP[s] ?? { label: s, cls: "bg-slate-100 text-slate-500 border-slate-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]" };
+  const m = MAP[s] ?? { label: s, cls: "bg-slate-100 text-slate-500 border-slate-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]" };
   return (
     <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10.5px] font-bold ${m.cls}`}>
       {m.label}
@@ -183,7 +183,7 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
       value:     stats.draft,
       icon:      <IconDraft />,
       iconBg:    "bg-slate-100 dark:bg-[#141417]",
-      iconColor: "text-slate-500 dark:text-[#71717a]",
+      iconColor: "text-slate-500 dark:text-[#a1a1aa]",
       href:      "/admin/blogs",
     },
   ];
@@ -238,8 +238,8 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
                 <polyline points="14 2 14 8 20 8" />
               </svg>
             </div>
-            <p className="text-[13px] font-semibold text-[#94a3b8] dark:text-[#71717a]">No blogs yet</p>
-            <p className="text-[12px] text-[#cbd5e1] mt-1 dark:text-[#71717a]">Create your first blog to see it here.</p>
+            <p className="text-[13px] font-semibold text-[#94a3b8]">No blogs yet</p>
+            <p className="text-[12px] text-[#cbd5e1] mt-1">Create your first blog to see it here.</p>
             <Link
               href="/admin/blogs/new"
               className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[#0a1628] dark:bg-[#1c1c20] px-4 py-2 text-[12px] font-bold text-white hover:bg-[#0a1628]/90 transition-colors"
@@ -278,7 +278,7 @@ export default function AdminDashboardClient({ stats, recentBlogs }: Props) {
                     <td className="hidden sm:table-cell px-4 py-3.5">
                       {statusBadge(blog.status)}
                     </td>
-                    <td className="hidden lg:table-cell px-4 py-3.5 text-[12px] text-[#94a3b8] whitespace-nowrap dark:text-[#71717a]">
+                    <td className="hidden lg:table-cell px-4 py-3.5 text-[12px] text-[#94a3b8] whitespace-nowrap">
                       {fmt(blog.publishedAt ?? blog.createdAt)}
                     </td>
                     <td className="px-4 py-3.5">

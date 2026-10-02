@@ -181,7 +181,7 @@ export function CardStandard({ blog }: { blog: BlogSummary }) {
         </p>
 
         {/* Footer */}
-        <div className="flex items-center justify-between text-[11px] text-[#9ca3af] pt-3 border-t border-[#f3f4f6] dark:border-[#27272b] dark:text-[#71717a]">
+        <div className="flex items-center justify-between text-[11px] text-[#9ca3af] pt-3 border-t border-[#f3f4f6] dark:border-[#27272b] dark:text-[#a1a1aa]">
           <div className="flex items-center gap-2">
             <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[9px] font-black text-white">
               {blog.author.firstName[0]}
@@ -213,7 +213,7 @@ export function CardList({ blog }: { blog: BlogSummary }) {
         <h3 className="mt-1 text-[15px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150 dark:text-[#fafafa]">
           {blog.title}
         </h3>
-        <span className="mt-1 block text-[11px] text-[#9ca3af] dark:text-[#71717a]">{formatDate(blog.publishedAt)}</span>
+        <span className="mt-1 block text-[11px] text-[#9ca3af] dark:text-[#a1a1aa]">{formatDate(blog.publishedAt)}</span>
       </div>
 
       {/* Image right */}
@@ -246,7 +246,7 @@ export function CardMini({ blog }: { blog: BlogSummary }) {
         <h4 className="text-[13px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150 dark:text-[#fafafa]">
           {blog.title}
         </h4>
-        <span className="mt-0.5 block text-[11px] text-[#9ca3af] dark:text-[#71717a]">{formatDate(blog.publishedAt)}</span>
+        <span className="mt-0.5 block text-[11px] text-[#9ca3af] dark:text-[#a1a1aa]">{formatDate(blog.publishedAt)}</span>
       </div>
     </Link>
   );
@@ -291,7 +291,7 @@ export function CardHorizontal({
         <p className="mb-4 text-[13.5px] leading-[1.7] text-[#6b7280] line-clamp-3 dark:text-[#a1a1aa]">
           {blog.summary}
         </p>
-        <div className="flex items-center gap-2.5 text-[11.5px] text-[#9ca3af] dark:text-[#71717a]">
+        <div className="flex items-center gap-2.5 text-[11.5px] text-[#9ca3af] dark:text-[#a1a1aa]">
           <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] text-[9px] font-black text-white">
             {blog.author.firstName[0]}
           </div>
@@ -323,7 +323,7 @@ export function CardPopularRank({ blog, rank }: { blog: BlogSummary; rank: numbe
         <h4 className="mt-0.5 text-[13.5px] font-bold leading-snug text-[#111] line-clamp-2 group-hover:text-[#1677f2] transition-colors duration-150 dark:text-[#fafafa]">
           {blog.title}
         </h4>
-        <span className="mt-1 block text-[11px] text-[#9ca3af] dark:text-[#71717a]">{blog.readingTime} min read</span>
+        <span className="mt-1 block text-[11px] text-[#9ca3af] dark:text-[#a1a1aa]">{blog.readingTime} min read</span>
       </div>
     </Link>
   );

@@ -96,9 +96,9 @@ export default function HeroEditor() {
     <div className="min-h-full bg-[#f4f7fb] p-6 lg:p-8 dark:bg-[#141417]">
       <div className="mb-5 flex items-center gap-2 text-[13px]">
         <Link href="/admin/website" className="font-semibold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">Website Editor</Link>
-        <span className="text-[#94a3b8] dark:text-[#71717a]">/</span>
+        <span className="text-[#94a3b8]">/</span>
         <Link href="/admin/website/homepage" className="font-semibold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">Homepage</Link>
-        <span className="text-[#94a3b8] dark:text-[#71717a]">/</span>
+        <span className="text-[#94a3b8]">/</span>
         <span className="font-bold text-[#0a1628] dark:text-[#fafafa]">Hero Section</span>
       </div>
 
@@ -111,12 +111,12 @@ export default function HeroEditor() {
       </div>
 
       {loading ? (
-        <div className="rounded-2xl border border-[#e2eaf2] bg-white px-6 py-12 text-center text-[13px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">Loading…</div>
+        <div className="rounded-2xl border border-[#e2eaf2] bg-white px-6 py-12 text-center text-[13px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b]">Loading…</div>
       ) : (
         <div className="max-w-3xl space-y-6">
           <section className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden dark:bg-[#141417] dark:border-[#27272b]">
             <div className="border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3 dark:bg-[#141417] dark:border-[#27272b]">
-              <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#71717a]">Text Content</span>
+              <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">Text Content</span>
             </div>
             <div className="grid gap-5 px-6 py-6 sm:grid-cols-2">
               {SCALARS.map((def) => (
@@ -127,7 +127,7 @@ export default function HeroEditor() {
                   ) : (
                     <input value={scalars[def.name] ?? ""} onChange={(e) => { setScalars((p) => ({ ...p, [def.name]: e.target.value })); touched(); }} className={inputCls} />
                   )}
-                  {def.hint && <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">{def.hint}</p>}
+                  {def.hint && <p className="mt-1 text-[11px] text-[#94a3b8]">{def.hint}</p>}
                 </div>
               ))}
             </div>
@@ -136,15 +136,15 @@ export default function HeroEditor() {
           {LISTS.map((def) => (
             <section key={def.name} className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden dark:bg-[#141417] dark:border-[#27272b]">
               <div className="flex items-center justify-between border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3 dark:bg-[#141417] dark:border-[#27272b]">
-                <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#71717a]">{def.label}</span>
+                <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">{def.label}</span>
                 <button onClick={() => addListItem(def.name)} className="rounded-lg border border-[#1677f2]/30 bg-[#1677f2]/10 px-3 py-1 text-[11px] font-bold text-[#1677f2] hover:bg-[#1677f2]/15 dark:text-[#4f9dfb]">+ Add</button>
               </div>
               <div className="space-y-2 px-6 py-5">
-                <p className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">{def.hint}</p>
+                <p className="text-[11px] text-[#94a3b8]">{def.hint}</p>
                 {(lists[def.name] ?? []).map((val, i) => (
                   <div key={i} className="flex items-center gap-1.5">
                     <input value={val} onChange={(e) => setListItem(def.name, i, e.target.value)} className={inputCls} />
-                    <button onClick={() => removeListItem(def.name, i)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a] dark:bg-[#2a1618]">✕</button>
+                    <button onClick={() => removeListItem(def.name, i)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:bg-[#2a1618]">✕</button>
                   </div>
                 ))}
               </div>

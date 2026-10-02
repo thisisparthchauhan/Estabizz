@@ -83,7 +83,7 @@ export default function RegulatoryUpdatesListClient({ updates }: { updates: Publ
                 <span className="rounded-full bg-blue-50 px-3 py-1 text-[11px] font-black text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">{u.regulator}</span>
                 <span className={`rounded-full px-3 py-1 text-[11px] font-black ${IMPACT_STYLES[u.impactLevel]}`}>{u.impactLevel} Impact</span>
               </div>
-              <p className="text-[11px] font-bold uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">{u.category}</p>
+              <p className="text-[11px] font-bold uppercase tracking-wide text-[#94a3b8]">{u.category}</p>
               <h2 className="mb-2 mt-1 text-[19px] font-black leading-snug text-[#0a1628] dark:text-[#fafafa]">{u.title}</h2>
               {(u.sourceDate || u.publishedDate) && (
                 <p className="mb-3 text-[12px] font-semibold text-[#64748b] dark:text-[#a1a1aa]">{fmtDate(u.sourceDate ?? u.publishedDate)}</p>

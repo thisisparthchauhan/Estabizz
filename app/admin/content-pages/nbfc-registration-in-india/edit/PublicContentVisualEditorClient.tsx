@@ -244,7 +244,7 @@ function EditField({
       <div className="flex items-center justify-between">
         <label className="text-[11px] font-black uppercase tracking-[0.12em] text-[#64748b] dark:text-[#a1a1aa]">{label}</label>
         {maxLength !== undefined && (
-          <span className={`text-[11px] font-bold ${value.length > maxLength * 0.88 ? "text-amber-500 dark:text-[#fcd34d]" : "text-[#94a3b8] dark:text-[#71717a]"}`}>
+          <span className={`text-[11px] font-bold ${value.length > maxLength * 0.88 ? "text-amber-500 dark:text-[#fcd34d]" : "text-[#94a3b8]"}`}>
             {value.length}/{maxLength}
           </span>
         )}
@@ -258,7 +258,7 @@ function EditField({
           maxLength={maxLength} placeholder={placeholder} disabled={disabled}
           className={`${base} h-10 py-0`} />
       )}
-      {hint && <p className="text-[11px] font-medium text-[#94a3b8] dark:text-[#71717a]">{hint}</p>}
+      {hint && <p className="text-[11px] font-medium text-[#94a3b8]">{hint}</p>}
     </div>
   );
 }
@@ -340,7 +340,7 @@ function MediaPickerModal({
       >
         <div className="flex items-center justify-between border-b border-blue-100 px-5 py-4 dark:border-[#27272b]">
           <div className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Select from Media Library</div>
-          <button type="button" onClick={onClose} className="rounded-lg p-1 text-[#94a3b8] hover:text-[#0a1628] dark:text-[#71717a]">
+          <button type="button" onClick={onClose} className="rounded-lg p-1 text-[#94a3b8] hover:text-[#0a1628]">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -494,10 +494,10 @@ function EditPanel({
                   <>
                     <div className="flex h-24 items-center justify-center rounded-xl border border-dashed border-blue-200 bg-white dark:bg-[#141417] dark:border-[#27272b]">
                       <div className="text-center">
-                        <svg className="mx-auto mb-1 text-[#cbd5e1] dark:text-[#71717a]" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <svg className="mx-auto mb-1 text-[#cbd5e1]" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                           <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" />
                         </svg>
-                        <div className="text-[11px] font-semibold text-[#94a3b8] dark:text-[#71717a]">No image selected</div>
+                        <div className="text-[11px] font-semibold text-[#94a3b8]">No image selected</div>
                       </div>
                     </div>
                     <button type="button" onClick={onOpenHeroImagePicker}
@@ -1555,7 +1555,7 @@ export default function PublicContentVisualEditorClient({
                 )}
               </>
             ) : (
-              <span className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-black text-slate-500 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">
+              <span className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-black text-slate-500 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                 Coming Soon
               </span>
             )}

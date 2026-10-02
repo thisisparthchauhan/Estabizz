@@ -97,7 +97,7 @@ export default function NavbarEditor() {
                 <label className="flex shrink-0 items-center gap-1 text-[11px] text-[#64748b] dark:text-[#a1a1aa]" title="Open in new tab">
                   <input type="checkbox" checked={link.newTab} onChange={(e) => setLink(i, { newTab: e.target.checked })} /> new tab
                 </label>
-                <button onClick={() => removeLink(i)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a] dark:bg-[#2a1618]">✕</button>
+                <button onClick={() => removeLink(i)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:bg-[#2a1618]">✕</button>
               </div>
             ))}
           </div>

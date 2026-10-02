@@ -110,7 +110,7 @@ export default async function JobDetailPage({ params }: Props) {
         <div className="mx-auto max-w-4xl">
           <Link
             href="/jobs"
-            className="mb-5 inline-flex items-center gap-1.5 text-[12px] font-bold text-[#94a3b8] hover:text-white transition-colors dark:text-[#71717a]"
+            className="mb-5 inline-flex items-center gap-1.5 text-[12px] font-bold text-[#94a3b8] hover:text-white transition-colors"
           >
             ← Back to all jobs
           </Link>
@@ -125,7 +125,7 @@ export default async function JobDetailPage({ params }: Props) {
             {job.title}
           </h1>
 
-          <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-[#94a3b8] dark:text-[#71717a]">
+          <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-[#94a3b8]">
             {job.location_text && <span>📍 {job.location_text}</span>}
             {job.remote_policy && <span>{REMOTE_LABELS[job.remote_policy]}</span>}
             {job.employment_type && <span>{EMPLOYMENT_LABELS[job.employment_type]}</span>}

@@ -133,7 +133,7 @@ export default async function CategoryBlogsPage({ params }: Props) {
           <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
             {/* Breadcrumb */}
             <nav
-              className="mb-5 flex items-center gap-2 text-[12px] text-[#9ca3af] dark:text-[#71717a]"
+              className="mb-5 flex items-center gap-2 text-[12px] text-[#9ca3af] dark:text-[#a1a1aa]"
               aria-label="Breadcrumb"
             >
               <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">
@@ -174,7 +174,7 @@ export default async function CategoryBlogsPage({ params }: Props) {
             </p>
 
             <div className="mt-5 flex items-center gap-4">
-              <span className="text-[13px] text-[#9ca3af] dark:text-[#71717a]">
+              <span className="text-[13px] text-[#9ca3af] dark:text-[#a1a1aa]">
                 {blogs.length} published article
                 {blogs.length !== 1 ? "s" : ""}
               </span>

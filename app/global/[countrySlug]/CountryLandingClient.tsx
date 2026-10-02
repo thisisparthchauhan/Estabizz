@@ -141,7 +141,7 @@ function Breadcrumb({ country }: { country: GlobalMarketConfig }) {
           <li aria-hidden="true"><ChevronRight className="h-3 w-3" /></li>
           <li><Link href="/global" className="hover:text-[#1677f2] dark:text-[#4f9dfb]">Global Markets</Link></li>
           <li aria-hidden="true"><ChevronRight className="h-3 w-3" /></li>
-          <li className="text-[#94a3b8] dark:text-[#71717a]">{country.region}</li>
+          <li className="text-[#94a3b8]">{country.region}</li>
           <li aria-hidden="true"><ChevronRight className="h-3 w-3" /></li>
           <li aria-current="page" className="font-semibold text-[#0a1628] dark:text-[#fafafa]">{country.name}</li>
         </ol>
@@ -253,7 +253,7 @@ function MarketEntryOverview({ country }: { country: GlobalMarketConfig }) {
             {country.overview}
           </p>
         )}
-        <p className="mt-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]">
+        <p className="mt-2 text-[12px] text-[#94a3b8]">
           Country information is general and subject to verification based on the proposed activity.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -903,7 +903,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
           {/* Additional context */}
           <div>
             <label htmlFor="lead-message" className="mb-1.5 block text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">
-              Additional context <span className="font-normal text-[#94a3b8] dark:text-[#71717a]">(optional)</span>
+              Additional context <span className="font-normal text-[#94a3b8]">(optional)</span>
             </label>
             <textarea
               id="lead-message"
@@ -949,7 +949,7 @@ function LeadForm({ country }: { country: GlobalMarketConfig }) {
             </button>
           )}
 
-          <p className="text-center text-[11px] text-[#94a3b8] dark:text-[#71717a]">
+          <p className="text-center text-[11px] text-[#94a3b8]">
             By submitting you agree to our{" "}
             <Link href="/legal/privacy-policy" className="underline hover:text-[#1677f2] dark:text-[#4f9dfb]">
               Privacy Policy

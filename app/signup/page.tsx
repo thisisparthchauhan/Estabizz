@@ -60,7 +60,7 @@ export default function SignupPage() {
     };
 
     const EyeBtn = ({ show, onToggle }: { show: boolean; onToggle: () => void }) => (
-        <button type="button" onClick={onToggle} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors dark:text-[#a1a1aa]">
+        <button type="button" onClick={onToggle} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
             {show ? (
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -73,7 +73,7 @@ export default function SignupPage() {
         </button>
     );
 
-    const inputClass = "w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]";
+    const inputClass = "w-full border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa] dark:placeholder-[#71717a] dark:text-[#fafafa]";
 
     return (
         <div className="min-h-screen flex">
@@ -103,7 +103,7 @@ export default function SignupPage() {
                         <h2 className="text-4xl font-bold text-white leading-tight">
                             Start Your<br />Compliance Journey
                         </h2>
-                        <p className="text-gray-400 mt-4 text-base leading-relaxed dark:text-[#71717a]">
+                        <p className="text-gray-400 mt-4 text-base leading-relaxed">
                             Get expert guidance for RBI, SEBI, IFSCA and IRDAI licenses — handled end-to-end.
                         </p>
                     </div>
@@ -116,7 +116,7 @@ export default function SignupPage() {
                         ].map(({ icon, label }) => (
                             <div key={label} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2.5 dark:bg-[#141417]">
                                 <span className="text-base">{icon}</span>
-                                <span className="text-gray-300 text-xs font-medium dark:text-[#71717a]">{label}</span>
+                                <span className="text-gray-300 text-xs font-medium">{label}</span>
                             </div>
                         ))}
                     </div>
@@ -128,7 +128,7 @@ export default function SignupPage() {
             {/* Right panel — form */}
             <div className="w-full lg:w-1/2 flex items-center justify-center bg-[#f8faff] px-6 py-12 overflow-y-auto dark:bg-[#141417]">
                 <div className="w-full max-w-md">
-                    <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors mb-8 group">
+                    <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors mb-8 group dark:text-[#a1a1aa] dark:hover:text-[#fafafa]">
                         <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
@@ -137,7 +137,7 @@ export default function SignupPage() {
 
                     <div className="mb-7">
                         <h1 className="text-2xl font-bold text-gray-900 dark:text-[#fafafa]">Create Account</h1>
-                        <p className="text-gray-500 text-sm mt-1 dark:text-[#71717a]">Start your compliance journey with us today.</p>
+                        <p className="text-gray-500 text-sm mt-1 dark:text-[#a1a1aa]">Start your compliance journey with us today.</p>
                     </div>
 
                     {error && <div className="mb-5 bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-xl dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]">{error}</div>}
@@ -157,13 +157,13 @@ export default function SignupPage() {
 
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1.5 dark:text-[#a1a1aa]">
-                                Mobile Number <span className="text-gray-400 font-normal dark:text-[#71717a]">(Optional)</span>
+                                Mobile Number <span className="text-gray-400 font-normal">(Optional)</span>
                             </label>
                             <div className="flex gap-2">
                                 <div className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-xl px-3 py-3 text-sm text-gray-600 whitespace-nowrap dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                                     🇮🇳 +91
                                 </div>
-                                <input type="tel" name="mobile" value={form.mobile} onChange={handleChange} placeholder="9876543210" className="flex-1 border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all dark:bg-[#141417] dark:border-[#27272b]" />
+                                <input type="tel" name="mobile" value={form.mobile} onChange={handleChange} placeholder="9876543210" className="flex-1 border border-gray-200 bg-white text-gray-900 placeholder-gray-400 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#1677f2] focus:ring-2 focus:ring-[#1677f2]/10 transition-all dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa] dark:placeholder-[#71717a]" />
                             </div>
                         </div>
 
@@ -205,12 +205,12 @@ export default function SignupPage() {
                         </button>
                     </form>
 
-                    <p className="text-center text-gray-500 text-sm mt-6 dark:text-[#71717a]">
+                    <p className="text-center text-gray-500 text-sm mt-6 dark:text-[#a1a1aa]">
                         Already have an account?{" "}
                         <Link href={buildLoginHref(returnPath)} className="text-[#1677f2] font-semibold hover:underline dark:text-[#4f9dfb]">Log in</Link>
                     </p>
 
-                    <p className="text-center text-gray-400 text-xs mt-4 dark:text-[#71717a]">
+                    <p className="text-center text-gray-400 text-xs mt-4">
                         By signing up, you agree to our{" "}
                         <Link href="/legal/terms-conditions" className="hover:text-gray-600 underline">Terms</Link>
                         {" & "}

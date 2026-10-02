@@ -26,7 +26,7 @@ export default function SolutionsHubPage() {
       <header className="relative isolate overflow-hidden border-b border-blue-100 dark:border-[#27272b] bg-white dark:bg-[#141417]">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-8%,rgba(22,119,242,0.12),transparent_46%),radial-gradient(circle_at_88%_84%,rgba(217,169,56,0.08),transparent_32%)]" />
         <div className="mx-auto w-full max-w-[1180px] px-6 py-16 sm:py-20">
-          <nav className="mb-6 flex items-center gap-2 text-[12px] font-medium text-[#94a3b8] dark:text-[#8b8b94]" aria-label="Breadcrumb">
+          <nav className="mb-6 flex items-center gap-2 text-[12px] font-medium text-[#94a3b8]" aria-label="Breadcrumb">
             <Link href="/" className="transition-colors hover:text-[#475569] dark:text-[#a1a1aa]">Home</Link>
             <span className="opacity-40">/</span>
             <span className="text-[#475569] dark:text-[#a1a1aa]">Solutions</span>
@@ -82,7 +82,7 @@ export default function SolutionsHubPage() {
                   {category.tagline}
                 </p>
                 <span className="mt-5 flex items-center justify-between text-[13px] font-bold">
-                  <span className="text-[#94a3b8] dark:text-[#8b8b94]">
+                  <span className="text-[#94a3b8]">
                     {count} {count === 1 ? "service" : "services"}
                   </span>
                   <span className="text-[#1677f2] dark:text-[#4f9dfb]">Explore →</span>

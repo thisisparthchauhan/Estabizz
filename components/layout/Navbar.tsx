@@ -916,7 +916,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                             <div ref={searchRef} className="relative w-[200px] 2xl:w-[240px]">
                                 <label className="sr-only" htmlFor="desktop-page-search">Search pages</label>
                                 <div className="relative">
-                                    <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8] dark:text-[#71717a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" />
                                     </svg>
                                     <input
@@ -1011,7 +1011,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                             just a logged-in user who has an Estabizz Jobs profile; see
                                             CANDIDATE_USER_MENU_ITEMS above). */}
                                         <div className="border-b border-gray-100 dark:border-[#27272b] py-1">
-                                            <p className="px-4 pb-1 pt-1.5 text-[10.5px] font-black uppercase tracking-[0.14em] text-[#94a3b8] dark:text-[#71717a]">
+                                            <p className="px-4 pb-1 pt-1.5 text-[10.5px] font-black uppercase tracking-[0.14em] text-[#94a3b8]">
                                                 Estabizz Jobs
                                             </p>
                                             {CANDIDATE_USER_MENU_ITEMS.map((item) => (
@@ -1115,8 +1115,8 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                     const isLive = !!linkMap[item];
                                                     return (
                                                         <Link key={j} href={linkMap[item] || "#"}
-                                                            className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6] dark:text-[#4f9dfb]' : 'text-[#94a3b8] hover:text-[#64748b] dark:text-[#71717a]'}`}>
-                                                            <span className={`${isLive ? 'text-[#1677f2] dark:text-[#4f9dfb]' : 'text-[#cbd5e1] dark:text-[#71717a]'} text-[8px] shrink-0`}>›</span>
+                                                            className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6] dark:text-[#4f9dfb]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}>
+                                                            <span className={`${isLive ? 'text-[#1677f2] dark:text-[#4f9dfb]' : 'text-[#cbd5e1]'} text-[8px] shrink-0`}>›</span>
                                                             {item}
                                                             {isLive && (
                                                                 <span className="ml-1 px-1.5 py-0.5 rounded-[4px] bg-[#10b981]/10 text-[#10b981] text-[9px] font-bold tracking-wider uppercase">Live</span>
@@ -1137,9 +1137,9 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                                 <Link
                                                     key={j}
                                                     href={linkMap[item] || "#"}
-                                                    className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6] dark:text-[#4f9dfb]' : 'text-[#94a3b8] hover:text-[#64748b] dark:text-[#71717a]'}`}
+                                                    className={`flex items-center gap-2 text-[13.5px] transition-colors py-1 ${isLive ? 'text-[#1677f2] font-medium hover:text-[#0077B6] dark:text-[#4f9dfb]' : 'text-[#94a3b8] hover:text-[#64748b]'}`}
                                                 >
-                                                    <span className={`${isLive ? 'text-[#1677f2] dark:text-[#4f9dfb]' : 'text-[#cbd5e1] dark:text-[#71717a]'} text-[8px]`}>›</span>
+                                                    <span className={`${isLive ? 'text-[#1677f2] dark:text-[#4f9dfb]' : 'text-[#cbd5e1]'} text-[8px]`}>›</span>
                                                     {item}
                                                     {isLive && (
                                                         <span className="ml-1 px-1.5 py-0.5 rounded-[4px] bg-[#10b981]/10 text-[#10b981] text-[9px] font-bold tracking-wider uppercase">Live</span>
@@ -1163,7 +1163,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                     )}
                                 </>
                             ) : (
-                                <p className="text-[14px] text-[#94a3b8] dark:text-[#71717a]">Upcoming content...</p>
+                                <p className="text-[14px] text-[#94a3b8]">Upcoming content...</p>
                             )}
                             <div className="flex items-center justify-between mt-8 pt-4 border-t border-gray-100 dark:border-[#27272b]">
                                 <Link href={currentMenu.categories[activeCategory]?.viewAll ?? currentMenu.viewAll} className="text-[14px] font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">
@@ -1184,7 +1184,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                         <div ref={searchRef} className="relative w-full">
                             <label className="sr-only" htmlFor="mobile-page-search">Search pages</label>
                             <div className="relative">
-                                <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8] dark:text-[#71717a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <svg className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" />
                                 </svg>
                                 <input
@@ -1348,7 +1348,7 @@ export default function Navbar({ content }: { content?: Partial<NavbarContent> }
                                         dropdown's Estabizz Jobs section. No functionality may be
                                         desktop-only. */}
                                     <div className="mb-2 mt-1 rounded-lg border border-gray-100 dark:border-[#27272b] py-1">
-                                        <p className="px-1 pb-1 pt-1 text-[10.5px] font-black uppercase tracking-[0.14em] text-[#94a3b8] dark:text-[#71717a]">
+                                        <p className="px-1 pb-1 pt-1 text-[10.5px] font-black uppercase tracking-[0.14em] text-[#94a3b8]">
                                             Estabizz Jobs
                                         </p>
                                         {CANDIDATE_USER_MENU_ITEMS.map((item) => (

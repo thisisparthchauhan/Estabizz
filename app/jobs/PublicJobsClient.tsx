@@ -269,25 +269,25 @@ export default function PublicJobsClient({ jobs, initialSearch = "" }: Props) {
                     )}
                     {job.location_text && (
                       <>
-                        <span className="text-[#cbd5e1] dark:text-[#71717a]">·</span>
+                        <span className="text-[#cbd5e1]">·</span>
                         <span>📍 {job.location_text}</span>
                       </>
                     )}
                     {job.remote_policy && (
                       <>
-                        <span className="text-[#cbd5e1] dark:text-[#71717a]">·</span>
+                        <span className="text-[#cbd5e1]">·</span>
                         <span>{REMOTE_LABELS[job.remote_policy]}</span>
                       </>
                     )}
                     {job.employment_type && (
                       <>
-                        <span className="text-[#cbd5e1] dark:text-[#71717a]">·</span>
+                        <span className="text-[#cbd5e1]">·</span>
                         <span>{EMPLOYMENT_LABELS[job.employment_type]}</span>
                       </>
                     )}
                     {expLabel(job.min_years_experience, job.max_years_experience) && (
                       <>
-                        <span className="text-[#cbd5e1] dark:text-[#71717a]">·</span>
+                        <span className="text-[#cbd5e1]">·</span>
                         <span>{expLabel(job.min_years_experience, job.max_years_experience)} exp</span>
                       </>
                     )}
@@ -299,7 +299,7 @@ export default function PublicJobsClient({ jobs, initialSearch = "" }: Props) {
                     Open
                   </span>
                   {job.closes_at && (
-                    <span className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">
+                    <span className="text-[11px] text-[#94a3b8]">
                       Closes {fmt(job.closes_at)}
                     </span>
                   )}
@@ -347,7 +347,7 @@ export default function PublicJobsClient({ jobs, initialSearch = "" }: Props) {
         >
           Join Estabizz
         </Link>
-        <p className="mt-5 text-[13px] font-medium text-[#94a3b8] dark:text-[#71717a]">
+        <p className="mt-5 text-[13px] font-medium text-[#94a3b8]">
           Prefer not to create a profile?{" "}
           <a href="mailto:info@estabizz.com?subject=Career%20Enquiry%20-%20Estabizz" className="font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">
             Email our recruitment team

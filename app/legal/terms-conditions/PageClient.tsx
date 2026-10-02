@@ -123,9 +123,9 @@ export default function PageClient() {
         <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-[12px] font-semibold text-[#64748b] dark:text-[#a1a1aa]" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-[#1677f2] dark:text-[#4f9dfb]">Home</Link>
-            <span className="text-[#94a3b8] dark:text-[#71717a]">/</span>
+            <span className="text-[#94a3b8]">/</span>
             <span className="text-[#64748b] dark:text-[#a1a1aa]">Legal</span>
-            <span className="text-[#94a3b8] dark:text-[#71717a]">/</span>
+            <span className="text-[#94a3b8]">/</span>
             <span className="text-[#0a1628] dark:text-[#fafafa]">Terms & Conditions</span>
           </nav>
           <div className="max-w-3xl">

@@ -8,8 +8,8 @@ import type { JobStatus } from "@prisma/client";
 // ─── Status meta ──────────────────────────────────────────────────────────────
 
 const STATUS_META: Record<JobStatus, { label: string; cls: string; dotCls: string }> = {
-  draft:     { label: "Draft",     cls: "bg-slate-100 text-slate-600 border-slate-200",       dotCls: "bg-slate-400" },
-  open:      { label: "Open",      cls: "bg-emerald-50 text-emerald-700 border-emerald-200",  dotCls: "bg-emerald-500" },
+  draft:     { label: "Draft",     cls: "bg-slate-100 text-slate-600 border-slate-200 dark:bg-[#1c1c20] dark:text-[#a1a1aa] dark:border-[#27272b]",       dotCls: "bg-slate-400" },
+  open:      { label: "Open",      cls: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]",  dotCls: "bg-emerald-500" },
   on_hold:   { label: "On Hold",   cls: "bg-yellow-50 text-yellow-700 border-yellow-200 dark:bg-[#2a2613] dark:border-[#4a431a] dark:text-[#fde047]",     dotCls: "bg-yellow-400" },
   closed:    { label: "Closed",    cls: "bg-red-50 text-red-600 border-red-200 dark:bg-[#2a1618] dark:border-[#4a2225] dark:text-[#fca5a5]",              dotCls: "bg-red-400" },
   filled:    { label: "Filled",    cls: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]",           dotCls: "bg-blue-500" },
@@ -17,7 +17,7 @@ const STATUS_META: Record<JobStatus, { label: string; cls: string; dotCls: strin
 };
 
 function StatusBadge({ status }: { status: JobStatus }) {
-  const m = STATUS_META[status] ?? { label: status, cls: "bg-slate-100 text-slate-500 border-slate-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]", dotCls: "bg-slate-400" };
+  const m = STATUS_META[status] ?? { label: status, cls: "bg-slate-100 text-slate-500 border-slate-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]", dotCls: "bg-slate-400" };
   return (
     <span className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10.5px] font-bold ${m.cls}`}>
       <span className={`h-1.5 w-1.5 rounded-full ${m.dotCls}`} />
@@ -138,7 +138,7 @@ export default function AdminJobsClient({ initialJobs }: Props) {
               className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-1.5 text-[12px] font-bold transition-colors ${active ? "border-[#1677f2] bg-[#1677f2] text-white" : "border-[#dbe7f3] bg-white text-[#64748b] hover:border-[#1677f2]/40 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"}`}
             >
               {tab.label}
-              <span className={`rounded-full px-1.5 py-0.5 text-[10px] ${active ? "bg-white/20 text-white dark:bg-[#141417]" : "bg-[#f1f5f9] text-[#94a3b8] dark:bg-[#1c1c20] dark:text-[#71717a]"}`}>
+              <span className={`rounded-full px-1.5 py-0.5 text-[10px] ${active ? "bg-white/20 text-white dark:bg-[#141417]" : "bg-[#f1f5f9] text-[#94a3b8] dark:bg-[#1c1c20]"}`}>
                 {count}
               </span>
             </button>
@@ -158,7 +158,7 @@ export default function AdminJobsClient({ initialJobs }: Props) {
 
       {/* Table */}
       {visible.length === 0 ? (
-        <div className="flex h-40 items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] text-[14px] text-[#94a3b8] dark:border-[#27272b] dark:text-[#71717a]">
+        <div className="flex h-40 items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] text-[14px] text-[#94a3b8] dark:border-[#27272b]">
           {jobs.length === 0 ? "No jobs yet. Create your first one." : "No jobs match the current filter."}
         </div>
       ) : (
@@ -179,7 +179,7 @@ export default function AdminJobsClient({ initialJobs }: Props) {
                 <tr key={job.id} className="border-b border-[#f1f5f9] hover:bg-[#f8fbff] transition-colors last:border-0 dark:bg-[#141417] dark:border-[#27272b]">
                   <td className="px-4 py-3">
                     <div className="font-bold text-[#0a1628] leading-tight dark:text-[#fafafa]">{job.title}</div>
-                    <div className="mt-0.5 text-[11px] text-[#94a3b8] dark:text-[#71717a]">
+                    <div className="mt-0.5 text-[11px] text-[#94a3b8]">
                       {job.job_code}
                       {job.department && <> · {job.department}</>}
                     </div>
@@ -193,7 +193,7 @@ export default function AdminJobsClient({ initialJobs }: Props) {
                     {job.is_public ? (
                       <span className="text-emerald-600 font-bold text-[11px] dark:text-[#6ee7b7]">Yes</span>
                     ) : (
-                      <span className="text-[#94a3b8] text-[11px] dark:text-[#71717a]">No</span>
+                      <span className="text-[#94a3b8] text-[11px]">No</span>
                     )}
                   </td>
                   <td className="px-4 py-3">

@@ -43,7 +43,7 @@ export default function GetStartedPage() {
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
                 <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 sm:py-16">
-                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
                         <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link>
                         <span className="opacity-40">/</span>
                         <span className="text-[#374151] dark:text-[#a1a1aa]">Get Started</span>
@@ -83,7 +83,7 @@ export default function GetStartedPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
                     <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-8 dark:bg-[#141417] dark:border-[#27272b]">
                         <h2 className="text-[24px] font-black text-[#0a1628] mb-2 dark:text-[#fafafa]">Lead Enquiry</h2>
-                        <p className="text-gray-500 text-sm mb-8 dark:text-[#71717a]">Share a few details and our advisory team will help map the next steps.</p>
+                        <p className="text-gray-500 text-sm mb-8 dark:text-[#a1a1aa]">Share a few details and our advisory team will help map the next steps.</p>
 
                         <GetStartedForm services={services} />
                     </div>
@@ -94,7 +94,7 @@ export default function GetStartedPage() {
                             {supportSteps.map((step, index) => (
                                 <div key={step} className="flex gap-3">
                                     <span className="w-7 h-7 rounded-full bg-[#1677f2] flex items-center justify-center text-xs font-black shrink-0">{index + 1}</span>
-                                    <p className="text-sm text-gray-200 leading-relaxed dark:text-[#71717a]">{step}</p>
+                                    <p className="text-sm text-gray-200 leading-relaxed">{step}</p>
                                 </div>
                             ))}
                         </div>

@@ -64,7 +64,7 @@ export default async function JoinEstabizzPage() {
         <h1 className="mt-3 text-[32px] font-black leading-tight tracking-tight text-white sm:text-[40px]">
           Join Estabizz
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8] dark:text-[#71717a]">
+        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8]">
           Create your candidate profile once, and the Estabizz recruitment team can consider you for
           current openings and roles that open later — without you needing to reapply from scratch each time.
         </p>

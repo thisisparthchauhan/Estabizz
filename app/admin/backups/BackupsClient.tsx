@@ -65,7 +65,7 @@ function DestBadge({ destination }: { destination: string }) {
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">{label}</div>
+      <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">{label}</div>
       <div className="mt-0.5 text-[12px] text-[#0a1628] font-medium break-words dark:text-[#fafafa]">{value || "—"}</div>
     </div>
   );
@@ -153,7 +153,7 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
 
             <div className="flex items-center justify-between border-b border-[#e2eaf2] px-6 py-4 dark:border-[#27272b]">
               <div className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Backup Details</div>
-              <button onClick={() => setSelected(null)} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] hover:text-[#0a1628] dark:bg-[#141417] dark:text-[#71717a]">
+              <button onClick={() => setSelected(null)} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] hover:text-[#0a1628] dark:bg-[#141417]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
@@ -173,7 +173,7 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
 
               {/* Item counts */}
               <div>
-                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-2 dark:text-[#71717a]">Items Backed Up</div>
+                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-2">Items Backed Up</div>
                 <div className="grid grid-cols-2 gap-2">
                   {[
                     ["Content Sections",   selected.itemCounts.contentBlocks],
@@ -186,7 +186,7 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
                   ].map(([label, val]) => (
                     <div key={String(label)} className="rounded-xl border border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20] p-3 text-center">
                       <div className="text-[18px] font-black text-[#1677f2] dark:text-[#4f9dfb]">{String(val)}</div>
-                      <div className="text-[10px] text-[#94a3b8] font-semibold mt-0.5 dark:text-[#71717a]">{String(label)}</div>
+                      <div className="text-[10px] text-[#94a3b8] font-semibold mt-0.5">{String(label)}</div>
                     </div>
                   ))}
                 </div>
@@ -299,11 +299,11 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
             {/* ── Backup list ───────────────────────────────────────────────── */}
             {result.records.length === 0 ? (
               <div className="flex h-56 flex-col items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] text-center">
-                <svg className="mb-3 text-[#cbd5e1] dark:text-[#71717a]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <svg className="mb-3 text-[#cbd5e1]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
                 </svg>
                 <div className="text-[14px] font-black text-[#0a1628] mb-1 dark:text-[#fafafa]">No Backups Yet</div>
-                <div className="text-[12px] text-[#94a3b8] leading-5 max-w-xs dark:text-[#71717a]">
+                <div className="text-[12px] text-[#94a3b8] leading-5 max-w-xs">
                   {canBackup
                     ? 'Click "Create Backup" to save your first snapshot.'
                     : "No backups have been created yet."}
@@ -314,12 +314,12 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
                 <table className="w-full text-[12px]">
                   <thead>
                     <tr className="border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11]">
-                      <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">File Name</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden md:table-cell dark:text-[#71717a]">Status</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell dark:text-[#71717a]">Destination</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell dark:text-[#71717a]">Created By</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Created On</th>
-                      <th className="px-4 py-3 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Actions</th>
+                      <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">File Name</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden md:table-cell">Status</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell">Destination</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell">Created By</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Created On</th>
+                      <th className="px-4 py-3 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#f4f7fb]">
@@ -330,7 +330,7 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
                         <td className="px-5 py-3.5">
                           <div className="font-bold text-[#0a1628] truncate max-w-[200px] dark:text-[#fafafa]">{rec.fileName}</div>
                           {rec.summary && (
-                            <div className="text-[10.5px] text-[#94a3b8] mt-0.5 truncate max-w-[220px] dark:text-[#71717a]">{rec.summary}</div>
+                            <div className="text-[10.5px] text-[#94a3b8] mt-0.5 truncate max-w-[220px]">{rec.summary}</div>
                           )}
                         </td>
 
@@ -372,7 +372,7 @@ export default function BackupsClient({ viewer, initialResult, githubReady }: Pr
 
             {/* ── Info panel ────────────────────────────────────────────────── */}
             <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-5 shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
-              <div className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-3 dark:text-[#71717a]">What is included in a backup?</div>
+              <div className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-3">What is included in a backup?</div>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-[11px] text-[#64748b] dark:text-[#a1a1aa]">
                 <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
                   <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Website content</div>

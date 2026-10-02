@@ -156,7 +156,7 @@ export default function RegulatoryPage() {
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
                 <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
-                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
                         <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link>
                         <span className="opacity-40">/</span>
                         <span className="text-[#374151] dark:text-[#a1a1aa]">Regulatory Services</span>
@@ -216,7 +216,7 @@ export default function RegulatoryPage() {
                                         className="group flex items-center justify-between rounded-lg px-3 py-2 transition-colors hover:bg-[#f5fbff] dark:bg-[#141417]"
                                     >
                                         <span className="text-[13.5px] font-medium text-[#475569] group-hover:text-[#1677f2] dark:text-[#a1a1aa]">{svc.name}</span>
-                                        <span className="text-[#94a3b8] transition-transform group-hover:translate-x-1 group-hover:text-[#1677f2] dark:text-[#71717a]">→</span>
+                                        <span className="text-[#94a3b8] transition-transform group-hover:translate-x-1 group-hover:text-[#1677f2]">→</span>
                                     </Link>
                                 ))}
                             </div>

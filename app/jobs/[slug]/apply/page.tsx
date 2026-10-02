@@ -90,7 +90,7 @@ export default async function ApplyPage({ params }: Props) {
         <div className="mx-auto max-w-2xl">
           <Link
             href={`/jobs/${slug}`}
-            className="mb-4 inline-flex items-center gap-1.5 text-[12px] font-bold text-[#94a3b8] hover:text-white transition-colors dark:text-[#71717a]"
+            className="mb-4 inline-flex items-center gap-1.5 text-[12px] font-bold text-[#94a3b8] hover:text-white transition-colors"
           >
             ← Back to job
           </Link>
@@ -103,7 +103,7 @@ export default async function ApplyPage({ params }: Props) {
             Apply — {job.title}
           </h1>
           {job.location_text && (
-            <p className="mt-2 text-[13px] text-[#94a3b8] dark:text-[#71717a]">📍 {job.location_text}</p>
+            <p className="mt-2 text-[13px] text-[#94a3b8]">📍 {job.location_text}</p>
           )}
         </div>
       </div>

@@ -43,7 +43,7 @@ function StatusBadge({ status }: { status: SeoPageItem["status"] }) {
     draft:            { cls: "bg-[#f8fafc] text-[#64748b] border-[#e2eaf2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]",     label: "Draft" },
     pending_approval: { cls: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]",       label: "Pending" },
     rejected:         { cls: "bg-red-50 text-red-600 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]",             label: "Rejected" },
-    default:          { cls: "bg-[#f0f4f8] text-[#94a3b8] border-[#dbe7f3] dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#71717a]",     label: "Default" },
+    default:          { cls: "bg-[#f0f4f8] text-[#94a3b8] border-[#dbe7f3] dark:bg-[#1c1c20] dark:border-[#27272b]",     label: "Default" },
   };
   const { cls, label } = map[status] ?? map.default;
   return (
@@ -60,7 +60,7 @@ function CharCount({ value, max }: { value: string; max: number }) {
   const over = len > max;
   const near = len > max * 0.9;
   return (
-    <span className={`text-[10px] font-semibold tabular-nums ${over ? "text-red-500 dark:text-[#fca5a5]" : near ? "text-amber-500 dark:text-[#fcd34d]" : "text-[#94a3b8] dark:text-[#71717a]"}`}>
+    <span className={`text-[10px] font-semibold tabular-nums ${over ? "text-red-500 dark:text-[#fca5a5]" : near ? "text-amber-500 dark:text-[#fcd34d]" : "text-[#94a3b8]"}`}>
       {len}/{max}
     </span>
   );
@@ -79,7 +79,7 @@ function Toggle({ on, onChange, label }: { on: boolean; onChange: (v: boolean) =
       <span className={`relative inline-flex h-5 w-9 shrink-0 rounded-full border-2 transition-colors ${on ? "border-[#1677f2] bg-[#1677f2]" : "border-[#cbd5e1] bg-[#e2eaf2] dark:bg-[#1c1c20] dark:border-[#27272b]"}`}>
         <span className={`inline-block h-3.5 w-3.5 translate-y-[-1px] rounded-full bg-white shadow transition-transform  dark:bg-[#141417] ${on ? "translate-x-[14px]" : "translate-x-[1px]"}`} />
       </span>
-      <span className={`text-[12px] font-semibold ${on ? "text-[#0a1628] dark:text-[#fafafa]" : "text-[#94a3b8] dark:text-[#71717a]"}`}>{label}</span>
+      <span className={`text-[12px] font-semibold ${on ? "text-[#0a1628] dark:text-[#fafafa]" : "text-[#94a3b8]"}`}>{label}</span>
     </button>
   );
 }
@@ -91,7 +91,7 @@ function Field({ label, hint, children }: { label: string; hint?: ReactNode; chi
     <div>
       <div className="flex items-center justify-between mb-1">
         <label className="text-[11px] font-black uppercase tracking-wide text-[#64748b] dark:text-[#a1a1aa]">{label}</label>
-        {hint && <span className="text-[10px] text-[#94a3b8] dark:text-[#71717a]">{hint}</span>}
+        {hint && <span className="text-[10px] text-[#94a3b8]">{hint}</span>}
       </div>
       {children}
     </div>
@@ -168,7 +168,7 @@ function ImagePreview({ url }: { url: string }) {
 function DrawerSection({ title }: { title: string }) {
   return (
     <div className="border-b border-[#f0f4f8] pb-1 mb-3 mt-2 dark:border-[#27272b]">
-      <span className="text-[10px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#71717a]">{title}</span>
+      <span className="text-[10px] font-black uppercase tracking-wider text-[#94a3b8]">{title}</span>
     </div>
   );
 }
@@ -293,10 +293,10 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-6 py-4">
               <div>
                 <div className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">{editing.label}</div>
-                <div className="text-[11px] text-[#94a3b8] mt-0.5 dark:text-[#71717a]">{editing.path}</div>
+                <div className="text-[11px] text-[#94a3b8] mt-0.5">{editing.path}</div>
               </div>
               <button onClick={closeDrawer}
-                      className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] hover:text-[#0a1628] transition-colors dark:bg-[#141417] dark:text-[#71717a]">
+                      className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] hover:text-[#0a1628] transition-colors dark:bg-[#141417]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
@@ -319,7 +319,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                   placeholder="E.g. RBI Services – NBFC Registration | Estabizz Fintech"
                   maxLength={120}
                 />
-                <div className="mt-1 flex justify-between text-[10px] text-[#94a3b8] dark:text-[#71717a]">
+                <div className="mt-1 flex justify-between text-[10px] text-[#94a3b8]">
                   <span>Shown in search results and browser tabs</span>
                   <span className={titleLen > 60 ? "text-red-500 font-bold dark:text-[#fca5a5]" : titleLen > 45 ? "text-green-600 dark:text-[#6ee7b7]" : ""}>
                     {titleLen > 60 ? "Over limit" : titleLen >= 30 ? "Good" : titleLen > 0 ? "Short" : ""}
@@ -334,7 +334,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                   placeholder="Brief description shown under the page title in search results."
                   rows={3}
                 />
-                <div className="mt-1 flex justify-between text-[10px] text-[#94a3b8] dark:text-[#71717a]">
+                <div className="mt-1 flex justify-between text-[10px] text-[#94a3b8]">
                   <span>Aim for 100–160 characters</span>
                   <span className={descLen > 160 ? "text-red-500 font-bold dark:text-[#fca5a5]" : descLen >= 100 ? "text-green-600 dark:text-[#6ee7b7]" : ""}>
                     {descLen > 160 ? "Over limit" : descLen >= 100 ? "Good" : descLen > 0 ? "Short" : ""}
@@ -359,7 +359,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                   onChange={v => set("canonicalUrl", v)}
                   placeholder="/rbi"
                 />
-                <p className="mt-1 text-[10px] text-[#94a3b8] dark:text-[#71717a]">
+                <p className="mt-1 text-[10px] text-[#94a3b8]">
                   Prevents duplicate content issues. Leave blank to use the page's default path.
                 </p>
               </Field>
@@ -446,7 +446,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                   onChange={v => set("secondaryKeywords", v)}
                   placeholder="Comma-separated, e.g. NBFC compliance, RBI registration, fintech India"
                 />
-                <p className="mt-1 text-[10px] text-[#94a3b8] dark:text-[#71717a]">
+                <p className="mt-1 text-[10px] text-[#94a3b8]">
                   For team reference only — not shown publicly.
                 </p>
               </Field>
@@ -560,11 +560,11 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                   <table className="w-full text-[12px]">
                     <thead>
                       <tr className="border-b border-[#f0f4f8] dark:border-[#27272b]">
-                        <th className="px-5 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Page</th>
-                        <th className="px-4 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden sm:table-cell dark:text-[#71717a]">Path</th>
-                        <th className="px-4 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Status</th>
-                        <th className="px-4 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell dark:text-[#71717a]">Last Updated</th>
-                        <th className="px-4 py-2.5 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Action</th>
+                        <th className="px-5 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Page</th>
+                        <th className="px-4 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden sm:table-cell">Path</th>
+                        <th className="px-4 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Status</th>
+                        <th className="px-4 py-2.5 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell">Last Updated</th>
+                        <th className="px-4 py-2.5 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Action</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[#f4f7fb]">
@@ -572,8 +572,8 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                         <tr key={page.key} className="hover:bg-[#fafcff] transition-colors dark:bg-[#141417]">
                           <td className="px-5 py-3.5">
                             <div className="font-bold text-[#0a1628] dark:text-[#fafafa]">{page.label}</div>
-                            <div className="text-[10.5px] text-[#94a3b8] mt-0.5 truncate max-w-[220px] dark:text-[#71717a]">
-                              {page.current.seoTitle || <span className="italic text-[#cbd5e1] dark:text-[#71717a]">No title set</span>}
+                            <div className="text-[10.5px] text-[#94a3b8] mt-0.5 truncate max-w-[220px]">
+                              {page.current.seoTitle || <span className="italic text-[#cbd5e1]">No title set</span>}
                             </div>
                           </td>
                           <td className="px-4 py-3.5 text-[#64748b] hidden sm:table-cell font-mono text-[11px] dark:text-[#a1a1aa]">
@@ -582,7 +582,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
                           <td className="px-4 py-3.5">
                             <StatusBadge status={page.status} />
                           </td>
-                          <td className="px-4 py-3.5 text-[#94a3b8] text-[11px] hidden lg:table-cell dark:text-[#71717a]">
+                          <td className="px-4 py-3.5 text-[#94a3b8] text-[11px] hidden lg:table-cell">
                             {page.lastUpdatedAt ? formatIST(page.lastUpdatedAt) : "—"}
                           </td>
                           <td className="px-4 py-3.5 text-right">
@@ -610,7 +610,7 @@ export default function PageSeoClient({ viewer, pages: initialPages }: Props) {
 
             {/* Quick-reference guide */}
             <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-5 shadow-[0_2px_12px_rgba(10,22,40,0.05)]">
-              <div className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-3 dark:text-[#71717a]">Quick Reference</div>
+              <div className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-3">Quick Reference</div>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-[11px] text-[#64748b] dark:text-[#a1a1aa]">
                 <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
                   <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Page Title</div>

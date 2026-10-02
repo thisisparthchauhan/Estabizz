@@ -50,9 +50,9 @@ function statusBeforeLabel(originalStatus: string): string {
 
 function SubTypeBadge({ subType }: { subType: string }) {
   const map: Record<string, string> = {
-    "Image":          "bg-blue-50 text-blue-700 border-blue-200",
+    "Image":          "bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#10243d] dark:text-[#60a5fa] dark:border-[#1d3a5c]",
     "Icon / SVG":     "bg-purple-50 text-purple-700 border-purple-200 dark:bg-[#231a2e] dark:text-[#c4b5fd] dark:border-[#3a2a4a]",
-    "PDF":            "bg-red-50 text-red-600 border-red-200",
+    "PDF":            "bg-red-50 text-red-600 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]",
     "Media File":     "bg-gray-50 text-gray-600 border-gray-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]",
     "Website Section":"bg-amber-50 text-amber-700 border-amber-200 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]",
     "SEO Block":      "bg-green-50 text-green-700 border-green-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]",
@@ -273,7 +273,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                   </div>
                 )}
 
-                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">
+                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">
                   Type DELETE to confirm
                 </label>
                 <input
@@ -318,7 +318,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
             {/* Header */}
             <div className="flex items-center justify-between border-b border-[#e2eaf2] px-6 py-4 dark:border-[#27272b]">
               <div className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Item Details</div>
-              <button onClick={() => setSelected(null)} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] hover:text-[#0a1628] dark:hover:text-[#f7f9fc] dark:bg-[#141417] dark:text-[#71717a]">
+              <button onClick={() => setSelected(null)} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] hover:text-[#0a1628] dark:hover:text-[#f7f9fc] dark:bg-[#141417]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
@@ -419,9 +419,9 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
 
                 {/* Search */}
                 <div className="flex-1 min-w-[180px]">
-                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block dark:text-[#71717a]">Search Removed Items</label>
+                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block">Search Removed Items</label>
                   <div className="relative">
-                    <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8] dark:text-[#71717a]" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                     </svg>
                     <input
@@ -434,7 +434,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
 
                 {/* Type filter */}
                 <div className="min-w-[140px]">
-                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block dark:text-[#71717a]">Item Type</label>
+                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block">Item Type</label>
                   <EstabizzSelect
                     variant="admin"
                     value={typeFilter}
@@ -451,7 +451,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
 
                 {/* Deleted by */}
                 <div className="min-w-[150px]">
-                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block dark:text-[#71717a]">Deleted By</label>
+                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block">Deleted By</label>
                   <input
                     type="text" value={removedBy} onChange={e => setRemovedBy(e.target.value)}
                     placeholder="Email…"
@@ -461,14 +461,14 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
 
                 {/* Date from */}
                 <div className="min-w-[130px]">
-                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block dark:text-[#71717a]">From Date</label>
+                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block">From Date</label>
                   <input type="date" value={from} onChange={e => setFrom(e.target.value)}
                     className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] px-3 py-2 text-[12px] text-[#475569] dark:text-[#a1a1aa] focus:border-[#1677f2] focus:outline-none" />
                 </div>
 
                 {/* Date to */}
                 <div className="min-w-[130px]">
-                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block dark:text-[#71717a]">To Date</label>
+                  <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 block">To Date</label>
                   <input type="date" value={to} onChange={e => setTo(e.target.value)}
                     className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] px-3 py-2 text-[12px] text-[#475569] dark:text-[#a1a1aa] focus:border-[#1677f2] focus:outline-none" />
                 </div>
@@ -490,11 +490,11 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
             {/* ── Items table ──────────────────────────────────────────────── */}
             {result.items.length === 0 ? (
               <div className="flex h-56 flex-col items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] text-center">
-                <svg className="mb-3 text-[#cbd5e1] dark:text-[#71717a]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <svg className="mb-3 text-[#cbd5e1]" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/>
                 </svg>
                 <div className="text-[14px] font-black text-[#0a1628] mb-1 dark:text-[#fafafa]">Recycle Bin is Empty</div>
-                <div className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">
+                <div className="text-[12px] text-[#94a3b8]">
                   {typeFilter !== "all" || search || removedBy || from || to
                     ? "No items match your current filters."
                     : "Removed media and deleted content sections will appear here."}
@@ -505,12 +505,12 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                 <table className="w-full text-[12px]">
                   <thead>
                     <tr className="border-b border-[#f0f4f8] bg-[#f8fafc] dark:bg-[#141417] dark:border-[#27272b]">
-                      <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Name</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden md:table-cell dark:text-[#71717a]">Type</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell dark:text-[#71717a]">Original Location</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell dark:text-[#71717a]">Deleted By</th>
-                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Deleted On</th>
-                      <th className="px-4 py-3 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Actions</th>
+                      <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Name</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden md:table-cell">Type</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell">Original Location</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell">Deleted By</th>
+                      <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Deleted On</th>
+                      <th className="px-4 py-3 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#f4f7fb]">
@@ -586,7 +586,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
                   <span className="text-[11px] text-[#94a3b8] dark:text-[#a1a1aa]">
                     Showing {result.items.length} of {result.total} removed item{result.total !== 1 ? "s" : ""}
                   </span>
-                  <div className="flex items-center gap-3 text-[11px] text-[#94a3b8] dark:text-[#71717a]">
+                  <div className="flex items-center gap-3 text-[11px] text-[#94a3b8]">
                     {canRestore && <span>Restore returns item to active use.</span>}
                     {canPurge   && <span className="text-red-400">Permanent Delete cannot be undone.</span>}
                   </div>
@@ -596,7 +596,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
 
             {/* Info panel */}
             <div className="rounded-2xl border border-[#e2eaf2] bg-white p-5 shadow-[0_2px_12px_rgba(10,22,40,0.05)] dark:bg-[#141417] dark:border-[#27272b]">
-              <div className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-3 dark:text-[#71717a]">About the Recycle Bin</div>
+              <div className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-3">About the Recycle Bin</div>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-[11px] text-[#64748b] dark:text-[#a1a1aa]">
                 <div className="rounded-xl border border-[#f0f4f8] p-3 leading-5 dark:border-[#27272b]">
                   <div className="font-bold text-[#0a1628] mb-1 dark:text-[#fafafa]">Media items</div>
@@ -628,7 +628,7 @@ export default function RecycleBinClient({ viewer, initialResult }: Props) {
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">{label}</div>
+      <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">{label}</div>
       <div className="mt-0.5 text-[12px] text-[#0a1628] font-medium break-words dark:text-[#fafafa]">{value || "—"}</div>
     </div>
   );

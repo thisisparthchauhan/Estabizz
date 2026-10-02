@@ -47,7 +47,7 @@ const STATUS_STYLES: Record<RegulatoryUpdateStatus, string> = {
   pending_approval: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]",
   draft:            "bg-slate-100 text-slate-600 border-slate-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]",
   rejected:         "bg-red-50 text-red-600 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]",
-  archived:         "bg-zinc-100 text-zinc-500 border-zinc-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]",
+  archived:         "bg-zinc-100 text-zinc-500 border-zinc-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]",
   deleted:          "bg-red-100 text-red-700 border-red-300 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]",
 };
 
@@ -411,7 +411,7 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
                       <button onClick={() => openEdit(it)} className="text-left font-bold text-[#0a1628] hover:text-[#1677f2] line-clamp-2 dark:text-[#fafafa]">
                         {it.title || "(untitled)"}
                       </button>
-                      <div className="text-[11px] text-[#94a3b8] mt-0.5 truncate dark:text-[#71717a]">/{it.slug}</div>
+                      <div className="text-[11px] text-[#94a3b8] mt-0.5 truncate">/{it.slug}</div>
                     </td>
                     <td className="px-4 py-3"><span className="rounded-full bg-blue-50 px-2.5 py-1 text-[11px] font-bold text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">{it.regulator}</span></td>
                     <td className="px-4 py-3 text-[#475569] dark:text-[#a1a1aa]">{it.category}</td>
@@ -432,7 +432,7 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
                     </td>
                     <td className="px-4 py-3 text-[12px] text-[#64748b] whitespace-nowrap dark:text-[#a1a1aa]">
                       {fmtIST(it.updatedAt)}
-                      {it.updatedBy && <div className="text-[11px] text-[#94a3b8] truncate max-w-[160px] dark:text-[#71717a]">{it.updatedBy}</div>}
+                      {it.updatedBy && <div className="text-[11px] text-[#94a3b8] truncate max-w-[160px]">{it.updatedBy}</div>}
                     </td>
                     <td className="px-4 py-3 text-right whitespace-nowrap">
                       <button onClick={() => openEdit(it)} className="rounded-lg border border-[#e2e8f0] px-3 py-1.5 text-[12px] font-bold text-[#0a1628] hover:border-[#1677f2] hover:text-[#1677f2] dark:border-[#27272b] dark:text-[#fafafa]">
@@ -472,7 +472,7 @@ export default function RegulatoryUpdatesClient({ viewer }: { viewer: AdminConte
                   </div>
                 )}
               </div>
-              <button onClick={closeDrawer} className="text-[#94a3b8] hover:text-[#0a1628] text-[20px] leading-none dark:text-[#71717a]">×</button>
+              <button onClick={closeDrawer} className="text-[#94a3b8] hover:text-[#0a1628] text-[20px] leading-none">×</button>
             </div>
 
             {/* Tabs: Edit / Preview */}
@@ -793,7 +793,7 @@ function Field({ label, required, hint, children }: {
     <label className="block">
       <span className="mb-1 flex items-center gap-1.5 text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">
         {label}{required && <span className="text-red-500 dark:text-[#fca5a5]">*</span>}
-        {hint && <span className="font-normal text-[#94a3b8] dark:text-[#71717a]">— {hint}</span>}
+        {hint && <span className="font-normal text-[#94a3b8]">— {hint}</span>}
       </span>
       {children}
     </label>
@@ -823,7 +823,7 @@ function TabBtn({ active, onClick, children }: {
 }) {
   return (
     <button onClick={onClick}
-      className={`px-3 py-2 text-[13px] font-bold border-b-2 -mb-px ${active ? "border-[#1677f2] text-[#1677f2] dark:text-[#4f9dfb]" : "border-transparent text-[#94a3b8] hover:text-[#475569] dark:text-[#71717a]"}`}>
+      className={`px-3 py-2 text-[13px] font-bold border-b-2 -mb-px ${active ? "border-[#1677f2] text-[#1677f2] dark:text-[#4f9dfb]" : "border-transparent text-[#94a3b8] hover:text-[#475569]"}`}>
       {children}
     </button>
   );
@@ -879,7 +879,7 @@ function PendingChangesPanel({
           {rows.map((r) => (
             <div key={r.label} className="text-[12px]">
               <div className="font-bold text-[#334155] dark:text-[#a1a1aa]">{r.label}</div>
-              <div className="text-[#94a3b8] line-through dark:text-[#71717a]">{r.from}</div>
+              <div className="text-[#94a3b8] line-through">{r.from}</div>
               <div className="text-violet-800 font-semibold dark:text-[#c4b5fd]">{r.to}</div>
             </div>
           ))}
@@ -897,7 +897,7 @@ function PreviewPanel({ form, editing }: { form: FormState; editing: RegulatoryU
         <span className="rounded-full bg-blue-50 px-3 py-1 text-[11px] font-black text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">{form.regulator}</span>
         <span className={`rounded-full px-3 py-1 text-[11px] font-black ${IMPACT_STYLES[impact]}`}>{impact} Impact</span>
       </div>
-      <p className="text-[11px] font-bold uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">{form.category}</p>
+      <p className="text-[11px] font-bold uppercase tracking-wide text-[#94a3b8]">{form.category}</p>
       <h2 className="mb-2 mt-1 text-[20px] font-black leading-snug text-[#0a1628] dark:text-[#fafafa]">{form.title || "Update title"}</h2>
       {(form.sourceDate || form.effectiveDate) && (
         <p className="mb-2 text-[12px] font-semibold text-[#64748b] dark:text-[#a1a1aa]">
@@ -929,7 +929,7 @@ function PreviewPanel({ form, editing }: { form: FormState; editing: RegulatoryU
         </a>
       )}
       {editing && (
-        <p className="mt-4 text-[11px] text-[#94a3b8] dark:text-[#71717a]">
+        <p className="mt-4 text-[11px] text-[#94a3b8]">
           This preview reflects unsaved edits. Only <b>Published</b> updates appear on the public website.
         </p>
       )}

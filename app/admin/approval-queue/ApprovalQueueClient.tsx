@@ -177,7 +177,7 @@ function DetailDrawer({
                   : `${item.pageName} · ${item.key}`}
               </p>
             </div>
-            <button type="button" onClick={onClose} className="rounded-xl px-3 py-2 text-[18px] text-[#94a3b8] hover:bg-[#f0f4f8] hover:text-[#0a1628] dark:bg-[#1c1c20] dark:text-[#71717a]">x</button>
+            <button type="button" onClick={onClose} className="rounded-xl px-3 py-2 text-[18px] text-[#94a3b8] hover:bg-[#f0f4f8] hover:text-[#0a1628] dark:bg-[#1c1c20]">x</button>
           </div>
         </div>
 
@@ -196,7 +196,7 @@ function DetailDrawer({
               ] : []),
             ].map(([label, value]) => (
               <div key={label} className="rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-[#fbfdff] dark:bg-[#1c1c20] px-4 py-3">
-                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">{label}</div>
+                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">{label}</div>
                 <div className="mt-1 break-words text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">{value}</div>
               </div>
             ))}
@@ -204,7 +204,7 @@ function DetailDrawer({
 
           {item.type === "regulatory_update" && (
             <div className="mb-5 rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-5">
-              <div className="mb-2 text-[12px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Regulatory Update</div>
+              <div className="mb-2 text-[12px] font-black uppercase tracking-wide text-[#94a3b8]">Regulatory Update</div>
               <p className="text-[13px] leading-6 text-[#475569] dark:text-[#a1a1aa]">{item.summary || "No summary provided."}</p>
               {item.sourceUrl && (
                 <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex rounded-xl border border-blue-100 bg-blue-50 px-4 py-2 text-[12px] font-bold text-[#1677f2] hover:border-[#1677f2]/40 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#4f9dfb]">
@@ -216,29 +216,29 @@ function DetailDrawer({
 
           <div className="mb-5 rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417]">
             <div className="border-b border-[#f0f4f8] bg-[#f8fafc] px-5 py-3 dark:bg-[#141417] dark:border-[#27272b]">
-              <h3 className="text-[12px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Changed Fields</h3>
+              <h3 className="text-[12px] font-black uppercase tracking-wide text-[#94a3b8]">Changed Fields</h3>
             </div>
             <div className="divide-y divide-[#f0f4f8]">
               {item.changedFields.length ? item.changedFields.map((change, index) => (
                 <div key={`${change.field}-${index}`} className="grid gap-3 px-5 py-4 lg:grid-cols-[180px_1fr_1fr]">
                   <div className="text-[12px] font-black text-[#0a1628] dark:text-[#fafafa]">{change.field}</div>
                   <div>
-                    <div className="mb-1 text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Published</div>
+                    <div className="mb-1 text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Published</div>
                     <div className="whitespace-pre-wrap rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-[#fbfdff] dark:bg-[#1c1c20] px-3 py-2 text-[12px] leading-5 text-[#475569] dark:text-[#a1a1aa]">{change.oldValue}</div>
                   </div>
                   <div>
-                    <div className="mb-1 text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Draft</div>
+                    <div className="mb-1 text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Draft</div>
                     <div className="whitespace-pre-wrap rounded-xl border border-[#cfe3ff] bg-[#f5faff] px-3 py-2 text-[12px] leading-5 text-[#0a1628] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#fafafa]">{change.newValue}</div>
                   </div>
                 </div>
               )) : (
-                <div className="px-5 py-8 text-center text-[13px] text-[#94a3b8] dark:text-[#71717a]">No changed fields were detected.</div>
+                <div className="px-5 py-8 text-center text-[13px] text-[#94a3b8]">No changed fields were detected.</div>
               )}
             </div>
           </div>
 
           <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] p-5">
-            <label className="mb-2 block text-[12px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Reviewer Comment</label>
+            <label className="mb-2 block text-[12px] font-black uppercase tracking-wide text-[#94a3b8]">Reviewer Comment</label>
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
@@ -354,7 +354,7 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
           <p className="mt-1 text-[13px] text-[#64748b] dark:text-[#a1a1aa]">Review pending website, SEO, blog and regulatory updates before they go live.</p>
         </div>
         <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-5 py-3 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
-          <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Pending Changes</div>
+          <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Pending Changes</div>
           <div className="mt-1 text-[24px] font-black text-[#1677f2] dark:text-[#4f9dfb]">{counts.pending}</div>
         </div>
       </div>
@@ -402,7 +402,7 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
                       <span className={`rounded-full border px-2.5 py-0.5 text-[10px] font-bold ${statusMeta[item.status]?.cls ?? statusMeta.pending_approval.cls}`}>
                         {statusMeta[item.status]?.label ?? item.status}
                       </span>
-                      <span className="text-[11px] font-bold text-[#94a3b8] dark:text-[#71717a]">{item.pageName}</span>
+                      <span className="text-[11px] font-bold text-[#94a3b8]">{item.pageName}</span>
                       {item.type === "regulatory_update" && (
                         <span className="rounded-full border border-[#cfe3ff] bg-[#f5faff] px-2.5 py-0.5 text-[10px] font-bold text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">
                           {regulatoryStateLabel(item)}
@@ -418,7 +418,7 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
                   </div>
                   <div className="hidden text-right lg:block">
                     <div className="text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">{formatIST(item.submittedAt)}</div>
-                    <div className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">Last updated {formatIST(item.updatedAt)}</div>
+                    <div className="mt-1 text-[11px] text-[#94a3b8]">Last updated {formatIST(item.updatedAt)}</div>
                   </div>
                   <div className="flex items-center justify-end gap-2">
                     <button type="button" onClick={() => openItem(item)} className="rounded-lg border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] px-3.5 py-1.5 text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa] hover:border-[#1677f2]/40 hover:text-[#1677f2] dark:hover:text-[#60a5fa]">
@@ -434,7 +434,7 @@ export default function ApprovalQueueClient({ initialItems, viewer }: Props) {
           <div className="px-6 py-16 text-center">
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef4fc] text-[20px] font-black text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">0</div>
             <p className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">No pending changes found</p>
-            <p className="mt-1 text-[12px] text-[#94a3b8] dark:text-[#71717a]">Try another filter or date range.</p>
+            <p className="mt-1 text-[12px] text-[#94a3b8]">Try another filter or date range.</p>
           </div>
         )}
       </div>

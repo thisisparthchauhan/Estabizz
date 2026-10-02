@@ -47,7 +47,7 @@ export default async function ApplySuccessPage({ params }: Props) {
             Browse More Jobs
           </Link>
         </div>
-        <p className="mt-6 text-[12px] text-[#94a3b8] dark:text-[#71717a]">
+        <p className="mt-6 text-[12px] text-[#94a3b8]">
           Applied for the wrong role?{" "}
           <Link href={`/jobs/${slug}`} className="font-bold text-[#1677f2] hover:underline dark:text-[#4f9dfb]">
             View job posting

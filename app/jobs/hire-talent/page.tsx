@@ -29,7 +29,7 @@ export default function HireTalentPage() {
         <h1 className="mt-3 text-[32px] font-black leading-tight tracking-tight text-white sm:text-[40px]">
           Hire Talent Through Estabizz
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8] dark:text-[#71717a]">
+        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8]">
           Managed recruitment for regulated financial services, fintech and technology roles.
           Tell us what you need — our recruitment team handles sourcing, screening and coordination.
         </p>

@@ -59,13 +59,13 @@ function CountryCard({ country }: { country: GlobalMarketConfig }) {
         <p className="truncate text-[13.5px] font-semibold text-[#0a1628] group-hover:text-[#1677f2] dark:text-[#fafafa]">
           {country.name}
         </p>
-        <p className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">{country.region}</p>
+        <p className="text-[11px] text-[#94a3b8]">{country.region}</p>
       </div>
       <div className="flex flex-col items-end gap-1.5">
         <span className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-black uppercase tracking-wide ${tc.badge}`}>
           {tc.label}
         </span>
-        <ChevronRight className="h-3.5 w-3.5 text-[#94a3b8] group-hover:text-[#1677f2] dark:text-[#71717a]" aria-hidden="true" />
+        <ChevronRight className="h-3.5 w-3.5 text-[#94a3b8] group-hover:text-[#1677f2]" aria-hidden="true" />
       </div>
     </Link>
   );
@@ -158,7 +158,7 @@ export default function GlobalMarketsClient() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             {/* Search */}
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8] dark:text-[#71717a]" aria-hidden="true" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#94a3b8]" aria-hidden="true" />
               <input
                 type="search"
                 value={search}
@@ -243,7 +243,7 @@ export default function GlobalMarketsClient() {
           )}
 
           {/* Result count */}
-          <p className="mb-4 text-[12.5px] text-[#94a3b8] dark:text-[#71717a]">
+          <p className="mb-4 text-[12.5px] text-[#94a3b8]">
             {filtered.filter(c => c.slug !== "india").length} markets
             {search && <> matching &ldquo;<strong className="text-[#334155] dark:text-[#a1a1aa]">{search}</strong>&rdquo;</>}
             {activeRegion !== "All" && <> in <strong className="text-[#334155] dark:text-[#a1a1aa]">{activeRegion}</strong></>}
@@ -265,7 +265,7 @@ export default function GlobalMarketsClient() {
                     <h2 className="text-[13px] font-black uppercase tracking-[0.15em] text-[#0a1628] dark:text-[#fafafa]">
                       {region}
                     </h2>
-                    <span className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">
+                    <span className="text-[11px] text-[#94a3b8]">
                       ({regionCountries.length})
                     </span>
                   </div>

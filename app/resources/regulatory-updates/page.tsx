@@ -22,7 +22,7 @@ export default async function RegulatoryUpdatesPage() {
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
                 <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="mx-auto max-w-7xl px-6 py-14 sm:py-16">
-                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
                         <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link><span className="opacity-40">/</span><Link href="/resources" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Resources</Link><span className="opacity-40">/</span><span className="text-[#374151] dark:text-[#a1a1aa]">Regulatory Updates</span>
                     </nav>
                     <span className="mb-4 inline-flex rounded-full border border-blue-100 bg-[#f5fbff] px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#0077B6] shadow-sm dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">Regulatory Updates</span>

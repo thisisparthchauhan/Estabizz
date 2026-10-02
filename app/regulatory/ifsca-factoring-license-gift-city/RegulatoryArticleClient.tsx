@@ -85,7 +85,7 @@ export default function RegulatoryArticleClient() {
         <div className="absolute inset-x-0 bottom-0 pointer-events-none h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <nav className="text-sm font-medium text-gray-500 mb-8 flex items-center space-x-2 dark:text-[#71717a]">
+          <nav className="text-sm font-medium text-gray-500 mb-8 flex items-center space-x-2 dark:text-[#a1a1aa]">
             <a href="/" className="hover:text-[#1677f2] transition-colors dark:text-[#4f9dfb]">Home</a>
             <span>&gt;</span>
             <a href="/" className="hover:text-[#1677f2] transition-colors dark:text-[#4f9dfb]">IFSCA</a>
@@ -105,13 +105,13 @@ export default function RegulatoryArticleClient() {
             IFSCA Factoring License in GIFT City – Complete Regulatory Guide for Finance Companies
           </h1>
 
-          <div className="flex flex-wrap items-center gap-4 text-[13px] text-gray-500 font-medium mb-8 dark:text-[#71717a]">
+          <div className="flex flex-wrap items-center gap-4 text-[13px] text-gray-500 font-medium mb-8 dark:text-[#a1a1aa]">
             <div className="flex items-center gap-1.5"><span>📅</span> 2024</div>
-            <span className="text-gray-300 dark:text-[#71717a]">|</span>
+            <span className="text-gray-300">|</span>
             <div className="flex items-center gap-1.5"><span>⏱️</span> 15 min read</div>
-            <span className="text-gray-300 dark:text-[#71717a]">|</span>
+            <span className="text-gray-300">|</span>
             <div className="flex items-center gap-1.5"><span>👁️</span> Regulatory Guide</div>
-            <span className="text-gray-300 dark:text-[#71717a]">|</span>
+            <span className="text-gray-300">|</span>
             <div className="flex items-center gap-1.5"><span>✅</span> Expert Reviewed</div>
           </div>
 
@@ -124,7 +124,7 @@ export default function RegulatoryArticleClient() {
       <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col xl:flex-row gap-10 items-start">
 
         <aside className="hidden xl:block w-[220px] shrink-0 sticky top-[80px] bg-white border border-[rgba(0,150,220,0.1)] rounded-[16px] p-5 shadow-[0_4px_20px_rgba(0,100,200,0.03)] z-10 dark:bg-[#141417]">
-          <h4 className="text-[12px] font-bold text-[#94a3b8] tracking-[0.1em] uppercase mb-4 dark:text-[#71717a]">Contents</h4>
+          <h4 className="text-[12px] font-bold text-[#94a3b8] tracking-[0.1em] uppercase mb-4">Contents</h4>
           <nav className="flex flex-col space-y-1 max-h-[calc(100vh-200px)] overflow-y-auto pr-2 custom-scrollbar">
             {sections.map((section) => (
               <a
@@ -153,6 +153,11 @@ export default function RegulatoryArticleClient() {
             .article-content ul { padding-left: 8px; margin-bottom: 24px; }
             .article-content li { display: flex; align-items: flex-start; margin-bottom: 8px; font-size: 15px; color: #374151; line-height: 1.85; }
             .article-content li::before { content: '◆'; color: #1677f2; font-size: 12px; margin-right: 12px; margin-top: 4px; }
+            .dark .article-content h2 { color: #fafafa; }
+            .dark .article-content h3 { color: #60a5fa; }
+            .dark .article-content p { color: #a1a1aa; }
+            .dark .article-content li { color: #a1a1aa; }
+            .dark .article-content li::before { color: #4f9dfb; }
           `}} />
 
           <h2 id="introduction" className="!mt-0">Introduction</h2>
@@ -175,19 +180,19 @@ export default function RegulatoryArticleClient() {
               <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#1677f2] to-[#0077B6]"></div>
               <div className="text-2xl mb-2">🏛️</div>
               <div className="font-bold text-[#0a1628] text-[15px] mb-1 dark:text-[#fafafa]">IFSCA Regulated</div>
-              <div className="text-gray-500 text-[13px] dark:text-[#71717a]">Governed under 2024 Regulations</div>
+              <div className="text-gray-500 text-[13px] dark:text-[#a1a1aa]">Governed under 2024 Regulations</div>
             </div>
             <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm relative overflow-hidden group dark:bg-[#141417] dark:border-[#27272b]">
               <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#1677f2] to-[#0077B6]"></div>
               <div className="text-2xl mb-2">🌐</div>
               <div className="font-bold text-[#0a1628] text-[15px] mb-1 dark:text-[#fafafa]">GIFT City IFSC</div>
-              <div className="text-gray-500 text-[13px] dark:text-[#71717a]">Gujarat International Finance Hub</div>
+              <div className="text-gray-500 text-[13px] dark:text-[#a1a1aa]">Gujarat International Finance Hub</div>
             </div>
             <div className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm relative overflow-hidden group dark:bg-[#141417] dark:border-[#27272b]">
               <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#1677f2] to-[#0077B6]"></div>
               <div className="text-2xl mb-2">📋</div>
               <div className="font-bold text-[#0a1628] text-[15px] mb-1 dark:text-[#fafafa]">2024 Framework</div>
-              <div className="text-gray-500 text-[13px] dark:text-[#71717a]">Registration of Factors Regulations</div>
+              <div className="text-gray-500 text-[13px] dark:text-[#a1a1aa]">Registration of Factors Regulations</div>
             </div>
           </div>
 
@@ -886,28 +891,28 @@ export default function RegulatoryArticleClient() {
             </h4>
             <div className="space-y-3">
               <div className="flex justify-between items-center text-[13px] border-b border-gray-50 pb-2">
-                <span className="text-gray-500 dark:text-[#71717a]">Regulator</span><span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">IFSCA</span>
+                <span className="text-gray-500 dark:text-[#a1a1aa]">Regulator</span><span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">IFSCA</span>
               </div>
               <div className="flex justify-between items-center text-[13px] border-b border-gray-50 pb-2">
-                <span className="text-gray-500 dark:text-[#71717a]">Location</span><span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">GIFT City, Gujarat</span>
+                <span className="text-gray-500 dark:text-[#a1a1aa]">Location</span><span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">GIFT City, Gujarat</span>
               </div>
               <div className="flex justify-between items-center text-[13px] border-b border-gray-50 pb-2">
-                <span className="text-gray-500 dark:text-[#71717a]">Prior Req</span><span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">Finance Co. Registration</span>
+                <span className="text-gray-500 dark:text-[#a1a1aa]">Prior Req</span><span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">Finance Co. Registration</span>
               </div>
               <div className="flex justify-between items-center text-[13px] border-b border-gray-50 pb-2">
-                <span className="text-gray-500 dark:text-[#71717a]">Framework</span><span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">2024 Regulations</span>
+                <span className="text-gray-500 dark:text-[#a1a1aa]">Framework</span><span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">2024 Regulations</span>
               </div>
               <div className="flex justify-between items-center text-[13px] border-b border-gray-50 pb-2">
-                <span className="text-gray-500 dark:text-[#71717a]">Currency</span><span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">Foreign currencies</span>
+                <span className="text-gray-500 dark:text-[#a1a1aa]">Currency</span><span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">Foreign currencies</span>
               </div>
               <div className="flex justify-between items-center text-[13px] pt-1">
-                <span className="text-gray-500 dark:text-[#71717a]">TReDS Filing</span><span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">Within 10 days</span>
+                <span className="text-gray-500 dark:text-[#a1a1aa]">TReDS Filing</span><span className="font-semibold text-[#0a1628] dark:text-[#fafafa]">Within 10 days</span>
               </div>
             </div>
           </div>
 
           <div className="bg-white border border-gray-100 rounded-[16px] p-5 shadow-sm text-center dark:bg-[#141417] dark:border-[#27272b]">
-            <h4 className="font-bold text-[13px] text-gray-500 uppercase tracking-wider mb-3 dark:text-[#71717a]">Share</h4>
+            <h4 className="font-bold text-[13px] text-gray-500 uppercase tracking-wider mb-3 dark:text-[#a1a1aa]">Share</h4>
             <div className="flex justify-center gap-2">
               <button className="w-10 h-10 rounded-full bg-blue-50 text-[#0077B6] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors dark:bg-[#1c1c20] dark:text-[#4f9dfb]" title="Share on LinkedIn"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg></button>
               <button className="w-10 h-10 rounded-full bg-blue-50 text-[#0077B6] flex items-center justify-center hover:bg-[#0077B6] hover:text-white transition-colors dark:bg-[#1c1c20] dark:text-[#4f9dfb]" title="Share on X"><svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg></button>
@@ -926,21 +931,21 @@ export default function RegulatoryArticleClient() {
               <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all h-full dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="text-[12px] font-bold text-[#1677f2] uppercase tracking-wider mb-2 dark:text-[#4f9dfb]">IFSC Entity Setup</div>
                 <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#1677f2] transition-colors mb-2 dark:text-[#fafafa]">Finance Company in GIFT IFSC</h3>
-                <p className="text-[13px] text-gray-500 line-clamp-2 dark:text-[#71717a]">Complete regulatory guide for setting up a unified Finance Company.</p>
+                <p className="text-[13px] text-gray-500 line-clamp-2 dark:text-[#a1a1aa]">Complete regulatory guide for setting up a unified Finance Company.</p>
               </div>
             </a>
             <a href="/ifsca/psp-license-ifsca" className="block group">
               <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all h-full dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="text-[12px] font-bold text-[#1677f2] uppercase tracking-wider mb-2 dark:text-[#4f9dfb]">Payment Services</div>
                 <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#1677f2] transition-colors mb-2 dark:text-[#fafafa]">PSP License – IFSCA</h3>
-                <p className="text-[13px] text-gray-500 line-clamp-2 dark:text-[#71717a]">Complete Authorisation Guide with Critical Compliance Insights.</p>
+                <p className="text-[13px] text-gray-500 line-clamp-2 dark:text-[#a1a1aa]">Complete Authorisation Guide with Critical Compliance Insights.</p>
               </div>
             </a>
             <a href="/rbi/nbfc-registration-in-india" className="block group">
               <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all h-full dark:bg-[#141417] dark:border-[#27272b]">
                 <div className="text-[12px] font-bold text-[#1677f2] uppercase tracking-wider mb-2 dark:text-[#4f9dfb]">Domestic Setup</div>
                 <h3 className="text-[16px] font-bold text-[#0a1628] group-hover:text-[#1677f2] transition-colors mb-2 dark:text-[#fafafa]">NBFC License Guide</h3>
-                <p className="text-[13px] text-gray-500 line-clamp-2 dark:text-[#71717a]">Reserve Bank of India registration guidelines.</p>
+                <p className="text-[13px] text-gray-500 line-clamp-2 dark:text-[#a1a1aa]">Reserve Bank of India registration guidelines.</p>
               </div>
             </a>
           </div>

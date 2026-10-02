@@ -114,7 +114,7 @@ function DetailDrawer({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl px-3 py-2 text-[18px] text-[#94a3b8] hover:bg-[#f0f4f8] hover:text-[#0a1628] dark:bg-[#1c1c20] dark:text-[#71717a]"
+              className="rounded-xl px-3 py-2 text-[18px] text-[#94a3b8] hover:bg-[#f0f4f8] hover:text-[#0a1628] dark:bg-[#1c1c20]"
               aria-label="Close"
             >
               x
@@ -139,7 +139,7 @@ function DetailDrawer({
               ["Content Key", item.contentKey],
             ].map(([label, value]) => (
               <div key={label} className="rounded-xl border border-[#e2eaf2] bg-[#fbfdff] px-4 py-3 dark:bg-[#141417] dark:border-[#27272b]">
-                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">{label}</div>
+                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">{label}</div>
                 <div className="mt-1 break-words text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">{value}</div>
               </div>
             ))}
@@ -163,7 +163,7 @@ function DetailDrawer({
                   </div>
                 </div>
               )) : (
-                <div className="px-5 py-8 text-center text-[13px] text-[#94a3b8] dark:text-[#71717a]">No changed fields were detected.</div>
+                <div className="px-5 py-8 text-center text-[13px] text-[#94a3b8]">No changed fields were detected.</div>
               )}
             </div>
           </div>
@@ -175,7 +175,7 @@ function DetailDrawer({
             ].map(([label, fields]) => (
               <div key={label as string} className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417]">
                 <div className="border-b border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#0f0f11] px-5 py-3">
-                  <h3 className="text-[12px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">{label as string}</h3>
+                  <h3 className="text-[12px] font-black uppercase tracking-wide text-[#94a3b8]">{label as string}</h3>
                 </div>
                 <div className="divide-y divide-[#f4f7fb]">
                   {(fields as ChangeHistoryItem["draftSnapshot"]).length ? (fields as ChangeHistoryItem["draftSnapshot"]).map((field) => (
@@ -184,7 +184,7 @@ function DetailDrawer({
                       <div className="break-words text-[12px] leading-5 text-[#475569] dark:text-[#a1a1aa]">{field.value}</div>
                     </div>
                   )) : (
-                    <div className="px-5 py-6 text-[12px] text-[#94a3b8] dark:text-[#71717a]">No saved snapshot is available.</div>
+                    <div className="px-5 py-6 text-[12px] text-[#94a3b8]">No saved snapshot is available.</div>
                   )}
                 </div>
               </div>
@@ -259,11 +259,11 @@ export default function ChangeHistoryClient({ initialHistory, viewerEmail }: Pro
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-5 py-3 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
-            <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Total Changes</div>
+            <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Total Changes</div>
             <div className="mt-1 text-[24px] font-black text-[#1677f2] dark:text-[#4f9dfb]">{history.total}</div>
           </div>
           <div className="rounded-2xl border border-[#e2eaf2] dark:border-[#27272b] bg-white dark:bg-[#141417] px-5 py-3 shadow-[0_2px_8px_rgba(10,22,40,0.04)]">
-            <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Viewing As</div>
+            <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Viewing As</div>
             <div className="mt-1 max-w-[220px] truncate text-[13px] font-black text-[#0a1628] dark:text-[#fafafa]">{viewerEmail || "Admin"}</div>
           </div>
         </div>
@@ -350,23 +350,23 @@ export default function ChangeHistoryClient({ initialHistory, viewerEmail }: Pro
                 <div key={item.id} className="grid gap-4 px-6 py-4 hover:bg-[#fbfdff] lg:grid-cols-[1fr_1fr_0.8fr_1fr_1fr_110px] lg:items-center dark:bg-[#141417]">
                   <div className="min-w-0">
                     <div className="text-[13px] font-black text-[#0a1628] dark:text-[#fafafa]">{item.pageName}</div>
-                    <div className="mt-1 text-[11px] font-bold text-[#94a3b8] dark:text-[#71717a]">{areaLabel(item)}</div>
+                    <div className="mt-1 text-[11px] font-bold text-[#94a3b8]">{areaLabel(item)}</div>
                   </div>
                   <div className="min-w-0">
                     <div className="text-[13px] font-bold text-[#334155] dark:text-[#a1a1aa]">{item.sectionName}</div>
-                    <div className="mt-1 truncate text-[11px] text-[#94a3b8] dark:text-[#71717a]">{item.contentKey}</div>
+                    <div className="mt-1 truncate text-[11px] text-[#94a3b8]">{item.contentKey}</div>
                   </div>
                   <div>
                     <span className={`inline-flex rounded-full border px-2.5 py-0.5 text-[10px] font-bold ${meta.cls}`}>{meta.label}</span>
-                    <div className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">{item.action}</div>
+                    <div className="mt-1 text-[11px] text-[#94a3b8]">{item.action}</div>
                   </div>
                   <div className="min-w-0">
                     <div className="truncate text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">{item.changedBy || "Unknown"}</div>
-                    <div className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">{item.changedByRole || "Unknown"}</div>
+                    <div className="mt-1 text-[11px] text-[#94a3b8]">{item.changedByRole || "Unknown"}</div>
                   </div>
                   <div>
                     <div className="text-[12px] font-bold text-[#334155] dark:text-[#a1a1aa]">{formatIST(item.changedAt)}</div>
-                    <div className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">{item.summary}</div>
+                    <div className="mt-1 text-[11px] text-[#94a3b8]">{item.summary}</div>
                   </div>
                   <div className="flex justify-end">
                     <button
@@ -385,7 +385,7 @@ export default function ChangeHistoryClient({ initialHistory, viewerEmail }: Pro
           <div className="px-6 py-16 text-center">
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef4fc] text-[20px] font-black text-[#1677f2] dark:bg-[#1c1c20] dark:text-[#4f9dfb]">0</div>
             <p className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">No changes found</p>
-            <p className="mt-1 text-[12px] text-[#94a3b8] dark:text-[#71717a]">Try another filter or date range.</p>
+            <p className="mt-1 text-[12px] text-[#94a3b8]">Try another filter or date range.</p>
           </div>
         )}
       </div>

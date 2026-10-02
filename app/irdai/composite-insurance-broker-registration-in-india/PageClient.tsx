@@ -625,7 +625,7 @@ export default function PageClient() {
                             <div className="step-dot" />
                             <div className="step-card">
                                 <div className="step-label">{step.label}</div>
-                                <div style={{ fontWeight: 600, color: "#0a1628" }}>{step.title}</div>
+                                <div className="font-semibold text-[#0a1628] dark:text-[#fafafa]">{step.title}</div>
                             </div>
                         </div>
                     ))}

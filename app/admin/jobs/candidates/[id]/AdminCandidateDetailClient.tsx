@@ -82,7 +82,7 @@ export default function AdminCandidateDetailClient({ candidate, notes, tasks }: 
                   <div key={e.id}>
                     <p className="font-bold text-[#0a1628] dark:text-[#fafafa]">{e.title}</p>
                     <p className="text-[13px] text-[#64748b] dark:text-[#a1a1aa]">{e.employerName}</p>
-                    <p className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">
+                    <p className="text-[12px] text-[#94a3b8]">
                       {fmt(e.startDate)} — {e.isCurrent ? "Present" : (e.endDate ? fmt(e.endDate) : "—")}
                     </p>
                   </div>
@@ -102,7 +102,7 @@ export default function AdminCandidateDetailClient({ candidate, notes, tasks }: 
                       {ed.degree}{ed.fieldOfStudy ? ` — ${ed.fieldOfStudy}` : ""}
                     </p>
                     <p className="text-[13px] text-[#64748b] dark:text-[#a1a1aa]">{ed.institutionName}</p>
-                    {ed.endYear && <p className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">{ed.endYear}</p>}
+                    {ed.endYear && <p className="text-[12px] text-[#94a3b8]">{ed.endYear}</p>}
                   </div>
                 ))}
               </div>
@@ -143,7 +143,7 @@ export default function AdminCandidateDetailClient({ candidate, notes, tasks }: 
               Applications ({candidate.applications.length})
             </h2>
             {candidate.applications.length === 0 ? (
-              <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No applications.</p>
+              <p className="text-[13px] text-[#94a3b8]">No applications.</p>
             ) : (
               <div className="space-y-3">
                 {candidate.applications.map((app) => (
@@ -161,7 +161,7 @@ export default function AdminCandidateDetailClient({ candidate, notes, tasks }: 
                       >
                         {app.stageName}
                       </span>
-                      <span className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">{fmt(app.appliedAt)}</span>
+                      <span className="text-[11px] text-[#94a3b8]">{fmt(app.appliedAt)}</span>
                     </div>
                   </div>
                 ))}

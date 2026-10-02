@@ -84,8 +84,8 @@ export default function TestimonialsEditor() {
                 return (
                   <div key={i} className={`rounded-xl border p-4 ${isPublic ? "border-green-200 bg-green-50/40 dark:bg-[#132a20] dark:border-[#1d4a37]" : "border-[#e8eef5] bg-[#fbfdff] dark:bg-[#141417] dark:border-[#27272b]"}`}>
                     <div className="mb-2 flex items-center justify-between">
-                      <span className="text-[11px] font-black text-[#94a3b8] dark:text-[#71717a]">
-                        {i + 1} · {isPublic ? <span className="text-green-600 dark:text-[#6ee7b7]">Public</span> : <span className="text-[#94a3b8] dark:text-[#71717a]">Not public</span>}
+                      <span className="text-[11px] font-black text-[#94a3b8]">
+                        {i + 1} · {isPublic ? <span className="text-green-600 dark:text-[#6ee7b7]">Public</span> : <span className="text-[#94a3b8]">Not public</span>}
                       </span>
                       <button onClick={() => removeItem(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225] dark:text-[#fca5a5]">Delete</button>
                     </div>

@@ -16,7 +16,7 @@ function fmt(iso?: string): string {
 
 const STATUS_META: Record<BlogStatus, { label: string; cls: string }> = {
   published:      { label: "Published",      cls: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]" },
-  draft:          { label: "Draft",          cls: "bg-slate-100 text-slate-600 border-slate-200" },
+  draft:          { label: "Draft",          cls: "bg-slate-100 text-slate-600 border-slate-200 dark:bg-[#1c1c20] dark:text-[#a1a1aa] dark:border-[#27272b]" },
   pending_review: { label: "Pending Review", cls: "bg-[#1677f2]/10 text-[#0866d9] border-[#1677f2]/40 dark:text-[#4f9dfb]" },
   approved:       { label: "Approved",       cls: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]" },
   rejected:       { label: "Rejected",       cls: "bg-red-50 text-red-700 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]" },
@@ -87,7 +87,7 @@ export default function MyBlogsClient({ initialBlogs, email }: Props) {
         ) : (
           <div className="overflow-hidden rounded-2xl border border-[#e8e8e8] bg-white dark:bg-[#141417] dark:border-[#27272b]">
             {blogs.map((blog) => {
-              const m = STATUS_META[blog.status] ?? { label: blog.status, cls: "bg-slate-100 text-slate-500 border-slate-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]" };
+              const m = STATUS_META[blog.status] ?? { label: blog.status, cls: "bg-slate-100 text-slate-500 border-slate-200 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]" };
               return (
                 <div
                   key={blog.id}
@@ -98,7 +98,7 @@ export default function MyBlogsClient({ initialBlogs, email }: Props) {
                       <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10.5px] font-bold ${m.cls}`}>
                         {m.label}
                       </span>
-                      <span className="text-[11px] text-[#9ca3af] dark:text-[#71717a]">
+                      <span className="text-[11px] text-[#9ca3af] dark:text-[#a1a1aa]">
                         {blog.category.icon} {blog.category.name} · {fmt(blog.createdAt)}
                       </span>
                     </div>
@@ -133,7 +133,7 @@ export default function MyBlogsClient({ initialBlogs, email }: Props) {
 
         {/* Pending note */}
         {blogs.some((b) => b.status === "pending_review") && (
-          <p className="mt-4 text-[12.5px] leading-6 text-[#94a3b8] dark:text-[#71717a]">
+          <p className="mt-4 text-[12.5px] leading-6 text-[#94a3b8]">
             Submissions marked <strong className="text-[#0866d9] dark:text-[#4f9dfb]">Pending Review</strong> are awaiting
             admin approval and are not yet publicly visible.
           </p>

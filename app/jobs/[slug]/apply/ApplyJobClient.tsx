@@ -49,7 +49,7 @@ export default function ApplyJobClient({ slug, jobTitle }: Props) {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="rounded-2xl border border-[#dbe7f3] bg-white p-6 dark:bg-[#141417] dark:border-[#27272b]">
         <h2 className="mb-1 text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Cover Note</h2>
-        <p className="mb-4 text-[12.5px] text-[#94a3b8] dark:text-[#71717a]">
+        <p className="mb-4 text-[12.5px] text-[#94a3b8]">
           Optional — briefly introduce yourself and why you&apos;re interested in this role.
         </p>
         <textarea
@@ -61,7 +61,7 @@ export default function ApplyJobClient({ slug, jobTitle }: Props) {
           disabled={submitting}
         />
         {coverNote.length > 0 && (
-          <p className="mt-1 text-right text-[11px] text-[#94a3b8] dark:text-[#71717a]">
+          <p className="mt-1 text-right text-[11px] text-[#94a3b8]">
             {coverNote.length}/3000
           </p>
         )}
@@ -89,7 +89,7 @@ export default function ApplyJobClient({ slug, jobTitle }: Props) {
         </Link>
       </div>
 
-      <p className="text-center text-[11.5px] text-[#94a3b8] dark:text-[#71717a]">
+      <p className="text-center text-[11.5px] text-[#94a3b8]">
         By submitting, you confirm that all information is accurate.
         Your profile details will be shared with the hiring team.
       </p>

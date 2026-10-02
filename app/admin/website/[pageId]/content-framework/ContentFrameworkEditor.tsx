@@ -46,7 +46,7 @@ export default function ContentFrameworkEditor() {
               {cards.map((card, i) => (
                 <div key={i} className={`rounded-xl border p-4 ${card.visible ? "border-[#e8eef5] bg-[#fbfdff] dark:bg-[#141417] dark:border-[#27272b]" : "border-[#e8eef5] bg-[#f3f4f6] opacity-75 dark:bg-[#1c1c20] dark:border-[#27272b]"}`}>
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="text-[11px] font-black text-[#94a3b8] dark:text-[#71717a]">Card {i + 1}</span>
+                    <span className="text-[11px] font-black text-[#94a3b8]">Card {i + 1}</span>
                     <div className="flex items-center gap-2">
                       <button onClick={() => move(i, -1)} className="rounded-md border border-[#dbe7f3] px-2 py-1 text-[11px] text-[#64748b] hover:bg-white dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">↑</button>
                       <button onClick={() => move(i, 1)} className="rounded-md border border-[#dbe7f3] px-2 py-1 text-[11px] text-[#64748b] hover:bg-white dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">↓</button>

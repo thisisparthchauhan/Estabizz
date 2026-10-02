@@ -594,7 +594,7 @@ export default function ContactClient() {
                 <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_85%_18%,rgba(0,150,214,0.16),transparent_38%),radial-gradient(circle_at_5%_92%,rgba(22,119,242,0.10),transparent_34%)]" />
                 <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#eaf6ff] dark:to-[#09090b]" />
                 <div className="relative z-10 mx-auto max-w-7xl px-6 py-14 sm:py-16">
-                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+                    <nav className="mb-5 flex items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
                         <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link>
                         <span className="opacity-40">/</span>
                         <span className="text-[#374151] dark:text-[#a1a1aa]">Contact Us</span>
@@ -612,7 +612,7 @@ export default function ContactClient() {
                     <div className="lg:col-span-2">
                         <div className="bg-white dark:bg-[#141417] rounded-2xl shadow-sm border border-gray-100 dark:border-[#27272b] p-8">
                             <h2 className="text-[22px] font-black text-[#0a1628] dark:text-[#fafafa] mb-2">Send Us a Message</h2>
-                            <p className="text-gray-500 text-sm mb-8 dark:text-[#71717a]">Fill in your details and we&apos;ll get back to you within 24 hours.</p>
+                            <p className="text-gray-500 text-sm mb-8 dark:text-[#a1a1aa]">Fill in your details and we&apos;ll get back to you within 24 hours.</p>
 
                             {submitted ? (
                                 <div className="text-center py-12">
@@ -622,7 +622,7 @@ export default function ContactClient() {
                                         </svg>
                                     </div>
                                     <h3 className="text-xl font-bold text-[#0a1628] mb-2 dark:text-[#fafafa]">Thank You!</h3>
-                                    <p className="text-gray-500 dark:text-[#71717a]">Your inquiry has been received. Our team will contact you within 24 hours.</p>
+                                    <p className="text-gray-500 dark:text-[#a1a1aa]">Your inquiry has been received. Our team will contact you within 24 hours.</p>
                                     <button
                                         onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", company: "", service: "", message: "" }); setDialIdx(0); }}
                                         className="mt-6 px-6 py-2.5 bg-[#1677f2] text-white font-semibold rounded-xl text-sm hover:bg-[#0866d9] transition-colors"
@@ -700,11 +700,11 @@ export default function ContactClient() {
                                                                         >
                                                                             <span className="text-base leading-none w-6 flex-shrink-0">{c.flag}</span>
                                                                             <span className="flex-1 truncate">{c.name}</span>
-                                                                            <span className="text-xs text-gray-400 flex-shrink-0 dark:text-[#71717a]">{c.dial}</span>
+                                                                            <span className="text-xs text-gray-400 flex-shrink-0">{c.dial}</span>
                                                                         </button>
                                                                     );
                                                                 }) : (
-                                                                    <p className="px-3 py-3 text-sm text-gray-400 text-center dark:text-[#71717a]">No country found</p>
+                                                                    <p className="px-3 py-3 text-sm text-gray-400 text-center">No country found</p>
                                                                 )}
                                                             </div>
                                                         </div>
@@ -754,7 +754,7 @@ export default function ContactClient() {
                                                         <span className="truncate text-[#0a1628] font-medium dark:text-[#fafafa]">{form.service}</span>
                                                     </div>
                                                 ) : (
-                                                    <span className="text-gray-400 dark:text-[#71717a]">Select a service...</span>
+                                                    <span className="text-gray-400">Select a service...</span>
                                                 )}
                                                 <svg className={`w-4 h-4 text-gray-400 flex-shrink-0 ml-2 transition-transform ${serviceOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -795,7 +795,7 @@ export default function ContactClient() {
                                                                 ))}
                                                             </div>
                                                         )) : (
-                                                            <p className="px-4 py-4 text-sm text-gray-400 text-center dark:text-[#71717a]">No service found</p>
+                                                            <p className="px-4 py-4 text-sm text-gray-400 text-center">No service found</p>
                                                         )}
                                                     </div>
                                                 </div>
@@ -853,7 +853,7 @@ export default function ContactClient() {
                                         </svg>
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-400 font-medium dark:text-[#71717a]">Phone</p>
+                                        <p className="text-xs text-gray-400 font-medium">Phone</p>
                                         <a href="tel:9825600907" className="text-sm font-semibold text-[#0a1628] hover:text-[#1677f2] dark:text-[#fafafa]">+91 98256 00907</a>
                                     </div>
                                 </div>
@@ -864,7 +864,7 @@ export default function ContactClient() {
                                         </svg>
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-400 font-medium dark:text-[#71717a]">Email</p>
+                                        <p className="text-xs text-gray-400 font-medium">Email</p>
                                         <a href="mailto:info@estabizz.com" className="text-sm font-semibold text-[#0a1628] hover:text-[#1677f2] dark:text-[#fafafa]">info@estabizz.com</a>
                                     </div>
                                 </div>
@@ -876,7 +876,7 @@ export default function ContactClient() {
                                         </svg>
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-400 font-medium dark:text-[#71717a]">Office</p>
+                                        <p className="text-xs text-gray-400 font-medium">Office</p>
                                         <p className="text-sm font-semibold leading-relaxed text-[#0a1628] dark:text-[#fafafa]">15, Vedika Exotika Bungalow, Near Gift City, PDPU Road, Rayson, Adalaj, Gandhinagar, Gujarat, India - 382421</p>
                                     </div>
                                 </div>
@@ -905,10 +905,10 @@ export default function ContactClient() {
                                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0a1628] flex items-center justify-center text-white font-bold text-lg">CS</div>
                                 <div>
                                     <p className="font-bold text-[#0a1628] text-sm dark:text-[#fafafa]">CS Devyani Khambhati</p>
-                                    <p className="text-xs text-gray-500 dark:text-[#71717a]">Regulatory Compliance Expert</p>
+                                    <p className="text-xs text-gray-500 dark:text-[#a1a1aa]">Regulatory Compliance Expert</p>
                                 </div>
                             </div>
-                            <p className="text-xs text-gray-500 leading-relaxed dark:text-[#71717a]">10+ years of experience in RBI, SEBI, IRDAI and FEMA regulatory frameworks. Trusted by 500+ businesses across India.</p>
+                            <p className="text-xs text-gray-500 leading-relaxed dark:text-[#a1a1aa]">10+ years of experience in RBI, SEBI, IRDAI and FEMA regulatory frameworks. Trusted by 500+ businesses across India.</p>
                         </div>
                     </div>
                 </div>

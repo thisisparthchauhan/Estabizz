@@ -46,7 +46,7 @@ export default function WhyEstabizzEditor() {
               {pillars.map((p, i) => (
                 <div key={i} className="rounded-xl border border-[#e8eef5] bg-[#fbfdff] p-4 dark:bg-[#141417] dark:border-[#27272b]">
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="text-[11px] font-black text-[#94a3b8] dark:text-[#71717a]">Reason {i + 1}</span>
+                    <span className="text-[11px] font-black text-[#94a3b8]">Reason {i + 1}</span>
                     <button onClick={() => removePillar(i)} className="rounded-md border border-red-200 px-2 py-1 text-[11px] text-red-500 hover:bg-red-50 dark:bg-[#2a1618] dark:border-[#4a2225] dark:text-[#fca5a5]">Delete</button>
                   </div>
                   <Field label="Title"><input value={p.title} onChange={(e) => setPillar(i, { title: e.target.value })} className={inputCls} /></Field>

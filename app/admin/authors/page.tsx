@@ -45,7 +45,7 @@ export default async function AuthorsPage() {
 
       <div className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_12px_rgba(10,22,40,0.05)] overflow-hidden dark:bg-[#141417] dark:border-[#27272b]">
         <div className="border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3 dark:bg-[#141417] dark:border-[#27272b]">
-          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#71717a]">
+          <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">
             Contributing Authors
           </span>
         </div>
@@ -53,7 +53,7 @@ export default async function AuthorsPage() {
         {authors.length === 0 ? (
           <div className="py-16 text-center">
             <div className="text-3xl mb-3 opacity-20">◉</div>
-            <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No authors found.</p>
+            <p className="text-[13px] text-[#94a3b8]">No authors found.</p>
           </div>
         ) : (
           <div className="divide-y divide-[#f8fafc]">
@@ -68,7 +68,7 @@ export default async function AuthorsPage() {
                   </div>
                   <div>
                     <div className="text-[13px] font-bold text-[#0a1628] dark:text-[#fafafa]">{author.name}</div>
-                    <div className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">{author.designation}</div>
+                    <div className="text-[11px] text-[#94a3b8]">{author.designation}</div>
                   </div>
                 </div>
                 <span className="rounded-full border border-[#dbe7f3] bg-[#f4f9ff] px-2.5 py-1 text-[11px] font-bold text-[#1677f2] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#4f9dfb]">

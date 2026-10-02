@@ -65,7 +65,7 @@ export default function RegulatoryLandscape({ countryName, regulators }: Props) 
           </p>
         </div>
       )}
-      <p className="mt-4 text-[11.5px] leading-relaxed text-[#94a3b8] dark:text-[#71717a]">
+      <p className="mt-4 text-[11.5px] leading-relaxed text-[#94a3b8]">
         Regulatory applicability depends on the proposed business model and must be
         confirmed with qualified local professionals. Estabizz does not provide legal
         opinions on foreign law.

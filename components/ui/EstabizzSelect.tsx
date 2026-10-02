@@ -300,7 +300,7 @@ export function EstabizzSelect({
       >
         <span
           className={
-            selectedLabel ? "truncate text-[#0a1628] dark:text-[#fafafa]" : "text-[#94a3b8] dark:text-[#71717a]"
+            selectedLabel ? "truncate text-[#0a1628] dark:text-[#fafafa]" : "text-[#94a3b8]"
           }
         >
           {selectedLabel || placeholder}

@@ -85,13 +85,13 @@ export default function LoginPage() {
                         <h2 className="text-4xl font-bold text-white leading-tight">
                             India&apos;s #1 Fintech<br />Compliance Platform
                         </h2>
-                        <p className="text-gray-400 mt-4 text-base leading-relaxed dark:text-[#71717a]">
+                        <p className="text-gray-400 mt-4 text-base leading-relaxed">
                             Expert regulatory guidance for RBI, SEBI, IFSCA and IRDAI licenses — end-to-end.
                         </p>
                     </div>
                     <div className="flex flex-wrap gap-3">
                         {["RBI Licensed", "SEBI Registered", "IFSCA Compliant"].map((tag) => (
-                            <span key={tag} className="text-xs bg-white/5 border border-white/10 text-gray-300 px-3 py-1.5 rounded-full dark:bg-[#141417] dark:text-[#71717a]">
+                            <span key={tag} className="text-xs bg-white/5 border border-white/10 text-gray-300 px-3 py-1.5 rounded-full dark:bg-[#141417]">
                                 ✓ {tag}
                             </span>
                         ))}
@@ -104,7 +104,7 @@ export default function LoginPage() {
             {/* Right panel — form */}
             <div className="w-full lg:w-1/2 flex items-center justify-center bg-[#f8faff] px-6 py-12 dark:bg-[#141417]">
                 <div className="w-full max-w-md">
-                    <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors mb-8 group">
+                    <Link href="/" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors mb-8 group dark:text-[#a1a1aa] dark:hover:text-[#fafafa]">
                         <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
@@ -113,7 +113,7 @@ export default function LoginPage() {
 
                     <div className="mb-8">
                         <h1 className="text-2xl font-bold text-gray-900 dark:text-[#fafafa]">Welcome Back</h1>
-                        <p className="text-gray-500 text-sm mt-1 dark:text-[#71717a]">Please enter your details to sign in.</p>
+                        <p className="text-gray-500 text-sm mt-1 dark:text-[#a1a1aa]">Please enter your details to sign in.</p>
                     </div>
 
                     {/* Tab toggle */}
@@ -121,14 +121,14 @@ export default function LoginPage() {
                         <button
                             type="button"
                             onClick={() => { setTab("email"); setForm({ identifier: "", password: "" }); setError(""); }}
-                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${tab === "email" ? "bg-white text-[#1677f2] shadow-sm dark:bg-[#141417] dark:text-[#4f9dfb]" : "text-gray-500 hover:text-gray-700 dark:text-[#71717a]"}`}
+                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${tab === "email" ? "bg-white text-[#1677f2] shadow-sm dark:bg-[#141417] dark:text-[#4f9dfb]" : "text-gray-500 hover:text-gray-700 dark:text-[#a1a1aa]"}`}
                         >
                             Email
                         </button>
                         <button
                             type="button"
                             onClick={() => { setTab("phone"); setForm({ identifier: "", password: "" }); setError(""); }}
-                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${tab === "phone" ? "bg-white text-[#1677f2] shadow-sm dark:bg-[#141417] dark:text-[#4f9dfb]" : "text-gray-500 hover:text-gray-700 dark:text-[#71717a]"}`}
+                            className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${tab === "phone" ? "bg-white text-[#1677f2] shadow-sm dark:bg-[#141417] dark:text-[#4f9dfb]" : "text-gray-500 hover:text-gray-700 dark:text-[#a1a1aa]"}`}
                         >
                             Phone Number
                         </button>
@@ -192,7 +192,7 @@ export default function LoginPage() {
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors dark:text-[#71717a]"
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                                 >
                                     {showPassword ? (
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -224,7 +224,7 @@ export default function LoginPage() {
                         </button>
                     </form>
 
-                    <p className="text-center text-gray-500 text-sm mt-6 dark:text-[#71717a]">
+                    <p className="text-center text-gray-500 text-sm mt-6 dark:text-[#a1a1aa]">
                         Don&apos;t have an account?{" "}
                         <Link href={buildSignupHref(returnPath)} className="text-[#1677f2] font-semibold hover:underline dark:text-[#4f9dfb]">Sign up</Link>
                     </p>

@@ -102,7 +102,7 @@ export default function CompliancePortal({ content }: { content?: Partial<Compli
                             </a>
                         </div>
 
-                        <p className="text-[#94a3b8] text-[12px] text-center mt-6 italic dark:text-[#71717a]">
+                        <p className="text-[#94a3b8] text-[12px] text-center mt-6 italic">
                             {c.footnote}
                         </p>
                     </div>

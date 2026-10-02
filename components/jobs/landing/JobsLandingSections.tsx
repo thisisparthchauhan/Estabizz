@@ -89,7 +89,7 @@ export function JobsHero({ openCount }: { openCount: number | null }) {
     <header className="relative isolate overflow-hidden border-b border-blue-100 bg-white dark:bg-[#141417] dark:border-[#27272b]">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_-8%,rgba(22,119,242,0.12),transparent_46%),radial-gradient(circle_at_88%_84%,rgba(217,169,56,0.08),transparent_32%)]" />
       <div className={`${WRAP} py-20 sm:py-24`}>
-        <nav className="mb-6 flex items-center gap-2 text-[12px] font-medium text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+        <nav className="mb-6 flex items-center gap-2 text-[12px] font-medium text-[#94a3b8]" aria-label="Breadcrumb">
           <Link href="/" className="transition-colors hover:text-[#475569] dark:text-[#a1a1aa]">Home</Link>
           <span className="opacity-40">/</span>
           <span className="text-[#475569] dark:text-[#a1a1aa]">Jobs</span>
@@ -156,7 +156,7 @@ export function JobsByLicence() {
                 <span className="text-[13px] font-black uppercase tracking-[0.2em] text-[#1677f2] dark:text-[#4f9dfb]">
                   {group.regulator}
                 </span>
-                <span className="text-[12.5px] font-medium text-[#94a3b8] dark:text-[#71717a]">{group.authority}</span>
+                <span className="text-[12.5px] font-medium text-[#94a3b8]">{group.authority}</span>
               </div>
 
               <h3 className="mt-2 text-[20px] font-black leading-tight text-[#071426] dark:text-[#fafafa]">
@@ -310,7 +310,7 @@ export function JobsFinalCta() {
           <h2 className="text-[28px] font-black leading-[1.12] tracking-tight text-white md:text-[38px]">
             The right person, in the right organisation.
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-[14.5px] font-medium leading-relaxed text-[#94a3b8] md:text-[16px] dark:text-[#71717a]">
+          <p className="mx-auto mt-3 max-w-2xl text-[14.5px] font-medium leading-relaxed text-[#94a3b8] md:text-[16px]">
             Regulated recruitment, delivered with regulatory discipline.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
@@ -337,7 +337,7 @@ export function JobsFinalCta() {
       </section>
 
       <section className="bg-white py-10 dark:bg-[#141417]">
-        <p className={`${WRAP} text-center text-[12.5px] font-medium leading-[1.9] text-[#94a3b8] dark:text-[#71717a]`}>
+        <p className={`${WRAP} text-center text-[12.5px] font-medium leading-[1.9] text-[#94a3b8] dark:text-[#a1a1aa]`}>
           <strong className="font-bold text-[#64748b] dark:text-[#a1a1aa]">Disclaimer:</strong> {JOBS_DISCLAIMER}
         </p>
       </section>

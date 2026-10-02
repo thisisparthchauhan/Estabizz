@@ -279,7 +279,7 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
           <div className="flex items-center gap-3">
             <div className="relative flex-1 max-w-lg">
               <svg
-                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9ca3af] dark:text-[#71717a]"
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9ca3af] dark:text-[#a1a1aa]"
                 fill="none" viewBox="0 0 24 24" stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -301,7 +301,7 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
                 Clear ×
               </button>
             )}
-            <p className="hidden sm:block text-[12px] text-[#9ca3af] dark:text-[#71717a]">
+            <p className="hidden sm:block text-[12px] text-[#9ca3af] dark:text-[#a1a1aa]">
               {filteredBlogs.length === 1 ? "1 article" : `${filteredBlogs.length} articles`}
               {activeCategory !== "all" && (
                 <span> in <strong className="text-[#374151] dark:text-[#a1a1aa]">
@@ -337,8 +337,8 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
                   <span className="font-semibold text-[#374151] group-hover:text-[#1677f2] transition-colors dark:text-[#a1a1aa]">
                     {b.title}
                   </span>
-                  <span className="text-[#cbd5e1] dark:text-[#71717a]">·</span>
-                  <span className="text-[#9ca3af] dark:text-[#71717a]">{fmtShort(b.publishedAt)}</span>
+                  <span className="text-[#cbd5e1]">·</span>
+                  <span className="text-[#9ca3af] dark:text-[#a1a1aa]">{fmtShort(b.publishedAt)}</span>
                 </Link>
               ))}
             </div>
@@ -374,7 +374,7 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
                 ? <>Results for &quot;{search}&quot;</>
                 : categories.find((c) => c.slug === activeCategory)?.name}
             </h2>
-            <p className="mt-1 text-[12.5px] text-[#9ca3af] dark:text-[#71717a]">
+            <p className="mt-1 text-[12.5px] text-[#9ca3af] dark:text-[#a1a1aa]">
               {filteredBlogs.length} {filteredBlogs.length === 1 ? "article" : "articles"} found
             </p>
           </div>
@@ -401,7 +401,7 @@ export default function BlogsClient({ initialBlogs, categories }: Props) {
                   </div>
                   {heroSide.length > 0 && (
                     <div className="border border-t-0 border-[#e8e8e8] px-5 py-4 lg:border-l-0 lg:border-t dark:border-[#27272b]">
-                      <p className="mb-3 text-[10px] font-black uppercase tracking-[0.18em] text-[#9ca3af] dark:text-[#71717a]">
+                      <p className="mb-3 text-[10px] font-black uppercase tracking-[0.18em] text-[#9ca3af] dark:text-[#a1a1aa]">
                         More Top Stories
                       </p>
                       {heroSide.map((blog) => (

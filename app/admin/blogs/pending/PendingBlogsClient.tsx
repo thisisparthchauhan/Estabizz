@@ -42,12 +42,12 @@ const STATUS_META: Record<
   BlogStatus,
   { label: string; dot: string; pill: string }
 > = {
-  draft:          { label: 'Draft',          dot: 'bg-slate-400',  pill: 'bg-slate-100 text-slate-600'    },
+  draft:          { label: 'Draft',          dot: 'bg-slate-400',  pill: 'bg-slate-100 text-slate-600 dark:bg-[#1c1c20] dark:text-[#a1a1aa]'    },
   pending_review: { label: 'Pending Review', dot: 'bg-amber-400',  pill: 'bg-amber-50 text-amber-700 border border-amber-200 dark:bg-[#2a2113] dark:text-[#fcd34d] dark:border-[#4a3a1a]'  },
   approved:       { label: 'Approved',       dot: 'bg-blue-500',   pill: 'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-[#1c1c20] dark:border-[#27272b] dark:text-[#60a5fa]'     },
   published:      { label: 'Published',      dot: 'bg-emerald-500',pill: 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-[#132a20] dark:text-[#6ee7b7] dark:border-[#1d4a37]' },
   rejected:       { label: 'Rejected',       dot: 'bg-red-500',    pill: 'bg-red-50 text-red-700 border border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]'        },
-  archived:       { label: 'Archived',       dot: 'bg-gray-400',   pill: 'bg-gray-100 text-gray-500 dark:bg-[#141417] dark:text-[#71717a]'      },
+  archived:       { label: 'Archived',       dot: 'bg-gray-400',   pill: 'bg-gray-100 text-gray-500 dark:bg-[#141417] dark:text-[#a1a1aa]'      },
 };
 
 const ACTION_CONFIG: Record<
@@ -298,11 +298,11 @@ function ReviewPanel({
                   User Submitted
                 </span>
               )}
-              <span className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">{timeAgo(blog.createdAt)}</span>
+              <span className="text-[11px] text-[#94a3b8]">{timeAgo(blog.createdAt)}</span>
             </div>
             <h2 className="text-[16px] font-black text-[#0a1628] leading-tight line-clamp-2 dark:text-[#fafafa]">{blog.title}</h2>
           </div>
-          <button onClick={onClose} className="shrink-0 w-8 h-8 flex items-center justify-center rounded-xl text-[#94a3b8] hover:text-[#0a1628] hover:bg-[#f0f4f8] transition-colors text-lg dark:bg-[#1c1c20] dark:text-[#71717a]">✕</button>
+          <button onClick={onClose} className="shrink-0 w-8 h-8 flex items-center justify-center rounded-xl text-[#94a3b8] hover:text-[#0a1628] hover:bg-[#f0f4f8] transition-colors text-lg dark:bg-[#1c1c20]">✕</button>
         </div>
 
         {/* Panel body — scrollable */}
@@ -327,14 +327,14 @@ function ReviewPanel({
                   { label: 'Category', value: blog.category.name },
                 ].map((s) => (
                   <div key={s.label} className="rounded-xl border border-[#e2eaf2] px-3.5 py-2 bg-white dark:bg-[#141417] dark:border-[#27272b]">
-                    <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">{s.label}</div>
+                    <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">{s.label}</div>
                     <div className="text-[13px] font-bold text-[#0a1628] mt-0.5 dark:text-[#fafafa]">{s.value}</div>
                   </div>
                 ))}
               </div>
 
               {/* Full content */}
-              <div className="text-[12px] font-black uppercase tracking-wide text-[#94a3b8] mb-2 dark:text-[#71717a]">Full Content</div>
+              <div className="text-[12px] font-black uppercase tracking-wide text-[#94a3b8] mb-2">Full Content</div>
               <div
                 className="blog-content text-[13.5px] leading-relaxed text-[#334155] border border-[#e2eaf2] rounded-xl p-4 bg-[#fafcff] max-h-[480px] overflow-y-auto dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]"
                 dangerouslySetInnerHTML={{ __html: blog.content }}
@@ -351,7 +351,7 @@ function ReviewPanel({
               {/* Featured image */}
               {blog.featuredImage.url && (
                 <div className="mt-5">
-                  <p className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-2 dark:text-[#71717a]">Featured Image</p>
+                  <p className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-2">Featured Image</p>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={blog.featuredImage.url}
@@ -359,7 +359,7 @@ function ReviewPanel({
                     className="w-full max-h-48 object-cover rounded-xl border border-[#e2eaf2] dark:border-[#27272b]"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                   />
-                  <p className="text-[11px] text-[#94a3b8] mt-1 dark:text-[#71717a]">Alt: {blog.featuredImage.alt || '—'}</p>
+                  <p className="text-[11px] text-[#94a3b8] mt-1">Alt: {blog.featuredImage.alt || '—'}</p>
                 </div>
               )}
             </div>
@@ -397,18 +397,18 @@ function ReviewPanel({
 
               {/* SEO */}
               <div>
-                <p className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-2 dark:text-[#71717a]">SEO Fields</p>
+                <p className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-2">SEO Fields</p>
                 <div className="space-y-1.5 text-[12px]">
                   <div className="rounded-lg border border-[#e2eaf2] bg-white px-3 py-2 dark:bg-[#141417] dark:border-[#27272b]">
-                    <div className="text-[10px] text-[#94a3b8] font-bold uppercase dark:text-[#71717a]">Focus Keyword</div>
+                    <div className="text-[10px] text-[#94a3b8] font-bold uppercase">Focus Keyword</div>
                     <div className="text-[#334155] mt-0.5 dark:text-[#a1a1aa]">{blog.focusKeyword || <span className="text-[#b0bec5] italic">Not set</span>}</div>
                   </div>
                   <div className="rounded-lg border border-[#e2eaf2] bg-white px-3 py-2 dark:bg-[#141417] dark:border-[#27272b]">
-                    <div className="text-[10px] text-[#94a3b8] font-bold uppercase dark:text-[#71717a]">SEO Title</div>
+                    <div className="text-[10px] text-[#94a3b8] font-bold uppercase">SEO Title</div>
                     <div className="text-[#334155] mt-0.5 leading-tight dark:text-[#a1a1aa]">{blog.seoTitle || <span className="text-[#b0bec5] italic">Not set</span>}</div>
                   </div>
                   <div className="rounded-lg border border-[#e2eaf2] bg-white px-3 py-2 dark:bg-[#141417] dark:border-[#27272b]">
-                    <div className="text-[10px] text-[#94a3b8] font-bold uppercase dark:text-[#71717a]">Meta Description</div>
+                    <div className="text-[10px] text-[#94a3b8] font-bold uppercase">Meta Description</div>
                     <div className="text-[#334155] mt-0.5 leading-tight line-clamp-2 dark:text-[#a1a1aa]">{blog.metaDescription || <span className="text-[#b0bec5] italic">Not set</span>}</div>
                   </div>
                 </div>
@@ -424,7 +424,7 @@ function ReviewPanel({
 
               {/* Quick actions */}
               <div>
-                <p className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-2 dark:text-[#71717a]">Quick Actions</p>
+                <p className="text-[11px] font-black uppercase tracking-wide text-[#94a3b8] mb-2">Quick Actions</p>
                 <div className="space-y-2">
                   <button
                     onClick={() => { onClose(); onAction('publish'); }}
@@ -467,7 +467,7 @@ function ReviewPanel({
             </button>
             <button
               onClick={() => { onClose(); onAction('archive'); }}
-              className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-semibold text-[#94a3b8] hover:text-[#334155] hover:bg-[#f8fbff] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]"
+              className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-semibold text-[#94a3b8] hover:text-[#334155] hover:bg-[#f8fbff] transition-colors dark:bg-[#141417] dark:border-[#27272b]"
             >
               Archive
             </button>
@@ -557,7 +557,7 @@ function BlogCard({
             </span>
           )}
         </div>
-        <span className="text-[11.5px] text-[#94a3b8] whitespace-nowrap shrink-0 dark:text-[#71717a]">
+        <span className="text-[11.5px] text-[#94a3b8] whitespace-nowrap shrink-0">
           {timeAgo(blog.createdAt)}
         </span>
       </div>
@@ -654,14 +654,14 @@ function BlogCard({
 
           <button
             onClick={() => onAction('draft')}
-            className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-medium text-[#94a3b8] hover:text-[#334155] hover:bg-[#f8fbff] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]"
+            className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-medium text-[#94a3b8] hover:text-[#334155] hover:bg-[#f8fbff] transition-colors dark:bg-[#141417] dark:border-[#27272b]"
           >
             Draft
           </button>
 
           <button
             onClick={() => onAction('archive')}
-            className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-medium text-[#94a3b8] hover:text-[#334155] hover:bg-[#f8fbff] transition-colors dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]"
+            className="px-4 py-2 rounded-xl border border-[#dbe7f3] bg-white text-[12.5px] font-medium text-[#94a3b8] hover:text-[#334155] hover:bg-[#f8fbff] transition-colors dark:bg-[#141417] dark:border-[#27272b]"
           >
             Archive
           </button>
@@ -792,10 +792,10 @@ export default function PendingBlogsClient({ initialBlogs }: { initialBlogs: Blo
               { label: 'Pending Review', value: pending.length,                           color: 'text-amber-600 dark:text-[#fcd34d]',  bg: 'bg-amber-50 border-amber-200 dark:bg-[#2a2113] dark:border-[#4a3a1a]'   },
               { label: 'Total Received', value: total,                                    color: 'text-[#1677f2] dark:text-[#4f9dfb]',  bg: 'bg-[#f0faff] border-[#c3e8fb] dark:bg-[#141417] dark:border-[#27272b]'  },
               { label: 'This Session',   value: blogs.filter(b => b.status !== 'pending_review').length, color: 'text-emerald-600 dark:text-[#6ee7b7]', bg: 'bg-emerald-50 border-emerald-200 dark:bg-[#132a20] dark:border-[#1d4a37]' },
-              { label: 'Avg. Words',     value: pending.length > 0 ? Math.round(pending.reduce((s, b) => s + wordCount(b.content), 0) / pending.length) : '—', color: 'text-[#0a1628]', bg: 'bg-white border-[#e2eaf2] dark:bg-[#141417] dark:border-[#27272b]' },
+              { label: 'Avg. Words',     value: pending.length > 0 ? Math.round(pending.reduce((s, b) => s + wordCount(b.content), 0) / pending.length) : '—', color: 'text-[#0a1628] dark:text-[#fafafa]', bg: 'bg-white border-[#e2eaf2] dark:bg-[#141417] dark:border-[#27272b]' },
             ].map((s) => (
               <div key={s.label} className={`rounded-2xl border ${s.bg} px-5 py-4`}>
-                <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#94a3b8] mb-1 dark:text-[#71717a]">{s.label}</div>
+                <div className="text-[11px] font-black uppercase tracking-[0.12em] text-[#94a3b8] mb-1">{s.label}</div>
                 <div className={`text-[28px] font-black ${s.color} leading-none`}>{s.value}</div>
               </div>
             ))}
@@ -811,7 +811,7 @@ export default function PendingBlogsClient({ initialBlogs }: { initialBlogs: Blo
                 <p className="text-[13px] font-semibold text-[#64748b] dark:text-[#a1a1aa]">
                   {pending.length} submission{pending.length !== 1 ? 's' : ''} awaiting review
                 </p>
-                <p className="text-[11.5px] text-[#94a3b8] dark:text-[#71717a]">Newest first</p>
+                <p className="text-[11.5px] text-[#94a3b8]">Newest first</p>
               </div>
 
               {/* Cards */}

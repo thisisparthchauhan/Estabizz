@@ -144,7 +144,7 @@ export function MediaPickerModal({
                   <img src={item.secureUrl} alt="" className="h-28 w-full object-cover" loading="lazy" />
                   <div className="p-2">
                     <p className="truncate text-[11px] font-bold text-[#334155] dark:text-[#e4e4e7]">{item.title || item.fileName || "Image"}</p>
-                    <p className="mt-0.5 truncate text-[10px] text-[#94a3b8] dark:text-[#71717a]">{item.width && item.height ? `${item.width} x ${item.height}` : item.publicId || "Cloudinary image"}</p>
+                    <p className="mt-0.5 truncate text-[10px] text-[#94a3b8]">{item.width && item.height ? `${item.width} x ${item.height}` : item.publicId || "Cloudinary image"}</p>
                   </div>
                 </button>
               ))}

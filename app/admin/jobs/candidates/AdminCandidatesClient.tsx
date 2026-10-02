@@ -93,11 +93,11 @@ export default function AdminCandidatesClient({
             Clear
           </button>
         )}
-        {isPending && <span className="self-center text-[12px] text-[#94a3b8] dark:text-[#71717a]">Loading…</span>}
+        {isPending && <span className="self-center text-[12px] text-[#94a3b8]">Loading…</span>}
       </div>
 
       {candidates.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-[#dbe7f3] bg-white py-16 text-center text-[14px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">
+        <div className="rounded-2xl border border-dashed border-[#dbe7f3] bg-white py-16 text-center text-[14px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b]">
           {total === 0 ? "No candidates yet." : "No results."}
         </div>
       ) : (
@@ -122,11 +122,11 @@ export default function AdminCandidatesClient({
                 <tr key={c.id} className="border-b border-[#f1f5f9] last:border-0 hover:bg-[#f8fbff] transition-colors dark:bg-[#141417] dark:border-[#27272b]">
                   <td className="px-4 py-3">
                     <p className="font-bold text-[#0a1628] dark:text-[#fafafa]">{c.firstName} {c.lastName}</p>
-                    <p className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">{c.candidateCode}</p>
+                    <p className="text-[11px] text-[#94a3b8]">{c.candidateCode}</p>
                   </td>
                   <td className="px-4 py-3">
                     {c.email && <p className="text-[#64748b] dark:text-[#a1a1aa]">{c.email}</p>}
-                    {c.phone && <p className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">{c.phone}</p>}
+                    {c.phone && <p className="text-[12px] text-[#94a3b8]">{c.phone}</p>}
                   </td>
                   <td className="px-4 py-3 text-[#64748b] dark:text-[#a1a1aa]">{c.currentCity ?? "—"}</td>
                   <td className="px-4 py-3">
@@ -154,10 +154,10 @@ export default function AdminCandidatesClient({
                         {c.latestStageName}
                       </span>
                     ) : (
-                      <span className="text-[#94a3b8] dark:text-[#71717a]">—</span>
+                      <span className="text-[#94a3b8]">—</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-[#94a3b8] dark:text-[#71717a]">{fmt(c.createdAt)}</td>
+                  <td className="px-4 py-3 text-[#94a3b8]">{fmt(c.createdAt)}</td>
                   <td className="px-4 py-3">
                     <Link
                       href={`/admin/jobs/candidates/${c.id}`}

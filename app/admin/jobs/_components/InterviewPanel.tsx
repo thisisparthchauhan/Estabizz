@@ -192,7 +192,7 @@ export default function InterviewPanel({ applicationId, initialInterviews }: Pro
       )}
 
       {interviews.length === 0 && !adding ? (
-        <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No interviews scheduled.</p>
+        <p className="text-[13px] text-[#94a3b8]">No interviews scheduled.</p>
       ) : (
         <div className="space-y-3">
           {interviews.map((iv) => (
@@ -204,7 +204,7 @@ export default function InterviewPanel({ applicationId, initialInterviews }: Pro
                   </p>
                   <p className="mt-0.5 text-[12.5px] text-[#64748b] dark:text-[#a1a1aa]">{fmt(iv.scheduledAt)}</p>
                   {iv.durationMinutes && (
-                    <p className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">{iv.durationMinutes} min</p>
+                    <p className="text-[12px] text-[#94a3b8]">{iv.durationMinutes} min</p>
                   )}
                   {iv.locationOrLink && (
                     <p className="mt-1 text-[12px] text-[#64748b] break-all dark:text-[#a1a1aa]">{iv.locationOrLink}</p>

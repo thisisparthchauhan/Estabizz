@@ -968,7 +968,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
                 title="View raw HTML output"
                 onClick={() => setShowHtml((s) => !s)}
                 className={`px-2.5 py-1.5 rounded-lg text-[11px] font-bold leading-none transition-colors ${
-                  showHtml ? "bg-[#0a1628] text-white" : "text-[#94a3b8] hover:text-[#334155] dark:text-[#71717a]"
+                  showHtml ? "bg-[#0a1628] text-white" : "text-[#94a3b8] hover:text-[#334155]"
                 }`}
               >
                 {"</>"}
@@ -1118,7 +1118,7 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
         </div>
 
         {/* ── Footer ───────────────────────────────────────────────────────── */}
-        <div className="flex items-center justify-between rounded-b-xl border-t border-[#e8f0f8] bg-[#f8fbff] px-3 py-1.5 text-[11px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">
+        <div className="flex items-center justify-between rounded-b-xl border-t border-[#e8f0f8] bg-[#f8fbff] px-3 py-1.5 text-[11px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b]">
           <span>
             {wordCount} {wordCount === 1 ? "word" : "words"} · ~{Math.max(1, Math.ceil(wordCount / 238))} min read
           </span>
@@ -1225,6 +1225,18 @@ export default function RichContentEditor({ value, onChange, onImageValidationCh
         .rich-editor-prose td { padding: 8px 12px; border-bottom: 1px solid #e8f0fa; color: #334155; vertical-align: top; }
         .rich-editor-prose tr:nth-child(even) td { background: #f8faff; }
         .rich-editor-prose strong, .rich-editor-prose b { font-weight: 700; color: #0a1628; }
+        .dark .rich-editor-prose h2 { color: #fafafa; border-bottom-color: #27272b; }
+        .dark .rich-editor-prose h3 { color: #fafafa; }
+        .dark .rich-editor-prose h4 { color: #e4e4e7; }
+        .dark .rich-editor-prose p  { color: #a1a1aa; }
+        .dark .rich-editor-prose li { color: #a1a1aa; }
+        .dark .rich-editor-prose a  { color: #60a5fa; }
+        .dark .rich-editor-prose blockquote { background: #1c1c20; color: #e4e4e7; }
+        .dark .rich-editor-prose th { background: #1c1c20; color: #fafafa; }
+        .dark .rich-editor-prose td { color: #a1a1aa; border-bottom-color: #27272b; }
+        .dark .rich-editor-prose tr:nth-child(even) td { background: #1c1c20; }
+        .dark .rich-editor-prose strong, .dark .rich-editor-prose b { color: #fafafa; }
+        .dark .rich-editor-prose .blog-image figcaption { color: #a1a1aa; }
         .rich-editor-prose em, .rich-editor-prose i { font-style: italic; }
         .rich-editor-prose u { text-decoration: underline; text-underline-offset: 2px; }
         .rich-editor-prose .blog-image { clear: both; margin: 1.5rem auto; max-width: 100%; }

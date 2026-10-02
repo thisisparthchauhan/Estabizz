@@ -132,7 +132,7 @@ function FieldGroup({
           {required && <span className="ml-0.5 text-red-500 dark:text-[#fca5a5]">*</span>}
         </label>
         {counter && (
-          <span className={`text-[11.5px] font-mono tabular-nums ${overMax ? 'text-red-500 dark:text-[#fca5a5]' : nearMax ? 'text-amber-500 dark:text-[#fcd34d]' : 'text-[#94a3b8] dark:text-[#71717a]'}`}>
+          <span className={`text-[11.5px] font-mono tabular-nums ${overMax ? 'text-red-500 dark:text-[#fca5a5]' : nearMax ? 'text-amber-500 dark:text-[#fcd34d]' : 'text-[#94a3b8]'}`}>
             {counter.current}/{counter.max}
           </span>
         )}
@@ -144,7 +144,7 @@ function FieldGroup({
         </p>
       )}
       {hint && !error && (
-        <p className="mt-1 text-[11.5px] text-[#94a3b8] leading-relaxed dark:text-[#71717a]">{hint}</p>
+        <p className="mt-1 text-[11.5px] text-[#94a3b8] leading-relaxed">{hint}</p>
       )}
     </div>
   );
@@ -220,7 +220,7 @@ function SupportingImages({
             <button
               type="button"
               onClick={() => remove(i)}
-              className="shrink-0 px-3 rounded-xl border border-[#dbe7f3] text-[#94a3b8] hover:border-red-300 hover:text-red-500 hover:bg-red-50 transition-colors text-[13px] dark:border-[#27272b] dark:text-[#71717a] dark:bg-[#2a1618]"
+              className="shrink-0 px-3 rounded-xl border border-[#dbe7f3] text-[#94a3b8] hover:border-red-300 hover:text-red-500 hover:bg-red-50 transition-colors text-[13px] dark:border-[#27272b] dark:bg-[#2a1618]"
               aria-label="Remove image"
             >✕</button>
           )}
@@ -243,7 +243,7 @@ function SupportingImages({
         Upload each file to /api/upload → Cloudinary / S3 / /public/images/blog/
         Ref: see app/api/upload/route.ts (to be created)
       */}
-      <p className="text-[11px] text-[#94a3b8] italic dark:text-[#71717a]">
+      <p className="text-[11px] text-[#94a3b8] italic">
         File upload coming soon. Please provide publicly accessible image URLs for now.
       </p>
     </div>
@@ -288,11 +288,11 @@ function SuccessScreen({ title }: { title: string }) {
             { step: '3', label: 'Decision',     sub: 'Publish or feedback from team', color: 'bg-[#10b981]', done: false },
           ].map((s) => (
             <div key={s.step} className={`rounded-xl border p-3.5 text-center ${s.done ? 'border-[#1677f2]/30 bg-[#f0faff] dark:bg-[#141417]' : 'border-[#e2eaf2] bg-white dark:bg-[#141417] dark:border-[#27272b]'}`}>
-              <div className={`mx-auto mb-2 w-7 h-7 rounded-full ${s.done ? s.color : 'bg-[#e2eaf2] dark:bg-[#1c1c20]'} flex items-center justify-center text-[11px] font-black ${s.done ? 'text-white' : 'text-[#94a3b8] dark:text-[#71717a]'}`}>
+              <div className={`mx-auto mb-2 w-7 h-7 rounded-full ${s.done ? s.color : 'bg-[#e2eaf2] dark:bg-[#1c1c20]'} flex items-center justify-center text-[11px] font-black ${s.done ? 'text-white' : 'text-[#94a3b8]'}`}>
                 {s.done ? '✓' : s.step}
               </div>
               <div className="text-[12px] font-bold text-[#0a1628] dark:text-[#fafafa]">{s.label}</div>
-              <div className="text-[11px] text-[#94a3b8] mt-0.5 dark:text-[#71717a]">{s.sub}</div>
+              <div className="text-[11px] text-[#94a3b8] mt-0.5">{s.sub}</div>
             </div>
           ))}
         </div>
@@ -551,7 +551,7 @@ export default function SubmitBlogClient({ categories }: { categories: BlogCateg
                       className={`${errors.content ? errorInputCls : inputCls} font-mono text-[13px] leading-relaxed resize-y`}
                     />
                     {/* Live stats bar */}
-                    <div className="flex items-center justify-between px-1 text-[11.5px] text-[#94a3b8] dark:text-[#71717a]">
+                    <div className="flex items-center justify-between px-1 text-[11.5px] text-[#94a3b8]">
                       <span>
                         <span className={wc < 400 ? 'text-amber-500 font-semibold dark:text-[#fcd34d]' : 'text-emerald-600 font-semibold dark:text-[#6ee7b7]'}>
                           {wc} words

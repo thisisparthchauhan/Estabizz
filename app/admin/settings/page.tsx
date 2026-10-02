@@ -50,7 +50,7 @@ export default function SettingsPage() {
             className="rounded-2xl border border-[#e2eaf2] bg-white shadow-[0_2px_10px_rgba(10,22,40,0.04)] overflow-hidden dark:bg-[#141417] dark:border-[#27272b]"
           >
             <div className="border-b border-[#f0f4f8] bg-[#f8fafc] px-6 py-3 dark:bg-[#141417] dark:border-[#27272b]">
-              <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8] dark:text-[#71717a]">
+              <span className="text-[11px] font-black uppercase tracking-wider text-[#94a3b8]">
                 {group.title}
               </span>
             </div>

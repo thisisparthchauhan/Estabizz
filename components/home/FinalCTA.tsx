@@ -38,13 +38,13 @@ export default function FinalCTA({ content }: { content?: Partial<FinalCtaConten
                         {c.heading}
                     </h2>
 
-                    <p className="text-[14.5px] md:text-[16px] text-[#94a3b8] leading-relaxed font-medium mb-7 max-w-2xl mx-auto dark:text-[#71717a]">
+                    <p className="text-[14.5px] md:text-[16px] text-[#94a3b8] leading-relaxed font-medium mb-7 max-w-2xl mx-auto">
                         {c.paragraph}
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
                         <a href={c.primaryBtnLink} className="relative overflow-hidden group w-full sm:w-auto bg-[#1677f2] text-white font-bold text-[15px] rounded-xl px-8 py-3.5 shadow-[0_14px_35px_rgba(22,119,242,0.32)] hover:-translate-y-0.5 hover:bg-[#0866d9] transition-all duration-300 text-center">
-                            <span className="absolute top-0 -left-full w-1/2 h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-30 skew-x-[-20deg] group-hover:animate-[shine_1s_ease-out] z-0 dark:via-[#141417]" />
+                            <span className="absolute top-0 -left-full w-1/2 h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-30 skew-x-[-20deg] group-hover:animate-[shine_1s_ease-out] z-0" />
                             <span className="relative z-10 flex items-center justify-center gap-2">
                                 {c.primaryBtnText} <span className="group-hover:translate-x-1.5 transition-transform">→</span>
                             </span>

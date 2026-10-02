@@ -38,7 +38,7 @@ function KpiCard({ label, value, accent, sub, href, alert }: KpiCardProps) {
       >
         {value}
       </p>
-      {sub && <p className="mt-1.5 text-[11.5px] text-[#94a3b8] dark:text-[#71717a]">{sub}</p>}
+      {sub && <p className="mt-1.5 text-[11.5px] text-[#94a3b8]">{sub}</p>}
     </div>
   );
   if (href) return <Link href={href} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1677f2]/60 rounded-2xl">{inner}</Link>;
@@ -109,7 +109,7 @@ export default async function RecruitmentDashboardPage() {
                   </p>
                 </div>
                 <p className="text-[36px] font-black text-[#0a1628] leading-none dark:text-[#fafafa]">{s.count}</p>
-                <p className="mt-1.5 text-[11.5px] text-[#94a3b8] dark:text-[#71717a]">
+                <p className="mt-1.5 text-[11.5px] text-[#94a3b8]">
                   {s.count === 1 ? "application" : "applications"}
                 </p>
               </div>

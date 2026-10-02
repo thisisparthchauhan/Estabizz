@@ -113,10 +113,10 @@ function cloudinaryThumb(url: string, w = 220, h = 160): string {
 
 const TYPE_META: Record<TypeFilter, { label: string; dot: string; badge: string }> = {
   all:   { label: "All",    dot: "#94a3b8", badge: "" },
-  image: { label: "Image",  dot: "#1677f2", badge: "bg-blue-50 text-blue-600 border-blue-200" },
-  icon:  { label: "Icon",   dot: "#7c3aed", badge: "bg-violet-50 text-violet-600 border-violet-200" },
-  pdf:   { label: "PDF",    dot: "#dc2626", badge: "bg-red-50 text-red-600 border-red-200" },
-  other: { label: "Other",  dot: "#64748b", badge: "bg-gray-50 text-gray-500 border-gray-200" },
+  image: { label: "Image",  dot: "#1677f2", badge: "bg-blue-50 text-blue-600 border-blue-200 dark:bg-[#10243d] dark:text-[#60a5fa] dark:border-[#1d3a5c]" },
+  icon:  { label: "Icon",   dot: "#7c3aed", badge: "bg-violet-50 text-violet-600 border-violet-200 dark:bg-[#231a2e] dark:text-[#c4b5fd] dark:border-[#3a2a4a]" },
+  pdf:   { label: "PDF",    dot: "#dc2626", badge: "bg-red-50 text-red-600 border-red-200 dark:bg-[#2a1618] dark:text-[#fca5a5] dark:border-[#4a2225]" },
+  other: { label: "Other",  dot: "#64748b", badge: "bg-gray-50 text-gray-500 border-gray-200 dark:bg-[#1c1c20] dark:text-[#a1a1aa] dark:border-[#27272b]" },
 };
 
 function hasPermission(viewer: Viewer | null, p: AdminPermission): boolean {
@@ -474,7 +474,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                 style={{ width: `${uploadPct}%` }}
               />
             </div>
-            <div className="mt-3 text-[12px] text-[#94a3b8] dark:text-[#71717a]">{uploadPct}%</div>
+            <div className="mt-3 text-[12px] text-[#94a3b8]">{uploadPct}%</div>
           </div>
         </div>
       )}
@@ -491,9 +491,9 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
             <div className="flex items-center justify-between border-b border-[#e2eaf2] px-6 py-4 dark:border-[#27272b]">
               <div>
                 <div className="text-[14px] font-black text-[#0a1628] dark:text-[#fafafa]">Edit Details</div>
-                <div className="text-[11px] text-[#94a3b8] truncate max-w-[260px] dark:text-[#71717a]">{editItem.fileName}</div>
+                <div className="text-[11px] text-[#94a3b8] truncate max-w-[260px]">{editItem.fileName}</div>
               </div>
-              <button onClick={closeEdit} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] hover:text-[#0a1628] dark:hover:text-[#f7f9fc] dark:bg-[#141417] dark:text-[#71717a]">
+              <button onClick={closeEdit} className="rounded-xl p-2 text-[#94a3b8] hover:bg-[#f4f7fb] dark:hover:bg-[#12223a] hover:text-[#0a1628] dark:hover:text-[#f7f9fc] dark:bg-[#141417]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               </button>
             </div>
@@ -517,13 +517,13 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
 
               {/* File Name */}
               <div>
-                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 dark:text-[#71717a]">File Name</div>
+                <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1">File Name</div>
                 <div className="text-[13px] text-[#475569] break-all dark:text-[#a1a1aa]">{editItem.fileName}</div>
               </div>
 
               {/* Title */}
               <div>
-                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">File Title</label>
+                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">File Title</label>
                 <input
                   type="text"
                   value={editForm.title}
@@ -535,7 +535,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
 
               {/* Alt Text */}
               <div>
-                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Alt Text</label>
+                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Alt Text</label>
                 <input
                   type="text"
                   value={editForm.altText}
@@ -547,7 +547,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
 
               {/* Caption */}
               <div>
-                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Caption</label>
+                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Caption</label>
                 <textarea
                   value={editForm.caption}
                   onChange={e => setEditForm(f => ({ ...f, caption: e.target.value }))}
@@ -559,7 +559,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
 
               {/* Tags */}
               <div>
-                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Tags</label>
+                <label className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Tags</label>
                 <div className="mt-1.5 flex flex-wrap gap-1.5 mb-2">
                   {editForm.tags.map(tag => (
                     <TagPill key={tag} tag={tag} onRemove={() =>
@@ -589,27 +589,27 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
               {/* Info row */}
               <div className="grid grid-cols-2 gap-3 rounded-2xl border border-[#f0f4f8] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20] p-4">
                 <div>
-                  <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">File Type</div>
+                  <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">File Type</div>
                   <div className="mt-0.5 text-[12px] font-semibold text-[#475569] dark:text-[#a1a1aa]">
                     <TypeBadge format={editItem.format} />
                   </div>
                 </div>
                 <div>
-                  <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">File Size</div>
+                  <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">File Size</div>
                   <div className="mt-0.5 text-[12px] font-semibold text-[#475569] dark:text-[#a1a1aa]">{formatBytes(editItem.size)}</div>
                 </div>
                 {editItem.width && editItem.height && (
                   <div>
-                    <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Dimensions</div>
+                    <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Dimensions</div>
                     <div className="mt-0.5 text-[12px] font-semibold text-[#475569] dark:text-[#a1a1aa]">{editItem.width} × {editItem.height}</div>
                   </div>
                 )}
                 <div>
-                  <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Uploaded By</div>
+                  <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Uploaded By</div>
                   <div className="mt-0.5 text-[12px] font-semibold text-[#475569] truncate dark:text-[#a1a1aa]">{editItem.uploadedBy}</div>
                 </div>
                 <div className="col-span-2">
-                  <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Uploaded On</div>
+                  <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Uploaded On</div>
                   <div className="mt-0.5 text-[12px] font-semibold text-[#475569] dark:text-[#a1a1aa]">{formatIST(editItem.createdAt)}</div>
                 </div>
               </div>
@@ -617,7 +617,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
               {/* Used In */}
               {editItem.usedIn.length > 0 && (
                 <div>
-                  <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1 dark:text-[#71717a]">Used In</div>
+                  <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] mb-1">Used In</div>
                   <div className="flex flex-wrap gap-1.5">
                     {editItem.usedIn.map(u => (
                       <span key={u} className="rounded-full bg-[#f4f7fb] dark:bg-[#1c1c20] border border-[#e2eaf2] dark:border-[#27272b] px-2 py-0.5 text-[11px] text-[#475569] dark:text-[#a1a1aa]">{u}</span>
@@ -643,7 +643,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                 <button
                   type="button"
                   onClick={() => setShowInternal(v => !v)}
-                  className="flex items-center gap-1.5 text-[11px] font-semibold text-[#94a3b8] hover:text-[#475569] dark:text-[#71717a]"
+                  className="flex items-center gap-1.5 text-[11px] font-semibold text-[#94a3b8] hover:text-[#475569]"
                 >
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
                     className={`transition-transform ${showInternal ? "rotate-90" : ""}`}>
@@ -654,11 +654,11 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                 {showInternal && (
                   <div className="mt-2 rounded-xl border border-[#e2eaf2] dark:border-[#27272b] bg-[#f8fafc] dark:bg-[#1c1c20] p-3 space-y-2">
                     <div>
-                      <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Cloudinary ID</div>
+                      <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Cloudinary ID</div>
                       <div className="mt-0.5 text-[11px] text-[#64748b] font-mono break-all dark:text-[#a1a1aa]">{editItem.publicId}</div>
                     </div>
                     <div>
-                      <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Cloudinary URL</div>
+                      <div className="text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Cloudinary URL</div>
                       <div className="mt-0.5 text-[11px] text-[#64748b] font-mono break-all leading-4 dark:text-[#a1a1aa]">{editItem.secureUrl}</div>
                     </div>
                   </div>
@@ -745,7 +745,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                 </svg>
                 Upload File
               </button>
-              <span className="text-[10px] text-[#94a3b8] dark:text-[#71717a]">JPG, PNG, WebP, SVG, PDF · Max 10 MB</span>
+              <span className="text-[10px] text-[#94a3b8]">JPG, PNG, WebP, SVG, PDF · Max 10 MB</span>
             </div>
           )}
 
@@ -791,7 +791,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
 
           {/* Search */}
           <div className="relative flex-1 min-w-[180px]">
-            <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8] dark:text-[#71717a]" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
             <input
@@ -802,7 +802,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
               className="w-full rounded-xl border border-[#dbe7f3] dark:border-[#27272b] bg-white dark:bg-[#141417] py-2 pl-8 pr-3 text-[12px] text-[#0a1628] dark:text-[#fafafa] placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:border-[#1677f2] focus:outline-none focus:ring-2 focus:ring-[#1677f2]/20"
             />
             {search && (
-              <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8] hover:text-[#475569] dark:text-[#71717a]">×</button>
+              <button onClick={() => setSearch("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8] hover:text-[#475569] dark:text-[#a1a1aa]">×</button>
             )}
           </div>
 
@@ -814,7 +814,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                 type="button"
                 onClick={() => setViewMode(m)}
                 className={`px-3 py-2 transition-colors ${
-                  viewMode === m ? "bg-[#1677f2] text-white" : "text-[#94a3b8] hover:text-[#475569] dark:text-[#71717a]"
+                  viewMode === m ? "bg-[#1677f2] text-white" : "text-[#94a3b8] hover:text-[#475569]"
                 }`}
                 title={m === "grid" ? "Grid view" : "List view"}
               >
@@ -845,14 +845,14 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
           </div>
         ) : items.length === 0 ? (
           <div className="flex h-64 flex-col items-center justify-center rounded-2xl border border-dashed border-[#dbe7f3] bg-white text-center dark:bg-[#141417] dark:border-[#27272b]">
-            <svg className="mb-3 text-[#cbd5e1] dark:text-[#71717a]" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg className="mb-3 text-[#cbd5e1]" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
               <polyline points="21 15 16 10 5 21"/>
             </svg>
             <div className="text-[14px] font-black text-[#0a1628] mb-1 dark:text-[#fafafa]">
               {search || typeFilter !== "all" ? "No files match your search" : "No files yet"}
             </div>
-            <div className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">
+            <div className="text-[12px] text-[#94a3b8]">
               {search || typeFilter !== "all" ? "Try a different search or filter." : "Upload your first file to get started."}
             </div>
           </div>
@@ -894,7 +894,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                     <div className="text-[12px] font-black text-[#0a1628] truncate leading-tight dark:text-[#fafafa]" title={item.title || item.fileName}>
                       {item.title || item.fileName}
                     </div>
-                    <div className="mt-0.5 flex items-center gap-1.5 text-[10.5px] text-[#94a3b8] dark:text-[#71717a]">
+                    <div className="mt-0.5 flex items-center gap-1.5 text-[10.5px] text-[#94a3b8]">
                       <span>{formatBytes(item.size)}</span>
                       <span>·</span>
                       <span>{formatIST(item.createdAt).split(",")[0]}</span>
@@ -913,7 +913,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                     <button
                       onClick={() => copyUrl(item.secureUrl)}
                       title="Copy Link"
-                      className="flex-1 flex items-center justify-center py-2 text-[#94a3b8] hover:text-[#1677f2] hover:bg-[#f0f7ff] transition-colors dark:bg-[#141417] dark:text-[#71717a]"
+                      className="flex-1 flex items-center justify-center py-2 text-[#94a3b8] hover:text-[#1677f2] hover:bg-[#f0f7ff] transition-colors dark:bg-[#141417]"
                     >
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                         <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -923,7 +923,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                       <button
                         onClick={() => openEdit(item)}
                         title="Edit Details"
-                        className="flex-1 flex items-center justify-center py-2 text-[#94a3b8] hover:text-[#1677f2] hover:bg-[#f0f7ff] transition-colors dark:bg-[#141417] dark:text-[#71717a]"
+                        className="flex-1 flex items-center justify-center py-2 text-[#94a3b8] hover:text-[#1677f2] hover:bg-[#f0f7ff] transition-colors dark:bg-[#141417]"
                       >
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                           <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
@@ -935,7 +935,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                       <button
                         onClick={() => setRemoveId(item._id)}
                         title="Remove"
-                        className="flex-1 flex items-center justify-center py-2 text-[#94a3b8] hover:text-red-500 hover:bg-red-50 transition-colors dark:text-[#71717a] dark:bg-[#2a1618]"
+                        className="flex-1 flex items-center justify-center py-2 text-[#94a3b8] hover:text-red-500 hover:bg-red-50 transition-colors dark:bg-[#2a1618]"
                       >
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                           <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
@@ -953,12 +953,12 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
             <table className="w-full text-[12px]">
               <thead>
                 <tr className="border-b border-[#f0f4f8] bg-[#f8fafc] dark:bg-[#141417] dark:border-[#27272b]">
-                  <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">File</th>
-                  <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden sm:table-cell dark:text-[#71717a]">Type</th>
-                  <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden md:table-cell dark:text-[#71717a]">Size</th>
-                  <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell dark:text-[#71717a]">Uploaded By</th>
-                  <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell dark:text-[#71717a]">Uploaded On</th>
-                  <th className="px-4 py-3 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8] dark:text-[#71717a]">Actions</th>
+                  <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">File</th>
+                  <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden sm:table-cell">Type</th>
+                  <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden md:table-cell">Size</th>
+                  <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell">Uploaded By</th>
+                  <th className="px-4 py-3 text-left text-[10px] font-black uppercase tracking-wide text-[#94a3b8] hidden lg:table-cell">Uploaded On</th>
+                  <th className="px-4 py-3 text-right text-[10px] font-black uppercase tracking-wide text-[#94a3b8]">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#f4f7fb]">
@@ -981,7 +981,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
                             <div className="font-black text-[#0a1628] truncate max-w-[180px] dark:text-[#fafafa]" title={item.title || item.fileName}>
                               {item.title || item.fileName}
                             </div>
-                            <div className="text-[10.5px] text-[#94a3b8] truncate dark:text-[#71717a]">{item.fileName}</div>
+                            <div className="text-[10.5px] text-[#94a3b8] truncate">{item.fileName}</div>
                           </div>
                         </div>
                       </td>
@@ -1042,7 +1042,7 @@ export default function MediaLibraryClient({ viewer }: { viewer: Viewer | null }
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between">
-            <div className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">
+            <div className="text-[12px] text-[#94a3b8]">
               Page {page} of {totalPages} · {total} total file{total !== 1 ? "s" : ""}
             </div>
             <div className="flex gap-2">

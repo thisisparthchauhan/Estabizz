@@ -126,7 +126,7 @@ export default function FooterEditor() {
               ) : (
                 <input type="text" value={scalars[def.name] ?? ""} onChange={(e) => { setScalars((p) => ({ ...p, [def.name]: e.target.value })); touched(); }} className={inputCls} />
               )}
-              {def.hint && <p className="mt-1 text-[11px] text-[#94a3b8] dark:text-[#71717a]">{def.hint}</p>}
+              {def.hint && <p className="mt-1 text-[11px] text-[#94a3b8]">{def.hint}</p>}
             </div>
           ))}
         </div>
@@ -150,7 +150,7 @@ export default function FooterEditor() {
                   <div key={li} className="flex items-center gap-1.5">
                     <input value={link.label} onChange={(e) => setColLink(ci, li, { label: e.target.value })} placeholder="Label" className={inputCls} />
                     <input value={link.href} onChange={(e) => setColLink(ci, li, { href: e.target.value })} placeholder="/path" className={inputCls + " font-mono text-[11px]"} />
-                    <button onClick={() => removeColLink(ci, li)} title="Remove link" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a] dark:bg-[#2a1618]">✕</button>
+                    <button onClick={() => removeColLink(ci, li)} title="Remove link" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:bg-[#2a1618]">✕</button>
                   </div>
                 ))}
               </div>
@@ -171,7 +171,7 @@ export default function FooterEditor() {
             <div key={ri} className="flex items-center gap-1.5">
               <input value={r.label} onChange={(e) => setReg(ri, { label: e.target.value })} placeholder="RBI" className={inputCls} />
               <input value={r.href} onChange={(e) => setReg(ri, { href: e.target.value })} placeholder="/rbi" className={inputCls + " font-mono text-[11px]"} />
-              <button onClick={() => removeReg(ri)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:text-[#71717a] dark:bg-[#2a1618]">✕</button>
+              <button onClick={() => removeReg(ri)} title="Remove" className="shrink-0 rounded-md px-1.5 py-1.5 text-[12px] text-[#94a3b8] hover:bg-red-50 hover:text-red-500 dark:bg-[#2a1618]">✕</button>
             </div>
           ))}
         </div>

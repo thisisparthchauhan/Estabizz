@@ -130,7 +130,7 @@ export default function NotesPanel({ entityType, entityId, initialNotes }: Props
       )}
 
       {notes.length === 0 ? (
-        <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No notes yet.</p>
+        <p className="text-[13px] text-[#94a3b8]">No notes yet.</p>
       ) : (
         <div className="space-y-3">
           {notes.map((note) => (
@@ -165,7 +165,7 @@ export default function NotesPanel({ entityType, entityId, initialNotes }: Props
                 <>
                   <p className="text-[13.5px] leading-7 text-[#334155] whitespace-pre-line dark:text-[#a1a1aa]">{note.content}</p>
                   <div className="mt-2 flex items-center justify-between">
-                    <p className="text-[11px] text-[#94a3b8] dark:text-[#71717a]">
+                    <p className="text-[11px] text-[#94a3b8]">
                       {note.authorName} · {fmt(note.createdAt)}
                       {note.updatedAt > note.createdAt && " (edited)"}
                     </p>

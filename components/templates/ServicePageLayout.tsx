@@ -228,11 +228,11 @@ export default function ServicePageLayout({
                             {/* Meta */}
                             <div className="flex flex-wrap items-center gap-4 text-[13.5px] text-[#64748b] dark:text-[#a1a1aa] font-semibold mb-6">
                                 <div className="flex items-center gap-1.5"><span>📅</span> {displayYear}</div>
-                                <span className="text-gray-300 dark:text-[#71717a]">|</span>
+                                <span className="text-gray-300">|</span>
                                 <div className="flex items-center gap-1.5"><span>⏱️</span> {readTime}</div>
-                                <span className="text-gray-300 dark:text-[#71717a]">|</span>
+                                <span className="text-gray-300">|</span>
                                 <div className="flex items-center gap-1.5"><span>👁️</span> Regulatory Guide</div>
-                                {!hideReviewBadge && <><span className="text-gray-300 dark:text-[#71717a]">|</span>
+                                {!hideReviewBadge && <><span className="text-gray-300">|</span>
                                 <div className="flex items-center gap-1.5"><span>{reviewPending ? '📋' : '✅'}</span> {reviewPending ? 'Content Review Pending' : 'Expert Reviewed'}</div></>}
                             </div>
 

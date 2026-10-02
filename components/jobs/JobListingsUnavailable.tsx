@@ -67,7 +67,7 @@ export function JobListingsUnavailable({
         <h1 className="mt-3 text-[32px] font-black leading-tight tracking-tight text-white sm:text-[40px]">
           Job Listings Coming Shortly
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8] dark:text-[#71717a]">
+        <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#94a3b8]">
           We&apos;re finalising open roles across regulated financial services, fintech, technology and
           growing businesses. Please check back soon, or reach out directly.
         </p>

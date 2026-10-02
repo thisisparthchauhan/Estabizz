@@ -28,7 +28,7 @@ export default function WebsiteEditorPage() {
             >
               <div className="flex items-center justify-between">
                 <h2 className="text-[15px] font-black text-[#0a1628] group-hover:text-[#1677f2] dark:text-[#fafafa]">{page.name}</h2>
-                <span className="text-[11px] font-mono text-[#94a3b8] dark:text-[#71717a]">{page.path}</span>
+                <span className="text-[11px] font-mono text-[#94a3b8]">{page.path}</span>
               </div>
               <p className="mt-2 text-[12px] text-[#64748b] dark:text-[#a1a1aa]">
                 {page.sections.length} sections · {ready} editable now
@@ -38,7 +38,7 @@ export default function WebsiteEditorPage() {
         })}
 
         {/* Future pages placeholder */}
-        <div className="rounded-2xl border border-dashed border-[#d8e2ee] bg-[#fbfdff] p-5 text-[12px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">
+        <div className="rounded-2xl border border-dashed border-[#d8e2ee] bg-[#fbfdff] p-5 text-[12px] text-[#94a3b8] dark:bg-[#141417] dark:border-[#27272b]">
           More pages (RBI, SEBI, IRDAI, About, Contact…) will appear here as they are added.
         </div>
       </div>

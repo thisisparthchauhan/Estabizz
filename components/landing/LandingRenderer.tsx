@@ -187,7 +187,7 @@ export function LandingRenderer({ page }: { page: LandingPage }) {
 
         <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 sm:py-16">
           {/* Breadcrumb */}
-          <nav className="mb-5 flex flex-wrap items-center gap-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]" aria-label="Breadcrumb">
+          <nav className="mb-5 flex flex-wrap items-center gap-2 text-[12px] text-[#94a3b8]" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Home</Link>
             <span className="opacity-40">/</span>
             <Link href="/mca-roc" className="hover:text-[#374151] transition-colors dark:text-[#a1a1aa]">Corporate Services</Link>

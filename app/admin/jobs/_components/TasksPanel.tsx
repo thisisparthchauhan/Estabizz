@@ -153,7 +153,7 @@ export default function TasksPanel({ entityType, entityId, initialTasks }: Props
       )}
 
       {tasks.length === 0 && !adding && (
-        <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No tasks yet.</p>
+        <p className="text-[13px] text-[#94a3b8]">No tasks yet.</p>
       )}
 
       {open.length > 0 && (
@@ -174,7 +174,7 @@ export default function TasksPanel({ entityType, entityId, initialTasks }: Props
                   >
                     {t.priority}
                   </span>
-                  <span className={t.dueAt && new Date(t.dueAt) < new Date() ? "font-bold text-red-600 dark:text-[#fca5a5]" : "text-[#94a3b8] dark:text-[#71717a]"}>
+                  <span className={t.dueAt && new Date(t.dueAt) < new Date() ? "font-bold text-red-600 dark:text-[#fca5a5]" : "text-[#94a3b8]"}>
                     Due {fmt(t.dueAt)}
                   </span>
                 </div>
@@ -191,7 +191,7 @@ export default function TasksPanel({ entityType, entityId, initialTasks }: Props
           </summary>
           <div className="space-y-2 border-t border-[#dbe7f3] p-3 dark:border-[#27272b]">
             {done.map((t) => (
-              <p key={t.id} className="text-[13px] text-[#94a3b8] line-through dark:text-[#71717a]">{t.title}</p>
+              <p key={t.id} className="text-[13px] text-[#94a3b8] line-through">{t.title}</p>
             ))}
           </div>
         </details>

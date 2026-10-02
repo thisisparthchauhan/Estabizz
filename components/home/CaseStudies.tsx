@@ -74,8 +74,7 @@ export default function CaseStudies({ content }: { content?: Partial<CaseStudies
 
               {/* Regulator Badge */}
               <div
-                className="inline-flex w-fit items-center px-3 py-1 rounded-full text-[12px] font-bold mb-6 shadow-sm border border-black/5"
-                style={{ color: CARD_COLOR, backgroundColor: `${CARD_COLOR}15` }}
+                className="inline-flex w-fit items-center px-3 py-1 rounded-full text-[12px] font-bold mb-6 shadow-sm border border-black/5 text-[#1677f2] bg-[#1677f215] dark:border-white/10 dark:text-[#4f9dfb] dark:bg-[#4f9dfb]/10"
               >
                 {caseStudy.category}
               </div>
@@ -97,14 +96,14 @@ export default function CaseStudies({ content }: { content?: Partial<CaseStudies
               {/* Outcome Box */}
               {caseStudy.outcome && (
                 <div className="mt-auto bg-[#f5fbff] border border-blue-100 border-l-[3px] rounded-r-lg px-4 py-3 dark:bg-[#141417] dark:border-[#27272b]" style={{ borderLeftColor: CARD_COLOR }}>
-                  <span className="text-[13px] font-bold tracking-wide" style={{ color: CARD_COLOR }}>
+                  <span className="text-[13px] font-bold tracking-wide text-[#1677f2] dark:text-[#4f9dfb]">
                     {caseStudy.outcome}
                   </span>
                 </div>
               )}
 
               {caseStudy.disclaimer && (
-                <p className="mt-3 text-[11px] italic leading-relaxed text-[#94a3b8] dark:text-[#71717a]">
+                <p className="mt-3 text-[11px] italic leading-relaxed text-[#94a3b8]">
                   {caseStudy.disclaimer}
                 </p>
               )}

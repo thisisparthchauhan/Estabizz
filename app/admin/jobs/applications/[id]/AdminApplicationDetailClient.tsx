@@ -141,7 +141,7 @@ export default function AdminApplicationDetailClient({ application, notes, tasks
               Stage History
             </h2>
             {application.stageHistory.length === 0 ? (
-              <p className="text-[13px] text-[#94a3b8] dark:text-[#71717a]">No history recorded.</p>
+              <p className="text-[13px] text-[#94a3b8]">No history recorded.</p>
             ) : (
               <ol className="space-y-3">
                 {application.stageHistory.map((h) => (
@@ -240,7 +240,7 @@ export default function AdminApplicationDetailClient({ application, notes, tasks
             >
               {application.jobTitle} ↗
             </Link>
-            <p className="mt-2 text-[12px] text-[#94a3b8] dark:text-[#71717a]">Last updated {fmt(application.updatedAt)}</p>
+            <p className="mt-2 text-[12px] text-[#94a3b8]">Last updated {fmt(application.updatedAt)}</p>
           </div>
         </div>
       </div>

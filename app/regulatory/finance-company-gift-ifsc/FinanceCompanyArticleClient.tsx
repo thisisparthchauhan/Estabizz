@@ -200,7 +200,7 @@ export default function FinanceCompanyArticleClient() {
                 {/* LEFT SIDEBAR */}
                 <aside className="hidden xl:block w-[220px] shrink-0">
                     <div className="sticky top-20 bg-white rounded-2xl border border-[rgba(0,150,220,0.1)] shadow-sm p-5 max-h-[calc(100vh-100px)] overflow-y-auto dark:bg-[#141417]">
-                        <h4 className="text-[12px] font-bold text-[#94a3b8] uppercase tracking-[.08em] mb-4 dark:text-[#71717a]">Contents</h4>
+                        <h4 className="text-[12px] font-bold text-[#94a3b8] uppercase tracking-[.08em] mb-4">Contents</h4>
                         <nav className="space-y-0.5">{tocItems.map(t => <button key={t} onClick={() => scrollTo(t)} className={`block w-full text-left px-3 py-[7px] rounded-lg text-[13px] transition-all duration-200 ${activeSection === t ? 'bg-[rgba(0,150,220,0.06)] text-[#1677f2] font-bold border-l-[3px] border-[#1677f2] -ml-px dark:text-[#4f9dfb]' : 'text-[#64748b] hover:text-[#1677f2] dark:text-[#a1a1aa]'}`}>{t}</button>)}</nav>
                     </div>
                 </aside>
@@ -468,7 +468,7 @@ export default function FinanceCompanyArticleClient() {
                                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0077B6] text-white flex items-center justify-center text-[18px] font-bold">DK</div>
                                 <div><div className="font-bold text-[#0a1628] text-[15px] dark:text-[#fafafa]">CS Devyani Khambhati</div><div className="text-[13px] text-[#1677f2] font-semibold dark:text-[#4f9dfb]">Compliance Expert</div></div>
                             </div>
-                            <p className="text-[12px] text-[#94a3b8] mb-3 dark:text-[#71717a]">IFSCA · GIFT City · Treasury</p>
+                            <p className="text-[12px] text-[#94a3b8] mb-3">IFSCA · GIFT City · Treasury</p>
                             <div className="text-[13px] mb-3">⭐⭐⭐⭐⭐ <span className="text-[12px] text-[#64748b] dark:text-[#a1a1aa]">Expert Reviewed</span></div>
                             <button className="w-full border-2 border-[#1677f2] text-[#1677f2] font-bold text-[13px] rounded-xl py-2.5 hover:bg-blue-50 transition-colors dark:bg-[#1c1c20] dark:text-[#4f9dfb]">Ask a Question →</button>
                         </div>
@@ -477,7 +477,7 @@ export default function FinanceCompanyArticleClient() {
                         <div className="bg-white rounded-2xl border border-[rgba(0,150,220,0.1)] p-5 dark:bg-[#141417]">
                             <h4 className="font-bold text-[#0a1628] text-[15px] mb-4 dark:text-[#fafafa]">📌 Quick Facts</h4>
                             {[["Regulator", "IFSCA"], ["Location", "GIFT City, Gujarat"], ["Min Capital", "USD 200,000"], ["Personnel", "Min 5 required"], ["Operations", "Within 6 months"], ["Currency", "Foreign currencies"]].map(([l, v], i) => (
-                                <div key={i} className={`flex justify-between py-3 ${i > 0 ? 'border-t border-gray-100 dark:border-[#27272b]' : ''}`}><span className="text-[12px] text-[#94a3b8] dark:text-[#71717a]">{l}</span><span className="text-[13px] text-[#1677f2] font-bold dark:text-[#4f9dfb]">{v}</span></div>
+                                <div key={i} className={`flex justify-between py-3 ${i > 0 ? 'border-t border-gray-100 dark:border-[#27272b]' : ''}`}><span className="text-[12px] text-[#94a3b8]">{l}</span><span className="text-[13px] text-[#1677f2] font-bold dark:text-[#4f9dfb]">{v}</span></div>
                             ))}
                         </div>
 

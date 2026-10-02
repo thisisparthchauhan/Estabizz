@@ -265,7 +265,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
                     <tr key={`${item.fullPath}-${item.sourceFile}`} className="align-top hover:bg-[#f8fbff] dark:bg-[#141417]">
                       <td className="max-w-[260px] px-4 py-3">
                         <div className="text-sm font-black leading-snug text-[#0a1628] dark:text-[#fafafa]">{item.title}</div>
-                        <div className="mt-1 text-[11px] font-semibold text-[#94a3b8] dark:text-[#71717a]">{item.slug}</div>
+                        <div className="mt-1 text-[11px] font-semibold text-[#94a3b8]">{item.slug}</div>
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-start gap-2">
@@ -302,7 +302,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
                             Import First
                           </span>
                         ) : (
-                          <span className="inline-flex rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[12px] font-black text-slate-500 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#71717a]">
+                          <span className="inline-flex rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[12px] font-black text-slate-500 dark:bg-[#141417] dark:border-[#27272b] dark:text-[#a1a1aa]">
                             Coming Soon
                           </span>
                         )}
@@ -318,7 +318,7 @@ export default function ContentPagesClient({ viewer }: { viewer: AdminContext | 
                             Open Page
                           </a>
                         ) : (
-                          <span className="text-[12px] font-semibold text-[#94a3b8] dark:text-[#71717a]">Not available</span>
+                          <span className="text-[12px] font-semibold text-[#94a3b8]">Not available</span>
                         )}
                       </td>
                     </tr>

@@ -54,17 +54,17 @@ export default function FeaturedBlogs() {
             <section className="py-20 bg-gradient-to-b from-white to-[#f0f7ff] dark:to-[#09090b] dark:from-[#141417]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4 animate-pulse" />
-                        <div className="h-4 bg-gray-200 rounded w-96 mx-auto animate-pulse" />
+                        <div className="h-8 bg-gray-200 dark:bg-[#27272b] rounded w-64 mx-auto mb-4 animate-pulse" />
+                        <div className="h-4 bg-gray-200 dark:bg-[#27272b] rounded w-96 mx-auto animate-pulse" />
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {[1, 2, 3, 4].map((i) => (
                             <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden animate-pulse dark:bg-[#141417]">
-                                <div className="h-48 bg-gray-200" />
+                                <div className="h-48 bg-gray-200 dark:bg-[#27272b]" />
                                 <div className="p-5">
-                                    <div className="h-4 bg-gray-200 rounded w-20 mb-3" />
-                                    <div className="h-5 bg-gray-200 rounded mb-2" />
-                                    <div className="h-4 bg-gray-200 rounded w-3/4" />
+                                    <div className="h-4 bg-gray-200 dark:bg-[#27272b] rounded w-20 mb-3" />
+                                    <div className="h-5 bg-gray-200 dark:bg-[#27272b] rounded mb-2" />
+                                    <div className="h-4 bg-gray-200 dark:bg-[#27272b] rounded w-3/4" />
                                 </div>
                             </div>
                         ))}
@@ -122,7 +122,7 @@ export default function FeaturedBlogs() {
                                 <h3 className="font-bold text-[#0a1628] text-base leading-snug mb-2 line-clamp-2 group-hover:text-[#1677f2] transition-colors dark:text-[#fafafa]">
                                     {blog.title}
                                 </h3>
-                                <p className="text-gray-500 text-sm line-clamp-2 mb-4 dark:text-[#71717a]">
+                                <p className="text-gray-500 text-sm line-clamp-2 mb-4 dark:text-[#a1a1aa]">
                                     {blog.excerpt}
                                 </p>
 
@@ -132,11 +132,11 @@ export default function FeaturedBlogs() {
                                         <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#1677f2] to-[#0077B6] flex items-center justify-center text-white text-xs font-bold">
                                             {blog.author.firstName[0]}
                                         </div>
-                                        <span className="text-xs text-gray-500 dark:text-[#71717a]">
+                                        <span className="text-xs text-gray-500 dark:text-[#a1a1aa]">
                                             {blog.author.firstName}
                                         </span>
                                     </div>
-                                    <div className="flex items-center gap-3 text-xs text-gray-400 dark:text-[#71717a]">
+                                    <div className="flex items-center gap-3 text-xs text-gray-400">
                                         <span className="flex items-center gap-1">
                                             <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />

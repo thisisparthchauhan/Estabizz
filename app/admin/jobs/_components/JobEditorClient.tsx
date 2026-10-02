@@ -236,7 +236,7 @@ export default function JobEditorClient({ job }: Props) {
             {job ? job.title : "Create Job Posting"}
           </h1>
           {job && (
-            <p className="mt-1 text-[12px] text-[#94a3b8] dark:text-[#71717a]">Code: {job.job_code}</p>
+            <p className="mt-1 text-[12px] text-[#94a3b8]">Code: {job.job_code}</p>
           )}
         </div>
         <div className="flex items-center gap-3">
@@ -285,7 +285,7 @@ export default function JobEditorClient({ job }: Props) {
             <div className="sm:col-span-2">
               <label className={labelCls()}>Slug *</label>
               <div className="flex items-center gap-2">
-                <span className="text-[12px] text-[#94a3b8] whitespace-nowrap dark:text-[#71717a]">/jobs/</span>
+                <span className="text-[12px] text-[#94a3b8] whitespace-nowrap">/jobs/</span>
                 <input
                   className={inputCls("flex-1")}
                   placeholder="senior-compliance-officer"

@@ -102,6 +102,10 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
                         </div>
                     </div>
 
+                    {/* Middle: newsletter — sits in the gap Section 1 already had, so
+                        it costs no extra footer height on desktop. */}
+                    <NewsletterSignup source="footer" />
+
                     {/* Right: 2×2 compact contact cards */}
                     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:w-[500px] lg:flex-shrink-0">
                         {/* Address */}
@@ -163,13 +167,6 @@ export default function Footer({ content }: { content?: Partial<FooterContent> }
                             </div>
                         </div>
                     </div>
-                </div>
-
-                {/* ═══════════════════════════════════════════════════════════
-                    Section 1b — Newsletter signup
-                ═══════════════════════════════════════════════════════════ */}
-                <div className="border-b border-white/[0.06] py-8">
-                    <NewsletterSignup source="footer" />
                 </div>
 
                 {/* ═══════════════════════════════════════════════════════════

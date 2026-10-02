@@ -55,27 +55,24 @@ export default function NewsletterSignup({ source = "footer" }: { source?: strin
     };
 
     return (
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
-            <div className="lg:max-w-[460px]">
-                <h4 className="mb-3 text-[10.5px] font-black uppercase tracking-[0.1em] text-[#4f9dfb]">
-                    Stay Updated
-                </h4>
+        <div className="w-full lg:w-[300px] lg:flex-shrink-0">
+            <h4 className="mb-2 text-[10.5px] font-black uppercase tracking-[0.1em] text-[#4f9dfb]">
+                Stay Updated
+            </h4>
 
-                <p className="text-[13.5px] leading-[1.75] text-white/55">
-                    Regulatory updates, circular explainers and filing deadlines — straight to your
-                    inbox. No spam, and you can unsubscribe any time.
-                </p>
-            </div>
+            <p className="mb-3 text-[12.5px] leading-[1.6] text-white/40">
+                Regulatory updates and filing deadlines, straight to your inbox.
+            </p>
 
             {state === "done" ? (
                 <p
                     role="status"
-                    className="w-full rounded-xl border border-[#1677f2]/40 bg-[#1677f2]/10 px-4 py-3.5 text-[13.5px] font-semibold text-[#8fc3fd] lg:w-[380px] lg:shrink-0"
+                    className="rounded-lg border border-[#1677f2]/40 bg-[#1677f2]/10 px-3.5 py-2.5 text-[12.5px] font-semibold text-[#8fc3fd]"
                 >
-                    You&rsquo;re subscribed. Watch your inbox for the next update.
+                    You&rsquo;re subscribed. Watch your inbox.
                 </p>
             ) : (
-                <form onSubmit={submit} noValidate className="w-full lg:w-[380px] lg:shrink-0">
+                <form onSubmit={submit} noValidate>
                     <label htmlFor="newsletter-email" className="sr-only">
                         Email address
                     </label>
@@ -92,7 +89,7 @@ export default function NewsletterSignup({ source = "footer" }: { source?: strin
                         placeholder="Enter your email"
                         aria-invalid={state === "error"}
                         aria-describedby={state === "error" ? "newsletter-error" : undefined}
-                        className="h-12 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-[14px] text-white outline-none transition-colors placeholder:text-white/35 focus:border-[#1677f2] focus:bg-white/[0.07]"
+                        className="h-10 w-full rounded-lg border border-white/10 bg-white/[0.04] px-3.5 text-[13px] text-white outline-none transition-colors placeholder:text-white/35 focus:border-[#1677f2] focus:bg-white/[0.07]"
                     />
 
                     {/* Honeypot — hidden from people, irresistible to bots. */}
@@ -110,13 +107,13 @@ export default function NewsletterSignup({ source = "footer" }: { source?: strin
                     <button
                         type="submit"
                         disabled={state === "sending"}
-                        className="mt-2.5 h-12 w-full rounded-xl bg-gradient-to-r from-[#1677f2] to-[#0866d9] text-[14.5px] font-bold text-white shadow-[0_12px_28px_rgba(22,119,242,0.28)] transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+                        className="mt-2 h-10 w-full rounded-lg bg-gradient-to-r from-[#1677f2] to-[#0866d9] text-[13px] font-bold text-white shadow-[0_8px_20px_rgba(22,119,242,0.25)] transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                     >
                         {state === "sending" ? "Subscribing…" : "Subscribe"}
                     </button>
 
                     {state === "error" && (
-                        <p id="newsletter-error" role="alert" className="mt-2.5 text-[12.5px] font-semibold text-[#fca5a5]">
+                        <p id="newsletter-error" role="alert" className="mt-2 text-[12px] font-semibold text-[#fca5a5]">
                             {error}
                         </p>
                     )}

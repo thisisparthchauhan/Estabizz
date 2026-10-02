@@ -49,8 +49,8 @@ export default function TrustedBy({ content }: { content?: Partial<TrustedByCont
 
             <div className="relative w-full max-w-[1400px] mx-auto">
                 {/* Gradients masks for smooth fade left/right */}
-                <div className="absolute left-0 top-0 bottom-0 w-[80px] md:w-[120px] bg-gradient-to-r from-[#f8faff] to-transparent z-10 pointer-events-none dark:from-[#09090b]"></div>
-                <div className="absolute right-0 top-0 bottom-0 w-[80px] md:w-[120px] bg-gradient-to-l from-[#f8faff] to-transparent z-10 pointer-events-none dark:from-[#09090b]"></div>
+                <div className="absolute left-0 top-0 bottom-0 w-[80px] md:w-[120px] bg-gradient-to-r from-[#f8faff] to-transparent z-10 pointer-events-none dark:from-[#141417]"></div>
+                <div className="absolute right-0 top-0 bottom-0 w-[80px] md:w-[120px] bg-gradient-to-l from-[#f8faff] to-transparent z-10 pointer-events-none dark:from-[#141417]"></div>
 
                 {/* Row 1 - Scroll Left */}
                 <div className="flex w-fit animate-marquee-left mb-6 whitespace-nowrap group">

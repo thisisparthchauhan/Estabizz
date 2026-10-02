@@ -37,7 +37,7 @@ const SERVICES_GROUPED = [
         group: 'IRDAI & Insurance',
         color: '#0891b2',
         items: [
-            'IRDA Insurance Broker License',
+            'IRDAI Insurance Broker Licence',
             'IRDAI Regulatory Sandbox',
             'Insurance Marketing Firm License',
             'ISNP Registration',

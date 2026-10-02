@@ -28,7 +28,7 @@ const ALL_SERVICES = [
     "Mutual Fund Registration",
     "Underwriter Registration",
     "Social Stock Exchange License in India",
-    "IRDA Insurance Broker License",
+    "IRDAI Insurance Broker Licence",
     "IRDAI Regulatory Sandbox",
     "Insurance Marketing Firm License",
     "ISNP Registration",

@@ -137,6 +137,10 @@ export default function ServicePageLayout({
     const resolvedSnapshotLabel = snapshotLabel ?? (isLegalMatter ? "Legal Matter Snapshot" : "Licence Snapshot");
     const resolvedGuideLabel = guideLabel ?? (isLegalMatter ? "Legal Guide" : "Regulatory Guide");
     const jurisdictionNote = showJurisdictionNote ?? isLegalMatter;
+    // "Get Started Free" reads as a SaaS trial. On a court matter, a notice or a
+    // property deed the reader is not starting a product, they want their own
+    // situation looked at. Licence pages keep the original wording.
+    const primaryCtaLabel = isLegalMatter ? "Review My Legal Matter →" : "Get Started Free →";
 
     // Structured data.
     //
@@ -605,10 +609,10 @@ export default function ServicePageLayout({
                     ) : (
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <Link href={contactHref} className="w-full sm:w-auto px-8 py-3.5 bg-[#1677f2] hover:bg-[#0866d9] text-white font-bold rounded-xl shadow-[0_14px_35px_rgba(22,119,242,0.28)] transition-all">
-                                Get Started Free →
+                                {primaryCtaLabel}
                             </Link>
                             <a href="tel:9825600907" className="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-sm transition-all border border-white/20 dark:bg-[#141417]">
-                                Talk to Expert
+                                {isLegalMatter ? "Speak to the Team" : "Talk to Expert"}
                             </a>
                         </div>
                     )}
